@@ -1,0 +1,61 @@
+%!TEX root = forallx-ubc.tex
+%\chapter{SL Trees}
+%\label{ch.sl.trees}
+
+
+
+\practiceproblemsA{ch.sl.trees}
+
+\vspace{-2em}
+
+If you want additional practice, you can construct trees for any of the SL arguments and entailment claims in the exercises for the previous two chapters.
+
+\solutions
+\problempart 
+\label{pr.sl.treeroot}
+To evaluate each of the following claims with a tree, (a) what would you put in the root of the tree?, and (b) if the tree closes, does that show that the claim is true or false?
+\begin{earg}
+\item $\{P, P \eif Q, Q \eif \enot P\} \vdash{}\bot$
+%(a) $\{P, P \eif Q, Q \eif \enot P\}$, (b) true
+\item $(P \eif Q) \eiff (Q \eif P)$ is a tautology.
+%(a) $\enot((P \eif Q) \eiff (Q \eif P))$, (b) true
+\item The following argument is valid:
+	\begin{ekey}
+		\item[] $P \eand Q$
+		\item[] $\enot R \eif \enot Q$
+		\item[\therefore] $P \eand R$
+	\end{ekey}
+%(a) $\{P \eand Q, \enot R \eif \enot Q, \enot (P \eand R)\}$, (b) true
+\item There is no interpretation that satisfies $A \eor B$, $B \eif C$, and $A \eiff C$ without also satisfying C.
+%$\{A \eor B, B \eif C, A \eiff C, \enot C\}, (b) true
+\item $A \eiff \enot A$ is a contradiction.
+%(a) $A \eiff \enot A$, (b) false
+\item Every interpretation satisfying $P$, $P \eif Q$, and $\enot Q$ also satisfies $A$.
+%(a) $\{P, P \eif Q, \enot Q, \enot A\}$
+\item There is at least one interpretation that satisfies $P \eif Q$, $\enot P \eor \enot Q$, and $Q \eif P$.
+%(a) $\{P \eif Q, \enot P \eor \enot Q, Q \eif P\}, (b) false.
+ \end{earg}
+
+\solutions
+\problempart 
+\label{pr.sl.agtree}
+Evaluate the argument given on p.\ \pageref{8letterargument} by constructing a tree. If it is invalid, give a model demonstrating it so.
+
+\solutions
+\problempart Evaluate each claim from Part \ref{pr.sl.treeroot} by constructing a tree. If applicable, give the interpretation that demonstrates the claim true or false.
+\label{tree.examples}
+
+\problempart Recall the discussion of the Sheffer stroke in Chapter \ref{ch.TruthTables}, page \pageref{pr.altConnectives}.  That connective, if added to SL, would have this characteristic truth table:
+
+\begin{center}
+\begin{tabular}{c|c|c}
+\metaA{} & \metaB{} & \metaA{}$|$\metaB{}\\
+\hline
+1 & 1 & 0\\
+1 & 0 & 1\\
+0 & 1 & 1\\
+0 & 0 & 1
+\end{tabular}
+\end{center}
+
+What would be appropriate resolution rules for the Sheffer stroke, or the negated Sheffer stroke?

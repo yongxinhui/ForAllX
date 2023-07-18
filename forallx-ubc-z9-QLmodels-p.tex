@@ -1,0 +1,178 @@
+﻿%!TEX root = forallx-ubc.tex
+%\chapter{A formal semantics for QL}
+%\label{ch.QL.models}
+
+
+
+
+
+\practiceproblemsA{ch.QL.models}
+
+\solutions
+\problempart
+\label{pr.TorF1}
+Determine whether each sentence is true or false in the model given.
+\begin{partialmodel}
+UD & \{Corwin, Benedict\}\\
+\extension{A} & \{Corwin, Benedict\}\\
+\extension{B} & \{Benedict\}\\
+\extension{N} & $\emptyset$\\
+\referent{c} & Corwin
+\end{partialmodel}
+\begin{earg}
+\item $Bc$
+\item $Ac \eiff \enot Nc$
+\item $Nc \eif (Ac \eor Bc)$
+\item $\qt{\forall}{x} Ax$
+\item $\qt{\forall}{x} \enot Bx$
+\item $\qt{\exists}{x}(Ax \eand Bx)$
+\item $\qt{\exists}{x}(Ax \eif Nx)$
+\item $\qt{\forall}{x}(Nx \eor \enot Nx)$
+\item $\qt{\exists}{x} Bx \eif \qt{\forall}{x} Ax$
+\end{earg}
+
+
+
+
+\solutions
+\problempart
+\label{pr.TorF2}
+Determine whether each sentence is true or false in the model given.
+\begin{partialmodel}
+UD & \{Waylan, Willy, Johnny\}\\
+\extension{H} & \{Waylan, Willy, Johnny\}\\
+\extension{W} & \{Waylan, Willy\}\\
+\extension{R} & \{\ntuple{Waylan, Willy},\ntuple{Willy, Johnny},\ntuple{Johnny, Waylan}\}\\
+\referent{m} & Johnny
+\end{partialmodel}
+\begin{earg}
+\item $\qt{\exists}{x}(Rxm \eand Rmx)$
+\item $\qt{\forall}{x}(Rxm \eor Rmx)$
+\item $\qt{\forall}{x}(Hx \eiff Wx)$
+\item $\qt{\forall}{x}(Rxm \eif Wx)$
+\item $\qt{\forall}{x}\bigl[Wx \eif(Hx \eand Wx)\bigr]$
+\item $\qt{\exists}{x} Rxx$
+\item $\qt{\exists}{x}\qt{\exists}{y} Rxy$
+\item $\qt{\forall}{x} \qt{\forall}{y} Rxy$
+\item $\qt{\forall}{x} \qt{\forall}{y} (Rxy \eor Ryx)$
+\item $\qt{\forall}{x} \qt{\forall}{y} \qt{\forall}{z}\bigl[(Rxy \eand Ryz) \eif Rxz\bigr]$
+\end{earg}
+
+\solutions
+\problempart
+\label{pr.TorF3}
+Determine whether each sentence is true or false in the model given.
+\begin{partialmodel}
+	UD			& \{Lemmy, Courtney, Eddy\}\\
+	\extension{G}	& \{Lemmy, Courtney, Eddy\}\\
+	\extension{H}	& \{Courtney\}\\
+	\extension{M}	& \{Lemmy, Eddy\}\\
+	\referent{c}	& Courtney\\
+	\referent{e}	& Eddy
+\end{partialmodel}
+\begin{earg}
+\item $Hc$
+\item $He$
+\item $Mc \eor Me$
+\item $Gc \eor \enot Gc$
+\item $Mc \eif Gc$
+\item $\qt{\exists}{x} Hx$
+\item $\qt{\forall}{x} Hx$
+\item $\qt{\exists}{x} \enot Mx$
+\item $\qt{\exists}{x}(Hx \eand Gx)$
+\item $\qt{\exists}{x}(Mx \eand Gx)$
+\item $\qt{\forall}{x}(Hx \eor Mx)$
+\item $\qt{\exists}{x} Hx \eand \qt{\exists}{x} Mx$
+\item $\qt{\forall}{x}(Hx \eiff \enot Mx)$
+\item $\qt{\exists}{x} Gx \eand \qt{\exists}{x} \enot Gx$
+\item $\qt{\forall}{x}\qt{\exists}{y}(Gx \eand Hy)$
+\end{earg}
+
+\solutions
+\problempart
+\label{pr.InterpretationToModel}
+Write out the model that corresponds to the interpretation given.
+\begin{ekey}
+\item{UD:} natural numbers from 10 to 13
+\item{Ox:} $x$ is odd. 
+\item{Sx:} $x$ is less than 7.
+\item{Tx:} $x$ is a two-digit number.
+\item{Ux:} $x$ is thought to be unlucky.
+\item{Nxy:} $x$ is the next number after $y$.
+\end{ekey}
+
+
+\problempart
+\label{pr.Contingent}
+Show that each of the following is contingent.
+\begin{earg}
+\item \leftsolutions\ $Da \eand Db$
+\item \leftsolutions\ $\qt{\exists}{x} Txh$
+\item \leftsolutions\ $Pm \eand \enot\qt{\forall}{x} Px$
+\item $\qt{\forall}{z} Jz \eiff \qt{\exists}{y} Jy$
+\item $\qt{\forall}{x} (Wxmn \eor \qt{\exists}{y}Lxy)$
+\item $\qt{\exists}{x} (Gx \eif \qt{\forall}{y} My)$
+\end{earg}
+
+\solutions
+\problempart
+\label{pr.NotEquiv}
+Show that the following pairs of sentences are not logically equivalent.
+\begin{earg}
+\item $Ja$, $Ka$
+\item $\qt{\exists}{x} Jx$, $Jm$
+\item $\qt{\forall}{x} Rxx$, $\qt{\exists}{x} Rxx$
+\item $\qt{\exists}{x} Px \eif Qc$, $\qt{\exists}{x} (Px \eif Qc)$
+\item $\qt{\forall}{x}(Px \eif \enot Qx)$, $\qt{\exists}{x}(Px \eand \enot Qx)$
+\item $\qt{\exists}{x}(Px \eand Qx)$, $\qt{\exists}{x}(Px \eif Qx)$
+\item $\qt{\forall}{x}(Px\eif Qx)$, $\qt{\forall}{x}(Px \eand Qx)$
+\item $\qt{\forall}{x}\qt{\exists}{y} Rxy$, $\qt{\exists}{x}\qt{\forall}{y} Rxy$
+\item $\qt{\forall}{x}\qt{\exists}{y} Rxy$, $\qt{\forall}{x}\qt{\exists}{y} Ryx$
+\end{earg}
+
+
+
+\problempart
+Show that the following sets of sentences are consistent.
+\begin{earg}
+\item \{Ma, \enot Na, Pa, \enot Qa\}
+\item \{$Lee$, $Lef$, $\enot Lfe$, $\enot Lff$\}
+\item \{$\enot (Ma \eand \qt{\exists}{x} Ax)$, $Ma \eor Fa$, $\qt{\forall}{x}(Fx \eif Ax)$\}
+\item \{$Ma \eor Mb$, $Ma \eif \qt{\forall}{x} \enot Mx$\}
+\item \{$\qt{\forall}{y} Gy$, $\qt{\forall}{x} (Gx \eif Hx)$, $\qt{\exists}{y} \enot Iy$\}
+\item \{$\qt{\exists}{x}(Bx \eor Ax)$, $\qt{\forall}{x} \enot Cx$, $\qt{\forall}{x}\bigl[(Ax \eand Bx) \eif Cx\bigr]$\}
+\item \{$\qt{\exists}{x} Xx$, $\qt{\exists}{x} Yx$, $\qt{\forall}{x}(Xx \eiff \enot Yx)$\}
+\item \{$\qt{\forall}{x}(Px \eor Qx)$, $\qt{\exists}{x}\enot(Qx \eand Px)$\}
+\item \{$\qt{\exists}{z}(Nz \eand Ozz)$, $\qt{\forall}{x}\qt{\forall}{y}(Oxy \eif Oyx)$\}
+\item \{$\enot \qt{\exists}{x} \qt{\forall}{y} Rxy$, $\qt{\forall}{x} \qt{\exists}{y} Rxy$\}
+\end{earg}
+
+
+\problempart
+Construct models to show that the following arguments are invalid.
+\begin{earg}
+\item $\qt{\forall}{x}(Ax \eif Bx)$, \therefore\ $\qt{\exists}{x} Bx$
+\item $\qt{\forall}{x}(Rx \eif Dx)$, $\qt{\forall}{x}(Rx \eif Fx)$, \therefore\ $\qt{\exists}{x}(Dx \eand Fx)$
+\item $\qt{\exists}{x}(Px\eif Qx)$, \therefore $\qt{\exists}{x} Px$
+\item $Na \eand Nb \eand Nc$, \therefore\ $\qt{\forall}{x} Nx$
+\item $Rde$, $\qt{\exists}{x} Rxd$, \therefore\ $Red$
+\item $\qt{\exists}{x}(Ex \eand Fx)$, $\qt{\exists}{x} Fx \eif \qt{\exists}{x} Gx$, \therefore\ $\qt{\exists}{x}(Ex \eand Gx)$
+\item $\qt{\forall}{x} Oxc$, $\qt{\forall}{x} Ocx$, \therefore\ $\qt{\forall}{x} Oxx$
+\item $\qt{\exists}{x}(Jx \eand Kx)$, $\qt{\exists}{x} \enot Kx$, $\qt{\exists}{x} \enot Jx$, \therefore\ $\qt{\exists}{x}(\enot Jx \eand \enot Kx)$
+\item $Lab \eif \qt{\forall}{x} Lxb$, $\qt{\exists}{x} Lxb$, \therefore\ $Lbb$
+\end{earg}
+
+
+
+
+
+\problempart
+\label{pr.SemanticsEssay}
+\begin{earg}
+\item Many logic books define consistency and inconsistency in this way:
+`` A set $\{\metaA{}_1,\metaA{}_2,\metaA{}_3,\cdots\}$ is inconsistent if and only if $\{\metaA{}_1,\metaA{}_2,\metaA{}_3,\cdots\}\models(\metaB{}\eand\enot\metaB{})$ for some sentence \metaB{}. A set is consistent if it is not inconsistent.''
+
+Does this definition lead to any different sets being consistent than the definition on  p.~\pageref{def.consistencySL}? Explain your answer.
+
+\item\leftsolutions\ Our definition of truth says that a sentence \metaA{} is \define{true in} \model{M} if and only if some variable assignment satisfies \metaA{} in $M$. Would it make any difference if we said instead that \metaA{} is \define{true in} \model{M} if and only if \emph{every} variable assignment satisfies \metaA{} in $M$? Explain your answer.
+\end{earg}

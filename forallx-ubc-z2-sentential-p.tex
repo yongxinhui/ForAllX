@@ -1,0 +1,210 @@
+%!TEX root = forallx-ubc.tex
+%\chapter{Sentential logic}
+%\label{ch.SL}
+
+
+
+
+
+
+
+
+\practiceproblemsA{ch.SL}
+
+\solutions
+\problempart Using the symbolization key given, translate each English-language sentence into SL.
+\label{pr.monkeysuits}
+\begin{ekey}
+\item[M:] Those creatures are men in suits. 
+\item[C:] Those creatures are chimpanzees. 
+\item[G:] Those creatures are gorillas.
+\end{ekey}
+\begin{earg}
+\item Those creatures are not men in suits.
+\item Those creatures are men in suits, or they are not.
+\item Those creatures are either gorillas or chimpanzees.
+\item Those creatures are neither gorillas nor chimpanzees.
+\item If those creatures are chimpanzees, then they are neither gorillas nor men in suits.
+\item Unless those creatures are men in suits, they are either chimpanzees or they are gorillas.
+\end{earg}
+
+
+\problempart Using the symbolization key given, translate each English-language sentence into SL.
+\begin{ekey}
+\item[A:] Mister Ace was murdered.
+\item[B:] The butler did it.
+\item[C:] The cook did it.
+\item[D:] The Duchess is lying.
+\item[E:] Mister Edge was murdered.
+\item[F:] The murder weapon was a frying pan.
+\end{ekey}
+\begin{earg}
+\item Either Mister Ace or Mister Edge was murdered.
+\item If Mister Ace was murdered, then the cook did it.
+\item If Mister Edge was murdered, then the cook did not do it.
+\item Either the butler did it, or the Duchess is lying.
+\item The cook did it only if the Duchess is lying.
+\item If the murder weapon was a frying pan, then the culprit must have been the cook.
+\item If the murder weapon was not a frying pan, then the culprit was either the cook or the butler.
+\item Mister Ace was murdered if and only if Mister Edge was not murdered.
+\item The Duchess is lying, unless it was Mister Edge who was murdered.
+\item If Mister Ace was murdered, he was done in with a frying pan.
+\item Since the cook did it, the butler did not.
+\item Of course the Duchess is lying!
+\end{earg}
+
+
+
+\solutions
+\problempart Using the symbolization key given, translate each English-language sentence into SL.
+\label{pr.avacareer}
+\begin{ekey}
+\item[E$_1$:] Ava is an electrician.
+\item[E$_2$:] Harrison is an electrician.
+\item[F$_1$:] Ava is a firefighter.
+\item[F$_2$:] Harrison is a firefighter.
+\item[S$_1$:] Ava is satisfied with her career.
+\item[S$_2$:] Harrison is satisfied with his career.
+\end{ekey}
+\begin{earg}
+\item Ava and Harrison are both electricians.
+\item If Ava is a firefighter, then she is satisfied with her career.
+\item Ava is a firefighter, unless she is an electrician.
+\item Harrison is an unsatisfied electrician.
+\item Neither Ava nor Harrison is an electrician.
+\item Both Ava and Harrison are electricians, but neither of them find it satisfying.
+\item Harrison is satisfied only if he is a firefighter.
+\item If Ava is not an electrician, then neither is Harrison, but if she is, then he is too.
+\item Ava is satisfied with her career if and only if Harrison is not satisfied with his.
+\item If Harrison is both an electrician and a firefighter, then he must be satisfied with his work.
+\item It cannot be that Harrison is both an electrician and a firefighter.
+\item Harrison and Ava are both firefighters if and only if neither of them is an electrician.
+\end{earg}
+
+
+
+
+\solutions
+\problempart
+\label{pr.spies}
+Give a symbolization key and symbolize the following sentences in SL.
+\begin{earg}
+\item Alice and Bob are both spies.
+\item If either Alice or Bob is a spy, then the code has been broken.
+\item If neither Alice nor Bob is a spy, then the code remains unbroken.
+\item The German embassy will be in an uproar, unless someone has broken the code.
+\item Either the code has been broken or it has not, but the German embassy will be in an uproar regardless.
+\item Either Alice or Bob is a spy, but not both.
+\end{earg}
+
+\solutions
+\problempart
+\label{pr.gregorbaseball}
+Give a symbolization key and symbolize the following sentences in SL.
+\begin{earg}
+\item If Gregor plays first base, then the team will lose.
+\item The team will lose unless there is a miracle.
+\item The team will either lose or it won't, but Gregor will play first base regardless.
+\item Gregor's mom will bake cookies if and only if Gregor plays first base.
+\item If there is a miracle, then Gregor's mom will not bake cookies.
+\end{earg}
+
+
+\problempart
+\label{pr.choresSL}
+For each argument, write a symbolization key and translate the argument as well as possible into SL.
+\begin{earg}
+\item If Dorothy plays the piano in the morning, then Roger wakes up cranky. Dorothy plays piano in the morning unless she is distracted. So if Roger does not wake up cranky, then Dorothy must be distracted.
+\item It will either rain or snow on Tuesday. If it rains, Neville will be sad. If it snows, Neville will be cold. Therefore, Neville will either be sad or cold on Tuesday.
+\item If Zoog remembered to do his chores, then things are clean but not neat. If he forgot, then things are neat but not clean. Therefore, things are either neat or clean --- but not both.
+\end{earg}
+
+
+
+\problempart
+\label{HW2.A}
+For each, indicate (yes/no) whether it is a sentence of SL.
+\begin{earg}
+		\item $P_{2}$
+		\item if $P$, then $Q$
+		\item $(P \eor Q \eand R)$
+		\item $((P \eand (P \eand P)) \eif P)$
+		\item $(p \eif q)$
+		\item $(P \eor Q) \eor R)$
+		\item $\enot \enot \enot \enot P$
+		\item $(\Sigma \eand \Phi)$
+	\end{earg}
+
+\solutions
+\problempart
+\label{pr.wiffSL}
+For each of the following: (a) Is it, by the strictest formal standards, a sentence of SL? (b) Is it an acceptable way to write down a sentence of SL, allowing for our notational conventions?
+\begin{earg}
+\item $(A)$
+\item $J_{374} \eor \enot J_{374}$
+\item $\enot \enot \enot \enot F$
+\item $\enot \eand S$
+\item $(G \eand \enot G)$
+\item $\metaA{} \eif \metaA{}$
+\item $(A \eif (A \eand \enot F)) \eor (D \eiff E)$
+\item $[(Z \eiff S) \eif W] \eand [J \eor X]$
+\item $(F \eiff \enot D \eif J) \eor (C \eand D)$
+\end{earg}
+
+
+
+\problempart
+\begin{earg}
+\item Are there any wffs of SL that contain no sentence letters? Why or why not?
+%\item In the chapter, we symbolized an \emph{exclusive or} using \eor, \eand, and \enot. How could you translate an \emph{exclusive or} using only two connectives? Is there any way to translate an \emph{exclusive or} using only one connective?
+\end{earg}
+
+\problempart
+\label{HW2.B}
+For each, first, indicate whether it is a conjunction, disjunction, conditional, biconditional, negation, or none of these.
+
+Second, unless the answer is ‘none of these,’ identify its relevant propositional components. (For example, if it is a conjunction, identify the conjuncts; etc.) In the case of complex propositions, you do not need to identify components of the components. (For example, if one of the conjuncts is itself a conjunction, you don’t need to identify the conjuncts of that conjunct.)
+
+	\begin{earg}
+		\item If your computer crashes and you don’t have a backup, then you’ll have to work all night or ask for an extension.
+		\item If the blue team scores, the crowd will not cheer.
+		\item I’m very hungry and if I have to wait any longer, I’m going to start getting angry.
+		\item I did not tell Mother or Father.
+	\end{earg}
+	
+\problempart
+\label{HW2.C}
+Translate these English sentences into SL, using this symbolization key:
+\begin{ekey}
+\item[P:] John will get a good grade.
+\item[Q:] John will get a good job.
+\item[R:] John's mother learns John's grade.
+\item[S:] John will be in trouble.
+\end{ekey}
+	\begin{earg}
+		\item If John doesn’t get a good grade, he won’t get a good job.
+		\item If John doesn’t get a good grade, then if his mother learns his grade, he’ll be in
+trouble.
+		\item John will be in trouble, but he will get a good grade.
+		\item If his grade isn't good, John won't be in trouble unless his mother learns his grade.
+	\end{earg}
+
+	
+\problempart
+\label{HW2.D}
+
+Translate these SL sentences into English, using this symbolization key:
+\begin{ekey}
+\item[P:] logic is awesome
+\item[Q:] opera is sexy
+\item[R:] the moon is made of cheese
+\item[S:] every PHIL 220 student will get an A
+\end{ekey}
+	\begin{earg}
+		\item $(P \eif \enot Q)$
+		\item $(S \eif (P \eor R))$
+		\item $(Q \eand \enot S)$
+		\item $\enot \enot Q$
+		\item $(Q \eiff R)$
+	\end{earg}
+	

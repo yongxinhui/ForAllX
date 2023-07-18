@@ -1,0 +1,150 @@
+﻿%!TEX root = forallx-ubc.tex
+%\chapter{Soundness and Completeness for QL Trees}
+%\label{ch.QLsoundcomplete}
+
+
+\practiceproblemsA{ch.QLsoundcomplete}
+
+\solutions
+\problempart
+\label{pr.QLalttrees-sound}
+Following are possible modifications to our QL tree system. For each, imagine a system that is like the system laid out in this chapter, except for the indicated change. Would the modified tree system be sound? If so, explain how the proof given in this chapter would extend to a system with this rule; if not, give a tree that is a counterexample to the soundness of the modified system.
+\begin{earg}
+\item Change the rule for existentials to this rule:
+	\factoidbox{
+	\begin{center}
+	\begin{prooftree}
+	{not line numbering}
+	[\qt{\exists}{\script{x}}\metaA{}, checked={\script{a}}
+		[\metaA{}\substitute{\script{x}}{\script{a}}, just=for \emph{any} \script{a}
+		]
+	]
+	\end{prooftree}
+	\end{center}
+	}
+	
+\item Change the rule for existentials to this rule:
+	\factoidbox{
+	\begin{center}
+	\begin{prooftree}
+	{not line numbering}
+	[\qt{\exists}{\script{x}}\metaA{}, checked=d
+		[\metaA{}\substitute{\script{x}}{d}, just=(whether or not $d$ is new)
+		]
+	]
+	\end{prooftree}
+	\end{center}
+	}
+
+\item Change the rule for existentials to this rule:
+	\factoidbox{
+	\begin{center}
+	\begin{prooftree}
+	{not line numbering}
+	[\qt{\exists}{\script{x}}\metaA{}, checked
+		[\metaA{}\substitute{\script{x}}{\script{a}}, just={for 3 different names, old or new}
+		[ , grouped
+		[\metaA{}\substitute{\script{x}}{\script{b}}, grouped
+		[ , grouped
+		[\metaA{}\substitute{\script{x}}{\script{c}}, grouped
+		]
+		]
+		]
+		]
+		]
+	]
+	\end{prooftree}
+	\end{center}
+	}
+
+\item Change the rule for universals to this rule:
+	\factoidbox{
+	\begin{center}
+	\begin{prooftree}
+	{not line numbering}
+	[\qt{\forall}{\script{x}}\metaA{}, checked
+		[\metaA{}\substitute{\script{x}}{\script{a}}, just={for 3 different names, old or new}
+		[ , grouped
+		[\metaA{}\substitute{\script{x}}{\script{b}}, grouped
+		[ , grouped
+		[\metaA{}\substitute{\script{x}}{\script{c}}, grouped
+		]
+		]
+		]
+		]
+		]
+	]
+	\end{prooftree}
+	\end{center}
+	}
+
+\item Change the rule for existentials to this rule:
+	\factoidbox{
+	\begin{center}
+	\begin{prooftree}
+	{not line numbering}
+	[\qt{\exists}{\script{x}}\metaA{}, checked
+		[\metaA{}\substitute{\script{x}}{\script{a}}, just={for 3 new names}
+		[ , grouped
+		[\metaA{}\substitute{\script{x}}{\script{b}}, grouped
+		[ , grouped
+		[\metaA{}\substitute{\script{x}}{\script{c}}, grouped
+		]
+		]
+		]
+		]
+		]
+	]
+	\end{prooftree}
+	\end{center}
+	}
+
+\item Change the rule for universals to this rule:
+	\factoidbox{
+            	\begin{center}
+            \begin{prooftree}
+            {not line numbering}
+            [\qt{\forall}{\script{x}}\metaA{}, checked={\script{a}}
+            	[\metaA{}\substitute{\script{x}}{\script{a}}, just=where \script{a} is \emph{new}
+            	]
+            ]
+            \end{prooftree}
+            \end{center}
+	}
+
+\item Change the rule for conjunction to this rule:
+	\factoidbox{
+            	\begin{center}
+            \begin{prooftree}
+            {not line numbering}
+            	[\metaA{} \eand \metaB{}, checked
+            		[\qt{\exists}{\script{x}} \metaA{}, just=where \script{x} does not occur in \metaA{}
+			[\metaB{}, grouped
+            		]
+            		]
+		]
+            \end{prooftree}
+            \end{center}
+	}
+
+
+\item Change this requirement (given on page \pageref{branchcompletion.defined})...
+	\factoidbox{A branch is \define{complete} if and only if either (i) it is closed, or (ii) every resolvable sentence in every branch has been resolved, and for every general sentence and every name \script{a} in the branch, the \script{a} instance of that general sentence has been taken.}
+	...to this one:
+	\factoidbox{A branch is \define{complete} if and only if either (i) it is closed, or (ii) every resolvable sentence in every branch has been resolved, and for every general sentence, \emph{at least one instance of} that general sentence has been taken.}
+
+\item Change the branch completion requirement to:
+	\factoidbox{\ldots and for every general sentence and every name \script{a} \emph{that is above that general sentence in the branch}, the \script{a} instance of that general sentence has been taken.}
+
+\item Change the branch completion requirement to:
+	\factoidbox{\ldots and for every general sentence and every name \script{a} in the branch, the \script{a} instance of that general sentence has been taken, \emph{and at least one additional new instance of that general sentence has also been taken}.}
+	
+	\end{earg}
+	
+	
+	
+	
+\solutions
+\problempart
+\label{pr.QLalttrees-complete}
+For each of the rule modifications given in Part \ref{pr.QLalttrees-sound}, would the modified tree system be complete? If so, explain how the proof given in this chapter would extend to a system with this rule; if not, give a tree that is a counterexample to the completeness of the modified system.

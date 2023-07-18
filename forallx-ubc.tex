@@ -1,0 +1,144 @@
+% So hi! This is Jonathan. I am making this source code available, for others to modify if they like. But if you're someone who knows your way around LaTeX, I probably need to apologize to you, because I don't really know what I'm doing with a lot of this code. I'm sure I've hacked some things in pretty bad ways, and I'm sorry. I've also forgotten how I made a lot of things work. Feel free to email me with a question if you want, that's ichikawa@gmail.com, but it's possible that I'm not going to know the answer to your question. I literally learned to use LaTeX by looking at Magnus's source code. Sorry.
+
+% Note that you may need to compile the file 2-3 times for all of the links between sections to work properly. In particular, the links in the subsections of the solution key
+% tend to require the document to be compiled multiple times.  
+
+% This automatically moves the PDF file up a directory when compiled. See pdflatex.py for a full description.
+% pdflatex.py config
+% output dir = ..
+
+\documentclass[12pt, openany, oneside]{book}
+\usepackage{forallx-ubc-Hunt} %calls local modified style file
+\usepackage{tocloft,placeins,pdfpages}
+\usepackage{multicol} %for quick reference modifications
+\usepackage{bm} %for JTapp quantifier rules
+
+\usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+
+
+\hypersetup{ pdfinfo={Title={forall x}, 
+		    Author={P.D. Magnus and Jonathan Ichikawa and the Calgary Remix Gang}, 
+		    Subject={An open access introductory textbook in formal logic}, 
+		    Keywords={propositional logic, predicate logic, formal semantics, proof}}, 
+		    pdfdisplaydoctitle={true}}
+
+% Text added by Benjamin Brast-McKie will be inserted with this command
+\newcommand{\ben}[1]{#1}
+\newenvironment{Ben}{}{}{}% environment name
+
+% Text added by Josh Hunt will be inserted with this command
+\newcommand{\josh}[1]{#1}
+
+% ********************
+% Uncommenting one of the following causes only that part to compile, so MUCH faster for editing just a part.
+
+% \includeonly{forallx-ubc-frontmatter-Hunt}
+% \includeonly{forallx-ubc-preface-Hunt}
+\includeonly{forallx-ubc-1-intro}
+% \includeonly{forallx-ubc-2-sentential}
+%\includeonly{forallx-ubc-3-truthtables}
+% \includeonly{forallx-ubc-4-SLmodels}
+%\includeonly{forallx-ubc-5-SLtrees}
+% \includeonly{forallx-ubc-6-SLsoundcomplete}
+%\includeonly{forallx-ubc-7-SLND}  
+%\include{forallx-ubc-7-midterm-review}
+%\includeonly{forallx-ubc-8-predicate}
+%\includeonly{forallx-ubc-9-QLmodels}
+%\includeonly{forallx-ubc-10-QLtrees}
+% \includeonly{forallx-ubc-11-QLsoundcomplete}
+%\includeonly{forallx-ubc-12-identity}
+%\includeonly{forallx-ubc-13-QLND}
+%\includeonly{forallx-ubc-app-notation}
+%\includeonly{forallx-ubc-app-quickreference-Hunt}
+%\includeonly{forallx-ubc-app-solutions}
+%\includeonly{forallx-ubc-app-QND-soundness}
+
+
+\begin{document}
+
+\setcounter{chapter}{-1} %Starts it at Chapter 0, so that chapters align with weeks
+
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+
+%%Table of Contents:
+ \pagestyle{plain}
+{
+\setlength{\parskip}{0em}
+\setlength{\cftsecnumwidth}{3em}
+\tableofcontents
+\markboth{Contents}{}
+}
+
+ %\includepdf[page=-]{forallx-frontcover.pdf}
+
+
+\thispagestyle{empty} %kills headers on a page 
+ %\pagestyle{frontmatter}
+
+\include{forallx-ubc-frontmatter-Hunt}
+
+\pagestyle{prefacestyle}
+
+\include{forallx-ubc-preface-Hunt}
+
+\pagestyle{mainmatter}
+
+
+\include{forallx-ubc-1-intro}
+
+%\iffalse
+\include{forallx-ubc-2-sentential}
+\include{forallx-ubc-3-truthtables}
+\include{forallx-ubc-4-SLmodels}
+\include{forallx-ubc-5-SLtrees}
+\include{forallx-ubc-6-SLsoundcomplete}
+\include{forallx-ubc-7-SLND}
+\include{forallx-ubc-7-midterm-review}
+\include{forallx-ubc-8-predicate}
+\include{forallx-ubc-9-QLmodels}
+\include{forallx-ubc-13-QLND} %reordering some chapters; putting trees at the end 
+\include{forallx-ubc-12-identity}
+\include{forallx-ubc-10-QLtrees}
+\include{forallx-ubc-11-QLsoundcomplete}
+%\fi 
+
+\appendix
+\include{forallx-ubc-app-notation}
+
+\include{forallx-ubc-app-quickreference-Hunt}
+
+\include{forallx-ubc-app-QND-soundness} %%%%Comment this out! 
+
+\onecolumn %end of quickreference is in twocolumn
+\restoregeometry
+\pagestyle{mainmatter} %turns back on auto-running headers 
+
+%\chapter[Practice Problems!]{Exercises}
+%\label{app.exercises}
+ 
+\include{forallx-ubc-z1-intro-p}
+\include{forallx-ubc-z2-sentential-p}
+\include{forallx-ubc-z3-truthtables-p}
+\include{forallx-ubc-z4-SLmodels-p}
+\include{forallx-ubc-z5-SLtrees-p}
+\include{forallx-ubc-z6-SLsoundcomplete-p}
+\include{forallx-ubc-z7-SLND-p}
+\include{forallx-ubc-z8-predicate-p}
+\include{forallx-ubc-z9-QLmodels-p}
+\include{forallx-ubc-z13-QLND-p} 
+\include{forallx-ubc-z12-identity-p}
+\include{forallx-ubc-z10-QLtrees-p}
+\include{forallx-ubc-z11-QLsoundcomplete-p}
+
+
+\include{forallx-ubc-app-solutions} %%%ALL the solutions are in this file 
+
+
+
+\include{forallx-ubc-backmatter}
+
+% \includepdf[page=-]{forallx-backcover.pdf}
+
+\end{document}

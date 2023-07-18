@@ -1,0 +1,155 @@
+﻿%!TEX root = forallx-ubc.tex
+%\pagestyle{plain}
+\pagestyle{appendixstyle}
+% change margins so that all the rules will fit
+\setlength{\topmargin}{0 in}
+\setlength{\headheight}{0 in}
+\setlength{\headsep}{0 in}
+\setlength{\textheight}{9 in}
+\setlength{\evensidemargin}{0.25 in}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\textwidth}{6 in}
+
+\pagenumbering{gobble}
+
+%\chapter[Quick Reference]{Quick Reference}
+%\label{app.quickreference}
+
+\section*{\hfill \normalsize \bf Satisfaction Semantics for QL: Key concepts and results \hfill} 
+
+A QL-model $\mathfrak{M} := (D, I)$ consists of a non-empty set $D$ of objects---called the domain of $\mathfrak{M}$---and a map $I$ (the \textit{interpretation} of $\mathfrak{M}$), which maps the vocabulary of QL to objects and ordered pairs from $D$ such that (1) For each constant $c$, $I(c)$ is an element of $D$, called the \textit{referent} or denotation of $c$, and (2) For each k-place predicate $P$, $I(P)$ is a set of ordered $k$-tuples of objects in $D$, called the \textit{extension} of $P$. ($I$ maps atomic sentences to true or false)
+
+A \textbf{variable assignment} for $I$ is a function $d_I$ that maps each variable to an object in the domain $D$. e.g. $d_I (y)$ might equal the object $5 \in \mathbb{N}$ 
+%see p. 337 of logic book, for examples 
+
+
+
+\textbf{Satisfaction for Atomic wffs}: $\metav{Q}$ of the form $\metav{P}t_1\dots t_k$ where each $t_i$ is a term. $d_I$ satisfies $\metav{Q}$ provided that the k-tuple $\langle t_1^D, \dots , t_k^D \rangle$ lies in the extension of $\metav{Q}$, i.e. in $I(\metav{Q})$
+
+\textbf{Satisfaction for conjunctions}: $d_I$ satisfies $\metav{Q} \eand \metav{R}$ iff it satisfies both $\metav{Q}$ and $\metav{R}$
+
+\textit{Shorthand}: if $Pc$ is true in $\mathfrak{M}$, then $I(c)=r$ \textbf{satisfies} $Px$ in $\mathfrak{M}$. We can write $\mathfrak{M}_{\mathbf{d}_I} \entails Px$
+
+A \textbf{variant} of a variable assignment  $d_I$ is a modified function $d_I[r/x]$ that assigns object $r \in D$ to $x$ and otherwise assigns all other non-$x$ variables the same objects as $d_I$. \\ e.g. $d_I[r/x](x) = r$ and $d_I[r/x] (y) = d_I (y) $
+
+Satisfaction conditions for \textbf{Existentially Quantified} wff $\qt{\exists}{x} \metav{Q}$: a $d_I$ satisfies $\qt{\exists}{x} \metav{Q}$ provided there is SOME object $r \in D$ such that $d_I [r/x]$ satisfies $\metav{Q}$ (i.e. some x-variant of $d_I$)\\ Intuition: provided there's at least one thing you can plug in for $x$ s.t. $\metav{Q}$ comes out true
+
+Satisfaction conditions for \textbf{Universally Quantified} wff $\qt{\forall}{x} \metav{Q}$: a $d_I$ satisfies $\qt{\forall}{x} \metav{Q}$ provided $d_I [r/x]$ satisfies $\metav{Q}$ for EACH object $r \in D$ (i.e. ALL the x-variants of $d_I$). \\ Intuition: provided no matter what you plug in for $x$, $\metav{Q}$ comes out true
+
+\textbf{All-or-nothing Lemma} (11.1.3): given a model $\mathfrak{M} = (D, I)$ and a QL \textit{sentence} $\metav{P}$ (i.e. a wff with no free variables), either all variable assignments $d_I$ satisfy $\metav{P}$ or none do.
+
+\textbf{Truth-in-QL}: A sentence $\metav{P}$ of QL is \emph{true} on model $\mathfrak{M}$ iff some variable assignment $d_I$ satisfies $\metav{P}$ in $\mathfrak{M}$. In this case, we write $\mathfrak{M} \entails \metav{P}$. Otherwise, a sentence $\metav{P}$ of QL is \emph{false} on model $\mathfrak{M}$, i.e. if no variable assignment $d_I$ satisfies $\metav{P}$ in $\mathfrak{M}$.
+
+\textbf{Substitution Lemma} (11.1.1): let $\metav{Q}$ be a wff of QL. The variable assignment $d_I$ satisfies $\metav{Q}\substitute{\script{x}}{\script{c}}$ if and only if $d_I [I(\script{c})/\script{x}]$ satisfies $\metav{Q}$ (intuition: $\script{x}$ refers to the same thing as $\script{c}$) \\ e.g. let $\metav{Q}=Fxx$, then $\metav{Q}\substitute{x}{c} = Fcc$. Let $I(c)$ be some object $r\in D$ s.t. $\langle (r,r) \rangle \in Ext(F)$
+
+\textbf{Locality Lemma} (11.1.7): consider a QL-sentence $\metav{P}$ and two QL-models $\mathfrak{M}^1 := (D, I_1)$ and $\mathfrak{M}^2 := (D, I_2)$ with the same domain $D$, whose interpretation functions $I_1$ and $I_2$ give the same interpretations for any constants or predicates appearing in QL-sentence $\metav{P}$. \\ Then  $\mathfrak{M}^1 \entails \metav{P}$ if and only if $\mathfrak{M}^2 \entails \metav{P}$. (Note that any differences between $\mathfrak{M}^1$ and $\mathfrak{M}^2$ arise from how they interpret QL-symbols NOT appearing in $\metav{P}$).  
+
+
+\iffalse
+\begin{itemize}
+
+\item A QL-model $\mathfrak{M} := (D, I)$ consists of a non-empty set $D$ of objects, called the domain of $\mathfrak{M}$, and a map I (the \textit{interpretation} of $\mathfrak{M}$), which maps the vocabulary of $\mathfrak{L}$ to objects and ordered pairs from $D$ such that (1) For each constant $c \in \mathfrak{L}$, $I(c)$ is an element of $D$, called the \textit{referent} or denotation of $c$ and (2) For each k-place predicate $P$ of $\mathfrak{L}$, $I(P)$ is a set of ordered $k$-tuples of objects in $D$, called the \textit{extension} of $P$. ($I$ maps atomic sentences to true or false)
+
+\begin{itemize}
+
+\item For each constant $c \in \mathfrak{L}$, $I(c)$ is an element of $D$, called the \textit{referent} or denotation of $c$
+
+\item For each k-place predicate $P$ of $\mathfrak{L}$, $I(P)$ is a set of ordered $k$-tuples of objects in $D$, called the \textit{extension} of $P$
+
+\end{itemize}
+\end{itemize}
+\fi 
+
+
+
+
+\newpage
+
+\section*{\hfill \normalsize \bf Derivation Schemas for Proving Soundness of QND \hfill} 
+\label{QND-soundness}
+				
+				\vspace{-1em}
+				
+All the rules of SND, plus the following quantifier rules. The rules of SND govern inferences where the main logical operator is one of the connectives from {\it{SL}}. Reiteration also allowed.
+
+%JH preferred substitution notation, from Logic Book: $\metaA{}[\script{c} / \script{x}]$
+%Note that you can modify \substitute command in the style file to toggle styles. 
+
+\textbf{Substitution instance}: ``$\metav{Q}\substitute{\script{x}}{\script{c}}$'' is the sentence you get from $\qt{\forall}{\script{x}}\metav{Q}$ or $\qt{\exists}{\script{x}}\metav{Q}$ by dropping the quantifier and putting $\script{c}$ in place of every $\script{x}$ in $\metav{Q}$. The other variables are untouched! \\ Read ``$\substitute{x}{c}$'' as saying ``substitute $c$ for every $x$''\\[1ex]%Equivalent notation: \metav{Q}\hspace{.15em}\raisebox{.3ex}{\fbox{$\script{x}\Rightarrow\script{c}$}}. \\[1ex]
+\textbf{Partial Substitution instance}:``$\metav{Q}\substitutesome{\script{c}}{\script{x}}$'' is the sentence you get by replacing some but not necessarily all instances of the constant $\script{c}$ in $\metav{Q}$ with the variable $\script{x}$. \\ We may write ``$\metav{Q}[\script{c}]$'' to indicate that the constant $\script{c}$ appears in $\metav{Q}$
+%But we'll write things out long-hand in the schemata below! 
+
+% (${\bm{P[a/x]}}$  is the sentence you get from $(\qt{\forall}{x}) {\bm{P}}$ by dropping the $(\qt{\forall}{x}) $ quantifier and putting ${\bf{a}}$ in the place of every $x$ in ${\bm{P}}$)
+
+
+
+\begin{multicols}{2}
+
+\textit{Universal Elimination} ($\forall$E) 
+
+\begin{proof}
+	\have[h]{a}{\qt{\forall}{\script{x}}\metav{Q}}
+	\have [\vdots] {n} {\hspace{2em} \vdots}
+	\have[k+1]{c}{\metav{Q}\substitute{\script{x}}{\script{c}}} \Ae{a}
+	%\have[\ ]{c}{\metaA{}\substitute{\script{x}}{\script{c}}} \Ae{a}
+\end{proof}
+
+\phantom{We replace every $\script{x}$ variable  in \metav{Q} with the same constant $\script{c}$. I.e. we go from $\qt{\forall}{\script{x}}\metav{Q}$ to $\metav{Q}[\script{c} / \script{x}]$. Other variables are untouched.} 
+
+\vspace{2.5em}
+
+\textit{Universal Introduction} ($\forall$I) 
+
+\begin{proof}
+	\have[h]{a}{\metav{Q}}
+	\have [\vdots] {n} {\hspace{2em} \vdots}
+	\have[k+1]{c}{\qt{\forall}{\script{x}}\metav{Q}\substitute{\script{c}}{\script{x}}} \Ai{a}
+\end{proof}
+
+\textbf{Provided that both} \\
+\textbf{(i)} $\script{c}$ does not occur in any undischarged assumptions that \metav{Q} is in the scope of. \\
+\textbf{(ii)} $\script{x}$ does not occur already in $\metav{Q}$ \\ (auto-enforced by needing to replace EVERY instance of $\script{c}$ with $\script{x}$  in \metav{Q}\substitute{\script{c}}{\script{x}})
+%I think the following is a mistake: $\script{c}$ does not occur already in $\forall \script{x}\metaA{}$. 
+
+
+
+\vfill\null
+\columnbreak
+
+\textit{Existential Introduction} ($\exists$I)
+
+\begin{proof}
+\have[h]{a}{\metav{Q}}
+	\have [\vdots] {n} {\hspace{2em} \vdots}
+\have[k+1]{c}{\qt{\exists}{\script{x}}\metav{Q}\substitutesome{\script{c}}{\script{x}}} \Ei{a}
+\end{proof}
+
+Provided that $\script{x}$ does not occur in $\metav{Q}[\script{c}]$ (auto-enforced by (a) needing $\metav{Q}$ to be a sentence and (b) our recursion clause for QL-wffs) %\\ Note that $\script{x}$ may replace some or all occurrences of $\script{c}$.
+
+
+
+
+
+\textit{Existential Elimination} ($\exists$E)
+
+\begin{fitchproof}
+	\have[h]{a}{\qt{\exists}{\script{x}} \metav{Q}}
+	\have [\ ] {n} {\hspace{2em} \vdots}
+	\open	
+		\hypo[j]{b}{\metav{Q}\substitute{\script{x}}{\script{c}}} \as{for $\exists$E}
+		\have [\ ] {n2} {\hspace{2em} \vdots}
+		\have[m]{c}{\metav{P}_{k+1}}
+	\close
+	%\have [\ ] {n3} {\hspace{2em} \vdots}
+	\have[k+1]{d}{\metav{P}_{k+1}} \Ee{a,b-c}
+\end{fitchproof}
+
+\textbf{Provided that} \\
+(i)  $\script{c}$ does not occur in any other undischarged assumptions that \metav{Q}\substitute{\script{x}}{\script{c}} is in the scope of \\
+(ii) $\script{c}$ does not occur already in $\qt{\exists}{\script{x}} \metav{Q}$ \\
+(iii) $\script{c}$ does not occur in $\metav{P}_{k+1}$ \\
+
+%\footnotesize{Simplified restriction (easier to remember): \textbf{provided $\script{c}$ doesn't occur anywhere else outside the subproof}. (Moral: always use a distinct constant for existential elimination, and you'll satisfy the three restrictions above automatically!)}
+%would be nice to shorten this to `provided c does not occur outside the subproof, but not sure if this is actually true! e.g. we could instantiate some other universal with c, and so have Fc outside the subproof. 
+
+\end{multicols} %ends multicol started for QND rules 

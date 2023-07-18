@@ -1,0 +1,133 @@
+%!TEX root = forallx-ubc.tex
+%\chapter{Natural Deduction Proofs in SL}
+%\label{ch.ND.proofs}
+
+\practiceproblemsA{ch.ND.proofs}
+
+\solutions
+\problempart
+\label{pr.justifySLproof}
+Provide a justification (rule and line numbers) for each line of proof that requires one {\color{black}(which for \textit{Carnap} means ALL of them!)}
+\begin{multicols}{2}
+\begin{proof}
+\hypo{1}{W \eif \enot B}
+\hypo{2}{A \eand W}
+\hypo{2b}{B \eor (J \eand K)}
+\have{3}{W}{}
+\have{4}{\enot B} {}
+\have{5}{J \eand K} {}
+\have{6}{K}{}
+\end{proof}
+
+\begin{proof}
+\hypo{1}{L \eiff \enot O}
+\hypo{2}{L \eor \enot O}
+\open
+	\hypo{a1}{\enot L}
+	\have{a2}{\enot O}{}
+	\have{a3}{L}{}
+	\have{a4}{\enot L}{}
+\close
+\have{3}{L}{}
+\end{proof}
+
+\begin{proof}
+\hypo{1}{Z \eif (C \eand \enot N)}
+\hypo{2}{\enot Z \eif (N \eand \enot C)}
+\open
+	\hypo{a1}{\enot(N \eor  C)}
+	\have{a2}{\enot N \eand \enot C} {}
+	\open
+		\hypo{b1}{Z}
+		\have{b2}{C \eand \enot N}{}
+		\have{b3}{C}{}
+		\have{b4}{\enot C}{}
+	\close
+	\have{a3}{\enot Z}{}
+	\have{a4}{N \eand \enot C}{}
+	\have{a5}{N}{}
+	\have{a6}{\enot N}{}
+\close
+\have{3}{N \eor C}{}
+\end{proof}
+\end{multicols}
+
+\solutions
+\problempart
+\label{pr.solvedSLproofs}
+Give a proof for each argument in SL.
+\begin{earg}
+\item $K\eand L$, \therefore $K\eiff L$
+\item $A\eif (B\eif C)$, \therefore $(A\eand B)\eif C$
+\item $P \eand (Q\eor R)$, $P\eif \enot R$, \therefore $Q\eor E$
+\item $(C\eand D)\eor E$, \therefore $E\eor D$
+\item $\enot F\eif G$, $F\eif H$, \therefore $G\eor H$
+\item $(X\eand Y)\eor(X\eand Z)$, $\enot(X\eand D)$, $D\eor M$ \therefore $M$
+\end{earg}
+
+\problempart
+Give a proof for each argument in SL.
+\begin{earg}
+\item $Q\eif(Q\eand\enot Q)$, \therefore\ $\enot Q$
+\item $J\eif\enot J$, \therefore\ $\enot J$
+\item $E\eor F$, $F\eor G$, $\enot F$, \therefore\ $E \eand G$
+\item $A\eiff B$, $B\eiff C$, \therefore\ $A\eiff C$
+\item $M\eor(N\eif M)$, \therefore\ $\enot M \eif \enot N$
+\item $S\eiff T$, \therefore\ $S\eiff (T\eor S)$
+\item $(M \eor N) \eand (O \eor P)$, $N \eif P$, $\enot P$, \therefore\ $M\eand O$
+\item $(Z\eand K) \eor (K\eand M)$, $K \eif D$, \therefore\ $D$
+\end{earg}
+
+
+\solutions
+\problempart
+\label{pr.SLND.theorems}
+Show that each of the following sentences is a theorem in SL.
+\begin{earg}
+\item $O \eif O$
+\item $N \eor \enot N$
+\item $\enot(P\eand \enot P)$
+\item $\enot(A \eif \enot C) \eif (A \eif C)$
+\item $J \eiff [J\eor (L\eand\enot L)]$
+\end{earg}
+
+\problempart
+Show that each of the following pairs of sentences are provably equivalent in SL.
+\begin{earg}
+\item $\enot\enot\enot\enot G$, $G$
+\item $T\eif S$, $\enot S \eif \enot T$
+\item $R \eiff E$, $E \eiff R$
+\item $\enot G \eiff H$, $\enot(G \eiff H)$
+\item $U \eif I$, $\enot(U \eand \enot I)$
+\end{earg}
+
+\solutions
+\problempart
+\label{pr.solvedSLproofs2}
+Provide proofs to show each of the following.
+\begin{earg}
+\item $M \eand (\enot N \eif \enot M) \vdash (N \eand M) \eor \enot M$
+\item \{$C\eif(E\eand G)$, $\enot C \eif G$\} $\vdash$ $G$
+\item \{$(Z\eand K)\eiff(Y\eand M)$, $D\eand(D\eif M)$\} $\vdash$ $Y\eif Z$
+\item \{$(W \eor X) \eor (Y \eor Z)$, $X\eif Y$, $\enot Z$\} $\vdash$ $W\eor Y$
+\end{earg}
+
+
+
+\problempart
+For the following, provide proofs using only the basic rules. The proofs will be longer than proofs of the same claims would be using the derived rules.
+\begin{earg}
+\item Show that MT is a legitimate derived rule. Using only the basic rules, prove the following: \metaA{}\eif\metaB{}, \enot\metaB{}, \therefore\ \enot\metaA{}
+\item Show that Comm is a legitimate rule for the biconditional. Using only the basic rules, prove that $\metaA{}\eiff\metaB{}$ and $\metaB{}\eiff\metaA{}$ are equivalent.
+\item Using only the basic rules, prove the following instance of DeMorgan's Laws: $(\enot A \eand \enot B)$, \therefore\ $\enot(A \eor B)$
+\item Show that {\eiff}{ex} is a legitimate derived rule. Using only the basic rules, prove that $D\eiff E$ and $(D\eif E)\eand(E\eif D)$ are equivalent.
+\end{earg}
+
+
+
+
+\problempart
+\begin{earg}
+\item If you know that $\metaA{}\vdash\metaB{}$, what can you say about $(\metaA{}\eand\metaC{})\vdash\metaB{}$? Explain your answer.
+\item If you know that $\metaA{}\vdash\metaB{}$, what can you say about $(\metaA{}\eor\metaC{})\vdash\metaB{}$? Explain your answer.
+\end{earg}

@@ -1,0 +1,601 @@
+﻿%!TEX root = forallx-ubc.tex
+\chapter{Natural Deduction Proofs in QL}
+\label{ch.QLND}
+
+
+Trees employ a kind of `brute force' strategy for proving entailment claims. When the logical structure of the relevant sentences is rather simple, as it is in SL and in some QL cases, it can be an effective strategy. But in other cases, trees become tedious and complex. It is useful to have a proof system that allows one to reason in a more targeted way --- especially if you already have an intuitive understanding of why a given argument should be expected to turn out valid. As we did in Chapter \ref{ch.ND.proofs} for SL, this chapter we will provide a natural deduction system, extending our system SND to quantifier logic. 
+%As in the case of trees, our QL natural deduction system is an extension of the one we learned previously for SL.
+
+Like our SL natural deduction system, our system can only be used to demonstrate that an argument \emph{is} valid. We do not have a formal method, as part of our natural deduction system, for demonstrating that an argument is \emph{invalid}. In this respect natural deduction differs from trees. We won't go through the proof in this book, but the natural deduction system we provide is both sound and complete. That means that there are natural deduction proofs corresponding to all and only the valid arguments in QL.
+
+\section{Natural Deduction: the basics}
+
+In a natural deduction system, one begins by writing down any starting assumptions, which correspond to the premises of an argument. Next, one derives a series of additional sentences, justified via a series of particular rules by the sentences above. Additional assumptions may be made and discharged along the way. If one succeeds in writing down the conclusion of the argument on a new line, with no additional undischarged assumptions, consistent with the natural deduction rules, one has proven that the conclusion follows from those premises. If you need a refresher on how that works, review Chapter \ref{ch.ND.proofs}.
+
+Our QL system will use all the same sentential rules that our SL system did. All the introduction and elimination rules for the sentential connectives will be part of this system too. (These are summarized, along with our new rules, in the Quick Reference guide at the end of this book.) We'll add introduction and elimination rules for the existential and universal quantifiers, and some other derived rules as well. {\color{black} Although, as usual, you can't use the derived rules in the online \textit{Carnap} system. After all, every derivation problem is a derived rule in some system.}
+
+\section{Basic quantifier rules}
+
+%to reformat the substitution instances, see the commands \substitute and \substitutesome in the style file. 
+
+Recall the relationship between quantified sentences and their instances. The sentence $Pa$ is a particular instance of the general claim $\qt{\forall}{x} Px$. For any wff \metaA{}, constant \script{c}, and variable \script{x}, we define  \metaA{}\substitute{\script{x}}{\script{c}} as the sentence you get from $\qt{\forall}{\script{x}}\metaA{}$ by dropping the $\qt{\forall}{\script{x}}$ quantifier and putting $\script{c}$ in place of every $\script{x}$ in $\metaA{}$. The other variables are untouched! 
+
+Remember that we read `\substitute{\script{x}}{\script{c}}' outloud as `$\script{c}$ for $\script{x}$'. We are substituting the constant \script{c} for the variable \script{x}. Fittingly, `\metaA{}\substitute{\script{x}}{\script{c}}' is called a \define{substitution instance} of $\qt{\forall}{\script{x}}\metaA{}$ or $\qt{\exists}{\script{x}}\metaA{}$. \script{c} is called the \define{instantiating constant}. When we start with a universal $\qt{\forall}{x} Px$, we can instantiate it to obtain $Pa$. If we start with an existential $\qt{\exists}{y}Py$, we can likewise instantiate it to some $Pb$, modulo some restrictions we'll impose in our derivation system. 
+
+%Ichikawa's preferred notation: 
+{\color{black}An alternative notation for substitution instances is the following: \metaA{}\hspace{.15em}\raisebox{.3ex}{\fbox{$\script{x}\Rightarrow\script{c}$}}. If you find this notation easier to remember, let me know! I personally find it a bit busy. A further alternative is just to write everything out explicitly, and that's what we do in the Quick Reference guide at the end of the book! As with system SND, I recommend printing out the page for QND to have in front of you for the HW assignments on this stuff! Better yet, print them both out and tape them to your walls!} 
+
+%Same paragraph written out in JH preferred notation, not using the \substitute command: 
+%For any wff \metaA{}, constant \script{c}, and variable \script{x}, we define $\metaA{}[\script{c} / \script{x}]$ as the sentence you get from $\qt{\forall}{\script{x}}\metaA{}$ by dropping the $\qt{\forall}{\script{x}}$ quantifier and putting $\script{c}$ in place of every $\script{x}$ in $\metaA{}$. The other variables are untouched! Remember that we read `$[\script{c} / \script{x}]$' outloud as `$\script{c}$ for $\script{x}$'. `$\metaA{}[\script{c} / \script{x}]$' is called a \define{substitution instance} of $\qt{\forall}{x}\metaA{}$ and $\qt{\exists}{x}\metaA{}$, and \script{c} is called the \define{instantiating constant}.
+
+
+
+
+
+
+
+
+
+%This should be familiar from our discussion of our tree rules for quantifiers in Chapter \ref{ch.QLTrees}. We will also use this notation to describe our quantifier rules.
+
+
+
+\subsection{Universal elimination}
+
+If you have $\qt{\forall}{x} Ax$, it is legitimate to infer, of anything in your domain of discourse, that it is an $A$. You can infer $Aa$, or $Ab$, or $Az$, or $Ad_3$, etc. That is, you can infer any substitution instance: you can infer $A\script{c}$ for any constant \script{c} $\in$ UD. This is the general form of the universal elimination rule ($\forall$E):
+
+\begin{proof}
+	\have[m]{a}{\qt{\forall}{\script{x}}\metaA{}}
+	\have[\ ]{c}{\metaA{}\substitute{\script{x}}{c}} \Ae{a}
+\end{proof}
+
+
+Remember that the notation for a substitution instance is not a legit symbol in QL, so you cannot write it directly in a proof. Instead, you write the substituted sentence with the constant \script{c} replacing \textit{all} occurrences of the variable \script{x} in \metaA{}, as in this example:
+
+\begin{proof}
+	\hypo{a}{\qt{\forall}{x}(Mx \eif Rxd)} \pr{}
+	\have{c}{Ma \eif Rad} \Ae{a}
+	\have{d}{Md \eif Rdd} \Ae{a}
+\end{proof}
+
+%This rule is very similar to the tree rule for universals, which, in our tree system, allowed one to develop a branch containing a universal with any instance of it one likes. 
+You are permitted to write down any instance you like on a new line. In this example, we have used the rule twice, to take two instances --- the $a$ instance and the $d$ instance. In the first case, we instantiate with the constant $a$. In the second case, we instantiate with a different constant $d$. 
+
+\subsection{Existential introduction}
+
+When is it legitimate to infer $\qt{\exists}{x} Ax$? If you know that something is an $A$ --- for instance, if you have $Aa$ available in the proof.
+
+This is the existential introduction rule ($\exists$I):
+
+\begin{proof}
+	\have[m]{a}{\metaA{}}
+	\have[\ ]{c}{\qt{\exists}{\script{x}}\metaA{}\substitutesome{c}{\script{x}}} \Ei{a}
+\end{proof}
+
+It is important to notice that \metaA{}\substitutesome{c}{\script{x}} is not necessarily a full substitution instance. It is possibly just a partial substitution instance. We write it with partial brackets $\lceil \; \rceil$ to show that the variable \script{x} does not need to replace all occurrences of the constant \script{c}. You can decide which occurrences to replace and which to leave in place. For example, each of lines 2--6 can be justified by $\exists${}I:
+
+\begin{proof}
+	\hypo{a}{Ma \eif Rad} \pr{}
+	\have{d}{\qt{\exists}{x}(Mx \eif Rad)} \Ei{a}
+	\have{b}{\qt{\exists}{x}(Ma \eif Rxd)} \Ei{a}
+	\have{c}{\qt{\exists}{x}(Mx \eif Rxd)} \Ei{a}
+	\have{e}{\qt{\exists}{y}\qt{\exists}{x}(Mx \eif Ryd)} \Ei{d}
+	\have{f}{\qt{\exists}{z}\qt{\exists}{y}\qt{\exists}{x}(Mx \eif Ryz)} \Ei{e}
+\end{proof}
+%\have{f}{\qt{\exists}{w}(Ma \eif Raw)} \Ei{a}
+
+There are two instances of the name `$a$' in the premise on line 1. When using $\exists${}I, one can introduce a variable to replace the first instance (as on line 2), the second instance (as on line 3), or both (line 4). Once we have $\qt{\exists}{x}(Mx \eif Rad)$ on line 2, we can convert the second constant `$a$' to a distinct variable $y$ by applying $\exists${}I again, leading to line 5. Since we still have a constant $d$, we can promote this to a distinct variable as well. \textbf{Note that you can't use an already bound variable}! And always introduce the new existential `$\exists$' on the LEFT. 
+
+%Since there is an instance of d, we can also replace that with a variable. 
+
+\subsection{Universal introduction}
+A universal claim like $\qt{\forall}{x} Px$ would be proven if {every} substitution instance of it had been proven, if every sentence $Pa$, $Pb$, $\ldots$ were available in a proof. Alas, there is no hope of proving \emph{every} substitution instance. That would require proving $Pa$, $Pb$, $\ldots$, $Pj_2$, $\ldots$, $Ps_7$, $\ldots$, and so on to infinity. There are infinitely many constants in QL, and so this process would never come to an end.
+
+Consider a simple argument: $\qt{\forall}{x} Mx$, \therefore\ $\qt{\forall}{y} My$
+
+It makes no difference to the meaning of the sentence whether we use the bound variable $x$ or the bound variable $y$, so this argument is obviously valid. Suppose we begin in this way:
+
+\begin{proof}
+	\hypo{x}{\qt{\forall}{x} Mx} \pr{want $\qt{\forall}{y} My$}
+	\have{a}{Ma} \Ae{x}
+\end{proof}
+
+We have derived $Ma$. Nothing stops us from using the same justification to derive $Mb$, $\ldots$, $Mj_2$, $\ldots$, $Ms_7$, $\ldots$, and so on until we run out of space or patience. We have effectively shown how to prove $M\script{c}$ for any constant \script{c}. From this, $\qt{\forall}{y} My$ follows.
+
+\begin{proof}
+	\hypo{x}{\qt{\forall}{x} Mx} \pr{want $\qt{\forall}{y} My$}
+	\have{a}{Ma} \Ae{x}
+	\have{y}{\qt{\forall}{y} My} \Ai{a}
+\end{proof}
+
+It is important here that $a$ was just some arbitrary constant. We had not made any special assumptions about it. If $a$ had already been mentioned, say as a premise in the argument, then this would not show anything about \emph{all} $y$. For example:
+
+\begin{proof}
+	\hypo{x}{\qt{\forall}{x} Rxa} \pr{}
+	\have{a}{Raa} \Ae{x}
+	\have{y}{\qt{\forall}{y} Ryy} \by{not allowed!}{}
+\end{proof}
+
+
+This is the schematic form of the universal introduction rule ($\forall$I):
+
+\begin{proof}
+	\have[m]{a}{\metaA{}}
+	\have[\ ]{c}{\qt{\forall}{\script{x}}\metaA{}\substitute{c^\ast}{\script{x}}} \Ai{a}
+\end{proof}
+$^\ast$ The constant \script{c} (i) \textbf{must not occur in any undischarged assumption} and {\color{black}(ii) must also not occur in the conclusion $\qt{\forall}{\script{x}}\metaA{}\substitute{c}{\script{x}}$. An alternative way of stating the second condition is that \textbf{the variable $\script{x}$ must not occur already in sentence \metaA{}}.} 
+% % JH: check equivalence of these two conditions! 
+
+Note that we can do this for any constant and variable that do not occur in an undischarged assumption. {\color{black}Ideally, you won't have to memorize these two restrictions on the use of the $\forall$I rule: they ought to make intuitive sense. Here's a gloss: to universally generalize it, we need the constant \script{c} to be \textit{arbitrary}. If \script{c} already occurs in an undischarged premise, then it's already being used to play some other functional role, so it's not arbitrary. Likewise, we need the bound variable \script{x} to be arbitrary. If \script{x} already occurs in sentence \metaA{}, then it's playing some other functional role (presumably, it's already a bound variable, and you can't double bind! No double jeopardy!)}
+% and for any variable.
+
+Although the constant \script{c} may not occur in any \emph{undischarged} assumption, it may occur in an assumption of a subproof that we have already closed. For example, here is a valid proof of $\qt{\forall}{z}(Dz \eif Dz)$ that does not use any premises. 
+
+\begin{proof}
+	\open
+		\hypo{f1}{Df}\as{want $Df$}
+		\have{f2}{Df}\by{R}{f1}
+	\close
+	\have{ff}{Df \eif Df}\ci{f1-f2}
+	\have{zz}{\qt{\forall}{z}(Dz \eif Dz)}\Ai{ff}
+\end{proof}
+
+{\color{black}Recall that for a proof that does not rely on any premises, the conclusion must be a tautology (provided our proof system is Sound, which trust me it is!) Recall that Soundness justifies converting a single turnstile `$\vdash$' into that coveted DOUBLE turnstile `$\models$'. So coupled with Soundness, this proof shows that $\models \qt{\forall}{z}(Dz \eif Dz)$, i.e. this formula is semantically entailed by the empty set, and hence is a tautology.}
+
+\subsection{Existential elimination}
+A sentence with an existential quantifier tells us that there is \emph{some} member of the UD that satisfies a formula. For example, $\qt{\exists}{x} Sx$ tells us (roughly) that there is at least one $S$. It does not tell us \emph{which} member of the UD satisfies $S$, however. We cannot immediately conclude $Sa$, $Sf_{23}$, or any other substitution instance of the sentence. What can we do?
+
+Suppose that we knew both $\qt{\exists}{x} Sx$ and $\qt{\forall}{x}(Sx \eif Tx)$. We could reason in this way:
+\begin{quote}
+Since $\qt{\exists}{x} Sx$, there is something that is an $S$. We do not know which constants refer to this thing, if any do, so call this thing `Ishmael'. From $\qt{\forall}{x}(Sx \eif Tx)$, it follows that if Ishmael is an $S$, then it is a $T$. Therefore, Ishmael is a $T$.  Because Ishmael is a $T$, we know that $\qt{\exists}{x} Tx$.
+\end{quote}
+In this paragraph, we introduced a name for the thing that is an $S$. We gave it an arbitrary name (`Ishmael') so that we could reason about it and derive some consequences from there being an $S$. Since `Ishmael' is just a bogus name introduced for the purpose of the proof and not a genuine constant, we could not mention it in the conclusion. Yet we could derive a sentence that does not mention Ishmael; namely, $\qt{\exists}{x} Tx$. This sentence does follow from the two premises.
+
+We want the existential elimination rule to work in a similar way. Yet since English language words like `Ishmael' are not symbols of QL, we cannot use them in formal proofs. Instead, just as we did in the analogous rule within our tree system, we will use names that are \emph{new} --- names which do not appear anywhere else in the proof. (This includes the conclusion you are aiming for.)
+
+A constant that is used to stand in for whatever it is that satisfies an existential claim is called a \define{proxy}. Reasoning with the proxy must all occur inside a subproof, and the proxy cannot be a constant that is doing work elsewhere in the proof.
+
+This is the schematic form of the existential elimination rule ($\exists$E): 
+
+\begin{proof}
+	\have[m]{a}{\qt{\exists}{\script{x}}\metaA{}}
+	\open	
+		\hypo[n]{b}{\metaA{}\substitute{x}{c^\ast}} \as{for $\exists${}E}
+		\have[p]{c}{\metaB{}}
+	\close
+	\have[\ ]{d}{\metaB{}} \Ee{a,b-c}
+\end{proof}
+$^\ast$ \textbf{The constant \script{c} must not appear outside the subproof} {\color{black} (Unless it only appears in a completely separate subproof that has been closed!)}. Remember that the proxy constant cannot appear in \metaB{}, the sentence you prove using $\exists$E. 
+%Ichikawa uses a shorthand restriction for \exists Elimination. 
+
+Technically, there are three minimal restrictions required for existential elimination (but you might find the shorthand gloss above in bold easier to remember): \\ (1) the proxy constant \script{c} does not appear in any undischarged assumption that our instantiated sentence \metaA{}\substitute{x}{c} is in the scope of \\ (2)   \script{c} does not occur in $\qt{\exists}{\script{x}}\metaA{}$ \\ (3) \script{c} does not occur in the conclusion of the subproof \metaB{}. 
+
+Nonetheless, in recognition of the fact that \script{c} is just a place holder that we use inside the subproof, {\color{black} the easiest way to stay out of trouble is to \textbf{always use an entirely new constant which does not appear anywhere else in the proof}. That way you'll automatically satisfy these three restrictions. Don't be toxic, use a new constant!}
+
+The existential elimination rule, like the rules for conditional introduction and negation introduction and elimination, is a rule that involves discharging an assumption. Assume a proxy instance, and see what would follow from that instance. {\color{black} You then derive the sentence of your dreams \metaB{} (possibly any sentence! provided it doesn't contain the proxy constant). Then you can pop out of the subproof and justify that badboy \metaB{} by the rule $\exists$E. Your proxy constant is a ladder to be kicked away. (Whereof we cannot speak, thereof we must be silent).}  
+
+As with those other assumption-involving rules, instead of a justification, one includes a note---in this case, `:AS for $\exists${}E'---about the role of the assumption in the proof {\color{black} (remember that to keep \textit{Carnap} happy, \textbf{you gotta include that pesky `:AS'}. The note is optional, but helps out your grader by communicating your purest intentions!)}. Remember that assumptions must be discharged before your proof is complete, so you should only make an assumption that goes beyond your premises when you have a plan for discharging it.
+
+% If you have the existential, then, you can stop making the assumption about the proxy, and help yourself to what would have followed from it.
+%JH: following sentence does not make sense to me, since we draw the horizontal line when we INTRODUCE the assumption, not discharge it!: We draw the horizontal line at the point where the assumption is discharged, defining a box of lines that were only conditionally derived. 
+
+
+With this rule, we can give a formal proof that $\qt{\exists}{x} Sx$ and $\qt{\forall}{x}(Sx \eif Tx)$ together entail $\qt{\exists}{x} Tx$.
+
+\begin{proof}
+	\hypo{es}{\qt{\exists}{x} Sx} \pr{}
+	\hypo{ast}{\qt{\forall}{x}(Sx \eif Tx)}\pr{want $\qt{\exists}{x} Tx$} 
+	\open
+		\hypo{s}{Sa}\as{for $\exists${}E}
+		\have{st}{Sa \eif Ta}\Ae{ast}
+		\have{t}{Ta} \ce{s,st}
+		\have{et1}{\qt{\exists}{x} Tx}\Ei{t}
+	\close
+	\have{et2}{\qt{\exists}{x} Tx}\Ee{es,s-et1}
+\end{proof}
+
+
+\iffalse
+
+% Following proof uses the \prs and \ass commands, which require double braces {}{}: 
+
+\begin{proof}
+	\hypo{es}{\qt{\exists}{x} Sx} \prs{}{}
+	\hypo{ast}{\qt{\forall}{x}(Sx \eif Tx)}\prs{want $\qt{\exists}{x} Tx$}{} 
+	\open
+		\hypo{s}{Sa}\ass{for $\exists${}E}{}
+		\have{st}{Sa \eif Ta}\Ae{ast}
+		\have{t}{Ta} \ce{s,st}
+		\have{et1}{\qt{\exists}{x} Tx}\Ei{t}
+	\close
+	\have{et2}{\qt{\exists}{x} Tx}\Ee{es,s-et1}
+\end{proof}
+
+\fi 
+
+\subsection{Quantifier negation}
+
+$\enot\qt{\exists}{\script{x}}\enot\metaA{}$ is logically equivalent to $\qt{\forall}{\script{x}}\metaA{}$. {\color{black} The first sentence says that it is not the case that there is something that falsifies \metaA{}, i.e. there is nothing that is not a \metaA{}. Even shorter:} it says that \emph{nothing falsifies} \metaA{}. The second sentence says \emph{everything satisfies} \metaA{}: everything is such that it is a \metaA{}. In QL, these two sentences are provably equivalent. Here is a proof schema for half of that equivalence via a natural deduction reductio. For any wff \metaA{}, variable \script{x}, and new name \script{a}:
+
+
+\begin{proof}
+	\have{Aa}{\qt{\forall}{\script{x}} \metaA{}} \pr{want $\enot\qt{\exists}{\script{x}}\enot \metaA{}$}
+	\open
+		\hypo{Ena}{\qt{\exists}{\script{x}}\enot \metaA{}}\as{for reductio}
+		\open
+			\hypo{nc}{\enot \metaA{\substitute{\script{x}}{\script{a}^\ast}}}\as{for $\exists$E}
+			\open
+				\hypo{Aa2}{\qt{\forall}{\script{x}} \metaA{}}\as{for reductio}{}
+				\have{c2}{\metaA{\substitute{\script{x}}{\script{a}^\ast}}}\Ae{Aa}
+				\have{nc2}{\enot \metaA{\substitute{\script{x}}{\script{a}^\ast}}}\by{R}{nc}
+			\close
+			\have{nAa}{\enot\qt{\forall}{\script{x}} \metaA{}}\ni{Aa2-nc2}
+		\close
+		\have{nAa3}{\enot\qt{\forall}{\script{x}} \metaA{}}\Ee{Ena, nc-nAa}
+		\have{Aa3}{\qt{\forall}{\script{x}} \metaA{}}\by{R}{Aa}
+		\close
+	\have{nEna}{\enot\qt{\exists}{\script{x}}\enot \metaA{}}\ni{Ena-Aa3}
+\end{proof}
+$^\ast$ Where name \script{a} does not appear outside the subproof.
+
+This is a proof \emph{schema} --- it is not itself a proof in QL, as its lines are not QL sentences. But it describes how a proof of this form can be given. For example, here is one instance of the above schema:
+
+
+\begin{proof}
+	\hypo{Aa}{\qt{\forall}{y} Ay} \pr{want $\enot\qt{\exists}{y}\enot Ay$}
+	\open
+		\hypo{Ena}{\qt{\exists}{y}\enot Ay}\as{for reductio}
+		\open
+			\hypo{nc}{\enot Ac}\as{for $\exists$E}
+			\open
+				\hypo{Aa2}{\qt{\forall}{y} Ay}\as{for reductio}
+				\have{c2}{Ac}\Ae{Aa}
+				\have{nc2}{\enot Ac}\by{R}{nc}
+			\close
+			\have{nAa}{\enot\qt{\forall}{y} Ay}\ni{Aa2-nc2}
+		\close
+		\have{nAa3}{\enot\qt{\forall}{y} Ay}\Ee{Ena, nc-nAa}
+		\have{Aa3}{\qt{\forall}{y} Ay}\by{R}{Aa}
+	\close
+	\have{nEna}{\enot\qt{\exists}{y}\enot Ay}\ni{Ena-Aa3, Ena-nAa3}
+\end{proof}
+
+(Note that this proof encodes the same form of reasoning one would employ to demonstrate via a tree that $\qt{\forall}{y} Ay \models \enot \qt{\exists}{y} \enot Ay$. If you're into TREES and read Chapter~\ref{ch.QLTrees}, you might have fun drawing out the tree to compare the two methods.)
+
+In order to fully demonstrate that $\enot\qt{\exists}{\script{x}}\enot\metaA{}$ is logically equivalent to $\qt{\forall}{\script{x}}\metaA{}$, we would also need a second proof that assumes $\enot\qt{\exists}{\script{x}}\enot\metaA{}$ and derives $\qt{\forall}{\script{x}}\metaA{}$. We leave that proof as an exercise for the reader.
+
+It will often be useful to translate between quantifiers by adding or subtracting negations in this way, so we add two derived rules for this purpose. These rules are called quantifier negation (QN):
+\begin{center}
+\begin{tabular}{rl}
+$\enot\qt{\forall}{\script{x}}\metaA{} \Longleftrightarrow \qt{\exists}{\script{x}}\enot\metaA{}$\\
+$\enot\qt{\exists}{\script{x}}\metaA{} \Longleftrightarrow \qt{\forall}{\script{x}}\enot\metaA{}$
+& QN
+\end{tabular}
+\end{center}
+QN is a replacement rule. Like our SL replacement rules (DeMorgan, Double Negation, etc.), it can be used on whole sentences or on subformulae.
+
+\section{Identity Introduction}
+
+The introduction rule for identity is very simple. Everything is identical to itself; so, for any name \script{a}, one may write --- regardless of what one has on the previous lines of the proof --- that $\script{a}{=}\script{a}$:
+
+\begin{proof}
+	\have[\ \,\,\,]{x}{\script{a}=\script{a}} \by{: =I}{}
+\end{proof}
+
+The {=}I rule is unlike our other rules in that it does not require referring to any prior lines of the proof. We need only cite the rule itself; it does not reference any line numbers.
+
+\section{Identity Elimination}
+
+If you have shown that $a{=}b$, then anything that is true of $a$ must also be true of $b$. For any sentence with $a$ in it, you can replace some or all of the occurrences of $a$ with $b$ and produce an equivalent sentence. For example, if you already know $Raa$, then you are justified in concluding $Rab$, $Rba$, $Rbb$. Recall that $\metaA{}\substitutesome{a}{b}$ is the sentence produced by replacing $a$ in \metaA{} with $b$. This is not the same as a substitution instance, because $b$ may replace some or all occurrences of $a$. The identity elimination rule ({=}E) justifies replacing terms with other terms that are identical to it:
+\begin{proof}
+	\have[m]{e}{\script{c}{=}\script{d}}
+	\have[n]{a}{\metaA{}}
+	\have[\ ]{ea1}{\metaA{}\substitutesome{\script{c}}{\script{d}}} \by{=E}{e,a}
+	\have[\ ]{ea2}{\metaA{}\substitutesome{\script{d}}{\script{c}}} \by{=E}{e,a}
+\end{proof}
+
+Here is a simple proof of an instance of the \emph{transitivity of identity}. Let's prove that if $a{=}b$ and $b{=}c$, then $a{=}c$:
+
+\begin{proof}
+	\open
+		\hypo{p}{a{=}b \eand b{=}c}\pr{want $a{=}c$}
+		\have{ab}{a{=}b}\ae{p}
+		\have{bc}{b{=}c}\ae{p}
+		\have{ac}{a{=}c}\by{{=}E}{ab,bc}
+	\close
+	\have{conc}{(a{=}b \eand b{=}c)\eif a{=}c} \ci{p-ac}
+\end{proof}
+
+At line 4, we took advantage of the identity claim $b{=}c$ on line 3, and replaced the $b$ in line 2 with a $c$. Then we used the familiar \eif{}I rule to discharge the assumption of line 1, proving the conditional we were aiming for.
+
+
+\section{Translation and evaluation}
+
+Consider this argument: There is only one button in my pocket. There is a blue button in my pocket. So there is no non-blue button in my pocket.
+
+We begin by defining a symbolization key:
+\begin{ekey}
+\item{UD:} buttons in my pocket
+\item{Bx:} $x$ is blue.
+\end{ekey}
+Because we have no need to discuss anything other than buttons in my pocket, we've restricted the UD accordingly. If we included other things (buttons elsewhere and/or things other than buttons), we'd need predicates corresponding to being a button and things' locations. The simple version here is adequate for our present needs. The argument is translated as:
+\begin{earg}
+\item{} $\qt{\forall}{x} \qt{\forall}{y}\ x{=}y$
+\item{} $\qt{\exists}{x} Bx$
+\item{\therefore} $\enot \qt{\exists}{x} \enot Bx$
+\end{earg}
+
+So the set-up for a natural deduction proof will be:
+
+\begin{proof}
+	\hypo{one}{\qt{\forall}{x}\qt{\forall}{y}\ x{=}y} \pr{}
+	\hypo{eb}{\qt{\exists}{x} Bx} \pr{want $\enot\qt{\exists}{x} \enot Bx$}
+	\have{}{}{}
+%	\open
+%		\hypo{be1}{Be}
+%		\have{all1}{\qt{\forall}{y}\ e{=}y}\Ae{one}
+%		\have{ef1}{e{=}f}\Ae{all1}
+%		\have{bf1}{Bf}\by{{=}E}{ef1,be1}
+%	\close
+%	\have{bf}{Bf}\Ee{eb,be1-bf1}
+%	\have{ab}{\qt{\forall}{x} Bx}\Ai{bf}
+%	\have{nnab}{\enot\enot\qt{\forall}{x} Bx}\by{DN}{ab}
+%	\have{nenb}{\enot\qt{\exists}{x}\enot Bx}\by{QN}{nnab}
+\end{proof}
+
+There are various strategies one might employ. Here are two clues that point toward one promising strategy. Note again that we have an existential on line 2 --- this suggests existential elimination as a possible strategy. Note also that we are aiming for $\enot \qt{\exists}{x} \enot Bx$, which equivalent to $\enot \enot \qt{\forall}{x} Bx$ by QN. This in turn is equivalent, by DN, to $\qt{\forall}{x} Bx$, which suggests that universal introduction is going to be an important step. If we introduce an assumption with a proxy instance of $\qt{\exists}{x} Bx$, we'll be able to work toward a generic instance of $Bx$. In this example, we'll take $e$ as our proxy, and show that $Bf$ follows from $\qt{\exists}{x} Bx$:
+
+\begin{proof}
+	\hypo{one}{\qt{\forall}{x}\qt{\forall}{y}\ x{=}y} \pr{}
+	\hypo{eb}{\qt{\exists}{x} Bx} \pr{want $\enot\qt{\exists}{x} \enot Bx$}
+	\open
+		\hypo{be1}{Be}\as{for $\exists${}E}
+		\have{all1}{\qt{\forall}{y}\ e{=}y}\Ae{one}
+		\have{ef1}{e{=}f}\Ae{all1}
+		\have{bf1}{Bf}\by{{=}E}{ef1,be1}
+	\close
+	\have{bf}{Bf}\Ee{eb,be1-bf1}
+%	\have{ab}{\qt{\forall}{x} Bx}\Ai{bf}
+%	\have{nnab}{\enot\enot\qt{\forall}{x} Bx}\by{DN}{ab}
+%	\have{nenb}{\enot\qt{\exists}{x}\enot Bx}\by{QN}{nnab}
+\end{proof}
+
+By line 7, we have discharged the assumption about the proxy --- we won't use the name $e$ any more --- we have established that $Bf$ follows from the two premises. Since $f$ is an arbitrary name --- one that does not appear in any undischarged assumption --- we can perform universal introduction on that instance. This in turn lets us complete the proof via the two substitution rules mentioned above:
+
+\begin{proof}
+	\hypo{one}{\qt{\forall}{x}\qt{\forall}{y}\ x{=}y} \pr{}
+	\hypo{eb}{\qt{\exists}{x} Bx} \pr{want $\enot\qt{\exists}{x} \enot Bx$}
+	\open
+		\hypo{be1}{Be}\as{for $\exists${}E}
+		\have{all1}{\qt{\forall}{y}\ e{=}y}\Ae{one}
+		\have{ef1}{e{=}f}\Ae{all1}
+		\have{bf1}{Bf}\by{{=}E}{ef1,be1}
+	\close
+	\have{bf}{Bf}\Ee{eb,be1-bf1}
+	\have{ab}{\qt{\forall}{x} Bx}\Ai{bf}
+	\have{nnab}{\enot\enot\qt{\forall}{x} Bx}\by{DN}{ab}
+	\have{nenb}{\enot\qt{\exists}{x}\enot Bx}\by{QN}{nnab}
+\end{proof}
+
+
+
+\section{Natural deduction strategy}
+
+All the strategy advice given in \S\ref{sec.SL.ND.strategy} is equally applicable to natural deduction proofs in QL. Review the suggestions there for general advice for natural deduction proofs. Applied to our new QL rules, if you have a universal, you can think about taking any instances that look useful. (Taking random instances is unlikely to be useful.) If you have an existential, consider using the existential elimination rule, which begins by assuming an instance with a proxy, then deriving a conclusion that does not contain that proxy name.
+
+Showing $\enot \qt{\exists}{x}\metaA{}$ can also be hard, and it is often easier to show  $\qt{\forall}{x}\enot \metaA{}$ and use the QN rule. {\color{black} Although technically in \textit{Carnap}---using system LogicBookPD---you won't have access to this rule QN of quantifier conversion! Sorry not sorry!} 
+
+
+
+\section{Soundness and completeness}
+
+The proofs for soundness and completeness of our natural deduction system are beyond the scope of this textbook {\color{black} (but not beyond the scope of the MIT version of this course!)}. If you are interested in thinking through how those proofs would go, here are a few hints to get you started. Soundness in a natural deduction system amounts to the claim that if any sentence \metaA{} is derivable from a set of sentences \metaSetX{}, then $\metaSetX{}\models\metaA{}$. To prove this, you would need to demonstrate that any possible natural deduction proof meets this constraint. This is trivial for `proofs' that only contain premises; you'd next have to show, for every possible way of extending the proof (i.e., everything permitted by any one of our rules), that any newly added lines with no undischarged assumptions are entailed by the premises.
+
+Undischarged assumptions would require special treatment. You can think of an assumption as being similar to a `temporary premise' --- what you really want to prove is that, for every possible line in a proof, that line is entailed by the premises \emph{in addition to} any undischarged assumptions.
+
+The completeness proof is more complex. We need some way to guarantee that there is a proof corresponding to every QL entailment. The way to do this is to find an algorithmic procedure that is guaranteed to find a proof if one exists, and to prove that this is so. One good way to do this is to take advantage of the proven completeness of our \emph{tree} system for QL, presented in Chapter \ref{ch.QLsoundcomplete}, and find a way to demonstrate that any tree proof can be converted to a natural deduction proof. Here is a hint if you'd like to undertake that project: the tree method encodes the same kind of reasoning that reductio proofs do.
+
+
+
+\iffalse
+
+\practiceproblems
+
+\solutions
+\problempart
+\label{pr.justifyQLproof}
+Provide a justification (rule and line numbers) for each line of proof that requires one.
+\begin{multicols}{2}
+%$\{\qt{\forall}{x}(\qt{\exists}{y})(Rxy \eor Ryx),\qt{\forall}{x}\enot Rmx\}\vdash\qt{\exists}{x}Rxm$
+\begin{proof}
+\hypo{p1}{\qt{\forall}{x}\qt{\exists}{y}(Rxy \eor Ryx)}
+\have{p2}{\qt{\forall}{x}\enot Rmx}
+\have{3}{\qt{\exists}{y}(Rmy \eor Rym)}{}
+	\open
+		\hypo{a1}{Rma \eor Ram}
+		\have{a2}{\enot Rma}{}
+		\have{a3}{Ram}{}
+		\have{a4}{\qt{\exists}{x} Rxm}{}
+	\close
+\have{n}{\qt{\exists}{x} Rxm} {}
+\end{proof}
+
+%$\{\qt{\forall}{x}(\qt{\exists}{y}Lxy \eif \qt{\forall}{z}Lzx), Lab\} \vdash \qt{\forall}{x}Lxx$
+\begin{proof}
+\hypo{1}{\qt{\forall}{x}(\qt{\exists}{y}Lxy \eif \qt{\forall}{z}Lzx)}
+\hypo{2}{Lab}
+\have{3}{\qt{\exists}{y} Lay \eif \qt{\forall}{z}Lza}{}
+\have{4}{\qt{\exists}{y} Lay} {}
+\have{5}{\qt{\forall}{z} Lza} {}
+\have{6}{Lca}{}
+\have{7}{\qt{\exists}{y} Lcy \eif \qt{\forall}{z}Lzc}{}
+\have{8}{\qt{\exists}{y} Lcy}{}
+\have{9}{\qt{\forall}{z} Lzc}{}
+\have{10}{Lcc}{}
+\have{11}{\qt{\forall}{x} Lxx}{}
+\end{proof}
+
+
+% $\{\qt{\forall}{x}(Jx \eif Kx), \qt{\exists}{x}\qt{\forall}{y} Lxy, \qt{\forall}{x} Jx\} \vdash \qt{\exists}{x}(Kx \eand Lxx)$
+\begin{proof}
+\hypo{a}{\qt{\forall}{x}(Jx \eif Kx)}
+\hypo{b}{\qt{\exists}{x}\qt{\forall}{y} Lxy}
+\hypo{c}{\qt{\forall}{x} Jx}
+\open
+	\hypo{2}{\qt{\forall}{y} Lay}
+	\have{d}{Ja}{}
+	\have{e}{Ja \eif Ka}{}
+	\have{f}{Ka}{}
+	\have{3}{Laa}{}
+	\have{4}{Ka \eand Laa}{}
+	\have{5}{\qt{\exists}{x}(Kx \eand Lxx)}{}
+\close
+\have{j}{\qt{\exists}{x}(Kx \eand Lxx)}{}
+\end{proof}
+
+
+%$\vdash \qt{\exists}{x} Mx \eor \qt{\forall}{x}\enot Mx$
+\begin{proof}
+	\open
+		\hypo{p1}{\enot (\qt{\exists}{x} Mx \eor \qt{\forall}{x}\enot Mx)}
+		\have{p2}{\enot \qt{\exists}{x} Mx \eand \enot \qt{\forall}{x}\enot Mx}{}
+		\have{p3}{\enot \qt{\exists}{x} Mx}{}
+		\have{p4}{\qt{\forall}{x}\enot Mx}{}
+		\have{p5}{\enot \qt{\forall}{x}\enot Mx}{}
+	\close
+\have{n}{\qt{\exists}{x} Mx \eor \qt{\forall}{x}\enot Mx} {}
+\end{proof}
+\end{multicols}
+
+\solutions
+\problempart
+\label{pr.someQLproofs}
+Provide a natural deduction proof of each claim.
+\begin{earg}
+\item $\vdash \qt{\forall}{x} Fx \eor \enot \qt{\forall}{x} Fx$
+\item $\{\qt{\forall}{x}(Mx \eiff Nx), Ma\eand\qt{\exists}{x} Rxa\}\vdash \qt{\exists}{x} Nx$
+\item $\{\qt{\forall}{x}(\enot Mx \eor Ljx), \qt{\forall}{x}(Bx\eif Ljx), \qt{\forall}{x}(Mx\eor Bx)\}\vdash \qt{\forall}{x}Ljx$
+\item $\qt{\forall}{x}(Cx \eand Dt)\vdash \qt{\forall}{x}Cx \eand Dt$
+\item $\qt{\exists}{x}(Cx \eor Dt)\vdash \qt{\exists}{x} Cx \eor Dt$
+\end{earg}
+
+\problempart
+Provide a proof of the argument about Billy on p.~\pageref{surgeon2}.
+
+
+
+\problempart
+\label{pr.BarbaraEtc.proof1}
+Look back at Part \ref{pr.BarbaraEtc} on p.~\pageref{pr.BarbaraEtc}. Provide proofs to show that each of the argument forms is valid in QL.
+
+
+
+
+\solutions
+\problempart
+\label{pr.QLproofsNDe}
+Provide a natural deduction proof of each claim.
+\begin{earg}
+\item $\qt{\forall}{x} \qt{\forall}{y} Gxy\vdash\qt{\exists}{x} Gxx$
+\item $\qt{\forall}{x} \qt{\forall}{y} (Gxy \eif Gyx) \vdash \qt{\forall}{x}\qt{\forall}{y} (Gxy \eiff Gyx)$
+\item $\{\qt{\forall}{x}(Ax\eif Bx), \qt{\exists}{x} Ax\} \vdash \qt{\exists}{x} Bx$
+\item $\{Na \eif \qt{\forall}{x}(Mx \eiff Ma), Ma, \enot Mb\}\vdash \enot Na$
+\item $\vdash\qt{\forall}{z} (Pz \eor \enot Pz)$
+\item $\vdash\qt{\forall}{x} Rxx\eif \qt{\exists}{x} \qt{\exists}{y} Rxy$
+\item $\vdash\qt{\forall}{y} \qt{\exists}{x} (Qy \eif Qx)$
+\end{earg}
+
+
+
+\problempart
+Show that each pair of sentences is provably equivalent.
+\begin{earg}
+\item $\qt{\forall}{x} (Ax\eif \enot Bx)$, $\enot\qt{\exists}{x}(Ax \eand Bx)$
+\item $\qt{\forall}{x} (\enot Ax\eif Bd)$, $\qt{\forall}{x} Ax \eor Bd$
+\item $\qt{\exists}{x} Px \eif Qc$, $\qt{\forall}{x} (Px \eif Qc)$
+\end{earg}
+
+
+
+\problempart
+Show that each of the following is provably inconsistent.
+\begin{earg}
+\item \{$Sa\eif Tm$, $Tm \eif Sa$, $Tm \eand \enot Sa$\}
+\item \{$\enot\qt{\exists}{x} Rxa$, $\qt{\forall}{x} \qt{\forall}{y} Ryx$\}
+\item \{$\enot\qt{\exists}{x} \qt{\exists}{y} Lxy$, $Laa$\}
+\item \{$\qt{\forall}{x}(Px \eif Qx)$, $\qt{\forall}{z}(Pz \eif Rz)$, $\qt{\forall}{y} Py$, $\enot Qa \eand \enot Rb$\}
+\end{earg}
+
+
+
+\solutions
+\problempart
+\label{pr.likes}
+Write a symbolization key for the following argument, translate it, and prove it:
+\begin{quote}
+There is someone who likes everyone who likes everyone that first person likes. Therefore, there is someone who likes themself.
+\end{quote}
+
+\problempart
+\label{pr.identity}
+Provide a proof of each claim.
+\begin{earg}
+\item $\{Pa \eor Qb, Qb \eif b{=}c, \enot Pa\}\vdash Qc$
+\item $\{m{=}n \eor n{=}o, An\}\vdash Am \eor Ao$
+\item $\{\qt{\forall}{x} \: x{=}m, Rma\}\vdash \qt{\exists}{x} Rxx$
+\item $\enot \qt{\exists}{x} \: x {\neq} m \vdash \qt{\forall}{x}\qt{\forall}{y} (Px \eif Py)$
+\item $\qt{\forall}{x}\qt{\forall}{y}(Rxy \eif x{=}y)\vdash Rab \eif Rba$
+\item $\{\qt{\exists}{x} Jx, \qt{\exists}{x} \enot Jx\}\vdash \qt{\exists}{x} \qt{\exists}{y}\ x{\neq} y$
+\item $\{\qt{\forall}{x}(x{=}n \eiff Mx), \qt{\forall}{x}(Ox \eor \enot Mx)\}\vdash On$
+\item $\{\qt{\exists}{x} Dx, \qt{\forall}{x}(x{=}p \eiff Dx)\}\vdash Dp$
+\item $\{\qt{\exists}{x}\bigl[Kx \eand \qt{\forall}{y}(Ky \eif x{=}y) \eand Bx\bigr], Kd\}\vdash Bd$
+\item $\vdash Pa \eif \qt{\forall}{x}(Px \eor x {\neq} a)$
+\end{earg}
+
+
+
+\solutions
+\problempart
+\label{pr.QLequivornot}
+For each of the following pairs of sentences: If they are logically equivalent in QL, give proofs to show this. If they are not, construct a model to show this.
+% TODO: this isn't a great problem set in the context, as ND isn't an appropriate method for demonstrating invalidity. Figure out what to do about this.
+\begin{earg}
+\item $\qt{\forall}{x} Px \eif Qc$, $\qt{\forall}{x} (Px \eif Qc)$
+\item $\qt{\forall}{x} Px \eand Qc$, $\qt{\forall}{x} (Px \eand Qc)$
+\item $Qc \eor \qt{\exists}{x} Qx$, $\qt{\exists}{x} (Qc \eor Qx)$
+\item $\qt{\forall}{x}\qt{\forall}{y} \qt{\forall}{z} Bxyz$, $\qt{\forall}{x} Bxxx$
+\item $\qt{\forall}{x}\qt{\forall}{y} Dxy$, $\qt{\forall}{y}\qt{\forall}{x} Dxy$
+\item $\qt{\exists}{x}\qt{\forall}{y} Dxy$, $\qt{\forall}{y}\qt{\exists}{x} Dxy$
+\end{earg}
+
+\solutions
+\problempart
+\label{pr.QLvalidornot}
+For each of the following arguments: If it is valid in QL, give a proof. If it is invalid, construct a model to show that it is invalid.
+% TODO: this isn't a great problem set in the context, as ND isn't an appropriate method for demonstrating invalidity. Figure out what to do about this.
+\begin{earg}
+\item $\qt{\forall}{x}\qt{\exists}{y} Rxy$, \therefore\ $\qt{\exists}{y}\qt{\forall}{x} Rxy$
+\item $\qt{\exists}{y}\qt{\forall}{x} Rxy$, \therefore\ $\qt{\forall}{x}\qt{\exists}{y} Rxy$
+\item $\qt{\exists}{x}(Px \eand \enot Qx)$, \therefore\ $\qt{\forall}{x}(Px \eif \enot Qx)$
+\item $\qt{\forall}{x}(Sx \eif Ta)$, $Sd$, \therefore\ $Ta$
+\item $\qt{\forall}{x}(Ax\eif Bx)$, $\qt{\forall}{x}(Bx \eif Cx)$, \therefore\ $\qt{\forall}{x}(Ax \eif Cx)$
+\item $\qt{\exists}{x}(Dx \eor Ex)$, $\qt{\forall}{x}(Dx \eif Fx)$, \therefore\ $\qt{\exists}{x}(Dx \eand Fx)$
+\item $\qt{\forall}{x}\qt{\forall}{y}(Rxy \eor Ryx)$, \therefore\ $Rjj$
+\item $\qt{\exists}{x}\qt{\exists}{y}(Rxy \eor Ryx)$, \therefore\ $Rjj$
+\item $\qt{\forall}{x} Px \eif \qt{\forall}{x} Qx$, $\qt{\exists}{x} \enot Px$, \therefore\ $\qt{\exists}{x} \enot Qx$
+\item $\qt{\exists}{x} Mx \eif \qt{\exists}{x} Nx$, $\enot \qt{\exists}{x} Nx$, \therefore\ $\qt{\forall}{x} \enot Mx$
+\end{earg}
+
+\problempart
+\label{pr.QLND.trees1}
+Look at the arguments given in Chapter \ref{ch.QLTrees}, Problem Part \ref{pr.QL.trees.translation.and.validity} (page \pageref{pr.QL.trees.translation.and.validity}). For those arguments whose QL translations are valid, prove their validity via natural deduction.
+
+\problempart
+\label{pr.QLND.trees2}
+Look at the entailment claims given in Chapter \ref{ch.identity}, Problem Part \ref{pr.IdentityTrees} (page \pageref{pr.IdentityTrees}). For those entailment claims that are true, prove them via natural deduction.
+
+\problempart
+\label{pr.QLND.trees3}
+Look at the arguments given in Chapter \ref{ch.identity}, Problem Part \ref{pr.IdentityArguments} (page \pageref{pr.IdentityArguments}). For those arguments whose QL translations are valid, prove their validity via natural deduction.
+
+\fi

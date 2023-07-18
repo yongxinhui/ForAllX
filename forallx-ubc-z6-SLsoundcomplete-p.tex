@@ -1,0 +1,143 @@
+
+%!TEX root = forallx-ubc.tex
+%\chapter{Soundness and Completeness for SL Trees}
+%\label{ch.SLsoundcomplete}
+
+
+
+\practiceproblemsA{ch.SLsoundcomplete}
+
+\solutions
+\problempart
+\label{pr.SL.soundness-resolutions}
+Following are possible modifications to our SL tree system. For each, imagine a system that is like the system laid out in this chapter, except for the indicated change. Would the modified tree system be sound? If so, explain how the proof given in this chapter would extend to a system with this rule; if not, give a tree that is a counterexample to the soundness of the modified system.
+\begin{earg}
+\item Change the rule for conjunctions to this rule:
+	\factoidbox{
+	\begin{center}
+	\begin{prooftree}
+	{not line numbering}
+	[\metaA{}\eand\metaB{}
+		[\metaA{}]
+		[\metaB{}]
+	]
+\end{prooftree}
+\end{center}
+}
+
+\item Change the rule for conjunctions to this rule:
+	\factoidbox{
+	\begin{center}
+	\begin{prooftree}
+	{not line numbering}
+	[\metaA{}\eand\metaB{}
+		[\metaA{}]
+	]
+\end{prooftree}
+\end{center}
+}
+
+\item Change the rule for conjunctions to this rule:
+	\factoidbox{
+	\begin{center}
+	\begin{prooftree}
+	{not line numbering}
+	[\metaA{}\eand\metaB{}
+		[\metaA{}
+		[\enot\metaB{}, grouped
+		]
+		]
+	]
+\end{prooftree}
+\end{center}
+}
+
+\item Change the rule for disjunctions to this rule:
+	\factoidbox{
+	\begin{center}
+	\begin{prooftree}
+	{not line numbering}
+	[\metaA{}\eor\metaB{}
+		[\metaA{}
+		[\metaB{}, grouped
+		]
+		]
+	]
+\end{prooftree}
+\end{center}
+}
+
+\item Change the rule for disjunctions to this rule:
+	\factoidbox{
+	\begin{center}
+	\begin{prooftree}
+	{not line numbering}
+	[\metaA{}\eor\metaB{}
+		[\metaA{}]
+		[\metaB{}]
+		[\metaA{} \eand \metaB{}]
+	]
+\end{prooftree}
+\end{center}
+}
+
+\item Change the rule for conditionals to this rule:
+	\factoidbox{
+	\begin{center}
+	\begin{prooftree}
+	{not line numbering}
+	[\metaA{}\eif\metaB{}
+		[\enot\metaA{}]
+		[\metaB{}\eor\metaA{}]
+	]
+\end{prooftree}
+\end{center}
+}
+
+\item Change the rule for conditionals to this rule:
+	\factoidbox{
+	\begin{center}
+	\begin{prooftree}
+	{not line numbering}
+	[\metaA{}\eif\metaB{}
+		[\enot\metaA{}\eor\metaB{}]
+	]
+\end{prooftree}
+\end{center}
+}
+
+\item Change the rule for biconditionals to this rule:
+	\factoidbox{
+	\begin{center}
+	\begin{prooftree}
+	{not line numbering}
+	[\metaA{}\eiff\metaB{}
+		[\metaA{}
+		[\metaB{}, grouped
+		]
+		]
+	]
+\end{prooftree}
+\end{center}
+}
+
+\item Change the rule for disjunctions to this rule:
+	\factoidbox{
+	\begin{center}
+	\begin{prooftree}
+	{not line numbering}
+	[\metaA{}\eor\metaB{}
+		[\metaA{}]
+		[\metaB{}]
+		[\metaC{}]
+	]
+\end{prooftree}
+\end{center}
+(This would mean that one can put whatever SL sentence one likes in the rightmost branch.)
+}
+
+\end{earg}
+
+\problempart
+\label{pr.SL.completenessresolutions}
+For each of the rule modifications given in Part \ref{pr.SL.soundness-resolutions}, would the modified tree system be complete? If so, explain how the proof given in this chapter would extend to a system with this rule; if not, give a tree that is a counterexample to the completeness of the modified system.

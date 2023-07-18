@@ -1,0 +1,202 @@
+﻿%!TEX root = forallx-ubc.tex
+%\chapter{Natural Deduction Proofs in QL}
+%\label{ch.QLND}
+
+\practiceproblemsA{ch.QLND}
+
+\solutions
+\problempart
+\label{pr.justifyQLproof}
+Provide a justification (rule and line numbers) for each line of proof that requires one.
+\begin{multicols}{2}
+%$\{\qt{\forall}{x}(\qt{\exists}{y})(Rxy \eor Ryx),\qt{\forall}{x}\enot Rmx\}\vdash\qt{\exists}{x}Rxm$
+\begin{proof}
+\hypo{p1}{\qt{\forall}{x}\qt{\exists}{y}(Rxy \eor Ryx)}
+\have{p2}{\qt{\forall}{x}\enot Rmx}
+\have{3}{\qt{\exists}{y}(Rmy \eor Rym)}{}
+	\open
+		\hypo{a1}{Rma \eor Ram}
+		\have{a2}{\enot Rma}{}
+		\have{a3}{Ram}{}
+		\have{a4}{\qt{\exists}{x} Rxm}{}
+	\close
+\have{n}{\qt{\exists}{x} Rxm} {}
+\end{proof}
+
+%$\{\qt{\forall}{x}(\qt{\exists}{y}Lxy \eif \qt{\forall}{z}Lzx), Lab\} \vdash \qt{\forall}{x}Lxx$
+\begin{proof}
+\hypo{1}{\qt{\forall}{x}(\qt{\exists}{y}Lxy \eif \qt{\forall}{z}Lzx)}
+\hypo{2}{Lab}
+\have{3}{\qt{\exists}{y} Lay \eif \qt{\forall}{z}Lza}{}
+\have{4}{\qt{\exists}{y} Lay} {}
+\have{5}{\qt{\forall}{z} Lza} {}
+\have{6}{Lca}{}
+\have{7}{\qt{\exists}{y} Lcy \eif \qt{\forall}{z}Lzc}{}
+\have{8}{\qt{\exists}{y} Lcy}{}
+\have{9}{\qt{\forall}{z} Lzc}{}
+\have{10}{Lcc}{}
+\have{11}{\qt{\forall}{x} Lxx}{}
+\end{proof}
+
+
+% $\{\qt{\forall}{x}(Jx \eif Kx), \qt{\exists}{x}\qt{\forall}{y} Lxy, \qt{\forall}{x} Jx\} \vdash \qt{\exists}{x}(Kx \eand Lxx)$
+\begin{proof}
+\hypo{a}{\qt{\forall}{x}(Jx \eif Kx)}
+\hypo{b}{\qt{\exists}{x}\qt{\forall}{y} Lxy}
+\hypo{c}{\qt{\forall}{x} Jx}
+\open
+	\hypo{2}{\qt{\forall}{y} Lay}
+	\have{d}{Ja}{}
+	\have{e}{Ja \eif Ka}{}
+	\have{f}{Ka}{}
+	\have{3}{Laa}{}
+	\have{4}{Ka \eand Laa}{}
+	\have{5}{\qt{\exists}{x}(Kx \eand Lxx)}{}
+\close
+\have{j}{\qt{\exists}{x}(Kx \eand Lxx)}{}
+\end{proof}
+
+
+%$\vdash \qt{\exists}{x} Mx \eor \qt{\forall}{x}\enot Mx$
+\begin{proof}
+	\open
+		\hypo{p1}{\enot (\qt{\exists}{x} Mx \eor \qt{\forall}{x}\enot Mx)}
+		\have{p2}{\enot \qt{\exists}{x} Mx \eand \enot \qt{\forall}{x}\enot Mx}{}
+		\have{p3}{\enot \qt{\exists}{x} Mx}{}
+		\have{p4}{\qt{\forall}{x}\enot Mx}{}
+		\have{p5}{\enot \qt{\forall}{x}\enot Mx}{}
+	\close
+\have{n}{\qt{\exists}{x} Mx \eor \qt{\forall}{x}\enot Mx} {}
+\end{proof}
+\end{multicols}
+
+\solutions
+\problempart
+\label{pr.someQLproofs}
+Provide a natural deduction proof of each claim.
+\begin{earg}
+\item $\vdash \qt{\forall}{x} Fx \eor \enot \qt{\forall}{x} Fx$
+\item $\{\qt{\forall}{x}(Mx \eiff Nx), Ma\eand\qt{\exists}{x} Rxa\}\vdash \qt{\exists}{x} Nx$
+\item $\{\qt{\forall}{x}(\enot Mx \eor Ljx), \qt{\forall}{x}(Bx\eif Ljx), \qt{\forall}{x}(Mx\eor Bx)\}\vdash \qt{\forall}{x}Ljx$
+\item $\qt{\forall}{x}(Cx \eand Dt)\vdash \qt{\forall}{x}Cx \eand Dt$
+\item $\qt{\exists}{x}(Cx \eor Dt)\vdash \qt{\exists}{x} Cx \eor Dt$
+\end{earg}
+
+\problempart
+Provide a proof of the argument about Billy on p.~\pageref{surgeon2}.
+
+
+
+\problempart
+\label{pr.BarbaraEtc.proof1}
+Look back at Part \ref{pr.BarbaraEtc} on p.~\pageref{pr.BarbaraEtc}. Provide proofs to show that each of the argument forms is valid in QL.
+
+
+
+
+\solutions
+\problempart
+\label{pr.QLproofsNDe}
+Provide a natural deduction proof of each claim.
+\begin{earg}
+\item $\qt{\forall}{x} \qt{\forall}{y} Gxy\vdash\qt{\exists}{x} Gxx$
+\item $\qt{\forall}{x} \qt{\forall}{y} (Gxy \eif Gyx) \vdash \qt{\forall}{x}\qt{\forall}{y} (Gxy \eiff Gyx)$
+\item $\{\qt{\forall}{x}(Ax\eif Bx), \qt{\exists}{x} Ax\} \vdash \qt{\exists}{x} Bx$
+\item $\{Na \eif \qt{\forall}{x}(Mx \eiff Ma), Ma, \enot Mb\}\vdash \enot Na$
+\item $\vdash\qt{\forall}{z} (Pz \eor \enot Pz)$
+\item $\vdash\qt{\forall}{x} Rxx\eif \qt{\exists}{x} \qt{\exists}{y} Rxy$
+\item $\vdash\qt{\forall}{y} \qt{\exists}{x} (Qy \eif Qx)$
+\end{earg}
+
+
+
+\problempart
+Show that each pair of sentences is provably equivalent.
+\begin{earg}
+\item $\qt{\forall}{x} (Ax\eif \enot Bx)$, $\enot\qt{\exists}{x}(Ax \eand Bx)$
+\item $\qt{\forall}{x} (\enot Ax\eif Bd)$, $\qt{\forall}{x} Ax \eor Bd$
+\item $\qt{\exists}{x} Px \eif Qc$, $\qt{\forall}{x} (Px \eif Qc)$
+\end{earg}
+
+
+
+\problempart
+Show that each of the following is provably inconsistent.
+\begin{earg}
+\item \{$Sa\eif Tm$, $Tm \eif Sa$, $Tm \eand \enot Sa$\}
+\item \{$\enot\qt{\exists}{x} Rxa$, $\qt{\forall}{x} \qt{\forall}{y} Ryx$\}
+\item \{$\enot\qt{\exists}{x} \qt{\exists}{y} Lxy$, $Laa$\}
+\item \{$\qt{\forall}{x}(Px \eif Qx)$, $\qt{\forall}{z}(Pz \eif Rz)$, $\qt{\forall}{y} Py$, $\enot Qa \eand \enot Rb$\}
+\end{earg}
+
+
+
+\solutions
+\problempart
+\label{pr.likes}
+Write a symbolization key for the following argument, translate it, and prove it:
+\begin{quote}
+There is someone who likes everyone who likes everyone that first person likes. Therefore, there is someone who likes themself.
+\end{quote}
+
+\problempart
+\label{pr.identity}
+Provide a proof of each claim.
+\begin{earg}
+\item $\{Pa \eor Qb, Qb \eif b{=}c, \enot Pa\}\vdash Qc$
+\item $\{m{=}n \eor n{=}o, An\}\vdash Am \eor Ao$
+\item $\{\qt{\forall}{x} \: x{=}m, Rma\}\vdash \qt{\exists}{x} Rxx$
+\item $\enot \qt{\exists}{x} \: x {\neq} m \vdash \qt{\forall}{x}\qt{\forall}{y} (Px \eif Py)$
+\item $\qt{\forall}{x}\qt{\forall}{y}(Rxy \eif x{=}y)\vdash Rab \eif Rba$
+\item $\{\qt{\exists}{x} Jx, \qt{\exists}{x} \enot Jx\}\vdash \qt{\exists}{x} \qt{\exists}{y}\ x{\neq} y$
+\item $\{\qt{\forall}{x}(x{=}n \eiff Mx), \qt{\forall}{x}(Ox \eor \enot Mx)\}\vdash On$
+\item $\{\qt{\exists}{x} Dx, \qt{\forall}{x}(x{=}p \eiff Dx)\}\vdash Dp$
+\item $\{\qt{\exists}{x}\bigl[Kx \eand \qt{\forall}{y}(Ky \eif x{=}y) \eand Bx\bigr], Kd\}\vdash Bd$
+\item $\vdash Pa \eif \qt{\forall}{x}(Px \eor x {\neq} a)$
+\end{earg}
+
+
+
+\solutions
+\problempart
+\label{pr.QLequivornot}
+For each of the following pairs of sentences: If they are logically equivalent in QL, give proofs to show this. If they are not, construct a model to show this.
+% TODO: this isn't a great problem set in the context, as ND isn't an appropriate method for demonstrating invalidity. Figure out what to do about this.
+\begin{earg}
+\item $\qt{\forall}{x} Px \eif Qc$, $\qt{\forall}{x} (Px \eif Qc)$
+\item $\qt{\forall}{x} Px \eand Qc$, $\qt{\forall}{x} (Px \eand Qc)$
+\item $Qc \eor \qt{\exists}{x} Qx$, $\qt{\exists}{x} (Qc \eor Qx)$
+\item $\qt{\forall}{x}\qt{\forall}{y} \qt{\forall}{z} Bxyz$, $\qt{\forall}{x} Bxxx$
+\item $\qt{\forall}{x}\qt{\forall}{y} Dxy$, $\qt{\forall}{y}\qt{\forall}{x} Dxy$
+\item $\qt{\exists}{x}\qt{\forall}{y} Dxy$, $\qt{\forall}{y}\qt{\exists}{x} Dxy$
+\end{earg}
+
+\solutions
+\problempart
+\label{pr.QLvalidornot}
+For each of the following arguments: If it is valid in QL, give a proof. If it is invalid, construct a model to show that it is invalid.
+% TODO: this isn't a great problem set in the context, as ND isn't an appropriate method for demonstrating invalidity. Figure out what to do about this.
+\begin{earg}
+\item $\qt{\forall}{x}\qt{\exists}{y} Rxy$, \therefore\ $\qt{\exists}{y}\qt{\forall}{x} Rxy$
+\item $\qt{\exists}{y}\qt{\forall}{x} Rxy$, \therefore\ $\qt{\forall}{x}\qt{\exists}{y} Rxy$
+\item $\qt{\exists}{x}(Px \eand \enot Qx)$, \therefore\ $\qt{\forall}{x}(Px \eif \enot Qx)$
+\item $\qt{\forall}{x}(Sx \eif Ta)$, $Sd$, \therefore\ $Ta$
+\item $\qt{\forall}{x}(Ax\eif Bx)$, $\qt{\forall}{x}(Bx \eif Cx)$, \therefore\ $\qt{\forall}{x}(Ax \eif Cx)$
+\item $\qt{\exists}{x}(Dx \eor Ex)$, $\qt{\forall}{x}(Dx \eif Fx)$, \therefore\ $\qt{\exists}{x}(Dx \eand Fx)$
+\item $\qt{\forall}{x}\qt{\forall}{y}(Rxy \eor Ryx)$, \therefore\ $Rjj$
+\item $\qt{\exists}{x}\qt{\exists}{y}(Rxy \eor Ryx)$, \therefore\ $Rjj$
+\item $\qt{\forall}{x} Px \eif \qt{\forall}{x} Qx$, $\qt{\exists}{x} \enot Px$, \therefore\ $\qt{\exists}{x} \enot Qx$
+\item $\qt{\exists}{x} Mx \eif \qt{\exists}{x} Nx$, $\enot \qt{\exists}{x} Nx$, \therefore\ $\qt{\forall}{x} \enot Mx$
+\end{earg}
+
+\problempart
+\label{pr.QLND.trees1}
+Look at the arguments given in Chapter \ref{ch.QLTrees}, Problem Part \ref{pr.QL.trees.translation.and.validity} (page \pageref{pr.QL.trees.translation.and.validity}). For those arguments whose QL translations are valid, prove their validity via natural deduction.
+
+\problempart
+\label{pr.QLND.trees2}
+Look at the entailment claims given in Chapter \ref{ch.identity}, Problem Part \ref{pr.IdentityTrees} (page \pageref{pr.IdentityTrees}). For those entailment claims that are true, prove them via natural deduction.
+
+\problempart
+\label{pr.QLND.trees3}
+Look at the arguments given in Chapter \ref{ch.identity}, Problem Part \ref{pr.IdentityArguments} (page \pageref{pr.IdentityArguments}). For those arguments whose QL translations are valid, prove their validity via natural deduction.

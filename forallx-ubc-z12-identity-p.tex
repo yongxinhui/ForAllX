@@ -1,0 +1,165 @@
+﻿%!TEX root = forallx-ubc.tex
+%\chapter{Identity}
+%\label{ch.identity}
+
+\practiceproblemsA{ch.identity}
+
+\solutions
+\problempart
+\label{pr.QL-ID-spies}
+Using the symbolization key given, translate each English-language sentence into QL with identity. For sentences containing definite descriptions, assume Russell's theory.
+\begin{ekey}
+\item[UD:] people
+\item[Kx:] $x$ knows the combination to the safe.
+\item[Sx:] $x$ is a spy.
+\item[Vx:] $x$ is a vegetarian.
+\item[Txy:] $x$ trusts $y$.
+\item[h:] Hofthor
+\item[i:] Ingmar
+\end{ekey}
+\begin{earg}
+\item Hofthor is a spy, but no vegetarian is a spy.
+\item No one knows the combination to the safe unless Ingmar does.
+\item No spy knows the combination to the safe.
+\item Neither Hofthor nor Ingmar is a vegetarian.
+\item Hofthor trusts a vegetarian.
+\item Everyone who trusts Ingmar trusts a vegetarian.
+\item Everyone who trusts Ingmar trusts someone who trusts a vegetarian.
+\item Only Ingmar knows the combination to the safe.
+\item Ingmar trusts Hofthor, but no one else.
+\item The person who knows the combination to the safe is a vegetarian.
+\item The person who knows the combination to the safe is not a spy.
+\end{earg}
+
+\solutions
+\problempart
+\label{pr.QL-ID-cards}
+Using the symbolization key given, translate each English-language sentence into QL with identity. For sentences containing definite descriptions, assume Russell's theory.
+\begin{ekey}
+\item[UD:] cards in a standard deck
+\item[Bx:] $x$ is black.
+\item[Cx:] $x$ is a club.
+\item[Dx:] $x$ is a deuce.
+\item[Jx:] $x$ is a jack.
+\item[Mx:] $x$ is a man with an axe.
+\item[Ox:] $x$ is one-eyed.
+\item[Wx:] $x$ is wild.
+\end{ekey}
+\begin{earg}
+\item All clubs are black cards.
+\item There are no wild cards.
+\item There are at least two clubs.
+\item There is more than one one-eyed jack.
+\item There are at most two one-eyed jacks.
+\item There are exactly two black jacks.
+\item There are exactly four deuces.
+\item The deuce of clubs is a black card.
+\item One-eyed jacks and the man with the axe are wild.
+\item If the deuce of clubs is wild, then there is exactly one wild card.
+\item The man with the axe is not a jack.
+\item The deuce of clubs is not the man with the axe.
+\end{earg}
+
+\solutions
+\problempart
+\label{pr.QLbuffy}
+Using the symbolization key given, translate each English-language sentence into QL with identity.
+\begin{ekey}
+\item[UD:] people, generations, and monsters
+\item[Gx:] $x$ is a generation.
+\item[Hx:] $x$ is human.
+\item[Sx:] $x$ is a slayer.
+\item[Vx:] $x$ is a vampire.
+\item[Dx:] $x$ is a demon.
+\item[Wx:] $x$ is a werewolf.
+\item[Fx:] $x$ is a force of darkness.
+\item[Axy:] $x$ will stand against $y$.
+\item[Bxy:] $x$ is born in generation $y$.
+\item[Kxy:] $x$ will kick $y$.
+\item[b:] Buffy
+\item[f:] Faith
+\item[w:] Willow
+\end{ekey}
+\begin{earg}
+\item Buffy and Willow were born unto the same generation.
+\item There is no more than one slayer born in each generation.
+\item A slayer other than Buffy is one of the forces of darkness.
+\item Willow will stand against any force of darkness other than a werewolf.
+\item Faith will kick everyone except herself.
+\item Buffy will kick anyone who stands against a slayer, unless they are also kicking vampires or demons.
+\item In every generation a slayer is born.
+\item In every generation a slayer is born. She will stand against the vampires, demons, and forces of darkness.
+\item In every generation a slayer is born. She alone will stand against the vampires, demons, and forces of darkness.
+\end{earg}
+
+
+
+\problempart Using the symbolization key given, translate each English-language sentence into QL with identity. For sentences containing definite descriptions, assume Russell's theory.
+\begin{ekey}
+\item[UD:] animals in the world
+\item[Bx:] $x$ is in Farmer Brown's field.
+\item[Hx:] $x$ is a horse.
+\item[Px:] $x$ is a Pegasus.
+\item[Wx:] $x$ has wings.
+\end{ekey}
+\begin{earg}
+\item There are at least three horses in the world.
+\item There are at least three animals in the world.
+\item There is more than one horse in Farmer Brown's field.
+\item There are three horses in Farmer Brown's field.
+\item There is a single winged creature in Farmer Brown's field; any other creatures in the field must be wingless.
+\item The Pegasus is a winged horse.
+\item The animal in Farmer Brown's field is not a horse.
+\item The horse in Farmer Brown's field does not have wings.
+\end{earg}
+
+\solutions
+\problempart Demonstrate each of the following, either by constructing a model, or by explaining why it's impossible to do so. If you wish, you can draw a tree to help you answer these questions; however, it is good conceptual practice to tackle some of these questions directly by thinking about just what you'd need to put in your model.
+\label{pr.IdentityModels}
+\begin{earg}
+\item Show that $\{{\enot}Raa, \qt{\forall}{x} (x{=}a \eor Rxa)\}$
+is consistent.
+%There are many possible answers. Here is one:
+%\begin{partialmodel}
+%UD & \{Harry, Sally\}\\
+%\extension{R} &\{\ntuple{Sally, Harry}\}\\
+%\referent{a} & Harry
+%\end{partialmodel}
+\item\ Show that $\{\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z}(x{=}y \eor y{=}z \eor x{=}z),
+\qt{\exists}{x}\qt{\exists}{y}\ x{\neq} y\}$ is consistent.
+%There are no predicates or constants, so we only need to give a UD.
+%Any UD with 2 members will do.
+\item\ Show that $\{\qt{\forall}{x}\qt{\forall}{y}\ x{=}y, \qt{\exists}{x}\ x {\neq} a\}$ is inconsistent.
+%We need to show that it is impossible to construct a model in which these are both true. Suppose $\qt{\exists}{x}\ x {\neq} a\$ is true in a model. There is something in the universe of discourse that is \emph{not} the referent of $a$. So there are at least two things in the universe of discourse: \referent{a} and this other thing. Call this other thing \metaB{}--- we know $a {\neq} \metaB{}$. But if $a {\neq} \metaB{}$, then $\qt{\forall}{x}\qt{\forall}{y}\ x=y$ is false. So the first sentence must be false if the second sentence is true is true. As such, there is no model in which they are both true. Therefore, they are inconsistent.
+\item Show that $\qt{\exists}{x} (x {=} h \eand x {=} i)$ is contingent.
+\item Show that \{$\qt{\exists}{x}\qt{\exists}{y}(Zx \eand Zy \eand x{=}y)$, $\enot Zd$, $d{=}s$\} is consistent.
+\item Show that `$\qt{\forall}{x}(Dx \eif \qt{\exists}{y} Tyx)$ \therefore\ $\qt{\exists}{y} \qt{\exists}{z}\ y{\neq} z$' is invalid.
+\end{earg}
+
+\solutions
+\problempart Construct a tree to test the following entailment claims. If they are false, provide a model that demonstrates this.
+\label{pr.IdentityTrees}
+\begin{earg}
+\item\  $\models \qt{\forall}{x} \qt{\forall}{y} (x{=}y \eif y{=}x)$
+\item\ $\models \qt{\forall}{x} \qt{\exists}{y} \: x{=}y$
+\item\  $\models \qt{\exists}{x} \qt{\forall}{y} \: x{=}y$
+\item   $\qt{\exists}{x} \qt{\forall}{y} \: x{=}y \models \qt{\forall}{x} \qt{\forall}{y} (Rxy \eiff Ryx)$
+\item   $\models \enot \qt{\forall}{x} \qt{\forall}{y} \qt{\forall}{z} [(Axy \eand Azx \eand y{=}z) \eif Axx] $
+\item  $\qt{\forall}{x} \qt{\forall}{y} \: x{=}y \models \qt{\exists}{x} Fx \eiff \qt{\forall}{x} Fx$
+\item $\qt{\forall}{x} (x{=}a \eor x{=}b), Ga \eiff \enot Gb \models \enot \qt{\exists}{x} \qt{\exists}{y} \qt{\exists}{z} (Gx \eand Gy \eand \enot Gz)$
+\item $\qt{\forall}{x} (Fx \eif x{=}f), \qt{\exists}{x} (Fx \eor \qt{\forall}{y} \: y{=}x) \models Ff$
+\item $\qt{\exists}{x} \qt{\exists}{y} Dxy \models \qt{\forall}{x_{1}} \! \qt{\forall}{x_{2}}\! \qt{\forall}{x_{3}}\! \qt{\forall}{x_{4}}\! [(Dx_{1}x_{2} \eand Dx_{3}x_{4}) \eif (x_{2}{\neq}x_{3} \eor Dx_{1}x_{4})]$
+\end{earg}
+
+\problempart In \S \ref{sec.quantity} we looked at two different translations of `Mozart wrote exactly two operas'. Use trees to prove that they are equivalent.
+
+\problempart Translate these arguments into QL with identity, and evaluate them for validity with a tree. (Don't be surprised or discouraged if some of these trees end up very complex.)
+\label{pr.IdentityArguments}
+\begin{earg}
+\item Dudley will threaten anyone who threatens anyone. Therefore, Dudley will threaten himself.
+\item The exam is easy. Therefore every exam Sheila took was easy. (Use Russell's theory of definite descriptions.)
+\item Three wise men visited Jesus. Every wise man who visited Jesus gave Jesus a gift. Therefore, Jesus received more than one gift.
+\item Worf is the only Klingon in Starfleet. Everyone in Starfleet is brave. All brave Klingons are warriors. Therefore, there is at least one brave warrior in Starfleet.
+\item Worf is the only Klingon in Starfleet. Everyone in Starfleet is brave. All brave Klingons are warriors. Therefore, there is exactly one brave warrior in Starfleet.
+\item Every person likes every kind of sandwich that is tasty. Jack is a person. Jack likes exactly one kind of sandwich. Therefore, no more than one kind of sandwich is tasty.
+\end{earg}

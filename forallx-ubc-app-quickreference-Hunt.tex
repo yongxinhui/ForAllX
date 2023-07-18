@@ -1,0 +1,1095 @@
+﻿%!TEX root = forallx-ubc.tex
+%\pagestyle{plain}
+\pagestyle{appendixstyle}
+% change margins so that all the rules will fit
+\setlength{\topmargin}{0 in}
+\setlength{\headheight}{0 in}
+\setlength{\headsep}{0 in}
+\setlength{\textheight}{9 in}
+\setlength{\evensidemargin}{0.25 in}
+\setlength{\oddsidemargin}{0.25 in}
+\setlength{\textwidth}{6 in}
+
+%\pagenumbering{gobble}
+
+\chapter[Quick Reference]{Quick Reference}
+\label{app.quickreference}
+
+\section*{Characteristic Truth Tables}
+\label{app.CharacteristicTTs}
+
+%\hfill
+%\begin{tabular}{c|c}
+%\metaA{} & \enot\metaA{}\\
+%\hline
+%T & F\\
+%F & T 
+%\end{tabular}
+%\hfill
+%\begin{tabular}{c|c|c|c|c|c}
+%\metaA{} & \metaB{} & \metaA{}\eand\metaB{} & \metaA{}\eor\metaB{} & \metaA{}\eif\metaB{} & \metaA{}\eiff\metaB{}\\
+%\hline
+%T & T & T & T & T & T\\
+%T & F & F & T & F & F\\
+%F & T & F & T & T & F\\
+%F & F & F & F & T & T
+%\end{tabular}
+%\hfill
+
+%\vfill
+\begin{tabular}{l l}
+\begin{tabular}[t]{c|c}
+\metaA{} & \enot\metaA{}\\
+\hline
+1 & 0\\
+0 & 1\\
+\end{tabular}
+&
+\begin{tabular}[t]{c|c|c|c|c|c}
+\metaA{} & \metaB{} & \metaA{}\eand\metaB{} & \metaA{}\eor\metaB{} & \metaA{}\eif\metaB{} & \metaA{}\eiff\metaB{}\\
+\hline
+1 & 1 & 1 & 1 & 1 & 1\\
+1 & 0 & 0 & 1 & 0 & 0\\
+0 & 1 & 0 & 1 & 1 & 0\\
+0 & 0 & 0 & 0 & 1 & 1
+\end{tabular}\\
+\end{tabular}
+\hfill
+
+%\vfill
+
+\section*{Symbolization}
+%\begin{center}
+\label{app.symbolization}
+\begin{tabular*}{\textwidth}{rl}
+\multicolumn{2}{l}{\textsc{Sentential Connectives} (chapter \ref{ch.SL})}\\ \\
+It is not the case that $P$. & $\enot P$\\
+Either $P$, or $Q$. & $(P \eor Q)$ (remember that this is INCLUSIVE `or') \\
+Neither $P$, nor $Q$. & $\enot(P \eor Q)$\ or \ $(\enot P \eand \enot Q)$\\
+Both $P$, and $Q$. & $(P \eand Q)$\\
+If $P$, then $Q$. & $(P \eif Q)$\\
+$P$ \textbf{only} if $Q$. & $(P \eif Q)$\ or \ $(\enot Q \eif \enot P)$ (i.e. the contrapositive) \\
+$P$ if and only if $Q$. & $(P \eiff Q)$\\
+$B$ if $A$. & $(A \eif B)$ (thing after solitary `if' is antecedent!) \\
+Unless $P$, $Q$. $P$ unless $Q$. & $(P \eor Q)$ (other ones are harder to remember!) \\
+\\
+\multicolumn{2}{l}{\label{SymbolizingPredicates}\textsc{Predicates} (chapter \ref{ch.QL})}\\ \\
+All $F$s are $G$s. & $\qt{\forall}{x}(Fx \eif Gx)$\\
+Some $F$s are $G$s. & $\qt{\exists}{x}(Fx \eand Gx)$\\
+Not all $F$s are $G$s. & $\enot\qt{\forall}{x}(Fx \eif Gx)$\ or\ $\qt{\exists}{x}(Fx \eand \enot Gx)$\\
+No $F$s are $G$s. & $\qt{\forall}{x}(Fx \eif\enot Gx)$\ or\ $\enot\qt{\exists}{x}(Fx \eand Gx)$\\
+\\
+\multicolumn{2}{l}{\textsc{Identity} (chapter \ref{ch.identity})}\\ \\
+Only $j$ is a $G$. & $\qt{\forall}{x}(Gx \eiff (x{=}j))$\\
+Everything besides $j$ is a $G$. & $\qt{\forall}{x}(x {\neq} j \eif Gx)$\\
+%$j$ is more $R$ than anyone else. & $\qt{\forall}{x}(x\neq j \eif Rjx)$\\
+The $F$ is $G$. & $\qt{\exists}{x}(Fx \eand \qt{\forall}{y}(Fy \eif x{=}y) \eand Gx)$\\
+The $F$ is not a $G$\scriptsize{(-Unit!)}. & $\qt{\exists}{x}(Fx \eand \qt{\forall}{y}(Fy \eif x{=}y) \eand \enot Gx)$\\
+%
+%\multicolumn{2}{l}{`The F is not G' can be translated two ways:} \\
+%It is not the case that the F is G. (wide)& $\enot\qt{\exists}{x}(Fx \eand \qt{\forall}{y}(Fy \eif x{=}y) \eand Gx)$\\
+%The $F$ is non-$G$. (narrow) & $\qt{\exists}{x}(Fx \eand \qt{\forall}{y}(Fy \eif x{=}y) \eand \enot Gx)$
+\end{tabular*}
+%\end{center}
+
+
+\newpage
+
+\label{Tree Rules}
+%{\hfill \normalsize \bf \phantom{Tree Rules} \hfill}
+{\hfill \normalsize \bf Tree Rules for Sentential Logic (System STD) \hfill}
+
+%page on how to override line numbers: 
+% https://tex.stackexchange.com/questions/415976/manually-set-line-numbers-if-prooftrees-sty
+
+
+%\textbf{\large Sentential Rules} (chapter \ref{ch.sl.trees})
+
+%note that could put vdots in line number for vdots row, but prints with a period afterwards, so looks weird and two tight to the m. 
+
+\makebox[\textwidth]{\textit{Double Negation} (\enot)} \vspace{-1em}
+\begin{center}
+\begin{prooftree}
+{line numbering}
+[\enot\enot\metaA{}, line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\metaA{}, line no override={j}, just={m \enot}
+	]
+	]
+]
+\end{prooftree}
+\end{center}
+
+%\vphantom{v}\\ \vdots
+%\phantom{v} \\
+
+\vspace{1em}
+
+\begin{multicols}{2}
+
+%row1col1
+%\begin{quote}\framebox{\parbox[][75px][c]{\linewidth}{
+\textit{Conjunction} (\eand) \vspace{-1em}
+\begin{center}
+%\textit{Conjunction} (\eand) %\vspace{-1em}
+\begin{prooftree} % CONJUNCTION 
+{line numbering}
+[\metaA{}\eand\metaB{}, line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\metaA{}, line no override={j}, just={m \eand}
+	[\metaB{}, grouped, line no override={j+1}
+	]
+	]
+	]
+]
+\end{prooftree}
+\end{center}
+%}}
+%\end{quote}
+
+\phantom{vvv}
+
+\textit{Disjunction} (\eor) \vspace{-1em}
+\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\metaA{}\eor\metaB{}, line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\metaA{}, line no override={j}, just={m \eor}]
+	[\metaB{}]
+]
+]
+\end{prooftree}
+\end{center}
+
+
+
+\phantom{vvv}
+
+\textit{Conditional} (\eif) \vspace{-1em}
+\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\metaA{}\eif\metaB{}, line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\enot\metaA{}, line no override={j}, just={m \eif}]
+	[\metaB{}]
+]
+]
+\end{prooftree}
+\end{center}
+
+%\vspace{0.5em}
+\phantom{vvv}
+
+\textit{Biconditional} (\eiff) \vspace{-1em}
+\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\metaA{}\eiff\metaB{}, line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\metaA{}, line no override={j}, just={m \eiff}
+		[\metaB{}, grouped, line no override={j+1}]
+	]
+	[\enot\metaA{}
+		[\enot\metaB{}, grouped]
+	]
+]
+]
+\end{prooftree}
+\end{center}
+
+%\vfill \null
+
+
+\columnbreak
+%***************************NEGATED CONNECTIVES****************************************
+
+\textit{Negated Conjunction} (\enot \eand) \vspace{-1em}
+\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\enot(\metaA{}\eand\metaB{}), line no override={m}
+[\vdots,vdotsline={\\[-0.55em] \vdots}, grouped
+	[\enot\metaA{}, line no override={j}, just={m \enot \eand}]
+	[\enot\metaB{}]
+]
+]
+\end{prooftree}
+\end{center}
+
+\vspace{3.3em}
+
+\textit{Negated Disjunction} (\enot \eor) \vspace{-1em}
+\begin{center}
+\begin{prooftree} %NEGATED DISJUNCTION 
+{line numbering, single branches}
+[\enot(\metaA{}\eor\metaB{}), line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\enot\metaA{}, line no override={j}, just={m \enot \eor}
+	[\enot\metaB{}, grouped,  line no override={j+1}
+	]
+	]
+]
+]
+\end{prooftree}
+\end{center}
+
+\vspace{1em}
+%\phantom{vvv}
+
+%\iffalse
+\textit{Negated Conditional} (\enot \eif) \vspace{-1em}
+\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\enot(\metaA{}\eif\metaB{}), line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\metaA{}, line no override={j}, just={m \enot \eif}
+	[\enot\metaB{}, grouped, line no override={j+1}
+	]
+	]
+]
+]
+\end{prooftree}
+\end{center}
+%\fi 
+
+\vspace{1em}
+
+\textit{Negated Biconditional} (\enot \eiff) \vspace{-1em}
+\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\enot(\metaA{}\eiff\metaB{}), line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\metaA{}, line no override={j}, just={m \enot \eiff}
+		[\enot\metaB{}, grouped]
+	]
+	[\enot\metaA{}
+		[\metaB{}, grouped, line no override={j+1}]
+	]
+]
+]
+\end{prooftree}
+\end{center}
+
+%\vfill \null
+%\columnbreak 
+\end{multicols}
+
+
+
+
+
+\iffalse
+%\begin{groupitems}
+	True.
+
+	\begin{prooftree}
+	{
+	to prove={\{P, P \eif Q, Q \eif \enot P\} \vdash{}\bot},
+	}
+	[P, name=p1, just=Ass, highlight line no
+	[P \eif Q, checked, name=p2, grouped, highlight wff
+	[Q \eif \enot P, checked, name=p3, grouped, line no override={n+1}
+		[\enot P, close]
+		[Q
+			[\enot Q, close]
+			[\enot P, close]
+		]
+	]
+	]
+	]
+	\end{prooftree}
+%	\end{groupitems}
+\fi 
+
+%trying to figure out where to put line no override={n}
+
+
+
+
+
+
+
+
+
+\iffalse %Ichikawa versions
+
+\begin{multicols}{5}
+
+%row1col1
+%\begin{quote}\framebox{\parbox[][75px][c]{\linewidth}{
+\begin{center}
+\begin{prooftree}
+{not line numbering}
+[\metaA{}\eand\metaB{}
+	[\metaA{}
+	[\metaB{}, grouped
+	]
+	]
+]
+\end{prooftree}
+\end{center}
+%}}
+%\end{quote}
+
+
+
+%row2col1 - not or
+%\begin{quote}\framebox{\parbox[][75px][c]{\linewidth}{
+\begin{center}
+\begin{prooftree}
+{not line numbering,
+single branches}
+[\enot(\metaA{}\eor\metaB{})
+	[\enot\metaA{}
+	[\enot\metaB{}, grouped
+	]
+	]
+]
+\end{prooftree}
+\end{center}
+%}}
+%\end{quote}
+
+%row3col1 - iff
+%\begin{quote}\framebox{\parbox[][75px][c]{\linewidth}{
+\begin{center}
+\begin{prooftree}
+{not line numbering,
+single branches}
+[\metaA{}\eiff\metaB{}
+	[\metaA{}
+		[\metaB{}, grouped]
+	]
+	[\enot\metaA{}
+		[\enot\metaB{}, grouped]
+	]
+]
+\end{prooftree}
+\end{center}
+%}}
+%\end{quote}
+
+%row1col2
+%\begin{quote}\framebox{\parbox[][75px][c]{\linewidth}{
+\begin{center}
+\begin{prooftree}
+{not line numbering,
+single branches}
+[\enot(\metaA{}\eand\metaB{})
+	[\enot\metaA{}]
+	[\enot\metaB{}]
+]
+\end{prooftree}
+\end{center}
+%}}
+%\end{quote}
+
+%row2col2 - if
+%\begin{quote}\framebox{\parbox[][75px][c]{\linewidth}{
+\begin{center}
+\begin{prooftree}
+{not line numbering,
+single branches}
+[\metaA{}\eif\metaB{}
+	[\enot\metaA{}]
+	[\metaB{}]
+]
+\end{prooftree}
+\end{center}
+%}}
+%\end{quote}
+
+%row3col2 - not iff
+%\begin{quote}\framebox{\parbox[][75px][c]{\linewidth}{
+\begin{center}
+\begin{prooftree}
+{not line numbering,
+single branches}
+[\enot(\metaA{}\eiff\metaB{})
+	[\metaA{}
+		[\enot\metaB{}, grouped]
+	]
+	[\enot\metaA{}
+		[\metaB{}, grouped]
+	]
+]
+\end{prooftree}
+\end{center}
+%}}
+%\end{quote}
+
+%row1col3 - or
+%\begin{quote}\framebox{\parbox[][75px][c]{\linewidth}{
+\begin{center}
+\begin{prooftree}
+{not line numbering,
+single branches}
+[\metaA{}\eor\metaB{}
+	[\metaA{}]
+	[\metaB{}]
+]
+\end{prooftree}
+\end{center}
+%}}
+%\end{quote}
+
+%row2col3 - not if
+%\begin{quote}\framebox{\parbox[][75px][c]{\linewidth}{
+\begin{center}
+\begin{prooftree}
+{not line numbering,
+single branches}
+[\enot(\metaA{}\eif\metaB{})
+	[\metaA{}
+	[\enot\metaB{}, grouped
+	]
+	]
+]
+\end{prooftree}
+\end{center}
+%}}
+%\end{quote}
+
+%row3col3 dn
+%\begin{quote}\framebox{\parbox[][75px][c]{\linewidth}{
+\begin{center}
+\begin{prooftree}
+{not line numbering}
+[\enot\enot\metaA{}
+	[\metaA{}]
+]
+\end{prooftree}
+\end{center}
+%}}
+%\end{quote}
+
+
+
+\end{multicols}
+
+
+\fi 
+
+\newpage
+
+\textbf{\large Quantifier Rules} (chapter \ref{ch.QL})
+
+\begin{multicols}{4}
+
+
+%\factoidbox{
+\begin{center}
+\begin{prooftree}
+{not line numbering}
+[\qt{\exists}{\script{x}}\metaA{}, checked={\script{a}}
+	[\metaA{}\substitute{\script{x}}{\script{a}}]
+]
+\end{prooftree}
+
+*\script{a} must be new
+\end{center}
+%}
+
+
+%\factoidbox{
+\begin{center}
+\begin{prooftree}
+{not line numbering}
+[\qt{\forall}{\script{x}}\metaA{}, subs=\script{a} 
+	[\metaA{}\substitute{\script{x}}{\script{a}}
+	]
+]
+\end{prooftree}
+
+for any \script{a}
+\end{center}
+%}
+
+%\factoidbox{
+\begin{center}
+\begin{prooftree}
+{not line numbering}
+[\enot\qt{\exists}{\script{x}}\metaA{}, subs=\script{a} 
+	[\enot\metaA{}\substitute{\script{x}}{\script{a}}
+	]
+]
+\end{prooftree}
+
+for any \script{a}
+\end{center}
+%}
+
+\label{notall-treerule}
+%\factoidbox{
+\begin{center}
+\begin{prooftree}
+{not line numbering}
+[\enot\qt{\forall}{\script{x}}\metaA{}, checked={\script{a}}
+	[\enot\metaA{}\substitute{\script{x}}{\script{a}}
+	]
+]
+\end{prooftree}
+
+*\script{a} must be new
+\end{center}
+%}
+
+\end{multicols}
+
+\textbf{\large Identity Rules} (chapter \ref{ch.identity})
+
+
+If a branch contains an identity claim \script{a}{=}\script{b} and some sentence \metaA{}, then you may add \metaA{}\substitute{\script{a}}{\script{b}} or \metaA{}\substitute{\script{b}}{\script{a}} to the branch.
+
+A branch is \define{complete} if and only if (i) it is closed or (ii) the following conditions are met:
+\begin{enumerate}
+\item Every resolvable sentence in the branch has been resolved;
+\item For every general quantified sentence \metaA{} and every name \script{a} in the branch, the \script{a} instance of \metaA{} is in the branch; and
+\item For every identity claim $\script{a}{=}\script{b}$ in the branch, either:
+	\begin{enumerate}
+	\item for every atomic sentence or negated atomic sentence \metaA{} containing \script{a} in the branch, \metaA{}\substitute{\script{a}}{\script{b}} is in the branch, or 
+	\item for every atomic sentence or negated atomic sentence \metaA{} containing \script{b} in the branch, \metaA{}\substitute{\script{b}}{\script{a}} is in the branch.
+	\end{enumerate}
+\end{enumerate}
+
+A branch closes if and only if either (i) it contains some sentence \metaA{} along with its negation, \enot\metaA{}, or (ii) it contains, for some name \script{a}, the sentence $\script{a}{\neq}\script{a}$.
+\newpage
+
+% This starts a new page and skips a page if necessary so as
+% to start on an even numbered page.
+% That way, the rules of proof will be on facing pages.
+% It fills it in with a somewhat gratuitous reference table.
+%\ifthenelse{\isodd{\thepage}}{
+%	\ \vspace{2 in}\par\centerline{[ This page intentionally left blank. ]}
+%\begin{table}
+%	Sometimes it is easier to show something by providing proofs than it is by providing models. Sometimes it is the other way round.
+%	\begin{center}
+%	\begin{tabular*}{\textwidth}{p{10em}|p{10em}|p{10em}|}
+%	\cline{2-3}
+%	 & {\centerline{YES}} & {\centerline{NO}}\\
+%	\cline{2-3}
+%	Is \metaA{} a tautology? & prove $\vdash\metaA{}$ & give a model in which \metaA{} is false\\
+%	\cline{2-3}
+%	Is \metaA{} a contradiction? &  prove $\vdash\enot\metaA{}$ & give a model in which \metaA{} is true\\
+%	\cline{2-3}
+%	Is \metaA{} contingent? & give a model in which \metaA{} is true and another in which \metaA{} is false & prove $\vdash\metaA{}$ or $\vdash\enot\metaA{}$\\
+%	\cline{2-3}
+%	Are \metaA{} and \metaB{} equivalent? & prove \mbox{$\metaA{}\vdash\metaB{}$} and \mbox{$\metaB{}\vdash\metaA{}$}  & give a model in which \metaA{} and \metaB{} have different truth values\\
+%	\cline{2-3}
+%	Is the set \model{A} consistent? & give a model in which all the sentences in \model{A} are true & taking the sentences in \model{A}, prove \metaB{} and \enot\metaB{}\\
+%	\cline{2-3}
+%	Is the argument \mbox{`\script{P}, \therefore\ \metaC{}'} valid? & prove $\script{P}\vdash\metaC{}$ & give a model in which \script{P} is true and \metaC{} is false\\
+%	\cline{2-3}
+%	\end{tabular*}
+%	\end{center}
+%\end{table}
+%	\newpage
+%}{}
+% eliminate page numbers
+
+
+
+
+
+%\pagestyle{empty} %turns off page numbers!
+
+
+
+\section*{\hfill \normalsize \bf Derivation Rules of Natural Deduction (System SND) \hfill} 
+\label{nd-proofrules}
+				
+				\vspace{-1em}
+				
+				\iffalse %suppressing Rule R to fit others on page
+\begin{center}
+%\textsc{Reiteration}
+\textit{Reiteration} (R) \vspace{-1em}
+\begin{proof}
+	\have[m]{a}{\metaA{}}
+	\have[\ ]{c}{\metaA{}} \by{R}{a}
+\end{proof}
+\end{center}
+\fi 
+
+\begin{multicols}{2}
+
+
+\textit{Conjunction Introduction} (\eand I) \vspace{-1em}
+\begin{proof}
+	\have[m]{a}{\metaA{}}
+	\have[n]{b}{\metaB{}}
+	\have[\ ]{c}{\metaA{}\eand\metaB{}} \ai{a, b}
+	\have[\ ]{d}{\metaB{}\eand\metaA{}} \ai{a, b}
+\end{proof}
+
+\vspace{1em}
+
+\textit{Conditional Introduction} (\eif I) \vspace{-1em}
+%\nopagebreak
+\begin{proof}
+	\open
+		\hypo[m]{a}{\metaA{}} \as{for \eif I}{}%\by{want \metaB{}}{}
+		\have[n]{b}{\metaB{}}
+	\close
+	\have[\ ]{ab}{\metaA{}\eif\metaB{}}\ci{a-b}
+\end{proof}
+
+\vspace{0.6em}
+
+\textit{Negation Introduction} (\enot I) \vspace{-1em}
+\begin{proof}
+\open
+	\hypo[m]{na}\metaA{} \as{for \enot I}   %\by{:AS for \enot I}{}
+	\have[n]{b}\metaB{}
+	\have[o]{nb}{\enot\metaB{}}
+\close
+\have[\ ]{a}[\ ]{\enot\metaA{}}\ni{na-nb}
+\end{proof}
+
+\vspace{0.6em}
+
+\textit{Disjunction Introduction} (\eor I) \vspace{-1em}
+
+\begin{proof}
+	\have[m]{a}{\metaA{}}
+	\have[\ ]{ab}{\metaA{}\eor\metaB{}}\oi{a}
+	\have[\ ]{ba}{\metaB{}\eor\metaA{}}\oi{a}
+\end{proof}
+
+%\vspace{1.9em} %3.9 for no extra vspaces
+\vspace{0.6em}
+
+\textit{Biconditional Introduction} (\eiff I) \vspace{-1em}
+
+\begin{fitchproof}
+	\open
+		\hypo[i]{a1}{\metaA{}} \as{for \eiff I}
+		\have[j]{b1}{\metaB{}}
+	\close
+\breakline
+	\open
+		\hypo[k]{b2}{\metaB{}} \as{for \eiff I}
+		\have[l]{a2}{\metaA{}}
+	\close
+	\have[\ ]{ab}{\metaA{}\eiff\metaB{}}\bi{a1-b1,b2-a2}
+\end{fitchproof}
+
+\iffalse %Ichikawa version:
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eif\metaB{}}
+	\have[n]{ba}{\metaB{}\eif\metaA{}}
+	\have[\ ]{c}{\metaA{}\eiff\metaB{}} \bi{ab, ba}
+\end{proof}
+\fi 
+
+\vfill\null
+\columnbreak
+
+%\newpage
+
+\textit{Conjunction Elimination} (\eand E) \vspace{-1em}
+
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eand\metaB{}}
+	\have[\ ]{a}{\metaA{}} \ae{ab}
+	\have[\ ]{b}{\metaB{}} \ae{ab}
+\end{proof}
+
+%\vspace{1.9em}
+%\vspace{2.9em}
+\vspace{0.75em}
+
+\textit{Conditional Elimination} (\eif E)  \vspace{-1em}
+
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eif\metaB{}}
+	\have[n]{a}{\metaA{}}
+	\have[\ ]{b}{\metaB{}} \ce{ab,a}
+\end{proof}
+
+%\vspace{1em}
+\vspace{0.45em}
+
+\textit{Negation Elimination} (\enot E)  \vspace{-1em}
+%%note that I think I'm missing some brackets around the sentences on various liens below! works in proof environment but less robust in nd environment. so i ought to fix these here and in negation intro 
+
+\begin{proof}
+\open
+	\hypo[m]{na}{\enot\metaA{}} \as{for \enot E}
+	\ellipsesline
+	\have[n]{b}\metaB{}
+	\have[o]{nb}{\enot\metaB{}}
+\close
+\have[\ ]{a}[\ ]\metaA{}\ne{na-nb}
+\end{proof}
+
+\vspace{1em}
+
+\textit{Disjunction Elimination} (\eor E)  \vspace{-1em}
+
+\begin{proof}
+\have[m]{ab}{\metaA{}\eor\metaB{}}
+	\open
+		\hypo[i]{a}{\metaA{}} \as{for \eor E}
+		\have[j]{c1}{\metaC{}}
+	\close
+\breakline
+	\open
+		\hypo[k]{b}{\metaB{}} \as{for \eor E}
+		\have[l]{c2}{\metaC{}}
+	\close
+	\have[\ ]{c}{\metaC{}} \oe{ab,a-c1, b-c2}
+\end{proof}
+
+
+\iffalse %Ichikawa Disjunction Syllogism version:
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eor\metaB{}}
+	\have[n]{nb}{\enot\metaB{}}
+	\have[\ ]{a}{\metaA{}} \oe{ab,nb}
+\end{proof}
+
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eor\metaB{}}
+	\have[n]{na}{\enot\metaA{}}
+	\have[\ ]{b}{\metaB{}} \oe{ab,nb}
+\end{proof}
+
+\fi 
+
+
+%\pagebreak
+
+
+
+\textit{Biconditional Elimination} (\eiff E) \vspace{-1em}
+
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eiff\metaB{}}
+	\have[n]{a}{\metaB{}}
+	\have[\ ]{b}{\metaA{}} \be{ab,a}
+\end{proof}
+%Can also go from \metaA{} to \metaB{} using \eiff E
+
+\iffalse
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eiff\metaB{}}
+	\have[n]{a}{\metaA{}}
+	\have[\ ]{b}{\metaB{}} \be{ab,a}
+\end{proof}
+\fi 
+
+
+
+\end{multicols} %ends multicol started for SD rules 
+
+%\pagestyle{empty}
+
+\section*{\hfill \normalsize \bf Derivation Rules of Natural Deduction System QND \hfill} 
+\label{nd-proofrules}
+				
+				\vspace{-1em}
+				
+All the rules of SND, plus the following rules for the quantifiers! The rules of SND govern inferences where the main logical operator is one of the connectives from {\it{SL}}. Reiteration is also allowed.
+
+%JH preferred substitution notation, from Logic Book: $\metaA{}[\script{c} / \script{x}]$
+%Note that you can modify \substitute command in the style file to toggle styles. 
+
+Recall: $\metaA{}\substitute{\script{x}}{\script{c}}$ is the sentence you get from $\qt{\forall}{\script{x}}\metaA{}$ by dropping the $\qt{\forall}{\script{x}}$ quantifier and putting $\script{c}$ in place of every $\script{x}$ in $\metaA{}$. The other variables are untouched! Equivalent notation: \metaA{}\hspace{.15em}\raisebox{.3ex}{\fbox{$\script{x}\Rightarrow\script{c}$}}. But we'll write things out long-hand in the schemata below! 
+
+% (${\bm{P[a/x]}}$  is the sentence you get from $(\qt{\forall}{x}) {\bm{P}}$ by dropping the $(\qt{\forall}{x}) $ quantifier and putting ${\bf{a}}$ in the place of every $x$ in ${\bm{P}}$)
+
+
+
+\begin{multicols}{2}
+
+\textit{Universal Elimination} ($\forall$E) 
+
+\begin{proof}
+	\have[m]{a}{\qt{\forall}{\script{x}}\metaA{}(\dots \script{x} \dots \script{x} \dots)}
+	\have [\vdots] {n} {\hspace{2em} \vdots}
+	\have[s]{c}{\metaA{}(\dots \script{c} \dots \script{c} \dots)} \Ae{a}
+	%\have[\ ]{c}{\metaA{}\substitute{\script{x}}{\script{c}}} \Ae{a}
+\end{proof}
+
+\phantom{We replace every $\script{x}$ variable  in \metaA{} with the same constant $\script{c}$. I.e. we go from $\qt{\forall}{\script{x}}\metaA{}$ to $\metaA{}[\script{c} / \script{x}]$. Other variables are untouched.} 
+
+\vspace{2.5em}
+
+\textit{Universal Introduction} ($\forall$I) 
+
+\begin{proof}
+	\have[m]{a}{\metaA{}(\dots \script{c} \dots \script{c} \dots)}
+	\have [\vdots] {n} {\hspace{2em} \vdots}
+	\have[s]{c}{\qt{\forall}{\script{x}}\metaA{}(\dots \script{x} \dots \script{x} \dots)} \Ai{a}
+\end{proof}
+
+\textbf{Provided that both} \\
+\textbf{(i)} $\script{c}$ does not occur in any undischarged assumptions that \metaA{} is in the scope of. \\
+\textbf{(ii)} $\script{x}$ does not occur already in $\metaA{}(\dots \script{c} \dots \script{c} \dots)$.
+%I think the following is a mistake: $\script{c}$ does not occur already in $\forall \script{x}\metaA{}$. 
+
+
+
+\vfill\null
+\columnbreak
+
+\textit{Existential Introduction} ($\exists$I)
+
+\begin{proof}
+	\have[m]{a}{\metaA{}(\dots \script{c} \dots \script{c} \dots)}
+	\have [\vdots] {n} {\hspace{2em} \vdots}
+	\have[s]{c}{\qt{\exists}{\script{x}}\metaA{}(\dots \script{x} \dots \script{x} \dots)} \Ei{a}
+\end{proof}
+
+\textbf{Provided that} $\script{x}$ does not occur already in $\metaA{}(\dots \script{c} \dots \script{c} \dots)$. Note that $\script{x}$ may replace some or all occurrences of $\script{c}$.
+
+
+
+
+
+\textit{Existential Elimination} ($\exists$E)
+
+\begin{proof}
+	\have[m]{a}{\qt{\exists}{\script{x}} \metaA{}}
+	\have [\ ] {n} {\hspace{2em} \vdots}
+	\open	
+		\hypo[n]{b}{\metaA{}(\dots \script{c} \dots \script{c} \dots)} \as{for $\exists$E}
+		\have [\ ] {n2} {\hspace{2em} \vdots}
+		\have[s]{c}{\metaB{}}
+	\close
+	%\have [\ ] {n3} {\hspace{2em} \vdots}
+	\have[s+1]{d}{\metaB{}} \Ee{a,b-c}
+\end{proof}
+
+\textbf{Provided that} \\
+(i)  $\script{c}$ does not occur in any undischarged assumptions that \metaA{} is in the scope of \\
+(ii) $\script{c}$ does not occur already in $\qt{\exists}{\script{x}} \metaA{}$ \\
+(iii) $\script{c}$ does not occur in \metaB{} \\
+
+\footnotesize{Simplified restriction (easier to remember): \textbf{provided $\script{c}$ doesn't occur anywhere else outside the subproof}. (Moral: always use a distinct constant for existential elimination, and you'll satisfy the three restrictions above automatically!)}
+%would be nice to shorten this to `provided c does not occur outside the subproof, but not sure if this is actually true! e.g. we could instantiate some other universal with c, and so have Fc outside the subproof. 
+
+\end{multicols} %ends multicol started for QND rules 
+
+
+
+
+\section*{\hfill \normalsize \bf Derivation Rules of Natural Deduction System QND \hfill} 
+\label{nd-proofrules}
+				
+				\vspace{-1em}
+				
+All the rules of SND, plus the following rules for the quantifiers! The rules of SND govern inferences where the main logical operator is one of the connectives from {\it{SL}}. Reiteration is also allowed.
+
+%JH preferred substitution notation, from Logic Book: $\metaA{}[\script{c} / \script{x}]$
+%Note that you can modify \substitute command in the style file to toggle styles. 
+
+Recall: $\metav{Q}\substitute{\script{x}}{\script{c}}$ is the sentence you get from $\qt{\forall}{\script{x}}\metav{Q}$ by dropping the $\qt{\forall}{\script{x}}$ quantifier and putting $\script{c}$ in place of every $\script{x}$ in $\metav{Q}$. The other variables are untouched! Equivalent notation: \metav{Q}\hspace{.15em}\raisebox{.3ex}{\fbox{$\script{x}\Rightarrow\script{c}$}}. But we'll write things out long-hand in the schemata below! 
+
+% (${\bm{P[a/x]}}$  is the sentence you get from $(\qt{\forall}{x}) {\bm{P}}$ by dropping the $(\qt{\forall}{x}) $ quantifier and putting ${\bf{a}}$ in the place of every $x$ in ${\bm{P}}$)
+
+
+
+\begin{multicols}{2}
+
+\textit{Universal Elimination} ($\forall$E) 
+
+\begin{proof}
+	\have[m]{a}{\qt{\forall}{\script{x}}\metav{Q}}
+	\have [\vdots] {n} {\hspace{2em} \vdots}
+	\have[s]{c}{\metav{Q}\substitute{\script{x}}{\script{c}}} \Ae{a}
+	%\have[\ ]{c}{\metaA{}\substitute{\script{x}}{\script{c}}} \Ae{a}
+\end{proof}
+
+\phantom{We replace every $\script{x}$ variable  in \metav{Q} with the same constant $\script{c}$. I.e. we go from $\qt{\forall}{\script{x}}\metav{Q}$ to $\metav{Q}[\script{c} / \script{x}]$. Other variables are untouched.} 
+
+\vspace{2.5em}
+
+\textit{Universal Introduction} ($\forall$I) 
+
+\begin{proof}
+	\have[m]{a}{\metav{Q}}
+	\have [\vdots] {n} {\hspace{2em} \vdots}
+	\have[s]{c}{\qt{\forall}{\script{x}}\metav{Q}\substitute{\script{c}}{\script{x}}} \Ai{a}
+\end{proof}
+
+\textbf{Provided that both} \\
+\textbf{(i)} $\script{c}$ does not occur in any undischarged assumptions that \metav{Q} is in the scope of. \\
+\textbf{(ii)} $\script{x}$ does not occur already in $\metav{Q}$.
+%I think the following is a mistake: $\script{c}$ does not occur already in $\forall \script{x}\metaA{}$. 
+
+
+
+\vfill\null
+\columnbreak
+
+\textit{Existential Introduction} ($\exists$I)
+
+\begin{proof}
+\have[m]{a}{\metav{Q}}
+	\have [\vdots] {n} {\hspace{2em} \vdots}
+\have[s]{c}{\qt{\exists}{\script{x}}\metav{Q}\substitutesome{c}{\script{x}}} \Ei{a}
+\end{proof}
+
+\textbf{Provided that} $\script{x}$ does not occur already in $\metav{Q}(\dots \script{c} \dots \script{c} \dots)$. Note that $\script{x}$ may replace some or all occurrences of $\script{c}$.
+
+
+
+
+
+\textit{Existential Elimination} ($\exists$E)
+
+\begin{fitchproof}
+	\have[m]{a}{\qt{\exists}{\script{x}} \metav{Q}}
+	\have [\ ] {n} {\hspace{2em} \vdots}
+	\open	
+		\hypo[n]{b}{\metav{Q}\substitute{\script{x}}{\script{c}}} \as{for $\exists$E}
+		\have [\ ] {n2} {\hspace{2em} \vdots}
+		\have[s]{c}{\metaB{}}
+	\close
+	%\have [\ ] {n3} {\hspace{2em} \vdots}
+	\have[s+1]{d}{\metaB{}} \Ee{a,b-c}
+\end{fitchproof}
+
+\textbf{Provided that} \\
+(i)  $\script{c}$ does not occur in any undischarged assumptions that \metav{Q} is in the scope of \\
+(ii) $\script{c}$ does not occur already in $\qt{\exists}{\script{x}} \metav{Q}$ \\
+(iii) $\script{c}$ does not occur in \metaB{} \\
+
+\footnotesize{Simplified restriction (easier to remember): \textbf{provided $\script{c}$ doesn't occur anywhere else outside the subproof}. (Moral: always use a distinct constant for existential elimination, and you'll satisfy the three restrictions above automatically!)}
+%would be nice to shorten this to `provided c does not occur outside the subproof, but not sure if this is actually true! e.g. we could instantiate some other universal with c, and so have Fc outside the subproof. 
+
+\end{multicols} %ends multicol started for QND rules 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%\newpage
+\twocolumn %carries down to end of the document 
+
+%{\large \bf Additional Rules}
+
+{\large \bf Identity Rules}
+
+\begin{proof}
+	\have[\ \,\,\,]{x}{\script{c}{=}\script{c}} \by{=I}{}
+\end{proof}
+
+\begin{proof}
+	\have[m]{e}{\script{c}{=}\script{d}}
+	\have[n]{a}{\metaA{}}
+	\have[\ ]{ea1}{\metaA{}\substitutesome{\script{c}}{\script{d}}} \by{=E}{e,a}
+	\have[\ ]{ea2}{\metaA{}\substitutesome{\script{d}}{\script{c}}} \by{=E}{e,a}
+\end{proof}
+
+\begin{footnotesize}\emph{One constant may replace some or all occurrences of the other.}
+\end{footnotesize}
+
+
+
+
+
+%\newpage
+
+{\large \bf Derived Rules}
+
+\textsc{Dilemma}
+
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eor\metaB{}}
+	\have[n]{ac}{\metaA{}\eif\metaC{}}
+	\have[p]{bc}{\metaB{}\eif\metaC{}}
+	\have[\ ]{a}{\metaC{}} \by{DIL}{ab,ac,bc}
+\end{proof}
+
+\textsc{Modus Tollens}
+
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eif\metaB{}}
+	\have[n]{a}{\enot\metaB{}}
+	\have[\ ]{b}{\enot\metaA{}} \by{MT}{ab,a}
+\end{proof}
+
+\textsc{Hypothetical Syllogism}
+
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eif\metaB{}}
+	\have[n]{bc}{\metaB{}\eif\metaC{}}
+	\have[\ ]{ac}{\metaA{}\eif\metaC{}}\by{HS}{ab,bc}
+\end{proof}
+
+\newpage
+
+{\large \bf Replacement Rules}
+
+\begin{footnotesize}\emph{(Replacement rules may be used within complex sentences or on whole lines.)}\end{footnotesize}
+
+\textsc{Commutativity} (Comm)\\
+$(\metaA{}\eand\metaB{}) \Longleftrightarrow (\metaB{}\eand\metaA{})$\\
+$(\metaA{}\eor\metaB{}) \Longleftrightarrow (\metaB{}\eor\metaA{})$\\
+$(\metaA{}\eiff\metaB{}) \Longleftrightarrow (\metaB{}\eiff\metaA{})$
+
+\textsc{DeMorgan} (DeM)\\
+$\enot(\metaA{}\eor\metaB{}) \Longleftrightarrow (\enot\metaA{}\eand\enot\metaB{})$\\
+$\enot(\metaA{}\eand\metaB{}) \Longleftrightarrow (\enot\metaA{}\eor\enot\metaB{})$
+
+\textsc{Double Negation} (DN)\\
+$\enot\enot\metaA{} \Longleftrightarrow \metaA{}$
+
+\textsc{Material Conditional} (MC)\\
+$(\metaA{}\eif\metaB{}) \Longleftrightarrow (\enot\metaA{}\eor\metaB{})$\\
+$(\metaA{}\eor\metaB{}) \Longleftrightarrow (\enot\metaA{}\eif\metaB{})$
+
+\textsc{Biconditional Exchange} ({\eiff}{ex})\\
+$[(\metaA{}\eif\metaB{})\eand(\metaB{}\eif\metaA{})] \Longleftrightarrow (\metaA{}\eiff\metaB{})$
+
+\textsc{Quantifier Negation} (QN)\\
+$\enot\qt{\forall}{\script{x}}\metaA{} \Longleftrightarrow \qt{\exists}{\script{x}}\enot\metaA{}$\\
+$\enot\qt{\exists}{\script{x}}\metaA{} \Longleftrightarrow \qt{\forall}{\script{x}}\enot\metaA{}$
+
+
+
+%%%********************
+%Some stuff from CALGARY REMIX QUICK REFERENCE, MUCH MORE EXTENSIVE
+
+
