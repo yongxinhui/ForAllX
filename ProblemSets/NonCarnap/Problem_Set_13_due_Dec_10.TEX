@@ -1,0 +1,274 @@
+ \documentclass[12pt]{article}
+ 
+ \usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=.8in,lmargin=1in,rmargin=1in}
+
+\usepackage{multicol}
+ 
+ \iffalse
+ \textheight     11truein
+ \vsize     10.0truein
+ \topmargin      .15truein
+ \textwidth 6.5truein \columnwidth \textwidth 
+ \setlength{\oddsidemargin}{0truein} 
+ %\footheight     0.0truein
+ \footskip       0.75truein
+ \headheight     .25truein
+ \headsep        0.25truein
+ \fi 
+
+\usepackage{amsmath} %for align* environment and gather*
+\usepackage{xref}
+ %    \textheight     10.0truein
+ \usepackage{graphics}
+ \usepackage{pstricks}
+% \usepackage{pst-tree}
+% \usepackage{pst-node,pst-tree}
+ \usepackage{makeidx}
+ 
+
+ 
+ %\usepackage{forallx-ubc-Hunt} %calls local modified style file, but could lead to conflicts. i ought to make my own `common.sty' file for the problem sets. maybe using the same `common' file as the lecture notes? i really ought to just have a single consistent set of style files for the book, problem sets, and lecture notes! 
+ 
+ %\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
+% disjunction
+\def\eor{\ensuremath{\vee}}
+% conjunction: 
+% {\,^{_{_{_{_{\mbox{\footnotesize\textbullet}}}}}}} gives the dot
+\def\eand{\ensuremath{\,\&\,}}
+% conditional: \rightarrow gives the right arrow
+\def\eif{\ensuremath{\supset}}
+% biconditional: \leftrightarrow gives the left and right arrow
+\def\eiff{\ensuremath{\equiv}}
+% negation: {\sim} gives the swung dash 
+%\def\enot{\ensuremath{\neg}}
+%\def\enot{\ensuremath{\sim}} %note that \sim is defined as a relation, which leads to spacing issues. adding a \! leads to more spacing issues (piled up double negations).  
+
+\def\enot{\ensuremath{{\sim}}} %redefining as {\sim} treats the tilde as a unary operator, rather than a relation, solving a lot of the spacing issues. 
+
+\let\oldsim\sim %renames any \sim commands as \oldsim. 
+\renewcommand{\sim}{{\oldsim}} %redefines \sim as unary operator version of \sim, in case there are any straggling \sim commands in the wild
+
+% metalanguage variables: change greek to A and B if you prefer
+\def\metaA{\ensuremath{\varPhi}}
+\def\metaB{\ensuremath{\varPsi}}
+\def\metaC{\ensuremath{\varOmega}}
+\def\metaD{\ensuremath{\varDelta}}
+\def\metaSetX{\ensuremath{\mathcal{X}}}
+\def\metaSetY{\ensuremath{\mathcal{Y}}}
+\def\metaSetZ{\ensuremath{\mathcal{Z}}}
+
+%Calgary script and metav commands: 
+\newcommand*{\script}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand*{\metav}[1]{\ensuremath{\mathcal{#1}}}
+
+% \pagestyle{empty}
+ 
+ % Tree stuff
+ 
+  \usepackage{prooftrees} %i copied over prooftrees file from Ichikawa source files, which I think is pre-2019 version
+  
+ %Note that I probably ought to just update my prooftrees package, since I downloaded the zip file and can just paste over the older version! (but who knows what else this could change...)
+%JRH: adding in definition of line no override, local option included in 2019 revision. since my prooftrees package is not up to date! 
+% see code here: https://tex.stackexchange.com/questions/415976/manually-set-line-numbers-if-prooftrees-sty
+% see p. 24 of prooftrees manual for directions on using this. works w/ {}, e.g. line no override={n+1}
+
+%the command `vdotsline' lets you put anything in number column, without a period appearing afterwards. so it's like `line no override' without \linenumberstyle
+%e.g. for vertical dots vertically aligned, use: vdotsline={\\[-0.55em] \vdots}
+
+\forestset{
+  line no override/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=\linenumberstyle{#1},
+        typeset node,
+      },
+    },
+  },
+  no line no/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=,
+        typeset node,
+      },
+    },
+  },
+  vdotsline/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=#1,
+        typeset node,
+      },
+    },
+  },
+  default preamble={
+	single branches,
+	close with=\ensuremath{\times},
+	just sep=1.75em,
+	line no sep=1.75em
+	}
+}
+
+\begin{document}
+
+\input macs
+%\input fitch
+\newcommand{\detritus}[1]{}
+
+
+\thispagestyle{empty}
+
+
+
+\iffalse
+\parindent = 0pt
+\hspace*{0.0in}\parbox[t]{2.5in}{
+Philosophy 24.241\\[3pt]
+Symbolic Logic\\[3pt]
+Fall, 2022
+}
+\fi 
+
+%\bigskip %\bigskip
+
+\iffalse 
+\begin{center}
+\Large\bf Problem Set 12 \large{(24.241 Symbolic Logic)}\\[1ex] 
+ Due Saturday {\bf{December 3rd}} by noon Eastern\\[3ex]
+\end{center}
+\fi
+
+\begin{center}
+\Large Problem Set 13 \large{(12th graded PS; 24.241 Symbolic Logic)} \\[1ex] 
+ Due Saturday \textbf{Dec. 10th} by 1pm Eastern\\ \normalsize{\textit{Please scan and upload to Canvas as a pdf}}\\[1ex]  %; feel free to \textit{also} turn in a paper copy to Philosophy Dept on 8th floor Stata Center, Dreyfoos-wing} \\[3ex] 
+ 
+ \textbf{Choose FOUR questions total to answer, but not \textit{both} \#2 and \#5} \\ (at least, you're not allowed to prove \#2 by appealing to \#5! Das ist verboten!)
+\end{center}
+
+
+
+%Note: the last four questions are really straightforward and can be answered succinctly. \\ The first two require more work.  Unless noted otherwise, let `$\vdash$' stand for `$\vdash_{SND}$' \\%[1ex]
+
+If you worked with up to two classmates, please list their names!
+
+\medskip
+%Some of these problems draw from the posted Induction and Recursion notes.\\
+
+%For questions 1 and 2, provide good translations of the following arguments into the language of sentential logic. Then, investigate their validity using the tree method (STD)
+
+\begin{enumerate}
+
+%%idea: two mandatory problems, then two sets where they choose one! 
+
+\item Problem \#12 in \textit{The Logic Book} \S 11.4E (p. 584). Have fun! 
+
+% % The following comes from Gordon Belot logic 313, lecture 27 handout, proposition 1.1
+\item Prove that there can be no formula $B$ of quantifier logic that is both \\ (i) true in all finite models and (ii) false in all countably infinite models \\ (where the cardinality of a model is the cardinality of its domain of discourse). \\ \textit{Hint}: use the compactness theorem for QL. But I recommend \#5 or \#6 instead! 
+
+% % The following is slightly modified from Gordon Belot logic 414, Winter 2016, problem set 3, problem 2. His version is stated more generally for any first-order language \script{L}
+\item Let $\Gamma$ be a set of QL-sentences that is unsatisfiable (i.e. there is no QL-model that makes true all of the sentences in $\Gamma $). Show that there must be sentences $\metav{P}_1$, $\metav{P}_2$, \dots, $\metav{P}_n$ $\in \Gamma$, such that the disjunction of the negations of these $\metav{P}_k$'s is a tautology (i.e. true in every QL-model): 
+\[ \metav{T} :=\enot \metav{P}_1 \eor \enot \metav{P}_2 \eor \dots \eor \enot \metav{P}_n \]
+(For readability, I have left out the otherwise requisite parentheses in $\metav{T}$). 
+
+You may take for granted that $\enot \metav{T}$ is logically equivalent to the following:
+\[ \metav{T}^{\prime} := \enot \enot\metav{P}_1 \eand \enot \enot\metav{P}_2 \eand \dots \eand \enot \enot\metav{P}_n \]
+\textit{Hint}: use the compactness theorem for QL. And you don't need to use $\metav{T}^{\prime}$. 
+
+\item Provide at least one reason why our proof of the soundness of system STD (trees) from Week 5 requires the premise set $\Gamma$ to be \textit{finite}, whereas our soundness proofs for SND and QND allow $\Gamma$ to be infinite. \\
+\textit{Hint}: compare the relevant inductive properties and base cases in the soundness proofs. 
+\\ (\textit{completely optional \& ungraded follow-up}: is it possible to modify either a definition(s) or our proof to show tree-soundness for a countably infinite premise-set $\Gamma$?) 
+
+% % Following comes from Gordon Belot 414, handout 13, consequences of compactness
+% possible hint to give them: define a sentence $\metav{L}_n$ that says that there are at least $n$ things. Then consider a sentence $B
+
+%does solving the following problem entail a solution to my current number 2??? if so, could make the problem-set trivial lol. 
+\item Consider a set of QL-sentences $\Gamma $ that has arbitrarily large finite models (i.e. for arbitrarily-many $n \in \mathbb{N}$, there exists a model $\mathfrak{M}$ whose domain $\metav{D}_n$ has cardinality $n$, s.t. $\mathfrak{M}$ satisfies $\Gamma $). Using compactness, prove that $\Gamma$  has an infinite model. \\(A corollary: no set of QL-sentences can be true in all and only finite models). \\
+\textit{Hints}: Let $L_n$ be a QL-sentence that says that there are at least $n$-things. \\ Define the set $\metav{K}$ to be the set of natural numbers $k$ such that $\Gamma $ has a model of size $k$. 
+
+% % Following comes from Gordon Belot 414, handout 13, consequences of compactness
+\item Is it possible to say in quantifier logic with identity that ``there are finitely many things'', without being more specific about how many things there are in the domain of discourse? If `yes', explain how. If `no', explain why not.  \\ \textit{Hints}: as above, let $L_n$ be a QL-sentence that says that there are at least $n$-things. Let $F$ be a QL-sentence that says that there are finitely many things.  \\ Consider the set $X := \{F, L_1, L_2, \dots \}$, containing $F$ and each $L_k$ for $k \in \mathbb{N}$. 
+
+
+\item Prove that if every finite subgraph of a graph $\Gamma$ can be $n$-colored, then so can $\Gamma$.\\[1ex]  \textit{Relevant background and definitions}: \\ A \textit{graph} $\Gamma$ is a finite or countably infinite set $X := \{x_1, x_2, \dots\}$ of \textit{nodes} together with an irreflexive and symmetric relation called \textit{adjacency}. \\ An $n$-coloring of a graph is a function $c$ that assigns a number in $\{1, 2, \dots, n\}$ to each node $x_k$---called the \textit{color} of $x_k$---such that adjacent nodes never receive the same color.
+
+\textit{Hints}: (i) Recall that our atomic wffs have at most a single subscript, e.g. $P_3$. For convenience, introduce ``$P_{k,n}$'' as a nickname for the atomic wff $P_{2^k 3^n}$, for any $k, n \in \mathbb{N}$. \\ (ii) Construct a set $S$ of SL-sentences representing the claim ``$\Gamma$ can be $n$-colored''. \\ (iii) Use the compactness theorem for SL \\ 
+
+%%see L and K Friendly intro to math logic book, Ex 3.3.3 
+%see definition of structure on p. 23, where `structure' seems to mean basically a model 
+\item Use the compactness theorem for a first-order language (e.g. QL with functions) to construct a non-standard model of arithmetic. Here, we take arithmetic to be a model $\mathfrak{N}$ whose domain of discourse is the natural numbers $\mathbb{N}$, equipped with the ordinary less-than ordering relation and the usual arithmetic functions of successor, addition, multiplication, and exponentiation. A non-standard model of arithmetic $\mathfrak{U}$ has a domain with more element(s) than $\mathfrak{N}$, but such that the same set of sentences $\metav{E}$ is true, i.e. such that both $\mathfrak{N} \models \metav{E}$ and $\mathfrak{U} \models \metav{E}$. \\ (\textit{Optional reflection question}: why is the existence of non-standard models of arithmetic kind of a bummer?)
+%Nonstandard Models of Arithmetic! 
+
+%`color' in $1 \leq c(x_k) \leq n$ to each node such that adjacent nodes never receive the same color
+
+%A graph is \textit{n-colorable} for some $n \in \mathbb{N}$ if there is a map $c$ that assigns each $x_k$ a number $1 \leq c(x_k) \leq n$, called the \textit{color} of $x_k$, such that adjacent $x_j$'s never receive the same color. 
+
+\subsection*{\centering Compactness Theorems and Definitions}
+
+\textbf{Compactness of SL}: for any set $\Gamma$ of SL-sentences (possibly infinite), $\Gamma$ is satisfiable if and only if every finite subset $\Delta \subseteq \Gamma$ is satisfiable (i.e. there is a truth-value assignment that makes all sentences in $\Delta$ true). 
+
+\textbf{Compactness of QL}: for any set $\Gamma$ of QL-sentences (possibly infinite), $\Gamma$ is satisfiable if and only if every finite subset $\Delta \subseteq \Gamma$ is satisfiable (i.e. there is a QL-model $\mathfrak{M}_{\Delta}$ that makes true every sentence in $\Delta$). 
+
+\textbf{Compactness of a first-order language} $\script{L}$: for any set $\Gamma$ of $\script{L}$-sentences (possibly infinite), $\Gamma$ is satisfiable if and only if every finite subset $\Delta \subseteq \Gamma$ is satisfiable. 
+
+Note: for all problems, it suffices to consider sets $\Gamma$ that are countably infinite. By using the axiom of choice, we could modify our completeness proof to show completeness (and thus compactness) for first-order languages that allow \textit{uncountably} infinite sets. 
+
+\textbf{``Saying in a model''} (relevant for problem \#6): for a given claim $C$ about how many things there are (e.g. the claim that there are finitely-many things), a set of sentences $\Gamma$ \textit{say that claim} $C$ just in case those sentences are true in \textit{all and only} models in which the domain $D$ is as claim $C$ describes. 
+
+\textbf{First-order language} $\script{L}$: a set of well-formed formulae specified by a recursion clause like the one we gave for QL, where the symbols of $\script{L}$ include variables, our five connectives, our two quantifiers, left and right parentheses, a set of names, a non-empty set of predicates, and a set of function symbols (interpreted as mapping terms to terms). Different first-order languages differ in their names, predicates, and functions. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+\iffalse
+
+d
+
+\fi 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+
+
+\end{document}

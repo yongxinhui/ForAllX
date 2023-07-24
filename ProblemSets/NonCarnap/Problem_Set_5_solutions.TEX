@@ -1,0 +1,435 @@
+ \documentclass[12pt]{article}
+ 
+ \usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+
+\usepackage{multicol}
+ 
+ \iffalse
+ \textheight     11truein
+ \vsize     10.0truein
+ \topmargin      .15truein
+ \textwidth 6.5truein \columnwidth \textwidth 
+ \setlength{\oddsidemargin}{0truein} 
+ %\footheight     0.0truein
+ \footskip       0.75truein
+ \headheight     .25truein
+ \headsep        0.25truein
+ \fi 
+
+\usepackage{amsmath} %for align* environment and gather*
+\usepackage{xref}
+ %    \textheight     10.0truein
+ \usepackage{graphics}
+ \usepackage{pstricks}
+% \usepackage{pst-tree}
+% \usepackage{pst-node,pst-tree}
+ \usepackage{makeidx}
+ 
+
+ 
+ %\usepackage{forallx-ubc-Hunt} %calls local modified style file, but could lead to conflicts. i ought to make my own `common.sty' file for the problem sets. maybe using the same `common' file as the lecture notes? i really ought to just have a single consistent set of style files for the book, problem sets, and lecture notes! 
+ 
+ %\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
+% disjunction
+\def\eor{\ensuremath{\vee}}
+% conjunction: 
+% {\,^{_{_{_{_{\mbox{\footnotesize\textbullet}}}}}}} gives the dot
+\def\eand{\ensuremath{\,\&\,}}
+% conditional: \rightarrow gives the right arrow
+\def\eif{\ensuremath{\supset}}
+% biconditional: \leftrightarrow gives the left and right arrow
+\def\eiff{\ensuremath{\equiv}}
+% negation: {\sim} gives the swung dash 
+%\def\enot{\ensuremath{\neg}}
+%\def\enot{\ensuremath{\sim}} %note that \sim is defined as a relation, which leads to spacing issues. adding a \! leads to more spacing issues (piled up double negations).  
+
+\def\enot{\ensuremath{{\sim}}} %redefining as {\sim} treats the tilde as a unary operator, rather than a relation, solving a lot of the spacing issues. 
+
+\let\oldsim\sim %renames any \sim commands as \oldsim. 
+\renewcommand{\sim}{{\oldsim}} %redefines \sim as unary operator version of \sim, in case there are any straggling \sim commands in the wild
+
+% metalanguage variables: change greek to A and B if you prefer
+\def\metaA{\ensuremath{\varPhi}}
+\def\metaB{\ensuremath{\varPsi}}
+\def\metaC{\ensuremath{\varOmega}}
+\def\metaD{\ensuremath{\varDelta}}
+\def\metaSetX{\ensuremath{\mathcal{X}}}
+\def\metaSetY{\ensuremath{\mathcal{Y}}}
+\def\metaSetZ{\ensuremath{\mathcal{Z}}}
+
+%Calgary script and metav commands: 
+\newcommand*{\script}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand*{\metav}[1]{\ensuremath{\mathcal{#1}}}
+
+\def\proves{\ensuremath{\vdash}}
+\def\entails{\ensuremath{\vDash}}
+\def\nproves{\ensuremath{\nvdash}}
+\def\nentails{\ensuremath{\nvDash}}
+
+
+% \pagestyle{empty}
+ 
+ % Tree stuff
+ 
+  \usepackage{prooftrees} %i copied over prooftrees file from Ichikawa source files, which I think is pre-2019 version
+  
+ %Note that I probably ought to just update my prooftrees package, since I downloaded the zip file and can just paste over the older version! (but who knows what else this could change...)
+%JRH: adding in definition of line no override, local option included in 2019 revision. since my prooftrees package is not up to date! 
+% see code here: https://tex.stackexchange.com/questions/415976/manually-set-line-numbers-if-prooftrees-sty
+% see p. 24 of prooftrees manual for directions on using this. works w/ {}, e.g. line no override={n+1}
+
+%the command `vdotsline' lets you put anything in number column, without a period appearing afterwards. so it's like `line no override' without \linenumberstyle
+%e.g. for vertical dots vertically aligned, use: vdotsline={\\[-0.55em] \vdots}
+
+\forestset{
+  line no override/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=\linenumberstyle{#1},
+        typeset node,
+      },
+    },
+  },
+  no line no/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=,
+        typeset node,
+      },
+    },
+  },
+  vdotsline/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=#1,
+        typeset node,
+      },
+    },
+  },
+  default preamble={
+	single branches,
+	close with=\ensuremath{\times},
+	just sep=1.75em,
+	line no sep=1.75em
+	}
+}
+
+\begin{document}
+
+\input macs
+%\input fitch
+\newcommand{\detritus}[1]{}
+
+
+\thispagestyle{empty}
+
+
+
+\iffalse
+\parindent = 0pt
+\hspace*{0.0in}\parbox[t]{2.5in}{
+Philosophy 24.241\\[3pt]
+Symbolic Logic\\[3pt]
+Fall, 2022
+}
+\fi 
+
+%\bigskip %\bigskip
+
+\iffalse 
+\begin{center}
+\Large\bf Problem Set 5\\[1ex] 
+ Due Fri. {\bf{October 14th}} by 5pm Eastern\\[3ex]
+\end{center}
+\fi
+
+\begin{center}
+\Large Problem Set 5 \\[1ex] 
+\large Solutions: Please Never Share or Upload to Internets or I'll have to make many new problems in the future and that would be a BIG BUMMER \\[3ex] 
+% \textbf{Answer FOUR questions total: 1 and 2, 3 Xor 4, 5 Xor 6 (exclusive or's!)}
+\end{center}
+
+%Question 0: if you worked with up to two classmates, please list their names! 
+%Some of these problems draw from the posted Induction and Recursion notes.\\
+
+%For questions 1 and 2, provide good translations of the following arguments into the language of sentential logic. Then, investigate their validity using the tree method (STD)
+
+\begin{enumerate}
+
+%%idea: two mandatory problems, then two sets where they choose one! 
+
+\item Consider the argument with premise set $\{\Phi, \Psi \}$ and conclusion $\Theta$. Suppose that you are able to make a tree for this argument in which all branches close, even though you make no use of $\Phi$ and $\Psi$: i.e. you do not resolve these sentences, and when you close a branch, it is never because it contains $\Phi$ or because it contains $\Psi$. What is the most informative thing you can say about $\Theta$?
+% \\ (feel free to use symbols `P', `Q', and conclusion `C' if you don't feel like writing Greek letters or worry about your handwriting!)
+%Let $\Phi$, \Psi , and \Theta be wffs 
+%From GB 303, HW 4
+
+\makebox[\textwidth]{\textbf{Solution}:}
+
+$\Theta$ must be a tautology. Whatever we did in the given tree with $\Phi$, $\Psi$, and $\enot \Theta$ at its root to make all the branches close, we could have done in a tree with just $\enot \Theta$ at its root—since by assumption $\Phi$ and $\Psi$ played no role in the further work we did. So there is a tree with just $\enot \Theta$ at its root in which all branches close (important to note this!). \\ Hence, $\varnothing \vdash_{STD} \Theta$. By soundness, $\varnothing \entails \Theta$, so $\Theta$ is a semantic tautology. 
+
+\item Prove that in a sound tree system, no argument G is both tree-valid and tree-invalid. Let `G' be an arbitrary argument with finite premise set $\Gamma$ and conclusion $\Theta$. 
+
+(\textit{Hints}: Show that if an argument is tree-invalid, then it is not tree-valid. To do this, apply a key fact coming from our proof of completeness, and then apply the soundness result. Alternatively, you could do a proof by contradiction, using the same results.) 
+% (but you'll still need soundness and the same key fact from our completeness proof. We stand here face to face with the hardness of the logical must). 
+
+\makebox[\textwidth]{\textbf{Solution}:}
+
+Suppose that argument G is tree-invalid. Then by definition, there exists at least one tree with root $\Gamma \cup\{\enot \Theta\} $ that has a complete open branch. Call this complete open branch `Oprah.' From our proof of completeness, we can use Oprah to define a truth value assignment that satisfies the root. This would be a TVA that makes the premises true but the conclusion false. Hence, the argument G must be semantically invalid, i.e. $\Gamma \nentails \Theta$. Since the system is Sound, we can apply the contrapositive of soundness to conclude that \textit{it is not the case that} G is tree-valid, i.e. $\Gamma \nvdash_{STD} \Theta$. 
+
+Hence, if an argument is tree-invalid, then it is not tree-valid (assuming our system is sound and complete). Hence, no argument is both tree-invalid and tree-valid.
+
+\makebox[\textwidth]{\textit{Alternative solution: proof by contradiction}:}
+
+Assume for contradiction that there is some argument G that is both tree-valid and tree-invalid. By soundness, G is semantically valid. Hence, whenever the premises $\Gamma$ are true, so is the conclusion $\Theta$. Hence, $\Gamma \cup\{\enot \Theta\} $ is inconsistent. 
+
+Yet, if G is tree-invalid, then there exists a tree with root $\Gamma \cup\{\enot \Theta\} $ that has a complete open branch. From our proof of completeness, we saw how to use such a branch to construct a TVA where the root is satisfied. So this TVA would satisfy $\Gamma \cup\{ \enot \Theta\} $. But that contradicts that $\Gamma \cup\{ \enot \Theta\} $ is unsatisfiable! Hence, G cannot also be tree-invalid. 
+
+\newpage
+
+\item[] \begin{center} Pick \textbf{one} of questions 3 or 4 to answer: %(then PROCEED TO 2ND PAGE!):
+\end{center}
+
+\item Briefly explain why we could augment our nine tree rules with their `syntactic equivalents' and not get into trouble with our Soundness and Completeness results (e.g. swapping the order of branches in the `splitting rules', or the order of sentences in the `stacking rules'). Your brief argument should note both (i) why our system would remain Sound (`reasoning from the top-down') and (ii) why our system would remain Complete (`reasoning from the bottom-up'). \\ 
+
+%NB: I'm \textit{not} asking you to formally extend the Soundness and Completeness proofs to include these additional $6+ 7 \times 2 = 20$ rules. But if you prefer to make it really concrete, feel free to just focus on a disjunction rule where the right disjunct is placed on the left branch, and the left disjunct is placed on the right branch of our new node. \\
+%maybe I was wrong to say that `completeness' is about having `enough rules', since it seems that sometimes adding a single rule could mess up completeness?
+
+\makebox[\textwidth]{\textbf{Solution}:}
+
+A very short `brief explanation': notice that the 20 syntactic variant rules involve either (i) the same child-nodes (possibly permuted) or (ii) permutations of the sentences within a child-node (or both). Yet, neither our soundness nor completeness proof depended on the order of the nodes or the order of the sentences appearing within a child-node. 
+
+\textbf{Providing some more details} (since the last claim above might be taken to be exactly what's in question): In the proof of soundness, we showed that if the sentence being resolved is satisfied, then so is at least one of the child-nodes (reasoning from the `top-down'). Since a syntactic variant involves the same child-nodes---just permuted or with sentences within a node permuted (or both)---at least one of the child nodes must remain satisfied whenever the sentence being resolved is satisfied. 
+
+In the proof of completeness, we showed that satisfying any one of the child nodes entails that the sentence being resolved is satisfied (reasoning from the `bottom-up'). This will also remain true, since our syntactic variants never change the sentences on a child node, just their order and/or the order of the child nodes. \\
+
+\textit{A cheap argument for preservation of completeness}: As some of you noted, adding additional rules to a complete system can never break completeness. Hence, to really make the completeness question interesting, I would have had to add some convoluted language about considering variant systems that swap out a syntactic variant for each of the standard nine rules. Thanks to those who respected the spirit of the question! 
+
+% Assume that a given interpretation \metav{I} satisfies every wff on the branch up to the sentence being resolved. Then we have already shown that \metav{I} must satisfy at least one of the branches below when we extend by any of our nine rules. The Yet, our proof did not depend on the order of the sentences appearing on the child-branch. 
+
+%\item Our textbook's Chapter 5 does not set-up the inductive proof for completeness properly. In lecture, we showed how to properly set-up the proof for soundness. Do the same for completeness noting (i) what you are doing induction over; (ii) the base case; \\ (iii) the induction hypothesis; (iv) what you would need to show in the induction step; and (v) comment on whether the book's proof leaves out any cases. \\ NB: I'm not asking you to actually re-do the proof, just to set it up! \\
+
+\newpage
+
+\item Our textbook's Chapter 5 does not set-up the inductive proof for completeness properly. In lecture, we showed how to properly set-up the proof for soundness. \\ Do the same for completeness noting (i) what you are doing induction over; \\ (ii) the base case(s); (iii) the induction hypothesis; \\ (iv) what you would need to show in the induction step. \\ NB: I'm not asking you to actually re-do the proof, just to set it up! 
+
+\makebox[\textwidth]{\textbf{Solution}:}
+
+Background: We assume that the argument from $\Gamma$ to $\Theta$ is not tree-valid, i.e. that $\Gamma \nvdash_{STD} \Theta$ . This means that EVERY tree with root $\Gamma \cup\{ \enot \Theta\} $ does not close. So considering an arbitrary such tree, if we complete it, we are guaranteed to have a complete open branch. Call this open branch $O $. We aim to use this completed open branch $O$ to define a truth value assignment \metav{I} that makes true every well-formed formula on $O $. We will then have shown that the root $\Gamma \cup\{ \enot \Theta\} $ is satisfiable, which means that $\Gamma \nentails \Theta$, which is the consequent of our contrapositive of completeness. 
+
+%we consider an arbitrary completed open tree that has root $\Gamma \cup\{ \enot \Theta\} $, i.e. an arbitrary tree showing that the argument from $\Gamma$ to $\Theta$ is tree-invalid. We assume that this tree has an open branch. 
+
+(i) We choose to do induction over the number of nodes, treating the last node of our completed open branch as having index $n=1$. The next higher node has index $n=2$, and so on to some finite number $m$ which indexes the root ($m$ could be an arbitrarily large finite number in $\mathbb{N}$).
+
+(ii) \textbf{Base case}: we consider the last node, with index $n=1$. Since the branch is complete, the sentences appearing here must be either atomic sentences or a single negation of an atomic sentence. We partially define an interpretation \metav{I} such that it assigns True to any atomic sentence at this last node and False to an atomic sentence that is negated (so that the negation of this sentence is true).  
+
+\begin{quote}
+\textit{Variant base case}: we could avoid a case below by fully defining \metav{I} such that it assigns an atomic sentence False if and only if the negation of that sentence appears at some node on the branch (so it assigns an atomic sentence True if and only if that sentence appears at some node on the branch). Note that since the branch is complete and open, we are guaranteed to never have both a sentence and its negation appear on the branch, so \metav{I} is well-defined. This is perhaps more elegant, but it also takes us out of the base case node; it's really a mix of using the inductive structure of SL right off the bat. 
+\end{quote}
+%this includes all of the atomic sentences or negations of atomic sentences on the complete open branch. We define an interpretation \metav{I} such that 
+
+%each atomic sentence true and each negation of an atomic formula true as well (so it assigns false to any atomic sentence that is negated)
+
+(iii) \textbf{Induction hypothesis}: Assume that the property holds at each node with index $n$, lower than a given node-index k, i.e. such that $1 \leq n < k$. (remember: we are counting up the tree, letting the bottom node have index 1, so that the root is assigned the largest node index). Then in particular, the property holds for each `complex sentence' below node k. %that is neither an atomic sentence nor a negation of an atomic sentence.  
+%(the property also of course holds for every atomic sentence or negation of an atomic sentence at node k or above, by the base case). 
+
+(iv) Consider an arbitrary node $k > 1$ on our completed open branch $O$. Then this node either has one or two sentences $S$ and $S'$. We'll consider sentence $S$, since the same considerations will show that $S'$ has the property as well. If S is an atomic sentence or the negation of an atomic sentence not considered in the base case, then we extend our definition of \metav{I} such it assigns $S$ true. Note that we are guaranteed to be able to extend \metav{I} in this way, since the branch is assumed complete and open, so we will never have already assigned an atomic $S$ as false if $S$ appears at $k$ (since that would mean that $\enot S$ occurs at a lower node, which would mean the branch closes; contradiction). [note that if we used the variant of the base case above, $S$ would already be handled in the case where it is atomic or the negation of an atomic sentence]. 
+
+Otherwise, $S$ must have string length $>2$. Since it is by assumption a well-formed formula of sentential logic, we know that there must exist well-formed formulae \metaA{} and \metaB{} such that one of the following five cases obtains: $S$ either equals (i) \enot\metaA{} (ii) \metaA{}\eand\metaB{}, (iii) \metaA{}\eor\metaB{}, (iv) \metaA{}\eif\metaB{}, or (v) \metaA{}\eiff\metaB{}. 
+
+Let's first consider cases (ii)--(v): since $O$ is a complete open branch, we know that sentence $S $ has been resolved. Hence, if S is of the form (ii)--(v), it has been resolved either by the tree rule for conjunction, disjunction, conditional, or biconditional. Each of these rules results in at least one new node, with what we'll call `tree-children' of $S$. Since at least one of these tree-children lies on $O$ at a node below $k$, it  has the property by the induction hypothesis. We would then show that $S$ must also have the property given that at least one of its tree-children has the property. 
+
+Second, we consider case (i), where $S$ has the form $\enot\metaA{}$, where $\enot\metaA{} $ is not an atomic sentence. In this case (again by implicit induction on sentential logic), $\metaA{}$ is itself either of the form (a) \enot \metaC{} or else of the form (b) \metaC{}\eand\metaD{}, (c) \metaC{}\eor\metaD{}, (d) \metaC{}\eif\metaD{}, or (e) \metaC{}\eiff\metaD{}. 
+
+In case (a), $S$ is of the form $\enot \enot \metaC{}$ for some double negated sentence \metaC{}. Since $S$ has been resolved, \metaC{} appears on a lower node and hence has the property by the induction hypothesis. Since the interpretation \metav{I} assigns true to \metaC{}, it must assign true to $\enot \enot \metaC{}$, so S has the property. 
+
+In cases (b)--(e), $S$ is a negation of a sentence whose main connective is one of our four binary connectives. Hence, $S$ has been resolved either by the tree rule for negated conjunction, negated disjunction, negated conditional, or negated biconditional. Hence, at least one of the tree-children coming from these rules lies on $O$ at a node below $k$. By the induction hypothesis, this tree-child(s) has the property, i.e. it is assigned true by interpretation \metav{I}. We would then show that $S$ must also have the property. 
+
+We will then have shown that no matter what, the sentence $S$ at node k has the property. Of course, node k could have an additional sentence $S'$ as well, and our argument applies to $S'$ mutatis mutandis. Hence, we will have shown that the arbitrary sentences at our arbitrary node k have the property, namely they are assigned to true by our interpretation \metav{I}. 
+
+It would follow by induction on the nodes in our completed open branch that the interpretation \metav{I} makes true every well-formed formulae on the open branch $O$, including those at the root. BOOM! \\
+
+%By showing that the property holds for every completed tree with root $\Gamma \cup\{ \enot \Theta\} $, we have shown that we could take an arbitrary open tree with root $\Gamma \cup\{ \enot \Theta\} $, complete it, and thereby us the complete open branch to define this interpretation \metav{I}. 
+
+\newpage
+
+\makebox[\textwidth]{\textit{An Alternative `Inspired' Solution using Induction on SL}:}
+%%credit to GB, phil 303, lecture 9 for this proof (or whatever source(s) he may have consulted for it. Restall?)
+
+Alternatively, we could make a clever choice of the defining property, and proceed to do induction directly on the recursive structure of SL sentences, thereby avoiding the tedium of induction on tree nodes. This clever choice introduces some `degenerate cases', but they are easy to handle.
+
+\textit{Background}: As before, we assume that every tree with root $\Gamma \cup \{\enot \Theta \}$ does not close. Hence each such tree has a complete open branch $O$. Using a particular $O$, we define an interpretation \metav{I} as follows: \metav{I} assigns an atomic sentence `False' if and only if its negation appears by itself on a node of $O$ (so all atomic sentences appearing by themselves on $O$ are assigned true.) As before, we aim to show that \metav{I} makes true every sentence on $O$ (including, of course, the root, showing it to be satisfiable!).  
+
+Say that a sentence of SL is `inspired' if it meets one of three conditions: (i) it appears at a node on our complete open branch $O$ and is true according to interpretation \metav{I}, \\ (ii) its negation appears at a node in $O$ and the wff is false according to \metav{I} (so its negation is \metav{I}-true), or (iii) neither the sentence nor its negation appear on $O$. 
+
+(i) Doing complete induction on the string length of sentences in SL, we will show that every SL sentence is inspired. % So we do complete induction over string length. 
+
+(ii) \textbf{Base case}: consider an arbitrary atomic sentence B. Then there are three cases to consider, and in each, we show that B is inspired: (i) B appears in $O$, (ii) $\enot B$ appears in $O$, (iii) neither B nor $\enot B$ appears in $O$. 
+
+(iii) \textbf{Induction Hypothesis}: Assume that the property holds for all sentences of string length $n$ where $1 \leq n < k$, i.e. that all such sentences of SL are inspired. 
+
+(iv) Consider an arbitrary sentence $\Delta$ of string length $k >1 $. Show that this sentence is inspired. By the recursive structure of SL, we know that there must exist component sentences \metaA{} and \metaB{}  (of length $< k$) such that $\Delta$ equals either (a) $\enot \metaA{}$, (b) $\metaA{} \eand \metaB{}$, (c) $\metaA{} \eor \metaB{}$, (d) $\metaA{} \eif \metaB{}$, or (e) $\metaA{} \eiff \metaB{}$. By the induction hypothesis, \metaA{} and \metaB{} are both inspired. 
+
+In each of these five cases, there are three sub-cases to consider: (a) neither $\Delta$ nor $\enot \Delta$ appears on $O$, (b) $\Delta$ appears on $O$, or (c) $\enot \Delta$ appears on $O$. The five (a)-subcases are degenerate ($\Delta$ is trivially inspired). One (b)-subcase involves \enot \metaA{} appearing on $O$, in which case since \metaA{} is assumed to be inspired, \metaA{} must be false according to \metav{I} so that \enot \metaA{} is \metav{I}-true (and hence inspired). 
+
+In the remaining nine cases, $\Delta$ occurs on $O$ and is resolved according to one of our nine tree rules. We then show that no matter which child node appears on $O$, $\Delta$ must be \metav{I}-true given that \metaA{} and \metaB{} are inspired.\dots \textit{Inspired BOOM}! 
+
+
+
+
+
+\newpage
+
+
+\item[] \begin{center} Pick \textbf{one} of questions 5 or 6 to answer: \end{center}
+
+What follows are two modiﬁcations to our SL tree system. For each, imagine
+a system STD$^{\ast}$ exactly like our system STD, except for the single indicated change.
+
+\textbf{(a) Would the modiﬁed tree system be sound?} If so, explain how to extend our inductive soundness proof to a system with this rule; if not, give a tree that is a counterexample to the soundness of STD$^{\ast}$.
+
+\textbf{(b) Would the modiﬁed tree system be complete?} If so, explain how to extend our inductive completeness proof to a system with this rule; if not, give a tree that is a counterexample to the completeness of  STD$^{\ast}$. 
+
+%\end{enumerate}
+
+\begin{multicols}{2}
+
+\item \textit{Crunk Conditional} (C\eif) \vspace{1em}
+
+%\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\metaA{}\eif\metaB{}, line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\enot\metaA{} \eor \metaB{}, line no override={j}, just={m C\eif}]
+	[\metaB{}, line no override={j}
+	[\Theta, grouped, line no override={j+1}
+	]
+	]
+]
+]
+\end{prooftree}
+%\end{center}
+
+Note that $\Theta$ is an arbitrary wff of SL
+
+\columnbreak
+
+\item \textit{Negligent Negated Conditional} (N\enot \eif) \vspace{0.42em}
+
+%\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\enot(\metaA{}\eif\metaB{}), line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\metaA{}, line no override={j}, just={m N\enot \eif}]
+	[\enot\metaB{}]
+	[(\metaA{} \eand \enot \metaB{}) \eand (P \eor \enot P)] 
+]
+]
+\end{prooftree}
+%\end{center}
+
+\end{multicols}
+
+\makebox[\textwidth]{Solution to Number 5:}
+
+To test whether a rule preserves soundness, we work `from the top down': does the sentence we are resolving entail the disjunction of the sentences on the node? (I.e. does the sentence `up top' entail the disjunction of the lower sentences?)
+
+Notice that the conditional is logically equivalent to $\enot \metaA{} \eor \metaB{}$. So this entails $(\enot \metaA{} \eor \metaB{})$. Since it entails the lower sentence on the left branch, it of course entails the disjunction of the sentences in the two new nodes, i.e. $(\enot \metaA{} \eor \metaB{}) \eor (\metaB{} \eand \Theta)$, \textit{regardless} of what sentence $\Theta$ is. So far, this is `heuristic reasoning' to be supplemented with a formal extension of our soundness result:
+
+\textbf{Formally}, we consider an interpretation \metav{I} that makes $(\metaA{} \eif \metaB{})$ true. Then \metav{I} makes either \metaA{} false or \metaB{} true. Hence, \metav{I} makes the left branch sentence $(\enot \metaA{} \eor \metaB{})$ true, so we are guaranteed to have an open branch upon resolving. 
+
+To test whether a rule preserves completeness, we work `from the bottom up': does each branch below individually entail the sentence we are resolving? Since the sentence on the left branch is logically equivalent to $(\metaA{} \eif \metaB{})$, we have entailment from the bottom up for this branch: $(\enot \metaA{} \eor \metaB{}) \models (\metaA{} \eif \metaB{})$. Turning to the right branch, we notice that the consequent of a conditional entails that conditional: whenever the consequent is true, so is the conditional: $\metaB{} \models (\metaA{} \eif \metaB{})$. Conjoining this consequent with an arbitrary sentence $\Theta$ does not change this, since if the conjunction $\metaB{} \eand \Theta$ is true, both conjuncts are true, and we've seen that $\metaB{} \models (\metaA{} \eif \metaB{})$. If the conjunction is false, then that truth-value assignment can't be a counterexample to entailment. 
+
+\textbf{Formally}, we first consider an interpretation \metav{I} that makes $(\enot \metaA{} \eor \metaB{})$ true. Then \metav{I} either makes \metaA{} false or \metaB{} true. Either way, \metav{I} assigns true to the sentence we are resolving. Second, we consider an interpretation \metav{I}' that makes $\metaB{} \eand \Theta$ true. Then \metav{I}' makes true each conjunct. Since it makes $\metaB{}$ true, \metav{I}' must also assign true to the sentence we are resolving (since that sentence is false only when \metaA{} is true but \metaB{} is false). Hence, no matter which child node lies on our complete open branch, if it is satisfied by our interpretation, then so is the sentence being resolved. \\
+
+%there is an interpretation that satisfies the sentence we are resolving. \\
+
+\makebox[\textwidth]{Solution to Number 6:}
+
+
+Note that the sentence we are resolving is logically equivalent to \metaA{} \eand \enot \metaB{}. This logically entails $(\metaA{} \eor \enot \metaB{}) \eor \big ( (\metaA{} \eand \enot \metaB{}) \eand (P \eor \enot P) \big )$, which is the semantic content of the new node. Hence, the system is sound.
+
+\textbf{Reframing this in terms of interpretations}: if we have an interpretation that assigns True to \enot(\metaA{}\eif\metaB{}), then it must assign True to \metaA{} and False to \metaB{}. Hence, it satisfies each child node (and to be sound, we just need at least one branch below to be satisfiable on the interpretation). 
+
+
+However, completeness fails: neither the left nor middle branch entails \enot(\metaA{}\eif\metaB{}). Hence, there exist interpretations where either of these branches is true but \enot(\metaA{}\eif\metaB{}) is false. Note that the far right branch is a decoy: it is logically equivalent to  \enot(\metaA{}\eif\metaB{}). 
+
+To \textbf{formally show} a failure of completeness, we need to construct a counterexample, namely a case where although $\Gamma \models \Theta$, we have a complete open tree with root $\Gamma \cup \enot \{ \Theta \}$ (for if the system \textit{were} complete, then we could use this complete open tree to construct a TVA that satisfies the root, which would contradict the root being unsatisfiable!) Hence, it suffices to construct a tree-invalid argument that is semantically valid. 
+
+Below is the simplest counterexample: Let both \metaA{} and \metaB{} be the atomic sentence `$Q$.' We construct a tree with a complete open branch that has an unsatisfiable root. (Note that (Q \eif Q) is a tautology, so its negation is unsatisfiable). 
+
+%We show that $\nvdash_{STD^{\ast}} (Q \eif Q)$ but of course (Q \eif Q) is a tautology, so we have $\models (Q \eif Q)$: \\
+
+% % Note that we need a COMPLETE open tree, so we have to fully resolve the tree!!! This is something that people could totally screw up on!!! so flag this in lecture!!!
+
+\begin{prooftree}
+{line numbering, single branches}
+[\enot(Q \eif Q)
+	[Q, just={1 N\enot \eif}, open]
+	[\enot Q, open]
+	[(Q \eand \enot Q) \eand (P \eor \enot P)] 
+]
+\end{prooftree}
+
+\bigskip
+
+Since the left branch is a complete open branch (likewise for the middle branch), this is a complete open tree. So it is tree-invalid. If the modified system were complete, we could use the leftmost branch to construct a TVA that satisfies the root. This TVA would make Q true, but the root $ \enot(Q \eif Q)$ remains false; contradiction! So we can conclude that the modified system is not complete. 
+
+Other commonly used counterexamples included the argument from $\enot (A \eif B)$ to conclusion $A$ (so $\enot A$ goes in the root), or from $B$ to $(A \eif B)$ (so $\enot (A \eif B)$ goes in the root). 
+
+%and by our question 2 argument, we can conclude that it is not tree valid, i.e. $\nvdash_{STD^{\ast}} (Q \eif Q)$. 
+
+
+
+%$\Gamma \nvdash_{STD^{\ast}} \Theta$. Note that `$\Gamma \nvdash_{STD^{\ast}} \Theta$' means that \textit{it is not the case that} the argument from $\Gamma$ to $\Theta$ is tree-valid in the given proof system. Technically, this is a statement about ALL trees with root $\Gamma \cup \{ \enot \Theta \}$, namely that all such trees do NOT close, i.e. that there always exists at least one open branch (and so every completed such tree has a complete open branch). 
+
+% I now believe that the following argument fails, since that result from question 2 requires at least partial completeness, which would not obtain here.
+%Nonetheless, since we have shown that system $STD^{\ast}$ remains sound, we can help ourselves to the result from question 2: in a sound tree system, if an argument is tree-invalid, then it is tree-valid (note that the proof of this result uses an idea from the completeness proof, but not completeness itself). 
+ 
+\iffalse
+
+\item (i) Translate the following argument into the language of sentential logic. (ii) Check its validity using a tree, and state your conclusion. If the argument is invalid, use the tree to find a truth value assignment that makes its premises true and conclusion false.
+
+\begin{quote}
+If logic monkeys are hirsute, then logic monkeys are orgulous. And if space dogs are splenetic, then space dogs are bilious. So both if logic monkeys are hirsute then space dogs are bilious, and if space dogs are splenetic then logic monkeys are orgulous. 
+\end{quote}
+
+Symbolization Key: H = logic monkeys are hirsute; O = logic monkeys are orgulous; S = space dogs are splenetic; B = space dogs are bilious
+
+\fi 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+
+
+\end{document}

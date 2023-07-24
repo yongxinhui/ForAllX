@@ -1,0 +1,317 @@
+ \documentclass[12pt]{article}
+ 
+ \usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+
+\usepackage{multicol}
+ 
+ \iffalse
+ \textheight     11truein
+ \vsize     10.0truein
+ \topmargin      .15truein
+ \textwidth 6.5truein \columnwidth \textwidth 
+ \setlength{\oddsidemargin}{0truein} 
+ %\footheight     0.0truein
+ \footskip       0.75truein
+ \headheight     .25truein
+ \headsep        0.25truein
+ \fi 
+
+\usepackage{amsmath} %for align* environment and gather*
+\usepackage{xref}
+ %    \textheight     10.0truein
+ \usepackage{graphics}
+ \usepackage{pstricks}
+% \usepackage{pst-tree}
+% \usepackage{pst-node,pst-tree}
+ \usepackage{makeidx}
+ 
+
+ 
+ %\usepackage{forallx-ubc-Hunt} %calls local modified style file, but could lead to conflicts. i ought to make my own `common.sty' file for the problem sets. maybe using the same `common' file as the lecture notes? i really ought to just have a single consistent set of style files for the book, problem sets, and lecture notes! 
+ 
+ %\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
+% disjunction
+\def\eor{\ensuremath{\vee}}
+% conjunction: 
+% {\,^{_{_{_{_{\mbox{\footnotesize\textbullet}}}}}}} gives the dot
+\def\eand{\ensuremath{\,\&\,}}
+% conditional: \rightarrow gives the right arrow
+\def\eif{\ensuremath{\supset}}
+% biconditional: \leftrightarrow gives the left and right arrow
+\def\eiff{\ensuremath{\equiv}}
+% negation: {\sim} gives the swung dash 
+%\def\enot{\ensuremath{\neg}}
+%\def\enot{\ensuremath{\sim}} %note that \sim is defined as a relation, which leads to spacing issues. adding a \! leads to more spacing issues (piled up double negations).  
+
+\def\enot{\ensuremath{{\sim}}} %redefining as {\sim} treats the tilde as a unary operator, rather than a relation, solving a lot of the spacing issues. 
+
+\let\oldsim\sim %renames any \sim commands as \oldsim. 
+\renewcommand{\sim}{{\oldsim}} %redefines \sim as unary operator version of \sim, in case there are any straggling \sim commands in the wild
+
+% metalanguage variables: change greek to A and B if you prefer
+\def\metaA{\ensuremath{\varPhi}}
+\def\metaB{\ensuremath{\varPsi}}
+\def\metaC{\ensuremath{\varOmega}}
+\def\metaD{\ensuremath{\varDelta}}
+\def\metaSetX{\ensuremath{\mathcal{X}}}
+\def\metaSetY{\ensuremath{\mathcal{Y}}}
+\def\metaSetZ{\ensuremath{\mathcal{Z}}}
+
+%Calgary script and metav commands: 
+\newcommand*{\script}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand*{\metav}[1]{\ensuremath{\mathcal{#1}}}
+
+\def\proves{\ensuremath{\vdash}}
+\def\entails{\ensuremath{\vDash}}
+\def\nproves{\ensuremath{\nvdash}}
+\def\nentails{\ensuremath{\nvDash}}
+
+
+% \pagestyle{empty}
+ 
+ % Tree stuff
+ 
+  \usepackage{prooftrees} %i copied over prooftrees file from Ichikawa source files, which I think is pre-2019 version
+  
+ %Note that I probably ought to just update my prooftrees package, since I downloaded the zip file and can just paste over the older version! (but who knows what else this could change...)
+%JRH: adding in definition of line no override, local option included in 2019 revision. since my prooftrees package is not up to date! 
+% see code here: https://tex.stackexchange.com/questions/415976/manually-set-line-numbers-if-prooftrees-sty
+% see p. 24 of prooftrees manual for directions on using this. works w/ {}, e.g. line no override={n+1}
+
+%the command `vdotsline' lets you put anything in number column, without a period appearing afterwards. so it's like `line no override' without \linenumberstyle
+%e.g. for vertical dots vertically aligned, use: vdotsline={\\[-0.55em] \vdots}
+
+\forestset{
+  line no override/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=\linenumberstyle{#1},
+        typeset node,
+      },
+    },
+  },
+  no line no/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=,
+        typeset node,
+      },
+    },
+  },
+  vdotsline/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=#1,
+        typeset node,
+      },
+    },
+  },
+  default preamble={
+	single branches,
+	close with=\ensuremath{\times},
+	just sep=1.75em,
+	line no sep=1.75em
+	}
+}
+
+\begin{document}
+
+\input macs
+%\input fitch
+\newcommand{\detritus}[1]{}
+
+
+\thispagestyle{empty}
+
+
+
+\iffalse
+\parindent = 0pt
+\hspace*{0.0in}\parbox[t]{2.5in}{
+Philosophy 24.241\\[3pt]
+Symbolic Logic\\[3pt]
+Fall, 2022
+}
+\fi 
+
+%\bigskip %\bigskip
+
+\iffalse 
+\begin{center}
+\Large\bf Problem Set 5\\[1ex] 
+ Due Fri. {\bf{October 14th}} by 5pm Eastern\\[3ex]
+\end{center}
+\fi
+
+\begin{center}
+\large Midterm (Written Portion) for 24.241 \\[1ex] 
+\normalsize 100 `points' (will scale to 50\% of Midterm grade, i.e. 9 grade points)
+%\large Solutions: Please Never Share or Upload to Internets or I'll have to make many new problems in the future and that would be a BIG BUMMER \\[3ex] 
+% \textbf{Answer FOUR questions total: 1 and 2, 3 Xor 4, 5 Xor 6 (exclusive or's!)}
+\end{center}
+
+%Question 0: if you worked with up to two classmates, please list their names! 
+%Some of these problems draw from the posted Induction and Recursion notes.\\
+
+%For questions 1 and 2, provide good translations of the following arguments into the language of sentential logic. Then, investigate their validity using the tree method (STD)
+
+To ease Symbolization on \textit{Carnap}, below is the symbolization key for M1.1--M1.6: 
+
+\begin{itemize}
+\item $F$: I have free will.
+\item $S$: I have a soul. 
+\item $B$: I (will still) \textbf{B}elieve I am free. 
+\item $K$: I \textbf{K}now that I am free.
+\item $A$: I fully and completely \textbf{A}ccept myself.
+\item $E$: I (will) recognize that I am \textbf{E}nough.
+\end{itemize}
+
+\bigskip
+
+\begin{enumerate}
+
+%%idea: two mandatory problems, then two sets where they choose one! 
+
+\item Test the following argument for validity \textit{using the \textbf{tree} method} (STD). \\ Label all relevant parts of your tree. Briefly justify your answer. [$20$ points]:
+\begin{align*}
+(\enot B \eand \enot D) \eif \enot A \\ 
+%(\enot C \eor H) \eand  (H \eif \enot H)\\
+- - - - - - - - - -\\
+\therefore \; [A \eif (B \eor D)]
+\end{align*}
+% \\ (feel free to use symbols `P', `Q', and conclusion `C' if you don't feel like writing Greek letters or worry about your handwriting!)
+%Let $\Phi$, \Psi , and \Theta be wffs 
+%From GB 303, HW 4
+
+%\makebox[\textwidth]{\textbf{Solution}:}
+
+\bigskip
+
+
+\item Consider a system STD$^{\ast}$ exactly like our system STD, except for the single indicated change to the rule for negated biconditional [$15+15 = 30$ points]: 
+
+\textbf{(a) Would the modiﬁed tree system be sound?} If so, explain how to extend our inductive soundness proof to a system with this rule; if not, give a tree that is a counterexample to the soundness of STD$^{\ast}$. [$15$ points]
+
+\textbf{(b) Would the modiﬁed tree system be complete?} If so, explain how to extend our inductive completeness proof to a system with this rule; if not, give a tree that is a counterexample to the completeness of  STD$^{\ast}$. [$15$ points]
+
+
+
+\begin{center}
+\textit{Naughty Negated Biconditional} (?\enot \eiff) \vspace{0.5em}
+
+\begin{prooftree}
+{line numbering, single branches}
+[\enot(\metaA{}\eiff\metaB{}), line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\metaA{} \eand \enot\metaB{}, line no override={j}, just={m ?\enot \eiff}
+	[N, grouped, line no override={j+1}
+	]
+	]	
+	[\enot\metaA{} \eand \metaB{}
+	[\enot N, grouped
+	]
+	]
+]
+]
+\end{prooftree}
+\end{center}
+
+
+
+%\item Prove that in a sound tree system, no argument G is both a tree-tautology and a tree-contradiction. Let `G' be an arbitrary argument with finite premise set $\Gamma$ and conclusion $\Theta$. 
+
+%(\textit{Hints}: Show that if an argument is tree-invalid, then it is not tree-valid. To do this, apply a key fact coming from our proof of completeness, and then apply the soundness result. Alternatively, you could do a proof by contradiction, using the same results.) 
+% (but you'll still need soundness and the same key fact from our completeness proof. We stand here face to face with the hardness of the logical must). 
+
+%\makebox[\textwidth]{\textbf{Solution}:}
+
+%Suppose that argument G is tree-invalid. Then by definition, there exists at least one tree with root $\Gamma \cup\{\enot \Theta\} $ that has a complete open branch. Call this complete open branch `Oprah.' From our proof of completeness, we can use Oprah to define a truth value assignment that satisfies the root. This would be a TVA that makes the premises true but the conclusion false. Hence, the argument G must be semantically invalid, i.e. $\Gamma \nentails \Theta$. Since the system is Sound, we can apply the contrapositive of soundness to conclude that \textit{it is not the case that} G is tree-valid, i.e. $\Gamma \nvdash_{STD} \Theta$. 
+
+%Hence, if an argument is tree-invalid, then it is not tree-valid (assuming our system is sound and complete). Hence, no argument is both tree-invalid and tree-valid.
+
+%\makebox[\textwidth]{\textit{Alternative solution: proof by contradiction}:}
+
+%Assume for contradiction that there is some argument G that is both tree-valid and tree-invalid. By soundness, G is semantically valid. Hence, whenever the premises $\Gamma$ are true, so is the conclusion $\Theta$. Hence, $\Gamma \cup\{\enot \Theta\} $ is inconsistent. 
+
+%Yet, if G is tree-invalid, then there exists a tree with root $\Gamma \cup\{\enot \Theta\} $ that has a complete open branch. From our proof of completeness, we saw how to use such a branch to construct a TVA where the root is satisfied. So this TVA would satisfy $\Gamma \cup\{ \enot \Theta\} $. But that contradicts that $\Gamma \cup\{ \enot \Theta\} $ is unsatisfiable! Hence, G cannot also be tree-invalid. 
+
+\newpage
+
+\item Call a string over $\{b, e\}$ a ``4-beeb palindrome" if it is (i) a palindrome that has ``$beeb$" as the middle four letters and (ii) has a string-length that is divisible by four (so a 4-beeb palindrome can have $4, 8, 12, 16, \dots 4 \times n, \dots$ many letters) [$15+15 = 30$ points]
+% You can assume the language has an empty string, or that it doesn't, but state which option you are going with, as the answer %will be slightly different in each case.\\
+
+\textbf{(i) Give a recursive definition} of the set of ``4-beeb palindromes", labeling each of the relevant clauses. [$15$ points]
+
+\textbf{(ii) prove by induction} that every 4-beeb palindrome has an even number of ``$b$"'s. Please state your \textbf{induction hypothesis} clearly! [$15$ points] \\
+
+\item \textit{Using induction}, show that you cannot build a formula of propositional logic that is a contradiction using horseshoe (\eif) as your \textit{only} connective (i.e. every contradiction in SL contains at least one other connective besides horseshoe). [$20$ points] \\ 
+
+-- Hint: call a formula ``\textbf{calm}'' if: (a) it is not a contradiction or (b) it
+contains a ``\textit{stressed-connective}'' tilde (\enot), a vel (\eor), an ampersand $(\eand)$, or a biconditional (\eiff). For shorthand, you may call these four non-horseshoe connectives the ``stressed-connectives''. Show by induction that every formula of propositional logic is ``calm'', and explain how this establishes what is to be proven. \\
+
+-- You may use our ``lazy induction schema'' for SL. \textit{Keep calm and logic on!} \\
+
+\makebox[\textwidth]{\textbf{REMINDERS for when (you think) you're done}:}
+
+\item[] If time remains, check your work for silly mistakes!!!
+
+\item[] DON'T LEAVE ANY QUESTION BLANK!!!! Plz WRITE SOMETHING, so that you can be awarded partial credit. 
+
+\item[] Make sure that you have answered EACH part of EACH question
+
+\item[] Make sure you actually clicked `Submit' on Carnap for EACH problem!
+
+\item[] Make sure you've written \textbf{YOUR NAME} on any looseleaf \\ \makebox[\textwidth]{(and username if your first name is `Daniel')}
+
+\item[] Make sure you actually finished the full proof above after proving that every SL sentence is calm! (or at least explain HOW you \textit{would} finish the proof if you had successfully shown that every SL sentence is calm)
+
+
+%\newpage
+
+
+\iffalse
+
+\item (i) Translate the following argument into the language of sentential logic. (ii) Check its validity using a tree, and state your conclusion. If the argument is invalid, use the tree to find a truth value assignment that makes its premises true and conclusion false.
+
+\begin{quote}
+If logic monkeys are hirsute, then logic monkeys are orgulous. And if space dogs are splenetic, then space dogs are bilious. So both if logic monkeys are hirsute then space dogs are bilious, and if space dogs are splenetic then logic monkeys are orgulous. 
+\end{quote}
+
+Symbolization Key: H = logic monkeys are hirsute; O = logic monkeys are orgulous; S = space dogs are splenetic; B = space dogs are bilious
+
+\fi 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+
+
+\end{document}

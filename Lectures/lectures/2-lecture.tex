@@ -1,0 +1,985 @@
+﻿% !TeX root = ./2-handout.tex
+
+\setcounter{section}{1}
+\section{SL and truth tables}
+
+\subsection{Characteristic truth tables}
+
+\begin{frame}
+\frametitle{Sentence letters and connectives}
+
+  \begin{itemize}[<+->]
+    \item Symbolization involves \emph{sentence letters} like $H$ and
+    \emph{connectives} ($\enot$, $\eor$, $\eand$, $\eif$, $\eiff$)
+    \item Recall that a \emph{case} makes atomic sentences \emph{true}
+    or \emph{false} (and never both).
+    \item So if we can determine \emph{truth conditions} for sentences
+   involving connectives, we can assign \emph{true} and \emph{false}
+   also to results of symbolization.
+   
+  \begin{block}{When is $(H \eand S)$ true?}
+    \begin{itemize}[<+->]
+      \item[] $(H \eand S)$ is true if and only if $H$ is true and $S$ is also
+  true.
+
+  \item[] Suppose a case makes $H$ true and $S$ false.
+
+  \item[] In that case, $(H \eand S)$ would be \only<8|handout:0>{???}\only<9>{\emph{false}}.
+\end{itemize} 
+\end{block}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Negation \enot}
+
+  \begin{definition}
+  $\enot \metav A$ is true iff $\metav A$ is false.
+  \end{definition}
+
+  Characteristic truth table:
+  \begin{center}
+  \begin{tabular}{c|c}
+  \metav{A} & \enot\metav{A}\\
+  \hline
+  \True & \False\\
+  \False & \True
+  \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Conjunction \eand}
+
+  \begin{definition}
+  $(\metav A \eand \metav B)$ is true iff $\metav A$ is true and
+  $\metav B$ is true, and false otherwise.
+  \end{definition}
+
+  Characteristic truth table:
+  \begin{center}
+  \begin{tabular}{c c |c}
+  \metav{A} & \metav{B} & $(\metav{A}\eand\metav{B})$\\
+  \hline
+  \True & \True & \True\\
+  \True & \False & \False\\
+  \False & \True & \False\\
+  \False & \False & \False
+  \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Disjunction \eor}
+
+  \begin{definition}
+  $(\metav A \eor \metav B)$ is true iff $\metav A$ is true or
+  $\metav B$ is true (or both), and false otherwise.
+  \end{definition}
+
+  Characteristic truth table:
+  \begin{center}
+  \begin{tabular}{c c |c}
+  \metav{A} & \metav{B} & $(\metav{A}\eor\metav{B})$\\
+  \hline
+  \True & \True & \True\\
+  \True & \False & \True\\
+  \False & \True & \True\\
+  \False & \False & \False
+  \end{tabular}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  \frametitle{A logic puzzle}
+
+Which card(s) do you have to turn over to make sure that:
+\bigskip
+
+\begin{quote}
+If a card has an even number on one side, then it has a vowel on the other.
+\end{quote}
+
+\begin{tabular}{cccc}
+\begin{beamerboxesrounded}[width=5em]{}
+\vskip 2ex
+\hfil \Large E\hfil\\
+\end{beamerboxesrounded} &
+\begin{beamerboxesrounded}[width=5em]{}
+\vskip 2ex
+\hfil \Large \alert{K}\hfil\\
+\end{beamerboxesrounded} &
+\begin{beamerboxesrounded}[width=5em]{}
+\vskip 2ex
+\hfil \Large 3\hfil\\
+\end{beamerboxesrounded} &
+\begin{beamerboxesrounded}[width=5em]{}
+\vskip 2ex
+\hfil \Large \alert{4}\hfil\\
+\end{beamerboxesrounded} \\
+(1) & \alert{(2)} & (3) & \alert{(4)}
+\end{tabular}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{The material conditional \eif}
+
+\begin{definition}
+  $(\metav A \eif \metav B)$ is true iff $\metav A$ is false or
+  $\metav B$ is true (or both), and false otherwise.
+  \end{definition}
+\[
+\begin{array}{cc|c}
+\metav{A} & \metav{B} & (\metav{A} \eif \metav{B})\\
+\hline
+\True & \True & \True\\
+\True & \False & \False\\
+\False & \True & \True\\
+\False & \False & \True
+\end{array}
+\]
+
+\uncover<2->{Memorize 2nd row!: Conditional is false ONLY in case of a counter- example, i.e. case where antecedent is true but consequent is false}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The material biconditional \eiff}
+  
+  \begin{definition}
+    $(\metav A \eiff \metav B)$ is true iff $\metav A$ and
+    $\metav B$ have the same truth value, and false otherwise.
+    \end{definition}
+  \[
+  \begin{array}{cc|c}
+  \metav{A} & \metav{B} & (\metav{A} \eiff \metav{B})\\
+  \hline
+  \True & \True & \True\\
+  \True & \False & \False\\
+  \False & \True & \False\\
+  \False & \False & \True
+  \end{array}
+  \]
+  
+\end{frame}
+
+\subsection{Sentences of SL}
+
+\begin{frame}
+\frametitle{Sentences of SL (\textit{Well-formed Formulae} (WFFs)}
+
+  \begin{definition}
+  \begin{enumerate}
+  \item Every sentence letter is a sentence (wff).
+  \item If $\metav{A}$ is a sentence, then $\enot\metav{A}$ is a sentence.
+  \item If $\metav{A}$ and $\metav{B}$ are sentences, then
+  \begin{itemize}
+  \item $(\metav{A}\eand\metav{B})$ is a sentence.
+  \item $(\metav{A}\eor\metav{B})$ is a sentence.
+  \item $(\metav{A}\eif\metav{B})$ is a sentence.
+  \item $(\metav{A}\eiff\metav{B})$ is a sentence.
+  \end{itemize}
+  \item Nothing else is a sentence.
+  \end{enumerate}
+  \end{definition}
+
+  The indicated connective is called the \emph{main connective}.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Construction of sentences}
+
+  \begin{itemize}[<+->]
+    \item $H$ is a sentence.
+    \item $S$ is a sentence.
+    \item $(H \mathbin{\emph{\eor}} S)$ is a sentence.
+    \item $(H \mathbin{\emph{\eand}} S)$ is a sentence.
+    \item $\emph{\enot} (H \eand S)$ is a sentence.
+    \item $((H \eor S) \mathbin{\emph{\eand}} \enot (H \eand S))$ is a sentence.
+  \end{itemize}
+
+\uncover<7>{(Main connective is \emph{highlighted}.)}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Examples of non-sentences (i.e. NOT well-formed formulae)}
+
+  \begin{itemize}
+    \item $\mathit{HikesMandy}$\\
+    \qquad single sentence letters
+    \item $(H \mathbin{\enot} S)$\\
+    \qquad$\enot$ can't go between sentences
+    \item $(H \eand S \eand C)$\\
+    \qquad $\eand$ combines only two sentences
+    \item $(\enot H)$\\
+    \qquad no parentheses around $\enot H$
+    \item $(H \eif (S \eand C)$\\
+    \qquad missing closing parenthesis
+    \item $H \eor S$\\
+    \qquad missing parentheses
+    \item $[H \eif (S \eand C)]$\\
+    \qquad only one kind of parentheses allowed: no brackets! 
+  \end{itemize}
+
+\end{frame}
+
+%\subsection{Valuations (i.e. Truth value assignments)}
+\subsection{Truth value assignments (a.k.a. `valuations')}
+
+\begin{frame}
+%  \frametitle{A valuation (i.e. a truth value assignment)}
+ \frametitle{Truth value assignment (a.k.a. `valuation')}
+
+  \begin{definition}
+  A \emph{truth value assignment} (TVA) (a.k.a. \emph{valuation}) is an assignment of \emph{\True} or \emph{\False} to each
+  atomic sentence letter in a sentence or sentences.
+  \end{definition}
+
+  \begin{definition}
+  The \emph{truth value of a sentence} \metav{S} on a valuation is:
+  \begin{enumerate}
+  \item if \metav{S} is a sentence letter: the truth value assigned to
+  it
+  \item if \metav{S} is $\enot \metav{A}$: opposite of the truth value of
+  $\metav{A}$
+  \item if \metav{S} is $(\metav{A} \ast \metav{B})$:
+  result of characteristic truth table of~$\ast$ for truth values of
+  $\metav{A}$ and $\metav{B}$.
+  \end{enumerate}
+  \end{definition}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Computing truth values}
+
+Truth-value assignment (TVA): $H$ is \True, $S$ is \False.
+
+On this valuation:
+
+  \begin{itemize}
+    \item $H$ is \True.
+    \item $S$ is \False.
+    \item $(H \eor S)$ is \True\ (because `$\True \eor \False$' gives \True).
+    \item $(H \eand S)$ is \False\ (because `$\True \eand \False$' gives \False).
+    \item $\enot (H \eand S)$ is \True\ (because $\enot \False$ is $\True$).
+    \item $((H \eor S) \eand \enot (H \eand S))$ is \True\
+    (because `$\True \eand \True$' gives $\True$).
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Computing truth values}
+
+\setbeamercovered{still covered={\opaqueness<1->{0}},
+again covered={\opaqueness<1->{30}}}
+
+\begin{tabular}{c c|r c l c l r c l}
+$H$ & $S$ & $(\alert<4>{(H}$ & \alert<3-4>{\eor} & $\alert<4>{S)}$ & \alert<9>{\eand} & $\alert<7-8>{\enot}$ & $\alert<6,8>{(H}$ & \alert<5-6,8>{\eand} & $\alert<6,8>{S)})$\\
+\hline
+ \True & \False &
+ \uncover<2-4>{\alert<3>{\True}} &
+ \uncover<4,9->{\alert<4,9>{\True}} &
+ \uncover<2-4>{\alert<3>{\False}} &
+ \uncover<10->{\alert<10>{\True}} &
+ \uncover<8-10>{\alert<8-9>{\True}} &
+ \uncover<2,5-6>{\alert<5>{\True}} &
+ \uncover<6-8>{\alert<6-7>{\False}} &
+ \uncover<2,5-6>{\alert<5>{\False}}\\
+ & & & \only<3-4|handout:0>{$\uparrow$} & & \only<9-10>{$\uparrow$} &
+ \only<7-8|handout:0>{$\uparrow$} & & \only<5-6|handout:0>{$\uparrow$}
+\end{tabular}
+\begin{itemize}
+  \item<2-> Copy truth values under atomic sentence letters.
+  \item<3-> Compute values of parts that combine sentence letters \\ (working from `inside out' i.e. from minor connectives toward the main connective)
+  \item<7-> Use computed values for larger parts.
+  \item<10-> Done row when you have the value under the main connective.
+  \item<11-> Complete this process for each row (each TVA)
+\end{itemize}
+\end{frame}
+
+\subsection{Validity and truth tables}
+
+\begin{frame}
+  \frametitle{Validity}
+
+  \begin{itemize}[<+->]
+  \item Recall: an argument is (deductively) \emph{valid} if there is no \emph{case}
+  where all premises are true and the conclusion is false.
+
+  \item In a \emph{case}, every \emph{atomic sentence} is either true or false
+  (but not both!).
+
+  \item In SL, \emph{valuations} make every \emph{atomic sentence letter} true or
+  false (and not both).
+
+  \item Also: every valuation makes every  \emph{wff} (i.e. `sentence') true or false (but
+  not both!), and we can compute the truth value of any well-formed formula (wff).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Validity in SL}
+
+  \begin{definition}
+  An argument is \emph{valid in SL} if there is \emph{no} valuation in which
+  all premises are \True{} and the conclusion is \False.
+
+  An argument is \emph{invalid in SL} if there is \emph{at least one}
+  valuation in which all premises are \True{} and the conclusion is
+  \False.
+  \end{definition}
+ 
+ \uncover<2->{Don't forget two \textit{vacuous} cases of valid arguments: \\ (i) inconsistent premises (never all true on a valuation) \\ (ii) conclusion is a tautology (true on every valuation)} 
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{Disjunctive syllogism}
+
+\setbeamercovered{still covered={\opaqueness<1->{0}},
+again covered={\opaqueness<1->{30}}}
+
+  \begin{columns}[c]
+  \begin{column}{2cm}
+  \begin{earg}
+  \item[] $H \eor S$
+  \item[] $\enot S$
+  \item[\therefore] $H$
+  \end{earg}
+  \end{column}
+  \begin{column}{5cm}
+  \[\begin{array}{cc|rcl|rc|cc}
+  H & S & (H & \eor & S) & \enot & S & H & \phantom{\leftarrow}\\
+  \hline
+    \uncover<2->{\alert<2>{\True}} &
+    \uncover<2->{\alert<2>{\True}} &
+    \uncover<3-4>{\True} &
+    \uncover<4,8->{\alert<4>{\True}} &
+    \uncover<3-4>{\True} &
+    \uncover<6,8->{\alert<6,9>{\False}} &
+    \uncover<5-6>{\True} &
+    \uncover<7->{\True} &
+    \only<9|handout:0>{\leftarrow}\only<10->{\checkmark}
+    \\
+    \uncover<2->{\alert<2>{\True}} &
+    \uncover<2->{\alert<2>{\False}} &
+    \uncover<3-4>{\True} &
+    \uncover<4,8->{\alert<4>{\True}} &
+    \uncover<3-4>{\False} &
+    \uncover<6,8->{\alert<6>{\True}} &
+    \uncover<5-6>{\False} &
+    \uncover<7->{\alert<10>{\True}} &
+    \only<10|handout:0>{\leftarrow}\only<11->{\checkmark}
+    \\
+    \uncover<2->{\alert<2>{\False}} &
+    \uncover<2->{\alert<2>{\True}} &
+    \uncover<3-4>{\False} &
+    \uncover<4,8->{\alert<4>{\True}} &
+    \uncover<3-4>{\True} &
+    \uncover<6,8->{\alert<6,11>{\False}} &
+    \uncover<5-6>{\True} &
+    \uncover<7->{\False} &
+    \only<11|handout:0>{\leftarrow}\only<12->{\checkmark}
+  \\
+    \uncover<2->{\alert<2>{\False}} &
+    \uncover<2->{\alert<2>{\False}} &
+    \uncover<3-4>{\False} &
+    \uncover<4,8->{\alert<4,12>{\False}} &
+    \uncover<3-4>{\False} &
+    \uncover<6,8->{\alert<6>{\True}} &
+    \uncover<5-6>{\False} &
+    \uncover<7->{\False} &
+    \only<12|handout:0>{\leftarrow}\only<13->{\checkmark}
+  \end{array}\]
+  \end{column}
+  \end{columns}
+  \begin{itemize}
+  \item \alert<2|handout:0>{List all valuations for $H$, $S$.}
+  \item \alert<3-7|handout:0>{Compute truth values of premises, conclusion.}
+  \item \alert<8-12|handout:0>{Check each valuation: one premise \False, or conclusion \True?}
+  \item \alert<13|handout:0>{All valuations check out: valid.}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{An invalid argument}
+
+\setbeamercovered{still covered={\opaqueness<1->{0}},
+again covered={\opaqueness<1->{30}}}
+
+  \begin{columns}[c]
+  \begin{column}{2cm}
+  \begin{earg}
+  \item[] $H \eor S$
+  \item[] $H$
+  \item[\therefore] $\enot S$
+  \end{earg}
+  \end{column}
+  \begin{column}{5cm}
+  \[\begin{array}{cc|rcl|r|ccc}
+  H & S & (H & \eor & S) &  H & \enot & S & \phantom{\leftarrow}\\
+  \hline
+    \uncover<2->{\alert<2>{\True}} &
+    \uncover<2->{\alert<2>{\True}} &
+    \uncover<3>{\True} &
+    \uncover<3->{\alert<3,6>{\True}} &
+    \uncover<3>{\True} &
+    \uncover<3->{\alert<3,6>{\True}} &
+    \uncover<3->{\alert<3,6>{\False}} &
+    \uncover<3>{\True} &
+    \only<5|handout:0>{\leftarrow}\only<6->{\alert{\text{\ding{55}}}}
+    \\
+    \uncover<2->{\alert<2>{\True}} &
+    \uncover<2->{\alert<2>{\False}} &
+    \uncover<3>{\True} &
+    \uncover<3->{\alert<3>{\True}} &
+    \uncover<3>{\False} &
+    \uncover<3->{\alert<3>{\True}} &
+    \uncover<3->{\alert<3,7>{\True}} &
+    \uncover<3>{\False} &
+    \only<7|handout:0>{\leftarrow}\only<8->{\checkmark}
+    \\
+    \uncover<2->{\alert<2>{\False}} &
+    \uncover<2->{\alert<2>{\True}} &
+    \uncover<3>{\False} &
+    \uncover<3->{\alert<3>{\True}} &
+    \uncover<3>{\True} &
+    \uncover<3->{\alert<3,8>{\False}} &
+    \uncover<3->{\alert<3>{\False}} &
+    \uncover<3>{\True} &
+    \only<8|handout:0>{\leftarrow}\only<9->{\checkmark}
+  \\
+    \uncover<2->{\alert<2>{\False}} &
+    \uncover<2->{\alert<2>{\False}} &
+    \uncover<3>{\False} &
+    \uncover<3->{\alert<3,9>{\False}} &
+    \uncover<3>{\False} &
+    \uncover<3->{\alert<3,9>{\False}} &
+    \uncover<3->{\alert<3>{\True}} &
+    \uncover<3>{\False} &
+    \only<9|handout:0>{\leftarrow}\only<10->{\checkmark}
+  \end{array}\]
+  \end{column}
+  \end{columns}
+  \begin{itemize}
+  \item \alert<2|handout:0>{List all valuations for $H$, $S$.}
+  \item \alert<3-4|handout:0>{Compute truth values of premises, conclusion.}
+  \item \alert<5|handout:0>{Check each valuation: one premise \False, or conclusion \True?}
+  \item \alert<6|handout:0>{Find a valuation with all premises \True{} and conclusion \False: invalid.}
+  \end{itemize}
+\end{frame}
+
+\subsection{Large truth tables}
+
+\begin{frame}
+\frametitle{Large truth tables}
+
+\begin{itemize}[<+->]
+\item For arguments with $n$ sentence letters, there are $2^n$
+possible valuations
+\begin{itemize}[<+->]
+\item A single letter $A$ can be \True{} or \False{}: $2^1 = 2$ valuations.
+\item For two letters $A$, $B$: $B$ can be \True{} or \False{} for every
+possible valuation (2) of $A$: $2 \times 2 = 2^2 = 4$ valuations
+\item For three letters $A$, $B$, $C$: $C$ can be \True{} or \False{}
+for every possible valuation (4) of $A$ and $B$: $2 \times 4 = 2^3 =
+8$ valuations
+\item Etc.
+\end{itemize}
+\item In the $i$th reference column, alternate \True{} and \False{}
+every $2^{n-i}$ lines
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{A complex truth table}
+  
+  3 sentence letters $A$, $C$, $E$: $2^3 = 8$ lines
+  \footnotesize
+    \[\begin{array}{lccc|c}
+    & A & C & E & \dots\\
+     \cline{2-5}
+    1 & \uncover<3->{\True} & \uncover<4->{\True} &
+     \uncover<5->{\True} & \dots \\
+    2 & \uncover<3->{\True} & \uncover<4->{\True} &
+     \uncover<5->{\False} & \dots \\
+    3 & \uncover<3->{\True} & \uncover<4->{\False} &
+     \uncover<5->{\True} & \dots \\
+    4 & \uncover<3->{\True} & \uncover<4->{\False} &
+     \uncover<5->{\False} & \dots \\
+    5 & \uncover<3->{\False} & \uncover<4->{\True} &
+    \uncover<5->{\True} & \dots \\
+    6 & \uncover<3->{\False} & \uncover<4->{\True} &
+    \uncover<5->{\False} & \dots \\
+    7 & \uncover<3->{\False} & \uncover<4->{\False} &
+    \uncover<5->{\True} & \dots \\
+    8 & \uncover<3->{\False} & \uncover<4->{\False} &
+    \uncover<5->{\False} & \dots \\
+    & \uncover<2>{\uparrow} &\uncover<3>{\uparrow} & \multicolumn{1}{c}{\uncover<4>{\uparrow}}\\
+    & \multicolumn{4}{l}{\uncover<2->{\text{alternate every \dots}}} \\
+    & \uncover<2>{4} & \uncover<3>{2} & \multicolumn{1}{c}{\uncover<4->{1}} \\
+    & \multicolumn{4}{l}{\uncover<2->{\text{rows}}} \\
+    \end{array}\]
+  \end{frame}
+  
+\begin{frame}
+  \frametitle{Example (simplified)}
+
+  Sarah lives in Chicago or Erie.\\
+  Amir lives in Chicago unless he enjoys hiking.\\
+  If Amir lives in Chicago, Sarah doesn't.\\
+  Amir doesn't enjoy hiking.\\
+  $\therefore$ Sarah lives in Erie.
+
+  \begin{align*}
+  & C \eor E\\
+  & A \eor M\\
+  & A \eif \enot C\\
+  &\enot M\\
+  \therefore & E
+  \end{align*}
+\end{frame}
+
+\begin{frame}\footnotesize
+\setbeamercovered{still covered={\opaqueness<1->{0}},
+again covered={\opaqueness<1>{20}\opaqueness<2->{10}}}
+\[
+  \begin{array}{cccc|cec|cec|ceec|ef|f}
+  A &  C & E & M & C &\eor & E & A & \eor & M & A & \eif & \enot & C & \enot & M & E\\
+  \hline
+  \True & \True & \True & \True &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3->{\False} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-5>{\True} \\
+  \True & \True & \True & \False &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3->{\False} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3-4>{\True} & \uncover<2>{\False} & \uncover<2-5>{\True} \\
+  \True & \True & \False & \True &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3->{\False} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-4>{\False} \\
+  \True & \True & \False & \False &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3->{\False} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3-4>{\True} & \uncover<2>{\False} & \uncover<2-4>{\False} \\
+
+  \True & \False & \True & \True &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-5>{\True} \\
+  \True & \False & \True & \False &
+    \uncover<2>{\False} & \uncover<3->{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3->{\True} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3->{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3->{\True} & \uncover<2>{\False} & \uncover<2-5>{\True} \\
+  \True & \False & \False & \True &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-4>{\False} \\
+  \True & \False & \False & \False &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3-4>{\True} & \uncover<2>{\False} & \uncover<2-4>{\False} \\
+
+
+  \False & \True & \True & \True &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-5>{\True} \\
+  \False & \True & \True & \False &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3-4>{\True} & \uncover<2>{\False} & \uncover<2-5>{\True} \\
+  \False & \True & \False & \True &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-4>{\False} \\
+  \False & \True & \False & \False &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3-4>{\True} & \uncover<2>{\False} & \uncover<2-4>{\False} \\
+
+  \False & \False & \True & \True &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-4>{\True} \\
+  \False & \False & \True & \False &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3-4>{\True} & \uncover<2>{\False} & \uncover<2-5>{\True} \\
+  \False & \False & \False & \True &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-4>{\False} \\
+  \False & \False & \False & \False &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3-4>{\True} & \uncover<2>{\False} & \uncover<2-4>{\False} \\
+    \end{array}
+    \]
+    \uncover<5>{Every valuation makes at least one premise false, or makes the
+    conclusion true: the argument is valid.}
+  \end{frame}
+
+\subsection{Entailment, equivalence, tautologies}
+
+\begin{frame}
+\frametitle{Validity of arguments}
+
+\begin{definition}
+An argument is \emph{valid in SL} iff every truth-value assignment either makes one
+or more of the premises false or it makes the conclusion true.  \\\uncover<2->{(i.e. there is no TVA where the premises are true but the conclusion is false).} 
+
+ \uncover<3->{An argument is \emph{invalid in SL} iff at least one TVA makes all the premises true and it makes the conclusion false.}
+\end{definition}
+\end{frame}
+
+\begin{frame}
+\frametitle{Entailment}
+
+\begin{definition}
+Sentences $\metav{A}_1, \dots, \metav{A}_n$ \emph{entail} a sentence
+$\metav{B}$ iff every TVA either makes at least one of
+$\metav{A}_1, \dots, \metav{A}_n$ false or makes $\metav{B}$ true.
+
+(i.e. for any valuation where the premises are all true, the conclusion is true)
+
+\uncover<2->{In that case we write $\metav{A}_1, \dots, \metav{A}_n \entails \metav{B}$.}
+\end{definition}
+
+\uncover<3->{The symbol `$\entails$' is called a `double turnstile'}
+
+\uncover<4->{Note the following relationship between entailment and validity:
+\begin{center}
+$\metav{A}_1, \dots, \metav{A}_n \entails \metav{B}$ iff the argument
+`$\metav{A}_1, \dots, \metav{A}_n \therefore \metav{B}$' is valid.
+\end{center}}
+\end{frame}
+
+\begin{frame}{Entailment}
+
+Does $\enot(\enot A \eor \enot B), A \eif \enot C \entails A \eif (B \eif C)$?
+
+\uncover<2->{Note that we are asking whether two sentences of SL entail a third \\ (i.e. do the first two provide a deductively valid argument for the conclusion $A \eif (B \eif C)$?)}
+
+\end{frame}
+
+\begin{frame}{Entailment}
+\[
+  \begin{array}{ccc | ceeeeeec | ce@{\ }c@{\ }eeec | c@{\ \ }eeeeeeef}
+A & B & C & $\enot$ & ( & $\enot$ & A & $\eor$ & $\enot$ & B & ) &  & A & $\eif$ & $\enot$ & C &  &  & A & $\eif$ & ( & B & $\eif$ & C & ) & \\
+\hline
+\True & \True & \True & \True &  & \False & \True & \False & \False & \True &  &  & \True & \False & \False & \True &  &  & \True & \True &  & \True & \True & \True &  & \\
+\True & \True & \False & \only<1>{\True}\only<2>{\colorbox{highlightbg}{\True}} &  & \False & \True & \False & \False & \True &  &  & \True & \only<1>{\True}\only<2>{\colorbox{highlightbg}{\True}} & \True & \False &  &  & \True & \only<1>{\False}\only<2>{\colorbox{highlightbg}{\False}} &  & \True & \False & \False & \only<2>{\rlap{$\leftarrow$}} & \\
+\True & \False & \True & \False &  & \False & \True & \True & \True & \False &  &  & \True & \False & \False & \True &  &  & \True & \True &  & \False & \True & \True &  & \\
+\True & \False & \False & \False &  & \False & \True & \True & \True & \False &  &  & \True & \True & \True & \False &  &  & \True & \True &  & \False & \True & \False &  & \\
+\False & \True & \True & \False &  & \True & \False & \True & \False & \True &  &  & \False & \True & \False & \True &  &  & \False & \True &  & \True & \True & \True &  & \\
+\False & \True & \False & \False &  & \True & \False & \True & \False & \True &  &  & \False & \True & \True & \False &  &  & \False & \True &  & \True & \False & \False &  & \\
+\False & \False & \True & \False &  & \True & \False & \True & \True & \False &  &  & \False & \True & \False & \True &  &  & \False & \True &  & \False & \True & \True &  & \\
+\False & \False & \False & \False &  & \True & \False & \True & \True & \False &  &  & \False & \True & \True & \False &  &  & \False & \True &  & \False & \True & \False &  & \\
+\end{array}\]
+\end{frame}
+
+\begin{frame}
+\frametitle{Tautologies}
+
+\begin{definition}
+A sentence \metav{A} is a \emph{tautology} iff it is true on every
+valuation.
+\end{definition}
+
+\[\begin{array}{c|ccc}
+P & P & \eif & P \\
+\hline
+\True & \True & \True & \True\\
+\False & \False & \True & \False
+\end{array}
+\]
+\end{frame}
+
+\begin{frame}
+\frametitle{Contradictions}
+
+\begin{definition}
+A sentence \metav{A} is a \emph{contradiction} iff it is false on every
+valuation.
+\end{definition}
+
+\[\begin{array}{c|cccc}
+P & P & \eand & \enot & P \\
+\hline
+\True & \True & \False & \False & \True\\
+\False & \False & \False & \True & \False
+\end{array}
+\]
+\end{frame}
+
+\begin{frame}
+\frametitle{Logically equivalent sentences}
+
+\begin{definition}
+Two sentences \metav{A} and \metav{B} are \emph{equivalent in SL}
+iff every TVA either makes both \metav{A} and \metav{B} true or
+it makes both \metav{A} and \metav{B} false.
+\end{definition}
+
+In other words: \metav{A} and \metav{B} agree in truth value, for
+every valuation.
+
+ \uncover<2->{Interesting case of equivalence: \metav{A} and \metav{B} comprise the same atomic sentence letters}
+
+ \uncover<3->{Uninteresting cases: (1) all tautologies are equivalent; \\ (2) all contradictions are equivalent}
+ 
+  \uncover<4->{\textit{Philosophy question}: What might we take this to indicate about \textit{the meaning} of tautologies and contradictions?}
+ %sparked by Henry question on day 0: which seems to prompt/motivate relevance logic. e.g. contradiction P&~P is equivalent to Q&~Q but intuitively ABOUT totally diff things. 
+ 
+ % Maybe we could avoid this result by focusing on restrictions of valuations? But presumably we define a valuation as an assignment to every atomic sentence letter.
+\end{frame}
+
+\begin{frame}
+\frametitle{Equivalent sentences}
+
+\setbeamercovered{still covered={\opaqueness<1->{0}},
+again covered={\opaqueness<1-3>{30}}}
+
+\[\begin{array}{cc|cccc|cccc}
+A & B & \enot & A & \eor & B & A & \eif & B\\
+\hline
+\True & \True & \uncover<2>{\False} & \uncover<1>{\True} &
+\uncover<2->{\True} & \uncover<1>{\True} & \uncover<1>{\True} &
+\uncover<2-3>{\True} & \uncover<1>{\True} \\
+\True & \False & \uncover<2>{\False} & \uncover<1>{\True} &
+\uncover<2->{\False} & \uncover<1>{\False} & \uncover<1>{\True} &
+\uncover<2-3>{\False} & \uncover<1>{\False} \\
+\False & \True & \uncover<2>{\True} & \uncover<1>{\False} &
+\uncover<2->{\True} & \uncover<1>{\True} & \uncover<1>{\False} &
+\uncover<2-3>{\True} & \uncover<1>{\True} \\
+\False & \False & \uncover<2>{\True} & \uncover<1>{\False} &
+\uncover<2->{\True} & \uncover<1>{\False} & \uncover<1>{\False} &
+\uncover<2-3>{\True} & \uncover<1>{\False}
+\end{array}
+\]
+
+\uncover<4->{Note how $(\enot A \eor B)$ wears the truth-conditions of $A \eif B$ \\ ``on its sleeves''}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Equivalence and entailment}
+
+\begin{itemize}[<+->]
+\item[]\begin{block}{Fact}
+If \metav{A} and \metav{B} are equivalent, then $\metav{A} \entails
+\metav{B}$ (likewise, $\metav{B} \entails \metav{A}$).
+\end{block}
+
+\item[]\begin{block}{Proof}
+\begin{itemize}[<+->]
+  \item Look at any valuation: it makes \metav{A} true or false.
+  \item If \metav{A} is false, the valuation is not a counterexample.
+  \item If \metav{A} is true, \metav{B} is also true (since \metav{A}
+  and \metav{B} agree in truth value on every valuation).
+  \item So if \metav{A} is true, the valuation is also not a counterexample.
+  \item So, no valuation can be a counterexample to $\metav{A} \entails \metav{B}$.
+\end{itemize}
+\end{block}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Two Questions about Entailment}
+
+Let `$\Gamma \nentails \Psi$' mean that the (set of) sentence(s) $\Gamma$ does not semantically entail $\Psi$, i.e. an argument from $\Gamma$ to $\Psi$ is invalid
+
+%%$\Gamma$ and $\Delta$ are sets of sentences; $\Phi$ and $\Psi$ are arbitrary individual sentences 
+
+%Let `$\Gamma \nentails \Delta$' mean that the (set of) sentence(s) $\Gamma$ does not semantically entail $\Delta$, i.e. an argument from $\Gamma$ to $\Delta$ is invalid. 
+
+\medskip 
+
+\begin{enumerate}[<+->]
+
+\item True or False? If $\Phi \entails \Psi$, then $\enot \Phi \nentails \Psi$ 
+
+\bigskip
+
+\item True or False? If $\Gamma \entails \Phi$ and $\Delta, \Phi \entails \Psi$, then $\Gamma, \Delta \entails \Psi$? 
+
+\end{enumerate}
+
+
+\end{frame}
+
+
+
+
+
+\subsection{Consistency}
+
+\begin{frame}
+\frametitle{Consistency (a.k.a joint satisfiability)}
+
+\begin{definition}
+Sentences $\metav{A}_1, \dots, \metav{A}_n$ are \emph{consistent} (i.e. `satisfiable') in SL if there is at least one TVA that makes all of them true.
+
+If they are not satisfiable, we say that they are \emph{inconsistent} (a.k.a `jointly unsatisfiable').
+\end{definition}
+
+ \uncover<2->{$A \eor B$, $\enot A$, $B$ are consistent (a.k.a `satisfiable').}
+
+ \uncover<3->{$A \eor B$, $\enot A$, $\enot B$ are inconsistent (a.k.a `unsatisfiable').}
+\end{frame}
+
+\begin{frame}{Inconsistency and validity}
+  \begin{itemize}[<+->]
+    \item Any argument with inconsistent premises is valid.
+    \begin{itemize}[<+->]
+      \item If premises are inconsistent, no valuation makes
+      them all true.
+      \item[] $\Rightarrow$ No valuation makes them all true and the conclusion false.
+      \item[] $\Rightarrow$ No valuation can be a counterexample.
+    \end{itemize}
+    \item An argument is valid if, and only if, the premises together
+    with the \emph{negation} of the conclusion are inconsistent.
+    
+    \item This fact is the basis our tree method for validity (`STD')!
+  \end{itemize}
+  
+\end{frame}
+
+\begin{frame}
+\frametitle{LSAT puzzle: Can you send Amir in the boat?}
+
+$A$, $B$, $C$, $D$: Amir, Betty, Chad, Dana are in the boat.
+
+Amir won't go without Chad. \uncover<2->{(If no Chad, then no Amir)}
+\uncover<3->{\[A \eif C\]} 
+Chad only goes if at least one of Betty and Dana goes too.
+\uncover<4->{\[C \eif (B \eor D)\]}%
+Amir and Dana can't be in the boat together.
+\uncover<5>{\begin{align*}& \enot (A \eand D)\\
+& A \eif \enot D\\
+& \enot A \eor \enot D
+\end{align*}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Dependency resolution by SAT checking}
+
+$A$, $B$, $C$, $D$: package A, B, C, D is installed.
+
+Package A depends on package C.
+\uncover<2>{\[A \eif C\]}%
+Package C requires either package B or D.
+\uncover<2>{\[C \eif (B \eor D)\]}%
+Package A is incompatible with package D.
+\uncover<2>{\begin{align*}& \enot (A \eand D)\\
+& A \eif \enot D\\
+& \enot A \eor \enot D
+\end{align*}}
+\end{frame}
+
+\begin{frame}
+\frametitle{Solution as satisfiability question}
+
+Can you send \emph{Amir} in the boat?
+
+Can package \emph{A} be installed?
+
+Same as: Are these sentences consistent?
+\begin{align*}
+& \emph{A}\\
+& A \eif C\\
+& C \eif (B \eor D) \\
+& \enot (A \eand D)
+\end{align*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{More complex satisfiability questions}
+  
+  Can you send \emph{Amir without Betty} in the boat?
+  
+  Can package \emph{A} be installed \emph{without installing B}?
+  
+  Same as: Are these sentences consistent?
+  \begin{align*}
+  & \alert{A \eand \enot B}\\
+  & A \eif C\\
+  & C \eif (B \eor D) \\
+  & \enot (A \eand D)
+  \end{align*}
+  
+  (Exercise: construct a complete truth table. Which valuations, if any,
+  satisfy all four sentences?)
+  \end{frame}
+  
+\begin{frame}
+\frametitle{Complexity of logical testing}
+
+\begin{itemize}[<+->]
+\item In general, testing for validity, satisfiability, tautology, etc., requires
+making a complete truth table
+\begin{itemize}
+\item Testing for validity requires checking \emph{every} valuation \\ (although can halt if find a counterexample to validity).
+\item Testing for satisfiability requires finding \emph{at least one} valuation.
+\end{itemize}
+\item If there are $n$ sentence letters, there are $2^n$ valuations to
+check.
+\item Computer scientists have yet to find a method that can (always) do this
+faster than truth tables (connected to ``P vs NP problem'').
+
+\item See \href{https://en.wikipedia.org/wiki/Cook–Levin_theorem}{Cook--Levin Theorem}
+%Boolean SAT problem is NP-complete: if we could find a polynomial time algorithm for this problem, we could transform it into a P time algorithm for ANY OTHER problem in class NP
+%NP stands for non-deterministic polynomial time
+\end{itemize}
+\end{frame}
+
+\frame{\frametitle{More on Complexity Classes}
+%\large
+\begin{itemize}[<+->]
+
+\item \emph{Class P}: solvable in polynomial time by a deterministic Turing machine (DTM)
+
+\item \emph{Class NP}: solvable in polynomial time by a non-deterministic Turing machine (NTM). Equivalently: can \textit{verify/check} solutions by DTM in polynomial time
+
+\item Boolean satisfiability and validity problems are \textit{NP-complete}:
+
+\begin{itemize}[<+->]
+
+\item Problems that are easy to check, but difficult to solve  
+
+\item If we could solve these in polynomial time with DTM, then we could solve \textit{ANY} NP problem in polynomial time
+
+\item You might stand to make a lot of money (you would potentially have an efficient algorithm for many problems)!!! 
+
+\item (At the very least, you could \href{https://cs.stackexchange.com/questions/88031/could-a-scientist-make-money-off-of-the-p-vs-np-solution}{cash in for a million-dollar prize})
+
+\item But most experts think that class P $\neq$ class NP
+
+\end{itemize}
+
+
+
+\end{itemize}
+}
+

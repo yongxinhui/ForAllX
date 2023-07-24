@@ -1,0 +1,149 @@
+\documentclass[12pt]{memoir}
+
+
+ \usepackage{forallx-ubc-Hunt} 
+ 
+  \usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+
+\begin{document}
+
+\newcommand{\detritus}[1]{}
+
+%\newcommand*{\emph}[1]{\textbf{#1}}
+
+%\newcommand*{\define}[1]{\textsc{\lowercase{#1}}}
+
+%\def\eor{\ensuremath{\vee}}
+
+
+\thispagestyle{empty}
+
+
+\begin{center}
+\Large Problem Set 13 \\[1ex] 
+\large Partial Solutions: We Assume you will never share these! \\[3ex] 
+\normalsize Apologies for typos! Let me know if you catch any! (Gotta catch-em all!)
+% \textbf{Answer FOUR questions total: 1 and 2, 3 Xor 4, 5 Xor 6 (exclusive or's!)}
+\end{center}
+
+\begin{enumerate}[1.)]
+
+\item Using the new existential intro and elimination rules, we show that $\enot \qt{\forall}{x}P \vdash_{QND^*} \qt{\exists}{x} \enot P$: 
+
+\begin{equation*}
+\begin{nd}
+	\hypo{1}{\enot \qt{\forall}{x}P} \pr{}
+	\open
+		\hypo{2}{\qt{\forall}{x}\enot\enot P} \as{for \enot I}
+		\open
+			\hypo{3}{\enot \qt{\forall}{x} \enot P} \as{for \enot E}
+			\have{4}{\qt{\exists}{x} \enot P} \Ei{3}
+			\have{5}{\enot \qt{\forall}{x}\enot\enot P} \Ee{4}
+			\have{6}{\qt{\forall}{x}\enot\enot P} \r{2}
+		\close
+		\have{7}{\qt{\forall}{x} \enot P} \ne{3-6}
+		\have{8}{\enot P[a/x]} \Ae{7}
+		\have{9}{\enot \enot P[a/x]} \Ae{2}
+	\close
+	\have{10}{\enot \qt{\forall}{x}\enot \enot P} \ni{2-9}
+	\have{11}{\qt{\exists}{x} \enot P} \Ei{10}
+\end{nd}
+\end{equation*}
+
+\item[4.] In the cases of soundness for SND and QND, we were able to define derivability for infinitely-many premises as follows: $\Theta$ is \emph{SND-derivable} from $\Gamma$ provided there is an SND derivation:
+
+\begin{enumerate}[1.)]
+
+\item whose starting premises $\Delta$ are a finite subset of $\Gamma$ 
+
+\item in which $\Theta$ appears on its own in the final line
+
+\item where $\Theta$ is directly next to the main scope line, i.e. only in the scope of the $\Delta$-premises
+
+\end{enumerate}
+
+In this case, we write $\Gamma \vdash_{SND} \Theta$ (also: $\Delta \vdash_{SND} \Theta$)
+
+If no such derivation exists, then we say that $\Theta$ is NOT SND-derivable from $\Gamma$, and we write $\Gamma \nvdash_{SND} \Theta$. Notice how ``not-SND-derivable" is the negation of ``SND-derivable."
+
+Now, going back to trees, recall that in this case, ``tree-invalid" was not the negation of ``tree-valid."
+
+\textbf{Tree-valid}: $\Gamma \cup \{\enot \Theta\}$ is \emph{tree-inconsistent}: There is at least one tree with this set as the root such that \emph{all branches close}
+
+\textbf{Tree-invalid}: $\Gamma \cup \{\enot \Theta\}$ is \emph{tree-consistent}: There is at least one tree with this set as the root such that there is a complete open branch (i.e. all wffs have been resolved and no contradictory pairs appear on this branch)
+
+Our proofs of soundness proceeded by proving the contrapositive: \\ \textit{Soundness}: If $\Gamma \nentails \Theta$, then $\Gamma \nvdash_{STD} \Theta$. Where here, ``$\Gamma \nvdash_{STD} \Theta$'' means that \textit{it is not the case that} the argument from $\Gamma$ to $\Theta$ is  \textbf{tree-valid}. 
+
+\begin{itemize}
+
+\item i.e., \textit{it is not the case that} there exists a tree with root $\Gamma \cup \{\enot \Theta \}$ that possesses \emph{all closed branches}
+
+\item \textcolor{red}{Equivalently}: ANY tree with root $\Gamma \cup \{\enot \Theta \}$ possesses \textbf{at least one \textcolor{red}{complete open branch}}
+
+\item (Aside: this is NOT the same as saying that the argument is \textcolor{red}{\textbf{tree-invalid}}, since that only requires the existence of a single tree with a complete open branch) 
+
+%\item for all we know right now, tree-invalidity does not preclude tree-validity
+
+%\item I.e., there is a tree with root $\Gamma \cup \{\enot \Theta \}$ that possesses a \textcolor{OGlyallpink}{complete open branch}
+
+\end{itemize}
+
+So it seems like the obvious way to modify these definitions for infinite premise sets would be the following: 
+
+\textbf{Tree-valid}: for infinite $\Gamma$, $\Gamma \cup \{\enot \Theta\}$ is \emph{tree-inconsistent} provided there is at least one finite subset $\Delta \subset \Gamma$ such that there is at least one tree with this set $\Delta $ as the root such that \emph{all branches close}. 
+
+\textbf{Tree-invalid}: for infinite $\Gamma$, $\Gamma \cup \{\enot \Theta\}$ is \emph{tree-consistent} provided there is at least one finite subset $\Delta \subset \Gamma$ such that there is at least one tree with this set $\Delta $ as the root such that \emph{there is a complete open branch}.
+
+At least one issue we run into: with these definitions, many arguments with infinite premise sets will be both tree-valid and tree-invalid: we can choose different finite subsets $\Delta$ that respectively have the properties above. 
+
+Following the above idea, for infinite $\Gamma$, \textbf{not-tree-valid}, i.e. $\Gamma \nvdash_{STD} \Theta$ amounts to the following: there exists at least one finite subset $\Delta \subset \Gamma$ such that \textit{it is not the case that} there exists a tree with root $\Delta \cup \{\enot \Theta \}$ that possesses \emph{all closed branches}.  Equivalently, this means that \textcolor{red}{for some finite} $\Delta \subset \Gamma$, ANY tree with root $\Delta \cup \{\enot \Theta \}$ possesses \textbf{at least one \textcolor{red}{complete open branch}}. 
+
+%%I think i screwed up the logic on the following: Equivalently, this means that ANY tree with root $\Delta \cup \{\enot \Theta \}$ possesses \textbf{at least one \textcolor{red}{complete open branch}}. 
+
+%FOllowing idea seems wrong, since I messed up equivalent statement: 
+
+So then for infinite $\Gamma$, it would suffice to find a single finite subset $\Delta$ such that any tree with root $\Delta \cup \{\enot \Theta \}$ possesses a complete open branch. However, it will often be trivial to find such a $\Delta$, simply by taking $\Delta$ small enough. Provided there is at least one wff in $\Gamma$ that is not logically equivalent to the conclusion $\Theta$, we can take that one wff as our $\Delta$ and the resulting tree with root $\Delta \cup \{\enot \Theta \}$ will possess a complete open branch. 
+
+Hence, we would be led to say that an infinite premise set containing $\{P, P \eif Q \}$ is not-tree-valid for conclusion $Q$, since we can take finite subset $\Delta$ to simply be $\{P \eif Q\}$ and note that all trees with root $\{P \eif Q \} \cup \{\enot Q \}$ have a complete open branch. 
+
+Of course, an infinite premise set containing $\{P, P \eif Q \}$ would ALSO count as tree-valid, since the finite subset $\Delta' := \{P, P \eif Q \}$ leads to a root $\Delta \cup \{\enot \Theta \}$ such that all branches close on this tree. 
+
+Alternative idea that actually could work: for infinite $\Gamma$, define \textbf{not-tree-valid}, i.e. $\Gamma \nvdash_{STD} \Theta$ as follows: for ALL finite subsets $\Delta \subset \Gamma$, ANY tree with root $\Delta \cup \{\enot \Theta \}$ possesses a complete open branch. 
+
+
+
+\iffalse
+
+\item  %JTapp PS10, number 1. Winter 2019 
+\begin{equation*}
+\begin{nd}
+	\hypo{1}{Gb \eif Fb} \pr{}
+	\hypo{2}{Gb} \pr{}
+	\have{3}{Fb} \ce{1, 2}
+	\have{4}{Fb \eor Hb} \oi{3}
+	\have{5}{\qt{\exists}{x}(Fx \eor Hx)} \Ei{4}
+\end{nd}
+\end{equation*}
+
+\fi 
+
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+
+
+
+
+
+
+
+\end{document}

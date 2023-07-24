@@ -1,0 +1,93 @@
+%partial list of some solutions, as I make sure I can do some of these for class tomorrow; 10/18/22
+
+
+PP6.20 is chill! very simple ~Intro example:
+
+    A :AS for >I
+        ~A :AS for ~I
+        A :1 R
+    ~~A :2-3 ~I
+A>~~A :1-4 >I   
+
+PP6.21 (typeset in the slides as well):
+trick is to realize that you need to build up a conditional, and that the consequent you're working towards is ALSO a conditional, so then assume it's antecedent ~B.
+Then, notice that to get its consequent (~A), you can do ~I on A
+so working three levels of subproof deep for much of the proof! 
+
+
+
+    (A ⊃ B) :AS for >I
+        ~B :AS for >I
+            A :AS for ~I
+            B :1, 3 >E
+            ~B :2 R
+        ~A :3-5 ~I
+    ~B>~A :2-6 >I
+((A ⊃ B) ⊃ (~B ⊃ ~A)) :1-7 >I
+
+
+PP6.22 (basically identical to prior problem, only now we do ~E on ~A. But same proof idea!)
+
+    (~A ⊃ ~B) :AS for >I
+        B :AS for >I
+            ~A :AS for ~E
+            ~B :1, 3 >E
+            B :2 R
+        A :3-5 ~E
+    B > A :2-6 >I
+((~A ⊃ ~B) ⊃ (B ⊃ A)) :1-7 >I
+
+PP6.23 one direction of de Morgan's (actually not as hard as I thought initially; note that you could also do ~E on what you want to prove, but would be unnecessary/overkill. would still build up ~A&~B directly w/in that subproof:
+
+~(A ∨ B) :PR
+    A :AS for ~I
+    A v B :2 vI
+    ~(A ∨ B) :1 R
+~A :2-4 ~I
+    B :AS for ~I
+    A v B :6 vI
+    ~(A ∨ B) :1 R
+~B :6-8 ~I
+(~A & ~B) :5, 9 &I
+
+
+
+
+PP 6.24 is genuinely tricky, since we don't have the falsum symbol! so we need to make the SAME contradiction on both our disjunction elim proof by cases. and this is a bit tedious! took me 17 lines. even though it's pretty obvious we'll have a contradiction on either branch of our disjunction (either A&~A or B&~B, but we basically need to pick one so that we can do vE. then use that contradiction to finish the ~Intro on A v B. (so end up going four layers of subproof deep at one point....)
+
+
+    (~A & ~B) :AS for >I
+        A v B :AS for ~I
+            A :AS for vE
+            ~A :1 &E
+            A&~A :3, 4 &I
+        --
+            B :AS for vE
+            ~B :1 &E
+                ~(A&~A) :AS for ~E
+                B :7 R
+                ~B :8 R
+            A&~A :9-11 ~E
+        A&~A :2, 3-5, 7-12 vE
+        A :13 &E
+        ~A :13 &E
+    ~(A v B) :2-15 ~I
+((~A & ~B) ⊃ ~(A ∨ B)) :1-16 >I    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

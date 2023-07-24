@@ -1,0 +1,119 @@
+notes on PS11 Zach problems (11-17-22)
+
+adding my problem values on shortened problem set:
+
+(4+6)+(4+6)+6+6+6+6
+
+4+6+4+6+6+6+6+6+14*4 
+
+1) easy;short; but good test of checking the UD!
+
+2) good one! although i forgot to say they are asteroids!
+
+3) hard one; so defs leave on auto-checker if I include it!!! (Ex)(Ay)(Px & ((Py & ~x=y)> Lxy))
+but I tried stuff like this a bunch: 
+(Ex)(Ay)(Px & Py & ~x=y & Lxy)), which is wrong. but perhaps hard to motivate why this is wrong. presumably need a countermodel that makes one true but the other false! so try to think of that
+
+4) good one and not too hard! got on first try modulo putting an atomic in parentheses lol: (Ax)( (Mx & Oxj & ~x=i) > Tx )
+
+5) tough one! 
+(Ax)((Tm & Te) & (Tx > (x=m v x=e) ))
+at first i just wrote the following: 
+(Ax)(Tx > (x=m v x=e)), and then it is hard to correctly build in the additional content that m and e both have an atmosopher. 
+
+This also works:
+(Ax)( (Tx > (x=m v x=e)) &(Te &Tm))
+
+6) Even harder!!! did not get right on first attempt despite focusing pretty hard...
+~~~{.Translate .FOL system="LogicBookPDE" points=1}
+PS9.6 (Ex)(Mx /\ Oxm) /\ (Ax)(Ey)((My /\ Oyx) -> x=m),  (Ax)(Ey)((My /\ Oyx) <-> x=m) : Only Mars has a moon.
+~~~
+
+initial fail: (Ax)(Ey)( (My & Oym) & ( (My & Oyx) > x=m) )
+failed: (Ax)(Ey)(Az)( (My & Oym) & ( (My & Oyx) > (x=m & z=y) ) )
+
+i gave up and looked at answer, so probs don't include this one in the PSet; too hard! at least if you haven't read the chapter or notes!
+
+one of zach's answers:
+(Ax)(Ey)((My /\ Oyx) <-> x=m)
+I feel like i perhaps just ought to pencil in my answer as acceptable! namely this one:
+(Ax)(Ey)( (My & Oym) & ( (My & Oyx) > x=m)
+
+
+7) man, also struggled with this one; but should include on the PSet i think
+first two attempts:
+(Ax)(Ay)( (Mx & Oxe & My & Oye) > x=y)
+(Ex)(Ay)( (Mx & Oxe & My & Oye) > x=y)
+
+but got it on third attempt, and i think would be easy if one had the pattern in mind:
+(Ex)(Ay)( (Mx & Oxe) & ( (My & Oye) > x=y))
+and this also works:
+(Ex)( (Mx & Oxe) & (Ay)( (My & Oye) > x=y))
+
+8) no idea why the following isn't right:
+(Ax)( (Px & ~x=j) > Ljx)
+seems that Zach wants you to tack on that jupiter is a planet, which I guess it's true you need to say lol:
+(Ax)( (Px & ~x=j) > Ljx) & Pj
+
+
+9) very easy! so defs include. minimal test of understanding
+
+10) not sure why the following doesn't work:
+~(Ex)(Ey)(Ez)(Mx & Oxy & Oxz & ~y=z & ~x=y & ~x=z)
+oh i see; need to say that y and z are planets! 
+
+but this also doesn't work!
+~(Ex)(Ey)(Ez)(Mx & Oxy & Oxz &Py &Pz & ~y=z & ~x=y & ~x=z)
+
+seems that Zach left out possibility of someone wanting to specify the x is distinct from the y and z. do we need to do this? presumably yes since by saying something is a moon, we don't logically rule out it being a planet as well!
+i'll think i'll add this as a second allowed solN
+
+11) this is a good one; include!
+ I think i naturally wrote down the schema for "Mars has exactly two moons":
+(Ex)(Ey)(Mx & My & Oxm & Oym & (Az)( (Mz & Ozm)> (z = x v z=y)))
+
+But the following also didn't work...
+(Ax)(Ay)(Az) ( (Mx & My & Oxm & Oym & Mz & Ozm) > (z = x v z=y ) )
+
+missed case where x = y
+(Ax)(Ay)(Az)( (Mx & My & Oxm & Oym & Mz & Ozm) > (z = x v z=y v x = y) )
+but perhaps unclear to me why this isn't ALREADY covered, since if x and y are distinct, then the claim about z equalling either prevents three moons. but maybe we need x = y to handle case where there's only one moon! 
+
+%since of course x could be z or x could be y. so if 
+
+12) good, relatively complex but unambiguous one to include
+got this one right on first try, so that's cool! but probs b/c i already thought about an earlier problem in terms of saying `exactly':
+(Ex)(Ey)(Mx & My & Tx & Ty & ~x=y & (Az) ((Mz & Tz) > (z=x v z=y)))
+
+
+13) got this right on first try, which is pretty cool; although almost screwed up parenthesis after the (Ay)
+
+ (Ex)(Mx & Oxe & (Ay)(((My & Oye)>x=y)&(Az)( (Mz & Ozm) > Lxz)))
+
+this also works:
+ (Ex)(Ay)(Mx & Oxe & ((My & Oye)>x=y)&(Az)( (Mz & Ozm) > Lxz))
+
+14) This one is tough! maybe too hard for an easy problem set. move to practice
+
+my first try (wrong):
+(Ex)(Px &~Tx & (Ay) ( (Py > Lyx) & ~y=x & (Az)( (Pz & Lyz) > x=z)))
+
+another wrong attempt (but i'm adding this to allowed answers):
+(Ex)(Px &~Tx & (Ay) ( ((Py & ~y=x) > Lyx)  & (Az)( (Pz & Lyz) > x=z)))
+
+gave up and looking at answer:
+(Ex)(Px /\ (Ay)((Py /\ ~x=y) -> Lyx) /\ ~Tx)
+but this seems simpler than mine. seems to miss part of the definite description part, namely that any other planet that is the smallest is the same as x! 
+
+zero clue to me why zach has following as an alternate answer:
+(Ex)(Px /\ (Ay)((Py /\ ~x=y) -> Lxy) /\ Tx), since this seems to say that the largest planet has an atmosophere. so deleting this answer. 
+
+
+
+
+
+
+15) tough one; got on second try! could include but maybe leave on the checker
+first attempt: (Ex)(Ey)(Mx & My & Oxm & Oym & ~y=x & ~Lxe & ~Lye)
+
+second attempt (restricting to exactly two moons!): (Ex)(Ey)(Mx & My & Oxm & Oym & ~y=x & ~Lxe & ~Lye & (Az)( (Mz & Ozm)>(z=x v z=y)))

@@ -1,0 +1,533 @@
+% !TeX root = ./slides-01.tex
+
+\setcounter{section}{0}
+\section{What is logic?}
+\subsection{Arguments and validity}
+
+\begin{frame}
+  \frametitle{An easy puzzle}
+
+  \begin{block}{Where does Sanjeev live?}
+  Sanjeev lives in Calgary or in Edmonton.\\
+  Sanjeev doesn't live in Edmonton.
+  \end{block}
+
+  \begin{itemize}
+    \item<2>[A:] Obviously, in Calgary.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Arguments and sentences}
+
+  \begin{block}{Argument 1}
+  Sanjeev lives in Calgary or in Edmonton.\\
+  Sanjeev doesn't live in Edmonton.\\
+  Therefore, Sanjeev lives in Calgary.
+  \end{block}
+
+  \begin{itemize}[<+->]
+  \item Such an argument consists of \emph{sentences}.
+  \item Individual sentences are the kinds that can be \emph{true} or \emph{false}.
+  \item ``Therefore'' ($\therefore$) indicates that the last sentence (supposedly)
+  \emph{follows from} the first two.
+  \item The last sentence is called the \emph{conclusion}.
+  \item The others are called the \emph{premises}.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Valid and invalid arguments}
+
+  \begin{block}{Argument 2}
+  Mandy enjoys skiing or hiking (or both).\\
+  Mandy doesn't enjoy hiking.\\
+  $\therefore$ Mandy enjoys skiing.
+  \end{block}
+
+  \begin{block}{Argument 3}
+  Mandy enjoys skiing or hiking (or both).\\
+  Mandy enjoys skiing.\\
+  $\therefore$ Mandy doesn't enjoy hiking.
+  \end{block}
+
+  What's the difference?
+
+  \note[itemize]{
+    \begin{itemize}
+    \item Arg 2 is like argument 1
+    \item Think-pair-share argument 2
+    \item Depending on result of experiment/agreement talk about
+    inclusive/exclusive
+    \item Argument 2 is valid if the ``or'' is exclusive.
+    \end{itemize}
+  }
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{(Deductive) Validity}
+
+  \begin{definition}<1->
+  An argument is (deductively) \emph{valid} if there is no case where all its
+  premises are true and the conclusion is false.
+  \end{definition}
+
+  \begin{definition}<2->
+  An argument is \emph{invalid} if there is at least one case where
+  all its premises are true and the conclusion is false (i.e., if it
+  is not valid).
+  \end{definition}
+
+  \begin{definition}<3->
+  A \emph{case} is some hypothetical scenario that makes each sentence
+  in an argument either true or false.
+  \end{definition}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Argument 2 is valid}
+
+  \begin{block}{Argument 2}
+  Mandy enjoys skiing or hiking.\\
+  Mandy doesn't enjoy hiking.\\
+  $\therefore$ Mandy enjoys skiing.
+  \end{block}
+
+Argument 2 is \emph{valid}: whenever the premises are
+true, the conclusion is also true.
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Argument 3 is not valid}
+
+  \begin{block}{Argument 3}
+  Mandy enjoys skiing or hiking.\\
+  Mandy enjoys skiing.\\
+  $\therefore$ Mandy doesn't enjoy hiking.
+  \end{block}
+
+  Argument 3 is \emph{invalid}: there is a possible case where the
+  premises are true and the conclusion isn't (Mandy enjoys both skiing
+  and hiking).
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{A harder puzzle}
+
+  \begin{block}{Where does Sarah live?}
+  Sarah lives in Calgary or Edmonton.\\
+  Amir lives in Calgary unless he enjoys hiking.\\
+  If Amir lives in Calgary, Sarah doesn't.\\
+  Neither Sarah nor Amir enjoy hiking.
+  \end{block}
+
+\end{frame}
+
+\subsection{Cases and determining validity}
+
+\begin{frame}
+  \frametitle{Validity}
+
+  \begin{definition}
+  An argument is \emph{valid} if there is no case where all its
+  premises are true and the conclusion is false.
+  \end{definition}
+
+  \begin{definition}
+  An argument is \emph{invalid} if there is at least one case where
+  all its premises are true and the conclusion is false (i.e., if it
+  is not valid).
+  \end{definition}
+\end{frame}
+
+\begin{frame}{Cases}
+  
+\begin{definition}
+  A \emph{case} is some hypothetical scenario that makes each sentence
+  in an argument either true or false.
+\end{definition}
+
+\begin{itemize}[<+->]
+  \item E.g., imagine you have a friend, her name is Mandy, she loves
+  hiking but hates skiing.
+  \item That's a case where ``Mandy enjoys hiking or skiing'' is true.
+  \item Some cases can be imagined even though they never happen IRL, e.g,
+  ``It is raining and the skies are clear.''
+  \item Some things you can't imagine, e.g.,
+  ``There is a blizzard but there is no wind.''
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Determining validity}
+
+  \begin{itemize}[<+->]
+    \item Imagine a case where the conclusion is false.
+    \item Are the premises true? You're done: invalid.
+    \item Otherwise, change or expand the case to make them true
+    (without making the conclusion also true).
+    \item Can't? (Probably) valid.
+  \end{itemize}
+
+  \uncover<5->{OR}
+
+  \begin{itemize}[<+->]
+    \item Imagine a case where all premises are true.
+    \item Is the conclusion false? You're done: invalid.
+    \item Otherwise, change or expand the case to make it false
+    (without making the premises false).
+    \item Can't? (Probably) valid.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Deductively Valid?}
+  \begin{earg}
+    \item[] Some rodents have bushy tails.
+    \item[] All squirrels are rodents.
+    \item[\therefore] Some squirrels have bushy tails.
+  \end{earg}
+\pause
+  \begin{itemize}[<+->]
+    \item Imagine squirrels evolving so that they no longer have bushy
+    tails. Then conclusion is false.
+    \item But premises still true:
+    \begin{itemize}[<+->]
+      \item Imagine chinchillas still have bushy tails.
+      \item Imagine also that squirrels have not evolved too
+      much---they are still rodents.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Valid?}
+  \begin{earg}
+    \item[] All rodents have bushy tails.
+    \item[] All squirrels are rodents.
+    \item[\therefore] All squirrels have bushy tails.
+  \end{earg}
+\pause
+  \begin{itemize}[<+->]
+    \item If it were invalid, you'd have a case that makes the
+    conclusion false: some squirrels without bushy tails.
+    \item They would have to be rodents still (otherwise premise 2 false).
+    \item And that would require that they have bushy tails (otherwise premise 1 false).
+  \end{itemize}
+\end{frame}
+
+\subsection{Other logical notions}
+
+\begin{frame}
+  \frametitle{Logical Consistency}
+
+  \begin{definition}
+  Sentences are (logically) \emph{consistent} if there is a case where they
+  are all true. \\ $\bullet$ also called `jointly possible' or `satisfiable' 
+  \end{definition}
+
+  \begin{definition}
+    Sentences are (logically) \emph{inconsistent} if there is no case where they
+    are all true. \\ $\bullet$ also called `jointly impossible' or `unsatisfiable' 
+    \end{definition}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Consistent?}
+  \begin{earg}
+    \item[] Some carnivores have bushy tails.
+    \item[] All carnivores are mammals. 
+    \item[] No mammals have bushy tails.
+  \end{earg}
+
+  \begin{itemize}
+    \item<2> No case makes them all true at the same time, so
+    \emph{jointly impossible}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Valid?}
+  \begin{earg}
+    \item[] Some carnivores have bushy tails.
+    \item[] All carnivores are mammals. 
+    \item[] No mammals have bushy tails.
+    \item[\therefore] All birds are carnivores. 
+  \end{earg}
+
+  \pause
+
+  \begin{itemize}[<+->]
+    \item The premises cannot all be true in the same case, so jointly
+    impossible.
+    \item So: no case makes all the premises true.
+    \item So also: no case makes the premises true and the conclusion false.
+    \item \emph{Arguments with jointly impossible premises are automatically
+    valid}, regardless of what the conclusion is.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Tautology (logically necessary truth)}
+
+  \begin{definition}
+    A sentence is a \emph{necessary truth} if there is no case where
+    it is false. \\ also called a `necessary truth' or `truth-functionally true'
+    \end{definition}
+\pause
+    \begin{itemize}[<+->]
+      \item If it's snowing, it's snowing.
+      \item Every fawn is a deer.
+      \item The number 5 is prime.
+      \item Physical objects are extended.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Tautology}
+    What can you say about an argument where the conclusion is a
+    necessary truth? 
+\pause
+\begin{itemize}[<+->]
+  \item If the conclusion is a necessary truth, there is no case where
+  it is false.
+  \item So there is no case where it is false, and the premises of the
+  argument are true.
+  \item \emph{Arguments with necessary truths as conclusions are
+  automatically valid}, regardless of what the premises are.
+\end{itemize}
+  \end{frame}
+
+\begin{frame}
+  \frametitle{Logical equivalence}
+
+  \begin{definition}
+  Two sentences are (logically) \emph{equivalent} if there is no case where one is
+  true and the other is false.
+  \end{definition}
+
+  \begin{itemize}[<+->]
+    \item What can you say about an argument where one of the premises
+    is equivalent to the conclusion? Is it automatically valid?
+    \item Can you have two equivalent sentences that are jointly impossible?
+  \end{itemize}
+
+\end{frame}
+
+\subsection{Symbolization and TFL}
+
+\begin{frame}
+  \frametitle{Validity in virtue of form}
+
+  \begin{block}<1->{Argument 1}
+  Sanjeev lives in Calgary or Edmonton.\\
+  Sanjeev doesn't live in Edmonton.\\
+  $\therefore$ Sanjeev lives in Calgary.
+  \end{block}
+
+  \begin{block}<1->{Argument 2}
+  Mandy enjoys skiing or hiking.\\
+  Mandy doesn't enjoy hiking.\\
+  $\therefore$ Mandy enjoys skiing.
+  \end{block}
+
+  \begin{block}<2>{Form of arguments 1 \& 2}
+  $X$ or $Y$.\\
+  Not $Y$.\\
+  $\therefore$ $X$.
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Some valid argument forms}
+
+  \begin{block}{Disjunctive syllogism}
+  $X$ or $Y$.\\
+  Not $Y$.\\
+  $\therefore\ X.$
+  \end{block}
+
+  \begin{block}{Modus ponens}
+  If $X$ then $Y$.\\
+  $X$.\\
+  $\therefore\ Y.$
+  \end{block}
+
+  \begin{block}{Hypothetical syllogism}
+  If $X$ then $Y$.\\
+  If $Y$ then $Z$.\\
+  $\therefore$ If $X$ then $Z$.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Symbolizing arguments}
+
+  \begin{block}{Symbolization key}
+  $S$: Mandy enjoys skiing\\
+  $H$: Mandy enjoys hiking
+  \end{block}
+
+  \begin{block}{Argument 2}
+    \begin{tabular}{@{}l@{}l@{}}
+      Mandy enjoys skiing or Mandy enjoys hiking.  & \ \emph{$(S \lor H)$}\\
+      Not: Mandy enjoy hiking. & \emph{$\lnot H$}\\
+      $\therefore$ Mandy enjoys skiing. & $\therefore$ \emph{$S$}
+    \end{tabular}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The language of TFL}
+
+  \begin{itemize}[<+->]
+  \item \emph{Sentence letters}, such as `$H$' and `$S$', to symbolize basic sentences (`Mandy likes hiking')
+  \item \emph{Connectives}, to indicate how basic sentences are connected
+  \begin{description}
+    \item[$\lor$] either \dots or \dots
+    \item[$\land$] both \dots and \dots
+    \item[$\to$] if \dots then \dots
+    \item[$\lnot$] not \dots
+  \end{description}
+
+  \item[] This can get complicated, e.g.:
+
+  ``Mandy enjoys skiing or hiking, and if she lives in Edmonton, she
+  doesn't enjoy both.''
+  \[
+  ((S \lor H) \land (E \to \lnot(S \land H)))
+  \]
+  \end{itemize}
+\end{frame}
+
+\subsection{What are we going to learn, and why?}
+
+\begin{frame}
+  \frametitle{What is logic?}
+
+  \begin{itemize}[<+->]
+  \item \emph{Logic is the science of what follows from what.}
+  \item Sometimes a conclusion follows from the premises, sometimes it
+  does not:
+  \begin{itemize}[<+->]
+    \item Mandy lives in Calgary.\\ Everyone who lives in Calgary likes hiking.\\
+    $\therefore$ Mandy likes hiking.
+    \item Mandy lives in Calgary.\\ Everyone who likes hiking lives in Calgary.\\
+    $\therefore$ Mandy likes hiking.
+    \end{itemize}
+  \item Logic investigates what makes the first argument \emph{valid}
+    and the second \emph{invalid}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{What is formal logic?}
+
+  \begin{itemize}[<+->]
+  \item Studies logical properties of \emph{formal languages} (TFL and
+  FOL, not English).
+    \begin{itemize}[<+->]
+    \item Logical consequence (what follows from what?)
+    \item Logical consistency (when do sentences contradict one another?)
+    \end{itemize}
+  \item Expressive power (what can be expressed in a given formal
+  language, and how?)
+  \item Formal models (mathematical structures described by formal language)
+  \item Inference and proof systems (how can it be proved that something
+  follows from something else?)
+  \item (Meta-logical properties of logical systems)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Plan for the course}
+
+  \begin{itemize}[<+->]
+  \item Truth-functional logic (TFL)
+    \begin{itemize}[<+->]
+    \item Symbolization in the formal language of TFL ($H, \lor,
+    \land, \to, \lnot$)
+    \item Testing for validity: truth-tables
+    \item Proofs in natural deduction
+    \end{itemize}
+  \item First-order logic (FOL)
+    \begin{itemize}[<+->]
+    \item More fine-grained symbolization ($E(m,h)$, $\forall$
+    `every', $\exists$ `some', $=$)
+    \item Semantics: interpretations
+    \item Proofs in natural deduction
+    \end{itemize}
+  \item Some advanced topics: expressive completeness, normal forms
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{What is logic good for? (Philosophy)}
+
+  \begin{itemize}[<+->]
+  \item Logic originates in philosophy (Aristotle), traditionally considered a sub-discipline of philosophy.
+  \item Valid arguments are critical in philosophical research.
+  \item Formal tools of logic are useful to make intuitive philosophical
+  notions precise, e.g.,
+    \begin{itemize}[<+->]
+    \item Possibility and necessity
+    \item Time
+    \item Composition and parthood (mereology)
+    \item Moral obligation and permissibility
+    \item Belief and knowledge
+    \end{itemize}
+  \item Logic applies to semantics of natural language (philosophy of
+  language, linguistics).
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{What is logic good for? (Mathematics)}
+
+  \begin{itemize}[<+->]
+  \item Formal logic was developed in the quest for a foundations of
+  mathematics (19th C.).
+  \item Logical systems provide precise foundational framework for
+  mathematics:
+    \begin{itemize}[<+->]
+    \item Axiomatic systems (e.g, geometry)
+    \item Algebraic structures (e.g., groups)
+    \item Set theory (e.g, Zermelo-Fraenkel with Choice)
+    \end{itemize}
+  \item Precision
+    \begin{itemize}[<+->]
+    \item Formal language makes claims more precise.
+    \item Formal structures can point to alternatives, unveil gaps in proofs.
+    \item Formal proof systems make proofs rigorous.
+    \item Formal proofs make mechanical \emph{proof checking} and \emph{proof search} possible.
+    \end{itemize}
+  \end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{What is logic good for? (Computer Science)}
+
+  \begin{itemize}[<+->]
+    \item Computer science deals with lots of formal languages.
+    \item Logic is a good example of how to set up and use formal languages.
+    \item Logic : Computer Science $=$ Calculus : Natural Science
+    \item Applications of logical systems in CS are numerous:
+  \begin{itemize}[<+->]
+  \item Combinational logic circuits
+  \item Database query languages
+  \item Logic programming
+  \item Knowledge representation
+  \item Automated reasoning
+  \item Formal specification and verification (of programs, of hardware designs)
+  \item Theoretical computer science (theory of computational
+  complexity, semantics of programming languages)
+ \end{itemize}
+\end{itemize}
+
+\end{frame}

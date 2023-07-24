@@ -1,0 +1,624 @@
+﻿% !TeX root = ./slides-05.tex
+
+\setcounter{section}{4}
+
+\section{Introduction to Quantifier Logic}
+
+\subsection{The goals of QL}
+
+\begin{frame}
+  \frametitle{Limits of symbolization in SL}
+
+\begin{itemize}[<+->]
+  \item Consider the argument:
+  \begin{earg}
+    \item[] Greta is a hero.
+    \item[\therefore] There is a hero.
+  \end{earg}
+  \item It's clearly valid: in any case in which Greta is a hero,
+  someone (or something, at least) is a hero, so there must be a hero.
+  \item But its symbolization in SL is invalid in SL:
+  \begin{earg}
+    \item[] $G$
+    \item[\therefore] $H$
+  \end{earg}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The problem}
+
+  \begin{itemize}[<+->]
+    \item Symbolization in SL allows us to break down sentences
+    containing ``and,'' ``or,'' ``if--then'' and determine validity in
+    virtue of these \emph{connectives}.
+    \item Anything that can't be further broken down must be
+    symbolized by a sentence letters.
+    \item That includes basic sentences like ``Greta is a hero,'' but also:
+    \begin{itemize}
+      \item Everyone is a hero.
+      \item No one is a hero.
+      \item All heroes wear capes.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The goals of QL}
+  \begin{itemize}[<+->]
+    \item Finer-grained symbolization
+    \item Combines with SL
+    \item Allows for precise semantics (like truth tables for SL)
+    \item Works with proof rules (add new rules)
+    \item Be simple \& expressive (few new symbols!)
+    \item New language: \emph{quantifier logic QL}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The goals of QL}
+
+  \begin{itemize}[<+->]
+    \item Consider the valid argument:
+      \begin{earg}
+        \item[] Greta is a hero.
+        \item[] Greta does not wear a cape.
+        \item[\therefore] Not all heroes wear capes.
+      \end{earg}
+    \item We'll need way to connect the occurrences of the name
+    ``Greta'' in the premises.
+    \item We'll need to connect ``hero'' in the premise and conclusion.
+    \item We want to retain use of \enot{} for ``not''
+    \item We want the symbolization to have a proof.
+  \end{itemize}
+\end{frame}
+
+\subsection{Beginning symbolization in QL}
+
+\begin{frame}
+  \frametitle{First steps: names}
+
+  \begin{itemize}[<+->]
+    \item Purpose of a \emph{proper name}: to pick out a single, specific thing.
+    \item (Contrast with common nouns like ``hero'' or ``rock'' which pick out collections of things)
+    \item For simplicity, we'll only consider names that pick out an
+    actual object (in any case we're considering)
+    \item Later on, we'll be able to deal with other expressions that play a similar role to names, e.g., ``the president of the USA''
+    \item In QL, names will be lowercase letters $a$--$r$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{First steps: predicates}
+
+  \begin{itemize}[<+->]
+    \item Remove a name from a sentence. What's left over is a \emph{predicate}, e.g.,\\
+      \begin{earg}
+        \item[] Greta is a hero
+        \item[$\Rightarrow$] \gap{x} is a hero.
+      \end{earg}
+      \begin{earg}
+        \item[] Greta admires Autumn
+        \item[$\Rightarrow$] \gap{x} admires \gap{y}.
+      \end{earg}
+    \item In QL, predicates are symbolized using uppercase letters
+    $A$--$Z$ plus a number of argument slots (marked with variables),
+    e.g., $H\qv{x}$ or $A\qr{x}{y}$.
+    \item Argument slots correspond to blanks.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Symbolization keys}
+
+  \begin{itemize}[<+->]
+    \item \emph{Names}: lowercase letters for proper names of English
+    \item \emph{Predicates}: uppercase letters with variables marking
+    blanks.
+    \begin{ekey}
+    \item[a] Autumn
+    \item[g] Greta
+    \item[H\qv{x}] \gap{x} is a hero
+    \item[V\qv{x}] \gap{x} is a villain 
+    \item[I\qv{x}] \gap{x} inspires
+    \item[C\qv{x}] \gap{x} wears a cape
+    \item[W\qr{x}{y}] \gap{x} watched \gap{y}
+    \item[A\qr{x}{y}] \gap{x} admires \gap{y}
+    \item[Y\qr{x}{y}] \gap{x} is younger than \gap{y} 
+    \end{ekey}
+    \item \emph{Domain}: what things we're talking about\\
+    e.g., people alive in \year{}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Symbolization}
+
+\begin{itemize}[<+->]
+\item Basic sentences: predicates with names replacing variables.
+\begin{itemize}[<+->]
+  \item Greta is a hero. \alert{$H\qv{g}$}
+  \item Greta admires Autum. \alert{$A\qr{g}{a}$}
+\end{itemize}
+\item Combinations using connectives:
+\begin{itemize}[<+->]
+  \item Greta and Autumn are heroes. \alert{$H\qv{g} \eand H\qv{a}$}
+\end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Symbolization}
+
+\begin{itemize}[<+->]
+\item Replacing pronouns by antecedents:
+\begin{itemize}[<+->]
+  \item If Autumn is a hero, Greta admires \textbf{her}. \alert{$H\qv{a} \eif A\qr{g}{a}$}
+  \item Greta doesn't admire \textbf{herself}. \alert{$\enot A\qr{g}{g}$}
+  \item Greta and Autumn watched \textbf{each other}. \alert{$W\qr{g}{a} \eand W\qr{a}{g}$}
+\end{itemize}
+\item Modification:
+\begin{itemize}[<+->]
+  \item Autumn is an \textbf{inspiring hero}.\\
+  Autumn inspires and is a hero. \alert{$I\qv{a} \eand H\qv{a}$}
+  \item Greta is a \textbf{hero who doesn't wear a cape}.\\
+   Greta is a hero and it's not the case that Greta wears a cape.
+   \alert{$H\qv{g} \eand \enot C\qv{g}$}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Careful with modification}
+
+\begin{itemize}[<+->]
+\item Greta is an international hero.
+\begin{itemize}
+  \item Can't be paraphrased as\\
+  ``Greta is international and a hero.''
+  \item So ``\gap{} is an international hero'' needs its own
+  predicate.
+\end{itemize}
+\item The Piltdown Man is a fake fossil.
+\begin{itemize}[<+->]
+  \item Can't be paraphrased as\\
+  ``The Piltdown Man is fake and a fossil.''
+  \item ``Fake'' and other privative adjectives (``pretend,''
+  ``fictitious'') imply opposite!
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Examples}
+
+\begin{itemize}[<+->]
+  \item Autumn and Greta are inspiring heroes.\\
+  \item[] \alert{$(I\qv{a} \eand H\qv{a}) \eand (I\qv{g} \eand H\qv{g})$}
+  \item Greta admires Autumn but not herself.\\
+  \item[] \alert{$A\qr{g}{a} \eand \enot A\qr{g}{g}$}
+  \item Greta inspires only if Autumn does.
+  \item[] \alert{$I\qv{g} \eif I\qv{a}$}
+  \item Greta and Autumn watched each other.
+  \item[] \alert{$W\qr{g}{a} \eand W\qr{a}{g}$} 
+  \item Greta is older than Autumn.
+  \item[] \alert{$Y\qr{a}{g}$}  
+  \item One of Greta and Autumn watched the other.
+  \item[] At least one: \hfill Exactly one:\\
+  \alert{$W\qr{g}{a} \eor W\qr{a}{g}$} \hfill \alert{$(W\qr{g}{a} \eor W\qr{a}{g}) \eand \enot(W\qr{g}{a} \eand W\qr{a}{g})$}
+\end{itemize}
+\end{frame}
+
+\subsection{The existential quantifier}
+
+\begin{frame}
+\frametitle{Existential quantifier}
+
+\begin{itemize}[<+->]
+  \item In English: ``something,'' ``someone,'' ``there is \dots''
+  \item For instance:
+  \begin{itemize}[<+->]
+    \item \emph{Someone} wears a cape.
+    \item \emph{There is} a hero.
+    \item \emph{Something} inspires.
+  \end{itemize}
+  \item Note: can (often) go where names and pronouns also go.
+  \item But works differently from names (``something'' doesn't pick
+  out a unique, specific object).
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{How to symbolize ``something''}
+
+  \begin{itemize}[<+->]
+    \item Idea: introduce a special term $\mathit{sg}$?
+    \item Problem: now we can't distinguish between
+    \begin{itemize}[<+->]
+      \item Someone is a hero and wears a cape.
+      \item Someone is a hero and someone wears a cape.
+    \end{itemize}
+    as both would be symbolized by $H(\mathit{sg}) \eand
+    C(\mathit{sg})$.
+    \item Better idea: symbolize (complex) \emph{properties} and introduce
+    mechanism for expressing that properties are \emph{instantiated}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Expressing properties}
+
+  \begin{itemize}[<+->]
+    \item One-place predicates \emph{express} properties, e.g.,
+    \begin{itemize}[<+->]
+      \item $H\qv{x}$ expresses property ``being a hero.''
+      \item $I\qv{x}$ expresses ``is inspiring.''
+    \end{itemize}
+    \item Combinations of predicates (with connectives, names) can
+    express \emph{derived} properties, e.g.,
+    \begin{itemize}[<+->]
+      \item $A\qr{x}{g}$ expresses ``admires Greta''
+      \item $W\qr{a}{x}$ expresses ``is watched by Autumn''
+      \item $H\qv{x} \eand C\qv{x}$ expresses ``is a hero who wears a cape''
+    \end{itemize}
+    \item Note: all contain a \emph{single} variable $x$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The existential quantifier $\exists$}
+
+  \begin{itemize}[<+->]
+    \item Symbol for ``there is'': \alert{$\exists$}
+    \item Combine $\exists$ with expression for a property (e.g., $(H\qv{x} \eand
+    C\qv{x})$) to say ``something (someone) has that property''
+    \item Put the variable that serves as a marker for the gap also
+    after $\exists$. E.g.,
+    \[ \alert{\qt{\exists}{x}\,(H\qv{x} \eand C\qv{x})} \]
+    says ``Someone is a hero and wears a cape''
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quantifiers and variables}
+
+  \begin{itemize}[<+->]
+    \item Compare:
+    \begin{align*}
+    \qt{\exists}{x}\,(H\qv{x} & \eand C\qv{x}) \text{ to }\\
+    \qt{\exists}{x} \, H\qv{x} &\eand \qt{\exists}{x}\, C\qv{x}
+    \end{align*}
+    \item In first case, the same person must be a hero and wear a cape.
+    \item In second case, one person can be the hero, and another wears a cape.
+    \item Multiple $\qt{\exists}{x}$ are independent, even if they use
+    the same~$x$. No difference in meaning between
+    \begin{align*}
+     & \qt{\exists}{x} \, H\qv{x} \eand \qt{\exists}{x}\, C\qv{x} \text{ and}\\
+     & \qt{\exists}{x} \, H\qv{x} \eand \qt{\exists}{y}\, C\qv{y}.
+    \end{align*}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The domain and quantifiers}
+
+\begin{itemize}[<+->]
+  \item Symbolization key gives a domain of objects being talked about.
+  \item Quantifier \emph{ranges over} this domain.
+  \item That means: $\qt{\exists}{x}\, \dots x \dots$ is true iff some object
+  \emph{in the domain} has the property expressed by $\dots x \dots$.
+  \item Domain makes a difference: Consider $\qt{\exists}{x}\, W\qr{x}{g}$.
+  \begin{itemize}
+    \item True if someone watched Greta (say, Autumn did).
+    \item Now take the domain to include only Greta.
+    \item Relative to that domain, $\qt{\exists}{x}\, W\qr{x}{g}$ is true iff
+    Greta watched herself.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quantifier restriction in English}
+
+\begin{itemize}[<+->]
+  \item ``something'' and ``someone'' work grammatically like singular
+  terms (go where names can also go).
+  \item ``some'' (on its own) does not: it is a \emph{determiner} and
+  needs a \emph{complement}, e.g.,
+  \begin{itemize}
+    \item a common noun (``some hero''), or
+    \item a noun phrase (``some admirer of Greta'').
+  \end{itemize}
+  \item ``some'' + complement works grammatically like ``someone'',
+  e.g., ``\emph{Some hero} wears a cape''
+  \item General form: ``Some $F$ is $G$.''
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Quantifier restriction in QL}
+
+\begin{itemize}[<+->]
+  \item ``Some $F$ is $G$'' \emph{restricts} the ``something''
+  quantifier to $F$s.
+  \item We could (and linguists often do) mark restrictions in the
+  quantifier, e.g., $(\qt{\exists}{x}\colon F\qv{x}) G\qv{x}$
+  \item We won't because we can do without.
+  \item ``Some $F$ is $G$'' is true iff there is something which
+  is both $F$ and also $G$, so:
+  \item ``Some $F$ is $G$'' can be symbolized as
+  \[ \qt{\exists}{x}(F\qv{x} \eand G\qv{x}) \]
+  \item We'll also symbolize the plural form this way\\ (``Some $F$s are
+  $G$s'').
+  \item And more generally (most) sentences of the form:\\
+  ``$G$(some $F$)'' or ``$G$(something that $F$s)''.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Examples}
+
+\begin{itemize}[<+->]
+  \item \alert{Some hero} wears a cape.\\
+  \alert{Some heroes} wear capes.\\
+  \item[] \alert{$\qt{\exists}{x}(H\qv{x} \eand C\qv{x})$}
+  \item \alert{Someone who wears a cape} watched Greta.\\
+  \item[] \alert{$\qt{\exists}{x}(C\qv{x} \eand W\qr{x}{g})$}
+  \item Greta admires \alert{some hero who wears a cape}.
+  \item[] \alert{$\qt{\exists}{x}((H\qv{x} \eand C\qv{x}) \eand A\qr{g}{x})$}
+  \item Autumn watched \alert{someone who watched Greta}.
+  \item[] \alert{$\qt{\exists}{x}(W\qr{x}{g} \eand W\qr{a}{x})$}
+\end{itemize}
+\end{frame}
+
+\subsection{The universal quantifier}
+
+\begin{frame}
+\frametitle{Universal quantifier}
+
+\begin{itemize}[<+->]
+  \item ``\emph{Something} is $F$'' is true iff \emph{at least one} element of domain
+  is~$F$.
+  \item ``\emph{Everything} is $F$'' is true iff \emph{every element} of the domain
+  is~$F$.
+  \item In QL: $\qt{\forall}{x}\, F\qv{x}$.
+  \item E.g.:
+    \begin{itemize}
+      \item ``Everyone wears a cape'' \alert{$\qt{\forall}{x}\,C\qv{x}$}
+      \item ``Everyone watched Greta or Autumn'' \alert{$\forall
+      x(W\qr{x}{g} \eor W\qr{x}{a})$}
+    \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Universal determiners: all, every, any}
+
+\begin{itemize}[<+->]
+  \item Determiners with universal meaning: \emph{all, every, any}.
+  \item Take complements (just like ``some'' does), e.g.,
+      \begin{itemize}[<+->]
+        \item \alert{Every hero} inspires.
+        \item \alert{All heroes} inspire.
+        \item \alert{Any hero} inspires.
+      \end{itemize}
+  \item These are true in the same cases (mean the same).
+  \item ``Every $F$ is $G$'' is true iff everything \alert{which is
+  $F$} is $G$.
+  \item Watch out for ``any'': not always universal.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Restricted $\forall$ in QL}
+
+  \begin{itemize}[<+->]
+    \item Suppose we can symbolize $F$ and $G$.
+    \item How do we symbolize ``Every $F$ is $G$''?
+    \item Options:
+      \begin{itemize}[<+->]
+        \item \alert{$\qt{\forall}{x}(F\qv{x} \eand G\qv{x})$}
+        \\\uncover<7->{If true, everything must be $F$.\\
+        So can be false when ``Every $F$ is $G$'' is true.}
+        \item \alert{$\qt{\forall}{x}(F\qv{x} \eor G\qv{x})$}
+        \\ \uncover<8->{True if everything is $F$ (without being $G$).\\
+        So can be true when ``Every $F$ is $G$'' is false.}
+        \item \alert{$\qt{\forall}{x}(F\qv{x} \eif G\qv{x})$}
+        \\ \uncover<9>{If $x$ is $F$, $x$ must also be $G$.\\
+        (If $x$ is not $F$, doesn't matter if it's $G$ or not.)}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Symbolizing ``all $F$s are $G$s''}
+
+Symbolize the following as \emph{\[\qt{\forall}{x}(F\qv{x} \to G\qv{x})\]}
+
+\begin{itemize}
+  \item All $F$s are $G$s.
+  \item Every $F$ is $G$.
+  \item Any $F$ is $G$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Examples}
+
+\begin{itemize}[<+->]
+  \item \emph{Every hero} wears a cape.\\
+  \emph{All heroes} wear capes.\\
+  \item[] \alert{$\qt{\forall}{x}(H\qv{x} \eif C\qv{x})$}
+  \item \emph{Every hero who wears a cape} watched Greta.\\
+  \item[] \alert{$\qt{\forall}{x}((H\qv{x} \eand C\qv{x}) \eif W\qr{x}{g})$}
+  \item Greta and Autumn admire \emph{anyone who wears a cape}.
+  \item[] \alert{$\qt{\forall}{x}(C\qv{x} \eif (A\qr{g}{x} \eand A\qr{a}{x}))$}
+  \item Autumn watched \emph{everyone who watched Greta}.
+  \item[] \alert{$\qt{\forall}{x}(W\qr{x}{g} \eif W\qr{a}{x})$}
+  \item All heroes and villains watched Greta. 
+  \item[] \alert{$\qt{\forall}{x}((H\qv{x}
+  \mathbin{\colorbox{highlightbg}{\eor}} V\qv{x}) \eif W\qr{x}{g})$} 
+\end{itemize}
+\end{frame}
+
+\subsection{No, only, a, and some \& any again}
+
+\begin{frame}
+\frametitle{No $F$ is $G$}
+
+\begin{itemize}[<+->]
+  \item ``\emph{No $F$s are $G$s}'' can be paraphrased as 
+\begin{itemize}[<+->]
+  \item ``\emph{Every} $F$ is \emph{not}-$G$,'' or as
+  \item ``\emph{Not: some} $F$ is $G$.''
+  \end{itemize}
+  \item So symbolize it using:
+\begin{itemize}
+  \item \emph{$\qt{\forall}{x}(F\qv{x} \to \enot G\qv{x})$} or
+  \item \emph{$\enot\qt{\exists}{x}(F\qv{x} \eand G\qv{x})$}
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Examples}
+
+\begin{itemize}[<+->]
+  \item \emph{No hero} wears a cape.\\
+  \emph{No heroes} wear capes.\\
+  \item[] \alert{$\qt{\forall}{x}(H\qv{x} \eif \enot C\qv{x})$}
+  \item \emph{No hero who wears a cape} watched Greta.\\
+  \item[] \alert{$\qt{\forall}{x}((H\qv{x} \eand C\qv{x}) \eif \enot W\qr{x}{g})$}
+  \item Greta admires \emph{no one who wears a cape}.
+  \item[] \alert{$\enot\qt{\exists}{x}(C\qv{x} \eand A\qr{g}{x})$}
+  \item Autumn watched \emph{no one who watched Greta}.
+  \item[] \alert{$\enot\qt{\exists}{x}(W\qr{x}{g} \eand W\qr{a}{x})$}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Only $F$s are $G$}
+
+\begin{itemize}[<+->]
+\item When is ``Only $F$s are $G$s'' false?
+\item When there is a \emph{non}-$F$ that's $G$.
+\item So symbolize it as
+\[
+  \alert{\enot\qt{\exists}{x}(\enot F\qv{x} \eand G\qv{x})}
+  \]
+\item Or, paraphrase it as: ``Any $x$ is $G$ \emph{only if} it is $F$''
+\item So another symbolization is:
+\[
+  \alert{\qt{\forall}{x}(G\qv{x} \to F\qv{x})}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Examples}
+
+\begin{itemize}[<+->]
+  \item Only heroes wear capes.\\
+  \item[] \alert{$\qt{\forall}{x}(C\qv{x} \eif H\qv{x})$}
+  \item Only heroes who wear capes watched Greta.\\
+  \item[] \alert{$\qt{\forall}{x}(W\qr{x}{g} \eif (H\qv{x} \eand C\qv{x}))$}
+  \item Greta admires only people who wear capes.
+  \item[] \alert{$\enot\qt{\exists}{x}(\enot  C\qv{x} \eand A\qr{g}{x})$}
+  \item Autumn watched only heroes and villains.
+  \item[] \alert{$\enot\qt{\exists}{x}(\enot (H\qv{x} \eor V\qv{x}) \eand W\qr{a}{x})$}
+  \item[] \alert{$\qt{\forall}{x}(W\qr{a}{x} \eif (H\qv{x} \eor V\qv{x}))$}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The indefinite article}
+
+\begin{itemize}[<+->]
+  \item We use ``is a'' to indicate predication, e.g., ``Greta is a hero.''
+  \item Often ``a'' is used to claim existence, e.g.,
+  \begin{itemize}[<+->]
+    \item[] Greta admires a hero.
+    \item[] \alert{$\qt{\exists}{x} (H\qv{x} \eand A\qr{g}{x})$}
+  \end{itemize}
+  \item But a \emph{generic} indefinite is closer to a
+  universal quantifier:
+  \begin{itemize}[<+->]
+    \item[] A hero is someone who inspires.
+    \item[] \alert{$\qt{\forall}{x}(H\qv{x} \eif I\qv{x})$}
+  \end{itemize}
+  \item Be careful if the indefinite article is in the antecedent of a conditional:
+  \begin{itemize}[<+->]
+    \item[] If \emph{a hero} wears a cape, \emph{they} inspire.
+    \item[] That means: all heroes who wear capes inspire.
+    \item[] \alert{$\qt{\forall}{x}((H\qv{x} \eand C\qv{x}) \eif I\qv{x})$}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Universal ``some'', existential ``any''}
+
+\begin{itemize}[<+->]
+  \item ``Someone,'' ``something'' can require a \emph{universal} quantifier:\\
+ if it's in the antecedent of a conditional, with a pronoun in the consequent referring back to it, e.g.,
+  \begin{itemize}[<+->]
+    \item[] If \emph{someone} is a hero, Autum admires \emph{them}.
+    \item[] Roughly: Autumn admires all heroes.
+    \item[] \alert{$\qt{\forall}{x}(H\qv{x} \eif A\qr{a}{x})$}
+  \end{itemize}
+  \item ``Any'' in antecedents but \emph{without} pronouns referring back to
+  them are \emph{existential}:
+  \begin{itemize}[<+->]
+    \item[] If \emph{anyone} is a hero, Greta is.
+    \item[] Roughly: if there are heroes (at all), Greta is a hero.
+    \item[] \alert{$\qt{\exists}{x}\, H\qv{x} \eif H\qv{g}$}
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\subsection{Mixed domains}
+
+\begin{frame}
+\frametitle{Mixed domains}
+
+\begin{itemize}[<+->]
+  \item Sometimes you want to talk about more than one kind of thing.
+  \item The domain can include any mix of things (e.g., people,
+  animals, items of clothing)
+  \item Proper symbolization then needs predicates for these kinds, e.g.:
+    \begin{ekey}
+    \item[$Domain$] people alive in \year{} and items of clothing
+    \item[P\qv{x}] \gap{x} is a person
+    \item[L\qv{x}] \gap{x} is an item of clothing.
+    \item[E\qv{x}] \gap{x} is a cape
+    \item[R\qr{x}{y}] \gap{x} wears \gap{y}
+    \end{ekey}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Quantification in mixed domains}
+
+\begin{itemize}[<+->]
+\item Not everyone is wearing a cape.
+\begin{itemize}
+  \item In domain of people only:
+  \item[] \alert{$\enot \qt{\forall}{x}\, C\qv{x}$}
+  \item In mixed domain:
+  \item[] \alert{$\enot \qt{\forall}{x}\, (P\qv{x} \eif C\qv{x})$}
+\end{itemize}
+\item Some people inspire.
+\begin{itemize}[<+->]
+  \item In domain of people only:
+  \item[] \alert{$\qt{\exists}{x}\,I\qv{x}$}
+  \item In mixed domain:
+  \item[] \alert{$\qt{\exists}{x}(P\qv{x} \eand I\qv{x})$}
+\end{itemize}
+\item Greta wears something.
+\item[] \alert{$\qt{\exists}{x}(L\qv{x} \eand R\qr{g}{x})$}
+\end{itemize}
+\end{frame}
+

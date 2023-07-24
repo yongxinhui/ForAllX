@@ -1,0 +1,535 @@
+ \documentclass[12pt]{article}
+
+
+%\usepackage{c:/xref}
+     \textheight     9.0truein
+ \usepackage{graphics}
+ \usepackage{pstricks}
+% \usepackage{pst-tree}
+% \usepackage{pst-node,pst-tree}
+ \usepackage{makeidx}
+
+
+ \vsize     9.2truein
+ \topmargin      0.0truein
+ \textwidth 6.5truein \columnwidth \textwidth 
+ \setlength{\oddsidemargin}{0truein} 
+ %\footheight     0.0truein
+ \footskip       0.75truein
+ \headheight     .25truein
+ \headsep        0.25truein
+
+\newcommand{\detritus}[1]{}
+
+ \def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
+% disjunction
+\def\eor{\ensuremath{\vee}}
+% conjunction: 
+% {\,^{_{_{_{_{\mbox{\footnotesize\textbullet}}}}}}} gives the dot
+\def\eand{\ensuremath{\,\&\,}}
+% conditional: \rightarrow gives the right arrow
+\def\eif{\ensuremath{\supset}}
+% biconditional: \leftrightarrow gives the left and right arrow
+\def\eiff{\ensuremath{\equiv}}
+% negation: {\sim} gives the swung dash 
+%\def\enot{\ensuremath{\neg}}
+%\def\enot{\ensuremath{\sim}} %note that \sim is defined as a relation, which leads to spacing issues. adding a \! leads to more spacing issues (piled up double negations).  
+
+\def\enot{\ensuremath{{\sim}}} %redefining as {\sim} treats the tilde as a unary operator, rather than a relation, solving a lot of the spacing issues. 
+
+\let\oldsim\sim %renames any \sim commands as \oldsim. 
+\renewcommand{\sim}{{\oldsim}} %redefines \sim as unary operator version of \sim, in case there are any straggling \sim commands in the wild
+
+ \thispagestyle{empty}
+
+\begin{document} 
+
+
+%\input c:/macs
+%\input c:/fitch
+%\input c:/moremacs
+%\input tictac
+
+\thispagestyle{empty}
+\parindent = 0pt
+\hspace*{0in}\parbox[t]{2.5in}{
+Philosophy 24.241\\[3pt]
+Logic 1\\[3pt]
+Fall 2022
+}
+
+\bigskip\bigskip
+
+
+\begin{center}
+\Large\bf Solutions to Problem Set 3 \\ \large (please don't post these to the internets or else I will be sad :( )
+\end{center}
+
+\begin{enumerate}
+
+\item (Recursively define $a$-palindrome and prove by induction that $a$-palindromes
+have even numbers of b's.)\\
+
+\noindent (i) Recursive Definition: \\ \textbf{Base clause}: ``$a$" is an $a$-palindrome.\\
+\textbf{Recursion clause}: If $s$ is an $a$-palindrome, then $asa$ and $bsb$
+are $a$-palindromes.\\
+\textbf{Closure Clause}: Nothing else is an $a$-palindrome over $\{a, b\}$
+
+\noindent (ii) Strategy for Proof by Induction: proceed by complete induction on the number $n$ of letters in a string. (Make sure to ``break down'' an arbitrary string $s$ of length $k$ rather than to ``build up'' from specific, smaller strings!)
+%(Let n be the number of letters in $s$.)\\
+
+\noindent \textbf{Base case}: The base case has to cover
+n = 1, since that is the case in the base clause of the recursive definition. If the length of $s$ is 1, then $s$ must be ``$a$".
+Since ``$a$" has no $b$'s, in it, it trivially has an even number of
+$b$'s, namely zero.\\
+
+\noindent \textbf{Induction step}: Assume that any $a$-palindrome with fewer than $k$ symbols has an even number
+of $b$'s (with $1<k$) . (Induction hypothesis for complete induction)\\
+
+Next, let $s$ be an arbitrary $a$-palindrome with $k$ letters. Since $k > 1$ (so that $s$ has at least two letters) $s$
+must result from
+an application of the recursion clause of the definition of $a$-palindrome (so we see that $k$ actually is $\geq 3$)\\
+
+Hence
+$s$ is one of: $as' a$ or $bs' b$, where $s'$ is an $a$-palindrome with 
+$k-2$ symbols. (It's important to note that $s'$ is itself an $a$-palindrome, since otherwise one hasn't justified that $s'$ falls within the scope of the induction hypothesis).\\
+%(Observation, not required for credit: $s'$ must have at least one symbol, since everything obtained from applying the recursion clause repeatedly to $a$ must contain $a$ ) \\
+
+The induction hypothesis applies, so we know that $s'$ has an even number of $b$'s. Since $s$ has exactly the letters of $s'$ except that it has either exactly two more $a$'s 
+or exactly two more $b$'s, we know that $s$ must also have an even number
+of $b$'s.\\ 
+
+
+\newpage
+
+\item Here is the inductive definition of n! (read ``n factorial"):\\
+\noindent $1! = 1$\\
+\noindent $(n+1)! = (n + 1) \times n!$\\
+
+\noindent That is, $n! = \underbrace{(n \times (n-1) \times \ldots 3 \times 2 \times 1)}_{n \ times}$\\
+
+\noindent {\bf{Prove by induction:}} For every $n$ greater than or equal to 5, $3^{n-1} < n!$ \\%< n^n$. 
+
+Hint: A simple bit of algebra will be useful here: if $a, b, c, d$ are all natural numbers, with $a < b$ and $c < d$,
+then $a\cdot c < b\cdot d$.
+  
+
+{\bf{Base case}}: (The base case will be $n = 5$ since we are restricting attention to $n$ such that $5 \leq n$.)
+If $n = 5$ then $3^{n-1} = 3^4 = 81$ and $5! = 5\times 4\times 3\times 2\times 1 = 120$.\\
+
+81 $<$ 120, 
+so the relevant property is true of the base case.\\
+
+{\bf{Induction Step}}: \\
+Assume that for an arbitrary $k$ (such that $5 \leq k$) we have $3^{k-1} < k!$.\\ %< k^k$. \\
+
+By definition of exponent and factorial, $3^{(k+1) -1} = 3\times3^{k-1}$ and $ (k+1)! = (k+1)\times k!$.\\
+
+Since $3 < k+1$ (since $5\leq k)$, and $3^{k-1} < k!$ by the induction hypothesis, we can apply the
+elementary principle that if $a < b$ and $c < d$ with $a, b, c, d$ all positive integers,
+then $a\cdot c < b\cdot d$ to get the inequality
+we want to prove:\\
+
+$3^{(k+1) -1} = 3\times3^{k-1} < (k+1)\times k! = (k+1)!$
+
+This completes the induction step, and hence the proof.
+
+%Similarly, since k+1 is positive and greater than one,
+%$k^k < (k + 1)^k$, so this inequality holds:\\
+%$(k + 1)! = (k+1)\cdot k! < (k + 1)\cdot k^k < (k + 1)\cdot (k+1)^k = (k+1)^{k+1}$.
+%Taking the first and last terms of this inequality gives us the other inequality we want.
+%Hence $2^{k+1} < (k + 1)! < (k + 1)^{k + 1}$.\\
+%This proves the induction step, and so it completes the proof.\\
+
+
+
+\newpage
+\item Prove by induction that if you just have 4 and 11 cent stamps, you can get a combination of stamps for 30 cents, and {\it{any}} amount greater than 30. (Hint: The base case you need in this one needs to be crafted carefully. You will need to prove more than one case.)
+
+
+Proof:\\
+
+\noindent {\bf{Base case}}: The base case here is a bit unusual, because it is easiest to consider four possibilities:\\
+$n = 30$ cents, $n = 31$ cents, $n = 32$, and $n = 33$ cents. 
+
+Here is how you can get these numbers from 4 and 11: $30 = 4\times2 + 11 \times 2; 31 = 4\times 5 + 11; 32 = 4\times 8; 33 = 11 \times 3$.\\
+
+(The point is that you need to have a stretch of 4 consecutive numbers that you can make up with the stamps. (30 is the smallest number that will work.) Then for any given $k$, you know that $k-4$ will fall in the scope of the induction hypothesis.)\\
+
+
+
+\noindent {\bf{Induction Step}}: Consider an arbitrary number $k > 34$.\\
+{\it{Induction hypothesis}}: assume that for
+every $n$, with $30 \leq n < k$, $n$ cents can be made up of a combination of 4 and 11 cent stamps. We want to show that we can make up k cents with a combination of 4 and 11 cent stamps (again: we are `breaking down' value $k$ into pieces under control by the Induction Hypothesis, NOT ``building $k$ up'')\\
+
+Since $34<k$, $k - 4$ is in the range $30 \leq n < k$, and hence it falls within the scope of the induction hypothesis.\\
+
+(***Note: This is why matters are simplest if we prove four cases in the base case. If we couldn't require $k$ to be greater than 34, then $k-4$ could be $<30$, which would put $k-4$ outside the range considered in the induction hypothesis.***)
+
+So, by the induction hypothesis, there are positive natural numbers $a$ and $b$ such that $4\times a + 11 \times b = (k-4)$.
+But then by adding a four-cent stamp, we get exactly $k$: $4\times a + 11 \times b + 4 = (k-4) +4 = k$.\\
+
+Simplifying $4\times a + 11 \times b + 4 = (k-4) +4 = k$, we have that $4\times (a+1) + 11 \times b = k$. \\
+This completes the induction step, and hence the proof.\\
+
+\newpage
+
+\item Prove by induction that the product of $n$ odd numbers (with $2 \leq n$) is odd.
+
+(You may find this fact useful: Any odd natural number $m$ can be written as $2k+1$, for some other natural number $k$.)\\
+
+Proof:\\
+We'll do the induction on the number $n$ of odd numbers multiplied together. ({\it{Not}} on the numbers that are multiplied together, or on the size of the number that is the product.)\\
+
+{\bf{Base case}}: Say that $n = 2$, and let $o_1$ and $o_2$ be odd numbers. Then there exist natural numbers $k, l$ such that $o_1 = 2k+1$ and $o_2 = 2l+1$.\\
+
+$o_1 \times o_2 = (2k + 1)(2l + 1) = 4kl + 2k + 2l +1 = 2(2kl + k + l) +1$\\
+
+The right-hand side is an even number plus 1, and so it's an odd number.\\
+
+{\bf{Induction Step}}\\
+{\it{Induction Hypothesis}}: Assume that for every $n$, with $2 < n < k$ the product of $n$ odd numbers is odd.
+
+Consider an arbitrary number $c$ that is the product of  exactly $k$ odd numbers. Then $c = m_1 \times m_2 \times \ldots \times m_k$, where each factor $m_i$ is odd. 
+
+Since $2 < k$, we can write $c$ as the product of two factors $c = c_1 \times c_2$, \\
+where $c_1 = m_1 \times m_2 \times \ldots \times m_i$ and  $c_2 = m_{i+1} \times m_{i+2} \times \ldots \times m_k$, with $2<i<k$.\\
+
+Both $c_1$ and $c_2$ are products of fewer than $k$ odd numbers, so they are odd by the induction hypothesis.\\
+
+Hence $c = c_1 \times c_2$ is the product of two odd numbers. By the argument in the base case, it follows that $c$ is an odd number. This completes the induction step, and hence the proof. \\
+
+(Note: it is also straightforward to solve this problem by ordinary induction on the number of odd factors)
+
+\newpage
+
+\item Prove that no well-formed formula of sentential logic ever contains consecutive atomic formulas [e.g. nothing like `$(PP\&Q)$'.] \\
+
+Proof (by complete induction on string-length $n$): 
+
+\textbf{Base Case}: from the recursive definition of wffs of SL, the base case includes all sentences of length 1, namely the atomic sentences. Since an atomic sentence contains only a single symbol, it cannot contain consecutive atomic formulae.
+
+\textbf{Induction step}: assume (for complete induction) that every wff of SL of length $n$---where $1 \leq n < k$---satisfies the property, i.e. does not contain consecutive atomic formulae. Need to show: an arbitrary wff of length $k$ also does not contain consecutive atomic formulae (again: we must `break down' rather than `build up').
+
+Let $\Gamma$ be an arbitrary wff of length $k$. Since $k > 1$, there must exist wff $\Phi$ and $\Psi$ of length less than $k$, such that $\Gamma$ equals one of the following five cases (that these are all and only the cases follows from the recursion clause and closure clause of our definition of ``wff of SL", but you don't have to note that). Before proceeding, note that since $\Phi$ and $\Psi$ are wff of length less than $k$, they each satisfy the relevant property by the induction hypothesis (i.e. neither contains consecutive atomic formulae).
+
+\begin{enumerate}
+
+\item[i.] \enot $\Phi$. In this case, $\Gamma$ merely has an additional negation symbol, compared to $\Phi$. Since $\Phi$ does not have consecutive atomic formulae, and since a negation symbol is not an atomic formula, it follows that $\Gamma$ also does not have consecutive atomic formulae.
+
+\item[ii.] $(\Phi \eand \Psi)$. In this case, $\Gamma$ has an additional left parenthesis, ampersand, and right parenthesis compared to its component wffs. Since none of these symbols is an atomic formula, and since neither $\Phi$ nor $\Psi$ contain consecutive atomic formula, it follows that $\Gamma$ also does not have consecutive atomic formulae. 
+
+\item[iii-v.] $(\Phi \eor \Psi)$; $(\Phi \eif \Psi)$; $(\Phi \eiff \Psi)$. In each of these three remaining cases, the reasoning is exactly parallel to the case of `$(\Phi \eand \Psi)$',  \textit{mutatis mutandis}.
+
+\end{enumerate}
+
+Hence, in any possible case, $\Gamma$ does not contain consecutive atomic formulae. This completes the induction step and hence the proof. \\
+
+ \textit{Alternative proof procedure, allowed for sentences of SL only}: As noted in lecture, we are allowing you to be particularly lazy when it comes to proofs involving properties of sentences of SL. After proving the base case, you can simply introduce two arbitrary wffs $\Phi$ and $\Psi$ and argue that in each of the five cases coming from the recursion clause of the definition, the relevant property obtains. Hopefully, it is clear why this lazy procedure is justified: it is an implicit case of complete induction on the string length. \\
+
+ \textit{Note as well}: you can also solve this problem by performing induction on either \\ i) the number of atomic formulae or ii) the number of connectives. 
+
+
+
+
+
+
+
+
+
+
+
+
+\detritus{{\bf{Optional Alternative argument for \# 3:}}\\
+Here is an argument that doesn't require you to prove several cases in the base case. It's not as conceptually simple as the one I've just given, but it's sort of cute if you like this kind of thing.
+
+{\bf{Base case}}: We can make up 30 cents with $4\times 2 + 11 \times 2 = 8 + 22$   \\
+
+Induction step: (Induction Hypothesis:) Say that $30 \leq k$ and $k = 4 \times a + 11 \times b$ for two positive natural numbers $a$ and $b$.\\
+
+We want to show that there are positive natural numbers $c$ and $d$ with $k+1 = c\times 4 + d\times 11$.
+There are two possibilities: either $b=0$ or $b\not = 0$. I'll consider each case in turn.\\
+
+a) $b \not = 0$\\
+Since $k = 4 \times a + 11 \times b$, we have that $k+1 = (4 \times a + 11 \times b) + 1$.\\
+
+So: $k + 1 = (4 \times a + 11 \times (b - 1) + 11) + 1$\\
+$\hspace*{10ex}  = 4 \times a + 11 \times (b - 1) + 12$\\
+$\hspace*{10ex}  = 4 \times a + 11 \times (b - 1) + 4 \times 3 $\\
+$\hspace*{10ex} = 4 \times (a+3) + 11\times (b - 1). $
+
+Since $b \not = 0$, b - 1 is not a negative number, so if we set c = (a + 3) and d = (b-1) we have two natural numbers with $4 \times c + 11\times d = k+1$.\\
+
+b) $b  = 0$\\
+Since b=0, we have that $k = 4 \times a$. Since $30 \leq k$, the smallest number $k$ can be is 32 ($= 4 \times 8 $), as that is the smallest product of 4 greater than or equal to 30, which means that $8 \leq a$.\\
+
+Note that if $k = 4 \times a$, we have: \\
+$k + 1 = 4 \times a + 1 = 4\times (a - 8) + 4\times 8 + 1$\\
+$\hspace*{18ex}\!\! = 4\times (a - 8) + 32 + 1$\\
+$\hspace*{18ex}\!\! = 4\times (a - 8) + 33 $\\
+$\hspace*{18ex}\!\! = 4\times (a - 8) + 3\times 11$\\
+
+Since $8 \leq a$, we know that $(a - 8)$ is a natural number. We can set $c = a - 8$ and $b = 3$, so that we have:\\
+
+$k+1 = c\times 4 + d\times 11$ with $c$ and $d$ natural numbers.\\
+
+On either a) or b), the induction step is completed, and so the problem is solved.\\}
+
+
+
+
+
+
+\detritus{ BEGIN DETRITUS --- PROOF OF EQUIVALENCE OF DEFINITIONS
+[The question only asked you to give a recursive definition of $a$-palindrome and didn't explictly ask for a proof that this recursive definition is equivalent to the original one, so this part is not needed for full marks. I'm including it for your information, to increase your stock of worked examples of inductive arguments.]
+
+
+%We now prove by induction that every $a$-palindrome is an inductive $a$-palindrome and conversely.\\
+Proof that the recursive definition defines the same set as the first definition of ``palindrome": \\
+
+\noindent {\bf{Proof}} (of equivalence of definitions):\\ 
+\noindent The induction will be on the length of the string s.\\
+{\bf{Base case:}} Say that s is 1 or 2 symbols long. Then it is one of `$a$', or `$aa$' which are
+both $a$-palindromes and inductive $a$-palindromes, or it is s is neither `$a$' nor `$aa$', in which case it is neither an $a$-palindrome nor an inductive $a$-palindrome.
+
+\noindent {\bf{Inductive step}}:\\
+\noindent{ \it{Assume}} (Induction hypothesis) that every $a$-palindrome of length less than $k$ symbols is an
+inductive $a$-palindrome and conversely.
+
+$\Rightarrow$ Say that $s$ is an $a$-palindrome with $ k>2$ letters.\\
+ If $s$ has more than two symbols, then we can remove the first
+and last letter, leaving a string $s'$. Since $s$ reads the same backwards and forwards,
+and $s'$ comes from $s$ by removing the first and last letter, s' reads the same backwards
+as forwards and since $s$ has `$a$' or `$aa$' in its center, so does $s'$. That is, $s'$ is an $a$-palindrome. Since $s'$ is an $a$-palindrome, and it has fewer than
+$k$ letters, then it is an inductive $a$ - palindrome by the induction hypothesis.\\
+
+Since $s$ is a palindrome, the first and last letter must be the same, so it is either 
+`$a$', `$b$', or `$c$'. So $s = as'a$, or $s = bs'b$, or $s = cs'c$, where
+$s'$ is an inductive palindrome. So, by the inductive clause of the definition of 
+inductive palindrome, s is an inductive palindrome.\\
+
+$\Leftarrow$ Say that s is an inductive $a$-palindrome with $k>2$ letters. \\
+By the recursion clause of the recursive definition of $a$-palindrome, $s = as'a$ or $bs'b$ or $cs'c$ where $s'$ is an $a$-palindrome.\\
+$s'$ has fewer than $k$ letters, so by the induction hypothesis it is a palindrome. \\
+Hence $s'$ has `$a$' or `$aa$' in the middle, and reads the same backwards as forwards.\\
+Since $s = as'a$ or $bs'b$ or $cs'c$ it therefore also has `$a$' or `$aa$' in the middle and reads the same backwards as forwards,
+so $s$ is a palindrome.
+[This completes the inductive proof of equivalence.] END DETRITUS}
+
+\detritus{CHESSBOARD QUESTION SOLUTION
+\item (Show by induction that a $2^n$ x $2^n$ chessboard with one square covered can be covered by L-tiles
+without overlap.)
+
+\noindent {\bf{Base case}}: Say that n=2. This is immediate, since whatever
+square is omitted, there will be an L-shape left over, as in this case (chosen square in red, remainder
+in blue): 
+%Tiled 4x4 board -- base case
+\begin{pspicture}(0,0)(1.5,1.5) 
+\pspolygon[fillstyle=solid, fillcolor=blue](.2,.2)(.7,.2)(.7,.7)(1.2,.7)(1.2,1.2)(.2,1.2)
+\pspolygon[fillstyle=solid, fillcolor=red](.7,.2)(.7,.7)(1.2,.7)(1.2,.2)
+\end{pspicture}
+
+\medskip
+
+\noindent {\bf{Induction step}}: {\bf{Assume}} (induction hypothesis) that any $2^n$ x $2^n$ board with one square removed
+can be covered without overlap with L-tiles. We want to show that any $2^{n+1}$ x $2^{n+1}$ board with 
+one square removed
+can be covered without overlap with L-tiles.\\
+
+\noindent Proof of induction step:\\
+
+Given a $2^{n+1}$ x $2^{n+1}$ board with 
+one square removed, break it into four $2^n$ x $2^n$ chessboards as in the diagram: 
+
+\begin{pspicture}(1, -.5)(7.5,5.5) 
+
+%Tiled chessboard with one colored square 
+%vertical:
+ \psline[linewidth=0.3mm]{-}(3,0)(3,4)
+  \psline[linewidth=0.3mm]{-}(3.5,0)(3.5,4)
+ \psline[linewidth=0.3mm]{-}(4,0)(4,4)
+ \psline[linewidth=0.3mm]{-}(4.5,0)(4.5,4)
+ \psline[linewidth=0.7mm]{-}(5,0)(5,4)
+ \psline[linewidth=0.3mm]{-}(5.5,0)(5.5,4)
+ \psline[linewidth=0.3mm]{-}(6,0)(6,4)
+ \psline[linewidth=0.3mm]{-}(6.5,0)(6.5,4)
+ \psline[linewidth=0.3mm]{-}(7,0)(7,4)
+
+
+%horizontal:
+
+ \psline[linewidth=0.3mm]{-}(3,0)(7,0)
+ \psline[linewidth=0.3mm]{-}(3,.5)(7,.5)
+ \psline[linewidth=0.3mm]{-}(3,1)(7,1)
+ \psline[linewidth=0.3mm]{-}(3,1.5)(7,1.5)
+ \psline[linewidth=0.7mm]{-}(3,2)(7,2)
+ \psline[linewidth=0.3mm]{-}(3,2.5)(7,2.5)
+ \psline[linewidth=0.3mm]{-}(3,3)(7,3)
+ \psline[linewidth=0.3mm]{-}(3,3.5)(7,3.5)
+ \psline[linewidth=0.3mm]{-}(3,4)(7,4)
+
+
+%big horizontal measuring standard
+
+\put(5,5.2){$2^{n+1}$}
+ \psline[linewidth=0.3mm]{-}(3,5)(7,5)
+ \psline[linewidth=0.3mm]{-}(3,4.9)(3,5)
+ \psline[linewidth=0.3mm]{-}(7,4.9)(7,5)
+
+%big vertical measuring standard
+
+ \put(1,2){$2^{n+1}$}
+ \psline[linewidth=0.3mm]{-}(1.8,0)(1.8,4)
+ \psline[linewidth=0.3mm]{-}(1.9,0)(1.8,0)
+ \psline[linewidth=0.3mm]{-}(1.9,4)(1.8,4)
+
+%small horizontal measuring standards
+
+\put(4,4.6){$2^n$}
+\put(6,4.6){$2^n$}
+
+
+
+ \psline[linewidth=0.3mm]{-}(3,4.5)(7,4.5)
+ \psline[linewidth=0.3mm]{-}(3,4.4)(3,4.5)
+ \psline[linewidth=0.3mm]{-}(7,4.4)(7,4.5)
+ \psline[linewidth=0.3mm]{-}(5,4.4)(5,4.5)
+
+
+%small vertical measuring standards
+
+ \put(2,1){$2^n$}
+ \put(2,3){$2^n$}
+\put(2.7,-.4){{\bf{III}}}
+\put(2.7,4){{\bf{I}}}
+\put(7.2,0){{\bf{IV}}}
+\put(7.2,4){{\bf{II}}}
+
+ \psline[linewidth=0.3mm]{-}(2.5,0)(2.5,4)
+ \psline[linewidth=0.3mm]{-}(2.6,0)(2.5,0)
+ \psline[linewidth=0.3mm]{-}(2.5,4)(2.6,4)
+ \psline[linewidth=0.3mm]{-}(2.5,2)(2.6,2)
+
+%fill in square
+\pspolygon[fillstyle=solid, fillcolor=red](6,2.5)(6,3)(6.5,3)(6.5,2.5)
+%\pspolygon[fillstyle=solid, fillcolor=yellow](.7,.2)(.7,.7)(1.2,.7)(1.2,.2)
+
+
+\end{pspicture}
+
+By dividing the $2^{n+1}$ x $2^{n+1}$ board into 4 quadrants, each of size $2^n$ x $2^n$ 
+we get a situation where the inductive hypothesis can help us. The red square will be in 
+one of the quadrants - in the diagram above, it is in the upper right hand quadrant, labelled II. 
+By the induction hypothesis we know that that quadrant II can be covered in L-tiles, leaving the 
+red square uncovered. To address the other three quadrants, we need to change them from 
+chessboards to chessboards with one square missing. Here's the trick: Place one L-tile in the 
+center so it covers one square of each quadrant, as in this diagram:
+
+
+\begin{pspicture}(1, -.5)(7.5,5.5) 
+
+%Tiled chessboard with one colored square 
+%vertical:
+ \psline[linewidth=0.3mm]{-}(3,0)(3,4)
+  \psline[linewidth=0.3mm]{-}(3.5,0)(3.5,4)
+ \psline[linewidth=0.3mm]{-}(4,0)(4,4)
+ \psline[linewidth=0.3mm]{-}(4.5,0)(4.5,4)
+ \psline[linewidth=0.7mm]{-}(5,0)(5,4)
+ \psline[linewidth=0.3mm]{-}(5.5,0)(5.5,4)
+ \psline[linewidth=0.3mm]{-}(6,0)(6,4)
+ \psline[linewidth=0.3mm]{-}(6.5,0)(6.5,4)
+ \psline[linewidth=0.3mm]{-}(7,0)(7,4)
+
+
+%horizontal:
+
+ \psline[linewidth=0.3mm]{-}(3,0)(7,0)
+ \psline[linewidth=0.3mm]{-}(3,.5)(7,.5)
+ \psline[linewidth=0.3mm]{-}(3,1)(7,1)
+ \psline[linewidth=0.3mm]{-}(3,1.5)(7,1.5)
+ \psline[linewidth=0.7mm]{-}(3,2)(7,2)
+ \psline[linewidth=0.3mm]{-}(3,2.5)(7,2.5)
+ \psline[linewidth=0.3mm]{-}(3,3)(7,3)
+ \psline[linewidth=0.3mm]{-}(3,3.5)(7,3.5)
+ \psline[linewidth=0.3mm]{-}(3,4)(7,4)
+
+
+%big horizontal measuring standard
+
+\put(5,5.2){$2^{n+1}$}
+ \psline[linewidth=0.3mm]{-}(3,5)(7,5)
+ \psline[linewidth=0.3mm]{-}(3,4.9)(3,5)
+ \psline[linewidth=0.3mm]{-}(7,4.9)(7,5)
+
+%big vertical measuring standard
+
+ \put(1,2){$2^{n+1}$}
+ \psline[linewidth=0.3mm]{-}(1.8,0)(1.8,4)
+ \psline[linewidth=0.3mm]{-}(1.9,0)(1.8,0)
+ \psline[linewidth=0.3mm]{-}(1.9,4)(1.8,4)
+
+%small horizontal measuring standards
+
+\put(4,4.6){$2^n$}
+\put(6,4.6){$2^n$}
+
+
+
+ \psline[linewidth=0.3mm]{-}(3,4.5)(7,4.5)
+ \psline[linewidth=0.3mm]{-}(3,4.4)(3,4.5)
+ \psline[linewidth=0.3mm]{-}(7,4.4)(7,4.5)
+ \psline[linewidth=0.3mm]{-}(5,4.4)(5,4.5)
+
+
+%small vertical measuring standards
+
+ \put(2,1){$2^n$}
+ \put(2,3){$2^n$}
+\put(2.7,-.4){{\bf{III}}}
+\put(2.7,4){{\bf{I}}}
+\put(7.2,0){{\bf{IV}}}
+\put(7.2,4){{\bf{II}}}
+
+ \psline[linewidth=0.3mm]{-}(2.5,0)(2.5,4)
+ \psline[linewidth=0.3mm]{-}(2.6,0)(2.5,0)
+ \psline[linewidth=0.3mm]{-}(2.5,4)(2.6,4)
+ \psline[linewidth=0.3mm]{-}(2.5,2)(2.6,2)
+
+%fill in square
+\pspolygon[fillstyle=solid, fillcolor=red](6,2.5)(6,3)(6.5,3)(6.5,2.5)
+%\pspolygon[fillstyle=solid, fillcolor=yellow](.7,.2)(.7,.7)(1.2,.7)(1.2,.2)
+\pspolygon[fillstyle=solid, fillcolor=blue](5,2)(5,2.5)(4.5,2.5)(4.5,1.5)(5.5,1.5)(5.5,2)
+
+\end{pspicture}
+
+
+ {\bf{Now}} we have a situation where we can apply the induction hypothesis to the other 3 quadrants:
+Each of them is a $2^n$ x $2^n$ chessboard with one square missing. Hence we can cover
+each of the remaining quadrants with L-tiles. The tiling of all four quadrants, plus the tile placed in
+the center, cover the whole $2^{n+1}$ x $2^{n+1}$ board except for the missing square. This proves the
+induction hypothesis.
+
+From the base case and the induction step, we conclude that the thesis is true in general:  
+every $2^{n+1}$ x $2^{n+1}$ board with one square missing can be covered without overlap
+with L-tiles.
+END DETRITUS CHESSBOARD SOLUTION}
+
+
+
+\end{enumerate}
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+

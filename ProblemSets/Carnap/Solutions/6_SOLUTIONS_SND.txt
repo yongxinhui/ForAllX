@@ -1,0 +1,261 @@
+#1 (zach PS3.6):
+
+A & (B & C) :PR
+A :1 &E
+B&C :1 &E
+B :3 &E
+C :3 &E
+C&B :4,5 &I
+(C&B)&A :2, 6 &I
+
+#2 (zach PS3.7) (VERY STRAIGHTFORWARD: breakdown and then build back up)
+
+(~E & A) :PR
+(A ⊃ (B & C)) :PR
+(B ⊃ D) :PR
+~E :1&E
+A :1&E
+B&C :2, 5 >E
+B :6&E
+C :6&E
+D :7, 3 >E
+(D&~E) :9, 4 &I
+C &(D&~E) :10,8 &I
+
+#3 (JTapp PS4.1)
+
+
+
+#4 (JTapp PS4.2)
+
+(~G ≡ F) :PR
+(D ⊃ ~G) :PR
+(~H & D) :PR
+~H :3 &E
+D :3 &E
+~G :2, 5 >E
+F :1, 6 <->E
+F & ~H :4, 7 &I
+
+
+
+#5: zach ps3.8 (with proper justification order:
+
+A > C :PR
+B > D :PR
+    A & B :AS for conditional I
+    A :3 &E
+    B :3 &E
+    C :1,4 >E
+    D :2, 5 >E 
+    C&D :6, 7 &I 
+(A&B) > (C&D) :3-8 >I   
+
+note that in the last line, you don't need the parentheses. carnap automatically treats the > as the main connective it seems here. 
+
+zach PS3.8 (with the other justification order)
+
+A > C :PR
+B > D :PR
+    A & B :AS for conditional I
+    A :&E 3
+    B :&E 3
+    C :>E 1, 4
+    D :>E 2, 5
+    C&D :&I 6, 7
+(A&B) > (C&D) :>I 3-8  
+
+[note that you need the parentheses around the conjunctions, at least in the zach system]
+
+
+#6: JTapp PS 4, #3:
+
+(B>B)>B :PR
+    B :AS for >Intro
+    B :2 R
+B > B :2-3 >I
+B :1, 4 >E
+
+
+long way of doing this via negation elim (thanks to Colin I think):
+
+((B>B)>B) :PR
+ ~B :AS
+  B :AS
+   ~B :AS
+   ~B :2R
+   B :2R
+  B :4-6~E
+ (B>B) :3-7>I
+ B :8,1>E
+ ~B :2R
+B :2-10~E
+
+
+#7: Zach PS3.9; trick is to remember to use or introduction w/in each subproof. note that carnap is sensitive to having the same order of disjuncts in the two subproofs! need C v D within both! D v C in the second generates an error.
+
+something to remind the students: asyou add new lines earlier in the proof, you'll have to update your citation/justification numbers!
+One option: work from top down and bottom up and put in the line numbers at the very end! just need to be careful here! 
+
+(A ∨ B) :PR
+(A ⊃ C) :PR
+(B ⊃ D) :PR
+    A :AS for vE
+    C :2, 4 >E
+    C v D :5 vI
+--
+    B: AS FOR vE
+    D :8, 3 >E
+    C v D:9 vI
+C v D :1, 4-6, 8-10 vE
+
+
+#8 (JTapp PS4.5)
+(~F ⊃ ~G) :PR
+(~F ∨ H) :PR
+(H ≡ ~G) :PR
+    ~F :AS FOR VE
+    ~G :1, 4 >E
+--
+    H :AS FOR VE
+    ~G :3, 7 <->E
+~G :2, 4-5, 7-8 vE
+
+
+hilariously complicated way of doing this one (also thanks to colin tang I believe):
+(~F>~G) :PR
+(~FvH) :PR
+(H<>~G) :PR
+ G :AS
+  H :AS
+  ~G :5,3<->E
+  G :4R
+ ~H :5-7~I
+  F :AS
+   ~F :AS
+    ~(A&~A) :AS
+    F :9R
+    ~F :10R
+   (A&~A) :11-13~E
+  --
+   H :AS
+    ~(A&~A) :AS
+    ~H :8R
+    H :16R
+   (A&~A) :17-19~E
+  (A&~A) :2,10-14,16-20vE
+  A :21&E
+  ~A :21&E
+ ~F :9-23~I
+ ~G :24,1>E
+ G :4 R
+~G :4-26~I
+
+An interesting way of doing 8 (subgoal: just derive H):
+
+-F>-G :PR
+-FvH :PR
+H <->-G :PR
+    -F :AS
+    -G :1,4 >E
+    H :3,5 <->E
+--
+    H :AS
+    H :8 R
+H :2,4-6,8-9 vE
+-G :3,10 <->E
+
+
+#9 (JTapp PS4.6)
+
+(I & ~I) :PR
+    ~(H & (~A ∨ B)) :AS for ~E
+    I :1 &E
+    ~I :1 &E
+(H & (~A ∨ B)) :2-4 ~E
+
+
+#10 (JTapp PS5.1); trick is to realize that if we can get ~~B, we can use vI to tack on the W. and to get ~~B, it suffices to assume ~B for ~Intro. Then, realize that we can build up the INNER conditional by assuming the antecedent and reiterating the consequent. 
+[looks like i came up with the exact solution proof all on my own, by thinking it through! so that's cool!]
+
+NOTE WELL: you MUST reiterate ~B within the subproof, so that B and ~B both appear under the subproof assumption. carnap will reject ~I for ~~B otherwise.  
+
+(((A ∨ R) ⊃ ~B) ⊃ B) :PR
+    ~B :AS for ~I
+        A v R :AS for >I
+        ~B :2 R
+    (A ∨ R) ⊃ ~B :3-4 >I
+    B :1, 5 >E
+    ~B : 2 R
+~~B :2-7 ~I
+~~B v W :8 vI
+
+#11 (zach PS3.10) (lots of risks for mistakes, but straightforward):
+- make sure that you tab in initially for the initial assumption. only pop out of this tab AT THE VERY end
+
+- make sure you &E for the disjunction that you'll use! i forgot to do that till the end and then had to renumber everything haha 
+
+
+
+    ((A ∨ (B ⊃ C)) & B) :AS for >I
+    B :1 &E
+    A ∨ (B ⊃ C) :1 &E
+        A :AS for vE
+        A :4 R
+        A&A :4,5 &I
+        C v (A&A) :6 vI
+    --
+        B>C :AS for vE
+        C :2, 9 >E
+        C v (A&A) :10 vI
+    C v (A&A) :3, 4-7, 9-11 vE
+(((A ∨ (B ⊃ C)) & B) ⊃ (C ∨ (A & A))) :1-12 >I
+
+
+#12 (Jtapp PS4.6)
+
+(can lower points on this prob to make earlier ones two points, since i'm leaving on proof checker)
+
+Last question: Law of Excluded Middle (Notes to self: have to tab everything in at least once until last line. For ~I and ~E, need to reiterate the line we're using as one of the contradiction sentences, even if it's up above. So Carnap is very literal w/ this  phi, ~phi syntax. Might want to note this to the students. 
+
+    ~ (P v ~P) :AS for ~E
+        P :AS for ~I 
+        P v ~P :2 vI
+        ~(P v ~P): 1R
+    ~P :2-4 ~I
+    P v ~P :5 vI
+    ~ (P v ~P) :1 R
+P v ~P :1-7 ~E
+
+
+
+
+Alternative solutions to #12, noticing carnap glitch:
+
+    ~(P v ~P) :AS for ~E
+        ~P :AS for ~E
+        P v ~P :2 vI
+        ~(P v ~P) :1 R
+    P :2-4 ~E
+    -- [this line is idle]
+        P :AS for ~I
+        P v ~P :7 vI
+        ~(P v ~P) :1 R
+    ~P :7-9 ~I
+    P :5 R
+P v ~P :1-11 ~E
+
+
+
+    ~(P v ~P) :AS for ~E
+        ~P :AS for ~E
+        P v ~P :2 vI
+        ~(P v ~P) :1 R
+    P :2-4 ~E
+        P :AS for ~I
+        P v ~P :6 vI
+        ~(P v ~P) :1 R
+    ~P :6-8 ~I
+    P :5 R
+P v ~P :1-10 ~E
+

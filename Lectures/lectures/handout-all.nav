@@ -1,0 +1,2077 @@
+\headcommand {\beamer@sectionpages {1}{0}}
+\headcommand {\beamer@subsectionpages {1}{0}}
+\headcommand {\sectionentry {0}{What is logic?}{1}{What is logic?}{0}}
+\headcommand {\slideentry {0}{0}{1}{1/1}{}{0}}
+\headcommand {\beamer@framepages {1}{1}}
+\headcommand {\slideentry {0}{0}{2}{2/2}{}{0}}
+\headcommand {\beamer@framepages {2}{2}}
+\headcommand {\slideentry {0}{0}{3}{3/3}{}{0}}
+\headcommand {\beamer@framepages {3}{3}}
+\headcommand {\slideentry {0}{0}{4}{4/4}{}{0}}
+\headcommand {\beamer@framepages {4}{4}}
+\headcommand {\beamer@subsectionpages {1}{4}}
+\headcommand {\beamer@subsectionentry {0}{0}{1}{5}{Arguments and validity}}
+\headcommand {\slideentry {0}{1}{1}{5/5}{Arguments and validity}{0}}
+\headcommand {\beamer@framepages {5}{5}}
+\headcommand {\slideentry {0}{1}{2}{6/6}{Arguments and validity}{0}}
+\headcommand {\beamer@framepages {6}{6}}
+\headcommand {\slideentry {0}{1}{3}{7/7}{Arguments and validity}{0}}
+\headcommand {\beamer@framepages {7}{7}}
+\headcommand {\slideentry {0}{1}{4}{8/8}{Arguments and validity}{0}}
+\headcommand {\beamer@framepages {8}{8}}
+\headcommand {\slideentry {0}{1}{5}{9/9}{Arguments and validity}{0}}
+\headcommand {\beamer@framepages {9}{9}}
+\headcommand {\slideentry {0}{1}{6}{10/10}{Arguments and validity}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\slideentry {0}{1}{7}{11/11}{Arguments and validity}{0}}
+\headcommand {\beamer@framepages {11}{11}}
+\headcommand {\slideentry {0}{1}{8}{12/12}{Arguments and validity}{0}}
+\headcommand {\beamer@framepages {12}{12}}
+\headcommand {\slideentry {0}{1}{9}{13/13}{Arguments and validity}{0}}
+\headcommand {\beamer@framepages {13}{13}}
+\headcommand {\slideentry {0}{1}{10}{14/14}{Arguments and validity}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\beamer@subsectionpages {5}{14}}
+\headcommand {\beamer@subsectionentry {0}{0}{2}{15}{Cases and determining validity}}
+\headcommand {\slideentry {0}{2}{1}{15/15}{Cases and determining validity}{0}}
+\headcommand {\beamer@framepages {15}{15}}
+\headcommand {\slideentry {0}{2}{2}{16/16}{Cases and determining validity}{0}}
+\headcommand {\beamer@framepages {16}{16}}
+\headcommand {\slideentry {0}{2}{3}{17/17}{Cases and determining validity}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\slideentry {0}{2}{4}{18/18}{Cases and determining validity}{0}}
+\headcommand {\beamer@framepages {18}{18}}
+\headcommand {\slideentry {0}{2}{5}{19/19}{Cases and determining validity}{0}}
+\headcommand {\beamer@framepages {19}{19}}
+\headcommand {\slideentry {0}{2}{6}{20/20}{Cases and determining validity}{0}}
+\headcommand {\beamer@framepages {20}{20}}
+\headcommand {\beamer@subsectionpages {15}{20}}
+\headcommand {\beamer@subsectionentry {0}{0}{3}{21}{Other logical notions}}
+\headcommand {\slideentry {0}{3}{1}{21/21}{Other logical notions}{0}}
+\headcommand {\beamer@framepages {21}{21}}
+\headcommand {\slideentry {0}{3}{2}{22/22}{Other logical notions}{0}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\slideentry {0}{3}{3}{23/23}{Other logical notions}{0}}
+\headcommand {\beamer@framepages {23}{23}}
+\headcommand {\slideentry {0}{3}{4}{24/24}{Other logical notions}{0}}
+\headcommand {\beamer@framepages {24}{24}}
+\headcommand {\slideentry {0}{3}{5}{25/25}{Other logical notions}{0}}
+\headcommand {\beamer@framepages {25}{25}}
+\headcommand {\slideentry {0}{3}{6}{26/26}{Other logical notions}{0}}
+\headcommand {\beamer@framepages {26}{26}}
+\headcommand {\slideentry {0}{3}{7}{27/27}{Other logical notions}{0}}
+\headcommand {\beamer@framepages {27}{27}}
+\headcommand {\beamer@subsectionpages {21}{27}}
+\headcommand {\beamer@subsectionentry {0}{0}{4}{28}{What are we going to learn? \\ And why?}}
+\headcommand {\slideentry {0}{4}{1}{28/28}{What are we going to learn? \\ And why?}{0}}
+\headcommand {\beamer@framepages {28}{28}}
+\headcommand {\slideentry {0}{4}{2}{29/29}{What are we going to learn? \\ And why?}{0}}
+\headcommand {\beamer@framepages {29}{29}}
+\headcommand {\slideentry {0}{4}{3}{30/30}{What are we going to learn? \\ And why?}{0}}
+\headcommand {\beamer@framepages {30}{30}}
+\headcommand {\slideentry {0}{4}{4}{31/31}{What are we going to learn? \\ And why?}{0}}
+\headcommand {\beamer@framepages {31}{31}}
+\headcommand {\slideentry {0}{4}{5}{32/32}{What are we going to learn? \\ And why?}{0}}
+\headcommand {\beamer@framepages {32}{32}}
+\headcommand {\slideentry {0}{4}{6}{33/33}{What are we going to learn? \\ And why?}{0}}
+\headcommand {\beamer@framepages {33}{33}}
+\headcommand {\slideentry {0}{4}{7}{34/34}{What are we going to learn? \\ And why?}{0}}
+\headcommand {\beamer@framepages {34}{34}}
+\headcommand {\beamer@subsectionpages {28}{34}}
+\headcommand {\beamer@subsectionentry {0}{0}{5}{35}{Symbolization and SL}}
+\headcommand {\slideentry {0}{5}{1}{35/35}{Symbolization and SL}{0}}
+\headcommand {\beamer@framepages {35}{35}}
+\headcommand {\slideentry {0}{5}{2}{36/36}{Symbolization and SL}{0}}
+\headcommand {\beamer@framepages {36}{36}}
+\headcommand {\slideentry {0}{5}{3}{37/37}{Symbolization and SL}{0}}
+\headcommand {\beamer@framepages {37}{37}}
+\headcommand {\slideentry {0}{5}{4}{38/38}{Symbolization and SL}{0}}
+\headcommand {\beamer@framepages {38}{38}}
+\headcommand {\slideentry {0}{5}{5}{39/39}{Symbolization and SL}{0}}
+\headcommand {\beamer@framepages {39}{39}}
+\headcommand {\beamer@subsectionpages {35}{39}}
+\headcommand {\beamer@subsectionentry {0}{0}{6}{40}{Bonus: Some \textbf {\alert {History}} of Logic!}}
+\headcommand {\slideentry {0}{6}{1}{40/40}{Bonus: Some \textbf {\alert {History}} of Logic!}{0}}
+\headcommand {\beamer@framepages {40}{40}}
+\headcommand {\slideentry {0}{6}{2}{41/41}{Bonus: Some \textbf {\alert {History}} of Logic!}{0}}
+\headcommand {\beamer@framepages {41}{41}}
+\headcommand {\slideentry {0}{6}{3}{42/42}{Bonus: Some \textbf {\alert {History}} of Logic!}{0}}
+\headcommand {\beamer@framepages {42}{42}}
+\headcommand {\slideentry {0}{6}{4}{43/43}{Bonus: Some \textbf {\alert {History}} of Logic!}{0}}
+\headcommand {\beamer@framepages {43}{43}}
+\headcommand {\slideentry {0}{6}{5}{44/44}{Bonus: Some \textbf {\alert {History}} of Logic!}{0}}
+\headcommand {\beamer@framepages {44}{44}}
+\headcommand {\slideentry {0}{6}{6}{45/45}{Bonus: Some \textbf {\alert {History}} of Logic!}{0}}
+\headcommand {\beamer@framepages {45}{45}}
+\headcommand {\slideentry {0}{6}{7}{46/46}{Bonus: Some \textbf {\alert {History}} of Logic!}{0}}
+\headcommand {\beamer@framepages {46}{46}}
+\headcommand {\slideentry {0}{6}{8}{47/47}{Bonus: Some \textbf {\alert {History}} of Logic!}{0}}
+\headcommand {\beamer@framepages {47}{47}}
+\headcommand {\slideentry {0}{6}{9}{48/48}{Bonus: Some \textbf {\alert {History}} of Logic!}{0}}
+\headcommand {\beamer@framepages {48}{48}}
+\headcommand {\slideentry {0}{6}{10}{49/49}{Bonus: Some \textbf {\alert {History}} of Logic!}{0}}
+\headcommand {\beamer@framepages {49}{49}}
+\headcommand {\slideentry {0}{6}{11}{50/50}{Bonus: Some \textbf {\alert {History}} of Logic!}{0}}
+\headcommand {\beamer@framepages {50}{50}}
+\headcommand {\slideentry {0}{6}{12}{51/51}{Bonus: Some \textbf {\alert {History}} of Logic!}{0}}
+\headcommand {\beamer@framepages {51}{51}}
+\headcommand {\beamer@sectionpages {1}{51}}
+\headcommand {\beamer@subsectionpages {40}{51}}
+\headcommand {\sectionentry {1}{Symbolization in SL}{52}{Symbolization in SL}{0}}
+\headcommand {\slideentry {1}{0}{1}{52/52}{}{0}}
+\headcommand {\beamer@framepages {52}{52}}
+\headcommand {\beamer@subsectionpages {52}{52}}
+\headcommand {\beamer@subsectionentry {0}{1}{1}{53}{Symbolization keys and paraphrase}}
+\headcommand {\slideentry {1}{1}{1}{53/53}{Symbolization keys and paraphrase}{0}}
+\headcommand {\beamer@framepages {53}{53}}
+\headcommand {\slideentry {1}{1}{2}{54/54}{Symbolization keys and paraphrase}{0}}
+\headcommand {\beamer@framepages {54}{54}}
+\headcommand {\slideentry {1}{1}{3}{55/55}{Symbolization keys and paraphrase}{0}}
+\headcommand {\beamer@framepages {55}{55}}
+\headcommand {\slideentry {1}{1}{4}{56/56}{Symbolization keys and paraphrase}{0}}
+\headcommand {\beamer@framepages {56}{56}}
+\headcommand {\slideentry {1}{1}{5}{57/57}{Symbolization keys and paraphrase}{0}}
+\headcommand {\beamer@framepages {57}{57}}
+\headcommand {\slideentry {1}{1}{6}{58/58}{Symbolization keys and paraphrase}{0}}
+\headcommand {\beamer@framepages {58}{58}}
+\headcommand {\slideentry {1}{1}{7}{59/59}{Symbolization keys and paraphrase}{0}}
+\headcommand {\beamer@framepages {59}{59}}
+\headcommand {\slideentry {1}{1}{8}{60/60}{Symbolization keys and paraphrase}{0}}
+\headcommand {\beamer@framepages {60}{60}}
+\headcommand {\slideentry {1}{1}{9}{61/61}{Symbolization keys and paraphrase}{0}}
+\headcommand {\beamer@framepages {61}{61}}
+\headcommand {\beamer@subsectionpages {53}{61}}
+\headcommand {\beamer@subsectionentry {0}{1}{2}{62}{Basic symbolization}}
+\headcommand {\slideentry {1}{2}{1}{62/62}{Basic symbolization}{0}}
+\headcommand {\beamer@framepages {62}{62}}
+\headcommand {\slideentry {1}{2}{2}{63/63}{Basic symbolization}{0}}
+\headcommand {\beamer@framepages {63}{63}}
+\headcommand {\slideentry {1}{2}{3}{64/64}{Basic symbolization}{0}}
+\headcommand {\beamer@framepages {64}{64}}
+\headcommand {\slideentry {1}{2}{4}{65/65}{Basic symbolization}{0}}
+\headcommand {\beamer@framepages {65}{65}}
+\headcommand {\slideentry {1}{2}{5}{66/66}{Basic symbolization}{0}}
+\headcommand {\beamer@framepages {66}{66}}
+\headcommand {\slideentry {1}{2}{6}{67/67}{Basic symbolization}{0}}
+\headcommand {\beamer@framepages {67}{67}}
+\headcommand {\slideentry {1}{2}{7}{68/68}{Basic symbolization}{0}}
+\headcommand {\beamer@framepages {68}{68}}
+\headcommand {\beamer@subsectionpages {62}{68}}
+\headcommand {\beamer@subsectionentry {0}{1}{3}{69}{Conditionals}}
+\headcommand {\slideentry {1}{3}{1}{69/69}{Conditionals}{0}}
+\headcommand {\beamer@framepages {69}{69}}
+\headcommand {\slideentry {1}{3}{2}{70/70}{Conditionals}{0}}
+\headcommand {\beamer@framepages {70}{70}}
+\headcommand {\slideentry {1}{3}{3}{71/71}{Conditionals}{0}}
+\headcommand {\beamer@framepages {71}{71}}
+\headcommand {\slideentry {1}{3}{4}{72/72}{Conditionals}{0}}
+\headcommand {\beamer@framepages {72}{72}}
+\headcommand {\slideentry {1}{3}{5}{73/73}{Conditionals}{0}}
+\headcommand {\beamer@framepages {73}{73}}
+\headcommand {\slideentry {1}{3}{6}{74/74}{Conditionals}{0}}
+\headcommand {\beamer@framepages {74}{74}}
+\headcommand {\slideentry {1}{3}{7}{75/75}{Conditionals}{0}}
+\headcommand {\beamer@framepages {75}{75}}
+\headcommand {\beamer@subsectionpages {69}{75}}
+\headcommand {\beamer@subsectionentry {0}{1}{4}{76}{``Only if'' and ``unless''}}
+\headcommand {\slideentry {1}{4}{1}{76/76}{``Only if'' and ``unless''}{0}}
+\headcommand {\beamer@framepages {76}{76}}
+\headcommand {\slideentry {1}{4}{2}{77/77}{``Only if'' and ``unless''}{0}}
+\headcommand {\beamer@framepages {77}{77}}
+\headcommand {\slideentry {1}{4}{3}{78/78}{``Only if'' and ``unless''}{0}}
+\headcommand {\beamer@framepages {78}{78}}
+\headcommand {\slideentry {1}{4}{4}{79/79}{``Only if'' and ``unless''}{0}}
+\headcommand {\beamer@framepages {79}{79}}
+\headcommand {\slideentry {1}{4}{5}{80/80}{``Only if'' and ``unless''}{0}}
+\headcommand {\beamer@framepages {80}{80}}
+\headcommand {\slideentry {1}{4}{6}{81/81}{``Only if'' and ``unless''}{0}}
+\headcommand {\beamer@framepages {81}{81}}
+\headcommand {\slideentry {1}{4}{7}{82/82}{``Only if'' and ``unless''}{0}}
+\headcommand {\beamer@framepages {82}{82}}
+\headcommand {\beamer@subsectionpages {76}{82}}
+\headcommand {\beamer@subsectionentry {0}{1}{5}{83}{More connectives}}
+\headcommand {\slideentry {1}{5}{1}{83/83}{More connectives}{0}}
+\headcommand {\beamer@framepages {83}{83}}
+\headcommand {\slideentry {1}{5}{2}{84/84}{More connectives}{0}}
+\headcommand {\beamer@framepages {84}{84}}
+\headcommand {\slideentry {1}{5}{3}{85/85}{More connectives}{0}}
+\headcommand {\beamer@framepages {85}{85}}
+\headcommand {\slideentry {1}{5}{4}{86/86}{More connectives}{0}}
+\headcommand {\beamer@framepages {86}{86}}
+\headcommand {\slideentry {1}{5}{5}{87/87}{More connectives}{0}}
+\headcommand {\beamer@framepages {87}{87}}
+\headcommand {\slideentry {1}{5}{6}{88/88}{More connectives}{0}}
+\headcommand {\beamer@framepages {88}{88}}
+\headcommand {\beamer@subsectionpages {83}{88}}
+\headcommand {\beamer@subsectionentry {0}{1}{6}{89}{Defining Formulae in SL}}
+\headcommand {\slideentry {1}{6}{1}{89/89}{Defining Formulae in SL}{0}}
+\headcommand {\beamer@framepages {89}{89}}
+\headcommand {\slideentry {1}{6}{2}{90/90}{Defining Formulae in SL}{0}}
+\headcommand {\beamer@framepages {90}{90}}
+\headcommand {\slideentry {1}{6}{3}{91/91}{Defining Formulae in SL}{0}}
+\headcommand {\beamer@framepages {91}{91}}
+\headcommand {\slideentry {1}{6}{4}{92/92}{Defining Formulae in SL}{0}}
+\headcommand {\beamer@framepages {92}{92}}
+\headcommand {\slideentry {1}{6}{5}{93/93}{Defining Formulae in SL}{0}}
+\headcommand {\beamer@framepages {93}{93}}
+\headcommand {\slideentry {1}{6}{6}{94/94}{Defining Formulae in SL}{0}}
+\headcommand {\beamer@framepages {94}{94}}
+\headcommand {\beamer@subsectionpages {89}{94}}
+\headcommand {\beamer@subsectionentry {0}{1}{7}{95}{Use vs. `Mention'}}
+\headcommand {\slideentry {1}{7}{1}{95/95}{Use vs. `Mention'}{0}}
+\headcommand {\beamer@framepages {95}{95}}
+\headcommand {\slideentry {1}{7}{2}{96/96}{Use vs. `Mention'}{0}}
+\headcommand {\beamer@framepages {96}{96}}
+\headcommand {\slideentry {1}{7}{3}{97/97}{Use vs. `Mention'}{0}}
+\headcommand {\beamer@framepages {97}{97}}
+\headcommand {\slideentry {1}{7}{4}{98/98}{Use vs. `Mention'}{0}}
+\headcommand {\beamer@framepages {98}{98}}
+\headcommand {\slideentry {1}{7}{5}{99/99}{Use vs. `Mention'}{0}}
+\headcommand {\beamer@framepages {99}{99}}
+\headcommand {\slideentry {1}{7}{6}{100/100}{Use vs. `Mention'}{0}}
+\headcommand {\beamer@framepages {100}{100}}
+\headcommand {\beamer@subsectionpages {95}{100}}
+\headcommand {\beamer@subsectionentry {0}{1}{8}{101}{Ambiguity}}
+\headcommand {\slideentry {1}{8}{1}{101/101}{Ambiguity}{0}}
+\headcommand {\beamer@framepages {101}{101}}
+\headcommand {\slideentry {1}{8}{2}{102/102}{Ambiguity}{0}}
+\headcommand {\beamer@framepages {102}{102}}
+\headcommand {\slideentry {1}{8}{3}{103/103}{Ambiguity}{0}}
+\headcommand {\beamer@framepages {103}{103}}
+\headcommand {\slideentry {1}{8}{4}{104/104}{Ambiguity}{0}}
+\headcommand {\beamer@framepages {104}{104}}
+\headcommand {\slideentry {1}{8}{5}{105/105}{Ambiguity}{0}}
+\headcommand {\beamer@framepages {105}{105}}
+\headcommand {\slideentry {1}{8}{6}{106/106}{Ambiguity}{0}}
+\headcommand {\beamer@framepages {106}{106}}
+\headcommand {\beamer@subsectionpages {101}{106}}
+\headcommand {\beamer@subsectionentry {0}{1}{9}{107}{Practice Problems!}}
+\headcommand {\slideentry {1}{9}{1}{107/107}{Practice Problems!}{0}}
+\headcommand {\beamer@framepages {107}{107}}
+\headcommand {\slideentry {1}{9}{2}{108/108}{Practice Problems!}{0}}
+\headcommand {\beamer@framepages {108}{108}}
+\headcommand {\slideentry {1}{9}{3}{109/109}{Practice Problems!}{0}}
+\headcommand {\beamer@framepages {109}{109}}
+\headcommand {\slideentry {1}{9}{4}{110/110}{Practice Problems!}{0}}
+\headcommand {\beamer@framepages {110}{110}}
+\headcommand {\slideentry {1}{9}{5}{111/111}{Practice Problems!}{0}}
+\headcommand {\beamer@framepages {111}{111}}
+\headcommand {\slideentry {1}{9}{6}{112/112}{Practice Problems!}{0}}
+\headcommand {\beamer@framepages {112}{112}}
+\headcommand {\beamer@sectionpages {52}{112}}
+\headcommand {\beamer@subsectionpages {107}{112}}
+\headcommand {\sectionentry {2}{SL and truth tables}{113}{SL and truth tables}{0}}
+\headcommand {\slideentry {2}{0}{1}{113/113}{}{0}}
+\headcommand {\beamer@framepages {113}{113}}
+\headcommand {\beamer@subsectionpages {113}{113}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{114}{Characteristic truth tables}}
+\headcommand {\slideentry {2}{1}{1}{114/114}{Characteristic truth tables}{0}}
+\headcommand {\beamer@framepages {114}{114}}
+\headcommand {\slideentry {2}{1}{2}{115/115}{Characteristic truth tables}{0}}
+\headcommand {\beamer@framepages {115}{115}}
+\headcommand {\slideentry {2}{1}{3}{116/116}{Characteristic truth tables}{0}}
+\headcommand {\beamer@framepages {116}{116}}
+\headcommand {\slideentry {2}{1}{4}{117/117}{Characteristic truth tables}{0}}
+\headcommand {\beamer@framepages {117}{117}}
+\headcommand {\slideentry {2}{1}{5}{118/118}{Characteristic truth tables}{0}}
+\headcommand {\beamer@framepages {118}{118}}
+\headcommand {\slideentry {2}{1}{6}{119/119}{Characteristic truth tables}{0}}
+\headcommand {\beamer@framepages {119}{119}}
+\headcommand {\slideentry {2}{1}{7}{120/120}{Characteristic truth tables}{0}}
+\headcommand {\beamer@framepages {120}{120}}
+\headcommand {\slideentry {2}{1}{8}{121/121}{Characteristic truth tables}{0}}
+\headcommand {\beamer@framepages {121}{121}}
+\headcommand {\beamer@subsectionpages {114}{121}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{122}{Sentences of SL}}
+\headcommand {\slideentry {2}{2}{1}{122/122}{Sentences of SL}{0}}
+\headcommand {\beamer@framepages {122}{122}}
+\headcommand {\slideentry {2}{2}{2}{123/123}{Sentences of SL}{0}}
+\headcommand {\beamer@framepages {123}{123}}
+\headcommand {\slideentry {2}{2}{3}{124/124}{Sentences of SL}{0}}
+\headcommand {\beamer@framepages {124}{124}}
+\headcommand {\slideentry {2}{2}{4}{125/125}{Sentences of SL}{0}}
+\headcommand {\beamer@framepages {125}{125}}
+\headcommand {\beamer@subsectionpages {122}{125}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{126}{Truth value assignments (a.k.a. `valuations')}}
+\headcommand {\slideentry {2}{3}{1}{126/126}{Truth value assignments (a.k.a. `valuations')}{0}}
+\headcommand {\beamer@framepages {126}{126}}
+\headcommand {\slideentry {2}{3}{2}{127/127}{Truth value assignments (a.k.a. `valuations')}{0}}
+\headcommand {\beamer@framepages {127}{127}}
+\headcommand {\slideentry {2}{3}{3}{128/128}{Truth value assignments (a.k.a. `valuations')}{0}}
+\headcommand {\beamer@framepages {128}{128}}
+\headcommand {\slideentry {2}{3}{4}{129/129}{Truth value assignments (a.k.a. `valuations')}{0}}
+\headcommand {\beamer@framepages {129}{129}}
+\headcommand {\beamer@subsectionpages {126}{129}}
+\headcommand {\beamer@subsectionentry {0}{2}{4}{130}{Validity and truth tables}}
+\headcommand {\slideentry {2}{4}{1}{130/130}{Validity and truth tables}{0}}
+\headcommand {\beamer@framepages {130}{130}}
+\headcommand {\slideentry {2}{4}{2}{131/131}{Validity and truth tables}{0}}
+\headcommand {\beamer@framepages {131}{131}}
+\headcommand {\slideentry {2}{4}{3}{132/132}{Validity and truth tables}{0}}
+\headcommand {\beamer@framepages {132}{132}}
+\headcommand {\slideentry {2}{4}{4}{133/133}{Validity and truth tables}{0}}
+\headcommand {\beamer@framepages {133}{133}}
+\headcommand {\slideentry {2}{4}{5}{134/134}{Validity and truth tables}{0}}
+\headcommand {\beamer@framepages {134}{134}}
+\headcommand {\beamer@subsectionpages {130}{134}}
+\headcommand {\beamer@subsectionentry {0}{2}{5}{135}{Large truth tables}}
+\headcommand {\slideentry {2}{5}{1}{135/135}{Large truth tables}{0}}
+\headcommand {\beamer@framepages {135}{135}}
+\headcommand {\slideentry {2}{5}{2}{136/136}{Large truth tables}{0}}
+\headcommand {\beamer@framepages {136}{136}}
+\headcommand {\slideentry {2}{5}{3}{137/137}{Large truth tables}{0}}
+\headcommand {\beamer@framepages {137}{137}}
+\headcommand {\slideentry {2}{5}{4}{138/138}{Large truth tables}{0}}
+\headcommand {\beamer@framepages {138}{138}}
+\headcommand {\slideentry {2}{5}{5}{139/139}{Large truth tables}{0}}
+\headcommand {\beamer@framepages {139}{139}}
+\headcommand {\beamer@subsectionpages {135}{139}}
+\headcommand {\beamer@subsectionentry {0}{2}{6}{140}{Entailment, equivalence, tautologies}}
+\headcommand {\slideentry {2}{6}{1}{140/140}{Entailment, equivalence, tautologies}{0}}
+\headcommand {\beamer@framepages {140}{140}}
+\headcommand {\slideentry {2}{6}{2}{141/141}{Entailment, equivalence, tautologies}{0}}
+\headcommand {\beamer@framepages {141}{141}}
+\headcommand {\slideentry {2}{6}{3}{142/142}{Entailment, equivalence, tautologies}{0}}
+\headcommand {\beamer@framepages {142}{142}}
+\headcommand {\slideentry {2}{6}{4}{143/143}{Entailment, equivalence, tautologies}{0}}
+\headcommand {\beamer@framepages {143}{143}}
+\headcommand {\slideentry {2}{6}{5}{144/144}{Entailment, equivalence, tautologies}{0}}
+\headcommand {\beamer@framepages {144}{144}}
+\headcommand {\slideentry {2}{6}{6}{145/145}{Entailment, equivalence, tautologies}{0}}
+\headcommand {\beamer@framepages {145}{145}}
+\headcommand {\slideentry {2}{6}{7}{146/146}{Entailment, equivalence, tautologies}{0}}
+\headcommand {\beamer@framepages {146}{146}}
+\headcommand {\slideentry {2}{6}{8}{147/147}{Entailment, equivalence, tautologies}{0}}
+\headcommand {\beamer@framepages {147}{147}}
+\headcommand {\slideentry {2}{6}{9}{148/148}{Entailment, equivalence, tautologies}{0}}
+\headcommand {\beamer@framepages {148}{148}}
+\headcommand {\slideentry {2}{6}{10}{149/149}{Entailment, equivalence, tautologies}{0}}
+\headcommand {\beamer@framepages {149}{149}}
+\headcommand {\slideentry {2}{6}{11}{150/150}{Entailment, equivalence, tautologies}{0}}
+\headcommand {\beamer@framepages {150}{150}}
+\headcommand {\beamer@subsectionpages {140}{150}}
+\headcommand {\beamer@subsectionentry {0}{2}{7}{151}{Consistency}}
+\headcommand {\slideentry {2}{7}{1}{151/151}{Consistency}{0}}
+\headcommand {\beamer@framepages {151}{151}}
+\headcommand {\slideentry {2}{7}{2}{152/152}{Consistency}{0}}
+\headcommand {\beamer@framepages {152}{152}}
+\headcommand {\slideentry {2}{7}{3}{153/153}{Consistency}{0}}
+\headcommand {\beamer@framepages {153}{153}}
+\headcommand {\slideentry {2}{7}{4}{154/154}{Consistency}{0}}
+\headcommand {\beamer@framepages {154}{154}}
+\headcommand {\slideentry {2}{7}{5}{155/155}{Consistency}{0}}
+\headcommand {\beamer@framepages {155}{155}}
+\headcommand {\slideentry {2}{7}{6}{156/156}{Consistency}{0}}
+\headcommand {\beamer@framepages {156}{156}}
+\headcommand {\slideentry {2}{7}{7}{157/157}{Consistency}{0}}
+\headcommand {\beamer@framepages {157}{157}}
+\headcommand {\slideentry {2}{7}{8}{158/158}{Consistency}{0}}
+\headcommand {\beamer@framepages {158}{158}}
+\headcommand {\slideentry {2}{7}{9}{159/159}{Consistency}{0}}
+\headcommand {\beamer@framepages {159}{159}}
+\headcommand {\beamer@sectionpages {113}{159}}
+\headcommand {\beamer@subsectionpages {151}{159}}
+\headcommand {\sectionentry {3}{Mathematical Induction \& Recursive Definitions}{160}{Mathematical Induction \& Recursive Definitions}{0}}
+\headcommand {\slideentry {3}{0}{1}{160/160}{}{0}}
+\headcommand {\beamer@framepages {160}{160}}
+\headcommand {\slideentry {3}{0}{2}{161/161}{}{0}}
+\headcommand {\beamer@framepages {161}{161}}
+\headcommand {\beamer@subsectionpages {160}{161}}
+\headcommand {\beamer@subsectionentry {0}{3}{1}{162}{Intro to Math. Induction}}
+\headcommand {\slideentry {3}{1}{1}{162/162}{Intro to Math. Induction}{0}}
+\headcommand {\beamer@framepages {162}{162}}
+\headcommand {\slideentry {3}{1}{2}{163/163}{Intro to Math. Induction}{0}}
+\headcommand {\beamer@framepages {163}{163}}
+\headcommand {\slideentry {3}{1}{3}{164/164}{Intro to Math. Induction}{0}}
+\headcommand {\beamer@framepages {164}{164}}
+\headcommand {\slideentry {3}{1}{4}{165/165}{Intro to Math. Induction}{0}}
+\headcommand {\beamer@framepages {165}{165}}
+\headcommand {\slideentry {3}{1}{5}{166/166}{Intro to Math. Induction}{0}}
+\headcommand {\beamer@framepages {166}{166}}
+\headcommand {\slideentry {3}{1}{6}{167/167}{Intro to Math. Induction}{0}}
+\headcommand {\beamer@framepages {167}{167}}
+\headcommand {\beamer@subsectionpages {162}{167}}
+\headcommand {\beamer@subsectionentry {0}{3}{2}{168}{Recursive Definitions}}
+\headcommand {\slideentry {3}{2}{1}{168/168}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {168}{168}}
+\headcommand {\slideentry {3}{2}{2}{169/169}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {169}{169}}
+\headcommand {\slideentry {3}{2}{3}{170/170}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {170}{170}}
+\headcommand {\slideentry {3}{2}{4}{171/171}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {171}{171}}
+\headcommand {\slideentry {3}{2}{5}{172/172}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {172}{172}}
+\headcommand {\slideentry {3}{2}{6}{173/173}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {173}{173}}
+\headcommand {\slideentry {3}{2}{7}{174/174}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {174}{174}}
+\headcommand {\slideentry {3}{2}{8}{175/175}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {175}{175}}
+\headcommand {\slideentry {3}{2}{9}{176/176}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {176}{176}}
+\headcommand {\slideentry {3}{2}{10}{177/177}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {177}{177}}
+\headcommand {\beamer@subsubsectionentry {0}{3}{2}{1}{178}{Recursive Definitions for SL and $\mathbb {N}$}}
+\headcommand {\slideentry {3}{2}{11}{178/178}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {178}{178}}
+\headcommand {\slideentry {3}{2}{12}{179/179}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {179}{179}}
+\headcommand {\slideentry {3}{2}{13}{180/180}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {180}{180}}
+\headcommand {\beamer@subsubsectionentry {0}{3}{2}{2}{181}{Recursive definitions of Strings}}
+\headcommand {\slideentry {3}{2}{14}{181/181}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {181}{181}}
+\headcommand {\slideentry {3}{2}{15}{182/182}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {182}{182}}
+\headcommand {\slideentry {3}{2}{16}{183/183}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {183}{183}}
+\headcommand {\slideentry {3}{2}{17}{184/184}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {184}{184}}
+\headcommand {\slideentry {3}{2}{18}{185/185}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {185}{185}}
+\headcommand {\beamer@subsectionpages {168}{185}}
+\headcommand {\beamer@subsectionentry {0}{3}{3}{186}{Mathematical Induction}}
+\headcommand {\slideentry {3}{3}{1}{186/186}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {186}{186}}
+\headcommand {\slideentry {3}{3}{2}{187/187}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {187}{187}}
+\headcommand {\slideentry {3}{3}{3}{188/188}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {188}{188}}
+\headcommand {\slideentry {3}{3}{4}{189/189}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {189}{189}}
+\headcommand {\slideentry {3}{3}{5}{190/190}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {190}{190}}
+\headcommand {\slideentry {3}{3}{6}{191/191}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {191}{191}}
+\headcommand {\slideentry {3}{3}{7}{192/192}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {192}{192}}
+\headcommand {\slideentry {3}{3}{8}{193/193}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {193}{193}}
+\headcommand {\slideentry {3}{3}{9}{194/194}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {194}{194}}
+\headcommand {\slideentry {3}{3}{10}{195/195}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {195}{195}}
+\headcommand {\slideentry {3}{3}{11}{196/196}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {196}{196}}
+\headcommand {\slideentry {3}{3}{12}{197/197}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {197}{197}}
+\headcommand {\slideentry {3}{3}{13}{198/198}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {198}{198}}
+\headcommand {\slideentry {3}{3}{14}{199/199}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {199}{199}}
+\headcommand {\slideentry {3}{3}{15}{200/200}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {200}{200}}
+\headcommand {\slideentry {3}{3}{16}{201/201}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {201}{201}}
+\headcommand {\beamer@subsubsectionentry {0}{3}{3}{1}{202}{Analogue of a HW Problem}}
+\headcommand {\slideentry {3}{3}{17}{202/202}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {202}{202}}
+\headcommand {\beamer@subsubsectionentry {0}{3}{3}{2}{203}{Sketch of another example (Skipped in Lecture)}}
+\headcommand {\slideentry {3}{3}{18}{203/203}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {203}{203}}
+\headcommand {\slideentry {3}{3}{19}{204/204}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {204}{204}}
+\headcommand {\slideentry {3}{3}{20}{205/205}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {205}{205}}
+\headcommand {\slideentry {3}{3}{21}{206/206}{Mathematical Induction}{0}}
+\headcommand {\beamer@framepages {206}{206}}
+\headcommand {\beamer@subsectionpages {186}{206}}
+\headcommand {\beamer@subsectionentry {0}{3}{4}{207}{Ordinary vs. Complete Induction}}
+\headcommand {\slideentry {3}{4}{1}{207/207}{Ordinary vs. Complete Induction}{0}}
+\headcommand {\beamer@framepages {207}{207}}
+\headcommand {\slideentry {3}{4}{2}{208/208}{Ordinary vs. Complete Induction}{0}}
+\headcommand {\beamer@framepages {208}{208}}
+\headcommand {\slideentry {3}{4}{3}{209/209}{Ordinary vs. Complete Induction}{0}}
+\headcommand {\beamer@framepages {209}{209}}
+\headcommand {\slideentry {3}{4}{4}{210/210}{Ordinary vs. Complete Induction}{0}}
+\headcommand {\beamer@framepages {210}{210}}
+\headcommand {\slideentry {3}{4}{5}{211/211}{Ordinary vs. Complete Induction}{0}}
+\headcommand {\beamer@framepages {211}{211}}
+\headcommand {\beamer@subsectionpages {207}{211}}
+\headcommand {\beamer@subsectionentry {0}{3}{5}{212}{Recursion and Induction for Palindromes}}
+\headcommand {\slideentry {3}{5}{1}{212/212}{Recursion and Induction for Palindromes}{0}}
+\headcommand {\beamer@framepages {212}{212}}
+\headcommand {\slideentry {3}{5}{2}{213/213}{Recursion and Induction for Palindromes}{0}}
+\headcommand {\beamer@framepages {213}{213}}
+\headcommand {\slideentry {3}{5}{3}{214/214}{Recursion and Induction for Palindromes}{0}}
+\headcommand {\beamer@framepages {214}{214}}
+\headcommand {\slideentry {3}{5}{4}{215/215}{Recursion and Induction for Palindromes}{0}}
+\headcommand {\beamer@framepages {215}{215}}
+\headcommand {\slideentry {3}{5}{5}{216/216}{Recursion and Induction for Palindromes}{0}}
+\headcommand {\beamer@framepages {216}{216}}
+\headcommand {\slideentry {3}{5}{6}{217/217}{Recursion and Induction for Palindromes}{0}}
+\headcommand {\beamer@framepages {217}{217}}
+\headcommand {\slideentry {3}{5}{7}{218/218}{Recursion and Induction for Palindromes}{0}}
+\headcommand {\beamer@framepages {218}{218}}
+\headcommand {\slideentry {3}{5}{8}{219/219}{Recursion and Induction for Palindromes}{0}}
+\headcommand {\beamer@framepages {219}{219}}
+\headcommand {\slideentry {3}{5}{9}{220/220}{Recursion and Induction for Palindromes}{0}}
+\headcommand {\beamer@framepages {220}{220}}
+\headcommand {\slideentry {3}{5}{10}{221/221}{Recursion and Induction for Palindromes}{0}}
+\headcommand {\beamer@framepages {221}{221}}
+\headcommand {\beamer@subsubsectionentry {0}{3}{5}{1}{222}{Remarks on the ``a-palindrome" question on the problem set}}
+\headcommand {\slideentry {3}{5}{11}{222/222}{Recursion and Induction for Palindromes}{0}}
+\headcommand {\beamer@framepages {222}{222}}
+\headcommand {\slideentry {3}{5}{12}{223/223}{Recursion and Induction for Palindromes}{0}}
+\headcommand {\beamer@framepages {223}{223}}
+\headcommand {\slideentry {3}{5}{13}{224/224}{Recursion and Induction for Palindromes}{0}}
+\headcommand {\beamer@framepages {224}{224}}
+\headcommand {\beamer@subsubsectionentry {0}{3}{5}{2}{225}{Stamps}}
+\headcommand {\slideentry {3}{5}{14}{225/225}{Recursion and Induction for Palindromes}{0}}
+\headcommand {\beamer@framepages {225}{225}}
+\headcommand {\slideentry {3}{5}{15}{226/226}{Recursion and Induction for Palindromes}{0}}
+\headcommand {\beamer@framepages {226}{226}}
+\headcommand {\beamer@subsectionpages {212}{226}}
+\headcommand {\beamer@subsectionentry {0}{3}{6}{227}{Recasting Induction in SL as Complete Induction}}
+\headcommand {\slideentry {3}{6}{1}{227/227}{Recasting Induction in SL as Complete Induction}{0}}
+\headcommand {\beamer@framepages {227}{227}}
+\headcommand {\slideentry {3}{6}{2}{228/228}{Recasting Induction in SL as Complete Induction}{0}}
+\headcommand {\beamer@framepages {228}{228}}
+\headcommand {\slideentry {3}{6}{3}{229/229}{Recasting Induction in SL as Complete Induction}{0}}
+\headcommand {\beamer@framepages {229}{229}}
+\headcommand {\slideentry {3}{6}{4}{230/230}{Recasting Induction in SL as Complete Induction}{0}}
+\headcommand {\beamer@framepages {230}{230}}
+\headcommand {\slideentry {3}{6}{5}{231/231}{Recasting Induction in SL as Complete Induction}{0}}
+\headcommand {\beamer@framepages {231}{231}}
+\headcommand {\slideentry {3}{6}{6}{232/232}{Recasting Induction in SL as Complete Induction}{0}}
+\headcommand {\beamer@framepages {232}{232}}
+\headcommand {\slideentry {3}{6}{7}{233/233}{Recasting Induction in SL as Complete Induction}{0}}
+\headcommand {\beamer@framepages {233}{233}}
+\headcommand {\slideentry {3}{6}{8}{234/234}{Recasting Induction in SL as Complete Induction}{0}}
+\headcommand {\beamer@framepages {234}{234}}
+\headcommand {\beamer@subsectionpages {227}{234}}
+\headcommand {\beamer@subsectionentry {0}{3}{7}{235}{More induction and recursion on strings}}
+\headcommand {\slideentry {3}{7}{1}{235/235}{More induction and recursion on strings}{0}}
+\headcommand {\beamer@framepages {235}{235}}
+\headcommand {\slideentry {3}{7}{2}{236/236}{More induction and recursion on strings}{0}}
+\headcommand {\beamer@framepages {236}{236}}
+\headcommand {\slideentry {3}{7}{3}{237/237}{More induction and recursion on strings}{0}}
+\headcommand {\beamer@framepages {237}{237}}
+\headcommand {\slideentry {3}{7}{4}{238/238}{More induction and recursion on strings}{0}}
+\headcommand {\beamer@framepages {238}{238}}
+\headcommand {\slideentry {3}{7}{5}{239/239}{More induction and recursion on strings}{0}}
+\headcommand {\beamer@framepages {239}{239}}
+\headcommand {\slideentry {3}{7}{6}{240/240}{More induction and recursion on strings}{0}}
+\headcommand {\beamer@framepages {240}{240}}
+\headcommand {\slideentry {3}{7}{7}{241/241}{More induction and recursion on strings}{0}}
+\headcommand {\beamer@framepages {241}{241}}
+\headcommand {\beamer@subsectionpages {235}{241}}
+\headcommand {\beamer@subsectionentry {0}{3}{8}{242}{Extra `Big Picture' stuff for Recursion}}
+\headcommand {\slideentry {3}{8}{1}{242/242}{Extra `Big Picture' stuff for Recursion}{0}}
+\headcommand {\beamer@framepages {242}{242}}
+\headcommand {\slideentry {3}{8}{2}{243/243}{Extra `Big Picture' stuff for Recursion}{0}}
+\headcommand {\beamer@framepages {243}{243}}
+\headcommand {\slideentry {3}{8}{3}{244/244}{Extra `Big Picture' stuff for Recursion}{0}}
+\headcommand {\beamer@framepages {244}{244}}
+\headcommand {\slideentry {3}{8}{4}{245/245}{Extra `Big Picture' stuff for Recursion}{0}}
+\headcommand {\beamer@framepages {245}{245}}
+\headcommand {\slideentry {3}{8}{5}{246/246}{Extra `Big Picture' stuff for Recursion}{0}}
+\headcommand {\beamer@framepages {246}{246}}
+\headcommand {\slideentry {3}{8}{6}{247/247}{Extra `Big Picture' stuff for Recursion}{0}}
+\headcommand {\beamer@framepages {247}{247}}
+\headcommand {\beamer@subsectionpages {242}{247}}
+\headcommand {\beamer@subsectionentry {0}{3}{9}{248}{Towers of Hanoi Example}}
+\headcommand {\slideentry {3}{9}{1}{248/248}{Towers of Hanoi Example}{0}}
+\headcommand {\beamer@framepages {248}{248}}
+\headcommand {\slideentry {3}{9}{2}{249/249}{Towers of Hanoi Example}{0}}
+\headcommand {\beamer@framepages {249}{249}}
+\headcommand {\slideentry {3}{9}{3}{250/250}{Towers of Hanoi Example}{0}}
+\headcommand {\beamer@framepages {250}{250}}
+\headcommand {\slideentry {3}{9}{4}{251/251}{Towers of Hanoi Example}{0}}
+\headcommand {\beamer@framepages {251}{251}}
+\headcommand {\slideentry {3}{9}{5}{252/252}{Towers of Hanoi Example}{0}}
+\headcommand {\beamer@framepages {252}{252}}
+\headcommand {\beamer@sectionpages {160}{252}}
+\headcommand {\beamer@subsectionpages {248}{252}}
+\headcommand {\sectionentry {4}{Truth Trees}{253}{Truth Trees}{0}}
+\headcommand {\slideentry {4}{0}{1}{253/253}{}{0}}
+\headcommand {\beamer@framepages {253}{253}}
+\headcommand {\slideentry {4}{0}{2}{254/254}{}{0}}
+\headcommand {\beamer@framepages {254}{254}}
+\headcommand {\beamer@subsectionpages {253}{254}}
+\headcommand {\beamer@subsectionentry {0}{4}{1}{255}{Why Trees?}}
+\headcommand {\slideentry {4}{1}{1}{255/255}{Why Trees?}{0}}
+\headcommand {\beamer@framepages {255}{255}}
+\headcommand {\slideentry {4}{1}{2}{256/256}{Why Trees?}{0}}
+\headcommand {\beamer@framepages {256}{256}}
+\headcommand {\slideentry {4}{1}{3}{257/257}{Why Trees?}{0}}
+\headcommand {\beamer@framepages {257}{257}}
+\headcommand {\slideentry {4}{1}{4}{258/258}{Why Trees?}{0}}
+\headcommand {\beamer@framepages {258}{258}}
+\headcommand {\slideentry {4}{1}{5}{259/259}{Why Trees?}{0}}
+\headcommand {\beamer@framepages {259}{259}}
+\headcommand {\slideentry {4}{1}{6}{260/260}{Why Trees?}{0}}
+\headcommand {\beamer@framepages {260}{260}}
+\headcommand {\slideentry {4}{1}{7}{261/261}{Why Trees?}{0}}
+\headcommand {\beamer@framepages {261}{261}}
+\headcommand {\slideentry {4}{1}{8}{262/262}{Why Trees?}{0}}
+\headcommand {\beamer@framepages {262}{262}}
+\headcommand {\beamer@subsectionpages {255}{262}}
+\headcommand {\beamer@subsectionentry {0}{4}{2}{263}{Tree Rules (trees rule!)}}
+\headcommand {\slideentry {4}{2}{1}{263/263}{Tree Rules (trees rule!)}{0}}
+\headcommand {\beamer@framepages {263}{263}}
+\headcommand {\slideentry {4}{2}{2}{264/264}{Tree Rules (trees rule!)}{0}}
+\headcommand {\beamer@framepages {264}{264}}
+\headcommand {\slideentry {4}{2}{3}{265/265}{Tree Rules (trees rule!)}{0}}
+\headcommand {\beamer@framepages {265}{265}}
+\headcommand {\slideentry {4}{2}{4}{266/266}{Tree Rules (trees rule!)}{0}}
+\headcommand {\beamer@framepages {266}{266}}
+\headcommand {\slideentry {4}{2}{5}{267/267}{Tree Rules (trees rule!)}{0}}
+\headcommand {\beamer@framepages {267}{267}}
+\headcommand {\slideentry {4}{2}{6}{268/268}{Tree Rules (trees rule!)}{0}}
+\headcommand {\beamer@framepages {268}{268}}
+\headcommand {\slideentry {4}{2}{7}{269/269}{Tree Rules (trees rule!)}{0}}
+\headcommand {\beamer@framepages {269}{269}}
+\headcommand {\slideentry {4}{2}{8}{270/270}{Tree Rules (trees rule!)}{0}}
+\headcommand {\beamer@framepages {270}{270}}
+\headcommand {\slideentry {4}{2}{9}{271/271}{Tree Rules (trees rule!)}{0}}
+\headcommand {\beamer@framepages {271}{271}}
+\headcommand {\slideentry {4}{2}{10}{272/272}{Tree Rules (trees rule!)}{0}}
+\headcommand {\beamer@framepages {272}{272}}
+\headcommand {\slideentry {4}{2}{11}{273/273}{Tree Rules (trees rule!)}{0}}
+\headcommand {\beamer@framepages {273}{273}}
+\headcommand {\beamer@subsectionpages {263}{273}}
+\headcommand {\beamer@subsectionentry {0}{4}{3}{274}{Grow your own Trees!}}
+\headcommand {\slideentry {4}{3}{1}{274/274}{Grow your own Trees!}{0}}
+\headcommand {\beamer@framepages {274}{274}}
+\headcommand {\slideentry {4}{3}{2}{275/275}{Grow your own Trees!}{0}}
+\headcommand {\beamer@framepages {275}{275}}
+\headcommand {\slideentry {4}{3}{3}{276/276}{Grow your own Trees!}{0}}
+\headcommand {\beamer@framepages {276}{276}}
+\headcommand {\slideentry {4}{3}{4}{277/277}{Grow your own Trees!}{0}}
+\headcommand {\beamer@framepages {277}{277}}
+\headcommand {\slideentry {4}{3}{5}{278/278}{Grow your own Trees!}{0}}
+\headcommand {\beamer@framepages {278}{278}}
+\headcommand {\slideentry {4}{3}{6}{279/279}{Grow your own Trees!}{0}}
+\headcommand {\beamer@framepages {279}{279}}
+\headcommand {\slideentry {4}{3}{7}{280/280}{Grow your own Trees!}{0}}
+\headcommand {\beamer@framepages {280}{280}}
+\headcommand {\beamer@subsectionpages {274}{280}}
+\headcommand {\beamer@subsectionentry {0}{4}{4}{281}{Using Trees}}
+\headcommand {\slideentry {4}{4}{1}{281/281}{Using Trees}{0}}
+\headcommand {\beamer@framepages {281}{281}}
+\headcommand {\slideentry {4}{4}{2}{282/282}{Using Trees}{0}}
+\headcommand {\beamer@framepages {282}{282}}
+\headcommand {\slideentry {4}{4}{3}{283/283}{Using Trees}{0}}
+\headcommand {\beamer@framepages {283}{283}}
+\headcommand {\slideentry {4}{4}{4}{284/284}{Using Trees}{0}}
+\headcommand {\beamer@framepages {284}{284}}
+\headcommand {\slideentry {4}{4}{5}{285/285}{Using Trees}{0}}
+\headcommand {\beamer@framepages {285}{285}}
+\headcommand {\slideentry {4}{4}{6}{286/286}{Using Trees}{0}}
+\headcommand {\beamer@framepages {286}{286}}
+\headcommand {\slideentry {4}{4}{7}{287/287}{Using Trees}{0}}
+\headcommand {\beamer@framepages {287}{287}}
+\headcommand {\slideentry {4}{4}{8}{288/288}{Using Trees}{0}}
+\headcommand {\beamer@framepages {288}{288}}
+\headcommand {\slideentry {4}{4}{9}{289/289}{Using Trees}{0}}
+\headcommand {\beamer@framepages {289}{289}}
+\headcommand {\slideentry {4}{4}{10}{290/290}{Using Trees}{0}}
+\headcommand {\beamer@framepages {290}{290}}
+\headcommand {\slideentry {4}{4}{11}{291/291}{Using Trees}{0}}
+\headcommand {\beamer@framepages {291}{291}}
+\headcommand {\beamer@subsectionpages {281}{291}}
+\headcommand {\beamer@subsectionentry {0}{4}{5}{292}{Topical Topiary Tips}}
+\headcommand {\slideentry {4}{5}{1}{292/292}{Topical Topiary Tips}{0}}
+\headcommand {\beamer@framepages {292}{292}}
+\headcommand {\slideentry {4}{5}{2}{293/293}{Topical Topiary Tips}{0}}
+\headcommand {\beamer@framepages {293}{293}}
+\headcommand {\slideentry {4}{5}{3}{294/294}{Topical Topiary Tips}{0}}
+\headcommand {\beamer@framepages {294}{294}}
+\headcommand {\slideentry {4}{5}{4}{295/295}{Topical Topiary Tips}{0}}
+\headcommand {\beamer@framepages {295}{295}}
+\headcommand {\slideentry {4}{5}{5}{296/296}{Topical Topiary Tips}{0}}
+\headcommand {\beamer@framepages {296}{296}}
+\headcommand {\slideentry {4}{5}{6}{297/297}{Topical Topiary Tips}{0}}
+\headcommand {\beamer@framepages {297}{297}}
+\headcommand {\slideentry {4}{5}{7}{298/298}{Topical Topiary Tips}{0}}
+\headcommand {\beamer@framepages {298}{298}}
+\headcommand {\slideentry {4}{5}{8}{299/299}{Topical Topiary Tips}{0}}
+\headcommand {\beamer@framepages {299}{299}}
+\headcommand {\slideentry {4}{5}{9}{300/300}{Topical Topiary Tips}{0}}
+\headcommand {\beamer@framepages {300}{300}}
+\headcommand {\beamer@subsectionpages {292}{300}}
+\headcommand {\beamer@subsectionentry {0}{4}{6}{301}{Practice with Proofs}}
+\headcommand {\slideentry {4}{6}{1}{301/301}{Practice with Proofs}{0}}
+\headcommand {\beamer@framepages {301}{301}}
+\headcommand {\slideentry {4}{6}{2}{302/302}{Practice with Proofs}{0}}
+\headcommand {\beamer@framepages {302}{302}}
+\headcommand {\slideentry {4}{6}{3}{303/303}{Practice with Proofs}{0}}
+\headcommand {\beamer@framepages {303}{303}}
+\headcommand {\slideentry {4}{6}{4}{304/304}{Practice with Proofs}{0}}
+\headcommand {\beamer@framepages {304}{304}}
+\headcommand {\beamer@sectionpages {253}{304}}
+\headcommand {\beamer@subsectionpages {301}{304}}
+\headcommand {\sectionentry {5}{Metalogic for STD}{305}{Metalogic for STD}{0}}
+\headcommand {\slideentry {5}{0}{1}{305/305}{}{0}}
+\headcommand {\beamer@framepages {305}{305}}
+\headcommand {\slideentry {5}{0}{2}{306/306}{}{0}}
+\headcommand {\beamer@framepages {306}{306}}
+\headcommand {\beamer@subsectionpages {305}{306}}
+\headcommand {\beamer@subsectionentry {0}{5}{1}{307}{Big Picture Stuff}}
+\headcommand {\slideentry {5}{1}{1}{307/307}{Big Picture Stuff}{0}}
+\headcommand {\beamer@framepages {307}{307}}
+\headcommand {\slideentry {5}{1}{2}{308/308}{Big Picture Stuff}{0}}
+\headcommand {\beamer@framepages {308}{308}}
+\headcommand {\slideentry {5}{1}{3}{309/309}{Big Picture Stuff}{0}}
+\headcommand {\beamer@framepages {309}{309}}
+\headcommand {\slideentry {5}{1}{4}{310/310}{Big Picture Stuff}{0}}
+\headcommand {\beamer@framepages {310}{310}}
+\headcommand {\slideentry {5}{1}{5}{311/311}{Big Picture Stuff}{0}}
+\headcommand {\beamer@framepages {311}{311}}
+\headcommand {\slideentry {5}{1}{6}{312/312}{Big Picture Stuff}{0}}
+\headcommand {\beamer@framepages {312}{312}}
+\headcommand {\beamer@subsectionpages {307}{312}}
+\headcommand {\beamer@subsectionentry {0}{5}{2}{313}{Soundness of System STD}}
+\headcommand {\slideentry {5}{2}{1}{313/313}{Soundness of System STD}{0}}
+\headcommand {\beamer@framepages {313}{313}}
+\headcommand {\slideentry {5}{2}{2}{314/314}{Soundness of System STD}{0}}
+\headcommand {\beamer@framepages {314}{314}}
+\headcommand {\slideentry {5}{2}{3}{315/315}{Soundness of System STD}{0}}
+\headcommand {\beamer@framepages {315}{315}}
+\headcommand {\slideentry {5}{2}{4}{316/316}{Soundness of System STD}{0}}
+\headcommand {\beamer@framepages {316}{316}}
+\headcommand {\slideentry {5}{2}{5}{317/317}{Soundness of System STD}{0}}
+\headcommand {\beamer@framepages {317}{317}}
+\headcommand {\slideentry {5}{2}{6}{318/318}{Soundness of System STD}{0}}
+\headcommand {\beamer@framepages {318}{318}}
+\headcommand {\slideentry {5}{2}{7}{319/319}{Soundness of System STD}{0}}
+\headcommand {\beamer@framepages {319}{319}}
+\headcommand {\slideentry {5}{2}{8}{320/320}{Soundness of System STD}{0}}
+\headcommand {\beamer@framepages {320}{320}}
+\headcommand {\slideentry {5}{2}{9}{321/321}{Soundness of System STD}{0}}
+\headcommand {\beamer@framepages {321}{321}}
+\headcommand {\slideentry {5}{2}{10}{322/322}{Soundness of System STD}{0}}
+\headcommand {\beamer@framepages {322}{322}}
+\headcommand {\beamer@subsubsectionentry {0}{5}{2}{1}{323}{Working through some (sub)cases}}
+\headcommand {\slideentry {5}{2}{11}{323/323}{Soundness of System STD}{0}}
+\headcommand {\beamer@framepages {323}{323}}
+\headcommand {\slideentry {5}{2}{12}{324/324}{Soundness of System STD}{0}}
+\headcommand {\beamer@framepages {324}{324}}
+\headcommand {\beamer@subsectionpages {313}{324}}
+\headcommand {\beamer@subsectionentry {0}{5}{3}{325}{Testing Alternative Rules: Soundness}}
+\headcommand {\slideentry {5}{3}{1}{325/325}{Testing Alternative Rules: Soundness}{0}}
+\headcommand {\beamer@framepages {325}{325}}
+\headcommand {\slideentry {5}{3}{2}{326/326}{Testing Alternative Rules: Soundness}{0}}
+\headcommand {\beamer@framepages {326}{326}}
+\headcommand {\slideentry {5}{3}{3}{327/327}{Testing Alternative Rules: Soundness}{0}}
+\headcommand {\beamer@framepages {327}{327}}
+\headcommand {\slideentry {5}{3}{4}{328/328}{Testing Alternative Rules: Soundness}{0}}
+\headcommand {\beamer@framepages {328}{328}}
+\headcommand {\slideentry {5}{3}{5}{329/329}{Testing Alternative Rules: Soundness}{0}}
+\headcommand {\beamer@framepages {329}{329}}
+\headcommand {\slideentry {5}{3}{6}{330/330}{Testing Alternative Rules: Soundness}{0}}
+\headcommand {\beamer@framepages {330}{330}}
+\headcommand {\slideentry {5}{3}{7}{331/331}{Testing Alternative Rules: Soundness}{0}}
+\headcommand {\beamer@framepages {331}{331}}
+\headcommand {\slideentry {5}{3}{8}{332/332}{Testing Alternative Rules: Soundness}{0}}
+\headcommand {\beamer@framepages {332}{332}}
+\headcommand {\slideentry {5}{3}{9}{333/333}{Testing Alternative Rules: Soundness}{0}}
+\headcommand {\beamer@framepages {333}{333}}
+\headcommand {\slideentry {5}{3}{10}{334/334}{Testing Alternative Rules: Soundness}{0}}
+\headcommand {\beamer@framepages {334}{334}}
+\headcommand {\beamer@subsectionpages {325}{334}}
+\headcommand {\beamer@subsectionentry {0}{5}{4}{335}{Completeness of System STD}}
+\headcommand {\slideentry {5}{4}{1}{335/335}{Completeness of System STD}{0}}
+\headcommand {\beamer@framepages {335}{335}}
+\headcommand {\slideentry {5}{4}{2}{336/336}{Completeness of System STD}{0}}
+\headcommand {\beamer@framepages {336}{336}}
+\headcommand {\slideentry {5}{4}{3}{337/337}{Completeness of System STD}{0}}
+\headcommand {\beamer@framepages {337}{337}}
+\headcommand {\slideentry {5}{4}{4}{338/338}{Completeness of System STD}{0}}
+\headcommand {\beamer@framepages {338}{338}}
+\headcommand {\slideentry {5}{4}{5}{339/339}{Completeness of System STD}{0}}
+\headcommand {\beamer@framepages {339}{339}}
+\headcommand {\slideentry {5}{4}{6}{340/340}{Completeness of System STD}{0}}
+\headcommand {\beamer@framepages {340}{340}}
+\headcommand {\slideentry {5}{4}{7}{341/341}{Completeness of System STD}{0}}
+\headcommand {\beamer@framepages {341}{341}}
+\headcommand {\slideentry {5}{4}{8}{342/342}{Completeness of System STD}{0}}
+\headcommand {\beamer@framepages {342}{342}}
+\headcommand {\beamer@subsubsectionentry {0}{5}{4}{1}{343}{Becoming complete}}
+\headcommand {\slideentry {5}{4}{9}{343/343}{Completeness of System STD}{0}}
+\headcommand {\beamer@framepages {343}{343}}
+\headcommand {\slideentry {5}{4}{10}{344/344}{Completeness of System STD}{0}}
+\headcommand {\beamer@framepages {344}{344}}
+\headcommand {\slideentry {5}{4}{11}{345/345}{Completeness of System STD}{0}}
+\headcommand {\beamer@framepages {345}{345}}
+\headcommand {\slideentry {5}{4}{12}{346/346}{Completeness of System STD}{0}}
+\headcommand {\beamer@framepages {346}{346}}
+\headcommand {\beamer@subsubsectionentry {0}{5}{4}{2}{347}{A Key fact from Our Construction}}
+\headcommand {\slideentry {5}{4}{13}{347/347}{Completeness of System STD}{0}}
+\headcommand {\beamer@framepages {347}{347}}
+\headcommand {\slideentry {5}{4}{14}{348/348}{Completeness of System STD}{0}}
+\headcommand {\beamer@framepages {348}{348}}
+\headcommand {\beamer@subsectionpages {335}{348}}
+\headcommand {\beamer@subsectionentry {0}{5}{5}{349}{Testing Alternative Rules: Completeness}}
+\headcommand {\slideentry {5}{5}{1}{349/349}{Testing Alternative Rules: Completeness}{0}}
+\headcommand {\beamer@framepages {349}{349}}
+\headcommand {\slideentry {5}{5}{2}{350/350}{Testing Alternative Rules: Completeness}{0}}
+\headcommand {\beamer@framepages {350}{350}}
+\headcommand {\slideentry {5}{5}{3}{351/351}{Testing Alternative Rules: Completeness}{0}}
+\headcommand {\beamer@framepages {351}{351}}
+\headcommand {\slideentry {5}{5}{4}{352/352}{Testing Alternative Rules: Completeness}{0}}
+\headcommand {\beamer@framepages {352}{352}}
+\headcommand {\slideentry {5}{5}{5}{353/353}{Testing Alternative Rules: Completeness}{0}}
+\headcommand {\beamer@framepages {353}{353}}
+\headcommand {\slideentry {5}{5}{6}{354/354}{Testing Alternative Rules: Completeness}{0}}
+\headcommand {\beamer@framepages {354}{354}}
+\headcommand {\slideentry {5}{5}{7}{355/355}{Testing Alternative Rules: Completeness}{0}}
+\headcommand {\beamer@framepages {355}{355}}
+\headcommand {\slideentry {5}{5}{8}{356/356}{Testing Alternative Rules: Completeness}{0}}
+\headcommand {\beamer@framepages {356}{356}}
+\headcommand {\slideentry {5}{5}{9}{357/357}{Testing Alternative Rules: Completeness}{0}}
+\headcommand {\beamer@framepages {357}{357}}
+\headcommand {\slideentry {5}{5}{10}{358/358}{Testing Alternative Rules: Completeness}{0}}
+\headcommand {\beamer@framepages {358}{358}}
+\headcommand {\beamer@sectionpages {305}{358}}
+\headcommand {\beamer@subsectionpages {349}{358}}
+\headcommand {\sectionentry {6}{Proofs in SL}{359}{Proofs in SL}{0}}
+\headcommand {\slideentry {6}{0}{1}{359/359}{}{0}}
+\headcommand {\beamer@framepages {359}{359}}
+\headcommand {\slideentry {6}{0}{2}{360/360}{}{0}}
+\headcommand {\beamer@framepages {360}{360}}
+\headcommand {\beamer@subsectionpages {359}{360}}
+\headcommand {\beamer@subsectionentry {0}{6}{1}{361}{Who ordered \textit {that}???}}
+\headcommand {\slideentry {6}{1}{1}{361/361}{Who ordered \textit {that}???}{0}}
+\headcommand {\beamer@framepages {361}{361}}
+\headcommand {\slideentry {6}{1}{2}{362/362}{Who ordered \textit {that}???}{0}}
+\headcommand {\beamer@framepages {362}{362}}
+\headcommand {\slideentry {6}{1}{3}{363/363}{Who ordered \textit {that}???}{0}}
+\headcommand {\beamer@framepages {363}{363}}
+\headcommand {\slideentry {6}{1}{4}{364/364}{Who ordered \textit {that}???}{0}}
+\headcommand {\beamer@framepages {364}{364}}
+\headcommand {\slideentry {6}{1}{5}{365/365}{Who ordered \textit {that}???}{0}}
+\headcommand {\beamer@framepages {365}{365}}
+\headcommand {\slideentry {6}{1}{6}{366/366}{Who ordered \textit {that}???}{0}}
+\headcommand {\beamer@framepages {366}{366}}
+\headcommand {\slideentry {6}{1}{7}{367/367}{Who ordered \textit {that}???}{0}}
+\headcommand {\beamer@framepages {367}{367}}
+\headcommand {\slideentry {6}{1}{8}{368/368}{Who ordered \textit {that}???}{0}}
+\headcommand {\beamer@framepages {368}{368}}
+\headcommand {\slideentry {6}{1}{9}{369/369}{Who ordered \textit {that}???}{0}}
+\headcommand {\beamer@framepages {369}{369}}
+\headcommand {\slideentry {6}{1}{10}{370/370}{Who ordered \textit {that}???}{0}}
+\headcommand {\beamer@framepages {370}{370}}
+\headcommand {\beamer@subsectionpages {361}{370}}
+\headcommand {\beamer@subsectionentry {0}{6}{2}{371}{Conjunction Intro and Elimination (Rules for \ensuremath {\,\&\,})}}
+\headcommand {\slideentry {6}{2}{1}{371/371}{Conjunction Intro and Elimination (Rules for \ensuremath {\,\&\,})}{0}}
+\headcommand {\beamer@framepages {371}{371}}
+\headcommand {\slideentry {6}{2}{2}{372/372}{Conjunction Intro and Elimination (Rules for \ensuremath {\,\&\,})}{0}}
+\headcommand {\beamer@framepages {372}{372}}
+\headcommand {\slideentry {6}{2}{3}{373/373}{Conjunction Intro and Elimination (Rules for \ensuremath {\,\&\,})}{0}}
+\headcommand {\beamer@framepages {373}{373}}
+\headcommand {\slideentry {6}{2}{4}{374/374}{Conjunction Intro and Elimination (Rules for \ensuremath {\,\&\,})}{0}}
+\headcommand {\beamer@framepages {374}{374}}
+\headcommand {\slideentry {6}{2}{5}{375/375}{Conjunction Intro and Elimination (Rules for \ensuremath {\,\&\,})}{0}}
+\headcommand {\beamer@framepages {375}{375}}
+\headcommand {\slideentry {6}{2}{6}{376/376}{Conjunction Intro and Elimination (Rules for \ensuremath {\,\&\,})}{0}}
+\headcommand {\beamer@framepages {376}{376}}
+\headcommand {\beamer@subsectionpages {371}{376}}
+\headcommand {\beamer@subsectionentry {0}{6}{3}{377}{Conditional Intro and Elim. (Rules for \ensuremath {\supset })}}
+\headcommand {\slideentry {6}{3}{1}{377/377}{Conditional Intro and Elim. (Rules for \ensuremath {\supset })}{0}}
+\headcommand {\beamer@framepages {377}{377}}
+\headcommand {\slideentry {6}{3}{2}{378/378}{Conditional Intro and Elim. (Rules for \ensuremath {\supset })}{0}}
+\headcommand {\beamer@framepages {378}{378}}
+\headcommand {\slideentry {6}{3}{3}{379/379}{Conditional Intro and Elim. (Rules for \ensuremath {\supset })}{0}}
+\headcommand {\beamer@framepages {379}{379}}
+\headcommand {\slideentry {6}{3}{4}{380/380}{Conditional Intro and Elim. (Rules for \ensuremath {\supset })}{0}}
+\headcommand {\beamer@framepages {380}{380}}
+\headcommand {\slideentry {6}{3}{5}{381/381}{Conditional Intro and Elim. (Rules for \ensuremath {\supset })}{0}}
+\headcommand {\beamer@framepages {381}{381}}
+\headcommand {\slideentry {6}{3}{6}{382/382}{Conditional Intro and Elim. (Rules for \ensuremath {\supset })}{0}}
+\headcommand {\beamer@framepages {382}{382}}
+\headcommand {\slideentry {6}{3}{7}{383/383}{Conditional Intro and Elim. (Rules for \ensuremath {\supset })}{0}}
+\headcommand {\beamer@framepages {383}{383}}
+\headcommand {\slideentry {6}{3}{8}{384/384}{Conditional Intro and Elim. (Rules for \ensuremath {\supset })}{0}}
+\headcommand {\beamer@framepages {384}{384}}
+\headcommand {\slideentry {6}{3}{9}{385/385}{Conditional Intro and Elim. (Rules for \ensuremath {\supset })}{0}}
+\headcommand {\beamer@framepages {385}{385}}
+\headcommand {\slideentry {6}{3}{10}{386/386}{Conditional Intro and Elim. (Rules for \ensuremath {\supset })}{0}}
+\headcommand {\beamer@framepages {386}{386}}
+\headcommand {\beamer@subsectionpages {377}{386}}
+\headcommand {\beamer@subsectionentry {0}{6}{4}{387}{Use of subproofs}}
+\headcommand {\slideentry {6}{4}{1}{387/387}{Use of subproofs}{0}}
+\headcommand {\beamer@framepages {387}{387}}
+\headcommand {\slideentry {6}{4}{2}{388/388}{Use of subproofs}{0}}
+\headcommand {\beamer@framepages {388}{388}}
+\headcommand {\slideentry {6}{4}{3}{389/389}{Use of subproofs}{0}}
+\headcommand {\beamer@framepages {389}{389}}
+\headcommand {\slideentry {6}{4}{4}{390/390}{Use of subproofs}{0}}
+\headcommand {\beamer@framepages {390}{390}}
+\headcommand {\slideentry {6}{4}{5}{391/391}{Use of subproofs}{0}}
+\headcommand {\beamer@framepages {391}{391}}
+\headcommand {\slideentry {6}{4}{6}{392/392}{Use of subproofs}{0}}
+\headcommand {\beamer@framepages {392}{392}}
+\headcommand {\beamer@subsectionpages {387}{392}}
+\headcommand {\beamer@subsectionentry {0}{6}{5}{393}{Disjunction Intro and Elim. (Rules for \ensuremath {\vee })}}
+\headcommand {\slideentry {6}{5}{1}{393/393}{Disjunction Intro and Elim. (Rules for \ensuremath {\vee })}{0}}
+\headcommand {\beamer@framepages {393}{393}}
+\headcommand {\slideentry {6}{5}{2}{394/394}{Disjunction Intro and Elim. (Rules for \ensuremath {\vee })}{0}}
+\headcommand {\beamer@framepages {394}{394}}
+\headcommand {\slideentry {6}{5}{3}{395/395}{Disjunction Intro and Elim. (Rules for \ensuremath {\vee })}{0}}
+\headcommand {\beamer@framepages {395}{395}}
+\headcommand {\slideentry {6}{5}{4}{396/396}{Disjunction Intro and Elim. (Rules for \ensuremath {\vee })}{0}}
+\headcommand {\beamer@framepages {396}{396}}
+\headcommand {\slideentry {6}{5}{5}{397/397}{Disjunction Intro and Elim. (Rules for \ensuremath {\vee })}{0}}
+\headcommand {\beamer@framepages {397}{397}}
+\headcommand {\slideentry {6}{5}{6}{398/398}{Disjunction Intro and Elim. (Rules for \ensuremath {\vee })}{0}}
+\headcommand {\beamer@framepages {398}{398}}
+\headcommand {\slideentry {6}{5}{7}{399/399}{Disjunction Intro and Elim. (Rules for \ensuremath {\vee })}{0}}
+\headcommand {\beamer@framepages {399}{399}}
+\headcommand {\beamer@subsectionpages {393}{399}}
+\headcommand {\beamer@subsectionentry {0}{6}{6}{400}{Negation Intro and Elimination}}
+\headcommand {\slideentry {6}{6}{1}{400/400}{Negation Intro and Elimination}{0}}
+\headcommand {\beamer@framepages {400}{400}}
+\headcommand {\slideentry {6}{6}{2}{401/401}{Negation Intro and Elimination}{0}}
+\headcommand {\beamer@framepages {401}{401}}
+\headcommand {\slideentry {6}{6}{3}{402/402}{Negation Intro and Elimination}{0}}
+\headcommand {\beamer@framepages {402}{402}}
+\headcommand {\slideentry {6}{6}{4}{403/403}{Negation Intro and Elimination}{0}}
+\headcommand {\beamer@framepages {403}{403}}
+\headcommand {\slideentry {6}{6}{5}{404/404}{Negation Intro and Elimination}{0}}
+\headcommand {\beamer@framepages {404}{404}}
+\headcommand {\slideentry {6}{6}{6}{405/405}{Negation Intro and Elimination}{0}}
+\headcommand {\beamer@framepages {405}{405}}
+\headcommand {\beamer@subsectionpages {400}{405}}
+\headcommand {\beamer@subsectionentry {0}{6}{7}{406}{Biconditional Intro and Elimination ($<$-$>$)}}
+\headcommand {\slideentry {6}{7}{1}{406/406}{Biconditional Intro and Elimination ($<$-$>$)}{0}}
+\headcommand {\beamer@framepages {406}{406}}
+\headcommand {\slideentry {6}{7}{2}{407/407}{Biconditional Intro and Elimination ($<$-$>$)}{0}}
+\headcommand {\beamer@framepages {407}{407}}
+\headcommand {\slideentry {6}{7}{3}{408/408}{Biconditional Intro and Elimination ($<$-$>$)}{0}}
+\headcommand {\beamer@framepages {408}{408}}
+\headcommand {\slideentry {6}{7}{4}{409/409}{Biconditional Intro and Elimination ($<$-$>$)}{0}}
+\headcommand {\beamer@framepages {409}{409}}
+\headcommand {\beamer@subsectionpages {406}{409}}
+\headcommand {\beamer@subsectionentry {0}{6}{8}{410}{Strategies and examples}}
+\headcommand {\slideentry {6}{8}{1}{410/410}{Strategies and examples}{0}}
+\headcommand {\beamer@framepages {410}{410}}
+\headcommand {\slideentry {6}{8}{2}{411/411}{Strategies and examples}{0}}
+\headcommand {\beamer@framepages {411}{411}}
+\headcommand {\slideentry {6}{8}{3}{412/412}{Strategies and examples}{0}}
+\headcommand {\beamer@framepages {412}{412}}
+\headcommand {\beamer@subsectionpages {410}{412}}
+\headcommand {\beamer@subsectionentry {0}{6}{9}{413}{The Rules, Reiterated}}
+\headcommand {\slideentry {6}{9}{1}{413/413}{The Rules, Reiterated}{0}}
+\headcommand {\beamer@framepages {413}{413}}
+\headcommand {\slideentry {6}{9}{2}{414/414}{The Rules, Reiterated}{0}}
+\headcommand {\beamer@framepages {414}{414}}
+\headcommand {\slideentry {6}{9}{3}{415/415}{The Rules, Reiterated}{0}}
+\headcommand {\beamer@framepages {415}{415}}
+\headcommand {\slideentry {6}{9}{4}{416/416}{The Rules, Reiterated}{0}}
+\headcommand {\beamer@framepages {416}{416}}
+\headcommand {\slideentry {6}{9}{5}{417/417}{The Rules, Reiterated}{0}}
+\headcommand {\beamer@framepages {417}{417}}
+\headcommand {\slideentry {6}{9}{6}{418/418}{The Rules, Reiterated}{0}}
+\headcommand {\beamer@framepages {418}{418}}
+\headcommand {\slideentry {6}{9}{7}{419/419}{The Rules, Reiterated}{0}}
+\headcommand {\beamer@framepages {419}{419}}
+\headcommand {\beamer@sectionpages {359}{419}}
+\headcommand {\beamer@subsectionpages {413}{419}}
+\headcommand {\sectionentry {7}{Midterm Review!}{420}{Midterm Review!}{0}}
+\headcommand {\slideentry {7}{0}{1}{420/420}{}{0}}
+\headcommand {\beamer@framepages {420}{420}}
+\headcommand {\slideentry {7}{0}{2}{421/421}{}{0}}
+\headcommand {\beamer@framepages {421}{421}}
+\headcommand {\beamer@subsectionpages {420}{421}}
+\headcommand {\beamer@subsectionentry {0}{7}{1}{422}{Recursive Definitions}}
+\headcommand {\slideentry {7}{1}{1}{422/422}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {422}{422}}
+\headcommand {\slideentry {7}{1}{2}{423/423}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {423}{423}}
+\headcommand {\slideentry {7}{1}{3}{424/424}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {424}{424}}
+\headcommand {\slideentry {7}{1}{4}{425/425}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {425}{425}}
+\headcommand {\slideentry {7}{1}{5}{426/426}{Recursive Definitions}{0}}
+\headcommand {\beamer@framepages {426}{426}}
+\headcommand {\beamer@subsectionpages {422}{426}}
+\headcommand {\beamer@subsectionentry {0}{7}{2}{427}{Induction on Strings}}
+\headcommand {\slideentry {7}{2}{1}{427/427}{Induction on Strings}{0}}
+\headcommand {\beamer@framepages {427}{427}}
+\headcommand {\slideentry {7}{2}{2}{428/428}{Induction on Strings}{0}}
+\headcommand {\beamer@framepages {428}{428}}
+\headcommand {\slideentry {7}{2}{3}{429/429}{Induction on Strings}{0}}
+\headcommand {\beamer@framepages {429}{429}}
+\headcommand {\beamer@subsectionpages {427}{429}}
+\headcommand {\beamer@subsectionentry {0}{7}{3}{430}{Induction on SL Sentences}}
+\headcommand {\slideentry {7}{3}{1}{430/430}{Induction on SL Sentences}{0}}
+\headcommand {\beamer@framepages {430}{430}}
+\headcommand {\slideentry {7}{3}{2}{431/431}{Induction on SL Sentences}{0}}
+\headcommand {\beamer@framepages {431}{431}}
+\headcommand {\slideentry {7}{3}{3}{432/432}{Induction on SL Sentences}{0}}
+\headcommand {\beamer@framepages {432}{432}}
+\headcommand {\slideentry {7}{3}{4}{433/433}{Induction on SL Sentences}{0}}
+\headcommand {\beamer@framepages {433}{433}}
+\headcommand {\slideentry {7}{3}{5}{434/434}{Induction on SL Sentences}{0}}
+\headcommand {\beamer@framepages {434}{434}}
+\headcommand {\slideentry {7}{3}{6}{435/435}{Induction on SL Sentences}{0}}
+\headcommand {\beamer@framepages {435}{435}}
+\headcommand {\slideentry {7}{3}{7}{436/436}{Induction on SL Sentences}{0}}
+\headcommand {\beamer@framepages {436}{436}}
+\headcommand {\beamer@subsectionpages {430}{436}}
+\headcommand {\beamer@subsectionentry {0}{7}{4}{437}{Trees}}
+\headcommand {\slideentry {7}{4}{1}{437/437}{Trees}{0}}
+\headcommand {\beamer@framepages {437}{437}}
+\headcommand {\slideentry {7}{4}{2}{438/438}{Trees}{0}}
+\headcommand {\beamer@framepages {438}{438}}
+\headcommand {\slideentry {7}{4}{3}{439/439}{Trees}{0}}
+\headcommand {\beamer@framepages {439}{439}}
+\headcommand {\slideentry {7}{4}{4}{440/440}{Trees}{0}}
+\headcommand {\beamer@framepages {440}{440}}
+\headcommand {\slideentry {7}{4}{5}{441/441}{Trees}{0}}
+\headcommand {\beamer@framepages {441}{441}}
+\headcommand {\slideentry {7}{4}{6}{442/442}{Trees}{0}}
+\headcommand {\beamer@framepages {442}{442}}
+\headcommand {\beamer@subsectionpages {437}{442}}
+\headcommand {\beamer@subsectionentry {0}{7}{5}{443}{Trees Metalogic: Testing Alternative Rules}}
+\headcommand {\slideentry {7}{5}{1}{443/443}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {443}{443}}
+\headcommand {\slideentry {7}{5}{2}{444/444}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {444}{444}}
+\headcommand {\slideentry {7}{5}{3}{445/445}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {445}{445}}
+\headcommand {\slideentry {7}{5}{4}{446/446}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {446}{446}}
+\headcommand {\slideentry {7}{5}{5}{447/447}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {447}{447}}
+\headcommand {\slideentry {7}{5}{6}{448/448}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {448}{448}}
+\headcommand {\slideentry {7}{5}{7}{449/449}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {449}{449}}
+\headcommand {\slideentry {7}{5}{8}{450/450}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {450}{450}}
+\headcommand {\slideentry {7}{5}{9}{451/451}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {451}{451}}
+\headcommand {\slideentry {7}{5}{10}{452/452}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {452}{452}}
+\headcommand {\slideentry {7}{5}{11}{453/453}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {453}{453}}
+\headcommand {\slideentry {7}{5}{12}{454/454}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {454}{454}}
+\headcommand {\slideentry {7}{5}{13}{455/455}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {455}{455}}
+\headcommand {\slideentry {7}{5}{14}{456/456}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {456}{456}}
+\headcommand {\slideentry {7}{5}{15}{457/457}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {457}{457}}
+\headcommand {\slideentry {7}{5}{16}{458/458}{Trees Metalogic: Testing Alternative Rules}{0}}
+\headcommand {\beamer@framepages {458}{458}}
+\headcommand {\beamer@subsectionpages {443}{458}}
+\headcommand {\beamer@subsectionentry {0}{7}{6}{459}{Translation/Symbolization in SL}}
+\headcommand {\slideentry {7}{6}{1}{459/459}{Translation/Symbolization in SL}{0}}
+\headcommand {\beamer@framepages {459}{459}}
+\headcommand {\slideentry {7}{6}{2}{460/460}{Translation/Symbolization in SL}{0}}
+\headcommand {\beamer@framepages {460}{460}}
+\headcommand {\slideentry {7}{6}{3}{461/461}{Translation/Symbolization in SL}{0}}
+\headcommand {\beamer@framepages {461}{461}}
+\headcommand {\slideentry {7}{6}{4}{462/462}{Translation/Symbolization in SL}{0}}
+\headcommand {\beamer@framepages {462}{462}}
+\headcommand {\slideentry {7}{6}{5}{463/463}{Translation/Symbolization in SL}{0}}
+\headcommand {\beamer@framepages {463}{463}}
+\headcommand {\slideentry {7}{6}{6}{464/464}{Translation/Symbolization in SL}{0}}
+\headcommand {\beamer@framepages {464}{464}}
+\headcommand {\beamer@subsectionpages {459}{464}}
+\headcommand {\beamer@subsectionentry {0}{7}{7}{465}{Truth Tables: (In)Validity and (In)Equivalence}}
+\headcommand {\slideentry {7}{7}{1}{465/465}{Truth Tables: (In)Validity and (In)Equivalence}{0}}
+\headcommand {\beamer@framepages {465}{465}}
+\headcommand {\slideentry {7}{7}{2}{466/466}{Truth Tables: (In)Validity and (In)Equivalence}{0}}
+\headcommand {\beamer@framepages {466}{466}}
+\headcommand {\slideentry {7}{7}{3}{467/467}{Truth Tables: (In)Validity and (In)Equivalence}{0}}
+\headcommand {\beamer@framepages {467}{467}}
+\headcommand {\slideentry {7}{7}{4}{468/468}{Truth Tables: (In)Validity and (In)Equivalence}{0}}
+\headcommand {\beamer@framepages {468}{468}}
+\headcommand {\slideentry {7}{7}{5}{469/469}{Truth Tables: (In)Validity and (In)Equivalence}{0}}
+\headcommand {\beamer@framepages {469}{469}}
+\headcommand {\beamer@subsectionpages {465}{469}}
+\headcommand {\beamer@subsectionentry {0}{7}{8}{470}{Natural Deduction}}
+\headcommand {\slideentry {7}{8}{1}{470/470}{Natural Deduction}{0}}
+\headcommand {\beamer@framepages {470}{470}}
+\headcommand {\slideentry {7}{8}{2}{471/471}{Natural Deduction}{0}}
+\headcommand {\beamer@framepages {471}{471}}
+\headcommand {\slideentry {7}{8}{3}{472/472}{Natural Deduction}{0}}
+\headcommand {\beamer@framepages {472}{472}}
+\headcommand {\slideentry {7}{8}{4}{473/473}{Natural Deduction}{0}}
+\headcommand {\beamer@framepages {473}{473}}
+\headcommand {\beamer@sectionpages {420}{473}}
+\headcommand {\beamer@subsectionpages {470}{473}}
+\headcommand {\sectionentry {8}{Intro. to Quantifier Logic}{474}{Intro. to Quantifier Logic}{0}}
+\headcommand {\slideentry {8}{0}{1}{474/474}{}{0}}
+\headcommand {\beamer@framepages {474}{474}}
+\headcommand {\slideentry {8}{0}{2}{475/475}{}{0}}
+\headcommand {\beamer@framepages {475}{475}}
+\headcommand {\beamer@subsectionpages {474}{475}}
+\headcommand {\beamer@subsectionentry {0}{8}{1}{476}{The goals of QL}}
+\headcommand {\slideentry {8}{1}{1}{476/476}{The goals of QL}{0}}
+\headcommand {\beamer@framepages {476}{476}}
+\headcommand {\slideentry {8}{1}{2}{477/477}{The goals of QL}{0}}
+\headcommand {\beamer@framepages {477}{477}}
+\headcommand {\slideentry {8}{1}{3}{478/478}{The goals of QL}{0}}
+\headcommand {\beamer@framepages {478}{478}}
+\headcommand {\slideentry {8}{1}{4}{479/479}{The goals of QL}{0}}
+\headcommand {\beamer@framepages {479}{479}}
+\headcommand {\slideentry {8}{1}{5}{480/480}{The goals of QL}{0}}
+\headcommand {\beamer@framepages {480}{480}}
+\headcommand {\beamer@subsectionpages {476}{480}}
+\headcommand {\beamer@subsectionentry {0}{8}{2}{481}{Beginning symbolization in QL}}
+\headcommand {\slideentry {8}{2}{1}{481/481}{Beginning symbolization in QL}{0}}
+\headcommand {\beamer@framepages {481}{481}}
+\headcommand {\slideentry {8}{2}{2}{482/482}{Beginning symbolization in QL}{0}}
+\headcommand {\beamer@framepages {482}{482}}
+\headcommand {\slideentry {8}{2}{3}{483/483}{Beginning symbolization in QL}{0}}
+\headcommand {\beamer@framepages {483}{483}}
+\headcommand {\slideentry {8}{2}{4}{484/484}{Beginning symbolization in QL}{0}}
+\headcommand {\beamer@framepages {484}{484}}
+\headcommand {\slideentry {8}{2}{5}{485/485}{Beginning symbolization in QL}{0}}
+\headcommand {\beamer@framepages {485}{485}}
+\headcommand {\slideentry {8}{2}{6}{486/486}{Beginning symbolization in QL}{0}}
+\headcommand {\beamer@framepages {486}{486}}
+\headcommand {\slideentry {8}{2}{7}{487/487}{Beginning symbolization in QL}{0}}
+\headcommand {\beamer@framepages {487}{487}}
+\headcommand {\slideentry {8}{2}{8}{488/488}{Beginning symbolization in QL}{0}}
+\headcommand {\beamer@framepages {488}{488}}
+\headcommand {\beamer@subsectionpages {481}{488}}
+\headcommand {\beamer@subsectionentry {0}{8}{3}{489}{The existential quantifier}}
+\headcommand {\slideentry {8}{3}{1}{489/489}{The existential quantifier}{0}}
+\headcommand {\beamer@framepages {489}{489}}
+\headcommand {\slideentry {8}{3}{2}{490/490}{The existential quantifier}{0}}
+\headcommand {\beamer@framepages {490}{490}}
+\headcommand {\slideentry {8}{3}{3}{491/491}{The existential quantifier}{0}}
+\headcommand {\beamer@framepages {491}{491}}
+\headcommand {\slideentry {8}{3}{4}{492/492}{The existential quantifier}{0}}
+\headcommand {\beamer@framepages {492}{492}}
+\headcommand {\slideentry {8}{3}{5}{493/493}{The existential quantifier}{0}}
+\headcommand {\beamer@framepages {493}{493}}
+\headcommand {\slideentry {8}{3}{6}{494/494}{The existential quantifier}{0}}
+\headcommand {\beamer@framepages {494}{494}}
+\headcommand {\slideentry {8}{3}{7}{495/495}{The existential quantifier}{0}}
+\headcommand {\beamer@framepages {495}{495}}
+\headcommand {\slideentry {8}{3}{8}{496/496}{The existential quantifier}{0}}
+\headcommand {\beamer@framepages {496}{496}}
+\headcommand {\slideentry {8}{3}{9}{497/497}{The existential quantifier}{0}}
+\headcommand {\beamer@framepages {497}{497}}
+\headcommand {\slideentry {8}{3}{10}{498/498}{The existential quantifier}{0}}
+\headcommand {\beamer@framepages {498}{498}}
+\headcommand {\beamer@subsectionpages {489}{498}}
+\headcommand {\beamer@subsectionentry {0}{8}{4}{499}{The universal quantifier}}
+\headcommand {\slideentry {8}{4}{1}{499/499}{The universal quantifier}{0}}
+\headcommand {\beamer@framepages {499}{499}}
+\headcommand {\slideentry {8}{4}{2}{500/500}{The universal quantifier}{0}}
+\headcommand {\beamer@framepages {500}{500}}
+\headcommand {\slideentry {8}{4}{3}{501/501}{The universal quantifier}{0}}
+\headcommand {\beamer@framepages {501}{501}}
+\headcommand {\slideentry {8}{4}{4}{502/502}{The universal quantifier}{0}}
+\headcommand {\beamer@framepages {502}{502}}
+\headcommand {\slideentry {8}{4}{5}{503/503}{The universal quantifier}{0}}
+\headcommand {\beamer@framepages {503}{503}}
+\headcommand {\slideentry {8}{4}{6}{504/504}{The universal quantifier}{0}}
+\headcommand {\beamer@framepages {504}{504}}
+\headcommand {\beamer@subsectionpages {499}{504}}
+\headcommand {\beamer@subsectionentry {0}{8}{5}{505}{`No', `only', `a', `some', and `any'}}
+\headcommand {\slideentry {8}{5}{1}{505/505}{`No', `only', `a', `some', and `any'}{0}}
+\headcommand {\beamer@framepages {505}{505}}
+\headcommand {\slideentry {8}{5}{2}{506/506}{`No', `only', `a', `some', and `any'}{0}}
+\headcommand {\beamer@framepages {506}{506}}
+\headcommand {\slideentry {8}{5}{3}{507/507}{`No', `only', `a', `some', and `any'}{0}}
+\headcommand {\beamer@framepages {507}{507}}
+\headcommand {\slideentry {8}{5}{4}{508/508}{`No', `only', `a', `some', and `any'}{0}}
+\headcommand {\beamer@framepages {508}{508}}
+\headcommand {\slideentry {8}{5}{5}{509/509}{`No', `only', `a', `some', and `any'}{0}}
+\headcommand {\beamer@framepages {509}{509}}
+\headcommand {\slideentry {8}{5}{6}{510/510}{`No', `only', `a', `some', and `any'}{0}}
+\headcommand {\beamer@framepages {510}{510}}
+\headcommand {\slideentry {8}{5}{7}{511/511}{`No', `only', `a', `some', and `any'}{0}}
+\headcommand {\beamer@framepages {511}{511}}
+\headcommand {\beamer@subsectionpages {505}{511}}
+\headcommand {\beamer@subsectionentry {0}{8}{6}{512}{Mixed domains}}
+\headcommand {\slideentry {8}{6}{1}{512/512}{Mixed domains}{0}}
+\headcommand {\beamer@framepages {512}{512}}
+\headcommand {\slideentry {8}{6}{2}{513/513}{Mixed domains}{0}}
+\headcommand {\beamer@framepages {513}{513}}
+\headcommand {\slideentry {8}{6}{3}{514/514}{Mixed domains}{0}}
+\headcommand {\beamer@framepages {514}{514}}
+\headcommand {\beamer@subsectionpages {512}{514}}
+\headcommand {\beamer@subsectionentry {0}{8}{7}{515}{Captain Morgan's (tele)scope!}}
+\headcommand {\slideentry {8}{7}{1}{515/515}{Captain Morgan's (tele)scope!}{0}}
+\headcommand {\beamer@framepages {515}{515}}
+\headcommand {\slideentry {8}{7}{2}{516/516}{Captain Morgan's (tele)scope!}{0}}
+\headcommand {\beamer@framepages {516}{516}}
+\headcommand {\slideentry {8}{7}{3}{517/517}{Captain Morgan's (tele)scope!}{0}}
+\headcommand {\beamer@framepages {517}{517}}
+\headcommand {\slideentry {8}{7}{4}{518/518}{Captain Morgan's (tele)scope!}{0}}
+\headcommand {\beamer@framepages {518}{518}}
+\headcommand {\slideentry {8}{7}{5}{519/519}{Captain Morgan's (tele)scope!}{0}}
+\headcommand {\beamer@framepages {519}{519}}
+\headcommand {\slideentry {8}{7}{6}{520/520}{Captain Morgan's (tele)scope!}{0}}
+\headcommand {\beamer@framepages {520}{520}}
+\headcommand {\beamer@sectionpages {474}{520}}
+\headcommand {\beamer@subsectionpages {515}{520}}
+\headcommand {\sectionentry {9}{Semantics of QL}{521}{Semantics of QL}{0}}
+\headcommand {\slideentry {9}{0}{1}{521/521}{}{0}}
+\headcommand {\beamer@framepages {521}{521}}
+\headcommand {\slideentry {9}{0}{2}{522/522}{}{0}}
+\headcommand {\beamer@framepages {522}{522}}
+\headcommand {\beamer@subsectionpages {521}{522}}
+\headcommand {\beamer@subsectionentry {0}{9}{1}{523}{Arguments and validity in QL}}
+\headcommand {\slideentry {9}{1}{1}{523/523}{Arguments and validity in QL}{0}}
+\headcommand {\beamer@framepages {523}{523}}
+\headcommand {\slideentry {9}{1}{2}{524/524}{Arguments and validity in QL}{0}}
+\headcommand {\beamer@framepages {524}{524}}
+\headcommand {\slideentry {9}{1}{3}{525/525}{Arguments and validity in QL}{0}}
+\headcommand {\beamer@framepages {525}{525}}
+\headcommand {\slideentry {9}{1}{4}{526/526}{Arguments and validity in QL}{0}}
+\headcommand {\beamer@framepages {526}{526}}
+\headcommand {\slideentry {9}{1}{5}{527/527}{Arguments and validity in QL}{0}}
+\headcommand {\beamer@framepages {527}{527}}
+\headcommand {\beamer@subsectionpages {523}{527}}
+\headcommand {\beamer@subsectionentry {0}{9}{2}{528}{Interpretations}}
+\headcommand {\slideentry {9}{2}{1}{528/528}{Interpretations}{0}}
+\headcommand {\beamer@framepages {528}{528}}
+\headcommand {\slideentry {9}{2}{2}{529/529}{Interpretations}{0}}
+\headcommand {\beamer@framepages {529}{529}}
+\headcommand {\slideentry {9}{2}{3}{530/530}{Interpretations}{0}}
+\headcommand {\beamer@framepages {530}{530}}
+\headcommand {\slideentry {9}{2}{4}{531/531}{Interpretations}{0}}
+\headcommand {\beamer@framepages {531}{531}}
+\headcommand {\slideentry {9}{2}{5}{532/532}{Interpretations}{0}}
+\headcommand {\beamer@framepages {532}{532}}
+\headcommand {\slideentry {9}{2}{6}{533/533}{Interpretations}{0}}
+\headcommand {\beamer@framepages {533}{533}}
+\headcommand {\slideentry {9}{2}{7}{534/534}{Interpretations}{0}}
+\headcommand {\beamer@framepages {534}{534}}
+\headcommand {\slideentry {9}{2}{8}{535/535}{Interpretations}{0}}
+\headcommand {\beamer@framepages {535}{535}}
+\headcommand {\slideentry {9}{2}{9}{536/536}{Interpretations}{0}}
+\headcommand {\beamer@framepages {536}{536}}
+\headcommand {\beamer@subsectionpages {528}{536}}
+\headcommand {\beamer@subsectionentry {0}{9}{3}{537}{Truth of sentences of QL}}
+\headcommand {\slideentry {9}{3}{1}{537/537}{Truth of sentences of QL}{0}}
+\headcommand {\beamer@framepages {537}{537}}
+\headcommand {\slideentry {9}{3}{2}{538/538}{Truth of sentences of QL}{0}}
+\headcommand {\beamer@framepages {538}{538}}
+\headcommand {\slideentry {9}{3}{3}{539/539}{Truth of sentences of QL}{0}}
+\headcommand {\beamer@framepages {539}{539}}
+\headcommand {\slideentry {9}{3}{4}{540/540}{Truth of sentences of QL}{0}}
+\headcommand {\beamer@framepages {540}{540}}
+\headcommand {\slideentry {9}{3}{5}{541/544}{Truth of sentences of QL}{0}}
+\headcommand {\beamer@framepages {541}{544}}
+\headcommand {\slideentry {9}{3}{6}{545/548}{Truth of sentences of QL}{0}}
+\headcommand {\beamer@framepages {545}{548}}
+\headcommand {\slideentry {9}{3}{7}{549/551}{Truth of sentences of QL}{0}}
+\headcommand {\beamer@framepages {549}{551}}
+\headcommand {\slideentry {9}{3}{8}{552/554}{Truth of sentences of QL}{0}}
+\headcommand {\beamer@framepages {552}{554}}
+\headcommand {\beamer@subsectionpages {537}{554}}
+\headcommand {\beamer@subsectionentry {0}{9}{4}{555}{Testing for validity}}
+\headcommand {\slideentry {9}{4}{1}{555/555}{Testing for validity}{0}}
+\headcommand {\beamer@framepages {555}{555}}
+\headcommand {\slideentry {9}{4}{2}{556/556}{Testing for validity}{0}}
+\headcommand {\beamer@framepages {556}{556}}
+\headcommand {\slideentry {9}{4}{3}{557/557}{Testing for validity}{0}}
+\headcommand {\beamer@framepages {557}{557}}
+\headcommand {\slideentry {9}{4}{4}{558/558}{Testing for validity}{0}}
+\headcommand {\beamer@framepages {558}{558}}
+\headcommand {\slideentry {9}{4}{5}{559/559}{Testing for validity}{0}}
+\headcommand {\beamer@framepages {559}{559}}
+\headcommand {\slideentry {9}{4}{6}{560/560}{Testing for validity}{0}}
+\headcommand {\beamer@framepages {560}{560}}
+\headcommand {\beamer@subsectionpages {555}{560}}
+\headcommand {\beamer@subsectionentry {0}{9}{5}{561}{Semantic notions in QL}}
+\headcommand {\slideentry {9}{5}{1}{561/561}{Semantic notions in QL}{0}}
+\headcommand {\beamer@framepages {561}{561}}
+\headcommand {\slideentry {9}{5}{2}{562/562}{Semantic notions in QL}{0}}
+\headcommand {\beamer@framepages {562}{562}}
+\headcommand {\slideentry {9}{5}{3}{563/563}{Semantic notions in QL}{0}}
+\headcommand {\beamer@framepages {563}{563}}
+\headcommand {\slideentry {9}{5}{4}{564/564}{Semantic notions in QL}{0}}
+\headcommand {\beamer@framepages {564}{564}}
+\headcommand {\beamer@subsectionpages {561}{564}}
+\headcommand {\beamer@subsectionentry {0}{9}{6}{565}{Arguing about interpretations}}
+\headcommand {\slideentry {9}{6}{1}{565/565}{Arguing about interpretations}{0}}
+\headcommand {\beamer@framepages {565}{565}}
+\headcommand {\slideentry {9}{6}{2}{566/566}{Arguing about interpretations}{0}}
+\headcommand {\beamer@framepages {566}{566}}
+\headcommand {\slideentry {9}{6}{3}{567/567}{Arguing about interpretations}{0}}
+\headcommand {\beamer@framepages {567}{567}}
+\headcommand {\beamer@sectionpages {521}{567}}
+\headcommand {\beamer@subsectionpages {565}{567}}
+\headcommand {\sectionentry {10}{Proofs in QL}{568}{Proofs in QL}{0}}
+\headcommand {\slideentry {10}{0}{1}{568/568}{}{0}}
+\headcommand {\beamer@framepages {568}{568}}
+\headcommand {\slideentry {10}{0}{2}{569/569}{}{0}}
+\headcommand {\beamer@framepages {569}{569}}
+\headcommand {\beamer@subsectionpages {568}{569}}
+\headcommand {\beamer@subsectionentry {0}{10}{1}{570}{Some Equivalences in QL}}
+\headcommand {\slideentry {10}{1}{1}{570/570}{Some Equivalences in QL}{0}}
+\headcommand {\beamer@framepages {570}{570}}
+\headcommand {\slideentry {10}{1}{2}{571/571}{Some Equivalences in QL}{0}}
+\headcommand {\beamer@framepages {571}{571}}
+\headcommand {\slideentry {10}{1}{3}{572/572}{Some Equivalences in QL}{0}}
+\headcommand {\beamer@framepages {572}{572}}
+\headcommand {\slideentry {10}{1}{4}{573/573}{Some Equivalences in QL}{0}}
+\headcommand {\beamer@framepages {573}{573}}
+\headcommand {\slideentry {10}{1}{5}{574/574}{Some Equivalences in QL}{0}}
+\headcommand {\beamer@framepages {574}{574}}
+\headcommand {\slideentry {10}{1}{6}{575/575}{Some Equivalences in QL}{0}}
+\headcommand {\beamer@framepages {575}{575}}
+\headcommand {\beamer@subsectionpages {570}{575}}
+\headcommand {\beamer@subsectionentry {0}{10}{2}{576}{Rules for $\forall $}}
+\headcommand {\slideentry {10}{2}{1}{576/576}{Rules for $\forall $}{0}}
+\headcommand {\beamer@framepages {576}{576}}
+\headcommand {\slideentry {10}{2}{2}{577/577}{Rules for $\forall $}{0}}
+\headcommand {\beamer@framepages {577}{577}}
+\headcommand {\slideentry {10}{2}{3}{578/578}{Rules for $\forall $}{0}}
+\headcommand {\beamer@framepages {578}{578}}
+\headcommand {\slideentry {10}{2}{4}{579/579}{Rules for $\forall $}{0}}
+\headcommand {\beamer@framepages {579}{579}}
+\headcommand {\slideentry {10}{2}{5}{580/580}{Rules for $\forall $}{0}}
+\headcommand {\beamer@framepages {580}{580}}
+\headcommand {\slideentry {10}{2}{6}{581/581}{Rules for $\forall $}{0}}
+\headcommand {\beamer@framepages {581}{581}}
+\headcommand {\slideentry {10}{2}{7}{582/582}{Rules for $\forall $}{0}}
+\headcommand {\beamer@framepages {582}{582}}
+\headcommand {\slideentry {10}{2}{8}{583/583}{Rules for $\forall $}{0}}
+\headcommand {\beamer@framepages {583}{583}}
+\headcommand {\slideentry {10}{2}{9}{584/584}{Rules for $\forall $}{0}}
+\headcommand {\beamer@framepages {584}{584}}
+\headcommand {\slideentry {10}{2}{10}{585/585}{Rules for $\forall $}{0}}
+\headcommand {\beamer@framepages {585}{585}}
+\headcommand {\beamer@subsectionpages {576}{585}}
+\headcommand {\beamer@subsectionentry {0}{10}{3}{586}{Rules for $\exists $}}
+\headcommand {\slideentry {10}{3}{1}{586/586}{Rules for $\exists $}{0}}
+\headcommand {\beamer@framepages {586}{586}}
+\headcommand {\slideentry {10}{3}{2}{587/587}{Rules for $\exists $}{0}}
+\headcommand {\beamer@framepages {587}{587}}
+\headcommand {\slideentry {10}{3}{3}{588/588}{Rules for $\exists $}{0}}
+\headcommand {\beamer@framepages {588}{588}}
+\headcommand {\slideentry {10}{3}{4}{589/589}{Rules for $\exists $}{0}}
+\headcommand {\beamer@framepages {589}{589}}
+\headcommand {\slideentry {10}{3}{5}{590/590}{Rules for $\exists $}{0}}
+\headcommand {\beamer@framepages {590}{590}}
+\headcommand {\slideentry {10}{3}{6}{591/591}{Rules for $\exists $}{0}}
+\headcommand {\beamer@framepages {591}{591}}
+\headcommand {\slideentry {10}{3}{7}{592/592}{Rules for $\exists $}{0}}
+\headcommand {\beamer@framepages {592}{592}}
+\headcommand {\beamer@subsectionpages {586}{592}}
+\headcommand {\beamer@subsectionentry {0}{10}{4}{593}{The Rules, collected!}}
+\headcommand {\slideentry {10}{4}{1}{593/593}{The Rules, collected!}{0}}
+\headcommand {\beamer@framepages {593}{593}}
+\headcommand {\slideentry {10}{4}{2}{594/594}{The Rules, collected!}{0}}
+\headcommand {\beamer@framepages {594}{594}}
+\headcommand {\slideentry {10}{4}{3}{595/595}{The Rules, collected!}{0}}
+\headcommand {\beamer@framepages {595}{595}}
+\headcommand {\beamer@subsectionpages {593}{595}}
+\headcommand {\beamer@subsectionentry {0}{10}{5}{596}{Substitution Instances}}
+\headcommand {\slideentry {10}{5}{1}{596/596}{Substitution Instances}{0}}
+\headcommand {\beamer@framepages {596}{596}}
+\headcommand {\slideentry {10}{5}{2}{597/597}{Substitution Instances}{0}}
+\headcommand {\beamer@framepages {597}{597}}
+\headcommand {\slideentry {10}{5}{3}{598/598}{Substitution Instances}{0}}
+\headcommand {\beamer@framepages {598}{598}}
+\headcommand {\slideentry {10}{5}{4}{599/599}{Substitution Instances}{0}}
+\headcommand {\beamer@framepages {599}{599}}
+\headcommand {\slideentry {10}{5}{5}{600/600}{Substitution Instances}{0}}
+\headcommand {\beamer@framepages {600}{600}}
+\headcommand {\slideentry {10}{5}{6}{601/601}{Substitution Instances}{0}}
+\headcommand {\beamer@framepages {601}{601}}
+\headcommand {\slideentry {10}{5}{7}{602/602}{Substitution Instances}{0}}
+\headcommand {\beamer@framepages {602}{602}}
+\headcommand {\slideentry {10}{5}{8}{603/603}{Substitution Instances}{0}}
+\headcommand {\beamer@framepages {603}{603}}
+\headcommand {\slideentry {10}{5}{9}{604/604}{Substitution Instances}{0}}
+\headcommand {\beamer@framepages {604}{604}}
+\headcommand {\slideentry {10}{5}{10}{605/605}{Substitution Instances}{0}}
+\headcommand {\beamer@framepages {605}{605}}
+\headcommand {\beamer@subsectionpages {596}{605}}
+\headcommand {\beamer@subsectionentry {0}{10}{6}{606}{Tips for an all-natural look!}}
+\headcommand {\slideentry {10}{6}{1}{606/606}{Tips for an all-natural look!}{0}}
+\headcommand {\beamer@framepages {606}{606}}
+\headcommand {\slideentry {10}{6}{2}{607/607}{Tips for an all-natural look!}{0}}
+\headcommand {\beamer@framepages {607}{607}}
+\headcommand {\slideentry {10}{6}{3}{608/608}{Tips for an all-natural look!}{0}}
+\headcommand {\beamer@framepages {608}{608}}
+\headcommand {\slideentry {10}{6}{4}{609/609}{Tips for an all-natural look!}{0}}
+\headcommand {\beamer@framepages {609}{609}}
+\headcommand {\slideentry {10}{6}{5}{610/610}{Tips for an all-natural look!}{0}}
+\headcommand {\beamer@framepages {610}{610}}
+\headcommand {\beamer@sectionpages {568}{610}}
+\headcommand {\beamer@subsectionpages {606}{610}}
+\headcommand {\sectionentry {11}{Multiple quantifiers \& \\ \hskip 2em\relax The Identity Predicate}{611}{Multiple quantifiers \& \\ \hskip 2em\relax The Identity Predicate}{0}}
+\headcommand {\slideentry {11}{0}{1}{611/611}{}{0}}
+\headcommand {\beamer@framepages {611}{611}}
+\headcommand {\slideentry {11}{0}{2}{612/612}{}{0}}
+\headcommand {\beamer@framepages {612}{612}}
+\headcommand {\beamer@subsectionpages {611}{612}}
+\headcommand {\beamer@subsectionentry {0}{11}{1}{613}{Two quantifiers}}
+\headcommand {\slideentry {11}{1}{1}{613/613}{Two quantifiers}{0}}
+\headcommand {\beamer@framepages {613}{613}}
+\headcommand {\slideentry {11}{1}{2}{614/614}{Two quantifiers}{0}}
+\headcommand {\beamer@framepages {614}{614}}
+\headcommand {\slideentry {11}{1}{3}{615/615}{Two quantifiers}{0}}
+\headcommand {\beamer@framepages {615}{615}}
+\headcommand {\slideentry {11}{1}{4}{616/616}{Two quantifiers}{0}}
+\headcommand {\beamer@framepages {616}{616}}
+\headcommand {\slideentry {11}{1}{5}{617/617}{Two quantifiers}{0}}
+\headcommand {\beamer@framepages {617}{617}}
+\headcommand {\slideentry {11}{1}{6}{618/618}{Two quantifiers}{0}}
+\headcommand {\beamer@framepages {618}{618}}
+\headcommand {\beamer@subsectionpages {613}{618}}
+\headcommand {\beamer@subsectionentry {0}{11}{2}{619}{Multiple Determiners}}
+\headcommand {\slideentry {11}{2}{1}{619/619}{Multiple Determiners}{0}}
+\headcommand {\beamer@framepages {619}{619}}
+\headcommand {\slideentry {11}{2}{2}{620/620}{Multiple Determiners}{0}}
+\headcommand {\beamer@framepages {620}{620}}
+\headcommand {\slideentry {11}{2}{3}{621/621}{Multiple Determiners}{0}}
+\headcommand {\beamer@framepages {621}{621}}
+\headcommand {\slideentry {11}{2}{4}{622/622}{Multiple Determiners}{0}}
+\headcommand {\beamer@framepages {622}{622}}
+\headcommand {\slideentry {11}{2}{5}{623/623}{Multiple Determiners}{0}}
+\headcommand {\beamer@framepages {623}{623}}
+\headcommand {\slideentry {11}{2}{6}{624/624}{Multiple Determiners}{0}}
+\headcommand {\beamer@framepages {624}{624}}
+\headcommand {\beamer@subsectionpages {619}{624}}
+\headcommand {\beamer@subsectionentry {0}{11}{3}{625}{The identity predicate}}
+\headcommand {\slideentry {11}{3}{1}{625/625}{The identity predicate}{0}}
+\headcommand {\beamer@framepages {625}{625}}
+\headcommand {\slideentry {11}{3}{2}{626/626}{The identity predicate}{0}}
+\headcommand {\beamer@framepages {626}{626}}
+\headcommand {\slideentry {11}{3}{3}{627/627}{The identity predicate}{0}}
+\headcommand {\beamer@framepages {627}{627}}
+\headcommand {\slideentry {11}{3}{4}{628/628}{The identity predicate}{0}}
+\headcommand {\beamer@framepages {628}{628}}
+\headcommand {\slideentry {11}{3}{5}{629/629}{The identity predicate}{0}}
+\headcommand {\beamer@framepages {629}{629}}
+\headcommand {\slideentry {11}{3}{6}{630/630}{The identity predicate}{0}}
+\headcommand {\beamer@framepages {630}{630}}
+\headcommand {\slideentry {11}{3}{7}{631/631}{The identity predicate}{0}}
+\headcommand {\beamer@framepages {631}{631}}
+\headcommand {\slideentry {11}{3}{8}{632/632}{The identity predicate}{0}}
+\headcommand {\beamer@framepages {632}{632}}
+\headcommand {\slideentry {11}{3}{9}{633/633}{The identity predicate}{0}}
+\headcommand {\beamer@framepages {633}{633}}
+\headcommand {\beamer@subsectionpages {625}{633}}
+\headcommand {\beamer@subsectionentry {0}{11}{4}{634}{Numerical quantification}}
+\headcommand {\slideentry {11}{4}{1}{634/634}{Numerical quantification}{0}}
+\headcommand {\beamer@framepages {634}{634}}
+\headcommand {\slideentry {11}{4}{2}{635/635}{Numerical quantification}{0}}
+\headcommand {\beamer@framepages {635}{635}}
+\headcommand {\slideentry {11}{4}{3}{636/636}{Numerical quantification}{0}}
+\headcommand {\beamer@framepages {636}{636}}
+\headcommand {\slideentry {11}{4}{4}{637/637}{Numerical quantification}{0}}
+\headcommand {\beamer@framepages {637}{637}}
+\headcommand {\slideentry {11}{4}{5}{638/638}{Numerical quantification}{0}}
+\headcommand {\beamer@framepages {638}{638}}
+\headcommand {\slideentry {11}{4}{6}{639/639}{Numerical quantification}{0}}
+\headcommand {\beamer@framepages {639}{639}}
+\headcommand {\slideentry {11}{4}{7}{640/641}{Numerical quantification}{0}}
+\headcommand {\beamer@framepages {640}{641}}
+\headcommand {\slideentry {11}{4}{8}{642/642}{Numerical quantification}{0}}
+\headcommand {\beamer@framepages {642}{642}}
+\headcommand {\beamer@subsectionpages {634}{642}}
+\headcommand {\beamer@subsectionentry {0}{11}{5}{643}{Both `both' and `neither'}}
+\headcommand {\slideentry {11}{5}{1}{643/643}{Both `both' and `neither'}{0}}
+\headcommand {\beamer@framepages {643}{643}}
+\headcommand {\slideentry {11}{5}{2}{644/644}{Both `both' and `neither'}{0}}
+\headcommand {\beamer@framepages {644}{644}}
+\headcommand {\slideentry {11}{5}{3}{645/645}{Both `both' and `neither'}{0}}
+\headcommand {\beamer@framepages {645}{645}}
+\headcommand {\beamer@subsectionpages {643}{645}}
+\headcommand {\beamer@subsectionentry {0}{11}{6}{646}{`The' Definite Description}}
+\headcommand {\slideentry {11}{6}{1}{646/646}{`The' Definite Description}{0}}
+\headcommand {\beamer@framepages {646}{646}}
+\headcommand {\slideentry {11}{6}{2}{647/647}{`The' Definite Description}{0}}
+\headcommand {\beamer@framepages {647}{647}}
+\headcommand {\slideentry {11}{6}{3}{648/648}{`The' Definite Description}{0}}
+\headcommand {\beamer@framepages {648}{648}}
+\headcommand {\slideentry {11}{6}{4}{649/649}{`The' Definite Description}{0}}
+\headcommand {\beamer@framepages {649}{649}}
+\headcommand {\slideentry {11}{6}{5}{650/650}{`The' Definite Description}{0}}
+\headcommand {\beamer@framepages {650}{650}}
+\headcommand {\slideentry {11}{6}{6}{651/651}{`The' Definite Description}{0}}
+\headcommand {\beamer@framepages {651}{651}}
+\headcommand {\slideentry {11}{6}{7}{652/652}{`The' Definite Description}{0}}
+\headcommand {\beamer@framepages {652}{652}}
+\headcommand {\beamer@subsectionpages {646}{652}}
+\headcommand {\beamer@subsectionentry {0}{11}{7}{653}{Using quantifiers to express properties}}
+\headcommand {\slideentry {11}{7}{1}{653/653}{Using quantifiers to express properties}{0}}
+\headcommand {\beamer@framepages {653}{653}}
+\headcommand {\slideentry {11}{7}{2}{654/654}{Using quantifiers to express properties}{0}}
+\headcommand {\beamer@framepages {654}{654}}
+\headcommand {\slideentry {11}{7}{3}{655/655}{Using quantifiers to express properties}{0}}
+\headcommand {\beamer@framepages {655}{655}}
+\headcommand {\slideentry {11}{7}{4}{656/656}{Using quantifiers to express properties}{0}}
+\headcommand {\beamer@framepages {656}{656}}
+\headcommand {\slideentry {11}{7}{5}{657/657}{Using quantifiers to express properties}{0}}
+\headcommand {\beamer@framepages {657}{657}}
+\headcommand {\beamer@subsectionpages {653}{657}}
+\headcommand {\beamer@subsectionentry {0}{11}{8}{658}{Multiple determiners: worked example}}
+\headcommand {\slideentry {11}{8}{1}{658/658}{Multiple determiners: worked example}{0}}
+\headcommand {\beamer@framepages {658}{658}}
+\headcommand {\slideentry {11}{8}{2}{659/659}{Multiple determiners: worked example}{0}}
+\headcommand {\beamer@framepages {659}{659}}
+\headcommand {\slideentry {11}{8}{3}{660/660}{Multiple determiners: worked example}{0}}
+\headcommand {\beamer@framepages {660}{660}}
+\headcommand {\slideentry {11}{8}{4}{661/661}{Multiple determiners: worked example}{0}}
+\headcommand {\beamer@framepages {661}{661}}
+\headcommand {\slideentry {11}{8}{5}{662/662}{Multiple determiners: worked example}{0}}
+\headcommand {\beamer@framepages {662}{662}}
+\headcommand {\beamer@subsectionpages {658}{662}}
+\headcommand {\beamer@subsectionentry {0}{11}{9}{663}{Quantifier scope ambiguity}}
+\headcommand {\slideentry {11}{9}{1}{663/663}{Quantifier scope ambiguity}{0}}
+\headcommand {\beamer@framepages {663}{663}}
+\headcommand {\slideentry {11}{9}{2}{664/664}{Quantifier scope ambiguity}{0}}
+\headcommand {\beamer@framepages {664}{664}}
+\headcommand {\slideentry {11}{9}{3}{665/665}{Quantifier scope ambiguity}{0}}
+\headcommand {\beamer@framepages {665}{665}}
+\headcommand {\slideentry {11}{9}{4}{666/666}{Quantifier scope ambiguity}{0}}
+\headcommand {\beamer@framepages {666}{666}}
+\headcommand {\beamer@subsectionpages {663}{666}}
+\headcommand {\beamer@subsectionentry {0}{11}{10}{667}{\hskip 1em\relax Donkey sentences}}
+\headcommand {\slideentry {11}{10}{1}{667/667}{\hskip 1em\relax Donkey sentences}{0}}
+\headcommand {\beamer@framepages {667}{667}}
+\headcommand {\slideentry {11}{10}{2}{668/668}{\hskip 1em\relax Donkey sentences}{0}}
+\headcommand {\beamer@framepages {668}{668}}
+\headcommand {\slideentry {11}{10}{3}{669/669}{\hskip 1em\relax Donkey sentences}{0}}
+\headcommand {\beamer@framepages {669}{669}}
+\headcommand {\slideentry {11}{10}{4}{670/670}{\hskip 1em\relax Donkey sentences}{0}}
+\headcommand {\beamer@framepages {670}{670}}
+\headcommand {\slideentry {11}{10}{5}{671/671}{\hskip 1em\relax Donkey sentences}{0}}
+\headcommand {\beamer@framepages {671}{671}}
+\headcommand {\beamer@sectionpages {611}{671}}
+\headcommand {\beamer@subsectionpages {667}{671}}
+\headcommand {\sectionentry {12}{Metalogic for SL}{672}{Metalogic for SL}{0}}
+\headcommand {\slideentry {12}{0}{1}{672/672}{}{0}}
+\headcommand {\beamer@framepages {672}{672}}
+\headcommand {\slideentry {12}{0}{2}{673/673}{}{0}}
+\headcommand {\beamer@framepages {673}{673}}
+\headcommand {\beamer@subsectionpages {672}{673}}
+\headcommand {\beamer@subsectionentry {0}{12}{1}{674}{A Meta-refresher}}
+\headcommand {\slideentry {12}{1}{1}{674/674}{A Meta-refresher}{0}}
+\headcommand {\beamer@framepages {674}{674}}
+\headcommand {\slideentry {12}{1}{2}{675/675}{A Meta-refresher}{0}}
+\headcommand {\beamer@framepages {675}{675}}
+\headcommand {\slideentry {12}{1}{3}{676/676}{A Meta-refresher}{0}}
+\headcommand {\beamer@framepages {676}{676}}
+\headcommand {\slideentry {12}{1}{4}{677/677}{A Meta-refresher}{0}}
+\headcommand {\beamer@framepages {677}{677}}
+\headcommand {\slideentry {12}{1}{5}{678/678}{A Meta-refresher}{0}}
+\headcommand {\beamer@framepages {678}{678}}
+\headcommand {\slideentry {12}{1}{6}{679/679}{A Meta-refresher}{0}}
+\headcommand {\beamer@framepages {679}{679}}
+\headcommand {\slideentry {12}{1}{7}{680/680}{A Meta-refresher}{0}}
+\headcommand {\beamer@framepages {680}{680}}
+\headcommand {\slideentry {12}{1}{8}{681/681}{A Meta-refresher}{0}}
+\headcommand {\beamer@framepages {681}{681}}
+\headcommand {\beamer@subsectionpages {674}{681}}
+\headcommand {\beamer@subsectionentry {0}{12}{2}{682}{Soundness of System SND}}
+\headcommand {\slideentry {12}{2}{1}{682/682}{Soundness of System SND}{0}}
+\headcommand {\beamer@framepages {682}{682}}
+\headcommand {\beamer@subsubsectionentry {0}{12}{2}{1}{683}{Righteous Throat-clearing}}
+\headcommand {\slideentry {12}{2}{2}{683/683}{Soundness of System SND}{0}}
+\headcommand {\beamer@framepages {683}{683}}
+\headcommand {\slideentry {12}{2}{3}{684/684}{Soundness of System SND}{0}}
+\headcommand {\beamer@framepages {684}{684}}
+\headcommand {\slideentry {12}{2}{4}{685/685}{Soundness of System SND}{0}}
+\headcommand {\beamer@framepages {685}{685}}
+\headcommand {\slideentry {12}{2}{5}{686/686}{Soundness of System SND}{0}}
+\headcommand {\beamer@framepages {686}{686}}
+\headcommand {\beamer@subsubsectionentry {0}{12}{2}{2}{687}{Soundness: the proof itself}}
+\headcommand {\slideentry {12}{2}{6}{687/687}{Soundness of System SND}{0}}
+\headcommand {\beamer@framepages {687}{687}}
+\headcommand {\slideentry {12}{2}{7}{688/688}{Soundness of System SND}{0}}
+\headcommand {\beamer@framepages {688}{688}}
+\headcommand {\slideentry {12}{2}{8}{689/689}{Soundness of System SND}{0}}
+\headcommand {\beamer@framepages {689}{689}}
+\headcommand {\slideentry {12}{2}{9}{690/690}{Soundness of System SND}{0}}
+\headcommand {\beamer@framepages {690}{690}}
+\headcommand {\slideentry {12}{2}{10}{691/691}{Soundness of System SND}{0}}
+\headcommand {\beamer@framepages {691}{691}}
+\headcommand {\slideentry {12}{2}{11}{692/692}{Soundness of System SND}{0}}
+\headcommand {\beamer@framepages {692}{692}}
+\headcommand {\slideentry {12}{2}{12}{693/693}{Soundness of System SND}{0}}
+\headcommand {\beamer@framepages {693}{693}}
+\headcommand {\slideentry {12}{2}{13}{694/694}{Soundness of System SND}{0}}
+\headcommand {\beamer@framepages {694}{694}}
+\headcommand {\beamer@subsectionpages {682}{694}}
+\headcommand {\beamer@subsectionentry {0}{12}{3}{695}{Completeness of System SND}}
+\headcommand {\slideentry {12}{3}{1}{695/695}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {695}{695}}
+\headcommand {\beamer@subsubsectionentry {0}{12}{3}{1}{696}{Completing our terminology}}
+\headcommand {\slideentry {12}{3}{2}{696/696}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {696}{696}}
+\headcommand {\slideentry {12}{3}{3}{697/697}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {697}{697}}
+\headcommand {\slideentry {12}{3}{4}{698/698}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {698}{698}}
+\headcommand {\beamer@subsubsectionentry {0}{12}{3}{2}{699}{Proof Sketch}}
+\headcommand {\slideentry {12}{3}{5}{699/699}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {699}{699}}
+\headcommand {\slideentry {12}{3}{6}{700/700}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {700}{700}}
+\headcommand {\slideentry {12}{3}{7}{701/701}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {701}{701}}
+\headcommand {\beamer@subsubsectionentry {0}{12}{3}{3}{702}{The completely straightforward part}}
+\headcommand {\slideentry {12}{3}{8}{702/702}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {702}{702}}
+\headcommand {\slideentry {12}{3}{9}{703/703}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {703}{703}}
+\headcommand {\slideentry {12}{3}{10}{704/704}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {704}{704}}
+\headcommand {\slideentry {12}{3}{11}{705/705}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {705}{705}}
+\headcommand {\slideentry {12}{3}{12}{706/706}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {706}{706}}
+\headcommand {\slideentry {12}{3}{13}{707/707}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {707}{707}}
+\headcommand {\slideentry {12}{3}{14}{708/708}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {708}{708}}
+\headcommand {\beamer@subsubsectionentry {0}{12}{3}{4}{709}{Stage 3: The completely tedious part}}
+\headcommand {\slideentry {12}{3}{15}{709/709}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {709}{709}}
+\headcommand {\slideentry {12}{3}{16}{710/710}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {710}{710}}
+\headcommand {\slideentry {12}{3}{17}{711/711}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {711}{711}}
+\headcommand {\slideentry {12}{3}{18}{712/712}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {712}{712}}
+\headcommand {\slideentry {12}{3}{19}{713/713}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {713}{713}}
+\headcommand {\slideentry {12}{3}{20}{714/714}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {714}{714}}
+\headcommand {\slideentry {12}{3}{21}{715/715}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {715}{715}}
+\headcommand {\slideentry {12}{3}{22}{716/716}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {716}{716}}
+\headcommand {\slideentry {12}{3}{23}{717/717}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {717}{717}}
+\headcommand {\slideentry {12}{3}{24}{718/718}{Completeness of System SND}{0}}
+\headcommand {\beamer@framepages {718}{718}}
+\headcommand {\beamer@sectionpages {672}{718}}
+\headcommand {\beamer@subsectionpages {695}{718}}
+\headcommand {\sectionentry {13}{Metalogic for QL}{719}{Metalogic for QL}{0}}
+\headcommand {\slideentry {13}{0}{1}{719/719}{}{0}}
+\headcommand {\beamer@framepages {719}{719}}
+\headcommand {\slideentry {13}{0}{2}{720/720}{}{0}}
+\headcommand {\beamer@framepages {720}{720}}
+\headcommand {\slideentry {13}{0}{3}{721/721}{}{0}}
+\headcommand {\beamer@framepages {721}{721}}
+\headcommand {\beamer@subsectionpages {719}{721}}
+\headcommand {\beamer@subsectionentry {0}{13}{1}{722}{Truth and Satisfaction in QL}}
+\headcommand {\slideentry {13}{1}{1}{722/722}{Truth and Satisfaction in QL}{0}}
+\headcommand {\beamer@framepages {722}{722}}
+\headcommand {\slideentry {13}{1}{2}{723/723}{Truth and Satisfaction in QL}{0}}
+\headcommand {\beamer@framepages {723}{723}}
+\headcommand {\slideentry {13}{1}{3}{724/724}{Truth and Satisfaction in QL}{0}}
+\headcommand {\beamer@framepages {724}{724}}
+\headcommand {\slideentry {13}{1}{4}{725/725}{Truth and Satisfaction in QL}{0}}
+\headcommand {\beamer@framepages {725}{725}}
+\headcommand {\slideentry {13}{1}{5}{726/726}{Truth and Satisfaction in QL}{0}}
+\headcommand {\beamer@framepages {726}{726}}
+\headcommand {\slideentry {13}{1}{6}{727/727}{Truth and Satisfaction in QL}{0}}
+\headcommand {\beamer@framepages {727}{727}}
+\headcommand {\slideentry {13}{1}{7}{728/728}{Truth and Satisfaction in QL}{0}}
+\headcommand {\beamer@framepages {728}{728}}
+\headcommand {\slideentry {13}{1}{8}{729/729}{Truth and Satisfaction in QL}{0}}
+\headcommand {\beamer@framepages {729}{729}}
+\headcommand {\slideentry {13}{1}{9}{730/730}{Truth and Satisfaction in QL}{0}}
+\headcommand {\beamer@framepages {730}{730}}
+\headcommand {\slideentry {13}{1}{10}{731/731}{Truth and Satisfaction in QL}{0}}
+\headcommand {\beamer@framepages {731}{731}}
+\headcommand {\beamer@subsectionpages {722}{731}}
+\headcommand {\beamer@subsectionentry {0}{13}{2}{732}{Recap: Substitution Instances}}
+\headcommand {\slideentry {13}{2}{1}{732/732}{Recap: Substitution Instances}{0}}
+\headcommand {\beamer@framepages {732}{732}}
+\headcommand {\slideentry {13}{2}{2}{733/733}{Recap: Substitution Instances}{0}}
+\headcommand {\beamer@framepages {733}{733}}
+\headcommand {\slideentry {13}{2}{3}{734/734}{Recap: Substitution Instances}{0}}
+\headcommand {\beamer@framepages {734}{734}}
+\headcommand {\slideentry {13}{2}{4}{735/735}{Recap: Substitution Instances}{0}}
+\headcommand {\beamer@framepages {735}{735}}
+\headcommand {\slideentry {13}{2}{5}{736/736}{Recap: Substitution Instances}{0}}
+\headcommand {\beamer@framepages {736}{736}}
+\headcommand {\slideentry {13}{2}{6}{737/737}{Recap: Substitution Instances}{0}}
+\headcommand {\beamer@framepages {737}{737}}
+\headcommand {\beamer@subsectionpages {732}{737}}
+\headcommand {\beamer@subsectionentry {0}{13}{3}{738}{QL rules recap}}
+\headcommand {\slideentry {13}{3}{1}{738/738}{QL rules recap}{0}}
+\headcommand {\beamer@framepages {738}{738}}
+\headcommand {\slideentry {13}{3}{2}{739/739}{QL rules recap}{0}}
+\headcommand {\beamer@framepages {739}{739}}
+\headcommand {\slideentry {13}{3}{3}{740/740}{QL rules recap}{0}}
+\headcommand {\beamer@framepages {740}{740}}
+\headcommand {\slideentry {13}{3}{4}{741/741}{QL rules recap}{0}}
+\headcommand {\beamer@framepages {741}{741}}
+\headcommand {\beamer@subsectionpages {738}{741}}
+\headcommand {\beamer@subsectionentry {0}{13}{4}{742}{Soundness of System QND}}
+\headcommand {\slideentry {13}{4}{1}{742/742}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {742}{742}}
+\headcommand {\slideentry {13}{4}{2}{743/743}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {743}{743}}
+\headcommand {\slideentry {13}{4}{3}{744/744}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {744}{744}}
+\headcommand {\beamer@subsubsectionentry {0}{13}{4}{1}{745}{More Righteousness?!}}
+\headcommand {\slideentry {13}{4}{4}{745/745}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {745}{745}}
+\headcommand {\slideentry {13}{4}{5}{746/746}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {746}{746}}
+\headcommand {\slideentry {13}{4}{6}{747/747}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {747}{747}}
+\headcommand {\slideentry {13}{4}{7}{748/748}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {748}{748}}
+\headcommand {\beamer@subsubsectionentry {0}{13}{4}{2}{749}{Soundness: the proof itself}}
+\headcommand {\slideentry {13}{4}{8}{749/749}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {749}{749}}
+\headcommand {\slideentry {13}{4}{9}{750/750}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {750}{750}}
+\headcommand {\slideentry {13}{4}{10}{751/751}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {751}{751}}
+\headcommand {\slideentry {13}{4}{11}{752/752}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {752}{752}}
+\headcommand {\slideentry {13}{4}{12}{753/753}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {753}{753}}
+\headcommand {\slideentry {13}{4}{13}{754/754}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {754}{754}}
+\headcommand {\slideentry {13}{4}{14}{755/755}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {755}{755}}
+\headcommand {\slideentry {13}{4}{15}{756/756}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {756}{756}}
+\headcommand {\slideentry {13}{4}{16}{757/757}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {757}{757}}
+\headcommand {\slideentry {13}{4}{17}{758/758}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {758}{758}}
+\headcommand {\slideentry {13}{4}{18}{759/759}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {759}{759}}
+\headcommand {\slideentry {13}{4}{19}{760/760}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {760}{760}}
+\headcommand {\slideentry {13}{4}{20}{761/761}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {761}{761}}
+\headcommand {\slideentry {13}{4}{21}{762/762}{Soundness of System QND}{0}}
+\headcommand {\beamer@framepages {762}{762}}
+\headcommand {\beamer@sectionpages {719}{762}}
+\headcommand {\beamer@subsectionpages {742}{762}}
+\headcommand {\sectionentry {13}{Completeness of QND}{763}{Completeness of QND}{0}}
+\headcommand {\slideentry {13}{0}{1}{763/763}{}{0}}
+\headcommand {\beamer@framepages {763}{763}}
+\headcommand {\slideentry {13}{0}{2}{764/764}{}{0}}
+\headcommand {\beamer@framepages {764}{764}}
+\headcommand {\slideentry {13}{0}{3}{765/765}{}{0}}
+\headcommand {\beamer@framepages {765}{765}}
+\headcommand {\slideentry {13}{0}{4}{766/766}{}{0}}
+\headcommand {\beamer@framepages {766}{766}}
+\headcommand {\beamer@subsectionpages {763}{766}}
+\headcommand {\beamer@subsectionentry {0}{13}{1}{767}{Semantic vs. Syntactic Consistency}}
+\headcommand {\slideentry {13}{1}{1}{767/767}{Semantic vs. Syntactic Consistency}{0}}
+\headcommand {\beamer@framepages {767}{767}}
+\headcommand {\slideentry {13}{1}{2}{768/768}{Semantic vs. Syntactic Consistency}{0}}
+\headcommand {\beamer@framepages {768}{768}}
+\headcommand {\slideentry {13}{1}{3}{769/769}{Semantic vs. Syntactic Consistency}{0}}
+\headcommand {\beamer@framepages {769}{769}}
+\headcommand {\slideentry {13}{1}{4}{770/770}{Semantic vs. Syntactic Consistency}{0}}
+\headcommand {\beamer@framepages {770}{770}}
+\headcommand {\beamer@subsectionpages {767}{770}}
+\headcommand {\beamer@subsectionentry {0}{13}{2}{771}{Proof Sketch}}
+\headcommand {\slideentry {13}{2}{1}{771/771}{Proof Sketch}{0}}
+\headcommand {\beamer@framepages {771}{771}}
+\headcommand {\slideentry {13}{2}{2}{772/772}{Proof Sketch}{0}}
+\headcommand {\beamer@framepages {772}{772}}
+\headcommand {\slideentry {13}{2}{3}{773/773}{Proof Sketch}{0}}
+\headcommand {\beamer@framepages {773}{773}}
+\headcommand {\slideentry {13}{2}{4}{774/774}{Proof Sketch}{0}}
+\headcommand {\beamer@framepages {774}{774}}
+\headcommand {\slideentry {13}{2}{5}{775/775}{Proof Sketch}{0}}
+\headcommand {\beamer@framepages {775}{775}}
+\headcommand {\beamer@subsectionpages {771}{775}}
+\headcommand {\beamer@subsectionentry {0}{13}{3}{776}{Stage 0: $\exists $-Completeness and QL$'$}}
+\headcommand {\slideentry {13}{3}{1}{776/776}{Stage 0: $\exists $-Completeness and QL$'$}{0}}
+\headcommand {\beamer@framepages {776}{776}}
+\headcommand {\slideentry {13}{3}{2}{777/777}{Stage 0: $\exists $-Completeness and QL$'$}{0}}
+\headcommand {\beamer@framepages {777}{777}}
+\headcommand {\slideentry {13}{3}{3}{778/778}{Stage 0: $\exists $-Completeness and QL$'$}{0}}
+\headcommand {\beamer@framepages {778}{778}}
+\headcommand {\slideentry {13}{3}{4}{779/779}{Stage 0: $\exists $-Completeness and QL$'$}{0}}
+\headcommand {\beamer@framepages {779}{779}}
+\headcommand {\beamer@subsectionpages {776}{779}}
+\headcommand {\beamer@subsectionentry {0}{13}{4}{780}{Stage 1: Constructing $\Gamma ^{\ast }$}}
+\headcommand {\slideentry {13}{4}{1}{780/780}{Stage 1: Constructing $\Gamma ^{\ast }$}{0}}
+\headcommand {\beamer@framepages {780}{780}}
+\headcommand {\slideentry {13}{4}{2}{781/781}{Stage 1: Constructing $\Gamma ^{\ast }$}{0}}
+\headcommand {\beamer@framepages {781}{781}}
+\headcommand {\slideentry {13}{4}{3}{782/782}{Stage 1: Constructing $\Gamma ^{\ast }$}{0}}
+\headcommand {\beamer@framepages {782}{782}}
+\headcommand {\slideentry {13}{4}{4}{783/783}{Stage 1: Constructing $\Gamma ^{\ast }$}{0}}
+\headcommand {\beamer@framepages {783}{783}}
+\headcommand {\beamer@subsectionpages {780}{783}}
+\headcommand {\beamer@subsectionentry {0}{13}{5}{784}{Stage 2: $\Gamma ^{\ast }$ is M-QND-C \& $\exists $-complete}}
+\headcommand {\slideentry {13}{5}{1}{784/784}{Stage 2: $\Gamma ^{\ast }$ is M-QND-C \& $\exists $-complete}{0}}
+\headcommand {\beamer@framepages {784}{784}}
+\headcommand {\slideentry {13}{5}{2}{785/785}{Stage 2: $\Gamma ^{\ast }$ is M-QND-C \& $\exists $-complete}{0}}
+\headcommand {\beamer@framepages {785}{785}}
+\headcommand {\slideentry {13}{5}{3}{786/786}{Stage 2: $\Gamma ^{\ast }$ is M-QND-C \& $\exists $-complete}{0}}
+\headcommand {\beamer@framepages {786}{786}}
+\headcommand {\slideentry {13}{5}{4}{787/787}{Stage 2: $\Gamma ^{\ast }$ is M-QND-C \& $\exists $-complete}{0}}
+\headcommand {\beamer@framepages {787}{787}}
+\headcommand {\slideentry {13}{5}{5}{788/788}{Stage 2: $\Gamma ^{\ast }$ is M-QND-C \& $\exists $-complete}{0}}
+\headcommand {\beamer@framepages {788}{788}}
+\headcommand {\beamer@subsectionpages {784}{788}}
+\headcommand {\beamer@subsectionentry {0}{13}{6}{789}{Stage 3: Model Construction}}
+\headcommand {\slideentry {13}{6}{1}{789/789}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {789}{789}}
+\headcommand {\slideentry {13}{6}{2}{790/790}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {790}{790}}
+\headcommand {\beamer@subsubsectionentry {0}{13}{6}{1}{791}{The Membership Lemma}}
+\headcommand {\slideentry {13}{6}{3}{791/791}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {791}{791}}
+\headcommand {\slideentry {13}{6}{4}{792/792}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {792}{792}}
+\headcommand {\slideentry {13}{6}{5}{793/793}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {793}{793}}
+\headcommand {\slideentry {13}{6}{6}{794/794}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {794}{794}}
+\headcommand {\slideentry {13}{6}{7}{795/795}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {795}{795}}
+\headcommand {\slideentry {13}{6}{8}{796/796}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {796}{796}}
+\headcommand {\beamer@subsubsectionentry {0}{13}{6}{2}{797}{Model Construction}}
+\headcommand {\slideentry {13}{6}{9}{797/797}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {797}{797}}
+\headcommand {\slideentry {13}{6}{10}{798/798}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {798}{798}}
+\headcommand {\beamer@subsubsectionentry {0}{13}{6}{3}{799}{Induction on QL$'$ (we be clubbin')}}
+\headcommand {\slideentry {13}{6}{11}{799/799}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {799}{799}}
+\headcommand {\slideentry {13}{6}{12}{800/800}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {800}{800}}
+\headcommand {\slideentry {13}{6}{13}{801/801}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {801}{801}}
+\headcommand {\slideentry {13}{6}{14}{802/802}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {802}{802}}
+\headcommand {\slideentry {13}{6}{15}{803/803}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {803}{803}}
+\headcommand {\slideentry {13}{6}{16}{804/804}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {804}{804}}
+\headcommand {\slideentry {13}{6}{17}{805/805}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {805}{805}}
+\headcommand {\slideentry {13}{6}{18}{806/806}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {806}{806}}
+\headcommand {\beamer@subsubsectionentry {0}{13}{6}{4}{807}{Stage 4? Salvation}}
+\headcommand {\slideentry {13}{6}{19}{807/807}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {807}{807}}
+\headcommand {\slideentry {13}{6}{20}{808/808}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {808}{808}}
+\headcommand {\slideentry {13}{6}{21}{809/809}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {809}{809}}
+\headcommand {\slideentry {13}{6}{22}{810/810}{Stage 3: Model Construction}{0}}
+\headcommand {\beamer@framepages {810}{810}}
+\headcommand {\beamer@sectionpages {763}{810}}
+\headcommand {\beamer@subsectionpages {789}{810}}
+\headcommand {\sectionentry {14}{Compactness of SL \& QL}{811}{Compactness of SL \& QL}{0}}
+\headcommand {\slideentry {14}{0}{1}{811/811}{}{0}}
+\headcommand {\beamer@framepages {811}{811}}
+\headcommand {\slideentry {14}{0}{2}{812/812}{}{0}}
+\headcommand {\beamer@framepages {812}{812}}
+\headcommand {\slideentry {14}{0}{3}{813/813}{}{0}}
+\headcommand {\beamer@framepages {813}{813}}
+\headcommand {\beamer@subsectionpages {811}{813}}
+\headcommand {\beamer@subsectionentry {0}{14}{1}{814}{Compactness of SL}}
+\headcommand {\slideentry {14}{1}{1}{814/814}{Compactness of SL}{0}}
+\headcommand {\beamer@framepages {814}{814}}
+\headcommand {\slideentry {14}{1}{2}{815/815}{Compactness of SL}{0}}
+\headcommand {\beamer@framepages {815}{815}}
+\headcommand {\slideentry {14}{1}{3}{816/816}{Compactness of SL}{0}}
+\headcommand {\beamer@framepages {816}{816}}
+\headcommand {\slideentry {14}{1}{4}{817/817}{Compactness of SL}{0}}
+\headcommand {\beamer@framepages {817}{817}}
+\headcommand {\slideentry {14}{1}{5}{818/818}{Compactness of SL}{0}}
+\headcommand {\beamer@framepages {818}{818}}
+\headcommand {\beamer@subsectionpages {814}{818}}
+\headcommand {\beamer@subsectionentry {0}{14}{2}{819}{A `Pure' proof of SL compactness}}
+\headcommand {\slideentry {14}{2}{1}{819/819}{A `Pure' proof of SL compactness}{0}}
+\headcommand {\beamer@framepages {819}{819}}
+\headcommand {\slideentry {14}{2}{2}{820/820}{A `Pure' proof of SL compactness}{0}}
+\headcommand {\beamer@framepages {820}{820}}
+\headcommand {\slideentry {14}{2}{3}{821/821}{A `Pure' proof of SL compactness}{0}}
+\headcommand {\beamer@framepages {821}{821}}
+\headcommand {\slideentry {14}{2}{4}{822/822}{A `Pure' proof of SL compactness}{0}}
+\headcommand {\beamer@framepages {822}{822}}
+\headcommand {\slideentry {14}{2}{5}{823/823}{A `Pure' proof of SL compactness}{0}}
+\headcommand {\beamer@framepages {823}{823}}
+\headcommand {\slideentry {14}{2}{6}{824/824}{A `Pure' proof of SL compactness}{0}}
+\headcommand {\beamer@framepages {824}{824}}
+\headcommand {\slideentry {14}{2}{7}{825/825}{A `Pure' proof of SL compactness}{0}}
+\headcommand {\beamer@framepages {825}{825}}
+\headcommand {\slideentry {14}{2}{8}{826/826}{A `Pure' proof of SL compactness}{0}}
+\headcommand {\beamer@framepages {826}{826}}
+\headcommand {\beamer@subsectionpages {819}{826}}
+\headcommand {\beamer@subsectionentry {0}{14}{3}{827}{Compactness of First-order Languages}}
+\headcommand {\slideentry {14}{3}{1}{827/827}{Compactness of First-order Languages}{0}}
+\headcommand {\beamer@framepages {827}{827}}
+\headcommand {\slideentry {14}{3}{2}{828/828}{Compactness of First-order Languages}{0}}
+\headcommand {\beamer@framepages {828}{828}}
+\headcommand {\slideentry {14}{3}{3}{829/829}{Compactness of First-order Languages}{0}}
+\headcommand {\beamer@framepages {829}{829}}
+\headcommand {\slideentry {14}{3}{4}{830/830}{Compactness of First-order Languages}{0}}
+\headcommand {\beamer@framepages {830}{830}}
+\headcommand {\slideentry {14}{3}{5}{831/831}{Compactness of First-order Languages}{0}}
+\headcommand {\beamer@framepages {831}{831}}
+\headcommand {\slideentry {14}{3}{6}{832/832}{Compactness of First-order Languages}{0}}
+\headcommand {\beamer@framepages {832}{832}}
+\headcommand {\beamer@subsectionpages {827}{832}}
+\headcommand {\beamer@subsectionentry {0}{14}{4}{833}{The L{\"o}wenheim--Skolem theorems}}
+\headcommand {\slideentry {14}{4}{1}{833/833}{The L{\"o}wenheim--Skolem theorems}{0}}
+\headcommand {\beamer@framepages {833}{833}}
+\headcommand {\slideentry {14}{4}{2}{834/834}{The L{\"o}wenheim--Skolem theorems}{0}}
+\headcommand {\beamer@framepages {834}{834}}
+\headcommand {\slideentry {14}{4}{3}{835/835}{The L{\"o}wenheim--Skolem theorems}{0}}
+\headcommand {\beamer@framepages {835}{835}}
+\headcommand {\slideentry {14}{4}{4}{836/836}{The L{\"o}wenheim--Skolem theorems}{0}}
+\headcommand {\beamer@framepages {836}{836}}
+\headcommand {\slideentry {14}{4}{5}{837/837}{The L{\"o}wenheim--Skolem theorems}{0}}
+\headcommand {\beamer@framepages {837}{837}}
+\headcommand {\beamer@subsectionpages {833}{837}}
+\headcommand {\beamer@subsectionentry {0}{14}{5}{838}{Skolem's `Paradox'}}
+\headcommand {\slideentry {14}{5}{1}{838/838}{Skolem's `Paradox'}{0}}
+\headcommand {\beamer@framepages {838}{838}}
+\headcommand {\slideentry {14}{5}{2}{839/839}{Skolem's `Paradox'}{0}}
+\headcommand {\beamer@framepages {839}{839}}
+\headcommand {\slideentry {14}{5}{3}{840/840}{Skolem's `Paradox'}{0}}
+\headcommand {\beamer@framepages {840}{840}}
+\headcommand {\slideentry {14}{5}{4}{841/841}{Skolem's `Paradox'}{0}}
+\headcommand {\beamer@framepages {841}{841}}
+\headcommand {\beamer@subsectionpages {838}{841}}
+\headcommand {\beamer@subsectionentry {0}{14}{6}{842}{Problems for finitism}}
+\headcommand {\slideentry {14}{6}{1}{842/842}{Problems for finitism}{0}}
+\headcommand {\beamer@framepages {842}{842}}
+\headcommand {\slideentry {14}{6}{2}{843/843}{Problems for finitism}{0}}
+\headcommand {\beamer@framepages {843}{843}}
+\headcommand {\slideentry {14}{6}{3}{844/844}{Problems for finitism}{0}}
+\headcommand {\beamer@framepages {844}{844}}
+\headcommand {\slideentry {14}{6}{4}{845/845}{Problems for finitism}{0}}
+\headcommand {\beamer@framepages {845}{845}}
+\headcommand {\beamer@subsectionpages {842}{845}}
+\headcommand {\beamer@subsectionentry {0}{14}{7}{846}{A topological proof of SL compactness}}
+\headcommand {\slideentry {14}{7}{1}{846/846}{A topological proof of SL compactness}{0}}
+\headcommand {\beamer@framepages {846}{846}}
+\headcommand {\slideentry {14}{7}{2}{847/847}{A topological proof of SL compactness}{0}}
+\headcommand {\beamer@framepages {847}{847}}
+\headcommand {\slideentry {14}{7}{3}{848/848}{A topological proof of SL compactness}{0}}
+\headcommand {\beamer@framepages {848}{848}}
+\headcommand {\slideentry {14}{7}{4}{849/849}{A topological proof of SL compactness}{0}}
+\headcommand {\beamer@framepages {849}{849}}
+\headcommand {\slideentry {14}{7}{5}{850/850}{A topological proof of SL compactness}{0}}
+\headcommand {\beamer@framepages {850}{850}}
+\headcommand {\slideentry {14}{7}{6}{851/851}{A topological proof of SL compactness}{0}}
+\headcommand {\beamer@framepages {851}{851}}
+\headcommand {\beamer@sectionpages {811}{851}}
+\headcommand {\beamer@subsectionpages {846}{851}}
+\headcommand {\sectionentry {14}{Final Review!}{852}{Final Review!}{0}}
+\headcommand {\slideentry {14}{0}{1}{852/852}{}{0}}
+\headcommand {\beamer@framepages {852}{852}}
+\headcommand {\slideentry {14}{0}{2}{853/853}{}{0}}
+\headcommand {\beamer@framepages {853}{853}}
+\headcommand {\beamer@subsectionpages {852}{853}}
+\headcommand {\beamer@subsectionentry {0}{14}{1}{854}{Checking Soundness for Alt. Rules}}
+\headcommand {\slideentry {14}{1}{1}{854/854}{Checking Soundness for Alt. Rules}{0}}
+\headcommand {\beamer@framepages {854}{854}}
+\headcommand {\slideentry {14}{1}{2}{855/855}{Checking Soundness for Alt. Rules}{0}}
+\headcommand {\beamer@framepages {855}{855}}
+\headcommand {\slideentry {14}{1}{3}{856/856}{Checking Soundness for Alt. Rules}{0}}
+\headcommand {\beamer@framepages {856}{856}}
+\headcommand {\slideentry {14}{1}{4}{857/857}{Checking Soundness for Alt. Rules}{0}}
+\headcommand {\beamer@framepages {857}{857}}
+\headcommand {\slideentry {14}{1}{5}{858/858}{Checking Soundness for Alt. Rules}{0}}
+\headcommand {\beamer@framepages {858}{858}}
+\headcommand {\slideentry {14}{1}{6}{859/859}{Checking Soundness for Alt. Rules}{0}}
+\headcommand {\beamer@framepages {859}{859}}
+\headcommand {\slideentry {14}{1}{7}{860/860}{Checking Soundness for Alt. Rules}{0}}
+\headcommand {\beamer@framepages {860}{860}}
+\headcommand {\slideentry {14}{1}{8}{861/861}{Checking Soundness for Alt. Rules}{0}}
+\headcommand {\beamer@framepages {861}{861}}
+\headcommand {\slideentry {14}{1}{9}{862/862}{Checking Soundness for Alt. Rules}{0}}
+\headcommand {\beamer@framepages {862}{862}}
+\headcommand {\beamer@subsectionpages {854}{862}}
+\headcommand {\beamer@subsectionentry {0}{14}{2}{863}{Applications of soundness \& completeness}}
+\headcommand {\slideentry {14}{2}{1}{863/863}{Applications of soundness \& completeness}{0}}
+\headcommand {\beamer@framepages {863}{863}}
+\headcommand {\slideentry {14}{2}{2}{864/864}{Applications of soundness \& completeness}{0}}
+\headcommand {\beamer@framepages {864}{864}}
+\headcommand {\slideentry {14}{2}{3}{865/865}{Applications of soundness \& completeness}{0}}
+\headcommand {\beamer@framepages {865}{865}}
+\headcommand {\slideentry {14}{2}{4}{866/866}{Applications of soundness \& completeness}{0}}
+\headcommand {\beamer@framepages {866}{866}}
+\headcommand {\slideentry {14}{2}{5}{867/867}{Applications of soundness \& completeness}{0}}
+\headcommand {\beamer@framepages {867}{867}}
+\headcommand {\slideentry {14}{2}{6}{868/868}{Applications of soundness \& completeness}{0}}
+\headcommand {\beamer@framepages {868}{868}}
+\headcommand {\beamer@subsectionpages {863}{868}}
+\headcommand {\beamer@subsectionentry {0}{14}{3}{869}{Alt. Cases of Membership Lemma}}
+\headcommand {\slideentry {14}{3}{1}{869/869}{Alt. Cases of Membership Lemma}{0}}
+\headcommand {\beamer@framepages {869}{869}}
+\headcommand {\slideentry {14}{3}{2}{870/870}{Alt. Cases of Membership Lemma}{0}}
+\headcommand {\beamer@framepages {870}{870}}
+\headcommand {\slideentry {14}{3}{3}{871/871}{Alt. Cases of Membership Lemma}{0}}
+\headcommand {\beamer@framepages {871}{871}}
+\headcommand {\slideentry {14}{3}{4}{872/872}{Alt. Cases of Membership Lemma}{0}}
+\headcommand {\beamer@framepages {872}{872}}
+\headcommand {\slideentry {14}{3}{5}{873/873}{Alt. Cases of Membership Lemma}{0}}
+\headcommand {\beamer@framepages {873}{873}}
+\headcommand {\slideentry {14}{3}{6}{874/874}{Alt. Cases of Membership Lemma}{0}}
+\headcommand {\beamer@framepages {874}{874}}
+\headcommand {\slideentry {14}{3}{7}{875/875}{Alt. Cases of Membership Lemma}{0}}
+\headcommand {\beamer@framepages {875}{875}}
+\headcommand {\beamer@subsectionpages {869}{875}}
+\headcommand {\beamer@subsectionentry {0}{14}{4}{876}{Translations in QL, with Identity}}
+\headcommand {\slideentry {14}{4}{1}{876/876}{Translations in QL, with Identity}{0}}
+\headcommand {\beamer@framepages {876}{876}}
+\headcommand {\slideentry {14}{4}{2}{877/877}{Translations in QL, with Identity}{0}}
+\headcommand {\beamer@framepages {877}{877}}
+\headcommand {\slideentry {14}{4}{3}{878/878}{Translations in QL, with Identity}{0}}
+\headcommand {\beamer@framepages {878}{878}}
+\headcommand {\beamer@subsubsectionentry {0}{14}{4}{1}{879}{Only, Neither, Counting}}
+\headcommand {\slideentry {14}{4}{4}{879/879}{Translations in QL, with Identity}{0}}
+\headcommand {\beamer@framepages {879}{879}}
+\headcommand {\slideentry {14}{4}{5}{880/880}{Translations in QL, with Identity}{0}}
+\headcommand {\beamer@framepages {880}{880}}
+\headcommand {\slideentry {14}{4}{6}{881/881}{Translations in QL, with Identity}{0}}
+\headcommand {\beamer@framepages {881}{881}}
+\headcommand {\slideentry {14}{4}{7}{882/882}{Translations in QL, with Identity}{0}}
+\headcommand {\beamer@framepages {882}{882}}
+\headcommand {\slideentry {14}{4}{8}{883/883}{Translations in QL, with Identity}{0}}
+\headcommand {\beamer@framepages {883}{883}}
+\headcommand {\beamer@subsubsectionentry {0}{14}{4}{2}{884}{`The' Definite Description}}
+\headcommand {\slideentry {14}{4}{9}{884/884}{Translations in QL, with Identity}{0}}
+\headcommand {\beamer@framepages {884}{884}}
+\headcommand {\slideentry {14}{4}{10}{885/885}{Translations in QL, with Identity}{0}}
+\headcommand {\beamer@framepages {885}{885}}
+\headcommand {\slideentry {14}{4}{11}{886/886}{Translations in QL, with Identity}{0}}
+\headcommand {\beamer@framepages {886}{886}}
+\headcommand {\slideentry {14}{4}{12}{887/887}{Translations in QL, with Identity}{0}}
+\headcommand {\beamer@framepages {887}{887}}
+\headcommand {\beamer@subsectionpages {876}{887}}
+\headcommand {\beamer@subsectionentry {0}{14}{5}{888}{Interpretations/Models for QL}}
+\headcommand {\slideentry {14}{5}{1}{888/888}{Interpretations/Models for QL}{0}}
+\headcommand {\beamer@framepages {888}{888}}
+\headcommand {\slideentry {14}{5}{2}{889/889}{Interpretations/Models for QL}{0}}
+\headcommand {\beamer@framepages {889}{889}}
+\headcommand {\slideentry {14}{5}{3}{890/890}{Interpretations/Models for QL}{0}}
+\headcommand {\beamer@framepages {890}{890}}
+\headcommand {\slideentry {14}{5}{4}{891/891}{Interpretations/Models for QL}{0}}
+\headcommand {\beamer@framepages {891}{891}}
+\headcommand {\slideentry {14}{5}{5}{892/892}{Interpretations/Models for QL}{0}}
+\headcommand {\beamer@framepages {892}{892}}
+\headcommand {\beamer@subsectionpages {888}{892}}
+\headcommand {\beamer@subsectionentry {0}{14}{6}{893}{Derivations in QND}}
+\headcommand {\slideentry {14}{6}{1}{893/893}{Derivations in QND}{0}}
+\headcommand {\beamer@framepages {893}{893}}
+\headcommand {\slideentry {14}{6}{2}{894/894}{Derivations in QND}{0}}
+\headcommand {\beamer@framepages {894}{894}}
+\headcommand {\slideentry {14}{6}{3}{895/895}{Derivations in QND}{0}}
+\headcommand {\beamer@framepages {895}{895}}
+\headcommand {\slideentry {14}{6}{4}{896/896}{Derivations in QND}{0}}
+\headcommand {\beamer@framepages {896}{896}}
+\headcommand {\beamer@partpages {1}{896}}
+\headcommand {\beamer@subsectionpages {893}{896}}
+\headcommand {\beamer@sectionpages {852}{896}}
+\headcommand {\beamer@documentpages {896}}
+\headcommand {\gdef \inserttotalframenumber {755}}

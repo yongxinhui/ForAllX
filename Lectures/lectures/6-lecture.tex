@@ -1,0 +1,1551 @@
+﻿% !TeX root = ./6-handout.tex
+
+\setcounter{section}{5}
+
+\section{Proofs in SL}
+
+\begin{frame}
+%\large
+
+\scriptsize{\tableofcontents}
+
+\end{frame}
+
+\subsection{Who ordered \textit{that}???}
+
+\begin{frame}
+\frametitle{The Power of a Proof System}
+%\large
+
+\begin{itemize}[<+->]
+
+\item We have already seen how powerful a proof system can be compared to truth tables:
+
+\item Consider our running example argument: 
+      \[
+      C \eor E, A \eor M, A \eif \enot C, \enot S \eand \enot M \therefore E
+      \]
+      requires 32 lines and 512 truth values
+
+\item With trees, we showed validity in 10 lines (13 sentences)
+
+\item Why not just tree always and everywhere? 
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{For the Love of Trees}
+%\large
+
+\begin{itemize}[<+->]
+
+\item The advantages of trees create limitations:
+
+\begin{itemize}
+
+\item Mechanical $\Rightarrow$ not `normal' pattern of inference
+
+\item Mirror partial truth-tables $\Rightarrow$ implicitly referencing truth-values
+
+\item Always checking satisfiability of the root $\Rightarrow$ we don't really `derive' anything at the end of the proof, unlike in normal inference 
+
+\item (this is why so many of us keep forgetting that it is the NEGATION of the conclusion that goes in the root)
+
+\end{itemize}
+
+\item We would like to form a better model of human inference patterns
+% % Key point: we do not ordinarily reason in terms of surveying truth value assignments, nor in talking about satisfiability, or open or closed branches.
+
+\item e.g., common rules such as Modus Ponens, disjunctive syllogism
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Idiosyncrasies of Table or Tree Reasoning}
+%\large
+
+\begin{itemize}[<+->]
+
+\item Tables:  
+
+\bi 
+\item Construct a truth table
+
+\item verify there is no TVA where premises are true but conclusion is false
+
+\ei 
+
+\item This is NOT how we typically reason through an argument
+
+\item Trees: ask whether a set of sentences is satisfiable:
+
+\bi
+\item Put premises and NEGATION of conclusion in root
+
+\item If tree closes, then unsatisfiable root (valid argument)
+
+\item If tree remains open, then satisfiable root (invalid argument)
+\ei
+
+\item Again, this is NOT how we typically reason through an argument 
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Very Idea of `Natural Deduction'}
+%\large
+
+\begin{itemize}[<+->]
+
+\item We commonly reason according to certain inference rules
+
+\item And we often make assumptions in the \textit{middle} of our reasoning, derive an intermediate conclusion, and `discharge' the assumption (e.g. in proof by contradiction)
+
+\item We would like to see if we can \textit{vindicate} these patterns:
+
+\begin{itemize}
+
+\item Show that these rules never get us into trouble: soundness
+
+\item Show that we have enough rules to handle any valid argument (including additional rules we might want to add): completeness   
+
+\end{itemize}
+
+\item Perhaps our natural deduction system \textit{explains} the success of our ordinary inference patterns
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Ordinary Reasoning by ``Proofs"}
+
+  \begin{itemize}[<+->]
+    \item Idea: work our way from premises to conclusion using steps
+    we know are entailed by the premises.
+    \item For instance:
+      \begin{itemize}[<+->]
+        \item From ``Neither Sarah nor Amir enjoys hiking'' we can
+        conclude ``Amir doesn't enjoy hiking.''
+        \item From ``Either Amir lives in Chicago or he enjoys hiking''
+        and ``Amir doesn't enjoy hiking'' we can conclude ``Amir
+        lives in Chicago'' (Disjunctive syllogism DS).
+        \item etc.
+      \end{itemize}
+    \item If we manage to work from the premises to the conclusion in
+    this way, we know that the argument must be valid.
+  \end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{An informal proof}
+
+  \begin{block}{Our argument}
+  1. Sarah lives in Chicago or Erie.\\
+  2. Amir lives in Chicago unless he enjoys hiking.\\
+  3. If Amir lives in Chicago, Sarah doesn't.\\
+  4. Neither Sarah nor Amir enjoy hiking.\\
+  $\therefore$ Sarah lives in Erie.
+  \end{block}
+
+  \begin{enumerate}[<+->]
+    \item[5.] Amir doesn't enjoy hiking (from 4).
+    \item[6.] Amir lives in Chicago (from 2 and 5).
+    \item[7.] Sarah doesn't live in Chicago (from 3 and 6).
+    \item[8.] Sarah lives in Erie (from 1 and 7).
+  \end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{A more formal proof}
+
+  \begin{block}{Our argument}
+    1. \alert<4>{$C \eor E$}\\
+    2. \alert<2>{$A \eor M$}\\
+    3. \alert<3>{$A \eif \enot C$}\\
+    4. \alert<1>{$\enot S \eand \enot M$} \\
+  $\therefore$ $E$
+  \end{block}
+
+  \begin{enumerate}[<+->]
+    \item[5.] \alert<1,2>{$\enot M$} (from 4, since $\metav{P} \eand \metav{Q}
+    \entails \metav{Q}$)
+    \item[6.] \alert<2,3>{$A$} (from 2 and 5, since $\{ \metav{P} \eor \metav{Q}, \enot \metav{Q} \} \entails \metav{P}$)
+    \item[7.] \alert<3,4>{$\enot C$} (from 3 and 6, since $\{ \metav{P} \eif \metav{Q}, \metav{P} \} \entails \metav{Q}$, i.e. via `modus ponens')
+    \item[8.] \alert<4>{$E$} (from 1 and 7, since $\{ \metav{P} \eor \metav{Q}, \enot \metav{P} \}    \entails \metav{Q}$)
+  \end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Some aspects of our Formal Deductions}
+
+  \begin{itemize}[<+->]
+    \item Numbered lines contain sentences of SL
+    \item A line may be a \emph{premise} (:PR).
+\item A line may be an \emph{assumption} (:AS)
+    \item If neither a premise nor assumption, it must be \emph{justified} %\textit{by a rule}
+    \item Justification requires:
+\medskip
+      \begin{itemize}
+        \item a \emph{rule} (e.g. `\&E'), and
+        \item prior line(s) invoked by the rule---referenced by line number(s)
+       \item starting with a colon: e.g. `: 2 \&E'
+      \end{itemize}
+\medskip
+    \item But: what are the rules? (very different from `what IS a rule'?)
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Aspects of our Rules for Natural Deduction}
+
+  \begin{itemize}[<+->]
+    \item Our Rules will (mostly) be \dots
+      \begin{itemize}[<+->]
+        \item \emph{Simple}: cite just a few lines as justification
+        \item \emph{Obvious}: new line should clearly be entailed by justifications
+        \item \emph{Schematic}: can be described just by \emph{forms} of
+        sentences involved
+        \item \emph{Few in number}: want to make do with just a handful
+      \end{itemize}
+    \item We'll have two rules per connective: \\ an \emph{introduction}
+    and an \emph{elimination} rule
+    \item They'll be used to either:
+    \begin{itemize}[<+->]
+      \item justify (say) $\metav{P} \eand \metav{Q}$ (i.e. to `introduce' \eand), or 
+    \item justify something \emph{using} $\metav{P}
+    \eand \metav{Q}$ (i.e. to `eliminate' \eand).
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\subsection{Conjunction Intro and Elimination (Rules for \eand)}
+
+
+\begin{frame}
+  \frametitle{Eliminating \eand}
+
+  \begin{itemize}[<+->]
+    \item What can we \emph{justify using} $\metav{P} \eand \metav{Q}$?
+    \item A conjunction entails each conjunct:
+    \begin{align*}
+      & \metav{P} \eand \metav{Q} \entails \metav{P}\\
+      & \metav{P} \eand \metav{Q} \entails \metav{Q}
+    \end{align*}
+    \item Already used this above to get $\enot M$ from $\enot S \eand
+    \enot M$, i.e., from ``Neither
+    Sarah nor Amir enjoys hiking'' we concluded\\
+ ``Amir doesn't enjoy hiking''.
+    \item (Role of $\metav{P}$ played by $\enot S$ and that of $\metav{Q}$
+    played by $\enot M$)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Introducing \eand}
+
+  \begin{itemize}[<+->]
+    \item What do we \emph{need to justify} $\metav{P} \eand \metav{Q}$?
+    \item We need both \metav{P} and \metav{Q}:
+    \begin{align*}
+      & \{ \metav{P}, \metav{Q} \} \entails \metav{P}\eand \metav{Q}
+    \end{align*}
+    \item For instance, if we have ``Sarah doesn't enjoy hiking'' and
+    also ``Amir doesn't enjoy hiking'', we can conclude\\
+    ``Neither
+    Sarah nor Amir enjoys hiking''
+    \item (Role of $\metav{P}$ played by $\enot S$ and $\metav{Q}$ by $\enot M$: \{ $\enot S, \enot M \} \entails \enot S \eand \enot M$)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Rules for \eand}
+  \begin{columns}
+    \begin{column}{3cm}
+  \begin{fitchproof}
+    \have[m]{a}{\metav{P}}
+    \have[n]{b}{\metav{Q}}
+    \have[\ ]{c}{\metav{P}\eand\metav{Q}} \ai{a, b}
+  \end{fitchproof}
+\end{column}
+\begin{column}{3cm}
+  \begin{fitchproof}
+    \have[m]{ab}{\metav{P}\eand\metav{Q}}
+    \have[\ ]{a}{\metav{P}} \ae{ab}
+  \end{fitchproof}
+  \begin{fitchproof}
+    \have[m]{ab}{\metav{P}\eand\metav{Q}}
+    \have[\ ]{b}{\metav{Q}} \ae{ab}
+  \end{fitchproof}
+\end{column}
+\end{columns}
+We'll illustrate using exercises in our \href{https://tinyurl.com/2p82rpv5}{Week 6 Practice Problems on Carnap}.
+\end{frame}
+
+\begin{frame}
+  \begin{fitchproof}
+    \hypo{1}{A \eand B} \pr{}
+    \have{2}{A}\ae{1}
+    \have{3}{B}\ae{1}
+    \have{4}{B \eand A}\ai{2,3}
+  \end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \begin{fitchproof}
+    \hypo{1}{A \eand (B \eand C)} \pr{}
+    \have{2}{A}\ae{1}
+    \have{3}{B \eand C}\ae{1}
+    \have{4}{C}\ae{3}
+    \have{5}{A \eand C}\ai{2,4}
+  \end{fitchproof}
+\end{frame}
+
+\subsection{Conditional Intro and Elim. (Rules for \eif)}
+
+\begin{frame}
+  \frametitle{Eliminating \eif}
+
+  \begin{itemize}[<+->]
+    \item What can we \emph{justify using} $\metav{P} \eif \metav{Q}$?
+    \item We used the conditional ``If Amir lives in Chicago, Sarah
+    doesn't'' to justify ``Sarah doesn't live in
+    Chicago''.
+    \item What is the general rule? What can we justify using
+    $\metav{P} \eif \metav{Q}$? What do we need in addition to $\metav{P} \eif \metav{Q}$?
+    \item The principle is \emph{modus ponens} (affirming the antecedent):
+    \[ \{ \metav{P} \eif \metav{Q}, \metav{P} \} \entails \metav{Q}\]
+    \item (When inferring from $A \eif \enot C$ and $A$ to $\enot C$, the role
+    of \metav{P} is played by $A$ and role of \metav{Q} by $\enot C$.)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Elimination rule for \eif}
+  \begin{fitchproof}
+    \have[m]{a}{\metav{P} \eif \metav{Q}}
+    \have[n]{b}{\metav{P}}
+    \have[\ ]{c}{\metav{Q}} \ce{a, b}
+  \end{fitchproof}
+
+  Let's illustrate this rule using an exercise
+ \href{https://tinyurl.com/2p82rpv5}{in Carnap}: \\ we
+  show that $\{A \eand B, A \eif C, B \eif D \} \entails C \eand D$.
+\end{frame}
+
+\begin{frame}
+  \begin{fitchproof}
+    \hypo{1}{A \eand B} \pr{}
+    \hypo{2}{A \eif C} \pr{}
+    \hypo{3}{B \eif D} \pr{}
+    \have{4}{A}\ae{1}
+    \have{5}{C}\ce{2,4}
+    \have{6}{B}\ae{1}
+    \have{7}{D}\ce{3,6}
+    \have{8}{C \eand D}\ai{5,7}
+  \end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Introducing \eif}
+
+  \begin{itemize}[<+->]
+  \item How do we justify a conditional? What should we require for a proof
+  of $\metav{P} \eif \metav{Q}$ (say, from some premise $\metav{R}$)?
+
+  \item We need a proof that shows that $\metav{R} \entails \metav{P} \eif
+  \metav{Q}$.
+
+  \item Idea: show instead that $\metav{R}, \metav{P} \entails \metav{Q}$.
+
+  \item The conditional $\eif$ no longer appears, so this seems easier.
+
+  \item It's a good move, because if $\metav{R}, \metav{P} \entails
+  \metav{Q}$
+  then $\metav{R} \entails \metav{P} \eif
+  \metav{Q}$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Justifying $\eif$I}
+  \begin{block}{Fact}
+  If $\metav{R}, \metav{P} \entails
+  \metav{Q}$
+  then
+  $\metav{R} \entails \metav{P} \eif
+  \metav{Q}$.
+  \end{block}
+
+  \begin{itemize}[<+->]
+    \item If $\metav{R}, \metav{P} \entails
+    \metav{Q}$ then every TVA makes $\metav{R}$ or
+   $\metav{P}$ false or it makes $\metav{Q}$ true
+    \item Let's show that no valuation is a counterexample to $\metav{R} \entails \metav{P} \eif
+    \metav{Q}$:
+    \begin{enumerate}
+      \item A valuation that makes $\metav{R}$ and
+    $\metav{P}$ true, but $\metav{Q}$ false, is impossible if  $\metav{R}, \metav{P} \entails
+    \metav{Q}$.
+    \item So any valuation must make $\metav{R}$ false, $\metav{P}$
+    false, or $\metav{Q}$ true.
+    \item If it makes $\metav{R}$ false, it's not a counterexample to $\metav{R} \entails \metav{P} \eif
+    \metav{Q}$.
+    \item If it makes $\metav{P}$ false, it makes $\metav{P} \eif
+    \metav{Q}$ true, so it's not a counterexample.
+    \item If it makes $\metav{Q}$ true, it also makes $\metav{P} \eif
+    \metav{Q}$ true, so it's not a counterexample.
+    \end{enumerate}
+    \item So, there are no counterexamples to $\metav{R} \entails \metav{P} \eif
+    \metav{Q}$.
+\item If $\metav{R} = \varnothing$, then from $\metav{P} \entails \metav{Q}$ we can infer $ \entails \metav{P} \eif \metav{Q}$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Subproofs (CRUCIAL CONCEPT)}
+
+  \begin{itemize}[<+->]
+    \item We want to justify $\metav{P} \eif \metav{Q}$ by giving a
+    proof of $\metav{Q}$ from \textit{assumption} $\metav{P}$ (and possibly other premises $\Gamma$, e.g. $\metav{R}$)
+    \item How to do this in a proof? We can add something as a
+    premise and \textit{discharge} it later!
+    \item Solution: add $\metav{P}$ as an assumption (:AS), and keep track
+    of what depends on that assumption (say, by indenting and a vertical
+    line)
+    \item Once we're done (have proved \metav{Q}), close this ``subproof''.
+    \item Justification of $\metav{P} \eif \metav{Q}$ is the \emph{entire} subproof (use a HYPHEN)
+    \item \emph{Important}: nothing \emph{inside} a subproof is available
+    outside as a justification (since inner lines might depend on the assumption)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Introduction rule for \eif}
+  \begin{fitchproof}
+    \open
+    \hypo[m]{a}{\metav{P}} \as{for \eif I}
+    \ellipsesline
+    \have[n]{b}{\metav{Q}}
+    \close
+    \have[\ ]{c}{\metav{P} \eif \metav{Q}} \ci{a-b}
+  \end{fitchproof}
+
+NOTE THE \emph{HYPHEN} IN THE JUSTIFICATION LINE!!!
+
+  We'll illustrate using more exercises from \href{https://tinyurl.com/2p82rpv5}{Week 6 Practice Problems}
+  \begin{itemize}
+  \item Show: $\{ A \eif B, B \eif C \} \entails A \eif C$.
+  \item Show: $A \eif (B \eif C) \entails (A \eand B) \eif (A \eand C)$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{fitchproof}
+    \hypo{1}{A \eif B} \pr{}
+    \hypo{2}{B \eif C} \pr{}
+    \open
+    \hypo{3}{A} \as{for \eif I}
+    \have{4}{B}\ce{1,3}
+    \have{5}{C}\ce{2,4}
+    \close
+    \have{6}{A \eif C}\ci{3-5}
+  \end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \begin{fitchproof}
+    \hypo{1}{A \eif (B \eif C)} \pr{}
+    \open
+    \hypo{2}{A \eand B} \as{for \eif I}
+    \have{3}{A}\ae{2}
+    \have{4}{B \eif C}\ce{1,3}
+    \have{5}{B}\ae{2}
+    \have{6}{C}\ce{4,5}
+    \have{7}{A \eand C}\ai{3,6}
+    \close
+    \have{8}{(A \eand B) \eif (A \eand C)}\ci{2-7}
+  \end{fitchproof}
+\end{frame}
+
+\subsection{Use of subproofs}
+
+\begin{frame}
+  \frametitle{Reiteration (for the 11th hour!)}
+
+  $\metav{P} \entails \metav{P}$, so ``Reiteration'' R is a good rule:
+
+  \begin{fitchproof}
+    \have[m]{ab}{\metav{P}}
+    \have[k]{a}{\metav{P}} \by{R}{ab}
+  \end{fitchproof}
+
+  Uses of reiteration (to the \href{https://tinyurl.com/2p82rpv5}{Carnap!}):
+
+  \begin{itemize}[<+->]
+    \item Proof of $A \entails A$.
+    \item Proof that $A \eif (B \eif A)$ is a tautology.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{fitchproof}
+    \open
+    \hypo{1}{A} \as{for \eif I}
+    \have{2}{A}\by{R}{1}
+    \close
+    \have{3}{A \eif A}\ci{1-2}
+  \end{fitchproof}
+
+Again, note the \emph{HYPHEN}! Even though our subproof is only two lines, we still write `:1\textbf{-}2' and NOT `:1, 2'. 
+\end{frame}
+
+\begin{frame}
+  \begin{fitchproof}
+    \open
+    \hypo{1}{A} \as{for \eif I}
+    \open
+    \hypo{2}{B} \as{for \eif I}
+    \have{3}{A}\by{R}{1}
+    \close
+    \have{4}{B \eif A}\ci{2-3}
+    \close
+    \have{5}{A \eif (B \eif A)}\ci{1-4}
+  \end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Rules for justifications and subproofs}
+
+  \begin{itemize}[<+->]
+    \item When a rule calls for a subproof, we cite it as ``: $m$--$n$",
+   hyphenating the first and last line numbers of the subproof.
+    \item Sentences on the Assumption line \emph{and} last line MUST match rule
+    \item After a subproof is done, you can only cite the whole thing,
+    NOT any line in it (you are `outside the scope' of these lines)
+    \item Subproofs \footnotesize{(subproofs can be nested)} \normalsize{can be nested}
+    \item You also can't cite any subproof entirely
+    contained inside another subproof, once the surrounding subproof
+    is completed (since again you'd be `outside the scope' of those lines)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reiteration (do's a don'ts) DOs and DON'Ts!}
+Which are correct applications of R?
+  \begin{fitchproof}
+    \open
+    \hypo{ab}{A} \as{}
+    \open
+    \hypo{b}{A} \as{}
+    \have{a}{A} \by{\uncover<2->{\alert{\checkmark}} R}{ab}
+    \close
+    \have{d}{A} \by{\uncover<3->{\alert{\checkmark}} R}{ab}
+    \have{c}{A} \by{\uncover<4->{\alert{\text{\ding{55}}}} R}{b}
+    \close
+    \have{e}{A} \by{\uncover<5->{\alert{\text{\ding{55}}}} R}{b}
+    \have{f}{A} \by{\uncover<6>{\alert{\text{\ding{55}}}} R}{ab}
+  \end{fitchproof}
+\end{frame}
+
+\subsection{Disjunction Intro and Elim. (Rules for \eor)}
+
+\begin{frame}
+  \frametitle{Introduction rule for \eor}
+  We have $\metav{P} \entails \metav{P} \eor \metav{Q}$. So:
+
+\begin{multicols}{2}
+
+  \begin{fitchproof}
+    \have[m]{ab}{\metav{P}}
+    \have[\ ]{a}{\metav{P}\eor\metav{Q}} \oi{ab}
+  \end{fitchproof}
+\columnbreak
+
+  \begin{fitchproof}
+    \have[m]{ab}{\metav{Q}}
+    \have[\ ]{b}{\metav{P}\eor\metav{Q}} \oi{ab}
+  \end{fitchproof}
+
+\end{multicols}
+
+\begin{itemize}[<+->]
+
+\item Note that the introduced disjunct can be ANYTHING!
+
+\item And you can introduce on the left OR right side!
+
+\item Let's do practice problem 6.10 on \href{https://tinyurl.com/2p82rpv5}{Carnap!}
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \begin{fitchproof}
+    \open
+    \hypo{1}{A} \as{for \eif I}
+    \have{2}{B \eor A}\oi{1}
+    \close
+    \have{3}{A \eif (B \eor A)}\ci{1-2}
+  \end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Eliminating $\eor$ (Proof by Cases)}
+
+  \begin{itemize}[<+->]
+  \item What can we justify with disjunction $\metav{P} \lor \metav{Q}$?
+
+  \item Not $\metav{P}$ and also not $\metav{Q}$: neither is entailed by
+  $\metav{P} \eor \metav{Q}$.
+
+  \item But: if both $\metav{P}$ and $\metav{Q}$ separately entail some
+  third sentence $\metav{R}$, then we know that $\metav{R}$ follows from the disjunction!
+
+  \item To show this, we need \emph{two} subproofs that show $\metav{R}$, but
+  in each proof we are allowed to use only one of $\metav{P}$, $\metav{Q}$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}\footnotesize
+  \frametitle{Elimination rule for $\eor$ (Proof by Cases)}
+
+\begin{multicols}{2}
+
+\begin{center}
+  \begin{fitchproof}
+    \have[m]{o}{\metav{P} \eor \metav{Q}}
+    \open
+    \hypo[i]{a}{\metav{P}} \as{for \eor E}
+    \ellipsesline
+    \have[j]{b}{\metav{R}}
+    \close
+\breakline
+    \open
+    \hypo[k]{aa}{\metav{Q}} \as{for \eor E}
+    \ellipsesline
+    \have[\ell]{bb}{\metav{R}}
+    \close
+    \have[\ ]{c}{\metav{R}} \oe{o, a-b, aa-bb}
+  \end{fitchproof}
+  \end{center}
+
+   \columnbreak
+    
+\begin{center}
+ \begin{itemize}[<+->]
+
+\item From \metav{P} we derive \metav{R}
+
+\item Start a subproof for each disjunct
+
+\item The subproofs need not be adjacent, but if they are, \emph{separate with -{}-}
+
+\item From \metav{Q} we derive \metav{R}
+
+\item You can swap the order of the subproofs
+
+\item Remember to cite BOTH subproofs (hyphens!), AND the line with the disjunction
+
+\item Remember to pop out of subproof level at the end!
+
+\end{itemize}
+
+% \ellipsesline
+  \end{center}
+  
+\end{multicols}
+  
+\end{frame}
+
+
+\begin{frame}
+  \begin{fitchproof}
+    \hypo{1}{A \eor B} \pr{}
+    \open
+    \hypo{2}{A} \as{for \eor E}
+    \have{3}{B \eor A}\oi{2}
+    \close
+%\breakline%makes the line numbers go super wonky 
+    \open
+    \hypo{4}{B} \as{for \eor E}
+    \have{5}{B \eor A}\oi{4}
+    \close
+    \have{6}{B \eor A}\oe{1,2-3,4-5}
+  \end{fitchproof}
+
+  \begin{itemize}[<+->]
+  
+  \item In Carnap: Need -{}- between the subproofs
+
+\item Note: need the \emph{SAME sentence} as the last line of each subproof
+
+\item Note the complex justification structure: (a) line with disjunction, (b) first subproof, (c) second subproof, (d) the rule itself 
+
+\item Proceed to Carnap PP6.15!
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \begin{fitchproof}
+    \hypo{1}{A \eor B} \pr{}
+    \hypo{2}{A \eif B} \pr{}
+    \open
+    \hypo{3}{A} \as{for \eor E}
+    \have{4}{B}\ce{2,3}
+    \close
+%\breakline%makes the line numbers go super wonky 
+    \open
+    \hypo{5}{B} \as{for \eor E}
+    \have{6}{B}\by{R}{5}
+    \close
+    \have{7}{B}\oe{1,3-4,5-6}
+  \end{fitchproof}
+\end{frame}
+
+
+\subsection{Negation Intro and Elimination} 
+
+\begin{frame}
+  \frametitle{Introducing $\enot$}
+
+  \begin{itemize}[<+->]
+    \item An argument is valid iff the premises
+    together with the negation of the conclusion are jointly
+    unsatisfiable.
+    \item For instance:
+    \begin{itemize}[<+->]
+      \item $\metav{Q} \entails \metav{P}$ iff
+      $\metav{Q}$ and $\enot\metav{P}$ are jointly unsatisfiable.
+      \item $\metav{Q} \entails \enot\metav{P}$ iff
+      $\metav{Q}$ and $\metav{P}$ are jointly unsatisfiable.
+    \end{itemize}
+    \item This last one gives us idea for $\enot$I rule: To justify
+    $\enot\metav{P}$, show that $\metav{P}$ (together with all other
+    premises) is unsatisfiable.
+    \item Unsatisfiable means: a contradiction follows!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Negation Introduction (\enot I)}
+  
+%\begin{columns}
+  %\begin{column}{3cm}
+\begin{multicols}{2}
+
+\begin{center}
+%\textit{Negation Intro} (\enot I) \vspace{0.25em}
+    \begin{fitchproof}
+    \open
+	\hypo[m]{na}\metaA{} \as{for \enot I}
+	 \ellipsesline
+	\have[n]{b}\metaB{}
+	 \ellipsesline
+	\have[o]{nb}{\enot\metaB{}}
+\close
+\have[\ ]{a}[\ ]{\enot\metaA{}}\ni{na-nb}
+    \end{fitchproof}
+    \end{center}
+   % \end{column}
+   
+   \columnbreak
+    
+%  \begin{column}{3cm}
+\begin{center}
+
+ \begin{itemize}[<+->]
+
+\item Assume the \emph{non}-negated wff!
+
+\item Derive a sentence and its negation (could be \metaA{}!)
+
+\item (\metaB{} and \enot\metaB{} can appear in opposite order)
+
+\item Pop out of the subproof and \emph{introduce} that negativity! 
+
+\item Remember to cite the WHOLE subproof (hyphen!)
+
+\item Let's try \href{https://tinyurl.com/2p82rpv5}{exercise PP6.21}:
+
+\end{itemize}
+
+
+  \end{center}
+%\end{columns}
+\end{multicols}
+
+%Note that you can swap the order of \metaB{} and \enot\metaB{} in the subproofs! 
+\end{frame}
+
+\begin{frame}
+  \begin{fitchproof}
+    \open
+    \hypo{1}{A \eif B} \as{for \eif I}
+    \open
+    \hypo{2}{\enot B} \as{for \eif I}
+    \open
+    \hypo{3}{A} \as{for \enot I}
+    \have{4}{B}\ce{1,3}
+    \have{5}{\enot B}\by{R}{2}
+    \close
+    \have{6}{\enot A}\ni{3-5}
+    \close
+    \have{7}{\enot B \eif \enot A}\ci{2-6}
+    \close
+    \have{8}{(A \eif B) \eif (\enot B \eif \enot A)}\ci{1-7}
+  \end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Negation Elimination (\enot E)}
+  
+\begin{multicols}{2}
+
+\begin{center}
+    \begin{fitchproof}
+\open
+	\hypo[m]{na}{\enot\metaA{}}\as{for \enot E}{}
+	 \ellipsesline
+	\have[n]{b}\metaB{}
+	 \ellipsesline
+	\have[o]{nb}{\enot\metaB{}}
+\close
+\have[\ ]{a}[\ ]\metaA{}\ne{na-nb}
+\end{fitchproof}
+    \end{center}
+   % \end{column}
+   
+   \columnbreak
+    
+\begin{center}
+
+ \begin{itemize}[<+->]
+
+\item Assume the \emph{negated} wff!
+
+\item Derive a sentence and its negation (could be \metaA{}!)
+
+\item (\metaB{} and \enot\metaB{} can appear in opposite order)
+
+\item Pop out of the subproof and \emph{eliminate} that negativity! 
+
+\item Put a smile on!
+
+\item Remember to cite the WHOLE subproof (hyphen!)
+
+\item Let's try \href{https://tinyurl.com/2p82rpv5}{exercise PP6.22}:
+
+\end{itemize}
+  \end{center}
+\end{multicols}
+
+%Note that you can swap the order of \metaB{} and \enot\metaB{} in the subproofs! 
+\end{frame}
+
+\begin{frame}
+  \begin{fitchproof}
+    \open
+    \hypo{1}{\enot A \eif \enot B} \as{for \eif I}
+    \open
+    \hypo{2}{B} \as{for \eif I}
+    \open
+    \hypo{3}{\enot A} \as{for \enot E}
+    \have{4}{\enot B}\ce{1,3}
+    \have{5}{B}\by{R}{2}
+    \close
+    \have{6}{A}\by{\enot E}{3-5}
+    \close
+    \have{7}{B \eif A}\ci{2-6}
+    \close
+    \have{8}{(\enot A \eif \enot B) \eif (B \eif A)}\ci{1-7}
+  \end{fitchproof}
+\end{frame}
+
+
+
+%******************START BICONDITIONAL RULES**************************
+
+
+
+\subsection{Biconditional Intro and Elimination ($<$-$>$)} 
+
+\begin{frame}
+  \frametitle{Biconditional  Introduction (\eiff I)    (Type $<$-$>$ !!!)}
+  
+\begin{multicols}{2}
+
+\begin{center}
+%\textit{Biconditional  Intro} (\eiff I) \vspace{0.25em}
+    \begin{fitchproof}
+\open
+		\hypo[i]{a1}{\metav{A}} \as{for \eiff I}
+		\ellipsesline
+		\have[j]{b1}{\metav{B}}
+	\close
+\breakline
+	\open
+		\hypo[k]{b2}{\metav{B}} \as{for \eiff I}
+		\ellipsesline
+		\have[l]{a2}{\metav{A}}
+	\close
+	\have[\ ]{ab}{\metav{A}\eiff\metav{B}}\bi{a1-b1,b2-a2}
+    \end{fitchproof}
+    \end{center}
+   
+   \columnbreak
+    
+\begin{center}
+ \begin{itemize}[<+->]
+
+\item Like doing conditional intro twice, from both directions
+
+\item You can swap the order of the subproofs
+
+\item The subproofs need not be adjacent, but if they are, \emph{separate with -{}-}
+
+\item Remember to cite BOTH subproofs (hyphens!)
+
+\item Remember to pop out of subproof line!
+
+\end{itemize}
+
+% \ellipsesline
+  \end{center}
+\end{multicols}
+
+%Note that you can swap the order of \metaB{} and \enot\metaB{} in the subproofs! 
+\end{frame}
+
+\begin{frame}
+  \frametitle{Biconditional  Elimination (\eiff E)     (Type $<$-$>$ !!!)}
+  
+\begin{multicols}{2}
+
+\begin{center}
+%\textit{Biconditional Elimination} (\enot E) %\vspace{1em}
+    \begin{fitchproof}
+	\have[m]{ab}{\metav{A}\eiff\metav{B}}
+	\have[n]{a}{\metav{A}}
+	\have[\ ]{b}{\metav{B}} \be{ab,a}
+\end{fitchproof}
+
+\begin{fitchproof}
+	\have[m]{ab}{\metav{A}\eiff\metav{B}}
+	\have[n]{a}{\metav{B}}
+	\have[\ ]{b}{\metav{A}} \be{ab,a}
+\end{fitchproof}
+
+    \end{center}
+  
+   
+   \columnbreak
+    
+\begin{center}
+
+ \begin{itemize}[<+->]
+
+\item Just like conditional elimination! 
+
+\item Only now you can eliminate from either side! (power!)
+
+\item There can be lines between lines m and n
+
+\item Remember to cite the lines of both (i) the biconditional and (ii) the side you have already
+
+\item Carnap issue: must type $<$-$>$E 
+
+\end{itemize}
+  \end{center}
+\end{multicols}
+
+%Note that you can swap the order of \metaB{} and \enot\metaB{} in the subproofs! 
+\end{frame}
+
+\begin{frame}
+\frametitle{Issue with Typing $\eiff$ in Carnap}
+%\large
+
+\begin{itemize}[<+->]
+
+\item For Carnap to recognize \eiff I or \eiff E in the justification column, you sadly must type $<$-$>$ I or $<$-$>$ E  % vs.  $<${}-{}$>$ E
+
+\item This is a bummer; I hope we can have it fixed (eventually)
+
+\item It is still fine to type $<$$>$ for the biconditional symbol in the sentences
+
+\item You can also copy/paste the \eiff symbol from elsewhere on the page! 
+
+
+\end{itemize}
+\end{frame}
+
+
+\subsection{Strategies and examples}
+
+\begin{frame}
+  \frametitle{Working forward and backward}
+
+  \begin{itemize}[<+->]
+    \item \emph{Working backward} from a conclusion (goal) means:
+    \begin{itemize}[<+->]
+      \item Find main connective of goal sentence
+      \item Match with conclusion of corresponding \textbf{I}ntro rule
+      \item Write out (above the goal!) what you'd need to apply that rule
+    \end{itemize}
+    \bigskip
+    \item \emph{Working forward} from a premise, assumption, or
+    already justified sentence means:
+    \begin{itemize}[<+->]
+      \item Find main connective of premise, assumption, or sentence
+      \item Match with top premise of corresponding E rule
+      \item Write out what else you need to apply the E rule (new goals)
+      \item If necessary, write out conclusion of the rule
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Constructing a proof}
+
+  \begin{itemize}[<+->]
+    \item Write out premises at the top (if there are any)
+    \item Write conclusion at bottom
+    \item Work backward \& forward from goals and premises/assumptions
+    in this order:
+    \begin{itemize}[<+->]
+      \item Work backward using \eand I, \eif I, \eiff I, \enot I/E, or
+      forward using \eor E
+      \item Work forward using \eand E
+      %\item Work forward from \enot I/E to a contradiction 
+      \item Work forward using \eif E, \eiff E
+      \item Work backward from \eor I
+      \item Try Negation Intro or Elimination, working toward a contradiction
+    \end{itemize}
+    \item Repeat for each new goal from top
+  \end{itemize}
+\end{frame}
+
+
+
+\subsection{The Rules, Reiterated}
+
+\begin{frame}
+  \frametitle{The rules, one more time: Reiteration}
+  
+\begin{multicols}{2}
+
+    \begin{fitchproof}
+      \have[m]{ab}{\metav{P}}
+     \ellipsesline
+      \have[k]{a}{\metav{P}} \by{R}{ab}
+    \end{fitchproof}
+  
+\columnbreak
+  
+  
+  \bi
+  
+  \item Remember that you must be in the scope of the line you're reiterating
+  
+  \item e.g. if you're outside a subproof, you can't reiterate anything wholly within the subproof
+  
+  \ei
+  
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The rules: Conjunction Intro (\eand I) and Elimination (\eand E)}
+\begin{columns}
+  \begin{column}{3cm}
+  \begin{fitchproof}
+    \have[m]{a}{\metav{P}}
+    \have[n]{b}{\metav{Q}}
+    \have[\ ]{c}{\metav{P}\eand\metav{Q}} \ai{a, b}
+  \end{fitchproof}
+\end{column}
+\begin{column}{3cm}
+  \begin{fitchproof}
+    \have[m]{ab}{\metav{P}\eand\metav{Q}}
+    \have[\ ]{a}{\metav{P}} \ae{ab}
+  \end{fitchproof}
+  \begin{fitchproof}
+    \have[m]{ab}{\metav{P}\eand\metav{Q}}
+    \have[\ ]{b}{\metav{Q}} \ae{ab}
+  \end{fitchproof}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The rules: Conditional Intro (\eif I) and Elim (\eif E)}
+\begin{columns}
+  \begin{column}{3cm}
+    \begin{fitchproof}
+      \open
+      \hypo[m]{a}{\metav{P}} \as{for \eif I}
+      \ellipsesline
+      \have[n]{b}{\metav{Q}}
+      \close
+      \have[\ ]{c}{\metav{P} \eif \metav{Q}} \ci{a-b}
+    \end{fitchproof}
+  \end{column}
+  \begin{column}{3cm}
+    \begin{fitchproof}
+      \have[m]{a}{\metav{P} \eif \metav{Q}}
+      \have[n]{b}{\metav{P}}
+      \have[\ ]{c}{\metav{Q}} \ce{a, b}
+    \end{fitchproof}
+  \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}\footnotesize
+  \frametitle{The rules: Disjunction Intro (\eor I) and Elimination (\eor E)}
+\begin{multicols}{2}
+
+  \begin{center}
+    \begin{fitchproof}
+      \have[m]{o}{\metav{P} \eor \metav{Q}}
+      \open
+      \hypo[i]{a}{\metav{P}} \as{for \eor E}
+      \ellipsesline
+      \have[j]{b}{\metav{R}}
+      \close
+\breakline %adds the -- but makes the proof too long, so add \footnotesize after begin frame 
+      \open
+      \hypo[k]{aa}{\metav{Q}} \as{for \eor E}
+      \ellipsesline
+      \have[\ell]{bb}{\metav{R}}
+      \close
+      \have[\ ]{c}{\metav{R}} \oe{o, a-b, aa-bb}
+    \end{fitchproof} 
+    \end{center}
+
+\columnbreak
+  
+  \begin{center}
+      \begin{fitchproof}
+        \have[m]{ab}{\metav{P}}
+        \have[\ ]{a}{\metav{P}\eor\metav{Q}} \oi{ab}
+      \end{fitchproof}
+      \begin{fitchproof}
+        \have[m]{ab}{\metav{Q}}
+        \have[\ ]{b}{\metav{P}\eor\metav{Q}} \oi{ab}
+      \end{fitchproof}
+       \end{center}
+       
+       Remember that \metav{P} can be the same wff as \metav{Q}
+       
+       so can introduce $\metav{P} \eor \metav{P}$ from \metav{P}
+\end{multicols}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The rules: Negation Intro and Elimination}
+  
+%\begin{columns}
+  %\begin{column}{3cm}
+\begin{multicols}{2}
+
+\begin{center}
+\textit{Negation Intro} (\enot I) \vspace{0.25em}
+    \begin{fitchproof}
+    \open
+	\hypo[m]{na}\metaA{} \as{for \enot I}
+	 \ellipsesline
+	\have[n]{b}\metaB{}
+	 \ellipsesline
+	\have[o]{nb}{\enot\metaB{}}
+\close
+\have[\ ]{a}[\ ]{\enot\metaA{}}\ni{na-nb}
+    \end{fitchproof}
+    \end{center}
+   % \end{column}
+   
+   \columnbreak
+    
+%  \begin{column}{3cm}
+\begin{center}
+\textit{Neg. Elimination} (\enot E) %\vspace{1em}
+    \begin{fitchproof}
+\open
+	\hypo[m]{na}{\enot\metaA{}}\as{for \enot E}{}
+	 \ellipsesline
+	\have[n]{b}\metaB{}
+	 \ellipsesline
+	\have[o]{nb}{\enot\metaB{}}
+\close
+\have[\ ]{a}[\ ]\metaA{}\ne{na-nb}
+    \end{fitchproof}
+    \end{center}
+ % \end{column}
+%\end{columns}
+\end{multicols}
+
+Note that you can swap the order of \metaB{} and \enot\metaB{} in the subproofs! 
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{The rules: Biconditional  Intro and Elimination ($<$-$>$)}
+  
+%\begin{columns}
+  %\begin{column}{3cm}
+\begin{multicols}{2}
+
+\begin{center}
+%\textit{Biconditional  Intro} (\eiff I) \vspace{0.25em}
+    \begin{fitchproof}
+\open
+		\hypo[i]{a1}{\metav{A}} \as{for \eiff I}
+		\ellipsesline
+		\have[j]{b1}{\metav{B}}
+	\close
+\breakline
+	\open
+		\hypo[k]{b2}{\metav{B}} \as{for \eiff I}
+		\ellipsesline
+		\have[l]{a2}{\metav{A}}
+	\close
+	\have[\ ]{ab}{\metav{A}\eiff\metav{B}}\bi{a1-b1,b2-a2}
+    \end{fitchproof}
+    \end{center}
+   % \end{column}
+   
+   \columnbreak
+    
+%  \begin{column}{3cm}
+\begin{center}
+\textit{Biconditional Elimination} (\eiff E) %\vspace{1em}
+    \begin{fitchproof}
+	\have[m]{ab}{\metav{A}\eiff\metav{B}}
+	\have[n]{a}{\metav{A}}
+	\have[\ ]{b}{\metav{B}} \be{ab,a}
+\end{fitchproof}
+
+\begin{fitchproof}
+	\have[m]{ab}{\metav{A}\eiff\metav{B}}
+	\have[n]{a}{\metav{B}}
+	\have[\ ]{b}{\metav{A}} \be{ab,a}
+\end{fitchproof}
+    \end{center}
+ % \end{column}
+%\end{columns}
+\end{multicols}
+
+Note that you can swap the order of \metaB{} and \enot\metaB{} in the subproofs! 
+\end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%*************************Stuff specific to Calgary Edition****************************
+\iffalse
+
+\subsection{Contradictions}
+
+\begin{frame}
+  \frametitle{Contradictions}
+
+  \begin{itemize}[<+->]
+  \item In proofs, we don't just use the premises of the argument, but also
+  sentences we've proved, and sentences we've assumed (for $\eif$I,
+  $\eor$E).
+
+  \item Sometimes it happens that assumptions we must make for correct
+  applications of these rules are incompatible with the premises.
+
+  \item For instance, to prove the disjunctive syllogism $A \eor B,
+  \enot B \entails A$ using \eor E, the assumption $B$ for the second
+  case conflicts with the premise $\enot B$.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Disjunctive syllogism}
+  \begin{fitchproof}
+    \have{o}{A \lor B}
+    \hypo{oa}{\alert{\enot B}}
+    \open
+    \hypo{a}{A}
+    \have{b}{A} \by{R}{a}
+    \close
+    \open
+    \hypo{aa}{\alert{B}}
+    \ellipsesline
+    \have[k]{bb}{A}
+    \close
+    \have{c}{A} \oe{o, a-b, aa-bb}
+  \end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Contradictions: eliminating $\enot$}
+
+  We highlight the situation where inside a subproof we have run into
+  a contradictory situation by the symbol \[\alert{\bot}\]
+
+  \begin{fitchproof}
+    \have[m]{a}{\enot\metav{P}}
+    \have[n]{b}{\metav{P}}
+    \have[\ ]{c}{\bot} \ne{a, b}
+  \end{fitchproof}
+
+  Since this also eliminates a $\enot$, we'll call it $\enot$E.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Explosion}
+
+  \begin{itemize}[<+->]
+  \item Any argument with jointly unsatisfiable premises is valid.
+  \item So whenever we can justify $\bot$ in a proof, we should be able to
+  justify \emph{anything}.
+  \item ``From a contradiction, anything follows.''
+
+  \begin{fitchproof}
+    \have[m]{ab}{\bot}
+    \have[k]{a}{\metav{P}} \by{X}{ab}
+  \end{fitchproof}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Disjunctive syllogism}
+  \begin{fitchproof}
+    \have{o}{A \lor B}
+    \hypo{oa}{\alert{\enot B}}
+    \open
+    \hypo{a}{A}
+    \have{b}{A} \by{R}{a}
+    \close
+    \open
+    \hypo{aa}{\alert{B}}
+    \have{bot}{\alert{\bot}}\by{\alert{\enot E}}{oa,aa}
+    \have{bb}{\alert{A}}\by{\alert{X}}{bot}
+    \close
+    \have{c}{A} \oe{o, a-b, aa-bb}
+  \end{fitchproof}
+\end{frame}
+
+\subsection{Introducing \enot}
+
+
+
+\begin{frame}
+  \frametitle{Introduction rule for \enot}
+  \begin{fitchproof}
+    \open
+    \hypo[m]{a}{\metav{P}}
+    \ellipsesline
+    \have[n]{b}{\bot}
+    \close
+    \have[\ ]{c}{\enot\metav{P}} \ni{a-b}
+  \end{fitchproof}
+\end{frame}
+
+
+
+\begin{frame}
+  \frametitle{Indirect proof rule}
+  \begin{fitchproof}
+    \open
+    \hypo[m]{a}{\enot\metav{P}}
+    \ellipsesline
+    \have[n]{b}{\bot}
+    \close
+    \have[\ ]{c}{\metav{P}} \by{IP}{a-b}
+  \end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \begin{fitchproof}
+    \open
+    \hypo{1}{\enot A \eif \enot B}
+    \open
+    \hypo{2}{B}
+    \open
+    \hypo{3}{\enot A}
+    \have{4}{\enot B}\ce{1,3}
+    \have{5}{\ered}\ne{2,4}
+    \close
+    \have{6}{A}\by{IP}{3-5}
+    \close
+    \have{7}{B \eif A}\ci{2-6}
+    \close
+    \have{8}{(\enot A \eif \enot B) \eif (B \eif A)}\ci{1-7}
+  \end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{The rules, one more time: Reiteration}
+\begin{columns}
+  \begin{column}{3cm}
+    \begin{fitchproof}
+      \have[m]{ab}{\metav{P}}
+      \have[k]{a}{\metav{P}} \by{R}{ab}
+    \end{fitchproof}
+    \begin{fitchproof}
+      \have[m]{ab}{\bot}
+      \have[k]{a}{\metav{P}} \by{X}{ab}
+    \end{fitchproof}
+  \end{column}
+  \begin{column}{3cm}
+  \begin{fitchproof}
+    \open
+    \hypo[m]{a}{\enot\metav{P}}
+    \ellipsesline
+    \have[n]{b}{\bot}
+    \close
+    \have[\ ]{c}{\metav{P}} \by{IP}{a-b}
+  \end{fitchproof}
+    \end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}\small
+  \begin{fitchproof}
+    \hypo{1}{\enot(A \eor B)}
+    \open
+    \hypo{2}{A}
+    \have{3}{A \eor B}\oi{2}
+    \have{4}{\ered}\ne{1,3}
+    \close
+    \have{5}{\enot A}\ni{2-4}
+    \open
+    \hypo{2a}{B}
+    \have{3a}{A \eor B}\oi{2a}
+    \have{4a}{\ered}\ne{1,3a}
+    \close
+    \have{5a}{\enot B}\ni{2a-4a}
+    \have{8}{\enot A \eand \enot B}\ai{5,5a}
+  \end{fitchproof}
+
+  \note[itemize]{    \begin{itemize}
+
+    \item Construct proof strategically
+    \item Conclusion is \eand: needs two subgoals above, $\enot A$ and
+    $\enot B$.
+    \item Tackle $\enot A$ first: main connective is \enot, use \enot I
+    \item \enot I needs subproof with assumption $A$ and last line \ered
+    \item To prove \ered, work forward from line 1: use \enot E
+    \item We have $\enot(A \eor B)$, we also need $A \eor B$
+    \item Work backward, ie try to apply \eor I. We'd need $A$ or $B$.
+    \item $A$ already there (assumption of subproof)
+    \item Fill in all justifications for first handful
+    \item Second half the same
+  \end{itemize}
+  }
+\end{frame}
+
+\begin{frame}\scriptsize
+  \begin{fitchproof}
+    \open
+    \hypo{1}{\enot A \eand \enot B}
+    \open
+    \hypo{2}{A \eor B}
+    \open
+    \hypo{3}{A}
+    \have{4}{\enot A}\ae{1}
+    \have{5}{\ered}\ne{4,3}
+    \close
+    \open
+    \hypo{6}{B}
+    \have{7}{\enot B}\ae{1}
+    \have{8}{\ered}\ne{7,6}
+    \close
+    \have{9}{\ered}\oe{2,3-5,6-8}
+    \close
+    \have{10}{\enot(A \eor B)}\ni{2-9}
+    \close
+    \have{11}{(\enot A \eand \enot B) \eif \enot(A \eor B)}\ci{1-10}
+  \end{fitchproof}
+
+  \note[itemize]{    \begin{itemize}
+    \item Conclusion is \eif: needs subproof with $\enot A \eand \enot
+    B$ as assumption, $\enot(A \eor B)$ as last line
+    \item New goal is $\enot(A \eor B)$, use \enot I: needs a subproof with $A \eor B$ as
+    assumption and \ered as last line
+    \item Want \ered: could try \enot E, but we don't have any sentence $\enot \metav{P}$.
+    \item Better to first work forward from $A \eor B$: apply \eor E.
+    \item Needs two subproofs, one stating with $A$ the other with $B$
+    \item Last line of each must match goal we want to prove (\ered)
+    \item Now in subproof, trying to prove \ered from $A$
+    \item Now's the time to work forward from $\enot A \eand \enot B$
+    to get $\enot A$
+    \item That lets us justify \ered using \enot E
+    \item Second subproof the same
+    \end{itemize}
+  }
+\end{frame}
+
+
+\begin{frame}
+  \begin{fitchproof}
+    \open
+    \hypo{1}{\enot(A \eor \enot A)}
+    \open
+    \hypo{2}{A}
+    \have{3}{A \eor \enot A}\oi{2}
+    \have{4}{\ered}\ne{1,3}
+    \close
+    \have{5}{\enot A}\ni{2-4}
+    \have{6}{A \eor \enot A}\oi{5}
+    \have{7}{\ered}\ne{1, 6}
+    \close
+    \have{8}{A \eor \enot A}\by{IP}{1-7}
+  \end{fitchproof}
+
+    \note[itemize]{\scriptsize    \begin{itemize}
+      \item Conclusion is $A \eor \enot A$. Working backward using
+      \eor I doesn't work, since neither $A$ nor $\enot A$ is
+      tautology, so neither has a proof with no premises
+      \item No other strategy applies. Last resort: use IP
+      \item Needs subproof, with $\enot(A \eor \enot A)$ as assumption, \ered{} as last line
+      \item To prove \ered, work forward using \enot E if possible (ie
+      if some $\enot \metav{P}$ is available).  There is: $\enot(A \eor \enot A)$ on line 1
+      \item For \enot E we also need $\metav{P}$, i.e., $A \eor \enot
+      A$: enter that as new goal
+      \item Now we should try working backward using \eor I again! Let's try $\enot A$ as new goal
+      \item Work backward using \enot I: needs subproof with
+      assumption $A$ and last line \ered
+      \item Once agian: when trying to prove \ered, work forward using
+      E when possible, ie, again look for $A \eor \enot A$ as goal
+      \item That can be justified using the new assumption $A$
+    \end{itemize}}
+\end{frame}
+
+\fi 
+%**********************END OF CALGARY SPECIFIC STUFF********************************
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,502 @@
+ \documentclass[12pt]{article}
+ 
+ %%Note to future self: there is some fancier way of putting in the line citations for closed branches, e.g.  close={:!u,!c}. Seems that we don't need to number every line but can still refer to lines easily. not sure how this works. see prooftrees package directions. 
+ %below, i've just put in line numbers by hand...which is probably not ideal if i ever want to modify the trees. 
+ 
+ %answer: !u refers to the current line’s parent line. !uu refers to the current line’s parent line’s parent line and so on
+ %so presumably !c refers to current line 
+ 
+ \usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+ 
+ \iffalse
+ \textheight     11truein
+ \vsize     10.0truein
+ \topmargin      .15truein
+ \textwidth 6.5truein \columnwidth \textwidth 
+ \setlength{\oddsidemargin}{0truein} 
+ %\footheight     0.0truein
+ \footskip       0.75truein
+ \headheight     .25truein
+ \headsep        0.25truein
+ \fi 
+
+\usepackage{amsmath} %for align* environment and gather*
+\usepackage{xref}
+ %    \textheight     10.0truein
+ \usepackage{graphics}
+ \usepackage{pstricks}
+% \usepackage{pst-tree}
+% \usepackage{pst-node,pst-tree}
+ \usepackage{makeidx}
+ 
+ \def\therefored{\ensuremath{\ldotp\dot{}\,\ldotp}}
+% disjunction
+\def\eor{\ensuremath{\vee}}
+% conjunction: 
+% {\,^{_{_{_{_{\mbox{\footnotesize\textbullet}}}}}}} gives the dot
+\def\eand{\ensuremath{\,\&\,}}
+% conditional: \rightarrow gives the right arrow
+\def\eif{\ensuremath{\supset}}
+% biconditional: \leftrightarrow gives the left and right arrow
+\def\eiff{\ensuremath{\equiv}}
+% negation: {\sim} gives the swung dash 
+%\def\enot{\ensuremath{\neg}}
+%\def\enot{\ensuremath{\sim}} %note that \sim is defined as a relation, which leads to spacing issues. adding a \! leads to more spacing issues (piled up double negations).  
+
+\def\enot{\ensuremath{{\sim}}} %redefining as {\sim} treats the tilde as a unary operator, rather than a relation, solving a lot of the spacing issues. 
+
+\let\oldsim\sim %renames any \sim commands as \oldsim. 
+\renewcommand{\sim}{{\oldsim}} %redefines \sim as unary operator version of \sim, in case there are any straggling \sim commands in the wild
+
+ %\pagestyle{empty}
+ 
+  % Tree stuff
+ 
+  \usepackage{prooftrees} %i copied over prooftrees file from Ichikawa source files, which I think is pre-2019 version
+  
+ %Note that I probably ought to just update my prooftrees package, since I downloaded the zip file and can just paste over the older version! (but who knows what else this could change...)
+%JRH: adding in definition of line no override, local option included in 2019 revision. since my prooftrees package is not up to date! 
+% see code here: https://tex.stackexchange.com/questions/415976/manually-set-line-numbers-if-prooftrees-sty
+% see p. 24 of prooftrees manual for directions on using this. works w/ {}, e.g. line no override={n+1}
+
+%the command `vdotsline' lets you put anything in number column, without a period appearing afterwards. so it's like `line no override' without \linenumberstyle
+%e.g. for vertical dots vertically aligned, use: vdotsline={\\[-0.55em] \vdots}
+
+\forestset{
+  line no override/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=\linenumberstyle{#1},
+        typeset node,
+      },
+    },
+  },
+  no line no/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=,
+        typeset node,
+      },
+    },
+  },
+  vdotsline/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=#1,
+        typeset node,
+      },
+    },
+  },
+  default preamble={
+	single branches,
+	close with=\ensuremath{\times},
+	just sep=1.75em,
+	line no sep=1.75em
+	}
+}
+ 
+ 
+\input macs
+%\input fitch
+\newcommand{\detritus}[1]{}
+
+\begin{document}
+
+%\thispagestyle{empty}
+
+%**************CREDIT TO GORDON BELOT FOR THESE PROBLEMS (as far as I know)******************
+%*********from his 303 problem sets 3 and 4 *************************************
+
+\iffalse
+\parindent = 0pt
+\hspace*{0.0in}\parbox[t]{2.5in}{
+Philosophy 24.241\\[3pt]
+Symbolic Logic\\[3pt]
+Fall, 2022
+}
+\fi 
+
+%\bigskip %\bigskip
+
+\iffalse 
+\begin{center}
+\Large\bf Problem Set 4 Solutions\\[1ex] 
+ Keep it secret! Keep it safe!\\[3ex]
+\end{center}
+\fi
+
+\begin{center}
+\Large Problem Set 4 Solutions \\[1ex] 
+ Keep it secret! Keep it safe! \\[1ex] 
+\end{center}
+
+\noindent Note that I ought to have line justifications next to the `$\times$' symbol for closed branches. But alas, I was lazy! I appreciate that most of you included these justifications in your own work! \\
+
+%Question 0: if you worked with up to two classmates, please list their names! 
+%Some of these problems draw from the posted Induction and Recursion notes.\\
+
+%For questions 1 and 2, provide good translations of the following arguments into the language of sentential logic. Then, investigate their validity using the tree method (STD)
+
+\begin{enumerate}
+
+\item[]For questions 1 and 2: \\ (i) Schematize the following argument into the language of sentential logic. \\ (ii) Then, investigate its validity using the tree method (STD): 
+
+\item ``If the lawyer did it, then the doctor did not. Therefore, if the doctor did it, then the lawyer did not.''
+
+\begin{itemize}
+
+\item Symbolization Key: B = the lawyer did it; G = the doctor did it  
+
+\end{itemize}
+
+
+\makebox[\textwidth]{Solution:}
+
+Schematization: $B \eif \enot G$. Therefore $G \eif \enot B$
+
+\bigskip 
+
+\begin{prooftree}
+{
+to prove={B \eif \enot G  \vdash_{STD} G \eif \enot B}
+}
+[B \eif \enot G, checked, name=p1, just=Assumption
+[\enot (G \eif \enot B), checked, grouped, name=p2, just={\enot Conclusion}
+		[G, just={\enot \eif}:p2, name=p3
+		[\enot \enot B, grouped, name=p4			
+		[\enot B, close={:!u,!c}, just={\eif}:p1]
+			[\enot G, close={:!uu,!c}]
+		]
+		]	
+]
+]
+\end{prooftree}
+%note, could also do closing citations manually: close={4,5}
+%i think i am naming way more lines than necessary. also seems relative referencing can be used in the justifcations part 
+
+Upshot: since each branch closes, the argument is valid. 
+
+
+
+
+% (i) Schematize the following argument into the language of sentential logic. \\ (ii) Then, investigate its validity using the tree method (STD): 
+
+\item ``If na\"ive realism is true, then na\"ive realism is false. Therefore, na\"ive realism is false.''
+
+\medskip
+
+\makebox[\textwidth]{Solution:} 
+
+Schematization: $N \eif \enot N$. Therefore: $\enot N$
+
+\bigskip
+
+
+\begin{prooftree}
+{
+to prove={N \eif \enot N  \vdash_{STD} \enot N}
+}
+[N \eif \enot N, checked, name=p1, just=Assumption
+[\enot \enot N, grouped, name=p2, just={\enot Conclusion}
+		[\enot N, close={2, 3}, just={\eif}:p1]
+		[\enot N, close={2, 3}]			
+]
+]
+\end{prooftree}
+
+Upshot: since each branch closes, the argument is valid. 
+
+\item Show via the tree method that the following is a tautology: 
+
+\makebox[\textwidth]{$\big( ( P \eor Q) \eand (P \eor R) \big) \eif \big (P \eor (Q \eand R) \big ) $}
+
+\medskip
+
+
+\makebox[\textwidth]{Solution (albeit not the most efficient tree):}
+
+ \begin{prooftree}
+{
+to prove={\vdash_{STD} \big( ( P \eor Q) \eand (P \eor R) \big) \eif \big (P \eor (Q \eand R) \big ):}
+}
+[\enot \Big( \big( ( P \eor Q) \eand (P \eor R) \big) \eif \big (P \eor (Q \eand R) \big ) \Big ), checked, name=p1, just={\enot wff}
+	[\big( ( P \eor Q) \eand (P \eor R) \big), checked, name=p2, just={\enot \eif}:p1
+	[\enot \big (P \eor (Q \eand R) \big ), checked, name=p3, grouped
+		[\enot P, just={\enot \eor}:p3
+		[\enot (Q \eand R), checked, name=p5, grouped
+			[P \eor Q, checked, name=p6, just={\eand}:p2
+			[P \eor R, checked, name=p7, grouped
+			[\enot Q, name=p8, just={\enot \eand}:p5
+				[P, close={4, 9}, just={\eor}:p6]
+				[Q, close={8, 9}]
+			]
+			[\enot R
+				[P, close={4, 9}]
+					[Q
+					[P, close={4, 10}, just={\eor}:p7]
+					[R, close={8, 10}]
+					]
+			]			
+			]
+			]
+		]
+		]
+	]
+	]		
+]
+\end{prooftree}
+
+
+Upshot: since each branch closes, the sentence is a tautology. Our tree shows that the negation of this sentence is unsatisfiable, i.e. a contradiction. 
+
+
+
+
+\newpage
+
+
+
+\item Test the following argument for validity using the tree method (STD):
+\begin{align*}
+ A \eand (B \eor C) \\ 
+(\enot C \eor H) \eand  (H \eif \enot H)\\
+- - - - - - - - - -\\
+\therefored \; \enot B 
+\end{align*}
+
+\makebox[\textwidth]{Solution (albeit again, a more elegant tree is to be had:} 
+
+ \begin{prooftree}
+{
+to prove={\{A \eand (B \eor C), (\enot C \eor H) \eand  (H \eif \enot H)\} ??\vdash_{STD}?? \enot B:}
+}
+[A \eand (B \eor C), checked, name=p1
+[(\enot C \eor H) \eand  (H \eif \enot H), checked, name=p2, grouped
+[\enot \enot B, checked, name=p3, grouped
+		[B, just={\enot}:p3
+		[A, name=p5, just={\eand}:p1
+		[B \eor C, checked, name=p6, grouped
+		[\enot C \eor H, name=p7, just={\eand}:p2
+		[H \eif \enot H, checked, name=p8, grouped
+			[B, just={\eor}:p6
+				[\enot C, just={\eor}:p7
+					[\enot H, open, just={\eif}:p8]
+					[\enot H, open]
+				]
+				[H
+					[\enot H, close={:!u,!c}]
+					[\enot H, close={:!u,!c}]
+				]
+			]
+		     [C
+		  	    [\enot C, close={:!u,!c}]
+		  	    [H
+		  	    		[\enot H, close={:!u,!c}]
+					[\enot H, close={:!u,!c}]
+				]
+			]	
+		]
+		]
+		]
+		]
+		]
+]
+]	
+]
+\end{prooftree}
+
+Upshot: the argument is invalid since there is a complete open branch. Hence, we can make the premises true and the conclusion false by assigning True to A and B and False to C and H. \\ 
+
+N.B.: we could have stopped making the tree as soon as we reached a complete open branch (e.g. the branch with the leftmost \enot H). So in completing the tree, I have shown more work than necessary. 
+
+
+
+
+
+
+
+
+
+\newpage
+
+\item Test the following argument for validity using the tree method (STD):
+\begin{align*}
+ A \eand (B \eif C) \\ 
+- - - - - - - - - -\\
+\therefored \; (A \eand C) \eor (A \eand \enot B)  
+\end{align*}
+
+\medskip
+
+\makebox[\textwidth]{Solution}
+
+ \begin{prooftree}
+{
+to prove={A \eand (B \eif C) \vdash_{STD} (A \eand C) \eor (A \eand \enot B):}
+}
+[A \eand (B \eif C), checked, name=p1
+[\enot \big ( (A \eand C) \eor (A \eand \enot B) \big), checked, name=p2, grouped
+	[A, name=p3, just={\eand}:p1
+	[B \eif C, checked, name=p4, grouped
+	[\enot(A \eand C), checked, name=p5, just={\enot \eor}:p2
+	[\enot(A \eand \enot B), checked, name=p6, grouped
+		[\enot A, close, just={\enot \eand}:p5]
+		[\enot C 
+			[\enot B, just={\eif}:p4
+				[\enot A, just={\enot \eand}:p6, close]
+				[\enot \enot B, close]
+			]
+			[C, close]
+		]
+	]
+	]
+	]
+	]
+]
+]
+\end{prooftree}
+
+Upshot: since each branch closes, the argument is tree-valid. Given the soundness of our system STD, we can conclude that there is no truth-value assignment that makes the premises true but the conclusion false. 
+
+\newpage
+
+\item Use a tree to check whether the following formula is a tautology. State your conclusion. If the formula is \textit{not} a tautology, then use the tree to find a truth value assignment that makes the formula false: 
+ 
+ \makebox[\textwidth]{$\big(P \eif (Q \eif R ) \big) \eif \big( ( P \eif Q) \eif (P \eif R) \big) $}
+ 
+ 
+\makebox[\textwidth]{ Solution:}
+ 
+ The following tree shows that this sentence is a tautology, since all branches close of a tree with its negation in the root. 
+ 
+  \begin{prooftree}
+{
+to prove={\vdash_{STD} \big(P \eif (Q \eif R ) \big) \eif \big( ( P \eif Q) \eif (P \eif R) \big) :}
+}
+[\enot \Big ( \big(P \eif (Q \eif R ) \big) \eif \big( ( P \eif Q) \eif (P \eif R) \big) \Big), checked, name=p1
+	[\big(P \eif (Q \eif R ) \big), checked, name=p2, just={\enot \eif}:p1
+	[\enot \big( ( P \eif Q) \eif (P \eif R) \big), checked, name=p3, grouped
+	[P \eif Q, checked, name=p4, just={\enot \eif}:p3
+	[\enot(P \eif R), checked, name=p5, grouped
+	[P, just={\enot \eif}:p5
+	[\enot R, grouped
+		[\enot P, close, just={\eif}:p4]
+		[Q
+			[\enot P, close, just={\eif}:p2]
+			[Q \eif R, checked, name=p9
+				[\enot Q, close, just={\eif}:p9]
+				[R, close]
+			]
+		]
+	]
+	]
+	]
+	]
+	]
+	]
+]
+\end{prooftree}
+ 
+ 
+ \iffalse
+ 
+ \item Example tree:
+ 
+ \begin{prooftree}
+{
+to prove={\{A \eiff B, \enot B \eif (C \eor D), E \eif \enot C, (\enot D \eand F) \eor G, \enot A \eand E\} \vdash H \eor G}
+}
+[A \eiff B, checked, name=p1
+[\enot B \eif (C \eor D), checked, grouped, name=p2
+[E \eif \enot C, checked, grouped, name=p3
+[(\enot D \eand F) \eor G, checked, grouped, name=p4
+[\enot A \eand E, checked, grouped, name=p5
+[\enot (H \eor G), checked, grouped, name=p6
+	[\enot A, just={\eand}:p5
+	[E, grouped
+		[\enot H, just={\enot \eor}:p6
+		[\enot G, grouped
+			[\enot D \eand F, checked, name=ndaf, just={\eor}:p4
+				[\enot D, just={\eand}:!u
+				[F, grouped
+					[\enot E, close, just={\eif}:p3
+					]
+					[\enot C
+						[A, just={\eiff}:p1
+						[B, grouped, close
+						]
+						]
+						[\enot A
+						[\enot B, grouped
+							[\enot \enot B, close, just={\eif}:p2]
+							[C \eor D, checked
+								[C, close, just={\eor}:!u]
+								[D, close]
+							]
+						]
+						]
+					]
+				]
+				]								
+			]
+			[G, close]
+		]
+		]
+	]
+	]
+]
+]
+]
+]
+]
+]
+\end{prooftree}
+
+ \fi 
+ 
+ \iffalse
+
+\item (i) Translate the following argument into the language of sentential logic. (ii) Check its validity using a tree, and state your conclusion. If the argument is invalid, use the tree to find a truth value assignment that makes its premises true and conclusion false.
+
+\begin{quote}
+If logic monkeys are hirsute, then logic monkeys are orgulous. And if space dogs are splenetic, then space dogs are bilious. So both if logic monkeys are hirsute then space dogs are bilious, and if space dogs are splenetic then logic monkeys are orgulous. 
+\end{quote}
+
+Symbolization Key: H = logic monkeys are hirsute; O = logic monkeys are orgulous; S = space dogs are splenetic; B = space dogs are bilious
+
+\fi 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+
+
+\end{document}

@@ -1,0 +1,840 @@
+﻿% !TeX root = ./slides-12.tex
+
+\setcounter{section}{11}
+
+\section{Functional completeness and normal forms}
+
+\subsection{Functional completeness}
+
+\begin{frame}
+    \frametitle{Truth functions}
+
+\begin{block}{Definition}
+
+An ($n$-place) \emph{truth function} $t$ is a mapping of $n$-tuples of \True{} and \False\ to either \True\ or \False.
+\medskip
+
+$n$-place truth functions correspond to truth tables of sentence $S$ with $n$ sentence letters $A_1$, \dots, $A_n$.
+\end{block}
+
+\begin{columns}
+  \begin{column}{.5\textwidth}
+$\begin{array}{cc|cc}
+\uncover<2->{A_1} & \uncover<2->{A_2} & t_\& & 
+\only<presentation:2|handout:0>{S}\only<3-4>{A_1 \land A_2}\\ \hline
+\True & \True & \True & \only<presentation:2|handout:0>{?}\only<3->{\True} \\
+\True & \False & \False & \only<presentation:2|handout:0>{?}\only<3->{\False}\\
+\False & \True & \False & \only<presentation:2|handout:0>{?}\only<3->{\False}\\
+\False & \False & \False & \only<presentation:2|handout:0>{?}\only<3->{\False}
+\end{array}$
+\end{column}
+\begin{column}{.5\textwidth}
+$\begin{array}{cc|cc}
+  \uncover<2->{A_1} & \uncover<2->{A_2} & t_\lor & 
+  \only<presentation:2-3|handout:0>{S}\only<4>{A_1 \lor A_2}\\ \hline
+\True & \True & \True & \only<presentation:2-3|handout:0>{?}\only<4>{\True}\\
+\True & \False & \True & \only<presentation:2-3|handout:0>{?}\only<4>{\True}\\
+\False & \True & \True & \only<presentation:2-3|handout:0>{?}\only<4>{\True}\\
+\False & \False & \False & \only<presentation:2-3|handout:0>{?}\only<4>{\False}
+\end{array}$
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Truth functions}
+
+\begin{block}{Definition}
+A sentence $S$ containing the sentence letters $A_1$, \dots, $A_n$
+\emph{expresses} the truth function $t$ iff the truth value of $S$ on
+the valuation which assigns $v_i$ to $A_i$ is $t(v_1,
+\dots, v_n)$.
+\medskip
+
+An $n$-place truth function is \emph{expressible} if there is a
+sentence containing sentence letters $A_1$, \dots, $A_n$ that
+expresses it.
+\end{block}
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Examples}
+
+\begin{tabular}{cc}
+$\begin{array}{cc|cl}
+  \uncover<2->{A_1} & \uncover<2->{A_2} & t_1 & \uncover<2->{S?}\\ \hline
+\True & \True & \True \\
+\True & \False & \True \\
+\False & \True & \False \\
+\False & \False & \False
+\end{array}$
+& \uncover<3->{$A_1 \quad\text{or:}\quad A_1 \land (A_2 \lor \lnot A_2)$} \\ \ \\
+$\begin{array}{cc|cl}
+  \uncover<2->{A_1} & \uncover<2->{A_2} & t_\mathit{xor} &\uncover<2->{S?}\\ \hline
+\True & \True & \False \\
+\True & \False & \True \\
+\False & \True & \True \\
+\False & \False & \False
+\end{array}$
+&
+\uncover<4->{$(A_1 \lor A_2) \land \lnot(A_1 \land A_2)$ or: $\enot (A_1 \eiff A_2)$}
+\end{tabular}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Functional completeness}
+
+  \begin{block}{Definition}
+  A collection of connectives is \emph{functionally complete} if every
+  truth function is expressible by a sentence containing only those
+  connectives.
+  \end{block}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Functional completeness: results}
+
+\begin{itemize}[<+->]
+  \item Functionally complete are:
+  \begin{itemize}[<+->]
+  \item Connectives we know:
+  \[
+    {\alert{\&}} + {\alert{\enot}} \qquad 
+  {\alert{\lor}} +
+  {\alert{\enot}} \qquad 
+  {\alert{\eif}} +
+  {\alert{\enot}} \qquad {\alert{\eif}} +
+  {\alert{\bot}}\] 
+  \item Any other set of connectives containing one of those.
+  \item Two two-place connectives by themselves: neither--not (\textsc{nor}) and not--both (\textsc{nand}).
+  \end{itemize}
+  \item No other (sets of) one and two-place connectives are functionally complete.
+  \item We'll prove this for $\eand + \eor$.
+\end{itemize}
+\end{frame}
+
+
+\subsection{Proving connectives are functionally complete}
+
+\begin{frame}
+  \frametitle{$\land + \lor + \lnot$ are functionally complete}
+\[
+\begin{array}{lll|l@{\qquad}l}
+A_1 & A_2 & A_3 & t_\mathit{odd} & S \\
+\hline
+\True & \True & \True & \True & \uncover<2->{(A_1 \land (A_2 \land A_3))} \uncover<6->{{}\lor{}}\\
+\True & \True & \False & \False \\
+\True & \False & \True & \False \\
+\True & \False & \False & \True & \uncover<3->{(A_1 \land (\lnot A_2 \land \lnot A_3))} \uncover<6->{{}\lor{}}\\
+\False & \True & \True & \False \\
+\False & \True & \False & \True & \uncover<4->{(\lnot A_1 \land (A_2 \land \lnot A_3))} \uncover<6->{{}\lor{}}\\
+\False & \False & \True & \True & \uncover<5->{(\lnot A_1 \land (\lnot A_2 \land A_3))}\\
+\False & \False & \False & \False
+\end{array}\]
+\end{frame}
+
+\begin{frame}
+  \frametitle{$\land + \lor + \lnot$ are functionally complete}
+
+\begin{itemize}[<+->]
+\item Each line makes one, and only one, conjunction true, e.g.,
+\item $\lnot A_1 \land A_2 \land \lnot A_3$ is true in, and only in, line \False\ \True\ \False.
+\item Combine using $\lor$: make $S$ true in all (and only) the lines where it is supposed to be true.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{The ``neither\dots nor \dots'' connective: $\downarrow$}
+
+\[
+\begin{array}{cc|c}
+P & Q & (P \downarrow Q)\\
+\hline
+\True & \True & \False\\
+\True & \False & \False\\
+\False & \True & \False\\
+\False & \False & \True
+\end{array}
+\]
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{$\downarrow$ is functionally complete}
+
+\begin{itemize}[<+->]
+\item We already know that ${\lnot} + {\land} + {\lor}$ is functionally complete, i.e.,
+\item Every truth function can be expressed using only $\lor$, $\land$, $\lnot$.
+\item To show $\downarrow$ is functionally complete, suffices to
+  show that \emph{every sentence containing only $\lnot$, $\lor$, $\land$ is
+   equivalent to one containing only $\downarrow$}.
+\item For that, it suffices to show that any negated sentence,
+  conjunction, disjunction, can be expressed using only $\downarrow$.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Expressing $\lnot$ using $\downarrow$}
+
+\begin{columns}
+\begin{column}{3cm}
+\[\begin{array}{cc|c}
+P & Q & (P \downarrow Q)\\
+\hline
+\True & \True & \False\\
+\True & \False & \False\\
+\False & \True & \False\\
+\False & \False & \True
+\end{array}\]
+\end{column}
+\begin{column}{7cm}
+\begin{itemize}[<+->]
+\item Note how $P \downarrow Q$ is \False{} in the first line and \True{} in the last (when $P$ and $Q$ have same truth value).
+\item So $P \downarrow P$ is \False{} if $P$ is \True, and \True{} if $P$ is \False, i.e., \[
+\lnot P \Leftrightarrow (P \downarrow P).
+\]
+\end{itemize}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Expressing $\lor$ using $\downarrow$}
+
+\begin{columns}
+\begin{column}{3cm}
+\[\begin{array}{cc|c}
+P & Q & (P \downarrow Q)\\
+\hline
+\True & \True & \False\\
+\True & \False & \False\\
+\False & \True & \False\\
+\False & \False & \True
+\end{array}\]
+\end{column}
+\begin{column}{7cm}
+\begin{itemize}[<+->]
+\item $P \downarrow Q$ is the ``neither \dots nor'' connective, which can also
+be expressed as $\lnot(P \lor Q)$, i.e.,
+\[ \lnot(P \lor Q) \Leftrightarrow P \downarrow Q \]
+\item Negate both sides:
+\[
+P \lor Q \Leftrightarrow \lnot(P \downarrow Q)
+\]
+\item Apply what we figured out in last slide:
+\[
+P \lor Q \Leftrightarrow (P \downarrow Q)\downarrow(P \downarrow Q)
+\]
+\end{itemize}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Expressing $\land$ using $\downarrow$}
+
+\begin{columns}
+\begin{column}{3cm}
+\[\begin{array}{cc|c}
+P & Q & (P \downarrow Q)\\
+\hline
+\True & \True & \False\\
+\True & \False & \False\\
+\False & \True & \False\\
+\False & \False & \True
+\end{array}\]
+\end{column}
+\begin{column}{7cm}
+\begin{itemize}[<+->]
+\item $P \downarrow Q$ is the ``neither \dots nor'' connective, which can also
+be expressed as $\lnot P \land \lnot Q$, i.e.,
+\[ (\lnot P \land \lnot Q) \Leftrightarrow P \downarrow Q \]
+\item Equivalence holds for \emph{all sentences} $P$, $Q$, so also if we replace $P$ by $\lnot R$ and $Q$ by $\lnot S$:
+\[
+\lnot\lnot R \land \lnot\lnot S \Leftrightarrow (\lnot R \downarrow \lnot S)
+\]
+\item Express $\lnot$ using $\downarrow$:
+\[
+R \land S \Leftrightarrow (R \downarrow R)\downarrow(S \downarrow S)
+\]
+\end{itemize}
+\end{column}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Functionally complete connectives}
+
+\begin{itemize}[<+->]
+\item De Morgan's Law: $\land$ can be expressed by $\lor$ and $\lnot$.
+\item Similarly: $\lor$ can be expressed by $\land$, $\lnot$.
+\item So $\lor, \lnot$ and $\land, \lnot$ are
+  functionally complete.
+\item $\to, \bot$ is functionally complete (HW).
+\item $\to, \lnot$ is functionally complete.
+\item No other sets of connectives that don't contain one of these
+sets are functionally complete.
+\item ``Neither \dots nor'' (\textsc{nor}) is functionally complete by itself.
+\item ``Not both'' (\textsc{nand}) connective is functionally complete by itself.
+\item No other 2-place connectives are functionally complete by themselves.
+  \end{itemize}
+\end{frame}
+
+\subsection{Proving connectives aren't functionally complete}
+
+\begin{frame}
+  \frametitle{$\land + \lor$ not functionally complete}
+
+\begin{itemize}[<+->]
+\item $\eand + \lor$ is not functionally complete.
+\item Remember: To be functionally complete, \emph{every} truth
+  function would have to be expressible using only $\eand$ and $\eor$.
+\item Which 2-place truth-functions can be expressed using $\eand$ and
+  $\eor$?
+\item Not this one:
+\[
+\begin{array}{cc|c}
+  && t_{\mathit{xor}}\\ \hline
+\True & \True & \False \\
+\True & \False & \True \\
+\False & \True & \True \\
+\False & \False & \False
+\end{array}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Proof by induction}
+
+\begin{itemize}[<+->]
+\item Sometimes need to prove something for \emph{all} sentences.
+\item E.g., ``every sentence containing only $\land$ and $\lor$ expresses a truth function \emph{other than} $t_\mathit{xor}$.''
+\item Proof by \emph{induction}:
+\begin{itemize}[<+->]
+\item Show that it holds for \emph{sentence letters} (and $\bot$).
+\item Suppose sentences \emph{$\metav{P}$}, \emph{$\metav{Q}$} have the property.
+\item Now show that it then also holds for \emph{$(\metav{P} \land \metav{Q})$}, \emph{$(\metav{P} \lor \metav{Q})$}, etc.
+\end{itemize}
+\item Why does this work? 
+\item This is how we form sentences (involving only $\land$, $\lor$).
+\item Property ``$S$ is a sentence expressing a truth function other than~$t_\mathit{xor}$'' propagates from atomic sentences to all sentences.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Proof by induction: example}
+
+\begin{theorem}
+Every sentence contains an even number of parentheses.
+\end{theorem}
+
+\begin{itemize}[<+->]
+\item Every atomic sentence contains an even number of parentheses:
+\[
+B \qquad \bot
+\]
+\item If $\metav{P}$ contains an even number of parentheses, so does $\lnot \metav{P}.$
+\item If $\metav{P}$ and $\metav{Q}$ both contain an even number of parentheses, so do
+\[ (\metav{P} \land \metav{Q}), (\metav{P} \lor \metav{Q}), (\metav{P} \eif \metav{Q}), (\metav{P} \eiff \metav{Q}). \]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{$\land + \lor$ not functionally complete}
+
+\begin{theorem}
+Any sentence containing only $A_1$, $A_2$, $\land$, $\lor$
+has a $\True$ in the first line of its truth table.
+\end{theorem}
+
+\begin{itemize}[<+->]
+\item Sentence letters: truth table of $A_i$ is just copy of column under $A_i$, so has $\True$ in first line where valuation assigns $\True$ to $A$.  
+\item Suppose $\metav{P}$, $\metav{Q}$ are sentences which
+  contain only $A_1$, $A_2$, $\land$, $\lor$ and are true in first line.
+\item $(\metav{P} \land \metav{Q})$ is true in first line, since $\True \land \True$ makes $\True$.
+\item $(\metav{P} \lor \metav{Q})$ is true in first line, since $\True
+\lor \True$ makes $\True$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{$\land + \lor$ not functionally complete}
+
+\begin{theorem}
+Any sentence containing only $A_1$, $A_2$, \&, $\lor$
+  expresses a truth function $t$ with $t(\True, \True) = \True$.
+\end{theorem}
+
+\begin{itemize}[<+->]
+\item Sentence letters: $A_1$, $A_2$: express $t_1$, $t_2$.
+\item Suppose $\metav{P}$, $\metav{Q}$ are sentences which
+  contain only $A_1$, $A_2$, $\&$, $\lor$ and express truth
+  functions $t$, $t'$ with $t(\True, \True) = t'(\True, \True) = \True$
+\item $(\metav{P} \land \metav{Q})$ expresses truth function $s$ with
+\[s(\True, \True) = t_\&(t(\True, \True), t'(\True, \True)) = \True\]
+\item $(\metav{P} \lor \metav{Q})$ expresses truth function $s$ with
+\[s(\True, \True) = t_\lor(t(\True, \True), t'(\True, \True)) = \True\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Non-functionally complete connectives}
+
+  \begin{itemize}[<+->]
+    \item We've shown that $\eand + \eor$ are not  functionally complete.
+    \item Same idea shows that $\eif$ and $\eiff$ not functionally complete.
+    \item When we add $\enot$ things get interesting:
+    \begin{itemize}[<+->]
+      \item Functionally complete:
+      \[{\enot} + {\eor} \qquad {\enot} + {\eand} \qquad {\enot} + {\eif}\]
+      \item Not functionally complete:
+      \[{\enot} + {\eiff}\]
+      (harder to prove).
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\subsection{Normal forms}
+
+\begin{frame}
+  \frametitle{Normal forms}
+
+  \begin{itemize}[<+->]
+    \item Sometimes interested in sentences that have specific \emph{form}, e.g.,
+    \item Negations apply only to sentence letters.
+    \item Alternation between $\land$ and $\lor$ is minimal.
+    \item Useful for applications:
+    \begin{itemize}
+      \item Combinational circuits.
+      \item \textsc{sat} solvers and theorem provers need inputs in \textsc{cnf}.
+      \item Complexity theory talks about problems involving sentences in normal form.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Scope of a connective}
+
+  \begin{definition}
+    The \emph{scope} of an occurrence of a connective in a sentence is that sub-sentence of which the connective is the main connective.
+  \end{definition}
+
+  \[(\underbrace{\hilitebox{\enot(A \lor B)}}_{\text{scope of } \lnot} \lor \underbrace{\hilitebox{((A \eif B) \land (B \eif C))}}_{\text{scope of }\land})\]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Disjunctive normal form}
+
+  \begin{block}{DNF}
+    A sentence is in \emph{disjunctive normal form} (\textsc{dnf}) iff it:
+    \begin{itemize}
+      \item contains only $\land$, $\lor$, $\lnot$;
+      \item only sentence letters are in scope of $\lnot$;
+      \item only sentence letters, $\land$, and $\lnot$ are in scope of $\land$.
+    \end{itemize}
+  \end{block}
+
+  In other words: \textsc{dnf} are disjunctions of conjunctions of
+  sentence letters and negated sentence letters, e.g.:
+  \begin{align*}
+  & (A \land \lnot B) \lor ((\lnot A \land C) \lor (B \land C))\\
+  & \lnot A \lor (B \land C)\\
+  & A \land (B \land C)\\
+  & A \lor (B \lor C)
+\end{align*}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{DNF theorem}
+
+\begin{theorem}
+Every sentence is equivalent to one in disjunctive normal form.
+\end{theorem}
+
+\begin{proof}
+  \begin{itemize}[<+->]
+    \item Construct truth table.
+    \item Apply method we used to show ${\land}
+    + {\lor} + {\lnot}$ is functionally complete.
+    \item This gives us a sentence
+    involving only $\land$, $\lor$, $\lnot$ with same truth table, i.e.,
+    is equivalent in SL.
+    \item That sentence is always in DNF.
+  \end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{$\land + \lor + \lnot$ are functionally complete}
+\[
+\begin{array}{lll|l@{\qquad}l}
+A_1 & A_2 & A_3 & t_\mathit{odd} & S \\
+\hline
+\True & \True & \True & \True & {(A_1 \land (A_2 \land A_3))} \lor\\
+\True & \True & \False & \False \\
+\True & \False & \True & \False \\
+\True & \False & \False & \True & {(A_1 \land (\lnot A_2 \land \lnot A_3))} \lor\\
+\False & \True & \True & \False \\
+\False & \True & \False & \True & {(\lnot A_1 \land (A_2 \land \lnot A_3))} \lor\\
+\False & \False & \True & \True & {(\lnot A_1 \land (\lnot A_2 \land A_3))}\\
+\False & \False & \False & \False
+\end{array}\]
+\end{frame}
+
+\begin{frame}
+  \frametitle{Conjunctive normal form}
+
+  \begin{block}{CNF}
+    A sentence is in \emph{conjunctive normal form} (\textsc{cnf}) if it:
+    \begin{itemize}
+      \item contains only $\land$, $\lor$, $\lnot$;
+      \item only sentence letters are in scope of $\lnot$;
+      \item only sentence letters, $\lor$, and $\lnot$ are in scope of~$\lor$.
+    \end{itemize}
+  \end{block}
+
+  In other words: \textsc{cnf} are conjunctions of disjunctions of
+  sentence letters and negated sentence letters, e.g.:
+  \begin{align*}
+  & (A \lor \lnot B) \land ((\lnot A \lor C) \land (B \lor C))\\
+  & \lnot A \land (B \lor C)\\
+  & A \lor (B \lor C) \\
+  & A \land (B \land C)
+  \end{align*}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{CNF theorem}
+
+\begin{theorem}
+Every sentence is equivalent to one in conjunctive normal form.
+\end{theorem}
+
+\begin{proof}
+\begin{itemize}[<+->]
+  \item Construct truth table.
+  \item For each line where sentence is $\False$, write a disjunction
+  of sentence letters and negated sentence letters:
+  \begin{itemize}[<+->]
+    \item Write $A$ if $A$ is assigned \False.
+    \item Write $\lnot A$ if $A$ is assigned \True.
+  \end{itemize}
+  \item Put $\land$'s between all of them.
+  \item Resulting is true iff the original sentence is true, and is in CNF.
+\end{itemize}
+\end{proof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{CNF from truth table}
+\[
+\begin{array}{lll|l@{\qquad}l}
+A_1 & A_2 & A_3 & S & CNF\\
+\hline
+\True & \True & \True & \True & \\
+\True & \True & \False & \False & (\lnot A_1 \lor (\lnot A_2 \lor A_3)) \land {}\\
+\True & \False & \True & \False & (\lnot A_1 \lor (A_2 \lor \lnot A_3)) \land {}\\
+\True & \False & \False & \True \\
+\False & \True & \True & \False & (A_1 \lor (\lnot A_2 \lor \lnot A_3)) \land {}\\
+\False & \True & \False & \True & \\
+\False & \False & \True & \True & \\
+\False & \False & \False & \False & (A_1 \lor (A_2 \lor A_3))
+\end{array}\]
+\end{frame}
+
+\subsection{Equivalent transformations}
+
+\begin{frame}
+\frametitle{Transformation equivalences}
+
+Defining $\eif$, $\eiff$ (Cond, Bicond)
+\begin{align*}
+(\metav{P} \eif \metav{Q}) & \Leftrightarrow (\lnot\metav{P} \lor \metav{Q})\\
+\lnot(\metav{P} \eif \metav{Q}) & \Leftrightarrow (\metav{P} \land \lnot\metav{Q})\\
+(\metav{P} \eiff \metav{Q}) & \Leftrightarrow (\metav{P} \eif \metav{Q}) \land (\metav{Q} \eif \metav{P})\\
+\intertext{Double negation (DN)}
+\lnot\lnot\metav{P} & \Leftrightarrow \metav{P}
+\end{align*}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Transformation equivalences}
+
+De Morgan's Laws (DeM):
+\begin{align*}
+\lnot(\metav{P} \lor \metav{Q}) & \Leftrightarrow (\lnot \metav{P} \land \lnot \metav{Q})\\
+\lnot(\metav{P} \land \metav{Q}) & \Leftrightarrow (\lnot \metav{P} \lor \lnot \metav{Q})
+\intertext{Commutativity (Comm):}
+\metav{P} \lor \metav{Q} & \Leftrightarrow \metav{Q} \lor \metav{P}\\
+\metav{P} \land \metav{Q} & \Leftrightarrow \metav{Q} \land \metav{P}
+\intertext{Distributivity (Dist):}
+\metav{P} \lor (\metav{Q} \land \metav{R}) & \Leftrightarrow (\metav{P} \lor \metav{Q}) \land (\metav{P} \lor \metav{R}) \\
+\metav{P} \land (\metav{Q} \lor \metav{R}) & \Leftrightarrow (\metav{P} \land \metav{Q}) \lor (\metav{P} \land \metav{R})
+\end{align*}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Transforming sentences into DNF/CNF}
+
+\begin{itemize}[<+->]
+  \item Replace any subsentence of the form $(\metav{P} \eif \metav{Q})$, $(\metav{P} \eiff \metav{Q})$ by its equivalent.
+  \item Use De Morgan's laws to place $\lnot$'s in front of sentence letters
+  \item Remove double negations.
+  \item Use distributivity and commutativity to ensure 
+  \begin{itemize}[<+->]
+    \item DNF: no $\lor$ is in the scope of~$\land$.
+    \item CNF: no $\land$ is in the scope of~$\lor$.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Transforming sentences into CNF/DNF}
+\setlength{\leftmargini}{0cm}
+\begin{itemize}[<+->]
+  \item[] $\lnot[\only<presentation:2-3|handout:0>{\hilitebox}{(A \eiff B)} \lor \lnot(B \eif C)]$\pause
+  \item[] $\lnot[\only<presentation:3-5|handout:0>{\hilitebox}{((A \eif B) \land (B \eif A))}\only<presentation:4-5|handout:0>{_\metav{P}} \lor \only<presentation:4-5|handout:0>{\hilitebox}{\lnot(B \eif C)}\only<presentation:4-5|handout:0>{_\metav{Q}}]$\hfill\alert<3>{Bicond}\pause
+  \item[]
+  $\lnot\only<presentation:5|handout:0>{\hilitebox}{(\only<presentation:6-7|handout:0>{\hilitebox}{(A
+  \eif B)}\only<presentation:6-7|handout:0>{_\metav{P}} \land
+  \only<presentation:6-7|handout:0>{\hilitebox}{(B \eif
+  A)}\only<presentation:6-7|handout:0>{_\metav{Q}}
+  \only<presentation:5|handout:0>{_\metav{Q}})}\only<presentation:5|handout:0>{_\metav{P}} \land \lnot\only<presentation:5|handout:0>{\hilitebox}{\lnot(B \eif C)}\only<presentation:5|handout:0>{_\metav{Q}}$\hfill\alert<5>{DeM}\pause 
+  \item[] $(\only<presentation:8-9|handout:0>{\hilitebox}{\lnot\only<presentation:7|handout:0>{\hilitebox}{(A
+  \eif B)}\only<presentation:7|handout:0>{_\metav{P}}} \lor
+  \lnot\only<presentation:7|handout:0>{\hilitebox}{(B \eif
+  A)}\only<presentation:7|handout:0>{_\metav{Q}}) \land \lnot\lnot(B
+  \eif C)$\hfill\alert<7>{DeM}\pause  
+  \item[] $(\only<presentation:9|handout:0>{\hilitebox}{(A
+  \land \lnot B)} \lor
+  \only<presentation:10-11|handout:0>{\hilitebox}{\lnot(B \eif
+  A)}) \land \lnot\lnot(B
+  \eif C)$\hfill\alert<9>{Cond}\pause  
+  \item[] $((A \land \lnot B) \lor
+  \only<presentation:11|handout:0>{\hilitebox}{(B \land \lnot
+  A)}) \land \only<presentation:12-13|handout:0>{\hilitebox}{\lnot\lnot}(B
+  \eif C)$\hfill\alert<11>{Cond}\pause  
+  \item[] $((A \land \lnot B) \lor
+  (B \land \lnot
+  A)) \land \only<presentation:14-15|handout:0>{\hilitebox}{(B
+  \eif C)}$\hfill\alert<13>{DN}\pause  
+  \item[] $((A \land \lnot B) \lor
+  (B \land \lnot
+  A)) \land \only<presentation:15|handout:0>{\hilitebox}{(\lnot B
+  \lor C)}$\hfill\alert<15>{Cond}\only<16>{}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Transforming sentences into DNF}
+\setlength{\leftmargini}{0cm}
+
+\begin{itemize}[<+->]\small
+  \item[] $\only<presentation:2-3|handout:0>{\hilitebox}{[(A \land \lnot B) \lor
+  (B \land \lnot
+  A)]}\only<presentation:2-3|handout:0>{_\metav{P}} \only<presentation:1|handout:0>{\hilitebox}\land (\only<presentation:2-3|handout:0>{\hilitebox}{\lnot B}\only<presentation:2-3|handout:0>{_\metav{Q}}
+  \only<presentation:1|handout:0>{\hilitebox}\lor \only<presentation:2-3|handout:0>{\hilitebox}{C}\only<presentation:2-3|handout:0>{_\metav{R}})$\pause
+  \item[] $(\only<presentation:3-5|handout:0>{\hilitebox}{[(A \land \lnot B) \lor
+  (B \land \lnot
+  A)]}\only<presentation:3-5|handout:0>{_\metav{P}} \land
+  \only<presentation:3-5|handout:0>{\hilitebox}{\lnot
+  B}\only<presentation:3-5|handout:0>{_\metav{Q}}) \lor
+  (\only<presentation:3|handout:0>{\hilitebox}{[(A \land \lnot B) \lor
+  (B \land \lnot
+  A)]}\only<presentation:3|handout:0>{_\metav{P}} \land
+  \only<presentation:3|handout:0>{\hilitebox}{C}\only<presentation:3|handout:0>{_\metav{R}})$\hfill\alert<3>{Dist}\pause
+  \item[] $(\only<presentation:5-7|handout:0>{\hilitebox}{\lnot
+  B}\only<presentation:5|handout:0>{_\metav{Q}}\only<presentation:6-7|handout:0>{_\metav{P}}
+   \land
+   \only<presentation:5|handout:0>{\hilitebox}{[
+     \only<presentation:6-7|handout:0>{\hilitebox}{(A \land \lnot B)}
+     \only<presentation:6-7|handout:0>{_\metav{Q}}
+     \lor
+     \only<presentation:6-7|handout:0>{\hilitebox}{(B \land \lnot A)}\only<presentation:6-7|handout:0>{_\metav{R}}]}
+  \only<presentation:5|handout:0>{_\metav{P}}
+  ) \land
+  ([(A \land \lnot B) \lor (B \land \lnot A)]
+  \land 
+  C)$\hfill\alert<5>{Comm}\pause  
+  \item[] $(
+    [\only<presentation:7|handout:0>{\hilitebox}{\lnot B}\only<presentation:7|handout:0>{_\metav{P}}
+   \land
+     \only<presentation:7|handout:0>{\hilitebox}{(A \land \lnot B)}
+     \only<presentation:7|handout:0>{_\metav{Q}}]
+     \lor
+     [\only<presentation:7|handout:0>{\hilitebox}{\lnot B}
+     \only<presentation:7|handout:0>{_\metav{P}}
+     \land 
+     \only<presentation:7|handout:0>{\hilitebox}{(B \land \lnot A)}
+     \only<presentation:7|handout:0>{_\metav{R}}])
+   \lor
+     ([\only<presentation:9-10|handout:0>{\hilitebox}{(A \land \lnot
+     B)}\only<presentation:9-10|handout:0>{_\metav{Q}} 
+    \lor \only<presentation:9-10|handout:0>{\hilitebox}{(B \land \lnot A)}\only<presentation:9-10|handout:0>{_\metav{R}}]
+  \land 
+  \only<presentation:9-10|handout:0>{\hilitebox}{C}
+  \only<presentation:9-10|handout:0>{_\metav{P}})$\hfill\alert<8>{Dist}\pause
+  \pause
+  \item[] $([\lnot B \land (A \land \lnot B)]
+     \lor
+     [\lnot B \land (B \land \lnot A)])
+     \lor
+     ([\only<presentation:10|handout:0>{\hilitebox}{(A \land \lnot B)}
+     \only<presentation:10|handout:0>{_\metav{Q}} \land
+     \only<presentation:10|handout:0>{\hilitebox}{C}
+     \only<presentation:10|handout:0>{_\metav{P}}]
+     \lor
+     [\only<presentation:10|handout:0>{\hilitebox}{(B \land \lnot A)}\only<presentation:10|handout:0>{_\metav{R}}
+  \land 
+  \only<presentation:10|handout:0>{\hilitebox}{C}
+  \only<presentation:10|handout:0>{_\metav{P}}])$\hfill\alert<10>{Dist}\only<11>{}
+\end{itemize}
+
+\vfill
+\end{frame}
+
+\subsection{Simplification}
+
+\begin{frame}
+\frametitle{Simplification equivalences}
+
+Associativity (Assoc):
+\begin{align*}
+\metav{P} \lor (\metav{Q} \lor \metav{R}) & \Leftrightarrow (\metav{P} \lor \metav{Q}) \lor \metav{R} &
+\metav{P} \land (\metav{Q} \land \metav{R}) & \Leftrightarrow (\metav{P} \land \metav{Q}) \land \metav{R}
+\end{align*}
+Idempotence (Id):
+\begin{align*}
+  (\metav{P} \lor \metav{P}) & \Leftrightarrow \metav{P} &
+  (\metav{P} \land \metav{P}) & \Leftrightarrow \metav{P}
+\intertext{Absorption (Abs):}
+\metav{P} \land (\metav{P} \lor \metav{Q}) & \Leftrightarrow \metav{P}&
+\metav{P} \lor (\metav{P} \land \metav{Q}) & \Leftrightarrow \metav{P}
+\intertext{Simplification (Simp):}
+\metav{P} \land (\metav{Q} \lor \lnot\metav{Q}) & \Leftrightarrow \metav{P} &
+\metav{P} \lor (\metav{Q} \land \lnot\metav{Q}) & \Leftrightarrow \metav{P}\\
+\metav{P} \lor (\metav{Q} \lor \lnot\metav{Q}) & \Leftrightarrow (\metav{Q} \lor \lnot\metav{Q}) &
+\metav{P} \land (\metav{Q} \land \lnot\metav{Q}) & \Leftrightarrow (\metav{Q} \land \lnot\metav{Q}) \\
+\end{align*}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Simplifying sentences}
+\small
+\setlength{\leftmargini}{0cm}
+\begin{itemize}[<+->]
+  \item[] $([\only<presentation:1|handout:0>{\hilitebox}{\lnot B} \land (\only<presentation:2-3|handout:0>{\hilitebox}{A \land \only<presentation:1|handout:0>{\hilitebox}{\lnot B}})]
+     \lor
+     [\lnot B \land (B \land \lnot A)])
+     \lor
+     ([(A \land \lnot B)
+     \land
+     C]
+     \lor
+     [(B \land \lnot A)
+  \land 
+  C])$\pause
+  \item[] $([\only<presentation:4-5|handout:0>{\hilitebox}{\lnot B \land
+  (\only<presentation:3|handout:0>{\hilitebox}{\lnot B \land A})}]
+  \lor
+  [\lnot B \land (B \land \lnot A)])
+  \lor
+  ([(A \land \lnot B)
+  \land
+  C]
+  \lor
+  [(B \land \lnot A)
+\land 
+C])$\hfill\alert<3>{Comm}\pause
+\item[] $([\only<presentation:5|handout:0>{\hilitebox}{\only<presentation:6-7|handout:0>{\hilitebox}{(\lnot B \land
+\lnot B)} \land A}]
+\lor
+[\lnot B \land (B \land \lnot A)])
+\lor
+([(A \land \lnot B)
+\land
+C]
+\lor
+[(B \land \lnot A)
+\land 
+C])$\hfill\alert<5>{Assoc}\pause
+\item[] $([\only<presentation:7|handout:0>{\hilitebox}{\lnot B} \land A]
+\lor
+[\only<presentation:8-9|handout:0>{\hilitebox}{\lnot B \land (B \land \lnot A)}])
+\lor
+([(A \land \lnot B)
+\land
+C]
+\lor
+[(B \land \lnot A)
+\land 
+C])$\hfill\alert<7>{Id}\pause
+\item[] $([\lnot B \land A]
+\lor
+[\only<presentation:9-10|handout:0>{\hilitebox}{(\lnot B \land B) \land \lnot A}])
+\lor
+([(A \land \lnot B)
+\land
+C]
+\lor
+[(B \land \lnot A)
+\land 
+C])$\hfill\alert<9>{Assoc}
+\item[] $(\only<presentation:11-12|handout:0>{\hilitebox}{[\lnot B \land A]
+\lor
+[\only<presentation:10|handout:0>{\hilitebox}{\lnot B \land B}]})
+\lor
+([(A \land \lnot B)
+\land
+C]
+\lor
+[(B \land \lnot A)
+\land 
+C])$\hfill\alert<10>{Simp}\pause
+\item[] $(\only<presentation:12,14-15|handout:0>{\hilitebox}{\lnot B \land A})
+\lor
+([(\only<presentation:14|handout:0>{\hilitebox}{A \land \lnot B})
+\land
+C]
+\lor
+[(B \land \lnot A)
+\land 
+C])$\hfill\alert<12>{Simp}\pause\pause
+\item[] $(\only<presentation:15|handout:0>{\hilitebox}{A \land \lnot B})
+\lor
+([(A \land \lnot B)
+\land
+C]
+\lor
+[(B \land \lnot A)
+\land 
+C])$\hfill\alert<15>{Comm}\pause
+\item[] $\only<presentation:18-19|handout:0>{\hilitebox}{((A \land \lnot B)
+\lor
+[(A \land \lnot B)
+\land
+C])}
+\lor
+[(B \land \lnot A)
+\land 
+C]$\hfill\alert<17>{Assoc}\pause
+\item[] $\only<presentation:19|handout:0>{\hilitebox}{(A \land \lnot B)}
+\lor
+[(B \land \lnot A)
+\land 
+C]$\hfill\alert<19>{Abs}\only<20>{}
+\end{itemize}
+\end{frame}

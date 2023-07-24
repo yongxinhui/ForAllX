@@ -1,0 +1,289 @@
+ \documentclass[12pt]{article}
+ 
+ \usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+
+\usepackage{multicol}
+ 
+ \iffalse
+ \textheight     11truein
+ \vsize     10.0truein
+ \topmargin      .15truein
+ \textwidth 6.5truein \columnwidth \textwidth 
+ \setlength{\oddsidemargin}{0truein} 
+ %\footheight     0.0truein
+ \footskip       0.75truein
+ \headheight     .25truein
+ \headsep        0.25truein
+ \fi 
+
+\usepackage{amsmath} %for align* environment and gather*
+\usepackage{xref}
+ %    \textheight     10.0truein
+ \usepackage{graphics}
+ \usepackage{pstricks}
+% \usepackage{pst-tree}
+% \usepackage{pst-node,pst-tree}
+ \usepackage{makeidx}
+ 
+
+ 
+ %\usepackage{forallx-ubc-Hunt} %calls local modified style file, but could lead to conflicts. i ought to make my own `common.sty' file for the problem sets. maybe using the same `common' file as the lecture notes? i really ought to just have a single consistent set of style files for the book, problem sets, and lecture notes! 
+ 
+ %\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
+% disjunction
+\def\eor{\ensuremath{\vee}}
+% conjunction: 
+% {\,^{_{_{_{_{\mbox{\footnotesize\textbullet}}}}}}} gives the dot
+\def\eand{\ensuremath{\,\&\,}}
+% conditional: \rightarrow gives the right arrow
+\def\eif{\ensuremath{\supset}}
+% biconditional: \leftrightarrow gives the left and right arrow
+\def\eiff{\ensuremath{\equiv}}
+% negation: {\sim} gives the swung dash 
+%\def\enot{\ensuremath{\neg}}
+%\def\enot{\ensuremath{\sim}} %note that \sim is defined as a relation, which leads to spacing issues. adding a \! leads to more spacing issues (piled up double negations).  
+
+\def\enot{\ensuremath{{\sim}}} %redefining as {\sim} treats the tilde as a unary operator, rather than a relation, solving a lot of the spacing issues. 
+
+\let\oldsim\sim %renames any \sim commands as \oldsim. 
+\renewcommand{\sim}{{\oldsim}} %redefines \sim as unary operator version of \sim, in case there are any straggling \sim commands in the wild
+
+% metalanguage variables: change greek to A and B if you prefer
+\def\metaA{\ensuremath{\varPhi}}
+\def\metaB{\ensuremath{\varPsi}}
+\def\metaC{\ensuremath{\varOmega}}
+\def\metaD{\ensuremath{\varDelta}}
+\def\metaSetX{\ensuremath{\mathcal{X}}}
+\def\metaSetY{\ensuremath{\mathcal{Y}}}
+\def\metaSetZ{\ensuremath{\mathcal{Z}}}
+
+%Calgary script and metav commands: 
+\newcommand*{\script}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand*{\metav}[1]{\ensuremath{\mathcal{#1}}}
+
+% \pagestyle{empty}
+ 
+ % Tree stuff
+ 
+  \usepackage{prooftrees} %i copied over prooftrees file from Ichikawa source files, which I think is pre-2019 version
+  
+ %Note that I probably ought to just update my prooftrees package, since I downloaded the zip file and can just paste over the older version! (but who knows what else this could change...)
+%JRH: adding in definition of line no override, local option included in 2019 revision. since my prooftrees package is not up to date! 
+% see code here: https://tex.stackexchange.com/questions/415976/manually-set-line-numbers-if-prooftrees-sty
+% see p. 24 of prooftrees manual for directions on using this. works w/ {}, e.g. line no override={n+1}
+
+%the command `vdotsline' lets you put anything in number column, without a period appearing afterwards. so it's like `line no override' without \linenumberstyle
+%e.g. for vertical dots vertically aligned, use: vdotsline={\\[-0.55em] \vdots}
+
+\forestset{
+  line no override/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=\linenumberstyle{#1},
+        typeset node,
+      },
+    },
+  },
+  no line no/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=,
+        typeset node,
+      },
+    },
+  },
+  vdotsline/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=#1,
+        typeset node,
+      },
+    },
+  },
+  default preamble={
+	single branches,
+	close with=\ensuremath{\times},
+	just sep=1.75em,
+	line no sep=1.75em
+	}
+}
+
+\begin{document}
+
+\input macs
+%\input fitch
+\newcommand{\detritus}[1]{}
+
+
+\thispagestyle{empty}
+
+
+
+\iffalse
+\parindent = 0pt
+\hspace*{0.0in}\parbox[t]{2.5in}{
+Philosophy 24.241\\[3pt]
+Symbolic Logic\\[3pt]
+Fall, 2022
+}
+\fi 
+
+%\bigskip %\bigskip
+
+\iffalse 
+\begin{center}
+\Large\bf Problem Set 5 \large{(24.241 Symbolic Logic)}\\[1ex] 
+ Due Fri. {\bf{October 14th}} by 5pm Eastern\\[3ex]
+\end{center}
+\fi
+
+\begin{center}
+\Large Problem Set 5 \large{(24.241 Symbolic Logic)} \\[1ex] 
+ Due Fri. \textbf{October 14th} by \textbf{5pm} Eastern\\ \normalsize{\textbf{Please scan and upload to Canvas as a pdf}; feel free to \textit{also} turn in a paper copy to Philosophy Dept on 8th floor Stata Center, Dreyfoos-wing} \\[3ex] 
+ \textbf{Answer FOUR questions total: 1 and 2, 3 Xor 4, 5 Xor 6 (exclusive or's!)}
+\end{center}
+
+Question 0: if you worked with up to two classmates, please list their names! 
+%Some of these problems draw from the posted Induction and Recursion notes.\\
+
+%For questions 1 and 2, provide good translations of the following arguments into the language of sentential logic. Then, investigate their validity using the tree method (STD)
+
+\begin{enumerate}
+
+%%idea: two mandatory problems, then two sets where they choose one! 
+
+\item Consider the argument with premise set $\{\Phi, \Psi \}$ and conclusion $\Theta$. Suppose that you are able to make a tree for this argument in which all branches close, even though you make no use of $\Phi$ and $\Psi$: i.e. you do not resolve these sentences, and when you close a branch, it is never because it contains $\Phi$ or because it contains $\Psi$. What is the most informative semantic property you can ascribe to $\Theta$ (you can take for granted that our system is sound and complete)? \\ (feel free to use symbols `P', `Q', and conclusion `C' if you don't feel like writing Greek letters or you worry about your Greek handwriting!)
+
+%What is the most informative thing you can say about $\Theta$? \\ (feel free to use symbols `P', `Q', and conclusion `C' if you don't feel like writing Greek letters or worry about your handwriting!)
+%Let $\Phi$, \Psi , and \Theta be wffs 
+%From GB 303, HW 4
+
+%solution: C must be a tautology. Whatever we did in the given tree with A, B, and „ C at its root to make all the branches close, we could have done in a tree with just „ C at its root—since by assumption A and B played no role in the further work we did. So there is a tree with just „ C at its root in which all branches close.
+
+\item Prove that in a sound and complete tree system, no argument G is both tree-valid and tree-invalid. Let `G' be an arbitrary argument with premise set $\Gamma$ and conclusion $\Theta$. 
+
+(\textit{Hints}: Show that if an argument is tree-invalid, then it is not tree-valid. To do this, apply \textbf{a key fact} coming from our proof of completeness, and then apply the soundness result. Alternatively, you could do a proof by contradiction, using the same results.) 
+% (but you'll still need soundness and the same key fact from our completeness proof. We stand here face to face with the hardness of the logical must). 
+
+\item[] \begin{center} Pick \textbf{one} of questions 3 or 4 to answer (then PROCEED TO 2nd PAGE!): \end{center}
+
+\item Briefly explain why we could augment our nine tree rules with their `syntactic equivalents' and not get into trouble with our Soundness and Completeness results (e.g. swapping the order of branches in the `splitting rules', or the order of sentences in the `stacking rules'). Your brief argument should note both (i) why our system would remain Sound (`reasoning from the top-down') and (ii) why our system would remain Complete (`reasoning from the bottom-up'). \\ NB: I'm \textit{not} asking you to formally extend the Soundness and Completeness proofs to include these additional $6+ 7 \times 2 = 20$ rules. But if you prefer to make it really concrete, feel free to just focus on a disjunction rule where the right disjunct is placed on the left branch, and the left disjunct is placed on the right branch of our new node. 
+%maybe I was wrong to say that `completeness' is about having `enough rules', since it seems that sometimes adding a single rule could mess up completeness?
+
+\item Our textbook's Chapter 5 does not set-up the inductive proof for completeness properly. In lecture, we showed how to properly set-up the proof for soundness. \\ Do the same for completeness noting (i) what you are doing induction over; \\ (ii) the base case(s); (iii) the induction hypothesis; \\ (iv) what you would need to show in the induction step. \\ NB: I'm not asking you to actually re-do the proof, just to set it up! \\ \textbf{Warning: this problem seems considerably trickier than \#3 to answer completely correctly.}
+
+%, since you're doing induction simultaneously on two structures, so you need two indices for your induction, making the induction hypothesis a bit convoluted.} 
+%[TWO recursive structures in this case!]
+
+%; and (v) comment on whether the book's proof leaves out any cases. \\ NB: I'm not asking you to actually re-do the proof, just to set it up! 
+
+
+\newpage
+
+
+\item[] \begin{center} Pick \textbf{one} of questions 5 or 6 to answer; do parts (a) AND (b): \end{center}
+
+\bigskip
+
+What follows are two modiﬁcations to our SL tree system. For each, imagine
+a system STD$^{\ast}$ exactly like our system STD, except for the single indicated change.
+
+\textbf{(a) Would the modiﬁed tree system be sound?} If so, explain how to extend our inductive soundness proof to a system with this rule; if not, give a tree that is a counterexample to the soundness of STD$^{\ast}$.
+
+\textbf{(b) Would the modiﬁed tree system be complete?} If so, explain how to extend our inductive completeness proof to a system with this rule; if not, give a tree that is a counterexample to the completeness of  STD$^{\ast}$. 
+
+%\end{enumerate}
+
+\begin{multicols}{2}
+
+\item \textit{Crunk Conditional} (C\eif) \vspace{1em}
+
+%\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\metaA{}\eif\metaB{}, line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\enot\metaA{} \eor \metaB{}, line no override={j}, just={m C\eif}]
+	[\metaB{}, line no override={j}
+	[\Theta, grouped, line no override={j+1}
+	]
+	]
+]
+]
+\end{prooftree}
+%\end{center}
+
+Note that $\Theta$ is an arbitrary wff of SL
+
+\columnbreak
+
+\item \textit{Negligent Negated Conditional} (N\enot \eif) \vspace{0.42em}
+
+%\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\enot(\metaA{}\eif\metaB{}), line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\metaA{}, line no override={j}, just={m N\enot \eif}]
+	[\enot\metaB{}]
+	[(\metaA{} \eand \enot \metaB{}) \eand (P \eor \enot P)] 
+]
+]
+\end{prooftree}
+%\end{center}
+
+\end{multicols}
+
+
+
+
+
+
+
+ 
+\iffalse
+
+\item (i) Translate the following argument into the language of sentential logic. (ii) Check its validity using a tree, and state your conclusion. If the argument is invalid, use the tree to find a truth value assignment that makes its premises true and conclusion false.
+
+\begin{quote}
+If logic monkeys are hirsute, then logic monkeys are orgulous. And if space dogs are splenetic, then space dogs are bilious. So both if logic monkeys are hirsute then space dogs are bilious, and if space dogs are splenetic then logic monkeys are orgulous. 
+\end{quote}
+
+Symbolization Key: H = logic monkeys are hirsute; O = logic monkeys are orgulous; S = space dogs are splenetic; B = space dogs are bilious
+
+\fi 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{enumerate}
+
+
+\end{document}

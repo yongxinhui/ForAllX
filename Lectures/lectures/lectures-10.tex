@@ -1,0 +1,429 @@
+﻿% !TeX root = ./slides-10.tex
+
+\setcounter{section}{9}
+
+\section{Proofs for full QL}
+
+\subsection{Proofs with multiple quantifiers}
+
+\begin{frame}
+  \frametitle{Eliminating $\forall$}
+
+  \begin{fitchproof}
+    \have[m]{a}{\qt{\forall}{\metav{x}}\metav{A}(\ldots \metav{x} \ldots \metav{c}\ldots)}
+    \have[\ ]{c}{\metav{A}(\ldots \metav{c} \ldots \metav{c}\ldots)} \Ae{a}
+  \end{fitchproof}
+  \begin{itemize}
+    \item No restriction on $\metav{c}$:
+    \begin{itemize}[<+->]
+      \item May be in an assumption.
+      \item May also be in $\qt{\forall}{\metav{x}}\metav{A}(\ldots \metav{x}
+      \ldots \metav{x}\ldots)$ already!
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Working forward from $\forall$}
+
+  \begin{itemize}[<+->]
+    \item If you \emph{have $\qt{\forall}{\metav{x}}\metav{A}\qv{\metav{x}}$}, replace every $\metav{x}$ by the
+      same $\metav{c}$.
+    \item The result is $\metav{A}\qv{\metav{c}}$, justified by $\forall E$.
+    \item You can pick any $\metav{c}$.
+    \item Good candidates: $\metav{c}$ which occur in assumptions or
+      in the sentences you're trying to prove.
+    \item You may need to try multiple candidates.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Introducing $\forall$}
+  
+  \begin{fitchproof}
+    \have[m]{a}{\metav{A}(\ldots \metav{c} \ldots \metav{c}\ldots)}
+    \have[\ ]{c}{\qt{\forall}{\metav{x}}\metav{A}(\ldots \metav{x} \ldots \metav{x}\ldots)} \Ai{a}
+  \end{fitchproof}
+
+  \begin{itemize}[<+->]
+  \item Restrictions on $\metav{c}$:
+  \begin{itemize}
+    \item must not occur in any undischarged assumption.
+    \item must not occur in $\qt{\forall}{\metav{x}}\metav{A}(\ldots \metav{x} \ldots \metav{x})$.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Working backward from $\forall$}
+
+  \begin{itemize}[<+->]
+    \item If you \emph{want $\qt{\forall}{\metav{x}}\metav{A}\qv{\metav{x}}$}, replace every $\metav{x}$ by the
+      same $\metav{c}$.
+    \item The result is $\metav{A}\qv{\metav{c}}$. 
+    \item Try to prove this \emph{above} $\qt{\forall}{\metav{x}}\metav{A}\qv{\metav{x}}$.
+    \item Justify $\qt{\forall}{\metav{x}}\metav{A}\qv{\metav{x}}$ by $\forall I$.
+    \item You must pick a \emph{new} $\metav{c}$ not already in the
+    proof constructed so far.
+    \item As long as $\metav{c}$ is fresh, this will work if you can
+    prove $\qt{\forall}{\metav{x}}\metav{A}\qv{\metav{x}}$ at all.
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Introducing $\exists$}
+
+  \begin{fitchproof}
+    \have[m]{a}{\metav{A}(\ldots \metav{c} \ldots \metav{c}\ldots)}
+    \have[\ ]{c}{\qt{\exists}{\metav{x}}\metav{A}(\ldots \metav{x} \ldots \metav{c}\ldots)}\Ei{a}
+  \end{fitchproof}
+  \begin{itemize}[<+->]
+    \item No restriction on $\metav{c}$:
+    \begin{itemize}[<+->]
+      \item May be in an assumption.
+      \item May also be in $\qt{\exists}{\metav{x}}\metav{A}(\ldots \metav{x}
+      \ldots \metav{c}\ldots)$.
+      \item So you can also justify $\qt{\exists}{\metav{x}}\metav{A}(\ldots \metav{x}
+      \ldots \metav{x}\ldots)$ or $\qt{\exists}{\metav{x}}\metav{A}(\ldots \metav{c}
+      \ldots \metav{x}\ldots)$.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Working backward from $\exists$}
+
+  \begin{itemize}[<+->]
+    \item If you \emph{want} $\qt{\exists}{\metav{x}}\metav{A}\qv{\metav{x}}$, replace every $\metav{x}$ by the
+      same $\metav{c}$.
+    \item The result is $\metav{A}\qv{\metav{c}}$. 
+    \item Try to prove this \emph{above} $\qt{\exists}{\metav{x}}\metav{A}\qv{\metav{x}}$
+    \item Justify $\qt{\exists}{\metav{x}}\metav{A}\qv{\metav{x}}$ by $\exists I$.
+    \item You can pick any $\metav{c}$.
+    \item Good candidates: $\metav{c}$ which occur in assumptions or
+      in the sentences you're trying to prove.
+    \item That includes $\qt{\exists}{\metav{x}}\metav{A}\qv{\metav{x}}$!
+    \item You may need to try multiple candidates.
+    \item This may not work (especially at the beginning, or if
+    you need~IP)!
+    \item Try other strategies first, especially strategies that put
+    more $\metav{c}$ into play ($\exists E$).
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Eliminating $\exists$}
+  \begin{fitchproof}
+    \have[m]{a}{\qt{\exists}{\metav{x}}\metav{A}(\ldots \metav{x} \ldots \metav{x}\ldots)}
+    \open
+      \hypo[i]{b}{\metav{A}(\ldots \metav{c} \ldots \metav{c}\ldots)}
+      \have[j]{c}{\metav{B}}
+    \close
+    \have[\ ]{d}{\metav{B}}\Ee{a,b-c}
+  \end{fitchproof}
+
+  \begin{itemize}[<+->]
+    \item Restrictions on $\metav{c}$:
+    \begin{itemize}[<+->]
+      \item must not occur in any assumption still open when you apply
+      $\exists E$.
+      \item must not occur in $\qt{\exists}{\metav{x}}\metav{A}(\ldots \metav{x} \ldots \metav{x}$).
+      \item must not occur in $\metav{B}$.
+    \end{itemize}
+  \end{itemize}
+  \end{frame}
+
+  \begin{frame}{Working forward from $\exists$}
+
+  \begin{itemize}[<+->]
+    \item If you \emph{have $\qt{\exists}{\metav{x}}\metav{A}\qv{\metav{x}}$}, and you \emph{want  $\metav{B}$}:
+      \begin{itemize}
+        \item replace every $\metav{x}$ by the
+        same $\metav{c}$.
+        \item The result is $\metav{A}\qv{\metav{c}}$.
+        \item Start a subproof with this.
+        \item Prove $\metav{B}$ on its last line
+        \item Justify $\metav{B}$ after the subproof using $\exists E$.
+        \end{itemize}
+    \item You must pick a \emph{new} $\metav{c}$ not already in the
+    proof constructed so far.
+    \item As long as $\metav{c}$ is fresh, this will work if you can
+    prove $\metav{B}$ from $\qt{\exists}{\metav{x}}\metav{A}\qv{\metav{x}}$ at all.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Admirers and admired}
+
+\begin{earg}
+\item[] Someone is admired by everyone
+\item[\therefore] Everyone admires someone
+\end{earg}
+
+\bigskip
+\begin{fitchproof}
+\hypo[ ]{1}{\qt{\exists}{y}\qt{\forall}{x}\, A\qr{x}{y}}
+\have[ ]{2}{\qt{\forall}{x}\qt{\exists}{y}\, A\qr{x}{y}}
+\end{fitchproof}
+Let's do it on \href{https://carnap.io/shared/rzach@ucalgary.ca/Practice\%20Problems\%20VII.md}{carnap.io}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Admirers and admired}
+
+  \begin{fitchproof}
+    \hypo{1}{\qt{\exists}{y}\qt{\forall}{x}\, A\qr{x}{y}}
+    \open
+    \hypo{2}{\qt{\forall}{x}\,A\qr{x}{c}}
+    \have{3}{A\qr{d}{c}}\Ae{2}
+    \have{4}{\qt{\exists}{y}\,A\qr{d}{y}}\Ei{3}
+    \have{5}{\qt{\forall}{x}\qt{\exists}{y}\,A\qr{x}{y}}\Ai{4}
+    \close
+    \have{6}{\qt{\forall}{x}\qt{\exists}{y}\, A\qr{x}{y}}\Ee{1,2-5}
+  \end{fitchproof}
+\end{frame}
+
+\begin{frame}
+    \frametitle{All hail Queen Anne}
+
+\begin{earg}
+\item[] Some woman is superior to every man.
+\item[\therefore] Every man is inferior to some woman.
+\end{earg}
+
+\bigskip
+
+\begin{fitchproof}
+\hypo[ ]{1}{\qt{\exists}{y}(W\qv{y} \land \qt{\forall}{x}(M\qv{x} \to S\qr{y}{x}))}
+\have[ ]{2}{\qt{\forall}{x}(M\qv{x} \to \qt{\exists}{y}(W\qv{y} \land S\qr{y}{x}))}
+\end{fitchproof}
+\end{frame}
+
+\begin{frame}\footnotesize
+
+\begin{fitchproof}
+\hypo{1}{\qt{\exists}{y}(W\qv{y} \land \qt{\forall}{x}(M\qv{x} \to S\qr{y}{x}))}
+\open
+\hypo{2}{W\qv{c} \land \qt{\forall}{x}(M\qv{x} \to S\qr{c}{x})}
+\open
+\hypo{3}{M\qv{d}}
+\have{4}{\qt{\forall}{x}(M\qv{x} \to S\qr{c}{x})}\ae{2}
+\have{5}{M\qv{d} \to S\qr{c}{d})}
+\have{6}{S\qr{c}{d}}
+\have{7}{W\qv{c}}\ae{2}
+\have{8}{W\qv{c} \land S\qr{c}{d}}\ai{6,7}
+\have{9}{\qt{\exists}{y}(W\qv{y} \land S\qr{y}{x})}\Ei{8}
+\close
+\have{10}{M\qv{d} \to \qt{\exists}{y}(W\qv{y} \land S\qr{y}{d})}
+\have{11}{\qt{\forall}{x}(M\qv{x} \to \qt{\exists}{y}(W\qv{y} \land S\qr{y}{x}))}\Ai{10}
+\close
+\have{12}{\qt{\forall}{x}(M\qv{x} \to \qt{\exists}{y}(W\qv{y} \land S\qr{y}{x}))}\Ee{1,2-11}
+\end{fitchproof}
+\end{frame}
+
+\subsection{Proofs with identity}
+
+\begin{frame}
+    \frametitle{Everybody loves my baby}
+
+
+\begin{earg}
+\item[] Everybody loves my baby.
+\item[] But my baby don't love nobody but me.
+\item[\therefore] My baby is me.
+\end{earg}
+
+\bigskip
+
+\begin{fitchproof}
+\hypo[ ]{1}{\qt{\forall}{x}\, L\qr{x}{b}}
+\hypo[ ]{2}{\qt{\forall}{x}(L\qr{b}{x} \eif x = i)}
+\have[ ]{3}{b = i}
+\end{fitchproof}
+
+\small\begin{itemize}
+\item
+\href{https://www.youtube.com/results?search_query=\%22Everybody+loves+my+baby\%22}{``Everybody
+Loves my Baby'' on YouTube}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{My baby is me}
+
+  \begin{fitchproof}
+\hypo{1}{\qt{\forall}{x}\, L\qr{x}{b}}
+\hypo{2}{\qt{\forall}{x}(L\qr{b}{x} \eif x = i)}
+\have{3}{L\qr{b}{b}}\Ae{1}
+\have{4}{L\qr{b}{b} \eif b = i}\Ae{2}
+\have{5}{b = i}\ce{3,4}
+\end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{I am my baby}
+
+  \begin{fitchproof}
+\hypo{1}{\qt{\forall}{x}\, L\qr{x}{b}}
+\hypo{2}{\qt{\forall}{x}(L\qr{b}{x} \eif x = i)}
+\have{3}{L\qr{b}{b}}\Ae{1}
+\have{4}{L\qr{b}{b} \eif b = i}\Ae{2}
+\have{5}{i = b}\by{?}{}
+\end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Proofs with identity}
+  
+  \begin{fitchproof}
+    \have[\ \,\,\,]{x}{\metav{c}=\metav{c}} \by{=I}{}
+  \end{fitchproof}
+  
+  \begin{fitchproof}
+    \have[m]{e}{\metav{a}=\metav{b}}
+    \have[n]{a}{\metav{A}(\ldots \metav{a} \ldots \metav{a}\ldots)}
+    \have[\ ]{ea1}{\metav{A}(\ldots \metav{b} \ldots \metav{a}\ldots)} \by{=E}{e,a}
+  \end{fitchproof}
+  \begin{fitchproof}
+    \have[m]{e}{\metav{a}=\metav{b}}
+    \have[n]{a}{\metav{A}(\ldots \metav{b} \ldots \metav{b}\ldots)}
+    \have[\ ]{ea2}{\metav{A}(\ldots \metav{a} \ldots \metav{b}\ldots)} \by{=E}{e,a}
+  \end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{I am my baby}
+
+  \begin{itemize}
+    \item We symbolized ``My baby is me'' as $b = i$.
+    \item But it's equivalent to ``I am my baby,'' $i = b$.
+    \item $=$I and $=$E let us prove this:
+    \begin{fitchproof}
+      \hypo{1}{b = i}
+      \have{2}{b = b}\by{=I}{}
+      \have{3}{i = b}\by{=E}{1,2}
+    \end{fitchproof}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Different properties, different things}
+
+  \begin{itemize}[<+->]
+    \item Two names $d$, $e$ may name the same thing.
+    \item In that case, $d = e$ would be true.
+    \item And then anything that's true about $d$ is also true about $e$.
+    \item In other words: \[d=e,P\qv{d} \models P\qv{e}\]
+    \item So if something is true about $d$ but false about $e$, then $\enot d = e$. 
+    \item In other words:
+    \[P\qv{d}, \enot P\qv{e} \models \enot d = e\]
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Different properties, different things}
+
+  \begin{fitchproof}
+    \hypo{1}{P\qv{d}}
+    \hypo{2}{\enot P\qv{e}}
+    \open
+    \hypo{3}{d = e}
+    \have{4}{P\qv{e}}\by{=E}{1,3}
+    \have{5}{\ered}\ne{2,4}
+    \close
+    \have{6}{\enot d = e}\ni{2-5}
+  \end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Uniqueness, again}
+
+  The two symbolizations  of ``there is exactly one hero'' are equivalent:
+  \begin{align*}
+    \qt{\exists}{x}&(H\qv{x} \land \qt{\forall}{y}(H\qv{y} \to x = y))\\
+    \qt{\exists}{x}\qt{\forall}{y} & (H\qv{y} \eiff x=y)
+  \end{align*}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Uniqueness, again}
+  \tiny
+  \begin{fitchproof}
+    \hypo{1}{\qt{\exists}{x}(H\qv{x} \land \qt{\forall}{y}(H\qv{y} \to x = y))}
+    \open
+    \hypo{2}{H\qv{a} \land \qt{\forall}{y}(H\qv{y} \to a = y)}
+    \open
+    \hypo{3}{H\qv{c}}
+    \have{4}{\qt{\forall}{y}(H\qv{y} \to a = y)}\ae{2}
+    \have{5}{H\qv{c} \to a = c}\Ae{4}
+    \have{6}{a=c}\ce{3,5}
+    \close
+    \open
+    \hypo{7}{a=c}
+    \have{8}{H\qv{a}}\ae{2}
+    \have{9}{H\qv{c}}\ie{7,8}
+    \close
+    \have{10}{H\qv{c} \eiff a=c}\bi{3-6,7-9}
+    \have{11}{\qt{\forall}{y}  (H\qv{y} \eiff a=y)}\Ai{10}
+    \have{12}{\qt{\exists}{x}\qt{\forall}{y}  (H\qv{y} \eiff x=y)}\Ei{11}
+    \close
+    \have{13}{\qt{\exists}{x}\qt{\forall}{y}  (H\qv{y} \eiff x=y)}\Ee{1,2-12}
+  \end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Uniqueness, again}
+\tiny
+  \begin{fitchproof}
+    \hypo{1}{\qt{\exists}{x}\qt{\forall}{y}  (H\qv{y} \eiff x=y)}
+    \open
+    \hypo{2}{\qt{\forall}{y} (H\qv{y} \eiff a=y)}
+    \have{4}{H\qv{a} \eiff a = a}\Ae{2}
+    \have{5}{a = a}\ii{}
+    \have{6}{H\qv{a}}\be{4,5}
+    \open
+    \hypo{7}{H\qv{c}}
+    \have{8}{H\qv{c} \eiff a = c}\Ae{2}
+    \have{9}{a=c}\be{7,8}
+    \close
+    \have{10}{H\qv{c} \eif a=c}\ci{7-9}
+    \have{11}{\qt{\forall}{y}(H\qv{y} \to a = y)}\Ai{10}
+    \have{12}{H\qv{a} \land \qt{\forall}{y}(H\qv{y} \to a = y)}\ai{6,11}
+    \have{13}{\qt{\exists}{x}(H\qv{x} \land \qt{\forall}{y}(H\qv{y} \to x = y))}\Ei{12}
+    \close
+    \have{14}{\qt{\exists}{x}(H\qv{x} \land \qt{\forall}{y}(H\qv{y} \to x = y))}\Ee{1,2-13}
+  \end{fitchproof}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Proofs with numerical claims}
+
+\begin{fitchproof}
+\hypo[ ]{1}{\qt{\exists}{x}\, P\qv{x}}
+\hypo[ ]{2}{\qt{\forall}{x}\qt{\forall}{y} ((P\qv{x} \land P\qv{y}) \to x = y)}
+\have[ ]{3}{\qt{\exists}{x}(P\qv{x} \land \qt{\forall}{y}(P\qv{y} \to x = y))}
+\end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Proofs with numerical claims}
+\tiny
+\begin{fitchproof}
+\hypo{1}{\qt{\exists}{x}\, P\qv{x}}
+\hypo{2}{\qt{\forall}{x}\qt{\forall}{y} ((P\qv{x} \land P\qv{y}) \to x = y)}
+\open
+\hypo{3}{P\qv{a}}
+\open
+\hypo{4}{P\qv{c}}
+\have{5}{\qt{\forall}{y} ((P\qv{a} \land P\qv{y}) \to a = y)}\Ae{2}
+\have{6}{(P\qv{a} \land P\qv{c}) \to a = c}\Ae{5}
+\have{7}{P\qv{a} \land P\qv{c}}\ai{3,4}
+\have{8}{a=c}\ce{6,7}
+\close
+\have{9}{P\qv{c} \eif a=c}\ci{4-8}
+\have{10}{\qt{\forall}{y}(P\qv{y} \to a = y)}
+\have{11}{P\qv{a} \land \qt{\forall}{y}(P\qv{y} \to a = y)}\ai{3,11}
+\have{12}{\qt{\exists}{x}(P\qv{x} \land \qt{\forall}{y}(P\qv{y} \to x = y))}\Ei{11}
+\close
+\have{13}{\qt{\exists}{x}(P\qv{x} \land \qt{\forall}{y}(P\qv{y} \to x = y))}\Ee{1,3-12}
+\end{fitchproof}
+\end{frame}

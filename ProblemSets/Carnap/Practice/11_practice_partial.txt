@@ -1,0 +1,122 @@
+
+
+
+
+- **Universe of Discourse** (UD): all currently living people (YOLO!), including in particular `**b**', denoting Barbara (Streisand) 
+
+
+**Predicate schemas**:
+
+- $Ey$:	$y$ will travel to Europe.   
+- $Py$:	$y$ will travel to Portugal.         
+- $Hx$:	$x$ will stay home (lame!).     
+- $Vxy$:	$x$ will visit $y$.         
+
+<br />
+
+
+
+
+
+[DON'T INCLUDE THIS ONE on Pset; too hard i think! some ambiguity about whether the `if one person' is a universal or an existential...seems like i got the first universal but treated the second person as an exisential, which is WRONG. so this one is TRICKY! so maybe allow them to submit even if not correct]::
+
+[note that the following two sentences are allegelyd not equivalent, at least not in carnap, which is interesting...:
+(Ax)(Px & (Ey)( (~y=x & ~Ey) > (~Vxy & ~Vyx)))
+(Ax)(Ey) ( (Px & ~Ey & ~x=y) > (~Vxy & ~Vyx ) )
+
+But Carnap DOES accept the following in this case:
+(Ax)(Ey)(Px&((~x=y & ~Ey) > (~Vxy & ~Vyx)))
+so I think it has to do w/ form P & (Q >R ) vs. (P&Q)>R
+
+so really I ought to have entered the following from the start:
+(Ax)( (Px & (Ey)( (~y=x & ~Ey)) > (~Vxy & ~Vyx) )
+but this is ungramattical: so seems IMPOSSIBLE to have the (Ey) not out front, since otherwise you close of the scope of (Ey) as you go to close off the antecedent...
+]::
+
+[JTapp PS8 3b]::
+
+~~~{.Translate .FOL system="LogicBookPDE" points=1}
+PS9.2 (Ax)(Ay)( (Px &  (~y=x & ~Ey))  > (~Vxy & ~Vyx) ) : If one person travels to Portugal and a different person doesn't travel to Europe, then neither of those people will visit the other.
+~~~
+
+[some ambiguity about whether this universals or existentials! but i got it right; they are universals!]::
+
+[JTapp PS8 3c]::
+
+~~~{.Translate .FOL system="LogicBookPDE" points=1}
+PS9.3 (Ax)(Ay)( (Vxy & ~x=y)>( (Ex & Ey) \/ (Hx & Hy) ) ) : If one person visits someone else, then either both travel to Europe or both stay home.
+~~~
+
+
+
+## "Only"
+
+[seems like comma between sentences allows you to include two logically distinct answers as correct; so that's neat! way to assign problems where there are ambiguities]::
+
+[Zach PS9.6]::
+
+~~~{.Translate .FOL system="LogicBookPDE" points=1}
+PS9.6 (Ex)(Mx /\ Oxm) /\ (Ax)(Ey)((My /\ Oyx) -> x=m), (Ax)(Ey)((My /\ Oyx) <-> x=m) : Only Mars has a moon.
+~~~
+
+## Uniqueness
+
+The next one is a bit tricky. As you try to come up with a solution, think about
+how to get your symbolization to preclude the following situations:
+
+- Jupiter is a star larger than all planets.
+- Saturn and Jupiter are both planets and the same size.
+
+[Zach PS9.8]::
+
+~~~{.Translate .FOL system="LogicBookPDE" points=1}
+PS9.8 (Ax)((Px /\ ~x=j) -> Ljx) /\ Pj,(Ex)(Ay) ( ( (Py/\~y=x)->Lxy) /\(Px/\x=j) ) : Jupiter is largest among all planets.
+~~~
+
+[- (See the note after the next problem for a probably unnecessary clarificatory remark)]::
+
+## Numerical quantification
+
+[Zach PS9.10]::
+
+~~~{.Translate .FOL system="LogicBookPDE" points=1}
+PS9.10 ~(Ex)(Mx /\ (Ey)(Ez)(Py /\ Pz /\ ~z=y /\ Oxy /\ Oxz)), ~(Ex)(Ey)(Ez)(Mx & Oxy & Oxz &Py &Pz & ~y=z & ~x=y & ~x=z) : No moon orbits two planets.
+~~~
+
+"No moon orbits two planets" is actually ambiguous. Chances are you're
+interpreting it the right way: there are no moons which orbit two
+planets simultaneously.  The other reading is that there are two
+planets which don't have moons. We want the first reading, not the second.
+
+
+## Definite descriptions
+
+[Zach PS9.14]::
+
+~~~{.Translate .FOL system="LogicBookPDE" points=1}
+PS9.14 (Ex)(Px /\ (Ay)((Py /\ ~x=y) -> Lyx) /\ ~Tx),(Ex)(~Tx /\ (Ay)(( Py /\ (Az)((~y=z /\ Pz) -> Lzy) ) <-> x=y)),(Ex)(Px &~Tx & (Ay) ( ((Py & ~y=x) > Lyx)  & (Az)( (Pz & Lyz) > x=z))): The smallest planet has no atmosphere.
+~~~
+
+## Neither
+
+[Zach PS9.15]::
+
+~~~{.Translate .FOL system="LogicBookPDE" points=1}
+PS9.15 (Ex)(Ey)(((~x=y /\ ((Mx /\ Oxm) /\ (My /\ Oym))) /\ (Az)((Mz /\ Ozm) -> (z = x \/ z = y))) /\ (~Lxe /\ ~Lye)), (Ex)(Ey)( ( ~x=y /\ (Az)((Mz /\ Ozm) <-> (z = x \/ z = y)) ) /\ (~Lxe /\ ~Lye)) : Neither moon of Mars is larger than Earth.
+~~~
+
+[easier way of writing solution:
+(Ex)(Ey)(Mx & My & Oxm & Oym & ~y=x & ~Lxe & ~Lye & (Az)( (Mz & Ozm)>(z=x v z=y))) ]::
+
+~~~{.Translate .FOL system="LogicBookPDE" points=1}
+PP11.16 (Ex)(Ey)(((~x=y /\ ((Mx /\ Oxm) /\ (My /\ Oym))) /\ (Az)((Mz /\ Ozm) -> (z = x \/ z = y))) /\ (~Tx /\ ~Ty)), (Ex)(Ey)( ( ~x=y /\ (Az)((Mz /\ Ozm) <-> (z = x \/ z = y)) ) /\ (~Tx /\ ~Ty)) : Neither moon of Mars has an atmosphere.
+~~~
+
+[(Ex)(Ey)(Mx & My & Oxm & Oym & ~y=x & ~Tx & ~Ty & (Az)( (Mz & Ozm)>(z=x v z=y)))]::
+
+
+
+
+
+
+

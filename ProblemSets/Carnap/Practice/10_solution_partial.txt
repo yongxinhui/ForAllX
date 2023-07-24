@@ -1,0 +1,27 @@
+started 11-13-22
+
+alternate 10.2 solution than what's in the slides:
+
+(Ax)(Hx > Axg) :PR
+(Ax)(Axg > Cx) :PR
+Hc > Acg :1 AE
+Acg > Cc :2 AE
+    Hc :AS for >I
+    Acg :3, 5 >E
+    Cc :4, 6 >E
+Hc > Cc :5-7 >I
+(Ax)(Hx > Cx) :8 AI
+
+
+alternate 10.5 (but very similar):
+
+(Ex)(Hx & Cx) :PR
+(Ax)(Cx > Axg) :PR
+    Hc &Cc :AS for EE
+    Cc > Acg :2 AE
+    Cc :3 &E
+    Acg :4, 5 >E
+    Hc :3 &E
+    Hc & Acg :6, 7 &I
+    (Ex)(Hx & Axg) :8 EI
+(Ex)(Hx & Axg) :1, 3-9 EE

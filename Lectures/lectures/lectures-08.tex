@@ -1,0 +1,450 @@
+﻿% !TeX root = ./slides-08.tex
+
+\setcounter{section}{7}
+
+\section{Multiple quantifiers}
+
+\subsection{Two quantifiers}
+
+\begin{frame}
+  \frametitle{Formulas expressing relations}
+
+\begin{itemize}[<+->]
+  \item A formula $\metav{A}\qv{x}$ with one free variable expresses a \emph{property}.
+  \item A formula $\metav{B}\qr{x}{y}$ with two free variables expresses a \emph{relation}
+  \item $\qt{\forall}{x}\qt{\forall}{y}\, \metav{B}\qr{x}{y}$ is a sentence; 
+  \item It's true iff 
+  \emph{every pair} of objects $\alpha$, $\beta$ stand in the relation expressed by $\metav{B}\qr{x}{y}$.
+  \item $\qt{\exists}{x}\qt{\exists}{y}\, \metav{B}\qr{x}{y}$ is a sentence.
+  \item It's true iff
+  \emph{at least one pair} of objects $\alpha$, $\beta$ stand in the relation expressed by $\metav{B}\qr{x}{y}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Multiple uses of a single quantifier: $\forall$}
+
+\begin{itemize}[<+->]
+  \item $A\qr{x}{y}$ \dots $x$ admires $y$.
+  \item $\qt{\forall}{x}\qt{\forall}{y}\, A\qr{x}{y}$ \dots for every pair $\langle
+  \alpha,\beta\rangle$, $\alpha$ admires $\beta$.
+  \item In other words: everyone admires everyone.
+  \item Note: ``every pair'' includes pairs $\langle\alpha, \alpha\rangle$, i.e.,
+  \item $\qt{\forall}{x}\qt{\forall}{y}\, A\qr{x}{y}$ is true only if all pairs $\langle \alert{\alpha, \alpha}\rangle$ satisfy $A\qr{x}{y}$.
+  \item That means, everyone admires themselves, in addition to everyone else.
+  \item So: $\qt{\forall}{x}\qt{\forall}{y}\, A\qr{x}{y}$ does \emph{not} symbolize ``everyone admires everyone \emph{else}.''
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Multiple uses of single quantifier: $\exists$}
+
+\begin{itemize}[<+->]
+  \item $\qt{\exists}{x}\qt{\exists}{y}\, A\qr{x}{y}$ \dots for at least one pair $\langle \alpha,\beta\rangle$, $\alpha$ admires $\beta$.
+  \item In other words: at least one person admires at least one person.
+  \item Note: includes pairs $\langle\alpha, \alpha\rangle$, i.e.,
+  \item $\qt{\exists}{x}\qt{\exists}{y}\, A\qr{x}{y}$ is already true if a single pair $\langle \alpha, \alpha\rangle$ satisfies $ A\qr{x}{y}$.
+  \item That means, we could just have one person admiring themselves.
+  \item So: $\qt{\exists}{x}\qt{\exists}{y}\, A\qr{x}{y}$ does \emph{not} symbolize ``someone admires someone \emph{else}.''
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Alternating quantifiers}
+
+\begin{enumerate}[<+->]
+  \item $\qt{\forall}{x} \qt{\exists}{y} \, A\qr{x}{y}$
+  \item<2->[] Everyone admires someone\\
+    (possibly themselves)
+  \item $\qt{\forall}{y} \qt{\exists}{x} \, A\qr{x}{y}$
+  \item<3->[] Everyone is admired by someone\\
+  (not necessarily the same person)
+  \item $\qt{\exists}{x} \qt{\forall}{y} \, A\qr{x}{y}$
+  \item<4->[] Someone admires everyone\\
+  (including themselves)
+  \item $\qt{\exists}{y} \qt{\forall}{x} \, A\qr{x}{y}$
+  \item<5->[] Someone is admired by everyone\\
+    (including themselves)
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Convergence vs. uniform convergence}
+
+\begin{itemize}[<+->]
+\item A function $f$ \emph{point-wise continuous} if
+\[
+\qt{\forall}{\epsilon}\qt{\forall}{x}\qt{\forall}{y}\qt{\exists}{\delta}(\left|x - y\right| < \delta \to \left|f\qvp{x} - f\qvp{y}\right| < \epsilon)
+\]
+\item A function $f$ \emph{uniformly continuous} if
+\[
+\qt{\forall}{\epsilon} \qt{\exists}{\delta} \qt{\forall}{x}\qt{\forall}{y}(\left|x - y\right| < \delta \to \left|f\qvp{x} - f\qvp{y}\right| < \epsilon)
+\]
+\end{itemize}
+
+\end{frame}
+
+\subsection{Using quantifiers to express properties}
+
+\begin{frame}
+\frametitle{Our symbolization key}
+
+    \begin{ekey}
+    \item[$Domain$] people alive in \year{} and items of clothing
+    \item[a] Autumn
+    \item[g] Greta
+    \item[P\qv{x}] \gap{x} is a person
+    \item[L\qv{x}] \gap{x} is an item of clothing.
+    \item[E\qv{x}] \gap{x} is a cape
+    \item[R\qr{x}{y}] \gap{x} wears \gap{y}
+    \item[H\qv{x}] \gap{x} is a hero
+    \item[I\qv{x}] \gap{x} inspires
+    \item[Y\qr{x}{y}] \gap{x} is younger than \gap{y}
+    \item[A\qr{x}{y}] \gap{x} admires \gap{y}
+    \item[O\qr{x}{y}] \gap{x} owns \gap{y}
+    \end{ekey}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Expressing properties, revisited}
+    \begin{itemize}[<+->]
+      \item One-place predicates express properties, e.g.,
+      \item[] $H\qv{x}$ expresses property ``being a hero''
+      \item Combinations of predicates (with connectives, names) can
+      express derived properties, e.g.,
+      \begin{itemize}[<+->]
+        \item[] $A\qr{x}{g}$ expresses ``$x$ admires Greta''
+        \item[] $H\qv{x} \eand C\qv{x}$ expresses ``$x$ is a hero who wears a cape''
+      \end{itemize}
+    \item Using quantifiers, we can express even more complex
+    properties, e.g.,
+    \item[] $\qt{\exists}{y}(P\qv{y} \eand A\qr{x}{y})$ expresses ``$x$ admires someone''
+    \end{itemize}
+  \end{frame}
+  
+  \begin{frame}
+    \frametitle{Finding, using properties expressed}
+  
+  \begin{itemize}[<+->]
+    \item If you can say it for Greta, you can say it for $x$.
+    \begin{itemize}[<+->]
+      \item Greta admires a hero.
+      \item[] \alert{$\qt{\exists}{y}(H\qv{y} \eand A\qr{g}{y})$}
+      \item $x$ admires a hero.
+      \item[] \alert{$\qt{\exists}{y}(H\qv{y} \eand A\qr{x}{y})$}
+    \end{itemize}
+    \item If you can say it for $x$, you can say it for Greta.
+    \begin{itemize}[<+->]
+      \item $x$ wears a cape.
+      \item[] \alert{$\qt{\exists}{y}(E\qv{y} \eand R\qr{x}{y})$}
+      \item Greta wears a cape.
+      \item[] \alert{$\qt{\exists}{y}(E\qv{y} \eand R\qr{g}{y})$}
+    \end{itemize}
+  \end{itemize}
+  \begin{ekey}\scriptsize
+    \item[E\qv{x}] \gap{x} is a cape
+    \item[R\qr{x}{y}] \gap{x} wears \gap{y}
+  \end{ekey}
+  \end{frame}
+  
+  \begin{frame}
+  \frametitle{Examples}
+  
+  \begin{itemize}[<+->]
+    \item $x$ wears a cape.
+    \item[] \alert{$\qt{\exists}{y}(E\qv{y} \eand R\qr{x}{y})$}
+    \item $x$ is admired by everyone.
+    \item[] \alert{$\qt{\forall}{y}(P\qv{y} \eif A\qr{y}{x})$}
+    \item $x$ admires a hero.
+    \item[] \alert{$\qt{\exists}{y}(H\qv{y} \eand A\qr{x}{y})$}
+    \item $x$ admires only heroes.
+    \item[] \alert{$\qt{\forall}{y}(A\qr{x}{y} \eif H\qv{y})$}
+    \item $x$ is naked.
+    \item[] \alert{$\enot\qt{\exists}{y}(L\qv{y} \eand R\qr{x}{y})$}\\
+     \alert{$\qt{\forall}{y}(L\qv{y} \eif \enot R\qr{x}{y})$}
+  \end{itemize}
+  
+  {\scriptsize
+  \begin{tabular}{llll}
+    $P\qv{x}$ & \gap{x} is a person &
+    $L\qv{x}$ & \gap{x} is an item of clothing\\
+    $E\qv{x}$ & \gap{x} is a cape &
+    $R\qr{x}{y}$ & \gap{x} wears \gap{y}
+  \end{tabular}}
+  \end{frame}
+
+\subsection{Multiple determiners}
+
+\begin{frame}
+  \frametitle{Symbolizing multiple determiners}
+
+\begin{itemize}[<+->]
+\item What if your sentence contains more than one determiner phrase?
+\item Deal with each determiner separately!
+\item Think of determiner phrase as replaced with name or variable---result has one less determiner.
+\item When you're down to one determiner, apply known methods for single quantifiers.
+\item This results in formulas that express properties or relations, but themselves contain quantifiers.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Two separate determiner phrases}
+
+\begin{itemize}[<+->]
+\item \textcolor{highlightB}{All heroes} wear \textcolor{highlightA}{a cape}
+\item \textcolor{highlightB}{All heroes} satisfy ``$x$ wears \textcolor{highlightA}{a cape}'' \[
+\textcolor{highlightB}{\qt{\forall}{x}(H\qv{x} \eif {}} \text{``$x$ wears \textcolor{highlightA}{a cape}''})
+\]
+\item $x$ wears \textcolor{highlightA}{a cape}\[
+ \textcolor{highlightA}{\qt{\exists}{y}(E\qv{y} \land{}} R\qr{x}{y})
+\]
+\item Together:
+\[
+\textcolor{highlightB}{\qt{\forall}{x}(H\qv{x} \eif {}} \textcolor{highlightA}{\qt{\exists}{y}(E\qv{y} \land{}} R\qr{x}{y}))
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Determiner within determiner phrase}
+
+\begin{itemize}[<+->]
+\item \textcolor{highlightB}{All heroes who wear \textcolor{highlightA}{ a cape}} admire Greta.
+\item All things that satisfy ``$x$ is a hero who wears \textcolor{highlightA}{a cape}'' admire Greta.
+\[
+\qt{\forall}{x} (\text{``x is a hero who wears a cape''} \eif A\qr{x}{g})
+\]
+\item $x$ is a hero who wears \textcolor{highlightA}{a cape}
+\[
+ H\qv{x} \land \qt{\exists}{y}(E\qv{y} \land R\qr{x}{y})
+\]
+\item Together:
+\[
+\qt{\forall}{x}((H\qv{x} \land \qt{\exists}{y}(E\qv{y} \land R\qr{x}{y})) \eif A\qr{x}{g})
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Mary Astell, 1666--1731}
+
+\begin{columns}
+\begin{column}{3cm}
+\pgfimage[height=4cm]{../assets/astell}
+\end{column}
+\begin{column}{7cm}
+\begin{itemize}
+\item British political philosopher
+\item \textit{Some Reflections upon Marriage} (1700)
+\item In preface to 3rd ed. 1706 reacts to William Nicholls' claim (in \textit{The Duty of Inferiors
+towards their Superiors, in Five Practical Discourses} (London 1701), Discourse IV: The Duty of Wives to their
+Husbands), that women are naturally inferior to men.
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}
+    \frametitle{Astell TL;DR}
+
+\begin{itemize}
+  \item What can Nicholls possibly mean by ``women are naturally inferior to men''?
+  \item It can't be that some women is inferior to some man, since
+  that's ``no great discovery.''
+  \item After all, surely some men are inferior to some women.
+  \item The obviously intended meaning must be: \emph{all} women are
+  inferior to \emph{all} men.
+  \item But that can't be right, for then ``the greatest Queen ought
+  not to command but to obey her Footman.''
+  \item It can't even be just: \emph{all} women are inferior to
+  \emph{some} men.
+  \item Since ``had they been pleased to remember their Oaths of
+  Allegiance and Supremacy, they might have known that \textit{One}
+  Women is superior to \textit{All} the Men in these Nations.''
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+    \frametitle{Symbolizing Astell}
+
+\begin{itemize}[<+->]
+\item \textcolor{highlightB}{ Some woman} is superior to \textcolor{highlightA}{ every man}
+\item \textcolor{highlightB}{ Some woman} satisfies ``$x$ is superior to
+\textcolor{highlightA}{ every man}''
+\[\textcolor{highlightB}{\qt{\exists}{x}(W\qv{x} \land {}}\text{``$x$ is superior to \textcolor{highlightA}{every man}''})\]
+\item $x$ is superior to \textcolor{highlightA}{ every man}
+\[
+\textcolor{highlightA}{\qt{\forall}{y}(M\qv{y} \eif {}}S\qr{x}{y})
+\]
+\item Together:
+\[
+\textcolor{highlightB}{\qt{\exists}{x}(W\qv{x} \land{}} \textcolor{highlightA}{\qt{\forall}{y}(M\qv{y} \to {}}S\qr{x}{y})
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Formalizing Astell}
+
+\begin{itemize}[<+->]
+\item Some woman is superior to some man.
+\item[] \alert{$\qt{\exists}{x}(W\qv{x} \land \qt{\exists}{y}(M\qv{y} \land S\qr{x}{y}))$}
+\item Every woman is superior to every man.
+\item[] \alert{$\qt{\forall}{x}(W\qv{x} \to \qt{\forall}{y}(M\qv{y} \to S\qr{x}{y}))$}
+\item Every woman is superior to some man.
+\item[]\alert{$\qt{\forall}{x}(W\qv{x} \to \qt{\exists}{y}(M\qv{y} \land S\qr{x}{y}))$}
+\item Some woman is superior to every man.
+\item[] \alert{$\qt{\exists}{x}(W\qv{x} \land \qt{\forall}{y}(M\qv{y} \to S\qr{x}{y}))$}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{``Any''}
+
+\begin{itemize}[<+->]
+\item Any (every) cape is worn by a hero.
+\[
+\uncover<2->{\qt{\forall}{x}(E\qv{x} \eif \qt{\exists}{y}(H\qv{y} \land R\qr{y}{x}))}
+\]\pause
+\item No hero wears any cape.
+\[
+\uncover<3->{\qt{\forall}{x}(H\qv{x} \eif \enot\qt{\exists}{y}(E\qv{y} \land R\qr{x}{y})}
+\]
+\item No hero wears every cape.
+\[
+\uncover<4->{\qt{\forall}{x}(H\qv{x} \eif \enot\qt{\forall}{y}(E\qv{y} \eif R\qr{x}{y})}
+\]
+\end{itemize}
+\end{frame}
+
+
+
+\subsection{Quantifier scope ambiguity}
+
+\begin{frame}
+  \frametitle{More scope ambiguity}
+
+\begin{itemize}[<+->]
+\item Autumn and Greta admire Isra or Luisa.
+\item Autumn admires Isra or Luisa, and so does Greta.
+\begin{align*}
+(A\qr{a}{i} \lor {} & A\qr{a}{l}) \land {}\\
+(A\qr{g}{i} \lor {} & A\qr{g}{l})
+\end{align*}
+\item Autumn and Greta both admire Isra, or they both admire Luisa.
+\begin{align*}
+(A\qr{a}{i} \land {} & A\qr{g}{i}) \lor {}\\
+(A\qr{a}{l} \land {} & A\qr{g}{l})
+\end{align*}
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}
+    \frametitle{Negation and the quantifiers}
+
+\begin{itemize}[<+->]
+\item ``All heroes don't inspire''
+\begin{itemize}[<+->]
+\item Denial of ``all heroes inspire''\\
+(``Do all heroes inspire? No, all heroes don't inspire'')\pauses
+\begin{align*}
+\lnot\qt{\forall}{x}(H\qv{x} & {} \to I\qv{x}) \\
+\qt{\exists}{x}(H\qv{x} & {} \land\lnot I\qv{x})
+\end{align*}
+\item All heroes are: not inspiring, i.e.,\\
+No heroes inspire\pauses
+\begin{align*}
+\qt{\forall}{x}(H\qv{x} & {} \to \lnot I\qv{x}) \\
+\lnot\qt{\exists}{x}(H\qv{x} & {}\land I\qv{x})
+\end{align*}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Multiple quantifiers and ambiguity}
+
+\begin{itemize}[<+->]
+\item ``All heroes wear a cape''
+\begin{itemize}[<+->]
+\item ``A cape'' in the scope of ``all heroes'', i.e.,\\
+``For every hero, there is a cape they wear''\pauses
+\[
+\qt{\forall}{x}(H\qv{x} \to \qt{\exists}{y}(E\qv{y} \land R\qr{x}{y}))
+\]
+\item ``All heroes'' in scope of ``a cape'', i.e.,\\
+``There is a cape which every hero wears''\pauses
+\[
+\qt{\exists}{y}(E\qv{y} \land \qt{\forall}{x}(H\qv{x} \to R\qr{x}{y}))
+\]
+\end{itemize}
+\item Compare the joke: ``Every day, a tourist is mugged on the streets of New York. We will interview him tonight.''
+\end{itemize}
+\end{frame}
+
+
+\subsection{Donkey sentences}
+
+\begin{frame}
+    \frametitle{Happy farmers}
+
+``Every farmer who owns a donkey is happy''
+
+\begin{itemize}[<+->]
+\item Step-by-step symbolization: ``All $A$s are $B$s''
+\item $x$ is a farmer who owns a donkey \dots\[
+F\qv{x} \land \qt{\exists}{y}(D\qv{y} \land O\qr{x}{y})
+\]
+\item \textcolor{highlightA}{Every} farmer who owns a donkey \textcolor{highlightA}{is happy}
+\[
+\textcolor{highlightA}{\qt{\forall}{x}(}(F\qv{x} \land \qt{\exists}{y}(D\qv{y} \land O\qr{x}{y})) \textcolor{highlightA}{\eif H\qv{x})}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Unhappy donkeys}
+
+``Every farmer who owns a donkey beats it''
+
+\begin{itemize}[<+->]
+\item Step-by-step symbolization: ``All As are Bs''
+\item $x$ is a farmer who owns a donkey \dots\[
+F\qv{x} \land \qt{\exists}{y}(D\qv{y} \land O\qr{x}{y})
+\]
+\item \textcolor{highlightA}{Every} farmer who owns a donkey \textcolor{highlightA}{beats it}
+\[
+\textcolor{highlightA}{\qt{\forall}{x}(}(F\qv{x} \land \qt{\exists}{y}(D\qv{y} \land O\qr{x}{y})) \textcolor{highlightA}{\to B(x, \textcolor{highlightB}{y}))}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+    \frametitle{Symbolizing donkey sentences}
+
+``Every farmer who owns a donkey beats it''\pauses
+
+\begin{itemize}[<+->]
+\item When is it false that every farmer who owns a donkey beats it? \pauses
+If there's a farmer who owns a donkey but doesn't beat it. Deny that! \pauses
+\[
+\alert{\lnot\qt{\exists}{x}(F\qv{x} \land \qt{\exists}{y}(D\qv{y} \land O\qr{x}{y} \land \lnot B\qr{x}{y}))}
+\]
+\item For every farmer and every donkey they own: the farmer beats the donkey.
+\[
+\alert{\qt{\forall}{x}\qt{\forall}{y}((F\qv{x} \land (D\qv{y} \eand O\qr{x}{y})) \to B\qr{x}{y}))}
+\]
+\item Every farmer beats every donkey they own.
+\[
+\alert{\qt{\forall}{x}(F\qv{x} \to \qt{\forall}{y}((D\qv{y} \land O\qr{x}{y}) \to B\qr{x}{y}))}
+\]
+\end{itemize}
+\end{frame}
