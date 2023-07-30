@@ -4,44 +4,64 @@
 \label{ch.preface2}
 \addcontentsline{toc}{chapter}{Preface to the MIT edition}
 
-The goal of this modified version of Ichikawa's \textit{ForAllX} is to bring to the masses some of the best features of the \textit{Logic Book}, for free!\footnote{McGraw--Hill: catch me if you can!} Of the existing free texts, Ichikawa's version seemed the closest (I hope that I was not wrong about this!). Why the \textit{Logic Book} system? It seems to me to strike the best balance of intellectual and practical virtues: no special symbols or special rules, a pleasing symmetry between introduction and elimination rules that makes things easy to remember, and the philosophical advantages of using proof-by-cases for disjunction elimination (along with the opportunity this affords to test if students are \textit{really} paying attention to derivation syntax). 
+The goal of this modified version of Ichikawa's \textit{ForAllX} is to bring some of the best features of the \textit{Logic Book}, for free!
+Of the existing free texts, Ichikawa's version seemed the closest.
+Why the \textit{Logic Book} system? 
+It seems to me to strike the best balance of intellectual and practical virtues: no special symbols or special rules, a pleasing symmetry between introduction and elimination rules that makes things easy to remember, and the philosophical advantages of using proof-by-cases for disjunction elimination. 
 
-Below is an ongoing list of modifications I have made, starting with some of the bigger ones:
+Below is an ongoing list of modifications that have been made to Ichikawa's version, starting with some of the bigger changes.
+I have maintained the list of changes that Josh has included, making a few additions.
 
 \begin{itemize}
 
-\item Natural Deduction in Sentential Logic: I have modified Ichikawa's system to be in complete accordance with that in the \textit{Logic Book}. This mainly involves relegating Disjunctive Syllogism to a derived rule, and modifying the justification syntax for indirect proofs.  I have also inserted expository material from the Calgary edition of ForAllX, since I preferred their organization. 
+\item The first chapter has been completely rewritten to provide a more compelling description of the subject matter of logic, and to remove some distracting glosses which may easily be misunderstood and confuse the introduction of the topic.
 
-\item To help integrate the text better with the online \textit{Carnap} proof checker, I have modified the syntax in the Selinger Fitch system to mirror what students must enter into \textit{Carnap} for Natural Deduction proofs in system LogicBookSD. One simply changes the \verb|\by{}{}| command to print the arguments in the opposite order, along with adding a colon first. I also added \verb|\pr{}| and \verb|\as{}| commands for premises and subproof assumptions. Unfortunately, the \textit{Carnap} systems are very sensitive to syntax, and it seems cruel to ask students to learn a separate syntax for homework problems than the one they are reading in the text. (I have also made the style file compatible with Kl{\"u}wer's Fitch system, but I don't recommend it, since it cannot be easily reformatted). 
+\item Natural Deduction in Sentential Logic: Ichikawa's system has been modified to be in complete accordance with that in the \textit{Logic Book}.
+  This mainly involves relegating Disjunctive Syllogism to a derived rule, and modifying the justification syntax for indirect proofs.
+  Expository material from the Calgary edition of ForAllX has also been included.
 
-\item I have systematically replaced the quantifier/bound variable syntax to match that of the \textit{Logic Book} (this involved over 700 replacements!). Who would have thought that \textit{Carnap} would care so much about the difference between `$\exists x$' vs. `$(\exists x$)', but hey that's syntax for you! (System LogicBookPD accepts only the latter!). To avoid this tedium in the future, all quantifier/bound variable instances are written with a command \verb|\qt{}{}| whose first argument takes the quantifier and second argument takes the bound variable. This way, one can easily modify the formatting in the style file (e.g. removing or adding parentheses). Again, it would seem cruel to ask students to remember that while in \textit{Carnap} using system LogicBookPD, they MUST put parentheses around $\exists x$ and $\forall x$, if that's not the format they're seeing in their text. 
+\item To help integrate the text better with the online \textit{Carnap} proof checker, the syntax in the Selinger Fitch system has been adapted to mirror what students must enter into \textit{Carnap} for Natural Deduction proofs in system LogicBookSD.
+  One simply changes the \verb|\by{}{}| command to print the arguments in the opposite order, along with adding a colon first.
+  The commands \verb|\pr{}| and \verb|\as{}| have been added for premises and subproof assumptions.
+  Unfortunately, the \textit{Carnap} systems are very sensitive to syntax, and it seems cruel to ask students to learn a separate syntax for homework problems than the one they are reading in the text. %(I have also made the style file compatible with Kl{\"u}wer's Fitch system, but I don't recommend it, since it cannot be easily reformatted).
 
-\item I have reworked the recursive definition of truth-conditions in Quantifier Logic (QL) (\S\ref{sec:satisfactionQL}). Hopefully this makes it both (1) easier to understand and (2) slightly more precise (although these may be competing virtues!). Whereas Ichikawa refers to this aspect of formal semantics as giving a definition of `truth', I prefer to say we are defining `truth-conditions' (I don't know of any intro logic books that provide a theory or definition of `truth'!). I have reworked the definition of truth-conditions for SL (\S\ref{sec:truthSL}) in a similar vein. 
+\item The quantifier/bound variable syntax has been adapted to match that of the \textit{Logic Book}.
+  System LogicBookPD accepts only `$(\exists x$)' and not `$\exists x$'.
+  To avoid this tedium in the future, all quantifier/bound variable instances are written with a command \verb|\qt{}{}| whose first argument takes the quantifier and second argument takes the bound variable.
+  This way, one can easily modify the formatting in the style file (e.g. removing or adding parentheses).
+  Again, it would seem cruel to ask students to remember that while in \textit{Carnap} using system LogicBookPD, they MUST put parentheses around $\exists x$ and $\forall x$, if that's not the format they're seeing in their text.
 
-\item I've created a more detailed list of rule schemas for SL tree rules, in the appendix! 
-%have also replaced `recursive' with `inductive' or `proof by induction' in Chapter on soundness/completeness for trees. 
+\item The recursive definition of truth-conditions in Quantifier Logic (QL) (\S\ref{sec:satisfactionQL}) have been reworked.
+  Hopefully this makes it both (1) easier to understand and (2) slightly more precise.
+  Whereas Ichikawa refers to this aspect of formal semantics as giving a definition of `truth', it is more accurate to say that we are defining `truth-conditions'.
+  The truth-conditions for SL (\S\ref{sec:truthSL}) have been reworked in a similar vein.
 
-\item I have input the Use--Mention section from Calgary ForallX.
+\item A more detailed list of rule schemas for SL tree rules have been included in the appendix. 
 
-\item The UBC edition tends to use the past-tense in a lot of places where the present-tense sounds better. It is part of the conceptual grammar of logic (and mathematics) that it is timeless; Logic is forever! (I've also tried to reduce the number of semi-colons). 
+\item The Use--Mention section have been adapted from the Calgary ForallX.
 
-\item I have rearranged and re-numbered chapters so as to match the week numbers at MIT, starting with a half-week `0.' This way, most chapter numbers, week numbers, and problem set numbers coincide. Hopefully, this makes it easier to remember what we have to do each week!
+\item The UBC edition tends to use the past-tense in a lot of places where the present-tense sounds better.
+  It is part of the conceptual grammar of logic (and mathematics) that it is timeless. 
+  The number of semi-colons and exclamation marks have also been reduced.
 
-\item I've tried to enclose most of my additions within \verb| {\color{black} } | so that they can be easily found and changed (e.g. deleted!). This might be useful for some of the more playful asides, which instructors more staid than myself might find distasteful. 
-%could ruffle the feathers of more staid instructors than myself. 
+\item Chapters have been rearranged and re-numbered so as to match the week numbers at MIT, starting with a half-week `0.'
+  This way, most chapter numbers, week numbers, and problem set numbers coincide.
+  Hopefully, this makes it easier to remember what we have to do each week.
 
-\item \textit{Philosophical Enrichment}: last but not least, I have incorporated philosophical asides at various places where the formal discussion runs headlong into philosophical waters. Intro logic books typically suppress any and all philosophy, making the whole subject seem cut and dry. Far from it! Really what goes on is that these books lead students down a narrow, carefully constructed path, where---unbeknownst to them---cliffs drop off on either side. Of course our glass houses will remain pristine if we never take a hammer to them. Obviously, I make no attempt to resolve any of these philosophical quandaries in these asides. I hope that they will engender a sense of wonder (or worry!) in the reader. First order logic provides an ideal setting for illustrating how a subject matter can be settled technically but not philosophically. If you're teaching logic or taking it in a Philosophy department, then let's do some philosophy! 
-
-
+\item \textit{Philosophical Enrichment}: last but not least, a number of philosophical asides have been included at various places where the formal discussion runs headlong into philosophical waters.
+  Intro logic books typically suppress any and all philosophy, making the whole subject seem cut and dry.
+  But really what goes on is that these books lead students down a narrow, carefully constructed path, where---unbeknownst to them---cliffs drop off on either side.
+  Hopefully these additions will engender a sense of wonder in the reader and a deeper appreciation for the subject, though nothing is done to settle any of the issues raised.
+  First-order logic provides an ideal setting for illustrating how a subject matter can be settled technically but not philosophically.
 
 \end{itemize}
 
-To the students especially: there are going to be bugs, so please pack your bugspray. 
+If you find any errors throughout this text, please let me know and I'll happily fix them.
 
 \begin{flushright}
-Josh Hunt \\
-August 2022 \\
-joshhunt@mit.edu
+Benjamin Brast-McKie \\
+July 2023 \\
+brastmck@mit.edu
 \end{flushright}
 
 
@@ -49,7 +69,7 @@ joshhunt@mit.edu
 \label{ch.preface}
 \addcontentsline{toc}{chapter}{Preface to the UBC edition}
 
-\textit{Hunt: The following first person pronouns refer to Ichikawa, not me! This is true for many of the first person pronouns in the book. Although, if you come across one in the context of a mildly ridiculous-sounding claim, that's probably me!}
+\textit{The following first person pronouns refer to Ichikawa, not me! This is true for many of the first person pronouns in the book.}
 
 This preface outlines my approach to teaching logic, and explains the way this version of \emph{forall x} differs from Magnus's original. The preface is intended more for instructors than for students. 
 
