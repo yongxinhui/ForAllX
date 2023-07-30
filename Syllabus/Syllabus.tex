@@ -1,0 +1,364 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Inzane Syllabus Template
+% LaTeX Template
+% Version 1.2 (8.22.2019)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Carmine Spagnuolo (cspagnuolo@unisa.it) with major modifications by 
+% Zane Wolf (zwolf.mlxvi@gmail.com)
+%
+% I (Zane) have left a lot of instructions both in the .tex file and the .cls file that can guide you to customize this document to suite your tastes and requirements. Here is a brief guide: 
+%  - Changing the Main Color: .cls line 39
+%  - Adding more FAQs: .cls line 126 and .tex line 99
+%  - Adding TA emails: uncomment .cls lines 220 & 224 and .tex lines 85 and 89
+%  - Deleting the FAQ sidebar entirely: .tex line 188
+%  - Removing the Lab/TA Info and placing a brief Overview/About section in their place:        uncomment .tex line 91 and .cls line 227, and comment .cls lines for the LAB/TA info        that you no longer want (c. lines 184-227)
+
+% I am also happy to help with crafting/designing modifications to this template to help suite your personal needs in a syllabus. Feel free to reach out! 
+%
+% License:
+% The MIT License (see included LICENSE file)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[letterpaper]{inzane_syllabus} % a4paper for A4
+
+\usepackage{booktabs, colortbl, xcolor}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{ltablex} 
+\usepackage{multirow}
+
+\setlist{nolistsep}
+
+\usepackage{lscape}
+\newcolumntype{r}{>{\hsize=0.9\hsize}X}
+\newcolumntype{w}{>{\hsize=0.6\hsize}X}
+\newcolumntype{m}{>{\hsize=.9\hsize}X}
+
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\arraystretch}{2.0}
+%----------------------------------------------------------------------------------------
+%	 PERSONAL INFORMATION
+%----------------------------------------------------------------------------------------
+
+\profilepic{fish.jpg} % Profile picture, if the height of the picture is less than that of the cirle, it will have a flat bottom. 
+
+
+% To remove any of the following, you need to comment/delete the lines in the .cls file (c. line 186). Commenting/deleting the lines below will produce an error. 
+
+%To add different lines, you will need to create the new command, e.g. \profPhone, in the .cls file c. line 76, and command to create the line in the side bar in the .cls file c. line 186
+
+\classname{Logic I} 
+\classnum{24.241, Fall 2023} 
+
+%%%%%%%%%%%%%%% PROF INFO
+\profname{Benjamin Brast-McKie}
+\officehours{Office Hrs: Mon \& Wed 1-2p} 
+\office{32-D966}
+\siteA{\href{https://carnap.io}{Carnap Website}} 
+\siteB{\href{https://canvas.mit.edu/courses/22144}{Canvas Website}} 
+\email{brastmck@mit.edu}
+
+%%%%%%%%%%%%%%% COURSE INFO
+\prereq{Prereq: None}
+\classdays{Tues \& Thurs}
+\classhours{9:30am - 11am}
+\classloc{32-124}
+
+%%%%%%%%%%%%%%% PROBLEM SET INFO
+\labdays{Due Fridays}
+\labhours{5pm sharp}
+\labloc{Online or scanned}
+
+%%%%%%%%%%%%%%% TA INFO
+% \taAname{Alice}
+% \taAofficehours{Office Hrs: Tues \& Thurs 10-11a}
+% \taAoffice{MCZ 104}
+% % \taAemail{}
+% \taBname{James}
+% \taBofficehours{Office Hrs: Tues \& Thurs 3-4p}
+% \taBoffice{MCZ 104}
+% \taBemail{}
+
+% \about{Fish make up the largest group of vertebrates on the planet, easily outnumbering mammals, marsupials, birds, and reptiles combined. Not only are they abundant, but they've diversified into an extraordinary array of sizes, shapes, lifestyles, and habitats. You can find them in the coldest, deepest parts of the ocean, and in the hottest freshwater ponds in the desert. This course will explore fish diversity and their biology. } 
+
+
+%---------------------------------------------------------------------------------------
+%	 FAQs
+%----------------------------------------------------------------------------------------
+%to add more questions or remove this section, go to the .cls file and start with lines comment
+%lines 226-250. Also comment out this section as well as line 152(ish), the command \makeSide
+
+\qOne{Is logic math?}
+\aOne{We will use formal symbols as in mathematics, but this does not make logic a type of mathematics any more than it makes physics a type of mathematics. Logic has a subject mater all its own, though saying what this is will require some care.}
+
+\qTwo{Is logic philosophy?}
+\aTwo{There is a sub-discipline called \textit{Philosophical Logic} which may be viewed as a type of philosophy carried out with certain formal methods (proof theory and model theory). There is another sub-discipline called \textit{Mathematical Logic} which falls considerably closer to mathematics. We will be doing a bit of both.}
+
+\qThree{Is logic a descriptive science?}
+\aThree{No! Logic is a \textit{normative} science insofar as it aims to regiment how we ought to reason in an artificial language, not merely how we happen to reason in a natural language like English.}
+
+\qFour{Why learn logic?}
+\aFour{Logic seeks to describe an ideal for reasoning. Of course, we are all engaged in reasoning. Learning logic is something akin to upgrading your firmware. It will literally change how you think.}
+
+\qFive{What does logic have to show for itself?}
+\aFive{Logic played a critical role in putting mathematics on a solid foundation (ZFC is accepted by most working mathematicians) and gave birth to the modern theory of computation as well as modern linguistics.}
+
+
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	 DESCRIPTION
+%----------------------------------------------------------------------------------------
+
+\makeprofile % Print the sidebar
+
+%----------------------------------------------------------------------------------------
+%	 OVERVIEW
+%----------------------------------------------------------------------------------------
+\section{Overview}
+
+During the first part of this course, we will study sentential logic (SL), also known as truth-functional (TFL) or propositional logic (PL). 
+This is the logic of truth-functional connectives, including ‘not,’ ‘and,’ ‘or,’ ‘if-then,’ and ‘if and only if.’ 
+But watch out: ‘if-then’ will not mean what you think it means! 
+
+During the second part, we will study quantifer logic (QL), also known as first order logic (FOL). 
+This is the logic of ‘for all’ and ‘some,’ plus our earlier sentential logic. 
+In both parts, we will present a formal syntax along with a semantics to interpret the language.
+Syntax will include the symbolization of natural language sentences into a formal language as well as proofs within that formal language. 
+Semantics will include interpretations of the formal languages. 
+For both parts of the course, we will do basic meta-logic, proving that our proof systems are sound and complete.
+
+%----------------------------------------------------------------------------------------
+%	 READING MATERIAL
+%----------------------------------------------------------------------------------------
+\vspace{0.5cm} %I make liberal use of the \vspace{} command to partition and place sections just how I want them. Alter as you see fit. 
+\section{Material}
+
+{\color{myCOLOR} Required Texts (It’s a free PDF)}\\
+Ichikawa, J. \& Magnus, P.D. ForAllX: MIT Edition FA23 (adapted by the instructor). \\
+
+{\color{myCOLOR} Optional Text (not free)}\\
+Bergmann, M., Moor, J. \& Nelson, J. The Logic Book. 6th Edition. McGraw Hill 2014. \\
+
+{\color{myCOLOR} Other}\\
+Any other required readings will be provided on Canvas.
+% I will also post supplemental readings written in a more philosophical vein.
+
+%----------------------------------------------------------------------------------------
+%	 GRADING SCHEME
+%----------------------------------------------------------------------------------------
+\vspace{0.5cm}
+\section{Grading Scheme}
+
+%below is the \twentyshort environment - a list with only two inputs. However, there is a \twenty environment, which creates a list with four inputs. You can find/alter details of that table in the .cls file c. lines 320. 
+\begin{twentyshort}
+	%\twentyitemshort{X\%}{Attendance/Participation}
+  \twentyitemshort{55\%}{Problem Sets (11 assignments at \%5 each)}
+	\twentyitemshort{20\%}{Midterm}
+  \twentyitemshort{25\%}{Final Exam}
+\end{twentyshort}
+
+Grades will follow the standard scale: A = 89.5-100; B = 79.5-89.4; C = 69.5-79.4; D = 60-69.4; F  $<$60. Grades will not be curved.
+
+%----------------------------------------------------------------------------------------
+%	 EXTRAS
+%----------------------------------------------------------------------------------------
+
+\vspace{0.5cm}
+\section{Problem Sets}
+
+There will be 12 graded problem sets, due Fridays by 5pm.
+Your lowest score will be dropped.
+Many of these will be online using a program called ‘Carnap’ so that you can get real-time feedback as you work.
+All work submitted MUST BE YOUR OWN, manifesting a direct causal relation to your own pen, pencil, or keyboard—written in your own voice without someone there with you or texting you answers.
+As you will find, even logic leaves room for creativity, and it will be important to get a sense of that for yourself.
+You are welcome to work through the problem set with at most two other students IN PREPARATION, but when it comes time to submit answers, you must be on your own.
+If you choose to work with others, please indicate your teammates’ names at the top of each assignment.
+
+\vspace{0.5cm}
+\section{Carnap}
+
+Most of the problem sets will be assigned on Carnap.
+You will need to enrol \href{https://carnap.io/enroll/Logic%20I}{(link)} which you can find demonstrated \href{https://youtu.be/lmkWcxqxEZk}{here}.
+Using Carnap will require some syntactic care: it is fussy about how things are entered, so you will have to learn to use the right syntax.
+Please don't hesitate to get in touch if you run into any issues.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                SECOND PAGE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage % Start a new page
+
+\makeSide % Print the FAQ sidebar; To get rid of, simply comment out and uncomment \makeFullPage
+
+% \makeFullPage
+
+\vspace{0.5cm}
+\section{Academic Integrity}
+
+Blindly copying someone else’s solution (written or typed) is cheating.
+In contrast, you are encouraged to talk through a solution step-by-step with a classmate or two where in doing so, everyone involved comes to understand each part.
+However, when it comes time to write up and submit the solutions, it is important that you do this for yourself without consulting others throughout the process.
+
+Learning logic requires practice! 
+Compare learning to speak a natural language like English. %, or skills like learning to walk on two legs or ride a bike.
+There are some tricks and techniques to get acquainted with where once you gain some familiarity, this course should be fun!
+But getting comfortable using these techniques takes time, making this a very difficult course to cram for the night before an exam.
+The good news is that with consistent practice, you should be able to master the techniques of this course long in advance of the exam.
+
+Doing problem sets is the best way to practice throughout the course.
+Cheating on problem sets will be to your own disadvantage in preparing for the exams.
+If you cheat on an exam, the academic consequences will be severe, so please don't consider it.
+There is more to life than grades; don't let them distract from learning!
+
+Instead of worrying about your grade, I recommend that you just focus on mastering logic, doing your best work and feeling good about it.
+Logic is an extremely deep subject, and foundational for this information age that we are all a part of.
+This course should provide you with an important tool kit that I hope you enjoy learning to use and that will serve you well beyond the end of this course.
+% This has certainly been true for me!
+
+\vspace{0.5cm}
+\section{Make-up Policy}
+
+Make-up exams or problem-sets are only permitted for students in the midst of a medical or family emergency.
+Making arrangements IN ADVANCE of the due date is required except in particularly difficult circumstances.
+
+\vspace{0.5cm}
+\section{Learning Objectives}
+
+%use \begin{outline} or \begin{outline}[enumerate] to create a list with subitems. 
+\begin{itemize}
+  \item Practice regimenting a range of natural language sentences into propositional and first-order languages.
+  \item Learn how to assess complex natural language arguments for validity.
+  \item Practice applying the rules of a proof system, regimenting valid reasoning.
+  \item Develop an appreciation for meta-logical proofs about our proof systems and their corresponding semantics.
+  \item Contemplate elements of the philosophy of logic, exploring such questions as: What is logic? What unites it as a discipline? What can logic do, and what are its limits? Do the rules of logic describe something universal or conventional?
+\end{itemize}
+
+\vspace{0.5cm}
+\section{Diversity and Inclusivity Statement}
+
+In all course-related activities and communications, you will be treated with respect.
+I welcome individuals of all ages, backgrounds, beliefs, ethnicities, genders, gender identities, gender expressions, national origins, religious affiliations, sexual orientations, ability, and other visible and non-visible differences.
+All members of this class are expected to help create a respectful, welcoming, and inclusive environment for every other member of the class.
+
+\vspace{0.5cm}
+\section{Accommodations for Students with Disabilities}
+
+If you are a student with learning needs that require accommodation, please contact Disability and Access Services at \texttt{das-student@mit.edu} (or for assistive technology, \texttt{atic-staff@mit.edu}) as soon as possible, to make an appointment to discuss your needs and to obtain an accommodations letter.
+Please also e-mail me as soon as possible to set up a time to discuss your learning needs.
+As someone who has used these services in the past, you can assume that you will have my full support.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%                COURSE SCHEDULE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\makeFullPage
+\section{Class Schedule}
+
+\begin{center}
+\begin{tabularx}{\textwidth}{p{2.5cm}p{8cm}p{9cm}} %change the width of the comments by changing these cm measurements. Add/substract columns by adding/deleting p{} sections. 
+\arrayrulecolor{myCOLOR}\hline
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MODULE 1
+\multicolumn{3}{l}{\textbf{\textcolor{myCOLOR}{\large Part 1: Sentential Logic}}} \\
+\hline
+% Week & Topic & Readings \\ \hline 
+%%Alternatively, instead of Week #, you can do Class date for meeting
+
+Week 0 & Introduction to Logic & ForAllX Ch. 0 \\
+Sep 07 & & Problem Set 0 (meet Carnap --- not graded)\\
+\arrayrulecolor{maingray}\hline
+
+Week 1 & Syntax \& Semantics for SL & ForAllX Ch. 1\\
+& Use/mention distinction & \\
+Sep 12, 14 & & Problem Set 1 Due Friday 9/15  \\
+\arrayrulecolor{maingray}\hline
+
+Week 2 & Truth Tables & ForAllX Ch. 2 \\
+& Entailment, Validity, Consistency & ForAllX Ch. 3 \\
+Sep 19, 21 & & Problem Set 2 Due Friday 9/22 \\
+\arrayrulecolor{maingray}\hline
+
+Week 3 & Mathematical Induction \& Recursive Definitions & Handout; Logic Book $\S6.1$\\
+Sep 26, 28 & & Problem Set 3 Due Friday 9/29 \\
+\arrayrulecolor{maingray}\hline
+
+Week 4 & Proof System 1: Trees (STD) & ForAllX Ch. 4 \\
+Oct 3, 5 & & Problem Set 4 Due Friday 10/6\\
+\arrayrulecolor{maingray}\hline
+
+Week 5 & SL Metalogic 1: & ForAllX Ch. 5 \\
+Oct 12 & Soundness \& Completeness of STD & Problem Set 5 Due Friday 10/13 \\
+\arrayrulecolor{maingray}\hline
+
+Week 6 & Proof System 2: Natural Deduction (SND) & ForAllX Ch. 6 \\
+Oct 17, 19 & &  Problem Set 6 Due Friday 10/20\\
+\arrayrulecolor{myCOLOR}\hline
+
+Week 7 & Midterm Review & Review Handout \\
+Oct 24, 26 & &  Problem Set 7 (not graded) \\
+\arrayrulecolor{myCOLOR}\hline
+
+\multicolumn{2}{l}{\textbf{\textcolor{myCOLOR}{\large Part 2: Quantifer Logic (QL) }}} \\
+\hline
+
+Week 8 & Quantifier Logic (QL) Syntax & ForAllX Ch. 8 \\
+Oct 31, Nov 2 & & Problem Set 8 Due Thurdsay 11/3 \\
+\arrayrulecolor{maingray}\hline
+ 
+Week 9 & Quantifer Logic Semantics & ForAllX Ch. 9 \\
+Nov 7, 9 & & Problem Set 9 Due Friday 11/10 \\
+\arrayrulecolor{maingray}\hline
+
+Week 10 & Natural Deduction (QND) & ForAllX Ch. 10 \\
+Nov 14, 16 & & Problem Set 10 Due Friday 11/17 \\
+\arrayrulecolor{maingray}\hline
+
+Week 11 & First-Order Logic with Identity & ForAllX Ch. 11 \\
+& Russell's Theory of Definite Descriptions & Sider $\S 5.3$; Goldfarb $\S\S 41-4$ \\
+Nov 21, 23 & & Problem Set 11 Due Friday 11/24 \\
+\arrayrulecolor{maingray}\hline
+
+\multicolumn{2}{l}{\textbf{\textcolor{myCOLOR}{\large Part 3: Metalogic }}} \\
+\hline
+
+Week 12 & SL Metalogic 2: Soundness of SND & Logic Book $\S6.3$ \\
+& SL Metalogic 3: Completeness of SND & Logic Book $\S6.4$ \\
+Nov 28, 30 & & Problem Set 12 Due Friday 12/1 \\
+\arrayrulecolor{maingray}\hline
+
+Week 13 & QL Metalogic 1: Soundness of QND & Supplement \\
+& QL Metalogic 2: Completeness of QND & Supplement \\
+Dec 5, 7 & & Problem Set 13 Due Friday 12/8 \\
+\arrayrulecolor{maingray}\hline
+
+Week 14 & Review for the Final & Handout \\
+Dec 12, 14 & & No Problem Set \\
+
+\arrayrulecolor{maingray}\hline\\
+
+\arrayrulecolor{myCOLOR}\hline
+Week 15 & FINAL EXAM (3 hours) & Time \& Location TBD \\ 
+\hline 
+\end{tabularx}
+\end{center}
+
+
+%----------------------------------------------------------------------------------------
+
+\end{document} 
+
+
+
