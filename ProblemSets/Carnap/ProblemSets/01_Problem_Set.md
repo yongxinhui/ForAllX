@@ -240,6 +240,7 @@ PS1.15 M \/ ~(P /\ R) : Thi is a musician or not a philosopher and a logician.
 
 [To be fair, I got this one wrong myself. I entered M v (~P & ~R), reading the not as giving an implicit/elliptical not before logician. Other readings listed are (1) M v (~P & R) and (2) R & (M v ~P)]::
 
+
 <br />
 
 

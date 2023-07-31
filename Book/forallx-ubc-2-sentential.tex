@@ -5,17 +5,33 @@
 
 
 
-This chapter introduces a logical language called SL. It is a version of \emph{sentential logic}, because the basic units of the language will represent entire sentences. (Recall from \S\ref{intro.sentences} that we're only considering propositional sentences.)
+This chapter introduces a logical language called SL.
+It is a version of \emph{sentential logic}, because the basic units of the language will represent entire sentences.
+(Recall from \S\ref{intro.sentences} that we're only considering propositional sentences, at least for now.)
+We will be concerned with translating sentences and whole arguments into SL.
+This brings us to our first definition: 
+  
+A \define{regimentation} (also called a \define{symbolization}) of an English sentence in SL is any sentence in SL which captures (some amount of) the logical form of that English sentence.
+
+This definition is vague, and necessarily so.
+As we will see, there will typically be more than one way to regiment a sentence in English, and different regimentations may capture more or less of the English sentence's logical form.
+Rather than a precise mathematical definition, regimentation (like any translation!) is a matter of degree, where some regimentations are better than others, and many may be on a par with each other.
+We may then say:
+
+A \define{regimentation} (\define{symbolization}) of an argument in English is an argument in SL whose sentences regiment the sentences of the argument in English.
+
+We will see a number of examples throughout this chapter, but it is good to have this definition in mind as you read, considering other ways that you might regiment the sentences and arguments in question.
+
 
 
 
 \section{Sentence letters}
 
-In SL, capital Roman letters ($A$, $B$, $C$, etc.
-are used to represent basic sentences.
-Considered only as a symbol of SL, the letter $A$ could mean any sentence.
+In SL, capital Roman letters ($A$, $B$, $C$, etc.) are the \define{sentence letters}.
+These are the basic building blocks from which complex sentences may be constructed.
+Considered only as a symbol of SL, the letter `$A$' could regiment any English sentence.
 So when translating from English into SL, it is important to provide a \emph{symbolization key}.
-The key provides an English language sentence for each sentence letter used in the symbolization.
+The key provides an English language sentence for each sentence letter used in the regimentation.
 
 For example, consider this argument:
 
@@ -25,9 +41,10 @@ For example, consider this argument:
 \item[\therefore] People are swimming in English Bay.
 \end{earg}
 
-This is obviously a valid argument in English.
-In symbolizing it, we want to preserve the structure of the argument that makes it valid.
-What happens if we replace each sentence with a letter? Our symbolization key would look like this:
+This is a valid argument in English.
+In regimenting it, we want to preserve the logical form of the argument which makes it valid.
+What happens if we replace each sentence with a letter? 
+Our symbolization key would look like this:
 
 \begin{ekey}
 \item[A:]Today is New Year's Day.
@@ -43,11 +60,15 @@ We could then symbolize the argument in this way:
 \item[\therefore] $C$
 \end{earg}
 
-This is a possible way to symbolize this argument, but it's not a very interesting one. 
-There is no logical connection between $A$ and $B$, where these could be any sentences, and $C$, which could also be any sentence.
-Something important about the argument has been lost in translation.
-Whereas the original argument was valid, this translation of the argument does not reflect that validity.
-For example, by using a different symbolization key, the following argument is also an instance of the logical form given above:
+This is regimentation of the argument, but it's not a very interesting one.
+In particular, our regimentation does not encode any logical connection between $A$, $B$, and $C$.
+What was compelling about the original argument has been lost in translation.
+Whereas the original argument was valid, the regimentation given above is not.
+After all, $A$, $B$, and $C$ could be any sentences whatsoever.
+Just because $A$ and $B$ are true (on a given interpretation), it does not follow that $C$ is also true (on that interpretation).\footnote{We will provide a formal definition of validity for SL in $\S\ref{ch.TruthTables}$ and $\S\ref{ch.SLmodels}$.}
+
+The symbolization key provided above is by no means the only symbolization key that we could have provided.
+For instance, consider the following alternative:
 
 \begin{ekey}
 \item[]Today is Christmas Day.
@@ -55,11 +76,11 @@ For example, by using a different symbolization key, the following argument is a
 \item[\therefore]We're all going to die tomorrow.
 \end{ekey}
 
-A more interesting translation of the valid New Year's argument will show how it is different from the invalid Christmas argument.
+A more interesting regimentation of the valid New Year's argument will show how it is different from the invalid Christmas argument.
 The relevant thing about the New Year's argument is that the second premise is not just \emph{any} sentence.
 Notice that the second premise contains the first premise and the conclusion \emph{as parts}.
 Our symbolization key for the argument only needs to include meanings for $A$ and $C$, and we can build the second premise from those pieces.
-So we symbolize the argument this way:
+Thus we may regiment the argument this way:
 
 \begin{earg}
 \item[] $A$
@@ -67,21 +88,26 @@ So we symbolize the argument this way:
 \item[\therefore] $C$
 \end{earg}
 
-This preserves the logical structure of the argument that makes it valid by making use of the English expression `If$\ldots$ then$\ldots$'.
+By making use of the English expression `If$\ldots$ then$\ldots$', we have managed to preserve enough of the logical structure of the argument in English to provide a valid regimentation.
 For our formal language, we ultimately want to replace all of the English expressions with logical notation, but this is a good start.
 
-The sentences that can be symbolized with sentence letters are called \emph{atomic sentences}, because they are the basic building blocks out of which more complex sentences can be built.
-Whatever logical structure a sentence might have is lost when it is translated as an atomic sentence.
-From the point of view of SL, the sentence is just a letter.
-It can be used to build more complex sentences, but it cannot be taken apart.
+The English sentences that can only be regimented in SL by sentence letters are called \emph{atomic sentences}.
+As we will see in later chapters, the internal structure of atomic sentences may be encoded in a formal language which includes predicates and singular terms.
+However, for the time being, we do not have these expressive resources at our disposal.
+Instead, atomic sentences are the smallest logical joints at which we may carve while regimenting English sentences in SL.
+Accordingly, the internal structure that an English sentence might have (its sub-sentential logical form) is lost when regimented by a sentence letter.
+From the point of view of SL, the sentence letters are as basic as it gets.
+Although the sentence letters can be used to build up more complex sentences, they cannot be taken apart.
 
 %Atomic sentences go together to make complex sentences in much the same way that physical atoms go together to make molecules. Physical atoms were originally called `atoms' because chemists thought that they were irreducible. Chemists were wrong, and physical atoms can be split.
 
 %It is important to remember that a symbolization key only gives the meaning of atomic sentences for purposes of translating a specific argument.
 
-We use capital Roman alphabet letters to represent SL sentences.\footnote{{\color{black} Later on, when we come to the logic of for-all and some, we will reserve \textit{lowercase} Roman alphabet letters for constants and variables. Hence, there is a \textit{good} reason why you will be forced to capitalize a lot of stuff on \textit{Carnap}. The caps are not optional!}} 
-There are only twenty-six such letters.
-We don't want to impose this artificial limit onto our formal language; it's better to work with a language that allows an arbitrary number of atomic sentences.
+We use capital Roman alphabet letters for the sentence letters of SL.\footnote{Later on, when we come to the logic of for-all and some, we will reserve \textit{lowercase} Roman alphabet letters for constants and variables. Hence, there is a \textit{good} reason why you will be forced to capitalize on \textit{Carnap}.} 
+However, there are only twenty-six such letters, and we don't want to impose this artificial limit onto our formal language.
+But how many sentence letters should we include?
+Any finite number would be rather arbitrary.
+Thus we will take SL to include a (countably) infinite number of sentence letters.\footnote{A set is \textit{countably infinite} just in case its elements can be paired one-to-one with the natural numbers, i.e., its elements can be listed one after the other without leaving any missing.}
 To achieve this, we allow atomic sentences that have a capital letter with a numeric subscript.
 So we could have a symbolization key that looks like this:
 
@@ -125,20 +151,34 @@ symbol&what it is called&rough translation\\
 \end{table}
 
 Natural languages like English are vague and imprecise, and carry many complex subtleties of meaning.
-Our formal language SL has none of these properties.
-It is defined by precise rigid rules.
-Consequently, the `translation' provided in the table is only an approximate one.
-We'll see some of the differences below.
+Providing a descriptive theory of these complexities belongs to linguistics, not logic.
+In contrast to English, our formal language SL will be clear and precise, defined by rules that hold without exception.
+This precision and universality has many advantages, but also comes at a cost: our language is artificial insofar as it's conventions are entirely stipulated, and who is to say which stipulations are the right ones to make?
+
+The question of which logic to accept for which applications is a deep and contentious issue within philosophical logic.
+Rather than attempting to settle that question here, it will be enough for our purposes here to indicate one method by which we may evaluate competing logics: abduction.
+By contrast to inductive arguments, or the deductive arguments with which we will primarily be concerned, abductive arguments draw support from the results that a theory yields.
+The reason that classical logic (i.e., the sentential and quantifier logics that we will be learning) holds the majority amongst logicians and philosophers is due to its strength and simplicity, making it of great utility for a wide range of applications.
+To take just one example, mathematics is almost entirely conducted in a first-order theory like the quantifier logic that we will be learning.
+Although competing logics (notably intuitionistic logic) may claim to hold certain philosophical advantages, not all proofs of mathematics can be reconstructed in their terms.
+By no means does this make first-order logic any kind of stopping place, for one can continue to add logical resources given broader aims of application than mathematics.
+For instance, the modal logics that you would learn about in an intermediate logic course have also been shown to have powerful applications within semantics, computer science, and philosophy, and may be naturally combined with the logics with which we will be concerned.
+Rather than any kind of stopping place, the logics covered in this course make for a natural place to begin.
+Once you have mastered sentential and quantifier logic, you may well wish to branch out and consider non-classical logics, as well as further extensions to the logical vocabulary included in a formal language.
+
+Despite the advantages afforded by the classical logics we will be concerned with, these logics will be rather artificial by comparison to the informal patterns of reasoning in English with which you are already familiar.
+Consequently, the ``translations'' provided by the table above are only approximate.
+We'll see some of the differences come out below.
 
 \section{Negation}
-Consider how we might symbolize these sentences:
+Consider how we might regiment these sentences:
 \begin{earg}
 \item[\ex{not1}] Logic is hard.
 \item[\ex{not2}] It is false that logic is hard.
 \item[\ex{not3}] Logic isn't hard.
 \end{earg}
 
-In order to symbolize sentence \ref{not1}, we will need one sentence letter.
+In order to regiment sentence \ref{not1}, we will need one sentence letter.
 We can provide a symbolization key:
 
 \begin{ekey}
@@ -168,8 +208,6 @@ But it's important to think about the actual meaning of the sentence, and not re
 
 \factoidbox{
 For any sentence \metaA{}, a sentence can be symbolized as $\enot\metaA{}$ if it can be paraphrased in English as `It is not the case that \metaA{}.'}
-
-(For more on the `\metaA{}' notation, see the `note about notation' on p.\ \pageref{notationnote}.)
 
 Consider these further examples:
 
@@ -237,7 +275,7 @@ Consider these sentences:
 \begin{earg}
 \item[\ex{and1}]Jessica is strong.
 \item[\ex{and2}]Luke is strong.
-\item[\ex{and3}]Jessica is strong, and Luke is also strong.
+\item[\ex{and3}]Jessica is strong and Luke is also strong.
 \end{earg}
 
 We will need separate sentence letters for \ref{and1} and \ref{and2}, so we define this symbolization key:
@@ -251,7 +289,7 @@ Sentence \ref{and1}, of course, is simply symbolized as $J$, and sentence \ref{a
 Sentence \ref{and3} can be paraphrased as `$J$ and $L$.'
 In order to fully symbolize this sentence, we need another symbol.
 We will use `\eand'.
-We translate `$J$ and $L$' as ($J\eand L$).
+We translate `$J$ and $L$' as $J\eand L$.
 The logical connective `\eand' is called \define{conjunction}, and $J$ and $L$ are each called \define{conjuncts}.
 
 Notice that we make no attempt to symbolize `also' in sentence \ref{and3}.
@@ -263,7 +301,7 @@ Here are some more examples:
 
 \begin{earg}
 \item[\ex{and4}]Jessica is strong and grumpy.
-\item[\ex{and5}]Jessica and Matt are both strong.
+\item[\ex{and5}]Jessica and Matt are strong.
 \item[\ex{and6}]Although Luke is strong, he is not grumpy.
 \item[\ex{and7}]Matt is strong, but Jessica is stronger than Matt.
 \end{earg}
@@ -273,7 +311,7 @@ The sentence says two things about Jessica, so in English it is natural to use h
 It might be tempting to try this when translating the argument: Since $J$ means `Jessica is strong', one might attempt to paraphrase sentence \ref{and4} as `$J$ and grumpy'.
 But this would be a mistake.
 Once we translate part of a sentence as $J$, any further structure within the original sentence is lost.
-$J$ is an atomic sentence and SL doesn't keep track of the fact that it was intended to be about Jessica.
+`$J$' is just a sentence letter and SL doesn't keep track of the fact that it was intended to be about Jessica.
 Moreover, `grumpy' is not a sentence; on its own it is neither true nor false.
 So instead, we paraphrase sentence \ref{and4} as the conjunction $J \eand G_{1}$ where $G_{1}$ has been added to the symbolization key and translates to `Jessica is grumpy.'
 More generally, we may say that:
@@ -285,7 +323,7 @@ A sentence can be symbolized as ($\metaA{}\eand\metaB{}$) if it can be paraphras
 Sentence \ref{and5} says one thing about two different subjects.
 It says of both Jessica and Matt that they are strong, and in English we use the word `strong' only once.
 In translating to SL, we want to make sure each conjunct is a sentence on its own, so once again, we'll paraphrase it by repeating the elements: `Jessica is strong, and Matt is strong.
-Once we add a new atomic sentence $M$ for `Matt is strong', this translates to $J\eand M$.
+Once we add a new atomic sentence $M$ for `Matt is strong', this translates to $J\eand M$.\footnote{One might contest this claim by instead taking `Jessica and Matt' to name a plurality where `are strong' is a plural predicate. We will be overlooking such complexities which are better handled in plural logics.}
 
 Sentence \ref{and6} is a bit more complicated.
 The word `although' tends to suggest a kind of contrast between the first part of the sentence and the second part.
@@ -306,7 +344,7 @@ How should we translate the second conjunct?
 We already have the sentence letters $J$ and $M$, but neither of these says anything comparative.
 We need a new sentence letter.
 Let $S$ mean `Jessica is stronger than Matt.'
-Now the sentence translates as ($M \eand S$).\footnote{In Chapter~\ref{ch.QL}, we will learn an even better way to translate relations. All in due course!}
+Now the sentence translates as $M \eand S$.\footnote{In Chapter~\ref{ch.QL}, we will learn an even better way to translate relations. All in due course!}
 
 \factoidbox{Sentences that can be paraphrased `\metaA{}, but \metaB{}' or `Although \metaA{}, \metaB{}' are best symbolized using conjunction: (\metaA{}\eand\metaB{}).
 }
@@ -316,7 +354,7 @@ Considered as symbols of SL, they have no meaning beyond being true or false.
 We used $J$ and $M$ to symbolize different English language sentences that are about people being strong, but this similarity is completely lost when we translate to SL.
 Nor does SL recognize any particular similarity between $G_{1}$ and $G_{2}$.
 
-For any two sentences \metaA{} and \metaB{}, the conjunction (\metaA{}\eand\metaB{}) is true if and only if the conjuncts --- \metaA{} and \metaB{} --- are both true. We can summarize this in the \textit{truth table} for conjunction:
+For any two sentences \metaA{} and \metaB{}, the conjunction \metaA{}\eand\metaB{} is true if and only if the conjuncts --- \metaA{} and \metaB{} --- are both true. We can summarize this in the \textit{truth table} for conjunction:
 \begin{center}
 \begin{tabular}{c|c|c}
 \metaA{} & \metaB{} & (\metaA{}\eand\metaB{})\\
@@ -332,7 +370,7 @@ The two left columns indicate the truth values of the conjuncts.
 Since there are four possible combinations of truth values, there are four rows.
 The conjunction is true when both conjuncts are true, and false otherwise.
 
-Note that conjunction is commutative: (\metaA{}\eand\metaB{}) is logically equivalent to (\metaB{}\eand\metaA{}).
+Note that conjunction is commutative: \metaA{}\eand\metaB{} is logically equivalent to \metaB{}\eand\metaA{}.
 Is `and' in English commutative?
 Consider the following claims:
 
@@ -353,33 +391,9 @@ Rather we stipulate that the sort of conjunction that we are interested in for t
 This doesn't make the commutative theory of conjunction less interesting than a non-commutative theory.
 Indeed, simplicity is a good thing, providing for broad applications where a non-commutative notion of conjunction may get in the way.
 For instance, consider mathematical claims: assuming all such claims are eternal, none are before others, and so we don't need to keep track of temporal order.
-Even if one were concerned to encode temporal order, getting to grips with SL and QL as we will in this course is the place to start.
+Even if one were concerned to encode temporal order, getting to grips with SL and QL as we will in this course is a good place to start.
 
 
-
-
-\subsection{A Note About Notation}
-\label{notationnote}
-
-In speaking generally about connectives, we've used the symbols `\metaA{}' and `\metaB{}' as variables to stand in for arbitrary sentences of SL.
-We saw, for instance, that for any sentence \metaA{}, we may consider the negation \enot\metaA{} of \metaA{}.
-This means:
-
-\begin{itemize}
-\item \enot $A$ is the negation of $A$
-\item \enot $B_1$ is the negation of $B_1$
-\item \enot $B_2$ is the negation of $B_2$
-\item \enot \enot $C$ is the negation of \enot $C$
-\item \enot $(A \eand B)$ is the negation of $(A\eand B)$
-\item etc.
-\end{itemize}
-
-Note that \metaA{} and \metaB{} are \emph{not} sentences of SL.
-They are called \textit{schematic variables} which, in this case, have sentences as values.
-Schematic variables allow us to talk about all SL sentences, but they're not themselves sentences of SL.
-Compare the use of variables like `$x$' in algebra.
-An `$x$' symbol is used to stand in for any number, but `$x$' is not itself a name for a number the way that `2' is a name for the number two.
-We'll return to this distinction in \S\ref{sec:sentencesofSL}, and again later on when we discuss proving general facts \textit{about} SL.
 
 
 

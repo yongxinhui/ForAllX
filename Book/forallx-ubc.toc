@@ -10,29 +10,28 @@
 \contentsline {section}{\numberline {0.4}Logical Form}{20}{section.0.4}%
 \contentsline {section}{\numberline {0.5}Other Logical Notions}{22}{section.0.5}%
 \contentsline {subsection}{\numberline {0.5.1}Logical truths (Tautologies)}{22}{subsection.0.5.1}%
-\contentsline {subsection}{\numberline {0.5.2}Logical Entailment and Equivalence}{22}{subsection.0.5.2}%
+\contentsline {subsection}{\numberline {0.5.2}Logical Entailment and Equivalence}{23}{subsection.0.5.2}%
 \contentsline {subsection}{\numberline {0.5.3}Consistency}{23}{subsection.0.5.3}%
-\contentsline {section}{Practice Exercises}{24}{section*.4}%
+\contentsline {section}{Practice Exercises}{25}{section*.4}%
 \contentsline {chapter}{\numberline {1}Sentential logic}{27}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Sentence letters}{27}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Connectives}{29}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Negation}{29}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Conjunction}{31}{section.1.4}%
-\contentsline {subsection}{\numberline {1.4.1}A Note About Notation}{34}{subsection.1.4.1}%
+\contentsline {section}{\numberline {1.2}Connectives}{30}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Negation}{31}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Conjunction}{32}{section.1.4}%
 \contentsline {section}{\numberline {1.5}Disjunction}{35}{section.1.5}%
-\contentsline {section}{\numberline {1.6}The Material Conditional}{37}{section.1.6}%
-\contentsline {section}{\numberline {1.7}Biconditional}{39}{section.1.7}%
-\contentsline {section}{\numberline {1.8}Other symbolization}{40}{section.1.8}%
-\contentsline {section}{\numberline {1.9}Sentences of SL}{41}{section.1.9}%
-\contentsline {subsection}{\numberline {1.9.1}Expressions}{42}{subsection.1.9.1}%
-\contentsline {subsection}{\numberline {1.9.2}Well-formed formulae}{42}{subsection.1.9.2}%
-\contentsline {subsection}{\numberline {1.9.3}Sentences}{44}{subsection.1.9.3}%
-\contentsline {subsection}{\numberline {1.9.4}Notational conventions}{45}{subsection.1.9.4}%
-\contentsline {section}{\numberline {1.10}Use vs. mention}{46}{section.1.10}%
-\contentsline {subsection}{\numberline {1.10.1}Quotation conventions}{46}{subsection.1.10.1}%
-\contentsline {subsection}{\numberline {1.10.2}Object language and metalanguage}{47}{subsection.1.10.2}%
-\contentsline {subsection}{\numberline {1.10.3}Metavariables}{48}{subsection.1.10.3}%
-\contentsline {subsection}{\numberline {1.10.4}Quotation conventions for arguments}{50}{subsection.1.10.4}%
+\contentsline {section}{\numberline {1.6}The Material Conditional}{38}{section.1.6}%
+\contentsline {section}{\numberline {1.7}Biconditional}{40}{section.1.7}%
+\contentsline {section}{\numberline {1.8}Other symbolization}{41}{section.1.8}%
+\contentsline {section}{\numberline {1.9}Sentences of SL}{42}{section.1.9}%
+\contentsline {subsection}{\numberline {1.9.1}Expressions}{43}{subsection.1.9.1}%
+\contentsline {subsection}{\numberline {1.9.2}Well-formed formulae}{43}{subsection.1.9.2}%
+\contentsline {subsection}{\numberline {1.9.3}Sentences}{45}{subsection.1.9.3}%
+\contentsline {subsection}{\numberline {1.9.4}Notational conventions}{46}{subsection.1.9.4}%
+\contentsline {section}{\numberline {1.10}Use vs. mention}{47}{section.1.10}%
+\contentsline {subsection}{\numberline {1.10.1}Quotation conventions}{47}{subsection.1.10.1}%
+\contentsline {subsection}{\numberline {1.10.2}Object language and metalanguage}{48}{subsection.1.10.2}%
+\contentsline {subsection}{\numberline {1.10.3}Metavariables}{49}{subsection.1.10.3}%
+\contentsline {subsection}{\numberline {1.10.4}Quotation conventions for arguments}{51}{subsection.1.10.4}%
 \contentsline {chapter}{\numberline {2}Truth tables}{51}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Truth-functional connectives}{51}{section.2.1}%
 \contentsline {section}{\numberline {2.2}Complete truth tables}{52}{section.2.2}%
