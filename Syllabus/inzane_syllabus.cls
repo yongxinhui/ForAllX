@@ -108,9 +108,10 @@
 %----------------------------------------------------------------------------------------
 %	 TA Info
 %----------------------------------------------------------------------------------------
-% \newcommand{\taAname}[1]{\renewcommand{\taAname}{#1}}
+\newcommand{\taAname}[1]{\renewcommand{\taAname}{#1}}
+\newcommand{\TAemail}[1]{\renewcommand{\TAemail}{#1}}
 % \newcommand{\taAofficehours}[1]{\renewcommand{\taAofficehours}{#1}}
-% \newcommand{\taAoffice}[1]{\renewcommand{\taAoffice}{#1}}
+\newcommand{\taAoffice}[1]{\renewcommand{\taAoffice}{#1}}
 % \newcommand{\taBname}[1]{\renewcommand{\taBname}{#1}}
 % \newcommand{\taBofficehours}[1]{\renewcommand{\taBofficehours}{#1}}
 % \newcommand{\taBoffice}[1]{\renewcommand{\taBoffice}{#1}}
@@ -198,6 +199,19 @@
 			\ifthenelse{\equal{\email}{}}{}{\textsc{\large\icon{@}} & \href{mailto:\email}{\email}}
 		\end{tabular}
         
+        \profilesection{\vspace{0.5cm} TA Info}
+
+        \begin{tabular}{p{0.5cm} @{\hskip 0.5cm}p{5cm}}
+            \ifthenelse{\equal{\taAname}{}}{}{\textsc{\large\icon{\faUser}} & \taAname\\}
+            % \ifthenelse{\equal{\taAofficehours}{}}{}{\textsc{\large\iconhalf{\ClockLogo}} & \taAofficehours\\}
+            \ifthenelse{\equal{\TAemail}{}}{}{\textsc{\large\icon{@}} & \href{mailto:\TAemail}{\TAemail}\\}
+            \ifthenelse{\equal{\taAoffice}{}}{}{\textsc{\large\iconhalf{\faMapMarker}} & \taAoffice}
+            % \ifthenelse{\equal{\taBname}{}}{}{\textsc{\large\icon{\faUser}} & \taBname\\}
+            % \ifthenelse{\equal{\taBofficehours}{}}{}{\textsc{\large\iconhalf{\ClockLogo}} & \taBofficehours\\}
+            % \ifthenelse{\equal{\taBoffice}{}}{}{\textsc{\large\iconhalf{\faMapMarker}} & \taBoffice\\}
+            % \ifthenelse{\equal{\taBemail}{}}{}{\textsc{\large\icon{@}} & \href{mailto:\taBemail}{\taBemail}\\}
+        \end{tabular}
+        
         \profilesection{\vspace{0.5cm} Course Info}
         
         \begin{tabular}{p{0.5cm} @{\hskip 0.5cm}p{5cm}}
@@ -214,19 +228,6 @@
             \ifthenelse{\equal{\labhours}{}}{}{\textsc{\large\iconhalf{\ClockLogo}} & \labhours\\}
             \ifthenelse{\equal{\labloc}{}}{}{\textsc{\large\iconhalf{\faMapMarker}} & \labloc\\}
         \end{tabular}
-        
-        % \profilesection{\vspace{0.5cm} TA Info}
-        % 
-        % \begin{tabular}{p{0.5cm} @{\hskip 0.5cm}p{5cm}}
-        %     \ifthenelse{\equal{\taAname}{}}{}{\textsc{\large\icon{\faUser}} & \taAname\\}
-        %     \ifthenelse{\equal{\taAofficehours}{}}{}{\textsc{\large\iconhalf{\ClockLogo}} & \taAofficehours\\}
-        %     \ifthenelse{\equal{\taAoffice}{}}{}{\textsc{\large\iconhalf{\faMapMarker}} & \taAoffice\\}
-        %     % \ifthenelse{\equal{\taAemail}{}}{}{\textsc{\large\icon{@}} & \href{mailto:\taAemail}{\taAemail}\\}
-        %     \ifthenelse{\equal{\taBname}{}}{}{\textsc{\large\icon{\faUser}} & \taBname\\}
-        %     % \ifthenelse{\equal{\taBofficehours}{}}{}{\textsc{\large\iconhalf{\ClockLogo}} & \taBofficehours\\}
-        %     \ifthenelse{\equal{\taBoffice}{}}{}{\textsc{\large\iconhalf{\faMapMarker}} & \taBoffice\\}
-        %     % \ifthenelse{\equal{\taBemail}{}}{}{\textsc{\large\icon{@}} & \href{mailto:\taBemail}{\taBemail}\\}
-        % \end{tabular}
         
 %         \ifthenelse{\equal{\about}{}}{}{
 % 			\profilesection{\vspace{0.5cm} About} %just change the title here to change the name of the section. 

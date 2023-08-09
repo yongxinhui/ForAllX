@@ -2,7 +2,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{forallx-ubc}[2011/10/29 support for a logic textbook]
 \usepackage[dvipsnames]{xcolor}
-\RequirePackage{adjustbox, amssymb,amsmath,lmodern,microtype,multicol,ifthen,prooftrees,titlesec, apptools}
+\RequirePackage{graphicx,adjustbox, amssymb,amsmath,lmodern,microtype,multicol,ifthen,prooftrees,titlesec, apptools}
 
 \usepackage[linktocpage=true]{hyperref}
 \definecolor{URLblue}{RGB}{0,0,150}
@@ -33,12 +33,28 @@
 %
 \def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
 % disjunction
-\def\eor{\ensuremath{\vee}}
+\def\eor{\ensuremath{\mkern1mu\vee\mkern1mu}}
 % conjunction: 
 % {\,^{_{_{_{_{\mbox{\footnotesize\textbullet}}}}}}} gives the dot
-\def\eand{\ensuremath{\,\&\,}}
+\def\eand{\ensuremath{\mkern1mu\&\mkern1mu}}
 % conditional: \rightarrow gives the right arrow
-\def\eif{\ensuremath{\supset}}
+\def\eif{\ensuremath{\mkern1mu\supset\mkern1mu}}
+
+% \def\corner[1]{\ensuremath\ulcorner#1\urcorner}
+
+\newcommand{\corner}[1]{\ulcorner#1\urcorner} %%Corner quotes
+
+% \makeatletter
+% \DeclareRobustCommand{\eif}{%
+%   \mathbin{\mathpalette\scaletoplus@{\mkern1mu\supset\mkern1mu}}%
+% }
+% \newcommand{\scaletoplus@}[2]{%
+%   \vcenter{%
+%     \hbox{\sbox\z@{$\m@th#1+$}\resizebox{\wd\z@}{!}{$\m@th#1#2$}}%
+%   }%
+% }
+% \makeatother
+
 % biconditional: \leftrightarrow gives the left and right arrow
 \def\eiff{\ensuremath{\equiv}}
 % negation: {\sim} gives the swung dash 

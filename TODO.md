@@ -6,10 +6,12 @@
   - [x] Carnap Problem Set 0
   - [x] Personal Information
 - [ ] Week 1
-  - [ ] Edit Ch 1
-  - [ ] Carnap Problem Set 1
-  - [ ] Link Van reading
+  - [x] Edit Ch 1
+  - [x] Carnap Problem Set 1
+  - [x] Link Van reading
   - [ ] Paper Problem Set 1
+  - [ ] valid argument form
+  - [ ] atomic sentences
 - [ ] Week 2
 - [ ] Week 3
 - [ ] Week 4

@@ -36,7 +36,7 @@ PS1.0 If you worked with up to two other students on these problems, please let 
 There are 19 questions. When (and only when) you are happy with your answer, click the `Submit`
 button. YOU CAN ONLY SUBMIT ONCE! So be careful! *Carnap* will then acknowledge and record your submission.
 
-For lower-point problems, Carnap will check your work before submitting if you press `Enter`. Most low-point problems will actually REQUIRE your answer to be correct before allowing you to submit (this is to help make sure you know what you're doing for the later problems. It also grants you BIG BALLER partial credit for later problems, which will floor at 50 percent if you attempt them). 
+For lower-point problems, Carnap will check your work before submitting if you press `Enter`. Most low-point problems will actually REQUIRE your answer to be correct before allowing you to submit (this is to help make sure you know what you're doing for the later problems. It also grants you partial credit for later problems, which will floor at 50 percent if you attempt them). 
 
 If you have it correct, *Carnap* will highlight part of the problem in green, but you STILL HAVE TO CLICK `Submit`!
 
