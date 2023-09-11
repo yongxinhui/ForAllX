@@ -1,0 +1,182 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs} %%Math packages
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep={}}
+
+\linespread{1.05} % Change line spacing here, Palatino benefits from a slight increase by default
+
+\newcommand{\corner}[1]{\ulcorner#1\urcorner} %%Corner quotes
+\newcommand{\tuple}[1]{\langle#1\rangle} %%Angle brackets
+\newcommand{\set}[1]{\lbrace#1\rbrace} %%Set brackets
+\newcommand{\interpret}[1]{\llbracket#1\rrbracket} %%Double brackets
+%\DeclarePairedDelimiter\ceil{\lceil}{\rceil}    
+\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
+
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
+\renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+
+\renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
+\begin{flushright} % Right align
+{\LARGE\@title} % Increase the font size of the title
+
+\vspace{10pt} % Some vertical space between the title and author name
+
+{\@author} % Author name
+\\\@date % Date
+
+\vspace{30pt} % Some vertical space between the author block and abstract
+\end{flushright}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{What is Logic?}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+\section*{Definitions}
+
+\begin{enumerate}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Proposition:] A \textsc{proposition} is a way for things to be which is either true or false.
+  \item[\it Declarative Sentence:]  A \textsc{declarative sentence} is a grammatical string of symbols which, on an interpretation, expresses a proposition that is either true or false.
+  \item[\it Argument:] An \textsc{Argument} is a finite sequence of declarative sentences where the final sentence is the \textsc{conclusion} and the preceding sentences are the \textsc{premises}.
+\end{enumerate}
+
+
+
+\section*{Examples}
+
+\subsection*{\it \textbf{Snow}}
+
+\begin{enumerate}
+  \item[(1)] It's snowing.
+  \item[\therefore] John drove to work.
+\end{enumerate}
+
+\noindent
+\textit{This argument may be compelling, but not certain.}
+
+\subsection*{\it \textbf{Red}}
+
+\begin{enumerate}
+  \item[(1)] The ball is crimson.
+  \item[\therefore] The ball is red.
+\end{enumerate}
+
+\noindent
+\textit{This argument provides certainty, but not on all interpretations.}
+
+\subsection*{\it \textbf{Museum}}
+
+\begin{enumerate}
+  \item[(1)] Kate is either at home or at the Museum.
+  \item[(2)] Kate is not at home.
+  \item[\therefore] Kate is at the Museum.
+\end{enumerate}
+
+\noindent
+\textit{This argument's certainty is independent of the interpretation.}
+
+
+\section*{Informal Validity}
+
+\begin{enumerate}[leftmargin=1.2in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\bf Task 1:] Account for the logical strength of \textit{Museum}.
+  \item[\it Atomic Sentences:] A declarative sentence is \textsc{atomic} just in case it is not composed of declarative sentences as proper parts.
+  \item[\bf Task 2:] Identify atomic sentences in \textit{Museum}.
+  \item[\it Informal Interpretation:] Let an \textsc{informal interpretation} assign every atomic sentence of English to exactly one \textsc{truth-value} 1 or 0.
+  \item[\it Informal Validity:] An argument is \textsc{informally valid} iff its conclusion is true in every interpretation in which its premises are true.
+  \item[\bf Task 3:] Assign truth-values to non-atomic sentences as a function of their parts.
+  \item[\it Logical Constants:] Complex sentences are composed from atomic sentences \textit{via} the sentential operators `and', `or', `not', `if', `iff', etc.
+  \item[\bf Task 4:] Provide semantic clauses for `not' and `or'.
+  \item[\it Atomic:] If $\varphi$ is atomic, then the truth-value of $\varphi$ is given by the interpretation. 
+  \item[\it Disjunction:] If $\varphi=\psi\vee\chi$, then $\varphi$ is true iff $\psi$ or $\chi$ is true (or both). 
+  \item[\it Negation:] If $\varphi=\neg\psi$, then $\varphi$ is true iff $\psi$ is false. 
+  \item[\bf Task 5:] Show that \textit{Museum} is informally valid.
+\end{enumerate}
+
+
+
+
+
+\section*{Formal Languages}
+
+\begin{enumerate}[leftmargin=1.2in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\bf Problem 1:] There is no set of all atomic sentences of English, and so no clear notion of an informal interpretation of English.
+  \item[\it Suggestion:] Could choose some large set of atomic English sentences, but this would be arbitrary and hard to specify.
+  \item[\bf Solution:] We will regiment English arguments in a formal language that is easy to specify precisely.
+  \item[\it Sentential Logic:] The \textsc{sentences} of SL are composed of sentence letters $A, B, C, \ldots$ and sentential operators $\neg,\vee,\wedge,\supset,$ and $\equiv$.
+  \item[\it Interpretation:] An \textsc{interpretation} of the sentences of SL assigns exactly one truth-value (1 or 0) to each sentence letter.
+  \item[\bf Problem 2:] SL cannot regiment all logically valid arguments.
+  \item[\it Socrates:] All men are mortal, Socrates is a man $\vdash$ Socrates is mortal. 
+  \item[\bf Solution:] This is reason to extend the language, e.g. QL.
+\end{enumerate}
+
+
+
+
+\section*{Logical Form}
+
+\subsection*{\it \textbf{Museum}}
+
+\begin{enumerate}
+  \item[(1)] The painting is 
+  \item[(2)] Kate is not at home.
+  \item[\therefore] Kate is at the Museum.
+\end{enumerate}
+
+\begin{enumerate}[leftmargin=1.2in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\bf Task 1:] Regiment \textit{Socrates} example in SL: $A, B \vdash C$.
+  \item[\bf Task 2:] Expand the language
+\end{enumerate}
+
+
+
+\section*{Further Notions}
+
+\begin{enumerate}[leftmargin=1.2in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Soundness:] 
+  \item[\it Logical Truth:]
+  \item[\it Contradiction:]
+  \item[\it Logical Entailment:]
+  \item[\it Logical Equivalence:]
+  \item[\it Consistency:]
+  \item[\it Inconsistency:]
+\end{enumerate}
+
+
+
+% \vfill
+%
+% \bibliographystyle{Phil_Review} %%bib style found in bst folder, in bibtex folder, in texmf folder.
+% \bibliography{Zotero} %%bib database found in bib folder, in bibtex folder
+
+
+\end{document}
