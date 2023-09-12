@@ -50,25 +50,6 @@
 \contentsline {section}{\numberline {3.6}Defining truth-conditions in SL}{71}{section.3.6}%
 \contentsline {subsection}{\numberline {3.6.1}Truth for Atomic Sentences}{71}{subsection.3.6.1}%
 \contentsline {subsection}{\numberline {3.6.2}Truth for arbitrary SL sentences}{73}{subsection.3.6.2}%
-\contentsline {chapter}{\numberline {4}SL Trees}{74}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Satisfiability and entailment}{75}{section.4.1}%
-\contentsline {section}{\numberline {4.2}An example: proving validity}{75}{section.4.2}%
-\contentsline {section}{\numberline {4.3}An example: proving invalidity}{78}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Resolution rules for SL trees}{80}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Conjunction}{80}{subsection.4.4.1}%
-\contentsline {subsection}{\numberline {4.4.2}Negated conjunction}{81}{subsection.4.4.2}%
-\contentsline {subsection}{\numberline {4.4.3}Disjunction}{81}{subsection.4.4.3}%
-\contentsline {subsection}{\numberline {4.4.4}Negated disjunction}{82}{subsection.4.4.4}%
-\contentsline {subsection}{\numberline {4.4.5}Conditional}{82}{subsection.4.4.5}%
-\contentsline {subsection}{\numberline {4.4.6}Negated conditional}{82}{subsection.4.4.6}%
-\contentsline {subsection}{\numberline {4.4.7}Biconditional}{83}{subsection.4.4.7}%
-\contentsline {subsection}{\numberline {4.4.8}Negated biconditional}{83}{subsection.4.4.8}%
-\contentsline {subsection}{\numberline {4.4.9}Double negation}{84}{subsection.4.4.9}%
-\contentsline {subsection}{\numberline {4.4.10}Resolution rules summary}{84}{subsection.4.4.10}%
-\contentsline {section}{\numberline {4.5}Branch closure rules}{85}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Branch completion rules}{86}{section.4.6}%
-\contentsline {section}{\numberline {4.7}Resolution order}{87}{section.4.7}%
-\contentsline {section}{\numberline {4.8}Choosing the right root}{88}{section.4.8}%
 \contentsline {chapter}{\numberline {5}Soundness and Completeness for SL Trees}{90}{chapter.5}%
 \contentsline {section}{\numberline {5.1}Informal proof}{91}{section.5.1}%
 \contentsline {section}{\numberline {5.2}Soundness}{91}{section.5.2}%
