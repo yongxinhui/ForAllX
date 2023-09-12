@@ -116,7 +116,7 @@
   \item[\it Atomic Sentences:] A declarative sentence is \textsc{atomic} just in case it is not composed of simpler declarative sentences.
   \item[\bf Task 1:] Identify atomic sentences in \textit{Museum}.
   \item[\it Informal Interpretation:] Let an \textsc{informal interpretation} assign every atomic sentence of English to exactly one \textsc{truth-value} 1 or 0.
-  \item[\it Informal Validity:] An argument in English is \textsc{informally valid} just in case its conclusion is true in every informal interpretation in which its premises are true (respecting the semantics).
+  \item[\it Informal Validity:] An argument in English is \textsc{informally valid} just in case its conclusion is true in every informal interpretation in which its premises are true.
   \item[\bf Task 2:] Use semantics to show that \textit{Museum} is informally valid.
 \end{enumerate}
 
@@ -131,13 +131,13 @@
   \item[\it Suggestion:] Could choose some large set of atomic English sentences, but this would be arbitrary and hard to specify.
   \item[\bf Solution 1:] We will \textit{regiment} English arguments in a formal language that is both general and easy to specify precisely.
   \item[\it Sentential Logic:] The \textsc{sentences} of SL are composed of sentence letters $A, B, C, \ldots$ and sentential operators $\neg,\vee,\wedge,\supset,$ and $\equiv$.
-  \item[\bf Task 3:] Provide semantic clauses for SL.
+  \item[\bf Task 3:] Regiment \textit{Museum} in SL: $A\vee B, \neg A \vDash B$.
+  \item[\bf Task 4:] Provide semantic clauses for SL.
   % \item[\it Atomic:] If $\varphi$ is atomic, then the truth-value of $\varphi$ is given by the interpretation. 
   \item[\it Interpretation:] An \textsc{interpretation} $\I$ of the sentences of SL assigns exactly one truth-value (1 or 0) to each sentence letter.
-  \item[\it Disjunction:] $\I(\varphi\vee\psi)=1$ just in case $\I(\varphi)=1$ or $\I(\psi)=1$ (or both). 
-  \item[\it Negation:] $\I(\neg\varphi)=1$ just in case $\I(\varphi)=0$. 
-  \item[\it Logical Validity:] An argument in SL is \textsc{logically valid} just in case its conclusion is true in every interpretation in which its premises are true (while respecting the semantics).
-  \item[\bf Task 4:] Regiment \textit{Museum} in SL: $A\vee B, \neg A \vDash B$.
+  \item[\it Disjunction:] $\I(\varphi\vee\psi)=1$ just in case $\I(\varphi)=1$ or $\I(\psi)=1$ (or both).
+  \item[\it Negation:] $\I(\neg\varphi)=1$ just in case $\I(\varphi)=0$.
+  \item[\it Logical Validity:] An argument in SL is \textsc{logically valid} just in case its conclusion is true in every interpretation in which its premises are true.
   \item[\bf Task 5:] Show that \textit{Museum} is logically valid.
 \end{enumerate}
 
@@ -175,10 +175,10 @@
 
 \begin{enumerate}[leftmargin=1.2in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
   \item[\it Model Theory:] We have characterized logical reasoning in terms of truth-preservation across a space of interpretations of the formal language by providing elements of a model theoretic semantics for SL.
-  \item[\bf Task 7:] Can we \textit{Snow} and \textit{Red} logically valid?
+  \item[\bf Task 7:] Can we make \textit{Snow} and \textit{Red} logically valid?
   \item[\it Syntactic Account:] Another approach focuses entirely on syntax, using rules to specify which inferences are deductively valid given the meanings of the logical constants.
   \item[\it Metalogic:] Amazingly, these two strategies coincide for both SL and QL, and we will prove these important results later in this course.
-  \item[\it Neutrality:] These methods accommodate reasoning about anything whatsoever, though not all forms of reasoning are equally well understood.
+  \item[\it Neutrality:] These methods accommodate reasoning about anything whatsoever, though not all logical constants are equally well understood.
 \end{enumerate}
 
 
