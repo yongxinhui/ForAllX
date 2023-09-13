@@ -2,6 +2,7 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{forallx-ubc}[2011/10/29 support for a logic textbook]
 \usepackage[dvipsnames]{xcolor}
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
 \RequirePackage{graphicx,adjustbox, amssymb,amsmath,lmodern,microtype,multicol,ifthen,prooftrees,titlesec, apptools}
 
 \usepackage[linktocpage=true]{hyperref}
@@ -36,14 +37,15 @@
 \def\eor{\ensuremath{\mkern1mu\vee\mkern1mu}}
 % conjunction: 
 % {\,^{_{_{_{_{\mbox{\footnotesize\textbullet}}}}}}} gives the dot
-\def\eand{\ensuremath{\mkern1mu\&\mkern1mu}}
+\def\eand{\ensuremath{\mathrel\&}}
 % conditional: \rightarrow gives the right arrow
-\def\eif{\ensuremath{\mkern1mu\supset\mkern1mu}}
+\def\eif{\ensuremath{\supset}}
 
 % \def\corner[1]{\ensuremath\ulcorner#1\urcorner}
 
 \newcommand{\corner}[1]{\ulcorner#1\urcorner} %%Corner quotes
 \newcommand{\I}{\mathcal{I}} %%Corner quotes
+\newcommand{\V}[1]{\mathcal{V}_{#1}} %%Corner quotes
 
 % \makeatletter
 % \DeclareRobustCommand{\eif}{%

@@ -18,7 +18,7 @@ As we will see, there will typically be more than one way to regiment a sentence
 Rather than a precise mathematical definition, regimentation (like any translation!) is a matter of degree, where some regimentations are better than others, and many may be on a par with each other.
 We may then say:
 
-A \define{regimentation} (\define{symbolization}) of an argument in English is an argument in SL whose sentences regiment the sentences of the argument in English.
+A \define{regimentation} (or \define{symbolization}) of an argument in English is an argument in SL whose sentences regiment the sentences of the argument in English.
 
 We will see a number of examples throughout this chapter, but it is good to have this definition in mind as you read, considering other ways that you might regiment the sentences and arguments in question.
 
@@ -65,7 +65,7 @@ In particular, our regimentation does not encode any logical connection between 
 What was compelling about the original argument has been lost in translation.
 Whereas the original argument was valid, the regimentation given above is not.
 After all, $A$, $B$, and $C$ could be any sentences whatsoever.
-Just because $A$ and $B$ are true (on a given interpretation), it does not follow that $C$ is also true (on that interpretation).\footnote{We will provide a formal definition of validity for SL in $\S\ref{ch.TruthTables}$ and $\S\ref{ch.SLmodels}$.}
+Just because $A$ and $B$ are true (on a given interpretation), it does not follow that $C$ is also true (on that interpretation).\footnote{We will provide a formal definition of validity for SL in Ch.~$\ref{ch.TruthTables}$ and Ch.~$\ref{ch.SLmodels}$.}
 
 The symbolization key provided above is by no means the only symbolization key that we could have provided.
 For instance, consider the following alternative:
@@ -95,7 +95,7 @@ The English sentences that can only be regimented in SL by sentence letters are 
 As we will see in later chapters, the internal structure of atomic sentences may be encoded in a formal language which includes predicates and singular terms.
 However, for the time being, we do not have these expressive resources at our disposal.
 Instead, atomic sentences are the smallest logical joints at which we may carve while regimenting English sentences in SL.
-Accordingly, the internal structure that an English sentence might have (its sub-sentential logical form) is lost when regimented by a sentence letter.
+Accordingly, the internal structure that an English sentence might have (i.e., its sub-sentential logical form) is lost when regimented by a sentence letter.
 From the point of view of SL, the sentence letters are as basic as it gets.
 Although the sentence letters can be used to build up more complex sentences, they cannot be taken apart.
 
@@ -156,16 +156,16 @@ In contrast to English, our formal language SL will be clear and precise, define
 This precision and universality has many advantages, but also comes at a cost: our language is artificial insofar as it's conventions are entirely stipulated, and who is to say which stipulations are the right ones to make?
 
 The question of which logic to accept for which applications is a deep and controversial issue within philosophical logic.
-Rather than attempting to settle that question here, it will be enough for our purposes here to indicate one method by which we may evaluate competing logics: abduction.
+Rather than attempting to settle that question here, it will be enough for our purposes here to appeal to one method by which we may evaluate competing logics: abduction.
 By contrast to inductive arguments, or the deductive arguments with which we will primarily be concerned, abductive arguments draw support from the results that a theory yields.
 The reason that classical logic (i.e., the sentential and quantifier logics that we will be learning) holds the majority amongst logicians and philosophers is due to its strength and simplicity, making it of great utility for a wide range of applications.
 
 To take just one example, mathematics is almost entirely conducted in a first-order theory like the quantifier logic that we will be learning.
 Although competing logics (notably intuitionistic logic) may claim to hold certain philosophical advantages, not all proofs of mathematics can be reconstructed in these terms.
-By no means does this make first-order logic any kind of stopping place, for one can continue to add logical resources given broader aims of application than mathematics.
+By no means does this make first-order logic any kind of stopping place, for one can continue to add logical resources given broader aims than application within mathematics.
 For instance, the modal logics that you would learn about in an intermediate logic course have also been shown to have powerful applications within linguistics, computer science, and philosophy, and may be naturally combined with the logics with which we will be concerned.
-Rather than any kind of end point, the logics covered in this course make for a natural place to begin.
-Once you have mastered sentential and quantifier logic, you may well wish to branch out and consider non-classical logics, as well as further extensions to the logical vocabulary included in a formal language.
+Rather than any kind of stopping point, the logics covered in this course make for a natural place to begin.
+Once you have mastered sentential and quantifier logic, you may well wish to branch out and consider non-classical logics, as well as further extensions to the logical vocabulary covered in this course.
 
 Despite the advantages afforded by the classical logics we will be studying, these logics will be rather artificial by comparison to the informal patterns of reasoning in English with which you are already familiar.
 Consequently, the ``translations'' provided by the table above are only approximate.
@@ -201,7 +201,7 @@ The sentence it negates, in this case $H$, is called the \define{negand}.
 What of Sentence \ref{not3}? It looks like a more natural  way of saying the same thing as sentence \ref{not2}.
 It's saying that logic isn't hard, which is just another way of negating the proposition that logic is hard.
 % So sentences \ref{not2} and \ref{not3} have the same truth conditions.
-In the terminology of Ch.\ \ref{ch.intro}, they are logically equivalent.
+In the terminology of Ch.~\ref{ch.intro}, they are logically equivalent.
 So we can regiment both sentence \ref{not2} and sentence \ref{not3} as: $\enot H$.
 
 When regimenting English sentences in SL, the word `not' is usually a pretty good clue that `\enot' will be an appropriate symbol to use.
@@ -664,12 +664,16 @@ For now, I'll just ask you to go along with this approach to conditionals even i
 %
 
 \section{Biconditional}
+  \label{sec.Bicon}
+
 Consider these sentences:
 \begin{earg}
 \item[\ex{iff1}] The figure on the board is a triangle only if it has exactly three sides.
 \item[\ex{iff2}] The figure on the board is a triangle if it has exactly three sides.
 \item[\ex{iff3}] The figure on the board is a triangle if and only if it has exactly three sides.
 \end{earg}
+
+We may then provide the following symbolization key:
 
 \begin{ekey}
 \item[T:] The figure is a triangle.
@@ -683,8 +687,13 @@ It can be paraphrased as, `If the figure has three sides, then it is a triangle.
 So it can be regimented by $S\eif T$.
 
 Sentence \ref{iff3} says that $T$ is true \emph{if and only if} $S$ is true.
-This is called a \define{biconditional}, because it entails the two conditionals $S\eif T$ and $T \eif S$. We will use `\eiff' to represent the biconditional.
+This is called a \define{biconditional}, because it entails the two conditionals $S\eif T$ and $T \eif S$.
+We will use `\eiff' to represent the biconditional.
 Thus sentence \ref{iff3} can be regimented by $S \eiff T$.
+Instead of referring to the sentence on the left-hand side of a biconditional as the antecedent and the sentence on the right-hand side as the consequent, we will refer to the sentences on either side of a biconditional as the \define{arguments} of the biconditional, where this is a general term for the sentences on which a logical connective operates.
+For instance, negation takes one argument (the negand), and so is a \define{unary} sentential operator.
+By contrast, all of the other logical connectives in SL take two arguments, and so are \textit{binary} sentential operators.
+Of course, the arguments of a given operator have nothing to do with the arguments we might evaluate for logical validity, though we have used the same term twice.
 
 We could easily make do without a new symbol for the biconditional.
 For instance, we could regiment \ref{iff3} as $(T \eif S)\eand(S\eif T)$.
@@ -816,7 +825,7 @@ Since any sequence of symbols is an expression, many expressions of SL will be n
 \end{earg}
 
 None of these are sentences in SL.
-A meaningful expression is called a \textit{well-formed formula}.
+A grammatical expression is called a \textit{well-formed formula}.
 It is common to use the acronym `wff' where the plural is `wffs'.
 
 Atomic sentence letters like $A$ and $G_{13}$ are certainly wffs.
@@ -830,8 +839,8 @@ Even though there is no point in trying to list all the wffs, we can still defin
 To begin with, we will describe the rules that govern the construction of wffs.
 These rules will matter a great deal in our later adventures in metalogic.
 Consider negation: given any wff \metaA{} of SL, $\enot\metaA{}$ is a wff of SL.
-Remember, \metaA{} is not itself a sentence; it is a variable that stands in for any wff at all.
-Since the variable \metaA{} is not a symbol of SL, `$\enot\metaA{}$' is not an expression of SL.
+Remember, `\metaA{}' is not itself a sentence; it is a variable that stands in for any wff at all.
+Since the variable `\metaA{}' is not a symbol of SL, `$\enot\metaA{}$' is not an expression of SL.
 Instead, it is an expression of the metalanguage that allows us to talk about infinitely many expressions of SL.
 For instance, we can say things like: For any $\metaA$, \ldots.
 
