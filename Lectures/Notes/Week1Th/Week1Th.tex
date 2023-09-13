@@ -37,7 +37,7 @@
 {\@author} % Author name
 \\\@date % Date
 
-\vspace{30pt} % Some vertical space between the author block and abstract
+\vspace{10pt} % Some vertical space between the author block and abstract
 \end{flushright}
 }
 
@@ -65,28 +65,72 @@
 
 % Previously we introduced the sentence letters and connectives, referring to the set of all sentences in SL
   % now we will define the sentences of SL a little more carefully
+  % to do so, we will:
+    % distinguish between object language and metalangauge
+    % use quotes to distinguish between use and mention
+    % use variables to quantify over the strings of SL
+    % use corner quotes to provide a recursive definition of the sentences of SL
+  % we will also relate the semantic clauses from before to truth-tables for each of the connectives
+
+\section*{Definitions}
+
+\begin{enumerate}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Previously:] We considered the sentences that could be constructed from the sentence letters with the connectives. We will now seek to specify this construction precisely.
+  \item[\it Object Language:] We will be concerned to define the sentences of SL, where the language of SL $\mathcal{L}=\tuple{\mathbb{L},\neg,\vee,\wedge,\supset,\equiv,(,)}$ will be referred to as the \textsc{object language}.
+  \item[\it Metalanguage:] We will present this definition with the resources of our \textsc{metalangauge} mathematical English.
+  \item[\it Strings:] A \textsc{string} (or \textsc{expression}) of SL is any sequence of symbols from the language of SL.
+  \item[\it Quotation:] To talk about strings we will need to name them, where a quoted string is the \textsc{canonical name} for the string quoted.
+  \item[\bf Example:] The argument $A, A\supset B \vdash B$ \textit{uses} the strings `$A$', `$A \supset B$', and `$B$'. By contrast, we may say that `$A$' is a sentence letter by using `$A$' to \textit{mention} $A$.
+  \item[\it Metalinguistic Variables:] Letting $\varphi,\psi,\chi,\ldots$ be variables whose values are strings, we may quantify over the strings of SL in order to define the sentences of SL.
+\end{enumerate}
 
 
 
 
+\section*{The Sentences of SL}
+
+\begin{enumerate}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item Every atomic sentence in $\mathbb{L}$ is a wff.
+  \item If $\varphi$ and $\psi$ are wffs, then:
+    \begin{enumerate}
+      \item $\neg\varphi$ is a wff;
+      \item $(\varphi\wedge\psi)$ is a wff;
+      \item $(\varphi\vee\psi)$ is a wff;
+      \item $(\varphi\supset\psi)$ is a wff; and
+      \item $(\varphi\equiv\psi)$ is a wff.
+    \end{enumerate}
+  \item Nothing else is a wff.
+\end{enumerate}
 
 
 
 
+\section*{Observations and Conventions}
+
+\begin{enumerate}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Corner Quotes:] Strictly speaking, this definition is non-sense and we need to use corner quotes to fix it.
+  \item[\it Conventions:] We will often drop quotes and parentheses for ease: $A\vee B\vee C$ vs $A\vee B\wedge C$.
+  \item[\it Sentences:] Since the wffs are good candidates for interpretation (it makes sense to assign them truth-values), we may identify the wffs with the sentences of SL. By contrast, the wffs of QL will not all be sentences of QL.
+  \item[\it Therefore:] We will use $\therefore$ or a line to represent arguments, though these are not parts of SL.
+\end{enumerate}
 
 
 
 
-% \section*{Definitions}
-%
-% \begin{enumerate}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
-%   \item[\it Proposition:] A \textsc{proposition} is a way for things to be which is either true or false.
-%   \item[\it Declarative Sentence:]  A \textsc{declarative sentence} is a grammatical string of symbols which, on an interpretation, expresses a proposition that is either true or false.
-%   \item[\it Argument:] An \textsc{Argument} is a finite sequence of declarative sentences where the final sentence is the \textsc{conclusion} and the preceding sentences are the \textsc{premises}.
-% \end{enumerate}
-%
-%
-%
+\section*{Truth Functionality}
+
+\begin{enumerate}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Sentential Operators:] The connectives are \textsc{sentential operators} which map sentences to sentences.
+  \item[\it Truth Functional:] $\I(\neg\varphi)=1-\I(\varphi)$;\\
+    $\I(\varphi\wedge\psi)=\I(\varphi)\times\I(\psi)$;\\
+    $\I(\varphi\vee\psi)=1-([1-\I(\varphi)]\times[1-\I(\psi)])$;\\
+    $\I(\varphi\supset\psi)=1-(\I(\varphi)\times[1-\I(\psi)])$;\\
+    \mbox{$\I(\varphi\equiv\psi)=[1-(\I(\varphi)\times[1-\I(\psi)])]\times[1-(\I(\psi)\times[1-\I(\varphi)])]$.}
+\end{enumerate}
+
+
+
+
 % \section*{Examples}
 %
 % \subsection*{\it \textbf{Snow}}

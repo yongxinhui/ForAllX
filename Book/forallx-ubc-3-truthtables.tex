@@ -7,22 +7,22 @@ This chapter introduces a way of evaluating sentences and arguments of SL. The t
 
 
 
-\section{Truth-functional connectives}
+\section{Truth-Functional Connectives}
 
-Any sentence of SL that is not a sentence letter is composed of sentence letters together with with sentential connectives.
+Any sentence of SL that is not a sentence letter is composed of sentence letters together with the sentential connectives.
 In Ch. \ref{ch.SL}, we offered truth tables for each connective.
 The fact that it is possible to give truth tables like this is very significant.
 It means that our connectives are \define{truth-functional}.
 That is to say, the only thing that matters for determining the truth value of a given sentence of SL is the truth values of its constituent parts.
-To determine the truth value of a sentence \enot\metaA{}, the only thing that matters is the truth value of \metaA{}.
-You don't have to know what \metaA{} means, or where it came from, or what evidence there is for it and what that evidence might depend on.
-The truth-value of a negation is a \emph{function} of the truth-value of its negand, and likewise for the other connectives.
+To determine the truth value of a sentence $\enot A$, the only thing that matters is the truth value of $A$.
+% You don't have to know what $A$ means, or where it came from, or what evidence there is for it and what that evidence might depend on.
+Given any interpretation, the truth-value of a negation on that interpretation is a \emph{function} of the truth-value of its negand on that interpretation, and likewise for the other connectives.
 
 We are using the same notion of a \define{function} that you have probably encountered in mathematics.
-A function from one set to another associates each member of the first set with exactly one member of the second set.
+A function from one set to another associates each member of the first set (the domain) with exactly one member of the second set (the range).
 Once the first element is fixed, the function uniquely selects an element of the second set.
-Any given numerical value of $x$ will unambiguously determine the value of $x^{2}$, for instance, so $f(x)=x^{2}$ is a function.
-In the same way, any given truth value of \metaA{} will unambiguously determine the value of \enot\metaA{}, which is why negation, too, is a function.
+For instance, any given numerical value of $x$ will unambiguously determine the value of $x^{2}$, so $f(x)=x^{2}$ is a function.
+In the same way, the truth value of $A$ on an interpretation will unambiguously determine the truth value of $\enot A$ on that interpretation.
 
 Truth-functionality is not inevitable.
 The syntax of English, for example, permits one to make a new, more complex English declarative sentence by prefixing the phrase `Ted Cruz doesn't care whether' in front of any declarative English sentence.
@@ -37,16 +37,14 @@ It is for this reason that we can construct truth tables to determine the logica
 
 \section{Complete truth tables}
 
-The truth-value of sentences are given by the truth table for the main connective in that sentence.
-Truth tables list out all the possible combinations of truth values for the atomic wffs at play; each row corresponds to a possible way of assigning truth values to sentence letters.
-For instance, \{$P=1$, $Q=1$\} is one way truth values could be assigned; \{$P=1$, $Q=0$\} is another.
+A truth table for a sentence may be constructed by writing the sentence in question at the top right of a table, and each of the distinct sentence letters immediately to the left on the top row.
+We then add $2^n$ rows below the top row where $n$ is the number of distinct sentence letters. 
+For instance, if there are only two sentence letters, we will need four rows of truth-values.
+Beginning with the sentence letter furthest to the left, we fill out the column with $2^{(n-1)}$ copies of 1 followed by $2^{(n-1)}$ copies of 0.
+Moving to the next sentence letter, we fill out the column with $2^{(n-2)}$ copies of 1 followed by $2^{(n-2)}$ copies of 0, and then repeating until all rows in the column are filled.
+We then proceed to the next sentence letter (if there is one), following the same pattern as before but with $2^{(n-3)}$ copies of 1 and 0, respectively.
 
-In the previous chapter, truth tables included `1' for true and `0' for false.
-It is important to note, however, that this is not about truth in any deep or cosmic sense.
-Philosophical investigation into the nature of truth is a worthy project in its own right, but the truth functions in SL are just rules which transform input values into output values.
-Mathematically, they are just the two possible values that a sentence of SL can have.
-In a machine, `1' might mean that a register is switched on and `0' that the register is switched off.
-The truth tables for the connectives of SL, written in terms of 1s and 0s, are given in table \ref{table.CharacteristicTTs}.
+In order to get a more concrete sense of this, we may begin with the following characteristic truth tables where instead of particular sentence letters, we will use metalinguistic variables:
 
 \begin{table}[htb]
 \begin{center}
@@ -70,12 +68,14 @@ The truth tables for the connectives of SL, written in terms of 1s and 0s, are g
 \label{table.CharacteristicTTs}
 \end{table}
 
+The table above provides a general recipe for calculating truth-values for any sentences \metaA{} and \metaB{}, however complex.
+The characteristic truth table for conjunction, for example, gives the truth conditions for any sentence of the form $\metaA{}\eand\metaB{}$.
+Even if the conjuncts \metaA{} and \metaB{} are long, complicated sentences, the conjunction is true if and only if both \metaA{} and \metaB{} are true.
 
-
-The characteristic truth table for conjunction, for example, gives the truth conditions for any sentence of the form $\metaA{}\eand\metaB{}$. Even if the conjuncts \metaA{} and \metaB{} are long, complicated sentences, the conjunction is true if and only if both \metaA{} and \metaB{} are true.
-
-
-Let's construct a truth table for a more complicated sentence. Consider the sentence $(H\eand I)\eif H$. We consider all the possible combinations of true and false for $H$ and $I$, which gives us four rows. We then copy the truth-values for the sentence letters and write them underneath the letters in the sentence.
+Let's construct a truth table for a more complicated sentence.
+For instance, consider the sentence $(H\eand I)\eif H$.
+We consider all the possible combinations of true and false for $H$ and $I$, which gives us four rows.
+We then copy the truth-values for the sentence letters and write them underneath the letters in the sentence.
 \begin{center}
 \begin{tabular}{c|c|@{\TTon}*{5}{c}@{\TToff}}
 $H$&$I$&$(H$&\eand&$I)$&\eif&$H$\\
@@ -122,7 +122,9 @@ They can be true or false in any combination, and the compound sentence still co
 It is crucial that we have considered all of the possible combinations.
 If we only had a two-line truth table, we could not be sure that the sentence was not false for some other combination of truth-values.
 Since each row of the truth table represents a different way of interpreting the relevant sentence letters $H$ and $I$, each row corresponds to a distinct interpretation of the sentence letters in question. 
-Thus we may conclude that the sentence $(H \eand I)\eif H$ as a whole is \textit{true in all interpretations}, or in other words, \textit{valid}. 
+Moreover, every possible combination of truth-values for $H$ and $I$ have been included.
+Since the truth-values of all other sentence letters does not effect the truth-value of the sentence in question, we may conclude that $(H \eand I)\eif H$ is \textit{true in all interpretations} whatsoever.
+In other words, $(H \eand I)\eif H$ is a \textit{tautology}.
 
 In this example, we have not repeated all of the entries in every successive table, so that it's easier for you to see which parts are new. When actually writing truth tables on paper, however, it is impractical to erase whole columns or rewrite the whole table for every step. Although it is more crowded, the truth table can be written in this way:
 \begin{center}
@@ -149,8 +151,7 @@ $C$&$[($&$C$&\eiff&$C$&$)$&\eif&$C$&$]$&\eand&\enot&$($&$C$&\eif&$C$&$)$\\
 \end{tabular}
 \end{center}
 Looking at the column underneath the main connective, we see that the sentence is false on both rows of the table; i.e., it is false regardless of whether $C$ is true or false.
-Since the rows of the truth table are the different possible interpretations of the relevant sentence letters, the sentence above is false on all interpretations and so a \textit{contradiction}.
-(See \S\ref{sec-tautologydef}.)
+Since the rows of the truth table correspond to the different possible interpretations of the relevant sentence letters, the sentence above is false on all interpretations, and so a \textit{contradiction}.
 
 A sentence that contains two sentence letters requires $2\times 2=$ four lines for a complete truth table, as in the other characteristic truth tables and the table for $(H \eand I)\eif I$ above.
 A sentence that contains three sentence letters requires $2\times 2\times 2=$ eight lines. For example:
@@ -184,23 +185,24 @@ In order to fill in the columns of a complete truth table, begin with the right-
 \subsection{Tautologies, contradictions, and contingent sentences}
 
 Recall from \S\ref{sec-tautologydef} that an English sentence is a tautology if it true on all interpretations.
-We now have a formal analogue for SL: a \define{tautology} of SL is any sentence of SL whose truth table only has 1s under its main connective, i.e., the sentence as a whole is true on all interpretations of its constituent sentence letters.
-Put yet another way, a tautology is a sentence of SL whose truth does not depend on the particular truth-values of the sentence letters from which it was built, but rather follows from the \textit{logical form} of that sentence.
-
-Similarly, a sentence is a \define{contradiction} in SL if the column under its main connective is 0 on every row of a complete truth table.
+Equivalently, we may define a \define{tautology} of SL is any sentence of SL whose truth table only has 1s under its main connective.
+Accordingly, a tautology is a sentence of SL whose truth does not depend on the particular truth-values of the sentence letters from which it was built, but rather follows from the \textit{logical form} of that sentence.
+Similarly, we could define a sentence as a \define{contradiction} in SL just in case the column under its main connective is 0 on every row of a complete truth table.
 Instead of being true in virtue of its logical form, a contradiction is false in virtue of its logical form.
 Recall that a sentence is \define{contingent} in SL if it is neither a tautology nor a contradiction.
-Accordingly, contingent sentences of SL will have 1 on at least one row while also having 0 on at least one row.
+Thus the contingent sentences of SL will have 1 on at least one row while also having 0 on at least one row.
 
 
 
 \subsection{Logical equivalence}
 
 Two sentences are logically equivalent in English if they have the same truth value on all interpretations.
-Truth tables allow us to define a formal analogue for SL: two sentences are \define{logically equivalent} in SL if the truth-values under their main connectives are the same on on every row of a complete truth table.
+Alternatively, we could define two sentences to be \define{logically equivalent} in SL if the truth-values under their main connectives are the same on every row of a complete truth table.
 Since the rows of a complete truth table exhaust the different interpretations of the relevant sentence letters, this amounts to requiring the two sentences of SL to have the same truth-value on every interpretation.
 
-Consider the sentences $\enot(A \eor B)$ and $\enot A \eand \enot B$. Are they logically equivalent? To find out, we construct a truth table.
+Consider the sentences $\enot(A \eor B)$ and $\enot A \eand \enot B$.
+Are they logically equivalent? 
+To find out, we construct a composite truth table which includes both sentences.
 \begin{center}
 \begin{tabular}{c|c|@{\TTon}*{4}{c}@{\TToff}|@{\TTon}*{5}{c}@{\TToff}}
 $A$&$B$&\enot&$(A$&\eor&$B)$&\enot&$A$&\eand&\enot&$B$\\
@@ -213,14 +215,18 @@ $A$&$B$&\enot&$(A$&\eor&$B)$&\enot&$A$&\eand&\enot&$B$\\
 \end{center}
 Look at the columns for the main connectives; negation for the first sentence, conjunction for the second. On the first three rows, both are 0. On the final row, both are 1. Since they match on every row, the two sentences are logically equivalent.
 
+
+
+
+
 \subsection{Consistency}
 
 Recall that a set of sentences in English is consistent if there is an interpretation which makes them all true at once.
-Thus we may say that a set of sentences in SL is \define{consistent} if there is at least one line of a complete truth table on which all of the sentences are true, and \define{inconsistent} otherwise.
+Thus we may say that a set of sentences in SL is \define{consistent} just in case there is at least one line of a complete truth table including every sentence in the set on which all of the sentences are true, and \define{inconsistent} otherwise.
+For instance, look again at the truth table above.
+We can see that $\enot(A \eor B)$ and $\enot A \eand \enot B$ are consistent, because there is at least one row, namely the last one, where both are assigned true.
 
-Look again at the truth table above. We can see that $\enot(A \eor B)$ and $\enot A \eand \enot B$ are consistent, because there is at least one row, namely the last one, where both are assigned true.
-
-Are $A$, $B$, and $\enot A \eand \enot B$ logically consistent?
+To take another example, are $A$, $B$, and $\enot A \eand \enot B$ logically consistent?
 No.
 If they were, there would have to be a row where all three sentences are assigned true.
 But examination of the truth table reveals that there is no such row, i.e., no such interpretation.
@@ -232,14 +238,40 @@ But examination of the truth table reveals that there is no such row, i.e., no s
 \subsection{Validity}
 \label{sub:validity}
 
-An argument in English is valid if there is no interpretation which makes the premises true and the conclusion false (at the same time).
-An argument is \define{valid in SL} if there is no row of a complete truth table on which the premises are all 1 and the conclusion is 0.
-An argument is \define{invalid in SL} if there \textit{is} at least one row where each of the premises is 1 but the conclusion is 0.
-Such a row provides a counterexample to validity.
+So far we have identified the rows of a truth-table for a relevant sentence, or set of sentences, with the relevant range of interpretations for that sentence, or set of sentences.
+Of course, truth tables are finite in size, and so cannot specify truth-values for every sentence letter whatsoever, much less for every sentence of SL.
+Rather, the rows of a truth table provide partial interpretations of SL by specifying all combinations of truth-values for some finite set of sentence letters.
+Insofar as the truth table includes all of the sentence letters that occur in the sentence(s) in question, the truth-values for all other sentence letters do not make a difference, and so may be safely ignored.
+Nevertheless, we cannot define the interpretations of SL as the rows of a truth table since no finite truth table specifies truth-values for every sentence letter.
+This motivates a slightly more general approach.
 
-Note that if there is no row of a complete truth table where the premises are all 1, then the argument is \textit{vacuously valid}.
-Hence, an argument with inconsistent premises will always be vacuously valid.
-Consider the following argument:
+Officially, we will take an \define{interpretation} of SL to be any function $\I$ which maps sentence letters to truth-values, thereby assigning every sentence letter to exactly one truth-value (either 1 or 0).
+Although interpretations only specify the truth-values of sentence letters, we may extend the domain of an interpretation to all sentences of SL by appealing to the characteristic truth tables given above.\footnote{This is to indulge in a slight abuse of notation. Instead of extending the domain of an interpretation $\I$, we could have recursively defined a \define{valuation function} $\mathcal{V}_{\I}$ for each $\I$ by replacing $\I$ with $\mathcal{V}_{\I}$ in the semantic clauses given above while specifying that $\mathcal{V}_{\I}(\metaA{})=\I(\metaA{})$ whenever $\metaA{}$ is a sentence letter.}
+Alternatively, we may provide the following semantic clauses for the connectives included in SL, where this amounts to the very same thing:
+
+\begin{enumerate}
+  \item[(\enot)] \quad $\I(\enot\metaA{})=1$ ~just in case~ $\I(\metaA{})=0$.
+  \item[(\eor)] \quad $\I(\metaA{} \eor \metaB{})=1$ ~just in case~ $\I(\metaA{})=1$ ~or~ $\I(\metaB{})=1$ ~(or both).
+  \item[(\eand)] \quad $\I(\metaA{} \eand \metaB{})=1$ ~just in case~ $\I(\metaA{})=1$ ~and~ $\I(\metaB{})=1$.
+  \item[(\eif)] \quad $\I(\metaA{} \eif \metaB{})=1$ ~just in case~ $\I(\metaA{})=0$ ~or~ $\I(\metaB{})=1$ ~(or both).
+  \item[(\eiff)] \quad $\I(\metaA{} \eiff \metaB{})=1$ ~just in case~ $\I(\metaA{})=\I(\metaB{})$.
+\end{enumerate}
+
+The clauses above hold for all sentences \metaA{} and \metaB{} of SL, thereby extending any interpretation $\I$ of SL so as to specify unique truth-values for every sentence of SL.
+Whereas the characteristic truth tables for the connectives specifies the truth-values of complex sentences visually, the semantic clauses specify the same information functionally.
+Although the characteristic truth tables may be easier to interpret, semantic clauses extend the definition of an interpretation to cover all sentences in SL.
+This is an advantage in defining logical validity.
+
+An argument in SL is \define{logically valid} just in case every interpretation $\I$ of SL which makes the premises true also makes the conclusion true.
+Alternatively, we could take an argument in SL to be \define{logically valid} just in case every line in a complete truth table which includes every sentence in the argument is such that if the premises are true on that line, the conclusion is also true on that line.
+Even though the lines of a truth table do not specify truth-values for all sentence letters of SL, only the sentence letters that occur in the argument are relevant, and so the truth-values of all other sentence letters may be safely ignored.
+Accordingly, these two definitions are equivalent.
+Nevertheless, it is definitionally simpler to quantify over all interpretations $\I$ of SL rather than the lines of an appropriately constructed complete truth table for the argument in question.
+
+It will often be convenient to drop `logically' from `logically valid'.
+It follows by the lights of the first definition of validity that an argument in SL is valid just in case there is no interpretation $\I$ of SL in which the premises are true and the conclusion is false.
+Accordingly, an argument whose premises are inconsistent is \textit{vacuously valid} since there is no interpretation $\I$ in which its premises are true, and so as a result, no interpretation $\I$ in which its premises are true and its conclusion is false.
+For instance, consider the following argument:
     
 \begin{earg}
 \item[] $\neg A \eand B$
@@ -262,12 +294,16 @@ To check your work, we can construct the following truth table:
 \end{tabular}
 \end{center}
 
-We may now check whether there are any rows in which the premises are 1 and the conclusion is 0.
 It is easy to see that there is no row in which the premises are all 1, and so it follows trivially that there are no rows in which the premises are 1 and the conclusion is 0.
 Thus the argument is valid.
-More generally, any argument with inconsistent premises will be valid.
+Instead of appealing to the truth table for this argument, we may prove that the argument is valid by assuming that there is an interpretation $\I$ which makes the premises true and the conclusion false. 
+Accordingly $\I(\enot A \eand B)=\I(\enot B)=1$ and $\I(B)=0$.
+It follows by the semantics for $\eand$ that $\I(B)=1$, and from the semantics for $\enot$ that $\I(B)=0$, and so $\I(B)\neq 1$.
+This is a contradiction, since $B$ cannot be both true and not true on any given interpretation.
+Thus there is no such interpretation $\I$, and so the argument is valid.
+More generally, any argument with inconsistent premises is be valid.
 
-Consider the following argument:
+It is worth contrasting the case above with the following argument:
 
 \begin{earg}
 \item[] $\enot L \eif (J \eor L)$
@@ -275,7 +311,7 @@ Consider the following argument:
 \item[\therefore] $J$
 \end{earg}
 
-It is worth consulting your intuitions in evaluating arguments before beginning to compute its truth table.
+It is good practice to consulting your intuitions in evaluating arguments before beginning to compute its truth table.
 Once you have a guess about its validity, consider the following:
 
 \begin{center}
@@ -291,8 +327,9 @@ $J$&$L$&\enot&$L$&\eif&$(J$&\eor&$L)$&\enot&L&J\\
 \end{center}
 
 To determine whether the argument is valid, check to see whether there are any rows on which both premises are assigned 1, but where the conclusion is assigned 0.
-The only row on which both the premises are 1 is the second row, and on that row the conclusion is also 1.
-So the argument is valid in SL.
+Notice that unlike the previous argument, there is a row in which both premises are 1.
+Nevertheless, the only row on which both the premises are 1 is the second row, and on that row the conclusion is also 1.
+So the argument is valid in SL, though it is not vacuously valid as before.\footnote{Can you use the semantics to prove that the argument is valid in the style presented above?}
 
 Here is another example.
 Is this argument valid?
@@ -304,7 +341,7 @@ Again, try to think about it first.
 \item[\therefore] $\enot Q$
 \end{earg}
 
-To evaluate it, construct a truth table and see whether there is a row that assigns 1 to the premises and 0 to the conclusion:
+To evaluate it, construct a truth table and check whether there is a row that assigns 1 to the premises and 0 to the conclusion:
 
 \begin{center}
 \begin{tabular}{@{ }c@{ }@{ }c | c@{ }@{ }c@{ }@{ }c@{ }@{ }c@{ }@{ }c | c@{ }@{ }c | c@{ }@{ }c}
@@ -317,9 +354,13 @@ $P$ & $Q$ &  & $P$ & $\eif$ & $Q$ &  & $\enot$ & $P$ & $\enot$ & $Q$\\
 \end{tabular}
 \end{center}
 
-There is.
 On the third row, the premises are true and the conclusion is false.
-So the argument is invalid in SL.
+Thus the argument is invalid in SL.
+We may establish much the same by taking $\I$ to be an interpretation of SL which makes the premises true and the conclusion false. 
+Thus $\I(P \eif Q)=\I(\enot P)=1$ and $\I(\enot Q)=0$. 
+By the semantic clause for $\enot$ we know that $\I(P)=0$ and $\I(Q)=1$.
+Moreover, this is perfectly consistent with $\I(P \eif Q)=1$.
+Accordingly, any interpretation $\I$ in which $\I(P)=0$ and $\I(Q)=1$ where the truth-values of all other sentence letters are arbitrary counts as a counterexample to the validity of the argument above. 
 
 
 
