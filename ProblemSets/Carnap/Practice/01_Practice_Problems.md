@@ -97,7 +97,7 @@ PP1.3 ~H: Mandy doesn't like hiking
 Note that once you enter a correct solution, the system will show you
 a dialog that either says "Perfect match" or "Correct" or "Logically equivalent to
 a standard translation" if your solution wasn't exactly identical to
-the solution *Carnap* knows about (e.g. is you entered ~~~H above). The English sentence will then be
+the solution *Carnap* knows about. The English sentence will then be
 highlighted in green, and *Carnap* puts a checkmark next to it. 
 
 Remember that *Carnap* forgets the solutions you entered but haven't

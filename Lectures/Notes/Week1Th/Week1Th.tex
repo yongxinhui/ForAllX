@@ -66,8 +66,8 @@
 
 \begin{enumerate}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
   \item[\it Previously:] We considered the sentences that could be constructed from the sentence letters with the connectives. We will now seek to specify this construction precisely.
-  \item[\it Object Language:] We will be concerned to define the sentences of SL, where the language of SL $=\tuple{\mathbb{L},\neg,\vee,\wedge,\supset,\equiv,(,)}$ will be referred to as the \textsc{object language}.
-  \item[\it Strings:] An \textsc{expression} of SL is any string of symbols from the language of SL.
+  \item[\it Object Language:] We will be concerned to define the sentences of SL, where the language of SL $=\tuple{\mathbb{L},\neg,\wedge,\vee,\supset,\equiv,(,)}$ will be referred to as the \textsc{object language}.
+  \item[\it Strings:] An \textsc{expression} of SL is any finite string of symbols from the language of SL.
   \item[\it Quotation:] To talk about strings we will need to name them, where a quoted string is the \textsc{canonical name} for the string quoted.
   \item[\it Use/Mention:] We mention expressions by putting them in quotes, where otherwise they are used.
   \item[\bf Example 1:] `Sue' is a three letter name but Sue is not.
@@ -82,16 +82,16 @@
 \section*{The Sentences of SL}
 
 \begin{enumerate}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
-  \item Every atomic sentence in $\mathbb{L}$ is a wff.
-  \item If $\varphi$ and $\psi$ are wffs, then:
+  \item Every atomic sentence in $\mathbb{L}$ is a wff of SL.
+  \item If $\varphi$ and $\psi$ are wffs of SL, then:
     \begin{enumerate}
-      \item $\neg\varphi$ is a wff;
-      \item $(\varphi\wedge\psi)$ is a wff;
-      \item $(\varphi\vee\psi)$ is a wff;
-      \item $(\varphi\supset\psi)$ is a wff; and
-      \item $(\varphi\equiv\psi)$ is a wff.
+      \item $\neg\varphi$ is a wff of SL;
+      \item $(\varphi\wedge\psi)$ is a wff of SL;
+      \item $(\varphi\vee\psi)$ is a wff of SL;
+      \item $(\varphi\supset\psi)$ is a wff of SL; and
+      \item $(\varphi\equiv\psi)$ is a wff of SL.
     \end{enumerate}
-  \item Nothing else is a wff.
+  \item Nothing else is a wff of SL.
 \end{enumerate}
 
 
@@ -101,10 +101,11 @@
 
 \begin{enumerate}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
   \item[\it Corner Quotes:] Strictly speaking, this definition is non-sense and we need to use corner quotes to fix it.
+  \item[\it Well-formed Formulas:] The wffs are the grammatical expressions of SL of type $t$, and so candidates for interpretation.
+  \item[\it Sentences:] Since all wffs in SL are \textit{good} candidates for interpretation (it makes sense to assign them truth-values), we may identify the wffs with the sentences of SL. By contrast, not all the wffs of QL are sentences of QL.
+  \item[\it Sentential Variables:] Restrict $\varphi,\psi,\chi,\ldots$ to sentences of SL.
   \item[\bf Task 1:] Build increasingly complex sentences from just $A$.
   \item[\it Conventions:] We will often drop quotes and parentheses for ease: $A\vee B\vee C$ vs $A\vee B\wedge C$.
-  \item[\it Well-formed Formulas:] The wffs are the grammatical expressions of SL, and so candidates for interpretation.
-  \item[\it Sentences:] Since all wffs in SL are \textit{good} candidates for interpretation (it makes sense to assign them truth-values), we may identify the wffs with the sentences of SL. By contrast, not all the wffs of QL are sentences of QL.
   \item[\it Therefore:] $\therefore$ is not part of SL.
 \end{enumerate}
 
@@ -119,19 +120,20 @@
   \item[\it Sentential Operators:] The connectives are \textsc{sentential operators} which map sentences to sentences.
   \item[\it Interpretations:] Last time we said that an \textsc{interpretation} $\I$ assigns truth-values to sentence letters.
   \item[\it Valuation:] We may then define a \textsc{valuation} function $\V{\I}$ which assigns truth-values to every sentence of SL by way of the following semantic clauses:
-    \item[($A$)] $\V{\I}(\neg\varphi)=\I(\varphi)$ iff $\varphi$ is a sentence letter of SL.
-    \item[($\neg$)] $\V{\I}(\neg\varphi)=1$ iff $\V{\I}(\varphi)=0$.
-    \item[($\vee$)] $\V{\I}(\varphi \vee \psi)=1$ iff $\V{\I}(\varphi)=1$ or $\V{\I}(\psi)=1$ (or both).
+    \item[($A$)] $\V{\I}(\varphi)=\I(\varphi)$ iff $\varphi$ is a sentence letter of SL.
+    \item[($\neg$)] $\V{\I}(\neg\varphi)=1$ iff $\V{\I}(\varphi)=0$ (i.e., $\V{\I}(\varphi)\neq 1$).
     \item[($\wedge$)] $\V{\I}(\varphi \wedge \psi)=1$ iff $\V{\I}(\varphi)=1$ and $\V{\I}(\psi)=1$.
+    \item[($\vee$)] $\V{\I}(\varphi \vee \psi)=1$ iff $\V{\I}(\varphi)=1$ or $\V{\I}(\psi)=1$ (or both).
     \item[($\supset$)] $\V{\I}(\varphi \supset \psi)=1$ iff $\V{\I}(\varphi)=0$ or $\V{\I}(\psi)=1$ (or both).
     \item[($\equiv$)] $\V{\I}(\varphi \equiv \psi)=1$ iff $\V{\I}(\varphi)=\V{\I}(\psi)$.
-  \item[\it Homophonic Semantics:] The semantics for $\neg$, $\wedge$, and $\vee$ uses analogous operators in the metalanguage. 
+  \item[\it Homophonic Semantics:] The semantics for $\neg$, $\wedge$, and $\vee$ use analogous operators in the metalanguage, but not so for $\supset$ and $\equiv$. 
   \item[\it Truth Functional:] $\V{\I}(\neg\varphi)=1-\V{\I}(\varphi)$;\\
-    $\V{\I}(\varphi\wedge\psi)=\V{\I}(\varphi)\times\V{\I}(\psi)$;\\
-    $\V{\I}(\varphi\vee\psi)=1-([1-\V{\I}(\varphi)]\times[1-\V{\I}(\psi)])$;\\
-    $\V{\I}(\varphi\supset\psi)=1-(\V{\I}(\varphi)\times[1-\V{\I}(\psi)])$;\\
-    \mbox{$\V{\I}(\varphi\equiv\psi)=[1-(\V{\I}(\varphi)\times[1-\V{\I}(\psi)])]\times[1-(\V{\I}(\psi)\times[1-\V{\I}(\varphi)])]$.}
-  \item[\bf Task 2:] How many binary truth-functions are there?
+    $\V{\I}(\varphi\wedge\psi)=\V{\I}(\varphi)\times\V{\I}(\psi)$.
+  \item[\sc Homework:] Given an interpretation $\I$, specify the truth-values of $\varphi\vee\psi$, $\varphi\supset\psi$, and $\varphi\equiv\psi$ as a function of the truth-values of $\varphi$ and $\psi$ in a similar fashion as above.
+    % $\V{\I}(\varphi\vee\psi)=1-([1-\V{\I}(\varphi)]\times[1-\V{\I}(\psi)])$;\\
+    % $\V{\I}(\varphi\supset\psi)=1-(\V{\I}(\varphi)\times[1-\V{\I}(\psi)])$;\\
+    % \mbox{$\V{\I}(\varphi\equiv\psi)=[1-(\V{\I}(\varphi)\times[1-\V{\I}(\psi)])]\times[1-(\V{\I}(\psi)\times[1-\V{\I}(\varphi)])]$.}
+  \item[\bf Task 2:] How many unary/binary truth-functions are there?
 \end{enumerate}
 
 
@@ -181,11 +183,11 @@
 \end{enumerate}
 
 \noindent
-\textit{Observe:} Conjunction in English tracks temporal order.
+\textit{Observe:} Conjunction in English can track temporal order.
 \vspace{.05in}
 
 \noindent
-\textit{Question:} How can we capture the invalidity of this argument?
+\textit{Question:} How can we capture the invalidity of this argument in SL?
 
 
 
@@ -202,7 +204,7 @@
 \end{enumerate}
 
 \noindent
-\textit{Observe:} We cannot regiment the conclusion with inclusive `or'.
+\textit{Observe:} We cannot regiment the conclusion with inclusive-`or'.
 \vspace{.05in}
 
 \noindent
@@ -212,12 +214,82 @@
 
 \section*{The Material Conditional}
 
+\subsection*{\it \textbf{Square}}
+
+\begin{enumerate}
+  \item[(1)] The rug is square.
+  \item[\therefore] If the rug is triangular, then it is square.
+\end{enumerate}
+
+\noindent
+\textit{Regiment:} Use $S$ and $T$ to regiment this argument. 
+\vspace{.05in}
+
+\noindent
+\textit{Observe:} It is natural to provide a modal reading for the conclusion.
+\vspace{.05in}
+
+\noindent
+\textit{Conclude:} The material conditional does not track possibilities.
+
+
+
+
+\subsection*{\it \textbf{Roses}}
+
+\begin{enumerate}
+  \item[(1)] Sugar is sweet.
+  \item[\therefore] Roses are only red if sugar is sweet.
+\end{enumerate}
+
+
+
+
+\subsection*{\it \textbf{Vacation}}
+
+\begin{enumerate}
+  \item[(1)] Casey is not on vacation.
+  \item[\therefore] If Casey is on vacation, then he is in Paris.
+\end{enumerate}
+
+
+
+
+
+\subsection*{\it \textbf{Crimson}}
+
+\begin{enumerate}
+  \item[(1)] Mary only likes the ball if it is crimson.
+  \item[(2)] Mary likes the ball.
+  \item[\therefore] If the ball is blue, then Mary likes it.
+\end{enumerate}
+
+
+
 
 
 
 \section*{Biconditional}
 
+\subsection*{\it \textbf{Rectangle}}
 
+\begin{enumerate}
+  \item[(1)] The room is a square.
+  \item[(2)] The room is a rectangle.
+  \item[\therefore] The room is a square if and only if it is a rectangle.
+\end{enumerate}
+
+
+
+
+
+\subsection*{\it \textbf{Roses}}
+
+\begin{enumerate}
+  \item[(1)] Kin isn't a professor.
+  \item[(2)] Sue isn't a chef.
+  \item[\therefore] Kin is a professor just in case Sue is a chef.
+\end{enumerate}
 
 
 

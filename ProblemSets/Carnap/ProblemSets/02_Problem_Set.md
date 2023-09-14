@@ -9,10 +9,10 @@ css: https://carnap.io/shared/rzach@ucalgary.ca/dark-mode.css
 <br />
 
 <!---
-This is problem set 2 for MIT Fall 2022 Logic I, 24.241.
+This is problem set 2 for MIT Fall 2023 Logic I, 24.241.
 Most problems come from Tappenden UMichigan 303 problem Set 2. A couple problems come from come from Zach Problem Set 3, modified for LogicBookSD system. Sometimes using IchikawaJenkinsSL to display brackets as well as parentheses.
 
-Description for students: Problem Set 2! Mostly truth tables and basic semantic concepts (validity, equivalence, consistency). Due Friday 9/23 at 5pm Eastern. 
+Description for students: Problem Set 2! Mostly truth tables and basic semantic concepts (validity, equivalence, consistency). Due Friday 09/21 at 5pm Eastern. 
 
 Comments to self can be entered with [blah blah]:: or [](blah blah). Former needs an empty space before the line! 
 
@@ -98,11 +98,10 @@ PS2.5 (A & B) > C, C & (D > A), A <> (B > D)
 PS2.6 ~(H <> I), ~(I & J), ~(H & J), H \/ (I & J)
 ~~~
 
-Determine if the following two sentences are equivalent
-in Sentential Logic (SL) using a complete truth table. If they are INequivalent, then click `inequivalent` and enter a truth value assignment to the atomic sentence letters that shows this. 
+Determine if the following two sentences are equivalent in Sentential Logic (SL) using a complete truth table. If they are INequivalent, then click `inequivalent` and enter a truth value assignment to the atomic sentence letters that shows this. 
 
 ~~~{.TruthTable .Simple counterexample-to="equivalence" system="LogicBookSD" options="autoAtoms nodash exam nocheck" points=8}
-PS2.7 ~(A -> B),      A /\ ~B
+PS2.7 ~(A -> B), A /\ ~B
 ~~~
 
 ###Part 3: Another Truth Table
