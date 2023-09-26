@@ -1,4 +1,4 @@
-
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
 \usepackage[protrusion=true,expansion=true]{microtype} % Better typography
 \usepackage{graphicx} % Required for including pictures
 \usepackage{wrapfig} % Allows in-line images
@@ -62,12 +62,167 @@
 
 %----------------------------------------------------------------------------------------
 
-%%% OUTLINE
-
-\section*{Definitions}
+\section*{Truth Functions}
 
 \begin{enumerate}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
-  \item[\it Previously:] 
+  \item[\it Previously:] For an interpretation $\I$, a \textsc{valuation} function $\V{\I}$ is the smallest function to assign truth-values to every sentence of SL that satisfies the semantic clauses:
+    \item[($A$)] $\V{\I}(\varphi)=\I(\varphi)$ iff $\varphi$ is a sentence letter of SL.
+    \item[($\neg$)] $\V{\I}(\neg\varphi)=1$ iff $\V{\I}(\varphi)=0$ (i.e., $\V{\I}(\varphi)\neq 1$).
+    \item[($\wedge$)] $\V{\I}(\varphi \wedge \psi)=1$ iff $\V{\I}(\varphi)=1$ and $\V{\I}(\psi)=1$.
+    \item[($\vee$)] $\V{\I}(\varphi \vee \psi)=1$ iff $\V{\I}(\varphi)=1$ or $\V{\I}(\psi)=1$ (or both).
+    \item[($\supset$)] $\V{\I}(\varphi \supset \psi)=1$ iff $\V{\I}(\varphi)=0$ or $\V{\I}(\psi)=1$ (or both).
+    \item[($\equiv$)] $\V{\I}(\varphi \equiv \psi)=1$ iff $\V{\I}(\varphi)=\V{\I}(\psi)$.
+  \item[\it Truth Tables:] Use the semantics to fill out the \textsc{characteristic truth tables} given below:
+\end{enumerate}
+
+
+\begin{table}[htb]
+\begin{center}
+\begin{tabular}{c|c}
+$\varphi$ & $\neg\varphi$\\
+\hline
+1 & 0\\
+0 & 1 
+\end{tabular}
+\ \ \ \ 
+\begin{tabular}{c|c|c|c|c|c}
+$\varphi$ & $\psi$ & $\varphi\wedge\psi$ & $\varphi\vee\psi$ & $\varphi\supset\psi$ & $\varphi\equiv\psi$\\
+\hline
+1 & 1 & 1 & 1 & 1 & 1\\
+1 & 0 & 0 & 1 & 0 & 0\\
+0 & 1 & 0 & 1 & 1 & 0\\
+0 & 0 & 0 & 0 & 1 & 1
+\end{tabular}
+\end{center}
+% \caption{The characteristic truth tables for the connectives of SL.}
+% \label{table.CharacteristicTTs}
+\end{table}
+
+
+\begin{enumerate}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Sentential Operators:] The connectives are \textsc{sentential operators} which map sentences to sentences.
+  \item[\it Truth Functional:] The connectives express truth-functions:\\ 
+    $\V{\I}(\neg\varphi)=1-\V{\I}(\varphi)$;\\
+    $\V{\I}(\varphi\wedge\psi)=\V{\I}(\varphi)\times\V{\I}(\psi)$.
+  \item[\sc Homework:] Given an interpretation $\I$, specify the truth-values of $\varphi\vee\psi$, $\varphi\supset\psi$, and $\varphi\equiv\psi$ as a function of the truth-values of $\varphi$ and $\psi$ in a similar fashion as above.
+    % $\V{\I}(\varphi\vee\psi)=1-([1-\V{\I}(\varphi)]\times[1-\V{\I}(\psi)])$;\\
+    % $\V{\I}(\varphi\supset\psi)=1-(\V{\I}(\varphi)\times[1-\V{\I}(\psi)])$;\\
+    % \mbox{$\V{\I}(\varphi\equiv\psi)=[1-(\V{\I}(\varphi)\times[1-\V{\I}(\psi)])]\times[1-(\V{\I}(\psi)\times[1-\V{\I}(\varphi)])]$.}
+  \item[\bf Task 1:] How many unary/binary truth-functions are there?
+  \item[\it Adequacy:] Given the expressive limitations of SL, what should we hope to be able to adequately regiment?
+\end{enumerate}
+
+
+
+
+
+\section*{Examples}
+
+\subsection*{\sc Complex Arguments}
+
+\subsubsection*{\it \textbf{Rain}}
+
+\begin{enumerate}
+  \item[(1)] If it is raining on a week day, Sam took his car.
+  \item[(2)] Kate borrowed Sam's car only if Sam did not take it.
+  \item[(3)] Kate borrowed Sam's car just in case she visited her parents.
+  \item[(3)] It is raining and Kate visited her parents.
+  \item[\therefore] It is not a week day.
+\end{enumerate}
+
+\noindent
+\textbf{Task 2:} Regiment this argument and construct its truth table.
+\vspace{.05in}
+
+\noindent
+\textit{Observe:} This argument can be adequately regimented and evaluate in SL.
+
+
+\subsection*{\sc Conjunction}
+
+\subsubsection*{\it \textbf{Gym}}
+
+\begin{enumerate}
+  \item[(1)] Kate took a shower and went to the gym.
+  \item[\therefore] Kate went to the gym and took a shower.
+\end{enumerate}
+
+\noindent
+\textbf{Task 3:} Regiment this argument and construct its truth table.
+\vspace{.05in}
+
+\noindent
+\textit{Observe:} Conjunction in English can track temporal order.
+\vspace{.05in}
+
+\noindent
+\textit{Question:} How can we capture the invalidity of this argument in SL?
+
+
+
+
+\subsection*{\sc Disjunction}
+
+\subsection*{\it \textbf{Vault}}
+
+\begin{enumerate}
+  \item[(1)] If Kin uses the remote, the trunk will open. 
+  \item[(2)] If Adi tries the handle, the trunk will open.
+  \item[(3)] If Kin uses the remote and Adi tries the handle, the trunk won't open.
+  \item[\therefore] If Kin uses the remote or Adi tries the handle, the trunk will open. 
+\end{enumerate}
+
+\noindent
+\textbf{Task 4:} Regiment this argument and construct its truth table.
+\vspace{.05in}
+
+\noindent
+\textit{Observe:} We cannot regiment the conclusion with inclusive-`or'.
+\vspace{.05in}
+
+\noindent
+\textit{Question:} Can we salvage the validity of this argument?
+
+
+
+\subsection*{\sc The Material Conditional}
+
+\subsubsection*{\it \textbf{Roses}}
+
+\begin{enumerate}
+  \item[(1)] Sugar is sweet.
+  \item[\therefore] The roses are only red if sugar is sweet.
+\end{enumerate}
+
+
+\noindent
+\textbf{Task 5:} Regiment this argument and construct its truth table.
+\vspace{.05in}
+
+\noindent
+\textit{Observe:} The locution `only if' appears to assert something stronger than $\supset$.
+\vspace{.05in}
+
+
+
+
+\subsubsection*{\it \textbf{Vacation}}
+
+\begin{enumerate}
+  \item[(1)] Casey is not on vacation.
+  \item[\therefore] If Casey is on vacation, then he is in Paris.
+\end{enumerate}
+
+
+
+
+
+\subsubsection*{\it \textbf{Crimson}}
+
+\begin{enumerate}
+  \item[(1)] Mary doesn't like the ball unless it is crimson.
+  \item[(2)] Mary likes the ball.
+  \item[\therefore] If the ball is blue, then Mary likes it.
 \end{enumerate}
 
 
@@ -75,44 +230,80 @@
 
 
 
+\subsection*{\sc The Biconditional}
 
+\subsubsection*{\it \textbf{Rectangle}}
+
+\begin{enumerate}
+  \item[(1)] The room is a square.
+  \item[(2)] The room is a rectangle.
+  \item[\therefore] The room is a square if and only if it is a rectangle.
+\end{enumerate}
+
+
+
+
+
+\subsubsection*{\it \textbf{Work}}
+
+\begin{enumerate}
+  \item[(1)] Kin isn't a professor.
+  \item[(2)] Sue isn't a chef.
+  \item[\therefore] Kin is a professor just in case Sue is a chef.
+\end{enumerate}
+
+
+
+
+\section*{Applications}
+
+\begin{enumerate}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Objection:] The semantics for SL is not good for anything.
+  \item[\it Response:] SL is perfect for necessary claims (like in mathematics), as well as sentences where we only care about their truth-value as opposed to their modal profile or subject-matter.
+\end{enumerate}
+
+
+
+
+% \section*{Further Notions}
+%
+% \begin{enumerate}[leftmargin=1.2in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+%   \item[\it Validity:] An argument in SL is \textit{valid} just in case its conclusion is true in any interpretation in which its premises are true.
+%   \item[\it Soundness:] An argument is \textit{sound} just in case it is both valid and has true premises.
+%   \item[\it Truth:] Soundness reaches beyond the scope of any logic course since truth on an interpretation requires subject-specific knowledge.
+%   \item[\it Tautology:] We can talk about sentences of formal languages being \textit{tautologies} just in case they are true on all interpretations.
+%   \item[\it Contradiction:] A sentence is a \textit{contradiction} just in case it is false on all interpretations.
+%   \item[\it Logical Entailment:] One sentence \textit{logically entails} another just in case every interpretation in which the former is true also makes the latter true.
+%   \item[\it Logical Equivalence:] One sentence is \textit{logically equivalent} to another just in case they logically entail each other.
+%   \item[\it Consistency:] A set of sentences is \textit{consistent} just in case there is an interpretation which makes every sentence in the set true, and \textit{inconsistent} otherwise.
+% \end{enumerate}
+%
+%
+%
 % \section*{Examples}
 %
-% \subsection*{\it \textbf{Snow}}
+% \noindent
+% Which sets of sentences are consistent? (e.g., is $\set{(1),(2)}$ consistent?)
+%
+% \subsection*{\it \textbf{Taller}}
 %
 % \begin{enumerate}
-%   \item[(1)] It's snowing.
-%   \item[\therefore] John drove to work.
+%   \item[(1)] Liza is taller than Sue.
+%   \item[(2)] Sue is taller than Paul.
+%   \item[(3)] Paul is taller than Liza.
 % \end{enumerate}
 %
-% \noindent
-% \textit{This argument may be compelling, but not certain.}
 %
-% \subsection*{\it \textbf{Red}}
+%
+%
+% \subsection*{\it \textbf{Lost}}
 %
 % \begin{enumerate}
-%   \item[(1)] The ball is crimson.
-%   \item[\therefore] The ball is red.
+%   \item[(4)] Kim is either in Somerville or Cambridge.
+%   \item[(5)] If Kim is in Somerville, then she is not far from home.
+%   \item[(6)] If Kim is not far from home, then she is in Cambridge.
+%   \item[(7)] Kim is not in Cambridge.
 % \end{enumerate}
-%
-% \noindent
-% \textit{This argument provides certainty, but not on all interpretations.}
-%
-% \subsection*{\it \textbf{Museum}}
-%
-% \begin{enumerate}
-%   \item[(1)] Kate is either at home or at the Museum.
-%   \item[(2)] Kate is not at home.
-%   \item[\therefore] Kate is at the Museum.
-% \end{enumerate}
-%
-% \noindent
-% \textit{This argument's certainty is independent of the interpretation.}
-
-
-
-
-
 
 
 

@@ -1,0 +1,149 @@
+\documentclass[12pt]{article}
+
+\usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+ 
+ \iffalse
+ \textheight     11truein
+ \vsize     10.0truein
+ \topmargin      .15truein
+ \textwidth 6.5truein \columnwidth \textwidth 
+ \setlength{\oddsidemargin}{0truein} 
+ %\footheight     0.0truein
+ \footskip       0.75truein
+ \headheight     .25truein
+ \headsep        0.25truein
+ \fi 
+
+\usepackage{amsmath} %for align* environment and gather*
+\usepackage{xref}
+ %    \textheight     10.0truein
+ \usepackage{graphics}
+ \usepackage{pstricks}
+% \usepackage{pst-tree}
+% \usepackage{pst-node,pst-tree}
+ \usepackage{makeidx}
+ 
+ \def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
+% disjunction
+\def\eor{\ensuremath{\vee}}
+% conjunction: 
+% {\,^{_{_{_{_{\mbox{\footnotesize\textbullet}}}}}}} gives the dot
+\def\eand{\ensuremath{\,\&\,}}
+% conditional: \rightarrow gives the right arrow
+\def\eif{\ensuremath{\supset}}
+% biconditional: \leftrightarrow gives the left and right arrow
+\def\eiff{\ensuremath{\equiv}}
+% negation: {\sim} gives the swung dash 
+%\def\enot{\ensuremath{\neg}}
+%\def\enot{\ensuremath{\sim}} %note that \sim is defined as a relation, which leads to spacing issues. adding a \! leads to more spacing issues (piled up double negations).  
+
+\def\enot{\ensuremath{{\sim}}} %redefining as {\sim} treats the tilde as a unary operator, rather than a relation, solving a lot of the spacing issues. 
+
+\let\oldsim\sim %renames any \sim commands as \oldsim. 
+\renewcommand{\sim}{{\oldsim}} %redefines \sim as unary operator version of \sim, in case there are any straggling \sim commands in the wild
+
+ \pagestyle{empty}
+
+\begin{document}
+
+\input macs
+%\input fitch
+\newcommand{\detritus}[1]{}
+
+
+\thispagestyle{empty}
+
+%**************CREDIT TO GORDON BELOT FOR THESE PROBLEMS (as far as I know)******************
+%*********from his 303 problem sets 3 and 4 *************************************
+
+% \iffalse
+\parindent = 0pt
+\hspace*{0.0in}\parbox[t]{2.5in}{
+Philosophy 24.241\\[3pt]
+Symbolic Logic\\[3pt]
+Fall, 2023
+}
+% \fi 
+
+%\bigskip %\bigskip
+
+\iffalse
+\begin{center}
+\Large\bf Problem Set 4\\[1ex] 
+ Due Fri. {\bf{October 7th}} by 5pm Eastern\\[3ex]
+\end{center}
+\fi
+
+\begin{center}
+  \Large Problem Set 3\\[1ex] 
+  Due Fri. September 29th by 5pm Eastern
+  \vspace{.15in}
+
+  \normalsize{(Please scan and upload to Canvas as a pdf)}\\[3ex] 
+\end{center}
+
+Question 0: If you worked with up to two classmates, please list their names! 
+%Some of these problems draw from the posted Induction and Recursion notes.\\
+
+%For questions 1 and 2, provide good translations of the following arguments into the language of sentential logic. Then, investigate their validity using the tree method (STD)
+
+\begin{enumerate}
+  \item[1.]
+    \begin{itemize}
+      \item[(i)] Regiment the following argument in SL.
+      \item[(ii)] Then, evaluate the validity of the resulting SL argument using the tree method.
+    \end{itemize}
+    \item[] \textit{If the lawyer did it, then the doctor did not. Therefore, if the doctor did it, then the lawyer did not.}
+    \item[] Symbolization Key: B = the lawyer did it; G = the doctor did it.
+      \vspace{.1in}
+
+  \item[2.] 
+    \begin{itemize}
+      \item[(i)] Regiment the following argument in SL.
+      \item[(ii)] Then, evaluate the validity of the resulting SL argument using the tree method.
+    \end{itemize}
+    \item[] \textit{Na\"ive realism is false. This is because if na\"ive realism were true, then na\"ive realism would be false.}
+    \item[] Symbolization Key: R = Na\"ive realism is true.
+      \vspace{.1in}
+
+  \item[3.] Show via the tree method that the following is a tautology: 
+    \item[] $\big( ( P \eor Q) \eand (P \eor R) \big) \eif \big (P \eor (Q \eand R) \big ) $
+      \vspace{.1in}
+
+  \item[4.] Test the following argument for validity using the tree method (STD): 
+    \item[] $A \eand (B \eor C)$
+    \item[] $(\enot C \eor H) \eand  (H \eif \enot H)$
+      \vspace{-.2in}
+    \item[] \underline{\hspace{1.75in}}
+      \vspace{-.1in}
+    \item[] $\enot B$
+      \vspace{.1in}
+
+  \item[5.] Test the following argument for validity using the tree method (STD): 
+    \item[] $A \eand (B \eif C)$
+      \vspace{-.2in}
+    \item[] \underline{\hspace{1.75in}}
+      \vspace{-.1in}
+    \item[] $(A \eand C) \eor (A \eand \enot B)$
+      \vspace{.1in}
+
+  \item[6.] Use a tree to check whether the following formula is a tautology.
+    State your conclusion.
+    If the formula is \textit{not} a tautology, then use the tree to find a truth value assignment that makes the formula false:
+    $\big(P \eif (Q \eif R ) \big) \eif \big( ( P \eif Q) \eif (P \eif R) \big)$.  
+  \vspace{.1in}
+
+  \item[7.] 
+    \begin{itemize}
+      \item[(i)] Regiment the following argument in SL.
+      \item[(ii)] Then, evaluate the validity of the resulting SL argument using the tree method.
+      \item[(iii)] If the argument is invalid, use the tree to identify an interpretation that makes its premises true and its conclusion false. 
+    \end{itemize}
+    \item[] \textit{If logic monkeys are hirsute, then logic monkeys are orgulous. And if space dogs are splenetic, then space dogs are bilious. So both if logic monkeys are hirsute then space dogs are bilious, and if space dogs are splenetic then logic monkeys are orgulous.}  
+    \item[] Symbolization Key: H = logic monkeys are hirsute; O = logic monkeys are orgulous; S = space dogs are splenetic; B = space dogs are bilious.
+      \vspace{.1in}
+\end{enumerate}
+
+
+\end{document}

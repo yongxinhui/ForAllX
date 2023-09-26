@@ -127,13 +127,14 @@
     \item[($\supset$)] $\V{\I}(\varphi \supset \psi)=1$ iff $\V{\I}(\varphi)=0$ or $\V{\I}(\psi)=1$ (or both).
     \item[($\equiv$)] $\V{\I}(\varphi \equiv \psi)=1$ iff $\V{\I}(\varphi)=\V{\I}(\psi)$.
   \item[\it Homophonic Semantics:] The semantics for $\neg$, $\wedge$, and $\vee$ use analogous operators in the metalanguage, but not so for $\supset$ and $\equiv$. 
-  \item[\it Truth Functional:] $\V{\I}(\neg\varphi)=1-\V{\I}(\varphi)$;\\
-    $\V{\I}(\varphi\wedge\psi)=\V{\I}(\varphi)\times\V{\I}(\psi)$.
-  \item[\sc Homework:] Given an interpretation $\I$, specify the truth-values of $\varphi\vee\psi$, $\varphi\supset\psi$, and $\varphi\equiv\psi$ as a function of the truth-values of $\varphi$ and $\psi$ in a similar fashion as above.
-    % $\V{\I}(\varphi\vee\psi)=1-([1-\V{\I}(\varphi)]\times[1-\V{\I}(\psi)])$;\\
-    % $\V{\I}(\varphi\supset\psi)=1-(\V{\I}(\varphi)\times[1-\V{\I}(\psi)])$;\\
-    % \mbox{$\V{\I}(\varphi\equiv\psi)=[1-(\V{\I}(\varphi)\times[1-\V{\I}(\psi)])]\times[1-(\V{\I}(\psi)\times[1-\V{\I}(\varphi)])]$.}
-  \item[\bf Task 2:] How many unary/binary truth-functions are there?
+  % \item[\it Truth Functional:] $\V{\I}(\neg\varphi)=1-\V{\I}(\varphi)$;\\
+  %   $\V{\I}(\varphi\wedge\psi)=\V{\I}(\varphi)\times\V{\I}(\psi)$.
+  % \item[\sc Homework:] Given an interpretation $\I$, specify the truth-values of $\varphi\vee\psi$, $\varphi\supset\psi$, and $\varphi\equiv\psi$ as a function of the truth-values of $\varphi$ and $\psi$ in a similar fashion as above.
+  %   % $\V{\I}(\varphi\vee\psi)=1-([1-\V{\I}(\varphi)]\times[1-\V{\I}(\psi)])$;\\
+  %   % $\V{\I}(\varphi\supset\psi)=1-(\V{\I}(\varphi)\times[1-\V{\I}(\psi)])$;\\
+  %   % \mbox{$\V{\I}(\varphi\equiv\psi)=[1-(\V{\I}(\varphi)\times[1-\V{\I}(\psi)])]\times[1-(\V{\I}(\psi)\times[1-\V{\I}(\varphi)])]$.}
+  % \item[\bf Task 2:] How many unary/binary truth-functions are there?
+  \item[\it Quantified Logic:] Later in the course, we will provide semantic clauses for the quantifiers `for all' and `there is' which will not have homophonic semantic clauses.
 \end{enumerate}
 
 
@@ -173,42 +174,42 @@
 
 
 
-\section*{Conjunction}
-
-\subsection*{\it \textbf{Gym}}
-
-\begin{enumerate}
-  \item[(1)] Kate took a shower and went to the gym.
-  \item[\therefore] Kate went to the gym and took a shower.
-\end{enumerate}
-
-\noindent
-\textit{Observe:} Conjunction in English can track temporal order.
-\vspace{.05in}
-
-\noindent
-\textit{Question:} How can we capture the invalidity of this argument in SL?
-
-
-
-
-\section*{Disjunction}
-
-\subsection*{\it \textbf{Vault}}
-
-\begin{enumerate}
-  \item[(1)] If button $A$ is pressed, the vault will open. 
-  \item[(2)] If button $B$ is pressed, the vault will open.
-  \item[(3)] If buttons $A$ and $B$ are pressed, the vault will not open.
-  \item[\therefore] If either button $A$ or $B$ are pressed, the vault will open. 
-\end{enumerate}
-
-\noindent
-\textit{Observe:} We cannot regiment the conclusion with inclusive-`or'.
-\vspace{.05in}
-
-\noindent
-\textit{Question:} Can we salvage the validity of this argument?
+% \section*{Conjunction}
+%
+% \subsection*{\it \textbf{Gym}}
+%
+% \begin{enumerate}
+%   \item[(1)] Kate took a shower and went to the gym.
+%   \item[\therefore] Kate went to the gym and took a shower.
+% \end{enumerate}
+%
+% \noindent
+% \textit{Observe:} Conjunction in English can track temporal order.
+% \vspace{.05in}
+%
+% \noindent
+% \textit{Question:} How can we capture the invalidity of this argument in SL?
+%
+%
+%
+%
+% \section*{Disjunction}
+%
+% \subsection*{\it \textbf{Vault}}
+%
+% \begin{enumerate}
+%   \item[(1)] If button $A$ is pressed, the vault will open. 
+%   \item[(2)] If button $B$ is pressed, the vault will open.
+%   \item[(3)] If buttons $A$ and $B$ are pressed, the vault will not open.
+%   \item[\therefore] If either button $A$ or $B$ are pressed, the vault will open. 
+% \end{enumerate}
+%
+% \noindent
+% \textit{Observe:} We cannot regiment the conclusion with inclusive-`or'.
+% \vspace{.05in}
+%
+% \noindent
+% \textit{Question:} Can we salvage the validity of this argument?
 
 
 
@@ -235,61 +236,61 @@
 
 
 
-\subsection*{\it \textbf{Roses}}
-
-\begin{enumerate}
-  \item[(1)] Sugar is sweet.
-  \item[\therefore] Roses are only red if sugar is sweet.
-\end{enumerate}
-
-
-
-
-\subsection*{\it \textbf{Vacation}}
-
-\begin{enumerate}
-  \item[(1)] Casey is not on vacation.
-  \item[\therefore] If Casey is on vacation, then he is in Paris.
-\end{enumerate}
-
-
-
-
-
-\subsection*{\it \textbf{Crimson}}
-
-\begin{enumerate}
-  \item[(1)] Mary only likes the ball if it is crimson.
-  \item[(2)] Mary likes the ball.
-  \item[\therefore] If the ball is blue, then Mary likes it.
-\end{enumerate}
-
-
-
-
-
-
-\section*{Biconditional}
-
-\subsection*{\it \textbf{Rectangle}}
-
-\begin{enumerate}
-  \item[(1)] The room is a square.
-  \item[(2)] The room is a rectangle.
-  \item[\therefore] The room is a square if and only if it is a rectangle.
-\end{enumerate}
-
-
-
-
-
-\subsection*{\it \textbf{Roses}}
-
-\begin{enumerate}
-  \item[(1)] Kin isn't a professor.
-  \item[(2)] Sue isn't a chef.
-  \item[\therefore] Kin is a professor just in case Sue is a chef.
-\end{enumerate}
+% \subsection*{\it \textbf{Roses}}
+%
+% \begin{enumerate}
+%   \item[(1)] Sugar is sweet.
+%   \item[\therefore] Roses are only red if sugar is sweet.
+% \end{enumerate}
+%
+%
+%
+%
+% \subsection*{\it \textbf{Vacation}}
+%
+% \begin{enumerate}
+%   \item[(1)] Casey is not on vacation.
+%   \item[\therefore] If Casey is on vacation, then he is in Paris.
+% \end{enumerate}
+%
+%
+%
+%
+%
+% \subsection*{\it \textbf{Crimson}}
+%
+% \begin{enumerate}
+%   \item[(1)] Mary only likes the ball if it is crimson.
+%   \item[(2)] Mary likes the ball.
+%   \item[\therefore] If the ball is blue, then Mary likes it.
+% \end{enumerate}
+%
+%
+%
+%
+%
+%
+% \section*{Biconditional}
+%
+% \subsection*{\it \textbf{Rectangle}}
+%
+% \begin{enumerate}
+%   \item[(1)] The room is a square.
+%   \item[(2)] The room is a rectangle.
+%   \item[\therefore] The room is a square if and only if it is a rectangle.
+% \end{enumerate}
+%
+%
+%
+%
+%
+% \subsection*{\it \textbf{Roses}}
+%
+% \begin{enumerate}
+%   \item[(1)] Kin isn't a professor.
+%   \item[(2)] Sue isn't a chef.
+%   \item[\therefore] Kin is a professor just in case Sue is a chef.
+% \end{enumerate}
 
 
 

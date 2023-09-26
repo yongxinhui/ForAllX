@@ -2,11 +2,33 @@
 \chapter{Soundness and Completeness for SL Trees}
 \label{ch.SLsoundcomplete}
 
-In Chapter \ref{ch.sl.trees} we introduced a proof system for SL. Trees provide a method for answering the question of whether a given set of SL sentences is jointly satisfiable. Our focus last chapter was on \emph{using} trees to answer those questions; this chapter we turn to the study of the proof system itself. This chapter engages in a project of \emph{metalogic}. In particular, we aim to first precisify, then answer, this question: is the tree method a good method?
+% In Chapter \ref{ch.sl.trees} we introduced a proof system for SL.
 
-It might not be obvious at first that there is even a genuine question here. The tree method is a formal method, with precisely defined rules. You might be tempted to think that, \emph{by definition}, following the rules makes it a good method. There is one sense in which that is right --- the rules laid out last chapter \emph{tell you} to follow the rules laid out last chapter, so following the rules is doing what the system tells you to do. But there is also a deeper question to be asked. The rules were not selected at random. They were designed to do something in particular: namely, to tell whether a set of sentences is satisfiable. This isn't a question about trees. (Note that we were considering this question back in Chapter \ref{ch.SLmodels}, before we had even introduced the idea of trees.) So there is a question to be asked about whether the tree method actually does what it's supposed to do.
+Whereas the previous chapter focused on defining and using SL tree proofs, this chapter studies the proof system itself, and so belongs to the discipline \emph{metalogic}.
+Although a matter of stipulation, the rules which constrain the construction of SL tree proofs were not selected at random.
+Rather, they were designed to determine whether a set of sentences is satisfiable in an entirely syntactic, mechanical, and notationally elegant way.
+Even so, a question remains as to whether the tree method succeeds in its ambitions.
+% This chapter will show that it does.
 
-Recall the distinction between our two turnstiles: we use `$\metaSetX{}\models{}\bot$' to mean that no interpretation satisfies \metaSetX{}; `$\metaSetX{}\vdash{}\bot$' means that a tree with root \metaSetX{} closes. We interpret the latter as our proof system \emph{saying} that nothing satisfies the root. Our question now is, can our proof system be trusted? Is it reliable? The main project of this chapter is to prove in a rigorous way that it can, and is.
+Recall the distinction between our two turnstiles.
+We use `$\Gamma \models \bot$' to say that $\Gamma$ is unsatisfiable, i.e., there is no SL interpretation that satisfies $\Gamma$ where satisfaction is a semantic concept.
+By contrast, `$\Gamma \proves \bot$' means that a tree with root $\Gamma$ closes where this is an entirely syntactic matter.
+In particular, we do not need to know what the symbols in SL mean in order to determine whether there is a closed SL tree with root $\Gamma$.
+By itself, the existence of such a closed tree is not illuminating, at least not given what we have shown so far.
+Rather, it is the ambition of the present chapter to establish the following claim:
+  $$\Gamma \proves \bot \text{ just in case } \Gamma \models \bot.$$
+Whereas the left-to-right direction is referred to as the \textit{Soundness} of the tree method, the right-to-left direction is referred to as the \textit{Completeness} of the tree method.
+Accordingly, the existence of a closed tree proof--- however uninteresting on its own--- tells us something that we already have reason to care about, namely unsatisfiability.
+
+Recall, the connection that unsatisfiability bears to entailment: 
+    $$\Gamma \models \varphi \text{ just in case } \Gamma, \neg \varphi \models \bot.$$
+Putting the pieces together, we may show that $\Gamma \models \varphi$ by showing that $\Gamma, \neg \varphi \proves \bot$, where the former entailment claim is something we have reason to care about.
+After all, an argument is logically valid just in case its premises entail its conclusion.
+Thus the SL tree proof system provides a method by which to determine which arguments are logically valid.
+
+
+
+
 
 \section{Informal proof}
 
@@ -16,11 +38,11 @@ Instead, we will be engaging in an \emph{informal} proof \emph{about} the formal
 
 \section{Soundness}
 
-If a tree with root \metaSetX{} closes, we interpret that as the system telling us that \metaSetX{} is unsatisfiable. If our system is a good one, then a tree will never mislead us in this respect. Tree closure should guarantee unsatisfiability. We call this property \define{soundness}. The soundness of our SL tree system is the first important metalogical theorem we will prove in this chapter. (A `metalogical' theorem is a theorem \emph{about} logic.)
+If a tree with root $\Gamma$ closes, we interpret that as the system telling us that $\Gamma$ is unsatisfiable. If our system is a good one, then a tree will never mislead us in this respect. Tree closure should guarantee unsatisfiability. We call this property \define{soundness}. The soundness of our SL tree system is the first important metalogical theorem we will prove in this chapter. (A `metalogical' theorem is a theorem \emph{about} logic.)
 
 \label{definesound}
 \factoidbox{
-\define{soundness}: If a tree closes, that guarantees that its root is unsatisfiable: $\metaSetX{}\vdash_{STD}{}\bot\Rightarrow\metaSetX{}\models\bot{}$. Equivalently, a tree-valid argument is semantically valid: $$\textnormal{If } \Gamma \vdash_{STD} \Theta \textnormal{, then } \Gamma \entails \Theta$$ 
+\define{soundness}: If a tree closes, that guarantees that its root is unsatisfiable: $\Gamma\vdash_{STD}{}\bot\Rightarrow\Gamma\models\bot{}$. Equivalently, a tree-valid argument is semantically valid: $$\textnormal{If } \Gamma \vdash_{STD} \Theta \textnormal{, then } \Gamma \entails \Theta$$ 
 }
 
 Here is a way to illustrate that soundness is a substantive result, and to clarify what it is we're trying to prove. Recall the resolution rule for disjunction (see p.\ \pageref{subsec.DisjunctionTreeRule}):
@@ -49,7 +71,7 @@ single branches}
 \end{prooftree}
 \end{center}
 
-If this had been our disjunction rule, and all the other rules remained the same, our tree system would have been unsound. It would have been possible for satisfiable roots to result in closed trees. That is to say, there would have been possible sets of sentences \metaSetX{} such that $\metaSetX{}\vdash{}\bot$, even though $\metaSetX{}\not\models{}\bot$. Consider for example these sentences:
+If this had been our disjunction rule, and all the other rules remained the same, our tree system would have been unsound. It would have been possible for satisfiable roots to result in closed trees. That is to say, there would have been possible sets of sentences $\Gamma$ such that $\Gamma\vdash{}\bot$, even though $\Gamma\not\models{}\bot$. Consider for example these sentences:
 
 \begin{earg}
 	\item[] $P$
@@ -95,18 +117,18 @@ Slightly more precisely: we're attempting to prove that the curse will always be
 
 Soundness is the claim that any time a tree closes, the root must be unsatisfiable. This is equivalent to the claim that any time the root \emph{is} satisfiable, the tree \emph{won't} close. (Compare: if every new citizen swears loyalty to the Queen, then everyone who \emph{doesn't} swear loyalty to the Queen must \emph{not} be a new citizen.) So to prove soundness, we can assume that the root is satisfiable, and show that it follows that the tree doesn't close.
 
-Suppose, then, we have some satisfiable set of sentences \metaSetX{} in the root of a tree. If the root is satisfiable, then there is some interpretation that satisfies it. (Recall that an interpretation in SL is an assignment of truth values to atomic sentences.) Call this interpretation $\mathcal{I}$. We will begin by proving that, if our tree follows the rules given in Chapter \ref{ch.sl.trees}, then $\mathcal{I}$ doesn't just satisfy the root --- it satisfies every sentence in some branch of the completed tree. Once we establish that claim, it's only a short step to demonstrate that this branch doesn't close. Branches only close when they contain some formula and its negation. But no interpretation can satisfy a formula and its negation; so if $\mathcal{I}$ satisfies every formula in the branch, that means that branch must not contain any formula along with its negation. So the tree will remain open.
+Suppose, then, we have some satisfiable set of sentences $\Gamma$ in the root of a tree. If the root is satisfiable, then there is some interpretation that satisfies it. (Recall that an interpretation in SL is an assignment of truth values to atomic sentences.) Call this interpretation $\mathcal{I}$. We will begin by proving that, if our tree follows the rules given in Chapter \ref{ch.sl.trees}, then $\mathcal{I}$ doesn't just satisfy the root --- it satisfies every sentence in some branch of the completed tree. Once we establish that claim, it's only a short step to demonstrate that this branch doesn't close. Branches only close when they contain some formula and its negation. But no interpretation can satisfy a formula and its negation; so if $\mathcal{I}$ satisfies every formula in the branch, that means that branch must not contain any formula along with its negation. So the tree will remain open.
 
 This is the broad structure of our proof. The key step is in proving that $\mathcal{I}$ has the property mentioned above --- that it satisfies every sentence in an open branch. {\color{black} Hence, we will be showing that any tree with the given root has a branch where all sentences are satisfied by $\mathcal{I}$. So this will include all such trees that are complete; such trees will have at least one complete open branch where each sentence is satisfied by $\mathcal{I}$.} We will prove this inductively.
 
 \subsection{Root}
 
-\textbf{Base case}: Start with the root, \metaSetX{}. Note that we are \emph{assuming} that our tree begins with a satisfiable root, because we are trying to prove what follows from that assumption. (Namely, that the tree won't close.) $\mathcal{I}$ is just our name for one of the interpretations we are assuming must exist. So $\mathcal{I}$ satisfies everything in the root. 
+\textbf{Base case}: Start with the root, $\Gamma$. Note that we are \emph{assuming} that our tree begins with a satisfiable root, because we are trying to prove what follows from that assumption. (Namely, that the tree won't close.) $\mathcal{I}$ is just our name for one of the interpretations we are assuming must exist. So $\mathcal{I}$ satisfies everything in the root. 
 %This is a reasonable thing to assume, when proving soundness, because soundness only tells us what happens when the root is satisfiable: namely, that the tree won't close. Soundness doesn't say anything about what happens if the root is unsatisfiable.
 
 
 %old paragraph (unclear):
-%Start with the root, \metaSetX{}. This is trivial. We are \emph{assuming} that our tree begins with a satisfiable root, because we are trying to prove what follows from that assumption. (Namely, that the tree won't close.) $\mathcal{I}$ is just our name for one of the interpretations we are assuming must exist. So $\mathcal{I}$ satisfies everything in the root. This is a reasonable thing to assume, when proving soundness, because soundness only tells us what happens when the root is satisfiable: namely, that the tree won't close. Soundness doesn't say anything about what happens if the root is unsatisfiable.
+%Start with the root, \Gamma. This is trivial. We are \emph{assuming} that our tree begins with a satisfiable root, because we are trying to prove what follows from that assumption. (Namely, that the tree won't close.) $\mathcal{I}$ is just our name for one of the interpretations we are assuming must exist. So $\mathcal{I}$ satisfies everything in the root. This is a reasonable thing to assume, when proving soundness, because soundness only tells us what happens when the root is satisfiable: namely, that the tree won't close. Soundness doesn't say anything about what happens if the root is unsatisfiable.
 
 We want our proof to be perfectly general, so we don't want to make any particular assumptions about what the tree does beyond the root. But, given the resolution rules outlined in \S\ref{sec.SLtreerules}, there are only nine possible ways the tree might develop at each step. (Compare the three possible ways the curse might move in the Murgatroyd example.) We will prove, for each of these nine resolution rules, the following: if $\mathcal{I}$ satisfies all the sentences in the branch \emph{above}, then $\mathcal{I}$ also satisfies at least one branch of what comes \emph{below}. In other words, we'll prove, for each inference rule, that that rule cannot take you from an open branch to a tree with no open branches. {\color{black}\textit{Note that in proving soundness, we reason from the top down: if an interpretation satisfies the sentence we are resolving, soundness requires that at least one of the nodes below is satisfied!}}
 
@@ -300,7 +322,7 @@ We've shown, for the nine resolution rules in our tree system, that they each ha
 Branches can only be closed if they contain a sentence and its negation, which a satisfiable branch will never have. So, assuming we started with a satisfiable root, the rules will never result in a tree with all branches closed. Satisfiable roots will always result in open trees. The tree method will never erroneously ``prove" that a root is unsatisfiable. Equivalently, tree closure guarantees unsatisfiability of the root. The tree method is sound.
 
 \factoidbox{
-\define{soundness}: If a tree closes, that guarantees that its root is unsatisfiable. In other words: $$\metaSetX{}\vdash{}\bot\Rightarrow\metaSetX{}\models{}\bot$$
+\define{soundness}: If a tree closes, that guarantees that its root is unsatisfiable. In other words: $$\Gamma\vdash{}\bot\Rightarrow\Gamma\models{}\bot$$
 }
 
 \section{Completeness}
@@ -309,7 +331,7 @@ Soundness is the first of two important metalogical theorems considered in this 
 
 \label{definecomplete}
 \factoidbox{
-\define{completeness}: If a root is unsatisfiable, that guarantees that the tree will close: $\metaSetX{}\models{}\bot\Rightarrow\metaSetX{}\vdash{}\bot$. Equivalently, if an argument is semantically valid, then it is tree-valid as well: $$\textnormal{If } \Gamma \entails \Theta\textnormal{, then } \Gamma \vdash_{STD} \Theta$$
+\define{completeness}: If a root is unsatisfiable, that guarantees that the tree will close: $\Gamma\models{}\bot\Rightarrow\Gamma\vdash{}\bot$. Equivalently, if an argument is semantically valid, then it is tree-valid as well: $$\textnormal{If } \Gamma \entails \Theta\textnormal{, then } \Gamma \vdash_{STD} \Theta$$
 }
 
 Consider the unsatisfiable set of sentences, $\{\enot Q, P \eand Q\}$. Given our conjunction rule, a tree with this root will close:

@@ -2,7 +2,9 @@
 \chapter{Truth tables}
 \label{ch.TruthTables}
 
-This chapter introduces a way of evaluating sentences and arguments of SL. The truth table method is a purely mechanical procedure that requires no intuition or special insight. Given the (albeit limited) translatability of English into SL, this also amounts to a formal way of evaluating at least some natural language arguments.
+This chapter introduces a way of evaluating sentences and arguments of SL.
+The truth table method is a purely mechanical procedure that requires no intuition or special insight.
+Given the (albeit limited) translatability of English into SL, this also amounts to a formal way of evaluating at least some natural language arguments.
 
 
 
@@ -176,10 +178,14 @@ $M$&$N$&$P$&$M$&\eand&$(N$&\eor&$P)$\\
 From this table, we know that the sentence $M\eand(N\eor P)$ might be true or false, depending on the truth-values of $M$, $N$, and $P$.
 Put otherwise, $M\eand(N\eor P)$ is true on some interpretations and false on others, and so it is \textit{contingent}.
 
+Recall that a complete truth table with $n$ sentence letters will have $2^n$ rows.
 A complete truth table for a sentence that contains four different sentence letters requires 16 lines.
-In general, a complete truth table with $n$ sentence letters will have $2^n$ rows.
+This means that the truth table method becomes syntactically unmanageable very quickly.
+By contrast, the semantic clauses can much more easily accommodate sentences and arguments with many sentence letters.
 
-In order to fill in the columns of a complete truth table, begin with the right-most sentence letter and alternate 1s and 0s. In the next column to the left, write two 1s, write two 0s, and repeat. For the third sentence letter, write four 1s followed by four 0s. This yields an eight line truth table like the one above. For a 16 line truth table, the next column of sentence letters should have eight 1s followed by eight 0s. For a 32 line table, the next column would have 16 1s followed by 16 0s. And so on.
+
+
+
 
 \section{Using truth tables}
 \label{sec.usingtruthtables}
@@ -222,6 +228,7 @@ Look at the columns for the main connectives; negation for the first sentence, c
 
 
 \subsection{Consistency}
+\label{sub:consistency}
 
 Recall that a set of sentences in English is consistent if there is an interpretation which makes them all true at once.
 Thus we may say that a set of sentences in SL is \define{consistent} just in case there is at least one line of a complete truth table including every sentence in the set on which all of the sentences are true, and \define{inconsistent} otherwise.
@@ -239,7 +246,7 @@ But examination of the truth table above reveals that there is no such row, i.e.
 
 \subsection{Validity}
 \label{sub:validity}
-
+ 
 So far we have identified the rows of a truth-table for a relevant sentence, or set of sentences, with the relevant range of interpretations for that sentence, or set of sentences.
 Of course, truth tables are finite in size, and so cannot specify truth-values for every sentence letter whatsoever, much less for every sentence of SL.
 Rather, the rows of a truth table provide partial interpretations of SL by specifying all combinations of truth-values for some finite set of sentence letters.
@@ -262,6 +269,16 @@ Somewhat more precisely, we may use any interpretation $\I$ to recursively defin
 
 The clauses above hold for all sentences \metaA{} and \metaB{} of SL, thereby extending any interpretation $\I$ of SL to $\V{\I}$ which specifies unique truth-values for every sentence of SL.
 Whereas the characteristic truth tables for the connectives specifies the truth-values of complex sentences visually, the semantic clauses specify the same information functionally.
+
+Formal languages are built from three kinds of elements: \define{logical symbols}, \define{non-logical symbols}, and \define{punctuation} i.e., the left and right parentheses.
+Connectives like `\eand' and `\eif' are logical symbols (also called \define{logical constants}) because their meaning is specified by semantic clauses which hold their meanings fixed.
+When interpreting a formal argument, you are not allowed to change the meaning of the logical symbols.
+You cannot say, for instance, that the `\enot' symbol will mean what `\eand' usually does.
+Rather, the `\enot' symbol will always have the same semantic clause, and so will always express negation.
+
+The sentence letters in SL are non-logical symbols because their meaning is not specified by the semantics for SL.
+When we translate an argument from English into SL, the sentence letter `$M$' (for example) does not have its meaning fixed as a result.
+Instead, we rely on interpretations to assign truth-values to `$M$' (and all other sentence letters), where the truth-values provide a rough way to model what those sentence letters mean.
 
 An argument in SL is \define{logically valid} just in case for every interpretation $\I$ of SL, if the valuation $\V{\I}$ makes the premises true (i.e., $\V{\I}(\metaA{})=1$ for every premise $\metaA{}$), then $\V{\I}$ also makes the conclusion true (i.e., $\V{\I}(\metaB{})=1$ where $\metaB{}$ is the conclusion).
 Alternatively, we could take an argument in SL to be \define{logically valid} just in case every line in a complete truth table which includes every sentence in the argument is such that if the premises are true on that line, the conclusion is also true on that line.

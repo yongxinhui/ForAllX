@@ -1,146 +1,188 @@
 %!TEX root = forallx-ubc.tex
-\chapter{Entailment and Models for SL}
+\chapter{Logical Entailment in SL}
 \label{ch.SLmodels}
 
-We turn now to a few crucial semantic concepts: entailment, validity, consistency, and equivalence. We will see that we can define each of these concepts in terms of entailment. At the end of the chapter, we provide a formal semantics for SL, by recursively defining the truth-conditions of well-formed formulae in SL. 
-
-%This chapter offers a formal semantics for SL, allowing us to be more precise about the notion of truth in SL. We'll also highlight some important features of \emph{entailment}, a key concept in formal logic.
-
-A formal, logical language is built from two kinds of elements: logical symbols and non-logical symbols. Connectives like `\eand' and `\eif' are logical symbols, because their meaning is specified within the formal language. When writing a symbolization key, you are not allowed to change the meaning of the logical symbols. You cannot say, for instance, that the `\enot' symbol will mean `not' in one argument and `perhaps' in another. The `\enot' symbol always means logical negation. Although we use it to translate the English language word `not', `\enot' is a symbol of a formal language and is defined by its functional role in determining the truth conditions of wffs. 
-
-The sentence letters in SL are non-logical symbols, because their meaning is not defined by the logical structure of SL. When we translate an argument from English to SL, for example, the sentence letter `$M$' does not have its meaning fixed in advance; instead, we provide a symbolization key that says how `$M$' should be interpreted in that argument.
-
-To translate from English to a formal language, we provide a symbolization key that interprets all the non-logical symbols used in the translation. An \define{interpretation} gives a meaning to all the non-logical elements of the language. We'll also use the term `\define{model}' as another word for an interpretation. {\color{black}Every interpretation induces a model, and vice versa.} In our simple formal language SL, meaning is simply a matter of truth and falsity, relative to a given interpretation. These notions too need to be characterized in a formal way.\footnote{{\color{black}What is `meaning' really? This is an incredibly foundational question in philosophy, plunging us very quickly into deep water. You might find the following gloss helpful: \textit{the meaning of a word is how that word ought to be used in a language}. Of course, this just pushes the bump under the rug: what in the world does it mean to say how something \textit{ought} to be used? And how would we figure out how we ought to use a word?}}
-
-
-%Stuff on Tarski, but not sure if this really applies to SL. Since Tarski's undefinability theorem is about theories that contain arithmetic. Recall that when we gave definitions for a sentence of SL and for a sentence of QL, we distinguished between the \define{object language} and the \define{metalanguage}. The object language is the language that we are \emph{talking about}: either SL or QL. The metalanguage is the language that we use to talk about the object language: English, supplemented with some mathematical jargon. The logician Alfred Tarksi introduced this distinction around 1940. Tarski argued that for many languages, the truth conditions of that language could never be expressed in the language itself --- the metalanguage needed to be more powerful than the object language. So it's simply not possible to give a definition of truth for SL that is itself a sentence of SL --- describing the semantics of SL requires a more powerful language. You'll have to come back for more logic in the future if you want to learn about this! (or wiki Tarski's theorem!)
+In Ch.~\ref{ch.SL} we defined the sentences of SL, and in Ch.~\ref{ch.TruthTables} we defined the interpretations of SL and provided semantic clauses for the logical connectives.
+Given these definitions, we are now in a position to introduce the notion of \textit{logical entailment}, relating this notion to the semantic concepts of validity, tautology, contradiction, consistency, and logical equivalence.
 
 
 
 
-\section{Interpretations and Satisfaction in SL}
-\label{sec:interpretationsSL}
 
-%JH: maybe just start the chapter here. And also would be ideal to note connection b/w entailment and validity. And to generalize entailment to a set of sentences, like the Logic book defines it on p. 95. section 3.5 does the generalization 
 
-% %JH: briefly mentions notion of satisfaction below (in a bad transition to entailment) and uses this notion in following section, BUT DOES NOT DEFINE SATISFACTION!!! so need to fix this! 
+\section{Satisfaction}
+\label{sec:satisfaction}
 
-Using the notion of logical entailment, we can give precise definitions of terms like `tautology', `contradiction', `consistency', and `logical equivalence'. Truth tables provide a way to \emph{check} whether a sentence is a tautology in SL, but they do not adequately define what it means to be a tautology in SL. {\color{black}Sure, we can gloss the notion of a `tautology' by saying it is a wff that is true on every row of its truth table, but what \textit{correctly} determines whether a sentence is true or false on a row? What prevents me from writing `true' for `$P\eand \enot P$' on every row of its truth table? Clearly, it is physically possible for me to construct such a truth table. What makes it the case that I would have constructed this table \textit{incorrectly}? To make headway on all this, we'll begin by describing in more detail what is meant by an `interpretation'.\footnote{{\color{black}Although, to be totally honest, there is a point at which our discussion gives out, since to completely answer these questions, we would need to give an answer to what is known in philosophy as the `rule-following paradox.' And we're not going to do that in an intro logic book!}} 
-% JH: is this really true though? Can't we simply define a tautology as a sentence that is true under any truth value assignment?
-%We will give definitions of these concepts for SL in terms of \define{entailment}.
+Recall that an \define{interpretation} is any function which assigns a truth-value to every sentence letter of SL.
+We will also refer to interpretations of SL as \define{models} of SL since interpretations provide an extensional way to represent the meanings of the sentence letters in SL.\footnote{Intensional and hyperintensional semantic frameworks provide much more fine-grained representations of meanings, but this doesn't make extensional frameworks irrelevant. After all, first-order set theory is an extensional theory which many take to provide a foundation for mathematics.}
 
-%The relation of semantic entailment is about satisfiability --- that is, whether there is an interpretation that meets a certain set of conditions. 
+Whereas a sentence $\metaA{}$ may be either true of false on a given interpretation $\I$ (i.e., the valuation function $\V{\I}$ induced by $\I$ assigns that sentence to $1$), sets of sentences do not have truth-values.
+Accordingly, we may say that an SL interpretation $\I$ \define{satisfies} a set of SL sentences $\Gamma=\set{\metaA_{1},\metaA_{2},\ldots}$ just in case $\V{\I}(\metaA)=1$ for all $\metaA \in \Gamma$.
+Derivatively, it is convenient to say that an interpretation $\I$ of SL \define{satisfies} a single sentence $\metaA$ just in case it satisfies the singleton set $\set{\metaA}$, i.e., the set which includes $\metaA$ as its only member. 
 
-An \emph{interpretation} in SL provides a truth value to each atomic sentence in use. For instance, if you are analyzing the sentence $(P \eand Q) \eif R$, an interpretation would specify a truth value for each of the atomic sentences $P, Q$ and $R$. It assigns each of these sentences a `1' or a `0'. Clearly, choosing an interpretation simply amounts to choosing a row of a truth table for `$(P \eand Q) \eif R$'. Every combination of truth values can be represented by an interpretation. 
 
-As we show in \S\ref{sec:truthSL}, assigning a truth-value to every atomic sentence induces a truth value for every other sentence of SL. This is because each wff of SL is composed of atomic sentences in a truth-functional way: that's why many prefer to call this language `Truth-Functional Logic'! Hence, by interpreting a set of atomic sentences, we automatically interpret every non-atomic wff composed from these. Abstractly, an interpretation provides a \textit{valuation function} $\mathbf{v}$ that assigns truth values to atomic sentences, and thereby every wff composed from these. A valuation function acts on these wffs and spits out a truth-value, i.e. either a `0' or a `1'. 
 
-{\color{black} To streamline our discussions of many fun technical concepts, we introduce the shorthand notion of \textit{satisfaction}. Say that an interpretation \textit{satisfies} a sentence \metaA{} provided that \metaA{} is true on that interpretation. Likewise, \metaA{} is satisfied in a model provided it is true in that model. Here's a helpful mnemonic: your desire for icecream is satisfied provided it's true you get some icecream! Now isn't that satisfying?!\footnote{{\color{black} When we come to quantifier logic, we will extend this notion of satisfaction such that it becomes more than a convenient shorthand (\S\ref{sec:satisfactionQL}). We will encounter a variety of sentences that lack truth-conditions but that are still meaningfully satisfied or unsatisfied in a model.}}
 
-%It is also convenient to introduce the notion of \textit{satisfaction}, which makes it easier to talk about a lot of these fun technical notions. 
 
 \section{Entailment}
-\label{sec:entailmentSL}
-%section title had `informally good arguments' in the title but doesn't seem to say much about these! 
+  \label{sec:entailment}
 
-Let's define entailment: to say that `\metaA{} entails \metaB{}', means that there is no interpretation for which \metaA{} is true and \metaB{} is false. {\color{black} Equivalently, for every interpretation where \metaA{} is true, \metaB{} is true as well.} So \metaA{} entails \metaB{} if and only if every assignment of truth values to atomic sentences that makes \metaA{} true also makes \metaB{} true. (We could just as well say that  `\metaA{} entails \metaB{}', means that there is no \emph{valuation function} that makes \metaA{} true and \metaB{} false. Interpretations specify valuation functions.)
+A set of SL sentences $\Gamma$ \define{logically entails} $\metaA$ just in case every interpretation that satisfies $\Gamma$ also satisfies $\metaA$.
+Logical entailment is also called the \define{logical consequence} relation, or \define{semantic consequence}, and is written: $\Gamma \models \metaA$. 
+An entire chapter is named after this relation for good reason: it is the most important semantic concept that we will introduce and will later be shown to have the same extension as a corresponding syntactic notion.
 
-We abbreviate entailment with a symbol called the \emph{double turnstile}:
-`$\metaA{}\models\metaB{}$' means `\metaA{} semantically entails \metaB{}.' For truth-functional sentences (like those of SL!), one can also read this as `\metaA{} truth-functionally entails \metaB{}.' {\color{black}Again, this means that every truth value assignment that makes $\metaA{}$ true also makes $\metaB{}$ true. Equivalently, there is no truth-value assignment on which $\metaA{}$ is true but $\metaB{}$ is false. Commit this concept to memory! Not understanding this crucial notion entails not doing well in this course!} 
-%We will generalize this notion in Quantifer Logic when we introduce a more general notion of models.
+Note that the double turnstile `$\models$' is--- like the metavariable `\metaA{}'--- part of the \emph{metalanguage} we use to discuss SL, and not a part of SL.
+For ease of exposition, we will often drop `logically', speaking simply of entailment.
+Although officially $\models$ takes a set of SL sentences on the left together with a single SL sentence on the right, it is both common and convenient to drop the set notation, writing `$\metaA_1,\ldots,\metaA_n \models \metaB$' instead of `$\set{\metaA_1,\ldots,\metaA_n} \models \metaB$'.
+% Even though entailment is connected in important ways to the validity of arguments, it is important to remember to apply the definitions rigorously and precisely.
 
-Using the notion of `satisfaction', we can streamline our definition of entailment as follows: a wff \metaA{} entails a wff \metaB{} if and only if every interpretation that satisfies \metaA{} also satisfies \metaB{}. Equivalently, there is no interpretation that satisfies \metaA{} but fails to satisfy \metaB{}. Note that the double turnstile `$\models$'---like the metavariable `\metaA{}'---is part of the \emph{metalanguage} we use to discuss SL. It is not part of SL itself.
+Recall that an argument in SL is a sequence of SL sentences, and so a completely different type of thing than a set of sentences of SL.
+After all, sets do not specify the order of their members.
+Nevertheless, we may say that for any SL argument, that argument is valid if and only if it's premises entail it's conclusion.
+What we cannot say is that for any set of SL sentences $\Gamma$ and further sentence $\metaA$, if $\Gamma \models \metaA$, then \textit{the} argument whose premises are the sentences in $\Gamma$ and whose conclusion is $\metaA$ is valid.
+This is because there may fail to be a unique argument that we can construct from a set of SL sentences $\Gamma$ and a further SL sentence $\metaA$.
+For instance, assuming $\Gamma$ includes at least two sentences, we can construct different arguments by ordering the premises in different ways.
+Instead, we may claim something general: if $\Gamma \models \metaA$, then \textit{every} argument where the sentence in $\Gamma$ are the premises (in some order or other) and $\metaA$ is the conclusion is valid.
 
-Entailment is a formal notion. It is connected in important ways to the informal notion of a good argument, but when considering entailment in SL, it is important to remember to apply the definitions rigorously and precisely, rather than relying on your sense of whether the argument is a good one. The notions can come apart in some surprising ways.
+It will help to consider a simple example.
+For instance, take the following entailment claim: 
+  $$P, Q \models P\eor Q.$$ 
+The entailment above is true since every interpretation that satisfies the set $\set{P, Q}$ also satisfies $P\eor Q$.
+Accordingly, we may say that the argument with $P$ as its first premise, $Q$ as its second premise, and $P\eand Q$ as its conclusion is logically valid. 
+Although closely related, this is a different claim than our original entailment, one to do with arguments.
+For instance, there is a distinct argument which takes $Q$ to be its first premise, $P$ as its second premise, and $P\eand Q$ as its conclusion, though this second argument is just as valid as the first.
+By contrast, permuting $P$ and $Q$ in the entailment claim above does not amount to a distinct entailment claim, but rather a distinct means of expressing the very same entailment claim. 
+This is because sets do not preserve order: $\set{P,Q}=\set{Q,P}$.
 
-Let's start with a straightforward example. Consider whether this entailment claim is true: $$(P\eand Q) \models (P\eor Q)$$ This is true if and only if every interpretation that satisfies $(P\eand Q)$, also satisfies  $(P\eor Q)$. Hopefully it is obvious to you that this is true. Only an interpretation that assigns 1 to both $P$ and $Q$ will satisfy the left, and any such interpretation will certainly satisfy the right as well. (You could draw the truth table to verify this; it's good practice!) So, as one might naturally expect, $(P\eand Q) \models (P\eor Q)$.
 
-Here is a less intuitive example. What should we make of this claim?
+
+
+\section{Tautologies}
+
+What should we make of the following claim:
 
 \begin{quote}
-$(P\eand Q) \models (A\eiff\enot\enot A)$
+  $P\eand Q \models A\eiff\enot\enot A$.
 \end{quote}
 
-Notice that the sentence letters on the left-hand-side here are completely different letters from those on the right-hand-side. So there is a straightforward sense in which the two sides of the turnstile have \emph{nothing to do with one another}. Nevertheless, this \emph{is} a true entailment claim. This is because it satisfies the definition: every interpretation that satisfies the left (i.e., every interpretation with a valuation function that assigns `1' to both $P$ and $Q$), also satisfies $(A\eiff\enot\enot A)$. This for the simple reason that every valuation \emph{whatsoever} satisfies $(A\eiff\enot\enot A)$; it is a tautology.
+Notice that the sentence letters on the left-hand-side are completely different letters from those on the right-hand-side.
+So there is a straightforward sense in which the two sides of the entailment have \emph{nothing to do with one another}.
+Nevertheless, the entailment above is true: every interpretation that satisfies the sentences on the left, also satisfes the sentence on the right for the simple reason that every interpretation whatsoever satisfies $A\eiff\enot\enot A$.
 
-From this example we can see that a tautology will be entailed by anything whatsoever. If the right-hand-side of the entailment claim is a tautology, it doesn't matter what's on the left --- you know it's going to be true.
+Whereas before we said that an SL sentence $\metaA$ is a tautology just in case it was true on all interpretations of SL (equivalently, all lines of a complete truth table for that sentence), we may now define the SL tautologies in terms of entailment.
+Officially, a sentence $\metaA$ of SL is a \define{tautology} just in case $\metaA$ is entailed by the empty set, i.e., $\varnothing \models \metaA$.
+Dropping set notation, it is typical to leave off the empty set entirely, writing $\models \metaA$ for brevity.
 
-So the following are all legit entailments:
+In order to see why this definition makes sense, we may observe that every SL interpretation satisfies the empty set $\varnothing$.
+After all, an SL interpretation $\I$ could only fail to satisfy a set $\Gamma$ of SL sentences if there were some sentence in $\Gamma$ that fails to be true on $\I$.
+Since there are no sentences in $\varnothing$, the empty set $\varnothing$ is vacuously satisfied by every SL interpretation whatsoever.
+By definition, an SL sentence $\metaA$ is entailed by the empty set (i.e., $\models \metaA$) just in case every interpretation to satisfy the empty set $\varnothing$ also satisfies $\metaA$.
+Since we have shown that every interpretation satisfies the empty set, this is equivalent to claiming that every SL interpretation satisfies $\metaA$. 
+Thus, $\models \metaA$ if and only if $\V{\I}(A)=1$ for all SL interpretations $\I$.   
 
-\begin{earg}
-\item[] $P \models (P \eor \enot P)$
-\item[] $Q \models (P \eor \enot P)$
-\item[] $(P \eand \enot P) \models (P \eor \enot P)$
-\end{earg}
-
-%JH: replacing Ichikawa's \metaset{X} with $\Gamma$, because this is easier to say verbally and also Ichikawa later uses `\metaset{X}' as a metavariable for variables in quantifier logic.
-
-In the examples so far, we've been talking about one sentence entailing another. But we can also describe a set of several sentences as jointly entailing an SL sentence. $$\metaA{}_1,\metaA{}_2,\metaA{}_3,\cdots\models\metaB{}$$ means that there is no truth value assignment for which all of the sentences in the set $\{\metaA{}_1,\metaA{}_2,\metaA{}_3,\cdots\}$ are true and \metaB{} is false. It will sometimes be convenient to use a variable that can stand in for any set of sentences; just as `\metaA{}' can stand for any sentence of SL, we can let `$\Gamma$' (pronounced `Gamma') stand in for any set of sentences in SL. (In the case of `$\metaA{}\models\metaB{}$' above, `$\Gamma$' is the singleton set containing just \metaA{}.)
-
-In general, we say that $$\Gamma\models\metaB{}$$ means that there's no interpretation satisfying every member of set $\Gamma$ without also satisfying sentence \metaB{}.
-
-{\color{black}The definition of `entailment' should hopefully remind you very much of how we characterized deductively valid arguments in Chapter~\ref{ch.TruthTables}. Recall that an argument is deductively valid provided that \textit{any interpretation that makes the premises true also makes the conclusion true}. In other words, an argument is deductively valid provided that \textit{the premises entail the conclusion}. The notion of entailment generalizes the notion of a deductively valid argument.}
-
-%\section{Validity}
-
-
-
-\section{Tautologies are entailed by the empty set}
-
-We saw in the previous section that a tautology ---  an SL sentence that is true in every interpretation --- is entailed by any sentence. The reasoning applies more generally: a tautology will be entailed by any set of sentences. This includes the \emph{empty set}, which can be written `$\emptyset$'. {\color{black} The empty set is a fancy way of representing the idea of `absolutely nothing'.}\footnote{{\color{black} Paradoxically, by talking about `nothing', we see that it is clearly a something! Perhaps nothing only become something when we talk about it!}} In general `$\Gamma \models \metaA{}$' says that every interpretation that satisfies everything in $\Gamma$, satisfies \metaA{}. In the special case where $\Gamma$ is $\emptyset$, every interpretation trivially satisfies everything in $\Gamma$. So `$\emptyset \models \metaA{}$' says that absolutely every interpretation satisfies \metaA{}. That is, it says that \metaA{} is a tautology.
-
-By convention, we can leave the left side of an entailment claim blank, instead of writing `$\emptyset$'. In other words, $$\models \metaA{} $$ is shorthand for $$ \emptyset \models \metaA{}.$$
-
-So these entailment claims are true, because in each case the sentence on the right is a tautology:
+Consider the following claims:
 
 \begin{earg}
-\item[] $\models (P \eor \enot P)$
-\item[] $\models (P \eiff P)$
-\item[] $\models ((P \eand\enot P)\eif (A \eor B))$
+  \item[] $\models P \eor \enot P$
+  \item[] $\models P \eiff P$
+  \item[] $\models (P \eand\enot P)\eif (A \eor B)$
 \end{earg}
 
-And these entailment claims are NOT true, since each sentence on the right is not a tautology:
+Although for different reasons, each of the entailments above are true, and so the SL sentences on the right are tautologies.
+For contrast, the following claims are not tautologies:
 
 \begin{earg}
-\item[] $\models P$
-\item[] $\models (P \eand \enot P)$
-\item[] $\models \enot(P \eif \enot P)$
+  \item[] $\models P$
+  \item[] $\models P \eand \enot P$
+  \item[] $\models \enot(P \eif \enot P)$
 \end{earg}
 
-(If you need help seeing why a given sentence is or is not a tautology, draw out the truth table and check to see whether it has a 1 on every row. See \S\ref{sec.usingtruthtables}.)
+If you ever want to compute whether a sentence is a tautology, you can always write out its truth table.
+This can be practical so long as it does not include too many sentence letters.
 
-\section{Inconsistent sentences entail absurdities}
 
-%JH: this section parallels earlier discussion of how an argument with inconsistent premises is vacuously valid. Would be nice to better connect earlier discussion of validity with these discussions of entailment. Might not be clear to students that validity is a special case of entailment. Section 3.7 just jumps to this characterization of validity w/out discussing it sooner, which is strange! 
+\section{Weakening}
 
-Consider this entailment claim: $$(P \eand \enot P) \models Q$$This statement is true. It says that every interpretation satisfying $(P \eand \enot P)$ also satisfies $Q$. But $(P \eand \enot P)$ is a contradiction --- no interpretations satisfy it. So trivially, `every' interpretation that satisfies it satisfies $Q$. {\color{black} This is another one of those `degenerate cases' of our concepts that we keep running into, and that you will simply have to get used to! Every interpretation that satisfies $(P \eand \enot P)$ also satisfies $Q$, simply because there are \textit{no interpretations} that satisfy $(P \eand \enot P)$. So the criterion for entailment is met by default.}
+If the right-hand-side of an entailment claim is a tautology, it doesn't matter what's on the left for the entailment to hold.
+For instance, given that $\models P \eor \enot P$, we may conclude that $Q \models P \eor \enot P$.
+More generally, we may observe the following:
+$$\text{If}~ \Gamma \models \metaA, ~\text{then}~ \Gamma \cup \Sigma\models \metaA.$$
+This principle is referred to as \define{weakening}.
+As a special case (i.e., $\Gamma=\varnothing$), we may conclude that if $\metaA$ is a tautology (i.e., $\models \metaA$), then every set of SL sentences $\Sigma$ entails $\metaA$ (i.e., $\Sigma \models \metaA$).
 
-This entailment relation has nothing to do with the specifics of the sentence $Q$. Exactly the same considerations would demonstrate that, for any sentence \metaB{}, $(P \eand \enot P) \models \metaB{}$. And the same goes for any other contradictory sentence, or any set of sentences that are mutually inconsistent. These are all true:
+In particular, we may draw the following conclusions from the entailments above:
 
 \begin{earg}
-\item[] $(P \eand \enot P) \models (\enot Q \eif R)$
-\item[] $P, (\enot Q \eand \enot P) \models (Q \eiff P)$
-\item[] $(P \eand\enot P) \models ((A_1 \eor A_2) \eif \enot (A_3 \eiff (A_4 \eand \enot A_2)))$
+  \item[] $Q \models P \eor \enot P$
+  \item[] $R \eif (Q \eand \enot Q)\models P \eiff P$
+  \item[] $A \eand \enot A \models (P \eand\enot P)\eif (A \eor B)$
 \end{earg}
 
-You can think of evaluating an entailment claim as like checking to see whether a rule is being violated or not. If there's a rule that says every student with a dog has to have a permit, you check each student with a dog, and make sure they have a permit. If you find someone without a dog, it doesn't matter whether they have a permit or not. (If you don't have a dog, you can't break the rule.) Or if you find someone with a permit, it doesn't matter whether they have a dog. (Nobody with a permit can be breaking the rule either.) An entailment claim is like a rule that says every interpretation that satisfies the left-hand-side must also satisfy the right-hand-side. To verify it, you can ignore any interpretation that falsifies the left, or that satisfies the right. ({\color{black} But we might wonder: what does it mean to follow a rule?)}
+In $\S\ref{sec:entailment}$, we said that if an argument is valid, then its premises entail its conclusion.
+Given weakening, it follows that if an argument is valid, then any set containing the arguments premises will entail the argument's conclusion.
 
-In each of the cases above, you don't even need to examine the sentence at the right to confirm that the entailment claim is true, since you already know that no interpretations satisfy the sentences on the left. (This is analogous to knowing that no students have a dog --- in this case you don't have to check to see whether anyone has a permit to confirm that the rule is being respected.) Any entailment claim with an unsatisfiable set of sentences on the left is true. An unsatisfiable set of sentences entails \emph{every} sentence.
 
-We have a special notation for describing this situation. We write: $$\Gamma \models \bot$$ to indicate that the set $\Gamma$ entails an \emph{absurdity}; think of `$\bot$' as standing in for an arbitrary unsatisfiable SL wff. You can think of `$\Gamma \models \bot$' as saying that every interpretation that satisfies $\Gamma$ satisfies the unsatisfiable. That's just another way of saying that \emph{no} interpretation satisfies $\Gamma$. (Compare: `the only Klingons who hate honour are the Klingons who aren't Klingons at all.')
 
-%By convention, we treat $$\Gamma \models$$ as shorthand for $$\Gamma \models \bot.$$ So if you see an entailment claim with nothing on the right, read it as saying that the left is unsatisfiable.
-%\label{sec.botshorthand}
 
-So these entailment claims are true, because the set of sentences on the left is not satisfiable:
+\section{Unsatisfiable}
+
+Having defined what it is for a sentence to be a tautology in terms of entailment, it is natural to consider how we might use the notion of entailment to define what it is for a sentence to be a contradiction.
+Here it will help to begin by considering the following entailment:
+$$P \eand \enot P \models Q.$$
+This statement is true.
+It says that every interpretation satisfying $P \eand \enot P$ also satisfies $Q$.
+This follows vacuously since no interpretation satisfies $P \eand \enot P$, and so every interpretation which satisfies $P \eand \enot P$ (all zero of them) also satisfies $Q$.
+Or to take another approach, think about what it would take for the entailment above to be false: there would have to be some interpretation which satisfies $P \eand \enot P$ but does not satisfy $Q$.
+But there are no interpretations that satisfy $P \eand \enot P$, and so the entailment above is true.
+
+Observe that the reason that the entailment above is true has nothing to do with the sentence $Q$.
+Thus the same considerations would demonstrate that $P \eand \enot P \models \metaA{}$ for any sentence \metaA{} of SL.
+Moreover, the same conclusion holds were we to replace $P \eand \enot P$ with any other SL sentence that is not true on any interpretation.
+For instance, consider:
 
 \begin{earg}
-\item[] $(P \eand \enot P) \models \bot$
-\item[] $P, (\enot Q \eand \enot P) \models\bot$
-\item[] $(P \eiff\enot P) \models\bot$
+\item[] $A \eand \enot A \models \enot Q \eif R$.
+\item[] $\enot (P \eor \enot P) \models (A_1 \eor A_2) \eif \enot (A_3 \eiff (A_4 \eand \enot A_2))$.
 \end{earg}
 
-And these entailment claims are NOT true, because the sentences on the left \emph{can} be satisfied:
+Since there are no interpretations that satisfy the sentences on the left, you do not need to examine the sentence on the right to confirm that the entailment claims above are true.
+Given that the sentences on the right do not matter, it would be nice to have a way to represent that the sentences on the left entail any sentence whatsoever.
+There are two common ways to do this, but both make use of the same notation where $\Gamma$ is a set of SL sentences:
+$$\Gamma \models \bot.$$
+One way to interpret the entailment above is as a universal claim that $\Gamma$ entails every sentence of SL whatsoever. 
+Another way to interpret this entailment is to take `$\bot$' to abbreviate some particular sentence of SL (it doesn't matter which) that is not true on any SL interpretation.
+These conventions turn out to amount to the very same thing.
+For simplicity, we will assume the latter convention where `$\bot$' abbreviates `$A \eand \enot A$' for definiteness.
+
+A sentence $\Gamma$ of SL is \define{unsatisfiable} just in case $\Gamma \models \bot$.
+In order to see why this definition makes sense, we may show that a set of SL sentences $\Gamma$ is unsatisfiable just in case there is no SL interpretation $\I$ which satisfies $\Gamma$.
+To do so, suppose that $\Gamma$ is unsatisfiable, and so $\Gamma \models \bot$.
+It follows that every SL interpretation that satisfies $\Gamma$ also satisfies $\bot$.
+However, by design, there is no interpretation that satisfies $\bot$.
+Thus there is no SL interpretation $\I$ that satisfies $\Gamma$, for otherwise $\I$ would have to satisfy $\bot$.
+Conversely, suppose that there is no SL interpretation $\I$ that satisfies $\Gamma$.
+It follows vacuously that every SL interpretation that satisfies $\Gamma$ (all zero of them) also satisfies $\bot$.
+Hence $\Gamma \models \bot$, and so $\Gamma$ is unsatisfiable.
+This shows that $\Gamma$ is unsatisfiable if and only if there is no SL interpretation $\I$ that satisfies $\Gamma$.
+% Haven taken unsatisfiability to be the basic notion, we may now define a set of SL sentences $\Gamma$ to be \define{satisfiable} just in case $\Gamma$ is not unsatisfiable. 
+It follows that $\Gamma$ is \define{satisfiable} just in case there is an SL interpretation $\I$ that satisfies $\Gamma$.
+
+Consider the following examples:
+
+\begin{earg}
+\item[] $A \eand \enot A \models \bot$.
+\item[] $P, \enot P \models \bot$.
+\item[] $P \eiff Q, Q \eiff\enot P \models \bot$.
+\end{earg}
+
+The sets of sentences on the left of each entailment above are unsatisfiable.\footnote{Recall that we have omitted set notation for ease of exposition.}
+As a special case, we may say that an SL sentence $\metaA$ is a \define{contradiction} just in case its singleton set $\set{\metaA}$ is unsatisfiable, i.e., $\metaA \models \bot$.
+Whereas contradictions are sentences of SL, only \textit{sets} of sentences of SL may be said to be unsatisfiable.
+Nevertheless, it follows by the weakening principle given above that any set of SL sentences which contains a contradiction is unsatisfiable.
+By contrast, there are lots of unsatisfiable sets of sentences that do not contain contradictions.
+For instance, neither $P \eiff Q$ nor $Q \eiff \neg P$ are contradictions. 
+Nevertheless, the set $\set{P \eiff Q, Q \eiff \neg P}$ is unsatisfiable. 
+Compare the following examples to those given above:
 
 \begin{earg}
 \item[] $(P \eor \enot P) \models\bot$
@@ -148,169 +190,143 @@ And these entailment claims are NOT true, because the sentences on the left \emp
 \item[] $\enot P, \enot Q, (P \eif \enot\enot Q) \models\bot$
 \end{earg}
 
-(If you need help seeing why a given set of sentences can be satisfied, draw out the truth table and check to see if any row assigns a `1' to each sentence. If not a single row assigns a `1` to every sentence in the set $\Gamma$, then this set of sentences is inconsistent (i.e. unsatisfiable). See \S\ref{sec.usingtruthtables} for more details.)
+Since the sentences on the left can be satisfied, the three entailments given above are false.
+
+
+
+\section{Consistency}
+  \label{sec:consistency}
+
+Recall that the definition of consistency given in $\S\ref{sub:consistency}$ appealed to complete truth-tables: a set of SL sentences $\Gamma$ is \define{consistent} just in case there is at least one line of a complete truth table including every sentence in $\Gamma$ on which all of the sentences in $\Gamma$ are true.
+Alternatively, we may avoid appealing to complete truth tables by saying that a set of SL sentences $\Gamma$ is \define{consistent} just in case there is an interpretation $\I$ of SL where every sentence in $\Gamma$ is true, i.e., $\V{\I}(\metaA)$ for all $\metaA$ in $\Gamma$.\label{def.consistencySL}
+Accordingly, we may show that any set of SL sentences $\Gamma$ is consistent just in case it is satisfiable. 
+Put otherwise, consistency and satisfiablility have the same \textit{extension} insofar as they apply to the very same sets of SL sentences.
+As a result, if you ever need help seeing whether a given set of sentences can be satisfied, you can always draw out its truth table to check if any row assigns a `1' every sentence in the set.
+If there is no row which assigns a `1` to every sentence in the set, then the set is unsatisfiable.
 
 
 
 
-\section{Defining concepts in terms of entailment}
+% \section{Defining truth-conditions in SL}
+% \label{sec:truthSL}
+% \label{sec.semanticsSL}
+%
+% % %JH: this section seems to have some conceptual problems. Try to find an analog in the Logic Book or Calgary book and rewrite this! 
+% %Could honestly make more sense to just get right to notions of truth-functional entailment, etc. It's not like we're really explaining `truth' in a first-semester logic class. Would need to get into disquotation theory. 
+% %so maybe move this and the next section to the end of the chapter! Ultimately, I'd like to combine this stuff w/ the truth tables anyway, like in the logic book! 
+% %alternatively, I could combine this section and the next w/ recursion/induction in a chapter on that. 
+%
+% {\color{black}This section formally characterizes the \emph{truth-conditions} of well-formed formulae (wffs) in SL. These are the logical conditions under which a sentence is true or false.} We build on what we already know from constructing truth tables. In Chapter~\ref{ch.TruthTables}, we used truth tables to reliably test whether a sentence is a tautology in SL, whether two sentences are equivalent, whether an argument is valid, and so on. For instance: \metaA{} is a tautology in SL if and only if it is assigned `1' on every line of a complete truth table.
+%
+% Truth tables work because each line of a truth table corresponds to a way the world might be, at least conceptually or logically. We consider all the logically possible combinations of 1s and 0s for the sentence letters that compose the sentences we care about. A truth table allows us to determine what would happen given these different combinations. 
+%
+% {\color{black}To formally define truth-conditions in SL, we introduce a function \textit{\textbf{a}} that assigns---for each interpretation---a 1 or 0 to each of the atomic sentences of SL. We call this function a \textit{truth-value assignment}. We proceed to use the function \textit{\textbf{a}} to construct a more general function \textit{\textbf{v}} called a `valuation function'. Unlike \textit{\textbf{a}}, \textit{\textbf{v}} is defined on arbitrarily complex wffs in SL. We show it is possible to construct the valuation function \textit{\textbf{v}} such that it has the following desirable property:} for any wff \metaA{}, \textit{\textbf{v}}(\metaA{})$=1$ if \metaA{} is true and \textit{\textbf{v}}(\metaA{})$=0$ if \metaA{} is false. 
+%
+% %It does this by means of a valuation function $\mathbf{v}$, that acts on atomic sentences 
+% %We can interpret this function as accurately defining the truth-conditions for SL if it assigns 1 to all of the true sentences of SL and 0 to all of the false sentences of SL. 
+%
+% Recall that the recursive definition of a wff of SL has two stages: The first step says that atomic sentences (solitary sentence letters) are wffs. The second stage considers wffs that are constructed out of more basic wffs. There is a clause in the definition for each of the sentential connectives. For example, if \metaA{} is a wff, then \enot\metaA{} is a wff.
 
-
-As we have just seen, the concept of entailment allows us to give concise definitions of various semantic concepts in SL. We'll use the double turnstile notation to summarize these definitions for future reference:
-\begin{quote}
-A \define{tautology in SL} is a sentence \metaA{}  such that $\emptyset\models\metaA{}$.
-
-A \define{contradiction in SL} is a sentence \metaA{} such that $\metaA{}\models\bot$.
-
-A sentence is \define{contingent in SL} if and only if it is neither a tautology nor a contradiction.
-
-An argument with premises $\Gamma$ and conclusion \metaA{} is \define{valid in SL} if and only if $\Gamma\models\metaA{}$.
-
-Two sentences \metaA{} and \metaB{} are \define{logically equivalent in SL} if and only if both $\metaA{}\models\metaB{}$ and $\metaB{}\models\metaA{}$.
-
-A set of sentences $\Gamma$ is \define{inconsistent in SL} if and only if $\Gamma\models \bot$. Otherwise $\Gamma$ is \define{consistent in SL}.\label{def.consistencySL}
-
- \end{quote}
-
-%JH: see end of Ch. 3, glossary, of Logic Book: 
-To enhance comprehension, it might also help to see how these concepts are defined in terms of truth-value assignments. So we'll collect these equivalent definitions here: 
-
-\begin{quote}
-A \define{tautology in SL} is a sentence \metaA{} that is true on every truth-value assignment. Such a sentence is `truth-functionally true.' 
-
-A \define{contradiction in SL} is a sentence \metaA{} that is false on every truth-value assignment. Such a sentence is `truth-functionally false.' 
-
-A sentence is \define{contingent in SL} if and only if it is true on at least one truth-value assignment and false on at least one other truth-value assignment. Such a sentence is `truth-functionally indeterminate.' 
-
-An argument with premises $\Gamma$ and conclusion \metaA{} is \define{valid in SL} if and only if there is no truth-value assignment on which all of the sentences in the premise-set $\Gamma$ are true while the conclusion \metaA{} is false. 
-
-Two sentences \metaA{} and \metaB{} are \define{logically equivalent in SL} if and only if there is no truth-value assignment on which they have different truth-values. Such sentences are also said to be `truth-functionally equivalent.'
-
-A set of sentences $\Gamma$ is \define{inconsistent in SL} if and only if there is no truth-value assignment on which all of the sentences in $\Gamma$ are true. In contrast, a set of sentences is \textit{consistent} provided that there is at least one truth-value assignment on which all of them are true. 
- \end{quote}
-
-%\section{Semantics for SL} %doesn't seem necessary to have two sections for this. lumping into one! 
-
-\section{Defining truth-conditions in SL}
-\label{sec:truthSL}
-\label{sec.semanticsSL}
-
-% %JH: this section seems to have some conceptual problems. Try to find an analog in the Logic Book or Calgary book and rewrite this! 
-%Could honestly make more sense to just get right to notions of truth-functional entailment, etc. It's not like we're really explaining `truth' in a first-semester logic class. Would need to get into disquotation theory. 
-%so maybe move this and the next section to the end of the chapter! Ultimately, I'd like to combine this stuff w/ the truth tables anyway, like in the logic book! 
-%alternatively, I could combine this section and the next w/ recursion/induction in a chapter on that. 
-
-{\color{black}This section formally characterizes the \emph{truth-conditions} of well-formed formulae (wffs) in SL. These are the logical conditions under which a sentence is true or false.} We build on what we already know from constructing truth tables. In Chapter~\ref{ch.TruthTables}, we used truth tables to reliably test whether a sentence is a tautology in SL, whether two sentences are equivalent, whether an argument is valid, and so on. For instance: \metaA{} is a tautology in SL if and only if it is assigned `1' on every line of a complete truth table.
-
-Truth tables work because each line of a truth table corresponds to a way the world might be, at least conceptually or logically. We consider all the logically possible combinations of 1s and 0s for the sentence letters that compose the sentences we care about. A truth table allows us to determine what would happen given these different combinations. 
-
-{\color{black}To formally define truth-conditions in SL, we introduce a function \textit{\textbf{a}} that assigns---for each interpretation---a 1 or 0 to each of the atomic sentences of SL. We call this function a \textit{truth-value assignment}. We proceed to use the function \textit{\textbf{a}} to construct a more general function \textit{\textbf{v}} called a `valuation function'. Unlike \textit{\textbf{a}}, \textit{\textbf{v}} is defined on arbitrarily complex wffs in SL. We show it is possible to construct the valuation function \textit{\textbf{v}} such that it has the following desirable property:} for any wff \metaA{}, \textit{\textbf{v}}(\metaA{})$=1$ if \metaA{} is true and \textit{\textbf{v}}(\metaA{})$=0$ if \metaA{} is false. 
-
-%It does this by means of a valuation function $\mathbf{v}$, that acts on atomic sentences 
-%We can interpret this function as accurately defining the truth-conditions for SL if it assigns 1 to all of the true sentences of SL and 0 to all of the false sentences of SL. 
-
-Recall that the recursive definition of a wff of SL has two stages: The first step says that atomic sentences (solitary sentence letters) are wffs. The second stage considers wffs that are constructed out of more basic wffs. There is a clause in the definition for each of the sentential connectives. For example, if \metaA{} is a wff, then \enot\metaA{} is a wff.
-
-\subsection{Truth for Atomic Sentences}
-
-Our strategy for defining the valuation \textit{\textbf{v}} will also be in two steps. The first step will handle truth-conditions for atomic sentences; the second step will handle truth-conditions for compound sentences.
-
-How can we define the truth-conditions for an atomic sentence of SL? Consider, for example, the sentence $M$. Without an interpretation, we cannot say whether $M$ is true or false. It might mean anything. If we use `$M$' to symbolize `The moon orbits the Earth', then $M$ is true. If we use `$M$' to symbolize `The moon is a giant turnip', then $M$ is false.
-
-When we give a symbolization key for SL, we provide a translation into English of the sentence letters that we use. In this way, the interpretation specifies what each of the sentence letters \emph{means}. However, this is not enough to determine whether or not that sentence is true. Assessing the sentences about the moon, for instance, requires that you know some rudimentary astronomy. Imagine a small child who became convinced that the moon is a giant turnip. She could understand what the sentence `The moon is a giant turnip' means, but mistakenly think that it were true.
-
-So a symbolization key alone does not determine whether a sentence is true or false. Truth or falsity depends also on what the world is like. If `$M$' meant `The moon is a giant turnip' and the real moon were a giant turnip, then $M$ would be true. To determine a truth value via the symbolization key, one has to first translate the sentence into English, and then rely on one's knowledge of what the world is like.
-
-We want a logical system that can proceed without astronomical investigation. Moreover, we want to abstract away from the specific commitments of a given symbolization key. So our characterization of truth-conditions proceeds in a different way. We ignore any proffered symbolization key, and take, from a given interpretation, a \emph{truth value assignment}. Formally, this is just a function that tells us the truth value of all the atomic sentences. Call this function `\textit{\textbf{a}}' (for `assignment'). We define \textit{\textbf{a}} for all atomic sentence letters \script{P}, such that
-\begin{displaymath}
-a(\script{P}) =
-\left\{
-	\begin{array}{ll}
-	1 & \mbox{if \script{P} is true},\\
-	0 & \mbox{otherwise.}
-	\end{array}
-\right.
-\end{displaymath}
-This means that \textit{\textbf{a}} takes any atomic sentence of SL and assigns it either a one or a zero; one if the sentence is true, zero if the sentence is false. 
-
-You can think of \textit{\textbf{a}} as being like a row of a truth table. Whereas a truth table row assigns a truth value to a few atomic sentences, the truth value assignment assigns a value to every atomic sentence of SL. There are infinitely many sentence letters, and the truth value assignment gives a value to each of them {\color{black}(if you're worried about infinity, this might trouble you!)}. When constructing a truth table, we only care about sentence letters that affect the truth value of sentences that interest us. As such, we ignore the rest.
-
-It is important to note that the truth value assignment, \textit{\textbf{a}}, is not part of the language SL. Rather, it is part of the mathematical machinery that we are using to describe SL. It encodes which atomic sentences are true and which are false.
-
-\subsection{Truth for arbitrary SL sentences}
-
-We now define the valuation function, \textit{\textbf{v}}, using the same recursive structure that we used to define a wff of SL.
-
-\begin{enumerate}
-\item If \metaA{} is a sentence letter, then \textit{\textbf{v}}(\metaA{}) $=$ \textit{\textbf{a}}(\metaA{}).
-%\setcounter{Example}{\arabic{enumi}}\end{enumerate}
-%...
-% Break out of the {enumerate} environment to say something about what is
-% going on. Using \setcounter in this way preserves the numbering, so
-% that the list can resume after the comments.
-
-%This is a mathematical equals sign, not the identity predicate we defined for QL.
-
-% Resume the {enumerate} environment and restore the counter.
-%...
-%\begin{enumerate}\setcounter{enumi}{\arabic{Example}}
-
-\item If \metaA{} is ${\enot}\metaB{}$ for some sentence \metaB{}, then
-\begin{displaymath}\textit{\textbf{v}}(\metaA{}) =
-	\left\{\begin{array}{ll}
-	1 & \mbox{if \textit{\textbf{v}}(\metaB{}) $= 0$},\\
-	0 & \mbox{otherwise.}
-	\end{array}\right.
-\end{displaymath}
-
-\item If \metaA{} is $(\metaB{}\eand\metaC{})$ for some sentences \metaB{}, \metaC{}, then
-\begin{displaymath}\textit{\textbf{v}}(\metaA{}) =
-	\left\{\begin{array}{ll}
-	1 & \mbox{if \textit{\textbf{v}}(\metaB{}) $= 1$ and \textit{\textbf{v}}(\metaC{}) $= 1$,}\\
-	0 & \mbox{otherwise.}
-	\end{array}\right.
-\end{displaymath}
-\setcounter{Example}{\arabic{enumi}}\end{enumerate}
-%...
-\label{truthdefinition}
-You may be tempted to worry that this definition is circular, because it uses the word `and' in trying to define `and.' But remember, we are not attempting to give a definition of the English word `and'; we are giving a definition of truth-conditions for sentences of SL containing the logical symbol `\eand.' We define truth-conditions for object language sentences containing the symbol `\eand' using the metalanguage word `and.' There is nothing circular about that.
-
-%...
-\begin{enumerate}\setcounter{enumi}{\arabic{Example}}
-
-\item If \metaA{} is $(\metaB{}\eor\metaC{})$ for some sentences \metaB{}, \metaC{}, then
-\begin{displaymath}\textit{\textbf{v}}(\metaA{}) =
-	\left\{\begin{array}{ll}
-	0 & \mbox{if \textit{\textbf{v}}(\metaB{}) $= 0$ and \textit{\textbf{v}}(\metaC{}) $= 0$,}\\
-	1 & \mbox{otherwise.}
-	\end{array}\right.
-\end{displaymath}
-%\setcounter{Example}{\arabic{enumi}}\end{enumerate}
-%...
-%Notice that this defines truth for sentences containing the symbol `\eor' using the word `and.'
-%...
-%\begin{enumerate}\setcounter{enumi}{\arabic{Example}}
-
-\item If \metaA{} is $(\metaB{}\eif\metaC{})$ for some sentences \metaB{}, \metaC{}, then
-\begin{displaymath}\textit{\textbf{v}}(\metaA{}) =
-	\left\{\begin{array}{ll}
-	0 & \mbox{if \textit{\textbf{v}}(\metaB{}) $= 1$ and \textit{\textbf{v}}(\metaC{}) $= 0$,}\\
-	1 & \mbox{otherwise.}
-	\end{array}\right.
-\end{displaymath}
-
-\item If \metaA{} is $(\metaB{}\eiff\metaC{})$ for some sentences \metaB{}, \metaC{}, then
-\begin{displaymath}\textit{\textbf{v}}(\metaA{}) =
-	\left\{\begin{array}{ll}
-	1 & \mbox{if \textit{\textbf{v}}(\metaB{}) $=$ \textit{\textbf{v}}(\metaC{})},\\
-	0 & \mbox{otherwise.}
-	\end{array}\right.
-\end{displaymath}
-\end{enumerate}
-
-Since the definition of \textit{\textbf{v}} has the same structure as the definition of a wff, we know that \textit{\textbf{v}} assigns a value to \emph{every} wff of SL. Since the sentences of SL and the wffs of SL are the same, this means that \textit{\textbf{v}} returns the truth value of every sentence of SL.
-
-Setting aside tautologies and contradictions, the truth or falsity of a sentence in SL is always \emph{relative to} some interpretation. This is because the sentence's truth-conditions do not say whether it is true or false. Rather, the truth-conditions specify how the truth of that sentence relates to a truth value assignment \textit{\textbf{a}} to atomic sentence letters.
+% \subsection{Truth for Atomic Sentences}
+%
+% Our strategy for defining the valuation \textit{\textbf{v}} will also be in two steps. The first step will handle truth-conditions for atomic sentences; the second step will handle truth-conditions for compound sentences.
+%
+% How can we define the truth-conditions for an atomic sentence of SL? Consider, for example, the sentence $M$. Without an interpretation, we cannot say whether $M$ is true or false. It might mean anything. If we use `$M$' to symbolize `The moon orbits the Earth', then $M$ is true. If we use `$M$' to symbolize `The moon is a giant turnip', then $M$ is false.
+%
+% When we give a symbolization key for SL, we provide a translation into English of the sentence letters that we use. In this way, the interpretation specifies what each of the sentence letters \emph{means}. However, this is not enough to determine whether or not that sentence is true. Assessing the sentences about the moon, for instance, requires that you know some rudimentary astronomy. Imagine a small child who became convinced that the moon is a giant turnip. She could understand what the sentence `The moon is a giant turnip' means, but mistakenly think that it were true.
+%
+% So a symbolization key alone does not determine whether a sentence is true or false. Truth or falsity depends also on what the world is like. If `$M$' meant `The moon is a giant turnip' and the real moon were a giant turnip, then $M$ would be true. To determine a truth value via the symbolization key, one has to first translate the sentence into English, and then rely on one's knowledge of what the world is like.
+%
+% We want a logical system that can proceed without astronomical investigation. Moreover, we want to abstract away from the specific commitments of a given symbolization key. So our characterization of truth-conditions proceeds in a different way. We ignore any proffered symbolization key, and take, from a given interpretation, a \emph{truth value assignment}. Formally, this is just a function that tells us the truth value of all the atomic sentences. Call this function `\textit{\textbf{a}}' (for `assignment'). We define \textit{\textbf{a}} for all atomic sentence letters \script{P}, such that
+% \begin{displaymath}
+% a(\script{P}) =
+% \left\{
+% 	\begin{array}{ll}
+% 	1 & \mbox{if \script{P} is true},\\
+% 	0 & \mbox{otherwise.}
+% 	\end{array}
+% \right.
+% \end{displaymath}
+% This means that \textit{\textbf{a}} takes any atomic sentence of SL and assigns it either a one or a zero; one if the sentence is true, zero if the sentence is false. 
+%
+% You can think of \textit{\textbf{a}} as being like a row of a truth table. Whereas a truth table row assigns a truth value to a few atomic sentences, the truth value assignment assigns a value to every atomic sentence of SL. There are infinitely many sentence letters, and the truth value assignment gives a value to each of them {\color{black}(if you're worried about infinity, this might trouble you!)}. When constructing a truth table, we only care about sentence letters that affect the truth value of sentences that interest us. As such, we ignore the rest.
+%
+% It is important to note that the truth value assignment, \textit{\textbf{a}}, is not part of the language SL. Rather, it is part of the mathematical machinery that we are using to describe SL. It encodes which atomic sentences are true and which are false.
+%
+% \subsection{Truth for arbitrary SL sentences}
+%
+% We now define the valuation function, \textit{\textbf{v}}, using the same recursive structure that we used to define a wff of SL.
+%
+% \begin{enumerate}
+% \item If \metaA{} is a sentence letter, then \textit{\textbf{v}}(\metaA{}) $=$ \textit{\textbf{a}}(\metaA{}).
+% %\setcounter{Example}{\arabic{enumi}}\end{enumerate}
+% %...
+% % Break out of the {enumerate} environment to say something about what is
+% % going on. Using \setcounter in this way preserves the numbering, so
+% % that the list can resume after the comments.
+%
+% %This is a mathematical equals sign, not the identity predicate we defined for QL.
+%
+% % Resume the {enumerate} environment and restore the counter.
+% %...
+% %\begin{enumerate}\setcounter{enumi}{\arabic{Example}}
+%
+% \item If \metaA{} is ${\enot}\metaB{}$ for some sentence \metaB{}, then
+% \begin{displaymath}\textit{\textbf{v}}(\metaA{}) =
+% 	\left\{\begin{array}{ll}
+% 	1 & \mbox{if \textit{\textbf{v}}(\metaB{}) $= 0$},\\
+% 	0 & \mbox{otherwise.}
+% 	\end{array}\right.
+% \end{displaymath}
+%
+% \item If \metaA{} is $(\metaB{}\eand\metaC{})$ for some sentences \metaB{}, \metaC{}, then
+% \begin{displaymath}\textit{\textbf{v}}(\metaA{}) =
+% 	\left\{\begin{array}{ll}
+% 	1 & \mbox{if \textit{\textbf{v}}(\metaB{}) $= 1$ and \textit{\textbf{v}}(\metaC{}) $= 1$,}\\
+% 	0 & \mbox{otherwise.}
+% 	\end{array}\right.
+% \end{displaymath}
+% \setcounter{Example}{\arabic{enumi}}\end{enumerate}
+% %...
+% \label{truthdefinition}
+% You may be tempted to worry that this definition is circular, because it uses the word `and' in trying to define `and.' But remember, we are not attempting to give a definition of the English word `and'; we are giving a definition of truth-conditions for sentences of SL containing the logical symbol `\eand.' We define truth-conditions for object language sentences containing the symbol `\eand' using the metalanguage word `and.' There is nothing circular about that.
+%
+% %...
+% \begin{enumerate}\setcounter{enumi}{\arabic{Example}}
+%
+% \item If \metaA{} is $(\metaB{}\eor\metaC{})$ for some sentences \metaB{}, \metaC{}, then
+% \begin{displaymath}\textit{\textbf{v}}(\metaA{}) =
+% 	\left\{\begin{array}{ll}
+% 	0 & \mbox{if \textit{\textbf{v}}(\metaB{}) $= 0$ and \textit{\textbf{v}}(\metaC{}) $= 0$,}\\
+% 	1 & \mbox{otherwise.}
+% 	\end{array}\right.
+% \end{displaymath}
+% %\setcounter{Example}{\arabic{enumi}}\end{enumerate}
+% %...
+% %Notice that this defines truth for sentences containing the symbol `\eor' using the word `and.'
+% %...
+% %\begin{enumerate}\setcounter{enumi}{\arabic{Example}}
+%
+% \item If \metaA{} is $(\metaB{}\eif\metaC{})$ for some sentences \metaB{}, \metaC{}, then
+% \begin{displaymath}\textit{\textbf{v}}(\metaA{}) =
+% 	\left\{\begin{array}{ll}
+% 	0 & \mbox{if \textit{\textbf{v}}(\metaB{}) $= 1$ and \textit{\textbf{v}}(\metaC{}) $= 0$,}\\
+% 	1 & \mbox{otherwise.}
+% 	\end{array}\right.
+% \end{displaymath}
+%
+% \item If \metaA{} is $(\metaB{}\eiff\metaC{})$ for some sentences \metaB{}, \metaC{}, then
+% \begin{displaymath}\textit{\textbf{v}}(\metaA{}) =
+% 	\left\{\begin{array}{ll}
+% 	1 & \mbox{if \textit{\textbf{v}}(\metaB{}) $=$ \textit{\textbf{v}}(\metaC{})},\\
+% 	0 & \mbox{otherwise.}
+% 	\end{array}\right.
+% \end{displaymath}
+% \end{enumerate}
+%
+% Since the definition of \textit{\textbf{v}} has the same structure as the definition of a wff, we know that \textit{\textbf{v}} assigns a value to \emph{every} wff of SL. Since the sentences of SL and the wffs of SL are the same, this means that \textit{\textbf{v}} returns the truth value of every sentence of SL.
+%
+% Setting aside tautologies and contradictions, the truth or falsity of a sentence in SL is always \emph{relative to} some interpretation. This is because the sentence's truth-conditions do not say whether it is true or false. Rather, the truth-conditions specify how the truth of that sentence relates to a truth value assignment \textit{\textbf{a}} to atomic sentence letters.
 
 
 

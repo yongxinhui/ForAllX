@@ -3,7 +3,7 @@
 \ProvidesPackage{forallx-ubc}[2011/10/29 support for a logic textbook]
 \usepackage[dvipsnames]{xcolor}
 \usepackage{enumitem} %%Enables control over enumerate and itemize environments
-\RequirePackage{graphicx,adjustbox, amssymb,amsmath,lmodern,microtype,multicol,ifthen,prooftrees,titlesec, apptools}
+\RequirePackage{graphicx,adjustbox,amssymb,amsmath,lmodern,microtype,multicol,ifthen,prooftrees,titlesec, apptools}
 
 \usepackage[linktocpage=true]{hyperref}
 \definecolor{URLblue}{RGB}{0,0,150}
@@ -46,6 +46,7 @@
 \newcommand{\corner}[1]{\ulcorner#1\urcorner} %%Corner quotes
 \newcommand{\I}{\mathcal{I}} %%Corner quotes
 \newcommand{\V}[1]{\mathcal{V}_{#1}} %%Corner quotes
+\newcommand{\set}[1]{\lbrace#1\rbrace} %%Set brackets
 
 % \makeatletter
 % \DeclareRobustCommand{\eif}{%
@@ -156,6 +157,8 @@
 \newcommand*{\gap}[1]{\blank$_{#1}$} % TB: used for keys, to avoid use/mention confusion
 
 % These are included for discussing formal semantics in predicate logic.
+\renewcommand{\models}{\vDash}
+\newcommand{\nmodels}{\nvDash}
 \newcommand*{\model}[1]{\ensuremath{\mathbb{#1}}}
 \newcommand*{\extension}[1]{\ensuremath{\mbox{extension}(#1)}}
 \newcommand*{\referent}[1]{\ensuremath{\mbox{referent}(#1)}}
