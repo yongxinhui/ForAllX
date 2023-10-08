@@ -1,8 +1,7 @@
- \documentclass[12pt]{article}
+\documentclass[12pt]{article}
  
- \usepackage{geometry}
+\usepackage{geometry}
 \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
-
 \usepackage{multicol}
  
  \iffalse
@@ -139,10 +138,12 @@ Fall, 2022
 \fi
 
 \begin{center}
-\Large Problem Set 5 \large{(24.241 Symbolic Logic)} \\[1ex] 
- Due Fri. \textbf{October 14th} by \textbf{5pm} Eastern\\ \normalsize{\textbf{Please scan and upload to Canvas as a pdf}; feel free to \textit{also} turn in a paper copy to Philosophy Dept on 8th floor Stata Center, Dreyfoos-wing} \\[3ex] 
- \textbf{Answer FOUR questions total: 1 and 2, 3 Xor 4, 5 Xor 6 (exclusive or's!)}
+\Large Problem Set 5\\[1ex] 
+ Due Fri. October 13 by 5pm Eastern\\ 
+  \vspace{.1in}
+  \normalsize{(Please scan and upload to Canvas as a pdf)} \\[3ex] 
 \end{center}
+
 
 Question 0: if you worked with up to two classmates, please list their names! 
 %Some of these problems draw from the posted Induction and Recursion notes.\\
@@ -153,7 +154,10 @@ Question 0: if you worked with up to two classmates, please list their names!
 
 %%idea: two mandatory problems, then two sets where they choose one! 
 
-\item Consider the argument with premise set $\{\Phi, \Psi \}$ and conclusion $\Theta$. Suppose that you are able to make a tree for this argument in which all branches close, even though you make no use of $\Phi$ and $\Psi$: i.e. you do not resolve these sentences, and when you close a branch, it is never because it contains $\Phi$ or because it contains $\Psi$. What is the most informative semantic property you can ascribe to $\Theta$ (you can take for granted that our system is sound and complete)? \\ (feel free to use symbols `P', `Q', and conclusion `C' if you don't feel like writing Greek letters or you worry about your Greek handwriting!)
+\item 
+  Consider an argument with premises $\varphi$ and $\psi$ and conclusion $\chi$.
+  Suppose that you are able to construct a closed tree for this argument even though you make no use of $\varphi$ and $\psi$, i.e., you do not resolve these sentences, and when you close a branch, it is never because it contains $\varphi$ or because it contains $\psi$.
+  Assuming soundness and completeness, what is the most informative semantic property you can ascribe to $\chi$? 
 
 %What is the most informative thing you can say about $\Theta$? \\ (feel free to use symbols `P', `Q', and conclusion `C' if you don't feel like writing Greek letters or worry about your handwriting!)
 %Let $\Phi$, \Psi , and \Theta be wffs 
@@ -161,73 +165,48 @@ Question 0: if you worked with up to two classmates, please list their names!
 
 %solution: C must be a tautology. Whatever we did in the given tree with A, B, and „ C at its root to make all the branches close, we could have done in a tree with just „ C at its root—since by assumption A and B played no role in the further work we did. So there is a tree with just „ C at its root in which all branches close.
 
-\item Prove that in a sound and complete tree system, no argument G is both tree-valid and tree-invalid. Let `G' be an arbitrary argument with premise set $\Gamma$ and conclusion $\Theta$. 
-
-(\textit{Hints}: Show that if an argument is tree-invalid, then it is not tree-valid. To do this, apply \textbf{a key fact} coming from our proof of completeness, and then apply the soundness result. Alternatively, you could do a proof by contradiction, using the same results.) 
-% (but you'll still need soundness and the same key fact from our completeness proof. We stand here face to face with the hardness of the logical must). 
-
-\item[] \begin{center} Pick \textbf{one} of questions 3 or 4 to answer (then PROCEED TO 2nd PAGE!): \end{center}
-
-\item Briefly explain why we could augment our nine tree rules with their `syntactic equivalents' and not get into trouble with our Soundness and Completeness results (e.g. swapping the order of branches in the `splitting rules', or the order of sentences in the `stacking rules'). Your brief argument should note both (i) why our system would remain Sound (`reasoning from the top-down') and (ii) why our system would remain Complete (`reasoning from the bottom-up'). \\ NB: I'm \textit{not} asking you to formally extend the Soundness and Completeness proofs to include these additional $6+ 7 \times 2 = 20$ rules. But if you prefer to make it really concrete, feel free to just focus on a disjunction rule where the right disjunct is placed on the left branch, and the left disjunct is placed on the right branch of our new node. 
-%maybe I was wrong to say that `completeness' is about having `enough rules', since it seems that sometimes adding a single rule could mess up completeness?
-
-\item Our textbook's Chapter 5 does not set-up the inductive proof for completeness properly. In lecture, we showed how to properly set-up the proof for soundness. \\ Do the same for completeness noting (i) what you are doing induction over; \\ (ii) the base case(s); (iii) the induction hypothesis; \\ (iv) what you would need to show in the induction step. \\ NB: I'm not asking you to actually re-do the proof, just to set it up! \\ \textbf{Warning: this problem seems considerably trickier than \#3 to answer completely correctly.}
-
-%, since you're doing induction simultaneously on two structures, so you need two indices for your induction, making the induction hypothesis a bit convoluted.} 
-%[TWO recursive structures in this case!]
-
-%; and (v) comment on whether the book's proof leaves out any cases. \\ NB: I'm not asking you to actually re-do the proof, just to set it up! 
+\item Assuming soundness and completeness, show that any SL tree with a closed branch has an unsatisfiable root.
+  
+% \item Prove that in a sound and complete tree system, no argument has both a complete open tree and a closed tree.
+% (\textit{Hints}: Show that if an argument is tree-invalid, then it is not tree-valid. To do this, apply \textbf{a key fact} coming from our proof of completeness, and then apply the soundness result. Alternatively, you could do a proof by contradiction, using the same results.) 
 
 
-\newpage
 
 
-\item[] \begin{center} Pick \textbf{one} of questions 5 or 6 to answer; do parts (a) AND (b): \end{center}
 
-\bigskip
+\item
+What follows are two alternative resolution rules.
+Consider the SL tree proof systems that result from adding one of the rules below to our usual tree proof system.
+(Thus there are two alternative systems to consider, one for each rule.)
 
-What follows are two modiﬁcations to our SL tree system. For each, imagine
-a system STD$^{\ast}$ exactly like our system STD, except for the single indicated change.
-
-\textbf{(a) Would the modiﬁed tree system be sound?} If so, explain how to extend our inductive soundness proof to a system with this rule; if not, give a tree that is a counterexample to the soundness of STD$^{\ast}$.
-
-\textbf{(b) Would the modiﬁed tree system be complete?} If so, explain how to extend our inductive completeness proof to a system with this rule; if not, give a tree that is a counterexample to the completeness of  STD$^{\ast}$. 
-
-%\end{enumerate}
 
 \begin{multicols}{2}
 
-\item \textit{Crunk Conditional} (C\eif) \vspace{1em}
+\textit{Conditional Reduction} (R\eif) \vspace{1em}
 
 %\begin{center}
 \begin{prooftree}
 {line numbering, single branches}
-[\metaA{}\eif\metaB{}, line no override={m}
+[\varphi\eif\psi{}, line no override={m}
 [\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
-	[\enot\metaA{} \eor \metaB{}, line no override={j}, just={m C\eif}]
-	[\metaB{}, line no override={j}
-	[\Theta, grouped, line no override={j+1}
-	]
-	]
+	[\enot\varphi{} \eand \psi{}, line no override={j}]
 ]
 ]
 \end{prooftree}
 %\end{center}
 
-Note that $\Theta$ is an arbitrary wff of SL
-
 \columnbreak
 
-\item \textit{Negligent Negated Conditional} (N\enot \eif) \vspace{0.42em}
+\textit{Exhaustive Negated Conditional} (E\enot\eif) \vspace{0.42em}
 
 %\begin{center}
 \begin{prooftree}
 {line numbering, single branches}
-[\enot(\metaA{}\eif\metaB{}), line no override={m}
+[\enot(\varphi\eif\psi), line no override={m}
 [\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
-	[\metaA{}, line no override={j}, just={m N\enot \eif}]
-	[\enot\metaB{}]
-	[(\metaA{} \eand \enot \metaB{}) \eand (P \eor \enot P)] 
+	[\varphi, line no override={j}]
+	[\enot\psi]
+	[\varphi \eand \enot \psi] 
 ]
 ]
 \end{prooftree}
@@ -236,6 +215,18 @@ Note that $\Theta$ is an arbitrary wff of SL
 \end{multicols}
 
 
+
+\textbf{Question:} 
+Are either of the modified tree systems sound?
+If so, explain how to extend our soundness proof to a system which includes the rule in question.
+Note that you do not need to rewrite the soundness proof in total, but do spell out the key changes to any lemmas used to prove soundness, using those lemmas to outline the soundness proof.
+If either of the modified tree systems fail to be sound, give a tree that is a counterexample to the soundness of such a system.
+
+% \textbf{(b) Would the modified tree system be complete?} 
+% If so, explain how to extend our inductive completeness proof to a system with this rule.
+% If not, give a tree that is a counterexample to the completeness of  STD$^{\ast}$. 
+
+%\end{enumerate}
 
 
 

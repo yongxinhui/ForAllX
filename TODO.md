@@ -5,23 +5,30 @@
 - [x] Week 0
     - [x] Carnap Problem Set 0
     - [x] Personal Information
+    - [x] Carnap Problem Set 1
 - [x] Week 1
     - [x] Edit Ch 1
-    - [x] Carnap Problem Set 1
+    - [x] Carnap Problem Set 2
     - [x] Link Van reading
     - [x] Handout Th
     - [x] Define arguments in ch. 2
     - [x] Talk to Gareth
     - [x] Chapter 2.4 onwards
     - [x] Chapter 3
-- [ ] Week 2
-    - [ ] Sort our grading
-    - [ ] Edit Chapter 4
-    - [ ] Paper Problem Set 2
+- [x] Week 2
+    - [x] Edit Chapter 4
+    - [x] Paper Problem Set 3
     - [x] Handout Tu
     - [x] Handout Th
-- [ ] Week 3
+- [x] Week 3
 - [ ] Week 4
+    - [ ] Sort out grading
+    - [ ] Edit Ch. 5
+        - [x] Soundness
+        - [ ] Completeness
+    - [x] Tu Handout
+    - [x] Th Handout
+    - [x] Problem Set 5
 - [ ] Week 5
 - [ ] Week 6
 - [ ] Week 7
