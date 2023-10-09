@@ -22,8 +22,8 @@ Rather, it is the ambition of the present chapter to establish:
 Whereas the left-to-right direction is referred to as the \textit{Soundness} of the tree method, the right-to-left direction is referred to as the \textit{Completeness} of the tree method.
 Accordingly, the existence of a closed tree proof--- however uninteresting on its own--- tells us something that we already have reason to care about, namely unsatisfiability.
 Recall, the connection: % that unsatisfiability bears to entailment: 
-    $$\Gamma \models \varphi \text{ just in case } \Gamma, \neg \varphi \models \bot.$$
-Putting the pieces together, we may show that $\Gamma \models \varphi$ by showing that $\Gamma, \neg \varphi \proves \bot$, where the former entailment claim is something we have reason to care about.
+    $$\Gamma \models \varphi \text{ just in case } \Gamma, \enot \varphi \models \bot.$$
+Putting the pieces together, we may show that $\Gamma \models \varphi$ by showing that $\Gamma, \enot \varphi \proves \bot$, where the former entailment claim is something we have reason to care about.
 After all, an argument is logically valid just in case its premises entail its conclusion.
 Thus the SL tree proof system provides a method by which to determine which arguments are logically valid.
 
@@ -1021,7 +1021,7 @@ Accordingly, \textbf{Lemma 6} and \textbf{Lemma 7} make up the core of the proof
 
 \textit{Proof:}
 Let $\B$ be a complete open branch in an SL tree. 
-Accordingly, every sentence in $\B$ has been resolved in $\B$. 
+As a result, every sentence in $\B$ has been resolved in $\B$. 
 % As a result, $\B$ is Hintikka.
 % For instance, if $\enot\enot\metaA$ occurs in $\B$, the resolution rule for $\enot\enot\metaA$ must have been applied since $\B$ is complete and open, and so $\metaA$ occurs in $\B$. 
 % Similarly, if $\metaA\eor\metaB$ occurs in $\B$, the resolution rule for $\metaA\eor\metaB$ must have been applied, and so either $\metaA$ or $\metaB$ occur in $\B$. 
@@ -1029,84 +1029,101 @@ Accordingly, every sentence in $\B$ has been resolved in $\B$.
 In order to show that $\B$ is satisfiable, let $\I$ be an SL interpretation where $\I(\metaA)=1$ just in case $\metaA$ is a sentence letter that occurs in $\B$.
 % Given any sentence letter $\metaA$ where $\enot\metaA$ occurs in $\B$, we know that $\metaA$ cannot occur in $\B$ since $\B$ is open, and so $\I(\metaA)=0$ by the definition of $\I$.
 % Thus $\I(\enot\metaA)=1$ for every sentence letter $\metaA$ that does not occur in $\B$. 
-We will now show that $\I$ satisfies $\B$ by induction on the resolution of sentences in $\B$.
+We will now show that $\I$ satisfies $\B$ by induction on the complexity of sentences in $\B$.
 
 
 
 \subsubsection{Base Case}
 
-Assume $\res(\metaA)=0$ for an arbitrary sentence $\metaA$ that occurs in $\B$. 
-It follows that $\metaA$ is a literal.
-If $\metaA$ is a sentence letter, then $\I(\metaA)=1$ as observed above, and so $\V{\I}(\metaA)=1$.
-If $\metaA=\enot\metaB$, we know that $\I(\metaB)=0$, and so $\V{\I}(\enot\metaB)=\V{\I}(\metaA)=1$.
-Thus $\I$ satisfies the literals in $\B$.
+Let $\metaA$ be an SL sentence that occurs in $\B$ where $\comp(\metaA)=1$.
+It follows that $\metaA$ is a sentence letter, and so $\V{\I}(\metaA)=\I(\metaA)=1$.
 
 
 \subsubsection{Induction Hypothesis}
 
-Assume that for every SL sentence $\metaA$ that occurs in $\B$, if $\res(\metaA)\leq n$, then $\V{\I}(\metaA)=1$. 
+Assume that for every SL sentence $\metaA$ that occurs in $\B$, if $\comp(\metaA)\leq n$, then $\V{\I}(\metaA)=1$. 
 
 
 \subsubsection{Induction Step}
 
-Let $\metaA$ be an SL sentence that occurs in $\B$ where $\res(\metaA)=n+1$.
-Since $\res(\metaA)>0$, there is an application rule for $\metaA$. 
-Given that $\B$ is complete and open, $\metaA$ has been resolved in $\B$. 
-There are nine cases to consider, corresponding to the nine resolution rules.
-
+Let $\metaA$ be an SL sentence that occurs in $\B$ where $\comp(\metaA)=n+1$.
+There are ten cases to consider, corresponding to the nine resolution rules plus an additional case for when $\metaA=\enot\metaB$ for some sentence letter $\metaB$. 
 
 \textit{Case 1:} 
-If $\metaA=\neg\neg\metaB$, then $\metaB$ occurs in $\B$.
-Since $\res(\metaB)\leq n$, we know by hypothesis that $\V{\I}(\metaB)=1$, and so $\V{\I}(\metaA)=\V{\I}(\enot\enot\metaB)=1$ by the semantic clause for negation. 
+Assume that $\metaA=\enot\metaB$ for some SL sentence letter $\metaB$.
+Since $\B$ is open, we know that $\metaB$ does not occur in $\B$, and so $\I(\metaB)=0$. 
+By the semantics for negation, $\V{\I}(\metaA)=\V{\I}(\enot\metaB)=1$.
 
 \textit{Case 2:} 
-If $\metaA=\metaB\eand\metaC$, then $\metaB$ and $\metaC$ occur in $\B$.
-Since $\res(\metaA) = \res(\metaB) + \res(\metaC) + 1$, we know that $\res(\metaB)\leq n$ and $\res(\metaC)\leq n$, and so $\V{\I}(\metaB)=1$ and $\V{\I}(\metaC)=1$ by hypothesis.  
-Thus $\V{\I}(\metaA)=\V{\I}(\metaB\eand\metaC)=1$ by the semantic clause for conjunction.
+Assume $\metaA=\enot\enot\metaB$.
+Since $\B$ is complete, every SL sentence in $\B$ has been resolved in $\B$, and so $\metaB$ occurs in $\B$.
+Since $\comp(\metaB)\leq n$, we know by hypothesis that $\V{\I}(\metaB)=1$, and so $\V{\I}(\metaA)=\V{\I}(\enot\enot\metaB)=1$ by the semantics for negation. 
 
 \textit{Case 3:} 
-If $\metaA=\enot(\metaB\eand\metaC)$, then $\enot\metaB$ or $\enot\metaC$ occur in $\B$.
-Since $\res(\metaA) = \res(\enot\metaB) + \res(\enot\metaC) + 1$, we know that $\res(\enot\metaB)\leq n$ and $\res(\enot\metaC)\leq n$, and so $\V{\I}(\enot\metaB)=1$ or $\V{\I}(\enot\metaC)=1$ by hypothesis.  
-By the semantics for negation, $\V{\I}(\metaB)=0$ or $\V{\I}(\metaC)=0$, and so either way $\V{\I}(\metaB\eand\metaC)=0$ by the semantics for conjunction.
-Thus $\V{\I}(\metaA)=\V{\I}(\enot(\metaB\eand\metaC))=1$.
+Assume $\metaA=\metaB\eand\metaC$.
+Since $\B$ is complete, both $\metaB$ and $\metaC$ occur in $\B$.
+Additionally, $\comp(\metaA) = \comp(\metaB) + \comp(\metaC) + 1$, and so $\comp(\metaB)\leq n$ and $\comp(\metaC)\leq n$.
+By hypothesis, $\V{\I}(\metaB)=1$ and $\V{\I}(\metaC)=1$.  
+Thus $\V{\I}(\metaA)=\V{\I}(\metaB\eand\metaC)=1$ by conjunction.
 
 \textit{Case 4:} 
-If $\metaA=\metaB\eor\metaC$, then $\metaB$ or $\metaC$ occur in $\B$.
-Since $\res(\metaA) = \res(\metaB) + \res(\metaC) + 1$, we know that $\res(\metaB)\leq n$ and $\res(\metaC)\leq n$, and so $\V{\I}(\metaB)=1$ or $\V{\I}(\metaC)=1$ by hypothesis.  
-Either way, $\V{\I}(\metaA)=\V{\I}(\metaB\eor\metaC)=1$ by the semantics for disjunction.
+Assume $\metaA=\enot(\metaB\eand\metaC)$.
+Since $\B$ is complete, either $\enot\metaB$ or $\enot\metaC$ occur in $\B$.
+Additionally, $\comp(\metaA) = \comp(\metaB\eand\metaC) + 1 = \comp(\metaB) + \comp(\metaC) + 2 = \comp(\enot\metaB) + \comp(\enot\metaC)$.
+Since $\comp(\enot\metaB) > 0$ and $\comp(\enot\metaC) > 0$, we know $\comp(\enot\metaB)\leq n$ and $\comp(\enot\metaC)\leq n$.
+By hypothesis, either $\V{\I}(\enot\metaB)=1$ or $\V{\I}(\enot\metaC)=1$, and so $\V{\I}(\metaB)=0$ or $\V{\I}(\metaC)=0$ by negation.
+Either way, $\V{\I}(\metaB\eand\metaC)=0$ by conjunction, and so $\V{\I}(\metaA)=\V{\I}(\enot(\metaB\eand\metaC))=1$ by negation.
 
 \textit{Case 5:} 
-If $\metaA=\enot(\metaB\eor\metaC)$, then $\enot\metaB$ and $\enot\metaC$ occur in $\B$.
-Since $\res(\metaA) = \res(\enot\metaB) + \res(\enot\metaC) + 1$, we know that $\res(\enot\metaB)\leq n$ and $\res(\enot\metaC)\leq n$, and so $\V{\I}(\enot\metaB)=1$ and $\V{\I}(\enot\metaC)=1$ by hypothesis.  
-By the semantics for negation, $\V{\I}(\metaB)=0$ and $\V{\I}(\metaC)=0$, and so $\V{\I}(\metaB\eor\metaC)=0$ by the semantics for disjunction.
-Thus $\V{\I}(\metaA)=\V{\I}(\enot(\metaB\eor\metaC))=1$.
+Assume $\metaA=\metaB\eor\metaC$.
+Since $\B$ is complete, either $\metaB$ or $\metaC$ occur in $\B$.
+Additionally, $\comp(\metaA) = \comp(\metaB) + \comp(\metaC) + 1$, and so $\comp(\metaB)\leq n$ and $\comp(\metaC)\leq n$.
+By hypothesis, $\V{\I}(\metaB)=1$ or $\V{\I}(\metaC)=1$, and so $\V{\I}(\metaA)=\V{\I}(\metaB\eor\metaC)=1$ by disjunction.
 
 \textit{Case 6:} 
-If $\metaA=\metaB\eif\metaC$, then $\enot\metaB$ or $\metaC$ occur in $\B$.
-Since $\res(\metaA) = \res(\enot\metaB) + \res(\metaC) + 1$, we know that $\res(\enot\metaB)\leq n$ and $\res(\metaC)\leq n$, and so $\V{\I}(\enot\metaB)=1$ or $\V{\I}(\metaC)=1$ by hypothesis.  
-By the semantics for negation, $\V{\I}(\metaB)=0$ or $\V{\I}(\enot\metaC)=1$.
-Either way, $\V{\I}(\metaA)=\V{\I}(\metaB\eif\metaC)=1$ by the semantics for the conditional.
+Assume $\metaA=\enot(\metaB\eor\metaC)$.
+Since $\B$ is complete, both $\enot\metaB$ and $\enot\metaC$ occur in $\B$.
+Additionally, $\comp(\metaA) = \comp(\metaB\eor\metaC) + 1 = \comp(\metaB) + \comp(\metaC) + 2 = \comp(\enot\metaB) + \comp(\enot\metaC)$.
+Since $\comp(\enot\metaB) > 0$ and $\comp(\enot\metaC) > 0$, it follows that $\comp(\enot\metaB)\leq n$ and $\comp(\enot\metaC)\leq n$.
+By hypothesis, both $\V{\I}(\enot\metaB)=1$ and $\V{\I}(\enot\metaC)=1$, and so $\V{\I}(\metaB)=0$ and $\V{\I}(\metaC)=0$ by negation.
+Thus $\V{\I}(\metaB\eor\metaC)=0$ by disjunction, and so $\V{\I}(\metaA)=\V{\I}(\enot(\metaB\eor\metaC))=1$ by negation.
 
 \textit{Case 7:} 
-If $\metaA=\enot(\metaB\eif\metaC)$, then $\metaB$ and $\enot\metaC$ occur in $\B$.
-Since $\res(\metaA) = \res(\metaB) + \res(\enot\metaC) + 1$, we know that $\res(\metaB)\leq n$ and $\res(\enot\metaC)\leq n$, and so $\V{\I}(\metaB)=1$ and $\V{\I}(\enot\metaC)=1$ by hypothesis.  
-By the semantics for negation, $\V{\I}(\metaB)=1$ and $\V{\I}(\metaC)=0$, and so $\V{\I}(\metaB\eif\metaC)=0$ by the semantics for the conditional.
-Thus $\V{\I}(\metaA)=\V{\I}(\enot(\metaB\eif\metaC))=1$.
+Assume $\metaA=\metaB\eif\metaC$.
+Since $\B$ is complete, either $\enot\metaB$ or $\metaC$ occur in $\B$.
+Additionally, $\comp(\metaA) = \comp(\metaB) + \comp(\metaC) + 1 = \comp(\enot\metaB) + \comp(\metaC)$.
+If $\metaC$ is a sentence letter, then $\comp(\metaC)=0$, and so $\comp(\enot\metaB)=n+1$.
+
+, and so both $\comp(\metaB)\leq n$ and $\comp(\metaC)\leq n$.
+If 
+
+By hypothesis, either $\V{\I}(\enot\metaB)=1$ or $\V{\I}(\metaC)=1$, and so $\V{\I}(\metaB)=0$ or $\V{\I}(\enot\metaC)=1$ by negation.
+Either way, $\V{\I}(\metaA)=\V{\I}(\metaB\eif\metaC)=1$ by the conditional.
+
+\textit{Case 8:} 
+Assume $\metaA=\enot(\metaB\eif\metaC)$.
+Since $\B$ is complete, both $\metaB$ and $\enot\metaC$ occur in $\B$.
+Additionally, $\comp(\metaA) = \comp(\metaB\eif\metaC) + 1 = \comp(\metaB) + \comp(\metaC) + 2 = \comp(\metaB) + \comp(\enot\metaC) + 1$, and so $\comp(\metaB)\leq n$ and $\comp(\enot\metaC)\leq n$.
+By hypothesis, $\V{\I}(\metaB)=1$ and $\V{\I}(\enot\metaC)=1$, and so $\V{\I}(\metaB)=1$ and $\V{\I}(\metaC)=0$ by negation.
+Thus $\V{\I}(\metaB\eif\metaC)=0$ by the conditional, and so $\V{\I}(\metaA)=\V{\I}(\enot(\metaB\eif\metaC))=1$ by negation.
 
 \textit{Case 8:} 
 If $\metaA=\metaB\eiff\metaC$, either $\metaB$ and $\metaC$ occur in $\B$ or $\enot\metaB$ and $\enot\metaC$ occur in $\B$.
-Since $\res(\metaA) = \res(\metaB) + \res(\metaC) + \res(\enot\metaB) + \res(\enot\metaC) + 1$, we know that $\res(\metaB)\leq n$, $\res(\metaC)\leq n$, $\res(\enot\metaB)\leq n$, and $\res(\enot\metaC)\leq n$.
+Since $\comp(\metaA) = \comp(\metaB) + \comp(\metaC) + \comp(\enot\metaB) + \comp(\enot\metaC) + 1$, we know that $\comp(\metaB)\leq n$, $\comp(\metaC)\leq n$, $\comp(\enot\metaB)\leq n$, and $\comp(\enot\metaC)\leq n$.
 Thus $\V{\I}(\metaB)=\V{\I}(\metaC)=1$ or $\V{\I}(\enot\metaB)=\V{\I}(\enot\metaC)=1$ by hypothesis.  
 In the latter case, $\V{\I}(\metaB)=\V{\I}(\metaC)=0$ by the semantics for negation, and so either way $\V{\I}(\metaA)=\V{\I}(\metaB\eiff\metaC)=1$ by the semantics for the biconditional.
 
 \textit{Case 9:} 
 If $\metaA=\enot(\metaB\eiff\metaC)$, then $\metaB$ and $\enot\metaC$ occur in $\B$ or $\metaA$ and $\enot\metaC$ occur in $\B$.
-Since $\res(\metaA) = \res(\metaB) + \res(\enot\metaC) + \res(\enot\metaB) + \res(\metaC) + 1$, we know that $\res(\metaB)\leq n$, $\res(\enot\metaC)\leq n$, $\res(\enot\metaB)\leq n$, and $\res(\metaC)\leq n$.
+Since $\comp(\metaA) = \comp(\metaB) + \comp(\enot\metaC) + \comp(\enot\metaB) + \comp(\metaC) + 1$, we know that $\comp(\metaB)\leq n$, $\comp(\enot\metaC)\leq n$, $\comp(\enot\metaB)\leq n$, and $\comp(\metaC)\leq n$.
 Thus $\V{\I}(\metaB)=\V{\I}(\enot\metaC)=1$ or $\V{\I}(\enot\metaB)=\V{\I}(\metaC)=1$ by hypothesis.  
 Either way, $\V{\I}(\metaB)\neq\V{\I}(\metaC)$ by the semantics for negation, and so $\V{\I}(\metaB\eiff\metaC)=0$ by the semantics for the biconditional.
 Thus $\V{\I}(\metaA)=\V{\I}(\enot(\metaB\eiff\metaC))=1$.
 
+\subsubsection{Conclusion}
 
+Since $\V{\I}(\metaA)=1$ in every case, we may conclude that $\V{\I}(\metaA)=1$ for every sentence that occurs in $\B$ where $\res(\metaA)=n+1$.
+Thus it follows by strong induction that $\I$ satisfies $\B$. 
 
 
 
