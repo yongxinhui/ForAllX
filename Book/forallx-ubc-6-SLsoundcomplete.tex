@@ -3,10 +3,10 @@
 \label{ch.SLsoundcomplete}
 
 % In Chapter \ref{ch.sl.trees} we introduced a proof system for SL.
-Whereas the previous chapter focused on defining and using SL tree proofs, this chapter studies the proof system itself, and so belongs to the discipline \emph{metalogic}.
-Although a matter of stipulation, the rules which constrain the construction of SL tree proofs were not selected at random.
+Whereas the previous chapter focused on defining and using SL tree proofs, this chapter studies the proof system itself, and so belongs to the discipline \emph{metalogic} which proves results about logical systems.
+Although a matter of stipulation, the rules which constrain the construction of SL trees were not chosen at random.
 Rather, they were designed to determine whether a set of sentences is satisfiable in an entirely syntactic, mechanical, and notationally elegant way.
-Even so, a question remains as to whether the tree method succeeds in its ambitions.
+Even so, a question remains as to whether the tree method succeeds in its aims.
 % This chapter will show that it does.
 
 Recall the distinction between our two turnstiles.
@@ -19,13 +19,13 @@ In particular, we do not need to know what the symbols in SL mean in order to de
 By itself, the existence of such a closed tree is not illuminating, at least not given what we have shown so far.
 Rather, it is the ambition of the present chapter to establish:
   $$\Gamma \proves \bot \text{ just in case } \Gamma \models \bot.$$
-Whereas the left-to-right direction is referred to as the \textit{Soundness} of the tree method, the right-to-left direction is referred to as the \textit{Completeness} of the tree method.
+Whereas the left-to-right direction is referred to as the \textit{soundness} of the tree method, the right-to-left direction is referred to as the \textit{completeness} of the tree method.
 Accordingly, the existence of a closed tree proof--- however uninteresting on its own--- tells us something that we already have reason to care about, namely unsatisfiability.
 Recall, the connection: % that unsatisfiability bears to entailment: 
     $$\Gamma \models \varphi \text{ just in case } \Gamma, \enot \varphi \models \bot.$$
 Putting the pieces together, we may show that $\Gamma \models \varphi$ by showing that $\Gamma, \enot \varphi \proves \bot$, where the former entailment claim is something we have reason to care about.
-After all, an argument is logically valid just in case its premises entail its conclusion.
-Thus the SL tree proof system provides a method by which to determine which arguments are logically valid.
+After all, an argument in SL is logically valid just in case its premises entail its conclusion.
+Thus the SL tree proof system provides a method by which to determine which SL arguments are logically valid.
 
 
 
@@ -36,7 +36,7 @@ Thus the SL tree proof system provides a method by which to determine which argu
 In Chapter \ref{ch.sl.trees} we learned a formal proof system.
 In this chapter, we will prove important results \emph{about} that system.
 It is important to emphasize, however, that the formal proof system isn't the only way to prove things.
-In particular, the tree method is \emph{not} an appropriate methodology for the task of this chapter.
+In particular, the tree method is \emph{not} an appropriate method for the task of this chapter.
 When we say we wish to prove that the tree method provides a way to determine whether arguments are logically valid, we don't mean that we will put the negation of that claim in the root of a tree.
 That would get us nowhere.
 After all, we have no right to rely on the tree method to prove that the tree method is to be trusted, for such proof procedure has no bottom.
@@ -79,7 +79,7 @@ single branches}
 \end{prooftree}
 \end{center}
 
-Let's suppose for the sake of argument that we had a different disjunction rule instead of the presented above.
+Let's suppose for the sake of argument that we had a different disjunction rule instead of the one presented above.
 For example, suppose that our rule for disjunction had been this:
 
 \label{unsoundrule}
@@ -129,7 +129,7 @@ We will prove that it is not.
 \section{Inductive Proofs}
 
 Note that the claim that we are attempting to establish holds for all sets of SL sentences $\Gamma$.
-Since we cannot check all such sets, one might attempt to proceed by \textit{reductio ad absurdum}, assuming that there is a counterexample and producing a contradiction.
+Since we cannot check all such sets individually, one might attempt to proceed by \textit{reductio ad absurdum}, assuming that there is a counterexample and producing a contradiction.
 This would be to assume that there is some $\Gamma$ as above where $\Gamma \proves \bot$ and yet $\Gamma \nvDash \bot$.
 However, just because we are assuming that there is some closed tree with root $\Gamma$, we can't conclude much more than that, and so it is hard to see how we might produce a contradiction with $\Gamma \nvDash \bot$.
 
@@ -147,7 +147,7 @@ This brings to light one of the trickiest part of an induction proof: not only i
 \textit{Stage 2:} 
 We must now provide some way of organizing the domain into a sequence of stages.
 For instance, if our domain was the set of natural numbers, we might consider their natural ordering where every number in the sequence is followed by its successor.
-In the case of the trees of SL sentences, there is no similarly natural ordering already give to us.
+In the case of the trees of SL sentences, there is no similarly natural ordering already given to us.
 The second stage is to come up with such an ordering, making sure that the ordering serves our needs without including any unnecessary complications.
 Instead of directly ordering the trees themselves, we will partition the domain of all trees into stages that can be ordered into a sequence.
 In particular, we will take two trees to belong to the same stage just in case they employ the same number of resolution rules.
@@ -176,7 +176,7 @@ In the case of soundness, we want to show that if a tree has a satisfiable root,
 Moreover, we may want to show that all objects belonging to a given stage have this property, e.g., all trees that are of length $n+1$ have the conditional property: if they have a satisfiable root, then they have a satisfiable branch. 
 This is a common predicament.
 
-In order to establish a general claim of the form `Everything in $D$ that is $F$ is also $G$', there is a tried a true method: choose an \textit{arbitrary} $F$ and show that it is $G$.
+In order to establish a general claim of the form `Everything in $D$ that is $F$ is also $G$', there is a tried a true method: choose an \textit{arbitrary} $D$ that is $F$ and show that it is also $G$.
 In the case of soundness, we will choose an arbitrary tree of length $n+1$ and assume that it has a satisfiable root.
 By drawing on the induction hypothesis, we will then endeavour to show that this arbitrary tree has a satisfiable branch. 
 This step typically constitutes the core of the induction proof.
@@ -188,7 +188,7 @@ Although the induction part of the proof is finished, it remains to establish so
 As we will see, soundness follows easily from what we have shown, i.e., that every tree with a satisfiable root has a satisfiable branch.
 Drawing this final connection completes the proof.
 
-This provides the rough outline of a proof by induction argument, with some reference to the proof for soundness.
+This provides the rough outline of proof by induction with some reference to the induction proof for soundness.
 In actual practice, the hardest part about induction proofs is staying organised and figuring out which properties to focus on, since sometimes you can make things a lot easier by proving something related to what you really want to show.
 
 
@@ -197,7 +197,7 @@ In actual practice, the hardest part about induction proofs is staying organised
 
 \section{Tree Length}
 
-Before attempting to establish soundness, it will be important to provide a precise definition of the length of a proof.
+Before attempting to establish soundness, it will be important to provide a precise definition of the length of an SL tree.
 This definition will take a recursive form.
 
 Consider any root consisting of SL sentences.
@@ -237,14 +237,14 @@ Even if the same sentence can be resolved on different branches, each time we re
 
 
 
-\section{Supporting Lemmas}
+\section{Soundness Lemmas}
 
 Although we could dive into proving soundness, it will streamline our proof to first establish some supporting results which we can draw on in the course of our proof of soundness.
 It is typical to call supporting results such as these \textit{lemmas} in order to flag their instrumental interest.
 Were a lemma to have significant and far reaching consequences that are of interest in their own right, we would do better to call it a \textit{proposition} or even a \textit{theorem}.
 For instance, it would be inappropriate to refer to soundness as a lemma given the significance of this result.
-However, in the case of the claims established below, we are just looking to better organise our proof, presenting some minor results to help us to do so.
-Knowing when to carve off a lemma to establish separately from the proof of primary interest is a skill in its own right, one that takes lots of practice writing proofs to cultivate.
+However, in the case of the claims established below, we are just looking to better organise our proof of soundness, presenting some minor results to help us to do so.
+Knowing when to carve off a lemma to establish separately from a proof of primary interest is a skill in its own right, one that takes lots of practice writing proofs to cultivate.
 
 Before presenting these results, let a branch $\B$ of a tree $X$ be \define{satisfied} by an SL interpretation $\I$ just in case $\V{\I}(\metaA)=1$ for every SL sentence $\metaA$ which occurs in $\B$.
 It will also be convenient to refer to a tree whose root consists of the sentences in $\Gamma$ as a tree \define{with} root $\Gamma$.
@@ -590,10 +590,10 @@ By showing that $X'$ has a satisfiable branch, we may generalize on $X'$ at the 
 Let $X$ be any tree with root $\Gamma$ where $X'$ is the result of resolving a sentence $\metaA$ in a branch $\B$ of $X$.
 Put otherwise, $X$ can be obtained by taking any branch of $X'$ and undoing the last resolution rule to be applied in that branch. 
 Since $\length(X')=n+1$, we know that $\length(X)=n$, and so \textit{by hypothesis} $X$ has a satisfiable branch $\B^\star$. 
-Note that in writing induction proofs, it is important to make use of the induction hypothesis perfectly clear.
+Note that in writing induction proofs, it is important to make your use of the induction hypothesis perfectly clear.
 
 Since either $\B^\star=\B$ or not, there are two cases to consider.
-We will consider these in order, where you should make the consideration of different cases just as clear in your proofs.
+We will consider these in order, where you should make the consideration of different cases just as obvious in your proofs.
 
 \textit{Case 1:} 
   Assume $\B^\star=\B$.
@@ -649,12 +649,12 @@ To do so, stating `Assume $\Gamma \nmodels \bot$' will be enough.
 Assume $\Gamma \nmodels \bot$.
 Thus $\Gamma$ is satisfiable. 
 Let $X$ be an SL tree with root $\Gamma$.
-By \textit{Lemma 3}, $X$ has a satisfiable branch $\B$.
-By \textit{Lemma 1}, $\B$ is open, and so $X$ is not closed. 
+By \textbf{Lemma 3}, $X$ has a satisfiable branch $\B$.
+By \textbf{Lemma 1}, $\B$ is open, and so $X$ is not closed. 
 Generalizing on $X$, we may conclude that there is no closed SL tree with root $\Gamma$, and so $\Gamma \nproves \bot$.
-Although we do not know that $\Gamma \nproves \bot$ for any $\Gamma$, we do know that $\Gamma \nproves \bot$ \textit{if} $\Gamma \nmodels \bot$ since this was are starting assumption. 
-Discharging our assumption we may conclude in perfect generality that: if $\Gamma \nmodels \bot$, then $\Gamma \nproves \bot$.
-It follows by contraposition that if $\Gamma \proves \bot$, then $\Gamma \nmodels \bot$.
+Although we do not know that $\Gamma \nproves \bot$ for any $\Gamma$, we do know that $\Gamma \nproves \bot$ \textit{if} $\Gamma \nmodels \bot$ since this was our starting assumption. 
+Discharging the assumption we may conclude in perfect generality that: if $\Gamma \nmodels \bot$, then $\Gamma \nproves \bot$.
+It follows by contraposition that if $\Gamma \proves \bot$, then $\Gamma \models \bot$.
 
 
 
@@ -669,8 +669,8 @@ It follows by contraposition that if $\Gamma \proves \bot$, then $\Gamma \nmodel
 \label{sec.sl.soundnessproof.end}
 \subsection{Taking Stock}
 
-Recall that \textbf{Lemma 2} showed that the resolution rules in the SL tree system are such that if you begin with a tree with a satisfiable branch, applying the rule will always result in a tree that also has a satisfiable branch.
-Since these rules are the only ways that one can develop a tree, \textit{Lemma 3} showed by induction on the length of trees that there is no way for a tree with a satisfiable root to develop into a tree without any satisfiable branches.
+Recall that \textbf{Lemma 2} showed that the resolution rules in the SL tree system are such that if you begin with a tree that has a satisfiable branch, applying the rule will always result in a tree that also has a satisfiable branch.
+Since these rules are the only ways that one can develop a tree, \textbf{Lemma 3} showed by induction on the length of trees that there is no way for a tree with a satisfiable root to develop into a tree without a satisfiable branch.
 
 Branches are closed just in case they contain a sentence and its negation.
 Since \textbf{Lemma 1} showed that a satisfiable branch cannot include a sentence and its negation, no satisfiable branch is closed.
@@ -686,10 +686,10 @@ Putting the pieces together, suppose that we have some argument in English that 
 If we can regiment that argument in SL and show that the premises together with the negation of the conclusion develop into a closed tree, we may conclude that the premises entail the conclusion, and so the argument is valid.
 
 Although soundness tells us that \textit{if} a tree closes, then its root is unsatisfiable, it does not tell us the converse.
-Give what we have shown, it remains possible that there could be some unsatisfiable root which does not develop into a closed tree.
-Even though we know we can rely on our SL tree proof system when it works, how do we know it will produce a closed tree for any unsatisfiable set?
+Given what we have shown, it remains possible that there could be some unsatisfiable root which does not develop into a closed tree.
+Even though we know that we can rely on our SL tree proof system when it works, how do we know it will produce a closed tree for any unsatisfiable set?
 This question can be restated as: how do we know that the SL tree proof system is \textit{complete}.
-The following section will attend to this question, demonstrating that the SL tree proof system is indeed complete, and so can be deployed in confidence, determining the satisfiability of any set of SL sentences whatsoever.
+The following section will attend to this question, demonstrating that the SL tree proof system is indeed complete, and so can be deployed to show that any unsatisfiable set of SL sentences has a closed tree.
 
 
 
@@ -761,7 +761,7 @@ We wish to prove that, given the actual rules, our system is complete.
 
 
 
-\section{Proving completeness}
+\section{Structure of the Proof}
 \label{sec.completenessproof}
 
 Completeness is the claim that any time a set of SL sentences $\Gamma$ is unsatisfiable, there is a closed tree with root $\Gamma$.
@@ -772,43 +772,48 @@ As with soundness, we will provide an \emph{informal} proof of completeness.
 In order to stay organized, the proof will be divided into a number of supporting lemmas.
 In particular, \textbf{Lemma 6} will provide the first substantial result, showing that for every SL tree, there is a complete SL tree with the same root.
 Since roots are trees of length zero, it follows that every root has a complete tree.
-Given the starting assumption that there is no closed tree with root $\Gamma$, it follows that there is some complete tree with root $\Gamma$ with an open branch $\B$ where this result is entirely syntactic in nature.
+Given the starting assumption that there is no closed tree with root $\Gamma$, it follows that there is some complete tree with root $\Gamma$ which is open and so has an open branch $\B$.
+It is worth noting that this result is entirely syntactic in nature.
 
-In order to move from syntax to semantics, \textbf{Lemma 7} shows that \emph{every} complete open branch is satisfiable.
-In particular, we will provide the following recipe for constructing an interpretation $\I$ that satisfies $\B$:
+In order to move from syntax to semantics, \textbf{Lemma 8} shows that every complete open branch is satisfiable.
+In particular, we will provide the following recipe for constructing an interpretation $\I$ that satisfies $\B$ where $\metaA$ is any SL sentence letter:
 
-\begin{enumerate}
-  \item If any atomic sentence $\metaA$ is in $\B$, then $\I(\metaA)=1$.
-  \item If any negated atomic sentence $\enot\metaB$ is $\B$, then $\I(\metaB)=0$.
-  \item Let $\I(\metaC)=1$ for every sentence letter $\metaC$ that does not occur in $\B$.
-\end{enumerate}
+$$\I(\metaA)=1 \text{ just in case } \metaA \text{ occurs in } \B.$$
 
-Since it doesn't matter what truth-value the sentence letters that do not occur in $\B$ have, we make the arbitrary choice of setting them all equal to $1$ in (3). 
-Rather, it is (1) and (2) which count.
-Given this recipe, $\I$ satisfies every literal in $\B$.
-It remains to show that $\I$ also satisfies every other sentence in $\B$, where this constitutes the core of the completeness proof.
-%% TODO: CONTINUE
-Here we will exploit the recursive definition of the sentences in SL.
-Since there is a fixed number of ways that sentences can be created from simpler sentences, we need only check that for every sentence form, if $\I$ satisfies a branch downstream of a sentence with that form in a completed branch, then $\I$ also satisfies that sentence.
+% \begin{enumerate}
+%   \item $\I(\metaA)=1$ just in case $\metaA$ occurs in $\B$.
+%   % \item $\I(\metaA)=0$ for every SL sentence letter $\metaA$ where $\enot\metaA$ occurs in $\B$.
+% \end{enumerate}
+
+Given that $\B$ is an open branch, we know that there is no SL sentence $\metaA$ where both $\metaA$ and $\enot\metaA$ occur in $\B$.
+It follows that if $\enot\metaA$ occurs in $\B$ where $\metaA$ is a sentence letter, then $\metaA$ does not occur in $\B$.
+By definition, $\I(\metaA)=0$, and so $\V{\I}(\enot\metaA)=1$.
+Thus $\I$ satisfies the literals in $\B$.
+
+It remains to show that $\I$ satisfies the other sentences in $\B$, where this constitutes the core of the completeness proof.
+By considering each of the resolution rules, we will show that for every SL sentence $\metaA$ that occurs in $\B$, if $\I$ satisfies the sentences below $\metaA$, then $\I$ also satisfies $\metaA$. 
 Whereas the soundness proof reasoned from the top of a branch down, the completeness proof will reason from the bottom up.
-
 This provides the broad outline of the proof.
-As with the proof soundness, it will help to establish some preliminary lemmas in order to streamline the proof of completeness.
+
+
+
+
+
+\section{Completeness Lemmas}
+
+As with the proof of soundness, it will help to establish some preliminary lemmas in order to streamline the proof of completeness.
 This will make it easier to keep track of what is going on by splitting the proof into smaller, more manageable pieces.
-We will attend to these details in the following section.
+We will attend to these details in the following sections.
 
 
-Accordingly, we may conclude that the branch $\B$ is satisfiable.
-Since every branch in a tree includes the root of that tree, we may conclude that $\Gamma$ is satisfiable as desired. 
 
-We can then construct an interpretation $\I$ based on $\B$, as follows: 
 
 
 \subsection{Lemma 4}
 
 Consider an SL tree $X$ with root $\Gamma$ where $\metaA$ is resolvable in some branch of $X$. 
-However, $\metaA$ may be resolvable in more than one branch of $X$. 
-In order to produce an SL tree $X'$ which results from resolving $\metaA$ in every branch in which it is resolvable in $X$, the following lemma shows that every SL tree whatsoever has at most a finite number of branches.
+Note that $\metaA$ may be resolvable in more than one branch of $X$. 
+In order to produce an SL tree $X'$ which results from resolving $\metaA$ in every branch in which it is resolvable in $X$, the following lemma shows that every SL tree has at most a finite number of branches.
 
 \label{FiniteBranchLemma}
 \factoidbox{
@@ -845,7 +850,8 @@ Generalizing on $X'$, it follows that $X'$ has a finite number of branches for e
 \subsubsection{Conclusion}
 
 It follows by weak induction that every SL tree $X$ has a finite number of branches. 
-Given any SL tree $X$ with root $\Gamma$ where $\metaA$ is resolvable in some branch of $X$, it follows by \textbf{Lemma 4} that $\metaA$ is resolvable in a finite number of branches of $X$.
+
+Given any SL tree $X$ with root $\Gamma$ where $\metaA$ is resolvable in some branch of $X$, \textbf{Lemma 4} shows that $\metaA$ is resolvable in a finite number of branches of $X$.
 Accordingly, we may order those branches, resolving $\metaA$ in each branch in turn, referring to the result as $X'$. 
 Since the root remains unchanged throughout this process, we may conclude that there is an SL tree $X'$ with root $\Gamma$ in which $\metaA$ has been resolved in every branch of $X'$.
 
@@ -854,7 +860,7 @@ Since the root remains unchanged throughout this process, we may conclude that t
 \subsection{Lemma 5}
 
 
-Consider the following recursive definition of the \define{resolution} $\res(\metaA)$ of an SL sentence $\metaA$:
+Consider the following recursive definition of the \define{resolution} of an SL sentence $\metaA$:
 
 \begin{enumerate}
   \item $\res(\metaA)=0$ if $\metaA$ is a literal.
@@ -965,7 +971,7 @@ Thus $X$ is complete, and so there is a complete SL tree $X'\ (=X)$ with root $\
 
 \subsubsection{Induction Hypothesis}
 
-Assume for weak induction that for every SL tree $X$ with root $\Gamma$ and $\res(X)=n$, there is a complete SL tree $X'$ with root $\Gamma$.
+Assume for strong induction that for every SL tree $X$ with root $\Gamma$ where $\res(X)\leq n$, there is a complete SL tree $X'$ with root $\Gamma$.
 
 
 
@@ -981,18 +987,49 @@ By hypothesis, there is a complete SL tree $Y'$ with root $\Gamma$.
 
 \subsubsection{Conclusion}
 
-We may conclude by weak induction that for every SL tree with root $\Gamma$, there is a complete SL tree $X'$ with root $\Gamma$. 
+We may conclude by strong induction that for every SL tree with root $\Gamma$, there is a complete SL tree $X'$ with root $\Gamma$. 
 Since every root is a tree, every root has a complete SL tree.
 
-In order to get a sense of why this result is important, suppose we were to assume that a root $\Gamma$ does not have a closed tree, i.e., $\Gamma \nproves \bot$.
-Given \textbf{Lemma 6}, we know that $\Gamma$ has a complete tree $X$, and so $X$ must be a complete open tree with a complete open branch $\B$.
-In the following lemma, we will show that complete open branches are satisfiable, where it follows as an immediate result that $\Gamma$ is satisfiable $\Gamma \nmodels \bot$. 
-Accordingly, \textbf{Lemma 6} and \textbf{Lemma 7} make up the core of the proof that the SL tree proof system is complete.
+% In order to get a sense of why this result is important, suppose we were to assume that a root $\Gamma$ does not have a closed tree, i.e., $\Gamma \nproves \bot$.
+% Given \textbf{Lemma 6}, we know that $\Gamma$ has a complete tree $X$, and so $X$ must be a complete open tree with a complete open branch $\B$.
+% In the following lemma, we will show that complete open branches are satisfiable, where it follows as an immediate result that $\Gamma$ is satisfiable $\Gamma \nmodels \bot$. 
+% Accordingly, \textbf{Lemma 6} and \textbf{Lemma 8} make up the core of the proof that the SL tree proof system is complete.
 
 
 
 
 \subsection{Lemma 7}
+
+Before proving \textbf{Lemma 8}, it will help to have another minor result in place.
+
+\label{FiniteLengthLemma}
+\factoidbox{
+\textbf{Lemma 7:} Every branch in an SL tree has a finite number of sentences.
+}
+
+The proof goes by induction on the length of trees.
+
+\subsubsection{Base Case}
+
+Assume that $\B$ is a branch of a tree $X$ where $\leng(X)=0$. 
+It follows that $\B$ is identical to the root of $X$ which has finitely many sentences. 
+
+\subsubsection{Induction Hypothesis}
+
+Assume that every branch $\B$ of an SL tree $X$ of $\leng(X)=n$ has a finite number of sentences.
+
+\subsubsection{Induction Step}
+
+Assume that $\B'$ belongs to an SL tree $X'$ of $\leng(X)=n+1$. 
+Let $X$ be any SL tree where $X'$ is the result of resolving a sentence in $X$. 
+As a result, $\leng(X)=n$, and so every branch $\B$ of $X$ has a finite number of sentences.
+Since $\B'$ includes at most two more sentences than any branch in $X$, we may conclude that $\B'$ also has a finite number of sentences. 
+
+\subsubsection{Conclusion}
+
+By weak induction, we may conclude that every branch in an SL tree has a finite number of sentences.
+Accordingly, there is a final sentence in every branch of an SL tree, and so we may number the sentences in a branch from the bottom up.
+This will be useful in the next lemma.
 
 % We begin by defining another important property that a branch of an SL tree may have.
 % A branch $\B$ of an SL tree is \define{hintikka} just in case it satisfies the following conditions:
@@ -1013,15 +1050,29 @@ Accordingly, \textbf{Lemma 6} and \textbf{Lemma 7} make up the core of the proof
 % In order to establish the following lemma, we will show that every complete open branch of an SL tree is Hintikka, and so satisfiable as a result.
 %
 
+% Consider the following definition of the \define{descendants} of $\metaA$ in an SL tree $X$.
+%
+% \begin{enumerate}
+%   \item Every child of $\metaA$ is a descendant of $\metaA$.
+%   \item Every child of a descendant of $\metaA$ is a descendant of $\metaA$.
+%   \item Nothing else is a descendant of $\metaA$.
+% \end{enumerate}
+%
+% Given any branch $\B$ in an SL tree and any sentence $\metaA$ in $\B$, it will be convenient to consider the descendants of $\metaA$ in $\B$.
+% In particular, we will establish the following lemma by showing that if an interpretation $\I$ satisfies all of the descendants of an SL sentence $\metaA$  in a branch $\B$, then $\I$ also satisfies $\metaA$.
+% As with the previous induction proofs, we will proceed in stages, though there is no need to explicitly number these stages as before.
+
+
 
 \label{HintikkaLemma}
 \factoidbox{
-\textbf{Lemma 7:} Every complete open branch in an SL tree is satisfiable.
+\textbf{Lemma 8:} Every complete open branch in an SL tree is satisfiable.
 }
 
 \textit{Proof:}
 Let $\B$ be a complete open branch in an SL tree. 
-As a result, every sentence in $\B$ has been resolved in $\B$. 
+By \textbf{Lemma 7}, we may number the sentences in $\B$, started with 0 for the leaf. 
+% As a result, every sentence that can be resolved in $\B$, has been resolved in $\B$. 
 % As a result, $\B$ is Hintikka.
 % For instance, if $\enot\enot\metaA$ occurs in $\B$, the resolution rule for $\enot\enot\metaA$ must have been applied since $\B$ is complete and open, and so $\metaA$ occurs in $\B$. 
 % Similarly, if $\metaA\eor\metaB$ occurs in $\B$, the resolution rule for $\metaA\eor\metaB$ must have been applied, and so either $\metaA$ or $\metaB$ occur in $\B$. 
@@ -1029,215 +1080,227 @@ As a result, every sentence in $\B$ has been resolved in $\B$.
 In order to show that $\B$ is satisfiable, let $\I$ be an SL interpretation where $\I(\metaA)=1$ just in case $\metaA$ is a sentence letter that occurs in $\B$.
 % Given any sentence letter $\metaA$ where $\enot\metaA$ occurs in $\B$, we know that $\metaA$ cannot occur in $\B$ since $\B$ is open, and so $\I(\metaA)=0$ by the definition of $\I$.
 % Thus $\I(\enot\metaA)=1$ for every sentence letter $\metaA$ that does not occur in $\B$. 
-We will now show that $\I$ satisfies $\B$ by induction on the complexity of sentences in $\B$.
+We will now show that $\I$ satisfies $\B$ by induction on the position of a sentence $\metaA$ in $\B$. % complexity of sentences in $\B$.
 
 
 
 \subsubsection{Base Case}
 
-Let $\metaA$ be an SL sentence that occurs in $\B$ where $\comp(\metaA)=1$.
-It follows that $\metaA$ is a sentence letter, and so $\V{\I}(\metaA)=\I(\metaA)=1$.
+Assume that $\metaA$ has position 0, and so has no children. 
+Since $\B$ is a complete open branch, every resolvable sentence in $\B$ has been resolved, and so $\metaA$ is not a resolvable sentence.
+
+\textit{Case 1:} Assume $\metaA$ is an SL sentence letter. 
+By definition, $\I(\metaA)=1$, and so $\V{\I}(\metaA)=1$.
+
+\textit{Case 2:} Assume $\metaA=\enot\metaB$ where $\metaB$ is an SL sentence letter. 
+Since $\B$ is open, $\metaB$ does not occur in $\B$, and so $\I(\metaB)=0$ by the definition of $\I$. 
+It follows that $\V{\I}(\metaB)=0$, and so $\V{\I}(\metaA)=\V{\I}(\enot\metaB)=1$ by the semantics for negation. 
+
+Thus $\V{\I}(\metaA)=1$ in both cases.
 
 
 \subsubsection{Induction Hypothesis}
 
-Assume that for every SL sentence $\metaA$ that occurs in $\B$, if $\comp(\metaA)\leq n$, then $\V{\I}(\metaA)=1$. 
+Assume that $\V{\I}(\metaA)=1$ for every SL sentence $\metaA$ in $\B$ with position $k\leq n$.
+% Given this assumption, we will show that $\I$ satisfies $\metaA$. 
+% Since $\metaA$ is any SL sentence in $\B$, it will follow as a result that $\I$ satisfies $\B$. 
 
 
 \subsubsection{Induction Step}
 
-Let $\metaA$ be an SL sentence that occurs in $\B$ where $\comp(\metaA)=n+1$.
-There are ten cases to consider, corresponding to the nine resolution rules plus an additional case for when $\metaA=\enot\metaB$ for some sentence letter $\metaB$. 
+Assume $\metaA$ is an SL sentence in $\B$ with position $n+1$. 
+There are eleven cases to consider corresponding to the nine resolution rules plus two additional cases for literals.
 
 \textit{Case 1:} 
+Assume that $\metaA$ is an SL sentence letter.
+By definition, $\V{\I}(\metaA)=\I(\metaA)=1$.
+
+\textit{Case 2:} 
 Assume that $\metaA=\enot\metaB$ for some SL sentence letter $\metaB$.
 Since $\B$ is open, we know that $\metaB$ does not occur in $\B$, and so $\I(\metaB)=0$. 
 By the semantics for negation, $\V{\I}(\metaA)=\V{\I}(\enot\metaB)=1$.
 
-\textit{Case 2:} 
-Assume $\metaA=\enot\enot\metaB$.
-Since $\B$ is complete, every SL sentence in $\B$ has been resolved in $\B$, and so $\metaB$ occurs in $\B$.
-Since $\comp(\metaB)\leq n$, we know by hypothesis that $\V{\I}(\metaB)=1$, and so $\V{\I}(\metaA)=\V{\I}(\enot\enot\metaB)=1$ by the semantics for negation. 
-
 \textit{Case 3:} 
-Assume $\metaA=\metaB\eand\metaC$.
-Since $\B$ is complete, both $\metaB$ and $\metaC$ occur in $\B$.
-Additionally, $\comp(\metaA) = \comp(\metaB) + \comp(\metaC) + 1$, and so $\comp(\metaB)\leq n$ and $\comp(\metaC)\leq n$.
-By hypothesis, $\V{\I}(\metaB)=1$ and $\V{\I}(\metaC)=1$.  
-Thus $\V{\I}(\metaA)=\V{\I}(\metaB\eand\metaC)=1$ by conjunction.
-
-\textit{Case 4:} 
-Assume $\metaA=\enot(\metaB\eand\metaC)$.
-Since $\B$ is complete, either $\enot\metaB$ or $\enot\metaC$ occur in $\B$.
-Additionally, $\comp(\metaA) = \comp(\metaB\eand\metaC) + 1 = \comp(\metaB) + \comp(\metaC) + 2 = \comp(\enot\metaB) + \comp(\enot\metaC)$.
-Since $\comp(\enot\metaB) > 0$ and $\comp(\enot\metaC) > 0$, we know $\comp(\enot\metaB)\leq n$ and $\comp(\enot\metaC)\leq n$.
-By hypothesis, either $\V{\I}(\enot\metaB)=1$ or $\V{\I}(\enot\metaC)=1$, and so $\V{\I}(\metaB)=0$ or $\V{\I}(\metaC)=0$ by negation.
-Either way, $\V{\I}(\metaB\eand\metaC)=0$ by conjunction, and so $\V{\I}(\metaA)=\V{\I}(\enot(\metaB\eand\metaC))=1$ by negation.
-
-\textit{Case 5:} 
-Assume $\metaA=\metaB\eor\metaC$.
-Since $\B$ is complete, either $\metaB$ or $\metaC$ occur in $\B$.
-Additionally, $\comp(\metaA) = \comp(\metaB) + \comp(\metaC) + 1$, and so $\comp(\metaB)\leq n$ and $\comp(\metaC)\leq n$.
-By hypothesis, $\V{\I}(\metaB)=1$ or $\V{\I}(\metaC)=1$, and so $\V{\I}(\metaA)=\V{\I}(\metaB\eor\metaC)=1$ by disjunction.
-
-\textit{Case 6:} 
-Assume $\metaA=\enot(\metaB\eor\metaC)$.
-Since $\B$ is complete, both $\enot\metaB$ and $\enot\metaC$ occur in $\B$.
-Additionally, $\comp(\metaA) = \comp(\metaB\eor\metaC) + 1 = \comp(\metaB) + \comp(\metaC) + 2 = \comp(\enot\metaB) + \comp(\enot\metaC)$.
-Since $\comp(\enot\metaB) > 0$ and $\comp(\enot\metaC) > 0$, it follows that $\comp(\enot\metaB)\leq n$ and $\comp(\enot\metaC)\leq n$.
-By hypothesis, both $\V{\I}(\enot\metaB)=1$ and $\V{\I}(\enot\metaC)=1$, and so $\V{\I}(\metaB)=0$ and $\V{\I}(\metaC)=0$ by negation.
-Thus $\V{\I}(\metaB\eor\metaC)=0$ by disjunction, and so $\V{\I}(\metaA)=\V{\I}(\enot(\metaB\eor\metaC))=1$ by negation.
-
-\textit{Case 7:} 
-Assume $\metaA=\metaB\eif\metaC$.
-Since $\B$ is complete, either $\enot\metaB$ or $\metaC$ occur in $\B$.
-Additionally, $\comp(\metaA) = \comp(\metaB) + \comp(\metaC) + 1 = \comp(\enot\metaB) + \comp(\metaC)$.
-If $\metaC$ is a sentence letter, then $\comp(\metaC)=0$, and so $\comp(\enot\metaB)=n+1$.
-
-, and so both $\comp(\metaB)\leq n$ and $\comp(\metaC)\leq n$.
-If 
-
-By hypothesis, either $\V{\I}(\enot\metaB)=1$ or $\V{\I}(\metaC)=1$, and so $\V{\I}(\metaB)=0$ or $\V{\I}(\enot\metaC)=1$ by negation.
-Either way, $\V{\I}(\metaA)=\V{\I}(\metaB\eif\metaC)=1$ by the conditional.
-
-\textit{Case 8:} 
-Assume $\metaA=\enot(\metaB\eif\metaC)$.
-Since $\B$ is complete, both $\metaB$ and $\enot\metaC$ occur in $\B$.
-Additionally, $\comp(\metaA) = \comp(\metaB\eif\metaC) + 1 = \comp(\metaB) + \comp(\metaC) + 2 = \comp(\metaB) + \comp(\enot\metaC) + 1$, and so $\comp(\metaB)\leq n$ and $\comp(\enot\metaC)\leq n$.
-By hypothesis, $\V{\I}(\metaB)=1$ and $\V{\I}(\enot\metaC)=1$, and so $\V{\I}(\metaB)=1$ and $\V{\I}(\metaC)=0$ by negation.
-Thus $\V{\I}(\metaB\eif\metaC)=0$ by the conditional, and so $\V{\I}(\metaA)=\V{\I}(\enot(\metaB\eif\metaC))=1$ by negation.
-
-\textit{Case 8:} 
-If $\metaA=\metaB\eiff\metaC$, either $\metaB$ and $\metaC$ occur in $\B$ or $\enot\metaB$ and $\enot\metaC$ occur in $\B$.
-Since $\comp(\metaA) = \comp(\metaB) + \comp(\metaC) + \comp(\enot\metaB) + \comp(\enot\metaC) + 1$, we know that $\comp(\metaB)\leq n$, $\comp(\metaC)\leq n$, $\comp(\enot\metaB)\leq n$, and $\comp(\enot\metaC)\leq n$.
-Thus $\V{\I}(\metaB)=\V{\I}(\metaC)=1$ or $\V{\I}(\enot\metaB)=\V{\I}(\enot\metaC)=1$ by hypothesis.  
-In the latter case, $\V{\I}(\metaB)=\V{\I}(\metaC)=0$ by the semantics for negation, and so either way $\V{\I}(\metaA)=\V{\I}(\metaB\eiff\metaC)=1$ by the semantics for the biconditional.
-
-\textit{Case 9:} 
-If $\metaA=\enot(\metaB\eiff\metaC)$, then $\metaB$ and $\enot\metaC$ occur in $\B$ or $\metaA$ and $\enot\metaC$ occur in $\B$.
-Since $\comp(\metaA) = \comp(\metaB) + \comp(\enot\metaC) + \comp(\enot\metaB) + \comp(\metaC) + 1$, we know that $\comp(\metaB)\leq n$, $\comp(\enot\metaC)\leq n$, $\comp(\enot\metaB)\leq n$, and $\comp(\metaC)\leq n$.
-Thus $\V{\I}(\metaB)=\V{\I}(\enot\metaC)=1$ or $\V{\I}(\enot\metaB)=\V{\I}(\metaC)=1$ by hypothesis.  
-Either way, $\V{\I}(\metaB)\neq\V{\I}(\metaC)$ by the semantics for negation, and so $\V{\I}(\metaB\eiff\metaC)=0$ by the semantics for the biconditional.
-Thus $\V{\I}(\metaA)=\V{\I}(\enot(\metaB\eiff\metaC))=1$.
-
-\subsubsection{Conclusion}
-
-Since $\V{\I}(\metaA)=1$ in every case, we may conclude that $\V{\I}(\metaA)=1$ for every sentence that occurs in $\B$ where $\res(\metaA)=n+1$.
-Thus it follows by strong induction that $\I$ satisfies $\B$. 
-
-
-
-\subsection{Conjunction}
-\label{conjunctionsound}
-Suppose our completed, open branch contains a conjunction of the form \metaA{}\eand\metaB{}. Since it is a \emph{completed} branch, this means that the conjunction resolution rule must have been applied to this conjunction. (Remember, a branch isn't completed until every complex formula has a check mark next to it.) So, given the conjunction rule,
-
+Assume $\metaA=\enot\enot\metaB$.
+Since $\B$ is complete, $\metaB$ occurs in $\B$ in position $k\leq n$: 
+% We may represent the case visually as follows:
 \begin{center}
 \begin{prooftree}
-{not line numbering}
-[\metaA{}\eand\metaB{}
-	[\metaA{}
-	[\metaB{}, grouped
-	]
-	]
-]
-\end{prooftree}
-\end{center}
-
-we know that the branch must also contain \metaA{} and \metaB{}. If we assume that $\mathcal{I}$ satisfies both these sentences, then we know from the definition of the truth of a conjunction in SL that $\mathcal{I}$ satisfies (\metaA{}\eand\metaB{}) too. In other words, there's no way to satisfy the simpler sentences that come after this resolution rule, without also satisfying the conjunction.
-
-
-
-\subsection{Negated conjunction}
-
-Suppose a negated conjunction appears in the open branch. Since the branch is complete, you know that the negated conjunction rule has been applied:
-
-\begin{center}
-\begin{prooftree}
-{not line numbering,
-single branches}
-[\enot(\metaA{}\eand\metaB{})
-	[\enot\metaA{}]
-	[\enot\metaB{}]
-]
-\end{prooftree}
-\end{center}
-
-We are assuming that the negated conjunction is in an open branch. This is consistent with either one of the branches below closing, but they cannot both close. If they did, the negated conjunction would not be in an open branch. So we know that at least one branch is open. So either $\mathcal{I}(\metaA{})=0$ (if the left branch is our open branch) or $\mathcal{I}(\metaB{})=0$ (if the right branch is the open branch). Since at least one of these sentences is assigned 0, their conjunction must also be assigned 0, which means the negated conjunction we're considering is assigned 1. So once again, if the material in at least one branch below the resolution rule is satisfied, then the negated conjunction is satisfied too.
-
-\subsection{Disjunction}
-
-Disjunctions are very similar to negated conjunctions. Since the tree is complete, any disjunction $\metaA{}\eor\metaB{}$ has a branch below it containing \metaA{}, and one containing \metaB{}. Whichever of these disjuncts is in the open branch, $\mathcal{I}$ satisfies that disjunct, and so satisfies the disjunction too.
-
-\subsection{Negated disjunction}
-
-Negated disjunctions are similar to conjunctions. If a negated disjunction is in an open branch, then the negation of each disjunct is also in that branch. So, suppose that $\mathcal{I}$ assigns 0 to each disjunct. Then it also assigns 0 to their disjunction. So once again, if the material below the negated disjunction is satisfied, then so is the negated disjunction itself.
-
-\subsection{Conditional}
-
-If a conditional is in a completed open branch, then it has been resolved by this branching rule:
-
-\begin{center}
-\begin{prooftree}
-{not line numbering,
-single branches}
-[\metaA{}\eif\metaB{}
-	[\enot\metaA{}]
+{not line numbering, single branches}
+[\enot\enot\metaB{}
 	[\metaB{}]
 ]
 \end{prooftree}
 \end{center}
+By hypothesis, $\V{\I}(\metaB)=1$, and so $\V{\I}(\metaA)=\V{\I}(\enot\enot\metaB)=1$ by the semantics for negation. 
 
-If the left development is the open branch, then we suppose that  $\mathcal{I}(\metaA{})=0$, which means that $\mathcal{I}(\metaA{}\eif\metaB{})=1$. If this right development is the open branch, then we suppose that $\mathcal{I}(\metaB{})=1$, which \emph{also} means that $\mathcal{I}(\metaA{}\eif\metaB{})=1$. So if the material below in at least one branch is satisfied, then the conditional is satisfied too.
 
-\subsection{Negated conditional}
+\textit{Case 4:} 
+Assume $\metaA=\metaB\eand\metaC$.
+Since $\B$ is complete, $\metaB$ and $\metaC$ occur in $\B$ in positions $j,k\leq n$.
+\begin{center}
+\begin{prooftree}
+{not line numbering}
+[\metaB\eand\metaC
+	[\metaB
+	[\metaC, grouped
+	]
+	]
+]
+\end{prooftree}
+\end{center}
+By hypothesis, $\V{\I}(\metaB)=1$ and $\V{\I}(\metaC)=1$, and so $\V{\I}(\metaA)=\V{\I}(\metaB\eand\metaC)=1$ by conjunction.
 
-If a negated conditional \enot(\metaA{}\eif\metaB{}) is in the open branch, then so too are \metaA{} and \enot\metaB{}. So $\mathcal{I}(\metaA{})=1$ and $\mathcal{I}(\metaB{})=0$. So $\mathcal{I}$ falsifies the conditional, satisfying the negated conditional.
 
-There are three more kinds of sentences that exist in SL.
-
-\subsection{Biconditional}
-
-Suppose a biconditional is in an open branch. If the branch is completed, then this rule has been performed:
-
+\textit{Case 5:} 
+Assume $\metaA=\enot(\metaB\eand\metaC)$.
+Since $\B$ is complete, either $\enot\metaB$ or $\enot\metaC$ occur in $\B$ in position $k\leq n$.
 \begin{center}
 \begin{prooftree}
 {not line numbering,
 single branches}
-[\metaA{}\eiff\metaB{}
-	[\metaA{}
-		[\metaB{}, grouped]
-	]
-	[\enot\metaA{}
-		[\enot\metaB{}, grouped]
-	]
+[\enot(\metaB\eand\metaC)
+	[\enot\metaB]
+	[\enot\metaC]
 ]
 \end{prooftree}
 \end{center}
+Although we cannot say which, one of the branches belongs to $\B$.
+By hypothesis, either $\V{\I}(\enot\metaB)=1$ or $\V{\I}(\enot\metaC)=1$, and so $\V{\I}(\metaB)=0$ or $\V{\I}(\metaC)=0$ by negation.
+Either way, $\V{\I}(\metaB\eand\metaC)=0$ by conjunction, and so $\V{\I}(\metaA)=\V{\I}(\enot(\metaB\eand\metaC))=1$ by negation.
 
-One of these developments is the open branch. If it's the left branch, then, supposing that $\mathcal{I}$ assigns 1 to both \metaA{} and \metaB{}, $\mathcal{I}$ must also assign 1 to the biconditional $\metaA{}\eiff\metaB{}$. If it's the right branch, then, supposing that $\mathcal{I}$ assigns 0 to both \metaA{} and \metaB{}, this also means that $\mathcal{I}$ must also assign 1 to the biconditional $\metaA{}\eiff\metaB{}$. So whichever branch is satisfied by $\mathcal{I}$, the biconditional is also satisfied.
 
-\subsection{Negated biconditional}
-
-Exactly the same reasoning as above applies to negated biconditionals, except this time, the branches each assign \emph{opposite} truth values to \metaA{} and \metaB{}. So for our interpretation to satisfy either branch, it must falsify the biconditional, thus satisfying the negated biconditional.
-
-\subsection{Double negation}
-
-Finally, suppose there is a double-negated sentence in our completed open branch. Then this rule has been performed:
-
+\textit{Case 6:} 
+Assume $\metaA=\metaB\eor\metaC$.
+Since $\B$ is complete, either $\metaB$ or $\metaC$ occur in $\B$ in positions $k\leq n$.
 \begin{center}
 \begin{prooftree}
-{not line numbering, single branches}
-[\enot\enot\metaA{}
-	[\metaA{}]
+{not line numbering,
+single branches}
+[\metaB\eor\metaC
+	[\metaB]
+	[\metaC]
 ]
 \end{prooftree}
 \end{center}
+By hypothesis, $\V{\I}(\metaB)=1$ or $\V{\I}(\metaC)=1$, and so $\V{\I}(\metaA)=\V{\I}(\metaB\eor\metaC)=1$ by disjunction.
 
-If $\mathcal{I}(\metaA{})=1$, then, given the definition of truth in SL, $\mathcal{I}(\enot\metaA{})=0$, and $\mathcal{I}(\enot\enot\metaA{})=1$. So once again, if our interpretation satisfies what comes below, then it satisfies the double-negation above.
+\textit{Case 7:} 
+Assume $\metaA=\enot(\metaB\eor\metaC)$.
+Since $\B$ is complete, $\enot\metaB$ and $\enot\metaC$ occur in $\B$ in positions $j,k\leq n$.
+\begin{center}
+\begin{prooftree}
+{not line numbering}
+[\enot(\metaB\eor\metaC)
+	[\enot\metaB
+	[\enot\metaC, grouped
+	]
+	]
+]
+\end{prooftree}
+\end{center}
+By hypothesis, both $\V{\I}(\enot\metaB)=1$ and $\V{\I}(\enot\metaC)=1$, and so $\V{\I}(\metaB)=0$ and $\V{\I}(\metaC)=0$ by negation.
+Thus $\V{\I}(\metaB\eor\metaC)=0$ by disjunction, and so $\V{\I}(\metaA)=\V{\I}(\enot(\metaB\eor\metaC))=1$ by negation.
 
-\subsection{Summarizing the completeness proof}
+\textit{Case 8:} 
+Assume $\metaA=\metaB\eif\metaC$.
+Since $\B$ is complete, either $\enot\metaB$ or $\metaC$ occur in $\B$ in positions $k\leq n$.
+\begin{center}
+\begin{prooftree}
+{not line numbering,
+single branches}
+[\metaB\eif\metaC
+	[\enot\metaB]
+	[\metaC]
+]
+\end{prooftree}
+\end{center}
+By hypothesis, either $\V{\I}(\enot\metaB)=1$ or $\V{\I}(\metaC)=1$, and so $\V{\I}(\metaB)=0$ or $\V{\I}(\enot\metaC)=1$ by negation.
+Either way, $\V{\I}(\metaA)=\V{\I}(\metaB\eif\metaC)=1$ by the conditional.
 
-What we've just shown is that, for any sentence of SL, if it has one of the nine structures just canvassed --- if it's a conjunction, a negated conjunction, a disjunction, etc. --- then, if it is in a completed open branch where the sentences below it are satisfied by $\mathcal{I}$, then it too is satisfied by $\mathcal{I}$. Given the way that $\mathcal{I}$ was selected, we know that $\mathcal{I}$ must satisfy every atomic sentence, and every negated atomic sentence, in the open branch. And since the nine structures considered are the only ways to develop more complex sentences, this implies that \emph{every} SL sentence in the open branch is satisfied by $\mathcal{I}$. This includes the root. Since interpretation $\mathcal{I}$ satisfies the root, this of course means that the root is satisfiable. That is to say, if a completed branch remains open, this guarantees that the root is satisfiable. Equivalently, if the root is unsatisfiable, a completed tree is guaranteed to close. Completeness is proven.
+\textit{Case 9:} 
+Assume $\metaA=\enot(\metaB\eif\metaC)$.
+Since $\B$ is complete, $\metaB$ and $\enot\metaC$ occur in $\B$ in positions $j,k\leq n$.
+\begin{center}
+\begin{prooftree}
+{not line numbering}
+[\enot(\metaB\eif\metaC)
+	[\metaB
+	[\enot\metaC, grouped
+	]
+	]
+]
+\end{prooftree}
+\end{center}
+By hypothesis, $\V{\I}(\metaB)=1$ and $\V{\I}(\enot\metaC)=1$, and so $\V{\I}(\metaB)=1$ and $\V{\I}(\metaC)=0$ by negation.
+Thus $\V{\I}(\metaB\eif\metaC)=0$ by the conditional, and so $\V{\I}(\metaA)=\V{\I}(\enot(\metaB\eif\metaC))=1$ by negation.
+
+\textit{Case 10:} 
+Assume $\metaA=\metaB\eiff\metaC$.
+Since $\B$ is complete, either $\metaB$ and $\metaC$ occur in $\B$ in positions $j,k\leq n$, or else $\enot\metaB$ and $\enot\metaC$ occur in $\B$ in positions $j,k\leq n$.
+\begin{center}
+\begin{prooftree}
+{not line numbering,
+single branches}
+[\metaB\eiff\metaC
+	[\metaB
+		[\metaC, grouped]
+	]
+	[\enot\metaB
+		[\enot\metaC, grouped]
+	]
+]
+\end{prooftree}
+\end{center}
+By hypothesis, either $\V{\I}(\metaB)=\V{\I}(\metaC)=1$ or $\V{\I}(\enot\metaB)=\V{\I}(\enot\metaC)=1$.  
+In the latter case, $\V{\I}(\metaB)=\V{\I}(\metaC)=0$ by negation.
+Either way, $\V{\I}(\metaA)=\V{\I}(\metaB\eiff\metaC)=1$ by the biconditional.
+
+\textit{Case 11:} 
+Assume $\metaA=\enot(\metaB\eiff\metaC)$.
+Since $\B$ is complete, either $\metaB$ and $\enot\metaC$ occur in $\B$ in positions $j,k\leq n$, or else $\enot\metaB$ and $\metaC$ occur in $\B$ in positions $j,k\leq n$.
+\begin{center}
+\begin{prooftree}
+{not line numbering,
+single branches}
+[\metaB\eiff\metaC
+	[\metaB
+		[\enot\metaC, grouped]
+	]
+	[\enot\metaB
+		[\metaC, grouped]
+	]
+]
+\end{prooftree}
+\end{center}
+By hypothesis, either $\V{\I}(\metaB)=\V{\I}(\enot\metaC)=1$ or $\V{\I}(\enot\metaB)=\V{\I}(\metaC)=1$.  
+In either case, we know by negation that $\V{\I}(\metaB)\neq\V{\I}(\metaC)$, and so $\V{\I}(\metaB\eiff\metaC)=0$ by the biconditional.
+Thus $\V{\I}(\metaA)=\V{\I}(\enot(\metaB\eiff\metaC))=1$ by negation.
+
+
+
+\subsubsection{Conclusion}
+
+Since $\V{\I}(\metaA)=1$ in each of the cases above, we may conclude by induction that $\V{\I}(\metaA)=1$ for every sentence that occurs in $\B$.
+Thus $\I$ satisfies $\B$. 
+
+
+
+
+\section{Proving Completeness}
+
+Given the lemmas above, we are now in a position to put the pieces together.
+
+\textit{Proof:}
+Assume for contraposition that $\Gamma \nproves \bot$.
+Thus there is no closed tree with root $\Gamma$.
+Letting $X$ be a root which contains the sentences in $\Gamma$, we know by \textbf{Lemma 6} that there is a complete SL tree $X'$ with root $\Gamma$. 
+Since there is no closed tree with root $\Gamma$, it follows that $X'$ is open, and so contains a complete open branch $\B$.
+By \textbf{Lemma 8}, $\B$ is satisfiable.
+Since every sentence in $\Gamma$ belongs to $\B$, we know that $\Gamma$ is satisfiable: $\Gamma \nmodels \bot$.
+By contraposition, if $\Gamma \models \bot$, then $\Gamma \proves \bot$.
+Since $\Gamma$ was arbitrary, the SL tree proof system is complete.
+
 
 \section{Testing Alternate Rules}
 
@@ -1254,9 +1317,18 @@ single branches}
 \end{prooftree}
 \end{center}
 
-Note, however, that if we think through the \emph{completeness} reasoning, we'll find that the completeness proof would still hold. If we assume that some interpretation $\mathcal{I}$ satisfies both \metaA{} and \metaB{}, we can be assured that it also satisfies the disjunction $\metaA{}\eor\metaB{}$. So changing the disjunction rule to this linear one would \emph{not} interfere with the completeness of our tree system. Our trees would still close any time they began with unsatisfiable roots. But as we saw on p.\ \pageref{soundprooffailure}, the soundness proof would fail, which is why a system with this rule could start in a satisfiable root, and result in a closed tree.
+Note, however, that if we think through the \emph{completeness} reasoning, we'll find that the completeness proof would still hold.
+If we assume that some interpretation $\mathcal{I}$ satisfies both \metaA{} and \metaB{}, we can be assured that it also satisfies the disjunction $\metaA{}\eor\metaB{}$.
+So changing the disjunction rule to this linear one would \emph{not} interfere with the completeness of our tree system.
+Our trees would still close any time they began with unsatisfiable roots.
+But as we saw on p.\ \pageref{soundprooffailure}, the soundness proof would fail, which is why a system with this rule could start in a satisfiable root, and result in a closed tree.
 
-When either the soundness or the completeness proof fails, you know you are working with an inappropriate rule. To conclusively demonstrate this, you can provide a counterexample to the failed metalogical theorem. A counterexample to soundness would be a tree with a satisfiable root that closes. A counterexample to completeness would be a completed tree, with an unsatisfiable root, that remains open. The rule above violates soundness, so using that rule we can construct a tree with a satisfiable root, that closes. Constructing the right counterexample takes a bit of thought. The rule puts both disjuncts into a single branch below, and we want it to close, despite having a satisfiable root. So adding the negation of just one of the disjuncts to the root will close the tree, without making the root unsatisfiable:
+A counterexample to soundness would be a tree with a satisfiable root that closes.
+A counterexample to completeness would be a completed tree with an unsatisfiable root that remains open.
+The rule above violates soundness, so using that rule we can construct a tree with a satisfiable root, that closes.
+Constructing the right counterexample takes a bit of thought.
+The alternate rule puts both disjuncts into a single branch below, and we want it to close, despite having a satisfiable root.
+So adding the negation of just one of the disjuncts to the root will close the tree, without making the root unsatisfiable:
 
 \begin{center}
 \begin{prooftree}
@@ -1286,11 +1358,36 @@ Let's work through one more example. Suppose we changed the conjunction rule to 
 	]
 \end{prooftree}
 \end{center}
-Would our system still be sound? To answer this, we assume that the conjunction $\metaA{}\eand\metaB{}$ is satisfiable, and ask whether this guarantees that at least one branch below is also satisfiable. It does. (In fact, both branches are guaranteed to be satisfiable.) So the system will still be sound.
+Would our system still be sound?
+To answer this, we assume that the conjunction $\metaA{}\eand\metaB{}$ is satisfiable, and ask whether this guarantees that at least one branch below is also satisfiable.
+It does.
+In fact, both branches are guaranteed to be satisfiable.
+So the system is sound.
 
-Would the system still be complete? To answer this, we ask whether each branch is such that, if we assume that an interpretation satisfies the developments below, it is guaranteed to satisfy the conjunction above. Begin with the left branch. If some interpretation satisfies both \metaA{} and \metaB{}, then it will certainly satisfy the conjunction $\metaA{}\eand\metaB{}$. So that branch looks fine. (Indeed, that branch is exactly the same as the linear development of our actual conjunction rule, so this reasoning is the same as that on p.\ \pageref{conjunctionsound}.)
+What about completeness?
+To answer this, we ask whether each branch is such that, if we assume that an interpretation satisfies the developments below, it is guaranteed to satisfy the conjunction above.
+Begin with the left branch.
+If some interpretation satisfies both \metaA{} and \metaB{}, then it will certainly satisfy the conjunction $\metaA{}\eand\metaB{}$.
+So that branch looks fine.
+Indeed, that branch is exactly the same as the linear development of our actual conjunction rule, so this reasoning is the same as that given in the proof above.
 
-But what of the right branch? Assume that some interpretation satisfies \metaB{}; does that guarantee that it satisfies $\metaA{}\eand\metaB{}$? Certainly not. So if the right branch is our open branch, a completed tree using this rule may remain open, even if its root is unsatisfiable. Completeness will be violated. Let's construct a counterexample of that form. We want a tree that includes a conjunction, whose root is unsatisfiable, but whose right branch remains open. Notice that the right branch `ignores' the first conjunct; this is a clue that a good way to construct a counterexample will be to locate the unsatisfiability within that first conjunct. Suppose, for example, that we let \metaA{} itself stand for a contradiction. If so, any conjunction with \metaA{} as a conjunct will be unsatisfiable. But if \metaB{} is not a contradiction, then a tree with root $\metaA{}\eand\metaB{}$ will remain open. Let's develop a tree with this root: $(P \eiff \enot P) \eand Q$. Note that this sentence has a contradictory first conjunct, and a contingent, atomic second conjunct.
+But what of the right branch?
+Assume that some interpretation satisfies \metaB{}.
+Does that guarantee that it satisfies $\metaA{}\eand\metaB{}$?
+Certainly not.
+So if the right branch is our open branch, a completed tree using this rule may remain open, even if its root is unsatisfiable.
+Completeness will be violated.
+
+Let's construct a counterexample to the alternative conjunction rule.
+We want a tree that includes a conjunction, whose root is unsatisfiable, but whose right branch remains open.
+Notice that the right branch ignores the first conjunct.
+This is a clue that a good way to construct a counterexample will be to locate the unsatisfiability within that first conjunct.
+
+Suppose, for example, that we let \metaA{} itself stand for a contradiction.
+If so, any conjunction with \metaA{} as a conjunct will be unsatisfiable.
+But if \metaB{} is not a contradiction, then a tree with root $\metaA{}\eand\metaB{}$ will remain open.
+Let's develop a tree with this root: $(P \eiff \enot P) \eand Q$.
+Note that this sentence has a contradictory first conjunct, and a contingent, atomic second conjunct.
 
 \begin{center}
 \begin{prooftree}
@@ -1313,11 +1410,16 @@ But what of the right branch? Assume that some interpretation satisfies \metaB{}
 \end{prooftree}
 \end{center}
 
-The left branch closes after we perform the unchanged biconditional rule on the contradictory first conjunct, but the right branch remains open. Since this is a completed tree with an open branch and an unsatisfiable root, it is a counterexample to completeness.
+The left branch closes after we perform the unchanged biconditional rule on the contradictory first conjunct, but the right branch remains open.
+Since this is a completed tree with an open branch and an unsatisfiable root, it is a counterexample to completeness.
 
-Remember that we are considering a modification to the tree system that uses a different conjunction rule. In this example I used $P \eiff \enot P$ as my \metaA{}, which let me use the unchanged biconditional rule. But if I had used a contradiction that used a conjunction, like $P \eand \enot P$, I would have had to have used the revised rule within the left branch too.
+Remember that we are considering a modification to the tree system that uses a different conjunction rule.
+In this example we used $P \eiff \enot P$ as \metaA{}.
+It is also possible to construct counterexamples using simpler sentences?
 
-It is also possible to construct counterexamples using simpler sentences if you add to the root. Instead of introducing a contradictory conjunct, we could have simply added to the root, in a way that makes the root unsatisfiable, but leaves the right branch open. Suppose for instance we put both $P \eand Q$ and $\enot P$ in the root. Then we'd have an unsatisfiable root, but the right branch would remain open:
+Instead of introducing a contradictory conjunct, we could have simply added to the root in a way that makes the root unsatisfiable, but leaves the right branch open.
+Suppose for instance we put both $P \eand Q$ and $\enot P$ in the root.
+Then we'd have an unsatisfiable root, but the right branch would remain open:
 	\begin{center}
 	\begin{prooftree}
 	{not line numbering}
@@ -1332,8 +1434,8 @@ It is also possible to construct counterexamples using simpler sentences if you 
 	]
 \end{prooftree}
 \end{center}
-
-This too is a counterexample to completeness, given the rule in question. So we see here two different kinds of strategies for generating counterexamples to completeness.
+This too is a counterexample to completeness for the system that result from replacing the conjunction rule with the alternative given above.
+Thus we have a second strategy for generating counterexamples to completeness.
 
 \iffalse
 
