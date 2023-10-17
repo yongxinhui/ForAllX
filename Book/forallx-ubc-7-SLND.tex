@@ -25,13 +25,13 @@ Accordingly, tree proofs can be used to determine something that we already care
 By contrast, we may argue that the natural deduction rules included in SD are forced upon us by the meanings of the connectives included in SL.
 For instance, given that $A\eand B$, one may deduce $A$ since what it is for a conjunction like $A\eand B$ to be true is for both of its conjuncts to be true, and so in particular we may conclude that $A$ is true. 
 Given a compelling range of inference rules for each of the connectives in SL, one may ask whether it is possible to argue from the premises to the conclusion.
-This is to ask whether an argument is \textit{deductively valid}, where knowing the answer to such a question holds interest independent of what metalogical properties that the natural deduction system in question may have.
+This is to ask whether an argument is \textit{deductively valid}, where knowing the answer to such a question holds interest independent of what metalogical properties the natural deduction system in question may be shown to have.
 
 It will turn out that there is a natural deduction derivation in SD corresponding to every valid SL argument.
 Put otherwise, SD is, like the tree method, complete.
 Moreover, there are no derivations in SD of a conclusion that fails to be entailed by its premises, and so SD is also sound.
 Nevertheless, when an argument is invalid, there is no way to use SD to see that it is valid.
-Instead, are left trying different ways to derive the conclusion from the premises, though in the case of an invalid argument, no such attempt will succeed.
+Instead, we get stuck trying different ways to derive the conclusion from the premises, though in the case of an invalid argument, no such attempt will succeed.
 
 In what follows, we will introduce ten basic derivation rules for our five logical connectives in SL.
 Each connective will have an introduction and an elimination rule where, taken together, these rules may be taken to capture a certain dimension of the \textit{meaning} of that connective.
@@ -43,7 +43,8 @@ However trivial, such an inference rule will turn out to have an important role 
 The following section will present the basic rules of inference included in SD.
 Given these rules, we will be in a position to provide a precise definition of a proof in SD.
 In contrast to trees, SD proofs are sequences of sentences satisfying certain properties.
-Already there is something much more natural about sequences of sentences in place of trees; after all, natural reasoning takes place in time, and time is linear.
+Already there is something much more natural about sequences of sentences instead of trees.
+After all, natural reasoning takes place in time, and time is linear.
 
 
 
@@ -88,60 +89,72 @@ Already there is something much more natural about sequences of sentences in pla
 % You will surely infer that I will get sick.
 % \emph{Modus ponens} is the name of this kind of conditional reasoning, and there is a special rule for it in our natural deduction system.
 
-\section{Premises, Assumptions, and Scope}
-\label{sec:Scope}
+\section{Premises and Assumptions}
+\label{sec:PremiseAssumption}
 
-A SD proof begins with a (possibly empty) list of premises, where these will be indicated by writing `PR' on the right.
+Before introducing the rules, it will help to get a sense of what SD proofs look like in order to articulate some important constraints on the lines to which a rule may appeal.
+
+A SD proof begins with a (possibly empty) list of premises, where these will be indicated by writing `:PR' on the right.
+It is often helpful to also include a note of what we want to derive.
 For instance, consider the following list of premises:
 \begin{fitchproof}
-  \have{1}{A \eif B} \pr{}
-  \have{2}{A} \pr{}
-\end{fitchproof}
-It is important to take note of the vertical line which abuts the premises included above.
-Were we to apply one of our rules (in this case conditional elimination discussed below), we can only appeal to sentences which abut this vertical line, or abut a vertical line to the left.
-We will refer to such sentences as \define{live} and falling within the \define{scope} of application of our rules.
-In this case, there is only one vertical line where the sentences in the first two lines abut the vertical line, and so both sentences fall within the scope of the rules.
-Accordingly, we may apply conditional elimination (discussed in detail below) to derive the following:
-\begin{fitchproof}
-  \hypo{1}{A \eif B} \pr{}
+  \hypo{1}{A \eif (B \eif C)} \pr{}
   \hypo{2}{A} \pr{}
-  \have{3}{B} \ce{1,2}
 \end{fitchproof}
-We have added a horizontal line in order to distinguish the premises from the rest of the derivation.
-Since $B$ also abuts the vertical line, it too falls within the scope of any further applications of the rules. 
-This breaks down if we are to add an assumption.
+% A line of a proof is \define{live} just in case it is not \define{dead}.
+% It is important to take note of the vertical line which abuts the premises included above.
+% Were we to apply one of our rules (in this case conditional elimination discussed below), we can only appeal to sentences which are \define{live} abut this vertical line, or abut a vertical line to the left.
+% We will refer to such sentences as \define{live} and falling within the \define{scope} of application of our rules.
+% In this case, there is only one vertical line where the sentences in the first two lines abut the vertical line, and so both sentences fall within the scope of the rules.
+The horizontal line indicates where the premises end and the rest of the derivation begins.
+For instance, we may apply conditional elimination (discussed below) to derive the following:
 \begin{fitchproof}
-  \hypo{1}{A \eif B} \pr{}
+  \hypo{1}{A \eif (B \eif C)} \pr{}
   \hypo{2}{A} \pr{}
-  \have{3}{B} \ce{1,2}
+  \have{3}{B \eif C} \ce{1,2}
+\end{fitchproof}
+Note that we appealed to lines $1$ and $2$ in order to derive line $3$, indicating as much in the justification of line $3$. 
+If $B \eif C$ is all that we wanted to derive, then we would be done. 
+However, suppose that we were to continue by adding a new assumption.
+\begin{fitchproof}
+  \hypo{1}{A \eif (B \eif C)} \pr{}
+  \hypo{2}{A} \pr{}
+  \have{3}{B \eif C} \ce{1,2}
   \open
-    \hypo{4}{\enot B} \as{}
+    \hypo{4}{B} \as{}
   \close
 \end{fitchproof}
-Assumptions open new subproofs which are indicated by indented vertical lines.
-In applying our rules, we are free to appeal to any sentences on this new vertical line, or on any vertical lines to the left of our current vertical line.
-For instance, we might add the following lines:
+At any point in a proof, we can introduce a new assumption, indenting the line on which the assumption occurs and starting a new vertical line.
+We will refer to the process of adding an assumption as one of \define{opening a subproof}.
+Subproofs are what they sound like: a proof within a proof, starting from a single assumption rather than the premises with which we began.
+For instance, we might add the following lines to the proof above:
 \begin{fitchproof}
-  \hypo{1}{A \eif B} \pr{}
+  \hypo{1}{A \eif (B \eif C)} \pr{}
   \hypo{2}{A} \pr{}
-  \have{3}{B} \ce{1,2}
+  \have{3}{B \eif C} \ce{1,2}
   \open
-    \hypo{4}{\enot B} \as{}
-    \have{5}{\enot B \eand A} \ai{4,2}
+    \hypo{4}{B} \as{}
+    \have{5}{C} \ce{3,4}
+    \have{6}{C \eand A} \ai{2,5}
   \close
-  \have{6}{\enot B \eif (\enot B \eand A)} \ci{4-5}
+  \have{7}{B \eif (C \eand A)} \ci{4-6}
 \end{fitchproof}
-Line $5$ applies conjunction introduction to lines $4$ and $2$, and line $6$ closes the subproof by using conditional introduction (these rules will be discussed below).
-Now suppose that we were to continue our proof.
-Whereas line $5$ was able to apply rules to any of the sentences above, this is not true of line $7$.
-Rather, only the sentences which abut the vertical line on the left fall within the scope of the rules at line $7$.
-In particular, both lines $4$ and $5$ are \define{dead} since they belong to a closed subproof and so fall outside the scope of our rules in line $7$. 
+Line $5$ applies conditional elimination (discussed below) on lines $3$ and $4$, and then line $6$ applies conjunction introduction (also discussed below) to lines $2$ and $5$.
+We then close the subproof, where this may take place at any point, ending the vertical line and stepping back one level of indentation.
+Once a subproof closes, the lines of that closed subproof are \define{dead}, and so cannot be appealed to individually.
+Nevertheless, we may appeal to the subproof in its entirety, where line $7$ does just this, using conditional introduction (discussed below) which cites lines $4$--$6$ (note the hyphen in place of the comma).
 
-The concept of scope is important to get a hold of before introducing the rules in full.
-Although it is tempting to say that any sentences above may be conjoined in a new line, this is not true strictly speaking.
-Rather, any sentences within the scope of application of a rule may be conjoined, but sentences outside the scope must be avoided.
-
-% he right-most vertical bar of the line you are appealing to must carry down to the line you are currently working on. If it doesn't, then you aren't in the scope of the claim on that line; it is not a live claim, and hence it would be ILLEGAL to appeal to it. 
+Every line of a proof that is not dead is referred to as \define{live}, where rules that cite individual lines (as opposed to subproofs) can only appeal to lines that are live at that point in the proof.
+For instance, were we to continue our proof a little further, we could not appeal to lines $4$, $5$, or $6$ since these lines are dead.
+Thus we stipulate the following restriction:
+  \factoidbox{
+    To cite an individual line when applying a rule, the line must not occur within a subproof that has been closed before the line where the rule is being applied.
+  }
+Closing a subproof is also called \define{discharging} the assumption of that subproof.
+Subproofs allow us to think about what we could show if we made a further assumption.
+Accordingly, we have to be careful to keep track of what assumptions we are making and when it is and is not permitted to appeal to an assumption or the sentences that we can derive from that assumption.
+Our proof system does this graphically by indenting and drawing vertical lines.
+The details for each rule which makes use of this feature of our proof system will be discussed below, but it is important to have some sense of all of this before introducing the rules.
 
 
 
@@ -149,10 +162,9 @@ Rather, any sentences within the scope of application of a rule may be conjoined
 
 \section{Reiteration}
 \label{sec:reiteration}
-% The very first rule is so breathtakingly obvious that it is surprising we bother with it at all.\footnote{From Calgary \S16.2.}
 
 The first rule was already eluded to above.
-Given any sentence that falls within the scope of application, the \emph{reiteration rule} (R) allows you to repeat that sentence on a new line.
+Given any sentence on a live line of a proof, the \emph{reiteration rule} (R) allows you to repeat that sentence on a new line.
 \begin{fitchproof}
 	\have[$\vdots$]{}{\vdots}
 	\have[4]{a1}{A \eand B}
@@ -185,12 +197,16 @@ Here is an example of three legal applications of rule R followed by an illegal 
     \have{con}{\enot Q}\by{R, (\textsc{illegal})}{l}
 	\end{fitchproof}
 
+% Once you have derived something from the premise, that new line is available to help justify future lines.
+% It is important to observe that every line after the premises includes a justification starting with a colon `:' which is followed by the relevant line numbers and the derivation rule in question, in that order.
 On the second line, we begin a subproof by assuming $\enot Q$.
-You can reiterate $\enot Q$ within the subproof, but not when you leave the subproof.
-On line $5$, we have left the subproof, and so line $2$ is no longer in scope.
-At line $6$, we can reiterate line $1$ which is in scope, but at line $7$ we cannot reiterate line $2$.
-Even if we were to open another subproof, we could not appeal to line $2$.
-Rather, the lines of a closed subproof are dead, and cannot be used again. 
+You can reiterate $\enot Q$ within the subproof as in line $3$, but not when you leave the subproof as in line $7$.
+On line $4$, we reiterate the sentence $P$ on line $1$, maintaining the same indentation.
+We then close the subproof which we cite in line $5$.
+At line $6$, we can reiterate line $1$ which is live, but at line $7$ we cannot appeal to line $2$ since this line is now dead.
+Even if we were to open another subproof, we still could not appeal to line $2$.
+Rather, the lines of a closed subproof are forever dead. 
+Even so, this does not stop us from appealing to the subproof as a whole as we do in line $5$.
 
 
 
@@ -205,25 +221,25 @@ Consider the rule for \textit{conjunction introduction} ($\eand$I):
 	\have[\ ]{c}{\metaA{}\eand\metaB{}} \ai{a, b}
 \end{proof}}
 
-This rule says that if any SL sentences $\metaA$ and $\metaB$ are live, you may derive their conjunction $\metaA \eand \metaB$, thereby introducing a conjunction into the proof.
+This rule says that if any SL sentences $\metaA$ and $\metaB$ are on live lines, you may derive their conjunction $\metaA \eand \metaB$.
 It is worth noting that $m$ and $n$ need not be consecutive lines, nor do they need to appear in the order listed.
-We require only that each line has been established somewhere in the proof, and that both lines are live.
+We require only that each line has been established somewhere in the proof, and that both lines are live at the line of application.
 
 Whereas conjunction introduction licenses the derivation of a conjunction from any two sentences, conjunction elimination lets us do the opposite.
 Given any live conjunction, we may derive either of its conjuncts.
 For instance, if $A \eand (P \eor Q)$ is live, we may derive $A$, or we may derive $P \eor Q$, but we must choose which.
 If we wish to derive both, then two applications of the rule is required, though the order does not matter.
 
-Here is the \textit{conjunction elimination} ($\eand$E) rule:
+Here are the left and right \textit{conjunction elimination} ($\eand$E) rules:
 \factoidbox{
 \begin{proof}
 	\have[m]{ab}{\metaA{}\eand\metaB{}}
 	\have[\ ]{a}\metaA{} \ae{ab}
 	\have[\ ]{b}\metaB{} \ae{ab}
 \end{proof}}
-This rule lets you derive either conjunct.
-Although you do not have to derive both conjuncts, you can with two applications of the rule.
-Nevertheless, this is a perfectly acceptable proof:
+These rules allow us to derive either conjunct.
+Although we will often end up deriving both conjunts, we need not do so.
+For instance, this is a perfectly acceptable proof:
 
 \begin{proof}
 	\hypo[1]{ab}{A \eand B} \pr{}
@@ -240,7 +256,6 @@ The main logical operator in both the premise and conclusion is conjunction.
 Since conjunction is symmetric, the argument is obviously valid since the two conjunctions have the same two conjuncts in the opposite order.
 In order to provide a proof, we begin by writing down the premise on a numbered line indicating that it is a premise with PR.
 After the premises, we draw a horizontal line where everything below this line must be justified by a proof rule.
-So the beginning of the proof looks like this:
 \begin{proof}
 	\hypo{ab}{{[}(A\eor B)\eif(C\eor D){]} \eand {[}(E \eor F) \eif (G\eor H){]}} \pr{}
 \end{proof}
@@ -264,7 +279,7 @@ Applying the {\eand}I rule to lines $3$ and $2$, we arrive at the desired conclu
 
 This proof may not look terribly interesting or surprising, but it shows how we can use the proof rules together to demonstrate the validity of an argument.
 Note that using a truth table to show that this argument is valid would have required a staggering 256 lines, since there are eight sentence letters in the argument.
-A proof via trees would be less unwieldy than that, but would not have been as simple or natural of an argument.
+A tree proof would be less unwieldy than that, but would not have been as simple or natural of an argument.
 
 
 
@@ -282,7 +297,8 @@ Thus the \textit{disjunction introduction} ($\eor$I) rule may be stated as follo
 	\have[\ ]{ab}{\metaA\eor\metaB}\oi{a}
 	\have[\ ]{ba}{\metaB\eor\metaA}\oi{a}
 \end{fitchproof}}
-Since $\metaB$ can be \emph{any} sentence whatsoever, the following is a perfectly acceptable proof:
+As above, the line $m$ must be live, where we cite this line in the justification of the rule application. 
+Since $\metaB$ can be \emph{any} sentence, the following is a perfectly acceptable proof:
 \begin{fitchproof}
 	\hypo{m}{M} \pr{}
 	\have{mmm}{M \eor ([(A\eiff B) \eif (C \eand D)] \eiff [E \eand F])}\oi{m}
@@ -293,14 +309,14 @@ The disjunction elimination rule is slightly trickier.
 Suppose that either Ludwig is reactionary or he is libertarian.
 It does not follow that Ludwig is reactionary, for he might be a libertarian.
 Equally, we cannot conclude that Ludwig is libertarian, since he might be reactionary.
-Since we don't know which disjunct is true, there is nothing that we can deduce from disjunction on its own.
-It is for this reason that disjunctions are hard to work with.
+Given that we don't know which disjunct is true, it is difficult to deduce anything from a disjunction on its own.
+The elimination rule for disjunction provides a workaround.
 
 Suppose that we could show that if Ludwig's is reactionary, then he is an Austrian economist.
 Suppose that we could also show that if Ludwig's is a libertarian, then he is also an Austrian economist.
 Even though we don't know whether Ludwig is reactionary or a libertarian, it doesn't matter: in either case he is an Austrian economist.
 This is a natural way to make use of a disjunction even when we don't know which disjunct is true.
-Generalizing on the line of reasoning above, consider the following \textit{disjunction elimination} ($\eor$E) rule:
+Generalizing on this line of reasoning, consider the following \textit{disjunction elimination} ($\eor$E) rule:
 \factoidbox{
 	\begin{fitchproof}
 		\have[m]{ab}{\metaA\eor\metaB}
@@ -317,16 +333,17 @@ Generalizing on the line of reasoning above, consider the following \textit{disj
 		\have[ ]{c}{\metaC}\oe{ab, a-c1,b-c2}
 	\end{fitchproof}}
 This rule is somewhat clunkier to write down than our previous rules, but the point is fairly simple.
-Suppose we have some disjunction, $\metaA \eor \metaB$.
-Suppose we have two subproofs, showing us that $\metaC$ follows from the assumption that $\metaA$, and that $\metaC$ also follows from the assumption that $\metaB$.
-Then we can infer $\metaC$ from the original disjunction $\metaA \eor \metaB$ together with our two subproofs.
+Suppose that we have some disjunction $\metaA \eor \metaB$.
+Suppose that we can also construct two subproofs showing that $\metaC$ can be derived from the assumption that $\metaA$, and that $\metaC$ can be derived from the assumption that $\metaB$.
+We can then infer $\metaC$ from the original disjunction $\metaA \eor \metaB$ together with our two subproofs.
 As usual, there can be as many lines as you like between $i$ and $j$, and as many lines as you like between $k$ and $l$.
 Moreover, the subproofs and the disjunction can come in any order, and do not have to be adjacent to each other as above.
+Although the lines $i$--$j$ and $k$--$l$ belong to closed subproofs and so dead, line $m$ must be live.
 
-Some examples might help illustrate this.
-Consider this argument:
+Some examples will help illustrate.
+Consider the following argument:
 $$(P \eand Q) \eor (P \eand R) \; \therefore \; P$$
-An example proof might run like this:
+A proof might run like this:
 	\begin{fitchproof}
 		\hypo{prem}{(P \eand Q) \eor (P \eand R) } \pr{}
 			\open
@@ -360,7 +377,7 @@ We may then construct the following proof:
 	\have{con}{(A \eand B) \eor (A \eand C)}\oe{boc, b-abo, c-aco}
 	\end{fitchproof}
 As natural as the rules may seem in isolation, it is not always obvious how to put them together to get from some premises to a conclusion.
-The ability to construct SD proofs takes some practice, and we'll cover some strategies for finding proofs at the end of the chapter.
+The ability to construct SD proofs requires practice like any skill, and we'll cover some strategies for finding proofs at the end of the chapter.
 Nevertheless, once a natural deduction proof has been constructed, each step is easy to justify, making the derivation in total impervious to doubts.
 Moreover, this certainty does not stem from any semantic considerations.
 Rather, the proof rules are directly justified by our intuitive understanding of how to use the logical connectives in our language.
@@ -377,20 +394,19 @@ Here is an abbreviated version of the reasoning which showed up in the completen
     Given the lemmas we have proven, it follows from this assumption that $\Gamma \nmodels \bot$.
     Although we don't know whether $\Gamma \nmodels \bot$ holds independent of our assumption, we may conclude that \textit{if} $\Gamma \nproves \bot$, \textit{then} $\Gamma \nmodels \bot$. 
 	\end{quote}
-This final step in the argument above is sometimes called \textit{discharging the assumption}.
-The ideas is that you help yourself to something that you may not know is true, do some reasoning to arrive at some further claim, then \textit{discharge} your assumption by asserting a conditional claim: if our assumption is true, then the further claim is true.
+The idea here is that you help yourself to something that you may not know is true, do some reasoning to arrive at some further claim, then conclude by asserting a conditional claim: if the assumption is true, then the further claim is true.
 
 Here is a somewhat simpler version of the same style of reasoning.
 	\begin{quote}
 		Ludwig is reactionary. Therefore if Ludwig is libertarian, then Ludwig is both reactionary \emph{and} libertarian.
 	\end{quote}
-We may regiment this argument as a natural deduction proof by started with one premise $R$ for `Ludwig is reactionary':
+We may regiment this argument as a natural deduction proof by starting with one premise $R$ for `Ludwig is reactionary':
 	\begin{fitchproof}
 		\hypo{r}{R} \pr{}
 	\end{fitchproof}
 We may now make an additional assumption $L$ for `Ludwig is libertarian'.
 In common parlance, we might say something like, ``suppose for the sake of argument,'' or in writing informal proofs, we might say, ``assume for conditional proof.''
-However, in our proof system SD, we will indicate that we are adding an assumption by writing `AS' on the right, where it is often helpful to also include `for $\eif$Intro' as a note to your reader.
+However, in our proof system SD, we will indicate that we are adding an assumption by writing `AS' on the right, where it is often helpful to also include `for $\eif$Intro' as a note to yourself or your reader.
 	\begin{fitchproof}
 		\hypo{r}{R} \pr{}
 		\open
@@ -412,7 +428,7 @@ With this extra assumption in place, we are in a position to use $\eand$I from b
 %		\have{con}{L \eif (R \eand L)}\ci{l-rl}
 	\end{fitchproof}
 Given the assumption $L$, we have deduced $R \eand L$.
-The next move to make is to discharge our assumption, or to use other language, to introduce a conditional.
+We may now discharge our assumption, closing the subproof and adding an appropriate conditional on the next line.
 	\begin{fitchproof}
 		\hypo{r}{R} \pr{}
 		\open
@@ -423,11 +439,11 @@ The next move to make is to discharge our assumption, or to use other language, 
 	\end{fitchproof}
 Whereas the indented subproof carries out reasoning under the assumption of $L$, line $4$ reverts back to our original proof which carries out reasoning under the assumption of our single premise $R$.
 Accordingly, we cannot conclude $R\eand L$ merely under the assumption of $R$ by writing $R\eand L$ at the original level of indenting.
-Nevertheless, we cannot assert the conditional $L\eif(R\eand L)$ as given in $4$, where writing this line both discharges the assumption in $2$ and closes the subproof. 
-In order to justify line $4$, we list the lines which make up the subproof by putting a hyphen between the first line of the subproof and the last line of the subproof.
-In this case there are only two lines, but in general there may be many more.
+Nevertheless, we can assert the conditional $L\eif(R\eand L)$ as given in $4$, justifying this line by referring to the entire subproof rather than to individual lines of our proof.
+In this case, there are only two lines in the subproof, but in general there may be many more.
+Even in the case where the subproof only consists of two lines, we must use a hyphen to indicate that we are citing a subproof instead of two lines.
 
-Generalising on this pattern of reasoning, consider the \textit{conditional introduction} rule:
+Generalising on this pattern, consider the \textit{conditional introduction} rule ($\eif$I):
 \factoidbox{
 	\begin{fitchproof}
 		\open
@@ -437,12 +453,13 @@ Generalising on this pattern of reasoning, consider the \textit{conditional intr
 		\close
 		\have[\ ]{ab}{\metaA\eif\metaB}\ci{a-c}
 	\end{fitchproof}}
-
+Whereas the individual lines that proof rules appeal to are required to be live, subproofs consist of dead lines, but this does not prevent them from providing justification for a new line assuming that the beginning and end of the subproof contain the appropriate sentences.
+In particular, we may justify a conditional claim with a subproof which begins with the antecedent and ends with the consequent, citing the subproof it is entirety.
 
 
 \section{Conditional Elimination}
 
-Many different arguments demonstrate the inference \emph{modus ponens}:
+Many different arguments demonstrate the classic inference \emph{modus ponens}:
 
 \begin{multicols}{3}
 \begin{earg}
@@ -473,9 +490,9 @@ Here is the rule:
 	\have[n]{a}\metaA{}
 	\have[\ ]{b}\metaB{} \ce{ab,a}
 \end{proof}}
-What this rule says is that if you have a conditional $\metaA\eif\metaB$ on line number $m$, and you also have the antecedent of that conditional $\metaA$ on a line $n$, you can write the consequent $\metaB$ on a new line.
-In order to justify this inference, we will list the line numbers $m$ and $n$ as well as `$\eif$E' to specify the rule that we are using.
-With this rule, we can prove that the arguments given above are valid.
+What this rule says is that if you have a conditional $\metaA\eif\metaB$ on a live line number $m$, and you also have the antecedent $\metaA$ of that conditional on a live line $n$, you can write the consequent $\metaB$ on a new line.
+In order to justify this inference, we will list the line numbers $m$ and $n$ in that order as well as `$\eif$E' to specify the rule.
+Given the conditional elimination rule, we can prove that the arguments given above are valid.
 Here are proofs of two of them:
 
 
@@ -496,7 +513,7 @@ Here are proofs of two of them:
 
 \end{multicols}
 
-Notice that these two proofs share the same structure.
+Notice that these proofs share the same structure.
 We start by listing the premises followed by a horizontal line, where subsequent lines will need to be derived with the rules.
 We then apply the conditional elimination rule to get the conclusion, citing the appropriate lines.
 One can produce more complicated proofs with the same rule.
@@ -516,17 +533,17 @@ We begin by writing our four premises on numbered lines:
 	\hypo{4}{A} \pr{}
 	\hypo{1}{A \eif B} \pr{}
 	\hypo{2}{B\eif C} \pr{}
-	\hypo{3}{C \eif [\enot P \eiff (Q \eor R)]} \pr{(Want \enot P \eiff (Q \eor R))}
+	\hypo{3}{C \eif [\enot P \eiff (Q \eor R)]} \pr{(Want \enot $P \eiff (Q \eor R)$)}
 %	\have{b} {B} \ce{1,4}
 %	\have{c}{C} \ce{2,b}
 %	\have{}{\enot P \eiff (Q \eor R))} \ce{3,c}
 \end{proof}
 
 The parenthetical off to the right is optional, but can help to keep track of the conclusion that we are attempting to establish.
-The proof will be complete once we derive $\enot P \eiff (Q \eor R)$ by applying the rules to the premises or subsequent lines that result from doing so.
+The proof will be complete once we derive $\enot P \eiff (Q \eor R)$ by applying the rules to the premises or lines that result from doing so.
 Since we cannot use conditional elimination to get to our desired conclusion directly from our premises, it is worth considering what we can do.
 For instance, we can use conditional elimination on lines $1$ and $2$ to get $B$ on a new line, and then repeat using our new line together with line $3$ to get $C$ on yet another new line. 
-Continuing in this manner gives us the following:
+Continuing in this manner gives us the following proof:
 
 \begin{proof}
 	\hypo{4}{A} \pr{}
@@ -538,9 +555,9 @@ Continuing in this manner gives us the following:
 	\have{}{\enot P \eiff (Q \eor R))} \ce{3,c}
 \end{proof}
 
-It is important to observe that every line after the premises includes a justification starting with a colon `:' which is followed by the relevant line numbers and the derivation rule in question, in that order.
-Once you have derived something from the premises, that new line is available to help justify future lines.
-For instance, once we derive line $5$, we were able to use it with line $3$ to derive line $6$.
+Having derive line $5$ from lines $1$ and $2$, we may derive $6$ from $3$ and $5$, and then conclude by deriving $7$ from $4$ and $6$.
+In general, each time that we appeal to earlier lines in a proof in order to apply a rule, we must check to see if those lines are live.
+However, in this case, we have not introduced any assumptions, and so there is no risk that any lines fail to be live.
 
 In order to see the conditional introduction and elimination rules work together, consider:
 	$$P \eif Q,\ Q \eif R\ \therefore \ P \eif R$$
@@ -554,11 +571,8 @@ A great way to do this is by conditional introduction and so, to use this rule, 
 		\hypo{p}{P} \as{for \eif I}{}
 	\close
 \end{fitchproof}
-Note that we have made $P$ available, by treating it as an additional assumption.
-Having done so, we can use conditional elimination on the first premise to get $Q$.
-We can then use conditional elimination on the second premise to get $R$.
-Finally, we may discharge $P$ to complete the proof. 
-Putting all of this together, we have the following:
+Note that we may appeal to $P$ in the course of our subproof since so far it is still live.
+Thus we may reason as follows:
 \label{HSproof}
 \begin{fitchproof}
 	\hypo{pq}{P \eif Q} \pr{}
@@ -570,95 +584,81 @@ Putting all of this together, we have the following:
 	\close
 	\have{pr}{P \eif R}\ci{p-r}
 \end{fitchproof}
+Whereas line $4$ derives $Q$ from lines $1$ and $3$ by conditional elimination, we may apply the same rule to derive $R$ on line $5$ from the lines $2$ and $4$.
+Finally, we may close our subproof, and conclude $P \eif R$ on line $6$ while citing the subproof on lines $3$--$5$. 
 
-% Here is another simple example of an argument form whose validity we can prove using the conditional rules.
-%
-%
-% \begin{earg}
-% \item[] $P \eif Q$
-% \item[] $Q \eif R$
-% \item[\therefore] $P \eif R$
-% \end{earg}
-% We begin the proof by writing the two premises as assumptions. Since the main logical operator in the conclusion is a conditional, we can expect to use the {\eif}I rule. For that, we need a subproof --- so we write in the antecedent of the conditional as assumption of a subproof. We make a note that we are aiming for the consequent of that conditional:
-%
-% \begin{proof}
-% 	\hypo{pq}{P \eif Q} \pr{}
-% 	\hypo{qr}{Q \eif R} \pr{}
-% 	\open
-% 		\hypo{p}{P} \as{for \eif I, want R}
-% 	\close
-% \end{proof}
-%
-% We made $P$ available by assuming it in a subproof, allowing us to use {\eif}E on the first premise. This gives us $Q$, which allows us to use {\eif}E on the second premise. Having derived $R$, we close the subproof. By assuming $P$ we were able to prove $R$, so we apply the {\eif}I rule and finish the proof:
-% \phantomsection\label{HSproof}
-% \begin{proof}
-% 	\hypo{pq}{P \eif Q} \pr{}
-% 	\hypo{qr}{Q \eif R} \pr{}
-% 	\open
-% 		\hypo{p}{P} \as{for \eif I, want R}
-% 		\have{q}{Q}\ce{pq,p}
-% 		\have{r}{R}\ce{qr,q}
-% 	\close
-% 	\have{pr}{P \eif R}\ci{p-r}
-% \end{proof}
 
-So far the examples have been simple, but perhaps you can already begin to see the strategy that natural deduction proofs sometimes require.
-To get good at these, there is no way to avoid putting in some practice.
-The good news is that natural deduction proofs are a lot more interesting to construct than tree proofs, and a lot more beneficial: getting good at natural deduction will streamline your reasoning well beyond this course.
+
 
 
 
 \section{The Biconditional}
-The rules for the biconditional will be like double-barrelled versions of the rules for the conditional.\footnote{Section from \S16.6 of Calgary} 
 
-In order to prove `$F \eiff G$', for instance, you must be able to prove `$G$' on the assumption `$F$' \emph{and} prove `$F$' on the assumption `$G$'. The biconditional introduction rule ({\eiff}I) therefore requires two subproofs. Schematically, the rule works like this: 
+The rules for the biconditional will be like double-barrelled versions of the rules for the conditional.
+In order to prove $F \eiff G$  you must be able to prove $G$ on the assumption $F$, and separately, prove $F$ on the assumption $G$.
+The \textit{biconditional introduction} rule ({\eiff}I) therefore requires two subproofs.
+Schematically, the rule looks like this: 
 \factoidbox{
 \begin{fitchproof}
 	\open
 		\hypo[i]{a1}{\metaA} \as{for \eiff I}
-			\ellipsesline
+		\have[\vdots]{c1}{\vdots}
 		\have[j]{b1}{\metaB}
 	\close
 	\open
 		\hypo[k]{b2}{\metaB} \as{for \eiff I}
-			\ellipsesline
+		\have[\vdots]{c2}{\vdots}
 		\have[l]{a2}{\metaA}
 	\close
 	\have[\ ]{ab}{\metaA\eiff\metaB}\bi{a1-b1,b2-a2}
 \end{fitchproof}}
-There can be as many lines as you like between $i$ and $j$, and as many lines as you like between $k$ and $l$. Moreover, the subproofs can come in any order, and the second subproof does not need to come immediately after the first.
+There can be as many lines as you like between $i$ and $j$, and as many lines as you like between $k$ and $l$.
+Moreover, the subproofs can come in any order, and the second subproof does not need to come immediately after the first.
 
-The biconditional elimination rule ({\eiff}E) lets you do a bit more than the conditional rule. If you have the left-hand subsentence of the biconditional, you can obtain the right-hand subsentence. If you have the right-hand subsentence, you can obtain the left-hand subsentence. So we allow:
+The biconditional elimination rule ({\eiff}E) lets you do a bit more than the conditional rule.
+If you have the left-hand subsentence of the biconditional, you can obtain the right-hand subsentence.
+If you have the right-hand subsentence, you can obtain the left-hand subsentence.
 \factoidbox{
 \begin{fitchproof}
 	\have[m]{ab}{\metaA\eiff\metaB}
 	\have[n]{a}{\metaA}
 	\have[\ ]{b}{\metaB} \be{ab,a}
 \end{fitchproof}}
-and equally:
+Equally, we may work in the reverse direction:
 \factoidbox{\begin{fitchproof}
 	\have[m]{ab}{\metaA\eiff\metaB}
 	\have[n]{a}{\metaB}
 	\have[\ ]{b}{\metaA} \be{ab,a}
 \end{fitchproof}}
-Note that the biconditional, and the right or left half, can be separated from one another, and they can appear in any order. However, in the citation for $\eiff$E, we always cite the biconditional first.
+Note that in the citation for $\eiff$E, we always cite the biconditional first and either the left or right argument depending as the second argument.
 
 
 
-\section{\emph{Reductio!} (The negation rules)}
+\section{Negation}
 Here is a simple mathematical argument in English:
 \begin{earg}
-\item[] Assume there is some greatest natural number. Call it $A$.
-\item[] That number plus one is also a natural number.
-\item[] Obviously, $A+1 > A$.
-\item[] So there is a natural number greater than $A$.
-\item[] This is impossible, since $A$ is assumed to be the greatest natural number.
-\item[\therefore] There is no greatest natural number.
+\item[] Assume there is some greatest natural number, call it $n$.
+\item[] Now consider its successor $n+1$ which is also a natural number.
+\item[] Since $n+1 > n$, we may conclude that $n$ is not the greatest natural number. 
+\item[] But this contradicts our assumption. 
+\item[\therefore] Thus there is no greatest natural number.
 \end{earg}
 
-This kind of argument form is traditionally called a \emph{reductio}. Its full Latin name is \emph{reductio ad absurdum}, which means `reduction to absurdity.' (You will also sometimes see proofs of this form described as `indirect' proofs.) In a \emph{reductio}, we assume something for the sake of argument --- for example, that there is a greatest natural number. Then we show that the assumption leads to two contradictory sentences --- for example, that $A$ is the greatest natural number and that it is not. In this way, we show that the original assumption must have been false.
+This kind of argument form is traditionally called a \emph{reductio} argument, or to use its full Latin name, \emph{reductio ad absurdum} which means ``reduction to absurdity.''
+Proofs of this form are also sometimes called \textit{indirect proofs}.
+A \emph{reductio} argument assumes something which we would like to show is false, or in common parlance, it assumes something \textit{for the sake of argument}, e.g., that there is a greatest natural number.
+Then we show that the assumption leads to a contradiction of some kind.
+For instance, we might end up reaching the negation of the \textit{reductio} assumption, or just reach two sentences of the form $\metaB$ and $\enot\metaB$.
+Given such a contradiction, we may conclude that the original assumption must have been false.
 
-The basic rules for negation will allow for arguments like this. Like the Conditional Introduction rule (\eif I), our negation rules require us to make a new assumption with no justification --- we draw a new vertical line, and a note to ourselves as to what we are trying to do. If we assume something and show that it leads to contradictory sentences, then we have proven the negation of the assumption. This is the Negation Introduction ({\enot}I) rule:
+In mathematics, \textit{reductio} arguments often lead to conclusions like $0=1$ that contradict something that is already known more generally though the negation $0\neq 1$ might not show up anywhere in the proof.
+Whether stated or not, what is going on here is that we really have two contradictory claims: $0=1$ and $0\neq 1$, or to be even more explicit, $\enot(0=1)$.
+Mathematical proofs typically suppress many of the obvious details, and so do not take the form of fully explicit valid arguments of the kind with which we will be concerned.
+
+The basic rules for negation will allow for \textit{reductio} style arguments of the above form.
+Like the conditional introduction rule (\eif I), our negation rules require us to make a new assumption on an indented line, drawing a new vertical line.
+If this assumption can be shown to lead to contradictory sentences in a subproof, then we may write the negation of the assumption of this subproof on a new.
+Schematically, this is the \textit{negation introduction} ({\enot}I) rule:
 
 %try the  \ellipsesline command line to insert dots more easily!
 
@@ -672,27 +672,33 @@ The basic rules for negation will allow for arguments like this. Like the Condit
 \have[\ ]{a}[\ ]{\enot\metaA{}}\ni{na-nb} %note that UBC has a more complex citation convention: {na-b, na-nb}
 \end{proof}}
 
-Let's walk through this step-by-step: On line m, we assume \metaA{} for \emph{reductio}. Our goal is then to derive a contradiction, represented by two sentences \metaB{} and \enot \metaB{} on separate lines. Not necessarily in a row; not necessarily in this order. We just need two sentences of the form \metaB{} and \enot \metaB{} to appear SOMEWHERE within the subproof, at the same scope-line level as our starting assumption \metaA{}. Note that \metaB{} could even be the very SAME sentence as \metaA{}, e.g. both could be `P.'. 
+On line $m$, we assume $\metaA$ for \emph{reductio}.
+Our goal is to derive a contradiction, represented by two sentences $\metaB$ and $\enot\metaB$ on separate lines in any order.
+Accordingly, it is often convenient to include a note to ourselves and our readers that we are trying to introduce a negation by reaching a contradiction.
+Observe that $\metaB$ could be the same sentence as $\metaA$, e.g. both could be P, but this need not always be the case. 
+Once we have derived a contradictory pair of sentences, we may close the subproof, moving to the left one level of indentation.
+We may then write the negation of the assumption in the subproof $\enot\metaA$ on a new line, citing the whole subproof by using a hyphen and indicating the negation introduction rule $\enot$I.
 
-Once we have derived this contradictory pair of sentences, we get to pop out of our subproof, discharging the assumption and introducing that big, beautiful negation: \enot \metaA{}. We cite the whole subproof and hence use a HYPHEN!
-
-%The {\enot}I rule discharges the assumption \metaA{} for \emph{reductio}, concluding with its negation \enot\metaA{}, when it's shown that some sentence and its negation each follow from the assumption. It cites two (overlapping) ranges: a subproof from the assumption to some sentence \metaB{}, and a subproof from that same assumption to \enot\metaB{}. 
-%We write `for reductio' to the right of the assumption, as a note to ourselves, a reminder of why we started the subproof. It is not formally part of the proof, but it is helpful for thinking clearly it and planning ahead.
-
-To see how the rule works, suppose we want to prove an instance of the law of non-contradiction: $\enot(G \eand \enot G)$. We can prove this without any premises by immediately starting a subproof. We want to apply {\enot}I to the subproof, so we assume $(G \eand \enot G)$. We then get an explicit contradiction by {\eand}E. The proof looks like this:
+To see how the rule works, suppose that we want to derive the law of non-contradiction: $\enot(G \eand \enot G)$.
+In general, if you want to conclude a negated sentence, it is natural to assume the negand and see if you can reach a contradiction, though this may not always be the best strategy.
+However, in the case of $\enot (G \eand \enot G)$, this is just what we will do, starting a subproof by adding the assumption $G\eand \enot G$ to a proof without any premises.
 
 \begin{proof}
-	%\open %commenting this out gets rid of extra scope line
-		\hypo{gng}{G\eand \enot G}\as{for reductio}
+	\open 
+		\hypo{gng}{G\eand \enot G}\as{for $\enot$I}
 		\have{g}{G}\ae{gng}
 		\have{ng}{\enot G}\ae{gng}
 	\close
 	\have{ngng}{\enot(G \eand \enot G)}\ni{gng-ng}
 \end{proof}
 
-{\color{black}This is our first example of a natural deduction proof with no premises: notice that there's NO scopeline to the left of the conclusion. It's chillin' outside the box. This syntactical feature encodes the fact that our conclusion is a tautology (although to really conclude this, we would need to first show that our natural deduction system is SOUND---see Section~\ref{sec:soundness}. We will prove the soundness of SD later in the semester, using a supplemental chapter not included here). Also note that less-dramatic \textit{Carnap} always includes an outer line anyways!}
+Although some proofs require some real creativity, this one is pretty obvious once we make the right assumption.
+After all, the only rule we could apply to our assumption is {\eand}E, where two applications give us a contradiction.
+By applying $\enot$I, we may conclude the proof.
 
-The Negation Elimination ({\enot}E) rule works in much the same way. If we assume \enot\metaA{} and show that it leads to a sentence and its negation, we have effectively proven \metaA{} {\color{black}(presupposing that the law of excluded middle holds!)}. So the rule looks like this:
+The \textit{negation elimination} ($\enot$E) rule works in much the same way.
+If we assume $\enot\metaA$ and show that it leads to a sentence and its negation, we may conclude $\metaA$.
+So the rule looks like this:
 
 \factoidbox{
 \begin{proof}
@@ -704,59 +710,63 @@ The Negation Elimination ({\enot}E) rule works in much the same way. If we assum
 \have[\ ]{a}[\ ]\metaA{}\ne{na-nb}
 \end{proof}}
 
-Below is an example proof using Reiteration to help with a Negation Introduction:
+As in the case of negation introduction, it is important that the justification of an application of negation elimination cite an entire subproof, indicating as much with a hyphen.
+Additionally, it is important that the contradictory pair of sentences occur in the subproof itself rather than elsewhere in the proof, even if live.
+Below is an example which makes an essential appeal to the reiteration rule in order to make use of a negation elimination:
 
 \begin{proof}
 	\hypo{p}{P} \pr{}
-	\hypo{qnp}{Q \eif \enot P} \pr{want \enot Q}
+	\hypo{qnp}{\enot Q \eif \enot P} \pr{want $Q$}
 	\open
-		\hypo{q}{Q} \as{for reductio}{}
+		\hypo{q}{\enot Q} \as{for $\enot$E}{}
 		\have{np}{\enot P}\ce{qnp,q}
 		\have{nnp}{P}\by{R}{p}
 	\close
-	\have{nq}{\enot Q}\ni{q-nnp}
+	\have{nq}{Q}\ne{q-nnp}
 \end{proof}
 
-Negation Introduction requires that one show that some sentence and its negation are both derivable from the assumption for \emph{reductio}. In this case, we establish that $P$ and $\enot P$ both follow from the assumption that $Q$. In the case of $\enot P$, we can get it directly via Conditional Elimination; the easiest way to get the $P$ that we need is simply to reiterate it from line 1.
+Negation elimination requires that one show that some sentence and its negation are derivable given the assumption of a negated sentence.
+In this case, we establish that $\enot P$ follows from the assumption that $\enot Q$ by conditional elimination.
+Even though $P$ occurs on a live line, we must use the reiteration rule in order to include $P$ in our subproof.
+Only then may we draw $Q$ as a conclusion by way of negation elimination. 
 
-\textit{Whew}! Pat yourself on the back---you've now gotten through the 10+1 basic rules (two for each of the five connectives, plus reiteration). Take a look at the glossary page to soak them all in! 
-
-(An aside: Negation Elimination is not a legal rule in all logical systems. What we are really doing is first applying Negation Introduction, arriving at \enot \enot \metaA{}, and then applying `double negation elimination', namely the classical truth that \enot \enot \metaA{} entails \metaA{}. But in some non-classical logics, Double Negation Elimination is itself illegal. As in life, it's easier to make things negative than to take a sad song and make it better.)
-%turn something negative into something positive.) 
-
-
-
+This concludes our discussion of the rules of SD.
+In the following section we will move to discuss some of the mistakes are easy to make in first learning to write SD proofs.
 
 
-\section{Exact matches (`oh to follow a rule!')}
 
-{\color{black}You might think that following a rule is easy. You are wrong!!! This section describes one of the most common mistakes people make. The fact that we are liable to make this kind of mistake shows just how hard it is to follow a rule.} 
+% \section{Exact Matches}
+%
+% Conditional elimination, as well as all of our other natural deduction rules, are syntactically defined.
+% That is to say, the application of the rules depends on the exact shape of the SL sentences in question.
+% Here, again, is the formal statement of the rule:
+%
+% \begin{proof}
+% 	\have[m]{ab}{\metaA{}\eif\metaB{}}
+% 	\have[n]{a}\metaA{}
+% 	\have[\ ]{b}\metaB{} \ce{ab,a}
+% \end{proof}
+%
+% It says that any time one has, on one line, a sentence made up of some sentence \metaA{}, followed by the `\eif' symbol, followed by some sentence \metaB{}, where one also has \metaA{} on another line, one may derive \metaB{}. This is the only pattern of inference that this rule permits. \metaA{} and \metaB{} can be any sentences of SL, but a line justified by Conditional Elimination must fit this pattern exactly. It is not enough that one can `just see' that a given sentence follows via a similar pattern of inference.
+%
+% For example, this is \emph{not} a legal derivation in our system:
+%
+% \begin{proof}
+% 	\hypo{ab}{P \eif (A \eand B)} \pr{}
+% 	\hypo{a}{P} \pr{}
+% 	\have{b}{B}\by{ILLEGAL \eif E}{ab,a}
+% \end{proof}
+%
+% The Conditional Elimination rule requires that the new sentence derived be the consequent of the conditional cited. But in this example, $B$ is not the consequent of $P\eif (A \eand B)$ --- $A \eand B$ is. It is true that $B$ obviously follows from $A \eand B$, but the Conditional Elimination rule doesn't allow you to derive things just because they obviously follow. (Neither does any other rule in our formal system.) To derive $B$ from these premises we'll need to use another rule. (In particular, we will want to use the Conjunction Elimination rule, given below.)
+%
+% To check to make sure you are applying the rules correctly, one good heuristic is to think about whether you are relying on the rule itself, or on your intuitive understanding of the meanings of the symbols we use in SL. Your intuitive understanding is a good way to think about which rules to use, but to check to make sure you're using the rules properly, think about whether the rules' exact formulations could explain why it is permissible to extend the derivation in the exact way you're working with. Pretend, for instance, that you have no idea what the `\eif' symbol means, but you do know that if you have two sentences joined by it on one line, and the first of those two sentences on another line, then you are allowed to copy down the second sentence exactly on a new line. This --- and no more --- is what the Conditional Elimination rule permits you to do. (This is what we mean when we say the rule is syntactically defined.) It would be pretty trivial to write a computer program to check to see whether a line is properly derived via Conditional Elimination (unlike us, computers are VERY good at following rules, since computers are defined via rules).
 
-Conditional Elimination, as well as all of our other natural deduction rules, are syntactically defined. That is to say, the application of the rules depends on the exact shape of the SL sentences in question. Here, again, is the formal statement of the rule:
 
-\begin{proof}
-	\have[m]{ab}{\metaA{}\eif\metaB{}}
-	\have[n]{a}\metaA{}
-	\have[\ ]{b}\metaB{} \ce{ab,a}
-\end{proof}
+\section{Subproofs}
 
-It says that any time one has, on one line, a sentence made up of some sentence \metaA{}, followed by the `\eif' symbol, followed by some sentence \metaB{}, where one also has \metaA{} on another line, one may derive \metaB{}. This is the only pattern of inference that this rule permits. \metaA{} and \metaB{} can be any sentences of SL, but a line justified by Conditional Elimination must fit this pattern exactly. It is not enough that one can `just see' that a given sentence follows via a similar pattern of inference.
-
-For example, this is \emph{not} a legal derivation in our system:
-
-\begin{proof}
-	\hypo{ab}{P \eif (A \eand B)} \pr{}
-	\hypo{a}{P} \pr{}
-	\have{b}{B}\by{ILLEGAL \eif E}{ab,a}
-\end{proof}
-
-The Conditional Elimination rule requires that the new sentence derived be the consequent of the conditional cited. But in this example, $B$ is not the consequent of $P\eif (A \eand B)$ --- $A \eand B$ is. It is true that $B$ obviously follows from $A \eand B$, but the Conditional Elimination rule doesn't allow you to derive things just because they obviously follow. (Neither does any other rule in our formal system.) To derive $B$ from these premises we'll need to use another rule. (In particular, we will want to use the Conjunction Elimination rule, given below.)
-
-To check to make sure you are applying the rules correctly, one good heuristic is to think about whether you are relying on the rule itself, or on your intuitive understanding of the meanings of the symbols we use in SL. Your intuitive understanding is a good way to think about which rules to use, but to check to make sure you're using the rules properly, think about whether the rules' exact formulations could explain why it is permissible to extend the derivation in the exact way you're working with. Pretend, for instance, that you have no idea what the `\eif' symbol means, but you do know that if you have two sentences joined by it on one line, and the first of those two sentences on another line, then you are allowed to copy down the second sentence exactly on a new line. This --- and no more --- is what the Conditional Elimination rule permits you to do. (This is what we mean when we say the rule is syntactically defined.) It would be pretty trivial to write a computer program to check to see whether a line is properly derived via Conditional Elimination (unlike us, computers are VERY good at following rules, since computers are defined via rules).
-
-
-\section{Additional assumptions and subproofs}
-The rule $\eif$I invoked the idea of making additional assumptions. These need to be handled with some care. Consider this proof:
+We have already made use of a number of subproofs.
+However, using subproofs requires some care, and so this section will describe some of the risks involved.
+Consider the following:
 \begin{fitchproof}
 	\hypo{a}{A} \pr{}
 	\open
@@ -765,9 +775,11 @@ The rule $\eif$I invoked the idea of making additional assumptions. These need t
 	\close
 	\have{con}{B \eif B}\ci{b1-b2}
 \end{fitchproof}
-This is perfectly in keeping with the rules we have laid down already, and it should not seem particularly strange. Since `$B \eif B$' is a tautology, no particular premises should be required to prove it.
+This is perfectly in keeping with the rules that we have laid down above, and it should not seem particularly surprising.
+After all, $B \eif B$ is a tautology, and so follows from no premises.
+Thus it is just as easy to derive $B \eif B$ from some starting premises.
 
-But suppose we now tried to continue the proof as follows:
+But now suppose that tried to continue the proof as follows:
 \begin{fitchproof}
 	\hypo{a}{A} \pr{}
 	\open
@@ -775,42 +787,48 @@ But suppose we now tried to continue the proof as follows:
 		\have{b2}{B} \by{R}{b1}
 	\close
 	\have{con}{B \eif B}\ci{b1-b2}
-	\have{b}{B} \by{ILLEGAL attempt to invoke $\eif$E on lines 3 and 4}{b2,con}
+	\have{b}{B} \by{$\eif$E \textsc{(illegal)}}{b2,con}
 	%\have [\ ]{x}{} 
 \end{fitchproof}
 %\by{to invoke $\eif$E}{con, b2}
-If we were allowed to do this, it would be a disaster. It would allow us to prove any sentence letter from any other sentence letter. However, if you tell me that Anne is fast (symbolized by `$A$'), we shouldn't be able to conclude that Queen Boudica stood twenty-feet tall (symbolized by `$B$')! We must be prohibited from doing this, but how are we to implement the prohibition?
+If we were allowed to do this, we could derive any sentence from any other sentence.
+However, if you tell me that Anne is fast (symbolized by $A$), we shouldn't be able to conclude that Queen Boudica stood twenty-feet tall (symbolized by $B$).
+Thankfully we are prohibited from making this move since our rules only permit us to draw on live lines.
+Once a subproof closes, the sentences in that proof are dead, and so we cannot appeal to them at a later point.
+This does not mean that we can't appeal to their results.
+For instance, we could appeal to $B \eif B$ on a later line. 
+Indenting helps to keep track of what we can and can't appeal to in writing proofs since it is easy to see which subproofs are closed.
+In particular, once you step back one level of indentation, the indented lines of the subproof above are dead, and so can only be cited by certain rules which appeal to an entire subproof of an appropriate form.
 
-We can describe the process of making an additional assumption as one of performing a \emph{subproof}: a subsidiary proof within the main proof. When we start a subproof, we draw another vertical line to indicate that we are no longer in the main proof. Then we write in the assumption upon which the subproof will be based. A subproof can be thought of as essentially posing this question: \emph{what could we show, if we also make this additional assumption?} (Compare: What could we achieve, if we only believed in ourselves!?)
+Once we have started thinking about what we can derive from additional assumptions, nothing stops us from asking what we can derive from adding even more assumptions.
+Instead of doing this all at once the way that we may begin with many premises, we will do so by opening subproofs within subproofs.
+For instance, here is a proof of contraposition, an inference that we relied on in proving soundness and completeness in the previous chapter:
 
-When we are working within the subproof, we can refer to the additional assumption that we made in introducing the subproof, and to anything that we obtained from our original assumptions. (After all, those original assumptions are still in effect.) At some point though, we will want to stop working with the additional assumption: we will want to return from the subproof to the main proof. To indicate that we have returned to the main proof, the vertical line for the subproof comes to an end. At this point, we say that the subproof is \define{closed}. Having closed a subproof, we have set aside---i.e. `discharged'---the additional assumption, so it would be illegitimate to rely on any line that depends on that additional assumption. Thus we stipulate:
-\factoidbox{To cite an individual line when applying a rule:
-\begin{enumerate}
-\item the line must come before the line where the rule is applied, but 
-\item not occur within a subproof that has been closed before the line where the rule is applied.
-\end{enumerate}}
-This stipulation rules out the disastrous attempted proof above. The application of rule $\eif$E on line~$5$ requires that we cite two individual lines from earlier in the proof. One of these lines (namely, line~$3$) occurs within a subproof (lines $2$--$3$). By line $5$, where we have to cite line $3$, the subproof has been closed. This is illegitimate: we are not allowed to cite line $3$ on line $5$.
+\begin{proof}
+  \hypo{qnp}{Q \eif P} \pr{want $\enot P\eif \enot Q$}  
+  \open
+    \hypo{a}{\enot P} \as{for $\eif$I}
+    \open
+      \hypo{q}{Q} \as{for $\enot$I}{}
+      \have{np}{P}\ce{qnp,q}
+      \have{nnp}{\enot P}\by{R}{a}
+    \close
+    \have{d}{\enot Q} \ni{q-nnp}
+  \close
+	\have{nq}{\enot P \eif \enot Q}\ci{a-d}
+\end{proof}
 
-Closing a subproof is called \define{discharging} the assumptions of that subproof. So we can put the point this way: \emph{you cannot refer back to anything that was obtained using discharged assumptions}.
+Since we can't do anything with a conditional by itself, line $2$ introduces the assumption $\enot P$.
+This is a natural choice given that we want to conclude $\enot P \eif \enot Q$.
+Even so, there is not much more that we can do than before, and so we are forced to introduce yet another assumption $Q$ on line $3$. 
+This is also a natural choice given that we would like to conclude $\enot Q$, and we know that we can use $\enot$I to do so if we reach a contradictory pair of sentences from assuming $Q$.
+Given our assumptions, we may then derive $P$ in line $4$ by appealing to lines $1$ and $3$, both of which are live. 
+Since line $2$ is also live, we may derive $\enot P$ on line $5$ by reiteration.
+Closing the second subproof, we may justify $\enot Q$ on line $6$ by citing the lines $3$--$5$.
+Now can close the first subproof, using these lines to justify $\enot P \eif \enot Q$ on line $7$. 
 
-Subproofs, then, allow us to think about what we could show, if we made additional assumptions. The point to take away from this is not surprising---in the course of a proof, we have to keep very careful track of what assumptions we are making, at any given moment. Our proof system does this very graphically. (Indeed, that's precisely why we have chosen to use \emph{this} proof system).\footnote{You can thank me for not using a Lemmon system that lacks this feature: life is full of lemons; I learned logic on a Lemmon; Lemmon has many virtues; I prefer limes that rhyme with `lines'.}
 
-Once we have started thinking about what we can show by making additional assumptions, nothing stops us from posing the question of what we could show if we were to make \emph{even more} assumptions? This might motivate us to introduce a subproof within a subproof. Here is an example using only the rules which we have considered so far: 
-\begin{fitchproof}
-\hypo{a}{A} \pr{}
-\open
-	\hypo{b}{B} \as{for \eif I}
-	\open
-		\hypo{c}{C} \as{for \eif I}
-		\have{ab}{A \eand B}\ai{a,b}
-	\close
-	\have{cab}{C \eif (A \eand B)}\ci{c-ab}
-\close
-\have{bcab}{B \eif (C \eif (A \eand B))}\ci{b-cab}
-\end{fitchproof}
-Notice that the citation on line~$4$ refers back to the initial assumption (on line 1) and an assumption of a subproof (on line~$2$). This is perfectly in order, since neither assumption has been discharged at the time (i.e., by line~$4$).
-
-Again, though, we need to keep careful track of what we are assuming at any given moment. Suppose we tried to continue the proof as follows:
+For contrast, here is a proof where things go awry:
 \begin{fitchproof}
 \hypo{a}{A} \pr{}
 \open
@@ -822,16 +840,14 @@ Again, though, we need to keep careful track of what we are assuming at any give
 	\have{cab}{C \eif (A \eand B)}\ci{c-ab}
 \close
 \have{bcab}{B \eif(C \eif (A \eand B))}\ci{b-cab}
-\have{bcab}{C \eif (A \eand B)}\by{ILLEGAL attempt to invoke $\eif$I on lines 3-4}{c-ab}
+\have{bcab}{C \eif (A \eand B)}\by{$\eif$I \textsc{(illegal)}}{c-ab}
 %\have [\ ]{x}{} \by{to invoke $\eif$I}{c-ab}
 \end{fitchproof}
-This would be awful. If we tell you that Anne is smart, you should not be able to infer that, if Cath is smart (symbolized by `$C$') then \emph{both} Anne is smart and Queen Boudica stood 20-feet tall! But this is just what such a proof would suggest, if it were permissible.
+The problem is that the subproof that began with the assumption $C$ was under the assumption of $B$ on line $2$.
+By lines $6$ and $7$, we have discharged the assumption $B$, and so are no longer asking what we could show if we assumed $B$.
+Although it was perfectly legitimate to draw this same inference on line $5$, by the time we are at line $7$ we cannot appeal to lines $2$--$5$.
 
-The essential problem is that the subproof that began with the assumption~`$C$' depended crucially on the fact that we had assumed `$B$' on line~$2$. By line~$6$, we have \emph{discharged} the assumption~`$B$': we have stopped asking ourselves what we could show, if we also assumed `$B$'. So it is simply cheating, to try to help ourselves (on line~$7$) to the subproof that began with the assumption~`$C$'. 
-
-Thus we stipulate, much as before, that \textbf{a subproof can only be cited on a line if it does not occur within some other subproof that is already closed at that line}. Perhaps put more simply, \textbf{you can't appeal to a subproof if you are outside the scope of an assumption(s) that the subproof depends on}. The attempted disastrous proof violates this stipulation. The subproof of lines $3$--$4$ occurs within a subproof that ends on line~$5$ (it depends on the assumption on line 2). So it cannot be invoked on line~$7$ (since line 7 is OUTSIDE the scope of the assumption on line 2). 
-
-Here is one further case we have to exclude:
+Here is one further mistake worth watching out for:
 \begin{fitchproof}
 \hypo{a}{A} \pr{}
 \open
@@ -839,22 +855,19 @@ Here is one further case we have to exclude:
 	\open
 		\hypo{c}{C} \as{for \eif I}
 	\have{bc}{B \eand C}\ai{b,c}
-	\have{c2}{C}\ae{bc}
+	% \have{c2}{C}\ae{bc}
 	\close
 \close
-\have{bcab}{B \eif C}\by{ILLEGAL attempt to invoke $\eif$I on lines 2-5}{b-c2}
+  \have{bcab}{B \eif (B \eand C)}\by{$\eif$I (\textsc{illegal})}{b-bc}
 %\have [\ ]{x}{} \by{}{b-c2}
 \end{fitchproof}
-Here we are trying to cite a subproof that begins on line~$2$ and ends on line~$5$---but the sentence on line~$5$ depends not only on the assumption on line~$2$, but also on one another assumption (line~$3$) which we have not discharged at the end of the subproof. The subproof started on line~$3$ is still open at line~$3$. But $\eif$I requires that the last line of the subproof \emph{only} relies on the assumption of the subproof being cited, i.e., the subproof beginning on line~$2$ (and anything before it), and not on assumptions of any subproofs within it. In particular, the last line of the subproof cited must not itself lie within a nested subproof.
+Here we are trying to cite a subproof that begins on line $2$ and ends on line $4$, but the sentence on line $4$ depends not only on the assumption on line $2$, but also on one another assumption (line $3$) which we have not discharged at the end of the subproof.
+Put otherwise, the subproof which starts by assuming $B$ does not end with a sentence at all, but rather ends with a subproof. 
+Although we can close both subproofs at once, doing so wouldn't be strategic since line $5$ cannot then cite lines $2$--$4$ to justify $B \eif (B \eand C)$.
 
-\factoidbox{To cite a subproof when applying a rule:
-\begin{enumerate} 
-\item the cited subproof must come entirely before the application of the rule where it is cited, 
-\item the cited subproof must not lie within some other closed subproof which is closed at the line it is cited, and 
-\item its last line of the cited subproof must not occur inside a nested subproof.
-\end{enumerate}}
-
-One last point to emphasize how rules can be applied: where a rule requires you to cite an individual line, you cannot cite a subproof instead; and where it requires you to cite a subproof, you cannot cite an individual line instead. So for instance, this is incorrect:
+It is also worth stressing the difference between citing a single line, and citing a subproof with a further example.
+In particular, when a rule requires you to cite a subproof, you cannot cite an individual line instead, nor \textit{vice versa}.
+So for instance, this is incorrect:
 \begin{fitchproof}
 \hypo{a}{A} \pr{}
 \open
@@ -864,96 +877,42 @@ One last point to emphasize how rules can be applied: where a rule requires you 
 	\have{bc}{B \eand C}\ai{b,c}
 	\have{c2}{C}\ae{bc}
 	\close
-	\have{c3}{C}\by{ILLEGAL attempt to invoke R}{c-c2}
+  \have{c3}{C}\by{R (\textsc{illegal})}{c-c2}
 %\have [\ ]{x}{} \by{to invoke R}{c-c2}
 \close
 \have[7]{bcab}{B \eif C}\ci{b-c3}
 \end{fitchproof}
-Here, we have tried to justify $C$ on line~$6$ by the reiteration rule, but we have cited the subproof on lines $3$--$5$ with it. That subproof is closed and can in principle be cited on line~$6$. (For instance, we could use it to justify $C \eif C$ by $\eif$I.) But the reiteration rule~R requires you to cite an individual line, so citing the entire subproof is inadmissible (even if that subproof contains the sentence~$C$ we want to reiterate).
+Here, we have tried to justify $C$ on line $6$ by the reiteration rule, but we have done so by citing the subproof on lines $3$--$5$.
+Although that subproof could in principle be cited on line $6$, the reiteration rule does not permit us to do so.
+Rather, we could have used $\eif$I to derive $C \eif C$ while citing that subproof.
+By contrast, the reiteration rule R requires you to cite an individual line that is live, so citing the entire subproof is not permissible.
 
-
-It is always permissible to open a subproof with any assumption. However, there is some strategy involved in picking a useful assumption. Starting a subproof with an arbitrary, wacky assumption would just waste lines of the proof. In order to obtain a conditional by {\eif}I, for instance, you must assume the antecedent of the conditional in a subproof.
-
-Equally, it is always permissible to close a subproof (and discharge its assumptions). However, it will not be helpful to do so until you have reached something useful. Once the subproof is closed, you can only cite the entire subproof in any justification. Those rules that call for a subproof or subproofs, in turn, require that the last line of the subproof is a sentence of some form or other. For instance, you are only allowed to cite a subproof for $\eif$I if the line you are justifying is of the form $\metaA \eif \metaB$, $\metaA$ is the assumption of your subproof, and $\metaB$ is the last line of your subproof.
-
-
-\iffalse %Ichikawa version: 
-
-\subsection{Reiteration}
-\label{sec:reiteration}
-
-In addition to the Introduction and Elimination rules for each logical operator, we will also have one more basic rule: Reiteration (R). If you already have shown something in the course of a proof, the Reiteration rule allows you to repeat it on a new line. Put formally:
-
-\begin{proof}
-	\have[m]{a1}\metaA{}
-	\have[\ ]{a2}\metaA{} \by{R}{a1}
-\end{proof}
-
-%Josh: I think the following has a problem anyways, since to apply Modus Tollens, one would need \enot (\enot P), so would have to construct this from two applications of negation introduction anyways.  
-%You may have noticed that there is another way to prove $\enot Q$ from these premises --- one may do it in a single step via \emph{modus tollens}. Recall that \emph{modus tollens} is not one of our \emph{basic} rules. It is a \emph{derived} rule that lets us take certain shortcuts. But anything that can be proven with \emph{modus tollens} can be proven with the basic rules listed above. In fact, the proof we have just seen, using Negation Introduction and Reiteration, provides a template. Anything you could get to with one step via \emph{modus tollens}, you could also get to in four steps via Negation Introduction, Conditional Elimination, and Reiteration.
-
-\fi 
-
-
-\iffalse
-
-\subsection*{Disjunction Elimination from Calgary Appendix}
-\begin{fitchproof}
-	\have[m]{a}{\metaA}
-	\have[\ ]{ab}{\metaA\eor\metaB}\oi{a}
-	\have[m]{a}{\metaA}
-\\	\have[\ ]{ba}{\metaB\eor\metaA}\oi{a}
-	\have[m]{ab}{\metaA\eor\metaB}
-\\	\open
-		\hypo[i]{a}{\metaA}
-		\have[j]{c1}{\metaC}
-	\close
-	\open
-		\hypo[k]{b}{\metaB}
-		\have[l]{c2}{\metaC}
-	\close
-	\have[\ ]{c}{\metaC} \oe{ab,a-c1, b-c2}
-\end{fitchproof}
-
-An example from Gordon in Kluwer Fitch:
-
-\begin{equation*}
-  \begin{fitch}
-    \fh a \supset b & A  \\
-    	\fa\fh a & A /$\supset$ I \\
-   	 \fa\fa b & ($\supset$E) 1,2 \\
-    	\fa\fa    a \&b & ($\&$I) 2,3 \\
-	\fa a \supset (a \& b) & ($\supset$I) 2-5
-    \end{fitch}
-\end{equation*} 
-
-
-\fi 
+However obvious these mistakes may seem, it can be tempting to bend the rules when writing natural deduction proofs.
+This is like bending the rules while playing chess: you simply are no longer playing chess, but rather moving chess pieces around a boards in a manner that is no longer constrained by the rules of chess, or any other game for that matter.
+So in writing your own proofs in SD, keep these rules in mind, sticking to them precisely.
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\section{Proof strategy}
+\section{Proof Strategy}
 \label{sec.SL.ND.strategy}
 
+So far the examples have been simple, but perhaps you can already get a sense of the strategy that natural deduction proofs sometimes require.
+For instance, although it is always permissible to open a subproof with any assumption, there is some strategy involved in picking a useful assumption.
+Starting a subproof with an arbitrary, wacky assumption would just waste lines of the proof.
+In order to obtain a conditional by {\eif}I, for example, it makes sense to assume the antecedent of the conditional in a subproof and see if you can derive the consequent.
+This is an example of a good proof strategy.
 
+It is also always permissible to close a subproof, discharging its assumptions.
+However, it will not be helpful to do so until you have reached something useful.
+Once the subproof is closed, you can only cite the entire subproof in a justification for a line following that subproof.
+Those rules that call for a subproof, or multiple subproofs, require that the last line of the subproof is a sentence of some form or other.
+For instance, you are only allowed to cite a subproof for $\eif$I if the line you are justifying is of the form $\metaA \eif \metaB$, $\metaA$ is the assumption of your subproof, and $\metaB$ is the last line of your subproof.
+This constrains the strategies that one might hope to employ in attempting to construct proof in SD.
 
-Like a good meal, there's no `one-size fits all' recipe for proofs. And there is no substitute for practice! Here, though, are some rules of thumb and strategies to keep in mind.
+Getting good at natural deduction will take some practice.
+The good news is that natural deduction proofs are a lot more interesting to construct than tree proofs, and a much more beneficial skill: practising natural deduction will streamline your reasoning well beyond the scope of this course, where the same cannot be said for constructing truth-tables or tree proofs.
+Although there are no fail-safe methods, and certainly no substitute for practice, there are some general rules of thumb and strategies that are worth keeping in mind.
 
 
 \paragraph{Work backwards from what you want.}
@@ -962,143 +921,166 @@ The ultimate goal is to derive the conclusion. Look at the conclusion and ask wh
 For example: If your conclusion is a conditional $\metaA{}\eif\metaB{}$, plan to use the {\eif}I rule. This requires starting a subproof in which you assume \metaA{}. In the subproof, you want to derive \metaB{}.
 
 \paragraph{Work forwards from what you have.}
-When you are starting a proof, look at the premises; later, look at the sentences that you have derived so far. Think about the elimination rules for the main operators of these sentences. These will tell you what your options are.
+When you are starting a proof, look at the premises and consider what implications they might have, or what you would need to derive in order to make use of the premises.
+It can help to think about the elimination rules for the main operators of the premises, or the sentences that you have derived so far.
 
-For example: If you have a conditional \metaA{}\eif\metaB{}, and you also have \metaA{}, {\eif}E is a pretty natural choice.
+For example: If you have a conditional $\metaA\eif\metaB$, and you also have $\metaA$ on a line, $\eif$E is a pretty natural move to make.
 
-For a short proof, you might be able to eliminate the premises and introduce the conclusion. A long proof is formally just a number of short proofs linked together, so you can fill the gap by alternately working back from the conclusion and forward from the premises.
+% \paragraph{Change what you are looking at.}
+% Replacement rules can often make your life easier. If a proof seems impossible, try out some different substitutions.
+%
+% For example: It is often difficult to prove a disjunction using the basic rules. If you want to show $\metaA{}\eor\metaB{}$, it is often easier to show $\enot\metaA{}\eif\metaB{}$ and use the MC rule.
+%
+% Some replacement rules should become second nature. If you see a negated disjunction, for instance, you should immediately think of DeMorgan's rule.
 
+\paragraph{Repeat as necessary.}
+A long proof is just a number of short proofs linked together, so you can fill the gap by alternately working back from the conclusion and forward from the premises.
+Once you have decided how you might be able to get to the conclusion, ask what you might be able to do with the premises.
+Then consider the target sentences again and ask how you might reach them.
 
-\paragraph{Change what you are looking at.}
-Replacement rules can often make your life easier. If a proof seems impossible, try out some different substitutions.
-
-For example: It is often difficult to prove a disjunction using the basic rules. If you want to show $\metaA{}\eor\metaB{}$, it is often easier to show $\enot\metaA{}\eif\metaB{}$ and use the MC rule.
-
-Some replacement rules should become second nature. If you see a negated disjunction, for instance, you should immediately think of DeMorgan's rule.
-
-\paragraph{Do not forget Reductio! (i.e. indirect proof).}
-
-{\color{black}Unlike good meals, there is a one-size fits all approach to \textit{bad} meals: it's called the microwave! And in many of our problems, if you are really stuck, you'll want to give Negation Elimination (or Introduction) a try: assume the negation of what you want to prove. You can often get pretty far with this. It's the logic equivalent of \textit{nuking} that problem. It often works, albeit in a messy way that leaves your proof feeling stodgy. Yum.} 
-
-To repeat: If you cannot find a way to show something directly, try assuming its negation.
-
-Remember that most proofs can be done either indirectly or directly. One way might be easier --- or perhaps one sparks your imagination more than the other --- but either one is formally legitimate.
-
-\paragraph{Repeat as necessary.} Once you have decided how you might be able to get to the conclusion, ask what you might be able to do with the premises. Then consider the target sentences again and ask how you might reach them.
+\paragraph{Try a reductio when nothing else works.}
+If you cannot find a way to show something directly, try assuming its negation and see where this leads.
+Sometimes this can help unlock a proof, perhaps even leading you to a direct line of argument.
 
 \paragraph{Persist.}
-Try different things. If one approach fails, then try something else. {\color{black}(Nevertheless, Logic persisted---Logic ain't ever gonna quit!).}
-% 
+Try different things.
+If one approach fails, then try something else.
+In general, there are typically many ways to construct a proof.
 
 
 
 
-\section{Proof-theoretic concepts}
+\section{Proofs and Provability}
 
-As we did in our discussion of trees, we will again use the symbol `$\vdash$' to indicate provability. Provability is relative to a proof system, so the meaning of the `$\vdash$' symbol featured in this chapter should be distinguished from the one we used for trees. When necessary, we can specify the single turnstile with reference to the proof system in question, letting `$\vdash_{T}$' stand for provability in the tree system, and `$\vdash_{ND}$' stand for provability in this natural deduction system. For the most part in this chapter, though, we'll be interested in natural deduction, so unless it is specified otherwise, you can understand `$\vdash$' to mean `$\vdash_{ND}$'.
+Given the natural deduction rules specified above, we may present the following definition:
 
-The {double turnstile} symbol `$\models$', remains unchanged. It stands for semantic entailment, as described in ch.~\ref{ch.SLmodels}.
+\factoidbox{
+  A natural deduction \define{proof} (or \define{derivation}) of a conclusion $\metaA$ from a set of premises $\Gamma$ in SD is any sequence of lines ending with $\metaA$ on a live line where every line in the sequence is either: (1) a premise in $\Gamma$; (2) a discharged assumption; or (3) follows from previous lines by one of the natural deduction rules for SD. 
+}
 
-When we write $\{\metaA{}_1,\metaA{}_2,\ldots\}\vdash_{ND}\metaB{}$, this means that it is possible to give a natural deduction derivation of \metaB{} from premises $\metaA{}_1$,$\metaA{}_2$,$\ldots$. With just one premise, we leave out the curly brackets, so $\metaA{}\vdash\metaB{}$ means that there is a proof of \metaB{} with \metaA{} as a premise. Naturally, $\vdash\metaA{}$ means that there is a proof of \metaA{} that has no premises. You can think of it as shorthand for $\emptyset\vdash\metaA{}$. 
+An SL sentence $\metaA$ is \define{provable} (or \define{derivable}) from $\Gamma$ in SD just in case there is a natural deduction proof (derivation) of $\metaA$ from $\Gamma$ in SD, where we may write this: $\Gamma \proves \metaA$. 
+% Whereas `$\Gamma \proves_{T} \metaA$' was shorthand for `$\Gamma, \enot \metaA \proves_{T} \bot$', 
 
-For notational completeness, we can understand $\metaSetX{}\vdash\bot$ to mean that from \metaSetX{}, we could prove an arbitrary contradiction. In other words, $\metaSetX{}$ is an inconsistent set.
-
-Logical proofs are sometimes called \emph{derivations}. So $\metaA{}\vdash\metaB{}$ can be read as `\metaB{} is derivable from \metaA{}.'
-
-A \define{theorem} is a sentence that is derivable without any premises; i.e., \metaA{} is a theorem if and only if $\vdash\metaA{}$.
-
-It is not too hard to show that something is a theorem --- you just have to give a proof of it. How could you show that something is \emph{not} a theorem? If its negation is a theorem, then you could provide a proof. For example, it is easy to prove $\enot(P \eand \enot P)$, which shows that $(P \eand \enot P)$ cannot be a theorem. For a sentence that is neither a theorem nor the negation of a theorem, however, there is no easy way to show this. You would have to demonstrate not just that certain proof strategies fail, but that no proof is possible. Even if you fail in trying to prove a sentence in a thousand different ways, perhaps the proof is just too long and complex for you to make out. As we've emphasized already, this is a difference between our natural deduction system and the tree method. (For just the same reason, the natural deduction system doesn't provide a straightforward way to demonstrate that an argument form is invalid.)
-
-Two sentences \metaA{} and \metaB{} are \define{provably equivalent} if and only if each can be derived from the other; i.e., $\metaA{}\vdash\metaB{}$ and $\metaB{}\vdash\metaA{}$.
-
-It is relatively easy to show that two sentences are provably equivalent --- it just requires a pair of proofs. Showing that sentences are \emph{not} provably equivalent would be much harder. It would be just as hard as showing that a sentence is not a theorem. (In fact, these problems are interchangeable. Can you think of a sentence that would be a theorem if and only if \metaA{} and \metaB{} were provably equivalent?)
-
-The set of sentences $\{\metaA{}_1,\metaA{}_2,\ldots\}$ is \define{provably inconsistent} if and only if contradictory sentences are derivable from it; i.e., for some sentence \metaB{}, $\{\metaA{}_1,\metaA{}_2,\ldots\}\vdash\metaB{}$ and $\{\metaA{}_1,\metaA{}_2,\ldots\}\vdash\enot \metaB{}$. This is equivalent to $\{\metaA{}_1,\metaA{}_2,\ldots\}\vdash\bot$.
-
-It is easy to show that a set is provably inconsistent: You just need to assume the sentences in the set and prove a contradiction. Showing that a set is \emph{not} provably inconsistent will be much harder. It would require more than just providing a proof or two; it would require showing that proofs of a certain kind are \emph{impossible}.
+Two sentences $\metaA$ and $\metaB$ are \define{provably equivalent} (or \define{interderivable}) if and only if both $\metaA\proves\metaB$ and $\metaB\proves\metaA$.
+% Additionally, we will take $\Gamma\proves\bot$ to mean that $\Gamma\proves\metaB\eand\enot\metaB$ for some SL sentence $\metaB$.
+% It is relatively easy to show that two sentences are provably equivalent since this requires a pair of proofs.
+% Showing that sentences are \emph{not} provably equivalent would be much harder.
+% It would be just as hard as showing that a sentence is not a theorem.
+% (In fact, these problems are interchangeable. Can you think of a sentence that would be a theorem if and only if \metaA{} and \metaB{} were provably equivalent?)
+A set of sentences $\Gamma$ is \define{provably inconsistent} if and only if $\Gamma\proves\bot$ where $\bot$ is our arbitrarily chosen contradiction, e.g., $A\eand\enot A$.
 
 
-\section{Proofs and models}
-As you might already suspect, there is a connection between \emph{theorems} and \emph{tautologies}.
+Provability is relative to a proof system, so the meaning of the `$\proves$' symbol featured in this chapter should be distinguished from the one we used for trees.
+When necessary, we can specify which turnstile we intend by including a reference to the proof system in question, letting `$\proves_{T}$' stand for provability in the tree system, and `$\proves_{SD}$' stand for provability in this natural deduction system.
+Since this chapter is concerned with natural deduction, you can take `$\proves$' to mean `$\proves_{SD}$' in this chapter unless specified otherwise.
+% For instance, it is important to disambiguate the turnstiles in making the following observation: whereas $\Gamma \proves_{T} \metaA$ was defined as $\Gamma, \enot \metaA \proves_{T} \bot$ for the tree proof system, here we have defined $\Gamma \proves_{SD} \bot$ in terms of $\Gamma \proves_{SD} \metaB\eand\enot\metaB$ for some $\metaB$. 
 
-There is a formal way of showing that a sentence is a theorem: Prove it. For each line, we can check to see if that line follows by the cited rule. It may be hard to produce a twenty line proof, but it is not so hard to check each line of the proof and confirm that it is legitimate --- and if each line of the proof individually is legitimate, then the whole proof is legitimate. Showing that a sentence is a tautology, though, requires reasoning in English about all possible models. There is no formal way of checking to see if the reasoning is sound. Given a choice between showing that a sentence is a theorem and showing that it is a tautology, it would be easier to show that it is a theorem.
+% So $\Gamma\proves\metaA$ can be read as: $\metaA$ is derivable from $\Gamma$.
+As above, it is often convenient to write `$\metaA_1,\metaA_2,\ldots\proves\metaB$' as a shorthand for $\set{\metaA_1,\metaA_2,\ldots}\proves\metaB$.
+We will refer to an SL sentence $\metaA$ as a \define{theorem} of SD just in case $\proves\metaA$, i.e., $\varnothing\proves\metaA$.
+It is important to note that the sentences of SL are only theorems \textit{relative to a proof system}, so there is no sense in which $A\eor\enot A$ is a theorem full stop.
+Nevertheless, it is natural to expect $A\eor\enot A$ to be a theorem of any respectable (i.e., complete) proof system for SL.
 
-By contrast, there is no formal way of showing that a sentence is \emph{not} a theorem. We would need to reason in English about all possible proofs. Yet there is a formal method for showing that a sentence is not a tautology. We need only construct a model in which the sentence is false. Given a choice between showing that a sentence is not a theorem and showing that it is not a tautology, it would be easier to show that it is not a tautology.
+In order to show that something is a theorem we have to derive it from no premises.
+But how could we show that something is \emph{not} a theorem?
+More generally, how could we show that $\Gamma \nproves \metaA$?
+Showing that there is no proof of $\metaA$ from $\Gamma$ would seem to require searching the space of all natural deduction proofs, and this is not bound to be easy. 
+For instance, even if you (or a computer program) failed to derive $\metaA$ from $\Gamma$ in a thousand different ways, perhaps their is a proof that has not yet been considered.
+As we've emphasized already, this brings out an important difference between our natural deduction system and the tree proof system.
+Whereas the tree method will determine whether $\Gamma \proves_{T} \metaA$ or not, the natural deduction system does not provide a straightforward way to demonstrate that an argument is invalid.
 
-Fortunately, a sentence is a theorem if and only if it is a tautology. If we provide a proof of $\vdash\metaA{}$ and thus show that it is a theorem, it follows that \metaA{} is a tautology; i.e., $\models\metaA{}$. Similarly, if we construct a model in which \metaA{} is false and thus show that it is not a tautology, it follows that \metaA{} is not a theorem.
+% It is easy to show that a set is provably inconsistent: You just need to assume the sentences in the set and prove a contradiction. Showing that a set is \emph{not} provably inconsistent will be much harder. It would require more than just providing a proof or two; it would require showing that proofs of a certain kind are \emph{impossible}.
 
-In general, $\metaA{}\vdash\metaB{}$ if and only if $\metaA{}\models\metaB{}$. As such:
-\begin{itemize}
-\item An argument is \emph{valid} if and only if \emph{the conclusion is derivable from the premises}.
-\item Two sentences are \emph{logically equivalent} if and only if they are \emph{provably equivalent}.
-\item A set of sentences is \emph{consistent} if and only if it is \emph{not provably inconsistent}.
-\end{itemize}
-You can pick and choose when to think in terms of proofs and when to think in terms of models, doing whichever is easier for a given task. Table \ref{table.ProofOrModel} summarizes when it is best to give proofs and when it is best to give models.
 
-In this way, proofs and models give us a versatile toolkit for working with arguments. If we can translate an argument into SL, then we can measure its logical weight in a purely formal way. If it is deductively valid, we can give a formal proof; if it is invalid, we can provide a formal counterexample.
 
-\begin{table}
+
+
+\section{Provability and Entailment}
+
+The double turnstile `$\models$' for logical entailment remains unchanged, and so no subscript is required.
+% Put otherwise, entailment is not relative to a proof system, but rather to a class of interpretations.
+% In particular, we were concerned with interpretations which assigned the sentence letters of SL to exactly one truth-value.
+% Since this is the only definition of an interpretation that we will consider for SL, there is only one corresponding notion of entailment $\models$.
+Although the soundness and completeness proofs showed that $\Gamma \proves_{T} \metaA$ if and only if $\Gamma \models \metaA$, a question remains as to whether a similar result may be established for SD.
+% A natural strategy for establishing this connection is to show that $\Gamma \proves_{SD} \metaA$ if and only if $\Gamma \proves_{T} \metaA$.
+
+Although the soundness proof for natural deduction is easy, the completeness proof is considerably more difficult.
+Rather, we will simply state that SD is both sound and complete:
+
+\factoidbox{
+  SD is both sound and complete, i.e., $\Gamma \proves_{SD} \metaA$ if and only if $\Gamma \models \metaA$.
+}
+
+Given the soundness and completeness of the tree method, it follows that our two proof systems are equivalent in the sense that anything provable in one is also provable in the other: $\Gamma\proves_{T}\metaA$ if and only if $\Gamma\proves_{SD}\metaA$.
+In practice, this is a good thing.
+For instance, suppose you are not sure if $\Gamma \proves_{SD} \metaA$, but if it does, you would like to provide a derivation.
+Using the tree method, you could check whether $\Gamma \proves_{T} \metaA$, and if the tree you construct closes, then go on to look for a natural deduction proof of $\metaA$ from $\Gamma$. 
+If we can show that $\Gamma \nproves_{T} \metaA$ by constructing a complete open tree, then we can conclude that there is no natural deduction derivation of $\metaA$ from $\Gamma$, and so no use looking for one. 
+Nevertheless, a direct proof of $\metaA$ from $\Gamma$ in SD is more compelling than a closed tree.
+Whereas it is easy to justify every move in a natural deduction derivation, it is a lot harder to use a closed tree to create a compelling argument.
+
+Given that SD is sound and complete, the \emph{theorems} of SD are coextensive with the \emph{tautologies} of SL.
+Whereas showing that a sentence is a tautology involves checking a truth-table or constructing a semantic argument, showing that a sentence is a theorem involves constructing a proof.
+Some proofs are easier to construct than others, but even for very long proofs, it is easy to check whether each line follows from the previous lines.
+% Moreover, the resulting argument is the kind of argument that you could present an analogue of in English in order to be persuasive.
+Although there is no formal way of showing that a sentence is \emph{not} a theorem, there is a method for showing that a sentence is not a tautology: construct an SL tree and read off the interpretation.
+% We need only construct a model in which the sentence is false. Given a choice between showing that a sentence is not a theorem and showing that it is not a tautology, it would be easier to show that it is not a tautology.
+
+
+\section{Logical Analysis}
+
+If we can translate an argument into SL, we now have a number of tools that we can use to investigate that argument's logical properties.
+Consider the following options:
+
+\begin{table}[h]
 \begin{center}
-\begin{tabular*}{\textwidth}{p{10em}|p{10em}|p{10em}|}
+\begin{tabular*}{\textwidth}{p{12em}|p{10em}|p{12em}|}
 \cline{2-3}
 
  & \multicolumn{1}{|c|}{YES} & \multicolumn{1}{|c|}{NO}\\
 \cline{2-3}
 
-Is \metaA{} a tautology? & prove $\vdash\metaA{}$ & give a model in which \metaA{} is false\\
+Is \metaA{} a tautology? & Prove $\proves\metaA{}$ & Give a model in which \metaA{} is false\\
 \cline{2-3}
 
-Is \metaA{} a contradiction? &  prove $\vdash\enot\metaA{}$ & give a model in which \metaA{} is true\\
+Is \metaA{} a contradiction? &  Prove $\proves\enot\metaA{}$ & Give a model in which \metaA{} is true\\
 \cline{2-3}
 
-Is \metaA{} contingent? & give a model in which \metaA{} is true and another in which \metaA{} is false & prove $\vdash\metaA{}$ or $\vdash\enot\metaA{}$\\
+Is \metaA{} contingent? & Give a model in which \metaA{} is true and another in which \metaA{} is false & Prove $\proves\metaA{}$ or $\proves\enot\metaA{}$\\
 \cline{2-3}
 
-Are \metaA{} and \metaB{} equivalent? & prove \mbox{$\metaA{}\vdash\metaB{}$} and \mbox{$\metaB{}\vdash\metaA{}$}  & give a model in which \metaA{} and \metaB{} have different truth values\\
+Are \metaA{} and \metaB{} equivalent? & Prove \mbox{$\metaA{}\proves\metaB{}$} and \mbox{$\metaB{}\proves\metaA{}$}  & Give a model in which \metaA{} and \metaB{} have different truth values\\
 \cline{2-3}
 
-Is the set \model{A} consistent? & give a model in which all the sentences in \model{A} are true & taking the sentences in \model{A}, prove \metaB{} and \enot\metaB{}\\
+Is the set $\Gamma$ consistent? & Give a model in which all the sentences in $\Gamma$ are true & Taking the sentences in $\Gamma$, prove $\metaB$ and $\enot\metaB$\\
 \cline{2-3}
 
-Is the argument `\metaA{}, \metaB{}, \ldots \mbox{\therefore\ \metaC{}'} valid? & prove $\metaA{}, \metaB{}, \ldots \vdash\metaC{}$ & give a model in which \{\metaA{}, \metaB{}, \ldots \} is satisfied and \metaC{} is falsified\\
+Is `$\metaA, \metaB, \ldots\ \therefore\ \metaC$' valid? & Prove $\metaA{}, \metaB{}, \ldots \proves\metaC{}$ & Give a model that satisfies $\set{\metaA, \metaB, \ldots,\ \enot \metaC}$\\
 \cline{2-3}
 \end{tabular*}
 \end{center}
-\caption{Sometimes it is easier to show something by providing proofs than it is by providing models. Sometimes it is the other way round.  It depends on what you are trying to show.}
+% \caption{Sometimes it is easier to show something by providing proofs than it is by providing models. Sometimes it is the other way round.  It depends on what you are trying to show.}
 \label{table.ProofOrModel}
 \end{table}
+% \FloatBarrier
 
-\FloatBarrier
+Answering the questions on the left may sometimes be easy, and other times far from obvious.
+Whereas the tree proof system provides a fail-safe way to determine the answer, the SD proof system provides a way to construct compelling arguments.
 
-\section{Soundness and completeness}
-\label{sec:soundness}
 
-Chapter \ref{ch.SLsoundcomplete} considered the soundness and completeness of the tree method at length; it proved that this method was both sound ($\metaSetX{}\vdash_{T}\metaA{}$ only if $\metaSetX{}\models{}$\metaA{}) and complete ($\metaSetX{}\models{}$\metaA{} only if $\metaSetX{}\vdash_{T}\metaA{}$). We said in the last section that $\metaA{}\vdash_{ND}\metaB{}$ if and only if $\metaA{}\models\metaB{}$; this is equivalent to saying that our natural deduction system, too, is sound and complete. Given the soundness and completeness of the tree method, this also means that our two proof systems are equivalent in the sense that anything provable in one is also provable in the other ($\metaSetX{}\vdash_{T}\metaA{})$ iff ($\metaSetX{}\vdash_{ND}\metaA{}$).
 
-How can we know that our natural deduction method is sound? A proof system is \define{sound} if there are no derivations corresponding to invalid arguments. Demonstrating that the proof system is sound would require showing that any possible proof in our system is the proof of a valid argument. There is a fairly simple way of approaching this in a step-wise fashion. If using the {\eand}E rule on the last line of a proof could never change a valid argument into an invalid one, then using the rule many times could not make an argument invalid. Similarly, if using the {\eand}E and {\eor}E rules individually on the last line of a proof could never change a valid argument into an invalid one, then using them in combination could not either.
 
-The strategy is to show for every rule of inference that it alone could not make a valid argument into an invalid one. It follows that the rules used in combination would not make a valid argument invalid. Since a proof is just a series of lines, each justified by a rule of inference, this would show that every provable argument is valid.
 
-Consider, for example, the {\eand}I rule. Suppose we use it to add \metaA{}\eand\metaB{} to a valid argument. In order for the rule to apply, \metaA{} and \metaB{} must already be available in the proof. Since the argument so far is valid, \metaA{} and \metaB{} are either premises of the argument or valid consequences of the premises. As such, any model in which the premises are true must be a model in which \metaA{} and \metaB{} are true. According to the definition of \define{truth in SL}, this means that \metaA{}\eand\metaB{} is also true in such a model. Therefore, \metaA{}\eand\metaB{} validly follows from the premises. This means that using the {\eand}I rule to extend a valid proof produces another valid proof.
+\iffalse
 
-In order to show that the proof system is sound, we would need to show this for the other inference rules. Since the derived rules are consequences of the basic rules, it would suffice to provide similar arguments for the 16 other basic rules. The reasoning is extremely similar to that given in the soundness proof for trees in the previous chapter. We will not go through it in detail here.
-
-What of completeness? Why think that \emph{every} valid argument is an argument that can be proven in our natural deduction system? That is, why think that $\metaA{}\models\metaB{}$ implies $\metaA{}\vdash\metaB{}$? Our system \emph{is} also complete, but the completeness proof for natural deduction is a bit more complex than the completeness proof for trees. (In the case of trees, we had a mechanical method that was guaranteed to find proofs if they exist; we have seen no such method here, which makes proving these general results harder.) This proof is beyond the scope of this book.
-
-The important point is that, happily, the proof system for SL is both sound and complete. Consequently, we may freely use this natural deduction method to draw conclusions about models in SL.
-
-\section{Bonus stuff that you can skip!}
-
-{\color{black}This section contains some additional material from Ichikawa's version that could be more confusing or overwhelming, at least on a first reading (this chapter is already very long). You won't be allowed to use the following derived rules on \textit{Carnap} or on the problems, so learning them will probably just make you yearn for a logical system with more legal rules. 
-
-They are instructive examples though! And of course you can always write out the long-form proof of each derived rule (so learning them can be handy tricks).} 
-
-\subsection{Basic vs. Derived rules}
+\section{Bonus: Derived Rules}
 \label{sec:basic}
 
-A \define{derived rule} is a rule of proof that does not make any new proofs possible. Anything that can be proven with a derived rule can be proven without it. You can think of a short proof using a derived rule as shorthand for a longer proof that uses only the basic rules. 
+A \define{derived rule} is a rule of proof that does not make any new proofs possible.
+Anything that can be proven with a derived rule can be proven without it.
+You can think of a short proof using a derived rule as shorthand for a longer proof that uses only the basic rules. 
 
-A useful fact about our natural deduction system is that the basic rules themselves are enough to derive every SL validity. Derived rules are helpful for making some proofs shorter or more intuitive, but one could prove anything provable without them.
+Derived rules are helpful for making some proofs shorter or more intuitive.
 
 Headline news: you WON'T be able to enter any derived rules on Carnap in proofs or use on assignments. So this section is less important, but still provides some good examples of proof syntax and reasoning in a natural deduction system. 
 
@@ -1293,17 +1275,7 @@ In this example, we used the premise on line 2 twice --- notice that the 2 appea
 
 
 
-\section*{Summary of definitions}
-\begin{itemize}
-\item A sentence \metaA{} is a \define{theorem} if and only if $\vdash\metaA{}$.
-
-\item Two sentences \metaA{} and \metaB{} are \define{provably equivalent} if and only if $\metaA{}\vdash\metaB{}$ and $\metaB{}\vdash\metaA{}$.
-
-\item $\{\metaA{}_1,\metaA{}_2,\ldots\}$ is \define{provably inconsistent} if and only if, for some sentence \metaB{}, $\{\metaA{}_1,\metaA{}_2,\ldots\}\vdash(\metaB{} \eand \enot \metaB{})$.
-\end{itemize}
-
-
-\subsection{Rules of replacement}
+\subsection{Replacement}
 
 Consider how you would prove this argument form valid: $F\eif(G\eand H)$ \therefore\ $F\eif G$
 
@@ -1457,7 +1429,7 @@ $[(\metaA{}\eif\metaB{})\eand(\metaB{}\eif\metaA{})] \Longleftrightarrow (\metaA
 %	\have{nenb}{\enot\exists x\enot Bx}\by{QN}{nnab}
 %\end{proof}
 
-\iffalse
+% \iffalse
  
 \clearpage
 
@@ -1567,10 +1539,10 @@ Show that each of the following pairs of sentences are provably equivalent in SL
 \label{pr.solvedSLproofs2}
 Provide proofs to show each of the following.
 \begin{earg}
-\item $M \eand (\enot N \eif \enot M) \vdash (N \eand M) \eor \enot M$
-\item \{$C\eif(E\eand G)$, $\enot C \eif G$\} $\vdash$ $G$
-\item \{$(Z\eand K)\eiff(Y\eand M)$, $D\eand(D\eif M)$\} $\vdash$ $Y\eif Z$
-\item \{$(W \eor X) \eor (Y \eor Z)$, $X\eif Y$, $\enot Z$\} $\vdash$ $W\eor Y$
+\item $M \eand (\enot N \eif \enot M) \proves (N \eand M) \eor \enot M$
+\item \{$C\eif(E\eand G)$, $\enot C \eif G$\} $\proves$ $G$
+\item \{$(Z\eand K)\eiff(Y\eand M)$, $D\eand(D\eif M)$\} $\proves$ $Y\eif Z$
+\item \{$(W \eor X) \eor (Y \eor Z)$, $X\eif Y$, $\enot Z$\} $\proves$ $W\eor Y$
 \end{earg}
 
 
@@ -1589,8 +1561,8 @@ For the following, provide proofs using only the basic rules. The proofs will be
 
 \problempart
 \begin{earg}
-\item If you know that $\metaA{}\vdash\metaB{}$, what can you say about $(\metaA{}\eand\metaC{})\vdash\metaB{}$? Explain your answer.
-\item If you know that $\metaA{}\vdash\metaB{}$, what can you say about $(\metaA{}\eor\metaC{})\vdash\metaB{}$? Explain your answer.
+\item If you know that $\metaA{}\proves\metaB{}$, what can you say about $(\metaA{}\eand\metaC{})\proves\metaB{}$? Explain your answer.
+\item If you know that $\metaA{}\proves\metaB{}$, what can you say about $(\metaA{}\eor\metaC{})\proves\metaB{}$? Explain your answer.
 \end{earg}
 
 \fi

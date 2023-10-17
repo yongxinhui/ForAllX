@@ -21,16 +21,19 @@
     - [x] Handout Tu
     - [x] Handout Th
 - [x] Week 3
-- [ ] Week 4
-    - [ ] Sort out grading
-    - [ ] Edit Ch. 5
+- [x] Week 4
+    - [x] Edit Ch. 5
         - [x] Soundness
-        - [ ] Completeness
+        - [x] Completeness
     - [x] Tu Handout
     - [x] Th Handout
     - [x] Problem Set 5
-- [ ] Week 5
+- [x] Week 5
 - [ ] Week 6
+    - [ ] Ch. 6 - Derived Rules
+    - [ ] Th handout
+    - [ ] Midterm review
+    - [x] Submit grades
 - [ ] Week 7
 - [ ] Week 8
 - [ ] Week 9

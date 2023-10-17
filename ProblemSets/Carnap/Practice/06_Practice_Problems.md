@@ -19,7 +19,7 @@ Practice Problems: Proofs for SND
 The following are some practice problems on natural deduction proofs
 for SL. They
 cover Chapter 6 of _forall x:
-MIT, Fall 2022_. 
+MIT, Fall 2023_. 
 
 Recall that when writing sentences of SL, remember you can use the following ways to enter connectives that are easier to do with a keyboard:
 

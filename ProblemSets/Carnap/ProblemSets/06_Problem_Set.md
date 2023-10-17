@@ -24,23 +24,18 @@ PS6.0 If you worked with up to two other students on these problems, please let 
 ```
 
 When (and only when) you are happy with your answer, click the `Submit`
-button. YOU CAN ONLY SUBMIT ONCE! So be careful! *Carnap* will then acknowledge and record your submission. There are 12 questions, for a total of 100 points. 
+button. You can only submit ONCE, so be careful! *Carnap* will then acknowledge and record your submission. There are 12 questions, for a total of 100 points. 
 
-Some low-point problems will check your proof line-by-line, attempting to give some hints if you make mistakes (these hints are sometimes fairly useless, sorry---not my program!). Then, if you enter a valid deduction, you'll get a green check mark! 
+Some low-point problems will check your proof line-by-line, attempting to give some hints if you make mistakes (these hints are sometimes fairly useless). Then, if you enter a valid deduction, you'll get a green check mark. 
 
-Higher-point problems will give much more minimal hints, just about silly syntax errors. And no green check mark! So don't submit these till you're confident in your proof! As usual, the lower-point questions function as partial credit for the later ones, which will floor at 50% if you make an attempt. 
+Higher-point problems will give much more minimal hints, just about silly syntax errors, and no green check mark. So don't submit these till you're confident in your proof. As usual, the lower-point questions function as partial credit for the later ones, which will floor at 50% if you make an attempt. 
 
 **You must ultimately click the `Submit` button for each exercise!**
 
-*The fineprint*: Your student page on *Carnap* lists which problems you have completed. You do not have to complete all problems at the same time; you can come back to this page and complete part of the problem set later. *However*, Carnap *will not save work on this page, and it won't show
-which problems you already have submitted correctly!* So you should
-keep track of which problems are done, and copy any work you want to
-save and paste it into a text document for later use or reference (but **not for sharing with others**---that's cheating!). You
-can also print the problem page with completed problems, or take
-screenshots.
+*The fineprint*: Your student page on *Carnap* lists which problems you have completed. You do not have to complete all problems at the same time; you can come back to this page and complete part of the problem set later. *However*, Carnap *will not save work on this page, and it won't show which problems you already have submitted correctly!* So you should keep track of which problems are done, and copy any work you want to save and paste it into a text document for later use or reference (but **not for sharing with others**). You can also print the problem page with completed problems, or take screenshots.
 
 
-### Before you leave this page, make sure every problem which you have solved correctly is also submitted!
+### Before you leave this page, make sure every problem which you have solved correctly is also submitted
 
 <br />
 

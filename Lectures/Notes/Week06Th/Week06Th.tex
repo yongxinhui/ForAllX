@@ -1,0 +1,147 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs} %%Math packages
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{multicol} 
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage{prooftrees} 
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep={}}
+% \usepackage{fitchproof} 
+
+% \linespread{1} % Change line spacing here, Palatino benefits from a slight increase by default
+
+\newcommand{\corner}[1]{\ulcorner#1\urcorner} %%Corner quotes
+\newcommand{\tuple}[1]{\langle#1\rangle} %%Angle brackets
+\newcommand{\set}[1]{\lbrace#1\rbrace} %%Set brackets
+\newcommand{\interpret}[1]{\llbracket#1\rrbracket} %%Double brackets
+%\DeclarePairedDelimiter\ceil{\lceil}{\rceil}    
+\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\even}{\texttt{Even}}
+\newcommand{\comp}{\texttt{Comp}}
+\newcommand{\res}{\texttt{Res}}
+\newcommand{\simp}{\texttt{Simple}}
+\newcommand{\leng}{\texttt{Length}}
+\newcommand{\V}[1]{\mathcal{V}_{#1}} %%Corner quotes
+
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
+\renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+
+\renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
+\begin{flushright} % Right align
+{\LARGE\@title} % Increase the font size of the title
+
+\vspace{10pt} % Some vertical space between the title and author name
+
+{\@author} % Author name
+\\\@date % Date
+
+\vspace{-10pt} % Some vertical space between the author block and abstract
+\end{flushright}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Natural Deduction in SL: Part II}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+
+\section*{Negation}
+
+\begin{enumerate}
+  \item[\it Elimination:] $\neg\neg A\ \vdash A$. 
+  \item $A \vee \neg A$. \quad(\textit{Law of Excluded Middle})
+  \item $\neg(A \wedge \neg A)$. \quad(\textit{Law of Non-Contradiction})
+  \item $A,\ \neg A \vdash B$. \quad(\textit{Ex Falso Quodlibet})
+  \item[\it Introduction:]
+\end{enumerate}
+
+%     \begin{itemize}
+%       \item $\neg(A \vee \neg A)$ \quad:AS
+%       \begin{itemize}
+%         \item $A$ \quad:AS 
+%         \item $A\vee \neg A$ \quad:$\vee$I 
+%         \item $\neg (A\vee \neg A)$ \quad:R 
+%       \end{itemize}
+%       \item $\neg A$ \quad:$\neg$I 
+%       \item $A \vee \neg A$ \quad:$\vee$I 
+%       \item $A\vee \neg A$ \quad:$\neg$E 
+%     \end{itemize}
+%     \begin{itemize}
+%       \item $\neg B$ \quad:AS 
+%       \begin{itemize}
+%         \item $A$ \quad:R 
+%         \item $\neg A$ \quad:R 
+%       \end{itemize}
+%       \item $B$ \quad:$\neg$E 
+%       \item[] ~
+%       \item[] ~
+%     \end{itemize}
+%   \end{multicols}
+
+
+
+
+\section*{Proof}
+
+\begin{enumerate}
+  \item[\it Proof:] A natural deduction \textsc{proof} (or \textsc{derivation}) of a conclusion $\varphi$ from a set of premises $\Gamma$ in SD is any sequence of lines ending with $\varphi$ on a live line where every line in the sequence is either:
+      \begin{itemize}
+        \item[(1)] a premise in $\Gamma$; 
+        \item[(2)] a discharged assumption; or
+        \item[(3)] follows from previous lines by the rules for SD.
+      \end{itemize}
+  \item[\it Provable:] An SL sentence $\varphi$ is \textsc{provable} (or \textsc{derivable}) from $\Gamma$ in SD \textit{iff} there is a natural deduction proof (derivation) of $\varphi$ from $\Gamma$ in SD, i.e., $\Gamma \vdash \varphi$. 
+  \item[\it Equivalent:] Two sentences $\varphi$ and $\psi$ are \textsc{provably equivalent} (or \textsc{interderivable}) if and only if both $\varphi\vdash\psi$ and $\psi\vdash\varphi$.
+  \item[\it Inconsistent:] A set of sentences $\Gamma$ is \textsc{provably inconsistent} if and only if $\Gamma\vdash\bot$ where $\bot$ is our arbitrarily chosen contradiction, e.g., $A\wedge\neg A$.
+\end{enumerate}
+
+
+
+\section*{Further Problems}
+
+\begin{enumerate}
+  \item $L\equiv \neg O,\ L\vee \neg O\ \vdash L$.
+  \item $A\equiv B\ \vdash \neg A\equiv\neg B$.
+  \item $Z \supset (C \wedge \neg N),\ \neg Z \supset (N \wedge \neg C)\ \vdash N \vee C$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+
