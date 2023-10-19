@@ -731,7 +731,7 @@ Even though $P$ occurs on a live line, we must use the reiteration rule in order
 Only then may we draw $Q$ as a conclusion by way of negation elimination. 
 
 This concludes our discussion of the rules of SD.
-In the following section we will move to discuss some of the mistakes are easy to make in first learning to write SD proofs.
+In the following section we will move to discuss some of the mistakes that are easy to make in first learning to write SD proofs.
 
 
 
@@ -1071,18 +1071,17 @@ Whereas the tree proof system provides a fail-safe way to determine the answer, 
 
 
 
-\iffalse
+% \iffalse
 
-\section{Bonus: Derived Rules}
+\section{Derived Rules}
 \label{sec:basic}
 
-A \define{derived rule} is a rule of proof that does not make any new proofs possible.
-Anything that can be proven with a derived rule can be proven without it.
-You can think of a short proof using a derived rule as shorthand for a longer proof that uses only the basic rules. 
+A \define{derived rule} is a rule of inference that has not been included as a basic rule of the proof system but may be derived using the basic rules included in that system.
+Accordingly, anything that can be proven with a derived rule can be proven without it.
 
-Derived rules are helpful for making some proofs shorter or more intuitive.
+You can think of derived rules as subroutines which can be used to shorten proofs, making some proofs easier to write and more intuitive to read.
+Like the basic rule, derived rules will use meta-variables since they hold for any sentences whatsoever.
 
-Headline news: you WON'T be able to enter any derived rules on Carnap in proofs or use on assignments. So this section is less important, but still provides some good examples of proof syntax and reasoning in a natural deduction system. 
 
 %\section{Basic and derived rules}
 
@@ -1095,9 +1094,10 @@ Headline news: you WON'T be able to enter any derived rules on Carnap in proofs 
 
 %We have already seen the Introduction and Elimination rules for conjunction, and the elimination rules for disjunction and conditionals. In the next several sections, we'll finish canvassing the basic rules, then say a bit more about \emph{modus tollens} and other derived rules.
 
-\subsection{A derived rule: \emph{modus tollens}}
+\subsection{\textit{Modus Tollens}}
 
-Modus tollens is an extremely important and common inference rule in ordinary reasoning (based on the logical equivalence between a conditional $P \eif Q$ and its contrapositive $\enot Q \eif \enot P$. Here is what the derived rule Modus Tollens looks like:
+Modus tollens is an extremely important and common inference rule in ordinary reasoning.
+Here is the derived rule for \textit{modus tollens} (MT):
 
 \begin{proof}
 	\have[m]{ab}{\metaA{}\eif\metaB{}}
@@ -1105,13 +1105,31 @@ Modus tollens is an extremely important and common inference rule in ordinary re
 	\have[\ ]{b}{\enot\metaA{}} \by{MT}{ab,a}
 \end{proof}
 
-If you have a conditional on one numbered line, and the negation of its consequent on another line, you may derive the negation of its antecedent on a new line. We abbreviate the justification for this rule as `MT' for \emph{modus tollens}. If you know that if she found the treasure, she is happy, and you also know that she isn't happy, then you can very sensibly infer that she didn't find the treasure.
+If you have a conditional on one numbered line and the negation of its consequent on another line, you may derive the negation of its antecedent on a new line.
+We abbreviate the justification for this rule as `MT' for \emph{modus tollens}.
+For instance, if you know that if Sue found the treasure, then she is happy, and you also know that Sue isn't happy, then you can infer that Sue didn't find the treasure.
+Inferences of this form are extremely common.
 
-You may notice an asymmetry between the labels we use for \emph{modus ponens} and \emph{modus tollens}: in the former case, we use Conditional Elimination (\eif E) as its official name, but in the latter case, we call the rule Modus Tollens (MT). We'll explain in more detail why we use the labels in this way when we discuss `basic' and `derived' rules in \S\ref{sec:basic} below. For now, the important thing is to understand how to use the rule.
+In order to derive MT from our basic rules we will construct a derivation in the manner above while using meta-variables instead of sentences of SL to provide the following proof schema:
 
-We do not include a horizontal line in the statement of the rule, because we don't want to assume that lines $m$ and $n$ are assumptions. They might be --- they might be premises in the argument, for example --- but they might themselves be derived, and have rules justifying them. It doesn't matter how we got $m$ and $n$, it just matters that we have them.
+\begin{proof}
+	\hypo{p}{\metaA{}}
+	\hypo{qnp}{\metaB{} \eif \enot \metaA{}} \want{\enot \metaB{}}
+	\open
+		\hypo{q}{\metaB{}} \by{:AS for $\enot$I}{}
+		\have{np}{\enot \metaA{}}\ce{qnp,q}
+		\have{nnp}{\metaA{}}\by{R}{p}
+	\close
+	\have{nq}{\enot \metaB{}}\ni{q-nnp}
+\end{proof}
 
-Here is an example employing \emph{Modus Tollens} several times over. We will derive $\enot A$ from $\{A \eif B, B \eif C, C \eif D, \enot D\}$:
+Since \metaA{} and \metaB{} are meta-variables, the lines above do not constitute an SD proof.
+Rather, the lines above are a \define{proof schema} which is a kind of recipe for constructing proofs.
+Given any values for $\metaA$ and $\metaB$, the proof schema for MT will yield an SD proof as an instance.
+Accordingly, applications of MT can always be replaced with an appropriate instance of the proof schema for MT which only refers to the basic rules included in SD.
+Nevertheless, MT is a convenient shortcut and so we will add it to our list of derived rules.
+
+Here is an example employing \textit{modus tollens} several times over.
 
 \begin{proof}
 	\hypo{ab}{A \eif B}
@@ -1124,44 +1142,40 @@ Here is an example employing \emph{Modus Tollens} several times over. We will de
 \end{proof}
 
 At each of lines 5--7, we cite a conditional and the negation of its consequent to infer the negation of its antecedent.
-
-\subsection{Deriving Modus tollens from our Basic Rules}
-
-%We have been discussing \emph{modus tollens} throughout this chapter, and 
-
-%In \S\ref{sec:reiteration} we showed how, in the case of one simple proof using \emph{modus tollens}, we can instead give a slightly longer proof using only basic rules. In fact, we can prove this much more generally, via this proof schema:
-
-We can derive the modus tollens (MT) rule from our basic rules using the following proof schema:
-
-\begin{proof}
-	\hypo{p}{\metaA{}}
-	\hypo{qnp}{\metaB{} \eif \enot \metaA{}} \want{\enot \metaB{}}
-	\open
-		\hypo{q}{\metaB{}} \by{Assume for reductio}{}
-		\have{np}{\enot \metaA{}}\ce{qnp,q}
-		\have{nnp}{\metaA{}}\by{R}{p}
-	\close
-	\have{nq}{\enot \metaB{}}\ni{q-nnp}
-\end{proof}
-
-As always,  \metaA{} and \metaB{} are meta-variables. They are not symbols of SL, but stand-ins for arbitrary sentences of SL. So this is not, strictly speaking, a proof in SL. It is more like a recipe; no matter what sentences you want to use \emph{modus tollens} on, if that rule would allow it, this pattern of proof will get you to the same place using basic rules only. This means that \emph{modus tollens} is not really necessary; we could prove everything we want to prove without it.
-
-Nevertheless, it is a convenient shortcut. We add it to our list of derived rules.
-
-\subsection{Derived Rule: Dilemma}
+Without citing MT, this proof would be much more cumbersome.
 
 
-Here is the Dilemma rule:
+\subsection{Dilemma}
+
+One of the most difficult proof rules to apply is disjunction elimination, and so it will be convenient to derive proof rules that streamline arguments from disjunctive sentences.
+Consider the \textit{dilemma rule} (DL):
 
 \begin{proof}
 	\have[m]{ab}{\metaA{}\eor\metaB{}} 
 	\have[n]{ac}{\metaA{}\eif\metaC{}}
 	\have[o]{bc}{\metaB{}\eif\metaC{}}
-	\have[\ ]{c}{\metaC{}} \by{DIL}{ab,ac,bc}
+	\have[\ ]{c}{\metaC{}} \by{DL}{ab,ac,bc}
 \end{proof}
 
-It might not be immediately obvious that this is a valid inference rule, but if you think about it a minute, you may be able to see why it is a good rule. If you know that two conditionals are true, and they have the same consequent, and you also know that one of the two antecedents is true, then whichever of those two disjuncts is true, will license a \emph{modus ponens} inference to the conclusion.
+If you know that two conditionals are true, and they have the same consequent, and you also know that one of the two antecedents is true, then conclusion is true no matter which antecedent is true.
+We may derive this rule as follows:
 
+\begin{proof}
+	\hypo{ab}{\metaA{}\eor\metaB{}}
+	\hypo{ac}{\metaA{}\eif\metaC{}}
+	\hypo{bc}{\metaB{}\eif\metaC{}}\by{want \metaC{}}{}
+	\open
+		\hypo{nc}{\metaA}\as{}
+		\have{na}{\metaC}\ce{ac,nc}
+  \close
+  \open
+    \hypo{b2}\metaB\as{}
+    \have{c2}{\metaC}\ce{bc,b2}
+  \close
+	\have{c}{\metaC} \oe{ab,nc-na,b2-c2}
+\end{proof}
+
+Whereas $\eor$E cites subproofs, DL only appeals to live lines in a proof, and so may be easier to apply in certain contexts.
 For example, suppose you know all of the following:
 
 \begin{earg}
@@ -1170,57 +1184,20 @@ For example, suppose you know all of the following:
 \item[] It is raining or it is snowing.
 \end{earg}
 
-From these premises, you can definitely establish that the car is wet. This is the form that the Dilemma rule captures. We use the label `dilemma' to convey the idea that, whichever way you pick, you'll be stuck with the same conclusion. (``You're damned if you do, and you're damned if you don't...'')
+From these premises, you can definitely establish that the car is wet.
+This is the form that DL captures, nicely resonating with a common form of reasoning.
 
-The Dilemma rule is also derivable from the basic rules. The proof is a bit more complicated, but here it is in schematic form:
-
-\begin{proof}
-	\hypo{ab}{\metaA{}\eor\metaB{}}
-	\hypo{ac}{\metaA{}\eif\metaC{}}
-	\hypo{bc}{\metaB{}\eif\metaC{}}\by{want \metaC{}}{}
-	\open
-		\have{nc}{\enot \metaC{}}\by{for reductio}{}
-		\open
-			\hypo{a1}\metaA{}\by{for reductio}{}
-			\have{c1}{\metaC{}}\ce{ac, a1}
-			\have{nc1}{\enot\metaC{}}\by{R}{nc}
-		\close
-		\have{na}{\enot\metaA{}}\ni{a1-c1, a1-nc1}
-		\open
-			\hypo{b2}\metaB{}\by{for reductio}{}
-			\have{c2}{\metaC{}}\ce{bc, b2}
-			\have{nc2}{\enot\metaC{}}\by{R}{nc}
-		\close
-		\have{b}\metaB{}\by{DS}{ab, na}
-		\have{nb}{\enot\metaB{}}\ni{b2-c2, b2-nc2}
-	\close
-	\have{c}{\metaC{}} \ne{nc-b, nc-nb}
-\end{proof}
-
-To understand this proof, think about the broad outline of it. Ultimately, we derive \metaC{} via Negation Elimination; that's why we assumed \enot\metaC{} on line 4, and worked our way to a contradiction on lines 12--13. The internal lines are subproofs to the intermediate conclusions \metaB{} and \enot\metaB{}. 
-
-This is our first example of a natural deduction proof that involves nested assumptions. You can assume something a second new sentence even while a previous assumption is open, as this proof does at line 5. Make sure to close the assumptions in the proper order, closing the newest assumptions first. (Here, the line 5 assumption must be closed, as it is after line 7, before the line 4 one is, at the end of the proof.)
-
-As in the case of \emph{modus tollens}, Dilemma doesn't allow us to prove anything we couldn't prove via basic rules. Anytime you wanted to use the Dilemma rule, you could always take ten extra lines and prove the same thing in basic rules. But it's a useful shorthand to include on our list of derived rules.
-
-\subsection{Derived Rule: Hypothetical Syllogism}
+As in the case of MT, the DL rule doesn't allow us to prove anything we couldn't prove via basic rules.
+Anytime you wanted to use the DL rule, you could always include a few extra steps to prove the same result without DL.
+Nevertheless, DL captures an natural form of reasoning in its own right, and so is well worth including in our stock of derived rules.
 
 
 
-We also add hypothetical syllogism (HS) as a derived rule:
 
-\begin{proof}
-	\have[m]{ab}{\metaA{}\eif\metaB{}}
-	\have[n]{bc}{\metaB{}\eif\metaC{}}
-	\have[\ ]{ac}{\metaA{}\eif\metaC{}}\by{HS}{ab,bc}
-\end{proof}
+\subsection{Disjunctive Syllogism}
 
-We have already given a proof of one instance of Hypothetical Syllogism on p.~\pageref{HSproof}. The general proof schema is just the same, but with $P$, $Q$, and $R$ replaced with \metaA{}, \metaB{}, and \metaC{}, respectively.
-
-
-\subsection{Derived Rule: Disjunctive Syllogism}
-
-Recall this argument form from the Introduction of this chapter:
+Although DL is occasionally useful, there other common forms of reasoning from a disjunction which DL does not capture.
+In particular, consider the following argument.
 
 \begin{earg}
 \item[] $P \eor Q$
@@ -1228,15 +1205,16 @@ Recall this argument form from the Introduction of this chapter:
 \item[\therefore] $Q$
 \end{earg}
 
-We noted above that this is a different argument form from one that uses \emph{modus ponens}; instead, it uses a kind of derivation that is specific to disjunction. From a disjunction like $P \eor Q$ alone, you can't conclude either disjunct, but you can conclude that \emph{at least one} of the two disjuncts is true. So if you have also established that one of the disjuncts is false --- i.e., its negation is true --- then you can conclude the other disjunct, as in the argument above.
-
-This inference form is sometimes called `Disjunctive Syllogism' (DS).\footnote{In the UBC version of this book, Ichikawa christens this the official Disjunction Elimination ({\eor}E) rule. But for philosophical and pedagogical reasons, I have relegated it to a derived rule, in favor of proof-by-cases as our official {\eor}E rule.} If you have a disjunction and also the negation of one of its disjuncts, you may conclude the other disjunct.
+Even small children and non-human animals can engage in reasoning of the form given above.
+For instance, if a ball is under one of two cups but you don't know which, and then it is revealed that it is not under one of the cups, it is natural to conclude that the ball must be under the other cup.
+This inference is called \textit{disjunctive syllogism} (DS):
 
 \begin{multicols}{2}
+
 \begin{proof}
 	\have[m]{ab}{\metaA{}\eor\metaB{}}
 	\have[n]{nb}{\enot\metaB{}}
-	\have[\ ]{a}\metaA{} \by{Disjunctive Syllogism}{ab,nb}
+	\have[\ ]{a}\metaA{} \by{DS}{ab,nb}
 \end{proof}
 
 \begin{proof}
@@ -1247,12 +1225,10 @@ This inference form is sometimes called `Disjunctive Syllogism' (DS).\footnote{I
 
 \end{multicols}
 
-We represent two different inference patterns here, because the rule allows you to conclude \emph{either} disjunct from the negation of the other. If we'd only listed the left version of the rule above, then DS would've only permited one to conclude the \emph{first} disjunct from the negation of the \emph{second} one, along with the disjunction. Our rule lets us work with either disjunction. (If you want to be very fussy about it, you could think of these as two different rules with a strong conceptual similarity that happen to have the same name.)
+We represent two different inference patterns here, because the rule allows you to conclude \emph{either} disjunct from the negation of the other.
+Nevertheless, both go by the same name as is the case for other symmetrical rules like $\eand$E.
 
-%Josh: would need to rewrite a diff example earlier on, not using disjunctive syllogism. 
-%Now that we have several rules, we are in a position to see how they can interact to construct more interesting proofs. 
-
-Consider for example this argument form:
+Consider the following argument:
 
 \begin{earg}
 \item[] $\enot L \eif (J \eor L)$
@@ -1260,7 +1236,9 @@ Consider for example this argument form:
 \item[\therefore] $J$
 \end{earg}
 
-The two premises match the requirements for Conditional Elimination (\emph{modus ponens}). And once that is done, we will be in a position to use Disjunctive Syllogism  to derive the desired conclusion:
+It is easy to see that $J\eor L$ follows by $\eif$E from the two premises, but it is difficult to see how the proof will go next were we constrained to our basic rules.
+However, given DS, it is plain to see that $J$ follows immediately from $J\eor L$ and $\enot L$. 
+So the proof is easy:
 
 \begin{proof}
 	\hypo{c}{\enot L \eif (J \eor L)}
@@ -1269,11 +1247,197 @@ The two premises match the requirements for Conditional Elimination (\emph{modus
 	\have{4}{J} \by{DS}{a,3}
 \end{proof}
 
-Via Conditional Elimination, we can derive $J \eor L$ from lines 1 and 2. Then from $J \eor L$ and $\enot L$, we can derive $J$, by Disjunctive Syllogism.
-
-In this example, we used the premise on line 2 twice --- notice that the 2 appears in the justification for both line 3 and line 4. There is no limit to how many times you can make use of a given line in a natural deduction proof; once something is established, you can make use of it as often as you like.
+Like DL, the derived rule DS makes it easier to derive proofs.
 
 
+
+
+\subsection{Hypothetical Syllogism}
+
+We also add \textit{hypothetical syllogism} (HS) as a derived rule:
+
+\begin{proof}
+	\have[m]{ab}{\metaA\eif\metaB}
+	\have[n]{bc}{\metaB\eif\metaC}
+	\have[\ ]{ac}{\metaA\eif\metaC}\by{HS}{ab,bc}
+\end{proof}
+
+Note that HS does not cite any subproofs, and so makes for elegant proofs that are easy to read.
+The same cannot be said for the proof schema for HS:
+
+\begin{proof}
+	\hypo[1]{ab}{\metaA\eif\metaB}
+	\hypo[2]{bc}{\metaB\eif\metaC}
+  \open 
+    \hypo[3]{a}{\metaA} \as{}
+    \have[4]{b}{\metaB} \ce{ab,a}
+    \have[5]{c}{\metaC} \ce{bc,b}
+  \close
+  \have[6]{ac}{\metaA\eif\metaC} \ci{a-c}
+\end{proof}
+
+
+\subsection{Contraposition}
+
+We also add \textit{contraposition} (CP) as a derived rule:
+
+\begin{proof}
+	\have[m]{ab}{\metaA\eif\metaB}
+	\have[\ ]{ba}{\enot\metaA\eif\enot\metaB}\by{CP}{ab}
+\end{proof}
+
+Not only is this inference natural, it is extremely useful.
+We have had various occasions to use CP in the informal proofs in the previous chapter.
+The derivation goes as follows:
+
+\begin{proof}
+	\hypo[1]{ab}{\metaA\eif\metaB}
+  \open 
+    \hypo[2]{nb}{\enot\metaB} \as{}
+    \open
+    \hypo[3]{a}{\metaA} \as{}
+    \have[4]{b}{\metaB} \ce{ab,a}
+    \have[5]{xb}{\enot\metaB} \r{nb}
+    \close
+  \have[6]{na}{\enot\metaA} \ni{a-xb}
+  \close
+  \have[7]{ba}{\enot\metaB\eif\enot\metaA} \ci{nb-na}
+\end{proof}
+
+Whereas the proof above involves two subproofs, one embedded in the other, applications of CP directly cite live lines of a proof, greatly simplifying the resulting argument.
+
+
+
+
+
+\subsection{Negative Biconditionals}
+
+Biconditional elimination only works when we have a biconditional together with one of the arguments of the biconditional on live lines.
+However, it in cases where we have the negation of one of the arguments of a biconditional, it is convenient to make use of the following derived rule for \textit{negative biconditionals} (NB):
+
+\begin{multicols}{2}
+
+\begin{proof}
+	\have[m]{ab}{\metaA\eiff\metaB}
+	\have[n]{na}{\enot\metaA}
+	\have[\ ]{nb}{\enot\metaB}\by{NB}{ab,na}
+\end{proof}
+
+\begin{proof}
+	\have[m]{ab}{\metaA\eiff\metaB}
+	\have[n]{nb}{\enot\metaB}
+	\have[\ ]{na}{\enot\metaA}\by{NB}{ab,nb}
+\end{proof}
+
+\end{multicols}
+
+The derivations for NB go as follows:
+
+\begin{multicols}{2}
+
+\begin{proof}
+	\hypo[1]{ab}{\metaA\eiff\metaB}
+	\hypo[2]{na}{\enot\metaA}
+  \open 
+    \hypo[3]{b}{\metaB} \as{}
+    \have[4]{a}{\metaA} \be{ab,b}
+    \have[5]{xa}{\enot\metaA} \r{na}
+  \close
+  \have[6]{nb}{\enot\metaB} \ni{b-xa}
+\end{proof}
+
+\begin{proof}
+	\hypo[1]{ab}{\metaA\eiff\metaB}
+	\hypo[2]{nb}{\enot\metaB}
+  \open 
+    \hypo[3]{a}{\metaA} \as{}
+    \have[4]{b}{\metaB} \be{ab,a}
+    \have[5]{xb}{\enot\metaB} \r{nb}
+  \close
+  \have[6]{na}{\enot\metaA} \ni{a-xb}
+\end{proof}
+
+\end{multicols}
+
+
+
+\subsection{Double Negation}
+
+Whereas we have included two similar rules for negation introduction and elimination, some texts only include negation introduction together with the following rule for \textit{double negation elimination} (DN):
+
+\begin{proof}
+	\have[m]{dna}{\enot\enot\metaA}
+	\have[\ ]{a}{\metaA}\by{DN}{dna}
+\end{proof}
+
+Although some philosophers of logic contest DN, arguing instead for \textit{intuitionistic logics} in which DN is neither basic nor derivable, most take DN to be a useful and extremely natural inference to draw.
+After all, what is meant by saying that it is not the case that the ball is not round, and yet it fails to be the case that the ball is round?
+Or to take the converse, what is meant by saying that the ball is round, but it fails to be the case that the ball is not not round.
+Classical logic avoids this mess by accepting DN even if it is derived instead of being included as a basic rule.
+Here is the derivation of DN in the present system SD:
+
+\begin{proof}
+	\hypo[1]{dna}{\enot\enot\metaA}
+  \open 
+    \hypo[3]{da}{\enot\metaA} \as{}
+    \have[4]{xa}{\enot\enot\metaA} \r{dna}
+  \close
+  \have[5]{a}{\metaA} \ne{da-xa}
+\end{proof}
+
+As in the other case, our derived rule DN allows us to draw natural inferences with minimal complexity, avoiding the need to open any subproofs.
+
+
+
+
+\subsection{Ex Falso Quodlibet}
+
+From a falsehood anything follows, or in Latin, \textit{ex falso quodlibet}.
+For instance, if $A$ is false, then $\enot A$ is true, and so if we were to take $A$ to also be true, then together we may derive $B$ from this contradiction. 
+More generally, we have the following rule (EFQ):
+
+\begin{proof}
+	\have[m]{a}{\metaA}
+	\have[n]{na}{\enot\metaA}
+	\have[\ ]{b}{\metaB}\by{EFQ}{a,na}
+\end{proof}
+
+This inference is occasionally convenient since, given $\metaA$ and $\enot\metaA$ on live lines we may draw any conclusion that might happen to want on the next line. 
+Here is the derivation of EFQ.
+
+\begin{proof}
+	\hypo[1]{a}{\metaA}
+	\hypo[2]{na}{\enot\metaA}
+  \open 
+    \hypo[3]{nb}{\enot\metaB} \as{}
+    \have[4]{xa}{\metaA} \r{a}
+    \have[5]{xna}{\enot\metaA} \r{na}
+  \close
+  \have[6]{b}{\metaB} \ne{nb-xna}
+\end{proof}
+
+This puts a syntactic spin on a semantic idea that we considered before: just as unsatisfiable sets of sentences entail everything, everything can be proven from any $\metaA$ and $\enot\metaA$. 
+
+
+\section{Schemata}
+
+You might be beginning to wonder just how many derived rules there are.
+Indeed, this way of thinking inspires an important approach to logic: instead of focusing of theorems and proofs in SL, perhaps we should really be focusing on the \textit{rule schemata} themselves.
+As a special case we have \textit{axiom schemata} which amount to rule schemata which do not cite any lines.
+For instance, here is an axiom schemata called the \textit{Law of Excluded Middle} (LEM): $\metaA\eor\enot\metaA$.
+Once we have derived LEM--- a worthwhile exercise--- we may write any instance of $\metaA\eor\enot\metaA$ on any line of a proof without citing any previous lines whatsoever.
+
+Instead of thinking about valid SL arguments and their corresponding proofs, one might think about a logic as a set of rule schemata.
+This approach to logic has some advantages since it cuts to the chase, focusing on what we are ultimately concerned with, namely \textit{logical forms}.
+It is also easy to prove things about such systems since they are easy to characterise abstractly.
+The disadvantage of such an approach is that these proof systems are somewhat harder to think about.
+By contrast, it is nice to have concrete instances of SL sentences and arguments instead of logical forms all the way down.
+This more concrete approach will be maintained throughout this text, however, it is nevertheless worth drawing the connection given all of our derived rules above.
+Indeed, we may think of the system of natural deduction SD as the smallest set to include the basic rule schemata in SD together with all rule schemata that are derivable from these basic rules.
+This set of logical forms of reasoning may be taken to provide an abstract answer to the question, ``What is logic about?''
+
+
+\iffalse
 
 \subsection{Replacement}
 

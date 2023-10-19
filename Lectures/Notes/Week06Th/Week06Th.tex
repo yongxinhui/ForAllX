@@ -76,35 +76,14 @@
 \section*{Negation}
 
 \begin{enumerate}
-  \item[\it Elimination:] $\neg\neg A\ \vdash A$. 
+  \item[\it Elimination Rule:] $\neg\neg A\ \vdash A$. \quad(\textit{Double Negation Elimination})
   \item $A \vee \neg A$. \quad(\textit{Law of Excluded Middle})
-  \item $\neg(A \wedge \neg A)$. \quad(\textit{Law of Non-Contradiction})
   \item $A,\ \neg A \vdash B$. \quad(\textit{Ex Falso Quodlibet})
-  \item[\it Introduction:]
+  \item[\it Introduction Rule:] $\neg(A \wedge \neg A)$. \quad(\textit{Law of Non-Contradiction})
+  \item $A \vdash \neg\neg A$. \quad(\textit{Double Negation Introduction}) 
 \end{enumerate}
 
-%     \begin{itemize}
-%       \item $\neg(A \vee \neg A)$ \quad:AS
-%       \begin{itemize}
-%         \item $A$ \quad:AS 
-%         \item $A\vee \neg A$ \quad:$\vee$I 
-%         \item $\neg (A\vee \neg A)$ \quad:R 
-%       \end{itemize}
-%       \item $\neg A$ \quad:$\neg$I 
-%       \item $A \vee \neg A$ \quad:$\vee$I 
-%       \item $A\vee \neg A$ \quad:$\neg$E 
-%     \end{itemize}
-%     \begin{itemize}
-%       \item $\neg B$ \quad:AS 
-%       \begin{itemize}
-%         \item $A$ \quad:R 
-%         \item $\neg A$ \quad:R 
-%       \end{itemize}
-%       \item $B$ \quad:$\neg$E 
-%       \item[] ~
-%       \item[] ~
-%     \end{itemize}
-%   \end{multicols}
+
 
 
 
@@ -112,26 +91,161 @@
 \section*{Proof}
 
 \begin{enumerate}
-  \item[\it Proof:] A natural deduction \textsc{proof} (or \textsc{derivation}) of a conclusion $\varphi$ from a set of premises $\Gamma$ in SD is any sequence of lines ending with $\varphi$ on a live line where every line in the sequence is either:
+  \item[\it Proof:] A natural deduction \textsc{proof} (or \textsc{derivation}) of a conclusion $\varphi$ from a set of premises $\Gamma$ in SD is any finite sequence of lines ending with $\varphi$ on a live line where every line in the sequence is either:
       \begin{itemize}
-        \item[(1)] a premise in $\Gamma$; 
-        \item[(2)] a discharged assumption; or
-        \item[(3)] follows from previous lines by the rules for SD.
+        \item[(1)] A premise in $\Gamma$; 
+        \item[(2)] A discharged assumption; or
+        \item[(3)] Follows from previous lines by the rules for SD.
       \end{itemize}
   \item[\it Provable:] An SL sentence $\varphi$ is \textsc{provable} (or \textsc{derivable}) from $\Gamma$ in SD \textit{iff} there is a natural deduction proof (derivation) of $\varphi$ from $\Gamma$ in SD, i.e., $\Gamma \vdash \varphi$. 
-  \item[\it Equivalent:] Two sentences $\varphi$ and $\psi$ are \textsc{provably equivalent} (or \textsc{interderivable}) if and only if both $\varphi\vdash\psi$ and $\psi\vdash\varphi$.
-  \item[\it Inconsistent:] A set of sentences $\Gamma$ is \textsc{provably inconsistent} if and only if $\Gamma\vdash\bot$ where $\bot$ is our arbitrarily chosen contradiction, e.g., $A\wedge\neg A$.
+  \item[\it Theorems:] An SL sentence $\varphi$ is a \textsc{theorem} of SD \textit{iff}~ $\vdash\varphi$.
+  \item[\it Equivalent:] Sentences $\varphi$ and $\psi$ are \textsc{provably equivalent} (or \textsc{interderivable}) if and only if both $\varphi\vdash\psi$ and $\psi\vdash\varphi$, i.e., $\varphi\dashv\vdash\psi$.
+  \item[\it Inconsistent:] A set of sentences $\Gamma$ is \textsc{provably inconsistent} \textit{iff} $\Gamma\vdash\bot$ where $\bot$ is the arbitrarily contradiction we chose, i.e., $A\wedge\neg A$.
 \end{enumerate}
 
 
 
-\section*{Further Problems}
+% \section*{Contradictions}
+%
+% \begin{enumerate}
+%   \item[\it Arbitrary:] Does it really not matter which contradiction we choose?
+%   \item[\bf Task 1:] Show that $\varphi\dashv\vdash\psi$ \textit{iff} $\varphi\vdash\bot$ and $\psi\vdash\bot$. 
+%     \begin{itemize}
+%       \item Assume $\bot = A \wedge \neg A$.
+%       \item Show that if $\varphi\vdash\bot$, then $\varphi\vdash\psi$. 
+%     \end{itemize}
+%   \item[\bf Task 2:] Show that $\varphi\dashv\vdash\psi$ \textit{iff} $\varphi\vDash\bot$ and $\psi\vDash\bot$. 
+% \end{enumerate}
+%
+
+
+\section*{Soundness and Completeness}
 
 \begin{enumerate}
-  \item $L\equiv \neg O,\ L\vee \neg O\ \vdash L$.
-  \item $A\equiv B\ \vdash \neg A\equiv\neg B$.
-  \item $Z \supset (C \wedge \neg N),\ \neg Z \supset (N \wedge \neg C)\ \vdash N \vee C$.
+  \item[\it Assume:] $\Gamma \vdash \varphi$ \textit{iff} $\Gamma \vDash \varphi$.
+  \item[\it Tautologies:] Coextensive with the theorems.
+  \item[\it Validity:] The valid SL arguments are derivable in SD, and \textit{vice versa}.
+  \item[\bf Task 1:] Can we ever use SD to determine that an argument is invalid?
+  \item[\it Uncertainty:] If we haven't found a proof, that doesn't mean one doesn't exist. 
+  % \item[\bf Task 2:] What if we can derive the negation of the conclusion from the premises?
+  %   \begin{itemize}
+  %     \item Does $\Gamma \vdash \neg \varphi$ entail $\Gamma \nvdash \varphi$?
+  %   \end{itemize}
+  % \item[\bf Task 3:] What can we conclude if both $\Gamma \vdash \neg \varphi$ and $\Gamma \vdash \varphi$?
 \end{enumerate}
+
+
+
+\section*{Logical Analysis}
+
+\begin{enumerate}
+  \item[\bf Task 2:] How can we tell if an argument is valid? 
+    \begin{itemize}
+      \item Use a semantic argument: true premises and false conclusion. 
+      \item Construct a tree proof.
+      \item[\it Pro:] Both methods provide a countermodel if there is one.
+      \item[\it Con:] Neither method derives the conclusion from the premises if valid.
+    \end{itemize}
+    \vspace{-.1in}
+  \begin{multicols}{2}
+    \item[\it Tautology?] \quad If YES, prove $\vdash\varphi$.\hfill
+    \item[\it Contradiction?] \quad If YES, prove $\vdash\neg\varphi$.\hfill
+    \item[\it Contingent?] \quad If YES, provide a models.\hfill
+    \item[\it Equivalent?] \quad If YES, prove $\varphi\dashv\vdash\psi$.\hfill
+    \item[] If NO, provide a countermodel.
+    \item[] If NO, provide a model.
+    \item[] If NO, prove $\vdash\varphi$ or $\vdash\neg\varphi$. 
+    \item[] If NO, provide a countermodel.
+  \end{multicols}
+\end{enumerate}
+
+
+
+\section*{Schemata}
+
+\begin{enumerate}
+  \item[\bf Observe:] Compare rules of inference in SD to SL proofs in SD.
+    \begin{itemize}
+      \item Whereas the rules are general, SL proofs are particular.
+      \item But nothing in our SL proofs depend on the particulars.
+    \end{itemize}
+  \item[\bf Task 3:] How might we generalise our proofs beyond any instance?
+  \item[\it Rule Schemata:] Replace sentence letters in SL proofs with metavariables.
+    \begin{itemize}
+      \item Premises are replaced with the lines cited by that rule.
+      \item New rules require new names if we are to use them.
+    \end{itemize}
+  \item[\bf Task 4:] Can we also generalise proofs of theorems?
+  \item[\it Axiom Schemata:] Amount to lines that can be added without citing lines. 
+  \item[\bf Goal:] We want to derive intuitive rule schemata.
+\end{enumerate}
+
+
+\section*{From Proofs to Schemata}
+
+\begin{enumerate}[leftmargin=1.5in]
+  \item[\it Double Negation:] $\neg\neg\varphi\ \dashv\vdash \varphi$.
+  \item[\it Ex Falso Quodlibet:] $\varphi,\ \neg\varphi\ \vdash \psi$.
+  \item[\it Law of Excluded Middle:] $\vdash \varphi\vee\neg\varphi$.
+  \item[\it Law of Non-Contradiction:] $\vdash \neg(\varphi\wedge\neg\varphi)$.
+  \item[\it Hypothetical Syllogism:] $\varphi \supset \psi,\ \psi \supset \chi\ \vdash \varphi \supset \chi$.
+  \item[\it Modus Tollens:] $\varphi \supset \psi,\ \neg\psi\ \vdash \neg\varphi$.
+  \item[\it Contraposition:] $\varphi \supset \psi\ \vdash \neg\psi \supset \neg\varphi$.
+\end{enumerate}
+
+
+
+
+
+\section*{Yet to be Derived Rules}
+
+\begin{enumerate}[leftmargin=1.5in]
+  \item[\it Dilemma:] $\varphi \vee \psi,\ \varphi \supset \chi,\ \psi \supset \chi\ \vdash \chi$.
+  \item[\it Disjunctive Syllogism:] $\varphi \vee \psi,\ \neg \varphi \vdash \psi$.
+  \item[\it $\vee$-Commutativity:] $\varphi \vee \psi\ \vdash \psi \vee \varphi$.
+  \item[\it $\wedge$-Commutativity:] $\varphi \wedge \psi\ \vdash \psi \wedge \varphi$.
+  \item[\it Biconditional MP:] $\varphi \equiv \psi,\ \neg\varphi\ \vdash \neg\psi$.
+  \item[\it $\equiv$-Commutativity:] $\varphi \equiv \psi\ \vdash \psi \equiv \varphi$.
+  \item[\it $\wedge$-De Morgan's:] $\neg(\varphi\wedge\psi)\dashv\vdash\neg\varphi\vee\neg\psi$.
+  \item[\it $\vee$-De Morgan's:] $\neg(\varphi\vee\psi)\dashv\vdash\neg\varphi\wedge\neg\psi$.
+  \item[\it ${\vee}{\wedge}$-Distribution:] $\varphi\vee(\psi\wedge\chi) \dashv\vdash (\varphi\vee\psi)\wedge(\varphi\vee\chi)$.
+  \item[\it ${\wedge}{\vee}$-Distribution:] $\varphi\wedge(\psi\vee\chi) \dashv\vdash (\varphi\wedge\psi)\vee(\varphi\wedge\chi)$.
+  \item[\it ${\vee}{\wedge}$-Absorption:] $\varphi\vee(\varphi\wedge\psi) \dashv\vdash \varphi$.
+  \item[\it ${\wedge}{\vee}$-Absorption:] $\varphi\wedge(\varphi\vee\psi) \dashv\vdash \varphi$.
+  \item[\it $\wedge$-Associativity:] $\varphi\wedge(\psi\wedge\chi) \dashv\vdash (\varphi\wedge\psi)\wedge\chi$.
+  \item[\it $\vee$-Associativity:] $\varphi\vee(\psi\vee\chi) \dashv\vdash (\varphi\vee\psi)\vee\chi$.
+\end{enumerate}
+
+
+
+
+\section*{Axiom System for SL}
+
+\begin{enumerate}
+  \item[\it Axiom System:] Consider the axiom and rule schemata, writing `$/$' for deduction.
+    \begin{itemize}
+      \item $\varphi \supset (\psi \supset \varphi)$.
+      \item $(\varphi \supset (\psi \supset \chi)) \supset ((\varphi \supset \psi) \supset (\varphi \supset \chi))$.
+      \item $(\neg\varphi \supset \neg\psi) \supset ((\neg\varphi \supset \psi) \supset \varphi)$.
+      \item $\varphi \supset \psi,\ \varphi\ /\ \psi$.
+    \end{itemize}
+  \item[\it PL-Proof:] $\Gamma \vdash_{PL} \varphi$ \textit{iff} there is a finite sequence of SL sentences where every sentence in the sequence is either: (1) a member of $\Gamma$; (2) an axiom schemata; or (3) follows from previous sentences in the sequence by the single rule schemata given above.
+  \item[\it Equivalence:] Amazingly, it is possible to show that $\Gamma \vdash_{PL} \varphi$ \textit{iff} $\Gamma \vdash_{SD} \varphi$. 
+  \item[\it Definitions:] Given that the axioms and rule schemata only include $\neg$ and $\supset$, we may take these to be the \textit{only} primitive logical connectives, defining all other connectives in their terms. 
+    \begin{itemize}
+      \item This makes for a very compact description of the same logic.
+      \item This logic is much less natural to use, requiring that a lot of derived rules be added to system.
+      \item We don't have this problem, though our system is more complex.
+    \end{itemize}   
+\end{enumerate}
+
+% \section*{Further Problems}
+%
+% \begin{enumerate}
+%   \item $L\equiv \neg O,\ L\vee \neg O\ \vdash L$.
+%   \item $A\equiv B\ \vdash \neg A\equiv\neg B$.
+%   \item $Z \supset (C \wedge \neg N),\ \neg Z \supset (N \wedge \neg C)\ \vdash N \vee C$.
+% \end{enumerate}
 
 
 

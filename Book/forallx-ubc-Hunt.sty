@@ -880,7 +880,7 @@
 \catcode`\*=\nd*astcode
 
 % a command for indicating the goal in a proof or subproof
-\newcommand*{\want}[1]{\by{want \ensuremath{#1}}{}}
+\newcommand*{\want}[1]{\by{(Want: \ensuremath{#1})}{}}
 % an environment that separates the proof from surrounding paragraphs
 \newenvironment{iproof}{\par$\begin{nd}}{\end{nd}$\par} %Redefining as iproof, since `proof' is already defined in another package; not sure how Ichikawa got away with this...Calgary remix defines this environment as `fitchproof' 
 %MAYBE ichikawa avoids trouble b/c he doesn't call a separate fitch file that defines proof environment!
