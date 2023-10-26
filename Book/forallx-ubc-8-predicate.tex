@@ -1,77 +1,150 @@
 %!TEX root = forallx-ubc.tex
-\chapter{Quantifier logic}
+\chapter{Quantifier Logic}
 \label{ch.QL}
 
-This chapter introduces a logical language called QL. It is a version of \emph{quantifier logic}, because it allows for quantifiers like \emph{all} ($\forall$) and \emph{some} ($\exists$). Quantifier logic is also sometimes called \emph{predicate logic} (PL), because the basic units of the language are predicates and terms. {\color{black} What is a predicate? A predicate is a name of a property. Quantifier logic is also often called \textit{First Order Logic} (FOL) because we quantify over objects but not over properties or relations (quantifying over properties would take us into \textit{second order} logic). For instance, in our system QL, we have the expressive power to quantify over people, animals, or things, but not over their various properties such as height, species, or chemical composition (at least not while we're treating these things as properties of those other things!). Why this restriction? First Order Logic is better behaved than second and higher-order logics, and it already lets us do quite a lot, at least enough for a semester (or the LSAT)!}
+This chapter introduces a logical language called QL which includes quantifiers like `for all' ($\forall x$) and `there is' ($\exists x$).
+Quantifier logic is also sometimes called \emph{predicate logic} because the basic units of the language are predicates and singular terms.
+Whereas a one-place predicate is a term for property, two-place predicates are terms for relations, and $n$-place predicates are similar.
+Quantifier logic is also often called \textit{first-order logic} because the quantifiers range over objects and not over properties or relations (which would take us into \textit{second order logic}).
+For instance, QL has the expressive power to quantify over people, animals, or things, but not over their various properties such as \textit{being blue}, or relations like \textit{being taller than}, etc.
 
-\section{From sentences to predicates}
-Consider the following argument, which is valid in English:
-\begin{quote}
-If everyone knows logic, then either no one will be confused or everyone will. \\ Everyone will be confused only if we try to believe a contradiction. \\ Everyone knows logic.\\
-\therefore\ If we don't try to believe a contradiction, then no one will be confused.
-\end{quote}
+
+
+
+\section{The Expressive Limitations of SL}
+
+Consider the following argument:
+
+\begin{earg}
+  \item[\ex{soc1}] Every human is mortal.
+  \item[\ex{soc2}] Socrates is human.
+  \item[\ex{soc3}] \therefore\ Socrates is mortal.
+\end{earg}
+
 In order to symbolize this in SL, we will need a symbolization key. 
+
 \begin{ekey}
-\item[L:] Everyone knows logic.
-\item[N:] No one will be confused.
-\item[E:] Everyone will be confused.
-\item[B:] We try to believe a contradiction.
-\end{ekey}
-Notice that $N$ and $E$ are both about people being confused, but they are two separate sentence letters. We can't replace $E$ with $\enot N$. Why not? $\enot N$ means `It is not the case that no one will be confused.' This would be the case if even one person were confused, so it is a long way from saying that \emph{everyone} will be confused.
-
-Because we have separate sentence letters for $N$ and $E$, however, our formalization does not encode any connection between the two. They are just two atomic sentences which might be true or false independently. It is impossible for it to be the case that both no one and everyone was confused. As sentences of SL, however, there is a truth-value assignment for which $N$ and $E$ are both true. This is a limitation of the descriptive power of SL. Some features of English sentences are not preserved in SL. Our new language, QL, will preserve more of the logical structure inherent in these natural language sentences. 
-
-Expressions like `no one', `everyone', and `anyone' \emph{quantify} over things, and we can represent them using `quantifiers'. By translating $N$ and $E$ as separate atomic sentences, we leave out the \emph{quantifier structure} of the sentences. In the example we've been discussing, the quantifier structure is not terribly important. The argument is valid without reference to it. As such, we can safely ignore it. To see this, we translate the argument to SL:
-\begin{earg}
-\item[]$L \eif (N \eor E)$
-\item[]$E \eif B$
-\item[]$L$
-\item[\therefore]$\enot B \eif N$
-\end{earg}
-This is a valid argument form in SL. (You can construct a truth table, a tree, or a natural deduction proof to confirm this.) 
-
-Now consider another argument. This one is also valid in English.
-
-\begin{quote}
-\label{willard1}
-Willard is a logician. All logicians wear funny hats.\\
-\therefore\ Willard wears a funny hat.
-\end{quote}
-
-To symbolize it in SL, we define a symbolization key:
-\begin{ekey}
-\item[L:] Willard is a logician.
-\item[A:] All logicians wear funny hats.
-\item[F:] Willard wears a funny hat.
+\item[E] Every human is mortal.
+\item[H] Socrates is human.
+\item[M] Socrates is mortal.
 \end{ekey}
 
-Now we symbolize the argument:
+Notice that there is no way to break down the sentences above into smaller parts.
+However, consider the following argument:
+
 \begin{earg}
-\item[]$L$
-\item[]$A$
-\item[\therefore] $F$
+  \item[] $E$
+  \item[] $H$
+  \item[\therefore] $M$
 \end{earg}
 
-This is pretty obviously an \emph{invalid} SL form. Nevertheless, this is clearly a valid argument in English. It's impossible for the premises to be true without the conclusion also being true. But the SL symbolization leaves out all quantificational structure in virtue of which it is valid. The sentence `All logicians wear funny hats' says something specific about both logicians and hat-wearing. By not translating this structure, treating the whole sentence as an atom, we lose the connection between Willard's being a logician and Willard's wearing a hat.
+It is easy to show that this argument is invalid.
+However, the argument in English is intuitively valid.
+Notice that although the sentences given above include the same terms, this is not captured by the regimentation in SL.
+Moreover, there is no better regimentation in SL.
 
-Some arguments with quantifier structure can be captured in SL, like the first example, even though SL ignores the quantifier structure. Other arguments' validity cannot be captured in SL, like the second example. Notice that the problem is not that we have made a mistake while symbolizing the second argument. We gave a perfectly appropriate translation into SL; indeed, these are the best symbolizations we can give for these arguments \emph{in SL}.
+Here's another common case:
 
-If an English argument is properly translated into a form that is valid in SL, that argument is valid, even if it involves quantifiers. But if it does not have a valid SL form, that doesn't mean the English argument is invalid; valid arguments can have invalid forms. It just means that SL doesn't \emph{show} that the argument is valid. This will be the case when the argument's quantifier structure plays an important role in its validity.
+\begin{earg}
+  \item[] All humans are mammals.
+  \item[] All mammals are multi-celled organisms.
+  \item[\therefore] All humans are multi-celled organisms.
+\end{earg}
 
-Similarly, if a sentence with quantifiers comes out as a \emph{tautology in SL}, then the English sentence is logically true. If it comes out as \emph{contingent in SL}, then this might be because of the structure of the quantifiers that gets removed when we translate into the formal language.
+This argument is clearly valid.
+However, were we to symbolize this argument in SL, the best we could do looks like this:
 
-In order to symbolize arguments that rely on quantifier structure, we need to develop a different, richer, logical language. We will call this language `quantifier logic', or QL. 
-%{\color{black} Note that in class I'll probably slip into calling this `quantifier logic' since that sounds more natural and parallels `sentential logic' (we didn't go around saying `sententified logic' now did we?}
+\begin{ekey}
+\item[H] All humans are mammals.
+\item[M] All mammals are multi-celled organisms.
+\item[O] All humans are multi-celled organisms.
+\end{ekey}
 
-\section{Building blocks of QL}
+Again, there is no way to break down these sentences into smaller parts.
+However, the resulting argument in SL is invalid for the same reason above:
 
-Our first key notion in QL will be \define{predicates}. {\color{black} An easy way to think about predicates is as names for properties: the predicate $Red$ stands for the property of redness.} Alternatively, a predicate is analogous to an English description  --- an expression like `is a dog' or `has black fur'. Such descriptions are not sentences on their own. They are neither true nor false. They are descriptions that apply to some objects, but not to others (predicates have an `extension'). In order to be true or false, we need to specify an object: Who or what is it that is said to be a dog, or to have black fur? In SL, we have no way to give meaningful translations to English terms that are not full sentences. In QL, we will.
+\begin{earg}
+  \item[] $H$
+  \item[] $M$
+  \item[\therefore] $O$
+\end{earg}
 
-The details of this will be explained in the rest of the chapter, but here is the basic idea: In QL, we will represent predicates with capital letters. For instance, we might let $D$ stand for `\blank\ is a dog.' We will use lower-case letters from $a$ to $v$ as the names of specific things, i.e. constants. For instance, we might let $b$ stand for Bertie. The expression $Db$ will be a sentence in QL. Given this symbolization, $Db$ is a translation of the sentence `Bertie is a dog.'
+Since there is nothing wrong with our regimentation when restricted to SL, we may take issue with the language SL itself, concluding that we have simply reached the limit of what can be captures with the expressive power of SL.
+Instead of carving arguments up into \textit{sentences}, we have to look deeper into the sentences themselves in order to capture the validity of the English arguments given above.
+In particular, we need to be able to regiment predicates like `is human', `is mortal', `is a mammal', etc., as well as the quantifiers `every' and `all', and also singular terms like `Socrates'.
+Providing the expressive resources to do so will be the ambition of this chapter, where the following chapters will develop a semantics, theory of entailment, and proof system for the resulting language QL.
 
-In order to represent quantifier structure, we introduce symbols that represent quantifiers. For instance, `$\exists$' will mean `There is some\blank.' So to say that there is a dog, we can write $\qt{\exists}{x} Dx$; that is: There is some $x$ such that $x$ is a dog.
+As we will see, QL is extremely powerful.
+Indeed, most of mathematics is developed in a first-order language.
+Understanding this language and its limits will prove to be an invaluable resource, shedding light on a wide range of theoretical applications as well as extending your powers of logical thinking in day to day reasoning. 
+The development of first-order logics and their applications constitute some of the most important and influential theories that human beings have developed, and logic is still at its very beginning.
 
-That will come later. We start by defining singular terms and predicates.
+
+
+
+
+\section{Primitive Expressions in QL}
+
+Our first key notion in QL will be \define{predicates}.
+An easy way to think about predicates is as terms for properties: the predicate `is red' stands for the property of being red.
+We use predicates to ascribe properties to objects.
+On their own, predicates are neither true nor false, though they are meaningful nevertheless.
+For instance, English speakers will know what `is red' means and how to use it to make claims about the world.
+Nevertheless, it doesn't make sense to assign a truth-value to `is red', `loves', `is between Sam and Mary in birth order', `is careful and quite', or any other predicate, however complex.
+Rather predicates are used to ascribe properties and relations to objects, where those objects may or may not have the properties and relations which are ascribed to them.
+
+In order to refer to objects, we will need another basic type of expression called \define{singular terms}.
+For instance, \define{names} like `Christoph' are singular terms which refer to objects, in this case a person.
+Accordingly, we may construct the sentence `Christoph is Italian', where this may be true or false depending on whether the object that `Christoph' names has the property expressed by the predicate `is Italian'.
+Although singular terms like `Christoph' are meaningful on their own, they do not have truth-values any more than predicates do.
+Rather, it is combining predicates with singular terms that we will construct \define{atomic sentences} which do have truth-values.
+Given the same sentential operators included in SL, we may then construct complex sentences which inherit their truth-values from their parts.
+Accordingly, QL will maintain our previous convention that only sentences have truth-values.
+
+Given that we can construct sentences with nothing more than names and predicates, you might be wondering where the quantifiers fit in.
+After all, there is no grammatical way to append `every', `all', or `some' to sentences like `Christoph is Italian'.
+What is missing are the \define{variables}.
+In order to bring this out, consider the following version of \textbf{H}:
+
+\begin{ekey}
+\item[H$'$] Everything is such that if it is human, then it is a mammal.
+\end{ekey}
+
+However stilted, this claim is perfectly intelligible and express exactly what \textbf{H} expressed before.
+Three observations are in order.
+Whereas \textbf{H} includes the plural terms `humans' and `mammals', we now have the clearly identifiable predicates `is human' and `is a mammal'.
+For instance, whereas we may combine `is human' with a name like `Christoph' in order to produce the perfectly intelligible declarative sentence `Christoph is human', the same cannot be said for the plural term `humans' since `Christoph humans' is nonsense. 
+
+Second, we may consider the role that `it' plays in \textbf{H$'$}.
+Whereas a name like `Christoph' refers to an object (in this case a person), the term `it' also appears to indicate an object.
+Rather, `it' is playing the role of a variable.
+Although it is not always clear which object a variable may refer to, variables are also singular terms. % just like names such as `Christoph'.
+% Although it is not clear what `it' refers to, `it' is a singular term insofar as it belongs to the right grammatical category to refer to an object. 
+Accordingly, `it' may be combined with a predicate to form a sentence.
+In particular, `it' may be combined with predicates to produce `it is human' and `it is a mammal'.
+Considered on their own, both `it is human' and `it is a mammal' are sentences though they include the \define{unbound} variable `it', and so are said to be \define{open sentences}.
+Nevertheless, these sentences may be combined with a conditional operator to form `if it is human, then it is mammal' which is also an open sentence.
+Appending `Everything is such that' to `if it is human, then it is mammal' produces \textbf{H$'$}. %, where the former is said to \define{bind} the unbound variables in the latter.
+Instead of speaking about a particular, \textbf{H$'$} says of each object that \textit{it} is a mammal if \textit{it} is human.
+Given any object, both occurrences of `it' refer to that object, at least until we move on to the next object since we are making a general claim about everything.
+% If you like, you could imagine that such a claim is equivalent to a very long conjunction were each conjunct says of a different thing that it is a mammal if human.
+Put otherwise, both occurrences of `it' are \define{bound} by the same quantifier `Everything is such that'.
+
+Third, we may observe that the perfectly natural occurrence of `All' in \textbf{H} has been replaced with the somewhat cumbersome `Everything is such that'.
+Whereas `All' is a \define{generalised quantifier}, `Everything is such that' is an attempt to express the \define{universal quantifier} $\forall x$ with the resources of English.
+These quantifiers differ in a number of important respects.
+In particular, generalised quantifiers like `every', `some', `all', `most', `many', etc., combine with two descriptive terms in order to produce a grammatical sentence.
+By contrast, we may observe that `Everything is such that' combines with the open sentence `if it is human, then it is mammal' to produce \textbf{H$'$}.
+Although `it' is unbound in `if it is human, then it is mammal' when considered on its own, both occurrences `it' are bound by `Everything is such that' in \textbf{H$'$}.
+Accordingly, \textbf{H$'$} is a \define{closed sentence} since it does not include any unbound variables.
+
+Although universal quantifiers can be approximated within English, generalised quantifiers are much more common and natural to use in English.
+Despite this, generalised quantifiers are more complicated than universal quantifiers, making them much less useful for systematic theorising.
+Moreover, we may use universal quantifiers to regiment claims in English which are expressed with generalised quantifiers without issue. 
+For these reasons, we will not include formal analogues of generalised quantifiers in our language QL.
+
+Given this overview of the new expressive resources that we will include in QL, the following sections will provide a much more details introduction of each of the elements that we touched on above.
+We will begin with names and variables.
 
 
 \section{Singular terms}

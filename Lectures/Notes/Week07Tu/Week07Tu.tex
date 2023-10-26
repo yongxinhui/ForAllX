@@ -1,0 +1,199 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs} %%Math packages
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{multicol} 
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage{prooftrees} 
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep={}}
+% \usepackage{fitchproof} 
+
+% \linespread{1} % Change line spacing here, Palatino benefits from a slight increase by default
+
+\newcommand{\corner}[1]{\ulcorner#1\urcorner} %%Corner quotes
+\newcommand{\tuple}[1]{\langle#1\rangle} %%Angle brackets
+\newcommand{\set}[1]{\lbrace#1\rbrace} %%Set brackets
+\newcommand{\interpret}[1]{\llbracket#1\rrbracket} %%Double brackets
+%\DeclarePairedDelimiter\ceil{\lceil}{\rceil}    
+\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\even}{\texttt{Even}}
+\newcommand{\comp}{\texttt{Comp}}
+\newcommand{\res}{\texttt{Res}}
+\newcommand{\simp}{\texttt{Simple}}
+\newcommand{\leng}{\texttt{Length}}
+\newcommand{\V}[1]{\mathcal{V}_{#1}} %%Corner quotes
+
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
+\renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+
+\renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
+\begin{flushright} % Right align
+{\LARGE\@title} % Increase the font size of the title
+
+\vspace{10pt} % Some vertical space between the title and author name
+
+{\@author} % Author name
+\\\@date % Date
+
+\vspace{30pt} % Some vertical space between the author block and abstract
+\end{flushright}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Midterm Review}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+\section*{Derivable Schemata}
+
+\begin{enumerate}[leftmargin=1.5in]
+  \item[\it Contraposition:] $\varphi \supset \psi\ \vdash \neg\psi \supset \neg\varphi$.
+  \item[\it Hypothetical Syllogism:] $\varphi \supset \psi,\ \psi \supset \chi\ \vdash \varphi \supset \chi$.
+  \item[\it Disjunctive Syllogism:] $\varphi \vee \psi,\ \neg \varphi \vdash \psi$.
+  \item[\it $\vee$-Conditional:] $\varphi \supset \psi\ \dashv\vdash \neg\varphi \vee \psi$.
+  \item[\it $\neg$-Conditional:] $\neg(\varphi \supset \psi)\ \dashv\vdash \varphi \wedge \neg \psi$.
+  \item[\it Conditional Weakening:] $\psi\ \vdash \varphi \supset \psi$.
+  \item[\it Double Negation:] $\neg\neg\varphi\ \dashv\vdash \varphi$.
+  \item[\it $\wedge$-De Morgan's:] $\neg(\varphi\wedge\psi)\dashv\vdash\neg\varphi\vee\neg\psi$.
+  \item[\it $\vee$-De Morgan's:] $\neg(\varphi\vee\psi)\dashv\vdash\neg\varphi\wedge\neg\psi$.
+  \item[\it Modus Tollens:] $\varphi \supset \psi,\ \neg\psi\ \vdash \neg\varphi$.
+  % \item[\it Ex Falso Quodlibet:] $\varphi,\ \neg\varphi\ \vdash \psi$.
+  % \item[\it Law of Excluded Middle:] $\vdash \varphi\vee\neg\varphi$.
+  % \item[\it Law of Non-Contradiction:] $\vdash \neg(\varphi\wedge\neg\varphi)$.
+  % \item[\it Dilemma:] $\varphi \vee \psi,\ \varphi \supset \chi,\ \psi \supset \chi\ \vdash \chi$.
+  % \item[\it $\vee$-Commutativity:] $\varphi \vee \psi\ \vdash \psi \vee \varphi$.
+  % \item[\it $\wedge$-Commutativity:] $\varphi \wedge \psi\ \vdash \psi \wedge \varphi$.
+  % \item[\it Biconditional MP:] $\varphi \equiv \psi,\ \neg\varphi\ \vdash \neg\psi$.
+  % \item[\it $\equiv$-Commutativity:] $\varphi \equiv \psi\ \vdash \psi \equiv \varphi$.
+  % \item[\it ${\vee}{\wedge}$-Distribution:] $\varphi\vee(\psi\wedge\chi) \dashv\vdash (\varphi\vee\psi)\wedge(\varphi\vee\chi)$.
+  % \item[\it ${\wedge}{\vee}$-Distribution:] $\varphi\wedge(\psi\vee\chi) \dashv\vdash (\varphi\wedge\psi)\vee(\varphi\wedge\chi)$.
+  % \item[\it ${\vee}{\wedge}$-Absorption:] $\varphi\vee(\varphi\wedge\psi) \dashv\vdash \varphi$.
+  % \item[\it ${\wedge}{\vee}$-Absorption:] $\varphi\wedge(\varphi\vee\psi) \dashv\vdash \varphi$.
+  % \item[\it $\wedge$-Associativity:] $\varphi\wedge(\psi\wedge\chi) \dashv\vdash (\varphi\wedge\psi)\wedge\chi$.
+  % \item[\it $\vee$-Associativity:] $\varphi\vee(\psi\vee\chi) \dashv\vdash (\varphi\vee\psi)\vee\chi$.
+\end{enumerate}
+
+
+\section*{Regimentation}
+
+\noindent
+Complete the following tasks for arguments (A) and (B):
+
+\begin{enumerate}
+  \item[\bf Task 1:] Write a symbolization key and regiment the argument.
+  \item[\bf Task 2:] Determine if the argument is valid.
+  \item[\bf Task 3:] Provide an SD proof if valid, and a countermodel otherwise.
+  \bigskip
+  \item[(A)] If Dorothy plays the piano in the morning, then Roger wakes up cranky.
+    Dorothy plays piano in the morning unless she is distracted.
+    So if Roger does not wake up cranky, then Dorothy must be distracted.
+  % \item[(B)] If the fair coin had been flipped, it would have either landed heads or tails.
+    % But it's not true that if it had been flipped, it would have landed heads.
+    % Therefore if it had been flipped, it would have landed tails.
+  \item[(B)] If Cam remembered to do his chores, then things are clean but not neat.
+    Cam forgot only if things are neat but not clean.
+    Therefore, things are clean just in case they are not neat.
+% \item You can fool some people sometimes, but you can't fool all the people all the time.
+\end{enumerate}
+
+\noindent
+
+
+% \section*{Logical Analysis}
+%
+% \begin{enumerate}
+%     \item[\bf Task 1:] How can we tell if a sentence is valid?
+%   \begin{multicols}{2}
+%     \item[\it Tautology?] \quad If YES, prove $\vdash\varphi$.\hfill
+%     \item[\it Contradiction?] \quad If YES, prove $\vdash\neg\varphi$.\hfill
+%     \item[\it Contingent?] \quad If YES, provide a models.\hfill
+%     \item[\it Equivalent?] \quad If YES, prove $\varphi\dashv\vdash\psi$.\hfill
+%     \item[] If NO, provide a countermodel.
+%     \item[] If NO, provide a model.
+%     \item[] If NO, prove $\vdash\varphi$ or $\vdash\neg\varphi$. 
+%     \item[] If NO, provide a countermodel.
+%   \end{multicols}
+% \end{enumerate}
+
+\section*{Lemmas}
+
+\begin{enumerate}
+  \item[\tt Lemma 1:] Every satisfiable branch $\B$ in an SL tree $X$ is open. 
+  \item[\tt Lemma 2:] If $X$ is an SL tree with a satisfiable branch $\B$, then any tree $X'$ which is the result of resolving a sentence in $\B$ has a satisfiable branch $\B'$.  
+  \item[\tt Lemma 3:] Every SL tree with a satisfiable root has a satisfiable branch.
+  \item[\tt Lemma 4:] Every SL tree $X$ has a finite number of branches.  
+  \item[\tt Lemma 5:] For any SL tree $X$ with root $\Gamma$ and $\varphi\in[X]$, there is an SL tree $Y$ with root $\Gamma$ where $\res(Y)<\res(X)$. 
+  \item[\tt Lemma 6:] For any tree $X$ with root $\Gamma$, there is a complete tree $X'$ with root $\Gamma$. 
+  \item[\tt Lemma 7:] Every complete open branch in an SL tree is satisfiable.
+\end{enumerate}
+
+
+
+
+
+\section*{Soundness}
+
+\begin{enumerate}
+  \item Assume $\Gamma$ is satisfiable. 
+  \item Let $X$ be an SL tree with root $\Gamma$. 
+  \item So $X$ has a satisfiable branch $\B$ by \textit{Lemma 3}. 
+  \item So $\B$ is open by \textit{Lemma 1}. 
+  \item So $X$ is not closed. 
+  \item More generally, there is no closed SL tree with root $\Gamma$. 
+  \item By contraposition, QED.
+\end{enumerate}
+
+
+
+
+\section*{Completeness}
+
+\begin{enumerate}
+  \item Assume there is no closed tree with root $\Gamma$.
+  \item Roots are trees, and so $\Gamma$ has a complete tree $X$ by \texttt{Lemma 6}.
+  \item So $X$ is a complete open tree with a complete open branch $\B$.
+  \item By \textit{Lemma 7}, $\B$ is satisfiable, and so $\Gamma$ is satisfiable. 
+  \item By contraposition, if $\Gamma \vDash \bot$, then $\Gamma \vdash \bot$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+

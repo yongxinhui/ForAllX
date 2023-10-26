@@ -143,10 +143,11 @@
     \begin{itemize}
       \item Use a semantic argument: true premises and false conclusion. 
       \item Construct a tree proof.
+      % \vspace{-.1in}
+    \end{itemize}
       \item[\it Pro:] Both methods provide a countermodel if there is one.
       \item[\it Con:] Neither method derives the conclusion from the premises if valid.
-    \end{itemize}
-    \vspace{-.1in}
+    \item[\bf Task 3:] How can we tell if a theorem is valid?
   \begin{multicols}{2}
     \item[\it Tautology?] \quad If YES, prove $\vdash\varphi$.\hfill
     \item[\it Contradiction?] \quad If YES, prove $\vdash\neg\varphi$.\hfill
@@ -181,7 +182,7 @@
 \end{enumerate}
 
 
-\section*{From Proofs to Schemata}
+\section*{Derivable Schemata}
 
 \begin{enumerate}[leftmargin=1.5in]
   \item[\it Double Negation:] $\neg\neg\varphi\ \dashv\vdash \varphi$.
@@ -191,15 +192,6 @@
   \item[\it Hypothetical Syllogism:] $\varphi \supset \psi,\ \psi \supset \chi\ \vdash \varphi \supset \chi$.
   \item[\it Modus Tollens:] $\varphi \supset \psi,\ \neg\psi\ \vdash \neg\varphi$.
   \item[\it Contraposition:] $\varphi \supset \psi\ \vdash \neg\psi \supset \neg\varphi$.
-\end{enumerate}
-
-
-
-
-
-\section*{Yet to be Derived Rules}
-
-\begin{enumerate}[leftmargin=1.5in]
   \item[\it Dilemma:] $\varphi \vee \psi,\ \varphi \supset \chi,\ \psi \supset \chi\ \vdash \chi$.
   \item[\it Disjunctive Syllogism:] $\varphi \vee \psi,\ \neg \varphi \vdash \psi$.
   \item[\it $\vee$-Commutativity:] $\varphi \vee \psi\ \vdash \psi \vee \varphi$.
