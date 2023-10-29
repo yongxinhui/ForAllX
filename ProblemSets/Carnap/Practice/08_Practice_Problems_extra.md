@@ -34,7 +34,7 @@ Comments to self can be entered with [blah blah]:: or [](blah blah). Former need
 
 Symbolization key (same one as for PS8 Problems 8-17)
 
-- UD: celestial objects in the solar system, including the following constants (the sun is `o`!):
+- Let the domain be the celestial objects in the solar system:
 - $o =$  the sun; $m=$  Mars; $j=$ Jupiter   
 - $d=$  Deimos; $p=$  Phobos
 - $l=$  Sila; $n=$  Nunam

@@ -36,7 +36,7 @@ PS8.0 ONLY if you worked with up to two other students on these problems, please
 When (and only when) you are happy with your answer, click the `Submit`
 button. YOU CAN ONLY SUBMIT ONCE! So be careful! *Carnap* will then acknowledge and record your submission. There are 17 questions, for a total of 100 points. 
 
-Eight lower-point problems will check your answer, giving you that coveted green check mark if you answer correctly. Higher-point problems will forgo the green into the grey! So don't submit these till you're confident in your proof! As usual, the lower-point questions function as partial credit for the later ones, which will floor at 50% if you make an attempt. 
+Eight lower-point problems will check your answer, giving you that coveted green check mark if you answer correctly. Higher-point problems will forgo the green into the grey! So don't submit these till you're confident! As usual, the lower-point questions function as partial credit for the later ones, which will floor at 50% if you make an attempt. 
 
 [Before you can submit, you have to check if your solution is correct (by pressing
 Enter in the textbox; the problem display will turn green and display
@@ -101,11 +101,9 @@ PS8.3 $ [(Ja \lor Jb) \lor (Jc \lor Jd)] \equiv [(\sim\!Ga \,\lor\, \!\sim\!Gb) 
 
 For these initial three translation exercises, do **NOT** use any quantifiers! 
 
-- Instead, since the Universe of Discourse (UD) is so tiny, simply ascribe properties to constants from the UD, which in this case are names of imaginary SENIORS at an imaginary university where everyone is happy because there is no logic HW ever! 
-
 - Some of these require long-ish disjunctions and conjunctions. Carnap will now accept disjunctions and conjunctions of more than two disjuncts/conjuncts, e.g., it treats `(A & B & C)` as if you had typed `((A & B) & C)`, likewise for `( Pa v Pb v Pc v Pd )` is treated as if you had typed `( (Pa v Pb) v (Pc v Pd) )`. Rejoice! 
 
-- **Universe of Discourse** (UD): the set $\{ a, b, c, d \}$ denoting the seniors Alice, Bob, Carol, and David, respectively. 
+- Consider the constants $a, b, c, d$ denoting the seniors Alice, Bob, Carol, and David, respectively. 
 
 **Predicate schemas**:
 
@@ -146,9 +144,10 @@ PS8.3 ( (Ja v Jb) v (Jc v Jd) ) > ( (((Ga & Gb) v (Ga & Gc)) v (Ga & Gd)) v ( ((
 
 [these four problems come from JTapp PS8, Winter 2019, problem 2a-d]::
 
-Now, alongside constants in the UD, you **will** use quantifiers, and you'll appreciate them *all the more*, having experienced the tedium of not having them at your disposal. 
+In addition to constants, we will now also use quantifiers. 
+This will often make your life easier since we can avoid long disjunctions and conjunctions, but also requires some care.
 
-- Use the same symbolization key as in the previous question, except change the UD to **all** MIT seniors (and *super*-seniors!)
+- Use the same symbolization key as in the previous question, except now we will assume that the domain is the set of MIT seniors.
 - Note that Carnap does NOT allow outer parentheses around a quantified expression. For instance, you should type `(Ax)Gx` and NOT ((Ax)Gx). *Carnap* deems the latter expression "ungrammatical". 
 
 [seems that the following results in a compilation problem: ((Ax)Gx) > (Gd & Gc). 
@@ -200,8 +199,8 @@ lecture videos for Unit 5 and Chapters 22 and 23 of the textbook.]::
 
 Using the key given, symbolize the following sentences in QL
 
-- UD: celestial objects in the solar system, including the following constants (the sun is `o`!):
-- $o =$  the sun; $m=$  Mars; $j=$ Jupiter   
+- Let the domain be the celestial objects in the solar system:
+- $o=$  the sun; $m=$  Mars; $j=$ Jupiter   
 - $d=$  Deimos; $p=$  Phobos
 - $l=$  Sila; $n=$  Nunam
 
@@ -252,7 +251,7 @@ PS8.11 (Ax) (Ax -> ~(Lxm \/ Tx)) : No asteroid is larger than Mars or has an atm
 
 Same symbolization key, repeated for your convenience:
 
-- UD: celestial objects in the solar system, including the following constants (the sun is `o`!):
+- Let the domain be the celestial objects in the solar system:
 - $o =$  the sun; $m=$  Mars; $j=$ Jupiter   
 - $d=$  Deimos; $p=$  Phobos
 - $l=$  Sila; $n=$  Nunam
@@ -305,7 +304,7 @@ can even do the following!
 PS8.17 (Ex)(Mx & Oxj) -> (Ex)(Mx & (Oxj & Tx)) : If Jupiter has a moon, it has a moon with an atmosphere.
 ~~~
 
-- UD: celestial objects in the solar system, including the following constants (the sun is `o`!):
+- Let the domain be the celestial objects in the solar system:
 - $o =$  the sun; $m=$  Mars; $j=$ Jupiter   
 - $d=$  Deimos; $p=$  Phobos
 - $l=$  Sila; $n=$  Nunam

@@ -29,6 +29,54 @@ Interpretation \script{I} settles the truth value of any SL sentence one can con
 
 \section{Interpretations in QL}
 
+%%% FROM last chapter
+
+Given the symbolization key we have been using, $\qt{\forall}{x}Hx$ means `Everyone is happy.' Who is included in this \emph{everyone}? When we use sentences like this in English, we usually do not mean everyone now alive on the Earth. We certainly do not mean everyone who was ever alive or who will ever live. We mean something more modest: everyone in the building, everyone in the class, or everyone in the room.
+
+In order to eliminate this ambiguity, we will need to specify a \define{universe of discourse} --- abbreviated UD {\color{black} (less grandiosely, we might call this the ``domain of discourse.'')}. The UD is the set of things that we are talking about. So if we want to talk about people in Chicago, we define the UD to be people in Chicago. We write this at the beginning of the symbolization key, like this:
+\begin{ekey}
+\item[UD:] people in Chicago
+\end{ekey}
+The quantifiers \emph{range over} the universe of discourse. Given this UD, $\qt{\forall}{x}$ means `Everyone in Chicago' and $\qt{\exists}{x}$ means `Someone in Chicago.' Each constant names some member of the UD, so we can only use this UD with the symbolization key above if Donald, Gregor, and Marybeth are all in Chicago. If we want to talk about people in places besides Chicago, then we need to include those people in the UD.
+
+In QL, the UD must be \emph{non-empty}; that is, it must include at least one thing. It is possible to construct formal languages that allow for empty UDs, but this introduces complications; such languages are beyond the scope of this book.
+
+Even allowing for a UD with just one member can produce some strange results. Suppose we have this as a symbolization key:
+\begin{ekey}
+\item[UD:] the Eiffel Tower
+\item[Px:] $x$ is in Paris.
+\end{ekey}
+The sentence $\qt{\forall}{x} Px$ might be paraphrased in English as `Everything is in Paris.' Yet that would be misleading. It means that everything \emph{in the UD} is in Paris. This UD contains only the Eiffel Tower, so with this symbolization key $\qt{\forall}{x} Px$ just means that the Eiffel Tower is in Paris. We will rarely work with such bizarre domains as this.
+
+It is a rule in QL that each constant will pick out exactly one member of the UD. (There is no rule prohibiting multiple different constants from referring to the same member of the UD.)
+
+%\subsection{Non-referring terms}
+%In QL, each constant must pick out exactly one member of the UD. A constant cannot refer to more than one thing --- it is a \emph{singular} term. Each constant must still pick out \emph{something}. This is connected to a classic philosophical problem: the so-called problem of non-referring terms.
+%
+%Medieval philosophers typically used sentences about the \emph{chimera} to exemplify this problem. Chimera is a mythological creature; it does not really exist. Consider these two sentences:
+%\begin{earg}
+%\item[\ex{chimera1}] Chimera is angry.
+%\item[\ex{chimera2}] Chimera is not angry.
+%\end{earg}
+%It is tempting just to define a constant to mean `chimera.' The symbolization key would look like this:
+%\begin{ekey}
+%\item[UD:] creatures on Earth
+%\item[Ax:] $x$ is angry.
+%\item[c:] chimera
+%\end{ekey}
+%We could then translate sentence \ref{chimera1} as $Ac$ and sentence \ref{chimera2} as $\enot Ac$.
+%
+%Problems will arise when we ask whether these sentences are true or false.
+%
+%One option is to say that sentence \ref{chimera1} is not true, because there is no chimera. If sentence \ref{chimera1} is false because it talks about a non-existent thing, then sentence \ref{chimera2} is false for the same reason. Yet this would mean that $Ac$ and $\enot Ac$ would both be false. Given the truth conditions for negation, this cannot be the case.
+%
+%Since we cannot say that they are both false, what should we do? Another option is to say that sentence \ref{chimera1} is \emph{meaningless} because it talks about a non-existent thing. So $Ac$ would be a meaningful expression in QL for some interpretations but not for others. Yet this would make our formal language hostage to particular interpretations. Since we are interested in logical form, we want to consider the logical force of a sentence like $Ac$ apart from any particular interpretation. If $Ac$ were sometimes meaningful and sometimes meaningless, we could not do that.
+%
+%This is the \emph{problem of non-referring terms}, and we will return to it later (see p.~\pageref{subsec.defdesc}.) The important point for now is that each constant of QL \emph{must} refer to something in the UD, although the UD can be any set of things that we like. If we want to symbolize arguments about mythological creatures, then we must define a UD that includes them. This option is important if we want to consider the logic of stories. We can translate a sentence like `Sherlock Holmes lived at 221B Baker Street' by including fictional characters like Sherlock Holmes in our UD.
+%
+
+%%%
+
 What is an interpretation in QL? Like a symbolization key for QL, an interpretation requires a universe of discourse, a schematic meaning for each of the predicates, and an object that is picked out by each constant. For example:
 
 \begin{ekey}

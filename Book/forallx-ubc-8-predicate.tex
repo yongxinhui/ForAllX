@@ -16,9 +16,9 @@ For instance, QL has the expressive power to quantify over people, animals, or t
 Consider the following argument:
 
 \begin{earg}
-  \item[\ex{soc1}] Every human is mortal.
-  \item[\ex{soc2}] Socrates is human.
-  \item[\ex{soc3}] \therefore\ Socrates is mortal.
+  \item[] Every human is mortal.
+  \item[] Socrates is human.
+  \item[\therefore] Socrates is mortal.
 \end{earg}
 
 In order to symbolize this in SL, we will need a symbolization key. 
@@ -147,191 +147,414 @@ Given this overview of the new expressive resources that we will include in QL, 
 We will begin with names and variables.
 
 
-\section{Singular terms}
-In English, a \define{singular term} (or `constant') is a word or phrase that refers to a \emph{specific} person, place, or thing. The word `dog' is not a singular term, because it is a general term that could apply to many individual animals. The phrase `Jonathan's dog Mezzo' is a singular term, because it refers to a specific little poodle mix. She is black, and soft, and wonderful (allegedly).
+\subsection{Singular terms}
 
-A \define{proper name} is a singular term that picks out an individual directly. The name `Emerson' is a proper name, and the name alone does not tell you anything about Emerson. Of course, some names are traditionally given to {\color{black}(children gendered as)} boys, and others are traditionally given to {\color{black}(children gendered as)} girls. If `Jack Hathaway' is used as a singular term, you might guess that it refers to a man. However, the name does not necessarily mean that the person referred to is a man --- or even that the creature referred to is a person. Jack might be a giraffe for all you could tell just from the name. There is a great deal of philosophical action surrounding this issue, but the important point here is that a name is a singular term because it picks out a single, specific individual.
+In English, a proper name is a term that refers to a person, place, or thing.
+For instance, `Christoph' refers to Christoph.
+In QL, we will take lower-case letters `$a$', `$b$', `$c$',\ldots from the beginning of the alphabet with optional subscripts to be names, referring to these terms as \define{constants}. 
+Constants are singular terms since they refer to a unique individual.
 
-Other singular terms more obviously convey information about the thing to which they refer. For instance, you can tell without being told anything further that `Jonathan's dog Mezzo' is a singular term that refers to a dog. A \define{definite description} picks out an individual by means of a unique description. In English, definite descriptions are often phrases of the form `the such-and-so.' They refer to \emph{the} specific thing that matches the given description. For example, `the tallest member of Monty Python' and `the first emperor of China' are definite descriptions. A description that does not pick out a specific individual is not a definite description. `A member of Monty Python' and `an emperor of China' are not definite descriptions. We'll discuss definite descriptions in more detail in Chapter \ref{ch.identity}.
+In English, the specification of a singular term may depend on context.
+Whereas `Willard' might pick out different people in different contexts who have the same name, we will avoid this ambiguity in QL by insisting that constants refer to at most one individual on any given interpretation.
+It is for this reason that we have included infinitely many constants (given the subscripts) so that we don't run out of names.
 
-In English, the specification of a singular term may depend on context; `Willard' means a specific person and not just someone named Willard; `P.D. Magnus' as a logical singular term means the original author of this textbook, not the other person who has the same name. We live with this kind of ambiguity in English, but it is important to keep in mind that singular terms in QL must refer to just one specific thing. {\color{black}In some contexts, `Logic' refers to the topic of this textbook, whereas in others, `Logic' refers to a successful 21st-century American rapper. It seems that sometimes a spade is not a spade!}
+There are other ways to refer to individuals, for instance by description.
+Whereas it is indeterminate to say `the person standing next to the podium' if more than one person is standing next to the podium, this expression succeeds in picking out a unique individual if there is just one person standing next to the podium.
+Or to take another case, we may use `the tallest person in the room' to refer to a unique individual assuming that there are at least some people in the room and that one of them is taller than all the others.
+Such terms are referred to as \define{definite descriptions}.
+Although definite descriptions which succeed in referring to unique objects are singular terms, we will not need to include primitive terms in our language to express definite descriptions.
+Instead, we will construct definite descriptions with the resources of QL.
 
-In QL, we will symbolize singular terms with lower-case letters $a$ through $v$.\footnote{Note to Hunt: Ichikawa's convention  goes to $w$, but we need to fix this for system LogicBookPD on Carnap.} We can add subscripts if we want to use some letter more than once. So $a,b,c,\ldots v, a_1, f_{32}, j_{390}$, and $m_{12}$ are all terms/constants in QL.
+Another important type of singular term are the \define{variables} that we considered above.
+In English, terms such as `it', `her', etc., often play this role.
+In QL, we will use lower-case letters `$x$', `$y$', `$z$',\ldots from the end of the alphabet with optional subscripts to be variables.
+We will use variables in combination with the quantifiers in order to make claims about every object, or about some object, specifying what properties those objects have.
+However, in order to make claims about objects, we will need more than singular terms.
 
-Singular terms are called \define{constants} because they pick out specific individuals. Note that $w, x, y$, and $z$ are not constants in QL. They will be \define{variables}, letters which do not stand for any specific thing. We will need them when we introduce quantifiers.
 
-\section{Predicates}
-Simple one-place predicates are properties of individuals. They are things you can say about an object. Here are some one-place predicates:
 
-\begin{earg}
-\item[] `\blank\ is a dog'
-\item[] `\blank\ is a member of Monty Python'
-\item[] `\blank\ 's favourite ramen place is in Gastown'
-\item[] `An anvil was dropped from a very high height onto \blank\ 's head'
-\end{earg}
 
-Predicates like these are called \define{one-place} or \define{monadic}, because there is only one blank to fill in. A one-place predicate and a singular term combine to make a sentence.
 
-Other predicates are about the \emph{relation} between two things. For instance:
+\subsection{Predicates}
 
-\begin{earg}
-\item[] `\blank\ is bigger than \blank'
-\item[] `\blank\ is to the left of \blank'
-\item[] `\blank\ owes money to \blank'
-\end{earg}
+\textsc{One-place} predicates are used to express properties of individuals.
+For instance, `is hungry' is a one-place predicate which, in combination with a singular term, forms an atomic sentence such as `Kate is hungry' and `She is hungry'.
+In claiming that a predicate is one-place, we are indicating that just one singular term is needed to construct an atomic sentence.
+This corresponds to the idea that the predicate expresses a property that a single object may instantiate or fail to instantiate.
+For instance, either Kate is hungry or she isn't.
+Accordingly, the sentence `Kate is hungry' is true or false, but the truth-value of this sentence only depends on Kate and whether she is hungry or not.
 
-These are \define{two-place} or \define{dyadic} predicates, because they need to be filled in with two terms in order to make a sentence {\color{black}(welcome to grown-up Mad Libs!)}. 
+\textsc{Two-place} predicates are used to express relations between individuals.
+For instance, `is taller than' is a two-place predicate which expresses a height relation between objects.
+Given a two-place predicate together with two singular terms, we may construct an atomic sentence which is either true or false.
+For instance, `Sam is taller than John' is true just in case Sam is taller than John.
+It is possible to use a two place predicate together with two instances of the same singular term.
+Just as we may say that `Jay knows Cary', we may say, `Jay knows Jay', or somewhat more naturally, `Jay knows himself'.
+Although there is just one object at issue in such cases, the predicate `knows' is two-place all the same. 
 
-In general, you can think about predicates as schematic sentences that need to be filled out with some number of terms. Conversely, you can start with sentences and make predicates out of them by removing terms. Consider the sentence, `Buchanan Tower is North of Barber but South of Buchanan E.' By removing a singular term, we can recognize this sentence as using any of three different monadic predicates:
-\begin{earg}
-\item[] \blank is North of Barber but South of Buchanan E.\\
-\item[] Buchanan Tower is North of \blank but South of Buchanan E.\\
-\item[] Buchanan Tower is North of Barber but South of \blank.
-\end{earg}
+The singular terms that a predicate requires to complete a sentence are referred to as the \define{arguments} of that predicate.
+Whereas one-place predicates have one argument and two-place predicates have two arguments, in general we may consider $n$-place predicates which have $n$ arguments. 
+Although it is easy to generalise, it is uncommon to consider more than three-place predicates in English.
+For instance, we may say that Sue is between Henry and Tom in birth order, where `between' has three arguments.
+Even if it is uncommon to do so in English, nothing stops us from including predicates with more than three arguments in QL.
+It is convenient to refer to the number of arguments that a predicate has as the \define{adicity} of that predicate, where this comes from the convention of referring to one-place predicates as \define{monadic}, two-place predicates as \define{dyadic}, three-place predicates as \define{triadic}, etc.
+Predicates with more than one place are called \define{polyadic}.
+% You can make an $n$-adic predicate by replacing $n$ names in any sentence with blanks.
+We will also include 0-place predicates which correspond to the sentence letters with which we are familiar from before.
 
-By removing two singular terms, we can recognize three different dyadic predicates:
-\begin{earg}
-\item[] Buchanan Tower is North of \blank but South of \blank.\\
-\item[] \blank is North of Barber but South of \blank.\\
-\item[] \blank is North of \blank but South of Buchanan E.\\
-\end{earg}
 
-By removing all three singular terms, we can recognize one \define{three-place} or \define{triadic} predicate:
-\begin{center}
-\item[] \blank is North of \blank but South of \blank.\\
-\end{center}
+% In general, you can think about predicates as schematic sentences that need to be filled out with some number of terms. Conversely, you can start with sentences and make predicates out of them by removing terms. Consider the sentence, `Buchanan Tower is North of Barber but South of Buchanan E.' By removing a singular term, we can recognize this sentence as using any of three different monadic predicates:
+% \begin{earg}
+% \item[] \blank is North of Barber but South of Buchanan E.\\
+% \item[] Buchanan Tower is North of \blank but South of Buchanan E.\\
+% \item[] Buchanan Tower is North of Barber but South of \blank.
+% \end{earg}
+%
+% By removing two singular terms, we can recognize three different dyadic predicates:
+% \begin{earg}
+% \item[] Buchanan Tower is North of \blank but South of \blank.\\
+% \item[] \blank is North of Barber but South of \blank.\\
+% \item[] \blank is North of \blank but South of Buchanan E.\\
+% \end{earg}
+%
+% By removing all three singular terms, we can recognize one \define{three-place} or \define{triadic} predicate:
+% \begin{center}
+% \item[] \blank is North of \blank but South of \blank.\\
+% \end{center}
+%
+% If we are translating this sentence into QL, should we translate it with a one-, two-, or three-place predicate? It depends on what we want to be able to say. If we're only interested in discussing the location of buildings relative to Barber, then the generality of the three-place predicate is unnecessary. If we only want to discuss whether buildings are North of Barber and South of Buchanan E, a one-place predicate will be enough.
+%
+% In general, we can have predicates with as many places as we need {\color{black}(you might get squeamish at infinity though!)}. 
 
-If we are translating this sentence into QL, should we translate it with a one-, two-, or three-place predicate? It depends on what we want to be able to say. If we're only interested in discussing the location of buildings relative to Barber, then the generality of the three-place predicate is unnecessary. If we only want to discuss whether buildings are North of Barber and South of Buchanan E, a one-place predicate will be enough.
+In order to symbolize predicates in QL, we will use capital letters $A$ through $Z$, with or without subscripts.
+In order to indicate both the arity and interpretation of these predicates, symbolization keys will use variables.
+For instance, consider the following examples:
 
-In general, we can have predicates with as many places as we need {\color{black}(you might get squeamish at infinity though!)}. Predicates with more than one place are called \define{polyadic}. Predicates with $n$ places, for some number $n$, are called \define{n-place} or \define{n-adic}. You can make an $n$-adic predicate by replacing $n$ names in any sentence with blanks. You can even have a 0-place predicate --- this would be the result of replacing $0$ names in a sentence with blanks. In other words, a 0-place predicate is just a sentence {\color{black} (mind blown)}.
-
-In QL, we symbolize predicates with capital letters $A$ through $Z$, with or without subscripts. When we give a symbolization key for predicates, we will not use blanks; instead, we will use variables. So we might write a key that looks like this:
-\begin{groupitems}
 \begin{ekey}
 \item[Ax:] $x$ is angry.
 \item[Hx:] $x$ is happy.
+\item[Sxy:] $x$ is shorter than $y$.
 \item[T$_1$xy:] $x$ is at least as tall as $y$.
 \item[T$_2$xy:] $x$ is at least as tough as $y$.
 \item[Bxyz:] $y$ is between $x$ and $z$.
+% \item[d:] Donald
+% \item[g:] Gregor
+% \item[m:] Marybeth
+\end{ekey}
+
+It is worth emphasising that the variables above do no further work than to specify the order of the arguments in a given predicate. 
+Since monadic predicates only have one argument, the variable doesn't do much work at all.
+By contrast, the order of the variables does matter for dyadic predicates like $T_1$.
+For instance, we could have introduced the predicate:
+
+\begin{ekey}
+\item[T$_3$xy:] $y$ is at least as tall as $x$.
+\end{ekey}
+
+Having reversed the order of the variables above, `$T_3$' expresses the converse of the relation expressed by `$T_1$'.
+This makes a big difference.
+However, it would not have mattered if we were to have replaced `$x$' with some other variable such as `$z$' or `$y_{13}$'.
+
+In order to put these predicates to work, we may now turn to combine the primitive elements that we have included in QL so far.
+
+
+
+
+
+\subsection{Atomic Sentences}
+
+Consider the following sentences:
+
+\begin{earg}
+\nix{I am inclined to change these to Cordelia, Hamlet, and Macbeth}
+\item[\ex{terms1}] Donald is angry.
+\item[\ex{terms2}] Donald is shorter than Gregor.
+\item[\ex{terms3}] If Donald is angry, then so are Gregor and Marybeth.
+\item[\ex{terms4}] Marybeth is at least as tall and as tough as Gregor.
+% \item[\ex{terms5}] Gregor is between Donald and Marybeth.
+\end{earg}
+
+We have already provided the predicates that we will need to regiment the sentences above, but we have not introduced any constants.
+Consider the following:
+
+\begin{groupitems}
+\begin{ekey}
 \item[d:] Donald
 \item[g:] Gregor
 \item[m:] Marybeth
 \end{ekey}
 \end{groupitems}
-%By convention, constants are listed at the end of the key. ; Josh: not following this convention on Carnap 
 
-We can symbolize sentences that use any combination of these predicates and terms. For example:
+Given these resources, we may regiment sentence \ref{terms1} as: $Ad$.
+Since the `$x$' in the symbolization key entry for `$Ax$' is just a placeholder, we have replaced the variable with the constant which names Donald, resulting in what we will refer to as an \define{atomic sentence}.
+
+Whereas `$Ad$' includes the monadic predicate `$A$', not all atomic sentences are like this.
+For instance, sentence \ref{terms2} can be regimented with the dyadic predicate `$S$' as: $Sdg$.
+In general, atomic sentences will include some $n$-place predicate followed by $n$ singular terms. 
+In the case above, the singular terms are all constants, but often these may also include variables.
+
+By contrast with sentences \ref{terms1} and \ref{terms2}, sentence \ref{terms3} is not atomic on account of including sentential operators.
+Nevertheless, we must begin by constructing atomic sentences in order to regiment this sentence.
+To begin with, we may identify its atomic parts, regimenting these as: $Ad$, $Ag$, and $Am$.
+If you like, you can think of these atomic sentences as replacing the need to introduce sentence letters as we did in SL.
+Otherwise, much is as before, where we may regiment the whole by: $Ad \eif (Ag \eand Am)$.
+
+Sentence \ref{terms4} is similar though the atomic sentences are a little trickier to identify.
+We begin by observing that two things are said of Marybeth and Gregor: first, Marybeth is at least as tall as Gregor; and second, Marybeth is at least as tough as Gregor.
+Thus we can build the atomic sentences: $T_1mg$ and $T_2mg$. 
+The last step is to put these together: $T_1mg \eand T_2mg$.
+
+
+
+
+
+\subsection{Open Sentences}
+
+Consider the following sentence:
+
 \begin{earg}
-\nix{I am inclined to change these to Cordelia, Hamlet, and Macbeth}
-\item[\ex{terms1}] Donald is angry.
-\item[\ex{terms2}] If Donald is angry, then so are Gregor and Marybeth.
-\item[\ex{terms3}] Marybeth is at least as tall and as tough as Gregor.
-\item[\ex{terms4}] Donald is shorter than Gregor.
-\item[\ex{terms5}] Gregor is between Donald and Marybeth.
+\item[\ex{open1}] Either it is crimson or ruby since she wants to impress him.
 \end{earg}
 
-Sentence \ref{terms1} is straightforward: $Ad$. The `$x$' in the key entry `$Ax$' is just a placeholder; we replace it with other terms when translating.
+In considering the predicates we will need, we may introduce the following:
 
-Sentence \ref{terms2} can be paraphrased as, `If $Ad$, then $Ag$ and $Am$.' QL has all the truth-functional connectives of SL, so we translate this as $Ad \eif (Ag \eand Am)$.
-
-Sentence \ref{terms3} can be translated as $T_1mg \eand T_2mg$.
-
-Sentence \ref{terms4} might seem as if it requires a new predicate. If we only needed to symbolize this sentence, we could define a predicate like $Sxy$ to mean `$x$ is shorter than $y$.' However, this would ignore the logical connection between `shorter' and `taller.' Considered only as symbols of QL, there is no connection between $S$ and $T_1$. They might mean anything at all. Instead of introducing a new predicate, we paraphrase sentence \ref{terms4} using predicates already in our key: `It is not the case that Donald is as tall or taller than Gregor.' We can translate it as $\enot T_1dg$.
-
-Sentence \ref{terms5} requires that we pay careful attention to the order of terms in the key. It becomes $Bdgm$.
-
-
-
-
-
-
-\section{Quantifiers}
-We are now ready to introduce quantifiers. Quantifiers (unlike names and predicates) are a new kind of logical connective (similar to a unary connective like negation). Like other connectives, they govern the interpretation of a QL sentence.  Consider these English sentences:
-\begin{earg}
-\item[\ex{q.a}] Everyone is happy.
-\item[\ex{q.ac}] Everyone is at least as tough as Donald.
-\item[\ex{q.e}] Someone is angry.
-\end{earg}
-
-It might be tempting to translate sentence \ref{q.a} as $Hd \eand Hg \eand Hm$. Yet this would only say that Donald, Gregor, and Marybeth are happy. We want to say that \emph{everyone} is happy, even if we have not defined a constant to name them. In order to do this, we introduce the `$\forall$' symbol. This is called the \define{universal quantifier} {\color{black}(get stoked, we will soon be talking about `the universe', or---more humbly---the `domain of discourse')}. 
-
-{\color{black} An aside on \textit{Carnap}: Since `$\forall$' looks like an upside down letter `A', we will code `$(\qt{\forall}{x})$' in Carnap as `(Ax)'. Similarly, we will refer to the two natural deduction rules involving $(\qt{\forall}{x})$ using A's, specifically AI and AE---for intro and elimination, of course! I'm afraid that yes, natural deduction comes roaring back in Chapter~\ref{ch.QLND}. In life, you can rarely outrun what you fear most: you typically have to stand down and face it. May we face it with grace.}
-
-A quantifier is placed in front of the formula that it binds. It always comes along with an associated variable. Typically that formula will include the same variable. We can translate sentence \ref{q.a} as $\qt{\forall}{x} Hx$. Paraphrased partially into English, this means `For all $x$, $x$ is happy' {\color{black}(i.e. Every $x$ is a happy $x$. Now that's the universe I want to be in!)}
-
-We call $\qt{\forall}{x}$ an \emph{x-quantifier}. The formula that follows the quantifier is said to be \emph{in the scope} of the quantifier. {\color{black}Ichikawa shortens this to just calling it the \emph{scope} of the quantifier.} We will give a formal definition of scope later, but intuitively it is the part of the sentence that the quantifier quantifies over. In $\qt{\forall}{x} Hx$, the scope of the universal quantifier is $Hx$.
-
-Sentence \ref{q.ac} can be paraphrased as, `For all $x$, $x$ is at least as tough as Donald.' This translates as $\qt{\forall}{x} T_2xd$.
-
-In these quantified sentences, the variable $x$ serves as a kind of placeholder. The expression $\qt{\forall}{x}$ means that you can pick anything from the domain of discourse and put it in as $x$. There is no special reason to use $x$ rather than some other variable. The sentence $\qt{\forall}{x} Hx$ means exactly the same thing as $\qt{\forall}{y} Hy$, $\qt{\forall}{z} Hz$, and $(\qt{\forall}{x_5}) Hx_5$.
-
-To translate sentence \ref{q.e}, we introduce another new symbol: the \define{existential quantifier}, $\exists$. Like the universal quantifier, the existential quantifier requires a variable. Sentence \ref{q.e} can be translated as $\qt{\exists}{x} Ax$. This means that there is some $x$ which is angry. {\color{black}More precisely, it means that at least one thing in our domain of discourse is angry. If our domain of discourse is people, then} it means that there is \emph{at least one} angry person. Once again, the variable is a kind of placeholder; we could just as easily have translated sentence \ref{q.e} as $\qt{\exists}{z} Az$.
-
-Consider these further sentences:
-\begin{earg}
-\item[\ex{q.ne}] No one is angry.
-\item[\ex{q.en}] There is someone who is not happy.
-\item[\ex{q.na}] Not everyone is happy.
-\end{earg}
-
-Sentence \ref{q.ne} can be paraphrased as, `It is not the case that someone is angry.' This can be translated using negation and an existential quantifier: $\enot \qt{\exists}{x} Ax$. Yet sentence \ref{q.ne} could also be paraphrased as, `Everyone is not angry.' With this in mind, it can be translated using negation and a universal quantifier: $\qt{\forall}{x} \enot Ax$. Both of these are acceptable translations, because they are logically equivalent. The critical thing is whether the negation comes before or after the quantifier.
-
-In general, $\qt{\forall}{x}\metaA{}$ is logically equivalent to $\enot\qt{\exists}{x}\enot\metaA{}$. This means that any sentence which can be symbolized with a universal quantifier can be symbolized with an existential quantifier, and vice versa. One translation might seem more natural than the other, but there is no logical difference in translating with one quantifier rather than the other. For some sentences, it will simply be a matter of taste.
-
-Sentence \ref{q.en} is most naturally paraphrased as, `There is some $x$ such that $x$ is not happy.' This becomes $\qt{\exists}{x} \enot Hx$. Equivalently, we could write $\enot\qt{\forall}{x} Hx$.
-
-Sentence \ref{q.na} is most naturally translated as $\enot\qt{\forall}{x} Hx$. This is logically equivalent to sentence \ref{q.en} and so could also be translated as $\qt{\exists}{x} \enot Hx$.
-
-%Although we have two quantifiers in QL, we could have an equivalent formal language with only one quantifier. We could proceed with only the universal quantifier, for instance, and treat the existential quantifier as a notational convention. We use square brackets [ ] to make some sentences more readable, but we know that these are really just parentheses ( ). In the same way, we could write `$\qt{\exists}{x}$' knowing that this is just shorthand for `$\enot \qt{\forall}{x} \enot$.' There is a choice between making logic formally simple and making it expressively simple. With QL, we opt for expressive simplicity. Both $\forall$ and $\exists$ will be symbols of QL.
-
-
-\section{Universe of discourse}
-Given the symbolization key we have been using, $\qt{\forall}{x}Hx$ means `Everyone is happy.' Who is included in this \emph{everyone}? When we use sentences like this in English, we usually do not mean everyone now alive on the Earth. We certainly do not mean everyone who was ever alive or who will ever live. We mean something more modest: everyone in the building, everyone in the class, or everyone in the room.
-
-In order to eliminate this ambiguity, we will need to specify a \define{universe of discourse} --- abbreviated UD {\color{black} (less grandiosely, we might call this the ``domain of discourse.'')}. The UD is the set of things that we are talking about. So if we want to talk about people in Chicago, we define the UD to be people in Chicago. We write this at the beginning of the symbolization key, like this:
 \begin{ekey}
-\item[UD:] people in Chicago
+% \item[Fx:] $x$ is frustrated.
+% \item[Ux:] $x$ is upset.
+% \item[Hx:] $x$ is human.
+% \item[Mx:] $x$ is mammal.
+\item[Cx:] $x$ is crimson.
+\item[Rx:] $x$ is ruby.
+\item[Wxy:] $x$ wants to impress $y$.
 \end{ekey}
-The quantifiers \emph{range over} the universe of discourse. Given this UD, $\qt{\forall}{x}$ means `Everyone in Chicago' and $\qt{\exists}{x}$ means `Someone in Chicago.' Each constant names some member of the UD, so we can only use this UD with the symbolization key above if Donald, Gregor, and Marybeth are all in Chicago. If we want to talk about people in places besides Chicago, then we need to include those people in the UD.
 
-In QL, the UD must be \emph{non-empty}; that is, it must include at least one thing. It is possible to construct formal languages that allow for empty UDs, but this introduces complications; such languages are beyond the scope of this book.
+Since there are no names in the sentence above, we do need to include constants in our symbolization key.
+Instead, we can get by with variables alone.
+In particular, we may regiment sentence \ref{open3} by first identifying the atomic sentences.
+To do so, we may observe that the object in question is said to be one of two colors, and that the person in question likes both of those colors.
+Since the same object is either crimson or ruby, we will use the same variable for each: $Cx$, $Rx$.
+We use different variables for `she' and `him', where this yields: $Wyz$.
+Putting these pieces together, we get: $(Cx \eor Rx) \eand Wyz$.
 
-Even allowing for a UD with just one member can produce some strange results. Suppose we have this as a symbolization key:
+It is worth considering a closely related sentence:
+
+\begin{earg}
+\item[\ex{open2}] Either it is crimson or ruby since she likes those colors.
+\end{earg}
+
+Now we will need the following symbolization key:
+
 \begin{ekey}
-\item[UD:] the Eiffel Tower
-\item[Px:] $x$ is in Paris.
+\item[Hxy:] $x$ has the color $y$.
+\item[Lxy:] $x$ likes $y$.
+\item[c:] Crimson
+\item[r:] Ruby
 \end{ekey}
-The sentence $\qt{\forall}{x} Px$ might be paraphrased in English as `Everything is in Paris.' Yet that would be misleading. It means that everything \emph{in the UD} is in Paris. This UD contains only the Eiffel Tower, so with this symbolization key $\qt{\forall}{x} Px$ just means that the Eiffel Tower is in Paris. We will rarely work with such bizarre domains as this.
 
-It is a rule in QL that each constant will pick out exactly one member of the UD. (There is no rule prohibiting multiple different constants from referring to the same member of the UD.)
+Instead of taking `is crimson' and `is ruby' to be monadic predicates, we have included constants for each together with a new dyadic predicate for `has the color'.
+This is useful since now we can say that she likes each color by using its name.
+Thus we have the atomics: $Hxc$, $Hxr$, $Lyc$, and $Lyr$.
+We can then build the following regimentation: $(Hxc \eor Hxr) \eand (Lyc \eand Lyr)$.
+Despite how similar the sentences \ref{open1} and \ref{open2} are to each other, their regimentations are very different, and by no means the only regimentations that we might give.
 
-%\subsection{Non-referring terms}
-%In QL, each constant must pick out exactly one member of the UD. A constant cannot refer to more than one thing --- it is a \emph{singular} term. Each constant must still pick out \emph{something}. This is connected to a classic philosophical problem: the so-called problem of non-referring terms.
-%
-%Medieval philosophers typically used sentences about the \emph{chimera} to exemplify this problem. Chimera is a mythological creature; it does not really exist. Consider these two sentences:
-%\begin{earg}
-%\item[\ex{chimera1}] Chimera is angry.
-%\item[\ex{chimera2}] Chimera is not angry.
-%\end{earg}
-%It is tempting just to define a constant to mean `chimera.' The symbolization key would look like this:
-%\begin{ekey}
-%\item[UD:] creatures on Earth
-%\item[Ax:] $x$ is angry.
-%\item[c:] chimera
-%\end{ekey}
-%We could then translate sentence \ref{chimera1} as $Ac$ and sentence \ref{chimera2} as $\enot Ac$.
-%
-%Problems will arise when we ask whether these sentences are true or false.
-%
-%One option is to say that sentence \ref{chimera1} is not true, because there is no chimera. If sentence \ref{chimera1} is false because it talks about a non-existent thing, then sentence \ref{chimera2} is false for the same reason. Yet this would mean that $Ac$ and $\enot Ac$ would both be false. Given the truth conditions for negation, this cannot be the case.
-%
-%Since we cannot say that they are both false, what should we do? Another option is to say that sentence \ref{chimera1} is \emph{meaningless} because it talks about a non-existent thing. So $Ac$ would be a meaningful expression in QL for some interpretations but not for others. Yet this would make our formal language hostage to particular interpretations. Since we are interested in logical form, we want to consider the logical force of a sentence like $Ac$ apart from any particular interpretation. If $Ac$ were sometimes meaningful and sometimes meaningless, we could not do that.
-%
-%This is the \emph{problem of non-referring terms}, and we will return to it later (see p.~\pageref{subsec.defdesc}.) The important point for now is that each constant of QL \emph{must} refer to something in the UD, although the UD can be any set of things that we like. If we want to symbolize arguments about mythological creatures, then we must define a UD that includes them. This option is important if we want to consider the logic of stories. We can translate a sentence like `Sherlock Holmes lived at 221B Baker Street' by including fictional characters like Sherlock Holmes in our UD.
-%
+We may conclude this subsection with a final example:
+
+\begin{earg}
+\item[\ex{open3}] If it is a dolphin, then it is a mammal and he won't eat it.
+\end{earg}
+
+Here we only need the following predicates:
+
+\begin{ekey}
+\item[Dx:] $x$ is dolphin.
+\item[Mx:] $x$ is mammal.
+\item[Eyx:] $y$ will eat $x$.
+\end{ekey}
+
+As before, we may build the atomic sentences $Hx$, $Mx$, and $\enot Eyx$, drawing on these to construct: $Hx \eif (Mx \eand \enot Eyx)$.
+By itself, this open sentence appears to refer to some unnamed individual, however, this hardly its power.
+Rather, it is by combining open sentences with quantifiers that we may make general claims of considerable interest and power.
+Indeed, such claims are common throughout mathematics, the sciences, and day-to-day life.
 
 
-\section{Translating to QL}
+
+\subsection{Quantifiers}
+
+We are now ready to introduce quantifiers.
+Unlike singular terms and predicates, quantifiers are a new kind of monadic logical connective similar to negation.
+Instead of relying on an interpretation of our language to specify the meaning of the quantifiers, we will provide semantic clauses for the quantifiers in an analogous manner to the semantic clauses that we provided for the sentential connectives $\enot$, $\eand$, $\eor$, $\eif$, and $\eiff$.
+
+Consider the sentences:
+
+\begin{earg}
+\item[\ex{qu1}] Someone is happy.
+\item[\ex{qu2}] Nobody is as guilty as Donald.
+\item[\ex{qu3}] Everybody loves somebody.
+\end{earg}
+
+We will need the following symbolization key:
+
+\begin{ekey}
+\item[Hx:] $x$ is happy.
+\item[Gxy:] $x$ is as guilty as $y$.
+\item[Lxy:] $x$ loves $y$.
+\item[d:] Donald.
+\end{ekey}
+
+It might be tempting to regiment sentence \ref{qu1} as: $Hx$.
+After all, if `It is happy' is true, then surely someone--- whoever `It' refers to--- must be happy.
+Tempting as this may be, these are very different claims.
+In order to see how these claims differ, we may consider who these claims \textit{concern} or \textit{are about}.
+Although it may not be clear exactly who, the sentence `It is happy' is presumable about whoever `It' refers to where this is some individual.
+By contrast, claiming that someone is happy does not appear to be about any particular individual at all.
+For instance, suppose the auditorium is filled with happy people but `It' happens to be used to refer to one of the tables.
+Although sentence \ref{qu1} may then be true, `It is happy' is false.
+
+Instead of asserting anything about a particular, quantifiers make claims about a range of individuals which we will refer to as the \define{domain}.
+Depending on the context of assertion, the domain may differ.
+Nevertheless, quantified claims may be understood to make claims about all of the individuals in the domain in question.
+By contrast, open sentences make claims about at most one individual.
+These are important differences, and we will have a lot more to say about them in the following chapter where we will introduce a semantics for QL.
+
+Although the `It is happy' does not say the same thing as sentence \ref{qu1}, we may nevertheless begin by regimenting `It is happy' in order to regiment sentence \ref{qu1}.
+Given the symbolization key above, this yields: $Hx$.
+What is missing is to add that \textit{there is something in the domain} where it is happy.
+We will add this piece with an \define{existential quantifier} `$\exists x$', where this yields: $\exists x Hx$.
+% Here the quantifier `$\exists x$' \define{binds} all instances of the variable `$x$' in the open sentence `$Hx$'.
+Whereas `$x$' is \define{unbound} in the open sentence `$Hx$', the variable `$x$' is \define{bound} in `$\exists x Hx$'.
+Since there are no unbound variables in `$\exists x Hx$', this sentence is \define{closed}.
+
+In order to regiment sentence \ref{qu2}, we may ask what this sentence says.
+One way to read this sentence is that: it is not the case that someone is as guilty as Donald.
+Unpacking this claim even further: it is not the case that something is such that it is as guilty as Donald.
+However cumbersome, this reading makes the atomic sentence plain to see: $Gxd$.
+Although `$Gxd$' contains the constant `$d$', it also contains the unbound variable `$x$' which we may bind with an existential quantifier as before: $\exists x Gxd$.
+We may then negate the result: $\enot \exists x Gxd$.
+
+Although this provides a fine regimentation of sentence \ref{qu2}, there is another natural reading.
+Instead of beginning with negation, we may take sentence \ref{qu2} to express that everyone is not as guilty as Donald.
+Put otherwise, everything is such that it is not as guilty as Donald.
+Here we begin as before with $Gxd$ but then immediately add negation: $\enot Gxd$.
+Note that this sentence is open since it includes the unbound variable $x$. 
+Finally, we add the \define{universal quantifier} `$\forall x$', where this yields: $\forall x \enot Gxd$.
+It turns out that this reading is logically equivalent to the first regimentation of sentence \ref{qu2} considered above, however, in many cases sentences will admit of multiple regimentations which are not all logically equivalent.
+
+% In these quantified sentences, the variable $x$ serves as a kind of placeholder. The expression $\qt{\forall}{x}$ means that you can pick anything from the domain of discourse and put it in as $x$. There is no special reason to use $x$ rather than some other variable. The sentence $\qt{\forall}{x} Hx$ means exactly the same thing as $\qt{\forall}{y} Hy$, $\qt{\forall}{z} Hz$, and $(\qt{\forall}{x_5}) Hx_5$.
+%
+% To translate sentence \ref{q.e}, we introduce another new symbol: the \define{existential quantifier}, $\exists$. Like the universal quantifier, the existential quantifier requires a variable. Sentence \ref{q.e} can be translated as $\qt{\exists}{x} Ax$. This means that there is some $x$ which is angry. {\color{black}More precisely, it means that at least one thing in our domain of discourse is angry. If our domain of discourse is people, then} it means that there is \emph{at least one} angry person. Once again, the variable is a kind of placeholder; we could just as easily have translated sentence \ref{q.e} as $\qt{\exists}{z} Az$.
+%
+% Consider these further sentences:
+% \begin{earg}
+% \item[\ex{q.ne}] No one is angry.
+% \item[\ex{q.en}] There is someone who is not happy.
+% \item[\ex{q.na}] Not everyone is happy.
+% \end{earg}
+%
+% Sentence \ref{q.ne} can be paraphrased as, `It is not the case that someone is angry.' This can be translated using negation and an existential quantifier: $\enot \qt{\exists}{x} Ax$. Yet sentence \ref{q.ne} could also be paraphrased as, `Everyone is not angry.' With this in mind, it can be translated using negation and a universal quantifier: $\qt{\forall}{x} \enot Ax$. Both of these are acceptable translations, because they are logically equivalent. The critical thing is whether the negation comes before or after the quantifier.
+
+On its own, `$\exists x$' may be read `there is something such that', and similarly `$\forall x$' may be read `everything is such that'.
+% The sentence following the quantifier is said to be in the \define{scope} of the quantifier.
+% We will provide a formal definition of scope later on, but intuitively it is the part of the sentence that the quantifier is able to .
+In general, $\forall x \metaA$ is logically equivalent to $\enot\exists x\enot\metaA$, and similarly, $\exists x \metaA$ is logically equivalent to $\enot\forall x\enot\metaA$.
+This means that any sentence which can be symbolized with a universal quantifier can be symbolized with an existential quantifier together with an appropriate number of negation signs, and \textit{vice versa}.
+Even though there is no logical difference in translating with one quantifier rather than the other, sometimes one translation might seem more natural than the other.
+Other times, the difference between regimenting with an existential as opposed to a universal quantifier will simply be a matter of taste.
+
+It remains to regiment sentence \ref{qu3}.
+This says of everything that it loves something.
+Focusing on `it loves something', we may unpack this to mean that there is something where it loves that thing.
+Thus we have: everything is such that there is something where it loves that thing.
+Notice that without the help of variables, it is easy to lose track of which quantifier is binding to which variable.
+It is for this reason that the method that we have employed above of unpacking the sentence in stilted English is of limited use.
+Nevertheless, we do need to make sure we know what the claim is saying, and sometimes it helps to write it out a few different ways in English.
+Often the best answer is to proceed in stages.
+
+We may begin by taking sentence \ref{qu3} to say that something is such that it loves somebody.
+Thus we have: $\forall x LS x$ where we have temporarily introduced `$LSx$' for `$x$ loves somebody'.
+Next we may take `$LS x$' to mean `there is some $y$ where $x$ loves $y$' which we may regiment: $\exists y Lxy$.
+By replacing `$LS x$' in our first pass regimentation with `$\exists y Lxy$' yields the final product: $\forall x \exists y Lxy$.
+In general, sentences with mixed quantifiers are tricky and require a lot of care to get right.
+Even if some case you can immediately intuit a correct regimentation, it is important to learn how to systematically decompose complex cases into simple parts before putting the pieces back together.
+This will take some practice.
+
+Having introduced each of the new primitives included in QL, we may proceed to define the well formed formulas as well as the sentences of QL a little more carefully.
+
+
+
+
+
+\subsection{Well-formed formulae}
+
+By definition, a \define{term of QL} is either a constant or a variable.
+
+An \define{atomic formula of QL} is an n-place predicate followed by $n$ terms. $n$ here can be any non-negative integer, including 0. (A 0-place predicate is an atomic formula of QL just on its own. It does not require the addition of a term for meaningfulness or a truth value. Note that SL atoms are 0-place QL predicates, and so count as QL atoms too.)
+
+Just as we did for SL, we will give a \emph{recursive} definition for a wff of QL. In fact, most of the definition will look like the definition of a wff of SL: Every atomic formula is a wff, and you can build new wffs by applying the sentential connectives.
+
+We could just add a rule for each of the quantifiers and be done with it. For instance: If \metaA{} is a wff, then $\qt{\forall}{x}\metaA{}$ and $\qt{\exists}{x}\metaA{}$ are wffs. However, this would allow for some confusing sentences like $\qt{\forall}{x}\qt{\exists}{x} Dx$. What could these possibly mean? There are possible ways to give interpretations of such sentences, but instead we will write the definition of a wff so that such abominations do not even count as well-formed. QL will include the rule that in order for $\qt{\forall}{x}\metaA{}$ or $\qt{\exists}{x}\metaA{}$ to be a wff, \metaA{} must not already contain an x-quantifier. So $\qt{\forall}{x} \qt{\exists}{x} Dx$ will not count as a wff because $\qt{\exists}{x} Dx$ already contains an x-quantifier.
+
+\begin{enumerate}
+\item Every atomic formula is a wff.
+\item If \metaA{} is a wff, then $\enot\metaA{}$ is a wff.
+\item If \metaA{} and \metaB{} are wffs, then $(\metaA{}\eand\metaB{})$ is a wff.
+\item If \metaA{} and \metaB{} are wffs, $(\metaA{}\eor\metaB{})$ is a wff.
+\item If \metaA{} and \metaB{} are wffs, then $(\metaA{}\eif\metaB{})$ is a wff.
+\item If \metaA{} and \metaB{} are wffs, then $(\metaA{}\eiff\metaB{})$ is a wff.
+\item If \metaA{} is a wff, \script{x} is a variable, and \metaA{} contains no \script{x}-quantifiers, then $\qt{\forall}{\script{x}}\metaA{}$ is a wff.
+\item If \metaA{} is a wff, \script{x} is a variable, and \metaA{} contains no \script{x}-quantifiers, then $\qt{\exists}{\script{x}}\metaA{}$ is a wff.
+\item All and only wffs of QL can be generated by applications of these rules.
+\end {enumerate}
+
+Notice that the `\script{x}' that appears in the definition above is not the variable $x$. It is a \emph{meta-variable} that stands in for any variable of QL. So $\qt{\forall}{x}Ax$ is a wff, but so are $\qt{\forall}{y}Ay$, $\qt{\forall}{z}Az$, $\qt{\forall}{x_4}Ax_4$, and $\qt{\forall}{z_9} Az_9$.
+
+We can now give a formal definition for scope: The \define{scope} of a quantifier is the subformula for which the quantifier is the main logical operator. 
+
+%\nix{
+%Consider the expression $\qt{\forall}{x}(\qt{\exists}{y}(Dy \eif Ex) \eand \qt{\exists}{y} Ey)$. Is it a wff?
+
+%The main logical operator of this expression is the universal quantifier $\qt{\forall}{x}$. The scope of the universal quantifier is the subformula $(\qt{\exists}{y}(Dy \eif Ex) \eand \enot\qt{\exists}{y} Ey)$. It contains one occurrence of $x$ and no x-quantifier, so by rule 7 the entire thing is a wff if this subformula is.
+
+%The main logical operator of the subformula is conjunction. By rule 3, it is a wff if both $\qt{\exists}{y}(Dy \eif Ex)$ and $\qt{\exists}{y} Ey$ are wffs.
+
+%Consider just $\qt{\exists}{y} Ey$. The main logical operator is the existential quantifier $\qt{\exists}{y}$, and its scope is $Ey$. Since $Ey$ contains at least one occurrence of $y$ and no y-quantifier, $\qt{\exists}{y} Ey$ is a wff by rule 8 if $Ey$ is a wff. Assuming that E is a one-place predicate, $Ey$ is a wff by rule 1.
+
+%We have shown that $\qt{\exists}{y} Ey$ is a wff. By similarly reasoning, we can show that $\qt{\exists}{y}(Dy \eif Ex)$ is a wff. So, the whole expression is a wff. 
+%}
+
+
+
+
+\subsection{Sentences}
+
+A {sentence} is something that can be either true or false. In SL, every wff was a sentence. This will not be the case in QL. Consider the following symbolization key:
+\begin{ekey}
+\item[UD:] people
+\item[Lxy:] $x$ loves $y$
+\item[b:] Boris
+\end{ekey}
+Consider the expression $Lzz$. It is an atomic formula: a two-place predicate followed by two terms. All atomic formula are wffs, so $Lzz$ is a wff. Does it mean anything? You might think that it means that $z$ loves himself, in the same way that $Lbb$ means that Boris loves himself. But $z$ is a variable; it does not name some person the way a constant would. The wff $Lzz$ does not tell us how to interpret $z$. Does it mean everyone? Anyone? Someone? Someone in particular? If we had a $z$-quantifier, it would tell us how to interpret $z$. For instance, $\qt{\exists}{z}Lzz$ would mean that someone loves themself.
+
+Some formal languages treat a wff like $Lzz$ as implicitly having a universal quantifier in front. We will not do this for QL. If you want to say that everyone loves themself, then you need to write the quantifier: $\qt{\forall}{z}Lzz$
+
+In order to make sense of a variable, we need a quantifier to tell us how to interpret that variable. The scope of an $x$-quantifier, for instance, is the part of the formula where the quantifier tells how to interpret $x$.
+
+In order to be precise about this, we define a \define{bound variable} to be an occurrence of a variable \script{x} that is within the scope of an \script{x}-quantifier. A \define{free variable} is an occurrence of a variable that is not bound.
+
+For example, consider this wff: $$\qt{\forall}{x}(Ex \eor Dy) \eif \qt{\exists}{z}(Rzx \eif Lzx)$$ 
+
+The scope of the universal quantifier $\qt{\forall}{x}$ is $(Ex \eor Dy)$, so the first $x$ is bound by the universal quantifier but the second and third $x$s are free. There is no $y$-quantifier, so the $y$ is free. The scope of the existential quantifier $\qt{\exists}{z}$ is $(Rzx \eif Lzx)$, so both occurrences of $z$ are bound by it. Since this wff contains variables with no instructions for how to interpret them, we don't know how to evaluate it. It is not a sentence.
+
+We define a \define{sentence} of QL as a wff of QL that contains no free variables.
+
+\subsection{Notational conventions}
+
+We will adopt the same notational conventions that we did for SL (p.~\pageref{SLconventions}). First, we may leave off the outermost parentheses of a formula. Second, we will sometimes---but not in \textit{Carnap!}---use square brackets `[' and `]' in place of parentheses to increase the readability of formulae.\footnote{{\color{black} \textit{Carnap} will not allow brackets, unless explicitly noted in a problem!}} Third, we give ourselves permission to leave out parentheses between each pair of conjuncts when writing long series of conjunctions. Fourth, we may similarly leave out parentheses between each pair of disjuncts when writing long series of disjunctions {\color{black}(and \textit{Carnap} \textit{will} allow this!}.
+
+
+
+
+\section{Regimentation in QL}
+
 We now have the basic pieces of QL. Translating more complicated sentences will only be a matter of knowing the right way to combine predicates, constants, quantifiers, variables, and sentential connectives. Consider these sentences:
 \begin{earg}
 \item[\ex{quan1}] Every coin in my pocket is a loonie.
@@ -674,72 +897,10 @@ quantifiers& $\forall, \exists$\\
 %copied from the definition for SL
 We define an \define{expression of QL} as any string of symbols of QL. Take any of the symbols of QL and write them down, in any order, and you have an expression.
 
-\subsection{Well-formed formulae}
-
-By definition, a \define{term of QL} is either a constant or a variable.
-
-An \define{atomic formula of QL} is an n-place predicate followed by $n$ terms. $n$ here can be any non-negative integer, including 0. (A 0-place predicate is an atomic formula of QL just on its own. It does not require the addition of a term for meaningfulness or a truth value. Note that SL atoms are 0-place QL predicates, and so count as QL atoms too.)
-
-Just as we did for SL, we will give a \emph{recursive} definition for a wff of QL. In fact, most of the definition will look like the definition of a wff of SL: Every atomic formula is a wff, and you can build new wffs by applying the sentential connectives.
-
-We could just add a rule for each of the quantifiers and be done with it. For instance: If \metaA{} is a wff, then $\qt{\forall}{x}\metaA{}$ and $\qt{\exists}{x}\metaA{}$ are wffs. However, this would allow for some confusing sentences like $\qt{\forall}{x}\qt{\exists}{x} Dx$. What could these possibly mean? There are possible ways to give interpretations of such sentences, but instead we will write the definition of a wff so that such abominations do not even count as well-formed. QL will include the rule that in order for $\qt{\forall}{x}\metaA{}$ or $\qt{\exists}{x}\metaA{}$ to be a wff, \metaA{} must not already contain an x-quantifier. So $\qt{\forall}{x} \qt{\exists}{x} Dx$ will not count as a wff because $\qt{\exists}{x} Dx$ already contains an x-quantifier.
-
-\begin{enumerate}
-\item Every atomic formula is a wff.
-\item If \metaA{} is a wff, then $\enot\metaA{}$ is a wff.
-\item If \metaA{} and \metaB{} are wffs, then $(\metaA{}\eand\metaB{})$ is a wff.
-\item If \metaA{} and \metaB{} are wffs, $(\metaA{}\eor\metaB{})$ is a wff.
-\item If \metaA{} and \metaB{} are wffs, then $(\metaA{}\eif\metaB{})$ is a wff.
-\item If \metaA{} and \metaB{} are wffs, then $(\metaA{}\eiff\metaB{})$ is a wff.
-\item If \metaA{} is a wff, \script{x} is a variable, and \metaA{} contains no \script{x}-quantifiers, then $\qt{\forall}{\script{x}}\metaA{}$ is a wff.
-\item If \metaA{} is a wff, \script{x} is a variable, and \metaA{} contains no \script{x}-quantifiers, then $\qt{\exists}{\script{x}}\metaA{}$ is a wff.
-\item All and only wffs of QL can be generated by applications of these rules.
-\end {enumerate}
-
-Notice that the `\script{x}' that appears in the definition above is not the variable $x$. It is a \emph{meta-variable} that stands in for any variable of QL. So $\qt{\forall}{x}Ax$ is a wff, but so are $\qt{\forall}{y}Ay$, $\qt{\forall}{z}Az$, $\qt{\forall}{x_4}Ax_4$, and $\qt{\forall}{z_9} Az_9$.
-
-We can now give a formal definition for scope: The \define{scope} of a quantifier is the subformula for which the quantifier is the main logical operator. 
-
-%\nix{
-%Consider the expression $\qt{\forall}{x}(\qt{\exists}{y}(Dy \eif Ex) \eand \qt{\exists}{y} Ey)$. Is it a wff?
-
-%The main logical operator of this expression is the universal quantifier $\qt{\forall}{x}$. The scope of the universal quantifier is the subformula $(\qt{\exists}{y}(Dy \eif Ex) \eand \enot\qt{\exists}{y} Ey)$. It contains one occurrence of $x$ and no x-quantifier, so by rule 7 the entire thing is a wff if this subformula is.
-
-%The main logical operator of the subformula is conjunction. By rule 3, it is a wff if both $\qt{\exists}{y}(Dy \eif Ex)$ and $\qt{\exists}{y} Ey$ are wffs.
-
-%Consider just $\qt{\exists}{y} Ey$. The main logical operator is the existential quantifier $\qt{\exists}{y}$, and its scope is $Ey$. Since $Ey$ contains at least one occurrence of $y$ and no y-quantifier, $\qt{\exists}{y} Ey$ is a wff by rule 8 if $Ey$ is a wff. Assuming that E is a one-place predicate, $Ey$ is a wff by rule 1.
-
-%We have shown that $\qt{\exists}{y} Ey$ is a wff. By similarly reasoning, we can show that $\qt{\exists}{y}(Dy \eif Ex)$ is a wff. So, the whole expression is a wff. 
-%}
 
 
 
 
-\subsection{Sentences}
-
-A {sentence} is something that can be either true or false. In SL, every wff was a sentence. This will not be the case in QL. Consider the following symbolization key:
-\begin{ekey}
-\item[UD:] people
-\item[Lxy:] $x$ loves $y$
-\item[b:] Boris
-\end{ekey}
-Consider the expression $Lzz$. It is an atomic formula: a two-place predicate followed by two terms. All atomic formula are wffs, so $Lzz$ is a wff. Does it mean anything? You might think that it means that $z$ loves himself, in the same way that $Lbb$ means that Boris loves himself. But $z$ is a variable; it does not name some person the way a constant would. The wff $Lzz$ does not tell us how to interpret $z$. Does it mean everyone? Anyone? Someone? Someone in particular? If we had a $z$-quantifier, it would tell us how to interpret $z$. For instance, $\qt{\exists}{z}Lzz$ would mean that someone loves themself.
-
-Some formal languages treat a wff like $Lzz$ as implicitly having a universal quantifier in front. We will not do this for QL. If you want to say that everyone loves themself, then you need to write the quantifier: $\qt{\forall}{z}Lzz$
-
-In order to make sense of a variable, we need a quantifier to tell us how to interpret that variable. The scope of an $x$-quantifier, for instance, is the part of the formula where the quantifier tells how to interpret $x$.
-
-In order to be precise about this, we define a \define{bound variable} to be an occurrence of a variable \script{x} that is within the scope of an \script{x}-quantifier. A \define{free variable} is an occurrence of a variable that is not bound.
-
-For example, consider this wff: $$\qt{\forall}{x}(Ex \eor Dy) \eif \qt{\exists}{z}(Rzx \eif Lzx)$$ 
-
-The scope of the universal quantifier $\qt{\forall}{x}$ is $(Ex \eor Dy)$, so the first $x$ is bound by the universal quantifier but the second and third $x$s are free. There is no $y$-quantifier, so the $y$ is free. The scope of the existential quantifier $\qt{\exists}{z}$ is $(Rzx \eif Lzx)$, so both occurrences of $z$ are bound by it. Since this wff contains variables with no instructions for how to interpret them, we don't know how to evaluate it. It is not a sentence.
-
-We define a \define{sentence} of QL as a wff of QL that contains no free variables.
-
-\subsection{Notational conventions}
-
-We will adopt the same notational conventions that we did for SL (p.~\pageref{SLconventions}). First, we may leave off the outermost parentheses of a formula. Second, we will sometimes---but not in \textit{Carnap!}---use square brackets `[' and `]' in place of parentheses to increase the readability of formulae.\footnote{{\color{black} \textit{Carnap} will not allow brackets, unless explicitly noted in a problem!}} Third, we give ourselves permission to leave out parentheses between each pair of conjuncts when writing long series of conjunctions. Fourth, we may similarly leave out parentheses between each pair of disjuncts when writing long series of disjunctions {\color{black}(and \textit{Carnap} \textit{will} allow this!}.
 
 \section{Common student errors}
 
