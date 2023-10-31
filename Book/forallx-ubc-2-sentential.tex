@@ -108,7 +108,7 @@ However, there are only twenty-six such letters, and we don't want to impose thi
 But how many sentence letters should we include?
 Any finite number would be rather arbitrary.
 Thus we will take SL to include a (countably) infinite number of sentence letters.\footnote{A set is \textit{countably infinite} just in case its elements can be paired one-to-one with the natural numbers, i.e., its elements can be listed one after the other without leaving any missing.}
-To achieve this, we allow atomic sentences that have a capital letter with a numeric subscript.
+To achieve this, we allow sentence letters that have a capital letter with a numeric subscript.
 So we could have a symbolization key that looks like this:
 
 \begin{ekey}
@@ -120,7 +120,7 @@ So we could have a symbolization key that looks like this:
 \item[T$_3$:] Toph invented metal bending.
 \end{ekey}
 
-Keep in mind that each of these is a different atomic sentence.
+Keep in mind that each of these is a different sentence letter.
 Although it is often convenient (and aids memory) to use letters corresponding to the sentences' subject matters, as in the example above, no such requirement is built into the rules of SL.
 There is no special relationship between $A_{1}$ and $A_{2}$, as far as SL goes.
 It's just for our convenience that we might choose to make all the $A$ sentences about Aang.
@@ -228,7 +228,7 @@ Using negation twice, we regiment this as $\enot \enot R$.
 The two negations in a row each work as negations, so the sentence means `It is not the case that, it is not the case that $R$.
 It is the negation of the negation of $R$.
 One can negate \emph{any} sentence of SL--- even a negation--- by putting the `\enot' symbol in front of it.
-It's not only for atomic sentences.
+It's not only for sentence letters.
 In the case of $\enot\enot R$, this is a negation whose negand is $\enot R$, which in turn is a negation whose negand is $R$.
 
 Here is an example that illustrates some of the complexities of regimentation:
@@ -246,7 +246,7 @@ No!
 Elliott might simply be meh.
 If you find out that someone is not happy, you cannot infer that they are unhappy.
 Hence, we shouldn't treat \ref{not7} as the negation of \ref{not6}.
-If we're allowing that `unhappy' means something different from `not happy', then we need to use a different atomic sentence to regiment \ref{not7}.
+If we're allowing that `unhappy' means something different from `not happy', then we need to use a different sentence letter to regiment \ref{not7}.
 
 But when is a negation true?
 For any sentence \metaA{}: if \metaA{} is true, then \enot\metaA{} is false.
@@ -264,7 +264,7 @@ Using `1' for true and `0' for false, we can summarize this in a \emph{truth tab
 
 The left column shows the possible truth-values for the negand and the right column shows the corresponding truth-value of the negation.
 Accordingly, the truth table given above specifies the \textit{truth conditions} for $\enot$, i.e, the conditions under which a negated sentence is true (similarly false).
-By using numeral digits, we avoid any clash with our atomic sentence letters.\footnote{Note that \textit{Carnap} will not have this virtue: truth tables will use `T' for \textit{true} and `F' for \textit{false}.}
+By using numeral digits, we avoid any clash with our sentence letters.\footnote{Note that \textit{Carnap} will not have this virtue: truth tables will use `T' for \textit{true} and `F' for \textit{false}.}
 Since 1 and 0, are the only possible values that we will consider in this course, the truth table above defines a function from the truth-value of the negand to the truth-value of the negation.
 We will refer to such functions from truth-values to truth-values as \textit{truth-functions}.
 We will discuss truth tables at greater length in Chapter \ref{ch.TruthTables}.
@@ -326,7 +326,7 @@ A sentence can be regimented by ($\metaA{}\eand\metaB{}$) if it can be paraphras
 Sentence \ref{and5} says one thing about two different subjects.
 It says of both Jessica and Matt that they are strong, and in English we use the word `strong' only once.
 In regimenting sentences in SL, we want to make sure each conjunct is a sentence on its own, so once again, we'll paraphrase it by repeating the elements: `Jessica is strong, and Matt is strong.'
-Once we add a new atomic sentence $M$ for `Matt is strong', this regiments $J\eand M$.\footnote{One might contest this claim by instead taking `Jessica and Matt' to name a plurality where `are strong' is a plural predicate. We will be overlooking such complexities which are better handled in plural logics.}
+Once we add a new sentence letter $M$ for `Matt is strong', this regiments $J\eand M$.\footnote{One might contest this claim by instead taking `Jessica and Matt' to name a plurality where `are strong' is a plural predicate. We will be overlooking such complexities which are better handled in plural logics.}
 
 Sentence \ref{and6} is a bit more complicated.
 The word `although' tends to suggest a kind of contrast between the first part of the sentence and the second part.
@@ -352,9 +352,8 @@ Now the sentence may be regimented by $M \eand S$.\footnote{In Chapter~\ref{ch.Q
 \factoidbox{Sentences that can be paraphrased `\metaA{}, but \metaB{}' or `Although \metaA{}, \metaB{}' are best regimented using conjunction: (\metaA{}\eand\metaB{}).
 }
 
-It is important to keep in mind that the sentence letters $J$, $M$, $G_{1}$, $G_{2}$, and $S$ are atomic sentences.
-Considered as symbols of SL, they have no meaning beyond being true or false.
-We used $J$ and $M$ to regiment different English language sentences that are about people being strong, but this similarity is completely lost when we regiment sentences in SL.
+It is important to keep in mind that the sentence letters $J$, $M$, $G_{1}$, $G_{2}$, and $S$ have no meaning beyond being true or false.
+We used $J$ and $M$ to regiment different English sentences that are about people being strong, but this similarity is completely lost when we regiment sentences in SL.
 Nor does SL recognize any particular similarity between $G_{1}$ and $G_{2}$.
 
 For any two sentences \metaA{} and \metaB{} of SL, the conjunction \metaA{}\eand\metaB{} is true if and only if the conjuncts--- \metaA{} and \metaB{}--- are both true. We can summarize this in the \textit{truth table} for conjunction:
@@ -536,8 +535,7 @@ Sentence \ref{if2} is different.
 It says that the only conditions under which the bomb will explode are ones where you cut the red wire, i.e., if the bomb explodes, then you must have cut the wire.
 As such, sentence \ref{if2} should be regimented by $B \eif R$. 
 
-Notice though that for both sentences, we have the same antecedent/consequent pattern: the atomic sentence before the `only if' is the antecdent.
-The atomic sentence after the `only if' is the consequent.
+Notice though that for both sentences, we have the same antecedent/consequent pattern: the sentence before the `only if' is the antecedent and the sentence after the `only if' is the consequent.
 Hence, we could also write sentence \ref{if1} as `You cut the red wire only if the bomb will explode', which we would also regiment by $R\eif B$.
 This is equivalent to saying `If you cut the red wire, then the bomb will explode.' 
 
@@ -829,7 +827,7 @@ None of these are sentences in SL.
 A grammatical expression is called a \textit{well-formed formula}.
 It is common to use the acronym `wff' where the plural is `wffs'.
 
-Atomic sentence letters like $A$ and $G_{13}$ are certainly wffs.
+Sentence letters like $A$ and $G_{13}$ are certainly wffs.
 We can form further wffs out of these by using the various connectives.
 Using negation, we can get $\enot A$ and $\enot G_{13}$.
 Using conjunction, we can get $A \eand G_{13}$, $G_{13} \eand A$, $A \eand A$, and $G_{13} \eand G_{13}$.
@@ -850,7 +848,7 @@ For instance, if \metaA{} and \metaB{} are wffs of SL, then $\metaA{}\eand\metaB
 Providing clauses like this for all of the connectives, we arrive at the following formal definition for a \define{well-formed formula of SL}:
 
 \begin{enumerate}
-\item Every atomic sentence is a wff.
+\item Every sentence letter is a wff.
 \item If \metaA{} and \metaB{} are any wffs, then:
 	\begin{enumerate}
 		\item $\enot\metaA{}$ is a wff;
@@ -937,7 +935,7 @@ In the language for quantifier logic (QL)--- developed later in this book--- the
 
 The recursive structure of sentences in SL will be important when we consider their truth-conditions.
 The sentence $\enot \enot \enot D$ is true if and only if the sentence $\enot \enot D$ is false, and so on through the structure of the sentence until we arrive at its basic components, i.e., the sentence letters from which it was build.
-For instance, $\enot \enot \enot D$ is true if and only if the atomic sentence $D$ is false.
+For instance, $\enot \enot \enot D$ is true if and only if the sentence $D$ is false.
 We will return to this point in much more detail in Chapters \ref{ch.TruthTables} and \ref{ch.SLmodels}.
 
 
@@ -1146,7 +1144,7 @@ We may say something analogues for each of the other connectives.
 In doing so, we may restate the definition of a wff with this new tool:
 
 \begin{enumerate}
-  \item Every atomic sentence is a wff.
+  \item Every sentence letter is a wff.
   \item If \metaA{} and \metaB{} are any wffs, then:
     \begin{enumerate}
       \item $\corner{\enot\metaA{}}$ is a wff;

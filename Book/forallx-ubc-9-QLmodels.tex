@@ -77,6 +77,101 @@ It is a rule in QL that each constant will pick out exactly one member of the UD
 
 %%%
 
+
+\section{Empty predicates}
+A predicate need not apply to anything in the UD. A predicate that applies to nothing in the UD is called an \define{empty} predicate.
+
+Suppose we want to symbolize these two sentences:
+\begin{earg}
+\item[\ex{monkey1}]Every monkey knows sign language.
+\item[\ex{monkey2}]Some monkey knows sign language.
+\end{earg}
+It is possible to write the symbolization key for these sentences in this way:
+\begin{ekey}
+\item[UD:] animals
+\item[Mx:] $x$ is a monkey.
+\item[Sx:] $x$ knows sign language.
+\end{ekey}
+
+Sentence \ref{monkey1} can now be translated as $\qt{\forall}{x}(Mx \eif Sx)$.
+
+Sentence \ref{monkey2} becomes $\qt{\exists}{x}(Mx \eand Sx)$.
+
+It is tempting to say that sentence \ref{monkey1} entails sentence \ref{monkey2}; that is: if every monkey knows sign language, then it must be that some monkey knows sign language. However, the entailment does not hold in QL. It is possible for the sentence $\qt{\forall}{x}(Mx \eif Sx)$ to be true even though the sentence $\qt{\exists}{x}(Mx \eand Sx)$ is false.
+
+How can this be? The answer comes from considering whether these sentences would be true or false \emph{if there were no monkeys}.
+
+We have defined $\forall$ and $\exists$ in such a way that $\forall\metaA{}$ is equivalent to $\enot \exists\enot \metaA{}$. As such, the universal quantifier doesn't involve the existence of anything --- only non-existence. If sentence \ref{monkey1} is true, then there are \emph{no} monkeys who don't know sign language. If there were no monkeys, then $\qt{\forall}{x}(Mx \eif Sx)$ would be true and $\qt{\exists}{x}(Mx \eand Sx)$ would be false.
+
+A second reason to allow empty predicates is that we want to be able to say things like, `I do not know if there are any monkeys, but any monkeys that there are know sign language.' That is, we want to be able to have predicates that do not (or might not) refer to anything.
+
+Third, consider: $\qt{\forall}{x} (Px \eif Px)$. This should be a tautology. But if sentence \ref{monkey1} implied sentence \ref{monkey2}, then this would imply $\qt{\exists}{x} (Px \eand Px)$. It would become a logical truth that for any predicate there is something that satisfies that predicate.
+
+What happens if we add an empty predicate $R$ to the interpretation above? For example, we might define $Rx$ to mean `$x$ is a refrigerator.' Now the sentence $\qt{\forall}{x}(Rx \eif Mx)$ will be true. This is counterintuitive, since we do not want to say that there are a whole bunch of refrigerator monkeys. It is important to remember, though, that $\qt{\forall}{x}(Rx \eif Mx)$ means that any member of the UD which is a refrigerator is a monkey. Since the UD is animals, there are no refrigerators in the UD and so the sentence is trivially true.
+
+If you were actually translating the sentence `All refrigerators are monkeys', then you would want to include appliances in the UD. Then the predicate $R$ would not be empty and the sentence $\qt{\forall}{x}(Rx \eif Mx)$ would be false.
+
+\begin{table}[t]
+\factoidbox{
+\begin{itemize}
+\item A UD must have \emph{at least} one member.
+\item A predicate may apply to some, all, or no members of the UD.
+\item A constant must pick out \emph{exactly} one member of the UD.
+\item A member of the UD may be picked out by one constant, many constants, or none at all.
+\end{itemize}
+}
+\end{table}
+
+\section{Picking a universe of discourse}
+The appropriate symbolization of an English language sentence in QL will depend on the symbolization key. In some ways, this is obvious: It matters whether $Dx$ means `$x$ is dainty' or `$x$ is dangerous.' The meaning of sentences in QL also depends on the UD.
+
+Let $Rx$ mean `$x$ is a rose,' let $Tx$ mean `$x$ has a thorn,' and consider this sentence:
+\begin{earg}
+\item[\ex{pickUDrose}] Every rose has a thorn.
+\end{earg}
+
+It is tempting to say that sentence \ref{pickUDrose} should be translated as $\qt{\forall}{x}(Rx \eif Tx)$. If the UD contains all roses, that would be correct. Yet if the UD is merely \emph{things on my kitchen table}, then $\qt{\forall}{x}(Rx \eif Tx)$ would only mean that every rose on my kitchen table has a thorn. If there are no roses on my kitchen table, the sentence would be trivially true.
+
+The universal quantifier only ranges over members of the UD, so we need to include all roses in the UD in order to translate sentence \ref{pickUDrose}. We have two options. First, we can restrict the UD to include all roses but \emph{only} roses. Then sentence \ref{pickUDrose} becomes $\qt{\forall}{x} Tx$. This means that everything in the UD has a thorn; since the UD just is the set of roses, this means that every rose has a thorn. This option can save us trouble if every sentence that we want to translate using the symbolization key is about roses.
+
+Second, we can let the UD contain things besides roses: rhododendrons, rats, rifles, and whatall else. Then sentence \ref{pickUDrose} must be $\qt{\forall}{x}(Rx \eif Tx)$.
+
+If we wanted the universal quantifier to mean \emph{every} thing, without restriction, then we might try to specify a UD that contains everything. But this notion is somewhat obscure. Does `everything' include things that have only been imagined, like fictional characters? On the one hand, we want to be able to symbolize arguments about Hamlet or Sherlock Holmes. So we need to have the option of including fictional characters in the UD. On the other hand, we never need to talk about every thing that does not exist. That might not even make sense. There are philosophical issues here that we will not try to address. We can avoid these difficulties by always specifying the UD. For example, if we mean to talk about plants, people, and cities, then the UD might be `living things and places.'
+
+Suppose that we want to translate sentence \ref{pickUDrose} and, with the same symbolization key, translate these sentences:
+
+\begin{earg}
+\item[\ex{pickUDhair}] Esmerelda has a rose in her hair.
+\item[\ex{pickUDcross}] Everyone is cross with Esmerelda.
+\end{earg}
+
+We need a UD that includes roses (so that we can symbolize sentence \ref{pickUDrose}) and a UD that includes people (so we can translate sentence \ref{pickUDhair}--\ref{pickUDcross}.) Here is a suitable key:
+\begin{ekey}
+\item[UD:] people and plants
+\item[Px:] $x$ is a person.
+\item[Rx:] $x$ is a rose.
+\item[Tx:] $x$ has a thorn.
+\item[Cxy:] $x$ is cross with $y$.
+\item[Hxy:] $x$ has $y$ in their hair.
+\item[e:] Esmerelda
+\end{ekey}
+
+Since we do not have a predicate that means `$\ldots$ has a rose in her hair', translating sentence \ref{pickUDhair} will require paraphrasing. The sentence says that there is a rose in Esmerelda's hair; that is, there is something which is both a rose and is in Esmerelda's hair. So we get: $\qt{\exists}{x}(Rx \eand Hex)$.
+
+It is tempting to translate sentence \ref{pickUDcross} as $\qt{\forall}{x} Cxe$. Unfortunately, this would mean that every member of the UD is cross with Esmerelda --- both people and plants. It would mean, for instance, that the rose in Esmerelda's hair is cross with her. Of course, sentence \ref{pickUDcross} does not mean that.
+
+`Everyone' means every person, not every member of the UD. So we can paraphrase sentence \ref{pickUDcross} as, `Every person is cross with Esmerelda.' We know how to translate sentences like this: $\qt{\forall}{x}(Px \eif Cxe)$.
+
+In general, the universal quantifier can be used to mean `everyone' if the UD contains only people. If there are people and other things in the UD, then `everyone' must be treated as `every person'.
+
+
+
+
+
+
+
+%%%
+
 What is an interpretation in QL? Like a symbolization key for QL, an interpretation requires a universe of discourse, a schematic meaning for each of the predicates, and an object that is picked out by each constant. For example:
 
 \begin{ekey}

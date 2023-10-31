@@ -1,0 +1,283 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs} %%Math packages
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{multicol} 
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage{prooftrees} 
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep={}}
+% \usepackage{fitchproof} 
+
+% \linespread{1} % Change line spacing here, Palatino benefits from a slight increase by default
+
+\newcommand{\corner}[1]{\ulcorner#1\urcorner} %%Corner quotes
+\newcommand{\tuple}[1]{\langle#1\rangle} %%Angle brackets
+\newcommand{\set}[1]{\lbrace#1\rbrace} %%Set brackets
+\newcommand{\interpret}[1]{\llbracket#1\rrbracket} %%Double brackets
+%\DeclarePairedDelimiter\ceil{\lceil}{\rceil}    
+\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\even}{\texttt{Even}}
+\newcommand{\comp}{\texttt{Comp}}
+\newcommand{\res}{\texttt{Res}}
+\newcommand{\simp}{\texttt{Simple}}
+\newcommand{\leng}{\texttt{Length}}
+\newcommand{\V}[1]{\mathcal{V}_{#1}} %%Corner quotes
+
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
+\renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+
+\renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
+\begin{flushright} % Right align
+{\LARGE\@title} % Increase the font size of the title
+
+\vspace{10pt} % Some vertical space between the title and author name
+
+{\@author} % Author name
+\\\@date % Date
+
+\vspace{15pt} % Some vertical space between the author block and abstract
+\end{flushright}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Quantifier Logic}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+\section*{Expressive Limitations}
+
+\begin{enumerate}
+  \item[\it Socrates:] Consider the following argument:
+  \begin{enumerate}
+    \item Every human is mortal.
+    \item Socrates is human.
+    \item \therefore\ Socrates is mortal.
+  \end{enumerate}
+  \item[\it Mammals:] Consider the following argument:
+  \begin{enumerate}
+    \item All humans are mammals.
+    \item All mammals are multi-celled organisms.
+    \item \therefore\ All humans are multi-celled organisms.
+  \end{enumerate}
+  \item[\it SL Regimentation:] Neither argument is valid in SL.
+\end{enumerate}
+
+
+
+
+\section*{Predicates, Variables, and Quantifiers}
+
+\begin{enumerate}
+  \item[\textit{Mammals} (a):] Everything is such that if it is human then it is a mammal.
+  \item[\textit{Mammals} (b):] Everything is such that if it is a mammal then it is a multi-celled organism.
+  \item[\textit{Mammals} (c):] Everything is such that if it is human then it is a multi-celled organism.
+  \item[\it Predicates:] 
+    `is human',\\ 
+    `is a mammal', and\\ 
+    `is a multi-celled organism'.
+  \item[\it Properties:] Predicates express properties.
+  \item[\it Variables:] `it'. 
+  \item[\it Reference:] What does `it' refer to?
+  \item[\it Atomic Formulas:] 
+    `it is human',\\ 
+    `it is a mammal', and\\ 
+    `it is a multi-celled organism'. 
+  \item[\it Complex Formulas:] 
+    `if it is human then it is a mammal',\\ 
+    `if it is a mammal then it is a multi-celled organism', and\\ 
+    `if it is human then it is a multi-celled organism'.
+  \item[\it Quantifiers:] `Everything is such that'.
+\end{enumerate}
+
+
+
+
+
+% \section*{Generalised Quantifiers}
+%
+% \begin{enumerate}
+%   \item[\it Compare:] `All' and `Everything is such that'.
+%   \item[\it Plurals:] `humans', `mammals', `multi-celled organisms'. 
+%   \item[\it Other GQs:] `Most', `Many', `Some', `No', `Every', etc.
+% \end{enumerate}
+
+
+\section*{Constants}
+
+\begin{enumerate}
+  \item[\textit{Socrates} (a):] Everything is such that if it is human then it is mortal.
+  \item[\textit{Socrates} (b):] Socrates is human.
+  \item[\textit{Socrates} (c):] Socrates is mortal.
+  \item[\it Predicates:] 
+    `is human' and 
+    `is mortal'.
+  \item[\it Variables:] `it'. 
+  \item[\it Constants:] `Socrates'. 
+  \item[\it Reference:] Constants refer to objects.
+  \item[\it Atomic Formulas:] 
+    `it is human',
+    `it is mortal',
+    `Socrates is human', and
+    `Socrates is mortal'. 
+  \item[\it Complex Formulas:] `if it is human then it is mortal'.
+  \item[\it Quantifiers:] `Everything is such that'.
+\end{enumerate}
+
+
+
+
+\section*{Binary Predicates}
+
+\begin{enumerate}
+  \item[\it Height:]
+    Kin is taller than Prema.\\ 
+    \therefore\ Prema is shorter than Kin.
+  \item[\bf Task 1:] Regiment the argument above.
+  \item[\it Predicates:] `is taller than', `is shorter than', and `is the same height as'.
+  \item[\it Relations:] Binary predicates express $2$-place properties, i.e., \textit{relations}. 
+    \begin{itemize}
+      \item $Tkp\ \therefore\ Spk$.
+      \item $Tkp\ \therefore\ \neg Tpk$.
+      \item $Tkp\ \therefore\ \neg Tpk \wedge \neg Epk$.
+    \end{itemize}
+  \item[\bf Question 1:] Is this argument valid, and if not how can we make it valid?
+    \begin{itemize}
+      \item $Tkp,\ Tkp \supset Spk\ \therefore\ Spk$.
+      \item $Tkp,\ \forall x \forall y(Txy \supset Syx)\ \therefore\ Spk$.
+    \end{itemize}
+  \item[\it Age:] 
+    Jon is older than Sara.\\ 
+    Sara is older than Ethan.\\
+    \therefore\ Jon is older than Ethan.
+  \item[\bf Task 2:] Regiment the argument above.
+  \item[\it Predicates:] `is older than'.
+    \begin{itemize}
+      \item $Ojs,\ Ose\ \therefore\ Oje$.
+    \end{itemize}
+  \item[\bf Question 2:] Is this argument valid, and if not how can we make it valid?
+    \begin{itemize}
+      \item $Ojs,\ Ose,\ (Ojs \wedge Ose) \supset Oje\ \therefore\ Oje$.
+      \item $Ojs,\ Ose,\ \forall x \forall y \forall z((Oxy \wedge Oyz) \supset Oxz)\ \therefore\ Oje$.
+    \end{itemize}
+\end{enumerate}
+
+
+
+
+\section*{Polyadic Predicates}
+
+\begin{enumerate}
+  \item[\it Triadic:] 
+    `$x$ is between $y$ and $z$',\\
+    `$x$ is more similar to $y$ than to $z$',\\
+    `$x$ is closer to $y$ than to $z$', \ldots 
+  \item[\it Polyadic:] We may refer to predicates as $n$-place or $n$-adic.
+  \item[\it Properties:] $n$-place predicates express $n$-place properties.
+\end{enumerate}
+
+
+
+
+
+\section*{Primitive Symbols of QL}
+
+\begin{enumerate}
+  \item[\it Predicates:] $n$-place predicates $A^n,\ldots,Z^n$  for $n\geq 0$ possibly with subscripts.
+  \item[\it Constants:] $a,b,c,\ldots$ possibly with subscripts.
+  \item[\it Variables:] $x,y,z,\ldots$ possibly with subscripts.
+  \item[\it Connectives:] $\neg, \wedge, \vee, \supset, \equiv$.
+  \item[\it Quantifiers:] $\forall, \exists$.
+  \item[\it Parentheses:] $(,)$.
+\end{enumerate}
+
+
+
+
+\section*{Well-Formed Formulas of QL}
+
+\begin{enumerate}
+  \item[\it Singular Terms:] Constants and variables are called \textit{singular terms}.
+  \item[\it Well-Formed Formulas:] We may define the well-formed formulas (wffs) of QL as follows:
+  \item $\mathcal{F}^n\alpha_1,\ldots,\alpha_n$ is a wff if $\mathcal{F}^n$ is an $n$-place predicate and $\alpha_1,\ldots,\alpha_n$ are singular terms.
+  \item If $\varphi$ and $\psi$ are wffs and $\alpha$ is a variable, then:
+    \begin{enumerate}
+      \begin{multicols}{2}
+        \item $\exists\alpha\varphi$ is a wff;
+        \item $\forall\alpha\varphi$ is a wff;
+        \item $\neg\varphi$ is a wff;
+        \item[] ~
+        \item $(\varphi\wedge\psi)$ is a wff;
+        \item $(\varphi\vee\psi)$ is a wff;
+        \item $(\varphi\supset\psi)$ is a wff; and
+        \item $(\varphi\equiv\psi)$ is a wff.
+      \end{multicols}
+    \end{enumerate}
+  \item Nothing else is a wff.
+  \item[\it Atomic Formulas:] The wffs defined by (a) are \textit{atomic}.
+  \item[\it Arguments:] The singular terms in an atomic wff are the \textit{arguments} of the predicate.
+  \item[\it Composition Rules:] The clauses in (b) are called \textit{composition rules}.
+  \item[\it Scope:] $\varphi$ is the \textit{scope} of the quantifier in $\exists \alpha \varphi$ and $\forall \alpha \varphi$.
+    \begin{itemize}
+      \item Compare the scope of negation.
+    \end{itemize}
+  \item[\bf Question 3:] Does the definition above make sense as stated?
+  \item[\bf Task 3:] How can we fix the definition above to respect use/mention?
+\end{enumerate}
+
+
+
+
+\section*{The Sentences of QL}
+
+\begin{enumerate}
+  \item[\it Free Variables:] We define the \textit{free variables} recursively:
+  \item $\alpha$ is free in $\mathcal{F}^n\alpha_1,\ldots,\alpha_n$ if $\alpha=\alpha_i$ for some $1\leq i\leq n$ where $\alpha$ is a variable, $\mathcal{F}^n$ is an $n$-place predicate, and $\alpha_1,\ldots,\alpha_n$ are singular terms.
+  \item If $\varphi$ and $\psi$ are wffs and $\alpha$ and $\beta$ are variables, then:
+    \begin{enumerate}
+        \item $\alpha$ is free in $\exists\beta\varphi$ if $\alpha$ is free in $\varphi$ and $\alpha\neq\beta$;
+        \item $\alpha$ is free in $\forall\beta\varphi$ if $\alpha$ is free in $\varphi$ and $\alpha\neq\beta$;
+        \item $\alpha$ is free in $\neg\varphi$ if $\alpha$ is free in $\varphi$;
+        \item $\alpha$ is free in $(\varphi\wedge\psi)$ if $\alpha$ is free in $\varphi$ or $\alpha$ is free in $\psi$;
+        \item $\alpha$ is free in $(\varphi\vee\psi)$ if $\alpha$ is free in $\varphi$ or $\alpha$ is free in $\psi$;
+        \item $\alpha$ is free in $(\varphi\supset\psi)$ if $\alpha$ is free in $\varphi$ or $\alpha$ is free in $\psi$;
+        \item $\alpha$ is free in $(\varphi\equiv\psi)$ if $\alpha$ is free in $\varphi$ or $\alpha$ is free in $\psi$;
+    \end{enumerate}
+  \item Nothing else is a free variable. 
+  \item[\it Bound Variables:] Every free occurrence of $\alpha$ in $\varphi$ is \textit{bound} in $\exists\alpha\varphi$ and $\forall\alpha\varphi$. 
+  \item[\it Binding:] The variable $\alpha$ is the \textit{binding variable} in $\exists\alpha\varphi$ and $\forall\alpha\varphi$.
+  \item[\it Open Sentences:] An \textit{open sentence} of QL is any wff with free variables.
+  \item[\it Sentences:] A \textit{sentence} of QL is any wff without free variables.
+  \item[\it Interpretation:] Only the sentences of QL will have truth-values on an interpretation independent of an assignment function.
+\end{enumerate}
+
+
+\end{document}
+
