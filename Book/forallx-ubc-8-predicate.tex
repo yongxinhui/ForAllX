@@ -730,182 +730,276 @@ Nevertheless, $y$ remains free throughout, and so \ref{sen9} is not a sentence o
 In order to bind the free occurrence of $y$ in \ref{sen9}, we may add an additional quantifier whose binding variable is $y$ as given by \ref{sen10}.
 Since \ref{sen10} does not include any free variables, \ref{sen10} is a sentence of QL and so amenable to interpretation.
 
-\bigskip
-
-{\Large To be continued\ldots}
 
 
 
-\iffalse
 
 
 
 \section{Regimentation in QL}
 
-We now have the basic pieces of QL. Translating more complicated sentences will only be a matter of knowing the right way to combine predicates, constants, quantifiers, variables, and sentential connectives. Consider these sentences:
+We now have the basic pieces of QL.
+Translating more complicated sentences will only be a matter of knowing the right way to combine predicates, constants, quantifiers, variables, and sentential connectives.
+Consider these sentences:
+
 \begin{earg}
 \item[\ex{quan1}] Every coin in my pocket is a loonie.
 \item[\ex{quan2}] Some coin on the table is a dime.
 \item[\ex{quan3}] Not all the coins on the table are loonies.
 \item[\ex{quan4}] None of the coins in my pocket are dimes.
 \end{earg}
-In providing a symbolization key, we need to specify a UD. Since we are talking about coins in my pocket and on the table, the UD must at least contain all of those coins. Since we are not talking about anything besides coins, we let the UD be all coins. Since we are not talking about any specific coins, we do not need to define any constants. So we define this key:
+
+In order to regiment these sentences, we may provide the following symbolization key:
+
 \begin{ekey}
-\item[UD:] all coins
+\item[Cx:] $x$ is a coin.
 \item[Px:] $x$ is in my pocket.
 \item[Tx:] $x$ is on the table.
 \item[Lx:] $x$ is a loonie.
 \item[Dx:] $x$ is a dime.
 \end{ekey}
-Sentence \ref{quan1} is most naturally translated with a universal quantifier. The universal quantifier says something about everything in the UD, not just about the coins in my pocket. Sentence \ref{quan1} means that, for any coin, \emph{if} that coin is in my pocket, \emph{then} it is a loonie. So we can translate it as $\qt{\forall}{x}(Px \eif Lx)$.
 
-Since sentence \ref{quan1} is about coins that are both in my pocket \emph{and} that are loonies, it might be tempting to translate it using a conjunction. However, the sentence $\qt{\forall}{x}(Px \eand Lx)$ would mean that everything in the UD is both in my pocket and a loonie: All the coins that exist are loonies in my pocket. This would be nice, but it means something very different than sentence \ref{quan1}.
+Sentence \ref{quan1} is most naturally translated with a universal quantifier.
+The universal quantifier says something about everything, not just about coins, or the coins in my pocket.
+Accordingly, we may take \ref{quan1} to say that, for anything, \textit{if} it is a coin and in my pocket, \textit{then} it is a loonie.
+So we can translate it as $\qt{\forall}{x}((Cx \eand Px) \eif Lx)$.
 
-Sentence \ref{quan2} is most naturally translated with an existential quantifier. It says that there is some coin which is both on the table and which is a dime. So we can translate it as $\qt{\exists}{x}(Tx \eand Dx)$.
+Since sentence \ref{quan1} is about coins that are both in my pocket \emph{and} that are loonies, it might be tempting to translate it using a conjunction.
+However, the sentence $\qt{\forall}{x}((Cx \eand Px) \eand Lx)$ would mean that everything is a coin in my pocket and a loonie.
+It would also be wrong to regiment sentence \ref{quan1} as $\qt{\forall}{x}(Cx \eif (Px \eand Lx))$ since this say that everything that is a coin is in my pocket and a loonie. 
+This is a very strong claim, and is unlikely to be true since there are a lot of coins out there which are neither in my pocket or loonies.
 
-Notice that we needed to use a conditional with the universal quantifier, but we used a conjunction with the existential quantifier. This is a common pattern. What would it mean to write $\qt{\exists}{x}(Tx \eif Dx)$? Probably not what you think. It means that there is some member of the UD which would satisfy the subformula; roughly speaking, there is some name $\alpha$ such that $(T\alpha \eif D\alpha)$ is true. In SL, $\metaA{} \eif \metaB{}$ is logically equivalent to $\enot\metaA{} \eor \metaB{}$, and this will also hold in QL. So $\qt{\exists}{x}(Tx \eif Dx)$ is true if there is some $\alpha$ such that $(\enot T\alpha \eor D\alpha)$; i.e., it is true if some coin is \emph{either} not on the table \emph{or} is a dime. Of course there is a coin that is not on the table --- there are coins in lots of other places. So $\qt{\exists}{x}(Tx \eif Dx)$ makes an extremely weak claim. A conditional will usually be the natural connective to use with a universal quantifier, but a conditional within the scope of an existential quantifier can do very strange things. It's a pretty good rule of thumb that you shouldn't be putting conditionals in the scope of existential quantifiers. This is pretty much never a good translation of any natural English sentence.
+These examples bring out the idea of \define{restricting} a universal quantifier.
+Since saying something about everything in an unrestricted way is only very rarely something that we intend to do, universal claims almost always take the following form:
 
-Sentence \ref{quan3} can be paraphrased as, `It is not the case that every coin on the table is a loonie.' So we can translate it as $\enot \qt{\forall}{x}(Tx \eif Lx)$. You might look at sentence \ref{quan3} and paraphrase it instead as, `Some coin on the table is not a loonie.' You would then translate it as $\qt{\exists}{x}(Tx \eand \enot Lx)$. Although it is probably not obvious, these two translations are logically equivalent. (This is due to the logical equivalence between $\enot\qt{\forall}{x}\metaA{}$ and $\qt{\exists}{x}\enot\metaA{}$, along with the equivalence between $\enot(\metaA{}\eif\metaB{})$ and $\metaA{}\eand\enot\metaB{}$. We'll be able to prove this later.)
-
-Sentence \ref{quan4} can be paraphrased as, `It is not the case that there is some dime in my pocket.' This can be translated as $\enot\qt{\exists}{x}(Px \eand Dx)$. It might also be paraphrased as, `Everything in my pocket is a non-dime,' and then could be translated as $\qt{\forall}{x}(Px \eif \enot Dx)$. Again the two translations are logically equivalent. Both are correct translations of sentence \ref{quan4}.
-
-We can now translate the argument from p.~\pageref{willard1}, the one that motivated the need for quantifiers:
-\begin{quote}
-Willard is a logician. All logicians wear funny hats.\\
-\therefore\ Willard wears a funny hat.
-\end{quote}
-\begin{ekey}
-\item[UD:] people
-\item[Lx:] $x$ is a logician.
-\item[Fx:] $x$ wears a funny hat.
-\item[w:] Willard
-\end{ekey}
-Translating, we get:
 \begin{earg}
-\item[] $Lw$
-\item[] $\qt{\forall}{x}(Lx \eif Fx)$
-\item[\therefore] $Fw$
+\item[\ex{quan5}] $\forall\alpha(\metaA(\alpha) \eif \metaB).$ 
 \end{earg}
 
-This captures the structure that was left out of the SL translation of this argument, and this is a valid argument in QL.
+Here $\metaA(\alpha)$ is a wff of QL in which $\alpha$ occurs as a free variable, and so $\alpha$ as it occurs in $\metaA(\alpha)$ is bound by the quantifier $\forall\alpha$.
+Accordingly, the sentence \ref{quan5} says that $\metaB$ holds of everything that satisfies the condition $\metaA$.
+Although we have not required $\metaB$ to also include $\alpha$ as a free variable, it is typical that $\metaB$ would include free occurrences of $\alpha$.
+For instance, in the case above, we compared taking $Cx \eand Px$ to restrict the quantifier with taking just $Cx$ to restrict the quantifier. 
+Whereas the former allows us to make universal claims about just the coins in my pocket, the latter allows us to make claims about all coins.
+
+Sentence \ref{quan2} is most naturally translated with an existential quantifier.
+It says that there is some coin which is both on the table and which is a dime.
+So we can translate it as $\qt{\exists}{x}(Cx \eand (Tx \eand Dx))$.
+Notice that we did not use a conditional to restrict the existential quantifier in the same way as we did with the universal quantifier.
+Instead, we used conjunction to say that there is at least one thing which is a coin and moreover it is on the table and is a dime.
+Using conjunction with an existential quantifier is common pattern.
+
+What would it mean to write $\qt{\exists}{x}(Cx \eif (Tx \eand Dx))$?
+This says that there is something which is a dime on the table \textit{if it is a coin}.
+Suppose that there are no coins that are dimes on the table, but there is at least one thing which is not a coin, say the planet Jupiter which we will symbolize by the constant $j$.
+Since the planet Jupiter is not a coin, it follows that $Cj \eif (Tj \eand Dj)$ is true since the antecedent $Cj$ is false. 
+As a result, $\qt{\exists}{x}(Cx \eif (Tx \eand Dx))$ is true even though we have assumed that there are no coins that are dimes on the table.
+More generally, whenever there is something that is not a coin, $\qt{\exists}{x}(Cx \eif (Tx \eand Dx))$ will be true, making this an extremely weak claim.
+Although the conditional is often used to restrict a universal quantifier, a conditional within the scope of an existential quantifier results in extremely week claims which we almost never intend to assert.
+Accordingly, it's a good rule of thumb that you shouldn't be putting conditionals in the scope of existential quantifiers.
+
+Sentence \ref{quan3} can be paraphrased as, `It is not the case that every coin on the table is a loonie'.
+So we can translate it as $\enot \qt{\forall}{x}((Cx \eand Tx) \eif Lx)$.
+Alternatively, we paraphrase sentence \ref{quan3} as, `Some coin on the table is not a loonie'.
+We would then translate sentence \ref{quan3} as $\qt{\exists}{x}((Cx \eand Tx) \eand \enot Lx)$.
+These two translations are logically equivalent.
+More generally, $\enot\qt{\forall}{x}\metaA{}$ and $\qt{\exists}{x}\enot\metaA{}$ are logically equivalent, as are $\enot(\metaA{}\eif\metaB{})$ and $\metaA{}\eand\enot\metaB{}$.
+This is something that we will return to in the following chapter.
+% Whereas we already have resources to establish the latter equivalence, the next chapter will allow us to also prove the former equivalence.
+
+Sentence \ref{quan4} can be paraphrased as, `It is not the case that there is a coin in my pocket that is a dime'.
+This can be regimented by $\enot\qt{\exists}{x}(Cx \eand (Px \eand Dx))$.
+It might also be paraphrased as `Every coin in my pocket is not a dime' which we may regiment by $\qt{\forall}{x}((Cx \eand Px) \eif \enot Dx)$.
+These two translations are logically equivalent, and so both correctly regiment sentence \ref{quan4}.
 
 
 
 
 
 
+\section{Paraphrasing Pronouns}
 
+When regimenting English sentences in QL, it is often helpful to paraphrase the sentence in English in a manner that exposes the logical features of that sentence.
+We have already provided a number of examples of this above.
+When paraphrasing, it is important that you do not accidentally make changes to the logical structure of the sentence since mistakes at this stage will end up resulting in the wrong regimentation.
+% Sometimes it will help to move through multiple stages paraphrasing a single sentence.
+% Each successive paraphrase should move from the original sentence closer to something that you can directly regiment in QL.
 
-
-
-
-
-
-\section{Translating pronouns}
-When translating to QL, it is important to understand the structure of the sentences you want to translate. What matters is the final translation in QL, and sometimes you will be able to move from an English language sentence directly to a sentence of QL. Other times, it helps to paraphrase the sentence one or more times. Each successive paraphrase should move from the original sentence closer to something that you can translate directly into QL.
-
-For the next several examples, we will use this symbolization key:
+Paraphrasing often requires departing from the superficial structure that the sentence has.
+For instance, consider the following symbolization key:
 
 \begin{ekey}
-\item[UD:] people
-\item[Gx:] $x$ can play guitar.
-\item[Rx:] $x$ is a rock star.
-\item[c:] Chris
-\item[l:] Lenny
+  \item[Sx:] $x$ is in session.
+  \item[Ax:] $x$ is full of activity.
+  \item[m:] MIT
 \end{ekey}
 
 Now consider these sentences:
 
 \begin{earg}
-\item[\ex{pronoun1}] If Chris can play guitar, then they are a rock star.
-\item[\ex{pronoun2}] If a person can play guitar, then they are a rock star.
+  \item[\ex{pronoun1}] If MIT is in session, then it is full of activity.
+  \item[\ex{pronoun2}] If some institute is in session, then it is full of activity.
 \end{earg}
 
-Sentence \ref{pronoun1} and sentence \ref{pronoun2} have the same words in the consequent (`$\ldots$ they are a rock star'), but they cannot be translated in the same way. It helps to paraphrase the original sentences, replacing pronouns with explicit references.
-
-Sentence \ref{pronoun1} can be paraphrased as, `If Chris can play guitar, then \emph{Chris} is a rockstar.' The word `they' in sentence \ref{pronoun1} is being used to refer to a specific individual, Chris. This can obviously be translated as $Gc \eif Rc$.
-
-Sentence \ref{pronoun2} must be paraphrased differently: `If a person can play guitar, then \emph{that person} is a rock star.' The pronoun `they' here is not about any particular person, so we need a variable. Translating halfway, we can paraphrase the sentence as, `For any person $x$, if $x$ can play guitar, then $x$ is a rock star.' Now this can be translated as $\qt{\forall}{x} (Gx \eif Rx)$. This is the same as, `Everyone who can play guitar is a rock star.'
-
-
-Consider these further sentences:
+Sentence \ref{pronoun1} and sentence \ref{pronoun2} have the same words in the consequent, but they cannot be regimented in the same way.
+This is because the `it' in sentence \ref{pronoun1} is not bound by a quantifier but rather indicates the same subject while avoiding repetition.
+By contrast, both occurrences of `it' in sentence \ref{pronoun2} are bound by the outermost quantifier.
+Whereas there is nothing to change about sentence \ref{pronoun2}, we may paraphrase sentence \ref{pronoun1} as follows:
 
 \begin{earg}
-\item[\ex{anyone1}] If anyone can play guitar, then Lenny can.
-\item[\ex{anyone2}] If anyone can play guitar, then they are a rock star.
+  \item[\ex{pronoun3}] If MIT is in session, then MIT is full of activity.
 \end{earg}
 
-These two sentences have the same antecedent (`If anyone can play guitar$\ldots$'), but they have different logical structures.
+Compare the following regimentations of sentences \ref{pronoun1} and \ref{pronoun3} respectively:
 
-Sentence \ref{anyone1} can be paraphrased, `If someone can play guitar, then Lenny can play guitar.' The antecedent and consequent are separate sentences, so it can be symbolized with a conditional as the main logical operator: $\qt{\exists}{x} Gx \eif Gl$.
-
-Sentence \ref{anyone2} can be paraphrased, `For anyone, if that one can play guitar, then that one is a rock star.' It would be a mistake to symbolize this with an existential quantifier, because it is talking about everybody. The sentence is equivalent to `All guitar players are rock stars.' It is best translated as $\qt{\forall}{x}(Gx \eif Rx)$.
-
-The English words `any' and `anyone' should typically be translated using quantifiers. As these two examples show, they sometimes call for an existential quantifier (as in sentence \ref{anyone1}) and sometimes for a universal quantifier (as in sentence \ref{anyone2}). If you have a hard time determining which is required, paraphrase the sentence with an English language sentence that uses words besides `any' or `anyone.'
-
-
-
-\section{Ambiguous predicates}
-
-Suppose we just want to translate this sentence:
 \begin{earg}
-\item[\ex{surgeon1}] Adina is a skilled surgeon.
+  \item[\ex{pronoun4}] $Sm \eif Am$.
+  \item[\ex{pronoun5}] $Sm \eif Ax$.
 \end{earg}
-Let the UD be people, let $Kx$ mean `$x$ is a skilled surgeon', and let $a$ mean Adina. Sentence \ref{surgeon1} is simply $Ka$.
+
+Although it might be tempting to try to regiment the `it' in the original sentence \ref{pronoun1} by a variable, this would result in the open sentence \ref{pronoun5} in place of the sentence \ref{pronoun4}.
+Since the original sentence says something entirely about MIT and nothing about some yet to be bound variable the way `It is red' does, sentence \ref{pronoun4} provides a better regimentation than \ref{pronoun5} does.
 
 
-Suppose instead that we want to translate this argument:
-\begin{quote}
-The hospital will only hire a skilled surgeon. All surgeons are greedy. Billy is a surgeon, but is not skilled. Therefore, Billy is greedy, but the hospital will not hire him.
-\end{quote}
-We need to distinguish being a \emph{skilled surgeon} from merely being a \emph{surgeon}. So we define this symbolization key:
+
+
+\section{Ambiguous Predicates}
+
+Suppose we want to regiment this sentence:
+
+\begin{earg}
+  \item[\ex{amb1}] Adina is a skilled surgeon.
+\end{earg}
+
+Consider the following symbolization key:
+
 \begin{ekey}
-\item[UD:] people
-\item[Gx:] $x$ is greedy.
-\item[Hx:] The hospital will hire $x$.
-\item[Rx:] $x$ is a surgeon.
-\item[Kx:] $x$ is skilled.
-\item[b:] Billy
+  \item[Kx:] $x$ is skilled
+  \item[Rx:] $x$ is a surgeon
+  \item[a:] Adina
 \end{ekey}
 
-Now the argument can be translated in this way:
+This yields the following:
+
+\begin{earg}
+  \item[\ex{amb2}] $Ka \eand Ra$.
+\end{earg}
+
+In English, this reads: Adina is skilled and Adina is a surgeon.
+Here one may object that being skilled and also being a surgeon is not the same thing as being a skilled surgeon.
+For instance, perhaps it is possible to be both skilled and a surgeon without being a skilled surgeon.
+Accordingly, we could have specified the following predicate instead:
+
+\begin{ekey}
+  \item[Sx:] $x$ is a skilled surgeon
+  \item[a:] Adina
+\end{ekey}
+
+We may then provide the following regimentation:
+
+\begin{earg}
+  \item[\ex{amb3}] $Sa$.
+\end{earg}
+
+Considering sentence \ref{amb1} on its own, it may be unclear whether to go with regimentation \ref{amb2} or \ref{amb3}.
+However, in the context of an argument, there may be good reason to go one way rather than the other.
+For instance, suppose that we want to regiment this argument:
+
+\begin{earg}
+  \item[] The hospital will only hire a skilled surgeon. 
+  \item[] Adina is a skilled.
+  \item[] Billy is a surgeon, but is not skilled.
+  \item[\therefore] Therefore, the hospital will hire Adina and not Billy.
+\end{earg}
+
+Here we need to distinguish being a \textit{skilled surgeon} from merely being a \textit{surgeon}.
+Consider this symbolization key:
+
+\begin{ekey}
+  \item[Gx:] $x$ is greedy
+  \item[Hx:] The hospital will hire $x$
+  \item[Kx:] $x$ is skilled
+  \item[Rx:] $x$ is a surgeon
+  \item[a:] Adina
+  \item[b:] Billy
+\end{ekey}
+
+Now the argument can be regimented this way:
+
 \begin{earg}
 \label{surgeon2}
-\item[] $\qt{\forall}{x}\bigl[\enot (Rx \eand Kx) \eif \enot Hx\bigr]$
-\item[] $\qt{\forall}{x}(Rx \eif Gx)$
-\item[] $Rb \eand \enot Kb$
-\item[\therefore] $Gb \eand \enot Hb$
+  \item[] $\qt{\forall}{x}(Hx \eif (Kx \eand Rx))$
+  \item[] $Ka$
+  \item[] $Rb \eand \enot Kb$
+  \item[\therefore] $\enot Hb \eand (Ha \eif Ra)$
 \end{earg}
 
 Next suppose that we want to translate this argument:
-\begin{quote}
+
+\begin{earg}
 \label{surgeon3}
-Carol is a skilled surgeon and a tennis player. Therefore, Carol is a skilled tennis player.
-\end{quote}
-If we start with the symbolization key we used for the previous argument, we could add a predicate (let $Tx$ mean `$x$ is a tennis player') and a constant (let $c$ mean Carol). Then the argument becomes:
+  \item[] Carol is a skilled surgeon and a tennis player.
+  \item[\therefore] Therefore, Carol is a skilled tennis player.
+\end{earg}
+
+Suppose that we were to use the symbolization key given above along with the following additions:
+
+\begin{ekey}
+  \item[Tx:] $x$ is a tennis player
+  \item[c:] Carol
+\end{ekey}
+
+Then the argument becomes:
+
 \begin{earg}
 \item[] $(Rc \eand Kc) \eand Tc$
 \item[\therefore] $Tc \eand Kc$
 \end{earg}
-This translation is a disaster! It takes what in English is a terrible argument and translates it as a valid argument in QL. The problem is that there is a difference between being \emph{skilled as a surgeon} and \emph{skilled as a tennis player}. Translating this argument correctly requires two separate predicates, one for each type of skill. If we let $K_1x$ mean `$x$ is skilled as a surgeon' and $K_2x$ mean `$x$ is skilled as a tennis player,' then we can symbolize the argument in this way:
+
+This argument in QL is valid, but the original argument in English is not.
+Something has gone wrong with our regimentation.
+The problem is that there is a difference between being \emph{skilled as a surgeon} and \emph{skilled as a tennis player}.
+Regimenting this argument correctly requires two separate predicates, one for each type of skill.
+Thus we may add the following:
+
+\begin{ekey}
+  \item[K$_1$x:] $x$ is skilled as a tennis player
+  \item[K$_2$x:] $x$ is skilled as a surgeon
+\end{ekey}
+
+We may now regiment the argument in this way:
+
 \begin{earg}
 \label{surgeon3correct}
-\item[] $(Rc \eand K_1c) \eand Tc$
-\item[\therefore] $Tc \eand K_2c$
+\item[] $(K_2c \eand Rc) \eand Tc$
+\item[\therefore] $K_1c \eand Tc$
 \end{earg}
-Like the English language argument it translates, this is invalid. %\nix{Notice that there is no logical connection between $K_1c$ and $Rc$. As symbols of QL, they might be any one-place predicates. In English there is a connection between being a \emph{surgeon} and being a \emph{skilled surgeon}: Every skilled surgeon is a surgeon. In order to capture this connection, we symbolize `Carol is a skilled surgeon' as $Rc \eand K_1c$. This means: `Carol is a surgeon and is skilled as a surgeon.'}
 
-The moral of these examples is that you need to be careful of symbolizing predicates in an ambiguous way. Similar problems can arise with predicates like \emph{good}, \emph{bad}, \emph{big}, and \emph{small}. Just as skilled surgeons and skilled tennis players have different skills, big dogs, big mice, and big problems are big in different ways.
+Like the English argument it regiments, this QL argument is invalid. 
+% Notice that there is no logical connection between $K_2c$ and $Rc$.
+% As symbols of QL, they might be any one-place predicates.
+% In English there is a connection between being a \textit{surgeon} and being a \textit{skilled surgeon} since every skilled surgeon is a surgeon.
+% In order to capture this connection, we symbolize `Carol is a skilled surgeon' as $Rc \eand K_1c$. This means: `Carol is a surgeon and is skilled as a surgeon.'
 
-Is it enough to have a predicate that means `$x$ is a skilled surgeon', rather than two predicates `$x$ is skilled' and `$x$ is a surgeon'? Sometimes. As sentence \ref{surgeon1} shows, sometimes we do not need to distinguish between skilled surgeons and other surgeons.
+Similar problems can arise with predicates like `is good', `is big', `is tall', etc.
+Just as skilled surgeons and skilled tennis players have different skills, big dogs, big mice, and big problems are all big in different ways.
+Must we always distinguish between different ways of being skilled, good, big, or tall? 
+No.
+As the argument about Billy shows, sometimes we only need to talk about one kind of skill.
+If you are translating an argument that is just about dogs, it is fine to use the predicate `$x$ is big'.
+However, if the argument is also about mice, it might be important to let use the predicate `$x$ is big for a dog' instead.
+In general, we try to introduce as few predicates as possible while nevertheless capturing the intended meaning of the sentence or argument in question.
 
-Must we always distinguish between different ways of being skilled, good, bad, or big? No. As the argument about Billy shows, sometimes we only need to talk about one kind of skill. If you are translating an argument that is just about dogs, it is fine to define a predicate that means `$x$ is big.' If the UD includes dogs and mice, however, it is probably best to make the predicate mean `$x$ is big for a dog.'
+
+
+
 
 
 \section{Multiple quantifiers}
+
 Consider this following symbolization key and the sentences that follow it:
+
 \begin{ekey}
-\item{UD:} People and dogs
 \item{Dx:} $x$ is a dog.
 \item{Fxy:} $x$ is a friend of $y$.
 \item{Oxy:} $x$ owns $y$.
@@ -923,14 +1017,36 @@ Consider this following symbolization key and the sentences that follow it:
 
 Sentence \ref{dog1} is easy: $Df$.
 
-Sentence \ref{dog2} can be paraphrased as, `There is a dog that Gerald owns.' This can be translated as $\qt{\exists}{x}(Dx \eand Ogx)$.
+Sentence \ref{dog2} can be paraphrased as, `There is a dog that Gerald owns.
+This can be translated as $\qt{\exists}{x}(Dx \eand Ogx)$.
 
-Sentence \ref{dog3} can be paraphrased as, `There is some $y$ such that $y$ is a dog owner.' The subsentence `$y$ is a dog owner' is just like sentence \ref{dog2}, except that it is about $y$ rather than being about Gerald. So we can translate sentence \ref{dog3} as $\qt{\exists}{y} \qt{\exists}{x}(Dx \eand Oyx)$. 
+Sentence \ref{dog3} can be paraphrased as, `There is someone such that that person is a dog owner.'
+The subsentence `that person is a dog owner' is just like sentence \ref{dog2}, except that it is about \textit{that person} rather than being about Gerald.
+We can save ourselves some writing by paraphrasing \ref{dog3} as `There is some $y$ such that $y$ is a dog owner'.
+So we can translate sentence \ref{dog3} as $\qt{\exists}{y} \qt{\exists}{x}(Dx \eand Oyx)$, replacing `is a dog owner' with our previous regimentation. 
 %(Although we could swap the $x$s and $y$s, it is important that we use two different variables here.)
 
-Sentence \ref{dog4} can be paraphrased as, `Every friend of Gerald is a dog owner.' Translating part of this sentence, we get $\qt{\forall}{x}(Fxg \eif\mbox{`$x$ is a dog owner'})$. Again, it is important to recognize that `$x$ is a dog owner' is structurally just like sentence \ref{dog2}. Since we already have an x-quantifier, we will need a different variable for the existential quantifier. Any other variable will do. Using $z$, sentence \ref{dog4} can be translated as $\qt{\forall}{x}\bigl[Fxg \eif\qt{\exists}{z}(Dz \eand Oxz)\bigr]$.
+Sentence \ref{dog4} can be paraphrased as, `Every friend of Gerald is a dog owner.
+We can expand this as, `Everything is such that, if it is a friend of Gerald, then it is a dog owner'.
+Translating part of this sentence, we get $\qt{\forall}{x}(Fxg \eif\mbox{$x$ is a dog owner})$.
+Again, it is important to recognize that `$x$ is a dog owner' is structurally just like sentence \ref{dog2}.
+Since we already have a quantifier binding $x$, we will need a different variable for the existential quantifier.
+Any other variable will do.
+Using $z$, sentence \ref{dog4} can be translated as $\qt{\forall}{x}(Fxg \eif\qt{\exists}{z}(Dz \eand Oxz))$.
 
-Sentence \ref{dog5} can be paraphrased as `For any $x$ that is a dog owner, there is a dog owner who is $x$'s friend.' Partially translated, this becomes $$\qt{\forall}{x}\bigl[\mbox{$x$ is a dog owner}\eif\qt{\exists}{y}(\mbox{$y$ is a dog owner}\eand Fxy)\bigr].$$ Completing the translation, sentence \ref{dog5} becomes $$\qt{\forall}{x}\bigl[\qt{\exists}{z}(Dz \eand Oxz)\eif\qt{\exists}{y}\bigl(\qt{\exists}{z}(Dz \eand Oyz)\eand Fxy\bigr)\bigr].$$
+Sentence \ref{dog5} can be paraphrased as `For any $x$ that is a dog owner, there is a dog owner who is $x$'s friend'.
+Partially translated, this becomes: 
+  $$\qt{\forall}{x}\bigl[\mbox{$x$ is a dog owner}\eif\qt{\exists}{y}(\mbox{$y$ is a dog owner}\eand Fxy)\bigr].$$
+Completing the translation, sentence \ref{dog5} becomes: 
+  $$\qt{\forall}{x}\bigl[\qt{\exists}{z}(Dz \eand Oxz)\eif\qt{\exists}{y}\bigl(\qt{\exists}{z}(Dz \eand Oyz)\eand Fxy\bigr)\bigr].$$
+
+Regimenting English sentences in QL will take some practice, and often there will be more than one way to go.
+When you come up with a regimentation, it is often worth considering if there are any other regimentations that you could have provided.
+Often there are, and they are not always logically equivalent.
+Sometimes what this means is that the original claim is ambiguous.
+Other times, some regimentations will be more natural than that others.
+
+\iffalse
 
 Consider this symbolization key and these sentences:
 \begin{ekey}
@@ -956,7 +1072,7 @@ When symbolizing sentences with multiple quantifiers, it is best to proceed by s
 
 
 
-
+% \iffalse
 
 \section{Common student errors}
 
