@@ -1,20 +1,24 @@
 ﻿%!TEX root = forallx-ubc.tex
-\chapter{Natural Deduction Proofs in QL}
+\chapter{Natural Deduction in QL}
 \label{ch.QLND}
 
 
-Trees employ a kind of `brute force' strategy for proving entailment claims. When the logical structure of the relevant sentences is rather simple, as it is in SL and in some QL cases, it can be an effective strategy. But in other cases, trees become tedious and complex. It is useful to have a proof system that allows one to reason in a more targeted way --- especially if you already have an intuitive understanding of why a given argument should be expected to turn out valid. As we did in Chapter \ref{ch.ND.proofs} for SL, this chapter we will provide a natural deduction system, extending our system SND to quantifier logic. 
-%As in the case of trees, our QL natural deduction system is an extension of the one we learned previously for SL.
+% Trees employ a kind of `brute force' strategy for proving entailment claims.
+% When the logical structure of the relevant sentences is rather simple, as it is in SL and in some QL cases, it can be an effective strategy.
+% But in other cases, trees become tedious and complex.
+% It is useful to have a proof system that allows one to reason in a more targeted way --- especially if you already have an intuitive understanding of why a given argument should be expected to turn out valid.
 
-Like our SL natural deduction system, our system can only be used to demonstrate that an argument \emph{is} valid. We do not have a formal method, as part of our natural deduction system, for demonstrating that an argument is \emph{invalid}. In this respect natural deduction differs from trees. We won't go through the proof in this book, but the natural deduction system we provide is both sound and complete. That means that there are natural deduction proofs corresponding to all and only the valid arguments in QL.
+This chapter extends our system SD to provide a natural deduction system for quantifier logic called QD.
+% Like our natural deduction system for SL, our system can only be used to demonstrate that an argument \emph{is} valid since natural deduction systems do not demonstrate that an argument is \emph{invalid}.
+% In this respect natural deduction differs from trees.
+We won't go through the proof in this book, but the system QD that we will provide is both sound and complete with respect to the semantics for QL.
+That means that there are natural deduction proofs corresponding to all and only the valid arguments in QL.
 
-\section{Natural Deduction: the basics}
+Our QL system will include all the same introduction and elimination rules that we provided for the sentential connectives included in SL. 
+We'll add introduction and elimination rules for the existential and universal quantifiers, and some other derived rules as well.
 
-In a natural deduction system, one begins by writing down any starting assumptions, which correspond to the premises of an argument. Next, one derives a series of additional sentences, justified via a series of particular rules by the sentences above. Additional assumptions may be made and discharged along the way. If one succeeds in writing down the conclusion of the argument on a new line, with no additional undischarged assumptions, consistent with the natural deduction rules, one has proven that the conclusion follows from those premises. If you need a refresher on how that works, review Chapter \ref{ch.ND.proofs}.
 
-Our QL system will use all the same sentential rules that our SL system did. All the introduction and elimination rules for the sentential connectives will be part of this system too. (These are summarized, along with our new rules, in the Quick Reference guide at the end of this book.) We'll add introduction and elimination rules for the existential and universal quantifiers, and some other derived rules as well. {\color{black} Although, as usual, you can't use the derived rules in the online \textit{Carnap} system. After all, every derivation problem is a derived rule in some system.}
-
-\section{Basic quantifier rules}
+\section{Basic Quantifier Rules}
 
 %to reformat the substitution instances, see the commands \substitute and \substitutesome in the style file. 
 

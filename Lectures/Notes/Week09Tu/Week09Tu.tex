@@ -28,6 +28,8 @@
 \newcommand{\I}{\mathcal{I}}
 \newcommand{\J}{\mathcal{J}}
 \newcommand{\B}{\mathcal{B}}
+\newcommand{\D}{\mathbb{D}}
+\renewcommand{\v}[1]{\mathbf{#1}}
 \newcommand{\even}{\texttt{Even}}
 \newcommand{\comp}{\texttt{Comp}}
 \newcommand{\res}{\texttt{Res}}
@@ -56,7 +58,7 @@
 %	TITLE
 %----------------------------------------------------------------------------------------
 
-\title{\textbf{Regimentation and Relations}} % Subtitle
+\title{\textbf{The Semantics for QL}} % Subtitle
 
 \author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
 
@@ -72,69 +74,58 @@
 
 %----------------------------------------------------------------------------------------
 
-% \section*{Examples}
-%
-% \begin{enumerate}
-%   \item[\it Age:] Consider the following argument:
-%   \begin{enumerate}
-%     \item Jon is older than Sara.
-%     \item Sara is older than Ethan.
-%     \item \therefore\ Jon is older than Ethan.
-%   \end{enumerate}
-%   \item[\bf Task 1:] Regiment the argument above.
-%     \begin{itemize}
-%       \item $Ojs,\ Ose\ \therefore\ Oje$.
-%     \end{itemize}
-%   \item[\bf Question 1:] Is this argument valid, and if not how can we make it valid?
-%     \begin{itemize}
-%       \item $Ojs,\ Ose,\ (Ojs \wedge Ose) \supset Oje\ \therefore\ Oje$.
-%       \item $Ojs,\ Ose,\ \forall x \forall y \forall z((Oxy \wedge Oyz) \supset Oxz)\ \therefore\ Oje$.
-%     \end{itemize}
-% \end{enumerate}
-%
-%
-%
-%
+\section*{Examples}%
+  \label{sec:Examples}
+  
+\begin{enumerate}
+  \item[\it Monadic:] Casey is dancing.
+  \item[\it Dyadic:] Al loves Max.
+  \item[\it Triadic:] Kim is between Boston and New York.
+\end{enumerate}
+
+\section*{Extensions and Referents}%
+  \label{sec:Extensions and Referents}
+  
+\begin{enumerate}
+  \item[\it Constants:] Constants are interpreted as referring to individuals.
+  \item[\it Existence:] Thus we need to know what things there are.
+  \item[\it Domain:] A \textit{domain} is any nonempty set $\D$.
+  \item[\it Referents:] Interpretations assign constants to elements of $\D$.
+  \item[\bf Question 1:] How are we going to interpret predicates?
+\end{enumerate}
+
+
+
+\section*{Extensions}%
+  \label{sec:Extensions}
+  
+\begin{enumerate}
+  \item[\it Example:] `Al loves Max' is true \textit{iff} Al bears the loves-relation to Max.
+  \item[\it Ordered Pairs:] A dyadic predicate is interpreted by a set of \textit{ordered pairs}.
+  \item[\it Cartesian Product:] Dyadic predicates are interpreted by subsets of $\D^2$.
+  \item[\bf Question 2:] How are we to interpret $n$-place predicates?
+  \item[\it Extensions:] $n$-place predicates are interpreted by subsets of $\D^n$.
+  \item[\bf Question 3:] How are we to interpret $0$-place and $1$-place predicates?
+  \item[\it Singletons:] $1$-place predicates are interpreted by subsets of $\D^1=\set{\tuple{\v{x}}:\v{x}\in\D}$.
+  \item[\it ]
+\end{enumerate}
+
 
 \section*{Restricting Quantifiers}
 
 \begin{enumerate}
-  \item[\it Universals Quantifiers:] Regiment the following sentences:
-    \begin{itemize}
-      \item All dogs go to heaven.
-      \item Jim took every chance he got.
-      \item All the monkeys that Amar loves love him back.
-      \item Everyone who trained hard or got lucky made it to the top or else didn't compete.
-    \end{itemize}
-  \item[\it Hidden Quantifiers:] Regiment the following sentences:
-    \begin{itemize}
-      \item At least the guests that remained were pleased with the party.
-      \item I haven't met a cat that likes Merra.
-      \item Kiko's only friends are animals.
-    \end{itemize}
-  \item[\it Existential Quantifiers:] Regiment the following sentences: 
-    \begin{itemize}
-      \item Something great is around the corner.
-      \item One of Ken's statues is very old.
-      \item Kate found a job that she loved.
-    \end{itemize}
+  \item[\it Regimentation:] Regiment the following sentences:
+  \begin{itemize}
+    \item Jim took every chance he got.
+    \item At least the guests that remained were pleased with the party.
+    \item I haven't met a cat that likes Merra.
+    \item Kate found a job that she loved.
+    \item Everybody everybody loves loves somebody.
+    \item No set is a member of itself.
+    \item There is a set with no members.
+  \end{itemize}
 \end{enumerate}
 
-
-
-
-
-\section*{Mixed Quantifiers}
-
-\begin{enumerate}
-  \item Nothing is without imperfections.
-  \item Every dog has its day.
-  \item Everyone loves someone.
-  \item Nobody knows everybody.
-  \item Everybody everybody loves loves somebody.
-  \item No set is a member of itself.
-  \item There is a set with no members.
-\end{enumerate}
 
 
 \section*{Arguments}

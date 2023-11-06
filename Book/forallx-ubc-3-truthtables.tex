@@ -259,7 +259,7 @@ Although interpretations only specify the truth-values of sentence letters, we m
 Somewhat more precisely, we may use any interpretation $\I$ to recursively define a \define{valuation} function $\V{\I}$ by way of the following semantic clauses for the connectives included in SL:
 
 \begin{enumerate}[labelsep=.15in]
-  \item[($A$)] $\V{\I}(\enot\metaA{})=\I(\metaA{})$ just in case $\metaA{}$ is a sentence letter of SL.
+  \item[($A$)] $\V{\I}(\metaA{})=\I(\metaA{})$ just in case $\metaA{}$ is a sentence letter of SL.
   \item[(\enot)] $\V{\I}(\enot\metaA{})=1$ just in case $\V{\I}(\metaA{})=0$.
   \item[(\eor)] $\V{\I}(\metaA{} \eor \metaB{})=1$ just in case $\V{\I}(\metaA{})=1$ or $\V{\I}(\metaB{})=1$ (or both).
   \item[(\eand)] $\V{\I}(\metaA{} \eand \metaB{})=1$ just in case $\V{\I}(\metaA{})=1$ and $\V{\I}(\metaB{})=1$.

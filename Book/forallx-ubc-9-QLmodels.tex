@@ -1,437 +1,539 @@
 ﻿%!TEX root = forallx-ubc.tex
-\chapter{A formal semantics for QL}
+\chapter{A Semantics for QL}
 \label{ch.QL.models}
-\chaptermark{Formal semantics for {QL}}
+\chaptermark{Semantics for QL}
 %see here: looks complicated:
 %https://tex.stackexchange.com/questions/476957/capitalize-first-letter-of-words-in-chapter-mark
 
 % Need to figure out how to capitalize `QL' in the running header, maybe need to define a special label (like i did in dissertation)
 
 %JH: when ichikawa talks about `defining truth' in this chapter and for SL, what he really means is defining truth CONDITIONS
-%logic of variable assignments and satisfiability semantics: we are temporarily making variables into constants: assigning a constant to each individual variable. basically converting open sentences (those with free variables) into wffs so that we can assign them truth values. 
+%logic of variable assignments and satisfiability semantics: we are temporarily making variables into constants: assigning a constant to each individual variable. basically converting open sentences (those with free variables) into wffs so that we can assign them truth-values. 
 
 %gameplan is to rewrite the truth-condition seciton using Logic Book Section 8.1, especially pages 338 and 339 which really do a much better job explaining this stuff. Should also make clear, like the logic book does, that one does not need to understand this bit of formal semantics to appreciate the important semantic notions of entailment, validity, and consistency in QL. For those, suffices to understand notion of truth in a model. 
 
-In this chapter, we describe a \emph{formal semantics} for QL. This corresponds to the discussion of interpretations and truth in SL given in Chapter \ref{ch.SLmodels}. Like truth in SL, truth in QL is determined by a particular interpretation; entailment is a matter of truth in all interpretations. In SL, we emphasized the partial valuation functions provided by interpretations, limiting the domain to the atomic sentences involved in a given set of sentences. These corresponded to rows of the truth table. For example, a model \script{I} might have provided these assignments:
+In this chapter, we will provide a \emph{semantics} for QL in much the same way that we did for SL.
+Like truth in SL, truth in QL is determined by an interpretation.
+By quantifying over all interpretations of QL, we may define entailment in QL along with the other semantic notions we introduced before.
+Recall that an interpretation of SL assigns exactly one truth-value to each sentence letter.
+For example, a model $\I$ might have included these assignments:
 
 \begin{displaymath}
-\script{I} :
-\left\{
 	\begin{array}{ll}
-	P = 0\\
-	Q = 1\\
-	R = 0
+    \I(P) = 0\\
+    \I(Q) = 1\\
+    \I(R) = 0
 	\end{array}
-\right.
 \end{displaymath}
 
-Interpretation \script{I} settles the truth value of any SL sentence one can construct from $P$, $Q$, and $R$. All the elements of SL {\color{black}are truth-functional, their truth-values determined by those of the atomic sentences that compose them}. Because QL involves richer notions and a more complex vocabulary than SL, it requires correspondingly richer information from its models.
-
-\section{Interpretations in QL}
-
-%%% FROM last chapter
-
-Given the symbolization key we have been using, $\qt{\forall}{x}Hx$ means `Everyone is happy.' Who is included in this \emph{everyone}? When we use sentences like this in English, we usually do not mean everyone now alive on the Earth. We certainly do not mean everyone who was ever alive or who will ever live. We mean something more modest: everyone in the building, everyone in the class, or everyone in the room.
-
-In order to eliminate this ambiguity, we will need to specify a \define{universe of discourse} --- abbreviated UD {\color{black} (less grandiosely, we might call this the ``domain of discourse.'')}. The UD is the set of things that we are talking about. So if we want to talk about people in Chicago, we define the UD to be people in Chicago. We write this at the beginning of the symbolization key, like this:
-\begin{ekey}
-\item[UD:] people in Chicago
-\end{ekey}
-The quantifiers \emph{range over} the universe of discourse. Given this UD, $\qt{\forall}{x}$ means `Everyone in Chicago' and $\qt{\exists}{x}$ means `Someone in Chicago.' Each constant names some member of the UD, so we can only use this UD with the symbolization key above if Donald, Gregor, and Marybeth are all in Chicago. If we want to talk about people in places besides Chicago, then we need to include those people in the UD.
-
-In QL, the UD must be \emph{non-empty}; that is, it must include at least one thing. It is possible to construct formal languages that allow for empty UDs, but this introduces complications; such languages are beyond the scope of this book.
-
-Even allowing for a UD with just one member can produce some strange results. Suppose we have this as a symbolization key:
-\begin{ekey}
-\item[UD:] the Eiffel Tower
-\item[Px:] $x$ is in Paris.
-\end{ekey}
-The sentence $\qt{\forall}{x} Px$ might be paraphrased in English as `Everything is in Paris.' Yet that would be misleading. It means that everything \emph{in the UD} is in Paris. This UD contains only the Eiffel Tower, so with this symbolization key $\qt{\forall}{x} Px$ just means that the Eiffel Tower is in Paris. We will rarely work with such bizarre domains as this.
-
-It is a rule in QL that each constant will pick out exactly one member of the UD. (There is no rule prohibiting multiple different constants from referring to the same member of the UD.)
-
-%\subsection{Non-referring terms}
-%In QL, each constant must pick out exactly one member of the UD. A constant cannot refer to more than one thing --- it is a \emph{singular} term. Each constant must still pick out \emph{something}. This is connected to a classic philosophical problem: the so-called problem of non-referring terms.
-%
-%Medieval philosophers typically used sentences about the \emph{chimera} to exemplify this problem. Chimera is a mythological creature; it does not really exist. Consider these two sentences:
-%\begin{earg}
-%\item[\ex{chimera1}] Chimera is angry.
-%\item[\ex{chimera2}] Chimera is not angry.
-%\end{earg}
-%It is tempting just to define a constant to mean `chimera.' The symbolization key would look like this:
-%\begin{ekey}
-%\item[UD:] creatures on Earth
-%\item[Ax:] $x$ is angry.
-%\item[c:] chimera
-%\end{ekey}
-%We could then translate sentence \ref{chimera1} as $Ac$ and sentence \ref{chimera2} as $\enot Ac$.
-%
-%Problems will arise when we ask whether these sentences are true or false.
-%
-%One option is to say that sentence \ref{chimera1} is not true, because there is no chimera. If sentence \ref{chimera1} is false because it talks about a non-existent thing, then sentence \ref{chimera2} is false for the same reason. Yet this would mean that $Ac$ and $\enot Ac$ would both be false. Given the truth conditions for negation, this cannot be the case.
-%
-%Since we cannot say that they are both false, what should we do? Another option is to say that sentence \ref{chimera1} is \emph{meaningless} because it talks about a non-existent thing. So $Ac$ would be a meaningful expression in QL for some interpretations but not for others. Yet this would make our formal language hostage to particular interpretations. Since we are interested in logical form, we want to consider the logical force of a sentence like $Ac$ apart from any particular interpretation. If $Ac$ were sometimes meaningful and sometimes meaningless, we could not do that.
-%
-%This is the \emph{problem of non-referring terms}, and we will return to it later (see p.~\pageref{subsec.defdesc}.) The important point for now is that each constant of QL \emph{must} refer to something in the UD, although the UD can be any set of things that we like. If we want to symbolize arguments about mythological creatures, then we must define a UD that includes them. This option is important if we want to consider the logic of stories. We can translate a sentence like `Sherlock Holmes lived at 221B Baker Street' by including fictional characters like Sherlock Holmes in our UD.
-%
-
-%%%
+Since all the sentential connectives in SL are truth-functional, the interpretation $\I$ settles the truth-value of any SL sentence that can be constructed from $P$, $Q$, and $R$ given the sentential connectives included in SL.
+Because QL includes more expressive vocabulary than SL, it requires a much richer interpretation than merely assigning truth-values to sentence letters.
+Defining the interpretations of QL and providing its semantics will the focus of this chapter.
 
 
-\section{Empty predicates}
-A predicate need not apply to anything in the UD. A predicate that applies to nothing in the UD is called an \define{empty} predicate.
 
-Suppose we want to symbolize these two sentences:
-\begin{earg}
-\item[\ex{monkey1}]Every monkey knows sign language.
-\item[\ex{monkey2}]Some monkey knows sign language.
-\end{earg}
-It is possible to write the symbolization key for these sentences in this way:
-\begin{ekey}
-\item[UD:] animals
-\item[Mx:] $x$ is a monkey.
-\item[Sx:] $x$ knows sign language.
-\end{ekey}
 
-Sentence \ref{monkey1} can now be translated as $\qt{\forall}{x}(Mx \eif Sx)$.
 
-Sentence \ref{monkey2} becomes $\qt{\exists}{x}(Mx \eand Sx)$.
+\section{Predicate Extensions}
 
-It is tempting to say that sentence \ref{monkey1} entails sentence \ref{monkey2}; that is: if every monkey knows sign language, then it must be that some monkey knows sign language. However, the entailment does not hold in QL. It is possible for the sentence $\qt{\forall}{x}(Mx \eif Sx)$ to be true even though the sentence $\qt{\exists}{x}(Mx \eand Sx)$ is false.
-
-How can this be? The answer comes from considering whether these sentences would be true or false \emph{if there were no monkeys}.
-
-We have defined $\forall$ and $\exists$ in such a way that $\forall\metaA{}$ is equivalent to $\enot \exists\enot \metaA{}$. As such, the universal quantifier doesn't involve the existence of anything --- only non-existence. If sentence \ref{monkey1} is true, then there are \emph{no} monkeys who don't know sign language. If there were no monkeys, then $\qt{\forall}{x}(Mx \eif Sx)$ would be true and $\qt{\exists}{x}(Mx \eand Sx)$ would be false.
-
-A second reason to allow empty predicates is that we want to be able to say things like, `I do not know if there are any monkeys, but any monkeys that there are know sign language.' That is, we want to be able to have predicates that do not (or might not) refer to anything.
-
-Third, consider: $\qt{\forall}{x} (Px \eif Px)$. This should be a tautology. But if sentence \ref{monkey1} implied sentence \ref{monkey2}, then this would imply $\qt{\exists}{x} (Px \eand Px)$. It would become a logical truth that for any predicate there is something that satisfies that predicate.
-
-What happens if we add an empty predicate $R$ to the interpretation above? For example, we might define $Rx$ to mean `$x$ is a refrigerator.' Now the sentence $\qt{\forall}{x}(Rx \eif Mx)$ will be true. This is counterintuitive, since we do not want to say that there are a whole bunch of refrigerator monkeys. It is important to remember, though, that $\qt{\forall}{x}(Rx \eif Mx)$ means that any member of the UD which is a refrigerator is a monkey. Since the UD is animals, there are no refrigerators in the UD and so the sentence is trivially true.
-
-If you were actually translating the sentence `All refrigerators are monkeys', then you would want to include appliances in the UD. Then the predicate $R$ would not be empty and the sentence $\qt{\forall}{x}(Rx \eif Mx)$ would be false.
-
-\begin{table}[t]
-\factoidbox{
-\begin{itemize}
-\item A UD must have \emph{at least} one member.
-\item A predicate may apply to some, all, or no members of the UD.
-\item A constant must pick out \emph{exactly} one member of the UD.
-\item A member of the UD may be picked out by one constant, many constants, or none at all.
-\end{itemize}
-}
-\end{table}
-
-\section{Picking a universe of discourse}
-The appropriate symbolization of an English language sentence in QL will depend on the symbolization key. In some ways, this is obvious: It matters whether $Dx$ means `$x$ is dainty' or `$x$ is dangerous.' The meaning of sentences in QL also depends on the UD.
-
-Let $Rx$ mean `$x$ is a rose,' let $Tx$ mean `$x$ has a thorn,' and consider this sentence:
-\begin{earg}
-\item[\ex{pickUDrose}] Every rose has a thorn.
-\end{earg}
-
-It is tempting to say that sentence \ref{pickUDrose} should be translated as $\qt{\forall}{x}(Rx \eif Tx)$. If the UD contains all roses, that would be correct. Yet if the UD is merely \emph{things on my kitchen table}, then $\qt{\forall}{x}(Rx \eif Tx)$ would only mean that every rose on my kitchen table has a thorn. If there are no roses on my kitchen table, the sentence would be trivially true.
-
-The universal quantifier only ranges over members of the UD, so we need to include all roses in the UD in order to translate sentence \ref{pickUDrose}. We have two options. First, we can restrict the UD to include all roses but \emph{only} roses. Then sentence \ref{pickUDrose} becomes $\qt{\forall}{x} Tx$. This means that everything in the UD has a thorn; since the UD just is the set of roses, this means that every rose has a thorn. This option can save us trouble if every sentence that we want to translate using the symbolization key is about roses.
-
-Second, we can let the UD contain things besides roses: rhododendrons, rats, rifles, and whatall else. Then sentence \ref{pickUDrose} must be $\qt{\forall}{x}(Rx \eif Tx)$.
-
-If we wanted the universal quantifier to mean \emph{every} thing, without restriction, then we might try to specify a UD that contains everything. But this notion is somewhat obscure. Does `everything' include things that have only been imagined, like fictional characters? On the one hand, we want to be able to symbolize arguments about Hamlet or Sherlock Holmes. So we need to have the option of including fictional characters in the UD. On the other hand, we never need to talk about every thing that does not exist. That might not even make sense. There are philosophical issues here that we will not try to address. We can avoid these difficulties by always specifying the UD. For example, if we mean to talk about plants, people, and cities, then the UD might be `living things and places.'
-
-Suppose that we want to translate sentence \ref{pickUDrose} and, with the same symbolization key, translate these sentences:
+Whereas SL could be interpreted by assigning sentence letters to truth-values without recourse to any other structure, the same cannot be said for QL.
+In order to bring this out, consider the following atomic sentences:
 
 \begin{earg}
-\item[\ex{pickUDhair}] Esmerelda has a rose in her hair.
-\item[\ex{pickUDcross}] Everyone is cross with Esmerelda.
+  \item[\ex{Q1}] Casey is dancing.
+  \item[\ex{Q2}] Al loves Max.
+  % \item[\ex{Q1}] Everyone at the party is dancing.
+  % \item[\ex{Q2}] Someone at the party already left.
 \end{earg}
 
-We need a UD that includes roses (so that we can symbolize sentence \ref{pickUDrose}) and a UD that includes people (so we can translate sentence \ref{pickUDhair}--\ref{pickUDcross}.) Here is a suitable key:
-\begin{ekey}
-\item[UD:] people and plants
-\item[Px:] $x$ is a person.
-\item[Rx:] $x$ is a rose.
-\item[Tx:] $x$ has a thorn.
-\item[Cxy:] $x$ is cross with $y$.
-\item[Hxy:] $x$ has $y$ in their hair.
-\item[e:] Esmerelda
-\end{ekey}
+In order to interpret the sentences \ref{Q1} and \ref{Q2}, we need to know what the names `Casey', `Al', and `Max' refer to, who is dancing, and who love who.
+Accordingly, it matters what objects there are.
+Matters are different in SL since we can directly provide an interpretation function $\I$ which assigns truth-values to sentences without specifying what there is or what predicates express what properties.
+By contrast, each interpretation in QL will be based on a \define{domain} $\D$ which we will take to be any nonempty set of objects whatsoever.
 
-Since we do not have a predicate that means `$\ldots$ has a rose in her hair', translating sentence \ref{pickUDhair} will require paraphrasing. The sentence says that there is a rose in Esmerelda's hair; that is, there is something which is both a rose and is in Esmerelda's hair. So we get: $\qt{\exists}{x}(Rx \eand Hex)$.
+% We use curly brackets `$\{$' and `$\}$' to denote sets.
+% The members of the set can be listed in any order, separated by commas, where sets either include an element or they don't.
+% This means that $\set{a,b}=\set{b,a}$ and $\set{c,c}=\set{c}$.
+% It is possible to have a set with no members in it, where this is called the \define{empty set}.
+% Although the empty set is sometimes written as `$\set{}$', it is usually written as the single symbol `$\varnothing$'.
+% % TODO: move above
 
-It is tempting to translate sentence \ref{pickUDcross} as $\qt{\forall}{x} Cxe$. Unfortunately, this would mean that every member of the UD is cross with Esmerelda --- both people and plants. It would mean, for instance, that the rose in Esmerelda's hair is cross with her. Of course, sentence \ref{pickUDcross} does not mean that.
+You can think of the domain as including everything that there is for the purposes of the interpretation in question.
+For instance, we might take $\D=\set{1,2,3}$ to include just three natural numbers, or we might introduce a domain $\D'=\set{Cam, Sara, Kaya, Mel}$ which includes just four people.
+Domains can be infinite--- e.g., the domain which includes all of the natural numbers, or all of the real numbers--- but they cannot be empty.
+We will come back to contemplate this constraint shortly.
 
-`Everyone' means every person, not every member of the UD. So we can paraphrase sentence \ref{pickUDcross} as, `Every person is cross with Esmerelda.' We know how to translate sentences like this: $\qt{\forall}{x}(Px \eif Cxe)$.
+Since it gets cumbersome to write out names, we will use lower-case letters and sometimes numbers for the elements of a domain.
+It is easy to confuse these with constants, and indeed, it is common to take a constant `$c$' to name the element $c$ in the domain.
+This is permitted so long as we are clear that the letter `$c$' is doing double duty.
 
-In general, the universal quantifier can be used to mean `everyone' if the UD contains only people. If there are people and other things in the UD, then `everyone' must be treated as `every person'.
+Given a domain $\D$, we will interpret predicates by assigning them to sets which we will construct from the domain $\D$.
+For instance, suppose that we symbolize `is taller than' with the $2$-place predicate `$T^2$'.
+To interpret `$T^2$', we consider ordered pairs of elements from $\D$, where an \define{ordered pair} is any set $\set{x,\set{y}}$ which we write $\tuple{x,y}$ for convenience. 
+Accordingly, we may interpret `$T^2$' by assigning it to a set of ordered pairs of elements from $\D$ where the first is taller than the second.
+We will refer to the set of elements to which a predicate is assigned by an interpretation of QL as the \define{extension} of that predicate.
+For example $\tuple{a,b}$ might belong to the extension of `$T^2$' on a given interpretation. 
 
+You might be wondering: how do we know which elements in the domain are taller than which?
+This is analogous to asking: how do we know which sentence letters in SL are true?
+Instead of relying on some prior interpret of the sentence letters in SL, each interpretation stipulates the truth-values of the sentence letters in SL.
+In a similar manner, the interpretations of the predicates in QL stipulates their extensions.
+These stipulations provide the different interpretations of QL in just the same way the stipulations of the truth-values of the sentence letters in SL provide different interpretations of SL.
+% But what about $n$-place predicates for $n>1$?
 
+Whereas the extension of a $2$-place predicate is a set of ordered pairs of elements from $\D$, how are we to interpret the $0$-place and $1$-place predicates, not to mention the $n$-place predicates of QL for $n>2$?
+Moreover, how are we going to do this all at once instead of having to provide separate instructions for the $n$-place predicates for each $n\geq 0$.
 
+We begin by drawing on $\D$ to construct Cartesian products of the domain.
+For instance, if we want to interpret a $2$-place predicate `$L^2$', we must construct the Cartesian product $\D^2=\D\times\D$ which includes all ordered pairs of the form $\tuple{x,y}$ where both $x$ and $y$ are elements of $\D$.
+In set builder notation, we may define the following Cartesian product: 
+  $$ \D^2 = \set{\tuple{x,y}:x,y\in\D}. $$
+The identity above reads: $\D^2$ is the set which includes all and only the ordered pair $\tuple{x,y}$ where both $x$ and $y$ are members of $\D$. 
+Given this notation, we may require QL interpretations to assign the $2$-place predicates of QL to subsets of $\D^2$. 
+For instance, given $\D=\set{a,b,c,d}$, we might specify an interpretation where $\I(T^2)=\set{\tuple{a,b},\tuple{b,c}}\subseteq\D^2$.
 
+In order to interpret all $n$-place predicates of QL, we will generalise on the same pattern.
+Given any domain $\D$, we will begin by defining the $n$-ary Cartesian product: 
+  $$ \D^n = \set{\tuple{x_1,\ldots,x_n}:x_1,\ldots,x_n\in\D}.$$ % ~~\text{for}~~ n\geq2 
+In place of ordered pairs, now we have ordered $n$-tuples.
+Accordingly, $n$-place predicates may be assigned to subsets of $\D^n$.
+For instance, a three place predicate will be assigned to a subset of $\D^3$ where its extension will include elements like $\tuple{a,b,c}$.
+Following the same pattern takes care of all the extensions of all $n$-place predicates.
 
+Officially, $n$-tuples are defined in terms of sets where $\tuple{x_1,x_2,\ldots,x_n}=\set{x_1,\set{x_2,\ldots,\set{x_n}}}$.
+As a result, $\tuple{x_1}=\set{x_1}$ which is a set containing one member, though for consistency we may maintain the tuple notation $\tuple{x_1}$.
+Letting a set with one member be referred to as a \define{singleton}, it follows that $\D^1=\set{\tuple{x_1}:x_1\in\D}$ only consists of singletons whose members belong to $\D$.
+For instance, if $a\in \D$, it follows that $\tuple{a}\in\D^1$.
+Accordingly, $\D^1\neq\D$ where $1$-place predicates will be assigned to sets of singletons in $\D^1$.
+For example, if we take `$H^1$' to symbolize the predicate `is happy', then $\I(H^1)\subseteq\D^1$ might include such elements as $\tuple{a}$.
 
+Next we may consider $\D^0$. 
+Setting $n=0$ in the definition above, it follows that $\D^0=\set{\varnothing}$ since $\varnothing=\tuple{}$.
+Since we will use $\D^0$ to interpret sentence letters, we may maintain consistency with the conventions introduced for SL by taking $1=\set{\varnothing}$ and $0=\varnothing$.
+As it happens, these are the standard von Neumann definitions of the first two ordinal numbers 0 and 1.
+Following the pattern above, a QL interpretation $\I$ will assign $A^0$ to a subset of $\set{\varnothing}$ where there are just two options: either $\I(A^0)=\set{\varnothing}=1$ or $\I(A^0)=\varnothing=0$.
+In both cases, $\I(A^0)\subseteq\D^0=\set{\varnothing}$, and so our present conventions subsume the conventions that we provided for SL.
 
-%%%
-
-What is an interpretation in QL? Like a symbolization key for QL, an interpretation requires a universe of discourse, a schematic meaning for each of the predicates, and an object that is picked out by each constant. For example:
-
-\begin{ekey}
-\item[UD:] Marvel characters
-\item[Hx:] $x$ is a hero.
-\item[Sx:] $x$ has spider powers.
-\item[m:] Miles Morales
-\item[p:] Peter Parker
-\item[r:] The Red Skull
-\item[s:] Susan Storm
-\item[u:] Ultimate Spider-Man
-\end{ekey}
-
-This interpretation is given in terms of English descriptions. To apply it, you need to know some details about the characters in question. For example, $Sm$ is true on this interpretation, because Miles Morales does have spider powers. But the interpretation itself doesn't tell us that --- to get that information from this way of setting out the interpretation, you need to know some details about what happens in the story. You need to know, for example, that Miles Morales, like his more famous mentor Peter Parker, also has spider powers. If you do know a bit about Marvel comics, you may know that Miles Morales is actually the Ultimate Spider-Man. So $u$ and $m$ in this interpretation are two different names for the same member of the UD. There is no rule against having multiple names for the same member. (We'll discuss this issue in much more detail in Chapter \ref{ch.identity}.)
-
-We want our QL models to encode this kind of information too. Like a good SL model, a QL model shouldn't require prior knowledge of comic books. One way we could try to do this would be to just give a truth value assignment, as we did for SL. The truth value assignment would assign 0 or 1 to each atomic wff: $Sm=1$, $Sp=1$, $Sr=0$, and so on. If we were to do that, however, we might just as well translate the sentences from QL to SL by replacing $Sp$ and $Sm$ with sentence letters. We could then rely on the definition of truth for SL, but at the cost of ignoring all the logical structure of predicates and terms. In writing a symbolization key for QL, we do not give separate definitions for $Sp$ and $Sm$. Instead, we give meanings to the components $S$, $p$, and $m$. This is essential because we want to be able to reflect the logical relationships between e.g.\ $Sp$ and $\qt{\exists}{x} Sx$.
-
-Our interpretations should include descriptions for predicates and names, not just for sentences. We cannot use a truth value assignment for this, because a predicate by itself (except a 0-place predicate) is neither true nor false. In the interpretation given above, $H$ is true \emph{of} Peter Parker (i.e., $Hp$ is true), but it makes no sense to ask whether $H$ on its own is true. It would be like asking whether the English language fragment `$\ldots$is a hero' is true.
-
-What does an interpretation do for a predicate, if it does not make it true or false? An interpretation helps to pick out the objects to which the predicate applies. Interpreting $Hx$ to mean `$x$ is a hero' picks out some characters as the things that are $H$s. Formally, this is a set of members of the UD to which the predicate applies; this set is called the \define{extension} of the predicate. 
-
-%JH: I feel like this discussion is not getting to the point fast enough. It is getting caught up in some abstract issues. Not enough concrete illustration. Ideally would rewrite this in the future.
-
-{\color{black} Basically, an interpretation specifies everything that falls within the extension of the predicate, i.e. everything that bears the property or relation described by that predicate. So if you have a predicate $R$ for the color red, your interpretation will specify all of the things in your domain of discourse that are red. Any object not assigned to the extension of `red' is by default not red.}
-
-Some predicates have indefinitely large extensions. It would be impractical to try and write down all of the Marvel characters individually, so instead we use an English language expression to interpret the predicate. This is somewhat imprecise, because the interpretation alone does not tell you which members of the UD are in the extension of the predicate. In order to figure out whether a particular member of the UD is in the extension of the predicate (to figure out whether the Red Skull is a hero, for instance), you need to know about comic books. (As you might guess from his name, he's not.) In general, the extension of a predicate is the result of an interpretation \emph{along with} some facts.
-
-Sometimes it is possible to list all of the things that are in the extension of a predicate. Instead of writing a schematic English sentence, we can write down the extension as a set of things. Suppose we wanted to add a one-place predicate $F$ to the key above, meaning `$x$ is a founding member of the Fantastic Four', so we write the extension as a set of characters:
-\begin{partialmodel}
-	\extension{F} & \{Reed Richards, Susan Storm, Johnny Storm, Ben Grimm\}
-\end{partialmodel}
-
-You do not need to know anything about comic books to be able to determine that, on this interpretation, $Fs$ is true: Susan Storm, whose name is given as `$s$', is just specified to be one of the things that is $F$. Similarly, $\qt{\exists}{x} Fx$ is obviously true on this interpretation: There is at least one member of the UD that is an $F$ --- in fact, there are four of them.
-
-What about the sentence $\qt{\forall}{x} Fx$? That sentence is false, because it is not true that all members of the UD are $F$. It requires the barest minimum of knowledge about comic books to know that there are other characters besides just these four. Although we specified the extension of $F$ in a formally precise way, we still specified the UD with an English language description. Formally speaking, a UD is just a set of {\color{black}objects fall within the extension of various predicates.}
-% members.
-
-The formal significance of a predicate is determined by its extension, but what should we say about constants like $m$ and $s$? The meaning of a constant determines which member of the UD is picked out by the constant. The individual that the constant picks out is called the \define{referent} of the constant. Both $m$ and $u$ have the same referent, since they both refer to the same comic book character. You can think of a constant letter as a name and the referent as the thing named. In English, we can use the different names `Miles' and `Ultimate Spider-Man' to refer to the same comic book character. In this interpretation, we also use the different constants `$m$' and `$u$' to refer to the same member of the UD.
-
-\section{Sets}
-
-We use curly brackets `\{' and `\}' to denote sets. The members of the set can be listed in any order, separated by commas. This means that \{foo, bar\} and \{bar, foo\} are the same set.
-
-It is possible to have a set with no members in it. This is called the \define{empty set}. The empty set is sometimes written as `\{\}', but usually it is written as the single symbol `$\emptyset$'.
-
-\section{Extensions of predicates}
-As we have seen, an interpretation in QL is only formally significant insofar as it determines a UD, an extension for each predicate, and a referent for each constant. We call this formal structure a \define{model} for QL.
-
-To see how this works, consider this symbolization key:
-\begin{ekey}
-\item{UD:} The first ten natural numbers
-\item{$Px$:} $x$ is prime.
-\item{$n_{4}$}: 4
-\end{ekey}
-
-Given some basic mathematical knowledge, it is obvious that $Pn_{4}$ is false. Let's consider the model this key suggests, to show why it makes this wff false. Instead of just giving a description in the UD, we can list the members as a set. We also define the extension of the predicate $P$, and the referent of the constant $n_{4}$:
-
-\begin{partialmodel}
-	UD & $\{1, 2, 3, 4, 5, 6, 7, 8, 9, 10\}$\\
-	\extension{P} & \{2, 3, 5, 7\}\\
-	\referent{n_{4}} & 4
-\end{partialmodel}
-
-This is not a full model for this interpretation, but it is a detailed enough partial model to show that $Pn_{4}$ is false. You do not need to know anything about mathematics to see that this sentence is false in this model. The UD member named by $n_{4}$ is not in the extension of $P$. In this way, the model captures all of the formal significance of the interpretation.
-
-Suppose we enrich this symbolization key with more predicates:
-\label{10UD}
-\begin{ekey}
-\item{UD:} The first ten natural numbers
-\item{$Ex$:} $x$ is even.
-\item{$Nx$:} $x$ is negative.
-\item{$Lxy$:} $x$ is less than $y$.
-\item{$Txyz$:} $x$ times $y$ equals $z$.
-\end{ekey}
-What do we need to add to the model for our new predicates?
-
-The extension of $E$ in our model should be the subset $\{2, 4, 6, 8, 10\}$. There are no negative numbers in the UD, so $N$ has an empty extension; i.e. $\extension{N}=\emptyset$.
-
-Sometimes it will be convenient to represent extensions graphically, similar to the way we did with truth tables. We can represent the extensions just described for $P$, $E$, and $N$ thus:
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{l|l|l|l}
-            & $P$ & $E$ & $N$ \\ \hline
-\textbf{1}  & 0  & 0          & 0          \\
-\textbf{2}  & 1  & 1          & 0          \\
-\textbf{3}  & 1  & 0          & 0          \\
-\textbf{4}  & 0  & 1          & 0          \\
-\textbf{5}  & 1  & 0          & 0          \\
-\textbf{6}  & 0  & 1          & 0          \\
-\textbf{7}  & 1  & 0          & 0          \\
-\textbf{8}  & 0  & 1          & 0          \\
-\textbf{9}  & 0  & 0          & 0          \\
-\textbf{10} & 0 & 1          & 0         
-\end{tabular}
-\end{table}
-
-The members of the UD are listed as rows; the one-place predicates are given as columns. The 0s and 1s indicate whether each member satisfies each predicate. Notice that the same information is conveyed in this chart as in the three sets of integers described above. Either is an acceptable way of indicating the extension of the predicates.
-
-The extension of a two-place predicate like $L$ is more complicated. {\color{black}Many-place predicates are \textit{relations} between objects.} Hence, no individual number falls under the extension of this predicate; it is about a relation between members. Note also that sets of pairs of numbers aren't suitable for the extension of $L$ either, because 1 is less than 8, but 8 is not less than 1. (Remember, the set \{1,8\} is the very same set as the set \{8,1\}.) The solution is to have the extension of $L$ comprise a set of \define{ordered pairs} of numbers. An ordered pair is like a set with two members, except that the order \emph{does} matter. We write ordered pairs with angle brackets `$\openntuple$' and `$\closentuple$'. The ordered pair \mbox{\ntuple{foo, bar}} is different than the ordered pair \mbox{\ntuple{bar, foo}}. The extension of $L$ is a set of ordered pairs --- all of the pairs of numbers in the UD such that the first number is less than the second. Writing this out completely:
+Having provided some sense of the extensions of $n$-place predicates on an interpretation of QL, we may now move to provide the definition of an interpretation of QL.
+As already noted, QL interpretations are parasitic on a domain, and so we cannot provide interpretations of QL on their own.
+Rather, to interpret QL we will specify an interpretation together with a domain where this pair will be referred to as a \textit{model} of QL.
 
 
-$\extension{L}=$ \{\ntuple{1, 2}, \ntuple{1, 3}, \ntuple{1, 4}, \ntuple{1, 5}, \ntuple{1, 6}, \ntuple{1, 7}, \ntuple{1, 8}, \ntuple{1, 9}, \ntuple{1, 10},
-\ntuple{2, 3}, \ntuple{2, 4}, \ntuple{2, 5}, \ntuple{2, 6}, \ntuple{2, 7}, \ntuple{2, 8}, \ntuple{2, 9}, \ntuple{2, 10},
-\ntuple{3, 4}, \ntuple{3, 5}, \ntuple{3, 6}, \ntuple{3, 7}, \ntuple{3, 8}, \ntuple{3, 9}, \ntuple{3, 10},
-\ntuple{4, 5}, \ntuple{4, 6}, \ntuple{4, 7}, \ntuple{4, 8}, \ntuple{4, 9}, \ntuple{4, 10},
-\ntuple{5, 6}, \ntuple{5, 7}, \ntuple{5, 8}, \ntuple{5, 9}, \ntuple{5, 10},
-\ntuple{6, 7}, \ntuple{6, 8}, \ntuple{6, 9}, \ntuple{6, 10}, 
-\ntuple{7, 8}, \ntuple{7, 9}, \ntuple{7, 10},
-\ntuple{8, 9}, \ntuple{8, 10}
-\ntuple{9, 10}%
-\}
+\section{QL Models}
+\label{ch9.ModelsQL}
 
-Formally, the extension of a two-place predicate is a set of ordered pairs. Sometimes we will find it easier to represent extensions in a chart, with the two variable positions represented on the two axes. For example, the extension above could be expressed via a table like the one below. The `0' in the first cell of the table says that \ntuple{1, 1} is not in the extension of $L$; the next cell in the first row says that \ntuple{1, 2} is. Etc. Sometimes drawing out a chart like this will be the easiest way to represent models for the extensions of two-place predicates.
+We are now in a position to interpret the constants and $n$-place predicates of QL over a given domain.
+In particular, $\I$ is an \define{interpretation} of QL over $\D$ just in case it satisfies:
 
+\begin{enumerate}[leftmargin=1.5in]
+  \item[\sc Constants:] $\I(\alpha)\in\D$ for every constant $\alpha$ of QL. 
+  \item[\sc Predicates:] $\I(\F^n)\subseteq\D^n$ for every $n$-place predicate $\F^n$ of QL where $n\geq 0$.
+\end{enumerate}
 
+Whereas \textsc{Constants} requires that every constant $\alpha$ of QL is assigned to a unique individual in the domain $\D$, \textsc{Predicates} requires that every $n$-place predicate is assigned to a subset of $\D^n$.
+Note that if the domain could be empty, there would be no way to satisfy \textsc{Constants}.
+Hence we will require $\D\neq\varnothing$.
+More specifically, a \define{model} of QL is any ordered pair $\M=\tuple{\D,I}$ where $\D$ is any nonempty set and $\I$ is an interpretation of QL over $\D$.
 
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{l|llllllllll}
-$Lxy$         & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} & \textbf{10} \\ \hline
-\textbf{1}  & 0          & 1          & 1          & 1          & 1          & 1          & 1          & 1          & 1          & 1           \\
-\textbf{2}  & 0          & 0          & 1          & 1          & 1          & 1          & 1          & 1          & 1          & 1           \\
-\textbf{3}  & 0          & 0          & 0          & 1          & 1          & 1          & 1          & 1          & 1          & 1           \\
-\textbf{4}  & 0          & 0          & 0          & 0          & 1          & 1          & 1          & 1          & 1          & 1           \\
-\textbf{5}  & 0          & 0          & 0          & 0          & 0          & 1          & 1          & 1          & 1          & 1           \\
-\textbf{6}  & 0          & 0          & 0          & 0          & 0          & 0          & 1          & 1          & 1          & 1           \\
-\textbf{7}  & 0          & 0          & 0          & 0          & 0          & 0          & 0          & 1          & 1          & 1           \\
-\textbf{8}  & 0          & 0          & 0          & 0          & 0          & 0          & 0          & 0          & 1          & 1           \\
-\textbf{9}  & 0          & 0          & 0          & 0          & 0          & 0          & 0          & 0          & 0          & 1           \\
-\textbf{10} & 0          & 0          & 0          & 0          & 0          & 0          & 0          & 0          & 0          & 0          
-\end{tabular}
-\end{table}
-
-{\color{black} Often, an even easier method is to use `set-builder notation', which is very common in mathematics. We can represent the extension of the less than relation as the set of numbers in our UD such that the first is less than the second:} $$extension(L) = \{ \ntuple{x, y} : (x < y \textrm{ and } x, y \in UD)\}$$
-
-{\color{black}The `$\in$' symbol indicates set-membership, so `$m \in UD$' means that $m$ is a member of the set UD. We read the colon `:' as `such that'. After the colon, we list any constraints that $x$ and $y$ must satisfy for the n-tuple $\ntuple{x, y}$ to be a member of the extension of the predicate $L$. Altogether, we read this as follows: the extension of $L$ is the set of n-tuples $\ntuple{x, y}$ where $x$ is less than $y$ and both $x$ and $y$ belong to the universe of discourse.}
-
-The extension of a three-place predicate is a set of ordered triples where the predicate is true of those three things \emph{in that order}. So the extension of $T$ in this model will contain ordered triples like \ntuple{2, 4, 8}, because $2\times 4 = 8$. Because the surface of a sheet of paper is for all intents and purposes two-dimensional, it is usually not convenient to represent 3-or-more place predicates with tables. {\color{black} Using set-builder notation, we can represent the extension of $T$ as follows:} $$extension(T) = \{ \ntuple{x, y, z} : x \times y = z \textrm{ and } x, y, z \in UD \}$$
-
-Generally, the extension of an $n$-place predicate is a set of ordered $n$-tuples ${\langle}a_1, a_2,\ldots, a_n{\rangle}$ such that $a_1$--$a_n$ are members of the UD and the predicate is true of $a_1$--$a_n$ in that order.
-
-
-\section{Extensions of 0-place predicates}
-\label{sec.0PlaceModels}
-
-What of a 0-place predicate? Recall from Chapter \ref{ch.QL} that a 0-place predicate corresponds to an SL sentence letter --- it takes a truth value in an interpretation without reference to any particular objects. So a QL model provides truth values to 0-place predicates directly, just like an SL valuation function does.
-
-This fact follows from the general description of $n$-place predicates given in the previous section: the extension of an $n$-place predicate is a set of ordered $n$-tuples. In the special case where $n=0$, the extension of the predicate will be a set of 0-tuples. But there is only one possible 0-tuple: the empty set, $\emptyset$. So there are only two possible extensions of a 0-place predicate, corresponding to the choice of whether $\emptyset$ is included in the extension or not. (Formally, the extension will either be the set containing the empty set --- \{$\emptyset$\} --- or it will be the empty set $\emptyset$ itself.)
-%JH: would be fun to relate these points to Frege's use of the True and the False. 
-
-For clarity and convenience, when indicating the extension of 0-place predicates in QL models, we'll simply indicate the truth values for the sentences themselves, like we did in SL. So we might indicate the extensions of 0-place predicates, for instance, by writing
+Consider the following symbolization key for the sentences \ref{Q1} and \ref{Q2} given above:
 
 \begin{ekey}
-\item{$P$} = 1
-\item{$Q$} = 0
+  \item[Dx:] $x$ is dancing. 
+  \item[Lx:] $x$ loves $y$.
+  \item[c:] Casey.
+  \item[a:] Al.
+  \item[m:] Max.
 \end{ekey}
 
-instead of the more confusing
+We may regiment the sentences \ref{Q1} and \ref{Q2} as follows:
+
+\begin{earg}
+  \item[\ex{RQ1}] $Dc$.
+  \item[\ex{RQ2}] $Lam$.
+\end{earg}
+
+Given the definition of a QL model above, we may consider what it would look like to interpret these sentences.
+In particular, we must specify a domain $\D$ along with interpretations of the constants and predicates in QL.
+Since this would take a long time--- there are infinitely many constants and predicates--- we will restrict our ambitions to the more modest task of interpreting the constants and predicates with which we are concerned, officially referring to this as a \define{partial model} of QL, often calling it a \define{model} for short.
+Consider the following:
 
 \begin{partialmodel}
-	\extension{P} & \{$\emptyset$\}\\
-	\extension{Q} & $\emptyset$. \\
+	$\D$		& $\set{c,a,m}$\\
+  $\I(D)$	& $\set{c}$\\
+  $\I(L)$ & $\set{\tuple{a,m}}$\\
+	$\I(c)$	& $c$\\
+	$\I(a)$	& $a$\\
+	$\I(m)$	& $m$
 \end{partialmodel}
 
-So in the special case where we are \emph{only} working with 0-place predicates, QL models directly provide SL valuation functions. This is another respect in which QL is simply a generalization of SL. If you ignore the UD and the extensions of higher-place predicates, a QL model provides the same information we were using to discuss SL models in Chapter \ref{ch.SLmodels}.
+Here the domain consists of three elements $c$, $a$, and $m$ where the extension of the predicate $D$ is the set $\set{c}$ and the extension of the predicate $L$ is the set $\set{\tuple{a,m}}$.
+Moreover, the constants $c$, $a$, and $m$ are assigned to themselves, $c$, $a$, and $m$, respectively. 
+That is, we happened to pick a domain consisting of the constants which we are using to name themselves as elements of the domain.
+This is often convenient, but by no means necessary.
+For instance, we could have let $\D=\set{1,2,3}$ where $\I(c)=1$, $\I(a)=2$, $\I(m)=3$, $\I(D)=\set{1}$, and $\I(L)=\set{\tuple{2,3}}$.
+The only reason to prefer our first model as opposed to the second is that it is easy to keep track of what refers to what by taking the constants to do double duty.
 
-\section{Working with models}
-\label{sec.UsingModels}
+Although we have succeeded in providing interpretations of the constants and predicates included in the symbolization key, we have not yet provided any way to determine whether the sentences \ref{RQ1} and \ref{RQ2} are true or false.
+Whereas the truth-values of at least the sentence letters are provided by the interpretations of SL, the same cannot be said for QL.
+Even in the case of atomic sentences, a model of QL does not determine truth and falsity.
+Rather, the truth and falsity of the sentences of QL are determined by the semantic clauses for QL.
+
+In order to provide the semantics for QL in full, it will also be necessary to include consideration of the variables.
+Although QL models do not interpret variables, this does not mean that quantified sentences which include variables do not have truth-values.
+Rather, we will rely on the notion of an \textit{assignment} of variables to elements of the domain, where this will resemble the interpretation of the constants, but may be varied independently of the model.
+It is by appealing to assignments that we will provide semantic clauses for the quantifiers in QL.
 
 
-We will use the double turnstile symbol for QL much as we did for SL. `$\metaA{}\models\metaB{}$' means that `\metaA{} entails \metaB{}': When \metaA{} and \metaB{} are two sentences of QL, $\metaA{}\models\metaB{}$ means that there is no model in which \metaA{} is true and \metaB{} is false. $\models\metaA{}$ is shorthand for $\emptyset\models\metaA{}$, which means that \metaA{} is true in every model. This allows us to give definitions for various concepts in QL. In fact, we can use the same definitions offered in Chapter \ref{ch.SLmodels}.
+\section{Variable Assignments}
+\label{ch9.VariableAssignments}
+
+Recall from before that every domain is required to be nonempty.
+Accordingly, there is guaranteed to be a way to interpret all of the constants included in QL even if many of those constants end up referring to the same elements of the domain.
+If there is just one element $d$ in the domain $\D=\set{d}$, every constant will be assigned to $d$, and so there is no latitude at all for how to interpret the constants in QL.
+By contrast, if $\D$ includes more than one element, suddenly there are many different ways for a QL interpretation to assign constants to elements of the domain. 
+For instance, given infinitely many constants in QL and just two elements in the domain, each interpretation of QL will decide which element in the domain each constant is assigned to.
+That is already a lot of decisions!
+
+Something similar may be observed in the case of assigning variables to elements of the domain.
+Given a domain $\D$, a \define{variable assignment} $\hat{a}$ over $\D$ is a function from the variables in QL to elements of $\D$.
+Accordingly, $\hat{a}(\alpha)\in\D$ for all variables $\alpha$ in QL. 
+As in the case of assigning constants to elements in the domain, there are typically many different variable assignments so long as $\D$ includes more than one element. 
+Nevertheless, we may quantify over the variable assignments defined for a given domain where it is by doing so that we will provide semantic clauses for the quantifiers included in QL.
+
+Suppose that we have a variable assignment (v.a. for short) $\va{a}$.
+In considering another v.a. $\va{b}$, there is no guarantee that $\va{a}$ and $\va{b}$ will agree about the elements of the domain that they assign to the different variables in QL.
+Instead of considering any other v.a. $\va{b}$ at all, it will often be convenient to consider \textit{variations} of $\va{a}$ which agree with $\va{a}$ about the elements they assign to every variable with the only possible exception being some particular variable with which we happen to be concerned.
+More precisely, we will take $\va{c}$ to be an $\alpha$-\define{variant} of $\va{a}$ just in case $\va{c}(\beta)=\va{a}(\beta)$ for every variable $\beta\neq\alpha$.
+Accordingly, $\alpha$-variants of $\va{a}$ differ with $\va{a}$ in at most the variable $\alpha$, and may even agree about $\alpha$.
+All we know is that $\alpha$-variants agree with $\va{a}$ about all variables with the only possible exception of $\alpha$.
+
+Given a domain $\D=\set{1,2,3,4,5}$, suppose that $\va{a}(x)=1$, $\va{a}(y)=2$, and $\va{a}(z)=3$.
+Letting $\va{c}$ be a $y$-variant of $\va{a}$, we know conclusively that $\va{c}(x)=\va{a}(x)=1$ and $\va{c}(z)=\va{a}(z)=3$.
+What we don't know is the identity of $\va{c}(y)$.
+Although it is possible that $\va{c}(y)=\va{a}(y)=2$, all that we know is that $\va{c}(y)\in\D$, and so there are exactly five possibilities given the size of our domain $\D$.
+It is by quantifying over variants of a v.a. that we will interpret the quantifiers in QL.
+
+Given a model $\M=\tuple{\D,\I}$ and a variable assignment $\va{a}$, it will be important to provide a general way to interpret singular terms.
+After all, a well-formed atomic formula of the form $\F^n\alpha_1,\ldots,\alpha_n$ may include both constants and variables, and we want to be able to treat these together in order to assign $\F^n\alpha_1,\ldots,\alpha_n$ a truth-value. 
+Thus we may define:
+
+\begin{align*}
+  \VV{\I}{\va{a}}{(\alpha)}=
+    \begin{cases}
+      \I(\alpha) & \text{if } \alpha \text{ is a constant} \\
+      \va{a}(\alpha) & \text{if } \alpha \text{ is a variable.}
+    \end{cases}
+\end{align*}
+
+If $\alpha$ happens to be a constant, then our function $\VV{\I}{\va{a}}{}$ appeals to the interpretation $\I$ in order to specify the element of the domain to which it refers. 
+If, however, $\alpha$ is a variable, then $\VV{\I}{\va{a}}{}$ appeals to the v.a. $\va{a}$ in order to specify an element of the domain.
+Given $\I$ and $\va{a}$, we may don't need to know whether $\alpha$ is a constant or a variable in order to specify the element in the domain to which it refers.
+This will turn out to be very important for providing truth-values for the atomic wffs of QL since they may include both constants and variables.
+
+
+
+
+
+\section{Semantics for QL}
+
+Having defined the models for QL as well as the variable assignments for a given domain, we are now in a position to provide the semantic clauses by which we will assign truth and falsity to the sentences of QL.
+Here it is important to recall the difference between open sentences which include free variables and the sentences of QL which do not.
+Whereas every model of QL will determine the truth-value of the sentences of QL, the same does not hold for the open sentences of QL which include free variables.
+Rather, such sentences must be interpreted at a model together with a variable assignment.
+
+
+This takes the following form:
+
+\begin{enumerate}[labelsep=.15in]
+  \item[($A$)] $\VV{\I}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1$ just in case $\tuple{\VV{\I}{\va{a}}{(\alpha_1)},\ldots,\VV{\I}{\va{a}}{(\alpha_n)}}\in\I(\F^n)$.
+  \item[(\hspace{1pt}$\forall$\hspace{1pt})] $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ just in case $\VV{\I}{\va{c}}(\metaA)=1$ for every $\alpha$-variant $\va{c}$ of $\va{a}$.
+  \item[(\hspace{1pt}$\exists$\hspace{1pt})] $\VV{\I}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$ just in case $\VV{\I}{\va{c}}(\metaA)=1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$.
+  \item[(\enot)] $\VV{\I}{\va{a}}(\enot\metaA{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})=0$.
+  \item[(\eor)] $\VV{\I}{\va{a}}(\metaA{} \eor \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})=1$ or $\VV{\I}{\va{a}}(\metaB{})=1$ (or both).
+  \item[(\eand)] $\VV{\I}{\va{a}}(\metaA{} \eand \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})=1$ and $\VV{\I}{\va{a}}(\metaB{})=1$.
+  \item[(\eif)] $\VV{\I}{\va{a}}(\metaA{} \eif \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})=0$ or $\VV{\I}{\va{a}}(\metaB{})=1$ (or both).
+  \item[(\eiff)] $\VV{\I}{\va{a}}(\metaA{} \eiff \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})=\VV{\I}{\va{a}}(\metaB{})$.
+\end{enumerate}
+
+The semantic clauses for the truth-functional operators $\enot,\eand,\eor,\eif,\eiff$ have been preserved from SL with the exception that a parameter has been added for a variable assignment. 
+Nevertheless, variable assignments do not do any work in the semantic clauses for the truth-functional operators, and so we may focus attention on the first three clauses in which variables assignments make an essential contribution.
+
+For any interpretation $\I$ and v.a. $\va{a}$, an atomic wff such as $G^3axy$ is true on $\I$ given $\va{a}$ just in case $\tuple{\VV{\I}{\va{a}}(a),\VV{\I}{\va{a}}(x),\VV{\I}{\va{a}}(y)}$ is a member of $\I(G^3)$.
+In this case $\VV{\I}{\va{a}}(a)=\I(a)$, $\VV{\I}{\va{a}}(x)=\va{a}(x)$, and $\VV{\I}{\va{a}}(y)=\va{a}(y)$, and so $\tuple{\VV{\I}{\va{a}}(a),\VV{\I}{\va{a}}(x),\VV{\I}{\va{a}}(y)}=\tuple{\I(a),\va{a}(x),\va{a}(y)}$. 
+Since $G^3$ is a $3$-place predicate, we know that $\I(G^3)\subseteq \D^3$ is a set of ordered triples. 
+The question remains whether $\tuple{\I(a),\va{a}(x),\va{a}(y)}\in\I(G^3)$.
+If so, $G^3axy$ is true on $\I$ given $\va{a}$, and false otherwise.
+
+The wff $\forall xG^3axy$ is true on $\I$ given $\va{a}$ just in case $G^3axy$ is true on $\I$ given any $x$-variant $\va{c}$ of $\va{a}$.
+This requires $\tuple{\I(a),\va{c}(x),\va{c}(y)}\in\I(G^3)$ for every $x$-variant $\va{c}$ of $\va{a}$.
+Since $x\neq y$, we know that $\va{c}(y)=\va{a}(y)$ for all $x$-variants $\va{c}$ of $\va{a}$.
+By contrast, $\va{c}(x)$ is permitted to vary, where $\va{c}(x)$ can range over all elements in $\D$.
+Thus by quantifying over all $x$-variants of $\va{a}$, we are requiring $\tuple{\I(a),\v{x},\va{a}(y)}\in\I(G^3)$ for all $\v{x}$ in the domain $\D$, leaving $\I(a)$ and $\va{a}(y)$ unchanged.
+For instance, assuming $\D=\set{1,2,3}$ where $\I(a)=1$ and $\va{a}(y)=3$, it follows that $\forall xG^3axy$ is true on $\I$ given $\va{a}$ just in case $\tuple{1,1,3}$, $\tuple{1,2,3}$, and $\tuple{1,3,3}$ are all members of $\I(G^3)$.
+
+Suppose that some wff $\metaA$ is true on an interpretation $\I$ given a v.a. $\va{a}$.
+For instance, perhaps $\forall xG^3axy$ is true on $\I$ given $\va{a}$ since $\I(G^3)=\set{\tuple{1,1,3},\tuple{1,2,3},\tuple{1,3,3},\tuple{2,3,1},\tuple{1,1,1}}$.
+What can we conclude?
+Very little.
+Even though $\VV{\I}{\va{a}}(G^3axy)=1$, we don't know whether this sentence will remain true on other variable assignments.
+Moreover, it is not clear what to make of truth on an interpretation \textit{given a variable assignment}.
+What we want to know is whether the sentence is true on an interpretation independent of the variable assignment.
+
+So long as a wff of QL includes free variables, there is no way to assign that sentence a truth-value without appealing to a variable assignment.
+This is not true for the sentences of QL which do not include free variables.
+For instance, consider the sentence $\exists y\forall xG^3axy$.
+Because $\VV{\I}{\va{a}}(\forall xG^3axy)=1$ and $\va{a}$ is a $y$-variant of itself, it follows that $\va{e}=\va{a}$ has a $y$-variant $\va{a}$ where $\VV{\I}{\va{a}}(\forall xG^3axy)=1$, and so $\VV{\I}{\va{e}}(\exists y\forall xG^3axy)=1$ by the semantic clause for the existential quantifier. 
+Whereas we chose $\va{e}=\va{a}$ for convenience, we could have taken $\va{e}$ to be any v.a. whatsoever. 
+This is because for any v.a. $\va{e}$, it will have a $y$-variant $\va{g}$ where $\va{g}(y)=\va{a}(y)=3$, and so $\VV{\I}{\va{g}}(\forall xG^3axy)=1$ for the same reasons given above. 
+
+This case brings out a general point: if $\metaA$ is a sentence of QL and so does not have any free variables, then $\VV{\I}{\va{a}}(\metaA)=1$ just in case $\VV{\I}{\va{c}}(\metaA)=1$ for every v.a. $\va{c}$.
+This is perhaps easiest to see in the case where a sentence of QL does not have any variables at all.
+For instance $\VV{\I}{\va{a}}(F^1b)=1$ just in case $\tuple{\I(b)}\in\I(F^1)$.
+Since the v.a. $\va{a}$ does not appear in $\tuple{\I(b)}\in\I(F^1)$, we can be sure that $\VV{\I}{\va{a}}(F^1b)=1$ just in case $\VV{\I}{\va{c}}(F^1b)=1$ for every v.a. $\va{c}$ whatsoever.
+
+Although variable assignments play a critical role in assigning truth-values to the open sentences of QL, they play at most an auxiliary role in assigning truth-values to the sentences of QL. 
+Accordingly, we may define the truth-values of the sentences of QL as follows:
+
+\begin{enumerate}[labelsep=.15in]
+  \item[(\metaA)] $\VV{\I}{}(\metaA)=1$ just in case $\VV{\I}{\va{a}}(\metaA)=1$ for some $\va{a}$ where $\metaA$ is a sentence of QL.
+\end{enumerate}
+
+Our primary concern is as it was in SL: to interpret the sentences of QL across a range of interpretations.
+To do so, we needed to consider variable assignments, since this is how we provided the semantics for the quantifiers.
+Even so, the variable assignments were merely instrumental.
+By the time that we are evaluating the sentences that we actually care about--- those without free variables--- the variable assignments have no work left to do.
+
+Having specified what it is for a sentence of QL to be true in an interpretation, we may now proceed to specify a range of semantic notions that are of interest as we did before.
+
+
+
+
+
+
+\section{Satisfaction and Entailment}
+\label{sec.Entailment}
+
+A QL model $\M=\tuple{\D,\I}$ \define{satisfies} a set of QL sentences $\Gamma$ just in case every $\metaA\in\Gamma$ is true in $\M$, i.e. $\VV{\I}{}(\metaA)=1$ for every $\metaA\in\Gamma$.
+As before, a model $\M$ satisfies a single sentence $\metaA$ just in case it satisfies its singleton $\set{\metaA}$.
+Using the double turnstile symbol `$\models$' for entailment in QL in the same way as we did for SL, we may define entailment as follows:
+
+\begin{enumerate}[leftmargin=1.5in]
+  \item[\sc Entailment:] $\Gamma\models\metaA$ just in case every model that satisfies $\Gamma$ also satisfies $\metaA$.
+\end{enumerate}
+
+As before, $\models\metaA$ is shorthand for $\varnothing\models\metaA$, which means that $\metaA$ is satisfied by every QL model.
+We may then import all the same semantic definitions that we introduced in Chapter \ref{ch.SLmodels}.
 
 \begin{quote}
-A \define{tautology in QL} is a sentence \metaA{} that is true in every model; i.e.,  $\models\metaA{}$.
+A \define{tautology in QL} is a sentence $\metaA$ where $\models\metaA$.
 
-A \define{contradiction in QL} is a sentence \metaA{} that is false in every model; i.e., $\models\enot\metaA{}$.
+A \define{contradiction in QL} is a sentence $\metaA$ where $\models\enot\metaA$.
 
-A sentence is \define{contingent in QL} if and only if it is neither a tautology nor a contradiction.
+A sentence is \define{contingent in QL} if and only if $\nmodels\metaA$ and $\nmodels\enot\metaA$.
 
-An argument `` $\script{P}_1, \script{P}_2, \cdots$, \therefore\ \metaC{} '' is \define{valid in QL} if and only if there is no model in which all of the premises are true and the conclusion is false; i.e., $\{\script{P}_1,\script{P}_2,\cdots\}\models\metaC{}$. Otherwise, an argument is \define{invalid in QL}.
+  An argument $\metaA_1,\metaA_2,\ldots\ \therefore\ \metaB$ is \define{valid in QL} if and only if $\set{\metaA_1,\metaA_2,\ldots}\models\metaB$ and \define{invalid in QL} otherwise.
 
-Two sentences \metaA{} and \metaB{} are \define{logically equivalent in QL} if and only if both $\metaA{}\models\metaB{}$ and $\metaB{}\models\metaA{}$.
+Two sentences $\metaA$ and $\metaB$ are \define{logically equivalent in QL} if and only if both $\metaA\models\metaB$ and $\metaB\models\metaA$.
 
-The set $\{\metaA{}_1,\metaA{}_2,\metaA{}_3,\cdots\}$ is \define{consistent in QL} if and only if there is at least one model in which all of the sentences are true (i.e. a model that satisfies all the sentences). A set is \define{inconsistent in QL} if and only if there is no such model.
-
+The set $\Gamma$ is \define{consistent in QL} if and only if there is at least one model $\M$ that satisfies $\Gamma$ and \define{inconsistent in QL} otherwise.
 \end{quote}
 
+These semantic notions will play much the same role that they did in SL.
+The only difference is that now we have a much more expressively powerful language QL in place of SL.
+As a result, it is a lot harder to show that a sentence is true or false in a model.
+Just as we constructed interpretations to make sentences of SL either true or false depending on our aims, we will do something similar for the sentences of QL.
 
-\section{Constructing models}
 
-Suppose we want to show that $\qt{\forall}{x}Axx \eif Bd$ is \emph{not} a tautology. This requires showing that the sentence is not true in every model. If we can provide an example of a model in which the sentence is false, then we will have shown that the sentence is not a tautology.
 
-What would such a model look like? In order for $(\qt{\forall}{x}Axx) \eif Bd$ to be false, the antecedent ($\qt{\forall}{x} Axx$) must be true, and the consequent ($Bd$) must be false.
 
-To construct such a model, we start with a UD. It will be easier to specify extensions for predicates if we have a small UD, so start with a UD that has just one member. Formally, this single member might be anything. Let's say it is Miles Morales.
 
-We want $\qt{\forall}{x} Axx$ to be true, so we want all members of the UD to be paired with themself in the extension of $A$; this means that the extension of $A$ must be \{\ntuple{Miles Morales, Miles Morales}\}.
+\section{Minimal Models}
 
-We want $Bd$ to be false, so the referent of $d$ must not be in the extension of $B$. We give $B$ an empty extension.
+Suppose that we want to show that $\qt{\forall}{x}Axx \eif Bd$ is not a tautology.
+This requires showing that the sentence is not satisfied by every model.
+If we can provide a model in which the sentence is false, then we will have shown that the sentence is not a tautology.
 
-Since Miles is the only member of the UD, it must be the referent of $d$. The model we have constructed looks like this:
+What would such a model look like?
+In order for $\qt{\forall}{x}Axx \eif Bd$ to be false, the antecedent $\qt{\forall}{x} Axx$ must be true, and the consequent $Bd$ must be false.
+Whenever a sentence is true in a model, it is typically true in more than one model, and some models are more complicated than others.
+To keep things as simple, we will construct \define{minimal models} which do what we want but only adds the elements that are required for our aims to succeed.
+
+We being by taking $\D=\{d,$\ leaving off the bracket on the right to indicate that we may end up adding more elements to the domain, but only if we must.
+The reason we added $d$ to the domain is that we know $\D$ is nonempty insofar as it is a domain at all, and so without any further consideration we may add an element to $\D$.
+Note that we chose $d$ instead of another element. 
+This was not necessary but it is convenient since $d$ appears in the sentence with which we are concerned.
+In general, it is common to let constants play double duty, and we will continue with this practice here. 
+Note that it does not matter whether $Bd$ is true or false in the model since either way we will need to talk about what `$d$' refers to, i.e., itself. 
+
+In order to make $\qt{\forall}{x} Axx$ true, all members of the domain $\D$ must bear the relation $A$ to themselves.
+So far we just have one element $d$ in the domain, and so all that is required is that $\tuple{d,d}\in\I(A)$.
+Accordingly, we may suppose that $\I(A)=\{\tuple{d,d}$,\ leaving off the bracket on the right as before since we might want to add more elements.
+
+Next we want $Bd$ to be false.
+Letting $\I(d)=d$ as we intended all along, we may need $\tuple{d}\notin\I(B)$.
+Accordingly, we may take $\I(B)=\{$ to be the empty extension for the time being, leaving off the right bracket as before.
+
+Given that we made some changes to the model in order to make $Bd$ false, it is always prudent to check that we have not changed the truth-value of $\qt{\forall}{x} Axx$. 
+However, in this case, all we did was assign a constant to the only element in the domain, letting $B$ have the empty extension.
+Accordingly, $\qt{\forall}{x} Axx$ is true for the same reason as before.  
+
+For contrast, if we had added another element to the domain, then further changes would be required.
+For instance, if we added $c$ to the domain so that $\D=\{d,c$, then we would have to add $\tuple{c,c}$ to the extension of $A$ so that $\I(A)=\{\tuple{d,d},\tuple{c,c}$.
+Since we didn't change the domain or the extension of $A$ in merely assigning $d$ to itself and taking $B$ to have the empty extension, we don't need to make these changes, maintaining minimality.
+
+Having achieved what we wanted, we may finish our model by closing off all of the sets.
+Accordingly, we have constructed the following model $\M=\tuple{\D,\I}$:
+
 \begin{partialmodel}
-	UD			& \{Miles Morales\}\\
-	\extension{A} 	& \{\ntuple{Miles Morales, Miles Morales}\}\\
-	\extension{B}	& $\emptyset$\\
-	\referent{d}	& Miles Morales
+  $\D$			& $\set{d}$\\
+	$\I(A)$ 	& $\set{\tuple{d,d}}$\\
+  $\I(B)$	  & $\varnothing$\\
+	$\I(d)$	  & $d$
 \end{partialmodel}
 
-Strictly speaking, a model specifies an extension for \emph{every} predicate of QL and a referent for \emph{every} constant. As such, it is generally impossible to write down a full model. That would require writing down infinitely many extensions and infinitely many referents. However, we do not need to consider every predicate in order to show that there are models in which $\qt{\forall}{x}Axx \eif Bd$ is false. Predicates like $H$ and constants like $f_{13}$ make no difference to the truth or falsity of this sentence. It is enough to specify extensions for $A$ and $B$ and a referent for $d$, as we have done. This provides a \emph{partial model} in which the sentence is false.
+Strictly speaking, a model specifies an extension for \textit{every} predicate of QL and a referent for \textit{every} constant, and $\M$ does not do this.
+That would require specifying infinitely many extensions and infinitely many referents.
+We may do this all at once by saying that the extension of every other predicate is empty, and that every constant refers to $d$.
+Although we may add these details to complete our model, doing so is hardly necessary since these details don't effect the truth-value of the sentence with which we are concerned.
+Accordingly we will typically omit this extra step where this is similar to only specifying the truth-values of the sentence letters which occur in the SL sentences with which we are concerned and not worrying about the rest.
+Although we could always go on to say that all other sentence letters are false, there is no need to do so.
 
-Perhaps you are wondering: What might the predicate $A$ mean in English? It doesn't really matter. For formal purposes, the existence of models like the one described above is enough to show that $\qt{\forall}{x} Axx \eif Bd$ is not a tautology. But we can offer an interpretation in English if we like. How about this one?
+Instead of providing a model of QL, $\M$ provides a partial model which fully specifies the truth-value of the sentence with which we are concerned, but does not fix the truth-values of other sentences.
+Moreover, the model above may be said to be minimal insofar as it does not add any superfluous details.
+Rather, we only made forced moves.
+
+Perhaps you are wondering what the predicate $A$ mean in English?
+It doesn't really matter.
+For formal purposes, the existence of models like the one described above is enough to show that $\qt{\forall}{x} Axx \eif Bd$ is not a tautology.
+But we can offer an interpretation in English if we like.
 
 \begin{ekey}
-\item[UD:] Miles Morales
-\item[$Axy$:] $x$ knows $y$'s biggest secret.
-\item[$Bx$:] $x$'s powers derive from gamma radiation.
-\item[$d$:] Miles Morales
+  \item[$Axy$:] $x$ knows $y$'s biggest secret.
+  \item[$Bx$:] $x$'s powers derive from gamma radiation.
+  \item[$d$:] Miles Morales
 \end{ekey}
 
-This is one way we can interpret the model above. $Add$ is true, because Miles does know Miles's biggest secret. (It's that he's the Ultimate Spider-Man. Now you know it too!) $Bd$ is false: Miles's powers came from a genetically enhanced spider, not from gamma radiation. But the partial model constructed above includes none of these interpretative details. All it says is that $A$ is a predicate which is true of Miles and Miles, and that $B$ is a predicate which does not apply to Miles. There are indefinitely many predicates in English that have this extension. $Axy$ might instead mean `$x$ is the same size as $y$' or `$x$ and $y$ live in the same city'; $Bx$ might  translate as `$x$ is a billionaire' or `$x$'s uncle was killed by a robber' or `Ted Cruz has tweeted about $x$'. In constructing a model and giving extensions for $A$ and $B$, we do not need to specify what English predicates $A$ and $B$ should be used to translate. We are concerned with whether the sentence `$\qt{\forall}{x}Axx \eif Bd$' comes out true or false, and all that matters for truth and falsity in QL is the information in the model: the UD, the extensions of predicates, and the referents of constants.
+This is one way we can interpret the model above.
+$Add$ is true, because Miles does know Miles's biggest secret.
+$Bd$ is false since Miles's powers came from a genetically enhanced spider, not from gamma radiation.
+But the partial model constructed above includes none of these details.
+All it says is that $A$ is a predicate which is true of $d$, and that $B$ is a predicate which does not apply to Miles.
+There are indefinitely many predicates in English that have this extension.
+For instance, $Axy$ might instead mean `$x$ is the same size as $y$' or `$x$ and $y$ live in the same city'.
+Similarly, $Bx$ might translate as `$x$ is a billionaire' or `$x$ has an uncle'.
+In constructing a model and giving extensions for $A$ and $B$, we do not need to specify what English predicates $A$ and $B$ should be used to translate.
+We are concerned with whether the sentence `$\qt{\forall}{x}Axx \eif Bd$' comes out true or false, and all that matters for truth and falsity in QL is the information included in the model that we construct.
 
-We can just as easily show that $\qt{\forall}{x}Axx \eif Bd$ is not a contradiction. We need only specify a model in which $\qt{\forall}{x}Axx \eif Bd$ is true; i.e., a model in which either $\qt{\forall}{x} Axx$ is false or $Bd$ is true. Here is one such partial model:
+We can just as easily show that $\qt{\forall}{x}Axx \eif Bd$ is not a contradiction.
+We need only specify a model in which $\qt{\forall}{x}Axx \eif Bd$ is true, i.e., a model in which either $\qt{\forall}{x} Axx$ is false or $Bd$ is true.
+Here is a minimal partial model $\M'=\tuple{\D,\J}$ with the same domain as before:
 
 \begin{partialmodel}
-	UD			& \{The Red Skull\}\\
-	\extension{A} 	& \{\ntuple{The Red Skull, The Red Skull}\}\\
-	\extension{B}	& \{The Red Skull\}\\
-	\referent{d}	& The Red Skull
+  $\D$			& $\set{d}$\\
+	$\J(A)$ 	& $\set{\tuple{d,d}}$\\
+  $\J(B)$	  & $\set{\tuple{d}}$\\
+	$\J(d)$	  & $d$
 \end{partialmodel}
 
-I've switched our object from Miles Morales to The Red Skull to emphasize that it doesn't matter what object you pick. (Changing the examples all back to Miles would make no difference.) On this model, $\qt{\forall}{x}Axx \eif Bd$ is true, because it is a conditional with a true consequent (as well as a true antecedent). We have now shown that $\qt{\forall}{x}Axx \eif Bd$ is neither a tautology nor a contradiction. By the definition of `contingent in QL,' this means that 
-$\qt{\forall}{x}Axx \eif Bd$ is contingent. In general, showing that a sentence is contingent will require two models: one in which the sentence is true and another in which the sentence is false.
+On this model, $\qt{\forall}{x}Axx \eif Bd$ is true, because it is a conditional with a true consequent.
+Thus $\qt{\forall}{x}Axx \eif Bd$ is neither a tautology nor a contradiction.
+By definition, $\qt{\forall}{x}Axx \eif Bd$ is contingent.
+As before, showing that a sentence is contingent will require two models: one in which the sentence is true and another in which the sentence is false.
 
-Suppose we want to show that $\qt{\forall}{x} Sx$ and $\qt{\exists}{x} Sx$ are not logically equivalent. We need to construct a model in which the two sentences have different truth values, where one of them is true while the other is false. We start by specifying a UD. Again, we make the UD reasonably small so that we can specify extensions easily. But this time we will need at least two members. If we only had one member of the domain, we wouldn't be able to illustrate the difference between \emph{all} and \emph{some}. Let the UD be \{The Red Skull, Miles Morales\}.
+You might be wondering what happened to the variable assignments from before.
+In order to prove that a quantified sentence in QL is true or false in a given model, shouldn't we have to say something about variable assignments?
+The answer is `Yes', but sometimes we can say very little.
+For instance, given any v.a. $\va{a}$, we may observe that $Bd$ is true in $\M'$ given $\va{a}$, and so $\qt{\forall}{x}Axx \eif Bd$ is true in $\M'$ given $\va{a}$ by the semantics for the material conditional.
+Officially what this looks like is that $\VV{\J}{\va{a}}(\qt{\forall}{x}Axx \eif Bd)=1$.
+Since $\qt{\forall}{x}Axx \eif Bd$ has no free variables, we may conclude that $\VV{\J}{}(\qt{\forall}{x}Axx \eif Bd)=1$. 
+Although the variable assignment $\va{a}$ comes along for the ride, it does no substantive work.
 
-We can make $\qt{\exists}{x} Sx$ true by including something in the extension of $S$, and we can make $\qt{\forall}{x} Sx$ false by leaving something out of the extension of $S$. It does not matter which one we include and which one we leave out. Making Miles the only $S$, we get a partial model that looks like this:
+In order to show that $\qt{\forall}{x}Axx \eif Bd$ is false, the variable assignments are no longer free wheels.
+In particular, to show that $\qt{\forall}{x}Axx$ is true in our first model $\M$, we need to produce some v.a. $\va{a}$ where $\VV{\I}{\va{a}}(\qt{\forall}{x}Axx)=1$.
+Since $\qt{\forall}{x}Axx$ does not have any free variables, it doesn't matter which v.a. we choose. 
+Thus we may let $\va{a}$ be any v.a. whatsoever that is defined over $\D$.
+Since $\D$ only has one element, it turns out that there is only one v.a. that we might choose, i.e., the v.a. which assigns every variable to $d$.
+This makes things very easy.
+
+Given the semantics, $\VV{\I}{\va{a}}(\qt{\forall}{x}Axx)=1$ just in case every $x$-variant $\va{c}$ of $\va{a}$ is such that $\VV{\I}{\va{c}}(Axx)=1$.
+Accordingly, we must check that $\tuple{\va{c}(x),\va{c}(x)}\in\I(A)$.
+Since there is only one element in the domain, and so only one v.a. at all, we need only check that $\tuple{d,d}\in\I(A)$, and indeed it is.
+Thus $\VV{\I}{\va{a}}(\qt{\forall}{x}Axx)=1$ as desired. 
+Although officially we need to go through all of these mechanics to show that a quantified sentence is true or false, it is often easy to see what is required to construct a minimal partial model.
+For instance, to show that $\qt{\forall}{x}Axx$ is true, we need everything in the domain to be $A$-related to itself, i.e., $\tuple{\v{x},\v{x}}$ must be in the extension of $A$ for all $\v{x}\in\D$.
+In other cases, especially when multiple quantifiers are involved, a lot more care may be required to keep things straight and to produce appropriate models.
+
+Suppose that we want to show that $\qt{\forall}{x} Sx$ and $\qt{\exists}{x} Sx$ are not logically equivalent.
+We need to construct a model in which the two sentences have different truth-values, where one of them is true while the other is false.
+We start by specifying a nonempty domain $\D=\{a$.
+Since the sentences with which we are concerned include the same predicate, there is no chance that $S$ may have different extensions. 
+Moreover, given a domain with just one member, there is no difference between something being $S$ and everything being $S$.
+Thus we must add another element to the domain $\D=\{a,b$.
+In order to make $\qt{\exists}{x} Sx$ true without making $\qt{\forall}{x} Sx$ true, we may take $\I(S)=\{\tuple{a}$.
+Letting $\va{a}$ be a v.a. where $\va{a}(x)=a$, it follows that $\tuple{\va{a}(x)}\in\I(S)$, and so by definition $\tuple{\VV{\I}{\va{a}}(x)}\in\I(S)$.
+Thus $\VV{\I}{\va{a}}(Sx)=1$, and so $\VV{\I}{\va{a}}(\exists xSx)=1$ since $\va{a}$ is an $x$-variant of itself.
+Having produced some v.a. $\va{a}$ where $\VV{\I}{\va{a}}(\exists xSx)=1$, it follows that $\VV{\I}{}(\exists xSx)=1$ given that $\exists xSx$ is a sentence of QL (it has no free variables). 
+
+What about $\qt{\forall}{x} Sx$?
+For $\VV{\I}{}(\forall xSx)\neq 1$, we need to show that $\VV{\I}{\va{c}}(\forall xSx)\neq 1$ for any v.a. $\va{c}$.
+Accordingly, we may let $\va{c}$ be an arbitrary v.a. over the domain $\D$.
+We may then observe that $\tuple{b}\notin\I(S)$.
+Accordingly, it will serve our purposes to let $\va{e}$ be a $x$-variant of $\va{c}$ where $\va{e}(x)=b$.
+It follows that $\tuple{\va{e}(x)}\notin\I(S)$, and so $\tuple{\VV{\I}{\va{e}}(x)}\notin\I(S)$.
+Thus $\VV{\I}{\va{e}}(Sx)\neq 1$, and so $\VV{\I}{\va{c}}(\forall xSx)\neq 1$ since it is not the case that every $x$-variant $\va{e}$ of $\va{c}$ is such that $\VV{\I}{\va{e}}(Sx)=1$. 
+Now we may recall that $\va{c}$ was an arbitrary v.a. over $\D$, and so $\VV{\I}{\va{c}}(\forall xSx)\neq 1$ for every v.a. $\va{c}$ over $\D$.
+As a result, it is not the case that there is some v.a. $\va{c}$ over $\D$ where $\VV{\I}{\va{c}}(\forall xSx)=1$, and so we may conclude that $\VV{\I}{}(\forall xSx)\neq 1$ as desired. 
+
+Having produced a partial model where $\qt{\forall}{x} Sx$ and $\qt{\exists}{x} Sx$ have different truth-values, we may close off the sets we defined above. 
+The result may be stated as follows:
+
 \begin{partialmodel}
-	UD			& \{Miles, The Red Skull\}\\
-	\extension{S}	& \{Miles\}
+  $\D$			& $\set{a,b}$\\
+	$\I(S)$ 	& $\set{\tuple{a}}$\\
 \end{partialmodel}
-This partial model shows that the two sentences are \emph{not} logically equivalent. $\qt{\exists}{x} Sx$ is assigned 1 on this model, but $\qt{\forall}{x} Sx$ is assigned 0.
+
+This partial model shows that the two sentences are \emph{not} logically equivalent since $\qt{\exists}{x} Sx$ is true on this model and $\qt{\forall}{x} Sx$ is false.
+Whereas only one model is required to show that two sentences of QL are not logically equivalent, to show that two sentences are logically equivalent we will need to quantify over all QL models.
+We will attend to this in the following section.
+However, before doing so, let's wrap up one loose end from before.
 
 Back on p.~\pageref{surgeon3correct}, we said that this argument would be invalid in QL:
 \begin{earg}
-\item[] $(Rc \eand K_1c) \eand Tc$
-\item[\therefore] $Tc \eand K_2c$
+\item[] $(K_2c \eand Rc) \eand Tc$
+\item[\therefore] $K_1c \eand Tc$
 \end{earg}
-Now we can prove that this is so. To show that this argument is invalid, we need to show that there is some model in which the premise is true and the conclusion is false. We can construct such a model deliberately. Here is one way to do it:
+Now we can prove that this is so. To show that this argument is invalid, we need to show that there is some model in which the premise is true and the conclusion is false. We can construct such a model as follows:
+
 \begin{partialmodel}
-	UD			& \{Reed Richards\}\\
-	\extension{T}	& \{Reed Richards\}\\
-	\extension{K_1}	& \{Reed Richards\}\\
-	\extension{K_2}	& $\emptyset$\\
-	\extension{R}	& \{Reed Richards\}\\
-	\referent{c}	& Reed Richards
+	$\D$			& $\set{c}$ \\
+	$\I(T)$	  & $\set{\tuple{c}}$ \\
+  $\I(K_1)$	& $\varnothing$  \\
+	$\I(K_2)$	& $\set{\tuple{c}}$ \\
+	$\I(R)$	  & $\set{\tuple{c}}$ \\
+	$\I(c)$	  & $c$
 \end{partialmodel}
 
-Similarly, we can show that a set of sentences is consistent by constructing a model in which all of the sentences are true.
+This time, no variable assignments are required in any substantive capacity.
+All we need to do is observe that $\tuple{c}$ is a member of the extensions $\I(K_2)$, $\I(R)$, and $\I(T)$.
+Since $\I(c)=c$ where `$c$' is a constant, it follows that $\tuple{\VV{\I}{\va{a}}(c)}=\tuple{\I(c)}=\tuple{c}$ is a member of the same extensions where $\va{a}$ is any v.a. over $\D$.
+Thus $\VV{\I}{\va{a}}(K_2c)=\VV{\I}{\va{a}}(Rc)=\VV{\I}{\va{a}}(Tc)=1$, and so $\VV{\I}{\va{a}}((K_2c \eand Rc) \eand Tc)=1$ by the semantics for conjunction.
+Since there are no free variables in this sentence, we may conclude that $\VV{\I}{}((K_2c \eand Rc) \eand Tc)=1$.
+
+Next we may let $\va{e}$ be any v.a. over $\D$.
+Given that $\tuple{c}\notin\I(K_2)$, it follows from the definitions that $\VV{\I}{\va{e}}(c)\notin\I(K_2)$, and so $\VV{\I}{\va{a}}(K_2c)\neq 1$.
+By the semantics for conjunction $\VV{\I}{\va{a}}(K_2c \eand Tc)\neq 1$.
+Since $\va{e}$ was arbitrary, we may conclude that $\VV{\I}{}(K_2c \eand Tc)\neq 1$. 
+Thus the partial model above makes the premise true and the conclusion false, proving that the argument is invalid.
+
+Suppose that we want to show that a set of sentences is consistent.
+For instance, consider the set $\Gamma=\set{(K_2c \eand Rc) \eand Tc,\ K_1c \eand Tc}$ which includes the premise and conclusion from the argument above. 
+We may tweak our model from before in order to satisfy this set, thereby proving that it is consistent.
+In particular, we may take $\J$ to be just like $\I$ given above except that $\J(K_1)=\set{\tuple{c}}$.
+It is easy to show by similar reasoning that $\VV{\J}{}(K_2c \eand Tc)=1$, and so $\J$ satisfies $\Gamma$.
+Thus we may conclude that $\Gamma$ is consistent. 
+
+Although officially \textit{models} satisfy sets of sentences and interpretations like $\J$ do not, it is often convenient to refer directly to the interpretation when the model is clear from context.
+Thus it is common to use `true in a model $\M$' and `true in an interpretation $\I$' interchangeably.
 
 
 
@@ -439,241 +541,301 @@ Similarly, we can show that a set of sentences is consistent by constructing a m
 
 
 
-
-
-
-\section{Reasoning about all models}
+\section{Reasoning About all Models}
 \label{sec.allmodelreasoning}
-We can show that a sentence is \emph{not} a tautology just by providing one carefully specified model: a model in which the sentence is false. To show that something is a tautology, on the other hand, it would not be enough to construct ten, one hundred, or even a thousand models in which the sentence is true. It is only a tautology if it is true in \emph{every} model, and there are infinitely many models. This cannot be avoided just by constructing partial models, because there are infinitely many partial models.
 
-Consider, for example, the sentence $Raa\eiff Raa$. There are two logically distinct partial models of this sentence that have a 1-member UD. There are 32 distinct partial models that have a 2-member UD. There are 1526 distinct partial models that have a 3-member UD. There are 262,144 distinct partial models that have a 4-member UD. And so on to infinity. In order to show that this sentence is a tautology, we need to show something about all of these models. There is no hope of doing so by dealing with them one at a time.
-%JH: not clear to me where the `32' comes from: two objects a and b. Two choices for Raa (true or false), likewise for Rbb, and then likewise for Rab and Rba. Then a choice about whether a is same object as b, or are we stipulating that the two objects are distinct? 
+We can show that a sentence is not a tautology by providing a carefully specified model in which the sentence in question is false.
+Similarly, to show that a sentence is not a contradiction, we only need to produce one model in which the sentence is true.
+In order to show that a sentence is contingent, we need to produce two models where the sentence is true in one model and false in the other.
+By contrast, only one model is required to show that two sentences are not equivalent on account of having different truth-values in that model.
+Similarly, only one model is required to show that a set of sentences is consistent.
 
-Nevertheless, $Raa\eiff Raa$ is obviously a tautology. We can prove it with a simple argument:
-\begin{quote}
-\label{allmodels1}
-There are two kinds of models: those in which $\langle$referent(a), referent(a)$\rangle$ is in the extension of $R$ and those in which it is not. In the first kind of model, $Raa$ is true. Hence, by the truth table for the biconditional, $Raa\eiff Raa$ is also true. In the second kind of model, $Raa$ is false, which also makes $Raa\eiff Raa$ true. Since the sentence is true in both kinds of model, and since every model is one of the two kinds, $Raa\eiff Raa$ is true in every model. Therefore, this sentence is a tautology.
-\end{quote}
-This is a sound argument; it should convince us of its conclusion. But note that it is not an argument in QL. Rather, it is an argument in English \emph{about} QL; it is an argument in the metalanguage. Furthermore, this style of argument won't always work, at least not without some generalization! 
+It is important to observe that we cannot appeal to any one or two models in order to show that a sentence is a tautology since this requires showing that the sentence is true in every model.
+Whereas producing one or two models is constructive in nature, establishing that a sentence is true in all models takes a general form where no individual constructions will suffice.
+For the same reason, we cannot show that a sentence is a contradiction by constructing a particular model, since what we need to show is that the sentence is false in every model.
+In both cases, we must reason about all models of QL where this will require a distinct set of strategies to those brought out above.
+Reasoning about all models is also required to show that an argument is valid, that two sentences are logically equivalent, or that a set of sentences is inconsistent.
+To summarizes, consider the following table:
 
-%JH: not clear that the following claim is true, since we do have a formal procedure through our natural deduction proof system, or other Sound proof systems: There is no formal procedure for evaluating or constructing natural language arguments like this one. Even though the imprecision of natural language is a key reason we began thinking about formal languages, we can't escape our metalanguage! 
-
-%Bad transition: There are further difficulties with this approach. 
-
-Consider the sentence $\qt{\forall}{x}(Rxx\eif Rxx)$, another obvious tautology. It might be tempting to reason in this way: `$Rxx\eif Rxx$ is true in every model, so $\qt{\forall}{x}(Rxx\eif Rxx)$ must be true.' The problem is that $Rxx\eif Rxx$ is \emph{not} true in every model. Since $x$ is a variable rather than a constant, `$Rxx\eif Rxx$' is not a sentence, and so it is \emph{neither} true \emph{nor} false. We do not yet have the vocabulary to say what we want to say about $Rxx\eif Rxx$. In the next section, we generalize the concept of \emph{satisfaction} introduced in \S\ref{sec:entailmentSL}. After doing so, we can provide an argument that $\qt{\forall}{x}(Rxx\eif Rxx)$ is a tautology.
-
-It is necessary to reason about an infinity of models to show that a sentence is a tautology. Similarly, it is necessary to reason about an infinity of models to show that a sentence is a contradiction, that two sentences are equivalent, that a set of sentences is inconsistent, or that an argument is valid. There are other things we can show by carefully constructing a model or two. Table \ref{table.ModelOrArgument} summarizes which things are which.
-
-{\color{black}In Chapter~\ref{ch.QLND}, our natural deduction system will provide an alternative strategy for showing that a sentence in QL is a tautology. By deriving a sentence from no assumptions, and then appealing to the Soundness of our proof system QND, we can show that sentence is a tautology. Cool story bro!}
-
-\begin{table}[t]
-\caption{It is relatively easy to answer a question if you can do it by constructing a model or two. It is much harder if you need to reason about all possible models. This table shows when it suffices to construct a model(s).}
+\begin{table}[htb]
+% \caption{It is relatively easy to answer a question if you can do it by constructing a model or two. It is much harder if you need to reason about all possible models. This table shows when it suffices to construct a model(s).}
 \label{table.ModelOrArgument}
 \begin{center}
-\begin{tabular*}{\textwidth}[t]{p{10em}p{10em}p{10em}}
+\begin{tabular*}{\textwidth}[t]{p{10em}p{12em}p{12em}}
 & {\centerline{YES}} & {\centerline{NO}}\\
 \cline{3-3}
 
-Is \metaA{} a tautology? & {show that \metaA{} must be true in any model} & \tablefbox{\emph{construct a model} in which \metaA{} is false}\\
+$\metaA$ is a tautology & {show that \metaA{} must be true in any model} & \tablefbox{\emph{construct a model} in which \metaA{} is false}\\
 \cline{3-3}
 
-Is \metaA{} a contradiction? &  {show that \metaA{} must be false in any model} & \tablefbox{\emph{construct a model} in which \metaA{} is true}\\
+$\metaA$ is a contradiction &  {show that \metaA{} must be false in any model} & \tablefbox{\emph{construct a model} in which \metaA{} is true}\\
 \cline{2-3}
 
-Is \metaA{} contingent? & \tablefbox{\emph{construct two models}, one in which \metaA{} is true and another in which \metaA{} is false}\vline & {either show that \metaA{} is a tautology or show that \metaA{} is a contradiction}\\
+$\metaA$ is contingent & \tablefbox{\emph{construct two models}, one where \metaA{} is true and one where \metaA{} is false} & {show that \metaA{} is a tautology or that \metaA{} is a contradiction}\\
 \cline{2-3}
 
-Are \metaA{} and \metaB{} equivalent? & {show that \metaA{} and \metaB{} must have the same truth value in any model} & \tablefbox{\emph{construct a model} in which \metaA{} and \metaB{} have different truth values}\\
+$\metaA$ and $\metaB$ are equivalent & {show that \metaA{} and \metaB{} have the same truth-value in any model} & \tablefbox{\emph{construct a model} in which \metaA{} and \metaB{} have different truth-values}\\
 \cline{2-3}
 
-Is the set \model{A} consistent? & \tablefbox{\emph{construct a model} in which all the sentences in \model{A} are true} & {show that the sentences in \model{A} could not all be true in any model}\\
+$\Gamma$ is consistent & \tablefbox{\emph{construct a model} in which all the sentences in $\Gamma$ are true} & {show that there is no model that satisfies $\Gamma$}\\
 \cline{2-3}
 
-Is the argument \mbox{`\script{P}, \therefore\ \metaC{}'} valid? & {show that any model in which \script{P} is true must be a model in which \metaC{} is true} & \tablefbox{\emph{construct a model} in which \script{P} is true and \metaC{} is false}\\
+  $\metaA_1,\metaA_2,\ldots \therefore\ \metaB$ is valid & {show that any model that satisfies $\set{\metaA_1,\metaA_2,\ldots}$ also satisfies $\metaB$} & \tablefbox{\emph{construct a model} that satisfies $\set{\metaA_1,\metaA_2,\ldots}$ but does not satisfy $\metaB$}\\
 \cline{3-3}
 \end{tabular*}
 \end{center}
 \end{table}
 
+Consider, for example, the sentence $Raa\eiff Raa$.
+In order to show that this sentence is a tautology, we need to show something about all models.
+Since there is no hope of doing so one at a time, it is typical to proceed by \textit{reductio}.
+Consider the following proof:
 
-
-\section{Truth-conditions in QL}
-\label{sec.TruthInQL}
-%JH: really, this section is about truth CONDITIONS, not truth. 
-%JH: replacing `definition of truth' with `definition of truth-conditions' or `determination of truth', since again, it's unclear that we are defining `truth.' We're simply providing a recursive account of truth conditions. 
-
-In our discussion of SL, we split the definition of the truth-conditions of sentences into two parts: a truth value assignment ($a$) for atomic sentence letters and a truth function ($v$) for all sentences. The truth function covered the way that complex sentences are built from sentence letters and connectives. This revealed a recursive structure for the truth-conditions of any well-formed formula in SL. 
-
-Just as for SL, the truth value of a sentence in QL is relative to an interpretation: a sentence is true \emph{in a model} or false \textit{in a model}. Tautologies are, of course, true \textit{in all models}; contradictions are false \textit{in all models}. Atomic sentences are $n$-place predicates followed by $n$ constants, like $Pj$ or $Qbcd$. A sentence $Pj$ is true in a model \model{M} if and only if the referent of $j$ is in the extension of $P$ in \model{M}.
-
-We could go on in this way to define truth for all atomic sentences that contain only predicates and constants: Consider any sentence of the form $\script{R}\script{c}_1\ldots\script{c}_n$ where \script{R} is an n-place predicate and the \script{c}s are constants. It is true in \model{M} if and only if ${\langle}\referent{\script{c}_1},\ldots,\referent{\script{c}_n}{\rangle}$ is a member of the set \extension{\script{R}} in \model{M}.
-
-We could then determine the truth of sentences built up with sentential connectives in the same way we did for SL. For example, the sentence $(Pj \eif Mda)$ is true in \model{M} if either $Pj$ is false in \model{M} or $Mda$ is true in \model{M}.
-
-Unfortunately, this approach fails when we consider sentences containing quantifiers. Consider $\qt{\forall}{x} Px$. When is it true in a model \model{M}? The answer cannot depend on whether $Px$ is true or false in \model{M}, because the $x$ in `$Px$' is a free variable. $Px$ is not a sentence. It is neither true nor false.
-
-We were able to give a recursive determination of truth in SL because every well-formed formula of SL has a truth value. Matters are more complex in QL, so we cannot determine truth values simply by starting with the truth of atomic sentences and building up. We also need to consider the atomic formulae which are not sentences (these contain unbound variables, and can be called `open formula'). In order to do this we will extend the notion of \emph{satisfaction}: in a model, every well-formed formula of QL will be satisfied or not satisfied, even if it does not have a truth value. We will then be able to determine the \emph{truth} of sentences of QL in terms of satisfaction. {\color{black} Fittingly, this approach to the semantics of quantifier logic is known as \textit{satisfaction semantics}, introduced by Tarski in the mid-1930s. We thank you, Tarski, for sponsoring the following section!}
-
-
-\section{Satisfaction Semantics}
-\label{sec:satisfactionQL}
-% earlier, I should define `open sentence', but maybe `open formula' is better, since Ichikawa is saying that these things are not sentences. So calling them and open sentence would be confusing.
-
-The open formula `$Px$' says, roughly, that `$x$ is one of the $P$s'. This cannot be quite right, however, because $x$ is a variable and not a constant. It does not name any particular member of the UD. Instead, its meaning in a sentence is determined by the quantifier that binds it. The variable $x$ must stand-in for any member of the UD in the sentence $\qt{\forall}{x}Px$, but it only needs to stand-in for one member in $\qt{\exists}{x}Px$. Since we want the definition of satisfaction to cover open formula like $Px$ without any quantifier whatsoever, we will start by saying how to interpret a free variable like the `$x$' in `$Px$'. 
-
-{\color{black}\textit{Long story short}: we will devise a method for temporarily treating free variables as constants. When we interpret an existential like $\qt{\exists}{x} Px$, we effectively ask ``is there some member $c$ of the UD such that if we construed $x$ as denoting that member $c$, then there would be a P, i.e. $Pc$ is true?" Likewise, when we interpret a universal like $\qt{\forall}{x} Px$, we effectively ask ``are all of the members $c_1, c_2, \dots$ of the UD such that if we construe $x$ as denoting any one of them, then $Pc_i$ is true, where we replace $x$ with that member $c_i$, doing this for \textit{every} member $c_i$?'' Hopefully this idea is pretty intuitive! In the remainder of this section, try not to lose the forest for the trees. We are basically going to spell out a formal but somewhat tedious way of making precise this guiding intuition. Honestly, if you understand this basic intuition, that is probably enough. The rest of the section is mainly an exercise in formalization.} 
-%Effectively, when we interpret 
-
-%JH: would be better to use function notation, e.g. f(x), to emphasize that we are assignming constants to the variable x. `a' is a bad choice for a couple reasons (looks like a constant and looks like a common word)
-
-{\color{black}Excepting tautologies and contradictions, the truth of a QL sentence is relative to an interpretation \textbf{I} (the \textbf{bold face font} denotes that this symbol is part of our metalanguage, not a QL sentence). Equivalently, it is relative to a model $\model{M}_{\mathbf{I}}$ induced by interpretation \textbf{I}. To temporarily replace variables with constants, we introduce a set of functions known as \textit{variable assignments}. Each variable assignment is relative to an interpretation (since different interpretations allow different variable assignments). We will denote a variable assignment as $\mathbf{d_I}$. The letter `d' should make you think of `denotations', since a variable assignment stipulates what a variable temporarily denotes, i.e. represents or stands for. Again, hold onto that forest!} 
-
-{\color{black}As the name suggests, a variable assignment $\mathbf{d_I}$ takes in a variable (e.g. $x$) and outputs a constant, i.e. some member of the UD. If our UD consists of positive integers, then $\mathbf{d_I} (x)$ might equal $2$. Different variables can be assigned to the same constant, but every variable must be assigned a constant (otherwise $\mathbf{d_I}$ wouldn't be a function over the variables!). Different variable assignments differ in the constants they assign to variables.} 
-
-%We do this by introducing a \emph{variable assignment}. Formally, this is a function that matches up each variable with a member of the UD. Call this function `$a$'. (The `$a$' is for `assignment', but this is not the same as the truth value assignment that we used in defining truth for SL.) 
-%For every variable $x$ in our metalanguage, `$a(x)$' represents the object that the assignment $a$ assigns to $x$. 
-
-{\color{black}Now we come to the whole point of this preamble: satisfaction. We'll say that a variable assignment $\mathbf{d_I} (x)$ \textit{satisfies} an open formula $Px$---on interpretation $\textbf{I}$---provided that $\mathbf{d_I}(x)$ lies in the extension of the predicate $P$. Again, `$\mathbf{d_I}(x)$' simply denotes the object that $\mathbf{d_I}$ assigns to the variable $x$. Equivalently, we could say that an open formula $Px$ is satisfied in a model $\model{M}_{\mathbf{I}}$ by a variable assignment $\mathbf{d_I}$ if and only if $\mathbf{d_I}(x)$ is in the  extension of P. Essentially, this notion of satisfaction lets us generalize the notion of truth to apply to open formulae. Cool beans.}  
-
-{\color{black}We can generalize this notion of satisfaction to open formulae that comprise any n-place predicate $Q$. Consider an open formula of the form $Qx_1x_2\dots x_n$, for an n-place predicate $Q$. A variable assignment $\mathbf{d_I}$ will take in each of these variables $x_1 \dots x_n$ and assign each to some constant in the UD (not necessarily the same constant, of course!). We can then say that the variable assignment $\mathbf{d_I}$ \textit{satisfies} $Qx_1 x_2 \dots x_n$ provided that $<\mathbf{d_I}(x_1), \mathbf{d_I}(x_2),\dots, \mathbf{d_I}(x_n)>$ is in the extension of $Q$ on interpretation \textbf{I}. Whew! Let that sink in a little.}
-
-%mathbf doesn't seem to work in ntuple command: $\ntuple{\mathbf{d_I}(x_1), \mathbf{d_I}(x_2),\dots, \mathbf{d_I}(x_n)}$
-%<d_I(x_1), d_I(x_2),\dots, d_I(x_n)
-
-{\color{black}Okay, so now we ascend from satisfaction for open formulae to the beast we're after: satisfaction for closed formulae, i.e. where variables are bound. So what does it take for an interpretation to satisfy a universal generalization like $\qt{\forall}{y} Py$? Recall our guiding intuition: we need it to be the case that the open formula $Py$ is satisfied no matter which member of the UD we assign to the variable $y$. To be satisfied, $\qt{\forall}{y} Py$ requires that every member of the UD lies in \extension{P}. So in particular,} it's not enough if $Py$ is satisfied in \model{M} by $\mathbf{d_I}(y)$. For that would just mean that the specific constant $\mathbf{d_I}(y)$ lies in the extension of $P$, without telling us anything about \textit{the other} constants in our UD. 
-
-{\color{black}Here's where things get really fancy (buckle your brain belts!). We need some way of expressing the intuitive idea of assigning constants to variables such that $Py$ is satisfied no matter what constant we assign to the variable $y$. When in doubt, notation it out! So we introduce a new kind of function $\mathbf{d_I} [c / y]$, where the notation `$[c/y]$' is read `$c$ for $y$'. The function $\mathbf{d_I} [c / y]$ is just like the variable assignment $\mathbf{d_I}$, except for the following: $\mathbf{d_I} [c / y]$ necessarily assigns the constant $c$ to variable $y$. This means that $\mathbf{d_I} [c / y] (y) = c$. For any other variable $x$ distinct from $y$, $\mathbf{d_I} [c / y] (x) = \mathbf{d_I}(x)$. Since the variable assignment $\mathbf{d_I} [c / y]$ is so similar to the variable assignment $\mathbf{d_I}$, we call the former a \textit{variant} of the latter.} 
-
-Defined piecewise, $\mathbf{d_I} [c / y]$ acts on variables as follows:\footnote{This piecewise function notation is very common in the mathlands. Take it or leave it!}
-
-\begin{equation}
-\mathbf{d_I} [c / y](x)=
-    \begin{cases}
-        \mathbf{d_I}(x) & \text{if } x \neq y \\
-        c & \text{if } x =y 
-    \end{cases}
-\end{equation}
-
-Here's a concrete illustration: Suppose that the UD is presidents of the United States. The function $\mathbf{d_I}[\mbox{Grover Cleveland}/y]$ assigns Grover Cleveland to the variable $y$, regardless of what $\mathbf{d_I}$ assigns to $y$. For any other variable $z$, $\mathbf{d_I}[\mbox{Grover Cleveland}/y](z)$ equals $\mathbf{d_I}(z)$.
-
-
-%So we need another bit of technical notation: For any member $\pi$ of the UD and any variable \script{x}, let $a[\pi|\script{x}]$ be the variable assignment that assigns $\pi$ to \script{x} but agrees with $\mathbf{d_I}(x)$ in all other respects. We have used $\pi$, the Greek letter \emph{pi}, to underscore the fact that it is some member of the UD and not some symbol of QL. 
-
-{\color{black}We can now say that $\qt{\forall}{y} Py$ is satisfied in a model $\model{M}_I$ by a variable assignment $\mathbf{d_I}$ if and only if, for every object $c$ in the UD of $\model{M}_I$, $Py$ is satisfied in \model{M} by $\mathbf{d_I}[c/y]$. Let's put that another way, in case you find it easier to understand: a formula of the form $\qt{\forall}{y} Py$ is satisfied by $\mathbf{d_I}$ on interpretation $\textbf{I}$ provided that each member $c$ of the UD is such that the variant $\mathbf{d_I}[c/y]$ satisfies $Py$ on interpretation $\textbf{I}$. In other words, the output of the variant $\mathbf{d_I}[c/y](c)$ lies in the extension of $P$ for every constant $c$ in our UD. Again, this is just a convoluted (but precise) way of saying the intuitive idea we began with! Forest, meet trees!} 
-
-{\color{black}It may help to see how satisfaction works out for existentials such as $\qt{\exists}{y} Py$, since this case is somewhat simpler. A variable assignment $\mathbf{d_I}$ satisfies a sentence of the form $\qt{\exists}{y} Py$ provided that there is at least one member $c$ of the UD such that the variant $\mathbf{d_I}[c/y]$ satisfies the open formula $Py$ on interpretation $\textbf{I}$. Basically, we just need there to be at least one constant $c$ that lies in the extension of $P$ (so that $\mathbf{d_I}[c/y](y) \in \text{extension}(P)$. We've just come up with a fancy way of formalizing this idea (a way that generalizes to QL sentences of arbitrary complexity).} 
-
-%The intuitive thought here is that wff satisfaction is relative to a variable assignment. A variable assignment is a way of treating each variable as if it were a name for some object or other; a wff is satisfied by $\mathbf{d_I}(x)$ in a given model iff, in that model, treating the variables the way $\mathbf{d_I}(x)$ suggests would yield a true wff.
-
-You may worry that our statement of satisfaction by a variable assignment in a model is circular, because it gives the satisfaction conditions for the sentence $\qt{\forall}{x} Px$ using the phrase `for every object'. Similarly, we give the satisfaction conditions for the sentence $\qt{\exists}{x} Px$ using the phrase `at least one object'. However, we must remember the difference between a logical symbol like `$\forall$' and an English language word like `every.' The word is part of the metalanguage that we use in defining satisfaction conditions for object language sentences that contain the symbol. (Recall the parallel discussion of sentential connectives on p.\ \pageref{truthdefinition}.)
-
-We can now give a general definition of satisfaction, generalizing from the cases we have already discussed. We define a function $\mathbf{s}$ (for `satisfaction') in a model $\model{M}_I$ such that for any wff \metaA{} and variable assignment $\mathbf{d_I}$, $\mathbf{s}(\metaA{}, \mathbf{d_I})=1$ if \metaA{} is satisfied in $\model{M}_I$ by $\mathbf{d_I}$; otherwise $\mathbf{s}(\metaA{}, \mathbf{d_I})=0$. Remember: `1' stands for `true' and `0' stands for `false.' 
-
-% %JH: Note that in the first \item, we are implicitly defining the denotation function that the Logic Book defines on p. 340, end of Section 8.1. It seems overkill to have to define yet another function, so this implicit approach seems fine (although it notationally not great to have these $t_i$ running around, since probably they should be in bold or script as metavariables. But then it would seem strange to write c_i = t_i. Logic Book gets around this by having that function, and also having an interpretation function I that can act on constants to say what they are interpreted as. 
-%\script{t}_1\ldots\script{t}_n
-
-\begin{enumerate}
-\item Let \metaA{} be an atomic wff of the form $\script{P}t_1\ldots t_n$, where each $t_i$ is either a constant or a variable. Introduce objects $c_i$ which represent the denotation of $t_i$, either because $t_i$ is already a constant or because we assign $t_i$ to a constant using a variable assignment. For each $t_i$, if $t_i$ is a constant then $c_i = t_i$. If $t_i$ is instead a variable, then $c_i = \mathbf{d_I}(t_i)$. We'll say that $\mathbf{d_I}$ satisfies $\script{P}t_1\ldots t_n$ provided that $< c_1, \ldots, c_n>$ is in \extension{\script{P}}. In other words, we have the following two cases:
-\begin{displaymath}\mathbf{s}(\metaA{}, \mathbf{d_I}) =
-	\left\{\begin{array}{ll}
-	1 & \mbox{if $< c_1, \ldots, c_n>$ is in \extension{\script{P}} in $\model{M}_I$},\\
-	0 & \mbox{otherwise.}
-	\end{array}\right.
-\end{displaymath}
-
-%For each term $t_i$: If $t_i$ is a constant, then $\pi_i = \referent{t_i}$. If $t_i$ is a variable, then $\pi_i = a(t_i)$.
-
-\item If \metaA{} is ${\enot}\metaB{}$ for some wff \metaB{}, then
-\begin{displaymath}\mathbf{s}(\metaA{}, \mathbf{d_I}) =
-	\left\{\begin{array}{ll}
-	1 & \mbox{if $\mathbf{s}(\metaB{}, \mathbf{d_I}) = 0$},\\
-	0 & \mbox{otherwise.}
-	\end{array}\right.
-\end{displaymath}
-
-\item If \metaA{} is $(\metaB{}\eand\metaC{})$ for some wffs \metaA{}, \metaB{}, then
-\begin{displaymath}\mathbf{s}(\metaA{}, \mathbf{d_I}) =
-	\left\{\begin{array}{ll}
-	1 & \mbox{if $\mathbf{s}(\metaB{}, \mathbf{d_I}) = 1$ and $\mathbf{s}(\metaC{}, \mathbf{d_I}) = 1$,}\\
-	0 & \mbox{otherwise.}
-	\end{array}\right.
-\end{displaymath}
-
-\item If \metaA{} is $(\metaB{}\eor\metaC{})$ for some wffs \metaA{}, \metaB{}, then
-\begin{displaymath}\mathbf{s}(\metaA{}, \mathbf{d_I}) =
-	\left\{\begin{array}{ll}
-	0 & \mbox{if $\mathbf{s}(\metaB{}, \mathbf{d_I}) = 0$  and $\mathbf{s}(\metaC{}, \mathbf{d_I}) = 0$,}\\
-	1 & \mbox{otherwise.}
-	\end{array}\right.
-\end{displaymath}
-
-\item If \metaA{} is $(\metaB{}\eif\metaC{})$ for some wffs \metaA{}, \metaB{}, then
-\begin{displaymath}\mathbf{s}(\metaA{}, \mathbf{d_I}) =
-	\left\{\begin{array}{ll}
-	0 & \mbox{if $\mathbf{s}(\metaB{}, \mathbf{d_I}) = 1$ and $\mathbf{s}(\metaC{}, \mathbf{d_I}) = 0$,}\\
-	1 & \mbox{otherwise.}
-	\end{array}\right.
-\end{displaymath}
-
-\item If \metaA{} is $(\metaB{}\eiff\metaC{})$ for some wffs \metaA{}, \metaB{}, then
-\begin{displaymath}\mathbf{s}(\metaA{}, \mathbf{d_I}) =
-	\left\{\begin{array}{ll}
-	1 & \mbox{if $\mathbf{s}(\metaB{}, \mathbf{d_I}) = \mathbf{s}(\metaC{}, \mathbf{d_I})$},\\
-	0 & \mbox{otherwise.}
-	\end{array}\right.
-\end{displaymath}
-
-\item If \metaA{} is $\qt{\forall}{\script{x}} \metaB{}$ for some wff \metaB{} and some variable \script{x}, then
-\begin{displaymath}\mathbf{s}(\metaA{}, \mathbf{d_I}) =
-	\left\{\begin{array}{ll}
-	1 & \mbox{if $\mathbf{s}(\metaB{}, \mathbf{d_I}[c/\script{x}])=1$ for every member $c$ of the UD},\\
-	0 & \mbox{otherwise.}
-	\end{array}\right.
-\end{displaymath}
-
-\item If \metaA{} is $\qt{\exists}{\script{x}} \metaB{}$ for some wff \metaB{} and some variable \script{x}, then
-\begin{displaymath}\mathbf{s}(\metaA{}, \mathbf{d_I}) =
-	\left\{\begin{array}{ll}
-	1 & \mbox{if $\mathbf{s}(\metaB{}, \mathbf{d_I}[c/\script{x}])=1$ for at least one member $c$ of the UD},\\
-	0 & \mbox{otherwise.}
-	\end{array}\right.
-\end{displaymath}
-\end{enumerate}
- 
-This definition follows the same structure as the definition of a wff for QL, so we know that every wff of QL will be covered by this definition. For a model \model{M} and a variable assignment $\mathbf{d_I}$, any wff will either be satisfied or not. No wffs are left out or assigned conflicting values. {\color{black}Man, what a wild ride that was!} 
-
-
-
-
-\section{Truth in QL}
-
-Consider a simple quantified sentence like $\qt{\forall}{x}Px$. By part 7 in the definition of satisfaction, this sentence is satisfied if $a[\pi|x]$ satisfies $Px$ in \model{M} for every $\pi$ in the UD. In other words, assign that $x$ to any object in the UD you like, and the resultant wff will come out true. By part 1 of the definition, this will be the case if every $\pi$ is in the extension of $P$. Whether $\qt{\forall}{x}Px$ is satisfied does not depend on the particular variable assignment $\mathbf{d_I}(x)$. If this sentence is satisfied, then it is true. This is a formalization of what we have said all along: $\qt{\forall}{x}Px$ is true if everything in the UD is in the extension of $P$.
-
-The same thing holds for any sentence of QL. Because all of the variables are bound, a sentence is satisfied or not regardless of the details of the variable assignment. So we can define truth in this way: A sentence \metaA{} is \define{true in} \model{M} if and only if some variable assignment satisfies \metaA{} in $M$; \metaA{} is \define{false in} \model{M} otherwise.
-
-Truth in QL is \emph{truth in a model}. {\color{black}Unless they are a tautology or a contradiction,} sentences of QL are not flat-footedly true or false as mere symbols, but only relative to a model. A model provides the meaning of the symbols, insofar as it makes any difference to truth and falsity.
-
-
-\section{Reasoning about all models (reprise)}
-At the end of section \ref{sec.allmodelreasoning}, we were stymied when we tried to show that $\qt{\forall}{x}(Rxx\eif Rxx)$ is a tautology. Having defined satisfaction, we can now reason in this way:
 \begin{quote}
-Consider some arbitrary model \model{M}. Now consider an arbitrary member of the UD; for the sake of convenience, call it $\pi$. It must be the case either that $\langle\pi,\pi\rangle$ is in the extension of $R$ or that it is not. If $\langle\pi,\pi\rangle$ is in the extension of $R$, then $Rxx$ is satisfied by a variable assignment that assigns $\pi$ to $x$ (by part 1 of the definition of  {satisfaction}); since the consequent of $Rxx\eif Rxx$ is satisfied, the conditional is satisfied (by part 5). If $\langle\pi,\pi\rangle$ is not in the extension of $R$, then $Rxx$ is not satisfied by a variable assignment that assigns $\pi$ to $x$ (by part 1); since the antecedent of $Rxx\eif Rxx$ is not satisfied, the conditional is satisfied (by part 5). In either case, $Rxx\eif Rxx$ is satisfied. This is true for any member of the UD, so $\qt{\forall}{x}(Rxx \eif Rxx)$ is satisfied by any truth value assignment (by part 7). So $\qt{\forall}{x}(Rxx \eif Rxx)$ is true in \model{M} (by the recursive structure of truth in QL). This argument holds regardless of the exact UD and regardless of the exact extension of $R$, so $\qt{\forall}{x}(Rxx \eif Rxx)$ is true in any model. Therefore, it is a tautology.
+\label{allmodels1}
+  \textit{Proof:}
+  Assume that there is a QL model $\M=\tuple{\D,\I}$ where $\VV{\I}{}(Raa\eiff Raa)\neq 1$.
+  Letting $\va{a}$ be any v.a. over $\D$, it follows that $\VV{\I}{\va{a}}(Raa\eiff Raa)\neq 1$.
+  Accordingly, $\VV{\I}{\va{a}}(Raa)\neq\VV{\I}{\va{a}}(Raa)$, and so $\tuple{\VV{\I}{\va{a}}(a),\VV{\I}{\va{a}}(a)}\notin\I(R)$ and $\tuple{\VV{\I}{\va{a}}(a),\VV{\I}{\va{a}}(a)}\in\I(R)$.
+  But this is a contradiction, and so $\VV{\I}{}(Raa\eiff Raa)=1$ for every QL model $\M$.
 \end{quote}
 
-Giving arguments about all possible models typically requires a clever combination of two strategies:
+The variable assignment $\va{a}$ did no substantive work above. 
+By contrast, consider the tautology $\qt{\forall}{x}(Rxx\eiff Rxx)$.
+It might be tempting to reason in this way: $Rxx\eiff Rxx$ is true in every model, so $\qt{\forall}{x}(Rxx\eiff Rxx)$ must also be true.
+The problem is that $Rxx\eiff Rxx$ is \emph{not} true in every model.
+Since $x$ is a variable rather than a constant, $Rxx\eiff Rxx$ is not a sentence, and so it is neither true nor false in any model.
+Rather, $Rxx\eiff Rxx$ is an open sentence, and so only has a truth-value in a model \textit{given a variable assignment}. 
+Consider the following proof:
 
-1. {\color{black}\textit{Proof by cases}}: Divide cases between possible kinds, such that every case must be one kind or the other.  In the argument on p.~\pageref{allmodels1}, for example, we distinguished two kinds of models based on whether or not a specific ordered pair was in \extension{R}. In the argument above, we distinguished cases in which an ordered pair was in \extension{R} and cases in which it was not. {\color{black}Note that this proof strategy is just like the one we use for the rule of Disjunction Elimination (\eor E) in our natural deduction systems!}
-
-2. {\color{black}\textit{Universal Generalization}}: Consider an arbitrary object as a way of showing something more general. In the argument above, it was crucial that $\pi$ was just some arbitrary member of the UD. We did not assume anything special about it. As such, whatever we could show to hold of $\pi$ must hold of every member of the UD --- if we could show it for $\pi$, we could show it for anything. In the same way, we did not assume anything special about \model{M}, and so whatever we could show about \model{M} must hold for all models. {\color{black}Note that this proof strategy parallels a new rule we will describe in Chapter~\ref{ch.QLND} for introducing a universal quantifier ($\forall$I). It is also a foundational reasoning strategy in mathematics.}
-
-Consider one more example. The argument $\qt{\forall}{x}(Hx \eand Jx)$ \therefore   $\qt{\forall}{x} Hx$ is obviously valid. We can show that the argument is valid by considering what must be true in every model in which the premise is true.
 \begin{quote}
-Consider an arbitrary model \model{M} in which the premise $\qt{\forall}{x}(Hx \eand Jx)$ is true. The conjunction $Hx \eand Jx$ is satisfied regardless of what is assigned to $x$, so $Hx$ must be also (by part 3 of the definition of {satisfaction}). As such, $\qt{\forall}{x} Hx$ is satisfied by any variable assignment (by part 7 of the definition of {satisfaction}) and true in \model{M} (by the definition of {truth}).
-Since we did not assume anything about \model{M} besides $\qt{\forall}{x}(Hx \eand Jx)$ being true, $\qt{\forall}{x} Hx$ must be true in any model in which $\qt{\forall}{x}(Hx \eand Jx)$ is true. So $\qt{\forall}{x}(Hx \eand Jx) \models \qt{\forall}{x} Hx$.
+\label{allmodels2}
+  \textit{Proof:}
+  Assume there is a QL model $\M=\tuple{\D,\I}$ where $\VV{\I}{}(\forall x(Rxx\eiff Rxx))\neq 1$.
+  Letting $\va{a}$ be any v.a. over $\D$, it follows that $\VV{\I}{\va{a}}(\forall x(Rxx\eiff Rxx))\neq 1$.
+  As a result there is some $x$-variant $\va{c}$ of $\va{a}$ where $\VV{\I}{\va{c}}(Rxx\eiff Rxx)\neq 1$.
+  Accordingly, $\VV{\I}{\va{c}}(Rxx)\neq\VV{\I}{\va{c}}(Rxx)$, and so $\tuple{\VV{\I}{\va{c}}(x),\VV{\I}{\va{c}}(x)}\notin\I(R)$ and $\tuple{\VV{\I}{\va{c}}(x),\VV{\I}{\va{c}}(x)}\in\I(R)$.
+  But this is a contradiction, so $\VV{\I}{}(\qt{\forall}{x}(Rxx\eiff Rxx))=1$ for every QL model $\M$.
 \end{quote}
-Even for a simple argument like this one, the reasoning is somewhat complicated. For longer arguments, the reasoning can be insufferable. Difficulties arise because talking about an infinity of models requires reasoning things out in English. What are we to do? The answer won't surprise readers of the first half of the book: we'll make use of some formal proof systems! We have seen two kinds of proof systems for SL: the tree method, and natural deduction proofs. In the coming chapters, we'll extend both kinds of systems to QL as well. 
 
-{\color{black}We hasten to note that---until we show these proof systems are Sound---the most they show is the syntactic property of derivability. They let us establish a single turnstile, e.g. that $\qt{\forall}{x}(Hx \eand Jx) \vdash{} \qt{\forall}{x} Hx$, but we'll need a Soundness result to convert this to a double turnstile $\models$, i.e. to a semantic notion of entailment.} 
+This proof is very similar.
+If you feel like you would struggle to come up with these proofs, note that each step follows immediately from the definitions.
+All you need to do for simple proofs like these is to assume that there is a model which makes the sentence in question false and use the definitions to derive a contradiction.
+It can take some time to become familiar with these definitions, but no better way to practice them than by writing proofs.
+% Although we could have used the definitions to unpack things even further--- given that $\tuple{\VV{\I}{\va{c}}(x),\VV{\I}{\va{c}}(x)}\in\I(R)$, it follows that $\tuple{\va{c}(x),\va{c}(x)}\in\I(R)$ since $x$ is a variable--- doing so is not necessary.
+% Rather, we included only the necessary steps to derive a contradiction.
+
+Once multiple quantifiers are involved, things get a lot trickier.
+For instance, suppose we want to show that $\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx) \models \qt{\forall}{x}\enot Fxx$.
+The proof proceeds in a similar fashion, assuming that there is a model which makes the premise true and the conclusion false.
+However, instead of relying solely on the definitions to lead us to a contradiction, a little bit of strategy will be required.
+Consider the following proof:
+
+\begin{quote}
+\label{allmodels3}
+  \textit{Proof:}
+  Assume for contradiction that there is a QL model $\M=\tuple{\D,\I}$ where $\VV{\I}{}(\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$ and $\VV{\I}{}(\qt{\forall}{x}\enot Fxx)\neq 1$. 
+  It follows from the former claim that $\VV{\I}{\va{a}}(\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$ for some v.a. $\va{a}$, where $\VV{\I}{\va{c}}(\qt{\forall}{x}\enot Fxx)\neq 1$ for every v.a. $\va{c}$ follows from the latter claim, so $\VV{\I}{\va{a}}(\qt{\forall}{x}\enot Fxx)\neq 1$ in particular.
+
+  By the semantics, $\VV{\I}{\va{e}}(\enot Fxx)\neq 1$ for some $x$-variant of $\va{e}$ of $\va{a}$, and so $\VV{\I}{\va{e}}(Fxx)=1$.
+  Thus $\tuple{\VV{\I}{\va{e}}(x),\VV{\I}{\va{e}}(x)}\in\I(F)$, and so $\tuple{\va{e}(x),\va{e}(x)}\in\I(F)$.
+
+  Since $\va{e}$ is an $x$-variant of $\va{a}$, we know from above that $\VV{\I}{\va{e}}(\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$.
+  Let $\va{g}$ be the $y$-variant of $\va{a}$ where $\va{g}(y)=\va{e}(x)$.
+  Thus $\VV{\I}{\va{g}}(Fxy \eif \enot Fyx)=1$.
+  By the semantics, $\VV{\I}{\va{g}}(Fxy)\neq 1$ or $\VV{\I}{\va{g}}(\enot Fyx)=1$, and so $\VV{\I}{\va{g}}(Fxy)\neq 1$ or $\VV{\I}{\va{g}}(Fyx)\neq 1$.
+  Thus $\tuple{\VV{\I}{\va{g}}(x),\VV{\I}{\va{g}}(y)}\notin\I(F)$ or $\tuple{\VV{\I}{\va{g}}(y),\VV{\I}{\va{g}}(x)}\notin\I(F)$, and since $x$ and $y$ are variables, $\tuple{\va{g}(x),\va{g}(y)}\notin\I(F)$ or $\tuple{\va{g}(y),\va{g}(x)}\notin\I(F)$.
+
+  Since $\va{g}$ is a $y$-variant of $\va{e}$ and $x\neq y$, it follows that $\va{g}(x)=\va{e}(x)$.
+  Moreover, $\va{g}(y)=\va{e}(x)$ by stipulation, and so $\tuple{\va{e}(x),\va{e}(x)}\notin\I(F)$, contradicting the above.
+  Thus there is no model $\M=\tuple{\D,\I}$ where $\VV{\I}{}(\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$ and $\VV{\I}{}(\qt{\forall}{x}\enot Fxx)\neq 1$. 
+  It follows that every model to make $\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx)$ true also makes $\qt{\forall}{x}\enot Fxx$ true, and so $\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx) \models \qt{\forall}{x}\enot Fxx$.
+
+\end{quote}
+
+This proof was a lot more complicated, and required some careful moves.
+In particular, we used $\VV{\I}{}(\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$ to identify the v.a. $\va{a}$, and used $\VV{\I}{}(\qt{\forall}{x}\enot Fxx)\neq 1$ to conclude that $\VV{\I}{\va{a}}(\qt{\forall}{x}\enot Fxx)\neq 1$. 
+We then unpacked this latter claim since it produced an $x$-variant $\va{e}$ where $\tuple{\va{e}(x),\va{e}(x)}\in\I(F)$.
+The remainder of the proof drew on the former general claim $\VV{\I}{\va{a}}(\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$ to show that $\tuple{\va{e}(x),\va{e}(x)}\notin\I(F)$.  
+It was important to observe that $\va{e}$ was a $x$-variant of $\va{a}$, and to have carefully chosen the $y$-variant $\va{g}$ of $\va{e}$ so that $\va{g}(y)=\va{e}(x)$.
+The rest follows from the semantics and definitions.
+
+
+
+
+
+\section{Constants and Quantifiers}
+
+In writing semantic proofs, it is best to unpack existential claims before universal claims.\footnote{We will see an analogue of this same idea show up in the proof system that we will introduce for QL.}
+You can think of this as analogous to the idea that it is best to unpack conjunctions before disjunctions, for instance in using the tree method for SL.
+Just as a negated conjunction has a similar character to a disjunction, and a negated disjunction has a similar character to a conjunction, something similar holds for the quantifiers.
+In particular, a negated (or false) universal claim has a similar character to a existential claim, and a negated (or false) existential claim has a similar character to a universal claim. 
+With this in mind, we may restate our previous recommendation: it is best to unpack claims with an \textit{existential character} before unpacking claims with a \textit{universal character}.
+
+Consider the sentences $\qt{\forall}{x}\enot Fxx$, $\enot \qt{\exists}{y} \enot Gy$, $\exists z \enot Kz$, and $\enot Hbc$.
+Which of these has an existential character, and which has a universal character?
+Although $\qt{\forall}{x}\enot Fxx$ includes a negation sign, it is making a general claim--- i.e., that nothing is $F$-related to itself--- and so has a universal character.
+Next consider $\enot \qt{\exists}{y} \enot Gy$ which, says that nothing is not $G$, and so everything is $G$.
+Again this has a universal character.
+Although $\exists z \enot Kz$ includes a negation sign, what we are saying is that something is not $K$, where this has an existential character. 
+Lastly, what are we to make of $\enot Hbc$?
+Although this sentence does not include any quantifiers at all, this sentence has in some ways the most existential character of all.
+Not only does $\enot Hbc$ say that \textit{something} is $H$-related to \textit{something}, it names the things that are $H$-related, though we don't know if `$a$' and `$c$' name the same thing or not.
+
+In order to bring out the existential character that constants have, consider the entailment $\enot Hbc \models \exists x \exists y \enot Hxy$.
+We may establish this claim with a direct proof:
+
+\begin{quote}
+\label{allmodels4}
+  \textit{Proof:}
+  Let $\M=\tuple{\D,\I}$ be a QL model where $\VV{\I}{}(\enot Hbc)=1$, and so $\VV{\I}{\va{a}}(\enot Hbc)=1$ for some v.a. $\va{a}$.
+  It follows that $\VV{\I}{\va{a}}(Hbc)\neq 1$, and so $\tuple{\VV{\I}{\va{a}}(b),\VV{\I}{\va{a}}(c)}\notin \I(H)$.
+  % Since $b$ and $c$ are constants, we know that $\tuple{\I(b),\I(c)}\notin \I(H)$. 
+
+  Let $\va{e}$ be the $x$-variant of $\va{a}$ where $\va{e}(x)=\VV{\I}{\va{a}}(b)$, and let $\va{g}$ be the $y$-variant of $\va{e}$ where $\va{g}(y)=\VV{\I}{\va{a}}(c)$.
+  Since $x\neq y$, we know that $\va{g}(x)=\va{e}(x)$, and so $\tuple{\va{g}(x),\va{g}(y)}\notin \I(H)$.
+  It follows that $\tuple{\VV{\I}{\va{g}}(x),\VV{\I}{\va{g}}(y)}\notin \I(H)$, and so $\VV{\I}{\va{g}}(Hxy)\neq 1$.
+  Thus $\VV{\I}{\va{g}}(\enot Hxy)=1$.
+
+  Since $\va{g}$ is a $y$-variant of $\va{e}$, it follows that $\VV{\I}{\va{e}}(\qt{\exists}{y}\enot Hxy)=1$.
+  By the same reasoning, $\VV{\I}{\va{a}}(\qt{\exists}{x}\qt{\exists}{y}\enot Hxy)=1$ since $\va{e}$ is a $x$-variant of $\va{a}$.
+  Thus $\VV{\I}{}(\qt{\exists}{x}\qt{\exists}{y}\enot Hxy)=1$ since $\qt{\exists}{x}\qt{\exists}{y}\enot Hxy$ is a sentence of QL. 
+
+  Generalising on $\M$, it follows that $\exists x \exists y \enot Hxy$ is true in every QL model in which $\enot Hbc$ is true, and so $\enot Hbc \models \exists x \exists y \enot Hxy$.
+\end{quote}
+
+Although it is sometimes easier to write \textit{reductio} style proofs, direct proofs are typically more illuminating.
+In this case, we may observe that the premise requires $b$ and $c$ to not be $H$-related, and so by existentially generalising on $b$ and $c$, we may conclude that there is some $x$ and some $y$ which are not $H$-related. 
+This sort of reasoning is common.
+
+Note that the entailment moved from a particular claim about some individuals to a quantified claim about some individuals so that the quantifiers only appear on the right side of the entailment.
+Were we to reverse the order of these sentences, the entailment would no longer hold: just because there are some things that are not $H$-related, it does not follow that $b$ and $c$ in particular are not $H$-related. 
+We find just the opposite pattern of entailment with universal quantifiers.
+For instance, suppose that we know that everybody loves Deeya: $\qt{\forall}{x}Lxd$.
+It follows that Deeya loves herself since she is also somebody: $Ldd$.
+Thus we may establish the entailment $\qt{\forall}{x}Lxd \models Ldd$ with the following proof: 
+
+\begin{quote}
+\label{allmodels5}
+  \textit{Proof:}
+  Let $\M=\tuple{\D,\I}$ be a QL model where $\VV{\I}{}(\qt{\forall}{x}Lxd)=1$.
+  It follows that $\VV{\I}{\va{a}}(\qt{\forall}{x}Lxd)=1$ for some v.a. $\va{a}$, and so $\VV{\I}{\va{c}}(Lxd)=1$ for every $x$-variant $\va{c}$ of $\va{a}$.
+  In particular, $\VV{\I}{\va{e}}(Lxd)=1$ where $\va{e}$ of $x$-variant $\va{a}$ for which $\va{e}(x)=\I(d)$.
+  As a result, $\tuple{\VV{\I}{\va{e}}(x),\VV{\I}{\va{e}}(d)}\in\I(L)$ where $\VV{\I}{\va{e}}(x)=\VV{\I}{\va{e}}(d)$, and so $\tuple{\VV{\I}{\va{e}}(d),\VV{\I}{\va{e}}(d)}\in\I(L)$.
+  Thus $\VV{\I}{\va{e}}(Ldd)=1$, and so $\VV{\I}{}(Ldd)=1$ as desired.
+  Since $\M$ was an arbitrary model in which $\VV{\I}{}(\qt{\forall}{x}Lxd)=1$, it follows that $\qt{\forall}{x}Lxd \models Ldd$.
+\end{quote}
+
+This proof was considerably easier than the previous proof given above.
+Although reasoning from universal claims to particular claims tends to be easier than reasoning from particular claims to existential claims, each case requires careful consideration.
+
+We will conclude with an example which includes mixed quantifiers, where such cases are typically require the most care.
+In particular, consider the entailment: $\qt{\exists}{x}\qt{\forall}{y}Lxy \models \qt{\forall}{y}\qt{\exists}{x}Lxy$.
+For simplicity, we will provide a \textit{reductio} proof as before:
+
+\begin{quote}
+\label{allmodels6}
+  \textit{Proof:}
+  Assume for contradiction that there is a QL model $\M=\tuple{\D,\I}$ where $\VV{\I}{}(\qt{\exists}{x}\qt{\forall}{y}Lxy)=1$ and $\VV{\I}{}(\qt{\forall}{y}\qt{\exists}{x}Lxy)=0$.
+  It follows that $\VV{\I}{\va{a}}(\qt{\exists}{x}\qt{\forall}{y}Lxy)=1$ for some v.a. $\va{a}$, and $\VV{\I}{\va{c}}(\qt{\forall}{y}\qt{\exists}{x}Lxy)=0$ for every v.a. $\va{c}$, and so $\VV{\I}{\va{a}}(\qt{\forall}{y}\qt{\exists}{x}Lxy)=0$ in particular.
+  Thus $\VV{\I}{\va{e}}(\qt{\forall}{y}Lxy)=1$ for some $x$-variant $\va{e}$ of $\va{a}$, and $\VV{\I}{\va{g}}(\qt{\exists}{x}Lxy)=0$ for some $y$-variant $\va{g}$ of $\va{a}$.
+  It follows that $\va{e}(y)=\va{a}(y)$ and $\va{g}(x)=\va{a}(x)$.
+
+  Given the above, $\VV{\I}{\va{e_1}}(Lxy)=1$ for the $y$-variant $\va{e_1}$ of $\va{e}$ where $\va{e_1}(y)=\va{g}(y)$.
+  Additionally, $\VV{\I}{\va{g_1}}(Lxy)=0$ for the $x$-variant $\va{g_1}$ of $\va{g}$ where $\va{g_1}(x)=\va{e_1}(x)$.
+  Since $x\neq y$, it follows that $\va{g}(y)=\va{g_1}(y)$, and so $\va{g_1}(y)=\va{e_1}(y)$ given the above. 
+
+  It follows that $\tuple{\VV{\I}{\va{e_1}}(x),\VV{\I}{\va{e_1}}(y)}\in\I(L)$ and $\tuple{\VV{\I}{\va{g_1}}(x),\VV{\I}{\va{g_1}}(y)}\notin\I(L)$, and since $x$ and $y$ are variables, $\tuple{\va{e_1}(x),\va{e_1}(y)}\in\I(L)$ and $\tuple{\va{g_1}(x),\va{g_1}(y)}\notin\I(L)$.
+  However, given the identities above, if follows from the former that $\tuple{\va{g_1}(x),\va{g_1}(y)}\in\I(L)$, thereby contradicting the latter.
+  Thus $\qt{\exists}{x}\qt{\forall}{y}Lxy \models \qt{\forall}{y}\qt{\exists}{x}Lxy$.
+\end{quote}
+
+% As in the cases above, this proof included some careful choices.
+Given our \textit{reductio} assumption, we began with two claims with an existential character evaluated at the same variable assignment $\va{a}$.
+However, unpacking these claims split in two direction, yielding the $x$-variant $\va{e}$ and the $y$-variant $\va{g}$, where the result was two claims with a universal character.
+Since these claim entail something about \textit{all} $y$-variants of $\va{e}$ and \textit{all} $x$-variants of $\va{g}$ respectively, we chose $\va{e_1}(y)=\va{g}(y)$ and $\va{g_1}(x)=\va{e_1}(x)$ in order to get these variable assignments to clash. 
+Since $\va{g_1}$ was an $x$-variant of $\va{g}$, we know that $\va{g}(y)=\va{g_1}(y)$, where making appropriate substitutions resulted in a contradiction.
+
+
+
+
+
+\section{Reasoning About all Models}
+  \label{sec.somemodelreasoning}
+
+We have already seen some tricky examples that require reasoning about all models.
+It remains to evaluate sentences at particular models.
+This differs from constructing models in which a given sentence is true or false since we are supposing the model to be provided.
+For instance, consider the following model $\M$:
+
+\begin{partialmodel}
+	$\D$			& $\set{1,2,3}$ \\
+	$\I(R)$	  & $\set{\tuple{1,2},\tuple{2,1},\tuple{1,3}}$ \\
+\end{partialmodel}
+
+Suppose that we want to show that $\forall x\exists y Rxy$ is false in $\M$.
+Reading `$R$' as `sees' for convenience, this claim says that everything sees something.
+However, looking into our model, we may observe that although $1$ sees $2$, and $2$ sees $3$, there is nothing in the domain $\D$ that $3$ sees.
+Thus the claim is false.
+It remains to provide a proof.
+
+\begin{quote}
+\label{somemodel1}
+  \textit{Proof:}
+  Let $\va{a}$ be a v.a. over $\D$ and $\va{c}$ be an $x$-variant of $\va{a}$ where $\va{c}(x)=3$.
+  Next, we may let $\va{g}$ be an arbitrary $y$-variant of $\va{c}$.
+  Since $\va{g}$ is a $y$-variant and $x\neq y$, it follows that $\va{g}(x)=\va{c}(x)=3$ where $\va{g}(y)\in\D$.
+  However, since $\tuple{3,\v{x}}\notin\I(R)$ for all $\v{x}\in\D$, we may conclude that $\tuple{\va{g}(x),\va{g}(y)}\notin\I(R)$, and so $\tuple{\VV{\I}{\va{g}}(x),\VV{\I}{\va{g}}(y)}\notin\I(R)$. 
+  Thus $\VV{\I}{\va{g}}(Rxy)\neq 1$ where $\va{g}$ was an arbitrary $y$-variant of $\va{c}$.
+  It follows that $\VV{\I}{\va{c}}(\qt{\exists}{y}Rxy)\neq 1$, and so $\VV{\I}{\va{a}}(\qt{\forall}{x}\qt{\exists}{y}Rxy)\neq 1$ since $\va{c}$ is an $x$-variant of $\va{a}$.
+  Given that $\va{a}$ was arbitrary, we may conclude that $\VV{\I}{}(\qt{\forall}{x}\qt{\exists}{y}Rxy)\neq 1$ as desired. 
+\end{quote}
+
+This proof shows that $\forall x\exists y Rxy$ is false in $\M$.
+In just the same way, we may show that a sentence is true on a given model.
+For instance, consider the sentence $\forall x\exists y Ryx$.
+Maintaining our reading from before, this says that everything is seen by something.
+We can show that this sentence is true in the same model $\M$ by means of the following proof: 
+	
+
+\begin{quote}
+\label{somemodel2}
+  \textit{Proof:}
+  Let $\va{a}$ be a v.a. over $\D$ and $\va{c}$ be an $x$-variant of $\va{a}$.
+  It follows that $\va{c}(x)\in\set{1,2,3}$, and so there are three cases to consider:
+
+  \textit{Case 1:}
+  Assume $\va{c}(x)=1$ and let $\va{e}$ be a $y$-variant of $\va{c}$ where $\va{e}(y)=2$.
+  Thus $\tuple{\va{e}(y),\va{e}(x)}\in\I(R)$ since $\va{e}(x)=\va{c}(x)=1$, and so $\tuple{\VV{\I}{\va{e}}(y),\VV{\I}{\va{e}}(x)}\in\I(R)$.
+  Hence $\VV{\I}{\va{e}}(Ryx)=1$, and so $\VV{\I}{\va{c}}(\qt{\exists}{y}Ryx)=1$ since $\va{e}$ is a $y$-variant of $\va{c}$. 
+
+  \textit{Case 2:}
+  Assume $\va{c}(x)=2$ and let $\va{e}$ be a $y$-variant of $\va{c}$ where $\va{e}(y)=1$.
+  Thus $\tuple{\va{e}(y),\va{e}(x)}\in\I(R)$ since $\va{e}(x)=\va{c}(x)=2$, and so $\tuple{\VV{\I}{\va{e}}(y),\VV{\I}{\va{e}}(x)}\in\I(R)$.
+  Hence $\VV{\I}{\va{e}}(Ryx)=1$, and so $\VV{\I}{\va{c}}(\qt{\exists}{y}Ryx)=1$ since $\va{e}$ is a $y$-variant of $\va{c}$. 
+
+  \textit{Case 3:}
+  Assume $\va{c}(x)=3$ and let $\va{e}$ be a $y$-variant of $\va{c}$ where $\va{e}(y)=1$.
+  Thus $\tuple{\va{e}(y),\va{e}(x)}\in\I(R)$ since $\va{e}(x)=\va{c}(x)=3$, and so $\tuple{\VV{\I}{\va{e}}(y),\VV{\I}{\va{e}}(x)}\in\I(R)$.
+  Hence $\VV{\I}{\va{e}}(Ryx)=1$, and so $\VV{\I}{\va{c}}(\qt{\exists}{y}Ryx)=1$ since $\va{e}$ is a $y$-variant of $\va{c}$. 
+
+  Thus $\VV{\I}{\va{c}}(\qt{\exists}{y}Ryx)=1$ for every $x$-variant $\va{c}$ of $\va{a}$, and so $\VV{\I}{\va{a}}(\qt{\forall}{x}\qt{\exists}{y}Ryx)=1$.
+  We may conclude that $\VV{\I}{}(\qt{\forall}{x}\qt{\exists}{y}Ryx)=1$ as desired. 
+\end{quote}
+
+
+
+\section{Conclusion}
+
+This chapter has presented one of the trickiest topics that we will cover in this course.
+Unlike the semantics for SL, the semantics for QL has a lot of moving pieces, and it is can be hard to avoid getting them tangled up.
+Even once you have mastered the definitions and can use them effectively to provide semantic arguments in the manner demonstrated above, this still takes quite a bit of work.
+To avoid having to provide complicated semantic arguments, the following chapter will extend the tree method we used for SL to QL.
+This will be convenient, but no substitute for understanding the semantics for QL itself.
+After all, it is the validity of arguments that we ultimately care about, where we only have reason to care about the tree method for QL if it can be shown to be sound and complete with respect to the semantics for QL.
+We will attend to these details in due course.
+For the time being, there is no better way to master the semantics of QL than working through problems for yourself.
+
 
 
 \iffalse

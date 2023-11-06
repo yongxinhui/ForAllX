@@ -544,7 +544,7 @@ parentheses&( , )\\
 Just as we did for SL, we will define the \define{well-formed formulas} (wffs) of QL recursively:
 
 \begin{enumerate}
-  \item $\mathcal{F}^n\alpha_1,\ldots,\alpha_n$ is a wff if $\mathcal{F}^n$ is an $n$-place predicate and $\alpha_1,\ldots,\alpha_n$ are singular terms.
+  \item $\F^n\alpha_1,\ldots,\alpha_n$ is a wff if $\F^n$ is an $n$-place predicate and $\alpha_1,\ldots,\alpha_n$ are singular terms.
 \item If \metaA{} and \metaB{} are wffs and $\alpha$ is a variable, then:
 	\begin{enumerate}
     % \begin{multicols}{2}
@@ -562,7 +562,7 @@ Just as we did for SL, we will define the \define{well-formed formulas} (wffs) o
 \end{enumerate}
 
 As brought out in Ch.~\ref{ch.SL}, the definitions above are strictly speaking nonsense.
-This is because the clauses above \textit{use} rather than \textit{mention} the meta-variables $\metaA$ and $\metaB$ for wffs, as well as new meta-variables for $n$-place predicates $\mathcal{F}^n$ and singular terms $\alpha_1,\ldots,\alpha_n$.
+This is because the clauses above \textit{use} rather than \textit{mention} the meta-variables $\metaA$ and $\metaB$ for wffs, as well as new meta-variables for $n$-place predicates $\F^n$ and singular terms $\alpha_1,\ldots,\alpha_n$.
 Moreover, it would not help to simply add quotes since the meta-variables that we have used above do not belong to QL.
 This is what motivated the introduction of corner quotes before, and we may reproduce a similar tactic here.
 However, instead of doing so, we will follow the common convention of relying on the reader to know where the corner quotes are supposed to go.
@@ -684,7 +684,7 @@ In order to be able to say which wffs of QL can be interpreted and which cannot,
 To begin with, we may provide the following recursive definition of \define{free variables}:
 
 \begin{enumerate}
-  \item $\alpha$ is free in $\mathcal{F}^n\alpha_1,\ldots,\alpha_n$ if $\alpha=\alpha_i$ for some $1\leq i\leq n$ where $\alpha$ is a variable, $\mathcal{F}^n$ is an $n$-place predicate, and $\alpha_1,\ldots,\alpha_n$ are singular terms.
+  \item $\alpha$ is free in $\F^n\alpha_1,\ldots,\alpha_n$ if $\alpha=\alpha_i$ for some $1\leq i\leq n$ where $\alpha$ is a variable, $\F^n$ is an $n$-place predicate, and $\alpha_1,\ldots,\alpha_n$ are singular terms.
   \item If $\metaA$ and $\metaB$ are wffs and $\alpha$ and $\beta$ are variables, then:
     \begin{enumerate}
         \item $\alpha$ is free in $\qt{\exists}{\beta}\metaA$ if $\alpha$ is free in $\metaA$ and $\alpha\neq\beta$;
@@ -1046,11 +1046,10 @@ Often there are, and they are not always logically equivalent.
 Sometimes what this means is that the original claim is ambiguous.
 Other times, some regimentations will be more natural than that others.
 
-\iffalse
+% \iffalse
 
-Consider this symbolization key and these sentences:
+Consider the following symbolization key and sentences:
 \begin{ekey}
-\item[UD:] people
 \item[Lxy:] $x$ likes $y$.
 \item[i:] Imre.
 \item[k:] Karl.
@@ -1060,19 +1059,24 @@ Consider this symbolization key and these sentences:
 \item[\ex{likes2}]There is someone who likes everyone who likes everyone that he likes.
 \end{earg}
 
-Sentence \ref{likes1} can be partially translated as $\qt{\forall}{x}(\mbox{Karl likes $x$}\eif\mbox{Imre likes $x$})$. This becomes $\qt{\forall}{x}(Lkx\eif Lix)$.
+Sentence \ref{likes1} can be partially translated as $\qt{\forall}{x}(\mbox{Karl likes $x$}\eif\mbox{Imre likes $x$})$.
+This becomes $\qt{\forall}{x}(Lkx\eif Lix)$.
 
-
-Sentence \ref{likes2} is complex. There is little hope of writing down the whole translation immediately, but we can proceed by small steps. An initial, partial translation might look like this: $$\qt{\exists}{x}\ \mbox{everyone who likes everyone that $x$ likes is liked by $x$}$$
+Sentence \ref{likes2} is complex.
+There is little hope of writing down the whole translation immediately, but we can proceed in stages.
+An initial, partial translation might look like this: $$\qt{\exists}{x}\ \mbox{everyone who likes everyone that $x$ likes is liked by $x$}$$
 The part that remains in English is a universal sentence, so we translate further: $$\qt{\exists}{x}\qt{\forall}{y}(\mbox{$y$ likes everyone that $x$ likes}\eif\mbox{$x$ likes $y$}).$$
-The antecedent of the conditional is structurally just like sentence \ref{likes1}, with $y$ and $x$ in place of Imre and Karl. So sentence \ref{likes2} can be completely translated in this way $$\qt{\exists}{x}\qt{\forall}{y}\bigl[\qt{\forall}{z}(Lxz \eif Lyz) \eif Lxy\bigr]$$
+The antecedent of the conditional is structurally just like sentence \ref{likes1}, with $y$ and $x$ in place of Imre and Karl.
+So sentence \ref{likes2} can be completely translated in this way $$\qt{\exists}{x}\qt{\forall}{y}\bigl[\qt{\forall}{z}(Lxz \eif Lyz) \eif Lxy\bigr]$$
 
-When symbolizing sentences with multiple quantifiers, it is best to proceed by small steps. Paraphrase the English sentence so that the logical structure is readily symbolized in QL. Then translate piecemeal, replacing the daunting task of translating a long sentence with the simpler task of translating shorter formulae.
+When symbolizing sentences with multiple quantifiers, it is best to proceed by small steps.
+Paraphrase the English sentence so that the logical structure is readily regimented in QL.
+Then translate piecemeal, replacing the daunting task of translating a long sentence with the simpler task of translating shorter formulae.
 
 
 
 
-% \iffalse
+\iffalse
 
 \section{Common student errors}
 

@@ -34,9 +34,7 @@ etc. (long list---see other file)
 
 ###Directions:
 
-We're doin' things a bit differently this week! Successfully complete 17 of the following 20 problems to earn a 100. 16 problems will net you a 95%, 15 a 90%, and so on. (No extra credit for having more than 17 correct; although they're good practice!). *Carnap* auto-checker will be on FOR ALL problems (wohhhhhhhh it's raining *Carnaps*!) *Carnap* is well-known for his Principle of Tolerance; look it up! (Spoiler: “in logic, there are no morals”.) 
-
-[(Wouldn't it be nice to **Educate** yourself for a change!) ]::
+We're doin' things a bit differently this week! *Carnap* auto-checker will be on FOR ALL problems.
 
 
 ```{.QualitativeProblem .ShortAnswer points=0}
@@ -65,7 +63,8 @@ interpretation. To give the domain, provide a list of numbers, e.g.,
 element from the domain that you want to be in the extension. For
 instance, if you want the extension of $Ax$ to be $1$, $2$, enter
 `1, 2` in the spot for `A(_)`. For two-place predicates, enter the
-list of pairs, with each pair in "angle brackets" (i.e. less than `<` and greater than `>` signs), e.g., `<0,0>, <0,1>`.
+list of pairs, with each pair in "angle brackets" (i.e. less than `<`
+and greater than `>` signs), e.g., `<0,0>, <0,1>`.
 
 It is often possible to find a solution simply by trial and error.
 If you do this, you will not understand why the solution works, and
@@ -74,16 +73,15 @@ trial and error**. Rather, think about what the sentences say, and under
 what conditions they are true and false. Draw diagrams to visualize
 the relationships between the predicates, especially when two-place
 prediates are involved. Add elements to the domain, or to the
-extensions of predicates to make the sentences true (or false). *Carnap* will tell you which sentences do not (yet) have the right truth value (this Carnap guy is really somethin' eh? what a chum!)
+extensions of predicates to make the sentences true (or false).
+*Carnap* will tell you which sentences do not (yet) have the right truth value.
 
-There are a total of 20 questions on this problem set, each nominally worth 5 points (but not exactly---this is mainly book-keeping). You have to solve 17 of them correctly to earn a 100%, 16 for a 95%, 15 for a 90%, etc. 
 
-[You have to solve 17 of them correctly to earn a 100%, 16 for a 96%, 15 for a 92%, etc. ]::
 
 ## Existence claims
 
 For each of the following sentences, give an interpretation that shows
-the sentences are jointly satisfiable (i.e., make them all true in your model).
+the set consisting of the sentences given in each problem is consistent.
 
 ```{.CounterModeler .Simple system="LogicBookPD" points=5}
 PS9.1 (Ex)(Ax /\ Bx), (Ex)(Ax /\ ~Bx)
@@ -101,7 +99,7 @@ PS9.4 (Ex)(Ax /\ Bx), (Ex) ~(Ax <-> Bx)
 ## Universal claims
 
 For each of the following sentences, give an interpretation that shows
-the sentences are jointly satisfiable.
+the set consisting of the sentences given in each problem is consistent.
 
 ```{.CounterModeler .Simple system="LogicBookPD" points=5}
 PS9.5 (Ax)(Ax -> Bx), (Ex) Ax, (Ex) ~Bx
@@ -122,7 +120,7 @@ PS9.9 (Ax)(Ax \/ Bx), (Ex)~(Ax <-> Cx), (Ax)((Ax \/ Bx) -> Cx)
 ## Relations and quantifiers
 
 For each of the following sentences, give an interpretation that shows
-the sentences are jointly satisfiable.
+the set consisting of the sentences given in each problem is consistent.
 
 - Note that you can make a textbox bigger by dragging its bottom right corner!
 
@@ -157,10 +155,10 @@ PS9.16 (Ax)(Ax -> (Bx \/ Cx)), (Ex)(Ax /\ ~Bx) :|-: (Ax) Cx
 PS9.17 (Ax)((Axb \/ Axc) -> Bx), (Ex) Axc /\ (Ex)(Bx /\ ~Acx), ~(Ax) Axx :|-: (Ex) ~Axc
 ```
 
-## (In)validities
+## Tautology
 
 Give an interpretation that shows the following sentence is *not* a
-validity of QL. 
+tautology of QL. 
 
 ```{.CounterModeler .Simple counterexample-to="validity" system="LogicBookPD" points=5}
 PS9.18 ((Ax) Bx -> (Ax) Cx) -> (Ax)(Bx -> Cx) 
