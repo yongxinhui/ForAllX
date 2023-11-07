@@ -2,126 +2,315 @@
 \chapter{Identity}
 \label{ch.identity}
 
-This chapter extends QL by adding a predicate for \emph{identity} to the language where we will refer to this extended language as QL$^=$.
-It is important to distinguish identity in the sense with which we will be concerned from indiscernibility, where two objects are \textit{indiscernible} just in case they share all the same intrinsic properties.
+The last two chapters introduced the syntax and semantics for QL.
+In this chapter, we will extend both the syntax and semantics of QL to accommodate the \define{identity} predicate $=$, referring to this extended languages as QL$^=$.
+
+It is important to emphasises that to say that $\v{x}$ and $\v{y}$ are identical is different from saying that $\v{x}$ and $\v{y}$ are \textit{duplicates} though this is a common way of using the word `identity' in English.
+For instance, consider the use of the word `identical' in the following case:
+
+  \begin{quote}
+    \texttt{Spheres}: Consider a possible world in which there is nothing but two identical spheres, similar in every way to each other, separated by just one meter.
+    Although there is no property that they do not share, the two spheres are distinct.
+    After all, there are two spheres, not just one.
+  \end{quote}
+
+Insofar as the spheres are distinct--- there are two of them, not one--- we will say that they are not \textit{numerically identical}, or just \textit{non-identical} for short.
+If `$a$' names one sphere and `$b$' names the other, we may express this with the sentence `${=}ab$' where `$=$' is a two place predicate, or `$a=b$' for the sake of readability and familiarity.
+In this sense of identity, it is not true that the two spheres are identical as claimed in \texttt{Spheres}.
+Indeed, no two things whatsoever are identical in our sense since if they were, then they would not be two things after all but rather just one thing perhaps with different names.
+
+Before showing how to include a designated predicate for identity in the syntax and semantics for QL$^=$, it will help to guide our ambitions to consider some of what motivates this addition.
+After all, QL is very powerful language, at least by comparison to SL.
+Why should we need to further extend QL?
+Can't we get by without identity?
 
 
-In the logical sense, identity is about which object something is. Two things aren't `identical' in our sense just because they look exactly alike. (Identical twins aren't \emph{logically} identical.) Neither does identity, in our logical sense, have to do with the way an individual conceives of oneself. (We're not getting into whether one \emph{identifies as} a woman, etc.) Instead, we will develop logical vocabulary to talk about whether, e.g., the person who robbed the bank is \emph{the same person as} the person who shot Uncle Ben.
 
-It is already possible to talk about identity in QL, by assigning identity and related concepts to predicates in interpretation keys. (In this sense, it's possible to talk about pretty much anything in QL.) However, there are a few reasons why we may wish to have a more robust logical notion of identity than that. We begin by examining some of these motivations. Identity will strengthen QL, increasing its expressive power in many ways.
+\section{Motivation}%
+  \label{sec:Motivation}
 
-\section{Motivating identity as a logical category}
-\label{sec.identitymotivation}
-
-Consider this sentence:
-
-\begin{earg}
-\item[\ex{onlyyou}] Only you can prevent forest fires.
-\end{earg}
-
-How should we translate it into QL? Here is one simple option. We could use this symbolization key:
-
-\begin{ekey}
-\item[UD:] people
-\item[Px:] only $x$ can prevent forest fires
-\item[u:] you
-\end{ekey}
-
-And then we could translate sentence \ref{onlyyou} straightforwardly as $Pu$. This might be adequate for some purposes, but this translation misses out on a key fact about sentence \ref{onlyyou}. Notice that sentence \ref{onlyyou} is inconsistent with sentence \ref{onlyher}:
-
-\begin{earg}
-\item[\ex{onlyher}] Only your mother can prevent forest fires.
-\end{earg}
-
-If we add a name for your mother to the symbolization key above,
+It turns out that there is a lot that cannot be said without an identity predicate.
+You might be wondering why we can't just declare that a certain predicate be used to express identity the way that we do in regimenting any sentence.
+For instance, suppose we were to regiment `Hesperus is Phosphorus' as `$Ihp$' given the following symbolization key:
 
 \begin{ekey}
-\item[m:] your mother
-\end{ekey}
-
-we can translate sentence \ref{onlyher} as $Pm$. The problem is that $Pu$ and $Pm$ are obviously consistent in QL, as this simple model demonstrates:
-
-\begin{partialmodel}
-	UD & \{$u$, $m$\}\\
-	\extension{P} & \{$u$, $m$\}
-\end{partialmodel}
-
-The `only' in each sentence has just been made a part of the predicate, in a way that ignores its logical force. (Compare the analogous discussion in the Introduction to Chapter \ref{ch.QL} that motivated extending SL with predicates and quantifiers.) If \emph{only} you can prevent forest fires, that means that no one \emph{else} --- i.e., no one who \emph{is not} you --- can prevent forest fires. We don't yet have the logical vocabulary to express these thoughts in a strong enough way.
-
-These sentences give rise to a related issue:
-
-\begin{earg}
-\item[\ex{ppq}] Peter Parker lives in Queens.
-\item[\ex{pps}] Peter Parker is Spider-Man.
-\item[\ex{sq}] Spider-Man lives in Queens.
-\end{earg}
-
-Here is a natural interpretation key for these sentences, given the resources we've seen so far.
-
-\begin{ekey}
-\item[UD:] people and places
-\item[Lxy:] $x$ lives in $y$
+% \begin{multicols}{2}
 \item[Ixy:] $x$ is $y$
-\item[p:] Peter Parker
-\item[s:] Spider-Man
-\item[q:] Queens
+\item[h:] Hesperus
+\item[p:] Phosphorus
+\item[v:] Venus
+% \end{multicols}
 \end{ekey}
 
-Then sentences \ref{ppq}--\ref{sq} can be translated thus:
+One might take the regimentation given above to do as good a job as any of our regimentations in QL.
+Why does identity deserve special treatment?
 
+Consider the following English argument regimented with the symbolization given above:
+
+\begin{multicols}{2}
+  
 \begin{earg}
-\item[\ref{ppq}.] $Lpq$
-\item[\ref{pps}.] $Ips$
-\item[\ref{sq}.] $Lsq$
+  \item[] Hesperus is Phosphorus.
+  \item[] Phosphorus is Venus.
+  \item[\therefore] Hesperus is Venus.
 \end{earg}
 
-But the argument from the English \ref{ppq} and \ref{pps} to \ref{sq} seems valid, whereas the corresponding argument form is obviously invalid in QL. This model satisfies the premises and falsifies the conclusion:
+\begin{earg}
+  \item[] $Ihp$
+  \item[] $Ipv$
+  \item[\therefore] $Ihv$
+\end{earg}
+
+\end{multicols}
+
+This argument is invalid.
+For instance, consider the following countermodel:
 
 \begin{partialmodel}
-	UD & \{p, s, q\}\\
-	\extension{L} &\begin{tabular}{l|lll}
-		$Lxy$   & p & s & q \\ \hline
-		p & -     & -  & 1 \\
-		s & -     & -  & 0 \\
-		q & -     & -  & -
-		\end{tabular}\\
-	\extension{I} &\begin{tabular}{l|lll}
-		$Ixy$   & p & s & q \\ \hline
-		p & -     & 1  & - \\
-		s & -     & -  & - \\
-		q & -     & -  & -
-		\end{tabular}
+	$\D$		& $\set{h,p,v}$\\
+  $\I(I)$ & $\set{\tuple{h,p},\tuple{p,v}}$\\
+	$\I(h)$	& $h$\\
+	$\I(p)$	& $p$\\
+	$\I(v)$	& $v$
 \end{partialmodel}
 
-Given the interpretation key above, this is a model where Peter is Spider-Man, but where Peter and Spider-Man do not live in the same place. This does not correspond to a genuine possibility; if Peter and Spider-Man are the same person, then they must live in the same place. This is an important logical fact about identity. But in the formalism given, $I$ is just another predicate like $L$, susceptible to many different interpretations and extensions.
+Since $\tuple{h,p},\tuple{p,v}\in\I(I)$ but $\tuple{h,v}\notin\I(I)$, it follows that $\tuple{\I(h),\I(p)},\tuple{\I(p),\I(v)}\in\I(I)$ and $\tuple{\I(h),\I(v)}\notin\I(I)$, and so by definition $\tuple{\VV{\I}{\va{a}}(h),\VV{\I}{\va{a}}(p)},\tuple{\VV{\I}{\va{a}}(p),\VV{\I}{\va{a}}(v)}\in\I(I)$ and $\tuple{\VV{\I}{\va{a}}(h),\VV{\I}{\va{a}}(v)}\notin\I(I)$ where $\va{a}$ is any variable assignment that does no substantive work.
+It follows that $\VV{\I}{\va{a}}(Ihp)=\VV{\I}{\va{a}}(Ipv)=1$ and yet $\VV{\I}{\va{a}}(Ihv)\neq 1$.
+Having produced a model which makes the premises true and the conclusion false, the argument is not valid.
+
+An analogous argument shows that the following argument is also invalid:
+
+\begin{multicols}{2}
+
+\begin{ekey}
+\item[Txy:] $x$ is taller than $y$
+\item[k:] Kate
+\item[s:] Sam
+\item[l:] Lu
+\end{ekey}
+
+\begin{earg}
+  \item[] Kate is taller than Sam.
+  \item[] Sam is taller than Lu.
+  \item[\therefore] Kate is taller than Lu.
+\end{earg}
+
+\begin{partialmodel}
+	$\D$		& $\set{k,s,l}$\\
+  $\I(T)$ & $\set{\tuple{k,s},\tuple{s,l}}$\\
+	$\I(k)$	& $k$\\
+	$\I(s)$	& $s$\\
+	$\I(l)$	& $l$
+\end{partialmodel}
+
+\begin{earg}
+  \item[] $Tks$
+  \item[] $Tsl$
+  \item[\therefore] $Tkl$
+\end{earg}
+
+\end{multicols}
+
+Replacing `$I$' with `$T$' and similarly replacing `$h$' with `$k$' and so on for the other constants, the very same semantic proof could be reproduced to show that the premises in the argument above do not entail the conclusion.
+Here we may ask if this is right, and if so, why we shouldn't say the very same thing about the identity argument.
+
+Certainly it should be admitted that the taller-than argument is a very strong argument in ordinary contexts.
+After all, given the intended interpretation of English, any \textit{possibility} in which Kate is taller than Sam and in which Sam is taller than Lu is also a possibility in which Kate is taller than Lu. 
+The reason the argument is invalid is that nothing forces us to interpret the predicate `is taller than' as meaning what it usually means.
+Put otherwise, the dyadic predicate `is taller than' is a \define{non-logical} term of our language, and is to be regimented by a non-logical dyadic predicate in QL which we may interpret by any subset of $\D^2$ given any domain $\D$ whatsoever. 
+Thus it is easy to invalidate.
+
+Were to want to make the taller-than argument valid, we would have had to add an additional premise as in the follow arguments:
+
+\begin{multicols}{2}
+  
+\begin{earg}
+  \item[] $(Tks \eand Tsl) \eif Tkl$
+  \item[] $Tks$
+  \item[] $Tsl$
+  \item[\therefore] $Tkl$
+\end{earg}
+
+\begin{earg}
+  \item[] $\forall x\forall y \forall z((Txy \eand Tyz) \eif Txz)$
+  \item[] $Tks$
+  \item[] $Tsl$
+  \item[\therefore] $Tkl$
+\end{earg}
+
+\end{multicols}
+
+Both of the arguments above are valid.
+Whereas the argument on the right starts off by asserting that the taller-than relation is transitive, the argument on the left appeals to a particular instances of the transitivity of the taller-than relation.
+
+It is natural to assume that on the intended interpretation of `is taller than' in English, we mean to express a transitive relation since this is how heights behave.
+In reasoning from $Tks$ and $Tsl$ to $Tkl$, we are implicitly relying on our intuitive grasp of a particular interpretation rather than not general logical features of the sentences involved. 
+That is, the argument is convincing not because of its logical form, but because of the particular interpretation that we are assuming, i.e., where `is taller than' expresses a transitive relation.
+When we add a premises which requires $T$ to be transitive (or else an its of that premise), we are making our assumptions explicit in a way that avoids reliance on a particular intended interpretation of our language.
+Instead, the amended arguments given above are valid since any model which makes these premises true makes their conclusions true. 
+Put otherwise, the conclusion follows by virtue of the logical forms of the sentences and not some particular interpretation.
+
+What about the identity argument?
+Certainly we could reproduce a similar story, claiming that as it stands, the identity argument we started off with is not valid but could be made valid by adding a premise that requires identity to be transitive.
+The question is whether this would be appropriate in the case of an identity predicate.
+More specifically, is it permissible to interpret identity as \textit{any} subset of $\D^2$ over any domain $\D$?
+
+The answer is certainly `Yes' since this is exactly how we would regiment the identity argument in QL.
+Nevertheless, there is good not to go this way, choosing instead to include a designated predicate for identity in QL$^=$.
+Recast in QL$^=$, the original identity argument becomes:
+
+\begin{multicols}{2}
+  
+\begin{earg}
+  \item[] Hesperus is Phosphorus.
+  \item[] Phosphorus is Venus.
+  \item[\therefore] Hesperus is Venus.
+\end{earg}
+
+\begin{earg}
+  \item[] $h=p$
+  \item[] $p=v$
+  \item[\therefore] $h=v$
+\end{earg}
+
+\end{multicols}
+
+Instead of taking this argument to only be convincing when we restrict consideration to an intended interpretation where `$=$' means identity, we are taking identity to be a logical notion akin to negation, conjunction, and the quantifiers.
+Rather than relying on the interpretation of our language to tell us what identity means in a given model, we are going to provide semantic clauses in just the same way that we did for the other logical terms of our language.
+% Roughly, `$\alpha=\beta$' is true in a model $\M=\tuple{\D,\I}$ given a variable assignment $\va{a}$ just in case $\alpha$ and $\beta$ refer to the same individual in the model.
+% Note that we have used `the same individual' to provide the semantics for identity.
+As a result, the argument above will turn out to be valid as it stands.
+
+You might be wondering why we don't do something similar for the `is taller than' predicate, and so on for other notions like `between', or `is older than', etc.
+There are two reasons worth considering.
+The first is that there is no clear stopping point.
+Were we to start expanding the range of logical predicates whose interpretation we hold fixed by providing semantic clauses, we could go and go forever.
+This in itself does not require that we do so--- we could just choose to include certain predicates in the logical vocabulary of our language an not others given our purposes.
+The second reason is more forceful: in order to provide a semantic clause for the taller-than predicate `$T$', we would have to provide a theory of what it is for one thing to be taller than another.
+Without providing such a theory, nothing guarantees that $T$ is transitive, and so the taller-than argument would remain invalid. 
+
+% Suppose one were to attempt to provide a theory of the taller-than predicate by taking $T$ to be transitive and irreflexive, using QL to state these assumptions.
+% Here we may object that there are lots of relations that are transitive and irreflexive, and so given these constraints alone, we have no reason to think that $T$ picks out the taller-than relation rather than some other relation.
+% For instance `is older than' is also transitive and irreflexive, but means something completely different than `is taller than'.
+%
+% Although one might attempt to improve on our initial theory of being taller than, doing so reaches beyond the subject-matter of logic.
+% Rather, logic is concerned with the so called \define{logical terms} like negation, conjunction, quantification, and identity, where these notions do not concern any particular ways for things to be (e.g., one thing being taller than another), but rather provide very general conceptual resources for articulating theories in the first place.
+% For instance, one may point out that we might use a language like QL in order to provide a theory constraining the interpretation of $T$.
+% In particular, consider the following constraint:
+%   $$(\alpha=\beta) \supset (T\alpha\gamma\equiv T\beta\gamma).$$
+% This says that if $\alpha=\beta$, then $\alpha$ is taller than $\gamma$ just in case $\beta$ is taller than $\gamma$. 
+% Certainly this seems true, and yet it is unclear how we would state such a principle for our theory of the taller-than relation without recourse to the identity predicate.
+% This gives us reason to think that the theory of the taller-than relation should be presented in QL$^=$ instead of QL. 
+% By contrast, we do not need to appeal to $T$ in order to provide a theory of identity.
+
+
+Although one might attempt to provide a theory of the taller-than relation, doing so reaches beyond the subject-matter of logic.
+Moreover, it would be natural to use a language like QL$^=$ in order to develop such a theory. 
+The same cannot so easily be said for identity.
+Instead of falling outside the subject-matter of logic, identity is taken to fit square within our present aims to develop the conceptual resources that we need to articulate theories in the first place.
+A prominent example is set theory where the predicate `$\in$' may be automatized in QL$^=$.
+Instead of requiring that we develop an independent theory of identity, the semantics for identity will rely on our understanding of identity in the metalanguage in much the same way that the semantics for negation relied on an understanding of negation in the metalanguage.
+
+Before pressing on, it is worth considering three more cases involving identity.
+To begin with, consider the following example originally presented by Gottlob Frege:
+
+\begin{multicols}{2}
+
+\begin{ekey}
+  % \begin{multicols}{2}
+    \item[Rx:] $x$ is rising.
+    \item[h:] Hesperus
+    \item[p:] Phosphorus
+  % \end{multicols}
+\end{ekey}
+
+\begin{earg}
+  \item[] Hesperus is rising.
+  \item[] Hesperus is Phosphorus.
+  \item[\therefore] Phosphorus is rising.
+\end{earg}
+
+\end{multicols}
+
+As specified below, identity is a primitive symbol of QL$^=$.
+Accordingly, we do not need to include identity in the symbolization key given above to provide the following regimentation.
+
+\begin{earg}
+  \item[] $Rh$
+  \item[] $h=p$
+  \item[\therefore] $Rp$
+\end{earg}
+
+This is a valid argument.
+Instead of restricting consideration to an intended interpretation, or else adding some further assumptions, the conclusion is entailed by the premises given the semantics we will provide for QL$^=$.
+
+% However, insofar as different models may have different domains, the interpretation of the identity predicate will have to change accordingly.
+% Instead of assigning the identity predicate to some subset of $\D^2$ for some particular domain $\D$ once and for all, we will provide a semantic clause for identity in much the same way that we did for the other logical terms included in QL. 
+% We will provide these details in due course, but for now we will focus on the motivations for doing so.
+
+Next consider the regimentation of the following argument:
+
+\begin{multicols}{2}
+
+\begin{ekey}
+  \item[Lxy:] $x$ loves $y$
+  \item[c:] Cara
+  \item[p:] Pedro
+  \item[d:] DJ Faro
+\end{ekey}
+
+\vfill
+\strut
+\columnbreak
+
+\begin{earg}
+  \item[] Only Cara loves Pedro.
+  \item[] DJ Faro loves Pedro.
+  \item[\therefore] Cara is DJ Faro.
+\end{earg}
+
+\begin{earg}
+  \item[] $Lcp \eand \forall x(Lxp \eif x=c)$
+  \item[] $Ldp$
+  \item[\therefore] $c=d$
+\end{earg}
+
+\end{multicols}
+
+This is a valid argument.
+Although we could say that Cara loves Pedro in QL, we could not say that \textit{only} Cara loves Pedro in QL since to do so we would need to say that anything that loves Pedro is identical to Cara.
+Moreover, given that DJ Faro loves Pedro, we may conclude that DJ Faro must be identical to Cara.
+Reasoning in this way requires that we extend the expressive power of QL by include identity in the language.
 
 Here is a third example. 
+Consider the following regimentations of sentence $\ref{M1}$:
 
 \begin{earg}
-\item[\ex{m1}] Mozart composed \emph{Le Nozze di Figaro}.
-\item[\ex{m2}] Mozart composed \emph{Don Giovanni}.
-\item[\ex{m3}] Mozart composed at least two things.
+  \item[\ex{M1}] Mozart composed at least two things.
 \end{earg}
 
-We introduce the obvious interpretation key:
+\begin{multicols}{2}
 
 \begin{ekey}
-\item[UD:] people and operas
-\item[Cxy:] $x$ composed $y$
-\item[m:] Mozart
-\item[n:] \emph{Le Nozze di Figaro}
-\item[g:] \emph{Don Giovanni}
+  \item[Cxy:] $x$ composed $y$
+  % \item[Sx:] $x$ is a symphony. 
+  \item[m:] Mozart
+  \item[] ~
 \end{ekey}
 
-Then we might translate the argument thus:
-
 \begin{earg}
-\item[] $Cmn$
-\item[] $Cmg$
-\item[\therefore] $\qt{\exists}{x} Cmx \eand \qt{\exists}{y} Cmy$
+  \item[\ex{M2}] $\qt{\exists}{x} Cmx \eand \qt{\exists}{y} Cmy$.
+  \item[\ex{M3}] $(\qt{\exists}{x} Cmx \eand \qt{\exists}{y} Cmy) \eand x\neq y$.
+  \item[\ex{M4}] $\qt{\exists}{x}\qt{\exists}{y}((Cmx \eand Cmy) \eand x\neq y)$.
 \end{earg}
 
-This is a valid argument form. But the problem is that $\qt{\exists}{x} Cmx \eand \qt{\exists}{y} Cmy$ is a very bad translation of `Mozart composed at least two things'. Notice that it is the conjunction of two existentials, each of which says that Mozart composed at least one thing. Suppose he composed only one thing; then each conjunct is true, so the conjunction is true. To say that he composed at least \emph{two} things, it's not enough to say that he composed at least one thing, and then to say again that he composed at least one thing --- we need some way to ensure that the $x$ and $y$ are \emph{not the same thing}.
+\end{multicols}
+
+Although sentence $\ref{M2}$ can be stated in QL, this regimentation does not require that there are more than two things that Mozart composed.
+This is because 
+Notice that it is the conjunction of two existentials, each of which says that Mozart composed at least one thing.
+Suppose he composed only one thing; then each conjunct is true, so the conjunction is true.
+To say that he composed at least \emph{two} things, it's not enough to say that he composed at least one thing, and then to say again that he composed at least one thing --- we need some way to ensure that the $x$ and $y$ are \emph{not the same thing}.
 
 What all three of these cases --- the forest fire case, the Spider-Man case, and the Mozart case --- show us is that if we want to reflect the logical relationships having to do with identity, we need special logical vocabulary to do so. Just as we introduced the `$\forall$' and `$\exists$' formalisms to reflect logical facts about quantifiers, we also need a special symbol for identity. That symbol will be `$=$'. Like our other logical symbols --- `\eif', `\enot', `$\forall$', etc. --- its meaning will be fixed as part of our language. Interpretation keys tell us what predicates like $Fx$ mean; they don't get to specify the meaning of the logical terms.
 

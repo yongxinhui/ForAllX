@@ -14,7 +14,7 @@
 \usepackage{bibentry}
 \usepackage{prooftrees} 
 \usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
-\setcitestyle{aysep={}}
+\setcitestyle{aysep=}
 % \usepackage{fitchproof} 
 
 % \linespread{1} % Change line spacing here, Palatino benefits from a slight increase by default
@@ -24,10 +24,12 @@
 \newcommand{\set}[1]{\lbrace#1\rbrace} %%Set brackets
 \newcommand{\interpret}[1]{\llbracket#1\rrbracket} %%Double brackets
 %\DeclarePairedDelimiter\ceil{\lceil}{\rceil}    
-\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
+\def\therefore{\ensuremath{\ldotp\dot\,\ldotp}}
 \newcommand{\I}{\mathcal{I}}
 \newcommand{\J}{\mathcal{J}}
 \newcommand{\B}{\mathcal{B}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\M}{\mathcal{M}}
 \newcommand{\D}{\mathbb{D}}
 \renewcommand{\v}[1]{\mathbf{#1}}
 \newcommand{\even}{\texttt{Even}}
@@ -36,6 +38,7 @@
 \newcommand{\simp}{\texttt{Simple}}
 \newcommand{\leng}{\texttt{Length}}
 \newcommand{\V}[1]{\mathcal{V}_{#1}} %%Corner quotes
+\newcommand{\VV}[2]{\mathcal{V}_{#1}^{#2}} %%
 
 \makeatletter
 \renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
@@ -83,7 +86,7 @@
   \item[\it Triadic:] Kim is between Boston and New York.
 \end{enumerate}
 
-\section*{Extensions and Referents}%
+\section*{Constants and Referents}%
   \label{sec:Extensions and Referents}
   
 \begin{enumerate}
@@ -96,27 +99,131 @@
 
 
 
-\section*{Extensions}%
+\section*{Predicates and Extensions}%
   \label{sec:Extensions}
   
 \begin{enumerate}
   \item[\it Example:] `Al loves Max' is true \textit{iff} Al bears the loves-relation to Max.
-  \item[\it Ordered Pairs:] A dyadic predicate is interpreted by a set of \textit{ordered pairs}.
-  \item[\it Cartesian Product:] Dyadic predicates are interpreted by subsets of $\D^2$.
+  \item[\it Dyadic Predicates:] Dyadic predicates are interpreted by sets of \textit{ordered pairs} in $\D^2$.
   \item[\bf Question 2:] How are we to interpret $n$-place predicates?
+  \item[\it Cartesian Power:] $\D^n=\set{\tuple{\v{x}_1,\ldots,\v{x}_n}:\v{x}_1,\ldots,\v{x}_n\in\D}$.
   \item[\it Extensions:] $n$-place predicates are interpreted by subsets of $\D^n$.
-  \item[\bf Question 3:] How are we to interpret $0$-place and $1$-place predicates?
   \item[\it Singletons:] $1$-place predicates are interpreted by subsets of $\D^1=\set{\tuple{\v{x}}:\v{x}\in\D}$.
-  \item[\it ]
+  \item[\bf Question 3:] How are we to interpret $0$-place predicates? What is $\D^0$?
+    \begin{itemize}
+      % \item[\it Ordered Pairs:] An ordered pair $\tuple{\v{x}_1,\v{x}_2}=\set{\set{\v{x}_1},\set{\v{x}_1,\v{x}_2}}$.
+      \item[\it $n$-Tuples:] Let $\tuple{\v{x}_1,\ldots,\v{x}_n}=\set{\tuple{1,\v{x}_1},\ldots,\tuple{n,\v{x}_n}}$.
+      \item[\it $0$-Tuple:] $\tuple{}=\varnothing$.
+        % \item\tuple{\tuple{\v{x}_1,\ldots,\v{x}_{n-1}},\v{x}_n}$.
+        % \item\tuple{\v{x}_1,\tuple{\v{x}_2,\ldots,\tuple{\v{x}_n,\varnothing}}}$.
+      % \item[\it $0$-Tuple:] $\tuple=\varnothing$ is the $0$-tuple.
+        % \item $\tuple{\v{x}_1}=\set{1,\v{x}_1}$ is a $1$-tuple.
+        % \item $\tuple{\v{x}_1,\ldots,\v{x}_n}=\tuple{\vec{\v{X}}_{n-1},\v{x}_n}$ is an $n+1$-tuple if $X_n$ is a $n$-tuple. 
+      \end{itemize}
+  \item[\it Truth-Values:] $0$-place predicates are interpreted by subsets of $\D^0=\set{\varnothing}$.
+  \item[\it Ordinals:] Let $1=\set{\varnothing}$ and $0=\varnothing$ be the first two von Neumann ordinals.
 \end{enumerate}
 
 
-\section*{Restricting Quantifiers}
+
+\section*{QL Models}
 
 \begin{enumerate}
-  \item[\it Regimentation:] Regiment the following sentences:
+  \item[\it Interpretations:] $\I$ is an QL interpretation over $\D$ \textit{iff} both: 
+    \begin{itemize}
+      \item $\I(\alpha)\in\D$ for every constant $\alpha$ in QL. 
+      \item $\I(\F^n)\subseteq\D^n$ for every $n$-place predicate $\F^n$.
+    \end{itemize}
+  \item[\bf Question 4:] What happens if $\D=\varnothing$?
+  \item[\it Model:] $\M=\tuple{\D,\I}$ is a model of QL \textit{iff} $\I$ is a QL interpretation over $\D\neq\varnothing$.
+  \item[\bf Task 1:] Regiment and interpret the sentences above.
+    \begin{itemize}
+      \item $Dc$, $Lam$, $Bkbn$.
+      \item $\D=\set{c,a,m,k,b,n}$.
+      \item $\I(D)=\set{\tuple{c}}$.
+      \item $\I(L)=\set{\tuple{a,m}}$.
+      \item $\I(B)=\set{\tuple{k,b,n}}$.
+      \item $\I(c)=c,\ \I(a)=a,\ \ldots$
+    \end{itemize}
+  \item[\it Lagadonian:] We often take constants to name themselves.
+  \item[\bf Question 5:] Do models give us truth-values?
+\end{enumerate}
+
+
+
+\section*{Variable Assignments}
+
+\begin{enumerate}
+  \item[\it Assignments:] A variable assignment $\hat{a}(\alpha)\in\D$ for every variable $\alpha$ in QL.
+  \item[\it Singular Terms:] We may define the referent of $\alpha$ in $\M=\tuple{\D,\I}$ as follows:\\
+    \begin{align*}
+      \VV{\I}{\hat{a}}{(\alpha)}=
+        \begin{cases}
+          \I(\alpha) & \text{if } \alpha \text{ is a constant} \\
+          \hat{a}(\alpha) & \text{if } \alpha \text{ is a variable.}
+        \end{cases}
+    \end{align*}
+  \item[\it Variants:] A $\hat{c}$ is an $\alpha$-variant of $\hat{a}$ \textit{iff} $\hat{c}(\beta)=\hat{a}(\beta)$ for all $\beta\neq\alpha$.
+  \item[\it Example:] Let $\D=\set{1,2,3,4,5}$ where $\hat{a}(x)=1$, $\hat{a}(y)=2$, and $\hat{a}(z)=3$.
+    \begin{itemize}
+      \item[\bf Task 2:] If $\hat{c}$ is a $y$-variant of $\hat{a}$, what is $\hat{c}(1)$, $\hat{c}(2)$, and $\hat{c}(3)$?
+    \end{itemize}
+\end{enumerate}
+
+
+
+\section*{Example}
+
+\begin{enumerate}
+  \item[\it Universal:] Al loves everything, i.e., $\forall xLax$.
+  \item[\it Existential:] Someone is dancing, i.e., $\exists x(Px \wedge Dx)$.
+  \item[\it Mixed:] Everyone loves someone, i.e., $\forall x(Px \supset \exists yLxy)$. 
+  \item[\it Complex:] Everything everything loves loves something, i.e., $\forall x(\forall yLyx \supset \exists zLxz)$.
+\end{enumerate}
+
+
+
+\section*{Semantics for QL}
+
+\begin{enumerate}
+  \item[($A$)] $\VV{\I}{\hat{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1$ ~\textit{iff}~ $\tuple{\VV{\I}{\hat{a}}{(\alpha_1)},\ldots,\VV{\I}{\hat{a}}{(\alpha_n)}}\in\I(\F^n)$.
+  \item[(\hspace{1pt}$\forall$\hspace{1pt})] $\VV{\I}{\hat{a}}(\forall\alpha\varphi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{c}}(\varphi)=1$ for every $\alpha$-variant $\hat{c}$ of $\hat{a}$.
+  \item[(\hspace{1pt}$\exists$\hspace{1pt})] $\VV{\I}{\hat{a}}(\exists\alpha\varphi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{c}}(\varphi)=1$ for some $\alpha$-variant $\hat{c}$ of $\hat{a}$.
+  \item[($\neg$)] $\VV{\I}{\hat{a}}(\neg\varphi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=0$.
+  \item[($\vee$)] $\VV{\I}{\hat{a}}(\varphi \vee \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=1$ or $\VV{\I}{\hat{a}}(\psi)=1$ (or both).
+  \item[($\wedge$)] $\VV{\I}{\hat{a}}(\varphi \wedge \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=1$ and $\VV{\I}{\hat{a}}(\psi)=1$.
+  \item[($\supset$)] $\VV{\I}{\hat{a}}(\varphi \supset \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=0$ or $\VV{\I}{\hat{a}}(\psi)=1$ (or both).
+  \item[($\equiv$)] $\VV{\I}{\hat{a}}(\varphi \equiv \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=\VV{\I}{\hat{a}}(\psi)$.
+\end{enumerate}
+
+
+
+\section*{Truth and Entailment}
+
+\begin{enumerate}
+  \item[\it Truth:] $\VV{\I}{}(\varphi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=1$ for some $\hat{a}$ where $\varphi$ is a sentence of QL. 
+  \item[\it Satisfaction:] $\M=\tuple{\D,\I}$ satisfies $\Gamma$ \textit{iff} $\VV{\I}{}(\varphi)=1$ for every $\varphi\in\Gamma$.
+  \item[\it Singletons:] As before $\M$ satisfies $\varphi$ \textit{iff} $\M$ satisfies $\set{\varphi}$.
+  \item[\it Entailment:] $\Gamma\vDash\varphi$ just in case every model $\M$ that satisfies $\Gamma$ also satisfies $\varphi$.
+  \item[\it Tautology:] $\varphi$ is a tautology \textit{iff} $\vDash \varphi$.
+  \item[\it Contradiction:] $\varphi$ is a contradiction \textit{iff} $\vDash \neg\varphi$.
+  \item[\it Contingent:] $\varphi$ is contingent \textit{iff} $\vDash \nvarphi$ and $\nvdash \neg\varphi$. 
+  \item[\it Consistent:] $\Gamma$ is consistent \textit{iff} $\Gamma$ is satisfiable. 
+\end{enumerate}
+
+
+
+\section*{Minimal Models}
+
+\begin{enumerate}
+  \item[\bf Task 3:] Provide minimal models in which the examples above are true/false.
+\end{enumerate}
+
+
+\section*{Regimentation}
+
   \begin{itemize}
-    \item Jim took every chance he got.
+    \item Every rose has its thorn.
     \item At least the guests that remained were pleased with the party.
     \item I haven't met a cat that likes Merra.
     \item Kate found a job that she loved.
@@ -124,7 +231,6 @@
     \item No set is a member of itself.
     \item There is a set with no members.
   \end{itemize}
-\end{enumerate}
 
 
 

@@ -85,30 +85,30 @@ Whereas the extension of a $2$-place predicate is a set of ordered pairs of elem
 Moreover, how are we going to do this all at once instead of having to provide separate instructions for the $n$-place predicates for each $n\geq 0$.
 
 We begin by drawing on $\D$ to construct Cartesian products of the domain.
-For instance, if we want to interpret a $2$-place predicate `$L^2$', we must construct the Cartesian product $\D^2=\D\times\D$ which includes all ordered pairs of the form $\tuple{x,y}$ where both $x$ and $y$ are elements of $\D$.
+For instance, if we want to interpret a $2$-place predicate `$L^2$', we must construct the Cartesian product $\D^2=\D\times\D$ which includes all ordered pairs of the form $\tuple{\v{x},\v{y}}$ where both $\v{x}$ and $\v{y}$ are elements of $\D$.
 In set builder notation, we may define the following Cartesian product: 
-  $$ \D^2 = \set{\tuple{x,y}:x,y\in\D}. $$
-The identity above reads: $\D^2$ is the set which includes all and only the ordered pair $\tuple{x,y}$ where both $x$ and $y$ are members of $\D$. 
+  $$ \D^2 = \set{\tuple{\v{x},\v{y}}:\v{x},\v{y}\in\D}. $$
+The identity above reads: $\D^2$ is the set which includes all and only the ordered pair $\tuple{\v{x},\v{y}}$ where both $\v{x}$ and $\v{y}$ are members of $\D$. 
 Given this notation, we may require QL interpretations to assign the $2$-place predicates of QL to subsets of $\D^2$. 
 For instance, given $\D=\set{a,b,c,d}$, we might specify an interpretation where $\I(T^2)=\set{\tuple{a,b},\tuple{b,c}}\subseteq\D^2$.
 
 In order to interpret all $n$-place predicates of QL, we will generalise on the same pattern.
 Given any domain $\D$, we will begin by defining the $n$-ary Cartesian product: 
-  $$ \D^n = \set{\tuple{x_1,\ldots,x_n}:x_1,\ldots,x_n\in\D}.$$ % ~~\text{for}~~ n\geq2 
+  $$ \D^n = \set{\tuple{\v{x}_1,\ldots,\v{x}_n}:\v{x}_1,\ldots,\v{x}_n\in\D}.$$ % ~~\text{for}~~ n\geq2 
 In place of ordered pairs, now we have ordered $n$-tuples.
 Accordingly, $n$-place predicates may be assigned to subsets of $\D^n$.
 For instance, a three place predicate will be assigned to a subset of $\D^3$ where its extension will include elements like $\tuple{a,b,c}$.
 Following the same pattern takes care of all the extensions of all $n$-place predicates.
 
-Officially, $n$-tuples are defined in terms of sets where $\tuple{x_1,x_2,\ldots,x_n}=\set{x_1,\set{x_2,\ldots,\set{x_n}}}$.
-As a result, $\tuple{x_1}=\set{x_1}$ which is a set containing one member, though for consistency we may maintain the tuple notation $\tuple{x_1}$.
-Letting a set with one member be referred to as a \define{singleton}, it follows that $\D^1=\set{\tuple{x_1}:x_1\in\D}$ only consists of singletons whose members belong to $\D$.
+Officially, $n$-tuples are defined as sets of ordered pairs $\tuple{\v{x}_1,\ldots,\v{x}_n}=\set{\tuple{1,\v{x}_1},\ldots,\tuple{n,\v{x}_n}}$.\footnote{Officially, the $n$-tuple $\tuple{\v{x}_1,\ldots,\v{x}_n}$ is the surjective function $f_n$ from the domain $\set{m\in\mathbb{N}:1\leq m\leq n}$ to the range $\set{\v{x}_i:1\leq i\leq n}$ where $f_n(i)=\v{x}_i$ for all $1\leq i\leq n$. Thus $\tuple{}=\varnothing$.}
+As a result, $\tuple{\v{x}_1}=\set{1,\v{x}_1}$, though for we will maintain the tuple notation $\tuple{\v{x}_1}$ for consistency.
+It follows that $\D^1=\set{\tuple{\v{x}_1}:\v{x}_1\in\D}$ only consists of $1$-tuples containing elements in $\D$.
 For instance, if $a\in \D$, it follows that $\tuple{a}\in\D^1$.
-Accordingly, $\D^1\neq\D$ where $1$-place predicates will be assigned to sets of singletons in $\D^1$.
+Accordingly, $\D^1\neq\D$ where $1$-place predicates will be assigned to sets of $1$-tuples in $\D^1$.
 For example, if we take `$H^1$' to symbolize the predicate `is happy', then $\I(H^1)\subseteq\D^1$ might include such elements as $\tuple{a}$.
 
 Next we may consider $\D^0$. 
-Setting $n=0$ in the definition above, it follows that $\D^0=\set{\varnothing}$ since $\varnothing=\tuple{}$.
+Setting $n=0$ in the definition above, it follows that $\D^0=\set{\varnothing}$ since $\tuple{}=\varnothing$.
 Since we will use $\D^0$ to interpret sentence letters, we may maintain consistency with the conventions introduced for SL by taking $1=\set{\varnothing}$ and $0=\varnothing$.
 As it happens, these are the standard von Neumann definitions of the first two ordinal numbers 0 and 1.
 Following the pattern above, a QL interpretation $\I$ will assign $A^0$ to a subset of $\set{\varnothing}$ where there are just two options: either $\I(A^0)=\set{\varnothing}=1$ or $\I(A^0)=\varnothing=0$.
@@ -159,7 +159,7 @@ Consider the following:
 
 \begin{partialmodel}
 	$\D$		& $\set{c,a,m}$\\
-  $\I(D)$	& $\set{c}$\\
+  $\I(D)$	& $\set{\tuple{c}}$\\
   $\I(L)$ & $\set{\tuple{a,m}}$\\
 	$\I(c)$	& $c$\\
 	$\I(a)$	& $a$\\
@@ -170,7 +170,7 @@ Here the domain consists of three elements $c$, $a$, and $m$ where the extension
 Moreover, the constants $c$, $a$, and $m$ are assigned to themselves, $c$, $a$, and $m$, respectively. 
 That is, we happened to pick a domain consisting of the constants which we are using to name themselves as elements of the domain.
 This is often convenient, but by no means necessary.
-For instance, we could have let $\D=\set{1,2,3}$ where $\I(c)=1$, $\I(a)=2$, $\I(m)=3$, $\I(D)=\set{1}$, and $\I(L)=\set{\tuple{2,3}}$.
+For instance, we could have let $\D=\set{1,2,3}$ where $\I(c)=1$, $\I(a)=2$, $\I(m)=3$, $\I(D)=\set{\tuple{1}}$, and $\I(L)=\set{\tuple{2,3}}$.
 The only reason to prefer our first model as opposed to the second is that it is easy to keep track of what refers to what by taking the constants to do double duty.
 
 Although we have succeeded in providing interpretations of the constants and predicates included in the symbolization key, we have not yet provided any way to determine whether the sentences \ref{RQ1} and \ref{RQ2} are true or false.
