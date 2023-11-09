@@ -138,26 +138,26 @@
     \begin{itemize}
       \item Goes by routine induction on complexity.
     \end{itemize}
-  \item[\it Lemma 2:] For any sentence $\varphi$: $\VV{\I}{}(\varphi)\neq 1$ \textit{iff} $\VV{\I}{\hat{a}}(\varphi)\neq 1$ for some v.a. $\hat{a}$ over $\D$.
+  \item[\it Lemma 2:] For any sentence $\varphi$: $\VV{\I}{}(\varphi)= 1$ \textit{iff} $\VV{\I}{\hat{a}}(\varphi)= 1$ for every v.a. $\hat{a}$ over $\D$.
     \begin{itemize}
-      \item[\it LTR:] Assume $\VV{\I}{}(\varphi)\neq 1$, so $\VV{\I}{\hat{c}}(\varphi)\neq 1$ for every v.a. $\hat{c}$ over $\D$ .
-      \item Since $\D$ is nonempty, there is some v.a. $\hat{a}$, and so $\VV{\I}{\hat{a}}(\varphi)\neq 1$. 
-      \item[\it RTL:] Assume $\VV{\I}{\hat{a}}(\varphi)\neq 1$ for some v.a. $\hat{a}$ over $\D$.
-      \item Let $\hat{c}$ be any v.a. over $\D$.
+      \item[\it LTR:] Assume $\VV{\I}{}(\varphi)= 1$, so $\VV{\I}{\hat{a}}(\varphi)= 1$ for some v.a. $\hat{c}$ over $\D$ .
+      \item Let $\hat{a}$ be any v.a. over $\D$.
       \item Since $\varphi$ has no free variables, $\VV{\I}{\hat{a}}(\varphi)=\VV{\I}{\hat{c}}(\varphi)$ by \textit{Lemma 1}.
-      % \item So $\VV{\I}{\hat{c}}(\varphi)\neq 1$ where $\hat{c}$ was arbitrary. 
-      \item So $\VV{\I}{\hat{c}}(\varphi)\neq 1$ for all v.a. $\hat{c}$ over $\D$, and so $\VV{\I}{}(\varphi)\neq 1$.
+      \item So $\VV{\I}{\hat{a}}(\varphi)=1$ for all v.a. $\hat{c}$ over $\D$.
+      \item[\it RTL:] Assume $\VV{\I}{\hat{a}}(\varphi)=1$ for all v.a. $\hat{a}$ over $\D$.
+      \item Since $\D$ is nonempty, there is some v.a. $\hat{a}$, and so $\VV{\I}{}(\varphi)= 1$. 
+      % \item So $\VV{\I}{}(\varphi)=1$.
     \end{itemize}
-  \item[\it Lemma 3:] For any sentence $\varphi$: $\VV{\I}{}(\varphi)=1$ \textit{iff} $\VV{\I}{\hat{a}}(\varphi)=1$ for every v.a. $\hat{a}$ over $\D$.
+  \item[\it Lemma 3:] For any sentence $\varphi$: $\VV{\I}{}(\varphi)\neq1$ \textit{iff} $\VV{\I}{\hat{a}}(\varphi)\neq 1$ for some v.a. $\hat{a}$ over $\D$.
 \end{enumerate}
 
 
 
 \section*{Minimal Models}
 
-\begin{enumerate}
+\begin{itemize}
   \item[\bf Task 1:] Provide minimal models in which the following are true/false.
-  \item[\it Universal:] Al loves everything, i.e., $\forall xLax$.
+  \item Al loves everything, i.e., $\forall xLax$.
     \begin{itemize}
       \item[\it True:] Let $\hat{a}$ be a v.a. over $\D=\set{a}$.
       \item Let $\hat{c}$ be any $x$-variant of $\hat{a}$.
@@ -175,7 +175,7 @@
       % \item Since $\hat{a}$ is a $x$-variant of itself, $\VV{\I}{\hat{a}}(\forall xLax)\neq 1$.
       % \item So $\VV{\I}{}(\forall xLax)\neq 1$ by \textit{Lemma 2}.
     \end{itemize}
-  \item[\it Existential:] Someone is dancing, i.e., $\exists x(Px \wedge Dx)$.
+  \item Someone is dancing, i.e., $\exists x(Px \wedge Dx)$.
     \begin{itemize}
       \item[\it True:] Let $\hat{a}$ be a v.a. over $\D=\set{a}$ where $\va{a}(x)=a$.
       \item Since $\I(P)=\I(D)=\set{\tuple{a}}$, we know $\tuple{\VV{\I}{\hat{a}}(x)}\in\I(P)=\I(D)$.
@@ -189,10 +189,48 @@
       \item So $\VV{\I}{\hat{c}}(Px)= 1$, and so $\tuple{\VV{\I}{\hat{c}}(x)}\in\I(P)$.
       \item Thus $\I(P)\neq\varnothing$.
     \end{itemize}
-  \item[\it Mixed:] Everyone loves someone, i.e., $\forall x(Px \supset \exists yLxy)$. 
-  \item[\it Complex:] Everything everything loves loves something, i.e., $\forall x(\forall yLyx \supset \exists zLxz)$.
-\end{enumerate}
+  \item No set is a member of itself. \quad \texttt{[contingent]}\\
+    $\neg\exists x(Sx \wedge x\in x)$
+  \item There is a set with no members. \quad \texttt{[contingent]}\\
+    $\exists x(Sx \wedge \forall y(y\notin x))$
+  \item Everyone loves someone. \quad \texttt{[contingent]}\\ 
+    $\forall x(Px \supset \exists yLxy)$.
+  \item The guests that remained were pleased with the party. \quad \texttt{[contingent]}\\  
+    $\forall x(Rxp \supset Px)$.
+  \item I haven't met a cat that likes Merra. \quad \texttt{[contingent]}\\
+    $\neg\exists x(Mbx \wedge Cx \wedge Lmx)$
+  \item Kate found a job that she loved. \quad \texttt{[contingent]}\\
+    $\exists x(Fkx \wedge Jx \wedge Lkx)$
+  \item Everything everything loves loves something. \quad \texttt{[contingent]}\\  
+    $\forall x(\forall yLyx \supset \exists zLxz)$.
+\end{itemize}
 
+
+
+
+
+\section*{Quantifier Exchange}
+
+\begin{enumerate}
+  \item[$({\neg}{\forall})$] $\neg\forall x \varphi \vDash \exists x\neg \varphi$.
+    \begin{itemize}
+      \item[\it Proof:] Let $\M=\tuple{\D,\I}$ satisfy $\neg\forall x \varphi$.
+      \item So $\VV{\I}{\hat{a}}(\neg\forall x \varphi)=1$ for some v.a. $\hat{a}$.
+      \item So $\VV{\I}{\hat{a}}(\forall x \varphi)\neq 1$.
+      \item So $\VV{\I}{\hat{c}}(\varphi)\neq 1$ for some $x$-variants $\hat{c}$ of $\hat{a}$.
+      \item So $\VV{\I}{\hat{c}}(\neg\varphi)=1$ for some $x$-variants $\hat{c}$ of $\hat{a}$.
+      \item So $\VV{\I}{\hat{a}}(\exists x\neg\varphi)=1$, and so $\VV{\I}{}(\forall x\neg\varphi)=1$.
+    \end{itemize}
+  \item[$({\neg}{\exists})$] $\neg\exists x \varphi \vDash \forall x\neg \varphi$.
+    \begin{itemize}
+      \item[\it Proof:] Let $\M=\tuple{\D,\I}$ satisfy $\neg\exists x \varphi$.
+      \item So $\VV{\I}{\hat{a}}(\neg\exists x \varphi)=1$ for some v.a. $\hat{a}$.
+      \item So $\VV{\I}{\hat{a}}(\exists x \varphi)\neq 1$.
+      \item So $\VV{\I}{\hat{c}}(\varphi)\neq 1$ for all $x$-variants $\hat{c}$ of $\hat{a}$.
+      \item So $\VV{\I}{\hat{c}}(\neg\varphi)=1$ for all $x$-variants $\hat{c}$ of $\hat{a}$.
+      \item So $\VV{\I}{\hat{a}}(\forall x\neg\varphi)=1$, and so $\VV{\I}{}(\forall x\neg\varphi)=1$.
+    \end{itemize}
+\end{enumerate}
 
 
 
@@ -266,42 +304,30 @@
 
 
 
-\section*{Regimentation}
-
-  \begin{itemize}
-    \item The guests that remained were pleased with the party.
-    \item I haven't met a cat that likes Merra.
-    \item Kate found a job that she loved.
-    \item Everybody everybody loves loves somebody.
-    \item No set is a member of itself.
-    \item There is a set with no members.
-  \end{itemize}
 
 
+% \section*{Relations}
 
-
-\section*{Relations}
-
-\begin{enumerate}
-  \item[\it Domain:] Let the \textit{domain} $D$ be any set.
-  \item[\it Relation:] A \textit{relation} $R$ on $D$ is any subset of $D^2$.
-  \item[\it Reflexive:] A relation $R$ is \textit{reflexive} on $D$ \textit{iff} $\tuple{x,x}\in R$ for all $x\in D$.
-  \item[\it Non-Reflexive:] A relation $R$ is \textit{non-reflexive} on $D$ \textit{iff} $R$ is not reflexive on $D$.
-  \item[\bf Question 1:] What is it to be \textit{irreflexive}?
-  \item[\it Irreflexive:] A relation $R$ is \textit{irreflexive} on $D$ \textit{iff} $\tuple{x,x}\notin R$ for all $x\in D$.
-  \item[\it Symmetric:] A relation $R$ is \textit{symmetric iff} $\tuple{y,x}\in R$ whenever ${x,y}\in R$.
-  \item[\bf Question 2:] Why don't we need to specify a domain?
-  \item[\bf Question 3:] Why is a relation reflexive or irreflexive with respect to a domain?
-  \item[\it Asymmetric:] A relation $R$ is \textit{asymmetric iff} $\tuple{y,x}\notin R$ whenever $\tuple{x,y}\in R$.
-  \item[\bf Question 4:] What is it to be non-symmetric? How about non-asymmetric?
-  \item[\bf Task 1:] Show that every asymmetric relation is irreflexive.
-  \item[\it Transitive:] A relation $R$ is \textit{transitive iff} $\tuple{x,z}\in R$ whenever $\tuple{x,y},\tuple{y,z}\in R$.
-  \item[\it Intransitive:] A relation $R$ is \textit{intransitive iff} $\tuple{x,z}\notin R$ whenever $\tuple{x,y},\tuple{y,z}\in R$.
-  \item[\bf Question 5:] Is every symmetric transitive relation reflexive? (No: $R=\varnothing$)
-  \item[\bf Task 2:] Show that every transitive irreflexive relation asymmetric?
-  \item[\it Euclidean:] A relation $R$ is \textit{euclidean iff} $\tuple{y,z}\in R$ whenever $\tuple{x,y},\tuple{x,z}\in R$.
-  \item[\bf Task 3:] Show that every transitive symmetric relation is euclidean.
-\end{enumerate}
+% \begin{enumerate}
+%   % \item[\it Domain:] Let the \textit{domain} $D$ be any set.
+%   \item[\it Relation:] A \textit{relation} $R$ on $D$ is any subset of $D^2$.
+%   \item[\it Reflexive:] A relation $R$ is \textit{reflexive} on $D$ \textit{iff} $\tuple{x,x}\in R$ for all $x\in D$.
+%   \item[\it Non-Reflexive:] A relation $R$ is \textit{non-reflexive} on $D$ \textit{iff} $R$ is not reflexive on $D$.
+%   \item[\bf Question 1:] What is it to be \textit{irreflexive}?
+%   \item[\it Irreflexive:] A relation $R$ is \textit{irreflexive} on $D$ \textit{iff} $\tuple{x,x}\notin R$ for all $x\in D$.
+%   \item[\it Symmetric:] A relation $R$ is \textit{symmetric iff} $\tuple{y,x}\in R$ whenever ${x,y}\in R$.
+%   \item[\bf Question 2:] Why don't we need to specify a domain?
+%   \item[\bf Question 3:] Why is a relation reflexive or irreflexive with respect to a domain?
+%   \item[\it Asymmetric:] A relation $R$ is \textit{asymmetric iff} $\tuple{y,x}\notin R$ whenever $\tuple{x,y}\in R$.
+%   \item[\bf Question 4:] What is it to be non-symmetric? How about non-asymmetric?
+%   \item[\bf Task 1:] Show that every asymmetric relation is irreflexive.
+%   \item[\it Transitive:] A relation $R$ is \textit{transitive iff} $\tuple{x,z}\in R$ whenever $\tuple{x,y},\tuple{y,z}\in R$.
+%   \item[\it Intransitive:] A relation $R$ is \textit{intransitive iff} $\tuple{x,z}\notin R$ whenever $\tuple{x,y},\tuple{y,z}\in R$.
+%   \item[\bf Question 5:] Is every symmetric transitive relation reflexive? (No: $R=\varnothing$)
+%   \item[\bf Task 2:] Show that every transitive irreflexive relation asymmetric?
+%   \item[\it Euclidean:] A relation $R$ is \textit{euclidean iff} $\tuple{y,z}\in R$ whenever $\tuple{x,y},\tuple{x,z}\in R$.
+%   \item[\bf Task 3:] Show that every transitive symmetric relation is euclidean.
+% \end{enumerate}
 
 
   % \item Diamonds last forever.
