@@ -768,6 +768,150 @@ Line 3 here is fine; but at line 4, this tree takes the $b$ instance of the exis
 Always work on the main connectives. If you have a sentence like $$\qt{\forall}{x} \qt{\exists}{y} \enot Ryx \eand (Fa \eif Fb)$$ don't use the universal rule. This sentence is a conjunction, so you must perform the conjunction rule on it. That will give you a universal, at which point you can take an instance.
 
 
+
+
+
+\section{Identity and trees}
+\label{sec.identity.trees}
+
+Because we have extended QL to include claims of identity, we also need to modify our tree system. Notice that if we do not do so, the system will not be complete. For example, the rules offered in Chapter \ref{ch.QLsoundcomplete} do not provide a way to demonstrate that $Fa, \enot Fb, a{=}b \models \bot$, even though those sentences are obviously inconsistent. Since each of those sentences are atoms or negated atoms in QL, there is nothing to resolve, and there is no contradiction to close the tree. We need to add new rules to deal with identity.
+
+Here is an obvious one:
+
+\factoidbox{If a branch contains an identity claim \script{a}{=}\script{b} and some sentence \metaA{}, then you may add \metaA{}\substitute{\script{a}}{\script{b}} or \metaA{}\substitute{\script{b}}{\script{a}} to the branch.}
+
+Recall that `\metaA{}\substitute{\script{a}}{\script{b}}' just means the sentence you get by replacing every `\script{a}' in \metaA{} with `\script{b}'. With this rule, we can easily demonstrate that the set of sentences mentioned above closes:
+
+\begin{prooftree}
+{
+to prove={\{Fa, \enot Fb, a{=}b\} \vdash{}\bot}
+}
+	[Fa
+	[\enot Fb, grouped
+	[a{=}b, grouped
+		[Fb, just={1, 3 =}, close={2, 4}]
+	]
+	]
+	]
+\end{prooftree}
+
+We will add this rule to our tree system. Notice that it is not a \emph{resolution} rule --- we do not put a check mark next to either sentence referenced. They may be used again.
+
+Since our tree system is supposed to be \emph{complete}, we need to \emph{ensure} that the tree will close; it's not enough that we have a rule that allows that it might. So, as in the case of the general rules discussed in Chapter \ref{ch.QLTrees}, we will also add an additional requirement governing branch completion. What we need is to make sure that we've made enough identity substitutions to demonstrate everything that needs demonstrating. The way we'll do this is by requiring, for every identity claim in the branch, that, for at least one of its directions (left-to-right or right-to-left) the substitution has been performed in that direction on every atomic sentence or negated atomic sentence in the branch.
+
+More precisely stated, an open branch is complete only if, for any identity claim $\script{a}{=}\script{b}$ in the branch, either, for any atomic sentence or negated atomic sentence \metaA{} containing \script{a} in the branch, \metaA{}\substitute{\script{a}}{\script{b}} is in the branch, or, for any atomic sentence or negated atomic sentence \metaA{} containing \script{b} in the branch, \metaA{}\substitute{\script{b}}{\script{a}} is in the branch.
+
+So, adding this requirement to the definition of branch completion given on page \pageref{branchcompletion.defined}, we get:
+
+\factoidbox{
+A branch is \define{complete} if and only if either (i) it is closed, or (ii) all of the following conditions are met:
+
+\begin{enumerate}
+\item Every resolvable sentence in the branch has been resolved;
+\item For every general quantified sentence \metaA{} and every name \script{a} in the branch, the \script{a} instance of \metaA{} is in the branch; and
+\item For every identity claim $\script{a}{=}\script{b}$ in the branch, either:
+	\begin{enumerate}
+	\item for every atomic sentence or negated atomic sentence \metaA{} containing \script{a} in the branch, \metaA{}\substitute{\script{a}}{\script{b}} is in the branch, or 
+	\item for every atomic sentence or negated atomic sentence \metaA{} containing \script{b} in the branch, \metaA{}\substitute{\script{b}}{\script{a}} is in the branch.
+	\end{enumerate}
+\end{enumerate}}
+
+We must also add one more rule to our tree system. Previously we said that branches only close when they contain some sentence along with its negation. We add one more condition that suffices for branch closure. If any branch contains a sentence $\script{a}{\neq}\script{a}$, then that branch closes. In no model can something be non-identical with itself.
+
+Adding this to the rule given on page \pageref{branchclosure.defined}:
+
+\factoidbox{
+A branch closes if and only if either (i) it contains some sentence \metaA{} along with its negation, \enot\metaA{}, or (ii) it contains, for some name \script{a}, the sentence $\script{a}{\neq}\script{a}$.
+}
+
+We need this rule, for example, to prove with a tree that $\qt{\forall}{x} \:  a{=}x$ is inconsistent with $\qt{\exists}{x} \:  x{\neq}a$:
+
+\begin{prooftree}
+{
+to prove={\{\qt{\forall}{x} \: a{=}x, \qt{\exists}{x} \: x{\neq}a\} \vdash \bot}
+}
+	[\qt{\forall}{x} \:  a{=}x, subs={b}
+	[\qt{\exists}{x} \:  x{\neq}a, grouped, checked=b
+		[b {\neq} a, just=2 $\exists$
+			[a{=}b, just=1 $\forall$
+				[b{\neq}b, just={3, 4 {=}}, close=5
+				]
+			]
+		]
+	]
+	]
+\end{prooftree}
+
+We must also take care, when constructing models from completed open branches, to respect identity claims. If for example the sentence $b{=}c$ appears in an open branch, we will not construct a model with two different objects, b and c --- instead, we'll just pick one of them as the object indicated, and assign both names to it. For example, consider this tree:
+
+\begin{prooftree}
+{}
+	[\qt{\forall}{x} (Rax \eif x{=}b), subs={a, b, c}
+	[\qt{\exists}{x} Rax, grouped, checked=c
+		[Rac, just=2 $\exists$
+			[Raa \eif a{=}b, just=1 $\forall$, checked
+			[Rab \eif b{=}b, grouped, just=1 $\forall$, checked
+			[Rac \eif c{=}b, grouped, just=1 $\forall$, checked
+				[\enot Rac, just=6 \eif, close={3, 7}
+				]
+				[c{=}b
+					[Rab, just={3, 7 {=}}
+						[\enot Rab, just=5 \eif, close={8, 9}]
+						[b{=}b
+							[\enot Raa, just=4 \eif, open
+							]
+							[a{=}b
+								[Rbb, just={8, 10 =}
+									[Rbc, just={3, 10 =}, open
+									]
+								]
+							]
+						]
+					]
+				]
+			]
+			]
+			]
+		]
+	]
+	]
+\end{prooftree}
+
+We end up with two open branches. We only need one to demonstrate that the root is satisfiable, but it is useful practice to consider both. Let's begin with the shorter open branch to the left, that completes at line 10. Examining that branch, we see three names, $a$, $b$, and $c$, and three atomic sentences concerning the extension of $R$: $Rac$, $Rab$, and $\enot Raa$. Using our previous method for constructing models, we would have posited a three-object UD and related those objects via $R$ in the appropriate way. Now, however, we also have identity claims to consider. There are two identity claims in the branch. $b{=}b$ doesn't tell us anything interesting --- of \emph{course} that object is identical with itself --- but the presence of $c{=}b$ indicates that our model will not include separate objects b and c. We'll only posit one object in the UD for those two names, and another object for $a$. We can pick either letter for the object; let's call it $b$. (Remember, it doesn't matter what kinds of objects we pick for the UD; it could be Reed Richards for all it matters. We typically pick letters because they are easy to keep track of.)
+
+So the model suggested by the first open branch here is:
+
+\begin{partialmodel}
+	UD & \{a, b\}\\
+	\referent{a} & a\\
+	\referent{b} & b\\
+	\referent{c} & b\\
+	\extension{R} & 
+	\begin{tabular}{l|lllll}
+	$Rxy$   & $a$ & $b$ \\ \hline
+	$a$   & 0 & 1   \\
+	$b$   & - & - \\
+	\end{tabular}
+\end{partialmodel}
+
+The longer open branch includes additional identity claims. It includes $a{=}b$ and $c{=}b$, which of course implies that all three of these names are names for the same object. So the UD for the model corresponding to the right branch will have only one object, which all three names denote.
+
+\begin{partialmodel}
+	UD & \{a\}\\
+	\referent{a} & a\\
+	\referent{b} & a\\
+	\referent{c} & a\\
+	\extension{R} & 
+	\begin{tabular}{l|lll}
+	$Rxy$   & $a$  \\ \hline
+	$a$   & 1    \\
+	\end{tabular}
+\end{partialmodel}
+
+It it sometimes helpful, for an intuitive grip on what is going on in these trees, to think about an English translation alongside the formalisms. For example, suppose that $Rxy$ is interpreted as `$x$ loves $y$'. Line 1 of the tree says that person $a$ loves at most one person; line 2 says that $a$ loves at least one person. The tree works out two ways that might be: the one and only person $a$ loves could be $a$, or it could be someone else.
+
+
+
 \iffalse
 
 \practiceproblems

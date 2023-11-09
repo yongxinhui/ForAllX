@@ -26,8 +26,8 @@ Can't we get by without identity?
 
 
 
-\section{Motivation}%
-  \label{sec:Motivation}
+\section{Identity and Logic}%
+  \label{sec:IdentityLogic}
 
 It turns out that there is a lot that cannot be said without an identity predicate.
 You might be wondering why we can't just declare that a certain predicate be used to express identity the way that we do in regimenting other predicates in QL.
@@ -214,7 +214,7 @@ Without providing such a theory, nothing guarantees that $T$ is transitive, and 
 Although one might attempt to provide a theory of the taller-than relation, doing so reaches beyond the subject-matter of logic.
 Moreover, it would be natural to use a language like QL$^=$ in order to develop such a theory. 
 The same cannot so easily be said for identity.
-Instead of falling outside the subject-matter of logic, identity is taken to fit squarely within our present aim to develop the conceptual resources that we need to articulate theories in the first place.\footnote{A prominent example is set theory where the predicate `$\in$' may be axiomatized in QL$^=$.}
+Instead of falling outside the subject-matter of logic, identity is taken to fit squarely within our present aim to develop the conceptual resources that we need to articulate theories in the first place.
 Instead of requiring that we develop an independent theory of identity, the semantics for identity will rely on our understanding of identity in the metalanguage in much the same way that the semantics for negation relied on an understanding of negation in the metalanguage.
 
 
@@ -261,6 +261,7 @@ Next consider the regimentation of the following argument:
 
 \begin{ekey}
   \item[Lxy:] $x$ loves $y$
+  \item[Dx:] $x$ is a DJ
   \item[c:] Cara
   \item[p:] Pedro
   \item[d:] DJ Faro
@@ -277,7 +278,7 @@ Next consider the regimentation of the following argument:
 \end{earg}
 
 \begin{earg}
-  \item[] $Lcp \eand \forall x(Lxp \eif x=c)$
+  \item[] $\forall x(Lxp \eiff x=c)$
   \item[] $Ldp$
   \item[\therefore] $c=d$
 \end{earg}
@@ -285,8 +286,10 @@ Next consider the regimentation of the following argument:
 \end{multicols}
 
 This is a valid argument.
-Although we could say that Cara loves Pedro in QL, we could not say that \textit{only} Cara loves Pedro in QL since to do so we would need to say that anything that loves Pedro is identical to Cara.
-Moreover, given that DJ Faro loves Pedro, we may conclude that DJ Faro must be identical to Cara.
+Although we could say that Cara loves Pedro in QL, we could not say that \textit{only} Cara loves Pedro in QL since to do so we would need to say that anything that loves Pedro is identical to Cara in addition to saying that Cara loves Pedro.
+Here we may accomplish both claims at once by saying that for anything, it loves Pedro just in case it is identical to Cara.
+Since Cara is identical to herself, she must love Pedro, and moreover, for anything that loves Pedro, it must be identical to Cara.
+Since DJ Faro loves Pedro, we may conclude that DJ Faro must be identical to Cara.
 Reasoning in this way requires that we extend the expressive power of QL by including identity in the language.
 
 Here is a third example. 
@@ -300,7 +303,7 @@ Consider the following regimentations of sentence $\ref{M1}$:
 
 \begin{ekey}
   \item[Cxy:] $x$ composed $y$
-  % \item[Sx:] $x$ is a symphony. 
+  % \item[Sx:] $x$ is a thing. 
   \item[m:] Mozart
   \item[] ~
 \end{ekey}
@@ -313,7 +316,7 @@ Consider the following regimentations of sentence $\ref{M1}$:
 
 \end{multicols}
 
-Although sentence $\ref{M2}$ can be stated in QL, this regimentation does not require that there are more than two things that Mozart composed.
+Although sentence $\ref{M2}$ can be stated in QL, this regimentation does not require that there are at least two things that Mozart composed.
 This is because both conjuncts could be satisfied by the same thing, and so the sentence would be true if there was just one thing that Mozart composed.
 Sentence $\ref{M3}$ is worse since this is not even a sentence. 
 Rather, it includes free variables which fall outside of the scope of both quantifiers.
@@ -327,15 +330,48 @@ Just as we introduced the `$\forall$' and `$\exists$' to regiment quantified cla
 
 
 
-\section{The Syntax of QL$^=$}
+\section{The Syntax for QL$^=$}
+  \label{sec:SyntaxQL=}
 
-It may be obvious how to build up sentences in our extended language QL$^=$, but officially we need to define the wffs of QL$^=$ afresh. 
-Nevertheless, much will be as it was before.
+The primitive symbols included in QL$^=$ are exactly the same as those included in QL with the single addition of the identity predicate `$=$'.
+Thus we have the following:
+
+\begin{center}
+  \begin{tabular}{|c|c|}
+    \hline
+      $n$-place predicates for $n\geq 0$ & $A^n,B^n,C^n,\ldots,Z^n$\\
+      with subscripts, as needed & $A_1^n, B_1^n, Z_1^n, A_2^n, A_{25}^n, J_{375}^n,\ldots$\\
+    \hline
+      constants & $a,b,c,\ldots,v$\\
+      with subscripts, as needed & $a_1, w_4, h_7, m_{32},\ldots$\\
+    \hline
+      variables & $w, x,y,z$\\
+      with subscripts, as needed & $x_1, y_1, z_1, x_2,\ldots$\\
+    \hline
+      sentential connectives & \enot, \eand, \eor, \eif, \eiff\\
+    \hline
+      identity & $=$\\
+    \hline
+      quantifiers& $\forall, \exists$\\
+    \hline
+      parentheses&( , )\\
+    \hline
+  \end{tabular}
+\end{center}
+
+Here we have included `$=$' in our alphabet of primitive symbols.
+This may seem like a small change and given the examples above, it may be obvious to you how to build up sentences in QL$^=$.
+Nevertheless, we need to define the wffs of QL$^=$ afresh, where something similar will be repeated for our other recursive definitions that we provided before and will amend here. 
+Although much will be as it was before, it is important to attend to the differences that occur throughout the definitions given in the following two sections. %, and it never hurts to review these essential definitions which give shape to our language.
+
+
+Whereas in QL there was just one way to form atomic wffs, now we will have two separate ways to form wffs.
+In particular, consider the following recursive definition:
 
 \begin{enumerate}
   \item $\F^n\alpha_1,\ldots,\alpha_n$ is a wff if $\F^n$ is an $n$-place predicate and $\alpha_1,\ldots,\alpha_n$ are singular terms.
   \item $\alpha=\beta$ is a wff if $\alpha$ and $\beta$ are singular terms.
-\item If \metaA and \metaB are wffs and $\alpha$ is a variable, then:
+\item If $\metaA$ and $\metaB$ are wffs and $\alpha$ is a variable, then:
 	\begin{enumerate}
     % \begin{multicols}{2}
       \item $\qt{\exists}{\alpha}\metaA$ is a wff;
@@ -351,10 +387,9 @@ Nevertheless, much will be as it was before.
 \item Nothing else is a wff.
 \end{enumerate}
 
-Here we have two ways to form atomic wffs.
-Whereas the first way is exactly as we did in QL, we may also form wffs with the identity predicate.
-Nevertheless, nothing requires identity wffs to be sentences since they may include free variables.
-This means that we will also have to extend our definition of free variables in as corresponding manner:
+We may either form atomic wffs as we did in QL, or we may form wffs with the identity predicate together with two singular terms.
+Nevertheless, nothing requires identity wffs to be sentences since they may include free variables in just the same way that $2$-place predicates may combine with free variables.
+This means that there is a new way for free variables to occur in wffs and so we will have to extend our definition of free variables accordingly:
 
 \begin{enumerate}
   \item $\alpha$ is free in $\F^n\alpha_1,\ldots,\alpha_n$ if $\alpha=\alpha_i$ for some $1\leq i\leq n$ where $\alpha$ is a variable, $\F^n$ is an $n$-place predicate, and $\alpha_1,\ldots,\alpha_n$ are singular terms.
@@ -372,6 +407,95 @@ This means that we will also have to extend our definition of free variables in 
   \item Nothing else is a free variable. 
 \end{enumerate}
 
+Given the definition of free variables in QL$^=$, we may define an \define{open sentence} of QL$^=$ to be any wff of QL$^=$ which includes free variables.
+In just the same way as before, a \define{sentence} of QL$^=$ is any wffs of QL$^=$ which does not include any free variables. 
+Given these definitions, the syntax for QL$^=$ is complete.
+We may now turn to interpret the sentences of QL$^=$. 
+
+% TODO: add regimentation examples
+
+
+
+\section{The Semantics for QL$^=$}%
+  \label{sec:SemanticsQL=}
+  
+In $\S\ref{ch9.ModelsQL}$, we defined a \define{model} of QL to be any ordered pair $\M=\tuple{\D,\I}$ where the \define{domain} $\D$ is any nonempty set and the \define{interpretation} $\I$ over $\D$ satisfies the following conditions: 
+
+\begin{enumerate}[leftmargin=1.5in]
+  \item[\sc Constants:] $\I(\alpha)\in\D$ for every constant $\alpha$ of QL. 
+  \item[\sc Predicates:] $\I(\F^n)\subseteq\D^n$ for every $n$-place predicate $\F^n$ of QL where $n\geq 0$.
+\end{enumerate}
+
+Since adding identity to the list or primitive symbols does not effect the manner in which the constants or predicates are interpreted, no change is required to the definition of a model for QL$^=$.
+Accordingly, QL$^=$ and QL have precisely the same models. 
+
+Recall the manner in which \define{variable assignments} were defined over a domain $\D$ to be any function $\va{a}$ from the variables in QL to elements of $\D$.
+Again, no change is required since neither the variables nor the domains that we might consider are effected by the addition of the identity predicate to the language.
+For a similar reason, we may also preserve the definition of a \define{$\alpha$-variant} of $\va{a}$ as any variable assignment $\va{c}$ where $\va{c}(\beta)=\va{a}(\beta)$ for all $\beta\neq\alpha$.
+Lastly, we include for the sake of completeness the aggregation function from before:
+
+\vspace{-.2in}
+\begin{align*}
+  \VV{\I}{\va{a}}{(\alpha)}=
+    \begin{cases}
+      \I(\alpha) & \text{if } \alpha \text{ is a constant} \\
+      \va{a}(\alpha) & \text{if } \alpha \text{ is a variable.}
+    \end{cases}
+\end{align*}
+
+So far, all of the semantic definitions have remained the same as they were in QL.
+Nevertheless, the semantics for QL$^=$ will differ insofar as it includes an extra clause for identity, mirroring the changes we made to the definition of the wffs of QL$^=$ given above. 
+
+\begin{enumerate}[labelsep=.15in]
+  \item[($A$)] $\VV{\I}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1$ just in case $\tuple{\VV{\I}{\va{a}}{(\alpha_1)},\ldots,\VV{\I}{\va{a}}{(\alpha_n)}}\in\I(\F^n)$.
+  \item[($=$)] $\VV{\I}{\va{a}}(\alpha=\beta)=1$ just in case $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
+  \item[(\hspace{1pt}$\forall$\hspace{1pt})] $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ just in case $\VV{\I}{\va{c}}(\metaA)=1$ for every $\alpha$-variant $\va{c}$ of $\va{a}$.
+  \item[(\hspace{1pt}$\exists$\hspace{1pt})] $\VV{\I}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$ just in case $\VV{\I}{\va{c}}(\metaA)=1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$.
+  \item[(\enot)] $\VV{\I}{\va{a}}(\enot\metaA{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})\neq 1$.
+  \item[(\eor)] $\VV{\I}{\va{a}}(\metaA{} \eor \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})=1$ or $\VV{\I}{\va{a}}(\metaB{})=1$ (or both).
+  \item[(\eand)] $\VV{\I}{\va{a}}(\metaA{} \eand \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})=1$ and $\VV{\I}{\va{a}}(\metaB{})=1$.
+  \item[(\eif)] $\VV{\I}{\va{a}}(\metaA{} \eif \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})\neq 1$ or $\VV{\I}{\va{a}}(\metaB{})=1$ (or both).
+  \item[(\eiff)] $\VV{\I}{\va{a}}(\metaA{} \eiff \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})=\VV{\I}{\va{a}}(\metaB{})$.
+\end{enumerate}
+
+Having added the clause for identity, the other clauses continue to apply.
+It is worth comparing the semantic clause for identity to the clause for negation and considering the following worry.
+
+\begin{quote}
+  \texttt{Gripe}:
+  The semantic clause for identity doesn't tell us anything because we have used identity--- indeed the same symbol--- on both sides of the semantic clause.
+  So in order to know about whether an identity sentence such as $\alpha=\beta$ is true in a model on an assignment, we already need to know what is identical to what.
+  Thus the semantics does not tell us anything we didn't already know.
+\end{quote}
+
+If we were attempting to understand what `$=$' means without drawing on any previous understanding, the certainly we should agree that the semantic clauses given above get us nowhere.
+However, the very same thing may be said for at least negation, conjunction, disjunction, and the quantifiers.
+In each of these cases, analogues of the terms with which we are concerned appear in the metalanguage and play a critical role in stating the semantic clauses.
+Thus we cannot lean on our semantics to learn what these terms mean without any prior understanding of at least their analogues in the metalanguage.
+
+All of this we must learn to accept.
+Where the grip goes wrong is in thinking that there is any other way in which semantics might proceed.
+Instead of constructing something out nothing, the semantics clauses allow us to use the meanings we already grasp in order to interpret a simplified formal language in a systematic way.
+Identity is no exception.
+
+Having defined truth relative to a model and assignment function, we are now in a position to specify what it is for a sentence of QL$^=$ to be true in a model (independent of assignments):
+
+\begin{enumerate}[labelsep=.15in]
+  \item[($\metaA$)] $\VV{\I}{}(\metaA)=1$ just in case $\VV{\I}{\va{a}}(\metaA)=1$ for some $\va{a}$ where $\metaA$ is a sentence of QL$^=$.
+\end{enumerate}
+
+This definition is just as it was before save that `QL' has been replaced by `QL$^=$'.
+For completeness, we will copy over the definitions of satisfaction and entailment given their importance, where the other semantic notions are the same as they were before.
+
+\begin{enumerate}[leftmargin=1.5in]
+  \item[\sc Satisfaction:] $\M=\tuple{\D,\I}$ satisfies $\Gamma$ just in case $\VV{\I}{}(\metaA)=1$ for every $\metaA\in\Gamma$.
+  \item[\sc Entailment:] $\Gamma\models\metaA$ just in case every model that satisfies $\Gamma$ also satisfies $\metaA$.
+\end{enumerate}
+
+Although there is a lot of redundancy with the syntax and semantics that we provided for QL, hopefully this gives you a good overview of all of the working piece that make up these theories.
+In the remaining sections of this chapter, we will put these theories to work in order to evaluate sentences and arguments in QL$^=$.
+As we will see, this language is very powerful and perhaps for this reason has become the \textit{lingua franca} in which a wide range of theories have been developed.
+One prominent example is set theory where the dyadic predicate `$\in$' for set-membership may be axiomatized in QL$^=$.
 
 
 
@@ -379,35 +503,307 @@ This means that we will also have to extend our definition of free variables in 
 
 
 
-\section{Identity and `no one else'}
+\section{Uniqueness}
 
-Consider again sentence \ref{onlyyou}:
+Recall the following argument from before:
 
-\begin{ekey}
-\item[\ref{onlyyou}.] Only you can prevent forest fires.
-\end{ekey}
-
-In the introduction we tried translating this into QL with a predicate `only  \blank can prevent forest fires'; now we can reflect its logical structure more fully. So we'll let our predicate just indicate the ability to prevent forest fires:
-
-\begin{ekey}
-\item[UD:] people
-\item[Px:] $x$ can prevent forest fires
-\item[u:] you
-\end{ekey}
-
-If only you can prevent forest fires, that means that you can prevent forest fires, and, moreover, no one \emph{else} --- no one who is not you --- can prevent forest fires. The first part is simple. You can prevent forest fires: $Pu$. Now we must say that no one else can prevent forest fires. Another way to say that is this: it is \emph{not} the case that there is someone \emph{who is not you} who can prevent forest fires. So you can think of that as a negated existential: $\enot \qt{\exists}{x} (x {\neq} u \eand Px)$. Putting these two pieces together as a conjunction, we can translate sentence \ref{onlyyou} as:
+\begin{multicols}{2}
 
 \begin{earg}
-\item[\ref{onlyyou}.] $Pu \eand \enot \qt{\exists}{x} (x {\neq} u \eand Px)$
+  \item[] Only Cara loves Pedro.
+  \item[] DJ Faro loves Pedro.
+  \item[\therefore] DJ Faro is Cara.
 \end{earg}
 
-A second way of characterizing the `no one else' clause would translate it as a universal claim, saying, of everything, that if it is not you, then it cannot prevent forest fires: $\qt{\forall}{x} (x {\neq} u \eif \enot Px)$. This is equivalent to $\enot \qt{\exists}{x} (x {\neq} u \eand Px)$; either is an acceptable translation. (By the end of this chapter we'll be able to prove this equivalence.)
+\begin{earg}
+  \item[] $\qt{\forall}{x}(Lxp \eiff x=c)$
+  \item[] $Ldp$
+  \item[\therefore] $d=c$
+\end{earg}
 
-Using similar reasoning, one can translate other kinds of sentences that talk about objects \emph{other than} ones just mentioned. For example, suppose we want to say that Rebecca only thinks about herself. She thinks about herself, and there is no one else that she thinks about. Using $r$ for Rebecca and $Txy$ for `$x$ thinks about $y$', we could say: $$Trr \eand \enot \qt{\exists}{x} (x {\neq} r \eand Trx)$$
+\end{multicols}
 
-There are more examples of similar kinds of translation exercises in the practice problems at the end of this chapter.
+We are now in a position to show that this argument is valid.
 
-\section{Identical objects satisfy identical predicates}
+\begin{quote}
+\label{unique1}
+  \textit{Proof:}
+  Let $\M=\tuple{\D,\I}$ be a QL model where $\VV{\I}{}(\forall x(Lxp \eiff x=c))=1$ and $\VV{\I}{}(Ldp)=1$.
+  Thus $\VV{\I}{\va{a}}(\forall x(Lxp \eiff x=c))=1$ and $\VV{\I}{\va{c}}(Ldp)=1$ for some $\va{a}$ and $\va{c}$, and so $\tuple{\VV{\I}{\va{c}}(d),\VV{\I}{\va{c}}(p)}\in\I(L)$.
+  It follows that $\tuple{\I(d),\I(p)}\in\I(L)$.
+
+  Let $\va{e}$ be an $x$-variant of $\va{a}$ where $\va{e}(x)=\I(d)$.
+  Given the universal claim above, $\VV{\I}{\va{e}}(Lxp \eiff x=c)=1$, and so $\VV{\I}{\va{e}}(Lxp)=\VV{\I}{\va{e}}(x=c)$.
+  Thus $\tuple{\VV{\I}{\va{e}}(x),\VV{\I}{\va{e}}(p)}\in\I(L)$ just in case $\VV{\I}{\va{e}}(x)=\VV{\I}{\va{e}}(c)$, and so $\tuple{\va{e}(x),\I(p)}\in\I(L)$ just in case $\va{e}(x)=\I(c)$.
+  Since $\va{e}(x)=\I(d)$, we know that $\tuple{\I(d),\I(p)}\in\I(L)$ just in case $\I(d)=\I(c)$.
+
+  Given the above, we may conclude that $\I(d)=\I(c)$.
+  Thus $\VV{\I}{\va{g}}(d)=\VV{\I}{\va{g}}(c)$ where $\va{g}$ is any v.a., and so $\VV{\I}{\va{g}}(d=c)=1$.
+  Since $d=c$ is a sentence, we may conclude that $\VV{\I}{}(d=c)=1$. 
+  Hence $\forall x(Lxp \eiff x=c), Ldp \models d=c$ as desired. 
+\end{quote}
+
+The proof above only requires one critical choice.
+Given that $\VV{\I}{\va{a}}(\forall x(Lxp \eiff x=c))=1$, we know that $\VV{\I}{\va{b}}(Lxp \eiff x=c)=1$ for any $x$-variant $\va{b}$ of $\va{a}$ whatsoever.
+We were careful to choose the $x$-variant $\va{e}$ of $\va{a}$ where $\va{e}(x)=\I(d)$.
+This is akin to instantiating $x$ by $d$, resulting in the sentence $Ldp \eiff d=c$ which, together with $Ldp$ entails $d=c$.
+Instead of replacing `$x$' with `$d$' as we did just now to illustrate, we chose the $x$-variant $\va{e}$ where $\va{e}(x)=\I(d)$.
+
+Given that only Cara loves Pedro, we may think of her as the unique-Pedro-lover.
+That is, not only is there something out there that loves Pedro, Cara is \textit{the} Pedro lover.
+Suppose we forget Cara's name, but remember this prominent fact about her.
+We might then ask: is the Pedro-lover the same as DJ Faro?
+Instead of using her name, we are using this distinguishing feature to refer to her.
+This is a common practice since we don't have names for everything in English, and even when we do, we don't always know the name of the relevant individual in question.
+Nevertheless, if we know that there is some particular way that only one thing happens to be, then we may use that way of being to pick out that thing.
+
+Whereas Cara's distinguishing feature was loving Pedro, in general we may appeal to any condition however complex.
+For instance, perhaps many people love Pedro, but Cara is the only DJ to love Pedro.
+We may express this with $\forall x((Dx \eand Lxp) \eiff x=c)$.
+By replacing the constant `$c$' with a variable as in $\forall x((Dx \eand Lxp) \eiff x=y)$, we may consider the condition of being the only DJ to love Pedro.
+This open sentence as akin to the complex property of \textit{being the only DJ to love Pedro} where we may appeal to this distinguishing feature to refer to an individual, in this case Cara.
+This brings us to the topic of definite descriptions.
+
+
+
+
+
+\section{Definite Descriptions}
+  \label{sec.DefiniteDescription}
+
+In 1905, Bertrand Russell famously characterized \emph{definite descriptions} in terms of identity.
+A definite description is a description that implies that only one object satisfies it.
+In the paradigm cases, definite descriptions use the definite article `the'.
+Suppose one were to hear crying in the next room, saying `the baby is hungry'.
+This is to claim that the \emph{one and only baby that is crying} is hungry.
+Russell was motivated in part by the apparent fact that one can use this sort of language in a meaningful way even if one is wrong about whether there's any baby around.
+If there is no baby--- the crying is a recording --- the statement is false, but it's still meaningful.
+For this reason, Russell was reluctant to suppose that we should understand `the baby' as a name.
+Remember, in QL, all names have to refer to objects in the domain.
+Instead, the sentence can be understood to be an existentially quantified claim about a unique baby.
+Saying `the baby is hungry', according to Russell, is to say three things: there is a baby, there's no other baby than that one, and that baby is hungry.
+That second element, the uniqueness claim, can be expressed in QL with identity. 
+
+In order to bring out the contrast, consider the following symbolization key:
+
+\begin{ekey}
+  \item[Bx:] $x$ is a baby
+  \item[Hx:] $x$ is hungry
+  \item[j:] Jonathan
+\end{ekey}
+
+A sentence like `Jonathan is hungry' is straightforwardly translated as $Hj$.
+According to Russell's theory of definite descriptions, `the baby is hungry' has a much more complex logical form which we may regiment in either of the follows ways:
+
+\begin{earg}
+  \item[\ex{Def1}] $\qt{\exists}{x} ((Bx \eand \qt{\forall}{y} (By \eif y = x)) \eand Hx)$.
+  \item[\ex{Def2}] $\qt{\exists}{x} (\qt{\forall}{y} (By \eiff y = x) \eand Hx)$.
+\end{earg}
+
+Whereas the first regimentation says that there is some baby which is the only baby and is crying, the second regimentation collapses the first two parts of the first regimentation, claiming that the unique baby is crying.
+In order to express the uniqueness of being a crying baby, we have used the biconditional as in the previous section.
+That is, $x$ is the unique baby insofar as for any $y$ whatsoever, $y$ is a baby if and only if $y$ is identical to $x$.
+
+As brought out in the previous section, the distinguishing feature need not be expressed by a single predicate.
+For instance, suppose there is a baby who is not crying right in front of us, and we hear crying from the other room.
+One may then be a little more specific, saying `the crying baby is hungry'.
+We may expand our symbolization key to regiment this claim.
+
+\begin{multicols}{2}
+
+\begin{ekey}
+  \item[Cx:] $x$ is a baby
+\end{ekey}
+
+\begin{earg}
+  \item[\ex{Def3}] $\qt{\exists}{x} (\qt{\forall}{y} ((Cy \eand By) \eiff y = x) \eand Hx)$.
+\end{earg}
+
+\end{multicols}
+
+Instead of the single predicate `$B$', we have used `$C$' together with `$B$' in order to form the open sentence `$Cy \eand By$' which describes the individual to which we intend to refer.
+
+In order to speak generally about the means by which we may refer to some unique individual satisfying a certain condition, let $\metaA(\alpha)$ be any wff of QL$^=$ in which the variable $\alpha$ is free. 
+If $\alpha$ is the only free variable in $\metaA(\alpha)$, we may take $\metaA(\alpha)$ to be a \define{description}.
+Moreover, $\metaA(\alpha)$ provides a \define{definite description} just in case $\metaA(\alpha)$ is a description which just one thing satisfies, i.e., $\qt{\exists}{\beta}\qt{\forall}{\alpha}(\metaA(\alpha)\eiff \alpha = \beta)$ where $\alpha$ and $\beta$ are distinct variables.
+Given a definite description $\metaA(\alpha)$, we may make claims about the object satisfying that description by conjoining another description $\metaB(\beta)$ within the scope of the existential quantifier as follows: 
+  $$\qt{\exists}{\beta}(\qt{\forall}{\alpha}(\metaA(\alpha)\eiff \alpha = \beta) \eand \metaB(\beta)).$$
+This reads: the unique thing for which $\metaA$ is such that $\metaB$.
+Sentence $\ref{Def3}$ is an instance of this general recipe, and reads: the unique thing for which it is a crying baby is hungry. 
+Russell's idea is that this is what is going on when we use the definite article `the' since we may say the same thing much more naturally with: \textit{the} crying baby is hungry.
+
+One of the interesting features of Russell's theory is that `the baby is not hungry' is not the negation of `the baby is hungry'.
+Instead, the negation applies only to the last conjunct:
+
+\begin{earg}
+  \item[\ex{Def4}] $\qt{\exists}{x} (\qt{\forall}{y} ((Cy \eand By) \eiff y = x) \eand \enot Hx)$.
+\end{earg}
+
+The reason Russell designed his theory this way was that he thought that both of these sentences equally implied that there is a baby.
+If there is no baby, then you'd be mistaken in saying either `the baby is hungry' or `the baby is not hungry'.
+Consequently, one can't be the negation of the other, but rather requires the analysis given above.
+
+As a treatment of the truth conditions of English sentences, Russell's theory is controversial.
+For instance, consider the following case:
+
+\begin{multicols}{2}
+
+\begin{ekey}
+  \item[Kxy:] $x$ is king of $y$
+  \item[Bx:] $x$ is Bald
+  \item[f:] France
+\end{ekey}
+
+\begin{earg}
+  \item[\ex{Def4}] The king of France is bald.
+  \item[\ex{Def5}] $\qt{\exists}{x} (\qt{\forall}{y} (Kyf \eiff y = x) \eand Bx)$.
+  \item[] ~
+\end{earg}
+
+\end{multicols}
+
+Some philosophers of language think that sentences that seem to presuppose the existence of something that isn't there aren't straightforwardly false, but are rather defective in some other way--- perhaps they fail to be meaningful, or perhaps they take on some truth value other than true or false.
+These matters are beyond our present scope, and so we will remain neutral on whether Russell's theory is an accurate treatment of English.
+Nevertheless, without including identity in the language, this question would not arise.
+This helps to bring out what is distinctive about the expressive power of QL$^=$ in contrast to QL. 
+
+
+
+
+
+
+
+\section{Quantities}
+  \label{sec:Quantities}
+
+Including identity in QL$^=$ also lets us talk about quantity in a way that wasn't possible in QL.
+In \S\ref{sec:IdentityLogic} we considered the sentence `Mozart composed at least two things' where identity was found to play a critical role.
+In particular, we provided the following regimentation:
+
+\begin{earg}
+  \item[\ref{M4}.] $\qt{\exists}{x}\qt{\exists}{y}((Cmx \eand Cmy) \eand x\neq y)$.
+\end{earg}
+
+Given that we were able to regiment `at least two', you might suspect that we can also regiment `at least three', and so on for the other natural numbers.
+Consider the following:
+
+\begin{earg}
+  \item[\ex{Q1}] $\qt{\exists}{x}\qt{\exists}{y}\qt{\exists}{z}(((((Cmx \eand Cmy) \eand Cmz) \eand x\neq y) \eand x\neq z) \eand y\neq z)$.
+\end{earg}
+
+Though it is a lot longer than sentence $\ref{M4}$, the sentence above says that there are at least three things that Mozart composed.
+Given that conjunction is associate and commutative, all but the outermost parentheses are more trouble than they are worth.
+In general, we will indulge in the convention of dropping the parentheses that occur in long conjunctions and long disjunctions.
+Thus we may rewrite sentence $\ref{Q1}$ as follows:
+
+\begin{earg}
+  \item[\ex{Q2}] $\qt{\exists}{x}\qt{\exists}{y}\qt{\exists}{z}(Cmx \eand Cmy \eand Cmz \eand x\neq y \eand x\neq z \eand y\neq z)$.
+\end{earg}
+
+This is a lot easier to read and nothing significant is lost.
+It is important to stress that we can only drop parentheses in sentences which \textit{only} include conjunction, or \textit{only} include disjunction.
+Even so, these sentences are bound to get very long for large values of $n$.
+
+In addition to being able to say that there are at least $n$ things that satisfy a certain condition, QL$^=$ permits us to say that that there are at most $n$ things that satisfy a certain condition. 
+We have already seen instances of this above with uniqueness.
+After all, saying that \textit{only} Cara loves Pedro is like saying there is \textit{exactly one} thing that loves Pedro where this entails both that there is \textit{at least} one thing that loves Pedro and that there is \textit{at most} one thing that loves Pedro, namely Cara.
+Consider the following sentence and its regimentation:
+
+\begin{earg}
+  \item[\ex{Q3}] Mozart composed at most two things.
+  \item[\ex{Q4}] $\qt{\exists}{x}\qt{\exists}{y}\qt{\forall}{z}(Cmz \eif (z= x \eor z= y))$.
+\end{earg}
+
+This says that there is some $x$ and $y$ where anything that Mozart composed is identical to either $x$ or $y$. 
+So far, nothing prevents $x=y$ or requires there to be something which Mozart composed. 
+Similarly, we may say that there at most three things that Mozart composed.
+
+\begin{earg}
+  \item[\ex{Q5}] Mozart composed at most three things.
+  \item[\ex{Q6}] $\qt{\exists}{x}\qt{\exists}{y}\qt{\exists}{z}\qt{\forall}{w}(Cmw \eif (w = x \eor w = y \eor w = z))$.
+\end{earg}
+
+Both sentences $\ref{Q4}$ and $\ref{Q6}$ are true if there are less than three things that Mozart composed, including the case where Mozart didn't compose anything.
+
+Suppose we want to say that there are exactly two things that Mozart composed.
+One way to do this is to conjoin sentences $\ref{M4}$ and $\ref{Q4}$ since this amounts to saying that there is at least two things that Mozart composed and at most two things that Mozart composed. 
+However, we can simplify things slightly by means of the following:
+
+\begin{earg}
+  \item[\ex{Q7}] Mozart composed at exactly two things.
+  \item[\ex{Q8}] $\qt{\exists}{x}\qt{\exists}{y}(x \neq y \eand \qt{\forall}{z}(Cmz \eiff (z = x \eor z = y)))$.
+  % \item[\ex{Q8}] $\qt{\exists}{x}\qt{\exists}{y}(Cmx \eand Cmy \eand x \neq y \eand \qt{\forall}{z}(Cmz \eif (z = x \eor z = y)))$.
+\end{earg}
+
+Since saying that there are exactly $n$ things that have some property is a useful thing to say but the ways that we have been considering saying these things in QL$^=$ is fairly complicated, it can be useful to introduce some abbreviations for the \define{cardinality quantifiers}.
+Instead of adding new primitive symbols to QL$^=$, we are only providing conventions for abbreviating long expression with much shorter expressions.
+To begin with, we will take $\metaA(\beta/\alpha)$ to be the result of replacing all free occurrences of $\alpha$ in $\metaA$ with $\beta$.
+We may then specify the following where we will assume $\beta, \gamma, \ldots$ are distinct variables that do not occur in $\metaA$.
+
+\vspace{-.2in}
+\begin{align*}
+  \qt{\exists_0}{\alpha}\metaA(\alpha) &\colonequals \qt{\forall}{\alpha}\enot\metaA(\alpha)\\
+  \qt{\exists_1}{\alpha}\metaA(\alpha) &\colonequals \qt{\exists}{\alpha}\qt{\forall}{\beta}(\metaA(\beta/\alpha) \eiff \beta = \alpha)\\ 
+  % \text{ for distinct } \alpha \text{ and } \beta\\
+  \qt{\exists_2}{\alpha}\metaA(\alpha) &\colonequals \qt{\exists}{\alpha}\qt{\exists}{\beta}(\alpha\neq\beta \eand \qt{\forall}{\gamma}(\metaA(\gamma/\alpha) \eiff (\gamma = \alpha \eor \gamma = \beta)))\\
+  % \text{ for distinct } \alpha, \beta, \text{ and } \gamma\\ 
+  \qt{\exists_3}{\alpha}\metaA(\alpha) &\colonequals \qt{\exists}{\alpha}
+      \qt{\exists}{\beta}
+        \qt{\exists}{\gamma}(
+          \alpha\neq\beta \eand \alpha\neq\gamma \eand \beta\neq\gamma \eand \qt{\forall}{\delta}(
+            \metaA(\delta/\alpha) \eiff (
+              \delta = \alpha \eor \delta = \beta \eor \delta = \gamma
+            )
+          )
+        )\\
+  % \text{ for distinct } \alpha, \beta, \text{ and } \gamma\\ 
+  & ~\vdots
+\end{align*}
+
+As you can see, these definitions get very long and complicated very quickly.
+In order to define all cardinality quantifiers in one go, we may adopt the following recursive definition:
+
+\vspace{-.2in}
+\begin{align*}
+  % \qt{\exists_{1}}{\alpha}\metaA(\alpha) &\colonequals \qt{\exists}{\alpha}(\metaA(\alpha) \eand \qt{\exists_0}{\beta}(\alpha \neq \beta \eand \metaA(\beta/\alpha))) \text{ for } \beta \text{ not free in } \metaA(\alpha)\\
+  %   &\colonequals \qt{\exists}{\alpha}(\metaA(\alpha) \eand \qt{\forall}{\beta}\enot(\alpha \neq \beta \eand \metaA(\beta/\alpha))) \text{ for } \beta \text{ not free in } \metaA(\alpha)\\
+  %   &\colonequals \qt{\exists}{\alpha}(
+  %     \metaA(\alpha) \eand 
+  %       \qt{\forall}{\beta}(
+  %         \metaA(\beta/\alpha) \eif \alpha = \beta
+  %       )
+  %     ) \text{ for } \beta \text{ not free in } \metaA(\alpha)\\
+  % \qt{\exists_{2}}{\alpha}\metaA(\alpha) &\colonequals \qt{\exists}{\alpha}(
+  %   \metaA(\alpha) \eand 
+  %     \qt{\exists_1}{\beta}(
+  %       \alpha \neq \beta \eand \metaA(\beta/\alpha) 
+  %     )
+  %   ) \text{ for } \beta \text{ not free in } \metaA(\alpha)\\
+  % &\colonequals \qt{\exists}{\alpha}(
+  %   \metaA(\alpha) \eand \qt{\exists}{\beta}(
+  %     \alpha \neq \beta \eand \metaA(\beta/\alpha) \eand 
+  %       \qt{\forall}{\gamma}(
+  %         (\alpha \neq \gamma \eand \metaA(\gamma/\alpha)) \eif \beta = \gamma
+  %       )
+  %     ) 
+  %   ) \text{ for } \gamma \text{ not free in } \metaA(\beta)\\ 
+  \qt{\exists_0}{\alpha}\metaA(\alpha) &\colonequals \qt{\forall}{\alpha}\enot\metaA(\alpha)\\
+  \qt{\exists_{n+1}}{\alpha}\metaA(\alpha) &\colonequals \qt{\exists}{\alpha}(\metaA(\alpha) \eand \qt{\exists_n}{\beta}(\alpha \neq \beta \eand \metaA(\beta/\alpha))) \text{ for } \beta \text{ not free in } \metaA(\alpha)
+  % \qt{\exists_1}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists_0}{\beta}(\alpha\neq\beta \eand \metaA(\beta/\alpha))) \text{ for } \beta \text{ not free in } \metaA\\
+  % \qt{\exists_1}{\beta}\metaA &\colonequals \qt{\exists}{\beta}(\metaA \eand \qt{\exists_0}{\gamma}(\beta\neq\gamma \eand \metaA(\gamma/\beta))) \text{ for } \gamma \text{ not free in } \metaA\\
+  % \qt{\exists_2}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists_1}{\beta}(\alpha\neq\beta \eand \metaA(\beta/\alpha))) \text{ for } \beta \text{ not free in } \metaA\\
+  % \qt{\exists_{n+1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists_n}{\beta}(\beta\neq\alpha \eand \metaA(\beta/\alpha)) \text{ for } \beta \text{ not free in } \metaA\\
+\end{align*}
+
+Although the results differ in logical form from those given previously, they are logically equivalent.
+The fact that these cardinality quantifiers are definable in QL$^=$ demonstrates the expressive power of this language in contrast to QL. 
+% For instance, we may consider a set of sentence $\Gamma=\set{}$
+% Given these definitions, we may consider the following set of sentences.
+
+
+
+
+\section{Leibniz's Laws}
 
 In \S\ref{sec.identitymotivation}, we saw that treating identity as a simple predicate prevented the validity of intuitively valid arguments like  this one:
 
@@ -433,218 +829,6 @@ If Peter is Spider-Man, then everything true of Peter is also true of Spider-Man
 
 In \S\ref{sec.identity.trees} below we'll extend our tree method to claims with identity, which will give us a formal means for proving the validity of arguments like this one. (The natural deduction system for QL given in Chapter \ref{ch.QLND} will give us another.)
 
-
-
-
-
-\section{Quantity}
-\label{sec.quantity}
-
-Identity also lets us talk about quantity in a way that wasn't available before. In \S\ref{sec.identitymotivation} we observed some challenges with translating claims about the number of objects that satisfy a particular description. For example, we struggled with sentences like `Mozart composed more than one opera'. But identity makes such claims straightforward.
-
-\begin{ekey}
-\item[UD:] people and operas
-\item[Cxy:] $x$ composed $y$
-\item[Ox:] $x$ is an opera
-\item[m:] Mozart
-\item[n:] \emph{Le Nozze di Figaro}
-\item[g:] \emph{Don Giovanni}
-\end{ekey}
-
-We want to say that there are two things, that have the following features: they are different from each other, they are both operas, and they are both composed by Mozart. A double-existential sentence, listing those conjuncts, will suffice: 
-$$\qt{\exists}{x} \qt{\exists}{y} (x {\neq} y \eand Ox \eand Oy \eand Cmx \eand Cmy)$$
-Strictly speaking, QL conjunctions only have two conjuncts, so to write this sentence scrupulously, we'd need to include brackets to signify that we're talking about conjunctions of conjunctions:
-$$\qt{\exists}{x} \qt{\exists}{y} (x {\neq} y \eand [(Ox \eand Oy) \eand (Cmx \eand Cmy)])$$
-In sentences like these --- and the longer ones listing more conditions that will feature soon --- it is usually preferable for readability to leave these internal brackets out. We will write as if our system allows arbitrary numbers of conjuncts, with the understanding that, should the need arise, we could always put them back in explicitly. (We'll rarely have occasion to do so.)
-
-This sentence says that Mozart wrote at least two operas. To say that he wrote at least \emph{three} operas would require another quantifier with a new variable $z$, and the specification that $z$ be an opera, written by Mozart, and non-identical to both of the ones previously mentioned:
-\begin{multline*}
-\qt{\exists}{x} \qt{\exists}{y} \qt{\exists}{z} (x {\neq} y \eand x {\neq} z \eand y {\neq} z \eand 
-Ox \eand Oy \eand Oz \eand Cmx \eand Cmy \eand Cmz)
-\end{multline*}
-
-As you can see, these sentences get long and complicated rather quickly.
-
-Suppose we wanted to say that Mozart composed \emph{exactly} two operas --- no more, and no fewer. There are two reasonably natural choices for how to say that. One is to conjoin the first QL sentence of this section --- Mozart composed at least two operas --- with the negation of the second --- Mozart did not compose at least three operas. The result is:
-\begin{multline*}
-\qt{\exists}{x} \qt{\exists}{y} (x {\neq} y \eand Ox \eand Oy \eand Cmx \eand Cmy) \eand \\ \enot \qt{\exists}{x} \qt{\exists}{y} \qt{\exists}{z} (x {\neq} y \eand x {\neq} z \eand y {\neq} z \eand Ox \eand Oy \eand Oz \eand Cmx \eand Cmy \eand Cmz)
-\end{multline*}
-
-A slightly more efficient way of saying the same thing, rather than conjoining a new negated triple existential, would be to add, within the scope of the first two quantifiers, a conjunct to the effect that every opera composed by Mozart is one of the two mentioned in that first conjunction. To say that any opera composed by Mozart is either $x$ or $y$ is to say that, for any $z$, if $z$ is an opera composed by Mozart, then it is either $x$ or $y$. In other words: $\qt{\forall}{z} [(Oz \eand Cmz) \eif (z{=}x \eor z{=}y)]$. So another way to say that Mozart composed exactly two operas is:
-\begin{multline*}
-\qt{\exists}{x} \qt{\exists}{y} ((x {\neq} y  \eand  Ox \eand Oy \eand  Cmx \eand Cmy) \eand \qt{\forall}{z} [(Oz \eand Cmz) \eif (z{=}x \eor z{=}y)])
-\end{multline*}
-
-So identity gives us a way to talk about quantities, albeit not a particularly efficient one.
-
-
-
-\section{Definite descriptions}
-\label{sec.defdesc}
-In 1905, Bertrand Russell famously characterized \emph{definite descriptions} in terms of identity. A definite description is a description that implies that only one object satisfies it. Paradigmatically, definite descriptions are ones that use the definite article `the'. If I say `the baby is hungry', I'm saying that the \emph{one and only baby we might be talking about} is hungry. Russell was motivated in part by the apparent fact that one can use this sort of language in a meaningful way even if one is wrong about whether there's any baby around. If there is no baby --- the crying I'm hearing is a recording --- my statement is false, but it's still meaningful. For this reason, Russell was reluctant to suppose that we should understand `the baby' as a name. Remember, in QL, all names have to refer to objects in the UD. Instead, my sentence can be understood as an existentially quantified claim about a unique baby. If I say `the baby is hungry', according to Russell, I'm in effect saying three things: there is a baby, there's no other baby than that one, and that baby is hungry. That second element, the uniqueness claim, can be expressed in QL with identity. 
-
-\begin{ekey}
-\item[UD:]People in this house
-\item[Bx:]$x$ is a baby
-\item[Hx:]$x$ is hungry
-\item[j:]Jonathan
-\end{ekey}
-
-A sentence like `Jonathan is hungry' is straightforwardly translated as $Hj$. According to Russell's theory of definite descriptions, `the baby is hungry' has a much more complex logical form: there is a baby $x$, there is no baby other than $x$, and $x$ is hungry.
-
-\begin{equation*}
-\qt{\exists}{x} [Bx \eand \enot \qt{\exists}{y} (By \eand y {\neq} x) \eand Hx]
-\end{equation*}
-
-One of the interesting features of Russell's theory is that `the baby is not hungry' is not the negation of `the baby is hungry'. Instead, the negation applies only to the hunger predication in the last conjunct:
-
-\begin{equation*}
-\qt{\exists}{x} [Bx \eand \enot \qt{\exists}{y} (By \eand y {\neq} x) \eand \enot Hx]
-\end{equation*}
-
-The reason Russell designed his theory this way was that he thought that both of these sentences equally implied that there is a baby. If there is no baby, then you'd be mistaken in saying either `the baby is hungry' or `the baby is not hungry'. Consequently, one can't be the negation of the other. As a treatment of the truth conditions of English sentences, Russell's theory is controversial. Some philosophers of language think that sentences that seem to presuppose the existence of something that isn't there aren't straightforwardly false, but are rather defective in some other way --- perhaps they fail to be meaningful at all, or perhaps they take on some truth value other than true or false. These matters are beyond our present scope. We will remain neutral on whether Russell's theory is an accurate treatment of English; it is relevant for us because it provides an interesting and useful case for translation of sentences into QL with identity.
-
-The general statement of Russell's theory of definite descriptions is, if you have a sentence applying a predicate \script{P} to the referent of a definite description \script{D}, translate it thus: there is something \script{x} that is \script{D}, there is nothing other than \script{x} that is \script{D}, and \script{x} is \script{P}.
-
-
-\section{Identity and trees}
-\label{sec.identity.trees}
-
-Because we have extended QL to include claims of identity, we also need to modify our tree system. Notice that if we do not do so, the system will not be complete. For example, the rules offered in Chapter \ref{ch.QLsoundcomplete} do not provide a way to demonstrate that $Fa, \enot Fb, a{=}b \models \bot$, even though those sentences are obviously inconsistent. Since each of those sentences are atoms or negated atoms in QL, there is nothing to resolve, and there is no contradiction to close the tree. We need to add new rules to deal with identity.
-
-Here is an obvious one:
-
-\factoidbox{If a branch contains an identity claim \script{a}{=}\script{b} and some sentence \metaA{}, then you may add \metaA{}\substitute{\script{a}}{\script{b}} or \metaA{}\substitute{\script{b}}{\script{a}} to the branch.}
-
-Recall that `\metaA{}\substitute{\script{a}}{\script{b}}' just means the sentence you get by replacing every `\script{a}' in \metaA{} with `\script{b}'. With this rule, we can easily demonstrate that the set of sentences mentioned above closes:
-
-\begin{prooftree}
-{
-to prove={\{Fa, \enot Fb, a{=}b\} \vdash{}\bot}
-}
-	[Fa
-	[\enot Fb, grouped
-	[a{=}b, grouped
-		[Fb, just={1, 3 =}, close={2, 4}]
-	]
-	]
-	]
-\end{prooftree}
-
-We will add this rule to our tree system. Notice that it is not a \emph{resolution} rule --- we do not put a check mark next to either sentence referenced. They may be used again.
-
-Since our tree system is supposed to be \emph{complete}, we need to \emph{ensure} that the tree will close; it's not enough that we have a rule that allows that it might. So, as in the case of the general rules discussed in Chapter \ref{ch.QLTrees}, we will also add an additional requirement governing branch completion. What we need is to make sure that we've made enough identity substitutions to demonstrate everything that needs demonstrating. The way we'll do this is by requiring, for every identity claim in the branch, that, for at least one of its directions (left-to-right or right-to-left) the substitution has been performed in that direction on every atomic sentence or negated atomic sentence in the branch.
-
-More precisely stated, an open branch is complete only if, for any identity claim $\script{a}{=}\script{b}$ in the branch, either, for any atomic sentence or negated atomic sentence \metaA{} containing \script{a} in the branch, \metaA{}\substitute{\script{a}}{\script{b}} is in the branch, or, for any atomic sentence or negated atomic sentence \metaA{} containing \script{b} in the branch, \metaA{}\substitute{\script{b}}{\script{a}} is in the branch.
-
-So, adding this requirement to the definition of branch completion given on page \pageref{branchcompletion.defined}, we get:
-
-\factoidbox{
-A branch is \define{complete} if and only if either (i) it is closed, or (ii) all of the following conditions are met:
-
-\begin{enumerate}
-\item Every resolvable sentence in the branch has been resolved;
-\item For every general quantified sentence \metaA{} and every name \script{a} in the branch, the \script{a} instance of \metaA{} is in the branch; and
-\item For every identity claim $\script{a}{=}\script{b}$ in the branch, either:
-	\begin{enumerate}
-	\item for every atomic sentence or negated atomic sentence \metaA{} containing \script{a} in the branch, \metaA{}\substitute{\script{a}}{\script{b}} is in the branch, or 
-	\item for every atomic sentence or negated atomic sentence \metaA{} containing \script{b} in the branch, \metaA{}\substitute{\script{b}}{\script{a}} is in the branch.
-	\end{enumerate}
-\end{enumerate}}
-
-We must also add one more rule to our tree system. Previously we said that branches only close when they contain some sentence along with its negation. We add one more condition that suffices for branch closure. If any branch contains a sentence $\script{a}{\neq}\script{a}$, then that branch closes. In no model can something be non-identical with itself.
-
-Adding this to the rule given on page \pageref{branchclosure.defined}:
-
-\factoidbox{
-A branch closes if and only if either (i) it contains some sentence \metaA{} along with its negation, \enot\metaA{}, or (ii) it contains, for some name \script{a}, the sentence $\script{a}{\neq}\script{a}$.
-}
-
-We need this rule, for example, to prove with a tree that $\qt{\forall}{x} \:  a{=}x$ is inconsistent with $\qt{\exists}{x} \:  x{\neq}a$:
-
-\begin{prooftree}
-{
-to prove={\{\qt{\forall}{x} \: a{=}x, \qt{\exists}{x} \: x{\neq}a\} \vdash \bot}
-}
-	[\qt{\forall}{x} \:  a{=}x, subs={b}
-	[\qt{\exists}{x} \:  x{\neq}a, grouped, checked=b
-		[b {\neq} a, just=2 $\exists$
-			[a{=}b, just=1 $\forall$
-				[b{\neq}b, just={3, 4 {=}}, close=5
-				]
-			]
-		]
-	]
-	]
-\end{prooftree}
-
-We must also take care, when constructing models from completed open branches, to respect identity claims. If for example the sentence $b{=}c$ appears in an open branch, we will not construct a model with two different objects, b and c --- instead, we'll just pick one of them as the object indicated, and assign both names to it. For example, consider this tree:
-
-\begin{prooftree}
-{}
-	[\qt{\forall}{x} (Rax \eif x{=}b), subs={a, b, c}
-	[\qt{\exists}{x} Rax, grouped, checked=c
-		[Rac, just=2 $\exists$
-			[Raa \eif a{=}b, just=1 $\forall$, checked
-			[Rab \eif b{=}b, grouped, just=1 $\forall$, checked
-			[Rac \eif c{=}b, grouped, just=1 $\forall$, checked
-				[\enot Rac, just=6 \eif, close={3, 7}
-				]
-				[c{=}b
-					[Rab, just={3, 7 {=}}
-						[\enot Rab, just=5 \eif, close={8, 9}]
-						[b{=}b
-							[\enot Raa, just=4 \eif, open
-							]
-							[a{=}b
-								[Rbb, just={8, 10 =}
-									[Rbc, just={3, 10 =}, open
-									]
-								]
-							]
-						]
-					]
-				]
-			]
-			]
-			]
-		]
-	]
-	]
-\end{prooftree}
-
-We end up with two open branches. We only need one to demonstrate that the root is satisfiable, but it is useful practice to consider both. Let's begin with the shorter open branch to the left, that completes at line 10. Examining that branch, we see three names, $a$, $b$, and $c$, and three atomic sentences concerning the extension of $R$: $Rac$, $Rab$, and $\enot Raa$. Using our previous method for constructing models, we would have posited a three-object UD and related those objects via $R$ in the appropriate way. Now, however, we also have identity claims to consider. There are two identity claims in the branch. $b{=}b$ doesn't tell us anything interesting --- of \emph{course} that object is identical with itself --- but the presence of $c{=}b$ indicates that our model will not include separate objects b and c. We'll only posit one object in the UD for those two names, and another object for $a$. We can pick either letter for the object; let's call it $b$. (Remember, it doesn't matter what kinds of objects we pick for the UD; it could be Reed Richards for all it matters. We typically pick letters because they are easy to keep track of.)
-
-So the model suggested by the first open branch here is:
-
-\begin{partialmodel}
-	UD & \{a, b\}\\
-	\referent{a} & a\\
-	\referent{b} & b\\
-	\referent{c} & b\\
-	\extension{R} & 
-	\begin{tabular}{l|lllll}
-	$Rxy$   & $a$ & $b$ \\ \hline
-	$a$   & 0 & 1   \\
-	$b$   & - & - \\
-	\end{tabular}
-\end{partialmodel}
-
-The longer open branch includes additional identity claims. It includes $a{=}b$ and $c{=}b$, which of course implies that all three of these names are names for the same object. So the UD for the model corresponding to the right branch will have only one object, which all three names denote.
-
-\begin{partialmodel}
-	UD & \{a\}\\
-	\referent{a} & a\\
-	\referent{b} & a\\
-	\referent{c} & a\\
-	\extension{R} & 
-	\begin{tabular}{l|lll}
-	$Rxy$   & $a$  \\ \hline
-	$a$   & 1    \\
-	\end{tabular}
-\end{partialmodel}
-
-It it sometimes helpful, for an intuitive grip on what is going on in these trees, to think about an English translation alongside the formalisms. For example, suppose that $Rxy$ is interpreted as `$x$ loves $y$'. Line 1 of the tree says that person $a$ loves at most one person; line 2 says that $a$ loves at least one person. The tree works out two ways that might be: the one and only person $a$ loves could be $a$, or it could be someone else.
 
 
 
@@ -800,7 +984,7 @@ is consistent.
 \item $\qt{\exists}{x} \qt{\exists}{y} Dxy \models \qt{\forall}{x_{1}} \! \qt{\forall}{x_{2}}\! \qt{\forall}{x_{3}}\! \qt{\forall}{x_{4}}\! [(Dx_{1}x_{2} \eand Dx_{3}x_{4}) \eif (x_{2}{\neq}x_{3} \eor Dx_{1}x_{4})]$
 \end{earg}
 
-\problempart In \S \ref{sec.quantity} we looked at two different translations of `Mozart wrote exactly two operas'. Use trees to prove that they are equivalent.
+\problempart In \S \ref{sec.quantity} we looked at two different translations of `Mozart composed exactly two things'. Use trees to prove that they are equivalent.
 
 \problempart Translate these arguments into QL with identity, and evaluate them for validity with a tree. (Don't be surprised or discouraged if some of these trees end up very complex.)
 \label{pr.IdentityArguments}
