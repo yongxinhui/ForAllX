@@ -212,24 +212,32 @@
 \section*{Quantifier Exchange}
 
 \begin{enumerate}
-  \item[$({\neg}{\forall})$] $\neg\forall x \varphi \vDash \exists x\neg \varphi$.
+  \item[$({\neg}{\forall})$] $\neg\forall x \varphi \Dashv\vDash \exists x\neg \varphi$.
     \begin{itemize}
-      \item[\it Proof:] Let $\M=\tuple{\D,\I}$ satisfy $\neg\forall x \varphi$.
+      \item[\it LTR:] Let $\M=\tuple{\D,\I}$ satisfy $\neg\forall x \varphi$.
       \item So $\VV{\I}{\hat{a}}(\neg\forall x \varphi)=1$ for some v.a. $\hat{a}$.
       \item So $\VV{\I}{\hat{a}}(\forall x \varphi)\neq 1$.
       \item So $\VV{\I}{\hat{c}}(\varphi)\neq 1$ for some $x$-variants $\hat{c}$ of $\hat{a}$.
       \item So $\VV{\I}{\hat{c}}(\neg\varphi)=1$ for some $x$-variants $\hat{c}$ of $\hat{a}$.
       \item So $\VV{\I}{\hat{a}}(\exists x\neg\varphi)=1$, and so $\VV{\I}{}(\forall x\neg\varphi)=1$.
     \end{itemize}
-  \item[$({\neg}{\exists})$] $\neg\exists x \varphi \vDash \forall x\neg \varphi$.
+  \item[$({\neg}{\exists})$] $\neg\exists x \varphi \Dashv\vDash \forall x\neg \varphi$.
     \begin{itemize}
-      \item[\it Proof:] Let $\M=\tuple{\D,\I}$ satisfy $\neg\exists x \varphi$.
+      \item[\it LTR:] Let $\M=\tuple{\D,\I}$ satisfy $\neg\exists x \varphi$.
       \item So $\VV{\I}{\hat{a}}(\neg\exists x \varphi)=1$ for some v.a. $\hat{a}$.
       \item So $\VV{\I}{\hat{a}}(\exists x \varphi)\neq 1$.
       \item So $\VV{\I}{\hat{c}}(\varphi)\neq 1$ for all $x$-variants $\hat{c}$ of $\hat{a}$.
       \item So $\VV{\I}{\hat{c}}(\neg\varphi)=1$ for all $x$-variants $\hat{c}$ of $\hat{a}$.
       \item So $\VV{\I}{\hat{a}}(\forall x\neg\varphi)=1$, and so $\VV{\I}{}(\forall x\neg\varphi)=1$.
     \end{itemize}
+  % \item[$({\forall}{\neg})$] $\forall x\neg \varphi \vDash \neg\exists x \varphi$.
+    % \begin{itemize}
+    %   \item[\it Proof:] Let $\M=\tuple{\D,\I}$ satisfy $\neg\exists x \varphi$.
+    % \end{itemize}
+  % \item[$({\exists}{\neg})$] $\exists x\neg \varphi \vDash \neg\forall x \varphi$.
+    % \begin{itemize}
+    %   \item[\it Proof:] Let $\M=\tuple{\D,\I}$ satisfy $\neg\forall x \varphi$.
+    % \end{itemize}
 \end{enumerate}
 
 
@@ -298,6 +306,15 @@
   %   \item Whenever one thing is bigger than a second thing, and the second thing is bigger than a third thing, then the first thing is bigger than the third thing. 
   %   \item[\therefore] Whenever something is bigger than a second thing, the second thing is not bigger than the first.
   %   % \item[\therefore] Nothing is bigger 
+  \item[\it Taller:] Regiment the following argument:
+    \begin{itemize}
+      \item If a first is taller than a second who is taller than a third, then the first is taller than the third.\\
+        $\forall x\forall y\forall z((Txy \wedge Tyz) \supset Txz)$.
+      \item Nothing is taller than itself.\\
+        $\neg\exists xTxx$.
+      \item[\therefore] \mbox{If a first is taller than a second, the second isn't taller than the first.}\\
+        $\forall x\forall y(Txy \supset \neg Tyx)$.
+    \end{itemize}
 \end{enumerate}
 
 

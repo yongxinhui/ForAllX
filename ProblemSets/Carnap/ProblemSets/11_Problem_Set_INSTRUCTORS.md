@@ -6,29 +6,25 @@ css:
 ---
 
 # Phil 24.241 Logic I
-# Problem Set \#11 Identity INSTRUCTOR'S VERSION 
-
-####(aka I have 99 problems and each one is unique :D )
+# Problem Set \#10 INSTRUCTOR'S VERSION FOOL! 
 
 <br />
 
 <!---
 
-(4+6)+(4+6)+6+6+6+6+14*4  = 100
+instructor's version! autochecking on for everything! 
 
-alternate would be 52+12*4
+1+1+14+1+14+13+14+20+6+16 = 100.
 
-note that must use system LogicBookPDE, for identity symbols to render! LogicBookPD doesn't support identity! 
+2+2+14+2+14+10+14+20+6+16 = 100.
 
-This is problem set 11 for MIT Fall 2022 Logic I, 24.241. Four of the problems come from Jtapp 303 Winter 2019 PS 8. Other five come from Zach PS9, modified for LogicBookSD system (so not allowed to ever post solutions to these!)
+This is problem set 10 for MIT Fall 2022 Logic I, 24.241. Five of the problems come from Jtapp 303 Winter 2019 PS 10. Other five come from Zach PS7, modified for LogicBookSD system (so not allowed to ever post solutions to these!)
 
-Description for students: Problem Set 11! Schematization in Quantifer Logic with Identity. Due Saturday, November 26th by 7pm Eastern. 
+Description for students: Problem Set 10! Natural Deduction for Quantifier Logic (System QND). Due Saturday, November 19th by 7pm Eastern. 
 
 Comments to self can be entered with [blah blah]:: or [](blah blah). Former needs an empty space before the line! 
 
 -->
-
-To enter logical symbols logically on the logical keyboard, use:
 
 ------------------------- -----------------------------
 not ~                     `-`, `~`
@@ -38,224 +34,129 @@ if then $\supset$                  `>`, `->`
 if and only if ≡           `<>`, `<->`
 universal quantifier ∀    `A`
 existential quantifier ∃  `E` 
-identity =                `=`
-x not identical to y                `~x=y`
 ------------------------- -----------------------------
 
-<br />
 
 ###Directions:
 
 ```{.QualitativeProblem .ShortAnswer points=0}
-PSI11.0 Just in case you worked with up to two other students on these problems, please let me know their names in the text box below. Otherwise, leave this blank and don't submit! 
+PSI10.0 Just in case you worked with up to two other students on these problems, please let me know their names in the text box below. Otherwise, leave this blank and don't submit! 
 ```
-- MEGA NOTE **READ THIS PLZ**: to say that one variable does NOT equal another, type the following: `~x = y` or `~x=y`. I can't find a not-equal symbol that works. Sorry!
 
 When (and only when) you are happy with your answer, click the `Submit`
-button. YOU CAN ONLY SUBMIT ONCE! So be careful! *Carnap* will then acknowledge and record your submission. There are **12 questions**, for a total of 100 points. 
+button. YOU CAN ONLY SUBMIT ONCE! So be careful! *Carnap* will then acknowledge and record your submission. There are 10 questions, for a total of 100 points. 
 
-- The first 8 have autochecker, but you can submit partial work for all but 1 $\&$ 3.
-- The last four are all you. YOU GOT THIS! 
+Five lower-point problems (from 2 to 10 pts) will check your answer, giving you that coveted green check mark if you answer correctly. Higher-point problems will only check syntax and will not give a green check mark. So don't submit these until you're confident in your proof! As usual, the lower-point questions function as partial credit for the later ones, which will floor at 50% if you make an attempt and have solved the lower point problems.  
 
-- Some of these require long disjunctions or conjunctions. *Carnap*
-  will accept disjunctions or conjunctions of more than two
-  disjuncts/conjuncts, e.g., it treats `(A & B & C)` as if you had
-  typed `((A & B) & C)`.
-- (For the "*fineprint*" directions, see a previous problem set)
+As always, you only get to submit once, and you MUST click `Submit` in order for your answer to be recorded. 
 
-[As always, you only get to submit once, and you MUST click `Submit` in order for your answer to be recorded.]::
+Mandatory syntax for our QND System:
 
+- a quantifier and its bound variable must be in parentheses: e.g. `(Ax)` for (∀x). 
 
-### Before you leave this page, make sure every problem which you have solved correctly is also `submit`ted!
+- a predicate (or relation) and its variable(s) must NOT be in parentheses: e.g. Fx, Bxa (these are atomic wffs of QL)
 
-<br />
+- Constants run from a to v. Variables include w, x, y, z. 
 
-###Problems 1 through 2! 
+(For the "*fineprint*" directions, see a previous problem set)
 
-- **Universe of Discourse** (UD): all currently living people (YOLO!), including in particular `**b**', denoting Barbara (Streisand) 
+####Problems! 
 
+We'll start off with a short and simple one, partly to refresh you on Natural Deduction: 
 
-**Predicate schemas**:
+[from JTapp PS10.1a, Winter 2019 ]::
 
-- $Ey$:	$y$ will travel to Europe.   
-- $Py$:	$y$ will travel to Portugal.         
-- $Hx$:	$x$ will stay home (lame!).     
-- $Vxy$:	$x$ will visit $y$.         
-
-<br />
-
-[note that Carnap also accepts the following, since quantifiers commute across a conditional when in the consequent: 
-(Ax)(Ey)((Ex > (Vxb &(~Vyb & ~y=x))))   ]::
-
-[JTapp PS8 3a]::
-
-~~~{.Translate .FOL system="LogicBookPDE" points=4}
-PSI11.1 (Ax)(Ex > (Vxb & (Ey)(~Vyb & ~y=x))) : Any person will travel to Europe only if that person visits Barbara and a different person doesn't visit Barbara.
+~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render" points=2} 
+PSI10.1 Gb > Fb, Gb :|-: (Ex) (Fx \/ Hx)
 ~~~
 
-[easy one! so include. can also have it in the form (Ax)(Px > (Ey)(Ez)((~Ey & ~Ez & ~x=y & ~x=z) )). Since the quantifiers commute across conditional when in the CONSEQUENT. 
-So carnap also accepts the following:
-(Ax)(Px > (Ey)(Ez)((~Ey & ~Ez & ~x=y & ~x=z)) )  ]::
+And now let's work on that tricky Existential Elimination (EE) rule, which you'll need to have down pat! Remember that you can always copy/paste the starting assumptions (don't forget to write `:Pr` after each one!). But it's also good practice to write these out yourself, to make sure you understand the proper syntax to use. 
 
-[JTapp PS8 3d]::
+[from JTapp PS10.1b, Winter 2019 ]::
 
-~~~{.Translate .FOL system="LogicBookPDE" options="exam" points=6}
-PSI11.2 (Ax)(Ey)(Ez)(Px > (~Ey & ~Ez & ~x=y & ~x=z) ), (Ax)(Ey)(Ez)(Px > (~Ey & ~Ez & ~x=y & ~x=z &~y=z) ) : For everyone who visits Portugal, there are two other people that don't visit Europe.
+~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render" points=2} 
+PSI10.2 (Ex) (Fx & Gx) :|-: (Ew) Gw & (Ey) Fy
 ~~~
 
+More practice with Existential Elimination (think about how to build the conclusion you want). We turn off Mr. Nice-nap for this, so no green checkmark!: 
 
 
-###The rest of the problems (12 total)!  
+[zach PSL7.2 ]::
 
-
-
-**Solar system of Discourse**: celestial objects in the solar system
-
-------------- ----------------------- ------------- --------
-**$Ax$**:         $x$ is an asteroid.      **$e$**:           Earth
-**$Mx$**:         $x$ is a moon.            **$m$**:           Mars
-**$Px$**:         $x$ is a planet.         **$j$**:                Jupiter
-**$Oxy$**:       $x$ orbits $y$.	       **$i$**:           Io
-**$Tx$**:     $x$ has an atmosphere.
-**$Lxy$**:     $x$ is larger than $y$.
-------------- ----------------------- ------------- --------
-
-Symbolize the following sentences using the above symbolization key, repeated at points below for your viewing convenience. 
-
-
-[Zach PS9.1 ]::
-
-~~~{.Translate .FOL system="LogicBookPDE" points=4}
-PSI11.3 (Ax)(~x=m -> Tx) : Every celestial body other than Mars has an atmosphere.
+~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render exam" points=14} 
+PSI10.3 (Ex) (Fx -> B) :|-: (Ax) Fx -> B
 ~~~
 
-[Zach PS9.2 ]::
+The following will help you get comfortable with ForAll Elimination (AE). Typically the trick here is to take-off the ∀'s and then build up to what you want to build. To ultimately apply ForAll Intro (AI), you'll need to build the inside first. For that, don't forget about our beloved rules from SND (and remember that Biconditional Intro and Elimination require typing `<->` for the biconditional symbol $\equiv$, in the justification column)! 
 
-~~~{.Translate .FOL system="LogicBookPDE" options="exam" points=6}
-PSI11.4 (Ex)(Ey)(~x=y /\ Ax /\ Ay /\ Oxy)  : Some asteroid orbits another.
+[from JTapp PS10.1c, Winter 2019 ]::
+
+~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render" points=2} 
+PSI10.4 (Ax) (Fx <> Gx), (Ax) (Gx <> Hx) :|-: (Ax) (Fx <> Hx)
 ~~~
 
-[Zach PS9.3 ]::
+Let's get some more relatively unsupervised practice, with one that's not too long!
 
-~~~{.Translate .FOL system="LogicBookPDE" options="exam" points=6}
-PSI11.5 (Ex)(Px /\ (Ay)((Py /\ ~x=y) -> Lxy)) : Some planet is larger than every other planet.
+[from JTapp PS10.1d, Winter 2019 ]::
+
+~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render exam" points=14} 
+PSI10.5 (Ax) Fx, (Ez) Bzz :|-: (Ey) (Byy & Fy)
 ~~~
 
-(Hint for the next one: Remember that "except for" leaves open whether Io has an atmosphere; the sentence does not entail that Io necessarily lacks an atmosphere)
+So we're now going to put together a bunch of pieces! It's a long one, but the proof idea is pretty straightforward (and you have a lot to work with!). Hint: begin with Existential Elimination or things could get messy. Be really careful about counting tabs to keep your subproofs straight. At one point you'll probably go three-levels deep. We'll give you step-by-step checks, but you can submit partial or incorrect work. But strive for the green check mark! 
 
-[Zach PS9.4 ]::
+[zach PSL7.1 ]::
 
-~~~{.Translate .FOL system="LogicBookPDE" options="exam" points=6}
-PSI11.6 (Ax)((Mx /\ Oxj /\ ~x = i) -> Tx), (Ax)((Mx /\ Oxj /\ ~x = i) -> Tx) /\ Mi /\ Oij : Except for Io, all of Jupiter's moons have an atmosphere.
+~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render exam" points=10} 
+PSI10.6 (Ay) (Fy \/ Gy), (Ax) (Fx -> Hx), (Ex) ~Hx :|-: (Ez) Gz
 ~~~
 
 
-**UD**: celestial objects in the solar system
+Whew, let's do a nice chill one now haha! 
 
-------------- ----------------------- ------------- --------
-**$Ax$**:         $x$ is an asteroid.      **$e$**:           Earth
-**$Mx$**:         $x$ is a moon.            **$m$**:           Mars
-**$Px$**:         $x$ is a planet.         **$j$**:                Jupiter
-**$Oxy$**:       $x$ orbits $y$.	       **$i$**:           Io
-**$Tx$**:     $x$ has an atmosphere.
-**$Lxy$**:     $x$ is larger than $y$.
-------------- ----------------------- ------------- --------
+[from JTapp PS10.1e, Winter 2019 ]::
 
-## "Only"
-
-<br />
-
-[Zach PS9.5 ]::
-
-~~~{.Translate .FOL system="LogicBookPDE" options="exam" points=6}
-PSI11.7 Tm /\ Te /\ (Ax)(Tx -> (x=m \/ x=e)), (Ax)(Tx <-> (x=m \/ x=e)) : Only Mars and Earth have an atmosphere.
+~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render exam" points=14} 
+PSI10.7 (Ax) (Fx <> Lx), (Ey) Fy :|-: (Ex) Lx
 ~~~
 
-- For a future problem(set): "Only that which is truly yourself has the power to heal." --Carl Jung
+The following one is conceptually a bit tricky! Remember that when in doubt, indirect proof it out! (Also, think about what these two sentences mean)
 
-[seems like comma between sentences allows you to include two logically distinct answers as correct; so that's neat! way to assign problems where there are ambiguities]::
+[zach PSL7.3]::
 
-
-
-## Uniqueness
-
-<br />
-
-[Zach PS9.7 ]::
-
-~~~{.Translate .FOL system="LogicBookPDE" points=6}
-PSI11.8 (Ex)(Mx /\ Oxe /\ (Ay)((My /\ Oye) -> y=x)), (Ex)(Ay)((My /\ Oye) <-> y=x) : Earth has only one moon.
+~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render exam" points=20} 
+PSI10.8 (Ax) (Px -> ~Qx) :|-: ~(Ex) (Px /\ Qx)
 ~~~
 
-- Or as the philosophers say: "we are all disturbed in our own special way."
+Note that both sentences mean: "No P is a Q". We'll show that they mean the same thing by proving that they both syntactically entail each other (which by the Soundness of our natural deduction system, proves they are semantically equivalent). We've already done one direction, so let's do the other! 
 
-## Numerical quantification (and turning off auto-checker)
-
-**UD**: celestial objects in the solar system
-
-------------- ----------------------- ------------- --------
-**$Ax$**:         $x$ is an asteroid.      **$e$**:           Earth
-**$Mx$**:         $x$ is a moon.            **$m$**:           Mars
-**$Px$**:         $x$ is a planet.         **$j$**:                Jupiter
-**$Oxy$**:       $x$ orbits $y$.	       **$i$**:           Io
-**$Tx$**:     $x$ has an atmosphere.
-**$Lxy$**:     $x$ is larger than $y$.
-------------- ----------------------- ------------- --------
-
-- Remember that "two moons" means "at least two", not "exactly two". (Remember that someone is gonna ask you this 10 years from now. Hint: it's not gonna be me!)
-
-- No auto-checker for the rest! 
+Hints: figuring out how to start this one is pretty tough! Indeed, I thought about quitting the first time I tried. The trick is to think about what you need to build, and just start building it. Work from the inside-out. If you're like me, you'll encounter some pleasing notes of Existential Introduction (EI) and Universal Introduction (AI). Option of getting a green checkmark
 
 
-[Zach PS9.9 ]::
+[zach PSL7.4 ]::
 
-~~~{.Translate .FOL system="LogicBookPDE" options="exam" points=14}
-PSI11.9 (Ex)(Ey)(~x=y /\ Mx /\ Oxm /\ My /\ Oym) : Mars has two moons.
+~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render exam" points=6} 
+PSI10.9 ~(Ex) (Px /\ Qx) :|-: (Ax) (Px > ~Qx)
 ~~~
 
-[Zach PS9.11]::
+Let's do one direction of De Morgan's rule for Quantifer Conversion, showing that from (∃x)Bx we can prove ~(∀x)~Bx. But we'll do this in terms of constructing a conditional: 
 
-~~~{.Translate .FOL system="LogicBookPDE" options="exam" points=14}
-PSI11.10 ~(Ex)(Ey)(Ez)(Mx /\ Oxm /\ My /\ Oym /\ Mz /\ Ozm /\ ~x=y /\ ~x=z /\ ~y=z) : Mars has at most two moons.
+Make sure you still tab into a subproof! Otherwise Carnap will be upset. 
+
+
+[zach PSL7.5 ]::
+
+~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render exam" points=16} 
+PSI10.10 :|-: (Ex) Bx -> ~(Ax) ~Bx
 ~~~
 
-[Zach PS9.12 ]::
+For funsies, you can do the other direction if you want, but it won't be graded! You'll have to use indirect proof, and again build up something you'll need for the contradiction. You can do it in 10 lines! 
 
-~~~{.Translate .FOL system="LogicBookPDE" options="exam" points=14}
-PSI11.11 (Ex)(Ey)(~x=y /\ Mx /\ Tx /\ My /\ Ty /\ (Az)((Mz /\ Tz) -> (z = x \/ z = y))), (Ex)(Ey)(~x=y /\ (Az)((Mz /\ Tz) <-> (z = x \/ z = y))) : There are exactly two moons with an atmosphere.
+~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render" submission="none"} 
+PSP10.11 :|-: ~(Ax) ~Bx -> (Ex) Bx
 ~~~
 
-Remember that "x has an atmosphere" is `Tx` not `Ax`.
+[zach PSL7.6 ]::
 
 
 
-## Definite descriptions
-
-- Remember that **singular** possessives like "Earth's moon" can be
-interpreted like the definite description "the moon of Earth."  But
-**plural** possessives like "Mars's moon**s**" aren't definite
-descriptions.
-
-
-[Zach PS9.14]::
-
-~~~{.Translate .FOL system="LogicBookPDE" options="exam" points=14}
-PSI11.12 (Ex)(((Mx /\ Oxe) /\ (Ay)((My /\ Oye) ->x=y)) /\ (Az)((Mz /\ Ozm)-> Lxz)),(Ex)(Ay) ( ( (My /\ Oye) <->x=y) /\ (Az) ( (Mz /\ Ozm)-> Lxz) ) : Earth's moon is larger than Mars's moons.
-~~~
-
-
-**UD**: celestial objects in the solar system
-
-------------- ----------------------- ------------- --------
-**$Ax$**:         $x$ is an asteroid.      **$e$**:           Earth
-**$Mx$**:         $x$ is a moon.            **$m$**:           Mars
-**$Px$**:         $x$ is a planet.         **$j$**:                Jupiter
-**$Oxy$**:       $x$ orbits $y$.	       **$i$**:           Io
-**$Tx$**:     $x$ has an atmosphere.
-**$Lxy$**:     $x$ is larger than $y$.
-------------- ----------------------- ------------- --------
-
-<br />
-
-### Before you leave this page, make sure every problem which you have solved correctly is also submitted! 
-#####And make sure you've reflected on at least one thing you're grateful for! I'm grateful for *Carnap*!
