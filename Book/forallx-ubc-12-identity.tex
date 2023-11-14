@@ -710,6 +710,41 @@ This is a lot easier to read and nothing significant is lost.
 It is important to stress that we can only drop parentheses in sentences which \textit{only} include conjunction, or \textit{only} include disjunction.
 Even so, these sentences are bound to get very long for large values of $n$.
 
+In order to characterize quantities in a more general way, it can be useful to introduce some abbreviations for what we will refer to as the \define{quantity quantifiers}.
+Instead of adding new primitive symbols to QL$^=$, we are only providing conventions for abbreviating long expression with much shorter expressions.
+
+In order to state these abbreviations in a general way, we will take $\beta$ to be \define{free for} $\alpha$ in $\metaA$ just in case there is no free occurrence of $\alpha$ in $\metaA$ in the scope of a quantifier that binds $\beta$. 
+For instance, $y$ is not free for $x$ in `$\forall y Fxy$' since replacing `$x$' with `$y$' would yield `$\forall yFyy$' where the quantifier `$\forall y$' would end up binding an extra variable.
+Roughly speaking, you can take `$\beta$ is free for $\alpha$' to mean `$\alpha$ is \textit{replaceable with} $\beta$ without leading to extra binding'.
+
+We may then take $\metaA\substitute{\alpha}{\beta}$ to be the result of replacing all free occurrences of $\alpha$ in $\metaA$ with $\beta$ where $\beta$ is required to be free for $\alpha$ in $\metaA$. 
+For instance, $\forall yFxy[z/x]$ is the wff $\forall yFzy$, and $\forall yFxy[y/x]$ is undefined since $y$ is not free for $x$.
+Given this notation, we may define the following abbreviations for quantifiers of the form `at least $n$ things are such that $\metaA$':
+
+\vspace{-.2in}
+\begin{align*}
+  \qt{\exists_{\geq 1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}\metaA\\ 
+  % \qt{\exists_{\geq 2}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists}{\beta}(\alpha\neq\beta \eand \metaA\substitute{\alpha}{\beta})) \text{ where } \beta \text{ is free for } \alpha\\
+  \qt{\exists_{\geq n+1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists_{\geq n}}{\beta}(\alpha \neq \beta \eand \metaA(\beta/\alpha))) \text{ for } \beta \text{ not free in } \metaA.
+  % \qt{\exists_2}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}\qt{\exists}{\beta}(\alpha\neq\beta \eand \qt{\forall}{\gamma}(\metaA(\gamma/\alpha) \eiff (\gamma = \alpha \eor \gamma = \beta)))\\
+  % % \text{ for distinct } \alpha, \beta, \text{ and } \gamma\\ 
+  % \qt{\exists_3}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}
+  %     \qt{\exists}{\beta}
+  %       \qt{\exists}{\gamma}(
+  %         \alpha\neq\beta \eand \alpha\neq\gamma \eand \beta\neq\gamma \eand \qt{\forall}{\delta}(
+  %           \metaA(\delta/\alpha) \eiff (
+  %             \delta = \alpha \eor \delta = \beta \eor \delta = \gamma
+  %           )
+  %         )
+  %       )\\
+  % \text{ for distinct } \alpha, \beta, \text{ and } \gamma\\ 
+  % & ~\vdots
+\end{align*}
+\vspace{-.2in}
+
+Here $\coloneq$ represents that the left side is merely an abbreviation for the right side. 
+These abbreviations have a recursive structure which defines $\qt{\exists_{\geq n}}{\alpha}$ for all $n$.
+
 In addition to being able to say that there are at least $n$ things that satisfy a certain condition, QL$^=$ permits us to say that that there are at most $n$ things that satisfy a certain condition. 
 We have already seen instances of this above with uniqueness.
 After all, saying that \textit{only} Cara loves Pedro is like saying there is \textit{exactly one} thing that loves Pedro where this entails both that there is \textit{at least} one thing that loves Pedro and that there is \textit{at most} one thing that loves Pedro, namely Cara.
@@ -717,7 +752,7 @@ Consider the following sentence and its regimentation:
 
 \begin{earg}
   \item[\ex{Q3}] Mozart composed at most two things.
-  \item[\ex{Q4}] $\qt{\exists}{x}\qt{\exists}{y}\qt{\forall}{z}(Cmz \eif (z= x \eor z= y))$.
+  \item[\ex{Q4}] $\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z}(Cmz \eif (z= x \eor z= y))$.
 \end{earg}
 
 This says that there is some $x$ and $y$ where anything that Mozart composed is identical to either $x$ or $y$. 
@@ -726,25 +761,44 @@ Similarly, we may say that there at most three things that Mozart composed.
 
 \begin{earg}
   \item[\ex{Q5}] Mozart composed at most three things.
-  \item[\ex{Q6}] $\qt{\exists}{x}\qt{\exists}{y}\qt{\exists}{z}\qt{\forall}{w}(Cmw \eif (w = x \eor w = y \eor w = z))$.
+  \item[\ex{Q6}] $\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z}\qt{\forall}{w}(Cmw \eif (w = x \eor w = y \eor w = z))$.
 \end{earg}
 
 Both sentences $\ref{Q4}$ and $\ref{Q6}$ are true if there are less than three things that Mozart composed, including the case where Mozart didn't compose anything.
 
+More generally, we may say that there are at most $n$ things which satisfy a given condition $\metaA$.
+Although we could define this recursively in a similar fashion to what was given above, we may avoid doing so by adopting the following convention for each value of $n$.
+
+\vspace{-.2in}
+\begin{align*}
+  \qt{\exists_{\leq n}}{\alpha}\metaA &\colonequals \neg\qt{\exists_{\geq n+1}}{\alpha}\metaA.
+\end{align*}
+\vspace{-.2in}
+
+This says that there are not at least $n+1$ things that are $\metaA$, and so no more than $n$ things that are $\metaA$. 
+We may combine these two types of quantifiers to say that there are between $n$ and $m$ things that are $\metaA$ as given by the following abbreviation: 
+
+\vspace{-.2in}
+\begin{align*}
+  \qt{\exists_{(n,m)}}{\alpha}\metaA &\colonequals \qt{\exists_{\geq n}}{\alpha}\metaA \eand \qt{\exists_{\leq m}}{\alpha}\metaA \text{ where } n\leq m.
+\end{align*}
+\vspace{-.2in}
+
+In the special case where $n=m$, the statement $\qt{\exists_{(n,n)}}{\alpha}\metaA$ says that exactly $n$ things are $\metaA$. 
+We may refer to such quantifiers as \define{cardinality quantifiers}.
+Although this is one way to define cardinality quantifiers, there is another much more elegant way to do so.
+
 Suppose we want to say that there are exactly two things that Mozart composed.
-One way to do this is to conjoin sentences $\ref{M4}$ and $\ref{Q4}$ since this amounts to saying that there is at least two things that Mozart composed and at most two things that Mozart composed. 
-However, we can simplify things slightly by means of the following:
+As above, one way to do this is to conjoin sentences $\ref{M4}$ and $\ref{Q4}$ since this amounts to saying that there is at least two things that Mozart composed and at most two things that Mozart composed. 
+However, we can simplify the regimentation by means of the following:
 
 \begin{earg}
-  \item[\ex{Q7}] Mozart composed at exactly two things.
+  \item[\ex{Q7}] Mozart composed exactly two things.
   \item[\ex{Q8}] $\qt{\exists}{x}\qt{\exists}{y}(x \neq y \eand \qt{\forall}{z}(Cmz \eiff (z = x \eor z = y)))$.
   % \item[\ex{Q8}] $\qt{\exists}{x}\qt{\exists}{y}(Cmx \eand Cmy \eand x \neq y \eand \qt{\forall}{z}(Cmz \eif (z = x \eor z = y)))$.
 \end{earg}
 
-Since saying that there are exactly $n$ things that have some property is a useful thing to say but the ways that we have been considering saying these things in QL$^=$ is fairly complicated, it can be useful to introduce some abbreviations for the \define{cardinality quantifiers}.
-Instead of adding new primitive symbols to QL$^=$, we are only providing conventions for abbreviating long expression with much shorter expressions.
-To begin with, we will take $\metaA(\beta/\alpha)$ to be the result of replacing all free occurrences of $\alpha$ in $\metaA$ with $\beta$.
-We may then specify the following where we will assume $\beta, \gamma, \ldots$ are distinct variables that do not occur in $\metaA$.
+More generally, we may introduce the following cardinality quantifiers:
 
 \vspace{-.2in}
 \begin{align*}
@@ -809,7 +863,7 @@ The fact that these cardinality quantifiers are definable in QL$^=$ demonstrates
 
 
 
-\section{Leibniz's Laws}
+\section{Leibniz's Law}
 
 In $\S\ref{sec:IdentityLogic}$, we saw that treating identity as any other predicate invalidated the argument:
 

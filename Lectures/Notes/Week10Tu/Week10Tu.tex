@@ -1,0 +1,374 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs} %%Math packages
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{multicol} 
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage{prooftrees} 
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep=}
+% \usepackage{fitchproof} 
+
+% \linespread{1} % Change line spacing here, Palatino benefits from a slight increase by default
+
+\newcommand{\corner}[1]{\ulcorner#1\urcorner} %%Corner quotes
+\newcommand{\tuple}[1]{\langle#1\rangle} %%Angle brackets
+\newcommand{\set}[1]{\lbrace#1\rbrace} %%Set brackets
+\newcommand{\interpret}[1]{\llbracket#1\rrbracket} %%Double brackets
+%\DeclarePairedDelimiter\ceil{\lceil}{\rceil}    
+\def\therefore{\ensuremath{\ldotp\dot\,\ldotp}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\D}{\mathbb{D}}
+\renewcommand{\v}[1]{\mathbf{#1}}
+\newcommand{\even}{\texttt{Even}}
+\newcommand{\comp}{\texttt{Comp}}
+\newcommand{\res}{\texttt{Res}}
+\newcommand{\simp}{\texttt{Simple}}
+\newcommand{\leng}{\texttt{Length}}
+\newcommand{\V}[1]{\mathcal{V}_{#1}} %%Corner quotes
+\newcommand{\VV}[2]{\mathcal{V}_{#1}^{#2}} %%
+
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
+\renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+
+\renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
+\begin{flushright} % Right align
+{\LARGE\@title} % Increase the font size of the title
+
+\vspace{10pt} % Some vertical space between the title and author name
+
+{\@author} % Author name
+\\\@date % Date
+
+\vspace{0pt} % Some vertical space between the author block and abstract
+\end{flushright}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Quantified Logic with Identity}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+\section*{Logical Terms}
+
+\begin{enumerate}
+  \item[\it Extensions:] QL extends SL, but we needn't stop there.
+  \item[\bf Question 1:] How far could we go? What terms could we include?
+  \item[\it Logicality:] The primitive symbols of SL and QL can be divided in three:
+    \begin{itemize}
+      \item[\tt Logical Terms:] $\neg,\wedge,\vee,\supset,\equiv,\forall\alpha,\exists\alpha$.
+      \item[\tt Non-Logical Terms:] $A^n,B^n,\ldots$ for $n\geq 0$.
+      \item[\tt Punctuation:] $(, )$
+    \end{itemize}
+  \item[\it Extensions:] The ``meanings'' of the non-logical terms is fixed by the interpretation.
+  \item[\it Semantics:] The ``meanings'' of the logical terms is fixed by the semantics.
+  \item[\bf Question 2:] How many logical terms are there?
+  \item[\it Identity:] At least one more, namely identity which we symbolize by `$=$'.
+\end{enumerate}
+
+
+
+
+
+\section*{Syntax for QL$^=$}
+
+\begin{enumerate}
+  \item[\it Identity:] We include `$=$' in the primitive symbols of the language.
+  \item[\it Well-Formed Formulas:] We may define the well-formed formulas (wffs) of QL as follows:
+  \item $\mathcal{F}^n\alpha_1,\ldots,\alpha_n$ is a wff if $\mathcal{F}^n$ is an $n$-place predicate and $\alpha_1,\ldots,\alpha_n$ are singular terms.
+  \item $\alpha=\beta$ is a wff if $\alpha$ and $\beta$ are singular terms.
+  \item If $\varphi$ and $\psi$ are wffs and $\alpha$ is a variable, then:
+    \begin{enumerate}
+      \begin{multicols}{2}
+        \item $\exists\alpha\varphi$ is a wff;
+        \item $\forall\alpha\varphi$ is a wff;
+        \item $\neg\varphi$ is a wff;
+        \item[] ~
+        \item $(\varphi\wedge\psi)$ is a wff;
+        \item $(\varphi\vee\psi)$ is a wff;
+        \item $(\varphi\supset\psi)$ is a wff; and
+        \item $(\varphi\equiv\psi)$ is a wff.
+      \end{multicols}
+    \end{enumerate}
+  \vspace{-.2in}
+  \item Nothing else is a wff.
+  \vspace{.1in}
+  \item[\it Atomic Formulas:] The wffs defined by (1) and (2) are \textit{atomic}.
+  \item[\it Complexity:] $\comp(\F^n\alpha_1,\ldots,\alpha_n)=\comp(\alpha=\beta)=0$.\\
+    $\comp(\exists\alpha\varphi)=\comp(\forall\alpha\varphi)=\comp(\neg\varphi)=\comp(\varphi)+1$.\\
+    $\comp(\varphi\wedge\psi)=\comp(\varphi\vee\psi)=\ldots=\comp(\varphi)+\comp(\psi)+1$.\\
+\end{enumerate}
+
+
+
+
+
+\section*{Free Variables}
+
+\begin{enumerate}
+  \item[\it Free Variables:] We define the \textit{free variables} recursively:
+  \item $\alpha$ is free in $\mathcal{F}^n\alpha_1,\ldots,\alpha_n$ if $\alpha=\alpha_i$ for some $1\leq i\leq n$ where $\alpha$ is a variable, $\mathcal{F}^n$ is an $n$-place predicate, and $\alpha_1,\ldots,\alpha_n$ are singular terms.
+  \item $\alpha$ is free in $\beta=\gamma$ if $\alpha=\beta$ or $\alpha=\gamma$ where $\alpha$ is a variable.
+  \item If $\varphi$ and $\psi$ are wffs and $\alpha$ and $\beta$ are variables, then:
+    \begin{enumerate}
+        \item $\alpha$ is free in $\exists\beta\varphi$ if $\alpha$ is free in $\varphi$ and $\alpha\neq\beta$;
+        \item $\alpha$ is free in $\forall\beta\varphi$ if $\alpha$ is free in $\varphi$ and $\alpha\neq\beta$;
+        \item $\alpha$ is free in $\neg\varphi$ if $\alpha$ is free in $\varphi$;
+        % \item $\alpha$ is free in $(\varphi\wedge\psi)$ if $\alpha$ is free in $\varphi$ or $\alpha$ is free in $\psi$;
+        % \item $\alpha$ is free in $(\varphi\vee\psi)$ if $\alpha$ is free in $\varphi$ or $\alpha$ is free in $\psi$;
+        % \item $\alpha$ is free in $(\varphi\supset\psi)$ if $\alpha$ is free in $\varphi$ or $\alpha$ is free in $\psi$;
+        % \item $\alpha$ is free in $(\varphi\equiv\psi)$ if $\alpha$ is free in $\varphi$ or $\alpha$ is free in $\psi$;
+        \item[\vdots] ~
+    \end{enumerate}
+  \item Nothing else is a free variable. 
+\end{enumerate}
+
+
+
+
+
+\section*{Sentences of QL$^=$}
+
+\begin{enumerate}
+  \item[\it Sentences:] A \textit{sentence} of QL$^=$ is any wff without free variables.
+  \item[\it Interpretation:] Only the sentences of QL$^=$ will have truth-values on an interpretation independent of an assignment function.
+\end{enumerate}
+
+
+
+
+
+\section*{QL Models}
+
+\begin{enumerate}
+  \item[\bf Question 3:] What in the semantics will have to change?
+  \item[\it Interpretations:] $\I$ is an QL interpretation over $\D$ \textit{iff} both: 
+    \begin{itemize}
+      \item $\I(\alpha)\in\D$ for every constant $\alpha$ in QL. 
+      \item $\I(\F^n)\subseteq\D^n$ for every $n$-place predicate $\F^n$.
+    \end{itemize}
+  \item[\it Model:] $\M=\tuple{\D,\I}$ is a model of QL \textit{iff} $\I$ is a QL interpretation over $\D\neq\varnothing$.
+\end{enumerate}
+
+
+
+
+
+\section*{Variable Assignments}
+
+\begin{enumerate}
+  \item[\it Assignments:] A variable assignment $\hat{a}(\alpha)\in\D$ for every variable $\alpha$ in QL.
+  \item[\it Referents:] We may define the referent of $\alpha$ in $\M=\tuple{\D,\I}$ as follows:\\
+    \begin{align*}
+      \VV{\I}{\hat{a}}{(\alpha)}=
+        \begin{cases}
+          \I(\alpha) & \text{if } \alpha \text{ is a constant} \\
+          \hat{a}(\alpha) & \text{if } \alpha \text{ is a variable.}
+        \end{cases}
+    \end{align*}
+  \item[\it Variants:] A $\hat{c}$ is an $\alpha$-variant of $\hat{a}$ \textit{iff} $\hat{c}(\beta)=\hat{a}(\beta)$ for all $\beta\neq\alpha$.
+\end{enumerate}
+
+
+
+
+
+\section*{Semantics for QL}
+
+\begin{enumerate}
+  \item[($A$)] $\VV{\I}{\hat{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1$ ~\textit{iff}~ $\tuple{\VV{\I}{\hat{a}}{(\alpha_1)},\ldots,\VV{\I}{\hat{a}}{(\alpha_n)}}\in\I(\F^n)$.
+  \item[($=$)] $\VV{\I}{\hat{a}}(\alpha=\beta)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\alpha)=\VV{\I}{\hat{a}}(\beta)$.
+  \item[(\hspace{1pt}$\forall$\hspace{1pt})] $\VV{\I}{\hat{a}}(\forall\alpha\varphi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{c}}(\varphi)=1$ for every $\alpha$-variant $\hat{c}$ of $\hat{a}$.
+  \item[(\hspace{1pt}$\exists$\hspace{1pt})] $\VV{\I}{\hat{a}}(\exists\alpha\varphi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{c}}(\varphi)=1$ for some $\alpha$-variant $\hat{c}$ of $\hat{a}$.
+  \item[($\neg$)] $\VV{\I}{\hat{a}}(\neg\varphi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)\neq 1$.
+  \item[($\vee$)] $\VV{\I}{\hat{a}}(\varphi \vee \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=1$ or $\VV{\I}{\hat{a}}(\psi)=1$ (or both).
+  \item[($\wedge$)] $\VV{\I}{\hat{a}}(\varphi \wedge \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=1$ and $\VV{\I}{\hat{a}}(\psi)=1$.
+  \item[($\supset$)] $\VV{\I}{\hat{a}}(\varphi \supset \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=0$ or $\VV{\I}{\hat{a}}(\psi)=1$ (or both).
+  \item[($\equiv$)] $\VV{\I}{\hat{a}}(\varphi \equiv \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=\VV{\I}{\hat{a}}(\psi)$.
+    \vspace{.1in}
+  \item[\it Truth:] $\VV{\I}{}(\varphi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=1$ for some $\hat{a}$ where $\varphi$ is a sentence of QL. 
+\end{enumerate}
+
+
+
+
+\section*{Example}
+
+\begin{enumerate}
+  \item[\bf Task 1:] Prove that the following argument is valid.
+    \begin{itemize}
+      \item[(1)] Hesperus is Phosphorus.
+      \item[(2)] Phosphorus is Venus.
+      \item[$\therefore$] Hesperus is Venus.
+    \end{itemize}
+\end{enumerate}
+
+
+
+
+
+\section*{Logical Predicates}
+
+\begin{enumerate}
+  \item[\it Taller-Than:] Suppose we were to take `taller than' ($T$) to be logical.
+  \item[\bf Question 4:] Could we provide its semantics?
+    \begin{itemize}
+      \item[($T$)] $\VV{\I}{\hat{a}}(T\alpha\beta)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\alpha)$ is taller than $\VV{\I}{\hat{a}}(\beta)$.
+    \end{itemize}
+  \item[\it Theory:] The semantics would have to rely on a theory of being taller than.
+    \begin{itemize}
+      \item Providing such a theory lies outside the subject-matter of logic.
+      \item By contrast, identity is something we already grasp.
+      \item Compare our pre-theoretic grasp of negation, conjunction, and the quantifiers.
+    \end{itemize}
+  \item[\bf Question 5:] Could we take set-membership $\in$ to be a logical term? 
+  \item[\bf Question 6:] Could we take a term in sentence position to be logical?
+    \begin{itemize}
+      \item[($\bot$)] $\VV{\I}{\hat{a}}(\bot)=1$ ~\textit{iff}~ $1\neq 1$.
+      \item[($\top$)] $\VV{\I}{\hat{a}}(\top)=1$ ~\textit{iff}~ $1=1$.
+    \end{itemize}
+  \item[\bf Question 7:] What is it to be a logical term?
+\end{enumerate}
+
+
+
+
+
+
+\section*{Assignment Lemmas}
+
+\begin{enumerate}
+  \item[\it Lemma 1:] If $\hat{a}(\alpha)=\hat{c}(\alpha)$ for all free variables $\alpha$ in a wff $\varphi$, then $\VV{\I}{\hat{a}}(\varphi)=\VV{\I}{\hat{c}}(\varphi)$.
+    \begin{itemize}
+      \item[\it Base:] Assume $\comp(\varphi)=0$, so $\varphi=(\alpha=\beta)$ or $\varphi=\F^n\alpha_1,\ldots,\alpha_n$.
+      \item[($\alpha=\beta$):] \mbox{So $\VV{\I}{\hat{a}}(\varphi)=\VV{\I}{\hat{a}}(\alpha=\beta)=1$ \textit{iff} $\VV{\I}{\hat{a}}(\alpha)=\VV{\I}{\hat{a}}(\beta)$ \textit{iff} $\VV{\I}{\hat{c}}(\alpha)=\VV{\I}{\hat{c}}(\beta)\ldots$}
+      \item[($\F^n\alpha_1,\ldots,\alpha_n$):] \mbox{So $\VV{\I}{\hat{a}}(\varphi)=\VV{\I}{\hat{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1$ \textit{iff} $\tuple{\VV{\I}{\hat{a}}(\alpha_1),\ldots,\VV{\I}{\hat{a}}(\alpha_n)}\in\I(F^n)\ldots$}
+    \end{itemize}
+  \item[\it Lemma 2:] For any sentence $\varphi$: $\VV{\I}{}(\varphi)= 1$ \textit{iff} $\VV{\I}{\hat{a}}(\varphi)= 1$ for every v.a. $\hat{a}$ over $\D$.
+    % \begin{itemize}
+    %   \item[\it LTR:] Assume $\VV{\I}{}(\varphi)= 1$, so $\VV{\I}{\hat{a}}(\varphi)= 1$ for some v.a. $\hat{c}$ over $\D$ .
+    %   \item Let $\hat{a}$ be any v.a. over $\D$.
+    %   \item Since $\varphi$ has no free variables, $\VV{\I}{\hat{a}}(\varphi)=\VV{\I}{\hat{c}}(\varphi)$ by \textit{Lemma 1}.
+    %   \item So $\VV{\I}{\hat{a}}(\varphi)=1$ for all v.a. $\hat{c}$ over $\D$.
+    %   \item[\it RTL:] Assume $\VV{\I}{\hat{a}}(\varphi)=1$ for all v.a. $\hat{a}$ over $\D$.
+    %   \item Since $\D$ is nonempty, there is some v.a. $\hat{a}$, and so $\VV{\I}{}(\varphi)= 1$. 
+    %   % \item So $\VV{\I}{}(\varphi)=1$.
+    % \end{itemize}
+  \item[\it Lemma 3:] For any sentence $\varphi$: $\VV{\I}{}(\varphi)\neq1$ \textit{iff} $\VV{\I}{\hat{a}}(\varphi)\neq 1$ for some v.a. $\hat{a}$ over $\D$.
+\end{enumerate}
+
+
+
+
+
+\section*{Uniqueness}
+
+\begin{enumerate}
+  \item[\it Only:] Regiment the following argument:
+    \begin{itemize}
+      \item[(1)] Lois Lane only loves Clark Kent.
+      \item[(2)] Only Clark Kent is Superman.
+      \item[$\therefore$] Lois Lane loves Superman.
+    \end{itemize}
+  \item[\bf Question:] Is this argument intuitively valid?
+\end{enumerate}
+
+
+
+
+
+
+\section*{Leibniz's Law}
+
+\begin{enumerate}
+  \item[\it Believes:] Regiment the following argument:
+    \begin{itemize}
+      \item[(1)] Lois Lane believes that Superman can fly.
+      \item[(2)] Superman is Clark Kent.
+      \item[$\therefore$] Lois Lane believes that Clark Kent can fly.
+    \end{itemize}
+  \item[\it Sees:] Regiment the following argument:
+    \begin{itemize}
+      \item[(1)] Lois Lane sees Superman.
+      \item[(2)] Superman is Clark Kent.
+      \item[$\therefore$] Lois Lane sees Clark Kent.
+    \end{itemize}
+  \item[\it Question 8:] Are these arguments intuitively valid?
+  \item[\it Opacity:] Whereas `believes' creates an opaque context and `sees' does not.
+\end{enumerate}
+
+
+
+
+\section*{Definite Descriptions}
+
+\begin{enumerate}
+  \item[\it Russell:] The king of France is Bald.\\ 
+    $\exists x\forall y(Kyf \equiv x=y)$.\\
+    $\exists x(Kxf \wedge \forall y(Kyf \supset x=y))$.\\
+\end{enumerate}
+
+
+
+
+
+
+% \section*{Relations}
+
+% \begin{enumerate}
+%   % \item[\it Domain:] Let the \textit{domain} $D$ be any set.
+%   \item[\it Relation:] A \textit{relation} $R$ on $D$ is any subset of $D^2$.
+%   \item[\it Reflexive:] A relation $R$ is \textit{reflexive} on $D$ \textit{iff} $\tuple{x,x}\in R$ for all $x\in D$.
+%   \item[\it Non-Reflexive:] A relation $R$ is \textit{non-reflexive} on $D$ \textit{iff} $R$ is not reflexive on $D$.
+%   \item[\bf Question 1:] What is it to be \textit{irreflexive}?
+%   \item[\it Irreflexive:] A relation $R$ is \textit{irreflexive} on $D$ \textit{iff} $\tuple{x,x}\notin R$ for all $x\in D$.
+%   \item[\it Symmetric:] A relation $R$ is \textit{symmetric iff} $\tuple{y,x}\in R$ whenever ${x,y}\in R$.
+%   \item[\bf Question 2:] Why don't we need to specify a domain?
+%   \item[\bf Question 3:] Why is a relation reflexive or irreflexive with respect to a domain?
+%   \item[\it Asymmetric:] A relation $R$ is \textit{asymmetric iff} $\tuple{y,x}\notin R$ whenever $\tuple{x,y}\in R$.
+%   \item[\bf Question 4:] What is it to be non-symmetric? How about non-asymmetric?
+%   \item[\bf Task 1:] Show that every asymmetric relation is irreflexive.
+%   \item[\it Transitive:] A relation $R$ is \textit{transitive iff} $\tuple{x,z}\in R$ whenever $\tuple{x,y},\tuple{y,z}\in R$.
+%   \item[\it Intransitive:] A relation $R$ is \textit{intransitive iff} $\tuple{x,z}\notin R$ whenever $\tuple{x,y},\tuple{y,z}\in R$.
+%   \item[\bf Question 5:] Is every symmetric transitive relation reflexive? (No: $R=\varnothing$)
+%   \item[\bf Task 2:] Show that every transitive irreflexive relation asymmetric?
+%   \item[\it Euclidean:] A relation $R$ is \textit{euclidean iff} $\tuple{y,z}\in R$ whenever $\tuple{x,y},\tuple{x,z}\in R$.
+%   \item[\bf Task 3:] Show that every transitive symmetric relation is euclidean.
+% \end{enumerate}
+
+
+  % \item Diamonds last forever.
+
+
+
+
+\end{document}
+

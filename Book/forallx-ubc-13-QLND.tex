@@ -8,21 +8,71 @@
 % But in other cases, trees become tedious and complex.
 % It is useful to have a proof system that allows one to reason in a more targeted way --- especially if you already have an intuitive understanding of why a given argument should be expected to turn out valid.
 
-This chapter extends our system SD to provide a natural deduction system for quantifier logic called QD.
+This chapter extends our system SD to provide a natural deduction system for QL$^=$ which we will refer to as QD.
 % Like our natural deduction system for SL, our system can only be used to demonstrate that an argument \emph{is} valid since natural deduction systems do not demonstrate that an argument is \emph{invalid}.
 % In this respect natural deduction differs from trees.
-We won't go through the proof in this book, but the system QD that we will provide is both sound and complete with respect to the semantics for QL.
-That means that there are natural deduction proofs corresponding to all and only the valid arguments in QL.
+We won't go through the proof in this book, but QD is both sound and complete with respect to the semantics for QL$^=$.
+That means that there are natural deduction proofs corresponding to all and only the valid arguments in QL$^=$.
 
-Our QL system will include all the same introduction and elimination rules that we provided for the sentential connectives included in SL. 
-We'll add introduction and elimination rules for the existential and universal quantifiers, and some other derived rules as well.
+Our QL system will include the same introduction and elimination rules that we provided for the sentential connectives included in SL, but now we will add introduction and elimination rules for the quantifiers and identity, deriving a number of new rules.
+
 
 
 \section{Basic Quantifier Rules}
 
 %to reformat the substitution instances, see the commands \substitute and \substitutesome in the style file. 
 
-Recall the relationship between quantified sentences and their instances. The sentence $Pa$ is a particular instance of the general claim $\qt{\forall}{x} Px$. For any wff \metaA{}, constant \script{c}, and variable \script{x}, we define  \metaA{}\substitute{\script{x}}{\script{c}} as the sentence you get from $\qt{\forall}{\script{x}}\metaA{}$ by dropping the $\qt{\forall}{\script{x}}$ quantifier and putting $\script{c}$ in place of every $\script{x}$ in $\metaA{}$. The other variables are untouched! 
+Consider the following claims:
+
+\begin{earg}
+  \item[\ex{I1}] Kin loves everything.
+  \item[\ex{I2}] Kin loves Cassandra.
+  \item[\ex{I3}] Kin loves something.
+\end{earg}
+
+Whereas sentence \ref{I1} makes a universal claim about everything, sentence \ref{I2} makes a particular claim about one thing, and sentence \ref{I3} makes an existential claim about something.
+It is important to distinguish between all three types of sentences, where one way to do this is to appeal to their logical strength, i.e., which sentences entail which.
+Specifically, sentence \ref{I1} entails sentence \ref{I2} but not \textit{vice versa}, and sentence \ref{I2} entails sentence \ref{I3} but not \textit{vice versa}.
+Similarly, sentence \ref{I1} entails sentence \ref{I3} but not \textit{vice versa}.
+It is worth nothing that this entailment would not hold if we permitted the domain to be empty since, given an empty domain, sentence \ref{I1} could be true while sentence \ref{I3} is false.
+
+% We will refer to sentence \ref{I2} as an \define{instance} of sentence \ref{I1}, and refer to \ref{I3} as an \define{existential generalisation} of \ref{I2}.
+
+We may regiment the sentences above with the following symbolization key:
+
+\begin{multicols}{2}
+  
+\begin{ekey}
+  \item[Lxy:] $x$ loves $y$ 
+  \item[k:] Kin
+  \item[c:] Cassandra
+\end{ekey}
+
+\begin{earg}
+  \item[\ex{I4}] $\forall xLkx$.
+  \item[\ex{I5}] $Lkc$.
+  \item[\ex{I6}] $\exists xLkx$.
+\end{earg}
+
+\end{multicols}
+
+Given that sentence \ref{I4} entails sentence \ref{I5} and sentence $\ref{I5}$ entails sentence $\ref{I6}$, we should expect a complete logic for QL$^=$ to include rules by which to derive sentence $\ref{I6}$ from sentence $\ref{I5}$, and to derive sentence $\ref{I5}$ from sentence $\ref{I4}$. 
+In order to state these rules in a sufficiently general way, we will take $\alpha$ to be \define{free for} $\beta$ in $\metaA$ 
+
+
+% : If φ is a formula which may contain the variable x free, we also write φ(x) to
+% indicate this. When it is clear which φ and x we have in mind, and t is a term
+% (assumed to be free for x in φ(x)), then we write φ(t) as short for φ[t/x]. So
+% for instance, we might say, “we call φ(t) an instance of ∀x φ(x).” By this we
+% mean that if φ is any formula, x a variable, and t a term that’s free for x in φ,
+% then φ[t/x] is an instance of ∀x φ
+
+$\metaA\substitute{\alpha}{\beta}$ to be the sentence that results from replacing $\script{c}$ in place of every $\script{x}$ in $\metaA{}$.
+
+To begin with, we will take $\metaA(\beta/\alpha)$ to be the result of replacing all free occurrences of $\alpha$ in $\metaA$ with $\beta$. 
+ 
+Recall the relationship between quantified sentences and their instances. The sentence $Pa$ is a particular instance of the general claim $\qt{\forall}{x} Px$. For any wff \metaA{}, constant \script{c}, and variable \script{x},
+
 
 Remember that we read `\substitute{\script{x}}{\script{c}}' outloud as `$\script{c}$ for $\script{x}$'. We are substituting the constant \script{c} for the variable \script{x}. Fittingly, `\metaA{}\substitute{\script{x}}{\script{c}}' is called a \define{substitution instance} of $\qt{\forall}{\script{x}}\metaA{}$ or $\qt{\exists}{\script{x}}\metaA{}$. \script{c} is called the \define{instantiating constant}. When we start with a universal $\qt{\forall}{x} Px$, we can instantiate it to obtain $Pa$. If we start with an existential $\qt{\exists}{y}Py$, we can likewise instantiate it to some $Pb$, modulo some restrictions we'll impose in our derivation system. 
 

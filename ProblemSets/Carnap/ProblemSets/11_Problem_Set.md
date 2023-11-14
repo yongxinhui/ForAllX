@@ -38,7 +38,7 @@ existential quantifier ∃  `E`
 ###Directions:
 
 ```{.QualitativeProblem .ShortAnswer points=0}
-PS10.0 Just in case you worked with up to two other students on these problems, please let me know their names in the text box below. Otherwise, leave this blank and don't submit! 
+PS11.0 Just in case you worked with up to two other students on these problems, please let me know their names in the text box below. Otherwise, leave this blank and don't submit! 
 ```
 
 When (and only when) you are happy with your answer, click the `Submit`
@@ -62,18 +62,18 @@ Mandatory syntax for our QND System:
 
 We'll start off with a short and simple one, partly to refresh you on Natural Deduction: 
 
-[from JTapp PS10.1a, Winter 2019 ]::
+[from JTapp PS11.1a, Winter 2019 ]::
 
 ~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render" points=2} 
-PS10.1 Gb > Fb, Gb :|-: (Ex) (Fx \/ Hx)
+PS11.1 Gb > Fb, Gb :|-: (Ex) (Fx \/ Hx)
 ~~~
 
 And now let's work on that tricky Existential Elimination (EE) rule, which you'll need to have down pat! Remember that you can always copy/paste the starting assumptions (don't forget to write `:Pr` after each one!). But it's also good practice to write these out yourself, to make sure you understand the proper syntax to use. 
 
-[from JTapp PS10.1b, Winter 2019 ]::
+[from JTapp PS11.1b, Winter 2019 ]::
 
 ~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render" points=2} 
-PS10.2 (Ex) (Fx & Gx) :|-: (Ew) Gw & (Ey) Fy
+PS11.2 (Ex) (Fx & Gx) :|-: (Ew) Gw & (Ey) Fy
 ~~~
 
 More practice with Existential Elimination (think about how to build the conclusion you want). We turn off Mr. Nice-nap for this, so no green checkmark!: 
@@ -82,23 +82,23 @@ More practice with Existential Elimination (think about how to build the conclus
 [zach PSL7.2 ]::
 
 ~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render exam" feedback="syntaxonly" points=14} 
-PS10.3 (Ex) (Fx -> B) :|-: (Ax) Fx -> B
+PS11.3 (Ex) (Fx -> B) :|-: (Ax) Fx -> B
 ~~~
 
 The following will help you get comfortable with ForAll Elimination (AE). Typically the trick here is to take-off the ∀'s and then build up to what you want to build. To ultimately apply ForAll Intro (AI), you'll need to build the inside first. For that, don't forget about our beloved rules from SND (and remember that Biconditional Intro and Elimination require typing `<->` for the biconditional symbol $\equiv$, in the justification column)! 
 
-[from JTapp PS10.1c, Winter 2019 ]::
+[from JTapp PS11.1c, Winter 2019 ]::
 
 ~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render" points=2} 
-PS10.4 (Ax) (Fx <> Gx), (Ax) (Gx <> Hx) :|-: (Ax) (Fx <> Hx)
+PS11.4 (Ax) (Fx <> Gx), (Ax) (Gx <> Hx) :|-: (Ax) (Fx <> Hx)
 ~~~
 
 Let's get some more relatively unsupervised practice, with one that's not too long!
 
-[from JTapp PS10.1d, Winter 2019 ]::
+[from JTapp PS11.1d, Winter 2019 ]::
 
 ~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render exam" feedback="syntaxonly" points=14} 
-PS10.5 (Ax) Fx, (Ez) Bzz :|-: (Ey) (Byy & Fy)
+PS11.5 (Ax) Fx, (Ez) Bzz :|-: (Ey) (Byy & Fy)
 ~~~
 
 So we're now going to put together a bunch of pieces! It's a long one, but the proof idea is pretty straightforward (and you have a lot to work with!). Hint: begin with Existential Elimination or things could get messy. Be really careful about counting tabs to keep your subproofs straight. At one point you'll probably go three-levels deep. We'll give you step-by-step checks, but you can submit partial or incorrect work. But strive for the green check mark! 
@@ -106,16 +106,16 @@ So we're now going to put together a bunch of pieces! It's a long one, but the p
 [zach PSL7.1 ]::
 
 ~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render exam" points=10} 
-PS10.6 (Ay) (Fy \/ Gy), (Ax) (Fx -> Hx), (Ex) ~Hx :|-: (Ez) Gz
+PS11.6 (Ay) (Fy \/ Gy), (Ax) (Fx -> Hx), (Ex) ~Hx :|-: (Ez) Gz
 ~~~
 
 
 Whew, let's do a nice chill one now haha! 
 
-[from JTapp PS10.1e, Winter 2019 ]::
+[from JTapp PS11.1e, Winter 2019 ]::
 
 ~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render exam" feedback="syntaxonly" points=14} 
-PS10.7 (Ax) (Fx <> Lx), (Ey) Fy :|-: (Ex) Lx
+PS11.7 (Ax) (Fx <> Lx), (Ey) Fy :|-: (Ex) Lx
 ~~~
 
 The following one is conceptually a bit tricky! Remember that when in doubt, indirect proof it out! (Also, think about what these two sentences mean)
@@ -123,7 +123,7 @@ The following one is conceptually a bit tricky! Remember that when in doubt, ind
 [zach PSL7.3]::
 
 ~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render exam" feedback="syntaxonly" points=20} 
-PS10.8 (Ax) (Px -> ~Qx) :|-: ~(Ex) (Px /\ Qx)
+PS11.8 (Ax) (Px -> ~Qx) :|-: ~(Ex) (Px /\ Qx)
 ~~~
 
 Note that both sentences mean: "No P is a Q". We'll show that they mean the same thing by proving that they both syntactically entail each other (which by the Soundness of our natural deduction system, proves they are semantically equivalent). We've already done one direction, so let's do the other! 
@@ -134,7 +134,7 @@ Hints: figuring out how to start this one is pretty tough! Indeed, I thought abo
 [zach PSL7.4 ]::
 
 ~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render exam" points=6} 
-PS10.9 ~(Ex) (Px /\ Qx) :|-: (Ax) (Px > ~Qx)
+PS11.9 ~(Ex) (Px /\ Qx) :|-: (Ax) (Px > ~Qx)
 ~~~
 
 Let's do one direction of De Morgan's rule for Quantifer Conversion, showing that from (∃x)Bx we can prove ~(∀x)~Bx. But we'll do this in terms of constructing a conditional: 
@@ -145,7 +145,7 @@ Make sure you still tab into a subproof! Otherwise Carnap will be upset.
 [zach PSL7.5 ]::
 
 ~~~{.ProofChecker .LogicBookPD options="tabindent guides fonts resize render exam" feedback="syntaxonly" points=16} 
-PS10.10 :|-: (Ex) Bx -> ~(Ax) ~Bx
+PS11.10 :|-: (Ex) Bx -> ~(Ax) ~Bx
 ~~~
 
 For funsies, you can do the other direction if you want, but it won't be graded! You'll have to use indirect proof, and again build up something you'll need for the contradiction. You can do it in 10 lines! 
