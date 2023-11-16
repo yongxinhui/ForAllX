@@ -682,7 +682,7 @@ This helps to bring out what is distinctive about the expressive power of QL$^=$
 \section{Quantities}
   \label{sec:Quantities}
 
-Including identity in QL$^=$ also lets us talk about quantity in a way that wasn't possible in QL.
+Including identity in QL$^=$ permits us to express claims about quantities that we couldn't in QL.
 In \S\ref{sec:IdentityLogic} we considered the sentence `Mozart composed at least two things' where identity was found to play a critical role.
 In particular, we provided the following regimentation:
 
@@ -698,7 +698,7 @@ Consider the following:
 \end{earg}
 
 Though it is a lot longer than sentence $\ref{M4}$, the sentence above says that there are at least three things that Mozart composed.
-Given that conjunction is associate and commutative, all but the outermost parentheses are more trouble than they are worth.
+Given that conjunction is associative and commutative, all but the outermost parentheses are more trouble than they are worth.
 In general, we will indulge in the convention of dropping the parentheses that occur in long conjunctions and long disjunctions.
 Thus we may rewrite sentence $\ref{Q1}$ as follows:
 
@@ -710,64 +710,60 @@ This is a lot easier to read and nothing significant is lost.
 It is important to stress that we can only drop parentheses in sentences which \textit{only} include conjunction, or \textit{only} include disjunction.
 Even so, these sentences are bound to get very long for large values of $n$.
 
-In order to characterize quantities in a more general way, it can be useful to introduce some abbreviations for what we will refer to as the \define{quantity quantifiers}.
-Instead of adding new primitive symbols to QL$^=$, we are only providing conventions for abbreviating long expression with much shorter expressions.
+In order to characterize quantities in a more general way, it can be useful to introduce some abbreviations for what we will refer to as the \define{inequality quantifiers}.
+Instead of adding new primitive symbols to QL$^=$, we are only providing conventions for abbreviating long expression with much shorter expressions for the sake of readability.
 
 In order to state these abbreviations in a general way, we will take $\beta$ to be \define{free for} $\alpha$ in $\metaA$ just in case there is no free occurrence of $\alpha$ in $\metaA$ in the scope of a quantifier that binds $\beta$. 
 For instance, $y$ is not free for $x$ in `$\forall y Fxy$' since replacing `$x$' with `$y$' would yield `$\forall yFyy$' where the quantifier `$\forall y$' would end up binding an extra variable.
-Roughly speaking, you can take `$\beta$ is free for $\alpha$' to mean `$\alpha$ is \textit{replaceable with} $\beta$ without leading to extra binding'.
+Roughly speaking, you can take `$\beta$ is free for $\alpha$' to mean `$\beta$ can replace $\alpha$ without leading to extra binding'.
 
-We may then take $\metaA\substitute{\alpha}{\beta}$ to be the result of replacing all free occurrences of $\alpha$ in $\metaA$ with $\beta$ where $\beta$ is required to be free for $\alpha$ in $\metaA$. 
-For instance, $\forall yFxy[z/x]$ is the wff $\forall yFzy$, and $\forall yFxy[y/x]$ is undefined since $y$ is not free for $x$.
+We may then take $\metaA\unisub{\beta}{\alpha}$ to be the result of replacing all free occurrences of $\alpha$ in $\metaA$ with $\beta$ where $\beta$ is required to be free for $\alpha$ in $\metaA$. 
+For instance, $\forall yFxy\unisub{z}{x}$ is the wff $\forall yFzy$, and $\forall yFxy\unisub{y}{x}$ is undefined since $y$ is not free for $x$.
 Given this notation, we may define the following abbreviations for quantifiers of the form `at least $n$ things are such that $\metaA$':
 
 \vspace{-.2in}
 \begin{align*}
   \qt{\exists_{\geq 1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}\metaA\\ 
-  % \qt{\exists_{\geq 2}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists}{\beta}(\alpha\neq\beta \eand \metaA\substitute{\alpha}{\beta})) \text{ where } \beta \text{ is free for } \alpha\\
-  \qt{\exists_{\geq n+1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists_{\geq n}}{\beta}(\alpha \neq \beta \eand \metaA(\beta/\alpha))) \text{ for } \beta \text{ not free in } \metaA.
-  % \qt{\exists_2}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}\qt{\exists}{\beta}(\alpha\neq\beta \eand \qt{\forall}{\gamma}(\metaA(\gamma/\alpha) \eiff (\gamma = \alpha \eor \gamma = \beta)))\\
-  % % \text{ for distinct } \alpha, \beta, \text{ and } \gamma\\ 
-  % \qt{\exists_3}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}
-  %     \qt{\exists}{\beta}
-  %       \qt{\exists}{\gamma}(
-  %         \alpha\neq\beta \eand \alpha\neq\gamma \eand \beta\neq\gamma \eand \qt{\forall}{\delta}(
-  %           \metaA(\delta/\alpha) \eiff (
-  %             \delta = \alpha \eor \delta = \beta \eor \delta = \gamma
-  %           )
-  %         )
-  %       )\\
-  % \text{ for distinct } \alpha, \beta, \text{ and } \gamma\\ 
-  % & ~\vdots
+  \qt{\exists_{\geq n+1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists_{\geq n}}{\beta}(\alpha \neq \beta \eand \metaA\unisub{\beta}{\alpha})) \text{ where } \beta \text{ is free for } \alpha \text{ in } \metaA.
 \end{align*}
 \vspace{-.2in}
 
-Here $\coloneq$ represents that the left side is merely an abbreviation for the right side. 
+Here `$\colonequals$' represents that the left side is merely an abbreviation for the right side. 
 These abbreviations have a recursive structure which defines $\qt{\exists_{\geq n}}{\alpha}$ for all $n$.
+We can put these quantifiers to work to consider sets of sentences like:
+
+\vspace{-.2in}
+\begin{align*}
+  \Gamma_{\infty} &\colonequals \set{\qt{\exists_{\geq n}}{x}(x=x): n\in\mathbb{N}}.
+\end{align*}
+\vspace{-.2in}
+
+For any natural number $n$, the set $\Gamma_\infty$ includes a sentence that says at least $n$ things that are self-identical.
+Not only may we show that there are models which satisfy $\Gamma$, these models must have infinite domains.
+That we can begin to express claims about the infinite further demonstrates just how much more expressive power QL$^=$ has than QL. 
 
 In addition to being able to say that there are at least $n$ things that satisfy a certain condition, QL$^=$ permits us to say that that there are at most $n$ things that satisfy a certain condition. 
-We have already seen instances of this above with uniqueness.
-After all, saying that \textit{only} Cara loves Pedro is like saying there is \textit{exactly one} thing that loves Pedro where this entails both that there is \textit{at least} one thing that loves Pedro and that there is \textit{at most} one thing that loves Pedro, namely Cara.
 Consider the following sentence and its regimentation:
 
 \begin{earg}
   \item[\ex{Q3}] Mozart composed at most two things.
-  \item[\ex{Q4}] $\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z}(Cmz \eif (z= x \eor z= y))$.
+  \item[\ex{Q4}] $\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z}((Cmx \eand Cmy \eand Cmz) \supset (x = y \eor x = z \eor y = z))$.
+  % \item[\ex{Q4}] $\qt{\exists}{x}\qt{\exists}{y}\qt{\forall}{z}(Cmz \eif (z= x \eor z= y))$.
 \end{earg}
 
-This says that there is some $x$ and $y$ where anything that Mozart composed is identical to either $x$ or $y$. 
-So far, nothing prevents $x=y$ or requires there to be something which Mozart composed. 
-Similarly, we may say that there at most three things that Mozart composed.
-
-\begin{earg}
-  \item[\ex{Q5}] Mozart composed at most three things.
-  \item[\ex{Q6}] $\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z}\qt{\forall}{w}(Cmw \eif (w = x \eor w = y \eor w = z))$.
-\end{earg}
-
-Both sentences $\ref{Q4}$ and $\ref{Q6}$ are true if there are less than three things that Mozart composed, including the case where Mozart didn't compose anything.
-
+This says that for any $x$, $y$, and $z$ which Mozart composed, at least two of them are identical. 
+So far, nothing prevents all of them from being identical or requires there to be something which Mozart composed. 
+% We may also that there at most three things that Mozart composed.
+%
+% \begin{earg}
+%   \item[\ex{Q5}] Mozart composed at most three things.
+%   \item[\ex{Q6}] $\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z}\qt{\forall}{w}((Cmx \eand Cmy \eand Cmz \eand Cmw) \supset (x = y \eor x = z \eor y = z \eor y = z))$.
+%   % \item[\ex{Q6}] $\qt{\exists}{x}\qt{\exists}{y}\qt{\exists}{z}\qt{\forall}{w}(Cmw \eif (w = x \eor w = y \eor w = z))$.
+% \end{earg}
+%
+% Both sentences $\ref{Q4}$ and $\ref{Q6}$ are true if there are less than three things that Mozart composed, including the case where Mozart didn't compose anything.
 More generally, we may say that there are at most $n$ things which satisfy a given condition $\metaA$.
-Although we could define this recursively in a similar fashion to what was given above, we may avoid doing so by adopting the following convention for each value of $n$.
+Although we could define this recursively in a similar fashion to what was given above, we may avoid doing so by adopting the following convention for all $n$.
 
 \vspace{-.2in}
 \begin{align*}
@@ -785,8 +781,10 @@ We may combine these two types of quantifiers to say that there are between $n$ 
 \vspace{-.2in}
 
 In the special case where $n=m$, the statement $\qt{\exists_{(n,n)}}{\alpha}\metaA$ says that exactly $n$ things are $\metaA$. 
+We have already seen instances of this above with uniqueness.
+After all, saying that \textit{only} Cara loves Pedro is like saying there is \textit{exactly one} thing that loves Pedro where this entails both that there is \textit{at least} one thing that loves Pedro and that there is \textit{at most} one thing that loves Pedro, namely Cara.
 We may refer to such quantifiers as \define{cardinality quantifiers}.
-Although this is one way to define cardinality quantifiers, there is another much more elegant way to do so.
+% Although this is one way to define cardinality quantifiers, there is another method.
 
 Suppose we want to say that there are exactly two things that Mozart composed.
 As above, one way to do this is to conjoin sentences $\ref{M4}$ and $\ref{Q4}$ since this amounts to saying that there is at least two things that Mozart composed and at most two things that Mozart composed. 
@@ -798,30 +796,7 @@ However, we can simplify the regimentation by means of the following:
   % \item[\ex{Q8}] $\qt{\exists}{x}\qt{\exists}{y}(Cmx \eand Cmy \eand x \neq y \eand \qt{\forall}{z}(Cmz \eif (z = x \eor z = y)))$.
 \end{earg}
 
-More generally, we may introduce the following cardinality quantifiers:
-
-\vspace{-.2in}
-\begin{align*}
-  \qt{\exists_0}{\alpha}\metaA &\colonequals \qt{\forall}{\alpha}\enot\metaA\\
-  \qt{\exists_1}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}\qt{\forall}{\beta}(\metaA(\beta/\alpha) \eiff \beta = \alpha)\\ 
-  % \text{ for distinct } \alpha \text{ and } \beta\\
-  \qt{\exists_2}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}\qt{\exists}{\beta}(\alpha\neq\beta \eand \qt{\forall}{\gamma}(\metaA(\gamma/\alpha) \eiff (\gamma = \alpha \eor \gamma = \beta)))\\
-  % \text{ for distinct } \alpha, \beta, \text{ and } \gamma\\ 
-  \qt{\exists_3}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}
-      \qt{\exists}{\beta}
-        \qt{\exists}{\gamma}(
-          \alpha\neq\beta \eand \alpha\neq\gamma \eand \beta\neq\gamma \eand \qt{\forall}{\delta}(
-            \metaA(\delta/\alpha) \eiff (
-              \delta = \alpha \eor \delta = \beta \eor \delta = \gamma
-            )
-          )
-        )\\
-  % \text{ for distinct } \alpha, \beta, \text{ and } \gamma\\ 
-  & ~\vdots
-\end{align*}
-
-As you can see, these definitions get very long and complicated very quickly.
-In order to define all cardinality quantifiers in one go, we may adopt the following recursive definition:
+More generally, we may define the cardinality quantifiers as follows:
 
 \vspace{-.2in}
 \begin{align*}
@@ -855,8 +830,33 @@ In order to define all cardinality quantifiers in one go, we may adopt the follo
   % \qt{\exists_{n+1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists_n}{\beta}(\beta\neq\alpha \eand \metaA(\beta/\alpha)) \text{ for } \beta \text{ not free in } \metaA\\
 \end{align*}
 
-Although the results differ in logical form from those given previously, they are logically equivalent.
-The fact that these cardinality quantifiers are definable in QL$^=$ demonstrates the expressive power of this language in contrast to QL. 
+We know what it is for no $\alpha$ to be $\metaA$--- that much is easy.
+What it is for $n+1$ things to be such that $\metaA$ is for something to be $\metaA$ and $n$ other things to be such that $\metaA$. 
+Given these recursive definitions, we may work out the following quantifiers:
+
+\vspace{-.2in}
+\begin{align*}
+  \qt{\exists_0}{\alpha}\metaA &\colonequals \qt{\forall}{\alpha}\enot\metaA\\
+  \qt{\exists_1}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}\qt{\forall}{\beta}(\metaA(\beta/\alpha) \eiff \beta = \alpha)\\ 
+  % \text{ for distinct } \alpha \text{ and } \beta\\
+  \qt{\exists_2}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}\qt{\exists}{\beta}(\alpha\neq\beta \eand \qt{\forall}{\gamma}(\metaA(\gamma/\alpha) \eiff (\gamma = \alpha \eor \gamma = \beta)))\\
+  % \text{ for distinct } \alpha, \beta, \text{ and } \gamma\\ 
+  \qt{\exists_3}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}
+      \qt{\exists}{\beta}
+        \qt{\exists}{\gamma}(
+          \alpha\neq\beta \eand \alpha\neq\gamma \eand \beta\neq\gamma \eand \qt{\forall}{\delta}(
+            \metaA(\delta/\alpha) \eiff (
+              \delta = \alpha \eor \delta = \beta \eor \delta = \gamma
+            )
+          )
+        )\\
+  % \text{ for distinct } \alpha, \beta, \text{ and } \gamma\\ 
+  & ~\vdots
+\end{align*}
+
+Although the results differ in logical form from those that we may derive from $\qt{\exists_{(n,n)}}$ for different values of $n$, they are logically equivalent.
+% The fact that these cardinality quantifiers are definable in QL$^=$ demonstrates the expressive power of this language in contrast to QL. 
+Whereas the inequality operators are interesting in their own right, the cardinality operators express something very specific, further demonstrating the expressive power of QL$^=$.
 % For instance, we may consider a set of sentence $\Gamma=\set{}$
 % Given these definitions, we may consider the following set of sentences.
 

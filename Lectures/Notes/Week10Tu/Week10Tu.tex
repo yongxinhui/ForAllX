@@ -84,12 +84,12 @@
   \item[\bf Question 1:] How far could we go? What terms could we include?
   \item[\it Logicality:] The primitive symbols of SL and QL can be divided in three:
     \begin{itemize}
-      \item[\tt Logical Terms:] $\neg,\wedge,\vee,\supset,\equiv,\forall\alpha,\exists\alpha$.
-      \item[\tt Non-Logical Terms:] $A^n,B^n,\ldots$ for $n\geq 0$.
+      \item[\tt Logical Terms:] $\neg,\wedge,\vee,\supset,\equiv,\forall\alpha,\exists\alpha,x_n,y_n,z_n\ldots$ for $n\geq 0$.
+      \item[\tt Non-Logical Terms:] $a_n,b_n,c_n,\ldots$ and $A^n,B^n,\ldots$ for $n\geq 0$.
       \item[\tt Punctuation:] $(, )$
     \end{itemize}
-  \item[\it Extensions:] The ``meanings'' of the non-logical terms is fixed by the interpretation.
-  \item[\it Semantics:] The ``meanings'' of the logical terms is fixed by the semantics.
+  \item[\it Extensions:] The ``meanings'' of the non-logical terms are fixed by an interpretation.
+  \item[\it Semantics:] The ``meanings'' of the logical terms are fixed by the semantics.
   \item[\bf Question 2:] How many logical terms are there?
   \item[\it Identity:] At least one more, namely identity which we symbolize by `$=$'.
 \end{enumerate}
@@ -102,7 +102,7 @@
 
 \begin{enumerate}
   \item[\it Identity:] We include `$=$' in the primitive symbols of the language.
-  \item[\it Well-Formed Formulas:] We may define the well-formed formulas (wffs) of QL as follows:
+  \item[\it Well-Formed Formulas:] We may define the well-formed formulas (wffs) of QL$^=$ as follows:
   \item $\mathcal{F}^n\alpha_1,\ldots,\alpha_n$ is a wff if $\mathcal{F}^n$ is an $n$-place predicate and $\alpha_1,\ldots,\alpha_n$ are singular terms.
   \item $\alpha=\beta$ is a wff if $\alpha$ and $\beta$ are singular terms.
   \item If $\varphi$ and $\psi$ are wffs and $\alpha$ is a variable, then:
@@ -166,16 +166,16 @@
 
 
 
-\section*{QL Models}
+\section*{QL$^=$ Models}
 
 \begin{enumerate}
   \item[\bf Question 3:] What in the semantics will have to change?
-  \item[\it Interpretations:] $\I$ is an QL interpretation over $\D$ \textit{iff} both: 
+  \item[\it Interpretations:] $\I$ is an QL$^=$ interpretation over $\D$ \textit{iff} both: 
     \begin{itemize}
-      \item $\I(\alpha)\in\D$ for every constant $\alpha$ in QL. 
+      \item $\I(\alpha)\in\D$ for every constant $\alpha$ in QL$^=$. 
       \item $\I(\F^n)\subseteq\D^n$ for every $n$-place predicate $\F^n$.
     \end{itemize}
-  \item[\it Model:] $\M=\tuple{\D,\I}$ is a model of QL \textit{iff} $\I$ is a QL interpretation over $\D\neq\varnothing$.
+  \item[\it Model:] $\M=\tuple{\D,\I}$ is a model of QL$^=$ \textit{iff} $\I$ is a QL$^=$ interpretation on $\D\neq\varnothing$.
 \end{enumerate}
 
 
@@ -185,7 +185,7 @@
 \section*{Variable Assignments}
 
 \begin{enumerate}
-  \item[\it Assignments:] A variable assignment $\hat{a}(\alpha)\in\D$ for every variable $\alpha$ in QL.
+  \item[\it Assignments:] A variable assignment $\hat{a}(\alpha)\in\D$ for every variable $\alpha$ in QL$^=$.
   \item[\it Referents:] We may define the referent of $\alpha$ in $\M=\tuple{\D,\I}$ as follows:\\
     \begin{align*}
       \VV{\I}{\hat{a}}{(\alpha)}=
@@ -201,7 +201,7 @@
 
 
 
-\section*{Semantics for QL}
+\section*{Semantics for QL$^=$}
 
 \begin{enumerate}
   \item[($A$)] $\VV{\I}{\hat{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1$ ~\textit{iff}~ $\tuple{\VV{\I}{\hat{a}}{(\alpha_1)},\ldots,\VV{\I}{\hat{a}}{(\alpha_n)}}\in\I(\F^n)$.
@@ -209,12 +209,13 @@
   \item[(\hspace{1pt}$\forall$\hspace{1pt})] $\VV{\I}{\hat{a}}(\forall\alpha\varphi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{c}}(\varphi)=1$ for every $\alpha$-variant $\hat{c}$ of $\hat{a}$.
   \item[(\hspace{1pt}$\exists$\hspace{1pt})] $\VV{\I}{\hat{a}}(\exists\alpha\varphi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{c}}(\varphi)=1$ for some $\alpha$-variant $\hat{c}$ of $\hat{a}$.
   \item[($\neg$)] $\VV{\I}{\hat{a}}(\neg\varphi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)\neq 1$.
-  \item[($\vee$)] $\VV{\I}{\hat{a}}(\varphi \vee \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=1$ or $\VV{\I}{\hat{a}}(\psi)=1$ (or both).
-  \item[($\wedge$)] $\VV{\I}{\hat{a}}(\varphi \wedge \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=1$ and $\VV{\I}{\hat{a}}(\psi)=1$.
-  \item[($\supset$)] $\VV{\I}{\hat{a}}(\varphi \supset \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=0$ or $\VV{\I}{\hat{a}}(\psi)=1$ (or both).
-  \item[($\equiv$)] $\VV{\I}{\hat{a}}(\varphi \equiv \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=\VV{\I}{\hat{a}}(\psi)$.
+  % \item[($\vee$)] $\VV{\I}{\hat{a}}(\varphi \vee \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=1$ or $\VV{\I}{\hat{a}}(\psi)=1$ (or both).
+  % \item[($\wedge$)] $\VV{\I}{\hat{a}}(\varphi \wedge \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=1$ and $\VV{\I}{\hat{a}}(\psi)=1$.
+  % \item[($\supset$)] $\VV{\I}{\hat{a}}(\varphi \supset \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=0$ or $\VV{\I}{\hat{a}}(\psi)=1$ (or both).
+  % \item[($\equiv$)] $\VV{\I}{\hat{a}}(\varphi \equiv \psi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=\VV{\I}{\hat{a}}(\psi)$.
+  \item[\vdots] 
     \vspace{.1in}
-  \item[\it Truth:] $\VV{\I}{}(\varphi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=1$ for some $\hat{a}$ where $\varphi$ is a sentence of QL. 
+  \item[\it Truth:] $\VV{\I}{}(\varphi)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\varphi)=1$ for some $\hat{a}$ where $\varphi$ is a sentence of QL$^=$. 
 \end{enumerate}
 
 
@@ -229,6 +230,7 @@
       \item[(2)] Phosphorus is Venus.
       \item[$\therefore$] Hesperus is Venus.
     \end{itemize}
+  \item[\bf Task 2:] Prove that $\forall x\forall y\forall z((x=y \wedge y=z) \supset x=z)$ is a tautology. 
 \end{enumerate}
 
 
@@ -250,12 +252,15 @@
       \item Compare our pre-theoretic grasp of negation, conjunction, and the quantifiers.
     \end{itemize}
   \item[\bf Question 5:] Could we take set-membership $\in$ to be a logical term? 
-  \item[\bf Question 6:] Could we take a term in sentence position to be logical?
+  \item[\bf Question 6:] What is it to be a logical term?
+  \item[\it Existence:] Observe that $\exists x(x=x)$ is a tautology. 
+  \item[\bf Question 7:] Could we take a term in sentence position to be logical?
     \begin{itemize}
-      \item[($\bot$)] $\VV{\I}{\hat{a}}(\bot)=1$ ~\textit{iff}~ $1\neq 1$.
-      \item[($\top$)] $\VV{\I}{\hat{a}}(\top)=1$ ~\textit{iff}~ $1=1$.
+      % \begin{multicols}{2}
+        \item[($\bot$)] $\VV{\I}{\hat{a}}(\bot)=1$ ~\textit{iff}~ $1\neq 1$.
+        \item[($\top$)] $\VV{\I}{\hat{a}}(\top)=1$ ~\textit{iff}~ $1=1$.
+      % \end{multicols}
     \end{itemize}
-  \item[\bf Question 7:] What is it to be a logical term?
 \end{enumerate}
 
 
@@ -289,20 +294,6 @@
 
 
 
-\section*{Uniqueness}
-
-\begin{enumerate}
-  \item[\it Only:] Regiment the following argument:
-    \begin{itemize}
-      \item[(1)] Lois Lane only loves Clark Kent.
-      \item[(2)] Only Clark Kent is Superman.
-      \item[$\therefore$] Lois Lane loves Superman.
-    \end{itemize}
-  \item[\bf Question:] Is this argument intuitively valid?
-\end{enumerate}
-
-
-
 
 
 
@@ -321,20 +312,36 @@
       \item[(2)] Superman is Clark Kent.
       \item[$\therefore$] Lois Lane sees Clark Kent.
     \end{itemize}
-  \item[\it Question 8:] Are these arguments intuitively valid?
-  \item[\it Opacity:] Whereas `believes' creates an opaque context and `sees' does not.
+  \item[\bf Question 8:] Are these arguments intuitively valid?
+  \item[\it Opacity:] Whereas `sees' admits substitution, `believes' does not.
+  \item[\it Transparency:] We may say that `sees' is transparent and that `believes' is opaque.
+  \item[\it Mathematics:] Importantly, mathematics is transparent insofar as it does not include any opaque contexts.
 \end{enumerate}
 
 
+% \section*{Uniqueness}
+%
+% \begin{enumerate}
+%   \item[\it Only:] Regiment the following argument:
+%     \begin{itemize}
+%       \item[(1)] Lois Lane only loves Clark Kent.
+%       \item[(2)] Only Clark Kent is Superman.
+%       \item[$\therefore$] Lois Lane loves Superman.
+%     \end{itemize}
+%   % \item[\bf Question:] Is this argument intuitively valid?
+% \end{enumerate}
 
 
-\section*{Definite Descriptions}
 
-\begin{enumerate}
-  \item[\it Russell:] The king of France is Bald.\\ 
-    $\exists x\forall y(Kyf \equiv x=y)$.\\
-    $\exists x(Kxf \wedge \forall y(Kyf \supset x=y))$.\\
-\end{enumerate}
+
+
+% \section*{Definite Descriptions}
+%
+% \begin{enumerate}
+%   \item[\it Russell:] The king of France is Bald.\\ 
+%     $\exists x\forall y(Kyf \equiv x=y)$.\\
+%     $\exists x(Kxf \wedge \forall y(Kyf \supset x=y))$.\\
+% \end{enumerate}
 
 
 

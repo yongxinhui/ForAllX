@@ -1,0 +1,318 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs} %%Math packages
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{multicol} 
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage{prooftrees} 
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep=}
+% \usepackage{fitchproof} 
+
+% \linespread{1} % Change line spacing here, Palatino benefits from a slight increase by default
+
+\newcommand{\corner}[1]{\ulcorner#1\urcorner} %%Corner quotes
+\newcommand{\tuple}[1]{\langle#1\rangle} %%Angle brackets
+\newcommand{\set}[1]{\lbrace#1\rbrace} %%Set brackets
+\newcommand{\interpret}[1]{\llbracket#1\rrbracket} %%Double brackets
+%\DeclarePairedDelimiter\ceil{\lceil}{\rceil}    
+\def\therefore{\ensuremath{\ldotp\dot\,\ldotp}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\D}{\mathbb{D}}
+\renewcommand{\v}[1]{\mathbf{#1}}
+\newcommand{\even}{\texttt{Even}}
+\newcommand{\comp}{\texttt{Comp}}
+\newcommand{\res}{\texttt{Res}}
+\newcommand{\simp}{\texttt{Simple}}
+\newcommand{\leng}{\texttt{Length}}
+\newcommand{\V}[1]{\mathcal{V}_{#1}} %%Corner quotes
+\newcommand{\VV}[2]{\mathcal{V}_{#1}^{#2}} %%
+\newcommand{\qt}[2]{#1 #2} % for modifying style of quantifer and bound variable pairs
+\newcommand{\unisub}[2]{[#1/#2]}
+
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
+\renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+
+\renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
+\begin{flushright} % Right align
+{\LARGE\@title} % Increase the font size of the title
+
+\vspace{10pt} % Some vertical space between the title and author name
+
+{\@author} % Author name
+\\\@date % Date
+
+\vspace{60pt} % Some vertical space between the author block and abstract
+\end{flushright}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Quantified Logic with Identity}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+
+
+
+\section*{Uniqueness}
+
+\begin{enumerate}
+  \item[\it Uniqueness:] Ingmar trusts Albert, but no one else.
+  \item[\it Only:] Regiment the following argument:
+    \begin{itemize}
+      \item[(1)] Lois Lane only loves Clark Kent.
+      \item[(2)] Only Clark Kent is Superman.
+      \item[$\therefore$] Lois Lane loves Superman.
+    \end{itemize}
+\end{enumerate}
+
+
+
+
+
+\section*{Definite Descriptions}
+
+\begin{enumerate}
+  % \item[\it Russell:] Compare the following sentences:
+  \item[\bf Question 1:] Regiment the following sentences.
+    \begin{itemize}
+      \item Socrates is guilty.
+      \item Socrates is not guilty.
+      \item Socrates is guilty or Socrates is not guilty.
+    \end{itemize}
+  \item[\bf Question 2:] Regiment the following sentences.
+    \begin{itemize}
+      \item The king of France is Bald.
+      \item The king of France is not bald.
+      \item The king of France is bald or the king of France is not bald.
+    \end{itemize}
+  \item[\bf Question 3:] Which of the sentences above are contingent?
+  \item[\it Existence:] If the king of France is Bald, then the king of France exists.
+  \item[\it Definite Article:] `The king of France' can't be a name.
+  \item[\it Regimentation:] Russell offered the following analysis:
+    \begin{itemize}
+      \item $\exists x(Kxf \wedge \forall y(Kyf \supset x=y) \wedge Bx)$.
+      \item $\exists x(\forall y(Kyf \equiv x=y) \wedge Bx)$.
+    \end{itemize}
+  \item[\it Negation:] Negation applies to the predicate, not the sentence.
+  \item[\bf Task 1:] Regiment the following:
+  \item Superman is keeping something from his lover.
+  % \item The Queen of spades is a black card.
+  \item The man with the axe is not a Jack.
+  \item The Ace of diamonds is not the man with the axe.
+  \item One-eyed jacks and the man with the axe are wild.
+  \item No spy knows the combination to the safe.
+  \item The one Ingmar trusts is lying.
+  % \item Only Ingmar knows the combination to the safe.
+  \item The person who knows the combination to the safe is not a spy.
+\end{enumerate}
+
+
+
+
+\section*{At Least:}
+
+\begin{enumerate}
+  \item[\bf Task 2:] Regiment the following claims.
+  % \item There are no wild cards.
+  \item There is at least one wild card.
+  \item There are at least two clubs.
+  \item There are at least three hearts on the table.
+  \item[\bf Question 4:] How can we define these quantifiers in general?
+\end{enumerate}
+
+
+
+
+
+\section*{Substitution}
+
+\begin{enumerate}
+  \item[\it Free For:] $\beta$ is \textsc{free for} $\alpha$ in $\varphi$ just in case there is no free occurrence of $\alpha$ in $\varphi$ in the scope of a quantifier that binds $\beta$. 
+  \item[\it Constants:] If $\beta$ is a constant, then $\beta$ is free for any $\alpha$ and $\varphi$. 
+  \item[\it Substitution:] If $\beta$ is free for $\alpha$ in $\varphi$, then the \textsc{substitution} $\varphi\unisub{\beta}{\alpha}$ is the result of replacing all free occurrences of $\alpha$ in $\varphi$ with $\beta$. 
+  \item[\it Examples:] Consider the following cases:
+    \begin{enumerate}
+      \item $z$ is free for $x$ in $\qt{\forall}{y}(Fxy \supset Fyx)$ 
+      \item $y$ is not free for $x$ in $\qt{\forall}{y}(Fxy \supset Fyx)$
+    \end{enumerate}
+\end{enumerate}
+   
+
+
+
+
+\section*{Inequality Quantifiers Defined}
+
+\begin{enumerate}
+  \item[\it Definition:] We may define the following abbreviations recursively:
+    \begin{itemize}
+      \item[\it Base:] $\qt{\exists_{\geq 1}}{\alpha}\varphi \coloneq \qt{\exists}{\alpha}\varphi$.
+      \item[\it Recursive:] $\qt{\exists_{\geq n+1}}{\alpha}\varphi \coloneq \qt{\exists}{\alpha}(\varphi \wedge \qt{\exists_{\geq n}}{\beta}(\alpha \neq \beta \wedge \varphi\unisub{\beta}{\alpha})).$
+    \end{itemize}
+  \item[\it Infinite:] $\Gamma_{\infty} \coloneq \set{\qt{\exists_{\geq n}}{x}(x=x): n\in\mathbb{N}}$.
+  \item[\bf Question 5:] What is the smallest model to satisfy $\Gamma_\infty$?
+  \item[\it At Most:] Regiment the following claims.
+  \item There is at most one wild card.
+  \item There are at most two one-eyed jacks.
+  \item There are at most three black jacks.
+  \item[\it Definition:] $\qt{\exists_{\leq n}}{\alpha}\varphi \coloneq \neg\qt{\exists_{\geq n+1}}{\alpha}\varphi$.
+\end{enumerate}
+ 
+ 
+
+
+
+
+
+\section*{Cardinality Quantifiers}
+ 
+\begin{enumerate}
+  \item[\bf Task 3:] Regiment the following.
+  \item There is one wild card.
+  \item There are three hearts on the table.
+  \item If the deuce of clubs is wild, then there is exactly one wild card.
+  \item[\bf Question 6:] How can we define the cardinality quantifiers in general?
+  \item[\it Base:] $\qt{\exists_0}{\alpha}\varphi \coloneq \qt{\forall}{\alpha}\neg\varphi$.
+  \item[\it Recursive:] $\qt{\exists_{n+1}}{\alpha}\varphi \coloneq \qt{\exists}{\alpha}(\varphi \wedge \qt{\exists_n}{\beta}(\alpha \neq \beta \wedge \varphi\unisub{\beta}{\alpha}))$.
+  \item[\bf Question 7:] How do the cardinality quantifiers relate to the inequality quantifiers?
+  \item[\it Between:] $\qt{\exists_{(n,m)}}{\alpha}\varphi \coloneq \qt{\exists_{\geq n}}{\alpha}\varphi \wedge \qt{\exists_{\leq m}}{\alpha}\varphi$~ where $n\leq m$.
+  \item[\it Exact:] $\qt{\exists_{n}}{\alpha}\varphi \coloneq \qt{\exists_{(n,n)}}{\alpha}\varphi.$
+\end{enumerate}
+
+
+
+
+
+ % Buffy and Willow were born unto the same generation.
+ % There is no more than one slayer born in each generation.
+ % A slayer other than Buffy is one of the forces of darkness.
+ % Willow will stand against any force of darkness other than a werewolf.
+ % Faith will kick everyone except herself.
+ % Buffy will kick anyone who stands against a slayer, unless they are also kicking vampires or demons.
+ % In every generation a slayer is born.
+ % In every generation a slayer is born. She will stand against the vampires, demons, and forces of darkness.
+ % In every generation a slayer is born. She alone will stand against the vampires, demons, and forces of darkness.
+
+% \item There are at least three horses in the world.
+% \item There are at least three animals in the world.
+% \item There is more than one horse in Farmer Brown's field.
+% \item There are three horses in Farmer Brown's field.
+% \item There is a single winged creature in Farmer Brown's field; any other creatures in the field must be wingless.
+% \item The Pegasus is a winged horse.
+% \item The animal in Farmer Brown's field is not a horse.
+% \item The horse in Farmer Brown's field does not have wings.
+
+
+
+
+\section*{Examples}
+
+\begin{enumerate}
+\item Show that $\set{{\neg}Raa, \qt{\forall}{x} (x{=}a \vee Rxa)}$ is satisfiable. 
+% \item Show that $\set{\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z}(x{=}y \vee y{=}z \vee x{=}z),\qt{\exists}{x}\qt{\exists}{y}\ x{\neq} y}$ is satisfiable.
+\item Show that $\qt{\forall}{x}\qt{\forall}{y}\ x{=}y \vdash \neg \qt{\exists}{x}\ x \neq a$.
+% \item Show that $\qt{\exists}{x} (x {=} h \wedge x {=} i)$ is contingent.
+% \item Show that \{$\qt{\exists}{x}\qt{\exists}{y}(Zx \wedge Zy \wedge x{=}y)$, $\neg Zd$, $d{=}s$\} is satisfiable.
+% \item Show that $\qt{\forall}{x}(Dx \supset \qt{\exists}{y} Tyx)\nvdash\qt{\exists}{y} \qt{\exists}{z}\ y{\neq} z$.
+\end{enumerate}
+
+
+
+
+
+
+\section*{Relations}
+
+\begin{enumerate}
+  \item[\bf Task 4:] Is the following argument valid? 
+    \begin{itemize}
+      \item[-] $\forall x\forall y(Rxy \supset Ryx)$.
+      \item[-] $\forall x\forall y\forall z((Rxy \wedge Ryz) \supset Rxz)$.
+      \item[$\therefore$] $\forall xRxx$.
+    \end{itemize}
+  \item[\bf Task 5:] Is the following argument valid?
+    \begin{itemize}
+      \item[-] $\forall x\forall y\forall z((Rxy \wedge Ryz) \supset Rxz)$.
+      \item[-] $\forall x\neg Rxx$.
+      \item[$\therefore$] $\forall x\forall y(Rxy \supset \neg Ryx)$.
+    \end{itemize}
+  % \item[\it Domain:] Let the \textit{domain} $D$ be any set.
+  % \item[\it Relation:] A \textit{relation} $R$ on $D$ is any subset of $D^2$.
+  % \item[\it Reflexive:] A relation $R$ is \textit{reflexive} on $D$ \textit{iff} $\tuple{x,x}\in R$ for all $x\in D$.
+  % \item[\it Non-Reflexive:] A relation $R$ is \textit{non-reflexive} on $D$ \textit{iff} $R$ is not reflexive on $D$.
+  % \item[\bf Question 1:] What is it to be \textit{irreflexive}?
+  % \item[\it Irreflexive:] A relation $R$ is \textit{irreflexive} on $D$ \textit{iff} $\tuple{x,x}\notin R$ for all $x\in D$.
+  % \item[\it Symmetric:] A relation $R$ is \textit{symmetric iff} $\tuple{y,x}\in R$ whenever ${x,y}\in R$.
+  % \item[\bf Question 2:] Why don't we need to specify a domain?
+  % \item[\bf Question 3:] Why is a relation reflexive or irreflexive with respect to a domain?
+  % \item[\it Asymmetric:] A relation $R$ is \textit{asymmetric iff} $\tuple{y,x}\notin R$ whenever $\tuple{x,y}\in R$.
+  % \item[\bf Question 4:] What is it to be non-symmetric? How about non-asymmetric?
+  % \item[\bf Task 1:] Show that every asymmetric relation is irreflexive.
+  % \item[\it Transitive:] A relation $R$ is \textit{transitive iff} $\tuple{x,z}\in R$ whenever $\tuple{x,y},\tuple{y,z}\in R$.
+  % \item[\it Intransitive:] A relation $R$ is \textit{intransitive iff} $\tuple{x,z}\notin R$ whenever $\tuple{x,y},\tuple{y,z}\in R$.
+  % \item[\bf Question 5:] Is every symmetric transitive relation reflexive? (No: $R=\varnothing$)
+  % \item[\bf Task 2:] Show that every transitive irreflexive relation asymmetric?
+  % \item[\it Euclidean:] A relation $R$ is \textit{euclidean iff} $\tuple{y,z}\in R$ whenever $\tuple{x,y},\tuple{x,z}\in R$.
+  % \item[\bf Task 3:] Show that every transitive symmetric relation is euclidean.
+\end{enumerate}
+
+
+
+% \section*{Assignment Lemmas}
+%
+% \begin{enumerate}
+%   \item[\it Lemma 1:] If $\hat{a}(\alpha)=\hat{c}(\alpha)$ for all free variables $\alpha$ in a wff $\varphi$, then $\VV{\I}{\hat{a}}(\varphi)=\VV{\I}{\hat{c}}(\varphi)$.
+%     \begin{itemize}
+%       \item[\it Base:] Assume $\comp(\varphi)=0$, so $\varphi=(\alpha=\beta)$ or $\varphi=\F^n\alpha_1,\ldots,\alpha_n$.
+%       \item[($\alpha=\beta$):] \mbox{So $\VV{\I}{\hat{a}}(\varphi)=\VV{\I}{\hat{a}}(\alpha=\beta)=1$ \textit{iff} $\VV{\I}{\hat{a}}(\alpha)=\VV{\I}{\hat{a}}(\beta)$ \textit{iff} $\VV{\I}{\hat{c}}(\alpha)=\VV{\I}{\hat{c}}(\beta)\ldots$}
+%       \item[($\F^n\alpha_1,\ldots,\alpha_n$):] \mbox{So $\VV{\I}{\hat{a}}(\varphi)=\VV{\I}{\hat{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1$ \textit{iff} $\tuple{\VV{\I}{\hat{a}}(\alpha_1),\ldots,\VV{\I}{\hat{a}}(\alpha_n)}\in\I(F^n)\ldots$}
+%     \end{itemize}
+%   \item[\it Lemma 2:] For any sentence $\varphi$: $\VV{\I}{}(\varphi)= 1$ \textit{iff} $\VV{\I}{\hat{a}}(\varphi)= 1$ for every v.a. $\hat{a}$ over $\D$.
+%     % \begin{itemize}
+%     %   \item[\it LTR:] Assume $\VV{\I}{}(\varphi)= 1$, so $\VV{\I}{\hat{a}}(\varphi)= 1$ for some v.a. $\hat{c}$ over $\D$ .
+%     %   \item Let $\hat{a}$ be any v.a. over $\D$.
+%     %   \item Since $\varphi$ has no free variables, $\VV{\I}{\hat{a}}(\varphi)=\VV{\I}{\hat{c}}(\varphi)$ by \textit{Lemma 1}.
+%     %   \item So $\VV{\I}{\hat{a}}(\varphi)=1$ for all v.a. $\hat{c}$ over $\D$.
+%     %   \item[\it RTL:] Assume $\VV{\I}{\hat{a}}(\varphi)=1$ for all v.a. $\hat{a}$ over $\D$.
+%     %   \item Since $\D$ is nonempty, there is some v.a. $\hat{a}$, and so $\VV{\I}{}(\varphi)= 1$. 
+%     %   % \item So $\VV{\I}{}(\varphi)=1$.
+%     % \end{itemize}
+%   \item[\it Lemma 3:] For any sentence $\varphi$: $\VV{\I}{}(\varphi)\neq1$ \textit{iff} $\VV{\I}{\hat{a}}(\varphi)\neq 1$ for some v.a. $\hat{a}$ over $\D$.
+% \end{enumerate}
+%
+
+
+
+
+
+\end{document}
+

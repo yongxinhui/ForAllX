@@ -407,10 +407,11 @@
 %\newcommand{\substitutesome}[2]{\hspace{.15em}\raisebox{.4ex}{\fbox{\fbox{$#1\Rightarrow#2$}}}}
 
 %Logic book notation for substitution instance, note that constant is written second when calling the command, in order to flip Ichikawa commands:
-\newcommand{\substitute}[2]{[#2/#1]}
+% \newcommand{\substitute}[2]{[#1/#2]}
+\newcommand{\unisub}[2]{[#1/#2]}
 
 %JH: idea to use ceiling notation since this looks like a partial bracket, mirroring a partial substitution instance
-\newcommand{\substitutesome}[2]{\mbox{$\lceil#2/#1\rceil$}}
+\newcommand{\freesub}[2]{(#1/#2)}
 
 %\newcommand{\substitutesome}[2]{\mbox{$\lceil#2/#1\rfloor$}}
 
