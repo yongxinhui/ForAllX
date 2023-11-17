@@ -1,5 +1,5 @@
 ﻿%!TEX root = forallx-ubc.tex
-\chapter{Natural Deduction in QL}
+\chapter{Natural Deduction in QL$^=$}
 \label{ch.QLND}
 
 
@@ -304,93 +304,142 @@ Since the assumption given in line $1$ above has been discharged, the instantiat
   \label{sec:ExistElim}
 
 A sentence with an existential quantifier tells us that \textit{something} satisfies a given condition.
-For example, letting `$S$' regiment `is sad', the existential claim $\qt{\exists}{x} Sx$ asserts that something is sad.
-However, this existential claim does not tell us \textit{what} is sad, but rather only tells us that there is something that is sad.
-As a result, we cannot conclude that $Sa$ where $a$ names something in particular.
-For instance, consider the following incorrect derivation:
+For example, letting `$S$' regiment `is sad' and `$M$' regiment `is mad', the existential claims $\qt{\exists}{x} Sx$ and $\qt{\exists}{y} Sy$ say that something is sad and that something is mad but they don't tell us \textit{what} is sad or mad.
+In particular, we cannot conclude that the same thing is sad and mad.
+This worry can be brought out with the following incorrect derivation:
 
 \begin{proof}
-	\hypo{a}{\qt{\exists}{x} Rxx} \pr{}
-	\hypo{b}{\qt{\exists}{y} My} \pr{}
-	\have{c}{Raa} \Ee{a}
-	\have{d}{Ma} \by{$\exists$E (\textsc{incorrect})}{b} 
-  \have{e}{Raa \eand Ma} \ai{c,d}
-  \have{f}{\qt{\exists}{z}(Rzz \eand Mz)} \Ei{e}
+  \hypo{b}{\qt{\exists}{x} Sx} \pr{}
+	\hypo{a}{\qt{\exists}{y} My} \pr{}
+  \have{d}{Sa} \by{$\exists$I (\textsc{incorrect})}{b} 
+  \have{c}{Ma} \by{$\exists$I (\textsc{incorrect})}{a}
+  \have{e}{Sa \eand Ma} \ai{c,d}
+  \have{f}{\qt{\exists}{z}(Sz \eand Mz)} \Ei{e}
 \end{proof}
 
-Nevertheless, given an arbitrary constant $a$, we can infer 
+Whereas $a$ is a perfectly arbitrary constant when it is introduced in line $3$, reusing $a$ in line $4$ leads to the conclusion that the same thing is both sad and mad.
+Were we permitted to introduce lines $3$ and $4$ in this way, nothing would stop us from conjoining these claims and existentially generalising, concluding that something is both sad and mad even though this might not be the case.
+For instance, one thing could be sad and something else could be mad where nothing requires these to be the same thing. 
+Somehow we must prevent these two existential claims from running together as they do above.
 
-Suppose that we knew both $\qt{\exists}{x} Sx$ and $\qt{\forall}{x}(Sx \eif Tx)$. We could reason in this way:
+Although it is important to avoid concluding too much, this does not mean that we cannot draw any inferences at all from an existential claim.
+For instance, suppose that we knew that $\qt{\exists}{x} Sx$ and $\qt{\forall}{x}(Sx \eif Mx)$, or in English, something is sad and, moreover, everything that is sad is also mad.
+It is natural to reason in the following way:
+
 \begin{quote}
-Since $\qt{\exists}{x} Sx$, there is something that is an $S$. We do not know which constants refer to this thing, if any do, so call this thing `Ishmael'. From $\qt{\forall}{x}(Sx \eif Tx)$, it follows that if Ishmael is an $S$, then it is a $T$. Therefore, Ishmael is a $T$.  Because Ishmael is a $T$, we know that $\qt{\exists}{x} Tx$.
+  By assumption, something is sad.
+  Although we do not know what that things is, call it `Bob' for the purposes of this argument.
+  We also know by assumption that everything that is sad is mad.
+  In particular, if Bob is sad, then Bob is mad.
+  Thus Bob is mad.
+  Since `Bob' was a name we introduced only for the sake of the argument, we may revert to the more general claim that something is mad.
 \end{quote}
-In this paragraph, we introduced a name for the thing that is an $S$. We gave it an arbitrary name (`Ishmael') so that we could reason about it and derive some consequences from there being an $S$. Since `Ishmael' is just a bogus name introduced for the purpose of the proof and not a genuine constant, we could not mention it in the conclusion. Yet we could derive a sentence that does not mention Ishmael; namely, $\qt{\exists}{x} Tx$. This sentence does follow from the two premises.
 
-We want the existential elimination rule to work in a similar way. Yet since English language words like `Ishmael' are not symbols of QL, we cannot use them in formal proofs. Instead, just as we did in the analogous rule within our tree system, we will use names that are \emph{new} --- names which do not appear anywhere else in the proof. (This includes the conclusion you are aiming for.)
+Especially for long lines of reasoning, it is often useful to introduce a temporary constant in the manner employed above.
+In particular, we want the constant to be arbitrary, and so it cannot occur in any previous assumptions.
+At the same time, we also need to keep track of this constant, being careful not to make any other assumptions about the object to which this temporary constant refers, or to draw any conclusions which include this constant.
 
-A constant that is used to stand in for whatever it is that satisfies an existential claim is called a \define{proxy}. Reasoning with the proxy must all occur inside a subproof, and the proxy cannot be a constant that is doing work elsewhere in the proof.
-
+It will be convenient to refer to an arbitrary constant that is used to temporarily refer to whatever it is that satisfies an existential claim as a \define{proxy}.
+Accordingly, our use of a proxy must be restricted to a subproof, where it is in this sense arbitrary and temporary.
 This is the schematic form of the existential elimination rule ($\exists$E): 
 
 \begin{proof}
-	\have[m]{a}{\qt{\exists}{\script{x}}\metaA{}}
+	\have[m]{a}{\qt{\exists}{\alpha}\metaA}
 	\open	
-		\hypo[n]{b}{\metaA{}\unisub{x}{c^\ast}} \as{for $\exists${}E}
-		\have[p]{c}{\metaB{}}
+    \hypo[n]{b}{\metaA\unisub{\beta}{\alpha}} \as{\strut\hspace{.07in}where $\beta$ is a constant and does not in occur}
+    \have[ ]{x}{\vdots} \by{\strut\hspace{.4in}lines $m$, $p$, or any undischarged assumptions}{}
+		\have[p]{c}{\metaB}
 	\close
 	\have[\ ]{d}{\metaB{}} \Ee{a,b-c}
 \end{proof}
-$^\ast$ \textbf{The constant \script{c} must not appear outside the subproof} {\color{black} (Unless it only appears in a completely separate subproof that has been closed!)}. Remember that the proxy constant cannot appear in \metaB{}, the sentence you prove using $\exists$E. 
-%Ichikawa uses a shorthand restriction for \exists Elimination. 
 
-Technically, there are three minimal restrictions required for existential elimination (but you might find the shorthand gloss above in bold easier to remember): \\ (1) the proxy constant \script{c} does not appear in any undischarged assumption that our instantiated sentence \metaA{}\unisub{x}{c} is in the scope of \\ (2)   \script{c} does not occur in $\qt{\exists}{\script{x}}\metaA{}$ \\ (3) \script{c} does not occur in the conclusion of the subproof \metaB{}. 
+The restriction on what $\beta$ can be is what prevents $\exists$E from producing invalid arguments as brought out above. 
+One easy way to satisfy these restrictions is to always choose a new instantiating constant $\beta$ that does not appear anywhere outside the subproof. 
+This practice is in keeping with the idea that $\beta$ is an arbitrary place holder that we make temporary use of inside a subproof in order to expedite the lines of reasoning that we wish to draw.
 
-Nonetheless, in recognition of the fact that \script{c} is just a place holder that we use inside the subproof, {\color{black} the easiest way to stay out of trouble is to \textbf{always use an entirely new constant which does not appear anywhere else in the proof}. That way you'll automatically satisfy these three restrictions. Don't be toxic, use a new constant!}
+Like the rules for conditional introduction, negation introduction, and negation elimination, the existential elimination rule is a rule that involves discharging an assumption.
+The pattern is to assume a substitution instance with a proxy, reason your way to a conclusion that does not include that proxy, and then discharge the assumption, closing the subproof.
 
-The existential elimination rule, like the rules for conditional introduction and negation introduction and elimination, is a rule that involves discharging an assumption. Assume a proxy instance, and see what would follow from that instance. {\color{black} You then derive the sentence of your dreams \metaB{} (possibly any sentence! provided it doesn't contain the proxy constant). Then you can pop out of the subproof and justify that badboy \metaB{} by the rule $\exists$E. Your proxy constant is a ladder to be kicked away. (Whereof we cannot speak, thereof we must be silent).}  
-
-As with those other assumption-involving rules, instead of a justification, one includes a note---in this case, `:AS for $\exists${}E'---about the role of the assumption in the proof {\color{black} (remember that to keep \textit{Carnap} happy, \textbf{you gotta include that pesky `:AS'}. The note is optional, but helps out your grader by communicating your purest intentions!)}. Remember that assumptions must be discharged before your proof is complete, so you should only make an assumption that goes beyond your premises when you have a plan for discharging it.
-
-% If you have the existential, then, you can stop making the assumption about the proxy, and help yourself to what would have followed from it.
-%JH: following sentence does not make sense to me, since we draw the horizontal line when we INTRODUCE the assumption, not discharge it!: We draw the horizontal line at the point where the assumption is discharged, defining a box of lines that were only conditionally derived. 
-
-
-With this rule, we can give a formal proof that $\qt{\exists}{x} Sx$ and $\qt{\forall}{x}(Sx \eif Tx)$ together entail $\qt{\exists}{x} Tx$.
+Having introduced the existential elimination rule, we are now in a position to regiment the informal argument given above in which `Bob' served as our proxy.
 
 \begin{proof}
 	\hypo{es}{\qt{\exists}{x} Sx} \pr{}
-	\hypo{ast}{\qt{\forall}{x}(Sx \eif Tx)}\pr{want $\qt{\exists}{x} Tx$} 
+	\hypo{ast}{\qt{\forall}{x}(Sx \eif Mx)} \pr{} 
 	\open
-		\hypo{s}{Sa}\as{for $\exists${}E}
-		\have{st}{Sa \eif Ta}\Ae{ast}
-		\have{t}{Ta} \ce{s,st}
-		\have{et1}{\qt{\exists}{x} Tx}\Ei{t}
+		\hypo{s}{Sa}\as{}
+		\have{st}{Sa \eif Ma}\Ae{ast}
+		\have{t}{Ma} \ce{s,st}
+		\have{et1}{\qt{\exists}{x} Mx}\Ei{t}
 	\close
 	\have{et2}{\qt{\exists}{x} Tx}\Ee{es,s-et1}
 \end{proof}
 
+Given the introduction and elimination rules for both the existential and universal quantifiers, we may turn to derive the quantifier exchange rules which will often be useful.
 
-\iffalse
 
-% Following proof uses the \prs and \ass commands, which require double braces {}{}: 
+
+
+\subsection{Quantifier Exchange Rules}
+
+Sentences of the form $\enot\qt{\exists}{\alpha}\metaA$ and $\qt{\forall}{\alpha}\enot\metaA$ are logically equivalent, as are sentences of the form $\enot\qt{\forall}{\alpha}\metaA$ and $\qt{\exists}{\alpha}\enot\metaA$.
+Accordingly, we may assert the following entailments: 
+
+\vspace{.1in}
+\begin{enumerate}[leftmargin=.75in]
+  \begin{multicols}{2}
+    \item[$(\enot\exists)$] $\enot\qt{\exists}{\alpha}\metaA \vDash \qt{\forall}{\alpha}\enot\metaA$.
+    \item[$(\enot\forall)$] $\enot\qt{\forall}{\alpha}\metaA \vDash \qt{\exists}{\alpha}\enot\metaA$.
+    \item[$(\forall\enot)$] $\qt{\forall}{\alpha}\enot\metaA \vDash \enot\qt{\exists}{\alpha}\metaA$.
+    \item[$(\exists\enot)$] $\qt{\exists}{\alpha}\enot\metaA \vDash \enot\qt{\forall}{\alpha}\metaA$.
+  \end{multicols}
+\end{enumerate}
+\vspace{-.05in}
+
+Given the introduction and elimination rules for the quantifiers, we may derive rules which correspond to these entailments.
+Consider the following proof for $(\enot\exists)$:
 
 \begin{proof}
-	\hypo{es}{\qt{\exists}{x} Sx} \prs{}{}
-	\hypo{ast}{\qt{\forall}{x}(Sx \eif Tx)}\prs{want $\qt{\exists}{x} Tx$}{} 
-	\open
-		\hypo{s}{Sa}\ass{for $\exists${}E}{}
-		\have{st}{Sa \eif Ta}\Ae{ast}
-		\have{t}{Ta} \ce{s,st}
-		\have{et1}{\qt{\exists}{x} Tx}\Ei{t}
-	\close
-	\have{et2}{\qt{\exists}{x} Tx}\Ee{es,s-et1}
+	\hypo{a}{\enot\qt{\exists}{\alpha} \metaA}      \pr{}
+    \open
+      \hypo{b}{\metaA\unisub{\beta}{\alpha}}      \as{where $\beta$ is a new constant}
+      \have{c}{\qt{\exists}{\alpha} \metaA}       \Ei{b}
+      \have{d}{\enot\qt{\exists}{\alpha} \metaA}  \r{a}
+    \close
+  \have{e}{\enot\metaA\unisub{\beta}{\alpha}}     \ni{b-d}
+  \have{f}{\qt{\forall}{\alpha}\enot\metaA}       \Ai{e}
 \end{proof}
 
-\fi 
+This proof works by instantiating $\metaA$ with a new constant $\beta$ in line $2$, and then existentially generalising on $\beta$ in order to derive a contradiction, where $\enot\metaA\unisub{\beta}{\alpha}$ follows by negation introduction. 
+Since $\beta$ does not occur in any undischarged assumptions, we may universally generalise on $\beta$ in order to derive the conclusion in line $6$. 
 
-\subsection{Quantifier Negation}
+Consider the following proof of the $(\forall\enot)$ which works in the opposite direction: 
 
-$\enot\qt{\exists}{\script{x}}\enot\metaA{}$ is logically equivalent to $\qt{\forall}{\script{x}}\metaA{}$. {\color{black} The first sentence says that it is not the case that there is something that falsifies \metaA{}, i.e. there is nothing that is not a \metaA{}. Even shorter:} it says that \emph{nothing falsifies} \metaA{}. The second sentence says \emph{everything satisfies} \metaA{}: everything is such that it is a \metaA{}. In QL, these two sentences are provably equivalent. Here is a proof schema for half of that equivalence via a natural deduction reductio. For any wff \metaA{}, variable \script{x}, and new name \script{a}:
+\begin{proof}
+	\hypo{a}{\enot\qt{\forall}{\alpha} \metaA}      \pr{}
+    \open
+      \hypo{b}{\qt{\exists}{\alpha}\metaA}        \as{}
+      \have{c}{\metaA\unisub{\beta}{\alpha}}      \by{$\exists$E where $\beta$ is a new constant}{b}
+      \have{d}{\enot\qt{\forall}{\alpha} \metaA}  \r{a}
+    \close
+  \have{e}{\enot\metaA\unisub{\beta}{\alpha}}     \ni{b-d}
+  \have{f}{\qt{\forall}{\alpha}\enot\metaA}       \ni{e}
+\end{proof}
+
+
+
+Consider the following proof for $(\enot\exists)$:
+
+\begin{proof}
+	\hypo{a}{\enot\qt{\exists}{\alpha} \metaA}      \pr{}
+    \open
+      \hypo{b}{\metaA\unisub{\beta}{\alpha}}      \as{where $\beta$ is a new constant}
+      \have{c}{\qt{\exists}{\alpha} \metaA}       \Ei{b}
+      \have{d}{\enot\qt{\exists}{\alpha} \metaA}  \r{a}
+    \close
+  \have{e}{\enot\metaA\unisub{\beta}{\alpha}}     \ni{b-d}
+  \have{f}{\qt{\forall}{\alpha}\enot\metaA}       \ni{e}
+\end{proof}
+
 
 
 \begin{proof}

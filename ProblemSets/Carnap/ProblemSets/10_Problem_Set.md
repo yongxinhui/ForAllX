@@ -59,8 +59,9 @@ When (and only when) you are happy with your answer, click the `Submit` button. 
 
 ###Problems 1 and 2 
 
-*Predicate schemas**:
+**Symbolization Key**:
 
+- $b$:	Barbara
 - $Ey$:	$y$ will travel to Europe.   
 - $Py$:	$y$ will travel to Portugal.         
 - $Hx$:	$x$ will stay home.     

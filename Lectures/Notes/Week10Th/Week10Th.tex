@@ -63,7 +63,7 @@
 %	TITLE
 %----------------------------------------------------------------------------------------
 
-\title{\textbf{Quantified Logic with Identity}} % Subtitle
+\title{\textbf{Uniqueness and Quantity}} % Subtitle
 
 \author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
 
@@ -106,15 +106,15 @@
     \begin{itemize}
       \item Socrates is guilty.
       \item Socrates is not guilty.
-      \item Socrates is guilty or Socrates is not guilty.
+      \item Socrates is guilty or not.
     \end{itemize}
   \item[\bf Question 2:] Regiment the following sentences.
     \begin{itemize}
-      \item The king of France is Bald.
+      \item The king of France is bald.
       \item The king of France is not bald.
-      \item The king of France is bald or the king of France is not bald.
+      \item The king of France is bald or not.
     \end{itemize}
-  \item[\bf Question 3:] Which of the sentences above are contingent?
+  \item[\bf Question 3:] What is the difference between these two cases?
   \item[\it Existence:] If the king of France is Bald, then the king of France exists.
   \item[\it Definite Article:] `The king of France' can't be a name.
   \item[\it Regimentation:] Russell offered the following analysis:
@@ -126,7 +126,7 @@
   \item[\bf Task 1:] Regiment the following:
   \item Superman is keeping something from his lover.
   % \item The Queen of spades is a black card.
-  \item The man with the axe is not a Jack.
+  \item The man with the axe is not Jack.
   \item The Ace of diamonds is not the man with the axe.
   \item One-eyed jacks and the man with the axe are wild.
   \item No spy knows the combination to the safe.
@@ -176,7 +176,7 @@
   \item[\it Definition:] We may define the following abbreviations recursively:
     \begin{itemize}
       \item[\it Base:] $\qt{\exists_{\geq 1}}{\alpha}\varphi \coloneq \qt{\exists}{\alpha}\varphi$.
-      \item[\it Recursive:] $\qt{\exists_{\geq n+1}}{\alpha}\varphi \coloneq \qt{\exists}{\alpha}(\varphi \wedge \qt{\exists_{\geq n}}{\beta}(\alpha \neq \beta \wedge \varphi\unisub{\beta}{\alpha})).$
+      \item[\it Recursive:] $\qt{\exists_{\geq n+1}}{\alpha}\varphi \coloneq \qt{\exists}{\alpha}(\varphi \wedge \qt{\exists_{\geq n}}{\beta}(\alpha \neq \beta \wedge \varphi\unisub{\beta}{\alpha}))$ where $\beta$ is free for $\alpha$. 
     \end{itemize}
   \item[\it Infinite:] $\Gamma_{\infty} \coloneq \set{\qt{\exists_{\geq n}}{x}(x=x): n\in\mathbb{N}}$.
   \item[\bf Question 5:] What is the smallest model to satisfy $\Gamma_\infty$?
@@ -198,8 +198,8 @@
 \begin{enumerate}
   \item[\bf Task 3:] Regiment the following.
   \item There is one wild card.
+  \item There are two winning hands.
   \item There are three hearts on the table.
-  \item If the deuce of clubs is wild, then there is exactly one wild card.
   \item[\bf Question 6:] How can we define the cardinality quantifiers in general?
   \item[\it Base:] $\qt{\exists_0}{\alpha}\varphi \coloneq \qt{\forall}{\alpha}\neg\varphi$.
   \item[\it Recursive:] $\qt{\exists_{n+1}}{\alpha}\varphi \coloneq \qt{\exists}{\alpha}(\varphi \wedge \qt{\exists_n}{\beta}(\alpha \neq \beta \wedge \varphi\unisub{\beta}{\alpha}))$.
@@ -238,6 +238,7 @@
 
 \begin{enumerate}
 \item Show that $\set{{\neg}Raa, \qt{\forall}{x} (x{=}a \vee Rxa)}$ is satisfiable. 
+  \item Show that $\set{{\neg}Raa, \qt{\forall}{x} (x{=}a \vee Rxa), \qt{\forall}{x}\qt{\exists}{y}Rxy}$ is satisfiable. 
 % \item Show that $\set{\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z}(x{=}y \vee y{=}z \vee x{=}z),\qt{\exists}{x}\qt{\exists}{y}\ x{\neq} y}$ is satisfiable.
 \item Show that $\qt{\forall}{x}\qt{\forall}{y}\ x{=}y \vdash \neg \qt{\exists}{x}\ x \neq a$.
 % \item Show that $\qt{\exists}{x} (x {=} h \wedge x {=} i)$ is contingent.

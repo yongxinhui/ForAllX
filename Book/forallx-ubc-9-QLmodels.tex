@@ -4,13 +4,9 @@
 \chaptermark{Semantics for QL}
 %see here: looks complicated:
 %https://tex.stackexchange.com/questions/476957/capitalize-first-letter-of-words-in-chapter-mark
-
 % Need to figure out how to capitalize `QL' in the running header, maybe need to define a special label (like i did in dissertation)
 
-%JH: when ichikawa talks about `defining truth' in this chapter and for SL, what he really means is defining truth CONDITIONS
-%logic of variable assignments and satisfiability semantics: we are temporarily making variables into constants: assigning a constant to each individual variable. basically converting open sentences (those with free variables) into wffs so that we can assign them truth-values. 
-
-%gameplan is to rewrite the truth-condition seciton using Logic Book Section 8.1, especially pages 338 and 339 which really do a much better job explaining this stuff. Should also make clear, like the logic book does, that one does not need to understand this bit of formal semantics to appreciate the important semantic notions of entailment, validity, and consistency in QL. For those, suffices to understand notion of truth in a model. 
+% TODO: add quantifier exchange entailments in anticipation of the derived natural deduction rules
 
 In this chapter, we will provide a \emph{semantics} for QL in much the same way that we did for SL.
 Like truth in SL, truth in QL is determined by an interpretation.
@@ -760,8 +756,8 @@ Since $\va{g_1}$ was an $x$-variant of $\va{g}$, we know that $\va{g}(y)=\va{g_1
 
 
 
-\section{Reasoning About all Models}
-  \label{sec.somemodelreasoning}
+\section{Particular Models}
+  \label{sec:ParticularModels}
 
 We have already seen some tricky examples that require reasoning about all models.
 It remains to evaluate sentences at particular models.
