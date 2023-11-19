@@ -97,7 +97,7 @@ The $F$ is not a $G$\scriptsize{(-Unit!)}. & $\qt{\exists}{x}(Fx \eand \qt{\fora
 
 \label{Tree Rules}
 %{\hfill \normalsize \bf \phantom{Tree Rules} \hfill}
-{\hfill \normalsize \bf Tree Rules for Sentential Logic (System STD) \hfill}
+{\hfill \normalsize \bf Tree Rules for Sentential Logic (System ST) \hfill}
 
 %page on how to override line numbers: 
 % https://tex.stackexchange.com/questions/415976/manually-set-line-numbers-if-prooftrees-sty
@@ -472,7 +472,7 @@ single branches}
 \end{multicols}
 
 
-\fi 
+% \fi 
 
 \newpage
 
@@ -486,7 +486,7 @@ single branches}
 \begin{prooftree}
 {not line numbering}
 [\qt{\exists}{\script{x}}\metaA{}, checked={\script{a}}
-	[\metaA{}\substitute{\script{x}}{\script{a}}]
+	[\metaA{}\unisub{\script{x}}{\script{a}}]
 ]
 \end{prooftree}
 
@@ -500,7 +500,7 @@ single branches}
 \begin{prooftree}
 {not line numbering}
 [\qt{\forall}{\script{x}}\metaA{}, subs=\script{a} 
-	[\metaA{}\substitute{\script{x}}{\script{a}}
+	[\metaA{}\unisub{\script{x}}{\script{a}}
 	]
 ]
 \end{prooftree}
@@ -514,7 +514,7 @@ for any \script{a}
 \begin{prooftree}
 {not line numbering}
 [\enot\qt{\exists}{\script{x}}\metaA{}, subs=\script{a} 
-	[\enot\metaA{}\substitute{\script{x}}{\script{a}}
+	[\enot\metaA{}\unisub{\script{x}}{\script{a}}
 	]
 ]
 \end{prooftree}
@@ -529,7 +529,7 @@ for any \script{a}
 \begin{prooftree}
 {not line numbering}
 [\enot\qt{\forall}{\script{x}}\metaA{}, checked={\script{a}}
-	[\enot\metaA{}\substitute{\script{x}}{\script{a}}
+	[\enot\metaA{}\unisub{\script{x}}{\script{a}}
 	]
 ]
 \end{prooftree}
@@ -543,7 +543,7 @@ for any \script{a}
 \textbf{\large Identity Rules} (chapter \ref{ch.identity})
 
 
-If a branch contains an identity claim \script{a}{=}\script{b} and some sentence \metaA{}, then you may add \metaA{}\substitute{\script{a}}{\script{b}} or \metaA{}\substitute{\script{b}}{\script{a}} to the branch.
+If a branch contains an identity claim \script{a}{=}\script{b} and some sentence \metaA{}, then you may add \metaA{}\unisub{\script{a}}{\script{b}} or \metaA{}\unisub{\script{b}}{\script{a}} to the branch.
 
 A branch is \define{complete} if and only if (i) it is closed or (ii) the following conditions are met:
 \begin{enumerate}
@@ -551,8 +551,8 @@ A branch is \define{complete} if and only if (i) it is closed or (ii) the follow
 \item For every general quantified sentence \metaA{} and every name \script{a} in the branch, the \script{a} instance of \metaA{} is in the branch; and
 \item For every identity claim $\script{a}{=}\script{b}$ in the branch, either:
 	\begin{enumerate}
-	\item for every atomic sentence or negated atomic sentence \metaA{} containing \script{a} in the branch, \metaA{}\substitute{\script{a}}{\script{b}} is in the branch, or 
-	\item for every atomic sentence or negated atomic sentence \metaA{} containing \script{b} in the branch, \metaA{}\substitute{\script{b}}{\script{a}} is in the branch.
+	\item for every atomic sentence or negated atomic sentence \metaA{} containing \script{a} in the branch, \metaA{}\unisub{\script{a}}{\script{b}} is in the branch, or 
+	\item for every atomic sentence or negated atomic sentence \metaA{} containing \script{b} in the branch, \metaA{}\unisub{\script{b}}{\script{a}} is in the branch.
 	\end{enumerate}
 \end{enumerate}
 
@@ -592,14 +592,14 @@ A branch closes if and only if either (i) it contains some sentence \metaA{} alo
 % eliminate page numbers
 
 
-
+\fi
 
 
 %\pagestyle{empty} %turns off page numbers!
 
 
 
-\section*{\hfill \normalsize \bf Derivation Rules of Natural Deduction (System SND) \hfill} 
+\section*{\hfill \normalsize \bf Derivation Rules of Natural Deduction (System SD) \hfill} 
 \label{nd-proofrules}
 				
 				\vspace{-1em}
@@ -789,17 +789,17 @@ A branch closes if and only if either (i) it contains some sentence \metaA{} alo
 
 %\pagestyle{empty}
 
-\section*{\hfill \normalsize \bf Derivation Rules of Natural Deduction System QND \hfill} 
+\section*{\hfill \normalsize \bf Derivation Rules of Natural Deduction System QD \hfill} 
 \label{nd-proofrules}
 				
 				\vspace{-1em}
 				
-All the rules of SND, plus the following rules for the quantifiers! The rules of SND govern inferences where the main logical operator is one of the connectives from {\it{SL}}. Reiteration is also allowed.
+All the rules of SD, plus the following rules for the quantifiers! The rules of SD govern inferences where the main logical operator is one of the connectives from {\it{SL}}. Reiteration is also allowed.
 
 %JH preferred substitution notation, from Logic Book: $\metaA{}[\script{c} / \script{x}]$
-%Note that you can modify \substitute command in the style file to toggle styles. 
+%Note that you can modify \unisub command in the style file to toggle styles. 
 
-Recall: $\metaA{}\substitute{\script{x}}{\script{c}}$ is the sentence you get from $\qt{\forall}{\script{x}}\metaA{}$ by dropping the $\qt{\forall}{\script{x}}$ quantifier and putting $\script{c}$ in place of every $\script{x}$ in $\metaA{}$. The other variables are untouched! Equivalent notation: \metaA{}\hspace{.15em}\raisebox{.3ex}{\fbox{$\script{x}\Rightarrow\script{c}$}}. But we'll write things out long-hand in the schemata below! 
+Recall: $\metaA{}\unisub{\script{x}}{\script{c}}$ is the sentence you get from $\qt{\forall}{\script{x}}\metaA{}$ by dropping the $\qt{\forall}{\script{x}}$ quantifier and putting $\script{c}$ in place of every $\script{x}$ in $\metaA{}$. The other variables are untouched! Equivalent notation: \metaA{}\hspace{.15em}\raisebox{.3ex}{\fbox{$\script{x}\Rightarrow\script{c}$}}. But we'll write things out long-hand in the schemata below! 
 
 % (${\bm{P[a/x]}}$  is the sentence you get from $(\qt{\forall}{x}) {\bm{P}}$ by dropping the $(\qt{\forall}{x}) $ quantifier and putting ${\bf{a}}$ in the place of every $x$ in ${\bm{P}}$)
 
@@ -813,7 +813,7 @@ Recall: $\metaA{}\substitute{\script{x}}{\script{c}}$ is the sentence you get fr
 	\have[m]{a}{\qt{\forall}{\script{x}}\metaA{}(\dots \script{x} \dots \script{x} \dots)}
 	\have [\vdots] {n} {\hspace{2em} \vdots}
 	\have[s]{c}{\metaA{}(\dots \script{c} \dots \script{c} \dots)} \Ae{a}
-	%\have[\ ]{c}{\metaA{}\substitute{\script{x}}{\script{c}}} \Ae{a}
+	%\have[\ ]{c}{\metaA{}\unisub{\script{x}}{\script{c}}} \Ae{a}
 \end{proof}
 
 \phantom{We replace every $\script{x}$ variable  in \metaA{} with the same constant $\script{c}$. I.e. we go from $\qt{\forall}{\script{x}}\metaA{}$ to $\metaA{}[\script{c} / \script{x}]$. Other variables are untouched.} 
@@ -887,9 +887,9 @@ Recall: $\metaA{}\substitute{\script{x}}{\script{c}}$ is the sentence you get fr
 All the rules of SND, plus the following rules for the quantifiers! The rules of SND govern inferences where the main logical operator is one of the connectives from {\it{SL}}. Reiteration is also allowed.
 
 %JH preferred substitution notation, from Logic Book: $\metaA{}[\script{c} / \script{x}]$
-%Note that you can modify \substitute command in the style file to toggle styles. 
+%Note that you can modify \unisub command in the style file to toggle styles. 
 
-Recall: $\metav{Q}\substitute{\script{x}}{\script{c}}$ is the sentence you get from $\qt{\forall}{\script{x}}\metav{Q}$ by dropping the $\qt{\forall}{\script{x}}$ quantifier and putting $\script{c}$ in place of every $\script{x}$ in $\metav{Q}$. The other variables are untouched! Equivalent notation: \metav{Q}\hspace{.15em}\raisebox{.3ex}{\fbox{$\script{x}\Rightarrow\script{c}$}}. But we'll write things out long-hand in the schemata below! 
+Recall: $\metav{Q}\unisub{\script{x}}{\script{c}}$ is the sentence you get from $\qt{\forall}{\script{x}}\metav{Q}$ by dropping the $\qt{\forall}{\script{x}}$ quantifier and putting $\script{c}$ in place of every $\script{x}$ in $\metav{Q}$. The other variables are untouched! Equivalent notation: \metav{Q}\hspace{.15em}\raisebox{.3ex}{\fbox{$\script{x}\Rightarrow\script{c}$}}. But we'll write things out long-hand in the schemata below! 
 
 % (${\bm{P[a/x]}}$  is the sentence you get from $(\qt{\forall}{x}) {\bm{P}}$ by dropping the $(\qt{\forall}{x}) $ quantifier and putting ${\bf{a}}$ in the place of every $x$ in ${\bm{P}}$)
 
@@ -902,8 +902,8 @@ Recall: $\metav{Q}\substitute{\script{x}}{\script{c}}$ is the sentence you get f
 \begin{proof}
 	\have[m]{a}{\qt{\forall}{\script{x}}\metav{Q}}
 	\have [\vdots] {n} {\hspace{2em} \vdots}
-	\have[s]{c}{\metav{Q}\substitute{\script{x}}{\script{c}}} \Ae{a}
-	%\have[\ ]{c}{\metaA{}\substitute{\script{x}}{\script{c}}} \Ae{a}
+	\have[s]{c}{\metav{Q}\unisub{\script{x}}{\script{c}}} \Ae{a}
+	%\have[\ ]{c}{\metaA{}\unisub{\script{x}}{\script{c}}} \Ae{a}
 \end{proof}
 
 \phantom{We replace every $\script{x}$ variable  in \metav{Q} with the same constant $\script{c}$. I.e. we go from $\qt{\forall}{\script{x}}\metav{Q}$ to $\metav{Q}[\script{c} / \script{x}]$. Other variables are untouched.} 
@@ -915,7 +915,7 @@ Recall: $\metav{Q}\substitute{\script{x}}{\script{c}}$ is the sentence you get f
 \begin{proof}
 	\have[m]{a}{\metav{Q}}
 	\have [\vdots] {n} {\hspace{2em} \vdots}
-	\have[s]{c}{\qt{\forall}{\script{x}}\metav{Q}\substitute{\script{c}}{\script{x}}} \Ai{a}
+	\have[s]{c}{\qt{\forall}{\script{x}}\metav{Q}\unisub{\script{c}}{\script{x}}} \Ai{a}
 \end{proof}
 
 \textbf{Provided that both} \\
@@ -933,7 +933,7 @@ Recall: $\metav{Q}\substitute{\script{x}}{\script{c}}$ is the sentence you get f
 \begin{proof}
 \have[m]{a}{\metav{Q}}
 	\have [\vdots] {n} {\hspace{2em} \vdots}
-\have[s]{c}{\qt{\exists}{\script{x}}\metav{Q}\substitutesome{c}{\script{x}}} \Ei{a}
+\have[s]{c}{\qt{\exists}{\script{x}}\metav{Q}\freesub{c}{\script{x}}} \Ei{a}
 \end{proof}
 
 \textbf{Provided that} $\script{x}$ does not occur already in $\metav{Q}(\dots \script{c} \dots \script{c} \dots)$. Note that $\script{x}$ may replace some or all occurrences of $\script{c}$.
@@ -948,7 +948,7 @@ Recall: $\metav{Q}\substitute{\script{x}}{\script{c}}$ is the sentence you get f
 	\have[m]{a}{\qt{\exists}{\script{x}} \metav{Q}}
 	\have [\ ] {n} {\hspace{2em} \vdots}
 	\open	
-		\hypo[n]{b}{\metav{Q}\substitute{\script{x}}{\script{c}}} \as{for $\exists$E}
+		\hypo[n]{b}{\metav{Q}\unisub{\script{x}}{\script{c}}} \as{for $\exists$E}
 		\have [\ ] {n2} {\hspace{2em} \vdots}
 		\have[s]{c}{\metaB{}}
 	\close
@@ -1018,8 +1018,8 @@ Recall: $\metav{Q}\substitute{\script{x}}{\script{c}}$ is the sentence you get f
 \begin{proof}
 	\have[m]{e}{\script{c}{=}\script{d}}
 	\have[n]{a}{\metaA{}}
-	\have[\ ]{ea1}{\metaA{}\substitutesome{\script{c}}{\script{d}}} \by{=E}{e,a}
-	\have[\ ]{ea2}{\metaA{}\substitutesome{\script{d}}{\script{c}}} \by{=E}{e,a}
+	\have[\ ]{ea1}{\metaA{}\freesub{\script{c}}{\script{d}}} \by{=E}{e,a}
+	\have[\ ]{ea2}{\metaA{}\freesub{\script{d}}{\script{c}}} \by{=E}{e,a}
 \end{proof}
 
 \begin{footnotesize}\emph{One constant may replace some or all occurrences of the other.}

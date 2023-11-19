@@ -40,7 +40,7 @@ Satisfaction conditions for \textbf{Universally Quantified} wff $\qt{\forall}{x}
 
 \textbf{Truth-in-QL}: A sentence $\metav{P}$ of QL is \emph{true} on model $\mathfrak{M}$ iff some variable assignment $d_I$ satisfies $\metav{P}$ in $\mathfrak{M}$. In this case, we write $\mathfrak{M} \entails \metav{P}$. Otherwise, a sentence $\metav{P}$ of QL is \emph{false} on model $\mathfrak{M}$, i.e. if no variable assignment $d_I$ satisfies $\metav{P}$ in $\mathfrak{M}$.
 
-\textbf{Substitution Lemma} (11.1.1): let $\metav{Q}$ be a wff of QL. The variable assignment $d_I$ satisfies $\metav{Q}\substitute{\script{x}}{\script{c}}$ if and only if $d_I [I(\script{c})/\script{x}]$ satisfies $\metav{Q}$ (intuition: $\script{x}$ refers to the same thing as $\script{c}$) \\ e.g. let $\metav{Q}=Fxx$, then $\metav{Q}\substitute{x}{c} = Fcc$. Let $I(c)$ be some object $r\in D$ s.t. $\langle (r,r) \rangle \in Ext(F)$
+\textbf{Substitution Lemma} (11.1.1): let $\metav{Q}$ be a wff of QL. The variable assignment $d_I$ satisfies $\metav{Q}\unisub{\script{x}}{\script{c}}$ if and only if $d_I [I(\script{c})/\script{x}]$ satisfies $\metav{Q}$ (intuition: $\script{x}$ refers to the same thing as $\script{c}$) \\ e.g. let $\metav{Q}=Fxx$, then $\metav{Q}\unisub{x}{c} = Fcc$. Let $I(c)$ be some object $r\in D$ s.t. $\langle (r,r) \rangle \in Ext(F)$
 
 \textbf{Locality Lemma} (11.1.7): consider a QL-sentence $\metav{P}$ and two QL-models $\mathfrak{M}^1 := (D, I_1)$ and $\mathfrak{M}^2 := (D, I_2)$ with the same domain $D$, whose interpretation functions $I_1$ and $I_2$ give the same interpretations for any constants or predicates appearing in QL-sentence $\metav{P}$. \\ Then  $\mathfrak{M}^1 \entails \metav{P}$ if and only if $\mathfrak{M}^2 \entails \metav{P}$. (Note that any differences between $\mathfrak{M}^1$ and $\mathfrak{M}^2$ arise from how they interpret QL-symbols NOT appearing in $\metav{P}$).  
 
@@ -73,10 +73,10 @@ Satisfaction conditions for \textbf{Universally Quantified} wff $\qt{\forall}{x}
 All the rules of SND, plus the following quantifier rules. The rules of SND govern inferences where the main logical operator is one of the connectives from {\it{SL}}. Reiteration also allowed.
 
 %JH preferred substitution notation, from Logic Book: $\metaA{}[\script{c} / \script{x}]$
-%Note that you can modify \substitute command in the style file to toggle styles. 
+%Note that you can modify \unisub command in the style file to toggle styles. 
 
-\textbf{Substitution instance}: ``$\metav{Q}\substitute{\script{x}}{\script{c}}$'' is the sentence you get from $\qt{\forall}{\script{x}}\metav{Q}$ or $\qt{\exists}{\script{x}}\metav{Q}$ by dropping the quantifier and putting $\script{c}$ in place of every $\script{x}$ in $\metav{Q}$. The other variables are untouched! \\ Read ``$\substitute{x}{c}$'' as saying ``substitute $c$ for every $x$''\\[1ex]%Equivalent notation: \metav{Q}\hspace{.15em}\raisebox{.3ex}{\fbox{$\script{x}\Rightarrow\script{c}$}}. \\[1ex]
-\textbf{Partial Substitution instance}:``$\metav{Q}\substitutesome{\script{c}}{\script{x}}$'' is the sentence you get by replacing some but not necessarily all instances of the constant $\script{c}$ in $\metav{Q}$ with the variable $\script{x}$. \\ We may write ``$\metav{Q}[\script{c}]$'' to indicate that the constant $\script{c}$ appears in $\metav{Q}$
+\textbf{Substitution instance}: ``$\metav{Q}\unisub{\script{x}}{\script{c}}$'' is the sentence you get from $\qt{\forall}{\script{x}}\metav{Q}$ or $\qt{\exists}{\script{x}}\metav{Q}$ by dropping the quantifier and putting $\script{c}$ in place of every $\script{x}$ in $\metav{Q}$. The other variables are untouched! \\ Read ``$\unisub{x}{c}$'' as saying ``unisub $c$ for every $x$''\\[1ex]%Equivalent notation: \metav{Q}\hspace{.15em}\raisebox{.3ex}{\fbox{$\script{x}\Rightarrow\script{c}$}}. \\[1ex]
+\textbf{Partial Substitution instance}:``$\metav{Q}\freesub{\script{c}}{\script{x}}$'' is the sentence you get by replacing some but not necessarily all instances of the constant $\script{c}$ in $\metav{Q}$ with the variable $\script{x}$. \\ We may write ``$\metav{Q}[\script{c}]$'' to indicate that the constant $\script{c}$ appears in $\metav{Q}$
 %But we'll write things out long-hand in the schemata below! 
 
 % (${\bm{P[a/x]}}$  is the sentence you get from $(\qt{\forall}{x}) {\bm{P}}$ by dropping the $(\qt{\forall}{x}) $ quantifier and putting ${\bf{a}}$ in the place of every $x$ in ${\bm{P}}$)
@@ -90,8 +90,8 @@ All the rules of SND, plus the following quantifier rules. The rules of SND gove
 \begin{proof}
 	\have[h]{a}{\qt{\forall}{\script{x}}\metav{Q}}
 	\have [\vdots] {n} {\hspace{2em} \vdots}
-	\have[k+1]{c}{\metav{Q}\substitute{\script{x}}{\script{c}}} \Ae{a}
-	%\have[\ ]{c}{\metaA{}\substitute{\script{x}}{\script{c}}} \Ae{a}
+	\have[k+1]{c}{\metav{Q}\unisub{\script{x}}{\script{c}}} \Ae{a}
+	%\have[\ ]{c}{\metaA{}\unisub{\script{x}}{\script{c}}} \Ae{a}
 \end{proof}
 
 \phantom{We replace every $\script{x}$ variable  in \metav{Q} with the same constant $\script{c}$. I.e. we go from $\qt{\forall}{\script{x}}\metav{Q}$ to $\metav{Q}[\script{c} / \script{x}]$. Other variables are untouched.} 
@@ -103,12 +103,12 @@ All the rules of SND, plus the following quantifier rules. The rules of SND gove
 \begin{proof}
 	\have[h]{a}{\metav{Q}}
 	\have [\vdots] {n} {\hspace{2em} \vdots}
-	\have[k+1]{c}{\qt{\forall}{\script{x}}\metav{Q}\substitute{\script{c}}{\script{x}}} \Ai{a}
+	\have[k+1]{c}{\qt{\forall}{\script{x}}\metav{Q}\unisub{\script{c}}{\script{x}}} \Ai{a}
 \end{proof}
 
 \textbf{Provided that both} \\
 \textbf{(i)} $\script{c}$ does not occur in any undischarged assumptions that \metav{Q} is in the scope of. \\
-\textbf{(ii)} $\script{x}$ does not occur already in $\metav{Q}$ \\ (auto-enforced by needing to replace EVERY instance of $\script{c}$ with $\script{x}$  in \metav{Q}\substitute{\script{c}}{\script{x}})
+\textbf{(ii)} $\script{x}$ does not occur already in $\metav{Q}$ \\ (auto-enforced by needing to replace EVERY instance of $\script{c}$ with $\script{x}$  in \metav{Q}\unisub{\script{c}}{\script{x}})
 %I think the following is a mistake: $\script{c}$ does not occur already in $\forall \script{x}\metaA{}$. 
 
 
@@ -121,7 +121,7 @@ All the rules of SND, plus the following quantifier rules. The rules of SND gove
 \begin{proof}
 \have[h]{a}{\metav{Q}}
 	\have [\vdots] {n} {\hspace{2em} \vdots}
-\have[k+1]{c}{\qt{\exists}{\script{x}}\metav{Q}\substitutesome{\script{c}}{\script{x}}} \Ei{a}
+\have[k+1]{c}{\qt{\exists}{\script{x}}\metav{Q}\freesub{\script{c}}{\script{x}}} \Ei{a}
 \end{proof}
 
 Provided that $\script{x}$ does not occur in $\metav{Q}[\script{c}]$ (auto-enforced by (a) needing $\metav{Q}$ to be a sentence and (b) our recursion clause for QL-wffs) %\\ Note that $\script{x}$ may replace some or all occurrences of $\script{c}$.
@@ -136,7 +136,7 @@ Provided that $\script{x}$ does not occur in $\metav{Q}[\script{c}]$ (auto-enfor
 	\have[h]{a}{\qt{\exists}{\script{x}} \metav{Q}}
 	\have [\ ] {n} {\hspace{2em} \vdots}
 	\open	
-		\hypo[j]{b}{\metav{Q}\substitute{\script{x}}{\script{c}}} \as{for $\exists$E}
+		\hypo[j]{b}{\metav{Q}\unisub{\script{x}}{\script{c}}} \as{for $\exists$E}
 		\have [\ ] {n2} {\hspace{2em} \vdots}
 		\have[m]{c}{\metav{P}_{k+1}}
 	\close
@@ -145,7 +145,7 @@ Provided that $\script{x}$ does not occur in $\metav{Q}[\script{c}]$ (auto-enfor
 \end{fitchproof}
 
 \textbf{Provided that} \\
-(i)  $\script{c}$ does not occur in any other undischarged assumptions that \metav{Q}\substitute{\script{x}}{\script{c}} is in the scope of \\
+(i)  $\script{c}$ does not occur in any other undischarged assumptions that \metav{Q}\unisub{\script{x}}{\script{c}} is in the scope of \\
 (ii) $\script{c}$ does not occur already in $\qt{\exists}{\script{x}} \metav{Q}$ \\
 (iii) $\script{c}$ does not occur in $\metav{P}_{k+1}$ \\
 

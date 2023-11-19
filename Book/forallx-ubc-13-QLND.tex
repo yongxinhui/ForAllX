@@ -11,7 +11,7 @@
 This chapter extends our system SD to provide a natural deduction system for QL$^=$ which we will refer to as QD.
 % Like our natural deduction system for SL, our system can only be used to demonstrate that an argument \emph{is} valid since natural deduction systems do not demonstrate that an argument is \emph{invalid}.
 % In this respect natural deduction differs from trees.
-We won't go through the proof in this book, but QD is both sound and complete with respect to the semantics for QL$^=$.
+As we will show in later chapters, QD is both sound and complete with respect to the semantics for QL$^=$.
 That means that there are natural deduction proofs corresponding to all and only the valid arguments in QL$^=$.
 
 Our QL system will include the same introduction and elimination rules that we provided for the sentential connectives included in SL, but now we will add introduction and elimination rules for the quantifiers and identity, deriving a number of new rules.
@@ -31,12 +31,11 @@ Consider the following claims:
 \end{earg}
 
 Sentence \ref{I2} is referred to as an \textit{instance} of both sentences \ref{I1} and \ref{I3}. % since it is about something particular.
-We will define what it is to be an instance below, but for now you can think of the instances of a general claim as being about a particular.
-Whereas sentence \ref{I1} makes a universal claim about everything, sentence \ref{I2} makes a particular claim about one thing, and sentence \ref{I3} makes an existential claim about something.
-It is important to distinguish between all three types of sentences, where one way to do this is to appeal to their logical strength, i.e., which sentences entail which.
+Whereas sentence \ref{I1} makes a universal claim about everything and sentence \ref{I3} makes an existential claim about something, sentence \ref{I2} makes a claim about two things in particular.
+It is important to distinguish between all three types of sentences, where one preliminary way to do this is to appeal to their logical strength, i.e., which sentences entail which.
 Specifically, sentence \ref{I1} entails sentence \ref{I2} but not \textit{vice versa}, and sentence \ref{I2} entails sentence \ref{I3} but not \textit{vice versa}.
 Similarly, sentence \ref{I1} entails sentence \ref{I3} but not \textit{vice versa}.
-It is worth nothing that this entailment would not hold if we permitted the domain to be empty since, given an empty domain, sentence \ref{I1} could be true while sentence \ref{I3} is false.
+It is worth nothing that this final entailment would not hold if we permitted the domain to be empty since given an empty domain, sentence \ref{I1} could be true while sentence \ref{I3} is false.
 
 % We will refer to sentence \ref{I2} as an \define{instance} of sentence \ref{I1}, and refer to \ref{I3} as an \define{existential generalisation} of \ref{I2}.
 
@@ -88,7 +87,7 @@ In particular, consider the following:
 }
 
 Since $\beta$ is a constant, the requirement that $\beta$ is free for $\alpha$ in $\metaA$ is satisfied.
-In particular, $Fxc \supset Fcx$ is an instance of $\qt{\forall}{y}(Fxy \supset Fyx)\unisub{z}{x}$ which is the result of stripping off the quantifier binding $y$ and replacing all free occurrences of $y$ with $c$. 
+In particular, $(Fxy \supset Fyx)\unisub{c}{y}=(Fxc \supset Fcx)$ is a substitution instance of $\qt{\forall}{y}(Fxy \supset Fyx)$ where this is the result of stripping off the quantifier binding $y$ and replacing all free occurrences of $y$ with $c$. 
 Nothing forced us to choose the constant $c$.
 Instead, we could have used $d$, producing the instance $Fxd \supset Fdx$.
 Both of these are instances, and in general, there will be a different instance for every constant in the language.
@@ -98,11 +97,12 @@ The constants here are referred to as \define{instantiating constants}.
 
 
 
-\subsection{Universal Elimination}
+\section{Universal Elimination}
   \label{sec:UniElim}
 
 Recall $\qt{\forall}{x} Lkx$ from before.
-We claimed that $Lkc$ was entailed by $\qt{\forall}{x} Lkx$, but now we are in a position to state this a little more precisely.
+We claimed that $Lkc$ was entailed by $\qt{\forall}{x} Lkx$.
+We are now in a position to state this a little more precisely.
 To begin with, we may observe that $Lkc$ is a substitution instance of $\qt{\forall}{x} Lkx$.
 More generally, universally quantified claims entail all of their substitution instances.
 In order to maintain completeness, we may include the following elimination rule ($\forall$E) so that the substitution instances of a universally quantified claim can be derived from that universally quantified claim:
@@ -129,7 +129,7 @@ You are permitted to write down any instance you like on a new line. In this exa
 
 
 
-\subsection{Existential Introduction}
+\section{Existential Introduction}
   \label{sec:ExistIntro}
 
 Recall that $Lkc$ was said to entail $\qt{\exists}{x} Lkx$.
@@ -167,7 +167,7 @@ Consider:
 Whereas line $2$ existentially generalises on the first occurrence of the constant $a$, line $3$ generalises on the second occurrence, and line $4$ generalises on both. 
 Focusing on line $2$, $\metaA\unisub{\beta}{\alpha}=(Mx \supset Rad)\unisub{a}{x}=(Ma \supset Rad)$, where similar identities hold for the other lines.
 For line $4$ we have $\metaA\unisub{\beta}{\alpha}=(Mx \supset Rxd)\unisub{a}{x}=(Ma \supset Rad)$, and for line $5$ we have $\metaA\unisub{\beta}{\alpha}=(Ma \supset Rad)\unisub{a}{x}=(Ma \supset Rad)$.
-In lines $6$ and $7$, one existential generalisation is staged after the next, even if they generalise on difference occurrences of the same constant. 
+In lines $6$ and $7$, one existential generalisation is staged after the next, generalising on difference occurrences of the same constant. 
 
 Put roughly, existential generalisation permits one to replace any number of occurrences of a constant with a variable that is then bound by an existential quantifier.
 Strictly speaking, this approximation is not correct since we cannot generalise as follows:
@@ -184,14 +184,15 @@ For instance, we cannot take $\metaA\unisub{\beta}{\alpha}=\qt{\exists}{x}(Mx \e
 By contrast, $\metaA\unisub{\beta}{\alpha}=\qt{\exists}{x}(Mx \eif Ryd)\unisub{a}{y}$ is acceptable since $\qt{\exists}{x}(Mx \eif Ryd)\unisub{a}{y}=\qt{\exists}{x}(Mx \eif Rad)$ which is identical to the premise.
 Thus we may derive $\exists y\qt{\exists}{x}(Mx \eif Ryd)$ on line $3$ by $\exists$I.
 
-Whereas replacing $a$ with $x$ results in a quantifier which is already present picking up an extra bound variable, this does not happen if we replace $a$ with $y$ instead. 
+Whereas replacing $a$ with $x$ results in a quantifier which is already present and so picks up an extra bound variable, this does not happen if we replace $a$ with $y$ instead. 
 The existential generalisation rule is stated in such a way so as to ensure that this extra binding cannot occur without breaking the rule.
-Nevertheless, it is important to be careful in generalising existentially to follow the rule accurately, where checking to see if you pick up any extra variable binding is an easy way to check to see if you are following the rule.
+Nevertheless, it is important to be careful to accurately follow the rule for existentially generalising.
+An easy way to see if you are following the rule correctly is to check to see if you pick up any extra variable binding.
 
 
 
 
-\subsection{Universal Introduction}
+\section{Universal Introduction}
   \label{sec:UniIntro}
 
 The rules provided above permit us to derive sentence $\ref{I5}$ from $\ref{I4}$ and to derive $\ref{I6}$ from $\ref{I5}$.
@@ -199,15 +200,15 @@ As we noted above, the converse derivations do not hold.
 After all, just because Kin loves Cassandra (\ref{I5}), it does not follow that Kin loves everything (\ref{I4}).
 Similarly, just because Kin loves something (\ref{I6}), it does not follow that Kin loves Cassandra (\ref{I5}).
 More generally, universal claims are not entailed by their substitution instances, and existential claims do not entail their substitution instances.
-Nevertheless, it is possible derive universal claims from their instances in specific circumstances, and similarly, it is possible to derive an instance of an existential claim in certain circumstances.
+Nevertheless, it is possible derive universal claims from their instances in specific circumstances and it is possible to make use of a certain instances of an existential claim to derive further sentences.
 The following two section will introduce these derivation rules, discussing the conditions of their application.
 
 One way to think about a universal claim of the form $\qt{\forall}{\alpha}\metaA\alpha$ is as a long conjunction $\metaA\unisub{a}{\alpha} \eand \metaA\unisub{b}{\alpha} \eand\ldots$ where the constants $a,b,\ldots$ name every element in the domain.
-However, this way of thinking is limited since we may not have enough constants to name every element in the domain, and even if there were enough constants to go around, they could all be interpreted by the same element of the domain on a given interpretation.
-These considerations are what motivated the introduction of variable assignments which we could quantify over in the semantics.
-In particular, $\VV{\I}{\va{a}}(\forall\alpha\metaA)=1$ just in case $\VV{\I}{\va{c}}(\metaA)=1$ for every $\alpha$-variant $\va{c}$ of $\va{a}$.
-We may simulate something analogous in the proof system for QL$^=$ by way of constants that do not occur in the premises of the derivation or in the universal claim that we are looking to derive.
-Some examples will help to illustrate.
+However, this way of thinking is limited since we may not have enough constants to name every element in the domain, and even if there were enough constants to go around, they could all be interpreted as referring to the same element of the domain.
+These considerations are what motivated the introduction of variable assignments which we used to provide the semantics for the quantifiers.
+In particular, $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ just in case $\VV{\I}{\va{c}}(\metaA)=1$ for every $\alpha$-variant $\va{c}$ of $\va{a}$, and $\VV{\I}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$ just in case $\VV{\I}{\va{c}}(\metaA)=1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$.
+We may simulate something analogous in the proof system for QL$^=$ by way of arbitrary constants.
+Some examples will help to illustrate what it is for a constant to be arbitrary.
 
 Consider the following sentences:
 
@@ -216,8 +217,8 @@ Consider the following sentences:
   \item[\ex{I8}] $\qt{\forall}{y} My$.
 \end{earg}
 
-It is natural to assume that these sentences are logically equivalent for indeed they say the very same thing, i.e., that everything is $M$.
-Insofar as these entailments are to be reflected in the proof system, we need a way to derive sentence \ref{I8} from sentence \ref{I7} and \textit{vice versa}.
+These sentences entail each other for indeed they say the very same thing, i.e., that everything is $M$.
+Insofar as the entailments between these sentences are to be reflected in the proof system, we need a way to derive sentence \ref{I8} from sentence \ref{I7} and \textit{vice versa}.
 
 Consider the following derivation:
 
@@ -228,19 +229,19 @@ Consider the following derivation:
 \end{proof}
 
 In line $2$, we have derived $Ma$ from $\qt{\forall}{x}Mx$ by $\forall$E given above.
-We could have equally derived $Mb$ or $M\alpha$ for any other constant $\alpha$.
+We could have equally derived $M\alpha$ for any other constant $\alpha$.
 This much should come as no surprise.
 What is more surprising is the derivation of $\qt{\forall}{y}My$ in line $3$ from $Ma$ in line $2$.
-After all, this is like the inference from `Alan is mad' to `everyone is mad' which is easy to invalidate.
+After all, this is like the inference from `Alan is mad' to `Everyone is mad' which is easy to invalidate.
 You might wonder what kind of constraints would make this inference to hold.
 
 The key idea behind the inference from line $2$ to line $3$ is that $a$ is an arbitrary constant. 
 In particular, $a$ does not occur in the premise, nor does $a$ occur in line $3$ which we are deriving, and so there are no constraints on what $a$ might name. 
 Rather, the constant $a$ could name anything whatsoever. 
-You can think of $a$ as analogous to $\va{c}(x)$ for an arbitrary $x$-variant $\va{c}$ which permits us to quantify over all elements of the domain.
+You can think of $a$ as analogous to $\va{c}(x)$ for an arbitrary $x$-variant $\va{c}$ which permits us to generalise over all elements of the domain.
 Given that $a$ could refer to anything, we may derive line $3$.
 Although we used the variable $y$ in line $3$, we could have used $x$, or indeed any other variable since there is no threat of any extra variable binding taking place.
-This puts us in a position to articulate the universal introduction rule ($\forall$I):
+More generally, the universal introduction rule ($\forall$I) is stated as follows:
 
 \begin{proof}
   \have[m]{a}{\metaA\unisub{\beta}{\alpha}} \by{where $\beta$ is a constant and $\alpha$ is a variable}{}  
@@ -280,8 +281,8 @@ Letting $\metaA\unisub{\beta}{\alpha}=Rax\unisub{a}{x}=Raa$, we may observe that
 This would have been correct but for the provision that $\beta$ not occur in $\qt{\forall}{\alpha}\metaA$ which in the case above requires that $a$ not occur in $\qt{\forall}{x}Rax$.
 Since $a$ does occur in $\qt{\forall}{x}Rax$, line $3$ does not follow from line $2$.
 
-A good way to remember the restrictions on the $\forall$I rule is to remember that these restriction are put in place to require the instantiating constant to be \textit{arbitrary}.
-In particular, we want the instantiating constant that we are generalising of to be arbitrary, and so it cannot occur in any undischarged assumptions or in the sentence that we are deriving.
+A good way to remember the restrictions on the $\forall$I rule is to remember that these restriction are put in place to require the instantiating constant to be arbitrary.
+In particular, we want the instantiating constant that we are generalising on to be anything, and so it cannot occur in any undischarged assumptions or in the sentence that we are deriving.
 The incorrect inferences above are paradigmatic of cases where these requirements are not satisfied.
 
 Although the constant $\alpha$ is not permitted to occur in any undischarged assumption, it may occur in an assumption of a subproof that we have already closed.
@@ -300,11 +301,11 @@ Since the assumption given in line $1$ above has been discharged, the instantiat
 
 
 
-\subsection{Existential Elimination}
+\section{Existential Elimination}
   \label{sec:ExistElim}
 
 A sentence with an existential quantifier tells us that \textit{something} satisfies a given condition.
-For example, letting `$S$' regiment `is sad' and `$M$' regiment `is mad', the existential claims $\qt{\exists}{x} Sx$ and $\qt{\exists}{y} Sy$ say that something is sad and that something is mad but they don't tell us \textit{what} is sad or mad.
+For example, letting `$S$' regiment `is sad' and `$M$' regiment `is mad', the existential claims $\qt{\exists}{x} Sx$ and $\qt{\exists}{y} My$ say that something is sad and that something is mad but they don't tell us \textit{what} is sad or mad.
 In particular, we cannot conclude that the same thing is sad and mad.
 This worry can be brought out with the following incorrect derivation:
 
@@ -328,7 +329,7 @@ It is natural to reason in the following way:
 
 \begin{quote}
   By assumption, something is sad.
-  Although we do not know what that things is, call it `Bob' for the purposes of this argument.
+  Although we do not know what that thing is, call it `Bob' for the purposes of this argument.
   We also know by assumption that everything that is sad is mad.
   In particular, if Bob is sad, then Bob is mad.
   Thus Bob is mad.
@@ -336,12 +337,11 @@ It is natural to reason in the following way:
 \end{quote}
 
 Especially for long lines of reasoning, it is often useful to introduce a temporary constant in the manner employed above.
-In particular, we want the constant to be arbitrary, and so it cannot occur in any previous assumptions.
+In particular, we want the constant to be arbitrary, and so it cannot occur in any undischarged assumptions.
 At the same time, we also need to keep track of this constant, being careful not to make any other assumptions about the object to which this temporary constant refers, or to draw any conclusions which include this constant.
-
-It will be convenient to refer to an arbitrary constant that is used to temporarily refer to whatever it is that satisfies an existential claim as a \define{proxy}.
-Accordingly, our use of a proxy must be restricted to a subproof, where it is in this sense arbitrary and temporary.
-This is the schematic form of the existential elimination rule ($\exists$E): 
+% It will be convenient to refer to an arbitrary constant that is used to temporarily refer to whatever it is that satisfies an existential claim as a \define{proxy}.
+% Accordingly, our use of a proxy must be restricted to a subproof, where it is in this sense arbitrary and temporary.
+The existential elimination rule ($\exists$E) will achieve all of this by way of a subproof:
 
 \begin{proof}
 	\have[m]{a}{\qt{\exists}{\alpha}\metaA}
@@ -353,14 +353,17 @@ This is the schematic form of the existential elimination rule ($\exists$E):
 	\have[\ ]{d}{\metaB{}} \Ee{a,b-c}
 \end{proof}
 
+Note that existential elimination cites both the existential claim that is being instantiated (line $m$ above) as well as the subproof (lines $n$--$p$) which follows from its instantiation.
 The restriction on what $\beta$ can be is what prevents $\exists$E from producing invalid arguments as brought out above. 
 One easy way to satisfy these restrictions is to always choose a new instantiating constant $\beta$ that does not appear anywhere outside the subproof. 
 This practice is in keeping with the idea that $\beta$ is an arbitrary place holder that we make temporary use of inside a subproof in order to expedite the lines of reasoning that we wish to draw.
 
-Like the rules for conditional introduction, negation introduction, and negation elimination, the existential elimination rule is a rule that involves discharging an assumption.
-The pattern is to assume a substitution instance with a proxy, reason your way to a conclusion that does not include that proxy, and then discharge the assumption, closing the subproof.
+Like the rules for conditional introduction and both negation introduction and elimination, the rule for existential elimination involves discharging an assumption.
+The pattern is to: (1) assume a substitution instance with an arbitrary constant; (2) reason your way to a conclusion that does not include that constant; and (3) discharge the assumption, closing the subproof.
+As before, the lines of a closed subproof are \define{dead}, where every line of a proof that is not dead is \define{live}.
+The rules that cite individual lines (as opposed to subproofs) can only appeal to lines that are live at that point in the proof.
 
-Having introduced the existential elimination rule, we are now in a position to regiment the informal argument given above in which `Bob' served as our proxy.
+Having introduced the existential elimination rule, we are now in a position to regiment the informal argument given above in which `Bob' served as our arbitrary constant.
 
 \begin{proof}
 	\hypo{es}{\qt{\exists}{x} Sx} \pr{}
@@ -379,7 +382,7 @@ Given the introduction and elimination rules for both the existential and univer
 
 
 
-\subsection{Quantifier Exchange Rules}
+\section{Quantifier Exchange Rules}
 
 Sentences of the form $\enot\qt{\exists}{\alpha}\metaA$ and $\qt{\forall}{\alpha}\enot\metaA$ are logically equivalent, as are sentences of the form $\enot\qt{\forall}{\alpha}\metaA$ and $\qt{\exists}{\alpha}\enot\metaA$.
 Accordingly, we may assert the following entailments: 
@@ -396,7 +399,7 @@ Accordingly, we may assert the following entailments:
 \vspace{-.05in}
 
 Given the introduction and elimination rules for the quantifiers, we may derive rules which correspond to these entailments.
-Consider the following proof for $(\enot\exists)$:
+Consider the proof which corresponds to $(\enot\exists)$:
 
 \begin{proof}
 	\hypo{a}{\enot\qt{\exists}{\alpha} \metaA}      \pr{}
@@ -409,215 +412,306 @@ Consider the following proof for $(\enot\exists)$:
   \have{f}{\qt{\forall}{\alpha}\enot\metaA}       \Ai{e}
 \end{proof}
 
-This proof works by instantiating $\metaA$ with a new constant $\beta$ in line $2$, and then existentially generalising on $\beta$ in order to derive a contradiction, where $\enot\metaA\unisub{\beta}{\alpha}$ follows by negation introduction. 
+This proof works by instantiating $\metaA$ with a new constant $\beta$ in line $2$ and then existentially generalising on $\beta$ in order to derive a contradiction.
+As a result, $\enot\metaA\unisub{\beta}{\alpha}$ follows by negation introduction. 
 Since $\beta$ does not occur in any undischarged assumptions, we may universally generalise on $\beta$ in order to derive the conclusion in line $6$. 
 
-Consider the following proof of the $(\forall\enot)$ which works in the opposite direction: 
+Consider the proof corresponding to $(\forall\enot)$: 
 
 \begin{proof}
-	\hypo{a}{\enot\qt{\forall}{\alpha} \metaA}      \pr{}
+	\hypo{a}{\qt{\forall}{\alpha} \enot\metaA}      \pr{}
     \open
       \hypo{b}{\qt{\exists}{\alpha}\metaA}        \as{}
-      \have{c}{\metaA\unisub{\beta}{\alpha}}      \by{$\exists$E where $\beta$ is a new constant}{b}
-      \have{d}{\enot\qt{\forall}{\alpha} \metaA}  \r{a}
+        \open
+          \hypo{c}{\metaA\unisub{\beta}{\alpha}}  \by{$\exists$E where $\beta$ is a new constant}{b}
+            \open
+              \hypo{d}{\qt{\exists}{\alpha}\metaA}  \as{}
+              \have{e}{\metaA\unisub{\beta}{\alpha}}  \r{c}
+              \have{f}{\enot\metaA\unisub{\beta}{\alpha}}  \Ae{a}
+            \close
+          \have{g}{\enot\qt{\exists}{\alpha}\metaA}  \ni{d-f}
+        \close
+      \have{h}{\enot\qt{\exists}{\alpha}\metaA}  \Ee{b,c-g}
     \close
-  \have{e}{\enot\metaA\unisub{\beta}{\alpha}}     \ni{b-d}
-  \have{f}{\qt{\forall}{\alpha}\enot\metaA}       \ni{e}
+  \have{i}{\enot\qt{\exists}{\alpha}\metaA}       \ni{b-h}
 \end{proof}
 
+The proof begins as expected by stating the premise and assuming line $2$ for negation introduction. 
+We then assume an instance of line $2$ in line $3$.
+Although we could instantiate line $1$ on line $4$ in order to produce a contradiction with line $3$, this is not what we need.
+Instead, we are looking to derive something which will contradict with line $2$ that does not include $\beta$. 
+Accordingly, we assume line $4$ for negation introduction. 
+We may now rewrite line $3$ in line $5$ and instantiate line $1$ on line $6$, producing a contradiction. 
+By negation introduction on line $7$, we have what we wanted, and since $\beta$ does not occur in line $7$, we may close the subproof with existential elimination on line $8$.
+The produces another contradiction, and so we may conclude in line $9$ with negation introduction. 
 
+Although we could go on to prove $(\enot\forall)$ and $(\exists\enot)$ in a similar fashion, there is another approach which turns on the following \define{metarule} which takes one derivation to follow from another instead of taking one sentence to follow from some others.
 
-Consider the following proof for $(\enot\exists)$:
+\begin{enumerate}[leftmargin=.75in]
+  \item[(MCP)] If $\metaA \proves \metaB$, then $\enot\metaB \proves \enot\metaA$.
+\end{enumerate}
+
+Given any $\metaA$ and $\metaB$, this rule says that if we can derive $\metaB$ from $\metaB$, then we may also derive $\enot\metaA$ from $\enot\metaB$, referring to this rule as \textit{meta-contraposition}.
+It is worth comparing our standard contraposition rule CP which we derived before: $\metaA \eif \metaB \proves \enot\metaB \eif \enot\metaA$.
+Whereas CP concerns the material conditional $\eif$, MCP concerns $\proves$.
+Nevertheless, the proof is similar where we begin by assuming $\metaA \proves \metaB$ for some otherwise arbitrary sentences $\metaA$ and $\metaB$, calling this assumption $(\star)$.
+We may then write the following proof:
 
 \begin{proof}
-	\hypo{a}{\enot\qt{\exists}{\alpha} \metaA}      \pr{}
+	\hypo{a}{\enot\metaB}     \pr{}
     \open
-      \hypo{b}{\metaA\unisub{\beta}{\alpha}}      \as{where $\beta$ is a new constant}
-      \have{c}{\qt{\exists}{\alpha} \metaA}       \Ei{b}
-      \have{d}{\enot\qt{\exists}{\alpha} \metaA}  \r{a}
+      \hypo{b}{\metaA}      \as{}
+      \have{c}{\metaB}      \by{$(\star)$}{}
+      \have{d}{\enot\metaB} \r{a}
     \close
-  \have{e}{\enot\metaA\unisub{\beta}{\alpha}}     \ni{b-d}
-  \have{f}{\qt{\forall}{\alpha}\enot\metaA}       \ni{e}
+  \have{e}{\enot\metaA}     \ni{b-d}
 \end{proof}
 
+Since we know that $\metaA \proves \metaB$ by assumption, there is some proof of $\metaB$ from $\metaA$.
+Accordingly, we may think of the proof given above as abbreviating a longer proof in which $(\star)$ is replaced with the proof of $\metaB$ from $\metaA$.
+The result is a complete proof of $\enot\metaA$ from $\enot\metaB$. 
 
+There are two more derived rules ($\forall$DN) and ($\exists$DN) which will come in handy:
 
+\begin{multicols}{2}
+  
 \begin{proof}
-	\have{Aa}{\qt{\forall}{\script{x}} \metaA{}} \pr{want $\enot\qt{\exists}{\script{x}}\enot \metaA{}$}
-	\open
-		\hypo{Ena}{\qt{\exists}{\script{x}}\enot \metaA{}}\as{for reductio}
-		\open
-			\hypo{nc}{\enot \metaA{\unisub{\script{x}}{\script{a}^\ast}}}\as{for $\exists$E}
-			\open
-				\hypo{Aa2}{\qt{\forall}{\script{x}} \metaA{}}\as{for reductio}{}
-				\have{c2}{\metaA{\unisub{\script{x}}{\script{a}^\ast}}}\Ae{Aa}
-				\have{nc2}{\enot \metaA{\unisub{\script{x}}{\script{a}^\ast}}}\by{R}{nc}
-			\close
-			\have{nAa}{\enot\qt{\forall}{\script{x}} \metaA{}}\ni{Aa2-nc2}
-		\close
-		\have{nAa3}{\enot\qt{\forall}{\script{x}} \metaA{}}\Ee{Ena, nc-nAa}
-		\have{Aa3}{\qt{\forall}{\script{x}} \metaA{}}\by{R}{Aa}
-		\close
-	\have{nEna}{\enot\qt{\exists}{\script{x}}\enot \metaA{}}\ni{Ena-Aa3}
+	\hypo{a}{\qt{\forall}{\alpha} \enot\enot\metaA}   \pr{}
+  \have{b}{\enot\enot\metaA\unisub{\beta}{\alpha}}  \Ae{a}
+  \have{c}{\metaA\unisub{\beta}{\alpha}}            \by{DN}{b}
+  \have{d}{\qt{\forall}{\alpha}\metaA}              \Ai{c}
 \end{proof}
-$^\ast$ Where name \script{a} does not appear outside the subproof.
-
-This is a proof \emph{schema} --- it is not itself a proof in QL, as its lines are not QL sentences. But it describes how a proof of this form can be given. For example, here is one instance of the above schema:
-
 
 \begin{proof}
-	\hypo{Aa}{\qt{\forall}{y} Ay} \pr{want $\enot\qt{\exists}{y}\enot Ay$}
+	\hypo{a}{\qt{\exists}{\alpha} \enot\enot\metaA}   \pr{}
+    \open
+      \hypo{b}{\enot\enot\metaA\unisub{\beta}{\alpha}}  \as{}
+      \have{c}{\metaA\unisub{\beta}{\alpha}}            \by{DN}{b}
+      \have{d}{\qt{\exists}{\alpha} \metaA}             \Ei{c}
+    \close
+  \have{e}{\qt{\exists}{\alpha} \metaA}             \Ee{a,b-d}
+\end{proof}
+
+\end{multicols}
+% \vspace{-.1in}
+
+We now have all the ingredients that we need to provide proofs which correspond to $(\enot\forall)$ and $(\exists\enot)$ from before.
+Since these proofs will make essential use of MCP, these proofs will take place in the metalanguage and be presented informally.
+
+\vspace{-.1in}
+\begin{quote}
+  $(\enot\forall)$:
+  Consider the result of replacing $\metaA$ with $\enot\metaA$ in the proof of $(\enot\exists)$ given above, where this constitutes a proof of $\enot\qt{\exists}{\alpha}\enot\metaA \proves \qt{\forall}{\alpha}\enot\enot\metaA$.
+  Since $\qt{\forall}{\alpha}\enot\enot\metaA \proves \qt{\forall}{\alpha}\metaA$ by $\forall$DN, we may chain these proofs together to derive $\enot\qt{\exists}{\alpha}\enot\metaA \proves \qt{\forall}{\alpha}\metaA$.
+  If follows by MCP that $\enot\qt{\forall}{\alpha}\metaA \proves \enot\enot\qt{\exists}{\alpha}\enot\metaA$, and so $\enot\qt{\forall}{\alpha}\metaA \proves \qt{\exists}{\alpha}\enot\metaA$ by DN. 
+  
+  $(\exists\enot)$:
+  Consider the result of replacing $\metaA$ with $\enot\metaA$ in the proof of $(\enot\forall)$ given above, where this constitutes a proof of $\enot\qt{\forall}{\alpha}\enot\metaA \proves \qt{\exists}{\alpha}\enot\enot\metaA$.
+  Since $\qt{\exists}{\alpha}\enot\enot\metaA \proves \qt{\exists}{\alpha}\metaA$ by $\exists$DN, we may chain these proofs together to derive $\enot\qt{\forall}{\alpha}\enot\metaA \proves \qt{\exists}{\alpha}\metaA$.
+  If follows by MCP that $\enot\qt{\exists}{\alpha}\metaA \proves \enot\enot\qt{\forall}{\alpha}\enot\metaA$, and so $\enot\qt{\exists}{\alpha}\metaA \proves \qt{\forall}{\alpha}\enot\metaA$ by DN. 
+\end{quote}
+\vspace{.1in}
+
+You can think of these proofs as instruction manuals for constructing the appropriate derivations.
+In this case, it might have been easier to provide derivations for $(\enot\forall)$ and $(\exists\enot)$ in the same manner that we did for $(\enot\exists)$ and $(\forall\enot)$.
+Even so, the metarule MCP and derived rules ($\forall$DN) and ($\exists$DN) are important in their own right.
+It is important to note, however, that whereas ($\forall$DN) and ($\exists$DN) may be applied in the course of a derivation, MCP cannot.
+This is because MCP draws the conclusion $\enot\metaB \proves \enot\metaA$ from $\metaA \proves \metaB$, where the instances of these claims are not sentences in QL$^=$ since they include `$\proves$'.
+It was for this reason that we provided informal proofs of $(\enot\forall)$ and $(\exists\enot)$ in the metalanguage. 
+
+% \begin{proof}
+% 	\hypo{Aa}{\qt{\forall}{y} Ay} \pr{want $\enot\qt{\exists}{y}\enot Ay$}
+% 	\open
+% 		\hypo{Ena}{\qt{\exists}{y}\enot Ay}\as{for reductio}
+% 		\open
+% 			\hypo{nc}{\enot Ac}\as{for $\exists$E}
+% 			\open
+% 				\hypo{Aa2}{\qt{\forall}{y} Ay}\as{for reductio}
+% 				\have{c2}{Ac}\Ae{Aa}
+% 				\have{nc2}{\enot Ac}\by{R}{nc}
+% 			\close
+% 			\have{nAa}{\enot\qt{\forall}{y} Ay}\ni{Aa2-nc2}
+% 		\close
+% 		\have{nAa3}{\enot\qt{\forall}{y} Ay}\Ee{Ena, nc-nAa}
+% 		\have{Aa3}{\qt{\forall}{y} Ay}\by{R}{Aa}
+% 	\close
+% 	\have{nEna}{\enot\qt{\exists}{y}\enot Ay}\ni{Ena-Aa3, Ena-nAa3}
+% \end{proof}
+
+
+
+
+
+
+
+\section{Identity}
+
+We turn now to the introduction and elimination rules for identity, both of which are a lot easier to work with than the quantifier rules.
+To begin with, the introduction rule for identity is in keeping with the idea that everything is identical to itself.
+Accordingly, for any constant $\alpha$, one may always write $\alpha = \alpha$ on any line of a proof.
+Moreover, instead of \textit{assuming} $\alpha = \alpha$ for some particular constant $\alpha$ where this would constitute a further undischarged assumption, we may justify any instance of $\alpha = \alpha$ by citing the following rule: 
+
+\begin{proof}
+  \have[\ ]{a}{\alpha = \alpha} \by{:=I}{}
+\end{proof}
+
+The $=$I rule is unlike the other rules in that it does appeal to any prior lines of the proof.
+Rather, $\alpha=\alpha$ is an axiom schema, meaning that for any constant $\alpha$, we may add $\alpha=\alpha$ to a proof without justification apart from citing $=$I itself. 
+% Something similar may be said for the theorems we may derive
+
+The elimination rule for identity is more complicated, but only slightly.
+% Nevertheless, we will need a new piece of notation in order to articulate identity elimination.
+%
+% \factoidbox{
+%    If $\beta$ is free for $\alpha$ in $\metaA$, then a \define{free substitution} $\metaA\freesub{\beta}{\alpha}$ is the result of replacing one or more free occurrences of $\alpha$ in $\metaA$ with $\beta$. 
+% } %TODO move above to section on substitution; discuss why we should not state the quantifier rules with freesub
+%
+% Note the indefinite article `a' above where we refer to $\metaA\freesub{\beta}{\alpha}$ as \textit{a} free substitution of $\beta$ for $\alpha$ in $\metaA$. 
+% This is because there could be multiple occurrences of $\alpha$ in $\metaA$ and since a free substitution of $\beta$ for $\alpha$ in $\metaA$ replaces one or more occurrences of $\alpha$ with $\beta$, there need not be unique result of replacing one or more such occurrence of $\alpha$ with $\beta$. 
+% As a result, we cannot use identify ``the'' free substitution of $\beta$ for $\alpha$ in $\metaA$ as brought out by the following cases: 
+%
+% \begin{earg}
+%   \item[\ex{F1}] $\forall x(Fxy \supset Fyx)\freesub{z}{y}=\forall x(Fxz \supset Fyx)$. ~~(\textsc{incorrect})
+%   \item[\ex{F2}] $\forall x(Fxy \supset Fyx)\freesub{z}{y}=\forall x(Fxy \supset Fzx)$. ~~(\textsc{incorrect})
+%   \item[\ex{F3}] $\forall x(Fxy \supset Fyx)\freesub{z}{y}=\forall x(Fxz \supset Fzx)$. ~~(\textsc{incorrect})
+% \end{earg}
+%
+% The reason that the identities above must be avoided follows from the fact that the wffs on the left are all identical, but the wffs on the right are not.
+% But distinct wffs cannot be identical to the same wff.
+% Nevertheless, the following claims are true:
+%
+% \begin{earg}
+%   % \item[\ex{F1}] $\forall x(Fxy \supset \exists yFyx)\freesub{z}{y}$.
+%   \item[\ex{F4}] $\forall x(Fxz \supset Fyx)$ is a free substitution instance of $\forall x(Fxy \supset Fyx)\freesub{z}{y}$.
+%   \item[\ex{F5}] $\forall x(Fxy \supset Fzx)$ is a free substitution instance of $\forall x(Fxy \supset Fyx)\freesub{z}{y}$.
+%   \item[\ex{F6}] $\forall x(Fxz \supset Fzx)$ is a free substitution instance of $\forall x(Fxy \supset Fyx)\freesub{z}{y}$.
+% \end{earg}
+%
+% Even though it could take a number of different forms, we will write $\metaA\freesub{\beta}{\alpha}$ to indicate a free substitution of $\beta$ for $\alpha$ in $\metaA$.
+% We may now state the elimination rule for identity.
+If you have derived $\metaA$ and $\alpha = \beta$ for some constants $\alpha$ and $\beta$, then we may replace any occurrence of $\alpha$ with $\beta$ in $\metaA$ and similarly, we may replace any occurrence of $\beta$ with $\alpha$ in $\metaA$.
+More specifically, the identity elimination rules ($=$E) may be stated as follows:
+
+\begin{multicols}{2}
+  
+\begin{proof}
+  \have[m]{a}{\alpha = \beta} 
+  \have[n]{b}{\metaA\unisub{\alpha}{\gamma}}
+	\have[\ ]{c}{\metaA\unisub{\beta}{\gamma}} \by{=E}{a,b}
+\end{proof}
+
+\begin{proof}
+  \have[m]{a}{\alpha = \beta} 
+  \have[n]{b}{\metaA\unisub{\beta}{\gamma}}
+	\have[\ ]{c}{\metaA\unisub{\alpha}{\gamma}} \by{=E}{a,b}
+\end{proof}
+
+\end{multicols}
+
+It is important to note that not all occurrences of $\alpha$ (similarly $\beta$) need to be replaced with $\beta$ ($\alpha$) in any given $\metaA$.
+The identity elimination rules capture this by including $\metaA\unisub{\alpha}{\gamma}$ and $\metaA\unisub{\beta}{\gamma}$.
+For example, consider the following derivations:
+
+\begin{proof}
+  \hypo{a}{Raa} 
+  \hypo{b}{a=b} 
+  \have{c}{Rab} \by{$=$E}{a,b}
+  \have{d}{Rba} \by{$=$E}{a,b} 
+  \have{d}{Rbb} \by{$=$E}{a,b} 
+  % \have{e}{Raa} \by{$=$E}{a,b} 
+\end{proof}
+
+Given the premises $Raa$ and $a=b$, we may derive $Rab$, $Rba$, and $Rbb$.
+This is because $Raa=Rac\unisub{a}{c}=Rca\unisub{a}{c}=Rcc\unisub{a}{c}$, leading to the replacements $Rac\unisub{b}{c}=Rab$, $Rca\unisub{b}{c}=Rba$, and $Rcc\unisub{b}{c}=Rbb$, respectively.
+Although the justifications for each inference is the same, the inferences are licensed on account of different values of $\metaA$.
+% In practice, it is not always important to construct the appropriate value of $\metaA$ since it is easy to apply the existential elimination rules by simply replacing one constant with another.
+
+Here is a proof that identity is transitive:
+
+\begin{proof}
 	\open
-		\hypo{Ena}{\qt{\exists}{y}\enot Ay}\as{for reductio}
-		\open
-			\hypo{nc}{\enot Ac}\as{for $\exists$E}
-			\open
-				\hypo{Aa2}{\qt{\forall}{y} Ay}\as{for reductio}
-				\have{c2}{Ac}\Ae{Aa}
-				\have{nc2}{\enot Ac}\by{R}{nc}
-			\close
-			\have{nAa}{\enot\qt{\forall}{y} Ay}\ni{Aa2-nc2}
-		\close
-		\have{nAa3}{\enot\qt{\forall}{y} Ay}\Ee{Ena, nc-nAa}
-		\have{Aa3}{\qt{\forall}{y} Ay}\by{R}{Aa}
+		\hypo{a}{a{=}b \eand b{=}c}\pr{}
+		\have{b}{a{=}b} \ae{a}
+		\have{c}{b{=}c} \ae{a}
+		\have{d}{a{=}c}\by{$=$E}{b,c}
 	\close
-	\have{nEna}{\enot\qt{\exists}{y}\enot Ay}\ni{Ena-Aa3, Ena-nAa3}
+	\have{e}{(a = b \eand b = c)\eif a = c} \ci{a-d}
+	\have{f}{\qt{\forall}{z}((a = b \eand b = z)\eif a = z)} \Ai{e}
+	\have{g}{\qt{\forall}{y}\qt{\forall}{z}((a = y \eand y = z)\eif a = z)} \Ai{f}
+	\have{h}{\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z}((x = y \eand y = z)\eif x = z)} \Ai{g}
 \end{proof}
 
-(Note that this proof encodes the same form of reasoning one would employ to demonstrate via a tree that $\qt{\forall}{y} Ay \models \enot \qt{\exists}{y} \enot Ay$. If you're into TREES and read Chapter~\ref{ch.QLTrees}, you might have fun drawing out the tree to compare the two methods.)
+At line $4$, we employed the identity claim $b = c$ on line $3$ in order to replace $b$ in line $2$ with a $c$.
+After discharging the assumption with the conditional introduction rule, the rest of the proof proceeded by universal introduction given that $a$, $b$, and $c$ do not occur in any undischarged assumptions. 
+A similar proof shows that identity is symmetric.
 
-In order to fully demonstrate that $\enot\qt{\exists}{\script{x}}\enot\metaA{}$ is logically equivalent to $\qt{\forall}{\script{x}}\metaA{}$, we would also need a second proof that assumes $\enot\qt{\exists}{\script{x}}\enot\metaA{}$ and derives $\qt{\forall}{\script{x}}\metaA{}$. We leave that proof as an exercise for the reader.
-
-It will often be useful to translate between quantifiers by adding or subtracting negations in this way, so we add two derived rules for this purpose. These rules are called quantifier negation (QN):
-\begin{center}
-\begin{tabular}{rl}
-$\enot\qt{\forall}{\script{x}}\metaA{} \Longleftrightarrow \qt{\exists}{\script{x}}\enot\metaA{}$\\
-$\enot\qt{\exists}{\script{x}}\metaA{} \Longleftrightarrow \qt{\forall}{\script{x}}\enot\metaA{}$
-& QN
-\end{tabular}
-\end{center}
-QN is a replacement rule. Like our SL replacement rules (DeMorgan, Double Negation, etc.), it can be used on whole sentences or on subformulae.
-
-\section{Identity Introduction}
-
-The introduction rule for identity is very simple. Everything is identical to itself; so, for any name \script{a}, one may write --- regardless of what one has on the previous lines of the proof --- that $\script{a}{=}\script{a}$:
+As a somewhat special case, it is worth considering a proof that identity is reflexive.
 
 \begin{proof}
-	\have[\ \,\,\,]{x}{\script{a}=\script{a}} \by{: =I}{}
+  \have{a}{a=a} \by{$=$I}{} 
+  \have{b}{\qt{\forall}{x}(x=x)} \by{$\forall$I}{a}
 \end{proof}
 
-The {=}I rule is unlike our other rules in that it does not require referring to any prior lines of the proof. We need only cite the rule itself; it does not reference any line numbers.
-
-\section{Identity Elimination}
-
-If you have shown that $a{=}b$, then anything that is true of $a$ must also be true of $b$. For any sentence with $a$ in it, you can replace some or all of the occurrences of $a$ with $b$ and produce an equivalent sentence. For example, if you already know $Raa$, then you are justified in concluding $Rab$, $Rba$, $Rbb$. Recall that $\metaA{}\freesub{a}{b}$ is the sentence produced by replacing $a$ in \metaA{} with $b$. This is not the same as a substitution instance, because $b$ may replace some or all occurrences of $a$. The identity elimination rule ({=}E) justifies replacing terms with other terms that are identical to it:
-\begin{proof}
-	\have[m]{e}{\script{c}{=}\script{d}}
-	\have[n]{a}{\metaA{}}
-	\have[\ ]{ea1}{\metaA{}\freesub{\script{c}}{\script{d}}} \by{=E}{e,a}
-	\have[\ ]{ea2}{\metaA{}\freesub{\script{d}}{\script{c}}} \by{=E}{e,a}
-\end{proof}
-
-Here is a simple proof of an instance of the \emph{transitivity of identity}. Let's prove that if $a{=}b$ and $b{=}c$, then $a{=}c$:
-
-\begin{proof}
-	\open
-		\hypo{p}{a{=}b \eand b{=}c}\pr{want $a{=}c$}
-		\have{ab}{a{=}b}\ae{p}
-		\have{bc}{b{=}c}\ae{p}
-		\have{ac}{a{=}c}\by{{=}E}{ab,bc}
-	\close
-	\have{conc}{(a{=}b \eand b{=}c)\eif a{=}c} \ci{p-ac}
-\end{proof}
-
-At line 4, we took advantage of the identity claim $b{=}c$ on line 3, and replaced the $b$ in line 2 with a $c$. Then we used the familiar \eif{}I rule to discharge the assumption of line 1, proving the conditional we were aiming for.
-
-
-\section{Translation and evaluation}
-
-Consider this argument: There is only one button in my pocket. There is a blue button in my pocket. So there is no non-blue button in my pocket.
-
-We begin by defining a symbolization key:
-\begin{ekey}
-\item{UD:} buttons in my pocket
-\item{Bx:} $x$ is blue.
-\end{ekey}
-Because we have no need to discuss anything other than buttons in my pocket, we've restricted the UD accordingly. If we included other things (buttons elsewhere and/or things other than buttons), we'd need predicates corresponding to being a button and things' locations. The simple version here is adequate for our present needs. The argument is translated as:
-\begin{earg}
-\item{} $\qt{\forall}{x} \qt{\forall}{y}\ x{=}y$
-\item{} $\qt{\exists}{x} Bx$
-\item{\therefore} $\enot \qt{\exists}{x} \enot Bx$
-\end{earg}
-
-So the set-up for a natural deduction proof will be:
-
-\begin{proof}
-	\hypo{one}{\qt{\forall}{x}\qt{\forall}{y}\ x{=}y} \pr{}
-	\hypo{eb}{\qt{\exists}{x} Bx} \pr{want $\enot\qt{\exists}{x} \enot Bx$}
-	\have{}{}{}
-%	\open
-%		\hypo{be1}{Be}
-%		\have{all1}{\qt{\forall}{y}\ e{=}y}\Ae{one}
-%		\have{ef1}{e{=}f}\Ae{all1}
-%		\have{bf1}{Bf}\by{{=}E}{ef1,be1}
-%	\close
-%	\have{bf}{Bf}\Ee{eb,be1-bf1}
-%	\have{ab}{\qt{\forall}{x} Bx}\Ai{bf}
-%	\have{nnab}{\enot\enot\qt{\forall}{x} Bx}\by{DN}{ab}
-%	\have{nenb}{\enot\qt{\exists}{x}\enot Bx}\by{QN}{nnab}
-\end{proof}
-
-There are various strategies one might employ. Here are two clues that point toward one promising strategy. Note again that we have an existential on line 2 --- this suggests existential elimination as a possible strategy. Note also that we are aiming for $\enot \qt{\exists}{x} \enot Bx$, which equivalent to $\enot \enot \qt{\forall}{x} Bx$ by QN. This in turn is equivalent, by DN, to $\qt{\forall}{x} Bx$, which suggests that universal introduction is going to be an important step. If we introduce an assumption with a proxy instance of $\qt{\exists}{x} Bx$, we'll be able to work toward a generic instance of $Bx$. In this example, we'll take $e$ as our proxy, and show that $Bf$ follows from $\qt{\exists}{x} Bx$:
-
-\begin{proof}
-	\hypo{one}{\qt{\forall}{x}\qt{\forall}{y}\ x{=}y} \pr{}
-	\hypo{eb}{\qt{\exists}{x} Bx} \pr{want $\enot\qt{\exists}{x} \enot Bx$}
-	\open
-		\hypo{be1}{Be}\as{for $\exists${}E}
-		\have{all1}{\qt{\forall}{y}\ e{=}y}\Ae{one}
-		\have{ef1}{e{=}f}\Ae{all1}
-		\have{bf1}{Bf}\by{{=}E}{ef1,be1}
-	\close
-	\have{bf}{Bf}\Ee{eb,be1-bf1}
-%	\have{ab}{\qt{\forall}{x} Bx}\Ai{bf}
-%	\have{nnab}{\enot\enot\qt{\forall}{x} Bx}\by{DN}{ab}
-%	\have{nenb}{\enot\qt{\exists}{x}\enot Bx}\by{QN}{nnab}
-\end{proof}
-
-By line 7, we have discharged the assumption about the proxy --- we won't use the name $e$ any more --- we have established that $Bf$ follows from the two premises. Since $f$ is an arbitrary name --- one that does not appear in any undischarged assumption --- we can perform universal introduction on that instance. This in turn lets us complete the proof via the two substitution rules mentioned above:
-
-\begin{proof}
-	\hypo{one}{\qt{\forall}{x}\qt{\forall}{y}\ x{=}y} \pr{}
-	\hypo{eb}{\qt{\exists}{x} Bx} \pr{want $\enot\qt{\exists}{x} \enot Bx$}
-	\open
-		\hypo{be1}{Be}\as{for $\exists${}E}
-		\have{all1}{\qt{\forall}{y}\ e{=}y}\Ae{one}
-		\have{ef1}{e{=}f}\Ae{all1}
-		\have{bf1}{Bf}\by{{=}E}{ef1,be1}
-	\close
-	\have{bf}{Bf}\Ee{eb,be1-bf1}
-	\have{ab}{\qt{\forall}{x} Bx}\Ai{bf}
-	\have{nnab}{\enot\enot\qt{\forall}{x} Bx}\by{DN}{ab}
-	\have{nenb}{\enot\qt{\exists}{x}\enot Bx}\by{QN}{nnab}
-\end{proof}
+Notice that there is no horizontal line below line $1$.
+This signifies that there is no premise.
+Rather, identity introduction has been used in its unique capacity to introduce an identity claim which does not appeal to any other lines.
+Accordingly, line $1$ is neither a premise nor assumption, and so the constant $a$ does not occur in any undischarged assumptions.
+As a result, we may use universal introduction in order to conclude the proof.
 
 
 
-\section{Natural deduction strategy}
 
-All the strategy advice given in \S\ref{sec.SL.ND.strategy} is equally applicable to natural deduction proofs in QL. Review the suggestions there for general advice for natural deduction proofs. Applied to our new QL rules, if you have a universal, you can think about taking any instances that look useful. (Taking random instances is unlikely to be useful.) If you have an existential, consider using the existential elimination rule, which begins by assuming an instance with a proxy, then deriving a conclusion that does not contain that proxy name.
+\section{Proofs and Provability in QL$^=$}
 
-Showing $\enot \qt{\exists}{x}\metaA{}$ can also be hard, and it is often easier to show  $\qt{\forall}{x}\enot \metaA{}$ and use the QN rule. {\color{black} Although technically in \textit{Carnap}---using system LogicBookPD---you won't have access to this rule QN of quantifier conversion! Sorry not sorry!} 
+We will refer to the natural deduction rules specified above together with the natural deduction rules provided in Ch.~\ref{ch.ND.proofs} as the natural deduction rules for QD.
+We may then adapt the definition of a proof from before as follows:
+
+\factoidbox{
+  A natural deduction \define{proof} (or \define{derivation}) of a conclusion $\metaA$ from a set of premises $\Gamma$ in QD is any sequence of lines ending with $\metaA$ on a live line where every line in the sequence is either: (1) a premise in $\Gamma$; (2) a discharged assumption; or (3) follows from previous lines by one of the natural deduction rules for QD. 
+}
+
+A QL$^=$ sentence $\metaA$ is \define{provable} (or \define{derivable}) from $\Gamma$ in QD just in case there is a natural deduction proof (derivation) of $\metaA$ from $\Gamma$ in QD, where we may write this $\Gamma \proves_{\textsc{qd}} \metaA$, or just $\Gamma \proves \metaA$ when it is clear from context which proof system we intend. 
+
+In keeping with the definitions given before, we will refer to a QL$^=$ sentence $\metaA$ as a \define{theorem} of QD just in case $\proves\metaA$, i.e., $\varnothing\proves\metaA$.
+Since QD includes all the same rules and expressive resources of SD, all of the theorems of SD are also theorems of QD.
+Put otherwise, QD is an \define{extension} of SD.
+Two sentences $\metaA$ and $\metaB$ are \define{provably equivalent} (or \define{interderivable}) in QD if and only if both $\metaA\proves\metaB$ and $\metaB\proves\metaA$.
+A set of sentences $\Gamma$ is \define{provably inconsistent} if and only if $\Gamma\proves\bot$ where $\bot$ is our arbitrarily chosen contradiction, e.g., $A\eand\enot A$.
 
 
 
-\section{Soundness and completeness}
 
-The proofs for soundness and completeness of our natural deduction system are beyond the scope of this textbook {\color{black} (but not beyond the scope of the MIT version of this course!)}. If you are interested in thinking through how those proofs would go, here are a few hints to get you started. Soundness in a natural deduction system amounts to the claim that if any sentence \metaA{} is derivable from a set of sentences \metaSetX{}, then $\metaSetX{}\models\metaA{}$. To prove this, you would need to demonstrate that any possible natural deduction proof meets this constraint. This is trivial for `proofs' that only contain premises; you'd next have to show, for every possible way of extending the proof (i.e., everything permitted by any one of our rules), that any newly added lines with no undischarged assumptions are entailed by the premises.
+\section{Soundness and Completeness of QD}
 
-Undischarged assumptions would require special treatment. You can think of an assumption as being similar to a `temporary premise' --- what you really want to prove is that, for every possible line in a proof, that line is entailed by the premises \emph{in addition to} any undischarged assumptions.
+% In order to show that something is a theorem we have to derive it from no premises.
+Recall from before the challenge of showing that a sentence is not a theorem.
+Whereas providing a derivation of the sentence from no premises is all that is required to show that the sentence is a theorem, it is not possible to survey the space of all possible proofs to show that a sentence is not a theorem.
+Instead, we may appeal to the following metalogical properties:
 
-The completeness proof is more complex. We need some way to guarantee that there is a proof corresponding to every QL entailment. The way to do this is to find an algorithmic procedure that is guaranteed to find a proof if one exists, and to prove that this is so. One good way to do this is to take advantage of the proven completeness of our \emph{tree} system for QL, presented in Chapter \ref{ch.QLsoundcomplete}, and find a way to demonstrate that any tree proof can be converted to a natural deduction proof. Here is a hint if you'd like to undertake that project: the tree method encodes the same kind of reasoning that reductio proofs do.
+\factoidbox{
+  \textsc{soundness:} $\Gamma \proves_{\textsc{qd}} \metaA$ only if $\Gamma \models \metaA$.
+}\vspace{-.4in}
+\factoidbox{
+  \textsc{completeness:} $\Gamma \proves_{\textsc{qd}} \metaA$ if $\Gamma \models \metaA$.
+}
+
+In order to show that $\Gamma \nproves \metaA$, we may show that $\Gamma \nmodels \metaA$ by providing a model which satisfies $\Gamma$ but does not satisfy $\metaA$.
+It then follows by soundness that $\Gamma \nproves \metaA$, and so there is no proof in QD of $\metaA$ from $\Gamma$.
+This is a lot easier that attempting survey the entire space of possible proofs in QD.
+In the case where $\Gamma=\varnothing$, we need only provide a countermodel to $\metaA$ in order to show that $\metaA$ is not a theorem, i.e., $\nproves \metaA$.
+
+In the opposite direction, showing that $\Gamma \models \metaA$ is enough to conclude that $\Gamma \proves \metaA$ by appealing to completeness.
+This tells us that there is a proof of $\metaA$ from the premises $\Gamma$, but it does not identify that proof for us.
+Nevertheless, we know that there is good reason to look for one.
+
+Recall the contrast between our two proof systems for SL.
+Whereas attempting to prove that $\Gamma \proves_{\textsc{sd}} \metaA$ was not guaranteed to lead to a proof or to the conclusion that no proof exists, the tree method for SL always returned an answer. 
+Given the soundness and completeness of the tree method for SL, we had an effective procedure for determining whether $\Gamma\models\metaA$ or not. 
+Put otherwise, logical entailment is \define{decidable} in SL insofar as there is an effective procedure for determining in a finite number of steps whether $\Gamma \models \metaA$ or not given soundness and completeness.
+By contrast, logical entailment in QL$^=$ is \define{undecidable} insofar as there is no such method for determining whether or not $\Gamma \models \metaA$.
+Even though we may construct a tree method for QL$^=$, this method is not guaranteed to lead to either a positive or negative determination in the way that it did for SL.
+This makes the tree method a lot less interesting for QL$^=$.
+As a result, the following chapters will establish soundness and completeness for QD rather than for an extension of the tree method for QL$^=$.
 
 
 

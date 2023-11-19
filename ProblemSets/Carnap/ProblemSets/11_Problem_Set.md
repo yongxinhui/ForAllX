@@ -6,7 +6,7 @@ css:
 ---
 
 # Phil 24.241 Logic I
-# Problem Set \#10 
+# Problem Set \#11
 
 <br />
 
