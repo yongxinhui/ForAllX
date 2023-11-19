@@ -8,7 +8,7 @@
 % output dir = ..
 
 \documentclass[12pt, openany, oneside]{book}
-\usepackage{forallx-ubc-Hunt} %calls local modified style file
+\usepackage{forallx-mit} %calls local modified style file
 \usepackage{tocloft,placeins,pdfpages}
 \usepackage{multicol} %for quick reference modifications
 \usepackage{bm} %for JTapp quantifier rules
@@ -25,28 +25,42 @@
 
 
 % ********************
-% Uncommenting one of the following causes only that part to compile, so MUCH faster for editing just a part.
+% Uncomment one of the following causes only that part to compile for faster editing.
+% ********************
 
-% \includeonly{forallx-ubc-frontmatter-Hunt}
-% \includeonly{forallx-ubc-preface-Hunt}
-% \includeonly{forallx-ubc-1-intro}
-% \includeonly{forallx-ubc-2-sentential}
-% \includeonly{forallx-ubc-3-truthtables}
-% \includeonly{forallx-ubc-4-SLmodels}
-% \includeonly{forallx-ubc-5-SLtrees}
-% \includeonly{forallx-ubc-6-SLsoundcomplete}
-% \includeonly{forallx-ubc-7-SLND}  
-% \include{forallx-ubc-7-midterm-review}
-% \includeonly{forallx-ubc-8-predicate}
-% \includeonly{forallx-ubc-9-QLmodels}
-% \includeonly{forallx-ubc-12-identity}
-% \includeonly{forallx-ubc-13-QLND}
-% \includeonly{forallx-ubc-10-QLtrees}
-% \includeonly{forallx-ubc-11-QLsoundcomplete}
-% \includeonly{forallx-ubc-app-notation}
-% \includeonly{forallx-ubc-app-quickreference-Hunt}
-% \includeonly{forallx-ubc-app-solutions}
-% \includeonly{forallx-ubc-app-QND-soundness}
+% \includeonly{forallx-mit-frontmatter}
+% \includeonly{forallx-mit-preface}
+
+% \includeonly{forallx-mit-00-introduction}
+% \includeonly{forallx-mit-01-SL}
+% \includeonly{forallx-mit-02-truthtables}
+% \includeonly{forallx-mit-03-SLmodels}
+% \includeonly{forallx-mit-04-ST}
+% \includeonly{forallx-mit-05-SLmeta}
+% \includeonly{forallx-mit-06-SD}
+% \includeonly{forallx-mit-07-midterm}
+% \includeonly{forallx-mit-08-QL}
+% \includeonly{forallx-mit-09-QLmodels}
+% \includeonly{forallx-mit-10-identity}
+% \includeonly{forallx-mit-11-QD}
+
+% \includeonly{forallx-mit-app-notation}
+% \includeonly{forallx-ubc-app-quickreference}
+
+% \includeonly{forallx-mit-pset-00}
+% \includeonly{forallx-mit-pset-01}
+% \includeonly{forallx-mit-pset-02}
+% \includeonly{forallx-mit-pset-03}
+% \includeonly{forallx-mit-pset-04}
+% \includeonly{forallx-mit-pset-05}
+% \includeonly{forallx-mit-pset-06}
+% \includeonly{forallx-mit-pset-08}
+% \includeonly{forallx-mit-pset-09}
+% \includeonly{forallx-mit-pset-10}
+% \includeonly{forallx-mit-pset-11} 
+% \includeonly{forallx-mit-app-solutions}
+% \includeonly{forallx-ubc-backmatter}
+
 
 
 \begin{document}
@@ -71,37 +85,35 @@
 \thispagestyle{empty} %kills headers on a page 
  %\pagestyle{frontmatter}
 
-\include{forallx-ubc-frontmatter-Hunt}
+\include{forallx-mit-frontmatter}
 
 \pagestyle{prefacestyle}
 
-\include{forallx-ubc-preface-Hunt}
+\include{forallx-mit-preface}
 
 \pagestyle{mainmatter}
 
 
-\include{forallx-ubc-1-intro}
-
-%\iffalse
-\include{forallx-ubc-2-sentential}
-\include{forallx-ubc-3-truthtables}
-\include{forallx-ubc-4-SLmodels}
-\include{forallx-ubc-5-SLtrees}
-\include{forallx-ubc-6-SLsoundcomplete}
-\include{forallx-ubc-7-SLND}
-\include{forallx-ubc-7-midterm-review}
-\include{forallx-ubc-8-predicate}
-\include{forallx-ubc-9-QLmodels}
-\include{forallx-ubc-12-identity}
-\include{forallx-ubc-13-QLND}
+\include{forallx-mit-00-introduction}
+\include{forallx-mit-01-SL}
+\include{forallx-mit-02-truthtables}
+\include{forallx-mit-03-SLmodels}
+\include{forallx-mit-04-ST}
+\include{forallx-mit-05-SLmeta}
+\include{forallx-mit-06-SD}
+\include{forallx-mit-07-midterm}
+\include{forallx-mit-08-QL}
+\include{forallx-mit-09-QLmodels}
+\include{forallx-mit-10-identity}
+\include{forallx-mit-11-QD}
 % \include{forallx-ubc-10-QLtrees}
 % \include{forallx-ubc-11-QLsoundcomplete}
 %\fi 
 
 \appendix
-\include{forallx-ubc-app-notation}
+\include{forallx-mit-app-notation}
 
-\include{forallx-ubc-app-quickreference-Hunt}
+\include{forallx-ubc-app-quickreference}
 
 % \include{forallx-ubc-app-QND-soundness} %%%%Comment this out! 
 
@@ -112,22 +124,22 @@
 %\chapter[Practice Problems!]{Exercises}
 %\label{app.exercises}
  
-\include{forallx-ubc-z1-intro-p}
-\include{forallx-ubc-z2-sentential-p}
-\include{forallx-ubc-z3-truthtables-p}
-\include{forallx-ubc-z4-SLmodels-p}
-\include{forallx-ubc-z5-SLtrees-p}
-\include{forallx-ubc-z6-SLsoundcomplete-p}
-\include{forallx-ubc-z7-SLND-p}
-\include{forallx-ubc-z8-predicate-p}
-\include{forallx-ubc-z9-QLmodels-p}
-\include{forallx-ubc-z12-identity-p}
-\include{forallx-ubc-z13-QLND-p} 
+\include{forallx-mit-pset-00}
+\include{forallx-mit-pset-01}
+\include{forallx-mit-pset-02}
+\include{forallx-mit-pset-03}
+\include{forallx-mit-pset-04}
+\include{forallx-mit-pset-05}
+\include{forallx-mit-pset-06}
+\include{forallx-mit-pset-08}
+\include{forallx-mit-pset-09}
+\include{forallx-mit-pset-10}
+\include{forallx-mit-pset-11} 
 % \include{forallx-ubc-z10-QLtrees-p}
 % \include{forallx-ubc-z11-QLsoundcomplete-p}
 
 
-\include{forallx-ubc-app-solutions} %%%ALL the solutions are in this file 
+\include{forallx-mit-app-solutions} %%%ALL the solutions are in this file 
 
 
 
