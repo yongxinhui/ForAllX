@@ -4,23 +4,19 @@
 \label{ch.preface2}
 \addcontentsline{toc}{chapter}{Preface to the MIT edition}
 
-The goal of this modified version of Ichikawa's \textit{ForAllX} is to bring some of the best features of the \textit{Logic Book}, for free!
-Of the existing free texts, Ichikawa's version seemed the closest.
-Why the \textit{Logic Book} system? 
-It seems to strike the best balance of intellectual and practical virtues: no special symbols or special rules, a pleasing symmetry between introduction and elimination rules that makes things easy to remember, and the philosophical advantages of using proof-by-cases for disjunction elimination. 
-
-Below is an ongoing list of modifications that have been made to Ichikawa's version, starting with some of the bigger changes.
-I have maintained the list of changes that Josh has included, making a number additions.
+I inherited a version of Ichikawa's {\tt forall\script{x}} from Josh Hunt who worked to bring the text closer to \textit{The Logic Book} by Bergmann, Moor, and Nelson for the purposes of teaching Logic I at MIT.
+Since then, I have substantially rewritten each of the chapters that remain having dropped some chapters entirely and included two new chapters on soundness and completeness for a natural deduction system for first-order logic.
+I have maintained the list of changes that Josh Hunt has included, making a number additions.
 
 \begin{itemize}
   \item Chapter 0 has been largely rewritten to provide a more compelling description of the subject matter of logic, and to remove some distracting glosses which may easily be misunderstood and confuse the introduction of the topic.
   \item Chapter 1 has also been substantially rewritten, clarifying the use of schematic variables in the definition of the wffs of SL, fixing conventions for dropping parentheses and quotes, and polishing examples throughout.
-  \item Chapter 2 has been revised, explaining the relationship between validity in English and valid regimentations. The connection between interpretations of the language and the lines on a truth table has been clarified and certain examples have been modified or removed to avoid confusion. Validity of argument schemata has also been avoided, focusing on the validity of SL arguments themselves.
+  \item Chapter 2 has been rewritten, explaining the relationship between validity in English and valid regimentations. The connection between interpretations of the language and the lines on a truth table has been clarified and certain examples have been modified or removed to avoid confusion. Validity of argument schemata has also been avoided, focusing on the validity of SL arguments themselves.
   \item Chapter 3 has been rewritten, including an explicit definition of satisfaction, defining logical entailment and unsatisfiability in these terms. Consideration of the weakening principle has been added and the relationship between validity and entailment has been clarified. Connections between consistency and satisfiability are then explained.
   \item Chapter 4 has been revised for consistency, simplifying the proof rules and definitions.
-  \item Chapter 5 has been substantially rewritten, fixing errors and including proofs of soundness and completeness. The chapter begins with an expanded discussion of mathematical induction.
+  \item Chapter 5 has been substantially rewritten, fixing errors and including proofs of soundness and completeness instead of rough sketches. The chapter begins with an extended discussion of mathematical induction.
   \item Chapter 6 has been reordered, condensed, and substantially rewritten.
-  \item Chapter 8 has been largely rewritten, eliminating reference to a UD (universe of discourse), including recursive definitions of free and bound variables, clearly distinguishing between sentences and wffs, and otherwise adapting the conventions for consistency and elegance.
+  \item Chapter 8 has been largely rewritten, eliminating reference to a universe of discourse, including recursive definitions of free and bound variables, clearly distinguishing between sentences and wffs, and otherwise adapting the conventions for consistency and elegance.
   \item Chapter 9 has been completely rewritten to include a standard semantics for first-order logic which does not take constants to be rigid designators and defines true relative to both a model and variable assignment, before defining truth at a model for sentences. Minimal models have been carefully motivated and presented along with a range of techniques for establishing entailments as well as evaluating sentences on a given model.
   \item Chapter 10 has been largely rewritten to reflect the same semantic conventions presented in Chapter 9. The motivations for adding identity to the language have been connected to ideas about the logical and non-logical terms of the language. Definitions of free-for and substitution has been included and discussions of inequality quantifiers, cardinality quantifiers, definite descriptions, and Leibniz's law have been added or adjusted.
   \item Chapter 11 has been substantially rewritten. Substitution has been carefully defined and used to articulate the rules for the quantifiers and identity in a standard manner. The chapter closes with some discussion of undecidability, motivating proofs of soundness and completeness for QD instead of the tree method.
@@ -39,7 +35,7 @@ I have maintained the list of changes that Josh has included, making a number ad
     To avoid this tedium in the future, all quantifier/bound variable instances are written with a command \verb|\qt{}{}| whose first argument takes the quantifier and second argument takes the bound variable.
     This way, one can easily modify the formatting in the style file (e.g. removing or adding parentheses).
     Again, it would seem cruel to ask students to remember that while in \textit{Carnap} using system LogicBookPD, they MUST put parentheses around $\exists x$ and $\forall x$, if that's not the format they're seeing in their text.
-  \item The recursive definition of truth-conditions in Quantifier Logic (QL) (\S\ref{sec:satisfactionQL}) have been reworked.
+  \item The recursive definition of truth-conditions in Quantifier Logic (QL) have been reworked.
     Hopefully this makes it both (1) easier to understand and (2) slightly more precise.
     Whereas Ichikawa refers to this aspect of formal semantics as giving a definition of `truth', it is more accurate to say that we are defining `truth-conditions'.
     The truth-conditions for SL have been reworked in a similar vein.
@@ -55,11 +51,13 @@ I have maintained the list of changes that Josh has included, making a number ad
 If you find any errors throughout this text, please let me know and I'll happily fix them.
 
 \begin{flushright}
-Benjamin Brast-McKie \\
-July 2023 \\
-brastmck@mit.edu
+\textsf{Benjamin Brast-McKie} \\
+\textsf{MIT, July 2023} \\
+\texttt{brastmck@mit.edu}
 \end{flushright}
 
+
+\iffalse
 
 \chapter*{Preface to the UBC Edition}
 \label{ch.preface}
@@ -97,3 +95,5 @@ University of British Columbia \\
 October 2021 \\
 ichikawa@gmail.com
 \end{flushright}
+
+\fi

@@ -31,34 +31,37 @@
 % \includeonly{forallx-mit-frontmatter}
 % \includeonly{forallx-mit-preface}
 
-% \includeonly{forallx-mit-00-introduction}
-% \includeonly{forallx-mit-01-SL}
-% \includeonly{forallx-mit-02-truthtables}
-% \includeonly{forallx-mit-03-SLmodels}
-% \includeonly{forallx-mit-04-ST}
-% \includeonly{forallx-mit-05-SLmeta}
-% \includeonly{forallx-mit-06-SD}
-% \includeonly{forallx-mit-07-midterm}
-% \includeonly{forallx-mit-08-QL}
-% \includeonly{forallx-mit-09-QLmodels}
-% \includeonly{forallx-mit-10-identity}
-% \includeonly{forallx-mit-11-QD}
+% \includeonly{Chapters/forallx-mit-00-introduction}
+% \includeonly{Chapters/forallx-mit-01-SL}
+% \includeonly{Chapters/forallx-mit-02-truthtables}
+% \includeonly{Chapters/forallx-mit-03-SLmodels}
+% \includeonly{Chapters/forallx-mit-04-ST}
+% \includeonly{Chapters/forallx-mit-05-SLmeta}
+% \includeonly{Chapters/forallx-mit-06-SD}
+% \includeonly{Chapters/forallx-mit-07-midterm}
+% \includeonly{Chapters/forallx-mit-08-QL}
+% \includeonly{Chapters/forallx-mit-09-QLmodels}
+% \includeonly{Chapters/forallx-mit-10-identity}
+% \includeonly{Chapters/forallx-mit-11-QD}
+% \includeonly{Chapters/forallx-mit-12-QDSoundness}
+% \includeonly{Chapters/forallx-mit-11-QDCompleteness}
 
 % \includeonly{forallx-mit-app-notation}
 % \includeonly{forallx-ubc-app-quickreference}
 
-% \includeonly{forallx-mit-pset-00}
-% \includeonly{forallx-mit-pset-01}
-% \includeonly{forallx-mit-pset-02}
-% \includeonly{forallx-mit-pset-03}
-% \includeonly{forallx-mit-pset-04}
-% \includeonly{forallx-mit-pset-05}
-% \includeonly{forallx-mit-pset-06}
-% \includeonly{forallx-mit-pset-08}
-% \includeonly{forallx-mit-pset-09}
-% \includeonly{forallx-mit-pset-10}
-% \includeonly{forallx-mit-pset-11} 
-% \includeonly{forallx-mit-app-solutions}
+% \includeonly{PSets/forallx-mit-pset-00}
+% \includeonly{PSets/forallx-mit-pset-01}
+% \includeonly{PSets/forallx-mit-pset-02}
+% \includeonly{PSets/forallx-mit-pset-03}
+% \includeonly{PSets/forallx-mit-pset-04}
+% \includeonly{PSets/forallx-mit-pset-05}
+% \includeonly{PSets/forallx-mit-pset-06}
+% \includeonly{PSets/forallx-mit-pset-08}
+% \includeonly{PSets/forallx-mit-pset-09}
+% \includeonly{PSets/forallx-mit-pset-10}
+% \includeonly{PSets/forallx-mit-pset-11} 
+% \includeonly{PSets/forallx-mit-app-solutions}
+
 % \includeonly{forallx-ubc-backmatter}
 
 
@@ -70,6 +73,11 @@
 \setlength{\parindent}{0em}
 \setlength{\parskip}{1em}
 
+\thispagestyle{empty} %kills headers on a page 
+ %\pagestyle{frontmatter}
+
+\include{forallx-mit-frontmatter}
+
 %%Table of Contents:
  \pagestyle{plain}
 {
@@ -79,13 +87,8 @@
 \markboth{Contents}{}
 }
 
- %\includepdf[page=-]{forallx-frontcover.pdf}
+ % \includepdf[page=-]{forallx-frontcover.pdf}
 
-
-\thispagestyle{empty} %kills headers on a page 
- %\pagestyle{frontmatter}
-
-\include{forallx-mit-frontmatter}
 
 \pagestyle{prefacestyle}
 
@@ -94,23 +97,24 @@
 \pagestyle{mainmatter}
 
 
-\include{forallx-mit-00-introduction}
-\include{forallx-mit-01-SL}
-\include{forallx-mit-02-truthtables}
-\include{forallx-mit-03-SLmodels}
-\include{forallx-mit-04-ST}
-\include{forallx-mit-05-SLmeta}
-\include{forallx-mit-06-SD}
-\include{forallx-mit-07-midterm}
-\include{forallx-mit-08-QL}
-\include{forallx-mit-09-QLmodels}
-\include{forallx-mit-10-identity}
-\include{forallx-mit-11-QD}
-% \include{forallx-ubc-10-QLtrees}
-% \include{forallx-ubc-11-QLsoundcomplete}
-%\fi 
+\include{Chapters/forallx-mit-00-introduction}
+\include{Chapters/forallx-mit-01-SL}
+\include{Chapters/forallx-mit-02-truthtables}
+\include{Chapters/forallx-mit-03-SLmodels}
+\include{Chapters/forallx-mit-04-ST}
+\include{Chapters/forallx-mit-05-SLmeta}
+\include{Chapters/forallx-mit-06-SD}
+\include{Chapters/forallx-mit-07-midterm}
+\include{Chapters/forallx-mit-08-QL}
+\include{Chapters/forallx-mit-09-QLmodels}
+\include{Chapters/forallx-mit-10-identity}
+\include{Chapters/forallx-mit-11-QD}
+% \include{Chapters/forallx-mit-12-QDSoundness}
+% \include{Chapters/forallx-mit-11-QDCompleteness}
+
 
 \appendix
+
 \include{forallx-mit-app-notation}
 
 \include{forallx-ubc-app-quickreference}
@@ -124,22 +128,19 @@
 %\chapter[Practice Problems!]{Exercises}
 %\label{app.exercises}
  
-\include{forallx-mit-pset-00}
-\include{forallx-mit-pset-01}
-\include{forallx-mit-pset-02}
-\include{forallx-mit-pset-03}
-\include{forallx-mit-pset-04}
-\include{forallx-mit-pset-05}
-\include{forallx-mit-pset-06}
-\include{forallx-mit-pset-08}
-\include{forallx-mit-pset-09}
-\include{forallx-mit-pset-10}
-\include{forallx-mit-pset-11} 
-% \include{forallx-ubc-z10-QLtrees-p}
-% \include{forallx-ubc-z11-QLsoundcomplete-p}
+\include{PSets/forallx-mit-pset-00}
+\include{PSets/forallx-mit-pset-01}
+\include{PSets/forallx-mit-pset-02}
+\include{PSets/forallx-mit-pset-03}
+\include{PSets/forallx-mit-pset-04}
+\include{PSets/forallx-mit-pset-05}
+\include{PSets/forallx-mit-pset-06}
+\include{PSets/forallx-mit-pset-08}
+\include{PSets/forallx-mit-pset-09}
+\include{PSets/forallx-mit-pset-10}
+\include{PSets/forallx-mit-pset-11} 
 
-
-\include{forallx-mit-app-solutions} %%%ALL the solutions are in this file 
+\include{PSets/forallx-mit-app-solutions} %%%ALL the solutions are in this file 
 
 
 

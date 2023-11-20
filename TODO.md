@@ -39,7 +39,10 @@
 - [ ] Week 9
 - [ ] Week 10
 - [ ] Week 11
+    - [ ] Tu handout
 - [ ] Week 12
+    - [ ] write soundness for QD
 - [ ] Week 13
+    - [ ] write completeness for QD
 - [ ] Week 14
 - [ ] Week 15
