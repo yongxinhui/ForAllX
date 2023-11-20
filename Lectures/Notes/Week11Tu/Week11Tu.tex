@@ -1,0 +1,266 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs} %%Math packages
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{multicol} 
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage{prooftrees} 
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep=}
+% \usepackage{fitchproof} 
+
+% \linespread{1} % Change line spacing here, Palatino benefits from a slight increase by default
+
+\newcommand{\corner}[1]{\ulcorner#1\urcorner} %%Corner quotes
+\newcommand{\tuple}[1]{\langle#1\rangle} %%Angle brackets
+\newcommand{\set}[1]{\lbrace#1\rbrace} %%Set brackets
+\newcommand{\interpret}[1]{\llbracket#1\rrbracket} %%Double brackets
+%\DeclarePairedDelimiter\ceil{\lceil}{\rceil}    
+\def\therefore{\ensuremath{\ldotp\dot\,\ldotp}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\D}{\mathbb{D}}
+\renewcommand{\v}[1]{\mathbf{#1}}
+\newcommand{\even}{\texttt{Even}}
+\newcommand{\comp}{\texttt{Comp}}
+\newcommand{\res}{\texttt{Res}}
+\newcommand{\simp}{\texttt{Simple}}
+\newcommand{\leng}{\texttt{Length}}
+\newcommand{\V}[1]{\mathcal{V}_{#1}} %%Corner quotes
+\newcommand{\VV}[2]{\mathcal{V}_{#1}^{#2}} %%
+\newcommand{\qt}[2]{#1 #2} % for modifying style of quantifer and bound variable pairs
+\newcommand{\unisub}[2]{[#1/#2]}
+
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
+\renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+
+\renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
+\begin{flushright} % Right align
+{\LARGE\@title} % Increase the font size of the title
+
+\vspace{10pt} % Some vertical space between the title and author name
+
+{\@author} % Author name
+\\\@date % Date
+
+\vspace{40pt} % Some vertical space between the author block and abstract
+\end{flushright}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Natural Deduction in QL$^=$}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+
+
+\section*{Motivation}
+
+\begin{enumerate}
+  \item[\it Entailment:] We have defined entailment in QL$^=$.
+  \item[\it Completeness:] We want a complete natural deduction system for QL$^=$.
+  \item[\bf Question 1:] What rules do we need to include to derive the following?
+    \begin{itemize}
+      \item[-] All humans are mortal.
+      \item[-] Socrates is human.
+      \item[-] Socrates is mortal.
+      \item[$\therefore$] Someone is mortal.
+    \end{itemize}
+  \item[\bf Task 1:] Include rules by which we may derive the arguments above. 
+\end{enumerate}
+
+
+
+
+\section*{Substitution}
+
+\begin{enumerate}
+  \item[\it Free For:] $\beta$ is \textsc{free for} $\alpha$ in $\varphi$ just in case there is no free occurrence of $\alpha$ in $\varphi$ in the scope of a quantifier that binds $\beta$. 
+  \item[\it Constants:] If $\beta$ is a constant, then $\beta$ is free for any $\alpha$ and $\varphi$. 
+  \item[\it Substitution:] If $\beta$ is free for $\alpha$ in $\varphi$, then the \textsc{substitution} $\varphi\unisub{\beta}{\alpha}$ is the result of replacing all free occurrences of $\alpha$ in $\varphi$ with $\beta$. 
+  \item[\it Instance:] $\varphi\unisub{\beta}{\alpha}$ is a substitution instance of $\qt{\forall}{\alpha}\varphi$ and $\qt{\exists}{\alpha}\varphi$ if $\beta$ is a constant. 
+  \item[\it Pattern:] $\qt{\forall}{x}\varphi \vdash \varphi\unisub{s}{x} \vdash \qt{\exists}{x}\varphi$.
+\end{enumerate}
+   
+
+
+
+
+\section*{Universal Elimination}
+
+\begin{enumerate}
+  \item[($\forall$E)] $\forall\alpha\varphi \vdash \varphi\unisub{\beta}{\alpha}$ where $\beta$ is a constant and $\alpha$ is a variable. 
+  \item[\bf Question 2:] Do we need to worry about $\beta$ being free for $\alpha$? 
+  \item[\it Example:] Everyone famous is either great or unfortunate.
+    \begin{itemize}
+      \item[-] $\forall x(Fx \supset (Gx \vee Ux))$.
+      \item[$\therefore$] $Ft \supset (Gt \vee Ut)$.
+    \end{itemize}
+\end{enumerate}
+
+
+
+
+\section*{Existential Introduction}
+
+\begin{enumerate}
+  \item[($\exists$I)] $\varphi\unisub{\beta}{\alpha} \vdash \exists\alpha\varphi$ where $\beta$ is a constant and $\alpha$ is a variable. 
+  \item[\it Example:] Tom is either great or unfortunate ($Gt \vee Ut$).
+    \begin{itemize}
+      \begin{multicols}{2}
+      \item[$\therefore$] $\exists x(Gx \vee Ux)$.
+      \item[$\therefore$] $\exists x(Gx \vee Ut)$.
+      \item[$\therefore$] $\exists x(Gt \vee Ut)$.
+      \item[$\therefore$] $\exists y\exists x(Gy \vee Uy)$.
+      \item[$\therefore$] $\exists y\exists x(Gx \vee Uy)$.
+      \item[$\#$] $\exists x\exists x(Gx \vee Ux)$.
+      \end{multicols}
+    \end{itemize}
+  % \item[\bf Question 3:] Do we need to worry about $\beta$ being free for $\alpha$? 
+\end{enumerate}
+
+
+
+
+\section*{Socrates}
+
+\begin{enumerate}
+  \item[\bf Task 2:] We can now derive the argument above:
+    \begin{itemize}
+      \item[-] $\forall x(Hx \supset Mx)$
+      \item[-] $Hs$
+      \item[$\therefore$] $Ms$ \quad (by $\forall$E) 
+      \item[$\therefore$] $\exists xMx$ \quad (by $\exists$I)   
+    \end{itemize}
+\end{enumerate}
+
+
+
+
+
+
+\section*{Universal Introduction}
+
+\begin{enumerate}
+  \item[\bf Task 3:] Compare the following invalid inference.
+    \begin{itemize}
+      \item[-] Socrates is moral.
+      \item[$\#$] Everything is mortal.
+    \end{itemize}
+  \item[\bf Question 3:] How are we going to introduce universal quantifiers without making the argument above derivable?
+  \item[\it Bad Response:] We cannot introduce universal quantifiers under any condition.
+  \item[\it Example:] But consider the following argument:
+    \begin{itemize}
+      \item[-] $\forall x\forall y\forall z((Rxy \wedge Ryz) \supset Rxz)$.
+      \item[-] $\forall x\neg Rxx$.
+      \item[$\therefore$] $\forall x\forall y(Rxy \supset \neg Ryx)$.
+    \end{itemize}
+  \item[($\forall$I)] $\varphi\unisub{\beta}{\alpha} \vdash \forall\alpha\varphi$ where $\beta$ is a constant, $\alpha$ is a variable, and $\beta$ does not occur in $\forall\alpha\varphi$ or in any undischarged assumption. 
+    \begin{itemize}
+      % \begin{multicols}{2}
+      \item[$\therefore$] $\forall y\forall z((Ray \wedge Ryz) \supset Raz)$ \quad $\forall$E 
+      \item[$\therefore$] $\forall z((Rab \wedge Rbz) \supset Raz)$ \quad $\forall$E
+      \item[$\therefore$] $(Rab \wedge Rba) \supset Raa$ \quad $\forall$E
+      % \item[$\therefore$] $\neg Raa$ \quad $\forall$E
+      % \item[$\therefore$] $Rab$ \quad :AS for $\supset$I
+      % \item[$\therefore$] $Rba$ \quad :AS for $\neg$I
+      % \end{multicols}
+    \end{itemize}
+  \item[\it Arbitrary:] The constraints on ($\forall$E) require $\beta$ to be arbitrary. 
+  \item[\it Review:] Bad inference above is blocked.
+\end{enumerate}
+
+
+
+
+
+
+\section*{Existential Elimination}
+
+\begin{enumerate}
+  \item[\bf Task 4:] Compare the following invalid inference.
+    \begin{itemize}
+      \item[-] Someone is mortal.
+      \item[$\#$] Zeus is mortal.
+    \end{itemize}
+  \item[\bf Question 4:] How are we going to eliminate existential quantifiers without making the argument above derivable?
+  \item[\it Example:] Consider the following argument:
+    \begin{itemize}
+      \item[-] Everyone who applied filled a position $\forall x(Ax \supset \exists y Fxy)$.
+      \item[-] Someone applied $\exists xAx$.
+      \item[$\therefore$] Someone filled a position $\exists x\exists y Fxy$.
+    \end{itemize}
+  \item[($\exists$E)] If $\exists\alpha\varphi,\varphi\unisub{\beta}{\alpha} \vdash \psi$ where $\beta$ is a constant that does not occur in $\exists\alpha\varphi$, $\psi$, or in any undischarged assumption, then $\exists\alpha\varphi\vdash \psi$.
+  \item[\it Derivation:] We can derive the example without deriving the invalid inference.
+\end{enumerate}
+
+
+
+\section*{Quantifier Exchange Rules}
+
+\begin{enumerate}
+  \begin{multicols}{2}
+    \item[$(\neg\exists)$] $\neg\qt{\exists}{\alpha}\varphi \vdash \qt{\forall}{\alpha}\neg\varphi$.
+    \item[$(\neg\forall)$] $\neg\qt{\forall}{\alpha}\varphi \vdash \qt{\exists}{\alpha}\neg\varphi$.
+    \item[$(\forall\neg)$] $\qt{\forall}{\alpha}\neg\varphi \vdash \neg\qt{\exists}{\alpha}\varphi$.
+    \item[$(\exists\neg)$] $\qt{\exists}{\alpha}\neg\varphi \vdash \neg\qt{\forall}{\alpha}\varphi$.
+  \end{multicols}
+\end{enumerate}
+
+\begin{enumerate}
+  \begin{multicols}{2}
+  \item[\bf Task 5:] $\qt{\forall}{\alpha}\neg\varphi \vdash \neg\qt{\exists}{\alpha}\varphi$.
+  \item \underline{$\forall\alpha\neg\varphi$}
+  \item | \underline{$\exists \alpha\varphi$}
+  \item | | \underline{$\varphi\unisub{\beta}{\alpha}$}
+  \item | | | \underline{$\exists\alpha\varphi$}
+  \item | | | $\varphi\unisub{\beta}{\alpha}$
+  \item | | | $\neg\varphi\unisub{\beta}{\alpha}$
+  \item | | $\neg\exists\alpha\varphi$
+  \item | $\neg\exists\alpha\varphi$
+  \item $\neg\exists\alpha\varphi$
+  \item[\bf Task 6:] $\qt{\exists}{\alpha}\neg\varphi \vdash \neg\qt{\forall}{\alpha}\varphi$.
+  \item \underline{$\exists\alpha\neg\varphi$}
+  \item | \underline{$\forall\alpha\varphi$}
+  \item | | \underline{$\neg\varphi\unisub{\beta}{\alpha}$}
+  \item | | | \underline{$\forall\alpha\varphi$}
+  \item | | | $\neg\varphi\unisub{\beta}{\alpha}$
+  \item | | | $\varphi\unisub{\beta}{\alpha}$
+  \item | | $\neg\forall\alpha\varphi$
+  \item | $\neg\forall\alpha\varphi$
+  \item $\neg\forall\alpha\varphi$
+  \end{multicols}
+\end{enumerate}
+
+
+
+
+\end{document}
+
