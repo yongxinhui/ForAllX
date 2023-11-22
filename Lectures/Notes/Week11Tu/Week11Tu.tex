@@ -55,7 +55,7 @@
 {\@author} % Author name
 \\\@date % Date
 
-\vspace{40pt} % Some vertical space between the author block and abstract
+\vspace{20pt} % Some vertical space between the author block and abstract
 \end{flushright}
 }
 
@@ -86,14 +86,23 @@
 \begin{enumerate}
   \item[\it Entailment:] We have defined entailment in QL$^=$.
   \item[\it Completeness:] We want a complete natural deduction system for QL$^=$.
-  \item[\bf Question 1:] What rules do we need to include to derive the following?
+  \item[\bf Question 1:] What rules do we need to derive the following?
     \begin{itemize}
-      \item[-] All humans are mortal.
-      \item[-] Socrates is human.
-      \item[-] Socrates is mortal.
-      \item[$\therefore$] Someone is mortal.
+      \begin{multicols}{2}
+        \item[-] All humans are mortal.
+        \item[-] Socrates is human.
+        % \item[-] Socrates is mortal if human.
+        \item[-] Socrates is mortal.
+        \item[$\therefore$] Someone is mortal.
+
+        \item[-] $\forall x(Hx \supset Mx)$
+        \item[-] $Hs$
+        % \item[-] $Hs \supset Ms$ \quad (by $\forall$E) 
+        \item[-] $Ms$ 
+        \item[$\therefore$] $\exists xMx$ 
+      \end{multicols}
     \end{itemize}
-  \item[\bf Task 1:] Include rules by which we may derive the arguments above. 
+  % \item[\bf Task 1:] Include rules by which we may derive the arguments above. 
 \end{enumerate}
 
 
@@ -106,33 +115,26 @@
   \item[\it Constants:] If $\beta$ is a constant, then $\beta$ is free for any $\alpha$ and $\varphi$. 
   \item[\it Substitution:] If $\beta$ is free for $\alpha$ in $\varphi$, then the \textsc{substitution} $\varphi\unisub{\beta}{\alpha}$ is the result of replacing all free occurrences of $\alpha$ in $\varphi$ with $\beta$. 
   \item[\it Instance:] $\varphi\unisub{\beta}{\alpha}$ is a substitution instance of $\qt{\forall}{\alpha}\varphi$ and $\qt{\exists}{\alpha}\varphi$ if $\beta$ is a constant. 
-  \item[\it Pattern:] $\qt{\forall}{x}\varphi \vdash \varphi\unisub{s}{x} \vdash \qt{\exists}{x}\varphi$.
+  % \item[\it Pattern:] $\qt{\forall}{x}\varphi \vdash \varphi\unisub{s}{x} \vdash \qt{\exists}{x}\varphi$.
 \end{enumerate}
    
 
 
 
 
-\section*{Universal Elimination}
+\section*{Universal Elimination and Existential Introduction}
 
 \begin{enumerate}
   \item[($\forall$E)] $\forall\alpha\varphi \vdash \varphi\unisub{\beta}{\alpha}$ where $\beta$ is a constant and $\alpha$ is a variable. 
-  \item[\bf Question 2:] Do we need to worry about $\beta$ being free for $\alpha$? 
-  \item[\it Example:] Everyone famous is either great or unfortunate.
-    \begin{itemize}
-      \item[-] $\forall x(Fx \supset (Gx \vee Ux))$.
-      \item[$\therefore$] $Ft \supset (Gt \vee Ut)$.
-    \end{itemize}
-\end{enumerate}
-
-
-
-
-\section*{Existential Introduction}
-
-\begin{enumerate}
   \item[($\exists$I)] $\varphi\unisub{\beta}{\alpha} \vdash \exists\alpha\varphi$ where $\beta$ is a constant and $\alpha$ is a variable. 
-  \item[\it Example:] Tom is either great or unfortunate ($Gt \vee Ut$).
+  % \item[-] $\forall x(Hx \supset Mx)$
+  % \item[-] $Hs$
+  % \item[-] $Hs \supset Ms$ \quad (by $\forall$E) 
+  % \item[-] $Ms$ \quad (by $\supset$E) 
+  % \item[-] $\exists xMx$ \quad (by $\exists$I) 
+  \item[\bf Task 1:] Derive the argument above.
+  \item[\it Universal:] Everyone is either great or unfortunate $\forall x(Gx \vee Ux)$.
+  \item[\it Existential:] Tom is either great or unfortunate ($Gt \vee Ut$).
     \begin{itemize}
       \begin{multicols}{2}
       \item[$\therefore$] $\exists x(Gx \vee Ux)$.
@@ -149,52 +151,47 @@
 
 
 
-\section*{Socrates}
-
-\begin{enumerate}
-  \item[\bf Task 2:] We can now derive the argument above:
-    \begin{itemize}
-      \item[-] $\forall x(Hx \supset Mx)$
-      \item[-] $Hs$
-      \item[$\therefore$] $Ms$ \quad (by $\forall$E) 
-      \item[$\therefore$] $\exists xMx$ \quad (by $\exists$I)   
-    \end{itemize}
-\end{enumerate}
-
-
-
-
 
 
 \section*{Universal Introduction}
 
 \begin{enumerate}
-  \item[\bf Task 3:] Compare the following invalid inference.
+  \item[\it Generalising:] It would seem that we cannot universally generalise from instances.
+  \item[\it Invalid:] The following argument is invalid and should not be derivable. 
     \begin{itemize}
-      \item[-] Socrates is moral.
-      \item[$\#$] Everything is mortal.
+      \item[-] Socrates is mortal. \quad ($Ms$)
+      \item[$\#$] Everything is mortal. \quad ($\forall xMx$)
     \end{itemize}
-  \item[\bf Question 3:] How are we going to introduce universal quantifiers without making the argument above derivable?
-  \item[\it Bad Response:] We cannot introduce universal quantifiers under any condition.
-  \item[\it Example:] But consider the following argument:
+  \item[\it Valid:] Compare the following valid argument which should be derivable:
     \begin{itemize}
       \item[-] $\forall x\forall y\forall z((Rxy \wedge Ryz) \supset Rxz)$.
       \item[-] $\forall x\neg Rxx$.
       \item[$\therefore$] $\forall x\forall y(Rxy \supset \neg Ryx)$.
     \end{itemize}
+  \item[\bf Task 2:] Use the rules we have to derive as much as we can.  
+    \item $\forall x\forall y\forall z((Rxy \wedge Ryz) \supset Rxz)$
+    \item \underline{$\forall x\neg Rxx$}
+    \item $\forall y\forall z((Ray \wedge Ryz) \supset Raz)$ \hfill :$\forall$E \hspace{2.35in}\strut
+    \item $\forall z((Rab \wedge Rbz) \supset Raz)$ \hfill :$\forall$E \hspace{2.35in}\strut 
+    \item $(Rab \wedge Rba) \supset Raa$ \hfill :$\forall$E \hspace{2.35in}\strut
+    \item $\neg Raa$ \hfill \hfill :$\forall$E  \hspace{2.35in}\strut
+    \item | $Rab$ \hfill \hfill :AS for $\supset$I \hspace{2.35in}\strut
+    \item | | $Rba$ \hfill :AS for $\neg$I \hspace{2.35in}\strut
+    \item | | $Rab \wedge Rba$ \hfill :$\wedge$I \hspace{2.35in}\strut
+    \item | | $Raa$ \hfill :$\supset$E \hspace{2.35in}\strut
+    \item | $\neg Rba$ \hfill :$\neg$I \hspace{2.35in}\strut
+    \item $Rab \supset \neg Rba$ \hfill :$\supset$I \hspace{2.35in}\strut
+    \item $\forall y(Ray \supset \neg Rya)$ \hfill :$\forall$I \hspace{2.35in}\strut
+    \item $\forall x\forall y(Rxy \supset \neg Ryx)$ \hfill :$\forall$I \hspace{2.35in}\strut
+    \item[\bf Question 2:] How are we going to introduce universal quantifiers without making the invalid argument above derivable?
   \item[($\forall$I)] $\varphi\unisub{\beta}{\alpha} \vdash \forall\alpha\varphi$ where $\beta$ is a constant, $\alpha$ is a variable, and $\beta$ does not occur in $\forall\alpha\varphi$ or in any undischarged assumption. 
-    \begin{itemize}
-      % \begin{multicols}{2}
-      \item[$\therefore$] $\forall y\forall z((Ray \wedge Ryz) \supset Raz)$ \quad $\forall$E 
-      \item[$\therefore$] $\forall z((Rab \wedge Rbz) \supset Raz)$ \quad $\forall$E
-      \item[$\therefore$] $(Rab \wedge Rba) \supset Raa$ \quad $\forall$E
-      % \item[$\therefore$] $\neg Raa$ \quad $\forall$E
-      % \item[$\therefore$] $Rab$ \quad :AS for $\supset$I
-      % \item[$\therefore$] $Rba$ \quad :AS for $\neg$I
-      % \end{multicols}
-    \end{itemize}
+  % \item[\it Bad Response:] We cannot introduce universal quantifiers under any condition.
   \item[\it Arbitrary:] The constraints on ($\forall$E) require $\beta$ to be arbitrary. 
   \item[\it Review:] Bad inference above is blocked.
+  \item[\it In Premise:] Anu loves every dog.\\
+    $\forall x(Dx \supset Lax)\ \vdash\ Da \supset Laa\ \nvdash\ \forall x(Dx \supset Lxx)$.
+  \item[\it In Conclusion:] All dogs love themselves.\\
+    $\forall x(Dx \supset Lxx)\ \vdash\ Da \supset Laa\ \nvdash\ \forall x(Dx \supset Lax)$.
 \end{enumerate}
 
 
@@ -205,17 +202,17 @@
 \section*{Existential Elimination}
 
 \begin{enumerate}
-  \item[\bf Task 4:] Compare the following invalid inference.
+  \item[\bf Task 3:] Compare the following invalid inference.
     \begin{itemize}
       \item[-] Someone is mortal.
       \item[$\#$] Zeus is mortal.
     \end{itemize}
-  \item[\bf Question 4:] How are we going to eliminate existential quantifiers without making the argument above derivable?
+  \item[\bf Question 3:] How are we going to eliminate existential quantifiers without making the argument above derivable?
   \item[\it Example:] Consider the following argument:
     \begin{itemize}
-      \item[-] Everyone who applied filled a position $\forall x(Ax \supset \exists y Fxy)$.
+      \item[-] Everyone who applied found a position $\forall x(Ax \supset \exists y Fxy)$.
       \item[-] Someone applied $\exists xAx$.
-      \item[$\therefore$] Someone filled a position $\exists x\exists y Fxy$.
+      \item[$\therefore$] Someone found a position $\exists x\exists y Fxy$.
     \end{itemize}
   \item[($\exists$E)] If $\exists\alpha\varphi,\varphi\unisub{\beta}{\alpha} \vdash \psi$ where $\beta$ is a constant that does not occur in $\exists\alpha\varphi$, $\psi$, or in any undischarged assumption, then $\exists\alpha\varphi\vdash \psi$.
   \item[\it Derivation:] We can derive the example without deriving the invalid inference.
@@ -236,7 +233,7 @@
 
 \begin{enumerate}
   \begin{multicols}{2}
-  \item[\bf Task 5:] $\qt{\forall}{\alpha}\neg\varphi \vdash \neg\qt{\exists}{\alpha}\varphi$.
+  \item[\bf Task 4:] $\qt{\forall}{\alpha}\neg\varphi \vdash \neg\qt{\exists}{\alpha}\varphi$.
   \item \underline{$\forall\alpha\neg\varphi$}
   \item | \underline{$\exists \alpha\varphi$}
   \item | | \underline{$\varphi\unisub{\beta}{\alpha}$}
@@ -246,7 +243,7 @@
   \item | | $\neg\exists\alpha\varphi$
   \item | $\neg\exists\alpha\varphi$
   \item $\neg\exists\alpha\varphi$
-  \item[\bf Task 6:] $\qt{\exists}{\alpha}\neg\varphi \vdash \neg\qt{\forall}{\alpha}\varphi$.
+  \item[\bf Task 5:] $\qt{\exists}{\alpha}\neg\varphi \vdash \neg\qt{\forall}{\alpha}\varphi$.
   \item \underline{$\exists\alpha\neg\varphi$}
   \item | \underline{$\forall\alpha\varphi$}
   \item | | \underline{$\neg\varphi\unisub{\beta}{\alpha}$}
@@ -257,6 +254,11 @@
   \item | $\neg\forall\alpha\varphi$
   \item $\neg\forall\alpha\varphi$
   \end{multicols}
+  \item[\bf Task 6:] Prove the rules below: 
+  \item[(MCP)] If $\varphi\vdash\psi$, then $\neg\psi\vdash\neg\varphi$.
+  \item[($\forall$DN)] $\forall\alpha\neg\neg\varphi\vdash\forall\alpha\varphi$.
+  \item[($\exists$DN)] $\exists\alpha\neg\neg\varphi\vdash\exists\alpha\varphi$.
+  \item[\bf Task 7:] Use the rules above to derive $(\neg\exists)$ and $(\neg\forall)$.
 \end{enumerate}
 
 

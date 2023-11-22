@@ -1,4 +1,4 @@
-﻿%!TEX root = forallx-ubc.tex
+﻿%!TEX root = forallx-mit.tex
 \chapter{Natural Deduction in QL$^=$}
 \label{ch.QLND}
 
@@ -552,7 +552,7 @@ Accordingly, for any constant $\alpha$, one may always write $\alpha = \alpha$ o
 Moreover, instead of \textit{assuming} $\alpha = \alpha$ for some particular constant $\alpha$ where this would constitute a further undischarged assumption, we may justify any instance of $\alpha = \alpha$ by citing the following rule: 
 
 \begin{proof}
-  \have[\ ]{a}{\alpha = \alpha} \by{:=I}{}
+  \have[\ ]{a}{\alpha = \alpha} \by{:=I where $\alpha$ is a constant}{}
 \end{proof}
 
 The $=$I rule is unlike the other rules in that it does appeal to any prior lines of the proof.
