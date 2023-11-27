@@ -5,23 +5,24 @@
 In Ch~\ref{ch.SLsoundcomplete}, we showed that the tree method was sound and complete with respect to the semantics for SL.
 In particular, soundness showed that whenever a tree with root $\Gamma\cup\set{\enot\metaA}$ closed, we could conclude that $\Gamma\cup\set{\enot\metaA}$ is unsatisfiable, and so $\Gamma \models \metaA$.
 As a result, we could rely on the tree method to evaluate whether the premises of an argument entailed its conclusion.
-The completeness result concerned the converse, showing that whenever some premises entail a conclusion, every tree that results from taking those premises together with the negation of the conclusion will close.
+The completeness result concerned the converse, showing that whenever some premises entail a conclusion, there is a closed tree that results from taking those premises together with the negation as the root.
+% Additionally, we showed that every root has a complete tree, a root has a closed tree just in case every tree with that root closes.
 Accordingly, the tree method can always be relied upon to evaluate whether some premises entail their conclusion.
 
 Although these are important results if we are to make use of the tree method, proof trees are of little independent interest.
 Moreover, when it comes to extending the tree method to accommodate quantifiers, there is no guarantee that the tree will always complete.
 This makes the tree method considerably less useful.
-Additionally, proving soundness and completeness for the tree method does not tell us anything about our natural deduction systems SD or QD, and this is something we would like to understand.
-Even if SD and QD do a good job of modelling natural reasoning in SL and QL$^=$ respectively, we should like to know whether the reasoning that we can conduct in the proof systems tells us anything about entailment and, subsequently, the validity of arguments.
-Specifically, we should like to know the following: 
+Additionally, proving soundness and completeness for the tree method does not tell us anything about our natural deduction systems SD or QD.
+Even if SD and QD do a good job of modelling natural reasoning in SL and QL$^=$ respectively, we should like to know whether the reasoning that we can conduct in these proof systems tell us anything about entailment and, subsequently, about the validity of arguments.
+Specifically, we should like to establish the following biconditional: 
   $$\Gamma \proves_{\textsc{qd}} \metaA \text{ just in case } \Gamma \models \metaA.$$
-Whereas the right-to-left direction is completeness, the left-to-right direction is soundness.
+Whereas the right-to-left direction asserts the completeness of QD, the left-to-right direction asserts the soundness of QD.
 If QD were to fail to be sound, we would have little reason to care about QD for we could not rely on it to establish valid arguments.
 Showing that QD is sound will be the focus of this chapter where it will follow as a result that SD is also sound.
 
 As in the soundness proof for the tree method, the soundness proof for QD will go by induction on the length of proof.
 In particular, we will be measuring proofs by how many lines they include.
-If we can show that soundness holds for proofs of length $1$ and, moreover, that soundness holds for proofs of length $n+1$ if soundness holds for proofs of length $n$, we may conclude by induction that soundness holds for proofs of any length.
+If we can show that soundness holds for proofs of length $1$ and, moreover, that soundness holds for proofs of length $n+1$ whenever soundness holds for proofs of length $n$, we may conclude by induction that soundness holds for proofs of any length.
 % This, of course, is no different from the statement of the soundness of QD.
 
 
@@ -33,9 +34,9 @@ If we can show that soundness holds for proofs of length $1$ and, moreover, that
 Assume $\Gamma \proves_{\textsc{qd}} \metaA$.
 It follows that there is some proof in QD of $\metaA$ from the premises $\Gamma$ where we may call this proof $X$. 
 Recall that we may evaluate which lines are live at any point in the course of a natural deduction proof in QD.
-For ease of exposition, it will help to introduce some notation that we will use throughout.
+For ease of exposition, it will help to introduce some notation that we will use throughout the proof.
 In particular, we may take $\metaA_i$ to be the sentence on the $i$-th line of the proof $X$ and $\Gamma_i$ to include all and only the undischarged assumptions (including premises) at the $i$-th line in $X$.
-We will then aim to show the following:
+We will then prove the following:
 \begin{enumerate}[leftmargin=1.5in]
   \item[\it Base:] $\Gamma_1 \models \metaA_1$.
   \item[\it Induction:] $\Gamma_{n+1} \models \metaA_{n+1}$ if $\Gamma_k \models \metaA_k$ for every $k\leq n$.
@@ -66,10 +67,10 @@ If $\metaA_{n+1}$ is not not a premise or assumption, then $\metaA_{n+1}$ follow
 There are now twelve proof rules coming from SD along with six additional rules for the quantifiers and identity in QD.
 Consider the following:
 \begin{enumerate}[leftmargin=1.5in]
-  \item[\it Rules:] If $\metaA_{n+1}$ follows by the proof rules for QD from sentences in $\Gamma_{n+1}$ and $\Gamma_k \models \metaA_k$ for every $k\leq n$, then $\Gamma_{n+1} \models \metaA_{n+1}$.
+  \item[\it QD Rules:] If $\metaA_{n+1}$ follows by the proof rules for QD from sentences in $\Gamma_{n+1}$ and $\Gamma_k \models \metaA_k$ for every $k\leq n$, then $\Gamma_{n+1} \models \metaA_{n+1}$.
 \end{enumerate}
-Assuming \textit{Rules} for the time being, it follows that $\Gamma_{n+1} \models \metaA_{n+1}$, completing the proof of \textit{Induction}.
-All that remains is to establish \textit{Rules} in the following sections.
+Assuming \textit{QD Rules} for the time being, it follows that $\Gamma_{n+1} \models \metaA_{n+1}$, completing the proof of \textit{Induction}.
+All that remains is to establish \textit{QD Rules} in the following sections.
 
 
 
@@ -80,13 +81,13 @@ All that remains is to establish \textit{Rules} in the following sections.
 
 We have already considered two rules in proving \textit{Base} by showing that AS and $=$I preserve entailment at least in the special case as $\Gamma_1 \models \metaA_1$.
 More generally, we should like to show that all of the rules preserve entailment, and not just in the case of proofs with one line.
-It is with this aim that we will seek to establish \textit{Rules} given above.
+It is with this more general aim that we will seek to establish \textit{QD Rules} given above.
 
-In order to divide the proof of \textit{Rules} into more manageable parts, this section will focus on the proof rules for SD. 
+In order to divide the proof of \textit{QD Rules} into more manageable parts, this section will focus on the proof rules for SD. 
 Accordingly, the proof begins with the assumption that $\metaA_{n+1}$ follows by the proof rules for SD from sentences in $\Gamma_{n+1}$ and that $\Gamma_k \models \metaA_k$ for every $k\leq n$.
 We will then seek to show that $\Gamma_{n+1} \models \metaA_{n+1}$ where it will help to establish a number of supporting lemmas along the way.
 This same strategy will latter be extended to show that $\Gamma_{n+1} \models \metaA_{n+1}$ when $\metaA_{n+1}$ follows from sentences in $\Gamma_{n+1}$ by the additional rules included in QD.
-As a result, we will cover all of the rules in QD, thereby completing the proof of \textit{Rules}.
+As a result, we will cover all of the rules in QD, thereby completing the proof of \textit{QD Rules}.
 
 
 
@@ -97,10 +98,12 @@ As a result, we will cover all of the rules in QD, thereby completing the proof 
   \label{sub:AssumptionRule}
 
 Before attending to the introduction and elimination rules for each of the logical operators included in SD, this section will focus on the assumption and reiteration rules.
+Whereas the proofs for most of the rules will appeal to the induction hypothesis given above, the proof for the assumption rule is an exception and is similar to what was given in the proof of \textit{Base}. 
 
-\label{rule:AS}
 \factoidbox{
-  (AS) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the assumption rule AS. 
+\begin{Rthm} \label{rule:AS}
+  \textbf{(AS)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule AS. 
+\end{Rthm}
 }
 
 \begin{quote} 
@@ -109,7 +112,9 @@ Before attending to the introduction and elimination rules for each of the logic
   Thus $\Gamma_{n+1} \models \metaA_{n+1}$.
 \end{quote}
 
-In order to establish the reiteration rule we will begin by proving the following lemmas which will play an important role in a number of proofs given below.
+The proof above does not require the induction hypothesis or any additional results.
+By contrast, it will help to establish the reiteration rule by first proving the following lemmas.
+These lemmas will play an important role throughout many of the proofs given below.
 
 \begin{Lthm} \label{lemma:weak}
   If $\Gamma \models \metaA$ and $\Gamma \subseteq \Gamma'$, then $\Gamma' \models \metaA$.
@@ -137,12 +142,13 @@ In order to establish the reiteration rule we will begin by proving the followin
   Thus $\Gamma_k\subseteq \Gamma_{n+1}$ as desired.
 \end{quote}
 
-% TODO: add discussion of lemmas
-Given the lemma above, we may now proceed to establish the reiteration rule R.
+Whereas \textbf{\ref{lemma:weak}} says that entailment is preserved upon adding premises, \textbf{\ref{lemma:live}} makes an important observation about how undischarged assumptions are inherited by live lines.
+Given these lemmas, we may now proceed to establish the reiteration rule R.
 
-\label{rule:R}
 \factoidbox{
-  (R) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the reiteration rule R. 
+\begin{Rthm} \label{rule:R}
+  \textbf{(R)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule R. 
+\end{Rthm}
 }
 
 \begin{quote} 
@@ -152,10 +158,18 @@ Given the lemma above, we may now proceed to establish the reiteration rule R.
   Thus $\Gamma_{n+1} \models \metaA_{n+1}$ given the identity above.
 \end{quote}
 
+By contrast with the assumption rule, the reiteration makes an essential appeal to the induction hypothesis.
+We will see something similar in all of the rule proofs given below with the only other exception being identity introduction.
+
 
 
 \subsection{Negation Rules}%
   \label{sub:NegationRules}
+
+The negation rules are a lot more complicated than the assumption and reiteration rules on account of citing subproofs.
+Accordingly, it will help to establish two more supporting lemmas before presenting the proofs for the negation rules.
+Whereas the first lemma asserts that a satisfiable set cannot entail a sentence and its negation, the second lemma draws an entailment out of an unsatisfiable set of sentences.
+These lemmas work nicely together and will reoccur in a number of rule proofs besides the negation rule proofs given below.
   
 \begin{Lthm} \label{lemma:unsat}
   If $\Gamma \models \metaA$ and $\Gamma \models \enot\metaA$, then $\Gamma$ is unsatisfiable.
@@ -186,12 +200,14 @@ Given the lemma above, we may now proceed to establish the reiteration rule R.
   We may then conclude that $\M$ satisfies $\enot\metaA$, and so $\Gamma \models \enot\metaA$.
 \end{quote}
 
+Given the lemmas above, we may provide the following negation rule proofs.
+It will be important to study this carefully proof, observing how all the working parts come together.
 
 
-
-\label{rule:NegI}
 \factoidbox{
-  ($\enot$I) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by negation introduction $\enot$I. 
+\begin{Rthm} \label{rule:NegI}
+  \textbf{($\boldsymbol\enot$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\enot$I. 
+\end{Rthm}
 }
 
 \begin{quote} 
@@ -216,13 +232,22 @@ Given the lemma above, we may now proceed to establish the reiteration rule R.
   Equivalently, $\Gamma_{n+1} \models \metaA_{n+1}$.
 \end{quote}
 
+The proof begins by assuming the antecedent as above, unpacking the consequences by appealing to the negation introduction rule.
+This provides a number of details about the proof in which $\enot\metaA$ was derived on line $n+1$.
+In addition to applying the induction hypothesis, it is important to observe that although $\metaA$ has been discharged by line $n+1$, this is the only difference between the sets of undischarged sentences for lines $i$--$j$ and line $n+1$.
+Thus the entailments that follow by hypothesis may be related to the undischarged assumptions at line $n+1$ together with the assumption $\metaA$ which has been discharged at $n+1$.
+The core of the proof follows from the two lemmas, showing that the undischarged assumptions at $n+1$ together with $\metaA$ are unsatisfiable, and so $\enot\metaA$ is entailed by those undischarged assumptions. 
+
+Before moving on to consider the rest of the rule proofs, it is important to get clear about how this proof works so that the details given below do not wash over you.
+It can help to prove the result given above for yourself where, if successful, you might also try to prove the following rule proof which works in a similar manner.
+Once you have a sense for how these proofs work, reading the rest of the proofs will become a lot easier and more meaningful.
 
 
 
-
-\label{rule:NegE}
 \factoidbox{
-  ($\enot$E) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by negation elimination $\enot$E. 
+\begin{Rthm} \label{rule:NegE}
+  \textbf{($\boldsymbol\enot$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\enot$E. 
+\end{Rthm}
 }
 
 \begin{quote} 
@@ -250,14 +275,30 @@ Given the lemma above, we may now proceed to establish the reiteration rule R.
   Thus $\Gamma_{n+1} \models \metaA_{n+1}$ by generalising on $\M$.
 \end{quote}
 
+This proof is almost identical to the \textbf{\ref{rule:NegI}} insofar as an additional negation sign is introduced before eliminating the double negation by appealing to the semantics.
+If we were to make further use of the fact that double negations may be eliminated, we might separate this final step into a lemma in its own right.
+However, double negation elimination will not be needed below, and so there is little advantage to adding an additional lemma for this minor result.
+
+In general, there are two primary reasons to introduce a lemma.
+First, the lemma can be used repeatedly, simplifying the reasoning of a number of further proofs.
+In cases where a lemma is only needed once, a second reason to introduce a lemma is that doing so can often help to reduce the complexity of a proof, making it easier to digest once the lemma is established.
+Even so, adding lemmas that are only need once should be reserved for cases where clarity is improved by making the separation. 
+
+
+
 
 
 
 \subsection{Conjunction and Disjunction}%
   \label{sub:ConjunctionDisjunction}
 
+The following lemmas have more than one application but will be convenient to present before providing the conjunction rule proofs.
+In particular, the first lemma asserts that so long as any two variable assignments agree about all of the free variables in a given sentence, that sentence will have the same truth-value when evaluated with those variable assignments in the same model.
+Although this is not surprising, the proof goes by induction on complexity where there are separate cases to check for each form that the wff in question might take.
+This makes for a long proof where many of the cases are similar and so left as exercises.
+
 \begin{Lthm} \label{lemma:assign}
-  $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$ if $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA$.
+  $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$ if $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\metaA$.
 \end{Lthm}
 % \vspace{-.3in}
 
@@ -328,9 +369,12 @@ Given the lemma above, we may now proceed to establish the reiteration rule R.
 \end{quote}
 
 
+Aside from keeping track of all of the notation and definitions, the only tricky part of the proof above is that we did not begin by considering some arbitrary variable assignments $\va{a}$ and $\va{c}$ and assuming $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\metaA$.
+The reason for this is that wanted to the induction hypothesis to take a general form, applying to all variable assignments so that it would be useful in establishing $(\dagger)$ in \textit{Case 6}.
+Thus the hardest part is knowing what to assume, setting up the proof accordingly.
 
-
-
+Given that the lemma above applies to all wffs, we may consider the special case where $\metaA$ is a sentence.
+As the following lemma shows, a sentence is true on some variable assignment and model just in case it is true on all variable assignments over that model.
 
 \begin{Lthm} \label{lemma:allvar}
   $\VV{\I}{}(\metaA)= 1$ just in case $\VV{\I}{\va{a}}(\metaA)= 1$ for every v.a. $\va{a}$ over $\D$. 
@@ -351,13 +395,16 @@ Given the lemma above, we may now proceed to establish the reiteration rule R.
 
 
 
+Given \textbf{\ref{lemma:assign}}, the proof for \textbf{\ref{lemma:allvar}} is trivial.
+Even so, it would be cumbersome to have to write the steps given above every time we wanted to make use of this convenient fact.
+As we will see, we will have a number of opportunities to make use of the lemma above beginning with the following proof rule for conjunction.
 
-  
-\label{rule:ConI}
 \factoidbox{
-  ($\eand$I) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conjunction introduction $\eand$I. 
+\begin{Rthm} \label{rule:ConI}
+  \textbf{(\&I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eand$I. 
+\end{Rthm}
 }
-
+  
 \begin{quote} 
   \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conjunction introduction $\eand$I.
   Thus $\metaA_{n+1}=\metaA_i\eand\metaA_j$ for some lines $i,j\leq n$ that are live at line $n+1$.
@@ -370,12 +417,12 @@ Given the lemma above, we may now proceed to establish the reiteration rule R.
 \end{quote}
 
 
+Whereas \textbf{\ref{lemma:allvar}} played a natural role in the proof given above, the rule proof for conjunction elimination and disjunction introduction are much more straightforward.
 
-
-
-\label{rule:ConE}
 \factoidbox{
-  ($\eand$E) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conjunction elimination $\eand$E. 
+\begin{Rthm} \label{rule:ConE}
+  \textbf{(\&E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eand$E. 
+\end{Rthm}
 }
 
 \begin{quote} 
@@ -389,10 +436,10 @@ Given the lemma above, we may now proceed to establish the reiteration rule R.
 
 
 
-
-\label{rule:DisI}
 \factoidbox{
-  ($\eor$I) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by disjunction introduction $\eor$I. 
+\begin{Rthm} \label{rule:DisI}
+  \textbf{($\boldsymbol\eor$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eor$I. 
+\end{Rthm}
 }
 
 \begin{quote} 
@@ -408,9 +455,13 @@ Given the lemma above, we may now proceed to establish the reiteration rule R.
 
 
 
-\label{rule:DisE}
+Neither of the rule proofs above should surprise, amounting to little more than applications of the semantic clauses for conjunction and disjunction respectively.
+Something similar may be said for the following proof though a little more care is required to keep track of all of the moving parts in the proof rule for disjunction elimination.
+
 \factoidbox{
-  ($\eor$E) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by disjunction elimination $\eor$E. 
+\begin{Rthm} \label{rule:DisE}
+  \textbf{($\boldsymbol\vee$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eor$E. 
+\end{Rthm}
 }
 
 \begin{quote} 
@@ -444,7 +495,7 @@ Given the lemma above, we may now proceed to establish the reiteration rule R.
   It follows that either way, $\M$ satisfies $\metaA_{n+1}$, and so $\Gamma_{n+1} \models \metaA_{n+1}$ is the result of generalising on $\M$.
 \end{quote}
 
-
+As with the previous two proof rules for conjunction and disjunction, the proof above turns on little more than an application of the semantics for disjunction.
 
 
 
@@ -452,6 +503,9 @@ Given the lemma above, we may now proceed to establish the reiteration rule R.
 \subsection{Conditional Rules}%
   \label{sub:ConditionalRules}
   
+Although the elimination rules for the conditional and the biconditional are also straightforward applications of the semantics, the introduction rules for the conditional and biconditional benefit from the following lemma which produces an entailment including a conditional from an entailment that does not.
+Even so, the following lemma turns on nothing more than the semantics for the conditional, and so has been proved separately only to avoid redundancy.
+
 \begin{Lthm} \label{lemma:cond}
   If $\Gamma \cup \set{\metaA} \models \metaB$, then $\Gamma \models \metaA \supset \metaB$.
 \end{Lthm}
@@ -478,10 +532,10 @@ Given the lemma above, we may now proceed to establish the reiteration rule R.
 
 
 
-
-\label{rule:CondI}
 \factoidbox{
-  ($\eif$I) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conditional introduction $\eif$I. 
+\begin{Rthm} \label{rule:label}
+  \textbf{($\boldsymbol\eif$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eif$I. 
+\end{Rthm}
 }
 
 \begin{quote} 
@@ -507,10 +561,10 @@ Given the lemma above, we may now proceed to establish the reiteration rule R.
 
 
 
-
-\label{rule:CondE}
 \factoidbox{
-  ($\eif$E) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conditional elimination $\eif$E. 
+\begin{Rthm} \label{rule:CondE}
+  \textbf{($\boldsymbol\eif$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eif$E. 
+\end{Rthm}
 }
 
 \begin{quote} 
@@ -528,10 +582,10 @@ Given the lemma above, we may now proceed to establish the reiteration rule R.
 
 
 
-
-\label{rule:BiconI}
 \factoidbox{
-  ($\eiff$I) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conditional introduction $\eiff$I. 
+\begin{Rthm} \label{rule:BiconI}
+  \textbf{($\boldsymbol\eiff$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eiff$I. 
+\end{Rthm}
 }
 
 \begin{quote} 
@@ -572,10 +626,10 @@ Given the lemma above, we may now proceed to establish the reiteration rule R.
 
 
 
-
-\label{rule:BiconE}
 \factoidbox{
-  ($\eiff$E) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conditional elimination $\eiff$E. 
+\begin{Rthm} \label{rule:Bicon}
+  \textbf{($\boldsymbol\eiff$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eiff$E. 
+\end{Rthm}
 }
 
 \begin{quote} 
@@ -589,15 +643,25 @@ Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\meta
   Thus $\M$ satisfies $\metaA_{n+1}$, and so we may conclude that $\Gamma_{n+1} \models \metaA_{n+1}$ by generalising on $\M$.
 \end{quote}
 
+These final results complete the last of the proofs for all of the rules included in SD.
+Given \textbf{\ref{rule:AS}} -- \textbf{\ref{rule:Bicon}}, we may report the following preliminary result:
 
+\begin{enumerate}[leftmargin=1.5in]
+  \item[\it SD Rules:] If $\metaA_{n+1}$ follows by the proof rules for SD from sentences in $\Gamma_{n+1}$ and $\Gamma_k \models \metaA_k$ for every $k\leq n$, then $\Gamma_{n+1} \models \metaA_{n+1}$.
+\end{enumerate}
 
+It remains to extend this result to include the remaining proof rules in QD.
+In order to do so, the following section will prove two important supporting lemmas.
 
 
 
 \section{Substitution and Model Lemmas}% TODO move above
   \label{sec:Lemmas}
 
+This section establishes two closely related results, both of which show that the truth-value of a wff is preserved by specific changes to that wff, or to the model in which it is evaluated.
+These results will play a crucial role in proving the lemmas that we will need to extend \textit{SD Rules} to include the remaining proof rules that belong to QD.
 
+In slightly greater detail, the following lemma shows that replacing $\alpha$ with $\beta$ in a wff $\metaA$ does not effect its truth-value when evaluated at a model and variable assignment so long as $\alpha$ and $\beta$ refer to the same element of the domain on that model and variable assignment.
 
 \begin{Lthm} \label{lemma:sub}
   $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ if $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$ and $\beta$ is free for $\alpha$ in $\metaA$.
@@ -682,7 +746,13 @@ Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\meta
 \end{quote}
 
 
+The proof above works by induction on complexity where the only tricky cases are for the quantifiers.
+In a similar manner to \textbf{\ref{lemma:assign}}, we avoided assuming the antecedent of the claim to be proved at the outset so that the induction hypothesis took a general form.
+In particular, $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ whenever $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
+Since this holds for any variable assignment $\va{a}$, we were able to apply the induction hypothesis in order to prove $(\dagger)$.
 
+The next lemma proves something similar, this time holding the wff $\metaA$ fixed and varying the model. 
+In particular, any model that agrees with $\M$ on all constants and predicates which occur in $\metaA$ will yield the same truth-value at any given variable assignment. 
 
 \begin{Lthm} \label{lemma:model}
   If $\M=\tuple{\D,\I}$ and $\M'=\tuple{\D,\I'}$ share the domain $\D$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and constant $\alpha$ that occurs in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any variable assignment $\va{a}$ over $\D$.
@@ -743,6 +813,8 @@ Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\meta
   Thus the lemma follows by induction.
 \end{quote}
 
+Although by no means surprising, the lemma above plays a crucial role in a number of the proofs given below.
+With these new resources in place, we may finish the proof of \textit{QD Rules}.
 
 
 
@@ -750,6 +822,9 @@ Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\meta
 
 \section{QD Rules}%
   \label{sec:QDRules}
+
+By drawing on the previous lemmas, we may prove a number of much more usable results.
+In particular, the following lemma provides a semantic analogue for universal introduction whereby we may assert the entailment of a universal claim given only the entailment of a sufficiently arbitrary instance.
 
 \subsection{Universal Quantifier Rules}%
   \label{sub:UniversalRules}
@@ -787,12 +862,16 @@ Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\meta
   Thus $\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})\neq 1$, contradicting the above, and so we may conclude that $\Gamma \models \qt{\forall}{\alpha}\metaA$.
 \end{quote}
 
+Given the lemma above, it easy to prove that the universal introduction proof rule preserves entailment in a similar manner to rules above.
+Consider the following proof.
 
 
 
-\label{rule:UniI}
+
 \factoidbox{
-  ($\forall$I) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by universal introduction $\forall$I. 
+\begin{Rthm} \label{rule:UniI}
+  \textbf{($\boldsymbol\forall$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\forall$I. 
+\end{Rthm}
 }
 
 \begin{quote} 
@@ -803,7 +882,9 @@ Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\meta
   Since $\beta$ does not occur in $\qt{\forall}{\alpha}\metaA$ or any undischarged assumptions in $\Gamma_{n+1}$, it follows by \textbf{\ref{lemma:unigen}} that $\Gamma_{n+1}\models \qt{\forall}{\alpha}\metaA$, and so $\Gamma_{n+1}\models\metaA_{n+1}$.
 \end{quote}
 
-
+This proof amounts to little more than an application of \textbf{\ref{lemma:unigen}}.
+In particular, there is no mention of the semantics for the universal quantifiers in the proof of \textbf{\ref{rule:UniI}} since all of these details are already contained in the supporting lemma.
+The following lemma will play an analogous role for universal elimination.
 
 
 
@@ -821,7 +902,10 @@ Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\meta
   As a result, $\M$ satisfies $\metaA\unisub{\beta}{\alpha}$, and so $\forall\alpha\metaA \models \metaA\unisub{\beta}{\alpha}$.
 \end{quote}
 
+Whereas \textbf{\ref{lemma:unigen}} made use of the particular constraints that must hold for the universal introduction rule to be applied, the lemma above is much less constrained.
+This corresponds to the fact that universal claims entail all of their instances.
 
+We now turn to provide another supporting lemma which will help further streamline the proof for the universal elimination rule as well as a number of other proofs below.
 
 
 
@@ -839,14 +923,15 @@ Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\meta
   Generalising on $\M$, we may conclude that $\Gamma\cup\Sigma\models\metaB$.
 \end{quote}
 
+The proof above is a semantic analogue of a metarule that goes by the name `\textit{Cut}' since it allows us to cut out intermediaries.
+This will play a helpful role in the following proof.
 
 
 
-
-
-\label{rule:UniE}
 \factoidbox{
-  ($\forall$E) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by universal elimination $\forall$E. 
+\begin{Rthm} \label{rule:UniE}
+  \textbf{($\boldsymbol\forall$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\forall$E. 
+\end{Rthm}
 }
 
 \begin{quote} 
@@ -857,6 +942,7 @@ Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\meta
   By \textbf{\ref{lemma:uniinst}} that $\qt{\forall}{\alpha}\metaA\models \metaA\unisub{\beta}{\alpha}$, and so $\Gamma_{n+1}\models\metaA_{n+1}$ by \textbf{\ref{lemma:cut}}.
 \end{quote}
 
+This proof turns on \textbf{\ref{lemma:uniinst}} where the other lemmas only play a supporting role.
 
 
 
@@ -865,6 +951,9 @@ Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\meta
 \subsection{Existential Quantifier Rules}%
   \label{sub:ExistentialRules}
  
+Just as universal elimination is an easier rule to apply under fewer constraints, something similar may be said for existential introduction.
+Nevertheless, the following lemma will play a vital role in the proof for existential introduction.
+
 \begin{Lthm} \label{lemma:exigen}
   $\metaA\unisub{\beta}{\alpha} \models \exists\alpha\metaA$ where $\alpha$ is a variable and $\metaA\unisub{\beta}{\alpha}$ is a sentence. 
 \end{Lthm}
@@ -881,24 +970,28 @@ Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\meta
   Thus $\metaA\unisub{\beta}{\alpha} \models \exists\alpha\metaA$.
 \end{quote}
 
+This lemma follows easily from \textbf{\ref{lemma:sub}} where most of the work was already accomplished save for one critical appeal to the semantics for the existential quantifier.
+We may now turn to provide a proof for the existential introduction rule given below:
 
 
 
-
-\label{rule:ExistI}
 \factoidbox{
-  ($\exists$I) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential introduction $\exists$I. 
+\begin{Rthm} \label{rule:ExistI}
+  \textbf{($\boldsymbol\exists$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\exists$I. 
+\end{Rthm}
 }
 
 \begin{quote} 
-  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential introduction $\exists$E.
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential introduction $\exists$I.
   Thus there is some $i\leq n$ where $\metaA_i=\metaA\unisub{\beta}{\alpha}$ is live at $n+1$ and $\metaA_{n+1}=\qt{\exists}{\alpha}\metaA$ for some variable $\alpha$ and constant $\beta$.
   By \textbf{\ref{lemma:live}}, $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\models\metaA_i$ by hypotheses, and so $\Gamma_{n+1} \models \metaA_i$ by \textbf{\ref{lemma:weak}}.
   Equivalently, $\Gamma_{n+1} \models \metaA\unisub{\beta}{\alpha}$.
   Since $\metaA\unisub{\beta}{\alpha} \models \qt{\exists}{\alpha}\metaA$ by \textbf{\ref{lemma:exigen}}, $\Gamma_{n+1}\models\metaA_{n+1}$ follows from \textbf{\ref{lemma:cut}}.
 \end{quote}
 
-
+Like the proof for universal elimination, this proof amounts to little more than an application of \textbf{\ref{lemma:exigen}} where most of the work was already accomplished.
+Whereas universal elimination and existential introduction are relatively unconstrained, the existential elimination rule is much more restricted.
+Accordingly, the following lemma makes use of these restrictions in order to establish a semantic analogue of the existential elimination rule in a similar manner to the supporting lemma for universal introduction.
 
 
 
@@ -923,20 +1016,40 @@ Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\meta
   Thus $\M$ satisfies $\metaB$, and so by generalising on $\M$ it follows that $\Gamma \models \metaB$.
 \end{quote}
 
+Given a model $\M$ that satisfies the premises $\Gamma$, this proof makes use of \textbf{\ref{lemma:model}} in order to introduce a model variant $\M'$ which assigns the constant $\beta$ to whatever the variable $\alpha$ had been assigned to by the resulting variable assignment.
+The variable $\alpha$ in the wff $\metaA$ is then replaced with $\beta$ where \textbf{\ref{lemma:sub}} is used to show that the truth-value remains unaffected in the model variant and variable assignment in question.
+Since $\beta$ does not occur in any premises, we may draw $\metaB$ as a consequince. 
 
 
 
 
 
-\label{rule:ExistE}
 \factoidbox{
-  ($\exists$E) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential elimination $\exists$E. 
+\begin{Rthm} \label{rule:ExistE}
+  \textbf{($\boldsymbol\exists$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\exists$E. 
+\end{Rthm}
 }
 
 \begin{quote} 
-  \textit{Proof:} % TODO: continue
-\end{quote}
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential elimination $\exists$E.
+  Thus there is some $i<j<k\leq n$ where $\metaA_i=\qt{\exists}{\alpha}\metaA$ is live at $n+1$, $\metaA_j=\metaA\unisub{\beta}{\alpha}$ for some constant $\beta$ that does not occur in $\metaA_i$, $\metaA_k$, or any $\metaB\in\Gamma_i$.
+  Thus we have:
 
+  \begin{proof}
+    \have[i]{i}{\qt{\exists}{\alpha}\metaA}
+    \open	
+      \hypo[j]{j}{\metaA\unisub{\beta}{\alpha}} \as{for $\exists$E}
+      \have[ ]{x}{\vdots} 
+      \have[k]{k}{\metaB}
+    \close
+    \have[n+1]{n}{\metaB{}} \Ee{i,j-k}
+  \end{proof}
+
+  By hypothesis, $\Gamma_i\models\metaA_i$ and $\Gamma_k\models\metaA_k$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:live}}.
+  With the exception of $\metaA_i$, every assumption that is undischarged at line $k$ is also undischarged at line $n+1$, and so $\Gamma_k\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$.
+  It follows by \textbf{\ref{lemma:weak}} that $\Gamma_{n+1} \models \metaA_i$ and $\Gamma_{n+1}\cup\set{\metaA_i} \models \metaA_k$, and so $\Gamma_{n+1} \models \qt{\exists}{\alpha}\metaA$ and $\Gamma_{n+1}\cup\set{\metaA\unisub{\beta}{\alpha}} \models \metaB$.
+  Thus $\Gamma_{n+1}\models\metaB$ by \textbf{\ref{lemma:exiinst}}, and so $\Gamma_{n+1}\models\metaA_{n+1}$.
+\end{quote}
 
 
 
@@ -946,12 +1059,10 @@ Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\meta
 \subsection{Identity Rules}%
   \label{sub:IdentityRules}
   
-
-
-\label{box:Lemma13}
-\factoidbox{
-  \textbf{Lemma \ref{ch.SoundQD}.13}: If $\alpha$ and $\beta$ are constants, then $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \models \metaA\unisub{\beta}{\gamma}$.
-  }
+\begin{Lthm} \label{lemma:id}
+  If $\alpha$ and $\beta$ are constants, then $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \models \metaA\unisub{\beta}{\gamma}$.
+\end{Lthm}
+\vspace{-.3in}
 
 \begin{quote} 
   \textit{Proof:} Let $\M=\tuple{\D,\I}$ be a model that satisfies $\metaA\unisub{\alpha}{\gamma}$ and $\alpha = \beta$ where $\alpha$ and $\beta$ are constants. 
@@ -967,22 +1078,46 @@ Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\meta
 
 
 
-
-
-
-\label{rule:IdI}
 \factoidbox{
-  ($=$I) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by identity introduction $=$I. 
+\begin{Rthm} \label{rule:IdI}
+  \textbf{($\boldsymbol=$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $=$I. 
+\end{Rthm}
 }
 
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential introduction $=$I.
+  Thus $\metaA_{n+1}$ is $\alpha=\alpha$ for some constant $\alpha$. 
+  Letting $\M=\tuple{\D,\I}$ be any model, it follows that $\I(\alpha)=\I(\alpha)$, and so $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\alpha)$ for any variable assignment $\va{a}$.
+  By the semantics for identity, $\VV{\I}{\va{a}}(\alpha=\alpha)=1$, and so $\M$ satisfies $\alpha=\alpha$.
+  Generalising on $\M$, it follows that $\models \alpha=\alpha$, or equivalently $\models \metaA_{n+1}$.
+  By \textbf{\ref{lemma:weak}}, we may conclude that $\Gamma_{n+1}\models\metaA_{n+1}$.
+\end{quote}
 
 
 
-\label{rule:IdE}
+
 \factoidbox{
-  ($=$E) $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by identity elimination $=$E. 
+\begin{Rthm} \label{rule:IdE}
+  \textbf{($\boldsymbol=$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $=$E. 
+\end{Rthm}
 }
 
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential elimination $=$E.
+  Thus there are some live lines $i,j\leq n$ at $n+1$ where $\metaA_i$ is $\alpha=\beta$ for some constants $\alpha$ and $\beta$ and either $\metaA_j=\metaA\unisub{\alpha}{\gamma}$ and $\metaA_{n+1}=\metaA\unisub{\beta}{\gamma}$ or else $\metaA_j=\metaA\unisub{\beta}{\gamma}$ and $\metaA_{n+1}=\metaA\unisub{\beta}{\gamma}$.
+  By parity of reasoning, we may assume that $\metaA_j=\metaA\unisub{\alpha}{\gamma}$ and $\metaA_{n+1}=\metaA\unisub{\beta}{\gamma}$ which we may represent as follows:
+
+  \begin{proof}
+    \have[i]{i}{\alpha = \beta} 
+    \have[j]{j}{\metaA\unisub{\alpha}{\gamma}}
+    \have[n+1]{n}{\metaA\unisub{\beta}{\gamma}} \by{=E}{i,j}
+  \end{proof}
+
+  By \textbf{\ref{lemma:live}}, $\Gamma_i,\Gamma_j\subseteq \Gamma_{n+1}$ where $\Gamma_i\models\metaA_i$ and $\Gamma_j\models\metaA_j$ by hypotheses, and so $\Gamma_{n+1} \models \metaA_i$ and $\Gamma_{n+1} \models \metaA_j$ by \textbf{\ref{lemma:weak}}.
+  Equivalently, $\Gamma_{n+1} \models \alpha = \beta$ and $\Gamma_{n+1} \models \metaA\unisub{\alpha}{\gamma}$.
+  Since $\alpha$ and $\beta$ are constants, we know by \textbf{\ref{lemma:id}} that $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \models \metaA\unisub{\beta}{\gamma}$.
+  By two applications of \textbf{\ref{lemma:cut}}, we may conclude that $\Gamma_{n+1}\models\metaA\unisub{\beta}{\gamma}$, or equivalently, $\Gamma_{n+1}\models\metaA_{n+1}$.
+\end{quote}
 
 
 
@@ -993,6 +1128,10 @@ Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\meta
 \section{Conclusion}%
   \label{sec:Conclusion}
   
+\begin{enumerate}[leftmargin=1.5in]
+  \item[\it Rules:] If $\metaA_{n+1}$ follows by the proof rules for QD from sentences in $\Gamma_{n+1}$ and $\Gamma_k \models \metaA_k$ for every $k\leq n$, then $\Gamma_{n+1} \models \metaA_{n+1}$.
+\end{enumerate}
+
 % TODO: thus we can trust our natural deduction system
 
 % TODO: entails that SD is also sound

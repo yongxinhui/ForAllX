@@ -155,6 +155,29 @@
 \newtheorem{Lthm}{}[chapter]% theorem counter resets every \subsection
 \renewcommand{\theLthm}{Lemma \arabic{chapter}.\arabic{Lthm}}% Remove subsection from theorem counter representation
 
+\newtheoremstyle{Rthm}
+{}                % Space above
+{}                % Space below
+{\normalfont}        % Theorem body font % (default is "\upshape")
+{}                % Indent amount
+{\bfseries}       % Theorem head font % (default is \mdseries)
+{}               % Punctuation after theorem head % default: no punctuation
+{4pt}               % Space after theorem head
+{}                % Theorem head spec
+\theoremstyle{Rthm}
+\newtheorem{Rthm}{}[]% theorem counter resets every \subsection
+\renewcommand{\theRthm}{Rule \arabic{Rthm}}% Remove subsection from theorem counter representation
+
+% \newtheorem{manualtheoreminner}{Theorem}
+% \newenvironment{Rthm}[1]{%
+%   \renewcommand\themanualtheoreminner{#1}%
+%   \manualtheoreminner
+% }{\endmanualtheoreminner}
+%
+% \begin{Rthm}{}[title]\label{foo}
+% This is a theorem.
+% \end{Rthm}
+
 \newtheoremstyle{Pthm}
 {}                % Space above
 {}                % Space below
