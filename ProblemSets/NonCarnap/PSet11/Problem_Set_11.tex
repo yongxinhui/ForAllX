@@ -1,0 +1,107 @@
+\documentclass[12pt]{article}
+ 
+\usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage{multicol}
+\usepackage{forallx-mit-pset} %calls local modified style file
+ 
+ \iffalse
+ \textheight     11truein
+ \vsize     10.0truein
+ \topmargin      .15truein
+ \textwidth 6.5truein \columnwidth \textwidth 
+ \setlength{\oddsidemargin}{0truein} 
+ %\footheight     0.0truein
+ \footskip       0.75truein
+ \headheight     .25truein
+ \headsep        0.25truein
+ \fi 
+
+\usepackage{amsmath} %for align* environment and gather*
+\usepackage{xref}
+ %    \textheight     10.0truein
+ \usepackage{graphics}
+ \usepackage{pstricks}
+% \usepackage{pst-tree}
+% \usepackage{pst-node,pst-tree}
+ \usepackage{makeidx}
+ 
+
+ 
+ %\usepackage{forallx-ubc-Hunt} %calls local modified style file, but could lead to conflicts. i ought to make my own `common.sty' file for the problem sets. maybe using the same `common' file as the lecture notes? i really ought to just have a single consistent set of style files for the book, problem sets, and lecture notes! 
+ 
+ %\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
+% disjunction
+\def\eor{\ensuremath{\vee}}
+% conjunction: 
+% {\,^{_{_{_{_{\mbox{\footnotesize\textbullet}}}}}}} gives the dot
+\def\eand{\ensuremath{\,\&\,}}
+% conditional: \rightarrow gives the right arrow
+\def\eif{\ensuremath{\supset}}
+% biconditional: \leftrightarrow gives the left and right arrow
+\def\eiff{\ensuremath{\equiv}}
+% negation: {\sim} gives the swung dash 
+%\def\enot{\ensuremath{\neg}}
+% \def\enot{\ensuremath{\sim}} %note that \sim is defined as a relation, which leads to spacing issues. adding a \! leads to more spacing issues (piled up double negations).  
+
+% \def\enot{\ensuremath{\sim}} %redefining as {\sim} treats the tilde as a unary operator, rather than a relation, solving a lot of the spacing issues. 
+
+\let\oldsim\sim %renames any \sim commands as \oldsim. 
+\renewcommand{\sim}{{\oldsim}} %redefines \sim as unary operator version of \sim, in case there are any straggling \sim commands in the wild
+
+% metalanguage variables: change greek to A and B if you prefer
+\def\metaA{\ensuremath{\varPhi}}
+\def\metaB{\ensuremath{\varPsi}}
+\def\metaC{\ensuremath{\varOmega}}
+\def\metaD{\ensuremath{\varDelta}}
+\def\metaSetX{\ensuremath{\mathcal{X}}}
+\def\metaSetY{\ensuremath{\mathcal{Y}}}
+\def\metaSetZ{\ensuremath{\mathcal{Z}}}
+
+%Calgary script and metav commands: 
+% \newcommand*{\script}[1]{\ensuremath{\mathcal{#1}}}
+% \newcommand*{\metav}[1]{\ensuremath{\mathcal{#1}}}
+
+% \pagestyle{empty}
+ 
+ % Tree stuff
+ 
+  
+
+
+\begin{document}
+
+% \input macs
+% \input fitch
+
+\thispagestyle{empty}
+
+
+
+\begin{center}
+\Large Problem Set 11\\[1ex] 
+ Due Fri. December 1 by 5pm Eastern\\ 
+  \vspace{.1in}
+  \normalsize{(Please scan and upload to Canvas as a pdf)} \\[3ex] 
+\end{center}
+
+
+\begin{enumerate}[leftmargin=.75in]
+  \item[\bf Question 0:] If you worked with up to two classmates, please list their names.
+  \item[\bf Question 1:] Derive the following in QD.
+  \item $Pa \vee Qb,\ Qb \supset b = c,\ \neg Pa \vdash Qc$
+  \item $\neg \qt{\exists}{x} \: x {\neq} m \vdash \qt{\forall}{x}\qt{\forall}{y} (Px \eif Py)$
+  \item $\qt{\forall}{x}\qt{\forall}{y}(Rxy \eif x{=}y)\vdash Rab \eif Rba$
+  \item $\qt{\exists}{x} Jx, \qt{\exists}{x} \neg Jx\vdash \qt{\exists}{x} \qt{\exists}{y}\ x{\neq} y$
+  \item $\qt{\exists}{x} Dx, \qt{\forall}{x}(x{=}p \eiff Dx)\vdash Dp$
+  % \item $m{=}n \eor n{=}o, An\vdash Am \eor Ao$
+  % \item $\qt{\forall}{x} \: x{=}m, Rma\vdash \qt{\exists}{x} Rxx$
+  % \item $\qt{\forall}{x}(x{=}n \eiff Mx), \qt{\forall}{x}(Ox \eor \neg Mx)\vdash On$
+  % \item $\qt{\exists}{x}(Kx \eand \qt{\forall}{y}(Ky \eif x{=}y) \eand Bx), Kd\vdash Bd$
+  % \item $\vdash Pa \eif \qt{\forall}{x}(Px \eor x {\neq} a)$
+\end{enumerate}
+
+\textit{Note:} Remember to justify each line and do not skip steps.
+
+
+\end{document}

@@ -124,9 +124,16 @@ However, suppose that we were to continue by adding a new assumption.
     \hypo{4}{B} \as{}
   \close
 \end{fitchproof}
-At any point in a proof, we can introduce a new assumption, indenting the line on which the assumption occurs and starting a new vertical line.
+At any point in a proof, we can introduce a new assumption on an indented line and starting a new vertical line.
+More precisely, consider the \textit{assumption rule} (AS) below:
+\factoidbox{
+\begin{fitchproof}
+  \open
+	\hypo[\ ]{c}{\metaA} \as{}
+  \close
+\end{fitchproof}}
 We will refer to the process of adding an assumption as one of \define{opening a subproof}.
-Subproofs are what they sound like: a proof within a proof, starting from a single assumption rather than the premises with which we began.
+Subproofs are what they sound like: a proof within a proof, starting from a single assumption added anywhere in a proof rather than the premises with which we began the proof.
 For instance, we might add the following lines to the proof above:
 \begin{fitchproof}
   \hypo{1}{A \eif (B \eif C)} \pr{}
@@ -635,7 +642,9 @@ Note that in the citation for $\eiff$E, we always cite the biconditional first a
 
 
 \section{Negation}
+
 Here is a simple mathematical argument in English:
+
 \begin{earg}
 \item[] Assume there is some greatest natural number, call it $n$.
 \item[] Now consider its successor $n+1$ which is also a natural number.
