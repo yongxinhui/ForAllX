@@ -1,4 +1,4 @@
-﻿%!TEX root = forallx-mit.tex
+﻿%!TEX root = ../forallx-mit.tex
 \chapter{The Soundness of QD}
   \label{ch.SoundQD}
 
@@ -48,7 +48,7 @@ Thus we may conclude:
 This establishes the soundness of QD over the semantics for QL$^=$.
 It remains, however, to establish \textit{Base} and \textit{Induction} assumed above.
 
-In order to prove \textit{Base}, we may recall from the definition of a proof in QD that $\metaA_1$ is either a premise, assumption, or follows by one of the proof rules for QD. 
+In order to prove \textit{Base}, we may recall from the definition of a proof in QD that $\metaA_1$ is either a premise or follows by one of the proof rules for QD. 
 Since $\metaA_1$ is the first line of the proof, the only proof rules that it could follow from are the assumption rule AS or identity introduction $=$I.
 If $\metaA_1$ is an instance of $=$I, then $\Gamma_1=\varnothing$ and $\metaA_1$ is $\alpha=\alpha$ for some constant $\alpha$. 
 Letting $\M=\tuple{\D,\I}$ be any model, it follows that $\I(\alpha)=\I(\alpha)$ where there is some variable assignment $\va{a}$.
@@ -61,7 +61,7 @@ This is all that is required to establish \textit{Base}.
 
 In order to establish \textit{Induction}, assume that $\Gamma_k \models \metaA_k$ for every $k\leq n$. 
 It remains to show that $\Gamma_{n+1} \models \metaA_{n+1}$.
-By the definition of a proof in QD, $\metaA_{n+1}$ is either a premise, assumption, or follows by one of the proof rules for QD. 
+By the definition of a proof in QD, $\metaA_{n+1}$ is either a premise or follows by one of the proof rules for QD. 
 If $\metaA_{n+1}$ is a premise or assumption, then $\Gamma_{n+1} \models \metaA_{n+1}$ for the same reason given above.
 If $\metaA_{n+1}$ is not not a premise or assumption, then $\metaA_{n+1}$ follows by one of the proof rules for QD. 
 There are now twelve proof rules coming from SD along with six additional rules for the quantifiers and identity in QD.
@@ -1016,10 +1016,10 @@ Accordingly, the following lemma makes use of these restrictions in order to est
   Thus $\M$ satisfies $\metaB$, and so by generalising on $\M$ it follows that $\Gamma \models \metaB$.
 \end{quote}
 
-Given a model $\M$ that satisfies the premises $\Gamma$, this proof makes use of \textbf{\ref{lemma:model}} in order to introduce a model variant $\M'$ which assigns the constant $\beta$ to whatever the variable $\alpha$ had been assigned to by the resulting variable assignment.
+Given a model $\M$ that satisfies the premises $\Gamma$, this proof makes use of \textbf{\ref{lemma:model}} in order to introduce a model variant $\M'$ which assigns the constant $\beta$ to whatever the variable $\alpha$ had been assigned.
 The variable $\alpha$ in the wff $\metaA$ is then replaced with $\beta$ where \textbf{\ref{lemma:sub}} is used to show that the truth-value remains unaffected in the model variant and variable assignment in question.
-Since $\beta$ does not occur in any premises, we may draw $\metaB$ as a consequince. 
-
+Since $\beta$ does not occur in any premises, we know that the premises are all true on the model variant, and so may draw $\metaB$ as a consequence of the assumption. 
+We may then put this lemma to work in the proof of the following rule.
 
 
 
@@ -1051,32 +1051,19 @@ Since $\beta$ does not occur in any premises, we may draw $\metaB$ as a consequi
   Thus $\Gamma_{n+1}\models\metaB$ by \textbf{\ref{lemma:exiinst}}, and so $\Gamma_{n+1}\models\metaA_{n+1}$.
 \end{quote}
 
-
-
+Since \textbf{\ref{lemma:exiinst}} already does most of the heavy lifting, the proof above is the result of carefully setting up a generic scenario in which the existential elimination rule is applied, using the lemmas cited above to draw out the resulting consequences.
 
 
 
 \subsection{Identity Rules}%
   \label{sub:IdentityRules}
+
+% The identity rules are much easier to prove than the quantifier rules given above.
+Recall from the proof of \textit{Base} that we have already considered identity introduction in the case of a one line proof.
+All that remains is to generalise this proof to the present setting where the $n+1$ line is the result of identity introduction. 
+Given that we were able to succeed in providing a proof for identity introduction in \textit{Base}, we will not need to appeal to the induction hypothesis.
+Nevertheless, it is important to establish the following general result.
   
-\begin{Lthm} \label{lemma:id}
-  If $\alpha$ and $\beta$ are constants, then $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \models \metaA\unisub{\beta}{\gamma}$.
-\end{Lthm}
-\vspace{-.3in}
-
-\begin{quote} 
-  \textit{Proof:} Let $\M=\tuple{\D,\I}$ be a model that satisfies $\metaA\unisub{\alpha}{\gamma}$ and $\alpha = \beta$ where $\alpha$ and $\beta$ are constants. 
-  It follows that $\VV{\I}{\va{a}}(\metaA\unisub{\alpha}{\gamma})=1$ for some variable assignment $\va{a}$ over $\D$.
-  By \textbf{\ref{lemma:allvar}}, $\VV{\I}{\va{c}}(\alpha=\beta)=1$ for all variable assignments $\va{c}$ over $\D$, and so $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$ in particular.
-  Thus $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
-  Since $\beta$ is a constant, $\beta$ is free for $\alpha$ in $\metaA\unisub{\alpha}{\gamma}$, and so $\VV{\I}{\va{a}}(\metaA\unisub{\alpha}{\gamma})=\VV{\I}{\va{a}}((\metaA\unisub{\alpha}{\gamma})\unisub{\beta}{\alpha})$ by \textbf{\ref{lemma:sub}}.
-  However, $(\metaA\unisub{\alpha}{\gamma})\unisub{\beta}{\alpha}=\metaA\unisub{\beta}{\gamma}$, and so $\VV{\I}{\va{a}}(\metaA\unisub{\alpha}{\gamma})=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\gamma})=1$.
-  Since $\metaA\unisub{\beta}{\gamma}$ is a sentence, $\VV{\I}{}(\metaA\unisub{\beta}{\gamma})=1$, and so $\M$ satisfies $\metaA\unisub{\beta}{\gamma}$. 
-  Generalising on $\M$ we may conclude that $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \models \metaA\unisub{\beta}{\gamma}$. 
-\end{quote}
-
-
-
 
 \factoidbox{
 \begin{Rthm} \label{rule:IdI}
@@ -1092,6 +1079,31 @@ Since $\beta$ does not occur in any premises, we may draw $\metaB$ as a consequi
   Generalising on $\M$, it follows that $\models \alpha=\alpha$, or equivalently $\models \metaA_{n+1}$.
   By \textbf{\ref{lemma:weak}}, we may conclude that $\Gamma_{n+1}\models\metaA_{n+1}$.
 \end{quote}
+
+The proof above follows the same line of reasoning presented in \textit{Base}.
+In order to provide a proof for identity elimination, the following lemma establishes a semantic analogue of the identity elimination rule where this proof will draw on the substitution lemma given above.
+
+
+
+
+\begin{Lthm} \label{lemma:id}
+  If $\alpha$ and $\beta$ are constants, then $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \models \metaA\unisub{\beta}{\gamma}$.
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:} Let $\M=\tuple{\D,\I}$ be a model that satisfies $\metaA\unisub{\alpha}{\gamma}$ and $\alpha = \beta$ where $\alpha$ and $\beta$ are constants. 
+  It follows that $\VV{\I}{\va{a}}(\metaA\unisub{\alpha}{\gamma})=1$ for some variable assignment $\va{a}$ over $\D$.
+  By \textbf{\ref{lemma:allvar}}, $\VV{\I}{\va{c}}(\alpha=\beta)=1$ for all variable assignments $\va{c}$ over $\D$, and so $\VV{\I}{\va{a}}(\alpha=\beta)=1$ in particular.
+  Thus $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
+  Since $\beta$ is a constant, $\beta$ is free for $\alpha$ in $\metaA\unisub{\alpha}{\gamma}$, and so $\VV{\I}{\va{a}}(\metaA\unisub{\alpha}{\gamma})=\VV{\I}{\va{a}}((\metaA\unisub{\alpha}{\gamma})\unisub{\beta}{\alpha})$ by \textbf{\ref{lemma:sub}}.
+  However, $(\metaA\unisub{\alpha}{\gamma})\unisub{\beta}{\alpha}=\metaA\unisub{\beta}{\gamma}$, and so $\VV{\I}{\va{a}}(\metaA\unisub{\alpha}{\gamma})=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\gamma})=1$.
+  Since $\metaA\unisub{\beta}{\gamma}$ is a sentence, $\VV{\I}{}(\metaA\unisub{\beta}{\gamma})=1$, and so $\M$ satisfies $\metaA\unisub{\beta}{\gamma}$. 
+  Generalising on $\M$ we may conclude that $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \models \metaA\unisub{\beta}{\gamma}$. 
+\end{quote}
+
+This lemma amounts to little more than an application of \textbf{\ref{lemma:sub}} together with the observation that $(\metaA\unisub{\alpha}{\gamma})\unisub{\beta}{\alpha}=\metaA\unisub{\beta}{\gamma}$.
+We may then provide the following proof:
 
 
 
@@ -1120,21 +1132,37 @@ Since $\beta$ does not occur in any premises, we may draw $\metaB$ as a consequi
 \end{quote}
 
 
-
+Since \textbf{\ref{lemma:id}} does most of the work above, and \textbf{\ref{lemma:sub}} made it easy to prove \textbf{\ref{lemma:id}}, identity elimination can be viewed as an application of \textbf{\ref{lemma:sub}}.
+Put otherwise, \textbf{\ref{lemma:sub}} is what explains why the identity elimination rule preserves validity.
 
 
 
 
 \section{Conclusion}%
   \label{sec:Conclusion}
+
+Having provided proofs for every rule included in QD, we may draw on \textbf{\ref{rule:AS}} -- \textbf{\ref{rule:IdE}} given above in order to assert the following conclusion:
   
 \begin{enumerate}[leftmargin=1.5in]
-  \item[\it Rules:] If $\metaA_{n+1}$ follows by the proof rules for QD from sentences in $\Gamma_{n+1}$ and $\Gamma_k \models \metaA_k$ for every $k\leq n$, then $\Gamma_{n+1} \models \metaA_{n+1}$.
+  \item[\it QD Rules:] If $\metaA_{n+1}$ follows by the proof rules for QD from sentences in $\Gamma_{n+1}$ and $\Gamma_k \models \metaA_k$ for every $k\leq n$, then $\Gamma_{n+1} \models \metaA_{n+1}$.
 \end{enumerate}
 
-% TODO: thus we can trust our natural deduction system
+The result above completes the proof of \textit{Induction} which together with \textit{Base} establishes the soundness of QD over the semantics for QL$^=$.
+% Since $\Gamma \proves_{\textsc{sd}}\metaA$ implies $\Gamma \proves_{\textsc{qd}}\metaA$, 
+Assuming that $\Gamma \proves_{\textsc{sd}}\metaA$ for sentences in SL, we may go on to observe that $\Gamma \proves_{\textsc{qd}}\metaA$ follows as an immediate consequence since QD includes all of the rules in SD where QL includes all the sentences in SL. 
+It follows that $\Gamma \models \metaA$ over the semantics for QL$^=$ by the soundness of QD. %, and so SD is also sound over the semantics for QL$=$.
+Given any SL interpretation $\I$ which satisfies $\Gamma$, we may construct a corresponding model $\M=\tuple{\D,\I'}$ which also satisfies $\Gamma$ by letting $\D=\set{a}$ where $\I'(\alpha)=a$ for all constants $\alpha$ and $\I'(\F^n)=\varnothing$ for all predicates $\F^n$.
+Thus $\M$ satisfies $\metaA$ where it is easy to show that $\M$ satisfies $\metaA$ just in case $\I$ satisfies $\metaA$.
+Thus we may conclude that the SL interpretation $\I$ that we began with satisfies $\metaA$, and so $\Gamma \models \metaA$ over the semantics for SL. 
+As a result, SD is also sound over the semantics for SL.
 
-% TODO: entails that SD is also sound
+It is worth comparing the soundness of SD and QD to the soundness proof for the tree method.
+Not only does the soundness of SD and QD tell us that we can rely on our natural deduction systems in order to construct valid arguments in which the premises entail the conclusion, soundness begins to close the gap between two very different approaches to logic.
+Whereas the entailment relation $\models$ is to do with truth-preservation over a class of interpretations or models depending on the language we are working with, the derivation relations $\proves_{\textsc{sd}}$ and $\proves_{\textsc{qd}}$ aim to encode natural patterns of reasoning in SL and QL$=$, respectively. 
+What soundness shows is that our purely syntactic proof-theoretic descriptions of logical reasoning in SL and QL$^=$ does not diverge from our semantics (or model-theoretic) descriptions of logical reasoning in SL and QL$^=$.
+Were either of these results to fail to hold, SD and QD could not be trusted.
+Although the soundness of the tree method similarly shows that the tree method can be relied upon to evaluate the validity of arguments, the tree method is of no independent interest since it does not claim to encode natural patterns of reasoning.
+
 
 
 \iffalse

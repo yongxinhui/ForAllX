@@ -63,7 +63,7 @@
 %	TITLE
 %----------------------------------------------------------------------------------------
 
-\title{\textbf{Natural Deduction in QL$^=$}} % Subtitle
+\title{\textbf{Existential Elimination and Soundness}} % Subtitle
 
 \author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
 
@@ -93,46 +93,15 @@
 
 
 
-\section*{Quantifier Rules}
+\section*{QD Rules}
 
 \begin{enumerate}
   \item[($\forall$E)] $\forall\alpha\varphi \vdash \varphi\unisub{\beta}{\alpha}$ where $\beta$ is a constant and $\alpha$ is a variable. 
   \item[($\exists$I)] $\varphi\unisub{\beta}{\alpha} \vdash \exists\alpha\varphi$ where $\beta$ is a constant and $\alpha$ is a variable.
   \item[($\forall$I)] $\varphi\unisub{\beta}{\alpha} \vdash \forall\alpha\varphi$ where $\beta$ is a constant, $\alpha$ is a variable, and $\beta$ does not occur in $\forall\alpha\varphi$ or in any undischarged assumption.
   \item[($\exists$E)] If $\exists\alpha\varphi,\varphi\unisub{\beta}{\alpha} \vdash \psi$ where $\beta$ is a constant that does not occur in $\exists\alpha\varphi$, $\psi$, or in any undischarged assumption, then $\exists\alpha\varphi\vdash \psi$.
-\end{enumerate}
-
-
-
-
-
-
-
-\section*{Identity Rules}
-
-\begin{enumerate}
   \item[($=$I)] $\vdash \alpha = \alpha$ for any constant $\alpha$. 
-    \begin{itemize}
-      \item[\it Axiom:] This rule is better referred to as an axiom schema.
-      \item[\it Note:] Easy to use, but not always obvious when to use.
-    \end{itemize}
-  \item[\bf Task 1:] Derive the following in QD:
-    \begin{itemize}
-      \item $\forall x(x=x \supset \exists yFyx) \vdash \exists y(Fyy)$.
-      \item Everything is something.
-      \item Something exists.
-    \end{itemize}
   \item[($=$E)] $\varphi\unisub{\alpha}{\gamma},\alpha=\beta\vdash\varphi\unisub{\beta}{\gamma}$.
-    \begin{itemize}
-      \item[\it Note:] Also easy to use, but not always obvious how to use.
-      % \item[\it Compare:] $Fab \vee \exists yFby,\ b = d\ \vdash Fad \vee \exists yFby/ Fab \vee \exists yFdy/ Fad \vee \exists yFdy$.
-    \end{itemize}
-  \item[\bf Task 2:] Derive the following in QD:
-    \begin{itemize}
-      \item $m = n \vee n = o,\ An\ \vdash Am \vee Ao$
-      \item Every symmetric antisymmetric relation is lonely.
-      \item Every irreflexive antisymmetric relation is asymmetric.
-    \end{itemize}
 \end{enumerate}
 
 
@@ -140,12 +109,95 @@
 
 
 
-\section*{Relations}
+\section*{Existential Elimination}
 
 \begin{enumerate}
-  \item[\bf Task 4:] Regiment and derive the following in QD.
-  \item Every transitive symmetric relation is left and right euclidean.
-  \item Every nonempty transitive and symmetric relation is reflexive.
+  \item[\bf Task 1:] Regiment and derive the following in QD.
+  % \item $\qt{\forall}{x}(x = m), Rma\vdash \qt{\exists}{x} Rxx$
+  % \item $\qt{\forall}{x}(x{=}n \equiv Mx), \qt{\forall}{x}(Ox \vee \neg Mx)\vdash On$
+  \item The elephant would not obey.\\
+    \underline{Patrick is an elephant.}\\ 
+    Patrick would not obey.
+  \item $\qt{\forall}{x}(Jx \supset Kx)$\\
+    $\qt{\exists}{x}\qt{\forall}{y} Lxy$\\
+    \underline{$\qt{\forall}{x} Jx$}\\
+    $\qt{\exists}{x}(Kx \wedge Lxx)$.
+  \item \underline{$\qt{\exists}{x}(Px \supset \qt{\forall}{x}Qx)$}\\
+    $\qt{\forall}{x}Px \supset \qt{\forall}{x}Qx$.
+  \item \underline{$\qt{\exists}{x}Px \vee \qt{\exists}{x}Qx$}\\
+    $\qt{\exists}{x}(Px \vee Qx)$.
+  % \item $\qt{\exists}{x}(Kx \wedge \qt{\forall}{y}(Ky \supset x{=}y) \wedge Bx), Kd\vdash Bd$
+  % \item $\vdash Pa \supset \qt{\forall}{x}(Px \vee x {\neq} a)$
+  \item Every nonempty asymmetric relation is non-symmetric.
+\end{enumerate}
+
+
+
+
+
+\section*{Natural to Normative}
+
+\begin{enumerate}
+  \item[\it Soundness:] If $\Gamma \vdash \varphi$, then $\Gamma \vDash \varphi$.
+  \item Shows that we can trust QD to establish validity.
+  \item Easier to derive a conclusion that to provide a semantic argument.
+  \item The natural rules of deduction preserve validity.
+  \item[\it Natural:] QD describes (approximately) how we in fact reason.
+  \item[\it Normative:] Soundness explains why we ought to use QD to reason.
+\end{enumerate}
+
+
+
+
+\section*{Soundness of QD}
+
+\begin{enumerate}
+  \item[\it Assume:] $\Gamma \vdash_{\textsc{qd}} \varphi$, so there is a QD proof $X$ of $\varphi$ from $\Gamma$. 
+  \item[\it Lines:] Let $\varphi_i$ be the $i$\superscript{th} line of $X$.
+  \item[\it Dependencies:] Let $\Gamma_i$ be the undischarged assumptions at line $i$. 
+  \item[\it Proof:] The proof goes by induction on length of $X$:
+    \begin{itemize}
+      \item[\it Base:] $\Gamma_1 \vDash \varphi_i$. 
+      \item[\it Induction:] If $\Gamma_k \vDash \varphi_k$ for all $k\leq n$, then $\Gamma_{n+1} \vDash \varphi_{n+1}$. 
+    \end{itemize}
+  \item[\it Finite:] Since $X$ is finite, there is some $m$ where $\Gamma_m=\Gamma$ and $\varphi_m=\varphi$, so $\Gamma \vDash \varphi$.
+\end{enumerate}
+
+
+
+
+\section*{Base Case}
+
+\begin{enumerate}
+  \item[\it Proof:] Every line in a QD proof is either a premise or follows by the rules.
+  \item[\it Assume:] $\varphi_1$ is either a premise or follows by AS or $=$I. 
+    \begin{itemize}
+      \item[\it Premise:] If $\varphi_1$ is a premise or assumption, then $\Gamma_1=\set{\varphi_1}$, and so $\Gamma_1\vDash\varphi_1$.
+      \item[\it Identity:] If $\varphi_1$ follows by $=$I, then $\varphi_1$ is $\alpha=\alpha$ for some constant $\alpha$. 
+      \item Letting $\M=\tuple{\D,\I}$ be any model, $\I(\alpha)=\I(\alpha)$.
+      \item Letting $\va{a}$ be a variable assignment, $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\alpha)$.
+      \item So $\VV{\I}{\va{a}}(\alpha=\alpha)=1$, and so $\vDash \alpha=\alpha$.
+      \item Thus $\Gamma_1\vDash \varphi_1$ since $\Gamma_1=\varnothing$.
+    \end{itemize}
+
+\end{enumerate}
+
+
+
+\section*{Induction Case}
+
+\begin{enumerate}
+  \item[\it Assume:] $\Gamma_k \vDash \varphi_k$ for all $k\leq n$.
+  \item[\it Undischarged:] If $\varphi_{n+1}$ is a premise or assumption, then the argument above applies. 
+  \item[\it Rules:] If $\varphi_{n+1}$ follows from $\Gamma_{n+1}$ by the QD rules, then $\Gamma_{n+1}\vDash\varphi_{n+1}$.
+  \item[\it Cases:] There are 12 rules in SD and an additional 6 in QD.
+\end{enumerate}
+
+\section*{Further Problems: Relations}
+
+\begin{enumerate}
+  \item[\bf Task 1:] Regiment and derive the following in QD.
+  \item Every transitive and symmetric relation is quasi-reflexive.
   \item Only the empty relation is symmetric and asymmetric.
   \item Every intransitive relation is irreflexive.
   \item Every intransitive relation is asymmetric.
@@ -156,15 +208,6 @@
 
 
 
-\section*{Further Examples}
-
-\begin{enumerate}
-  \item[\bf Task 3:] Regiment and derive the following in QD.
-  \item $\qt{\forall}{x}(x = m), Rma\vdash \qt{\exists}{x} Rxx$
-  \item $\qt{\forall}{x}(x{=}n \equiv Mx), \qt{\forall}{x}(Ox \vee \neg Mx)\vdash On$
-  \item $\qt{\exists}{x}(Kx \wedge \qt{\forall}{y}(Ky \eif x{=}y) \wedge Bx), Kd\vdash Bd$
-  \item $\vdash Pa \supset \qt{\forall}{x}(Px \vee x {\neq} a)$
-\end{enumerate}
 
 
 
