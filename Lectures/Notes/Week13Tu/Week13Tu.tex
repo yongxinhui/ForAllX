@@ -126,10 +126,11 @@
 \begin{enumerate}[labelsep=.1in]
   % \item[\checkmark (AS)] Proof is the same as in the base case considered last week.
   \item[(R)] $\metaA_k=\metaA_{n+1}$ for live $k\leq n$. Thus $\Gamma_k\models\metaA_k$ by hypothesis and $\Gamma_k\subseteq\Gamma_{n+1}$ by \textbf{L12.2}. Thus $\Gamma_{n+1}\models\metaA_k$ by \textbf{L12.1}, and so $\Gamma_{n+1}\models\metaA_{n+1}$.
-  \item[($\neg$I)] $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\neg$I.
+  \item[($\neg$I)] %$\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\neg$I.
     \begin{itemize}
       \item There is a proof of $\metaB$ at line $h$ and $\neg\metaB$ at line $j$ from $\metaA$ on line $i$. 
       \item By hypothesis $\Gamma_h\models \metaB$ and $\Gamma_j\models\neg\metaB$, where $\Gamma_h,\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$.
+      \item By \textbf{L12.1}, $\Gamma_{n+1}\cup\set{\metaA_i}\models\metaB$ and $\Gamma_{n+1}\cup\set{\metaA_i}\models\neg\metaB$.
       \item So $\Gamma_{n+1}\cup\set{\metaA_i}$ is unsatisfiable by \textbf{L12.3}, so $\Gamma_{n+1}\models\metaA_{n+1}$ by \textbf{L12.4}.
     \end{itemize}
   % \item[\checkmark ($\neg$E)] Similar to ($\neg$I).
@@ -197,7 +198,7 @@
       \item[4.] Let $\M'$ by like $\M$ but for $\I'(\beta)=\va{c}(\alpha)$.
       \item[5.] By \textbf{L12.9}, $\M'$ satisfies $\Gamma$ since $\beta$ does not occur in $\Gamma$.
       \item[6.] So $\M'$ satisfies $\metaA\unisub{\beta}{\alpha}$ since $\Gamma \models \metaA\unisub{\beta}{\alpha}$.
-      \item[7.] By \textbf{L12.5}, $\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$ for all $\va{c}$, and so for $\va{c}$ in particular.
+      \item[7.] By \textbf{L12.6}, $\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$ for all $\va{c}$, and so for $\va{c}$ in particular.
       \item[8.] Since $\beta$ is not in $\qt{\forall}{\alpha}\metaA$, we know $\beta$ is not in $\metaA$.
       \item[9.] So $\VV{\I'}{\va{c}}(\metaA)\neq 1$ by \textbf{L.12.9} given (3) above. 
       \item[10.] By (4) above, $\VV{\I'}{\va{c}}(\alpha)=\VV{\I'}{\va{c}}(\beta)$ where $\beta$ is free for $\alpha$. 
@@ -205,6 +206,12 @@
       \item[12.] Thus $\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})\neq 1$, contradicting the above.
     \end{itemize}
   \item[\bf L12.11] $\forall\alpha\metaA \models \metaA\unisub{\beta}{\alpha}$ where $\alpha$ is a variable and $\metaA\unisub{\beta}{\alpha}$ is a sentence.
+    \begin{itemize}
+      \item Let $\M$ satisfy $\qt{\forall}{\alpha}\metaA$, so $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ for some $\va{a}$. 
+      \item So $\VV{\I}{\va{c}}(\metaA)=1$ where $\va{c}(\alpha)=\I(\beta)$ for an $\alpha$-variant $\va{c}$ of $\va{a}$.
+      % \item Thus $\VV{\I}{\va{c}}(\alpha)=\VV{\I}{\va{c}}(\beta)$.
+      \item By \textbf{L12.8}, $\VV{\I}{\va{c}}(\metaA)=\VV{\I}{\va{c}}(\metaA\unisub{\beta}{\alpha})$, and so $\VV{\I}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$.
+    \end{itemize}
   \item[\bf L12.12] If $\Gamma \models \metaA$ and $\Sigma \cup \set{\metaA} \models \metaB$, then $\Gamma\cup\Sigma \models \metaB$.
   \item[\bf L12.13] $\metaA\unisub{\beta}{\alpha} \models \exists\alpha\metaA$ where $\alpha$ is a variable and $\metaA\unisub{\beta}{\alpha}$ is a sentence.
   \item[\bf L12.14] For any constant $\beta$ that does not occur in $\exists\alpha\metaA$, $\metaB$, or in any sentence $\metaC\in\Gamma$, if $\Gamma \models \exists\alpha\metaA$ and $\Gamma \cup \set{\metaA\unisub{\beta}{\alpha}} \models \metaB$, then $\Gamma \models \metaB$.
@@ -215,7 +222,7 @@
 \section*{QD Rules}
 
 \begin{enumerate}[labelsep=.1in]
-  \item[($\forall$I)] Assume $\metaA_{n+1}$ follows by $\forall$I. 
+  \item[($\forall$I)] %Assume $\metaA_{n+1}$ follows by $\forall$I. 
     \begin{itemize}
       \item $\metaA_i=\metaA\unisub{\beta}{\alpha}$ for $i\leq n$ live at $n+1$ where $\beta$ is not in $\metaA_{n+1}$ or $\Gamma_{n+1}$. 
       \item So $\Gamma_i\models\metaA_i$ by hypothesis, and $\Gamma_i\subseteq\Gamma_{n+1}$ by \textbf{L12.2}.
@@ -223,11 +230,18 @@
       \item So $\Gamma_{n+1}\models \qt{\forall}{\alpha}\metaA$ by \textbf{L12.10} since $\beta$ not in $\qt{\forall}{\alpha}\metaA$ or $\Gamma_{n+1}$.
       \item Equivalently, $\Gamma_{n+1}\models \metaA_{n+1}$.
     \end{itemize}
-  \item[($\forall$E)] $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\forall$E. 
-  \item[($\exists$I)] $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\exists$I. 
-  \item[($\exists$E)] $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\exists$E. 
-  \item[($=$I)] $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $=$I. 
-  \item[($=$E)] $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $=$E. 
+  \item[($\forall$E)] %Assume $\metaA_{n+1}$ follows by $\forall$E. 
+    \begin{itemize}
+      \item $\metaA_i=\qt{\forall}{\alpha}\metaA$ for $i\leq n$ live at $n+1$ where $\metaA_{n+1}=\metaA\unisub{\beta}{\alpha}$.
+      \item So $\Gamma_i\models\metaA_i$ by hypothesis, and $\Gamma_i\subseteq\Gamma_{n+1}$ by \textbf{L12.2}.
+      \item Thus $\Gamma_{n+1}\models\metaA_i$ by \textbf{L12.1}, so $\Gamma_{n+1}\models \qt{\forall}{\alpha}\metaA$.
+      \item By \textbf{L12.11} $\qt{\forall}{\alpha}\metaA\models\metaA\unisub{\beta}{\alpha}$, and so $\Gamma_{n+1}\models\metaA\unisub{\beta}{\alpha}$ by \textbf{L12.12}.
+      \item Equivalently, $\Gamma_{n+1}\models \metaA_{n+1}$.
+    \end{itemize}
+  % \item[($\exists$I)] $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\exists$I. 
+  % \item[($\exists$E)] $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\exists$E. 
+  % \item[($=$I)] $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $=$I. 
+  % \item[($=$E)] $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $=$E. 
 \end{enumerate}
 
 

@@ -5,6 +5,76 @@
 \section{Introduction}
   \label{sec:Introduction}
 
+Consider a calculator that can compute basic arithmetical operations.
+If that calculator sometimes gave false answers we probably shouldn't call it a calculator at all.
+Although it may often given the right results, there would be no way to know if it was giving us the right result or not, and so could not be relied upon.
+Put otherwise, the calculator is not \textit{sound} with respect to the truths of arithmetic since some of its answers are false.
+For an analogous reason, it was important to show that QD was sound over the semantics for QL$^=$ so that we could rely on QD to conduct valid reasoning.
+If $\metaA$ is derivable from $\Gamma$, then we know by soundness that $\metaA$ is also entailed by $\Gamma$.
+Put formally: if $\Gamma\proves\metaA$, then $\Gamma\models\metaA$.
+
+Completeness asserts the converse so that we may conclude that $\metaA$ is derivable from $\Gamma$ whenever $\metaA$ is entailed by $\Gamma$, or more compactly: if $\Gamma\models\metaA$, then $\Gamma\proves\metaA$.
+You might wonder if our calculator from before is also complete.
+In fact, no calculator is complete for purely material reasons: no matter how much memory a calculator may have, there are numbers big enough that will exhaust its memory.
+For instance, raising one large number to another large number will quickly use up the memory in most calculators that you may have come across.
+Accordingly, there are some arithmetical operations that the calculator simply cannot compute, yielding `ERROR' as a result.
+So long as the calculator doesn't spit out any false answers, it may still be of considerable use despite its incompleteness.
+
+A separate question is whether, in principle, there could be an effective procedure which yields the right answers to any arithmetical operations.
+By `effective procedure' we do not mean a material computing device but rather an abstract method which could be fully specified with precise rules which one could in principle follow to compute the result of any arithmetical operations.
+It turns out that there is no such effective procedure for arithmetic.
+Put otherwise, arithmetic is incomplete.
+QD does not share this same fate.
+Rather, we will show in the following section that whenever some premises entail a given conclusion, that conclusion is derivable from those premises in QD.
+This is an impressive result.
+
+Instead of beginning with $\Gamma\models\metaA$ as an assumption and arguing to the conclusion $\Gamma\proves\metaA$, we will focus on establishing a closely related result: 
+\begin{enumerate}[leftmargin=1.5in]
+  \item[\textbf{\ref{thm:comp}}] Every consistent set of QL$^=$ sentences $\Gamma$ is satisfiable. 
+\end{enumerate}
+Recall that a set of QL$^=$ sentences $\Gamma$ is inconsistent if $\bot$ is derivable from $\Gamma$, and consistent otherwise.
+If $\Gamma\proves\metaA$, we know that $\Gamma\cup\set{\enot\metaA}$ is inconsistent since it would be easy to derive both $\metaA$ and $\enot\metaA$ from this set and--- as EFQ shows in $\S\ref{EFQ}$--- anything whatsoever follows from a contradiction, including $\bot$.
+Given the theorem above, $\Gamma\cup\set{\enot\metaA}$ is unsatisfiable. 
+Accordingly, any model that satisfies $\Gamma$ cannot also satisfy $\enot\metaA$, and so must satisfy $\metaA$. 
+Thus we may conclude that $\Gamma\models\metaA$ from the assumption that $\Gamma\proves\metaA$. 
+This provides a sketch of the completeness proof for QD given the theorem above (see \textbf{\ref{cor:Completeness}} for the proof).
+
+It remains to establish \textbf{\ref{thm:comp}}.
+The proof will proceed in a number of stages.
+To begin with, we will extend our language to include a denumerable number of new constants.
+For simplicity, we will take the set of natural numbers $\N$ to be our new constants, calling our new language QL$^=_{\N}$. 
+Assuming that $\Gamma$ is consistent in QL$^=$, we will show in $\S\ref{sub:Witnesses}$ that $\Gamma$ is also consistent in QL$^=_{\N}$.
+This completes the first stage of the proof.
+
+You might be wondering why we extended our language in the first place.
+The reason is that we would like to extend $\Gamma$ to a bigger set of sentences which is guaranteed to include instances of every existential claim. 
+That is, if $\qt{\exists}{x}Fxa$ is a sentence in $\Gamma$, then we would like to include an instance such as $F1a$ where our instantiating constant is guaranteed not to conflict with anything else in $\Gamma$.
+An easy way to do this is to draw on our set of new constants.
+Since $\Gamma$ is still the same set of QL$^=$ sentences, none of our new constants occur in any sentence in $\Gamma$.
+For instance $1$ does not occur in any sentence in $\Gamma$, and so our instance $F1a$ will not conflict with what belongs to $\Gamma$. 
+Extending $\Gamma$ to include all instances of all existential claims constitutes the second stage of the proof where we will refer to this larger set $\Sigma_\Gamma$ as \textit{saturated}. 
+As we will show in $\S\ref{sub:Saturation}$, $\Sigma_\Gamma$ is also consistent. 
+
+The next stage extends $\Sigma_\Gamma$ even further so that it includes every sentence or its negation but not both, calling this \textit{maximal} set $\Delta_{\Sigma_\Gamma}$, or just $\Delta$ for short. 
+We will show in $\S\ref{sub:Maximization}$ that $\Delta$ is consistent, where it follows that $\Delta$ is \textit{deductively closed} insofar as it contains every sentence that is derivable from $\Delta$.
+Deductive closure is a very important and convenient property which will play a critical role in the later stages of the proof.
+
+Having extended $\Gamma$ to a much bigger set of sentences $\Delta$ that is saturated, maximal, consistent, and deductively closed, we will proceed to use this set to construct a model that satisfies $\Delta$, and so satisfies $\Gamma$ as a result. 
+This may sound strange since we are using a set of sentences to build a model that we will use to interpret that set of sentences.
+Nevertheless, there is no circularity here: to interpret our language, we need a domain, where any nonempty domain will do.
+In particular, we will take the domain $\D_\Delta$ to be sets of constants in our extended language QL$^=_{\N}$ which we will define below.
+Although these might be strange objects to include in a domain, nothing prevents us from using them to interpret QL$^=_{\N}$.
+So long as we have a nonempty set of them, we can proceed to interpret our predicates over this domain.
+
+Given $\D_{\Delta}$, we will specify referents and extensions for the constants and predicates of our language in such that the resulting model $\M_\Delta$ satisfies all and only the sentences that belong to $\Delta$.
+As a result, $\M_\Delta$ satisfies $\Delta$, and since $\Gamma\subseteq\Delta$, we may conclude that $\Gamma$ is satisfiable. 
+Following tradition, we will refer to this cleverly constructed model $\M_\Delta$ as a Henkin model after Leon Henkin who first presented this proof strategy in 1949.
+
+This provides a rough overview of the proof strategy that will be deployed below.
+If you find that you get lost along the way, it can help to return to this overview to regain your bearings.
+Slogging on in the dark is rarely advisable.
+Rather, it is better to keep zooming out so that you can keep track of where you are and where you are headed to next.
+
 % TODO: introduction
   % state standard form of completeness
   % we will establish this as a corollary of the consistency version
@@ -23,7 +93,7 @@
 
 
 \section{Extensions}%
-  \label{sub:Extensions}
+  \label{sec:Extensions}
 
 Assume $\Gamma$ is a consistent set of QL$^=$ sentences.
 This section will construct a superset $\Delta\supseteq\Gamma$ which may be shown to be saturated, maximal, and consistent where these properties will enable us to show that $\Delta$ is \define{deductively closed} insofar as $\metaA\in\Delta$ whenever $\Delta\proves\metaA$. 
@@ -40,9 +110,9 @@ The present section will begin by adding a range of new constants to $QL^=$ whic
 
 Let QL$^=_{\N}$ be a language like QL$^=$ except for including the natural numbers $\N$ as an additional set of constants.
 Even though $\Gamma$ is consistent in QL$^=$, it does not immediately follow that $\Gamma$ is consistent in QL$^=_{\N}$.
-In general, adding expressive resources to a language can provide the grounds for new derivations and so we need to check that a contradiction cannot be derived in QL$^=_{\N}$.
+In general, adding expressive resources to a language can provide the grounds for new derivations and so we need to check that a contradiction cannot be derived in QL$^=_{\N}$ from $\Gamma$.
 In order to rule out this possibility out, we will prove the following lemma.
-Assuming that $\beta$ is free for $\alpha$ in ever line of a proof $X$, it will ease the following exposition to take $X\unisub{\beta}{\alpha}$ to be the result of replacing $\beta$ with $\alpha$ in every line of $X$.
+Assuming that $\beta$ is free for $\alpha$ in every line of a proof $X$, it will ease the following exposition to take $X\unisub{\beta}{\alpha}$ to be the result of replacing $\beta$ with $\alpha$ in every line of $X$.
 
 % \begin{Lthm} \label{lemma:gencon}
 %   If $\Gamma\proves\metaA$ and $\beta$ is a constant that does not occur in any $\metaB\in\Gamma$, then there is a variable $\alpha$ which does not occur in $\metaA$ such that $\Gamma\proves \qt{\forall}{\alpha}\metaC$ where $\metaC=\metaA\unisub{\alpha}{\beta}$ and the derivation of $\qt{\forall}{\alpha}\metaC$ from $\Gamma$ does not include $\beta$.
@@ -61,9 +131,12 @@ Assuming that $\beta$ is free for $\alpha$ in ever line of a proof $X$, it will 
 
 \begin{quote} 
   \textit{Proof:} Assume that $\alpha$ is a constant and $X$ is a proof in which the constant $\beta$ does not occur.
-  The proof goes by induction on the length of $X$.
-
-  \textit{Base:} Assume that 
+  The proof goes by a routine induction on the length of $X$, and so the details will be omitted.
+%   For easy of exposition, we will take $\metaA_i$ to be the $i$\textsuperscript{th} line of $X$ and $\Gamma_i$ to be the undischarged assumptions at line $i$.
+%   We then aim to show that $\Gamma_i\models\metaA_i$ for ever line $i$ in $X$. 
+%
+%   \textit{Base:} We know that $\metaA_1$ is either a premise, assumption, or instance of identity introduction $\alpha=\alpha$ for a constant $\alpha$. 
+%   In each case, $\Gamma_1\proves$
 \end{quote}
 
 
@@ -90,7 +163,7 @@ Assuming that $\beta$ is free for $\alpha$ in ever line of a proof $X$, it will 
 \end{quote}
 
 Although the proof of \textbf{\ref{lemma:const}} is not immediate, it is hardly surprising that merely adding new constants would enable the derivation of a contradiction from $\Gamma$ when no contradiction is derivable from $\Gamma$ without those additional constants.
-Given that $\Gamma$ is consistent in QL$^=$, we may conclude that $\Gamma$ is consistent in QL$^=_{\N}$.
+Since $\Gamma$ is consistent in QL$^=$, we may conclude that $\Gamma$ is consistent in QL$^=_{\N}$.
 
 
 
@@ -297,7 +370,7 @@ In order to establish these results, we will begin by proving the following supp
 Maximal consistent sets of sentences are deductively closed insofar as they contain every sentence derivable from that set as a member.
 Put formally, $\Delta$ is deductively closed just in case $\metaA\in\Delta$ whenever $\Delta\proves\metaA$.
 Since $\Delta\proves\metaA$ whenever $\metaA\in\Delta$, deductively closed sets of sentences are identical to the set of sentences which they derive.
-In order to show that $\Delta_{\Sigma_\Gamma}$ is deductively closed, consider the following general lemmas. 
+In order to show that $\Delta_{\Sigma_\Gamma}$ is deductively closed, we will begin with the following general lemma. 
 
 \begin{Lthm} \label{lemma:cont}
   If $\Lambda\proves\metaA$ and $\Lambda\proves\enot\metaA$, then $\Lambda$ is inconsistent. 
