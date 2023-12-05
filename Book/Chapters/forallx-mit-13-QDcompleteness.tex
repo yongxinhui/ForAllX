@@ -405,8 +405,8 @@ In order to show that $\Delta_{\Sigma_\Gamma}$ is deductively closed, we will be
 \section{Henkin Model}%
   \label{sub:HenkinModel}
 
-Having extended the consistent set of sentences $\Gamma$ in QL$^=$ to a saturated maximal consistent set of sentences $\Delta_{\Sigma_\Gamma}$ in QL$^=_{\N}$ which is deductively closed, we may now proceed to use $\Delta_{\Sigma_\Gamma}$ to construct a Henkin model that satisfies $\Delta_{\Sigma_\Gamma}$, and so thereby satisfies $\Gamma$.
-For ease of exposition, we will often drop the subscripts, though `$\Delta$' is to be understood as standing for $\Delta_{\Sigma_\Gamma}$.
+Having extended the consistent set of sentences $\Gamma$ in QL$^=$ to a saturated maximal consistent set of sentences $\Delta_{\Sigma_\Gamma}$ in QL$^=_{\N}$ which was shown to be deductively closed, we may proceed to use $\Delta_{\Sigma_\Gamma}$ to construct a Henkin model that satisfies $\Delta_{\Sigma_\Gamma}$, and so also satisfies $\Gamma$.
+For ease of exposition, we will often drop the subscripts, assuming $\Delta=\Delta_{\Sigma_\Gamma}$.
 
 We begin by letting $\C$ be the set of all constants in QL$^=_{\N}$ where this includes all the typical constants included in QL$^=$ together with the natural numbers $\N$ which we have added. 
 Since more than one constant can refer to the same element in a domain, we will model the elements of the domain as equivalence classes of co-referring constants.
@@ -416,7 +416,7 @@ Consider the following:
     \item[\it Domain:] $\D_\Delta=\set{[\alpha]_\Delta:\alpha\in\C}$.
   \end{enumerate}
 The equivalence class $[\alpha]_\Delta$ is the set which includes every constant $\beta$ in $\C$ where the sentence $\alpha=\beta$ belongs to $\Delta$.
-In order to show that $[\alpha]_\Delta\neq\varnothing$ for any constant $\alpha\in\C$, we begin by proving the following weakening principle:
+In order to show that $[\alpha]_\Delta\neq\varnothing$ for any constant $\alpha\in\C$, we begin by proving the following weakening principle which will be of general utility throughout the proof:
 
 
 
@@ -786,18 +786,20 @@ It remains to show that $\M_\Delta$ satisfies $\Delta$, and so satisfies $\Gamma
 \section{Satisfiability}%
   \label{sub:Satisfiability}
  
-It follows immediately from \textbf{\ref{lemma:truth}} that $\M_\Delta$ satisfies $\Delta$ and so $\M_\Delta$ satisfies $\Gamma$ since $\Gamma\subseteq\Delta$. 
-Nevertheless, since $\M_\Delta$ is a model of QL$^=_{\N}$ and not QL$^=$, it remains to show that $\Gamma$ is satisfied by a model of QL$^=$.
-Accordingly, we will restrict $\M_\Delta$ to QL$^=$ as follows: 
+It follows immediately from \textbf{\ref{lemma:truth}} that $\M_\Delta$ satisfies $\Delta$ and so $\M_\Delta$ satisfies $\Gamma$ since $\Gamma\subseteq\Delta$ by \textbf{\ref{lemma:include}}. 
+Since $\M_\Delta$ is a model of QL$^=_{\N}$ and not QL$^=$, and so it remains to show that $\Gamma$ is satisfied by a model of QL$^=$.
+Thus we will restrict $\M_\Delta$ to QL$^=$ as follows: 
   \begin{enumerate}[leftmargin=1.5in]
     \item[\it Restriction:] $\I'_\Delta(\alpha)=[\alpha]_\Delta$ for every constant $\alpha$ in QL$^=$.
     \item[~] $\I'_\Delta(\F^n)=\I_\Delta(\F^n)$ for all $n$-place predicates $\F^n$ and $n\in\N$. 
   \end{enumerate}
 Since the predicates in QL$^=_{\N}$ are the same as those in QL$^=$, no change to the extensions of the $n$-place predicates is required.
 Given that our aim is to restrict consideration to the expressions in QL$^=$, it doesn't matter that the elements in $\D_\Delta$ may contain constants that do not belong to QL$^=$.
-So long as we are only interpreting constants and predicates that do belong to QL$^=$, the domain may contain anything whatsoever.
+In interpreting constants and predicates that belong to QL$^=$ the domain may contain anything whatsoever.
+There simply is no requirement that the domain only include constants that belong to QL$^=$.
 Thus we may take $\D'_\Delta=\D_\Delta$ as before, letting $\M'_\Delta=\tuple{\D'_\Delta,\I'_\Delta}$ be the restriction of $\M$ to QL$^=$. 
-It is easy to show that $\M'_\Delta$ and $\M_\Delta$ satisfy the same QL$^=$ sentences, and so $\M'_\Delta$ satisfies $\Gamma$. 
+It is easy to show that $\M'_\Delta$ and $\M_\Delta$ satisfy the same QL$^=$ sentences, and so $\M'_\Delta$ satisfies $\Gamma$ where $\M'_\Delta$ is a model of QL$^=$. 
+Thus we may conclude that $\Gamma$ is satisfiable in the desired sense. 
 
 \begin{Lthm} \label{lemma:satrest}
   For all QL$^=$ sentences $\metaA$, $\M'_\Delta$ satisfies $\metaA$ just in case $\M_\Delta$ satisfies $\metaA$.
@@ -806,10 +808,10 @@ It is easy to show that $\M'_\Delta$ and $\M_\Delta$ satisfy the same QL$^=$ sen
 \begin{quote} 
   \textit{Proof:} The proof goes by induction where the base cases are immediate from the restriction to the sentences of QL$^=$ together with the definition of $\M'_\Delta$.
   The induction case is just as trivial, and so details will be omitted.
-
-  % TODO Use the \bref{lemma:model}
-
-  If $\M=\tuple{\D,\I}$ and $\M'=\tuple{\D,\I'}$ share the domain $\D$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and constant $\alpha$ that occurs in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any variable assignment $\va{a}$ over $\D$.
+  %
+  % % TODO Use the \bref{lemma:model}
+  %
+  % If $\M=\tuple{\D,\I}$ and $\M'=\tuple{\D,\I'}$ share the domain $\D$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and constant $\alpha$ that occurs in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any variable assignment $\va{a}$ over $\D$.
 \end{quote}
 
 Given that $\M_\Delta$ satisfies $\Gamma$ where every $\metaA\in\Gamma$ is a sentence of QL$^=$, it follows from \textbf{\ref{lemma:satrest}} that $\M'_\Delta$ satisfies $\Gamma$ where $\M'_\Delta$ is a QL$^=$ model. 
@@ -850,12 +852,53 @@ Given this result, the completeness of QD over the semantics for QL$^=$ follows 
   Since $\enot\enot\metaA\proves\metaA$ by DN, we may conclude that $\Gamma\proves\metaA$ by \textbf{\ref{lemma:cut}}.
 \end{quote}
 
+Completeness may seems like a good property for any proof system to have.
+In particular, the completeness of QD shows that there is no (extensionally) better proof system which allows us to derive a valid inference that QD leaves out.
+However, there is another perspective which takes completeness to describe a certain limitation on what sorts of entailments hold between sentences in QL$^=$, calling the notion of entailment in QL$^=$ into question.
+% We will close by briefly considering this 
 
-\section{Conclusion}%
-  \label{sub:Conclusion}
+
+
+
+
+
+\section{Compactness}%
+  \label{sec:Compactness}
   
 
+We will close with an important consequence of completeness.
 
+\begin{Cthm}[Compactness] \label{cor:compact}
+  If $\Gamma\models\metaA$, then there is a finite subset $\Lambda\subseteq\Gamma$ where $\Lambda\models\metaA$.
+\end{Cthm}
+
+\begin{quote} 
+  \textit{Proof:} 
+Assume $\Gamma\models\metaA$.  
+It follows by completeness that $\Gamma\proves\metaA$, and so there is a finite proof $X$ of $\metaA$ from $\Gamma$.
+Letting $\Gamma_X$ be the set of premises which appear in $X$, it follows that $\Gamma_X\proves\metaA$, and so $\Gamma_X\models\metaA$.
+Since $X$ is finite, $\Gamma_X$ is also finite, and so we may conclude that whenever $\Gamma\models\metaA$ there is a finite subset $\Lambda\subseteq\Gamma$ where $\Lambda\models\metaA$.
+\end{quote}
+
+This property is referred to as \define{compactness}.
+Although compactness may seems like a nice property to have, it demonstrates that there cannot be sentences which are only entailed by infinitely many sentences.
+However, there would seems to be some natural examples.
+For instance, let $\Gamma_\infty=\set{\exists_{\geq n}xFx:n\in\N}$ be the set of sentences which says that at least $n$ things are $F$ for all natural numbers $n$. 
+Although it would seem that $\Gamma_\infty$ entails that infinitely many things are $F$, this entailment cannot hold by compactness.
+Suppose for instance that $A_\infty$ is a sentence which is only satisfied by models with infinite domains where everything is $F$.
+If $\Gamma_\infty\models A_\infty$, then $\Lambda\models A_\infty$ for some finite subset $\Lambda\subseteq\Gamma_\infty$ by compactness.
+However, every nonempty finite subset $\Lambda\subseteq\Gamma_\infty$ will have a finite model, and so $A_\infty$ must have a finite model given $\Lambda\models A_\infty$. 
+But this contradicts the assumption that $A_\infty$ is a sentence which is only satisfied by models with infinite domains.
+As a result, there are no sentences such as $A_\infty$ that only have infinite models. %, and so there is much that we cannot say in our present language.
+Put otherwise, talk of infinity is simply out of reach.
+% Although this does not mean that QL$^=$ along with its semantics and the definition of entailment is of no use, it does means that we should not take 
+
+These conclusions do not tell against infinity, but rather expose a limitation of our present semantics.
+Although this is a limitation that we can accept, it suggests that there are stronger notions of entailment that we may wish to consider.
+These semantic theories will not be compact, and so will not admit of complete logics since otherwise we could construct a similar argument to what was given above.
+From this perspective, completeness describes a limitation of our semantics for QL$^=$ rather than a virtue.
+Even though QL$^=$ along with its semantics and proof system QD is extremely useful for a wide range of applications, logic does not end here. 
+Rather, the systems that we have covered are just the beginning.
 
 \iffalse
 
