@@ -99,10 +99,10 @@
 %lines 226-250. Also comment out this section as well as line 152(ish), the command \makeSide
 
 \qOne{Is logic math?}
-\aOne{We will use formal symbols as in mathematics, but this does not make logic a type of mathematics any more than it makes physics a type of mathematics. Logic has a subject mater all its own, though saying what this is will require some care.}
+\aOne{We will use formal symbols as in mathematics, but this does not make logic a type of math any more than it makes physics a type of mathematics. Rather, logic has a subject mater all its own, though saying what this is will require some care.}
 
 \qTwo{Is logic philosophy?}
-\aTwo{There is a sub-discipline called \textit{Philosophical Logic} which may be viewed as a type of philosophy carried out with certain formal methods (proof theory and model theory). There is another sub-discipline called \textit{Mathematical Logic} which falls considerably closer to mathematics. We will be doing a bit of both.}
+\aTwo{\textit{Philosophical Logic} concerns the philosophy of logic. There are also formal approaches to philosophy which employ methods from proof theory and model theory. \textit{Mathematical Logic} is a sub-discipline that falls considerably closer to mathematics. We will be doing a bit of all of these.}
 
 \qThree{Is logic a descriptive science?}
 \aThree{No! Logic is a \textit{normative} science insofar as it aims to regiment how we ought to reason in an artificial language, not merely how we happen to reason in a natural language like English.}
@@ -130,15 +130,14 @@
 %----------------------------------------------------------------------------------------
 \section{Overview}
 
-During the first part of this course, we will study sentential logic (SL), also known as truth-functional (TFL) or propositional logic (PL). 
+During the first part of this course, we will study sentential deduction (SD) also known as propositional logic (PL). 
 This is the logic of truth-functional connectives, including ‘not,’ ‘and,’ ‘or,’ ‘if-then,’ and ‘if and only if.’ 
-But watch out: ‘if-then’ will not mean what you think it means! 
 
-During the second part, we will study quantifer logic (QL), also known as first order logic (FOL). 
+In the second part, we will study quantifier deduction (QD) also known as first-order logic (FOL). 
 This is the logic of ‘for all’ and ‘some,’ plus our earlier sentential logic. 
-In both parts, we will present a formal syntax along with a semantics to interpret the language.
-Syntax will include the regimentation of natural language sentences into a formal language as well as proofs within that formal language. 
-Semantics will include interpretations of the formal languages. 
+In both parts, we will present a syntax for a formal language along with a semantics to interpret that language.
+We will use our formal languages to regiment natural language sentences, providing proofs within a corresponding deductive system. 
+We will also cover the semantics needed to interpret our the formal languages and to define logical entailment. 
 For both parts of the course, we will do basic meta-logic, proving that our proof systems are sound and complete.
 
 %----------------------------------------------------------------------------------------
@@ -148,10 +147,7 @@ For both parts of the course, we will do basic meta-logic, proving that our proo
 \section{Material}
 
 {\color{myCOLOR} Required Texts (It’s a free PDF)}\\
-Ichikawa, J. \& Magnus, P.D. ForAllX: MIT Edition FA23 (adapted by the instructor). \\
-
-{\color{myCOLOR} Optional Text (not free)}\\
-Bergmann, M., Moor, J. \& Nelson, J. The Logic Book. 6th Edition. McGraw Hill 2014. \\
+ForAllX: MIT Edition (Fall 23). \\
 
 {\color{myCOLOR} Other}\\
 Any other required readings will be provided on Canvas.
@@ -210,12 +206,12 @@ Please don't hesitate to get in touch if you run into any issues.
 \section{Academic Integrity}
 
 Blindly copying someone else’s solution (written or typed) is cheating.
-In contrast, you are encouraged to talk through a solution step-by-step with a classmate or two where in doing so, everyone involved comes to understand each part.
+By contrast, you are encouraged to talk through a solution step-by-step with a classmate or two where in doing so, everyone involved comes to understand each part.
 However, when it comes time to write up and submit the solutions, it is important that you do this for yourself without consulting others throughout the process.
 
 Learning logic requires practice! 
 Compare learning to speak a natural language like English. %, or skills like learning to walk on two legs or ride a bike.
-There are some tricks and techniques to get acquainted with where once you gain some familiarity, this course should be fun!
+There are some tricks and techniques to get acquainted with where once you gain some familiarity, this course should be fun.
 But getting comfortable using these techniques takes time, making this a very difficult course to cram for the night before an exam.
 The good news is that with consistent practice, you should be able to master the techniques of this course long in advance of the exam.
 
@@ -224,7 +220,7 @@ Cheating on problem sets will be to your own disadvantage in preparing for the e
 If you cheat on an exam, the academic consequences will be severe, so please don't consider it.
 There is more to life than grades; don't let them distract from learning!
 
-Instead of worrying about your grade, I recommend that you just focus on mastering logic, doing your best work and feeling good about it.
+Instead of worrying about your grade, I recommend that you focus on mastering logic, doing your best work and feeling good about it.
 Logic is an extremely deep subject, and foundational for this information age that we are all a part of.
 This course should provide you with an important tool kit that I hope you enjoy learning to use and that will serve you well beyond the end of this course.
 % This has certainly been true for me!
@@ -251,7 +247,7 @@ Making arrangements IN ADVANCE of the due date is required except in particularl
 \section{Diversity and Inclusivity Statement}
 
 In all course-related activities and communications, you will be treated with respect.
-I welcome individuals of all ages, backgrounds, beliefs, ethnicities, genders, gender identities, gender expressions, national origins, religious affiliations, sexual orientations, ability, and other visible and non-visible differences.
+I welcome individuals of all ages, backgrounds, cultures, beliefs, ethnicities, gender identities and expressions, national origins, religious affiliations, abilities, sexual orientations, and other visible and non-visible differences.
 All members of this class are expected to help create a respectful, welcoming, and inclusive environment for every other member of the class.
 
 \vspace{0.5cm}
@@ -282,28 +278,27 @@ Week 0 & Introduction to Logic & ForAllX Ch. 0 \\
 Sep 07 & & Problem Set 0 (meet Carnap --- not graded)\\
 \arrayrulecolor{maingray}\hline
 
-Week 1 & Syntax \& Semantics for SL & ForAllX Ch. 1\\
-Sep 12, 14 & Use/mention distinction & Problem Set 1 Due Friday 9/15  \\
+Week 1 & Syntax for SL & ForAllX Ch. 1\\
+Sep 12, 14 & Regimentation in SL & Problem Set 1 Due Friday 9/15  \\
 \arrayrulecolor{maingray}\hline
 
-Week 2 & Truth Tables & ForAllX Ch. 2 \\
-& Entailment, Validity, Consistency & ForAllX Ch. 3 \\
-Sep 19, 21 & & Problem Set 2 Due Friday 9/22 \\
+  Week 2 & Semantics for SL & ForAllX Ch. 2 \& 3 \\
+Sep 19, 21 & Entailment, Validity, Satisfiability & Problem Set 2 Due Friday 9/22 \\
 \arrayrulecolor{maingray}\hline
 
-Week 3 & Proof System 1: Trees (STD) & ForAllX Ch. 4 \\
+Week 3 & Trees Proof System (ST) & ForAllX Ch. 4 \\
 Sep 26, 28 & & Problem Set 3 Due Friday 9/29 \\
 \arrayrulecolor{maingray}\hline
 
-Week 4 & Mathematical Induction \& Recursive Definitions & Handout; Logic Book $\S6.1$\\
-Oct 3, 5 & & Problem Set 4 Due Friday 10/6\\
+Week 4 & Mathematical Induction \& Recursive Definitions & ForAllX Ch. 5 \\
+Oct 3, 5 & Soundness & Problem Set 4 Due Friday 10/6\\
 \arrayrulecolor{maingray}\hline
 
-Week 5 & SL Metalogic 1: & ForAllX Ch. 5 \\
-Oct 12 & Soundness \& Completeness of STD & Problem Set 5 Due Friday 10/13 \\
+Week 5 & Completeness & ForAllX Ch. 5 \\
+Oct 12 &  & Problem Set 5 Due Friday 10/13 \\
 \arrayrulecolor{maingray}\hline
 
-Week 6 & Proof System 2: Natural Deduction (SND) & ForAllX Ch. 6 \\
+Week 6 & Natural Deduction (SD) & ForAllX Ch. 6 \\
 Oct 17, 19 & &  Problem Set 6 Due Friday 10/20\\
 \arrayrulecolor{myCOLOR}\hline
 
@@ -316,33 +311,32 @@ Oct 24, 26 & --- MIDTERM --- &  Problem Set 7 (not graded) \\
 \multicolumn{2}{l}{\textbf{\textcolor{myCOLOR}{\large Part 2: Quantifer Logic (QL) }}} \\
 \hline
 
-Week 8 & Quantifier Logic (QL) Syntax & ForAllX Ch. 8 \\
-Oct 31, Nov 2 & & Problem Set 8 Due Thurdsay 11/3 \\
+Week 8 & Syntax for QL & ForAllX Ch. 8 \\
+Oct 31, Nov 2 & Regimentation in QL & Problem Set 8 Due Thurdsay 11/3 \\
 \arrayrulecolor{maingray}\hline
  
-Week 9 & Quantifer Logic Semantics & ForAllX Ch. 9 \\
-Nov 7, 9 & & Problem Set 9 Due Friday 11/10 \\
+Week 9 & Semantics for QL & ForAllX Ch. 9 \\
+Nov 7, 9 & Entailment, Validity, Satisfiability & Problem Set 9 Due Friday 11/10 \\
 \arrayrulecolor{maingray}\hline
 
-Week 10 & Natural Deduction (QND) & ForAllX Ch. 10 \\
-Nov 14, 16 & & Problem Set 10 Due Friday 11/17 \\
+Week 10 & Syntax QL$^=$ & ForAllX Ch. 10 \\
+Nov 14, 16 & Semantics for QL$^=$ & Problem Set 10 Due Friday 11/17 \\
 \arrayrulecolor{maingray}\hline
 
-Week 11 & First-Order Logic with Identity & ForAllX Ch. 11 \\
-& Russell's Theory of Definite Descriptions & Sider $\S 5.3$; Goldfarb $\S\S 41-4$ \\
-Nov 21, 23 & & Problem Set 11 Due Friday 11/24 \\
+Week 11 & Natural Deduction (QD) & ForAllX Ch. 11 \\
+Nov 14, 16 & Identity & Problem Set 10 Due Friday 11/17 \\
 \arrayrulecolor{maingray}\hline
+
+\newpage
 
 \multicolumn{2}{l}{\textbf{\textcolor{myCOLOR}{\large Part 3: Metalogic }}} \\
 \hline
 
-Week 12 & SL Metalogic 2: Soundness of SND & Logic Book $\S6.3$ \\
-& SL Metalogic 3: Completeness of SND & Logic Book $\S6.4$ \\
+Week 12 & Soundness of QD & ForAllX Ch. 12 \\
 Nov 28, 30 & & Problem Set 12 Due Friday 12/1 \\
 \arrayrulecolor{maingray}\hline
 
-Week 13 & QL Metalogic 1: Soundness of QND & Supplement \\
-& QL Metalogic 2: Completeness of QND & Supplement \\
+Week 13 & Completeness of QD & ForAllX Ch. 13 \\
 Dec 5, 7 & & Problem Set 13 Due Friday 12/8 \\
 \arrayrulecolor{maingray}\hline
 

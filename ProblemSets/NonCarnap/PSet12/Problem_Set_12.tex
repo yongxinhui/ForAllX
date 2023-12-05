@@ -1,0 +1,107 @@
+\documentclass[12pt]{article}
+ 
+\usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\usepackage{multicol}
+\usepackage{forallx-mit-pset} %calls local modified style file
+ 
+ \iffalse
+ \textheight     11truein
+ \vsize     10.0truein
+ \topmargin      .15truein
+ \textwidth 6.5truein \columnwidth \textwidth 
+ \setlength{\oddsidemargin}{0truein} 
+ %\footheight     0.0truein
+ \footskip       0.75truein
+ \headheight     .25truein
+ \headsep        0.25truein
+ \fi 
+
+\usepackage{amsmath} %for align* environment and gather*
+\usepackage{xref}
+ %    \textheight     10.0truein
+ \usepackage{graphics}
+ \usepackage{pstricks}
+% \usepackage{pst-tree}
+% \usepackage{pst-node,pst-tree}
+ \usepackage{makeidx}
+ 
+
+ 
+ %\usepackage{forallx-ubc-Hunt} %calls local modified style file, but could lead to conflicts. i ought to make my own `common.sty' file for the problem sets. maybe using the same `common' file as the lecture notes? i really ought to just have a single consistent set of style files for the book, problem sets, and lecture notes! 
+ 
+ %\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
+% disjunction
+\def\eor{\ensuremath{\vee}}
+% conjunction: 
+% {\,^{_{_{_{_{\mbox{\footnotesize\textbullet}}}}}}} gives the dot
+\def\eand{\ensuremath{\,\&\,}}
+% conditional: \rightarrow gives the right arrow
+\def\eif{\ensuremath{\supset}}
+% biconditional: \leftrightarrow gives the left and right arrow
+\def\eiff{\ensuremath{\equiv}}
+% negation: {\sim} gives the swung dash 
+%\def\enot{\ensuremath{\neg}}
+% \def\enot{\ensuremath{\sim}} %note that \sim is defined as a relation, which leads to spacing issues. adding a \! leads to more spacing issues (piled up double negations).  
+
+% \def\enot{\ensuremath{\sim}} %redefining as {\sim} treats the tilde as a unary operator, rather than a relation, solving a lot of the spacing issues. 
+
+\let\oldsim\sim %renames any \sim commands as \oldsim. 
+\renewcommand{\sim}{{\oldsim}} %redefines \sim as unary operator version of \sim, in case there are any straggling \sim commands in the wild
+
+% metalanguage variables: change greek to A and B if you prefer
+\def\metaA{\ensuremath{\varPhi}}
+\def\metaB{\ensuremath{\varPsi}}
+\def\metaC{\ensuremath{\varOmega}}
+\def\metaD{\ensuremath{\varDelta}}
+\def\metaSetX{\ensuremath{\mathcal{X}}}
+\def\metaSetY{\ensuremath{\mathcal{Y}}}
+\def\metaSetZ{\ensuremath{\mathcal{Z}}}
+
+%Calgary script and metav commands: 
+% \newcommand*{\script}[1]{\ensuremath{\mathcal{#1}}}
+% \newcommand*{\metav}[1]{\ensuremath{\mathcal{#1}}}
+
+% \pagestyle{empty}
+ 
+ % Tree stuff
+ 
+  
+
+
+\begin{document}
+
+% \input macs
+% \input fitch
+
+\thispagestyle{empty}
+
+
+
+\begin{center}
+\Large Problem Set 12\\[1ex] 
+ Due Fri. December 8 by 5pm Eastern\\ 
+  \vspace{.1in}
+  \normalsize{(Please scan and upload to Canvas as a pdf)} \\[3ex] 
+\end{center}
+
+
+\begin{enumerate}[leftmargin=.75in]
+  \item[\bf Question 0:] If you worked with up to two classmates, please list their names.
+  \item[\bf Question 1:] By Lemma 12.8, $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ if $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$ and $\beta$ is free for $\alpha$ in $\metaA$.
+    \begin{itemize}
+      \item[\bf (1.1)] Construct an example to show what can go wrong if $\beta$ is not free for $\alpha$.
+      \item[\bf (1.2)] In the induction step of the proof of Lemma 12.8, the cases for the binary operators and existential quantifier have been omitted. Set up the induction proof, leaving the base case blank, filling in the details for just the conditional case where $\metaA=(\metaB\supset\metaC)$ and the existential case where $\metaA=\qt{\exists}{\gamma}\metaA$.
+      \item[\bf (1.3)] Explain the role that Lemma 12.8 plays in the proof of Lemma 12.11. What does Lemma 12.8 allow us to conclude and why is this helpful in the course of the proof of 12.11? Would it be possible to prove Lemma 12.11 without appealing to Lemma 12.8 or including a similar result in the proof?
+    \end{itemize}
+  \item[\bf Question 2:] Assume $\Gamma\proves_{\textsc{sd}}\metaA$ and let $\I$ be an SL interpretation that satisfies $\Gamma$. Construct a model $\M$ as in the conclusion of Chapter 12 proving the following:
+    \begin{itemize}
+      \item[\bf (2.1)] $\M$ satisfies $\metaA$ just in case $\I$ satisfies $\metaA$.
+      \item[\bf (2.2)] Use (2.1) to complete the proof that SD is sound, writing out all steps in the proof from the beginning, citing the soundness of QD and (2.1).
+    \end{itemize}
+\end{enumerate}
+
+\textit{Note:} Please write legibly.
+
+
+\end{document}

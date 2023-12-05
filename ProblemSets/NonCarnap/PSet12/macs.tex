@@ -1,0 +1,548 @@
+ %%%%%%%%%%%%%%%%%%%%%%%%% GENERAL INFORMATION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ % File name: macs.tex
+ % Author: Richmond H. Thomason <rich@thomason.org>
+ % Explanation:  Macros for New Logic Intro
+ % 
+ %
+ %%%%%%%%%%%%%%%%%%%%%%%%% DOCUMENT HISTORY %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %
+ %	1. Created May 5, 2003 by RT
+ %	2. Final macs for 2003 version of the book completed.
+ %         These are the macros  archived on the CD given to Jamie
+ %         fall of 2004.  Additional RT macros for Chapters VIII ff.
+ %         are in the file moremacs.tex
+ %	3. At some point, the macros need to be merged.
+ %	4.  \psub macro added
+ %	5.  \newcommand{\cLB}{{\cal L}^B}  ==>
+ %      \newcommand{\cLB}{{\cal L}^\mbox{\scriptsize B}} 
+ %	6. \newcommand{\LBV}{{\cal L}^B(\bV)} ==>
+ %      \newcommand{\LBV}{{\cal L}{^\mbox{\scriptsize B}(\bV)}}  
+ %	7.    \newcommand{\LBVstat}{{\cal L}^{B(\bV_{\mbox{{\sc stat}}})}} ==>
+ %      \newcommand{\LBVstat}{{\cal L}^{\mbox{\scriptsize B}
+ %                  (\bV_{\mbox{{\sc stat}}})}}
+ %  	8. These macros used for 4.1, 2/2/04
+ %
+ % REMAINING EDITS 2/2/04
+ % 1.   Why were \VIV, \VIP defined in this file?  I tested, apparently
+ %       these macros were not used in Chs I-VII.
+ % 2. 
+ % 3.
+ % 4. 
+ % 5.  
+ % 6.  
+ %
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%% BEGIN SPECIAL MACROS FOR BIB
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ 	\catcode`@=11
+ %\def\thebibliography#1{\section*{References\@mkboth     %Lamport
+\def\thebibliography#1{\section*{\@mkboth    %--RT Modification
+% {REFERENCES}{REFERENCES}}\list
+ {}{}}\list
+ {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus .07em}
+ \sloppy\clubpenalty4000\widowpenalty4000
+ \sfcode`\.=1000\relax}
+	\catcode`@=12
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%% END SPECIAL MACROS FOR BIB
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%% BEGIN SECTION MACROS
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ 	\catcode`@=11
+\def\@sect#1#2#3#4#5#6[#7]#8{\ifnum #2>\c@secnumdepth
+     \def\@svsec{}\else 
+%     \refstepcounter{#1}\edef\@svsec{\csname the#1\endcsname\hskip 1em }\fi
+% MODIFIED TO GET PERIOD IN SECTION NUMBER.  --RT
+     \refstepcounter{#1}\edef\@svsec{\csname the#1\endcsname{}.\hskip 1em }\fi
+     \@tempskipa #5\relax
+      \ifdim \@tempskipa>\z@ 
+        \begingroup #6\relax
+          \@hangfrom{\hskip #3\relax\@svsec}{\interlinepenalty \@M #8\par}
+        \endgroup
+       \csname #1mark\endcsname{#7}\addcontentsline
+         {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+                      \protect\numberline{\csname the#1\endcsname}\fi
+                    #7}\else
+        \def\@svsechd{#6\hskip #3\@svsec #8\csname #1mark\endcsname
+                      {#7}\addcontentsline
+                           {toc}{#1}{\ifnum #2>\c@secnumdepth \else
+                             \protect\numberline{\csname the#1\endcsname}\fi
+                       #7}}\fi
+     \@xsect{#5}}
+
+\def\sectionfont{\large\bf}
+\def\subsectionfont{\normalsize\bf}
+\def\section{\@startsection {section}{1}{\z@}{-3.25ex plus -1ex minus -.2ex}{1.5ex plus .2ex}{\sectionfont}}
+\def\subsection{\@startsection{subsection}{2}{\z@}{-3.25ex plus -1ex minus -.2ex}{1.5ex plus .2ex}{\subsectionfont}}
+	\catcode`@=12
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%% END SECTION MACROS
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%% BEGIN LOCAL MACROS
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ \newcommand{\terminology}[2]{
+\begin{center}
+ \fbox{\parbox[t]{5.5in}{\raggedright\hspace*{.1in}\parbox[t]{5.3in}{
+    \vspace*{1ex}
+        {\bf Terminology}\\[1ex]
+       {\it #1:} #2\\
+    \vspace*{.2ex}
+   }}}
+ \end{center}
+}
+
+ \newcommand{\notation}[1]{
+\begin{center}
+ \fbox{\parbox[t]{5.5in}{\raggedright\hspace*{.1in}\parbox[t]{5.3in}{
+    \vspace*{1ex}
+        {\bf Notation:}\\[1ex]
+        #1\\
+    \vspace*{.2ex}
+   }}}
+ \end{center}
+}
+
+ \newcommand{\notationw}[2]{
+\begin{center}
+ \fbox{\parbox[t]{#1in}{\raggedright\hspace*{.1in}\parbox[t]{5.3in}{
+    \vspace*{1ex}
+        {\bf Notation:}\\[1ex]
+        #2\\
+    \vspace*{.2ex}
+   }}}
+ \end{center}
+}
+
+ \newcounter{example}
+ \newcommand{\example}{\addtocounter{example}{1}
+ {\bf{\em Example \arabic{example}\/}}}
+
+ \newcommand{\definition}{\addtocounter{example}{1}
+ {\bf{\em Definition \arabic{example}\/}}}
+
+
+ \newlength{\exboxlength}
+
+\newcommand{\exbox}[2]{\setlength{\exboxlength}{#1in}
+ \begin{center}\begin{tabular}{c} 
+ \fbox{\parbox[t]{\exboxlength}{\raggedright\hspace*{.1in}
+ 	\addtolength{\exboxlength}{-.2in}\parbox[t]{\exboxlength}{
+    \vspace*{1ex} \raggedright
+        #2
+    \vspace*{.8ex}
+   }}}\\
+   \example\raisebox{3.5ex}{ \hspace*{0ex}} \end{tabular}
+ \end{center}
+  }
+ 
+\newcommand{\proofbox}[2]{\setlength{\exboxlength}{#1in}
+ \begin{center} \begin{tabular}{c} 
+ \fbox{\parbox[t]{\exboxlength}{\raggedright\hspace*{.1in}
+ 	\addtolength{\exboxlength}{-.2in}\parbox[t]{\exboxlength}{
+    \vspace*{1ex} \raggedright
+        #2
+    \vspace*{.8ex}
+   }}}\\
+ \addtocounter{example}{1}
+ {\bf{\em Proof \arabic{example}\/}}  \raisebox{3.5ex}{ \hspace*{0ex}}
+ \end{tabular}
+ \end{center}
+  }
+ 
+\newcommand{\principlebox}[2]{\setlength{\exboxlength}{#1in}
+ \begin{center} \begin{tabular}{c} 
+ \fbox{\parbox[t]{\exboxlength}{\raggedright\hspace*{.1in}
+ 	\addtolength{\exboxlength}{-.2in}\parbox[t]{\exboxlength}{
+    \vspace*{1ex} \raggedright
+        #2
+    \vspace*{.8ex}
+   }}}\\
+ \addtocounter{example}{1}
+ {\bf{\em Principle \arabic{example}\/}}  \raisebox{3.5ex}{ \hspace*{0ex}}
+ \end{tabular}
+ \end{center}
+  }
+ 
+\newcommand{\factbox}[2]{\setlength{\exboxlength}{#1in}
+ \begin{center} \begin{tabular}{c} 
+ \fbox{\parbox[t]{\exboxlength}{\raggedright\hspace*{.1in}
+ 	\addtolength{\exboxlength}{-.2in}\parbox[t]{\exboxlength}{
+    \vspace*{1ex} \raggedright
+        #2
+    \vspace*{.8ex}
+   }}}\\
+ \addtocounter{example}{1}
+ {\bf{\em Fact \arabic{example}\/}} \raisebox{3.5ex}{ \hspace*{0ex}}
+ \end{tabular}
+ \end{center}
+  }
+ 
+\newcommand{\parameterbox}[3]{\setlength{\exboxlength}{#1in}
+ \begin{center} \begin{tabular}{c} 
+ \fbox{\parbox[t]{\exboxlength}{\raggedright\hspace*{.1in}
+ 	\addtolength{\exboxlength}{-.2in}\parbox[t]{\exboxlength}{
+    \vspace*{1ex} \raggedright
+        #3
+    \vspace*{.8ex}
+   }}}\\
+ \addtocounter{example}{1}
+ {\bf{\em #2 \arabic{example}\/}}  \raisebox{3.5ex}{ \hspace*{0ex}}
+ \end{tabular}
+ \end{center}
+  }
+ 
+\newcommand{\defbox}[2]{\setlength{\exboxlength}{#1in}
+ \begin{center} \begin{tabular}{c} 
+ \fbox{\parbox[t]{\exboxlength}{\raggedright\hspace*{.1in}
+ 	\addtolength{\exboxlength}{-.2in}\parbox[t]{\exboxlength}{
+    \vspace*{1ex} \raggedright
+        #2
+    \vspace*{.8ex}
+   }}}\\
+   \definition \raisebox{3.5ex}{ \hspace*{0ex}}
+   \end{tabular}
+ \end{center}
+  }
+  
+\newcommand{\plainexbox}[2]{\setlength{\exboxlength}{#1in}
+ \begin{center} \begin{tabular}{c} 
+ \parbox[t]{\exboxlength}{\raggedright\hspace*{.1in}
+ 	\addtolength{\exboxlength}{-.2in}\parbox[t]{\exboxlength}{
+    \vspace*{1ex} \raggedright
+        #2
+    \vspace*{.8ex}
+   }}\\
+   \example  \raisebox{3.5ex}{ \hspace*{0ex}}
+   \end{tabular}
+ \end{center}
+  }
+ 
+ \newcounter{line}
+  
+ \newcommand{\argument}[1]{\setcounter{line}{0}{
+ 		  \begin{tabular}{ll}
+ 		   #1
+		  \end{tabular}
+    }}
+   
+ \newcommand{\numline}[1]{\addtocounter{line}{1}\arabic{line}.&
+ 	\parbox[t]{4.4in}{\raggedright #1\raisebox{-1ex}{ \hspace*{0ex}}}\\}
+
+ \newcommand{\exref}[1]{}  % USE TO MARK PLACES IN TEXT WHERE EXAMPLES
+ 		           % ARE REFERRED TO.
+
+ \newcommand{\argpic}[2]{\begin{picture}(28,17)
+ 			\put(5,12){$#1$}
+			\put(0,12){\line(1,0){4}}\put(28,12){\line(-1,0){4}}
+			\put(0,12){\line(2,-1){12}}
+			\put(28,12){\line(-2,-1){12}}
+			\put(13,3){$#2$}
+ 				  \end{picture}
+
+ 	}
+
+ \newcommand{\bigargpic}[2]{\begin{picture}(42,20)
+ 			\put(5,15){$#1$}
+			\put(0,15){\line(1,0){4}}\put(48,15){\line(-1,0){4}}
+			\put(0,15){\line(2,-1){21}}
+			\put(48,15){\line(-2,-1){21}}
+			\put(23,1){#2}
+ 				  \end{picture}
+
+ 	}
+
+ \newcommand{\bA}{\mbox{\bf A}}
+ \newcommand{\es}{\epsilon}
+ \newcommand{\emptystring}{\epsilon}
+
+% \newcommand{\myeqn}[1]{\addtocounter{example}{1}
+%\noindent\parbox[t]{5in}{ $#1$}  foo (\theexample)}
+% \newcommand{\myeqn}[1]{\addtocounter{example}{1}
+%\noindent\begin{tabular}{p{5in}r}$#1$\hfill&  (\theexample)\end{tabular} }
+ \newcommand{\myeqn}[1]{\addtocounter{example}{1} \hspace*{0ex}\hfill$#1$\hfill(\theexample)\\}
+
+ \newcommand{\letitbe}{:=}
+
+ \newcounter{thm} \newcounter{metathm} 
+
+\newcounter{def} 
+\newcommand{\mydef}[1]{\addtocounter{def}{1} \noindent
+{D\thedef.  \it #1}
+}
+
+ \newcommand{\mychapter}[2]{
+ \setcounter{chapter}{#1}\setcounter{example}{0}
+ \setcounter{def}{0}\setcounter{metathm}{0}\chapter{#2}
+  }
+
+ \newcommand{\FS}{\mbox{\it FS}} 
+
+\newcommand{\ang}[1]{\langle #1 \rangle} 
+
+ \newcommand{\aucomment}[1]{AUTHOR COMMENT: #1}   %USE FOR AUTHOR COMMENT 
+
+ \newcommand{\Append}{\mbox{\sc Append}}
+ \newcommand{\concat}{\mbox{\raisebox{.75ex}{\tiny{$\frown$}}}}
+ %\scriptscriptstyle
+
+\newcommand{\lparenhyp}{\mbox{(\hspace*{-.9ex}-}\hspace*{.15ex}}
+\newcommand{\rparenhyp}{\mbox{)\hspace*{-.7ex}-}\hspace*{.15ex}}                  
+
+\newcommand{\Space}{\backslash\hspace{-.15ex}%
+\mbox{\rule[-.65ex]{1.2ex}{.1ex}} \hspace*{.2ex}}
+
+\newcommand{\cl}{{\ell}}
+
+\newcommand{\Strings}{\mbox{\sc Strings}}
+\newcommand{\StringsFS}{\mbox{\sc Strings}_{\mbox{\scriptsize\it FS\/}}}
+\newcommand{\StringsFSi}{\mbox{\sc Strings}_{\mbox{\scriptsize\it FS\/}_1}}
+\newcommand{\StringsFSiii}{\mbox{\sc Strings}_{\mbox{\scriptsize\it FS\/}_3}}
+\newcommand{\StringsFSv}{\mbox{\sc Strings}_{\mbox{\scriptsize\it FS\/}_5}}
+\newcommand{\StringsFSvi}{\mbox{\sc Strings}_{\mbox{\scriptsize\it FS\/}_6}}
+\newcommand{\StringsFSvii}{\mbox{\sc Strings}_{\mbox{\scriptsize\it FS\/}_7}}
+
+\newcommand{\clearcounters}{
+\setcounter{example}{0}
+\setcounter{def}{0}
+\setcounter{thm}{0}
+\setcounter{metathm}{0}
+ }
+
+ \newcommand{\hs}{\hspace*{1ex}}
+
+ %%%%%%% BEGIN CHAPTER REFERENCES  %%%%%%%%
+ % USE WITH \erefs ONLY.  LaTeX \ref INCLUDES CHAPTERS
+ %
+ \newcommand{\indroduction}{1}     % Introduction 
+ \newcommand{\mathprelims}{2}      % Mathematical Preliminaries 
+ \newcommand{\proofsandangs}{3}    % Proofs and algorithms
+ \newcommand{\proplang}{4}         % The logic of propositions: language 
+ 			           %      and the art of formalization 
+ \newcommand{\propnatded}{5}       % The logic of propositions: natural 
+ 				   %      deduction
+ \newcommand{\propproofth}{6}      % The logic of propositions: proof theory 
+ \newcommand{\propsemantics}{7}    % The logic of propositions: semantics
+ \newcommand{\propcomplete}{8}     % The logic of propositions: semantic 
+                                   %      completeness
+ \newcommand{\follang}{9}          % First-order logic: language and
+                                   %     the art of formalization
+ \newcommand{\folnatded}{10}       % First-order logic: natural deduction
+ \newcommand{\folproofth}{11}      % First-order logic: proof theory
+ \newcommand{\folsemantics}{12}    % First-order logic: semantics
+ \newcommand{\folcomplete}{13}     % First-order logic: semantic completeness
+ \newcommand{\Strut}[1]{\raisebox{#1ex}{\hspace*{0ex}}}
+ \newcommand{\ts}{\hspace*{.05ex}}
+ \newcommand{\Evenb}{\mbox{\it Evenb\/}}
+ \newcommand{\Oddb}{\mbox{\it Oddb\/}}
+ \newcommand{\setof}[2]{\{#1\;/\:#2\}}
+ \newcommand{\ar}{\rightarrow}
+ \newcommand{\labar}[1]{\stackrel{#1}{\longrightarrow}}
+
+ % BEGIN MACS FOR CHAPTER III
+
+ % BEGIN MACS FOR CHAPTER IV
+\newcommand{\STRUT}[2]{%
+\raisebox{#1ex}{\hspace*{0ex}}\raisebox{-#2ex}{\hspace*{0ex}}}
+
+ % BEGIN MACS FROM ORIGINAL LOGIC BOOK
+ \newcommand{\rb}[2]{\raisebox{#1}{#2}}
+ \newlength{\justadj}
+ \newcommand{\jadj}[1]{\setlength{\justadj}{#1ex}}
+ \newcommand{\js}[1]{\hspace*{\justadj}}
+ \newcommand{\orr}{\mbox{\raisebox{-.7ex}{$\;^{\vee}\,$}}}
+ \newcommand{\both}{\,\mbox{\raisebox{-.7ex}{$^{\wedge}$}}\,}
+ \newcommand{\then}{\rightarrow}
+ \newcommand{\bV}{\mbox{\bf V}}
+ \newcommand{\cL}{{\cal L}}
+ \newcommand{\cLB}{{\cal L}^{\mbox{\scriptsize B}}}
+ \newcommand{\LBV}{{\cal L}{^{\mbox{\scriptsize B}}(\bV)}}
+ \renewcommand{\iff}{\leftrightarrow}
+ \newcommand{\Sp}{\mbox{\bf S}_p\/}
+ \newcommand{\subSp}{\mbox{\scriptsize\bf S}_p\/}
+
+ % BEGIN MACS FOR CHAPTER IV
+\newcommand{\fns}{\footnotesize}
+
+ % BEGIN MACS FOR CHAPTER V
+
+\newcommand{\circles}[1]{
+ \begin{pspicture}(0,0)(1.5,1.5) 
+    #1
+\end{pspicture}
+}
+
+\newcommand{\bigwhitei}{\pscircle[linewidth=0.5mm](.5,.9){.62}
+		\put(.45,-.1){\footnotesize 1}
+		}
+\newcommand{\bigblacki}{\pscircle*[linewidth=0.5mm](.5,.9){.62}
+		\put(.45,-.1){\footnotesize 1}
+		}
+\newcommand{\bigwhiteii}{\pscircle[linewidth=0.5mm](3,.9){.62}
+		\put(2.9,-.1){\footnotesize 2}
+		}
+\newcommand{\bigblackii}{\pscircle*[linewidth=0.5mm](3,.9){.62}
+		\put(2.9,-.1){\footnotesize 2}
+		}
+
+\newcommand{\smallwhitei}{\pscircle[linewidth=0.5mm](.5,.9){.4}
+		\put(.31,-.1){\footnotesize 1}
+		}
+\newcommand{\smallblacki}{\pscircle*[linewidth=0.5mm](.5,.9){.4}
+		\put(.31,-.1){\footnotesize 1}
+		}
+\newcommand{\smallwhiteii}{\pscircle[linewidth=0.5mm](3,.9){.4}
+		\put(2.9,-.1){\footnotesize 2}
+		}
+\newcommand{\smallblackii}{\pscircle*[linewidth=0.5mm](3,.9){.4}
+		\put(2.9,-.1){\footnotesize 2}
+		}
+
+\newcommand{\TTex}[2]{
+	      \parameterbox{#1}{Truth Table}{
+ 	      \begin{tabular}[t]{c}
+              #2\\
+	      \end{tabular}  }
+                    }
+
+ \newlength{\TTformula}   \newlength{\TTadjust}
+
+ \newcommand{\tti}[2]{\setlength{\TTformula}{#1}
+ 	\begin{tabular}[t]{p{3.5ex}|@{\hspace*{2ex}}p{\TTformula}}
+	#2
+	\end{tabular}
+ }
+ \newcommand{\ttitop}[2]{$#1$&\raisebox{-1.3ex}{\hspace*{.1ex}}$#2$\\
+	\hline 	}
+
+ \newcommand{\ttifirstline}[2]{$#1$&$#2$\raisebox{3.5ex}{\hspace*{.1ex}} \\}
+ \newcommand{\ttiline}[2]{$#1$&$#2$\\}
+
+ \newcommand{\ttii}[3]{\setlength{\TTformula}{#1}\setlength{\TTadjust}{#2}
+ 	\begin{tabular}[t]{p{3.5ex}p{3.5ex}|@{\hspace*{2ex}}p{\TTformula}}
+	#3
+	\end{tabular}
+ }
+ \newcommand{\ttiitop}[3]{$#1$&$#2$&\raisebox{-1.3ex}{\hspace*{.1ex}}$#3$\\
+	\hline 	}
+
+ \newcommand{\ttiifirstline}[3]{$#1$&$#2$& \hspace*{\TTadjust}$#3$
+ 		\raisebox{3.5ex}{\hspace*{.1ex}} \\}
+ \newcommand{\ttiiline}[3]{$#1$&$#2$&\hspace*{\TTadjust}$#3$\\}
+
+
+ \newcommand{\ttiii}[3]{\setlength{\TTformula}{#1}\setlength{\TTadjust}{#2}
+ 	\begin{tabular}[t]{p{3.5ex}p{3.5ex}p{3.5ex}|@{\hspace*{2ex}}p{\TTformula}}	#3
+	\end{tabular}
+ }
+
+ \newcommand{\ttiiitop}[4]{$#1$&$#2$&$#3$
+\raisebox{-1.3ex}{\hspace*{.1ex}}&$#4$\\
+	\hline 	}
+
+ \newcommand{\ttiiifirstline}[4]{$#1$&$#2$&$#3$& \hspace*{\TTadjust}$#4$
+ 		\raisebox{3.5ex}{\hspace*{.1ex}} \\}
+ \newcommand{\ttiiiline}[4]{$#1$&$#2$&$#3$&\hspace*{\TTadjust}$#4$\\}
+
+\newcommand{\true}{\mbox{\rm T}}
+\newcommand{\false}{\mbox{\rm F}}
+
+\newcommand{\metathm}[1]{\addtocounter{metathm}{1}\noindent
+Metatheorem~\themetathm. {\it #1}
+}
+
+\newcommand{\proof}[1]{{\sc proof.}  #1 \medskip
+  }
+
+\newcommand{\dturnst}{\mbox{\raisebox{.3ex}{\scriptsize $\,\parallel \hspace{-1.2ex}-$}}}  %MAKES DOUBLE TURNST SAME SIZE AS \vdash
+
+\newcommand{\notdturnst}{\mbox{\raisebox{.3ex}{\scriptsize $\,\parallel\hspace{-2.0ex}\mbox{\raisebox{-.4ex}{\large /}} \hspace*{-1.2ex}-$}}}
+  %MAKES NEGATEDDOUBLE TURNST SAME SIZE AS \vdash
+
+\newcommand{\bVtc}{\bV_{\mbox{\scriptsize TC}}}
+
+\newcommand{\Ih}{\mbox{\it \^I\/}}
+
+\newcommand{\sub}[3]{#3\hspace{0in}$\raisebox{1ex}{$#1\,$}$
+\!\!/#2}  % SUBST #1 for #2 in #3
+
+\newcommand{\ABP}{\sub{x}{u}{A}}
+
+ % END MACS FOR CHAPTER V
+
+
+ % BEGIN MACS FOR CHAPTER VI
+
+ \newcommand{\Empty}{\mbox{\it Empty\/}}
+ \newcommand{\End}{\mbox{\it End\/}}
+ \newcommand{\LBVstat}{{\cal L}^{\mbox{\scriptsize B}(\bV_{\mbox{{\sc stat}}})}}
+ \newcommand{\State}{\mbox{\it State\/}}
+ \newcommand{\Blank}{\mbox{\it Blank\/}}
+ \newcommand{\Viable}{\mbox{\it Viable\/}}
+ \newcommand{\Unchanged}{\mbox{\it Unchanged\/}}
+ \newcommand{\DiffersOnly}{\mbox{\it DiffersOnly\/}}
+ \newcommand{\PutO}{\mbox{\it PutO\/}}
+ \newcommand{\PutX}{\mbox{\it PutX\/}}
+% \newcommand{\Game}{\mbox{\it Game\/}}
+ \newcommand{\Bigand}[1]{\mbox{\raisebox{-1.5ex}{$\stackrel{\mbox{\Large $\wedge$}}{\mbox{\scriptsize $#1$}}   $}
+	\raisebox{-2.7ex}{\hspace*{0ex}}}}
+ \newcommand{\Bigor}[1]{\mbox{\raisebox{-1.5ex}{$\stackrel{\mbox{\Large $\vee$}}{\mbox{\scriptsize $#1$}}   $}
+ 	\raisebox{-2.7ex}{\hspace*{0ex}}}}
+
+ % END MACS FOR CHAPTER VI
+
+ % BEGIN MACS FOR CHAPTER VII
+
+\newcommand{\turnst}{\vdash}
+\newcommand{\notturnst}{\not\,\vdash}
+\newcommand{\bD}{\mbox{\bf D}}
+
+\newcommand{\unnumberedexbox}[2]{\setlength{\exboxlength}{#1in}
+ \begin{tabular}[t]{c} 
+ \fbox{\parbox[t]{\exboxlength}{\raggedright\hspace*{.1in}
+ 	\addtolength{\exboxlength}{-.2in}\parbox[t]{\exboxlength}{
+    \vspace*{1ex} \raggedright
+        #2
+    \vspace*{.8ex}
+   }}}\\ \end{tabular}
+ }
+
+\newcommand{\vdashes}{ \hspace*{.25ex}\mbox{\raisebox{1.5ex}{
+\begin{tabular}[c]{l}
+\rule{.15ex}{.6ex}\\[-2ex]\rule{.15ex}{.6ex}\\[-2ex]
+	\rule{.15ex}{.6ex}\end{tabular}}}}
+
+ \renewcommand{\mit}[1]{\mbox{\emph{#1}}}
+  \newcommand{\VIV}{\bV_{\mbox{\scriptsize\bf IV}}}
+  \newcommand{\VIP}{\bV_{\mbox{\scriptsize\bf IP}}}
+  \newcommand{\VIC}{\bV_{\mbox{\scriptsize\bf IC}}}
+  \newcommand{\VP}{\bV_{\mbox{\scriptsize\bf P}}}
+  \newcommand{\VT}{\bV_{\mbox{\scriptsize\bf T}}}
+  \newcommand{\VF}{\bV_{\mbox{\scriptsize\bf F}}}
+
+ \newcommand{\sd}{\!\rule{.6ex}{.6ex}\;}
+ \newcommand{\thensd}{\then\sd}
+
+\newcommand{\psub}[3]{\mbox{\emph{sub}\{\raisebox{1ex}{$#1\,$}}
+\!\!/#2\}(#3)}  % SUBST #1 for #2 in #3
+
+ %%%%%%% END CHAPTER REFERENCES  %%%%%%%%
+
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ %%%% END LOCAL MACROS
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+ 

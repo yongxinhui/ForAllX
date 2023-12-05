@@ -6,7 +6,8 @@
   \label{sec:Introduction}
 
 % TODO: introduction
-  % equivalence with: consistent sets are satisfiable
+  % state standard form of completeness
+  % we will establish this as a corollary of the consistency version
   % basic outline of the proof
     % expand language to include infinitely more constants
     % saturate \Gamma by adding witness wffs 
@@ -24,11 +25,10 @@
 \section{Extensions}%
   \label{sub:Extensions}
 
-Assume $\Gamma$ is a consistent set of QL$^=$ sentences where we will maintain this assumption throughout the proof in order to show that $\Gamma$ is satisfiable.
-It follows that there is no QL$^=$ sentence $\metaA$ where $\Gamma\proves \metaA\wedge\neg \metaA$.
-This section will construct a superset $\Delta\supseteq\Gamma$ which may be shown to be saturated, maximal, and consistent.
-  % TODO: change definition of consistency
-We will begin by adding a range of new constants to $QL^=$ which will serve as witnesses for the quantified sentences in $\Gamma$. 
+Assume $\Gamma$ is a consistent set of QL$^=$ sentences.
+This section will construct a superset $\Delta\supseteq\Gamma$ which may be shown to be saturated, maximal, and consistent where these properties will enable us to show that $\Delta$ is \define{deductively closed} insofar as $\metaA\in\Delta$ whenever $\Delta\proves\metaA$. 
+Deductive closure will play a critical role in constructing a Henkin model $\M_\Delta$ which satisfies $\Delta$, and so satisfies $\Gamma$ as a consequence. 
+The present section will begin by adding a range of new constants to $QL^=$ which will serve as witnesses for the quantified sentences in $\Gamma$.
 
 
 
@@ -41,17 +41,30 @@ We will begin by adding a range of new constants to $QL^=$ which will serve as w
 Let QL$^=_{\N}$ be a language like QL$^=$ except for including the natural numbers $\N$ as an additional set of constants.
 Even though $\Gamma$ is consistent in QL$^=$, it does not immediately follow that $\Gamma$ is consistent in QL$^=_{\N}$.
 In general, adding expressive resources to a language can provide the grounds for new derivations and so we need to check that a contradiction cannot be derived in QL$^=_{\N}$.
-In order to rule this possibility out, we will begin with the following lemma:
+In order to rule out this possibility out, we will prove the following lemma.
+Assuming that $\beta$ is free for $\alpha$ in ever line of a proof $X$, it will ease the following exposition to take $X\unisub{\beta}{\alpha}$ to be the result of replacing $\beta$ with $\alpha$ in every line of $X$.
 
-\begin{Lthm} \label{lemma:gencon}
-  If $\Gamma\proves\metaA$ and $\beta$ is a constant that does not occur in any $\metaB\in\Gamma$, then there is a variable $\alpha$ which does not occur in $\metaA$ such that $\Gamma\proves \qt{\forall}{\alpha}\metaC$ where $\metaC=\metaA\unisub{\alpha}{\beta}$ and the derivation of $\qt{\forall}{\alpha}\metaC$ from $\Gamma$ does not include $\beta$.
+% \begin{Lthm} \label{lemma:gencon}
+%   If $\Gamma\proves\metaA$ and $\beta$ is a constant that does not occur in any $\metaB\in\Gamma$, then there is a variable $\alpha$ which does not occur in $\metaA$ such that $\Gamma\proves \qt{\forall}{\alpha}\metaC$ where $\metaC=\metaA\unisub{\alpha}{\beta}$ and the derivation of $\qt{\forall}{\alpha}\metaC$ from $\Gamma$ does not include $\beta$.
+% \end{Lthm}
+%
+% \begin{quote} 
+%   \textit{Proof:} Assume $\Gamma\proves\metaA$ where $\beta$ is a constant that does not occur in any $\metaB\in\Gamma$.
+%   Thus there is some QD proof $X$ of $\metaA$ from $\Gamma$ where $\beta$ does not occur in any line of $X$. 
+%   Let $\alpha$ be the first variable that does not occur in any line of $X$, and let $X\unisub{\alpha}{\beta}$ be the result of substituting $\alpha$ for $\beta$ in ever line of $X$.
+%   Since $\beta$ does not occur in any $\metaB\in\Gamma$, it follows that $X\unisub{\alpha}{\beta}$ is a proof $\metaA\unisub{\alpha}$ from $\Gamma$ 
+% \end{quote}
+
+\begin{Lthm} \label{lemma:prsub}
+  If $\alpha$ is a constant and $X$ is a proof in which the constant $\beta$ does not occur, then $X\unisub{\beta}{\alpha}$ is also a proof.
 \end{Lthm}
 
 \begin{quote} 
-  \textit{Proof:} Assume $\Gamma\proves\metaA$ where $\beta$ is a constant that does not occur in any $\metaB\in\Gamma$.
+  \textit{Proof:} Assume that $\alpha$ is a constant and $X$ is a proof in which the constant $\beta$ does not occur.
+  The proof goes by induction on the length of $X$.
+
+  \textit{Base:} Assume that 
 \end{quote}
-
-
 
 
 
@@ -61,11 +74,23 @@ In order to rule this possibility out, we will begin with the following lemma:
 
 \begin{quote} 
   \textit{Proof:} Assume $\Gamma$ is a consistent set of QL$^=$ sentences.
+  Assume for contradiction that $\Gamma$ is not consistent in QL$^=_{\N}$, and so $\Gamma\proves A\eand\enot A$ in QL$^=+{\N}$.
+  Thus there is a proof $X$ of $A\eand\enot A$ from $\Gamma$ where every line of $X$ is a sentence of QL$^=_{\N}$.
+  Since every proof is finite, there are at most finitely many constants that occur in $X$, and so at most finitely many constants in $X$ that belong to $\N$.
+
+  Letting $\vec{n}=\tuple{n_1,\ldots,n_m}$ include all constants in $\N$ that occur in $X$, we may take $\vec{\alpha}=\tuple{\alpha_1,\ldots,\alpha_m}$ to be a sequence of QL$^=$ constants where $\alpha_i$ is the $i$\textsuperscript{th} QL$^=$ constant not to occur in $X$.
+  By defining $X\unisub{\vec{\alpha}}{\vec{n}}\colonequals X\unisub{\alpha_1}{n_1}\ldots\unisub{\alpha_m}{n_m}$ to be the result of substituting $\alpha_i$ for $n_i$ in for all $1\leq i\leq n$ in every line of $X$, it follows by $m$ applications of \textbf{\ref{lemma:prsub}} that $X\unisub{\vec{\alpha}}{\vec{n}}$ is a proof of $(A\eand\enot A)\unisub{\vec{\alpha}}{\vec{n}}$ from $\Gamma\unisub{\vec{\alpha}}{\vec{n}}$ where every line in $X\unisub{\vec{\alpha}}{\vec{n}}$ is a QL$^=$ sentence.
+  % where  $\Gamma\unisub{\vec{\alpha}}{\vec{n}}\colonequals\set{\metaB\unisub{\vec{\alpha}}{\vec{n}}:\metaB\in\Gamma}$.
+  % Observe that $X\unisub{\vec{\alpha}}{\vec{n}}=X\unisub{\alpha_1}{n_1}\ldots\unisub{\alpha_m}{n_m}$.
+
+  Since $\Gamma$ is consistent in QL$^=$, we know that $\metaB$ is a QL$^=$ sentence for every $\metaB\in\Gamma$, and so it follows that $\Gamma\unisub{\vec{\alpha}}{\vec{n}}=\Gamma$.
+  Similarly, $(A\eand\enot A)\unisub{\vec{\alpha}}{\vec{n}}=(A\eand\enot A)$ which is a sentence of QL$^=$. 
+  As a result, $X\unisub{\vec{\alpha}}{\vec{n}}$ is a proof of $A\eand\enot A$ from $\Gamma$ in QL$^=$, and so $\Gamma$ is not consistent, contradicting the above.
+  Thus $\Gamma$ is consistent in QL$^=_{\N}$.
 \end{quote}
 
-Although the proof follows easily given \textbf{\ref{lemma:gencon}}, the proof is not immediate.
-Nevertheless, it is hardly surprising that merely adding new constants would enable the derivation of a contradiction from $\Gamma$ when no contradiction is derivable from $\Gamma$ without those additional constants.
-Given $\Gamma$ is consistent in QL$^=$, we may conclude that $\Gamma$ is consistent in QL$^=_{\N}$.
+Although the proof of \textbf{\ref{lemma:const}} is not immediate, it is hardly surprising that merely adding new constants would enable the derivation of a contradiction from $\Gamma$ when no contradiction is derivable from $\Gamma$ without those additional constants.
+Given that $\Gamma$ is consistent in QL$^=$, we may conclude that $\Gamma$ is consistent in QL$^=_{\N}$.
 
 
 
@@ -74,21 +99,612 @@ Given $\Gamma$ is consistent in QL$^=$, we may conclude that $\Gamma$ is consist
 \subsection{Saturation}%
   \label{sub:Saturation}
 
-We will now move to extend $\Gamma$ to a saturated set of sentences, where a set of sentences $\Sigma$ is \define{saturated} just in case $\metaA\unisub{\beta}{\alpha}\in\Sigma$ for some constant $\beta$ whenever $\qt{\exists}{\alpha}\metaA\in\Sigma$.
-Consider the fixed enumeration of existentially qu
-
-Letting $\set{\metaA_i:\qt{\exists}{\alpha}\metaA_i}$
+We will now move to extend $\Gamma$ to a saturated set of sentences.
+Letting $\metaA(\alpha)$ be a wff of QL$^=$ with at most one free variable $\alpha$, we may take a set of sentences $\Sigma$ to be \define{saturated} in QL$^=_{\N}$ just in case for each wff $\metaA(\alpha)$ of QL$^=_{\N}$, there is a constant $\beta$ where $(\qt{\exists}{\alpha}\metaA \eif \metaA\unisub{\beta}{\alpha})\in\Sigma$.
+In order to extend $\Gamma$ to a saturated set $\Sigma$, fix an enumeration $\metaA_0(\alpha_0),\metaA_1(\alpha_1),\metaA_2(\alpha_2),\ldots$ of all wffs of QL$^=_{\N}$ with one free variable. %, and let $n_0$ be the first natural number that does not occur in $\metaA_0(\alpha_0)$.
+We may then provide the following recursive definition:
+\begin{enumerate}[leftmargin=1in]
+  \item[\it $\theta$-Base:] $\theta_0=(\qt{\exists}{\alpha_0}\metaA_0\eif \metaA_0\unisub{n_0}{\alpha_0})$ where $n_0\in\N$ is the first constant not in $\metaA_0$.
+  \item[\it $\theta$-Recursion:] $\theta_{k+1}=(\qt{\exists}{\alpha_{k+1}}\metaA_{k+1}\eif \metaA_{k+1}\unisub{n_{k+1}}{\alpha_{k+1}})$  where $n_{k+1}\in\N$ is the first constant not in $\theta_j$ for any $j\leq k$.
+\end{enumerate}
+% TODO: show that there is a denumerable number of wffs of QL$^=$
+Given the infinite supply of new constants $\N$, we may always find an unused constant at each stage $k$ in the process of constructing $\theta_k$.
+We may then extend $\Gamma$ to the saturated set $\Sigma_\Gamma$:
+  % $$ \Sigma_\Gamma=\Gamma\cup\set{\theta_i:i\in\N}. $$
 \begin{align*}
   \label{name}
   \Sigma_0     &= \Gamma\\
-  \Sigma_{n+1} &= \Sigma_n\cup\set{\metaA_{n+1}\unisub{n+1}{\alpha}}
+  \Sigma_{n+1} &= \Sigma_n\cup\set{\theta_n}\\
+  \Sigma_\Gamma &= \bigcup_{i\in\N}\Sigma_n.
 \end{align*}
+Equivalently, $\Sigma_\Gamma=\Gamma\cup\set{\theta_i:i\in\N}$.
+The reason we did not define $\Sigma_\Gamma$ in this way is to ease the exposition of the proof that $\Sigma_\Gamma$ is consistent which goes by induction on the stages of the construction of $\Sigma_\Gamma$. 
+% Not only is $\Sigma_\Gamma$ a saturated superset of $\Gamma$, we may also show that $\Sigma_\Gamma$ is consistent. 
+It will help to begin by establishing the following supporting lemma.
 
 
 
+
+
+% \begin{Lthm} \label{lemma:prunigen}
+%   $\Gamma\proves \qt{\forall}{\alpha}\metaA$ if $\Gamma\proves\metaA\unisub{\beta}{\alpha}$ where $\beta$ is a constant not occurring in $\Gamma$ or $\metaA$.
+% \end{Lthm}
+%
+% \begin{quote} 
+%   \textit{Proof:} Assume $\Gamma\proves\metaA\unisub{\beta}{\alpha}$ where $\beta$ is a constant not occurring in $\Gamma$ or $\metaA$. 
+% \end{quote}
+%
+%
+%
+
+\begin{Lthm} \label{lemma:incon}
+  If $\Lambda\cup\set{\metaA}$ is inconsistent, then $\Lambda\proves\enot\metaA$. 
+\end{Lthm}
+  % TODO: define contradiction in the more general way to start
+
+\begin{quote} 
+  \textit{Proof:} Assume $\Lambda\cup\set{\metaA}$ is inconsistent.
+  Thus $\Lambda\cup\set{\metaA}\proves A\eand\enot A$, and so there is some proof $X$ of $A\eand\enot A$ from $\Lambda\cup\set{\metaA}$. 
+  Let $X'$ be the result of replacing the premise $\metaA$ with $\metaA$ as an assumption, appending lines for $A$ and $\enot A$ by conjunction elimination $\eand$E. 
+  We may then apply negation introduction $\enot$I in order to discharge the assumption of $\metaA$.
+  The result is a proof of $\enot\metaA$ from $\Lambda$, and so $\Lambda\proves\enot\metaA$. 
+\end{quote}
+
+
+
+
+\begin{Lthm} \label{lemma:sat}
+  If $\Gamma$ is consistent in QL$^=_{\N}$, then $\Sigma_\Gamma$ is consistent and saturated in QL$^=_{\N}$. 
+\end{Lthm}
+
+\begin{quote} 
+  \textit{Proof:} 
+  Letting $\metaA(\alpha)$ be any wff of QL$^=_{\N}$ with one free variable, $\metaA(\alpha)=\metaA_i(\alpha_i)$ for some $i\in\N$.
+  By construction $\theta_i\in\Sigma_\Gamma$ where $\theta_i=(\qt{\exists}{\alpha_i}\metaA_i \eif \metaA_i\unisub{n_i}{\alpha_i})$.
+  Thus there is some constant $n_i$ where $(\qt{\exists}{\alpha}\metaA \eif \metaA\unisub{n_i}{\alpha})\in\Sigma_\Gamma$, and so $\Sigma_\Gamma$ is saturated. 
+
+  The proof that $\Sigma_\Gamma$ is consistent goes by induction on its construction where the consistency of $\Sigma_0$ follows from its definition together with the assumption.
+  Assuming that $\Sigma_m$ is consistent, we must show that $\Sigma_{m+1}$ is also consistent. 
+  Assume for contradiction that $\Sigma_{m+1}$ is not consistent.
+  Since $\Sigma_{m+1}=\Sigma_m\cup\set{\theta_{m+1}}$, $\Sigma_m\proves \enot\theta_{m+1}$ by \textbf{\ref{lemma:incon}}, and so $\Gamma_m\proves\enot(\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}\eif \metaA_{m+1}\unisub{n_{m+1}}{\alpha_{m+1}})$.
+
+  Given that the derived rules for SD are also derived rules in QD, it follows that $\Sigma_m\proves \qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ and $\Sigma_m\proves\enot\metaA_{m+1}\unisub{n_{m+1}}{\alpha_{m+1}}$.
+    % TODO: cite derived rule; add this rule to chapter 6
+  Since $n_{m+1}$ does not occur in $\metaA_{m+1}$ or in $\Sigma_m$, it follows by universal introduction $\forall$I that $\Sigma_m\proves \qt{\forall}{\alpha_{m+1}}\enot\metaA_{m+1}$, and so $\Sigma_m\proves \enot\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ by the quantifier exchange rule $\forall\enot$ derived in $\S\ref{QER}$.
+  By EFQ in $\S\ref{EFQ}$, we may conclude that $\Sigma_m\proves A\wedge\neg A$, and so $\Sigma_m$ is inconsistent, contradicting our assumption. 
+    % TODO: replace EFQ with better reference
+    % TODO: avoid reference to specific contradiction
+  Thus we may conclude that $\Sigma_{m+1}$ is consistent, and so $\Sigma_k$ is consistent for all $k\in\N$ as desired.
+
+  Assume for contradiction that $\Sigma_\Gamma$ is inconsistent. 
+  Thus $\Sigma_\Gamma\proves A\wedge\neg A$, and so there is some proof $X$ of $A\wedge\neg A$ from the premises $\Sigma_\Gamma$.
+  Since every proof is finite, at most finitely many premises in $\Sigma_\Gamma$ are cited in $X$, and so there is some $m\in\N$ where every premise cited in $X$ occurs in $\Sigma_m$.
+  As a result, $\Sigma_m\proves A\wedge\neg A$, and so $\Sigma_m$ is inconsistent, contradicting what was shown above. 
+  Thus $\Sigma_\Gamma$ is consistent. 
+\end{quote}
+
+
+
+
+\subsection{Maximization}%
+  \label{sub:Maximization}
   
+A set of sentences $\Delta$ is \define{maximal} in QL$^=_{\N}$ just in case as either $\metaB\in\Delta$ or $\enot\metaB\in\Delta$ for every sentence $\metaB$ in QL$^=_{\N}$.
+Having shown that $\Sigma_\Gamma$ is consistent if $\Gamma$ is consistent, we may now maximize $\Sigma_\Gamma$ by adding every sentence that we can consistently. 
+Whereas before we enumerated all wffs which contain a single free variable, now we will enumerate all sentences $\metaB_0,\metaB_1,\metaB_2,\ldots$ in QL$^=_{\N}$ whatsoever in order to present the following recursive construction:
+\begin{align*}
+  % \label{name}
+  \Delta_0     &= \Sigma \\
+  \Delta_{n+1} &= 
+    \begin{cases}
+      \Delta_n\cup\set{\metaB_n} &\text{if } \Gamma_n\cup\set{\metaB_n} \text{ is consistent}\\
+      \Delta_n\cup\set{\enot\metaB_n} &\text{otherwise}.
+    \end{cases}\\
+  \Delta_\Sigma &= \bigcup_{i\in\N}\Delta_n. 
+\end{align*}
+If $\Sigma_\Gamma$ is consistent, we may show that $\Delta_{\Sigma_\Gamma}$ is both consistent and maximal where it follows as a result that $\Delta_{\Sigma_\Gamma}$ is deductively closed.
+Moreover, we may show $\Gamma\subseteq\Sigma_\Gamma\subseteq\Delta_{\Sigma_\Gamma}$ where $\Delta_{\Sigma_\Gamma}$ is saturated on account of including $\Sigma_\Gamma$.
+These properties will form the basis upon which the Henkin model is constructed in section $\S\ref{sub:HenkinModel}$.
+In order to establish these results, we will begin by proving the following supporting lemmas.
+
+
+
+
+\begin{Lthm} \label{lemma:prcut}
+  If $\Lambda \proves \metaA$ and $\Pi\cup{\metaA} \proves \metaB$, then $\Lambda\cup\Pi \proves \metaB$. 
+\end{Lthm}
+
+\begin{quote} 
+  \textit{Proof:} Assume that $\Lambda \proves \metaA$ and $\Pi\cup{\metaA} \proves \metaB$.
+  It follows that there is a proof of $\metaA$ from $\Lambda$ as well as a proof $Y$ of $\metaB$ from $\Pi$. 
+  Let $Z$ be the result of replacing the line in which $\metaA$ occurs as a premise with $X$.
+  Since $Z$ proves $\metaB$ from the premises $\Lambda$ in $X$ together with the premises $\Pi\cup\set{\metaA}$ in $Y$ with the exception of $\metaA$, we may conclude that $Z$ proves $\metaA$ from $\Lambda\cup\Pi$, and so $\Lambda\cup\Pi\proves\metaB$.
+\end{quote}
+
+
+
+
+\begin{Lthm} \label{lemma:conin}
+  If $\Lambda \cup \set{\metaA}$ and $\Lambda\cup \set{\enot\metaA}$ are both inconsistent, then $\Lambda$ is inconsistent. 
+\end{Lthm}
+
+\begin{quote} 
+  \textit{Proof:} Assume that $\Lambda \cup \set{\metaA}$ and $\Lambda\cup \set{\enot\metaA}$ are both inconsistent.
+  It follows that $\Lambda\proves \enot\metaA$ and $\Lambda\proves\enot\enot\metaA$ by \textbf{\ref{lemma:incon}}, and so there is some proof $X$ of $\enot\metaA$ from $\Lambda$, and some proof $Y$ of $\enot\enot\metaA$ from $\Lambda$. 
+  Let $Z$ be the result of concatenating $X$ and $Y$ and using EFQ from $\S\ref{EFQ}$ on the last lines of $X$ and $Y$ to derive $A\eand\enot A$. 
+  Since the only premises in $Z$ are the premises in $X$ and $Y$, we may conclude that $\Lambda\proves A\eand\enot A$, and so $\Lambda$ is inconsistent. 
+\end{quote}
+
+
+
+
+
+\begin{Lthm} \label{lemma:max}
+  If $\Gamma$ is consistent in QL$^=_{\N}$, then $\Delta_{\Sigma_\Gamma}$ is maximal consistent in QL$^=_{\N}$. 
+\end{Lthm}
+
+\begin{quote} 
+  \textit{Proof:} 
+  Let $\metaA$ be any sentence of QL$^=_{\N}$.
+  Thus $\metaA=\metaB_i$ for some $i\in\N$ given the enumeration above where either $\metaB_i\in\Delta_{i+1}$ or $\enot\metaB_i\in\Delta_{i+1}$.
+  Since $\Delta_{i+1}\subseteq\Delta_{\Sigma_\Gamma}$, either $\metaA\in\Delta_{\Sigma_\Gamma}$ or $\enot\metaA\in\Delta_{\Sigma_\Gamma}$, and so $\Delta_{\Sigma_\Gamma}$ is maximal.
+
+  The proof that $\Delta_{\Sigma_\Gamma}$ is consistent goes by induction on the construction of $\Delta_{\Sigma_\Gamma}$, where we know by \textbf{\ref{lemma:sat}} that $\Sigma_\Gamma=\Delta_0$ is consistent. 
+  Assume for induction that $\Delta_n$ is consistent. 
+  There are two cases to consider.
+
+  \textit{Case 1:} $\Delta_n\cup\set{\metaB_n}$ is consistent, and so $\Delta_{n+1}=\Delta_n\cup\set{\metaB_n}$ is consistent. 
+
+  \textit{Case 2:} $\Delta_n\cup\set{\metaB_n}$ is not consistent, and so $\Delta_{n+1}=\Delta_n\cup\set{\enot\metaB_n}$. 
+  Assume for contradiction that $\Delta_n\cup\set{\enot\metaB_n}$ is not consistent. 
+  By \textbf{\ref{lemma:conin}}, $\Delta_n$ is inconsistent, contradicting the hypothesis. 
+  % It follows that $\Delta_n\proves\enot\enot\metaB_n$ by \textbf{\ref{lemma:incon}}, and so $\Delta_n\proves\metaB_n$ by DN.
+  % Since $\Delta_n\cup\set{\metaB_n}$ is also not consistent, $\Delta_n\cup\set{\metaB_n} \proves A\eand\enot A$.
+  % By \textbf{\ref{lemma:prcut}}, $\Delta_n \proves A\eand\enot A$, and so $\Delta_n$ is not consistent, contradicting the hypothesis. 
+  Thus $\Gamma_{n+1}$ is consistent. 
+
+  Since $\Gamma_{n+1}$ is consistent, it follows by induction that $\Gamma_n$ is consistent for all $n\in\N$.
+  Assume for contradiction that $\Delta_{\Sigma_\Gamma}$ is inconsistent.
+  Thus $\Delta_{\Sigma_\Gamma}\proves A\eand\enot A$, and so there is a proof $Y$ of $A\eand\enot A$ from $\Delta_{\Sigma_\Gamma}$. 
+    % TODO: remove particular contradiction
+  Since $Y$ is finite, there is a finite number of premises cited in $Y$, and so there is some $k\in\N$ where every premise cited in $Y$ belongs to $\Delta_k$.
+  As a result, $Y$ is also a proof of $A\eand\enot A$ from $\Delta_k$, and so $\Delta_k$ is inconsistent, contradicting the above. 
+  Thus $\Delta_{\Sigma_\Gamma}$ is consistent. 
+\end{quote}
+
+
+
+
+\begin{Lthm} \label{lemma:include}
+  $\Gamma\subseteq\Sigma_\Gamma\subseteq\Delta_{\Sigma_\Gamma}$ where $\Delta_{\Sigma_\Gamma}$ is saturated.
+\end{Lthm}
+ 
+\begin{quote} 
+  \textit{Proof:} 
+  By definition, $\Gamma=\Sigma_0$ where $\Sigma_0\subseteq\Sigma_\Gamma$, and $\Sigma_\Gamma=\Delta_0$ where $\Delta_0\subseteq\Delta_{\Sigma_\Gamma}$.
+  Thus $\Gamma\subseteq\Delta_{\Sigma_\Gamma}$.
+  Moreover, $\Delta_{\Sigma_\Gamma}$ is saturated since otherwise there would be some wff $\metaA(\alpha)$ of QL$^=_{\N}$ with one free variable but no constant $n$ where $(\qt{\exists}{\alpha}\metaA \eif \metaA\unisub{n}{\alpha})\in\Delta_{\Sigma_\Gamma}$. 
+  Since $\Sigma_\Gamma\subseteq\Delta_{\Sigma_\Gamma}$, there would be no constant $n$ where $(\qt{\exists}{\alpha}\metaA \eif \metaA\unisub{n}{\alpha})\in\Sigma_\Gamma$, and so $\Sigma_\Gamma$ would not saturated, contradicting \textbf{\ref{lemma:sat}}.
+  Thus $\Delta_{\Sigma_\Gamma}$ is saturated. 
+
+\end{quote}
+
+
+
+\subsection{Deductive Closure}%
+  \label{sub:DeductiveClosure}
+
+Maximal consistent sets of sentences are deductively closed insofar as they contain every sentence derivable from that set as a member.
+Put formally, $\Delta$ is deductively closed just in case $\metaA\in\Delta$ whenever $\Delta\proves\metaA$.
+Since $\Delta\proves\metaA$ whenever $\metaA\in\Delta$, deductively closed sets of sentences are identical to the set of sentences which they derive.
+In order to show that $\Delta_{\Sigma_\Gamma}$ is deductively closed, consider the following general lemmas. 
+
+\begin{Lthm} \label{lemma:cont}
+  If $\Lambda\proves\metaA$ and $\Lambda\proves\enot\metaA$, then $\Lambda$ is inconsistent. 
+\end{Lthm}
+
+\begin{quote} 
+  \textit{Proof:} 
+  Assume $\Lambda\proves\metaA$ and $\Lambda\proves\enot\metaA$.
+  Thus there is a QD proof $X$ of $\metaA$ from $\Lambda$ as well as a QD proof $Y$ of $\enot\metaA$ from $\Lambda$. 
+  Letting $Z$ be the result of concatenating $X$ and $Y$ and using EFQ from $\S\ref{EFQ}$ to derive $A\eand\enot A$, we may observe that $Z$ is a proof of $A\eand\enot A$ from $\Lambda$, and so $\Lambda$ is inconsistent.
+\end{quote}
+  
+
+
+
+
+\begin{Lthm} \label{lemma:deductive}
+  If $\Delta$ is maximal consistent in QL$^=_{\N}$, then $\metaA\in\Delta$ whenever $\Delta\proves\metaA$.
+\end{Lthm}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\Delta$ is maximal consistent in QL$^=_{\N}$ and $\Delta\proves\metaA$.
+  If $\Delta\proves\enot\metaA$, then $\Delta$ is inconsistent by \textbf{\ref{lemma:cont}}, contradicting the assumption.
+  Thus $\Delta\nproves\enot\metaA$, and so $\enot\metaA\notin\Delta$ since otherwise $\Delta\proves\enot\metaA$. 
+  Since $\Delta$ is maximal, $\metaA\in\Delta$. 
+\end{quote}
+
+
+
+
+
 \section{Henkin Model}%
   \label{sub:HenkinModel}
+
+Having extended the consistent set of sentences $\Gamma$ in QL$^=$ to a saturated maximal consistent set of sentences $\Delta_{\Sigma_\Gamma}$ in QL$^=_{\N}$ which is deductively closed, we may now proceed to use $\Delta_{\Sigma_\Gamma}$ to construct a Henkin model that satisfies $\Delta_{\Sigma_\Gamma}$, and so thereby satisfies $\Gamma$.
+For ease of exposition, we will often drop the subscripts, though `$\Delta$' is to be understood as standing for $\Delta_{\Sigma_\Gamma}$.
+
+We begin by letting $\C$ be the set of all constants in QL$^=_{\N}$ where this includes all the typical constants included in QL$^=$ together with the natural numbers $\N$ which we have added. 
+Since more than one constant can refer to the same element in a domain, we will model the elements of the domain as equivalence classes of co-referring constants.
+Consider the following:
+  \begin{enumerate}[leftmargin=1.5in]
+    \item[\it Element:] $[\alpha]_\Delta=\set{\beta\in\C:\alpha=\beta\in\Delta}$.
+    \item[\it Domain:] $\D_\Delta=\set{[\alpha]_\Delta:\alpha\in\C}$.
+  \end{enumerate}
+The equivalence class $[\alpha]_\Delta$ is the set which includes every constant $\beta$ in $\C$ where the sentence $\alpha=\beta$ belongs to $\Delta$.
+In order to show that $[\alpha]_\Delta\neq\varnothing$ for any constant $\alpha\in\C$, we begin by proving the following weakening principle:
+
+
+
+
+
+\begin{Lthm} \label{lemma:prweak}
+  If $\Lambda\proves\metaA$, then $\Lambda\cup\Pi\proves\metaA$.
+\end{Lthm}
+  % TODO: move weakening to QD chapter?
+
+\begin{quote} 
+  \textit{Proof:} 
+  Assuming that $\Lambda\proves\metaA$, there is a proof $X$ of $\metaA$ from $\Lambda$ in QD.
+  Since $\Lambda\subseteq\Lambda\cup\Pi$, it follows that $X$ is a proof of $\metaA$ from $\Lambda\cup\Pi$ in QD, and so $\Lambda\cup\Pi\proves\metaA$. 
+\end{quote}
+
+
+
+% It follows that every element $[\alpha]_\Delta$ of the domain is nonempty.
+% Since $\Delta$ is maximal, all such identity sentences or their negations will belong to $\Delta$ where we are gathering together all of the co-referring constants into sets which are taking to be the elements of the domain $\D_\Delta$. 
+Every constant $\alpha\in\C$ generates an element $[\alpha]_\Delta\in\D_\Delta$ which includes $\alpha$ as a member: 
+
+
+\begin{Lthm} \label{lemma:nonempty}
+  $\alpha\in[\alpha]_\Delta$ for any constant $\alpha\in\C$.
+\end{Lthm}
+
+\begin{quote} 
+  \textit{Proof:} 
+  Let $\alpha\in\C$ be an arbitrary constant. 
+  Since $\proves \alpha=\alpha$ by identity introduction $=$I, it follows that $\Delta\proves\alpha=\alpha$ by \textbf{\ref{lemma:prweak}}, and so $\alpha=\alpha\in\Delta$ by \textbf{\ref{lemma:deductive}}.
+  Thus $\alpha\in[\alpha]_\Delta$ for any constant $\alpha\in\C$.
+\end{quote}
+
+\begin{Lthm} \label{lemma:define}
+  If $\alpha=\beta\in\Delta$, then $[\alpha]_\Delta=[\beta]_\Delta$.
+\end{Lthm}
+
+\begin{quote} 
+  \textit{Proof:}
+  Assume $\alpha=\beta\in\Delta$.
+  Letting $\gamma\in[\alpha]_\Delta$, it follows that $\alpha=\gamma\in\Delta$.
+  Since $\alpha=\beta,\alpha=\gamma\proves\beta=\gamma$ by identity elimination $=$E, we know that $\Delta\proves\beta=\gamma$ by \textbf{\ref{lemma:prweak}}, and so $\beta=\gamma\in\Delta$ by \textbf{\ref{lemma:deductive}}. 
+  Thus $\gamma\in[\beta]_\Delta$, and so generalising on $\gamma$, it follows that $[\alpha]_\Delta\subseteq[\beta]_\Delta$.
+  By parity of reasoning, we may conclude that $[\beta]_\Delta\subseteq[\alpha]_\Delta$, and so $[\alpha]_\Delta=[\beta]_\Delta$.
+\end{quote}
+
+This shows that it does not matter which element $\alpha\in[\alpha]_\Delta$ we choose to represent the element $[\alpha]_\Delta$.
+For instance, if $\beta\in[\alpha]_\Delta$, then $\alpha=\beta\in\Delta$ and so we could have written `$[\beta]_\Delta$' in place of `$[\alpha]_\Delta$' since $[\alpha]_\Delta=[\beta]_\Delta$.
+As a result, the elements in $\D_\Delta$ are well-defined. 
+
+Having constructed the domain, we may proceed to specify an interpretation of the constants and predicates included in QL$^=_{\N}$.
+Rather than specifying any interpretation at all, we will make a number of especially natural choices in order to guarantee that the resulting model satisfies all of the sentences in $\Delta$.
+In particular, consider the following definitions:
+  \begin{enumerate}[leftmargin=1.5in]
+    \item[\it Constants:] $\I_\Delta(\alpha)=[\alpha]_\Delta$ for all constants $\alpha\in\C$. 
+    \item[\it Predicates:] $\I_\Delta(\F^n)=\set{\tuple{[\alpha_1]_\Delta,\ldots,[\alpha_n]_\Delta}\in\D_\Delta^n:\F^n\alpha_1,\ldots,\alpha_n\in\Delta}$.
+  \end{enumerate}
+Whereas every constant $\alpha$ is assigned to the element $[\alpha]_\Delta$ it generates, the extension of any $n$-place predicate $\F^n$ includes all and only the ordered tuples $\tuple{[\alpha_1]_\Delta,\ldots,[\alpha_n]_\Delta}$ for which $\F^n\alpha_1,\ldots,\alpha_n\in\Delta$.
+% Put otherwise, each constant $\alpha$ is assigned to the element $[\alpha]_\Delta$ that it represents where the atomic sentences of the form $\F^n\alpha_1,\ldots,\alpha_n\in\Delta$ specify which $n$-tuples of elements belong to the extension of $\F^n$.
+Given that $[\alpha]_\Delta=[\beta]_\Delta$ may hold for distinct constants $\alpha$ and $\beta$, we must check that there is no ensuing conflict among the atomic sentences included in $\Delta$.
+Put otherwise, we must show that the extensions of predicates are well-defined as follows:
+
+
+
+
+
+\begin{Lthm} \label{lemma:preddef}
+  If $\alpha_i=\beta_i\in\Delta$, then $\F^n\alpha_1,\ldots,\alpha_n\in\Delta$ just in case $\F^n\alpha_1,\ldots,\alpha_n\unisub{\beta_i}{\alpha_i}\in\Delta$.
+\end{Lthm}
+
+\begin{quote} 
+  \textit{Proof:} 
+  Assume that $\alpha_i=\beta_i\in\Delta$ for some $\alpha_i,\beta_i\in\C$ where $\F^n\alpha_1,\ldots,\alpha_n\in\Delta$.
+  It follows that $\Delta\proves\F^n\alpha_1,\ldots,\alpha_n\unisub{\beta_i}{\alpha_i}$ by identity elimination $=$E, and so $\F^n\alpha_1,\ldots,\alpha_n\unisub{\beta_i}{\alpha_i}\in\Delta$ by \textbf{\ref{lemma:deductive}}.
+  By parity of reasoning, we may conclude that $\F^n\alpha_1,\ldots,\alpha_n\in\Delta$ just in case $\F^n\alpha_1,\ldots,\alpha_n\unisub{\beta_i}{\alpha_i}\in\Delta$.
+\end{quote}
+
+
+Suppose that $\alpha_1=\beta_1\in\Delta$ where $\F^n\alpha_1,\ldots,\alpha_n\in\Delta$. 
+It follows by the definition in \textit{Predicates} that $\tuple{[\alpha_1]_\Delta,\ldots,[\alpha_n]_\Delta}\in\I_\Delta(\F^n)$, and so $\tuple{[\beta_1]_\Delta,\ldots,[\alpha_n]_\Delta}\in\I_\Delta(\F^n)$ since $[\alpha_1]_\Delta=[\beta_1]_\Delta$ by \textbf{\ref{lemma:define}}.
+Thus $\F^n\beta_1,\ldots,\alpha_n\in\Delta$ again by \textit{Predicates}. 
+What the lemma above shows is that this type of reasoning will never produce a contradiction since $\F^n\alpha_1,\ldots,\alpha_n\in\Delta$ just in case $\F^n\alpha_1,\ldots,\alpha_n\unisub{\beta_i}{\alpha_i}\in\Delta$ whenever $\alpha_i=\beta_i\in\Delta$. 
+Accordingly, the extension $\I_\Delta(\F^n)$ for any predicate $\F^n$ is well-defined since their is no possibility of disagreement about whether $\tuple{[\alpha_1]_\Delta,\ldots,[\alpha_n]_\Delta}\in\I_\Delta(\F^n)$ by changing the representative $\alpha_i$ for the element $[\alpha_i]_\Delta$ to $\beta_i$.
+
+Observe that $\M_\Delta=\tuple{\D_\Delta,\I_\Delta}$ satisfies the definition of a QL$^=_{\N}$ model.
+Since this construction is due to Leon Henkin (1949), we will refer to $\M_\Delta$ as the \define{henkin model} for $\Gamma$ (recall that $\Delta=\Delta_{\Sigma_\Gamma}$).
+It remains to show that $\M_\Delta$ satisfies $\Delta$, and so satisfies $\Gamma$ as a result.
+
+
+
+
+
+\begin{Lthm} \label{lemma:quantE}
+  $\VV{\I_\Delta}{\va{a}}(\qt{\exists}{\alpha}\metaB)=1$ just in case $\VV{\I_\Delta}{\va{a}}(\metaB\unisub{\beta}{\alpha})=1$ for some constant $\beta\in\C$.
+  % $\M_\Delta$ satisfies $\qt{\exists}{\alpha}\metaA$ just in case $\M_\Delta$ satisfies $\metaA\unisub{\beta}{\alpha}$ for some constant $\beta$.
+\end{Lthm}
+
+
+\begin{quote} 
+  \textit{Proof:}
+  Assume that $\VV{\I_\Delta}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$ for an arbitrary variable assignment $\va{a}$.
+  It follows that $\VV{\I_\Delta}{\va{c}}(\metaA)=1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$ by the semantics for the existential quantifier.
+  Given that $\va{c}(\alpha)\in\D_\Delta$, we know that $\va{c}(\alpha)=[\beta]_\Delta$ for some constant $\beta\in\C$.
+  Moreover, we know that $\I_\Delta(\beta)=[\beta]_\Delta$ and so $\va{c}(\alpha)=\I_\Delta(\beta)$.
+  Thus $\VV{\I}{\va{c}}(\alpha)=\VV{\I}{\va{c}}(\beta)$, and so $\VV{\I_\Delta}{\va{c}}(\metaA)=\VV{\I_\Delta}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{\ref{lemma:model}}.
+  Since $\qt{\exists}{\alpha}\metaA$ is a sentence and $\beta$ is a constant, at most $\alpha$ is free in $\metaA$, and so $\metaA\unisub{\beta}{\alpha}$ is a sentence.
+  It follows that $\VV{\I_\Delta}{}(\metaA\unisub{\beta}{\alpha})=1$, and so $\VV{\I_\Delta}{\va{e}}(\metaA\unisub{\beta}{\alpha})=1$ for all variable assignments $\va{e}$ by \textbf{\ref{lemma:allvar}}.
+  In particular, $\VV{\I_\Delta}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$.
+
+  Assume instead that $\VV{\I_\Delta}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for some constant $\beta\in\C$.
+  Letting $\va{c}$ be the $\alpha$-variant of $\va{a}$ where $\va{c}(\alpha)=\I_\Delta(\beta)$, it follows that $\VV{\I}{\va{c}}(\alpha)=\VV{\I}{\va{c}}(\beta)$, and so $\VV{\I_\Delta}{\va{c}}(\metaA)=\VV{\I_\Delta}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{\ref{lemma:model}}.
+  We may then conclude by the semantics for the existential quantifier that $\VV{\I_\Delta}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$ as desired. 
+\end{quote}
+
+
+
+
+
+
+\begin{Lthm} \label{lemma:quantA}
+  $\VV{\I_\Delta}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ just in case $\VV{\I_\Delta}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for all constants $\beta\in\C$.
+\end{Lthm}
+
+\begin{quote} 
+  \textit{Proof:}
+  Assume that $\VV{\I_\Delta}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ for an arbitrary variable assignment $\va{a}$.
+  It follows that $\VV{\I_\Delta}{\va{c}}(\metaA)=1$ for every $\alpha$-variant $\va{c}$ of $\va{a}$ by the semantics for the universal quantifier.
+  Let $\beta\in\C$ be any constant. 
+  Since $[\beta]_\Delta\in\D_\Delta$, we may let $\va{c}$ be the $\alpha$-variant of $\va{a}$ where $\va{c}(\alpha)=[\beta]_\Delta$.
+  Given that $\I_\Delta(\beta)=[\beta]_\Delta$, it follows that $\va{c}(\alpha)=\I_\Delta(\beta)$.
+  As a result, $\VV{\I}{\va{c}}(\alpha)=\VV{\I}{\va{c}}(\beta)$, and so $\VV{\I_\Delta}{\va{c}}(\metaA)=\VV{\I_\Delta}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{\ref{lemma:model}}.
+  Since $\qt{\forall}{\alpha}\metaA$ is a sentence and $\beta$ is a constant, at most $\alpha$ is free in $\metaA$, and so $\metaA\unisub{\beta}{\alpha}$ is a sentence, and so $\VV{\I_\Delta}{}(\metaA\unisub{\beta}{\alpha})=1$.
+  Thus $\VV{\I_\Delta}{\va{e}}(\metaA\unisub{\beta}{\alpha})=1$ for all variable assignments $\va{e}$ by \textbf{\ref{lemma:allvar}}, and so $\VV{\I_\Delta}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ in particular.
+  By generalising on $\beta\in\C$, we know that $\VV{\I_\Delta}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for all constants $\beta\in\C$.
+
+  Assume instead that $\VV{\I_\Delta}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for every constant $\beta\in\C$.
+  % Choosing an arbitrary $\beta\in\C$, we know that $\metaA\unisub{\beta}{\alpha}$ is a sentence since at most $\alpha$ is free in $\metaA$.
+  % Thus $\VV{\I_\Delta}{}(\metaA\unisub{\beta}{\alpha})=1$, and so $\VV{\I_\Delta}{\va{e}}(\metaA\unisub{\beta}{\alpha})=1$ for all variable assignments $\va{e}$ by \textbf{\ref{lemma:allvar}}.
+  Letting $\va{c}$ be any $\alpha$-variant of $\va{a}$, it follows that $\va{c}(\alpha)\in\D_\Delta$, and so $\va{c}(\alpha)=[\beta]_\Delta$ for some constant $\beta\in\C$.
+  Thus $\VV{\I}{\va{c}}(\alpha)=\VV{\I}{\va{c}}(\beta)$, and so $\VV{\I_\Delta}{\va{c}}(\metaA)=\VV{\I_\Delta}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{\ref{lemma:model}}.
+  By assumption $\VV{\I_\Delta}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$, and so $\VV{\I_\Delta}{}(\metaA\unisub{\beta}{\alpha})=1$ given that $\metaA\unisub{\beta}{\alpha}$ is a sentence.
+  It follows that $\VV{\I_\Delta}{\va{e}}(\metaA\unisub{\beta}{\alpha})=1$ for every variable assignment $\va{e}$ by \textbf{\ref{lemma:allvar}}, and so $\VV{\I_\Delta}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$ in particular. 
+  Thus $\VV{\I_\Delta}{\va{c}}(\metaA)=1$ by the identity above, and so by generalising on $\va{c}$, $\VV{\I_\Delta}{\va{c}}(\metaA)=1$ for all $\alpha$-variants $\va{c}$ of $\va{a}$.
+  By the semantics for the universal quantifier, $\VV{\I_\Delta}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$. 
+\end{quote}
+
+
+
+
+
+
+\begin{Lthm} \label{lemma:truth}
+  If $\Delta$ is a saturated maximal consistent set of QL$^=_{\N}$ sentences and $\metaA$ is any QL$^=_{\N}$ sentence, then $\M_\Delta$ satisfies $\metaA$ just in case $\metaA\in\Delta$.  
+\end{Lthm}
+
+\begin{quote} 
+  \textit{Proof:} 
+  Assume $\Delta$ is a saturated maximal consistent set of QL$^=_{\N}$ sentences and $\metaA$ is any QL$^=_{\N}$ sentence.
+  Letting $\va{a}$ be an arbitrary variable assignment over $\D_\Delta$, we will show $\VV{\I_\Delta}{\va{a}}(\metaA)=1$ just in case $\metaA\in\Delta$ by induction on the complexity of the sentences of QL$^=_{\N}$.
+  Thus there are two base cases and seven induction cases.
+
+  \textit{Base:} 
+  Assume $\comp(\metaA)=0$ and so either $\metaA$ is $\F^n\alpha_1,\ldots,\alpha_n$ or $\alpha_1=\alpha_2$ for some constants $\alpha_1,\ldots,\alpha_n\in\C$.
+  Consider the following biconditionals:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I_\Delta}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1 % &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1 \text{ for some v.a. } \va{a}\\
+      &\textit{ ~iff~ } \tuple{\VV{\I_\Delta}{\va{a}}(\alpha_1),\ldots,\VV{\I_\Delta}{\va{a}}(\alpha_n)}\in\I_\Delta(\F^n)\\
+      &\textit{ ~iff~ } \tuple{\I_\Delta(\alpha_1),\ldots,\I_\Delta(\alpha_n)}\in\I_\Delta(\F^n)\\
+      &\textit{ ~iff~ } \tuple{[\alpha_1]_\Delta,\ldots,[\alpha_n]_\Delta}\in\I_\Delta(\F^n)\\
+      &\textit{ ~iff~ } \F^n\alpha_1,\ldots,\alpha_n\in\Delta.
+  \end{align*}
+
+  Whereas the final biconditional follows by the definition of $\I_\Delta$, all of the other biconditionals are immediate from the definitions together with the assumptions.
+  Something similar may be observed for identity sentences in QL$^=_{\N}$:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I_\Delta}{\va{a}}(\alpha_1=\alpha_2)=1 %&\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\alpha_1=\alpha_2)=1 \text{ for some v.a. } \va{a}\\
+      &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\alpha_1)=\VV{\I_\Delta}{\va{a}}(\alpha_2)\\
+      &\textit{ ~iff~ } \I_\Delta(\alpha_1)=\I_\Delta(\alpha_2)\\
+      &\textit{ ~iff~ } [\alpha_1]_\Delta=[\alpha_2]_\Delta\\
+      &\textit{ ~iff~ } \alpha_1=\alpha_2\in\Delta.
+  \end{align*}
+
+  In support of the final biconditional, assume $[\alpha_1]_\Delta=[\alpha_2]_\Delta$.
+  By \textbf{\ref{lemma:nonempty}}, we know that $\alpha_2\in[\alpha_2]_\Delta$, and so $\alpha_2\in[\alpha_1]_\Delta$.
+  By definition, $\alpha_1=\alpha_2\in\Delta$.
+  Together with \textbf{\ref{lemma:define}}, we may conclude that $(\star)$ holds where the other biconditionals follow from the definitions and the assumption that $\alpha_1,\alpha_2\in\C$.
+  It follows that $\M_\Delta$ satisfies $\metaA$ just in case $\metaA\in\Delta$ whenever $\comp(\metaA)=0$.
+
+  \textit{Induction:}
+  Assume for induction that $\VV{\I_\Delta}{\va{a}}(\metaA)=1$ just in case $\metaA\in\Delta$ whenever $\comp(\metaA)\leq n$. 
+  Let $\metaA$ be a sentence of QL$^=_{\N}$ where $\comp(\metaA)=n+1$.
+
+  \textit{Case 1:}
+  Assume $\metaA=\enot\metaB$.
+  Since $\comp(\enot\metaB)=\comp(\metaB)+1$ and $\comp(\metaA)=n+1$, it follows that $\comp(\metaB)=n$.
+  We may then reason as follows:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I_\Delta}{\va{a}}(\metaA)=1 &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\enot\metaB)=1\\
+      &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\metaB)\neq 1 \\
+      (\hspace{1pt}\star\hspace{1pt}) &\textit{ ~iff~ } \metaB\notin\Delta \\
+      (\neg) &\textit{ ~iff~ } \enot\metaB\in\Delta \\
+      &\textit{ ~iff~ } \metaA\in\Delta.
+  \end{align*}
+
+  Whereas $(\hspace{1pt}\star\hspace{1pt})$ holds by hypothesis, $(\neg)$ follows from the maximality of $\Delta$ established in \textbf{\ref{lemma:max}}, and the biconditionals follow from the semantics for negation together and the case assumption.
+
+  \textit{Case 2:}
+  Assume $\metaA=\metaB\eand\metaC$.
+  Since $\comp(\metaB\eand\metaC)=\comp(\metaB)+\comp(\metaC)+1$ and  $\comp(\metaA)=n+1$, it follows that $\comp(\metaB),\comp(\metaC)\leq n$.
+  Thus we have:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I_\Delta}{\va{a}}(\metaA)=1 &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\metaB\eand\metaC)=1\\
+      &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\metaB)=\VV{\I_\Delta}{\va{a}}(\metaC)=1 \\
+      (\hspace{1.6pt}\star\hspace{1.6pt}) &\textit{ ~iff~ } \metaB,\metaC\in\Delta \\
+      (\eand) &\textit{ ~iff~ } \metaB\eand\metaC\in\Delta \\
+      &\textit{ ~iff~ } \metaA\in\Delta.
+  \end{align*}
+
+  Assuming that $\metaB,\metaC\in\Delta$, we know that $\Delta\proves\metaB\eand\metaC$ by conjunction introduction $\eand$I, and so $\metaB\eand\metaC\in\Delta$ by \textbf{\ref{lemma:deductive}}.
+  Assuming instead that $\metaB\eand\metaC\in\Delta$, it follows that $\Delta\proves\metaB$ and $\Delta\proves\metaC$ by conjunction elimination $\eand$E, and so $\metaB,\metaC\in\Delta$ by \textbf{\ref{lemma:deductive}}.
+  This establishes $(\eand)$.
+
+  Additionally, $(\hspace{1.6pt}\star\hspace{1.6pt})$ holds by hypothesis, and the other biconditionals follow from the semantics for conjunction along with the case assumption.
+
+
+  \textit{Case 3:}
+  Assume $\metaA=\metaB\eor\metaC$.
+  Since $\comp(\metaB\eor\metaC)=\comp(\metaB)+\comp(\metaC)+1$ and  $\comp(\metaA)=n+1$, it follows that $\comp(\metaB),\comp(\metaC)\leq n$.
+  Thus we have:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I_\Delta}{\va{a}}(\metaA)=1 &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\metaB\eor\metaC)=1\\
+      &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\metaB)=1 \text{ or } \VV{\I_\Delta}{\va{a}}(\metaC)=1 \\
+      (\hspace{1.6pt}\star\hspace{1.6pt}) &\textit{ ~iff~ } \metaB\in\Delta \text{ or } \metaC\in\Delta \\
+      (\eor) &\textit{ ~iff~ } \metaB\eor\metaC\in\Delta \\
+      &\textit{ ~iff~ } \metaA\in\Delta.
+  \end{align*}
+
+  Assuming that $\metaB\in\Delta$, we know that $\Delta\proves\metaB\eor\metaC$ by disjunction introduction $\eor$I, and so $\metaB\eor\metaC\in\Delta$ by \textbf{\ref{lemma:deductive}}.
+  Analogous reasoning shows that $\metaB\eor\metaC\in\Delta$ if $\metaC\in\Delta$, and so $\metaB\eor\metaC\in\Delta$ if either $\metaB\in\Delta$ or $\metaC\in\Delta$. 
+
+  Assume instead that $\metaB\eor\metaC\in\Delta$.
+  If $\metaB\in\Delta$, then either $\metaB\in\Delta$ or $\metaC\in\Delta$.
+  If $\metaB\notin\Delta$, then $\enot\metaB\in\Delta$ by \textbf{\ref{lemma:max}}, and so $\Delta\proves\metaC$ by DS from $\S\ref{DS}$.
+  Thus $\metaC\in\Delta$ by \textbf{\ref{lemma:deductive}}, and so either $\metaB\in\Delta$ or $\metaC\in\Delta$. 
+  It follows that $\metaB\in\Delta$ or $\metaC\in\Delta$ if $\metaB\eor\metaC\in\Delta$ which, together with the above, establishes $(\eor)$.  
+
+  Additionally, $(\hspace{1.6pt}\star\hspace{1.6pt})$ holds by hypothesis, and the other biconditionals follow from the semantics for disjunction along with the case assumption.
+
+  \textit{Case 4:}
+  Assume $\metaA=\metaB\eif\metaC$.
+  Since $\comp(\metaB\eif\metaC)=\comp(\metaB)+\comp(\metaC)+1$ and  $\comp(\metaA)=n+1$, it follows that $\comp(\metaB),\comp(\metaC)\leq n$.
+  Thus we have:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I_\Delta}{\va{a}}(\metaA)=1 &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\metaB\eif\metaC)=1\\
+      &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\metaB)\neq 1 \text{ or } \VV{\I_\Delta}{\va{a}}(\metaC)=1 \\
+      (\hspace{1.6pt}\star\hspace{1.6pt}) &\textit{ ~iff~ } \metaB\notin\Delta \text{ or } \metaC\in\Delta \\
+      (\eif) &\textit{ ~iff~ } \metaB\eif\metaC\in\Delta \\
+      &\textit{ ~iff~ } \metaA\in\Delta.
+  \end{align*}
+
+  Assuming that $\metaB\notin\Delta$, we know that $\enot\metaB\in\Delta$ by \textbf{\ref{lemma:max}}.
+  Moreover, it is easy to derive $\enot\metaB\proves\metaB\eif\metaC$ since given $\enot\metaB$ as a premise, we may use the assumption rule AS to write $\metaB$ on a second line, deriving $\metaC$ by EFQ from $\S\ref{EFQ}$ and using conditional introduction $\eif$I to discharge the assumption.
+  % TODO: derive this in an earlier chapter
+  It follows that $\Delta\proves\metaB\eif\metaC$ by \textbf{\ref{lemma:prweak}}, and so $\metaB\eif\metaC\in\Delta$ by \textbf{\ref{lemma:deductive}}.
+
+  Assuming instead that $\metaC\in\Delta$, we may derive $\metaC\proves\metaB\eif\metaC$ since given $\metaC$ as a premise, we may use the assumption rule AS to write $\metaB$ on a second line.
+  % TODO: derive this in an earlier chapter
+  By then using the reiteration rule R, we may rewrite the premise $\metaC$, discharging our assumption with conditional introduction $\eif$I in order to derive $\metaB\eif\metaC$ from $\metaC$. 
+  Thus $\Delta\proves\metaB\eif\metaC$ by \textbf{\ref{lemma:prweak}}, and so $\metaB\eif\metaC\in\Delta$ by \textbf{\ref{lemma:deductive}}.
+  We may then conclude that $\metaB\eif\metaC\in\Delta$ if either $\metaB\notin\Delta$ or $\metaC\in\Delta$.
+
+  Assume instead that $\metaB\eif\metaC\in\Delta$.
+  If $\metaB\notin\Delta$, then $\metaB\notin\Delta$ or $\metaC\in\Delta$.
+  If $\metaB\in\Delta$, then $\Delta\proves\metaC$ by conditional elimination $\eif$E, and so $\metaC\in\Delta$ by \textbf{\ref{lemma:deductive}}.
+  Thus $\metaB\notin\Delta$ or $\metaC\in\Delta$ if $\metaB\eif\metaC\in\Delta$ which, given the above, establishes $(\eif)$.  
+
+  Additionally, $(\hspace{1.6pt}\star\hspace{1.6pt})$ holds by hypothesis, and the other biconditionals follow from the semantics for the conditional along with the case assumption.
+
+  \textit{Case 5:}
+  Assume $\metaA=\metaB\eiff\metaC$. (Exercise for the reader.)
+
+  \textit{Case 6:}
+  Assume $\metaA=\qt{\exists}{\alpha}\metaB$.
+  Since $\comp(\qt{\exists}{\alpha}\metaB)=\comp(\metaB)+1$ and $\comp(\metaA)=n+1$, it follows that $\comp(\metaB)=n$.
+  We may then reason as follows:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I_\Delta}{\va{a}}(\metaA)=1 &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\qt{\exists}{\alpha}\metaB)=1\\
+      % &\textit{ ~iff~ } \VV{\I_\Delta}{\va{c}}(\metaB)=1 \text{ for some } \alpha\text{-variant } \va{c} \text{ of } \va{a}\\
+      (\hspace{.7pt}\ast\hspace{.7pt}) &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\metaB\unisub{\beta}{\alpha})=1 \text{ for some constant } \beta\in\C\\
+      (\hspace{.7pt}\star\hspace{.7pt}) &\textit{ ~iff~ } \metaB\unisub{\beta}{\alpha}\in\Delta \text{ for some constant } \beta\in\C\\ 
+      (\exists) &\textit{ ~iff~ } \qt{\exists}{\alpha}\metaB\in\Delta \\
+      &\textit{ ~iff~ } \metaA\in\Delta.
+  \end{align*}
+
+  Assume $\metaB\unisub{\beta}{\alpha}\in\Delta$ for some constant $\beta\in\C$.
+  Thus $\Delta\proves \qt{\exists}{\alpha}\metaB$ by existential introduction $\exists$I, and so $\qt{\exists}{\alpha}\metaB\in\Delta$ by \textbf{\ref{lemma:deductive}}.
+  Assuming $\qt{\exists}{\alpha}\metaB\in\Delta$ instead, we know that $\metaB$ has at most one free variable $\alpha$, and so $\metaB=\metaA_i(\alpha_i)$ for some $i\in\N$ where $\alpha_i=\alpha$ by the enumeration given in $\S\ref{sub:Saturation}$.
+  Thus $\qt{\exists}{\alpha_i}\metaA_i\eif \metaA_i\unisub{n_i}{\alpha_i}\in\Delta$ by \textbf{\ref{lemma:include}}.
+  Since $n_i\in\C$, it follows that $\qt{\exists}{\alpha}\metaB\eif\metaB\unisub{\beta}{\alpha}\in\Delta$ for some $\beta\in\C$, and so $\Delta\proves\metaB\unisub{\beta}{\alpha}$ by conditional elimination $\eif$E. 
+  We may then conclude by \textbf{\ref{lemma:deductive}} that $\metaB\unisub{\beta}{\alpha}\in\Delta$, thereby establishing $(\exists)$.
+
+  Additionally, $(\hspace{.7pt}\star\hspace{.7pt})$ holds by hypothesis, $(\hspace{.7pt}\ast\hspace{.7pt})$ is given by \textbf{\ref{lemma:quantE}}, and the other biconditionals follow from the case assumption.
+
+  \textit{Case 7:}
+  Assume $\metaA=\qt{\forall}{\alpha}\metaB$.
+  Since $\comp(\qt{\forall}{\alpha}\metaB)=\comp(\metaB)+1$ and $\comp(\metaA)=n+1$, it follows that $\comp(\metaB)=n$.
+  We may then reason as follows:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I_\Delta}{\va{a}}(\metaA)=1 &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\qt{\forall}{\alpha}\metaB)=1\\
+      % &\textit{ ~iff~ } \VV{\I_\Delta}{\va{c}}(\metaB)=1 \text{ for some } \alpha\text{-variant } \va{c} \text{ of } \va{a}\\
+      (\hspace{.7pt}\ast\hspace{.7pt}) &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\metaB\unisub{\beta}{\alpha})=1 \text{ for every constant } \beta\in\C\\
+      (\hspace{.7pt}\star\hspace{.7pt}) &\textit{ ~iff~ } \metaB\unisub{\beta}{\alpha}\in\Delta \text{ for every constant } \beta\in\C\\ 
+      (\forall) &\textit{ ~iff~ } \qt{\forall}{\alpha}\metaB\in\Delta \\
+      &\textit{ ~iff~ } \metaA\in\Delta.
+  \end{align*}
+
+  Assume for contraposition that $\metaB\unisub{\beta}{\alpha}\notin\Delta$ for some constant $\beta\in\C$.
+  Thus $\enot\metaB\unisub{\beta}{\alpha}\in\Delta$ by \textbf{\ref{lemma:max}}.
+  Since $\enot\metaB$ has at most one free variable $\alpha$, we know that $\enot\metaB=\metaA_i(\alpha_i)$ for some $i\in\N$ where $\alpha_i=\alpha$ by the enumeration given in $\S\ref{sub:Saturation}$.
+  Thus $\qt{\exists}{\alpha_i}\metaA_i\eif\metaA_i\unisub{n_i}{\alpha_i}\in\Delta$ by \textbf{\ref{lemma:include}}.
+  Since $n_i\in\C$, it follows that $\qt{\exists}{\alpha}\enot\metaB\eif\enot\metaB\unisub{\beta}{\alpha}\in\Delta$ for some $\beta\in\C$, and so $\Delta\proves\enot\metaB\unisub{\beta}{\alpha}$ by conditional elimination $\eif$E. 
+  It follows by \textbf{\ref{lemma:deductive}} that $\enot\metaB\unisub{\beta}{\alpha}\in\Delta$, and so $\Delta\proves \qt{\exists}{\alpha}\enot\metaB$ by existential introduction $\exists$I. 
+  Since $\qt{\exists}{\alpha}\enot\metaB\proves\enot\qt{\forall}{\alpha}\metaB$ by $(\exists\enot)$ from \textbf{\ref{QER}}, it follows that $\Delta\proves\enot \qt{\forall}{\alpha}\metaB$ by \textbf{\ref{lemma:prweak}}. 
+  Thus $\enot\qt{\forall}{\alpha}\metaB\in\Delta$, and so $\qt{\forall}{\alpha}\metaB\notin\Delta$ by \textbf{\ref{lemma:max}}.
+  We may then conclude by contraposition that $\qt{\forall}{\alpha}\metaB\in\Delta$ if $\metaB\unisub{\beta}{\alpha}\in\Delta$ for every constant $\beta\in\C$.
+
+  Assume instead that $\qt{\forall}{\alpha}\metaB\in\Delta$ and let $\beta\in\C$ be arbitrary.
+  Thus $\Delta\proves\metaB\unisub{\beta}{\alpha}$ by universal elimination $\forall$E, and so $\metaB\unisub{\beta}{\alpha}\in\Delta$ by \textbf{\ref{lemma:deductive}}.
+  Generalising on $\beta$, it follows that $\metaB\unisub{\beta}{\alpha}\in\Delta$ for all $\beta\in\C$, thereby establishing $(\forall)$.
+  Additionally, $(\hspace{.7pt}\star\hspace{.7pt})$ holds by hypothesis, $(\hspace{.7pt}\ast\hspace{.7pt})$ is given by \textbf{\ref{lemma:quantA}}, and the other biconditionals follow from the case assumption.
+
+  \textit{Conclusion:}
+  It follows by induction that $\VV{\I_\Delta}{\va{a}}(\metaA)=1$ just in case $\metaA\in\Delta$ for any variable assignment $\va{a}$ and sentence $\metaA$ in QL$^=_{\N}$. 
+  Thus we have the following:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \M_\Delta \text{ satisfies } \metaA &\textit{ ~iff~ } \VV{\I_\Delta}{}(\metaA)=1\\
+    &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\metaA)=1 \text{ for some v.a. } \va{a}\\
+      &\textit{ ~iff~ } \metaA\in\Delta.
+  \end{align*}
+
+  This completes the proof.
+\end{quote}
 
 
 
@@ -97,8 +713,69 @@ Letting $\set{\metaA_i:\qt{\exists}{\alpha}\metaA_i}$
 \section{Satisfiability}%
   \label{sub:Satisfiability}
  
+It follows immediately from \textbf{\ref{lemma:truth}} that $\M_\Delta$ satisfies $\Delta$ and so $\M_\Delta$ satisfies $\Gamma$ since $\Gamma\subseteq\Delta$. 
+Nevertheless, since $\M_\Delta$ is a model of QL$^=_{\N}$ and not QL$^=$, it remains to show that $\Gamma$ is satisfied by a model of QL$^=$.
+Accordingly, we will restrict $\M_\Delta$ to QL$^=$ as follows: 
+  \begin{enumerate}[leftmargin=1.5in]
+    \item[\it Restriction:] $\I'_\Delta(\alpha)=[\alpha]_\Delta$ for every constant $\alpha$ in QL$^=$.
+    \item[~] $\I'_\Delta(\F^n)=\I_\Delta(\F^n)$ for all $n$-place predicates $\F^n$ and $n\in\N$. 
+  \end{enumerate}
+Since the predicates in QL$^=_{\N}$ are the same as those in QL$^=$, no change to the extensions of the $n$-place predicates is required.
+Given that our aim is to restrict consideration to the expressions in QL$^=$, it doesn't matter that the elements in $\D_\Delta$ may contain constants that do not belong to QL$^=$.
+So long as we are only interpreting constants and predicates that do belong to QL$^=$, the domain may contain anything whatsoever.
+Thus we may take $\D'_\Delta=\D_\Delta$ as before, letting $\M'_\Delta=\tuple{\D'_\Delta,\I'_\Delta}$ be the restriction of $\M$ to QL$^=$. 
+It is easy to show that $\M'_\Delta$ and $\M_\Delta$ satisfy the same QL$^=$ sentences, and so $\M'_\Delta$ satisfies $\Gamma$. 
 
+\begin{Lthm} \label{lemma:satrest}
+  For all QL$^=$ sentences $\metaA$, $\M'_\Delta$ satisfies $\metaA$ just in case $\M_\Delta$ satisfies $\metaA$.
+\end{Lthm}
 
+\begin{quote} 
+  \textit{Proof:} The proof goes by induction where the base cases are immediate from the restriction to the sentences of QL$^=$ together with the definition of $\M'_\Delta$.
+  The induction case is just as trivial, and so details will be omitted.
+
+  % TODO Use the \bref{lemma:model}
+
+  If $\M=\tuple{\D,\I}$ and $\M'=\tuple{\D,\I'}$ share the domain $\D$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and constant $\alpha$ that occurs in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any variable assignment $\va{a}$ over $\D$.
+\end{quote}
+
+Given that $\M_\Delta$ satisfies $\Gamma$ where every $\metaA\in\Gamma$ is a sentence of QL$^=$, it follows from \textbf{\ref{lemma:satrest}} that $\M'_\Delta$ satisfies $\Gamma$ where $\M'_\Delta$ is a QL$^=$ model. 
+Thus $\Gamma$ is satisfiable with respect to the models of QL$^=$.
+Since $\Gamma$ was any consistent set, we may draw the following conclusion:
+
+% \factoidbox{
+  \begin{Tthm} \label{thm:comp}
+    Every consistent set of QL$^=$ sentences $\Gamma$ is satisfiable. 
+  \end{Tthm}
+% }
+
+\begin{quote} 
+  \textit{Proof:} 
+  Assume $\Gamma$ is a consistent set of QL$^=$ sentences.
+  By \textbf{\ref{lemma:const}}, $\Gamma$ is a consistent set of QL$^=_{\N}$ sentences, and so $\Sigma_\Gamma$ is a consistent and saturated set of QL$^=_{\N}$ sentences by \textbf{\ref{lemma:sat}}. 
+  Given \textbf{\ref{lemma:max}} and \textbf{\ref{lemma:include}}, $\Delta_{\Sigma_\Gamma}$ is a saturated maximal consistent set of sentences in QL$^=_{\N}$ where $\Gamma\subseteq\Delta_{\Sigma_\Gamma}$.
+  Letting $\Delta=\Delta_{\Sigma_\Gamma}$, it follows that there is a Henkin model $\M_\Delta$ which satisfies $\metaA$ just in case $\metaA\in\Delta$.
+  As a result, $\M_\Delta$ satisfies $\Delta$, and since $\Gamma\subseteq\Delta$, we know that $\M_\Delta$ satisfies $\Gamma$.
+  Since $\Gamma$ is a set of QL$^=$ sentences, it follows by \textbf{\ref{lemma:satrest}} that there is a model QL$^=$ model $\M'_\Delta$ that satisfies $\Gamma$.
+  Thus $\Gamma$ is satisfiable.
+
+\end{quote}
+
+Given this result, the completeness of QD over the semantics for QL$^=$ follows as a corollary. 
+
+\begin{Cthm}[Completeness] \label{cor:Completeness}
+  If $\Gamma\models\metaA$, then $\Gamma\proves\metaA$.
+\end{Cthm}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\Gamma\models\metaA$ and let $\M=\tuple{\D,\I}$ be a model that satisfies $\Gamma$.
+  It follows that $\M$ satisfies $\metaA$, and so by \textbf{\ref{lemma:allvar}}, $\VV{\I}{\va{a}}(\metaA)=1$ for every variable assignment $\va{a}$.
+  Given the semantics for negation, $\VV{\I}{\va{a}}(\enot\metaA)\neq 1$ for every variable assignment $\va{a}$, and so $\VV{\I}{}(\enot\metaA)\neq 1$.
+  Thus $\M$ does not satisfy $\enot\metaA$.
+  By generalising on $\M$, no model that satisfies $\Gamma$ also satisfies $\enot\metaA$, and so $\Gamma\cup\set{\metaA}$ is unsatisfiable. 
+  By \textbf{\ref{thm:comp}}, $\Gamma\cup\set{\enot\metaA}$ is inconsistent, and so $\Gamma\proves\enot\enot\metaA$ by \textbf{\ref{lemma:incon}}.
+  Since $\enot\enot\metaA\proves\metaA$ by DN, we may conclude that $\Gamma\proves\metaA$ by \textbf{\ref{lemma:cut}}.
+\end{quote}
 
 
 \section{Conclusion}%

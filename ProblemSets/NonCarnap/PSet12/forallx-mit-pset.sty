@@ -50,8 +50,6 @@
 \newcommand{\J}{\mathcal{J}} %%
 \newcommand{\B}{\mathcal{B}} %%
 \newcommand{\M}{\mathcal{M}} %%
-\newcommand{\N}{\mathbb{N}} %%
-\newcommand{\C}{\mathbb{C}} %%
 \newcommand{\F}{\mathcal{F}} %%
 \newcommand{\D}{\mathbb{D}} %%
 \newcommand{\length}{\texttt{Length}} %%
@@ -130,84 +128,48 @@
 %   {\proof[#1]\leftskip=1cm\rightskip=1cm}
 %   {\endproof}
 
-\newtheoremstyle{Tthm}
-{.3in}                % Space above
-{}                % Space below
-{\normalfont}        % Theorem body font % (default is "\upshape")
-{}                % Indent amount
-{\bfseries}       % Theorem head font % (default is \mdseries)
-{}               % Punctuation after theorem head % default: no punctuation
-{.18in}               % Space after theorem head
-{}                % Theorem head spec
-\theoremstyle{Tthm}
-\newtheorem{Tthm}{}% theorem counter resets every \subsection
-\renewcommand{\theTthm}{Theorem \arabic{chapter}.\arabic{Tthm}}% Remove subsection from theorem counter representation
-
-
-\newtheoremstyle{Lthm}
-{.3in}                % Space above
-{}                % Space below
-{\normalfont}        % Theorem body font % (default is "\upshape")
-{}                % Indent amount
-{\bfseries}       % Theorem head font % (default is \mdseries)
-{}               % Punctuation after theorem head % default: no punctuation
-{.18in}               % Space after theorem head
-{}                % Theorem head spec
-\theoremstyle{Lthm}
-\newtheorem{Lthm}{}[chapter]% theorem counter resets every \subsection
-\renewcommand{\theLthm}{Lemma \arabic{chapter}.\arabic{Lthm}}% Remove subsection from theorem counter representation
-
-\newtheoremstyle{Cthm}
-{.3in}                % Space above
-{}                % Space below
-{\normalfont}        % Theorem body font % (default is "\upshape")
-{}                % Indent amount
-{\bfseries}       % Theorem head font % (default is \mdseries)
-{}               % Punctuation after theorem head % default: no punctuation
-{.18in}               % Space after theorem head
-{}                % Theorem head spec
-\theoremstyle{Cthm}
-\newtheorem{Cthm}{}[]% theorem counter resets every \subsection
-\renewcommand{\theCthm}{Corollary \arabic{chapter}.\arabic{Cthm}}% Remove subsection from theorem counter representation
-
-\newtheoremstyle{Rthm}
-{}                % Space above
-{}                % Space below
-{\normalfont}        % Theorem body font % (default is "\upshape")
-{}                % Indent amount
-{\bfseries}       % Theorem head font % (default is \mdseries)
-{}               % Punctuation after theorem head % default: no punctuation
-{4pt}               % Space after theorem head
-{}                % Theorem head spec
-\theoremstyle{Rthm}
-\newtheorem{Rthm}{}[]% theorem counter resets every \subsection
-\renewcommand{\theRthm}{Rule \arabic{Rthm}}% Remove subsection from theorem counter representation
-
-% \newtheorem{manualtheoreminner}{Theorem}
-% \newenvironment{Rthm}[1]{%
-%   \renewcommand\themanualtheoreminner{#1}%
-%   \manualtheoreminner
-% }{\endmanualtheoreminner}
+% \newtheoremstyle{Tthm}
+% {}                % Space above
+% {}                % Space below
+% {\normalfont}        % Theorem body font % (default is "\upshape")
+% {}                % Indent amount
+% {\bfseries}       % Theorem head font % (default is \mdseries)
+% {}               % Punctuation after theorem head % default: no punctuation
+% {.18in}               % Space after theorem head
+% {}                % Theorem head spec
+% \theoremstyle{Tthm}
+% \newtheorem{Tthm}{}% theorem counter resets every \subsection
+% \renewcommand{\theTthm}{T\arabic{theorem}}% Remove subsection from theorem counter representation
 %
-% \begin{Rthm}{}[title]\label{foo}
-% This is a theorem.
-% \end{Rthm}
-
-\newtheoremstyle{Pthm}
-{}                % Space above
-{}                % Space below
-{\normalfont}        % Theorem body font % (default is "\upshape")
-{}                % Indent amount
-{\bfseries}       % Theorem head font % (default is \mdseries)
-{}               % Punctuation after theorem head % default: no punctuation
-{.18in}               % Space after theorem head
-{}                % Theorem head spec
-\theoremstyle{Pthm}
-\newtheorem{Pthm}{}[subsection]% theorem counter resets every \subsection
-\renewcommand{\thePthm}{P\arabic{Pthm}}% Remove subsection from theorem counter representation
-
-\newcommand{\bref}[1]{\textbf{\ref{#1}}}
-
+%
+% \newtheoremstyle{Lthm}
+% {\topsep}                % Space above
+% {\topsep}                % Space below
+% {\normalfont}        % Theorem body font % (default is "\upshape")
+% {}                % Indent amount
+% {\bfseries}       % Theorem head font % (default is \mdseries)
+% {}               % Punctuation after theorem head % default: no punctuation
+% {.18in}               % Space after theorem head
+% {}                % Theorem head spec
+% \theoremstyle{Lthm}
+% \newtheorem{Lthm}{}[chapter]% theorem counter resets every \subsection
+% \renewcommand{\theLthm}{Lemma \arabic{chapter}.\arabic{Lthm}}% Remove subsection from theorem counter representation
+%
+% \newtheoremstyle{Pthm}
+% {}                % Space above
+% {}                % Space below
+% {\normalfont}        % Theorem body font % (default is "\upshape")
+% {}                % Indent amount
+% {\bfseries}       % Theorem head font % (default is \mdseries)
+% {}               % Punctuation after theorem head % default: no punctuation
+% {.18in}               % Space after theorem head
+% {}                % Theorem head spec
+% \theoremstyle{Pthm}
+% \newtheorem{Pthm}{}[subsection]% theorem counter resets every \subsection
+% \renewcommand{\thePthm}{P\arabic{Pthm}}% Remove subsection from theorem counter representation
+%
+% \newcommand{\bref}[1]{\textbf{\ref{#1}}}
+%
 
 
 %    ****************************************
@@ -298,8 +260,8 @@
 
 % Used in conjunction with {earg}, this handles the numbering and
 % references to example sentences:
-\newcounter{Example}[chapter]
-\newcommand*{\ex}[1]{\refstepcounter{Example}\arabic{Example}.\label{#1}}
+% \newcounter{Example}[chapter]
+% \newcommand*{\ex}[1]{\refstepcounter{Example}\arabic{Example}.\label{#1}}
 % Used in specifying partial models, this keeps the lines justified so
 % so that the = signs all line up. For example:
 %	\begin{partialmodel}
@@ -323,8 +285,8 @@
 %    ****************************************
 %    *          PRACTICE PROBLEMS           *
 %    ****************************************
-\newcounter{ProbPart}[chapter]
-\renewcommand{\theProbPart}{\Alph{ProbPart}}
+% \newcounter{ProbPart}[chapter]
+% \renewcommand{\theProbPart}{\Alph{ProbPart}}
 
 % This inserts a heading and resets the counter; labels with ch. number:
 \newcommand*{\practiceproblemsA}[1]{
@@ -391,10 +353,10 @@
 %    ****************************************
 %    *   TABLE OF CONTENTS, Headers  *
 %    ****************************************
-\setcounter{tocdepth}{1}
-% \setcounter{secnumdepth}{2}
-\renewcommand{\thechapter}{\arabic{chapter}}
-\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+% \setcounter{tocdepth}{1}
+% % \setcounter{secnumdepth}{2}
+% \renewcommand{\thechapter}{\arabic{chapter}}
+% \renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
 %\renewcommand{\thesubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}
 
 
@@ -438,14 +400,14 @@
 \renewcommand{\headrulewidth}{0pt}%gets rid of line
 }
 
-%\iffalse
-\renewcommand{\chaptermark}[1]{\markboth%redefines chaptermark 
-{\forallx}% defines book title as the \leftmark
-{\scshape Ch.~\thechapter\ #1}% defines chapter title as the \rightmark, and formats it 
-}
-\renewcommand{\sectionmark}[1]{}
-%\fi
-%\textrm{Ch.~\thechapter\ \MakeUppercase{#1}}  %alternate style for header 
+% %\iffalse
+% \renewcommand{\chaptermark}[1]{\markboth%redefines chaptermark 
+% {\forallx}% defines book title as the \leftmark
+% {\scshape Ch.~\thechapter\ #1}% defines chapter title as the \rightmark, and formats it 
+% }
+% \renewcommand{\sectionmark}[1]{}
+% %\fi
+% %\textrm{Ch.~\thechapter\ \MakeUppercase{#1}}  %alternate style for header 
 
 % Slightly decrease the spacing between the numbers of (sub)sections
 % and the name of the (sub)section to avoid overfull hboxes.

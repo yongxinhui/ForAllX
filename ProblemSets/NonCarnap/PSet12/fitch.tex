@@ -1,0 +1,198 @@
+%%%%%%%%%%%%%%%%%%%%%%%%% GENERAL INFORMATION %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% File Explanation:  LaTeX Macros for Fitch-Style subproofs, courtesy
+% of CSLI Publications.
+% 
+% Apparently, these were used in producing "Language, Proof and Logic",
+% by Jon Barwise and John Etchemendy.
+%
+% These comments prepared by Rich Thomason, rich@thomason.org.
+% Please send bug reports and/or improvements to me.
+%
+% EXERCISE: Figure out if you can how to do this with two macros:
+%        \subproof         3 arguments: HYPOTHESIS  
+%                                       HYPOTHESIS REASON, IF ANY
+%                                       STEPS 
+%        \e                2 arguments: STEP 
+%                                       STEP REASON, IF ANY
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%% INSTRUCTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% No general instructions included in this document.  Users need to
+% figure out how to enter subproofs from the attached sample.
+%
+
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% PART I: MACRO PACKAGE %%%%%%%%%%%%%%%%%%%%%%%%
+%
+
+\newcommand{\slider}{\mbox {$\triangleright \;$}}
+\newcommand{\mf}[1]{$\sf{#1}$}
+
+\def\tpskip{\vskip .25ex}
+\def\smllskip{\vskip .50ex}
+\def\mdskip{\vskip .75ex}
+\def\btskip{\vskip 1.00ex}
+
+% NOTE: \m should be set to the width of the slider
+\newdimen\m
+\setbox0=\hbox{\begin{tabular}{r@{}|}\slider\end{tabular}}
+\m=-\wd0
+
+\newdimen\fitchargone   \fitchargone 3.5in
+\newdimen\fitchone   \fitchone 2.5in
+\newdimen\fitchtwo   \fitchtwo 0pt
+\newdimen\fitchthree \fitchthree=\fitchtwo
+\advance\fitchthree by 10pt
+
+\newcommand{\fitchmain}[1]{\advance \fitchone by -\fitchthree%
+\hspace{\m}\begin{tabular}[t]{r@{}|p{\fitchone}@{}l}
+ \phantom{\slider} & & \\[-1.75ex]
+ #1 \\[-1.75ex] & & 
+ \end{tabular}}
+
+ %\Fitch creates a barrier flagged with 1st arg
+\newcommand{\Fitch}[2]{\advance \fitchone by -\fitchthree%
+\begin{tabular}[t]{p{0ex}l}%
+ #1& \hspace{\m}\begin{tabular}[t]{r@{}|p{\fitchone}@{}l}
+  \phantom{\slider} & & \\[-1.75ex]
+ #2 \\[-1.75ex] & & 
+ \end{tabular}\end{tabular} }
+
+ %Adjustable width \Fitch
+\newcommand{\adjFitch}[3]{\advance \fitchone by -\fitchthree%
+\begin{tabular}[t]{p{0ex}l}%
+ #2& \hspace{\m}\begin{tabular}[t]{r@{}|p{#1ex}@{}l}
+  \phantom{\slider} & & \\[-1.75ex]
+ #3 \\[-1.75ex] & & 
+ \end{tabular}\end{tabular} }
+
+\newcommand{\fitch}[2]{\advance \fitchone by -\fitchthree%
+\hspace*{.35em}\begin{tabular}[t]{|p{\fitchtwo}@{}p{\fitchone}@{}l}
+ \multicolumn{3}{@{}l@{}}{\ }\\[-2.35ex]
+  #1 \\ 
+  \ \\[-2.5ex] \cline{1-1}\\[-2ex]
+  #2 \\ \multicolumn{3}{@{}l@{}} \ \\[-2.35ex]
+ \end{tabular}}
+
+
+ %\FITCH creates flagged derivation with hypothesis
+\newcommand{\FITCH}[3]{\advance \fitchone by -\fitchthree%
+\hbox{\hspace*{.35em}
+ \raisebox{.2ex}{#1} \hspace*{-.3ex} 
+ \begin{tabular}[t]{|p{\fitchtwo}@{}p{\fitchone}@{}l}
+ \multicolumn{3}{@{}l@{}}{\ }\\[-2.35ex]
+ \raisebox{2.5ex}{\hspace*{0ex}}#2 \\ 
+  \ \\[-2.5ex] \cline{1-1}\\[-2ex]
+  #3 \\ \multicolumn{3}{@{}l@{}} \ \\[-2.35ex]
+ \end{tabular}}}
+
+
+ %\FITCH creates flagged derivation with hypothesis
+% \newcommand{\adjFITCH}[4]{\advance \fitchone by -\fitchthree%
+% \hbox{\hspace*{.35em}
+%  \raisebox{.2ex}{#2} \hspace*{-.3ex} 
+%  \begin{tabular}[t]{|p{\fitchone}@{}p{#1ex}@{}l}
+%  \multicolumn{3}{@{}l@{}}{\ }\\[-2.35ex]
+%  \raisebox{2.5ex}{\hspace*{0ex}}#3 \\ 
+%   \ \\[-2.5ex] \cline{1-1}\\[-2ex]
+%   #4 \\ \multicolumn{3}{@{}l@{}} \ \\[-2.35ex]
+%  \end{tabular}}}
+
+ \newcommand{\adjFITCH}[4]{\advance \fitchone by -\fitchthree%
+ \hbox{\hspace*{.35em}%
+ \raisebox{.2ex}{#2} \hspace*{-.3ex} 
+\begin{tabular}[t]{|p{\fitchtwo}@{}p{#1ex}@{}l}
+  \multicolumn{3}{@{}l@{}}{\ }\\[-2.35ex]
+   #3 \\ 
+   \ \\[-2.5ex] \cline{1-1}\\[-2ex]
+   #4 \\ \multicolumn{3}{@{}l@{}} \ \\[-2.35ex]
+  \end{tabular}}}
+ 
+
+ %FOR BODYLESS DERIVATIONS 
+\newcommand{\hyponly}[1]{
+   \hbox{\hspace*{2ex}\raisebox{-2.3ex}{\rule{.07ex}{4.4ex}}
+  \hspace*{-.8ex}\raisebox{-.7ex}{\rule{1.2ex}{.07ex}}\rule{0ex}{3ex}#1}
+ }
+
+\newcommand{\fitchsub}[1]
+{\advance \fitchone by -\fitchthree%
+\vspace*{-5pt}
+\begin{tabular}[t]{|p{\fitchtwo}@{}p{\fitchone}l}
+  #1 \\[-2pt] \end{tabular} }
+
+\newcommand{\fitcharg}[2]{\advance \fitchargone by -\fitchthree%
+\hspace*{.35em}\begin{tabular}[t]{|p{\fitchtwo}@{}p{\fitchargone}}
+ \multicolumn{2}{@{}l@{}}{\ }\\[-2.35ex]
+  #1 \\ 
+  \ \\[-2.5ex] \cline{1-1}\\[-2ex]
+  #2 \\ \multicolumn{2}{@{}l@{}} \ \\[-2.35ex]
+ \end{tabular}}
+
+% EXAMPLE:
+% \fitchmain{ & \fitch{ & {\sf P}    &    }
+%                     { & $\;\vdots$ & \\
+%                       & $\bot$     &    }
+%              & \\
+%     \slider & ${\sf \neg P}$              & }
+% 
+
+
+\newcommand{\nfitch}[3]{\advance \fitchone by -\fitchthree%
+\hspace*{.35em}\begin{tabular}[t]{|p{\fitchtwo}@{}p{\fitchone}@{}l}
+ \multicolumn{3}{l@{}@{}}{\ }\\[-2.35ex]
+  #1 \\ 
+  \ \\[-2.5ex] \cline{1-1}\\[-2ex]
+  #2 \\ \multicolumn{3}{@{}l@{}} \ \\[-2.35ex]
+ \end{tabular}}
+
+% TEMPLATE FOR EMBEDDED FITCH PROOFS
+%
+%  \fitchmain{ & 
+%               & \\
+%               & ${\sf \neg P}$              & 
+%             }
+%  
+
+\newcommand{\ef}{ \raisebox{-1.5ex}{\hspace*{0ex}}\\}
+
+
+
+\newcommand{\bigfitchmain}[1]{\advance \fitchone by -\fitchthree%
+\hspace{\m}\begin{tabular}[t]{r@{}|p{5in}@{}l}
+ \phantom{\slider} & & \\[-1.75ex]
+ #1 \\[-1.75ex] & & 
+ \end{tabular}}
+
+\newcommand{\adjfitchmain}[2]{\advance \fitchone by -\fitchthree%
+\hspace{\m}\begin{tabular}[t]{r@{}|p{#1ex}@{}l}
+ \phantom{\slider} & & \\[-1.75ex]
+ #2 \\[-1.75ex] & & 
+ \end{tabular}}
+
+\newcommand{\bigfitch}[2]{\advance \fitchone by -\fitchthree%
+\hspace*{.35em}\begin{tabular}[t]{|p{\fitchtwo}@{}p{5in}@{}l}
+ \multicolumn{3}{@{}l@{}}{\ }\\[-2.35ex]
+  #1 \\ 
+  \ \\[-2.5ex] \cline{1-1}\\[-2ex]
+  #2 \\ \multicolumn{3}{@{}l@{}} \ \\[-2.35ex]
+ \end{tabular}}
+
+\newcommand{\adjfitch}[3]{\advance \fitchone by -\fitchthree%
+\hspace*{.35em}\begin{tabular}[t]{|p{\fitchtwo}@{}p{#1ex}@{}l}
+ \multicolumn{3}{@{}l@{}}{\ }\\[-2.35ex]
+  #2 \\ 
+  \ \\[-2.5ex] \cline{1-1}\\[-2ex]
+  #3 \\ \multicolumn{3}{@{}l@{}} \ \\[-2.35ex]
+ \end{tabular}}
+
+\newcommand{\num}[1]{\begin{tabular}[t]{p{3.5ex}}
+ #1
+ \end{tabular}}
+
+\newcommand{\just}[1]{\begin{tabular}[t]{p{15ex}}
+ #1
+ \end{tabular}}
+

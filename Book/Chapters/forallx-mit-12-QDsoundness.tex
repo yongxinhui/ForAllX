@@ -2,6 +2,8 @@
 \chapter{The Soundness of QD}
   \label{ch.SoundQD}
 
+  % TODO: make existential case come before universal case throughout
+
 In Ch~\ref{ch.SLsoundcomplete}, we showed that the tree method was sound and complete with respect to the semantics for SL.
 In particular, soundness showed that whenever a tree with root $\Gamma\cup\set{\enot\metaA}$ closed, we could conclude that $\Gamma\cup\set{\enot\metaA}$ is unsatisfiable, and so $\Gamma \models \metaA$.
 As a result, we could rely on the tree method to evaluate whether the premises of an argument entailed its conclusion.
@@ -714,6 +716,12 @@ In slightly greater detail, the following lemma shows that replacing $\alpha$ wi
   It follows by hypothesis that $\VV{\I}{\va{a}}(\metaB)=\VV{\I}{\va{a}}(\metaB\unisub{\beta}{\alpha})$, and so $\VV{\I}{\va{a}}(\enot\metaB)=\VV{\I}{\va{a}}(\enot\metaB\unisub{\beta}{\alpha})$ by the semantics for negation.
   Thus $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ as desired. 
   % Since the cases for $\eand,\eor,\eif,$ and $\eiff$ are similar, these cases will be left as exercises for the reader.
+
+  % \textit{Case 2:} Assume that $\metaA=\metaB\eand\metaC$ where $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
+  % Since $\comp(\metaA)=n+1$ and $\comp(\metaB\eand\metaC)=\comp(\metaB)+\comp(\metaC)+1$, it follows that $\comp(\metaB),\comp(\metaC)\leq n$.
+  % It follows by hypothesis that $\VV{\I}{\va{a}}(\metaB)=\VV{\I}{\va{a}}(\metaB\unisub{\beta}{\alpha})$ and $\VV{\I}{\va{a}}(\metaC)=\VV{\I}{\va{a}}(\metaC\unisub{\beta}{\alpha})$, and so $\VV{\I}{\va{a}}(\metaB\eand\metaC)=\VV{\I}{\va{a}}((\metaB\eand\metaC)\unisub{\beta}{\alpha})$ by the semantics for conjunction.
+  % Thus $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ as desired. 
+  % % Since the cases for $\eand,\eor,\eif,$ and $\eiff$ are similar, these cases will be left as exercises for the reader.
 
   \textit{Case 6:} Assume $\metaA=\qt{\forall}{\gamma}\metaB$ where $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
   If $\gamma=\alpha$, if follows that $\alpha$ is not free in $\metaA$, and so $\metaA=\metaA\unisub{\beta}{\alpha}$.
