@@ -6,7 +6,7 @@
 
 I inherited a version of Ichikawa's {\tt forall\script{x}} from Josh Hunt who worked to bring the text closer to \textit{The Logic Book} by Bergmann, Moor, and Nelson for the purposes of teaching Logic I at MIT.
 Since then, I have dropped certain chapters, substantially rewritten the chapters that have been kept, and included two new chapters on soundness and completeness for a natural deduction system for first-order logic.
-I have maintained the list of changes that Josh Hunt has included, making a number additions.
+I have maintained a list of changes that I have made throughout the course of revising the textbook.
 
 \begin{itemize}
   \item Chapter 0 has been largely rewritten to provide a more compelling description of the subject matter of logic, and to remove some distracting glosses which may easily be misunderstood and confuse the introduction of the topic.
@@ -22,27 +22,6 @@ I have maintained the list of changes that Josh Hunt has included, making a numb
   \item Chapter 11 has been substantially rewritten. Substitution has been carefully defined and used to articulate the rules for the quantifiers and identity in a standard manner. The chapter closes with some discussion of undecidability, motivating proofs of soundness and completeness for QD instead of the tree method.
   \item Chapter 12 has been written from scratch, establishing the soundness of QD.
   \item Chapter 13 has been written from scratch, establishing the completeness of QD.
-  \item Rather than calling sentence letters of SL \textit{atomic}, this label has been saved for the simplest English sentences that one can symbolise with a sentence letter in SL as well as for the simplest wffs and sentences in QL.
-  \item Natural Deduction in Sentential Logic: Ichikawa's system has been modified to be in complete accordance with that in the \textit{Logic Book}.
-    This mainly involves relegating Disjunctive Syllogism to a derived rule, and modifying the justification syntax for indirect proofs.
-    Expository material from the Calgary edition of ForAllX has also been included.
-  \item To help integrate the text better with the online \textit{Carnap} proof checker, the syntax in the Selinger Fitch system has been adapted to mirror what students must enter into \textit{Carnap} for Natural Deduction proofs in system LogicBookSD.
-    One simply changes the \verb|\by{}{}| command to print the arguments in the opposite order, along with adding a colon first.
-    The commands \verb|\pr{}| and \verb|\as{}| have been added for premises and subproof assumptions.
-    Unfortunately, the \textit{Carnap} systems are very sensitive to syntax, and it seems cruel to ask students to learn a separate syntax for homework problems than the one they are reading in the text. %(I have also made the style file compatible with Kl{\"u}wer's Fitch system, but I don't recommend it, since it cannot be easily reformatted).
-  \item The quantifier/bound variable syntax has been adapted to match that of the \textit{Logic Book}.
-    System LogicBookPD accepts only `$(\exists x$)' and not `$\exists x$'.
-    To avoid this tedium in the future, all quantifier/bound variable instances are written with a command \verb|\qt{}{}| whose first argument takes the quantifier and second argument takes the bound variable.
-    This way, one can easily modify the formatting in the style file (e.g. removing or adding parentheses).
-    Again, it would seem cruel to ask students to remember that while in \textit{Carnap} using system LogicBookPD, they MUST put parentheses around $\exists x$ and $\forall x$, if that's not the format they're seeing in their text.
-  \item The recursive definition of truth-conditions in Quantifier Logic (QL) have been reworked.
-    Hopefully this makes it both (1) easier to understand and (2) slightly more precise.
-    Whereas Ichikawa refers to this aspect of formal semantics as giving a definition of `truth', it is more accurate to say that we are defining `truth-conditions'.
-    The truth-conditions for SL have been reworked in a similar vein.
-  \item A more detailed list of rule schemas for SL tree rules have been included in the appendix. 
-  \item The UBC edition tends to use the past-tense in a lot of places where the present-tense sounds better.
-    It is part of the conceptual grammar of logic (and mathematics) that it is timeless. 
-    The number of semi-colons and exclamation marks have also been reduced.
   \item Chapters have been rearranged and re-numbered so as to match the week numbers at MIT, starting with a half-week `0.'
     This way, most chapter numbers, week numbers, and problem set numbers coincide.
     Hopefully, this makes it easier to remember what we have to do each week.
