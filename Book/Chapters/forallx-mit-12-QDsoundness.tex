@@ -1159,7 +1159,7 @@ The result above completes the proof of \textit{Induction} which together with \
 % Since $\Gamma \proves_{\textsc{sd}}\metaA$ implies $\Gamma \proves_{\textsc{qd}}\metaA$, 
 Assuming that $\Gamma \proves_{\textsc{sd}}\metaA$ for sentences in SL, we may go on to observe that $\Gamma \proves_{\textsc{qd}}\metaA$ follows as an immediate consequence since QD includes all of the rules in SD where QL includes all the sentences in SL. 
 It follows that $\Gamma \models \metaA$ over the semantics for QL$^=$ by the soundness of QD. %, and so SD is also sound over the semantics for QL$=$.
-Given any SL interpretation $\I$ which satisfies $\Gamma$, we may construct a corresponding model $\M=\tuple{\D,\I'}$ which also satisfies $\Gamma$ by letting $\D=\set{a}$ where $\I'(\alpha)=a$ for all constants $\alpha$ and $\I'(\F^n)=\varnothing$ for all predicates $\F^n$.
+Given any SL interpretation $\I$ which satisfies $\Gamma$, we may construct a corresponding model $\M=\tuple{\D,\I'}$ which also satisfies $\Gamma$ by letting $\D=\set{a}$ where $\I'(\alpha)=a$ for all constants $\alpha$ and $\I'(\F^0)=\I(\F^0)$ for all predicates $\F^0$.
 Thus $\M$ satisfies $\metaA$ where it is easy to show that $\M$ satisfies $\metaA$ just in case $\I$ satisfies $\metaA$.
 Thus we may conclude that the SL interpretation $\I$ that we began with satisfies $\metaA$, and so $\Gamma \models \metaA$ over the semantics for SL. 
 As a result, SD is also sound over the semantics for SL.

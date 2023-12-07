@@ -66,7 +66,7 @@ In particular, we will take the domain $\D_\Delta$ to be sets of constants in ou
 Although these might be strange objects to include in a domain, nothing prevents us from using them to interpret QL$^=_{\N}$.
 So long as we have a nonempty set of them, we can proceed to interpret our predicates over this domain.
 
-Given $\D_{\Delta}$, we will specify referents and extensions for the constants and predicates of our language in such that the resulting model $\M_\Delta$ satisfies all and only the sentences that belong to $\Delta$.
+Given $\D_{\Delta}$, we will specify referents and extensions for the constants and predicates of our language in such a way that the resulting model $\M_\Delta$ satisfies all and only the sentences that belong to $\Delta$.
 As a result, $\M_\Delta$ satisfies $\Delta$, and since $\Gamma\subseteq\Delta$, we may conclude that $\Gamma$ is satisfiable. 
 Following tradition, we will refer to this cleverly constructed model $\M_\Delta$ as a Henkin model after Leon Henkin who first presented this proof strategy in 1949.
 
@@ -284,7 +284,7 @@ In order to establish these results, we will begin by proving the following supp
 
 
 \begin{Lthm} \label{lemma:prcut}
-  If $\Lambda \proves \metaA$ and $\Pi\cup{\metaA} \proves \metaB$, then $\Lambda\cup\Pi \proves \metaB$. 
+  If $\Lambda \proves \metaA$ and $\Pi\cup\set{\metaA} \proves \metaB$, then $\Lambda\cup\Pi \proves \metaB$. 
 \end{Lthm}
 
 \begin{quote} 
@@ -415,7 +415,7 @@ Consider the following:
     \item[\it Element:] $[\alpha]_\Delta=\set{\beta\in\C:\alpha=\beta\in\Delta}$.
     \item[\it Domain:] $\D_\Delta=\set{[\alpha]_\Delta:\alpha\in\C}$.
   \end{enumerate}
-The equivalence class $[\alpha]_\Delta$ is the set which includes every constant $\beta$ in $\C$ where the sentence $\alpha=\beta$ belongs to $\Delta$.
+The equivalence class $[\alpha]_\Delta$ is the set which includes constant $\beta$ in $\C$ just in case $\alpha=\beta$ belongs to $\Delta$.
 In order to show that $[\alpha]_\Delta\neq\varnothing$ for any constant $\alpha\in\C$, we begin by proving the following weakening principle which will be of general utility throughout the proof:
 
 
@@ -601,13 +601,13 @@ It remains to show that $\M_\Delta$ satisfies $\Delta$, and so satisfies $\Gamma
       &\textit{ ~iff~ } \VV{\I_\Delta}{\va{a}}(\alpha_1)=\VV{\I_\Delta}{\va{a}}(\alpha_2)\\
       &\textit{ ~iff~ } \I_\Delta(\alpha_1)=\I_\Delta(\alpha_2)\\
       &\textit{ ~iff~ } [\alpha_1]_\Delta=[\alpha_2]_\Delta\\
-      &\textit{ ~iff~ } \alpha_1=\alpha_2\in\Delta.
+      (\ast) &\textit{ ~iff~ } \alpha_1=\alpha_2\in\Delta.
   \end{align*}
 
   In support of the final biconditional, assume $[\alpha_1]_\Delta=[\alpha_2]_\Delta$.
   By \textbf{\ref{lemma:nonempty}}, we know that $\alpha_2\in[\alpha_2]_\Delta$, and so $\alpha_2\in[\alpha_1]_\Delta$.
   By definition, $\alpha_1=\alpha_2\in\Delta$.
-  Together with \textbf{\ref{lemma:define}}, we may conclude that $(\star)$ holds where the other biconditionals follow from the definitions and the assumption that $\alpha_1,\alpha_2\in\C$.
+  Together with \textbf{\ref{lemma:define}}, we may conclude that $(\ast)$ holds where the other biconditionals follow from the definitions and the assumption that $\alpha_1,\alpha_2\in\C$.
   It follows that $\M_\Delta$ satisfies $\metaA$ just in case $\metaA\in\Delta$ whenever $\comp(\metaA)=0$.
 
   \textit{Induction:}
@@ -868,7 +868,7 @@ However, there is another perspective which takes completeness to describe a cer
 
 We will close with an important consequence of completeness.
 
-\begin{Cthm}[Compactness] \label{cor:compact}
+\begin{Cthm} \label{cor:compact}
   If $\Gamma\models\metaA$, then there is a finite subset $\Lambda\subseteq\Gamma$ where $\Lambda\models\metaA$.
 \end{Cthm}
 
@@ -879,6 +879,21 @@ It follows by completeness that $\Gamma\proves\metaA$, and so there is a finite 
 Letting $\Gamma_X$ be the set of premises which appear in $X$, it follows that $\Gamma_X\proves\metaA$, and so $\Gamma_X\models\metaA$.
 Since $X$ is finite, $\Gamma_X$ is also finite, and so we may conclude that whenever $\Gamma\models\metaA$ there is a finite subset $\Lambda\subseteq\Gamma$ where $\Lambda\models\metaA$.
 \end{quote}
+
+
+
+\begin{Cthm}[Compactness] \label{cor:compact2}
+  $\Gamma$ is satisfiable if every finite subset $\Lambda\subseteq\Gamma$ is satisfiable.
+\end{Cthm}
+
+\begin{quote} 
+  \textit{Proof:} 
+  Assume for contraposition that $\Gamma$ is unsatisfiable. 
+  It follows vacuously that $\Gamma\models\bot$, and so $\Lambda\models\bot$ by \textbf{\ref{cor:compact}} for some finite subset $\Lambda\subseteq\Gamma$.
+  Thus there is some finite subset $\Lambda\subseteq\Gamma$ that is unsatisfiable. 
+  By contraposition, if every finite subset $\Lambda\subseteq\Gamma$ is satisfiable, then $\Gamma$ is satisfiable. 
+\end{quote}
+
 
 This property is referred to as \define{compactness}.
 Although compactness may seems like a nice property to have, it demonstrates that there cannot be sentences which are only entailed by infinitely many sentences.
