@@ -119,14 +119,14 @@
 \section*{Saturation}
 
 \begin{enumerate}
+  \item[\it Free:] Let $\metaA(\alpha)$ be a wff of QL$^=$ with at most one free variable $\alpha$.
   \item[\it Saturated:] A set of sentences $\Sigma$ is \define{saturated} in QL$^=_{\N}$ just in case for each wff $\metaA(\alpha)$ of QL$^=_{\N}$, there is a constant $\beta$ where $(\qt{\exists}{\alpha}\metaA \supset \metaA\unisub{\beta}{\alpha})\in\Sigma$.
   \item[\it Constants:] Let $\C$ be the constants of QL$^=_{\N}$ where $\N\subseteq\C$ are new constants.
   \item[\bf L13.2] Assuming $\Gamma$ is consistent in QL$^=$, we know $\Gamma$ is consistent in QL$^=_{\N}$.
-  \item[\it Free:] Let $\metaA(\alpha)$ be a wff of QL$^=$ with at most one free variable $\alpha$.
-  \item[\it Free Enumeration:] \mbox{Let $\metaA_0(\alpha_0),\metaA_1(\alpha_1),\metaA_2(\alpha_2),\ldots$ enumerate all wffs of QL$^=_{\N}$ with one free variable.}
-  \item[\it Witnesses:] \mbox{$\theta_0=(\qt{\exists}{\alpha_0}\metaA_0\supset \metaA_0\unisub{n_0}{\alpha_0})$ where $n_0\in\N$ is the first constant not in $\metaA_0$.}\vspace{.05in}\\
+  \item[\it Free Enumeration:] \mbox{Let $\metaA_1(\alpha_1),\metaA_2(\alpha_2),\metaA_3(\alpha_3),\ldots$ enumerate all wffs of QL$^=_{\N}$ with one free variable.}
+  \item[\it Witnesses:] \mbox{$\theta_1=(\qt{\exists}{\alpha_1}\metaA_1\supset \metaA_1\unisub{n_1}{\alpha_1})$ where $n_1\in\N$ is the first constant not in $\metaA_1$.}\vspace{.05in}\\
     $\theta_{k+1}=(\qt{\exists}{\alpha_{k+1}}\metaA_{k+1}\supset \metaA_{k+1}\unisub{n_{k+1}}{\alpha_{k+1}})$  where $n_{k+1}\in\N$ is the first constant not in $\theta_j$ for any $j\leq k$.
-  \item[\it Saturation:] Let $\Sigma_0 = \Gamma$, $\Sigma_{n+1} = \Sigma_n\cup\set{\theta_n}$, and $\Sigma_\Gamma = \bigcup_{i\in\N}\Sigma_n$.
+  \item[\it Saturation:] Let $\Sigma_1 = \Gamma$, $\Sigma_{n+1} = \Sigma_n\cup\set{\theta_n}$, and $\Sigma_\Gamma = \bigcup_{i\in\N}\Sigma_n$.
   \item[\bf L13.4] $\Sigma_\Gamma$ is consistent and saturated in QL$^=_{\N}$.
   \item If $\Sigma_{m+1}$ is inconsistent, then $\Sigma_m\proves \qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ and $\Sigma_m\proves\neg\metaA_{m+1}\unisub{n_{m+1}}{\alpha_{m+1}}$.
   \item So $\Sigma_m\proves \qt{\forall}{\alpha_{m+1}}\neg\metaA_{m+1}$ by $\forall$I, and so $\Sigma_m\proves \neg\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ by $\forall\neg$.

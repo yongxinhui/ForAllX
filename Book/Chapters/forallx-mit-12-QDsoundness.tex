@@ -133,12 +133,12 @@ These lemmas will play an important role throughout many of the proofs given bel
 
 
 \begin{Lthm} \label{lemma:live}
-  For any QD proof $X$, if $\metaA_k$ is live at line $n$ where $k\leq n$, then $\Gamma_k\subseteq \Gamma_{n}$.
+  For any QD proof $X$, if $\metaA_k$ is live at line $n+1$ where $k\leq n+1$, then $\Gamma_k\subseteq \Gamma_{n+1}$.
 \end{Lthm}
 % \vspace{-.3in}
 
 \begin{quote} 
-  \textit{Proof:} Let $X$ be a QD proof where $\metaA_k$ is live at line $n+1$ where $k\leq n$.
+  \textit{Proof:} Let $X$ be a QD proof where $\metaA_k$ is live at line $n+1$ where $k\leq n+1$.
   Assume for contradiction that some undischarged assumption $\metaB \in \Gamma_k$ is not live at $n+1$.
   It follows that $\metaB$ has been discharged at a line $j>k$, and so $\metaA_k$ is dead at $n+1$, contradicting the above.
   Thus $\Gamma_k\subseteq \Gamma_{n+1}$ as desired.

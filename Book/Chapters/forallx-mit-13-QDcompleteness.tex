@@ -174,10 +174,10 @@ Since $\Gamma$ is consistent in QL$^=$, we may conclude that $\Gamma$ is consist
 
 We will now move to extend $\Gamma$ to a saturated set of sentences.
 Letting $\metaA(\alpha)$ be a wff of QL$^=$ with at most one free variable $\alpha$, we may take a set of sentences $\Sigma$ to be \define{saturated} in QL$^=_{\N}$ just in case for each wff $\metaA(\alpha)$ of QL$^=_{\N}$, there is a constant $\beta$ where $(\qt{\exists}{\alpha}\metaA \eif \metaA\unisub{\beta}{\alpha})\in\Sigma$.
-In order to extend $\Gamma$ to a saturated set $\Sigma$, fix an enumeration $\metaA_0(\alpha_0),\metaA_1(\alpha_1),\metaA_2(\alpha_2),\ldots$ of all wffs of QL$^=_{\N}$ with one free variable. %, and let $n_0$ be the first natural number that does not occur in $\metaA_0(\alpha_0)$.
+In order to extend $\Gamma$ to a saturated set $\Sigma$, fix an enumeration $\metaA_1(\alpha_1),\metaA_2(\alpha_2),\metaA_3(\alpha_3),\ldots$ of all wffs of QL$^=_{\N}$ with one free variable. %, and let $n_0$ be the first natural number that does not occur in $\metaA_0(\alpha_0)$.
 We may then provide the following recursive definition:
 \begin{enumerate}[leftmargin=1in]
-  \item[\it $\theta$-Base:] $\theta_0=(\qt{\exists}{\alpha_0}\metaA_0\eif \metaA_0\unisub{n_0}{\alpha_0})$ where $n_0\in\N$ is the first constant not in $\metaA_0$.
+  \item[\it $\theta$-Base:] $\theta_1=(\qt{\exists}{\alpha_1}\metaA_1\eif \metaA_1\unisub{n_1}{\alpha_1})$ where $n_1\in\N$ is the first constant not in $\metaA_1$.
   \item[\it $\theta$-Recursion:] $\theta_{k+1}=(\qt{\exists}{\alpha_{k+1}}\metaA_{k+1}\eif \metaA_{k+1}\unisub{n_{k+1}}{\alpha_{k+1}})$  where $n_{k+1}\in\N$ is the first constant not in $\theta_j$ for any $j\leq k$.
 \end{enumerate}
 % TODO: show that there is a denumerable number of wffs of QL$^=$
