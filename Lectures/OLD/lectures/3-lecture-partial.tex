@@ -1,0 +1,140 @@
+﻿% !TeX root = ./3-handout.tex
+
+\setcounter{section}{2}
+\section{Mathematical Induction \& Recursive Definitions}
+
+\subsection{Intro to Math. Induction}
+
+\frame{\frametitle{A Super-natural example!}
+%\large
+\begin{itemize}[<+->]
+
+\item You're doing time in purgatory, and are automatically enrolled in philosophy (lucky you!)
+
+\item Good news: To pass your class, you just need to produce one satisfactory piece of work
+
+\item Bad news bears: your teacher is Gordon Ramsay, and he is never satisfied with any assignment
+
+\item Whenever you turn something in, Ramsay returns it with suggestions for improvement, with revisions due tomorrow
+
+\item How long should you expect to spend in this class?
+
+\end{itemize}
+}
+
+
+
+\frame{\frametitle{Mathematical Induction for SL Sentences}
+%\large
+
+If you want to prove that \emph{ALL} sentences (wffs) of SL have a particular property, it suffices to show the following:
+
+\begin{enumerate}[<+->]
+
+\item All \emph{atomic} sentences have that property (`\textbf{base case}')
+
+\item If \metav{A} and \metav{B} are two \emph{arbitrary wffs} with that property, then so are the sentences built out of them by adding a connective \\ \hspace{4em} `\textbf{Induction step}' (There are five cases to consider:) 
+
+\begin{enumerate}[(i)]
+  \item $\enot \metav{A}$
+  \item $(\metav{A}\eand\metav{B})$ 
+  \item $(\metav{A}\eor\metav{B})$ 
+  \item $(\metav{A}\eif\metav{B})$
+  \item $(\metav{A}\eiff\metav{B})$
+
+\end{enumerate}
+
+%\item \textit{Induction Step}: assume antecedent of point 2
+
+\end{enumerate}
+}
+
+
+\frame{\frametitle{A Simple Example}
+\large
+\begin{itemize}
+
+\item Prove by induction that every well-formed formulae (wff) of SL has exactly as many left parentheses as it has \\ right parentheses
+
+\item Don't forget to explicitly state the \textbf{base case}
+
+\item Don't forget to explicitly state the \textbf{Induction Step}!
+
+\end{itemize}
+}
+
+\frame{\frametitle{Three More Examples!}
+\large
+
+Prove the following by induction. Don't forget to explicitly state the base case and the induction step! 
+
+\begin{enumerate}[<+->]
+
+\item No wff begins or ends with a binary connective
+
+\item No wff contains two consecutive binary connectives (i.e. with no symbols between them)
+
+\item If a wff doesn't contain any binary connectives, then it is contingent. \normalsize{(hint: say that a wff is \textit{baller} if it either contains a binary connective or is contingent. Use induction to show that every wff is baller.)}
+
+\end{enumerate}
+}
+
+
+
+
+\frame{\frametitle{Two DISTINCT notions of `Induction' }
+%\large
+\begin{itemize}[<+->]
+
+\item \emph{Mathematical Induction} is completely different from \emph{scientific induction} or what we earlier called `inductive arguments' (which we contrasted with `deductive arguments')
+
+\item \emph{Mathematical Induction}: Rigorous method of proving that a property holds for an infinite number of cases. Follow the steps we've outlined!
+
+\item \emph{Scientific Induction}: fallible method of supporting a claim, based on a finite number of previous observations.
+
+  \begin{itemize}[<+->]
+
+\item All of the ravens I have ever seen are black
+
+\item Therefore, the next raven I see will be black 
+
+\item Notice how your conclusion could be wrong! Albino ravens!
+
+\end{itemize} 
+
+\end{itemize}
+}
+
+
+
+
+
+
+
+\iffalse
+\begin{frame}
+\frametitle{Sentence letters and connectives}
+
+  \begin{itemize}[<+->]
+    \item d
+    \emph{d} ($\enot$, $\eor$, $\eand$, $\eif$, $\eiff$)
+  
+  \begin{block}{blah}
+    \begin{itemize}[<+->]
+      \item[] d
+
+  \item[] d
+
+  \item[] d
+\end{itemize} 
+\end{block}
+
+  \begin{definition}
+  d
+  \end{definition}
+
+
+\end{itemize}
+\end{frame}
+
+\fi

@@ -1,0 +1,210 @@
+ \documentclass[12pt]{article}
+ 
+% \usepackage{0_Fitch_for_probs} 
+ 
+\usepackage{forallx-mit-exam} 
+\usepackage{geometry}
+\geometry{verbose,tmargin=.8in,bmargin=.6in,lmargin=1in,rmargin=1in}
+
+
+\usepackage{multicol}
+ 
+
+
+\usepackage{amsmath} %for align* environment and gather*
+% \usepackage{xref}
+ %    \textheight     10.0truein
+ % \usepackage{graphics}
+ \usepackage{pstricks}
+% \usepackage{pst-tree}
+% \usepackage{pst-node,pst-tree}
+ \usepackage{makeidx}
+ 
+
+ 
+%  %\usepackage{forallx-ubc-Hunt} %calls local modified style file, but could lead to conflicts. i ought to make my own `common.sty' file for the problem sets. maybe using the same `common' file as the lecture notes? i really ought to just have a single consistent set of style files for the book, problem sets, and lecture notes! 
+%  
+% \def\eor{\ensuremath{\eor}}
+% \def\eand{\ensuremath{\,\&\,}}
+% \def\eif{\ensuremath{\eif}}
+% \def\eiff{\ensuremath{\equiv}}
+% \def\enot{\ensuremath{{\sim}}}
+%
+% \let\oldsim\sim %renames any \sim commands as \oldsim. 
+% \renewcommand{\sim}{{\oldsim}} %redefines \sim as unary operator version of \sim, in case there are any straggling \sim commands in the wild
+%
+% % metalanguage variables: change greek to A and B if you prefer
+% \def\metaB{\ensuremath{\metaA}}
+% \def\metaA{\ensuremath{\varmetaB}}
+% \def\metaC{\ensuremath{\varOmega}}
+% \def\metaD{\ensuremath{\varDelta}}
+% \def\metaSetX{\ensuremath{\mathcal{X}}}
+% \def\metaSetY{\ensuremath{\mathcal{Y}}}
+% \def\metaSetZ{\ensuremath{\mathcal{Z}}}
+%
+% %Calgary script and metav commands: 
+% \newcommand*{\script}[1]{\ensuremath{\mathscr{#1}}} %previously had \mathcal here; getting an issue 
+% \newcommand*{\metav}[1]{\ensuremath{\mathcal{#1}}}
+%
+% \def\proves{\ensuremath{\vdash}}
+% \def\entails{\ensuremath{\vDash}}
+% \def\nproves{\ensuremath{\nvdash}}
+% \def\nentails{\ensuremath{\nvDash}}
+%
+% \newcommand{\qt}[2]{(#1 #2) \,}
+% \newcommand{\unisub}[2]{[#2/#1]}
+%
+% %JH: idea to use ceiling notation since this looks like a partial bracket, mirroring a partial substitution instance
+% %\newcommand{\unisubsome}[2]{\mbox{$\lceil#2/#1\rceil$}}
+%
+% %\newcommand*{\script}[1]{\ensuremath{\mathscr{#1}}}
+%
+% % \pagestyle{empty}
+%  
+ % Tree stuff
+ 
+% \iffalse %pre using 0_Fitch_for_probs.sty
+ 
+  \usepackage{prooftrees} %i copied over prooftrees file from ImetaCkawa source files, which I think is pre-2019 version
+  
+ %Note that I probably ought to just update my prooftrees package, since I downloaded the zip file and can just paste over the older version! (but who knows what else this could change...)
+%JRH: adding in definition of line no override, local option included in 2019 revision. since my prooftrees package is not up to date! 
+% see code here: https://tex.stackexchange.com/questions/415976/manually-set-line-numbers-if-prooftrees-sty
+% see p. 24 of prooftrees manual for directions on using this. works w/ {}, e.g. line no override={n+1}
+
+%the command `vdotsline' lets you put anything in number column, without a period appearing afterwards. so it's like `line no override' without \linenumberstyle
+%e.g. for vertical dots vertically aligned, use: vdotsline={\\[-0.55em] \vdots}
+
+\forestset{
+  line no override/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=\linenumberstyle{#1},
+        typeset node,
+      },
+    },
+  },
+  no line no/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=,
+        typeset node,
+      },
+    },
+  },
+  vdotsline/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=#1,
+        typeset node,
+      },
+    },
+  },
+  default preamble={
+	single branches,
+	close with=\ensuremath{\times},
+	just sep=1.75em,
+	line no sep=1.75em
+	}
+}
+
+%\fi 
+
+
+\begin{document}
+
+%\input macs
+%\input fitch
+\newcommand{\detritus}[1]{}
+
+
+\thispagestyle{empty}
+
+
+
+
+%\bigskip %\bigskip
+
+
+\begin{center}
+\large Final Review for Logic I: 24.241 \\[1ex] 
+% \normalsize (7 problems in 160 minutes + 10 minutes to check for errors)\\
+%   \vspace{.1in}
+% \normalsize --- 160 points total ---\\
+%   \vspace{.25in}
+% \normalsize (Please write your name, give yourself lots of room to work, and write clearly.)
+  % \vspace{.25in}
+\end{center}
+
+\noindent
+\textit{Note:} $\Gamma,\Delta$, and $\Lambda$ are sets of QL$^=$ sentences, and $\metaA,\metaB$, and $\metaC$ are QL$^=$ sentences.
+Unless otherwise stated, you may appeal to lemmas, corollaries, theorems, and derived rules.\\
+
+\begin{enumerate}
+
+  \item Regiment the following claims in QL$^=$, showing that it is contingent.
+
+  \begin{itemize}
+    \item Ankita was not the only gymnast to qualify.
+    % \item The gold medallist scored higher than all of the other gymnasts.
+  \end{itemize}
+
+  \item Regiment the following argument in QL$^=$, providing a proof in QD if valid, and a countermodel otherwise:
+
+  \begin{itemize}
+    \item Alan Turning was the only one who cracked the code. Someone who cracked the code was treated unfairly. Thus Alan Turning was treated unfairly.
+    % \item The only inhabitable planet is Earth. If an alien has visited Earth, there is another inhabitable planet besides Earth. Therefore no alien has visited Earth.
+  \end{itemize}
+
+  \item Prove the following by providing a derivation in QD or else provide a countermodel:
+
+    \begin{itemize}
+      \item If $R$ is reflexive, symmetric, and transitive, then $R$ is universal insofar as $\qt{\forall}{x}\qt{\forall}{y}Rxy$.
+    \end{itemize}
+
+
+  \item Consider a system QD$^-$ just like QD except that we replace the conditional elimination rule $\eif$E with the following alternative rule MT:
+
+    \begin{equation*}
+    \begin{nd}
+    \have[i]{i}{\metaA \eif \metaB}
+    \have[j]{j}{\enot\metaB}
+    % \ellipsesline
+    \have[n+1]{a}[\ ]{\enot\metaA}\by{MT}{i, j}
+    \end{nd}
+    \end{equation*}
+
+    Provide a proof (of the relevant induction case) or a counterexample for the following:
+
+    \begin{enumerate}
+      \item QD$^-$ is sound.
+      \item QD$^-$ is complete.
+    \end{enumerate}
+
+  \item Prove the following claims without appealing to any lemmas:
+    \begin{enumerate}
+      \item If $\Gamma$ is satisfiable, then $\Gamma$ is consistent.
+      \item If $\Lambda\cup\set{\metaA}$ is inconsistent, then $\Lambda\proves_{\textsc{qd}}\enot\metaA$.   
+      \item If $\Gamma \vdash_{\textsc{qd}} \metaA$ and $\Gamma \cup \set{\metaA}$ is inconsistent, then $\Gamma \vdash_{\textsc{qd}} \metaB$ if true.
+    \end{enumerate}
+
+
+  \item Assume that $\Delta$ is a maximal saturated consistent set of QL$^=$ sentences.
+  Prove:
+    \begin{enumerate}
+      \item $\enot (\metaA \eand \metaB) \in \Delta$ if and only if either $\enot\metaA\in \Delta$ or $\enot\metaB\in \Delta$.
+      \item If $\alpha$ occurs free in $\metaA$ and $\beta$ is a constant, then $\qt{\forall}{\alpha}\metaA \eand \enot\metaA\unisub{\beta}{\alpha} \notin \Delta$.
+    \end{enumerate}
+    
+
+  \item Prove that $\qt{\exists_{\geq n}}{x}Fx$ is satisfied by a model with at least $n$ elements in the domain, and not satisfied by a model with fewer than $n$ in the domain.
+
+\end{enumerate}
+
+
+
+
+
+
+
+\end{document}

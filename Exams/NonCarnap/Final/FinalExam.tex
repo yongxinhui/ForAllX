@@ -1,0 +1,281 @@
+ \documentclass[12pt]{article}
+ 
+% \usepackage{0_Fitch_for_probs} 
+ 
+\usepackage{forallx-mit-exam} 
+\usepackage{geometry}
+\geometry{verbose,tmargin=.8in,bmargin=.6in,lmargin=1in,rmargin=1in}
+
+
+\usepackage{multicol}
+ 
+
+
+\usepackage{amsmath} %for align* environment and gather*
+% \usepackage{xref}
+ %    \textheight     10.0truein
+ % \usepackage{graphics}
+ \usepackage{pstricks}
+% \usepackage{pst-tree}
+% \usepackage{pst-node,pst-tree}
+ \usepackage{makeidx}
+ 
+
+ 
+%  %\usepackage{forallx-ubc-Hunt} %calls local modified style file, but could lead to conflicts. i ought to make my own `common.sty' file for the problem sets. maybe using the same `common' file as the lecture notes? i really ought to just have a single consistent set of style files for the book, problem sets, and lecture notes! 
+%  
+% \def\eor{\ensuremath{\eor}}
+% \def\eand{\ensuremath{\,\&\,}}
+% \def\eif{\ensuremath{\eif}}
+% \def\eiff{\ensuremath{\equiv}}
+% \def\enot{\ensuremath{{\sim}}}
+%
+% \let\oldsim\sim %renames any \sim commands as \oldsim. 
+% \renewcommand{\sim}{{\oldsim}} %redefines \sim as unary operator version of \sim, in case there are any straggling \sim commands in the wild
+%
+% % metalanguage variables: change greek to A and B if you prefer
+% \def\metaB{\ensuremath{\metaA}}
+% \def\metaA{\ensuremath{\varmetaB}}
+% \def\metaC{\ensuremath{\varOmega}}
+% \def\metaD{\ensuremath{\varDelta}}
+% \def\metaSetX{\ensuremath{\mathcal{X}}}
+% \def\metaSetY{\ensuremath{\mathcal{Y}}}
+% \def\metaSetZ{\ensuremath{\mathcal{Z}}}
+%
+% %Calgary script and metav commands: 
+% \newcommand*{\script}[1]{\ensuremath{\mathscr{#1}}} %previously had \mathcal here; getting an issue 
+% \newcommand*{\metav}[1]{\ensuremath{\mathcal{#1}}}
+%
+% \def\proves{\ensuremath{\vdash}}
+% \def\entails{\ensuremath{\vDash}}
+% \def\nproves{\ensuremath{\nvdash}}
+% \def\nentails{\ensuremath{\nvDash}}
+%
+% \newcommand{\qt}[2]{(#1 #2) \,}
+% \newcommand{\unisub}[2]{[#2/#1]}
+%
+% %JH: idea to use ceiling notation since this looks like a partial bracket, mirroring a partial substitution instance
+% %\newcommand{\unisubsome}[2]{\mbox{$\lceil#2/#1\rceil$}}
+%
+% %\newcommand*{\script}[1]{\ensuremath{\mathscr{#1}}}
+%
+% % \pagestyle{empty}
+%  
+ % Tree stuff
+ 
+% \iffalse %pre using 0_Fitch_for_probs.sty
+ 
+  \usepackage{prooftrees} %i copied over prooftrees file from ImetaCkawa source files, which I think is pre-2019 version
+  
+ %Note that I probably ought to just update my prooftrees package, since I downloaded the zip file and can just paste over the older version! (but who knows what else this could change...)
+%JRH: adding in definition of line no override, local option included in 2019 revision. since my prooftrees package is not up to date! 
+% see code here: https://tex.stackexchange.com/questions/415976/manually-set-line-numbers-if-prooftrees-sty
+% see p. 24 of prooftrees manual for directions on using this. works w/ {}, e.g. line no override={n+1}
+
+%the command `vdotsline' lets you put anything in number column, without a period appearing afterwards. so it's like `line no override' without \linenumberstyle
+%e.g. for vertical dots vertically aligned, use: vdotsline={\\[-0.55em] \vdots}
+
+\forestset{
+  line no override/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=\linenumberstyle{#1},
+        typeset node,
+      },
+    },
+  },
+  no line no/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=,
+        typeset node,
+      },
+    },
+  },
+  vdotsline/.style={
+    before drawing tree={
+      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
+        content=#1,
+        typeset node,
+      },
+    },
+  },
+  default preamble={
+	single branches,
+	close with=\ensuremath{\times},
+	just sep=1.75em,
+	line no sep=1.75em
+	}
+}
+
+%\fi 
+
+
+\begin{document}
+
+%\input macs
+%\input fitch
+\newcommand{\detritus}[1]{}
+
+
+\thispagestyle{empty}
+
+
+
+
+%\bigskip %\bigskip
+
+
+\begin{center}
+\large Final Exam for Logic I: 24.241 \\[1ex] 
+\normalsize (7 problems in 160 minutes + 10 minutes to check for errors)\\
+  \vspace{.1in}
+\normalsize --- 160 points total ---\\
+  \vspace{.25in}
+\normalsize (Please write your name, give yourself lots of room to work, and write clearly.)
+  % \vspace{.25in}
+\end{center}
+
+\noindent
+\textit{Note:} $\Gamma,\Delta$, and $\Lambda$ are sets of QL$^=$ sentences, and $\metaA,\metaB$, and $\metaC$ are QL$^=$ sentences. 
+You may appeal to the lemmas, corollaries, theorems, and derived rules included on the next page.\\
+
+\begin{enumerate}
+
+  \item Regiment the following claims in QL$^=$ [4pts], showing that it is contingent [6pt].
+
+  \begin{enumerate}
+    \item Everyone everyone loves loves someone.
+    \item The gold medallist scored higher than all of the other gymnasts.
+  \end{enumerate}
+
+  \item Regiment the following argument in QL$^=$ [5pts], providing a proof in QD if valid and a countermodel otherwise [10pts]:
+
+  \begin{enumerate}
+    % \item Alan Turning was the only one who cracked the code. Someone who cracked the code was treated unfairly. Thus Alan Turning was treated unfairly.
+    \item The only inhabitable planet is Earth. If an alien has visited Earth, there is another inhabitable planet besides Earth. Therefore no alien has visited Earth.
+    \item Everyone who loves Meera is brave. Someone loves Meera but not everyone is brave. Thus there are at least two people.
+  \end{enumerate}
+
+  \item Prove the following by providing derivations in QD:
+    \begin{enumerate}
+      \item $\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z}((Rxy \eand Ryz) \eif \enot Rxz) \vdash \qt{\forall}{x}\enot Rxx$. [10pts]
+      \item $\qt{\forall}{x}\qt{\forall}{y}\ x=y \vdash \enot \qt{\exists}{x}\ a\neq x$. [10pts]
+    \end{enumerate}
+
+
+  \item Consider a system QD$^*$ just like QD except that we add a rule for negated disjunction introduction ($\enot\eor$I) which takes the following form:
+
+    \begin{equation*}
+    \begin{nd}
+    \have[i]{i}{\enot\metaA}
+    \have[j]{j}{\enot\metaB}
+    \ellipsesline
+    \have[n+1]{a}[\ ]{\enot(\metaA \eor \metaB)}\by{\enot \eor I}{i, j}
+    \end{nd}
+    \end{equation*}
+
+    \begin{enumerate}
+      \item Is QD$^*$ sound?
+        If so, prove that QD$^*$ is sound (you only need to check the relevant induction case).
+        Otherwise, provide a counterexample to soundness. [20pts]
+      \item Is QD$^*$ complete? If so, provide a proof. If not, provide a counterexample. [10pts] 
+    \end{enumerate}
+
+  \item Prove the following claims:
+    \begin{enumerate}
+      % \item If $\Gamma$ is satisfiable, then $\Gamma$ is consistent. [10pts]
+      \item If $\Lambda\vdash\metaA$ and $\Lambda\vdash\enot\metaA$, then $\Lambda$ is inconsistent. [10pts] 
+      \item If $\Gamma \cup \set{\metaA}$ and $\Delta \cup \set{\enot \metaA}$ are unsatisfiable, then $\Gamma \cup \Delta$ is inconsistent. [10pts] 
+    \end{enumerate}
+
+  % \item If $\Gamma \vdash_{\textsc{qd}} \metaA$ and $\Gamma \cup \set{\metaA}$ is inconsistent, prove that $\Gamma \vdash_{\textsc{qd}} \metaB$ if true, and otherwise prove that $\Gamma \nvdash_{\textsc{qd}} \metaB$. [15pts]
+
+  \item Assume that $\Delta$ is a maximal consistent set of QL$^=$ sentences.
+  Prove the following:
+    \begin{enumerate}
+      \item $\Delta\proves\metaA$ if and only if $\metaA\in\Delta$. [10pts]
+      \item $\enot (\metaA \eor \metaB) \in \Delta$ if and only if both $\enot\metaA\in \Delta$ and $\enot\metaB\in \Delta$. [10pts]
+      % \item $[\alpha]_\Delta=[\beta]_\Delta$ if and only if $\alpha=\beta\in\Delta$. [10pts]
+    \end{enumerate}
+    
+
+  % \item Prove that $\qt{\exists_{\geq n}}{x}Fx$ is satisfied by a model with at least $n$ elements in the domain, and not satisfied by a model with fewer than $n$ in the domain. [30pts] 
+
+  % \item Assume $\Gamma\models\metaA$.
+  %   Prove that there is a finite subset $\Lambda\subseteq\Gamma$ where $\Lambda\models\metaA$. [10pts]
+
+  \item Let $\qt{\exists_{<\infty}}{\alpha}$ be a quantifier which reads `there are at most finitely many' where $\qt{\exists_{<\infty}}{x}Fx$ is satisfied by a model just in case the extension of $F$ is finite. 
+    Consider the claim $\set{\qt{\exists_{\geq n}}{x}Fx:n\in\N}\vDash\enot \qt{\exists_{<\infty}}{x}Fx$. 
+    % Assuming that $\set{\qt{\exists_{\geq n}}{x}Fx:n\leq m}$ is satisfied by a finite for every $m\in\N$, 
+    Prove that $\qt{\exists_{<\infty}}{\alpha}$ is not definable in QL$^=$. [20pts]
+
+\end{enumerate}
+
+
+
+
+% \newpage
+
+\section*{Lemmas, Corollaries, and Theorems}
+
+
+\begin{enumerate}[itemsep=0in,leftmargin=.75in]
+\item[\bf L12.1:] If $\Gamma \models \metaA$ and $\Gamma \subseteq \Gamma'$, then $\Gamma' \models \metaA$.
+\item[\bf L12.2:] For any QD proof $X$, if $\metaA_k$ is live at line $n+1$ where $k\leq n+1$, then $\Gamma_k\subseteq \Gamma_{n+1}$.
+\item[\bf L12.7:] If $\Gamma \cup \set{\metaA} \models \metaB$, then $\Gamma \models \metaA \eif \metaB$.
+\item[\bf L12.12:] If $\Gamma \models \metaA$ and $\Sigma \cup \set{\metaA} \models \metaB$, then $\Gamma\cup\Sigma \models \metaB$.
+\item[\bf Soundness:] If $\Gamma\proves_{\textsc{qd}}\metaA$, then $\Gamma\models\metaA$.
+\item[\bf L13.3:] If $\Lambda\cup\set{\metaA}$ is inconsistent, then $\Lambda\proves\enot\metaA$.
+\item[\bf L13.5:] If $\Lambda \proves \metaA$ and $\Pi\cup\set{\metaA} \proves \metaB$, then $\Lambda\cup\Pi \proves \metaB$.
+\item[\bf L13.6:] If $\Lambda \cup \set{\metaA}$ and $\Lambda\cup \set{\enot\metaA}$ are both inconsistent, then $\Lambda$ is inconsistent.
+\item[\bf L13.9:] If $\Lambda\proves\metaA$, then $\Lambda\cup\Pi\proves\metaA$.
+\item[\bf T13.1:] Every consistent set of QL$^=$ sentences $\Gamma$ is satisfiable.
+\item[\bf Completeness:] If $\Gamma\models\metaA$, then $\Gamma\proves_{\textsc{qd}}\metaA$.
+% \item[\bf C13.2:] If $\Gamma\models\metaA$, then there is a finite subset $\Lambda\subseteq\Gamma$ where $\Lambda\models\metaA$.
+\item[\bf Compactness:] $\Gamma$ is satisfiable if every finite subset $\Lambda\subseteq\Gamma$ is satisfiable.
+\end{enumerate}
+
+
+
+
+
+
+\section*{Derived Rules}%
+  \label{sec:Rules}
+  
+\begin{enumerate}[itemsep=0in,leftmargin=.5in]
+  \begin{multicols}{2}
+  \item[(DS):] $\metaA \eor \metaB,\ \enot \metaA \vdash \metaB$.
+  \item[(MT):] $\metaA \eif \metaB,\ \enot\metaB\ \vdash \enot\metaA$.
+  \item[(CP):] $\metaA \eif \metaB\ \vdash \enot\metaB \eif \enot\metaA$.
+  \item[(BMT):] $\metaA \equiv \metaB,\ \enot\metaA\ \vdash \enot\metaB$.
+  \item[(BCP):] $\metaA \equiv \metaB\ \vdash \enot\metaB \equiv \enot\metaA$.
+  \item[(HS):] $\metaA \eif \metaB,\ \metaB \eif \metaC\ \vdash \metaA \eif \metaC$.
+  \item[(DL):] $\metaA \eor \metaB,\ \metaA \eif \metaC,\ \metaB \eif \metaC\ \vdash \metaC$.
+  \item[(EFQ):] $\metaA,\ \enot\metaA\ \vdash \metaB$.
+  \item[(LEM):] $\vdash \metaA\eor\enot\metaA$.
+  \item[(LNC):] $\vdash \enot(\metaA\eand\enot\metaA)$.
+  \item[($\eor$CM):] $\metaA \eor \metaB\ \vdash \metaB \eor \metaA$.
+  \item[($\eand$CM):] $\metaA \eand \metaB\ \vdash \metaB \eand \metaA$.
+  \item[($\equiv$CM):] $\metaA \equiv \metaB\ \vdash \metaB \equiv \metaA$.
+  \item[(DN):] $\enot\enot\metaA\ \dashv\vdash \metaA$.
+  \item[($\eor$C):] $\metaA \eif \metaB\ \dashv\vdash \enot\metaA \eor \metaB$.
+  \item[($\enot$C):] $\enot(\metaA \eif \metaB)\ \dashv\vdash \metaA \eand \enot \metaB$.
+  \item[($\eand$DM):] $\enot(\metaA\eand\metaB)\dashv\vdash\enot\metaA\eor\enot\metaB$.
+  \item[($\eor$DM):] $\enot(\metaA\eor\metaB)\dashv\vdash\enot\metaA\eand\enot\metaB$.
+  \item[($\eor$D):] $\metaA\eor(\metaB\eand\metaC) \dashv\vdash (\metaA\eor\metaB)\eand(\metaA\eor\metaC)$.
+  \item[($\eand$D):] $\metaA\eand(\metaB\eor\metaC) \dashv\vdash (\metaA\eand\metaB)\eor(\metaA\eand\metaC)$.
+  \item[($\eand$AB):] $\metaA\eand(\metaA\eor\metaB) \dashv\vdash \metaA$.
+  \item[($\eor$AB):] $\metaA\eor(\metaA\eand\metaB) \dashv\vdash \metaA$.
+  \item[($\eand$AS):] $\metaA\eand(\metaB\eand\metaC) \dashv\vdash (\metaA\eand\metaB)\eand\metaC$.
+  \item[($\eor$AS):] $\metaA\eor(\metaB\eor\metaC) \dashv\vdash (\metaA\eor\metaB)\eor\metaC$.
+  \item[($\enot\exists$)] $\enot\qt{\exists}{\alpha}\metaA \dashv\vdash \qt{\forall}{\alpha}\enot\metaA$.
+  \item[($\enot\forall$)] $\enot\qt{\forall}{\alpha}\metaA \dashv\vdash \qt{\exists}{\alpha}\enot\metaA$.
+  % \item[($\forall\enot$)] $\qt{\forall}{\alpha}\enot\metaA \vdash \enot\qt{\exists}{\alpha}\metaA$.
+  % \item[($\exists\enot$)] $\qt{\exists}{\alpha}\enot\metaA \vdash \enot\qt{\forall}{\alpha}\metaA$.
+  \end{multicols}
+\end{enumerate}
+
+
+\end{document}

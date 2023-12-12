@@ -1,0 +1,450 @@
+﻿% !TeX root = ./10-handout-old.tex
+
+\setcounter{section}{9}
+
+% %note to josh: think about using zach tutorial 7 as part of week 10 lecture material, along w/ stuff from GB on natural deduction! and also stuff i wrote for 303 discussion section 
+
+\section{Proofs in QL}
+
+\begin{frame}
+%\large
+
+\scriptsize{\tableofcontents}
+
+\end{frame}
+
+\subsection{Some Equivalences in QL}
+
+\begin{frame}
+\frametitle{Motivation: Proving Equivalences}
+%\large
+
+\begin{itemize}[<+->]
+
+\item We'd like to have a method for proving that two sentences are equivalent, or that an argument is valid 
+%along with a method for showing valid
+
+\item Models only provide counterexamples to equivalence or validity
+
+\item By extending our natural deduction system to cover QL, we'll be able to prove two sentences are equivalent! 
+
+\bi
+
+\item Derive one from the other and vice versa
+
+\item Basically: show that the biconditional of the two sentences is a tautology 
+
+\ei
+
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Some Equivalences: Quantifiers commuting over connectives}
+%\large
+
+\begin{enumerate}[<+->]
+
+\item $F\qv{a} \eand \qt{\exists}{x}G\qv{x}$ is equivalent to $\qt{\exists}{x}(F\qv{a} \eand G\qv{x})$
+
+\item $F\qv{a} \eand \qt{\forall}{x}G\qv{x}$ is equivalent to $\qt{\forall}{x}(F\qv{a} \eand G\qv{x})$
+
+\item $F\qv{a} \eor \qt{\exists}{x}G\qv{x}$ is equivalent to $\qt{\exists}{x}(F\qv{a} \eor G\qv{x})$
+
+\item $F\qv{a} \eor \qt{\forall}{x}G\qv{x}$ is equivalent to $\qt{\forall}{x}(F\qv{a} \eor G\qv{x})$
+
+\item $F\qv{a} \eif \qt{\exists}{x}G\qv{x}$ is equivalent to $\qt{\exists}{x}(F\qv{a} \eif G\qv{x})$
+
+\item $F\qv{a} \eif \qt{\forall}{x}G\qv{x}$ is equivalent to $\qt{\forall}{x}(F\qv{a} \eif G\qv{x})$
+
+\item[] -- But note that `$\eif$' is not symmetric, so we have to examine the converse: e.g. $\qt{\exists}{x}G\qv{x} \eif F\qv{a}$!
+
+\item[] -- And there are no analogous rules for biconditionals 
+
+
+\end{enumerate}
+%ask what happens if we put $F\qv{a}$ in the consequent, 
+\end{frame}
+
+\begin{frame}
+\frametitle{Quantifiers NOT commuting over some conditionals}
+%\large
+
+`$\eif$' is not symmetric, so we have to examine the converse %: e.g. $\qt{\exists}{x}G\qv{x}$ \eif F\qv{a}$!
+
+\begin{enumerate}[<+->]
+
+\item[bad:] $\qt{\exists}{x}G\qv{x} \eif F\qv{a}$ is NOT equivalent to $\qt{\exists}{x}(G\qv{x} \eif F\qv{a})$
+
+\item[] Instead, the existential converts to a universal when we scope over the consequent:
+
+\item[7.] $\qt{\exists}{x}G\qv{x} \eif F\qv{a}$ is equivalent to  $\qt{\forall}{x}(G\qv{x} \eif F\qv{a})$
+
+\item[bad:] $\qt{\forall}{x}G\qv{x} \eif F\qv{a}$ is NOT equivalent to $\qt{\forall}{x}(G\qv{x} \eif F\qv{a})$
+
+\item[] Instead, the universal converts to an existential when we scope over the consequent:
+
+\item[8.] $\qt{\forall}{x}G\qv{x} \eif F\qv{a}$ is equivalent to  $\qt{\exists}{x}(G\qv{x} \eif F\qv{a})$
+
+
+\end{enumerate}
+
+%ask what happens if we put $F\qv{a}$ in the consequent, 
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Informal Argument: If anyone G's, then c F's}
+%\large
+
+\begin{itemize}[<+->]
+
+\item[7.] $\qt{\exists}{x}G\qv{x} \eif F\qv{c}$ is equivalent to $\qt{\forall}{x}(G\qv{x} \eif F\qv{c})$
+
+\item Recall: ``Any'' in antecedents but \emph{without} pronouns referring back to
+  them are \emph{existential}:
+  \begin{itemize}[<+->]
+    \item[] If \emph{anyone} is a hero, Greta is.
+    \item[] Roughly: if there are heroes (at all), Greta is a hero.
+    \item[] \alert{$\qt{\exists}{x}\, H\qv{x} \eif H\qv{g}$}
+    %need to check restrictions on parentheses here! recall some tricky stuff...
+  \end{itemize}
+
+%\item Gloss: If anyone G's, then c F's
+
+\item Intuitively: for everybody, if they are a hero, then Greta is a hero
+
+\bi
+ \item[] \alert{$\qt{\forall}{x}(H\qv{x} \eif H\qv{g})$}
+\ei
+
+\item We would like to show that if we can derive one of these sentences, then we can derive the other. 
+
+\item[] Our proof system will show this \textit{naturally}!
+
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Informal Argument: If everyone G's, then c F's}
+%\large
+
+%note to Josh: this is related to hw problem 8.6:
+
+%likewise, explain why the following solN to 8.6 does NOT work:
+
+%(Ax)((Gx& Jc) > Pa)
+%If everyone graduates and Carol gets a job, then Alice will become a physician. : correct answer: (((\forall x)Gx & Jc) > Pa)
+
+\begin{itemize}[<+->]
+
+\item[8.] $\qt{\forall}{x}G\qv{x} \eif F\qv{c}$ is equivalent to  $\qt{\exists}{x}(G\qv{x} \eif F\qv{c})$
+
+\item By truth conditions for `$\eif$', first sentence is equivalent to:
+
+\item[] $\enot \qt{\forall}{x}G\qv{x} \eor F\qv{c}$
+
+\item[] Apply de Morgan's: $\qt{\exists}{x}\enot G\qv{x} \eor F\qv{c}$
+
+\item Now apply our rule 3: existential commutes over disjunction (provided the disjunct doesn't contain the bound variable $x$)
+
+\item[] $\qt{\exists}{x}(\enot G\qv{x} \eor F\qv{c})$, and apply `$\eif$' truth conditions again:
+
+\item Yields $\qt{\exists}{x}(G\qv{x} \eif F\qv{c})$
+
+\end{itemize}
+\end{frame}
+
+
+
+
+\subsection{Rules for $\forall$}
+
+\begin{frame}
+\frametitle{Rules for formal proofs}
+
+\begin{itemize}[<+->]
+\item Need rules for $\forall$ and $\exists$ for formal proofs
+\item Formal proofs now more important, because no alternative
+  (truth-table method)
+\item Intro and Elim rules should be
+\begin{itemize}[<+->]
+\item simple
+\item elegant (not involve other connectives or quantifiers)
+\item yield only valid arguments
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Candidates for rules}
+
+\begin{itemize}[<+->]
+\item Only simple sentence close to $\qt{\forall}{x}\, \metav{A}\qv{\script{x}}$ is
+$\metav A\qv{\script{c}}$
+\item Gives simple, elegant $\forall$E rule:
+
+\begin{fitchproof}
+\have[k]{a}{\qt{\forall}{\script{x}}\, \metav A\qv{\script{x}}}
+\have[ ]{b}{\metav A\qv{\script{c}}}\Ae{a}
+	%\have[m]{a}{\qt{\forall}{\script{x}}\metaA{}(\dots \script{x} \dots \script{x} \dots)}
+	%\have [\vdots] {n} {\hspace{2em} \vdots}
+	%\have[s]{c}{\metaA{}(\dots \script{c} \dots \script{c} \dots)} \Ae{a}
+	%\have[\ ]{c}{\metaA{}\substitute{\script{x}}{\script{c}}} \Ae{a}
+\end{fitchproof}
+
+\bigskip
+
+\item This is a good rule: $\qt{\forall}{\script{x}}\,\metav A\qv{\script{x}}
+\models \metav A\qv{\script{c}}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Candidates for rules}
+
+\begin{itemize}[<+->]
+\item Problem: corresponding ``intro rule'' isn't valid:
+\begin{fitchproof}
+\have[k]{a}{\metav A\qv{\script{c}}}
+\have[ ]{b}{\qt{\forall}{\script{x}}\,\metav A\qv{\script{x}}}\by{\emph{(doesn't follow)}}{a}
+\end{fitchproof}
+\item Diagnosis: the $\script{c}$ in $\metav A\qv{\script{c}}$ is a name for
+a \emph{specific object}.
+\item We need a name for an \emph{arbitrary,
+unspecified object}.
+\item If $\metav A\qv{\script{c}}$ is true for whatever $\script{c}$
+\emph{could} name, then $\metav A\qv{\script{x}}$ is satisfied by \emph{every} object.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Names for arbitrary objects}
+
+\begin{itemize}[<+->]
+\item When we give proofs of general claims, we often do use names for
+arbitrary objects (well, mathematicians do at least).
+
+\begin{earg}
+\item[] All heroes admire Greta.
+\item[] Only people who wear capes admire Greta.
+\item[\therefore] All heroes wear capes.
+\end{earg}
+\pause
+Proof: Let Carl be any hero.  \\ Since all heroes admire Greta, Carl
+admires Greta. \\ Since only people who wear capes admire Greta, Carl wears a cape. But ``Carl'' stands for \emph{any} hero. \\ So all heroes
+wear capes.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Universal generalization}
+
+\begin{fitchproof}
+  \have[k]{a}{\metav{A}\qv{\script{c}}}
+  \have[ ]{b}{\qt{\forall}{\script{x}}\,\metav{A}\qv{\script{x}}}\Ai{a}
+\end{fitchproof}
+  \begin{itemize}[<+->]
+  \item $\script{c}$ is special: $\script{c}$ must not appear in any
+  premise or assumption of a subproof not already ended
+  \item $\metav{A}\qv{\script{x}}$ is obtained from $\metav{A}\qv{\script{c}}$ by replacing \emph{all} occurrences of $\script{c}$ by $\script{x}$.
+  \item In other words, $\script{c}$ must also not occur in $\forall
+  \script{x}\,\metav{A}\qv{\script{x}}$.
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{General conditional proof}
+
+Proving ``All $A$s are $B$s''
+
+\begin{fitchproof}
+  \open
+  \hypo[k]{a}{A\qv{c}} \as{for $\eif$I}
+  \have[l]{b}{B\qv{c}}
+  \close
+  \have{c}{A\qv{c} \eif B\qv{c}}\ci{a-b}
+  \have{d}{\qt{\forall}{x}(A\qv{x} \eif B\qv{x})}\Ai{c}
+\end{fitchproof}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example}
+
+\begin{earg}
+  \item[] All heroes admire Greta.
+  \item[] Only people who wear capes admire Greta.
+  \item[\therefore] All heroes wear capes.
+\end{earg}
+
+\bigskip
+
+\begin{earg}
+  \item[] $\qt{\forall}{x}(H\qv{x} \eif A\qr{x}{g})$
+  \item[] $\qt{\forall}{x}(A\qr{x}{g} \eif C\qv{x})$
+  \item[\therefore] $\qt{\forall}{x}(H\qv{x} \eif C\qv{x})$
+\end{earg}
+
+Let's do it \href{https://tinyurl.com/4dst762n}{on Carnap (PP10.2)}!
+
+%\href{https://carnap.io/shared/rzach@ucalgary.ca/Practice\%20Problems\%20VII.md}{carnap.io}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example}
+\small
+\begin{fitchproof}
+  \hypo{a}{\qt{\forall}{x}(H\qv{x} \eif A\qr{x}{g})} \pr{}
+  \hypo{b}{\qt{\forall}{x}(A\qr{x}{g} \eif C\qv{x})} \pr{}
+  \open
+  \hypo{c}{H\qv{c}} \as{for $\eif$I}
+  \have{d}{H\qv{c} \eif A\qr{c}{g}}\Ae{a}
+  \have{e}{A\qr{c}{g}}\ce{d,c}
+  \have{f}{A\qr{c}{g} \eif C\qv{c}}\Ae{b}
+  \have{g}{C\qv{c}}\ce{f,e}
+  \close
+  \have{h}{H\qv{c} \eif C\qv{c}}\ci{c-g}
+  \have{i}{\qt{\forall}{x}(H\qv{x} \eif C\qv{x})}\Ai{h}
+\end{fitchproof}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example}
+  \small
+  \begin{fitchproof}
+    \hypo{1}{\qt{\forall}{x}\,A\qv{x} \eor \qt{\forall}{x}\, B\qv{x}} \pr{}
+    \open
+    \hypo{2}{\qt{\forall}{x}\,A\qv{x}} \as{for $\lor$E}
+    \have{3}{A\qv{c}}\Ae{2}
+    \have{4}{A\qv{c} \eor B\qv{c}}\oi{3}
+\close
+\open
+\hypo{5}{\qt{\forall}{x}\,B\qv{x}} \as{for $\lor$E}
+\have{6}{B\qv{c}}\Ae{5}
+\have{7}{A\qv{c} \eor B\qv{c}}\oi{6}
+\close
+  \have{8}{A\qv{c} \eor B\qv{c}}\oe{1,2-4,5-7}
+  \have{9}{\qt{\forall}{x}(A\qv{x} \eor B\qv{x})}\Ai{8}
+  \end{fitchproof}
+  \end{frame}
+
+\subsection{Rules for $\exists$}
+
+\begin{frame}
+\frametitle{Rules for $\exists$}
+
+\begin{itemize}[<+->]
+\item If we know of a specific object that it satisfies $\metav A\qv{x}$, we know that at least one object satisfies $\metav A\qv{x}$.
+\item So this rule is valid:
+\begin{fitchproof}
+  \have[k]{a}{\metav A\qv{\script{c}}}
+  \have[ ]{b}{\qt{\exists}{\script{x}}\, \metav A\qv{\script{x}}}\Ei{a}
+\end{fitchproof}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Arbitrary objects again}
+
+\begin{itemize}
+  \item Problem: corresponding ``elimination rule'' isn't valid:
+  \bigskip
+  \begin{fitchproof}
+    \have[k]{a}{\qt{\exists}{\script{x}}\, \metav A\qv{\script{x}}}
+    \have[ ]{b}{\metav A\qv{\script{c}}}\by{\emph{doesn't follow from}}{a}
+  \end{fitchproof}
+  \bigskip
+  \item If we know that $\qt{\exists}{\script{x}}\, \metav A\qv{\script{x}}$ is
+  true, we know that \emph{at least one} object satisfies $\metav A\qv{\script{x}}$, but not which one(s).
+\item To use this information, we have to introduce a temporary name
+that stands for any one of the objects that satisfy $\metav A(\script{x})$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Reasoning from existential information}
+
+  \begin{itemize}
+    \item To use $\qt{\exists}{\script{x}}\,\metav A\qv{\script{x}}$, pretend the
+    $\script{x}$ has a name~$\script{c}$, and reason from $\metav A(\script{c})$.
+    \item This is what we do to reason informally from existential information, e.g.,
+  \begin{earg}
+  \item[] There are heroes who wear capes.
+  \item[] Anyone who wears a cape admires Greta.
+  \item[\therefore] Some heroes admire Greta.
+  \end{earg}
+
+\pause
+Proof: We know there are heroes who wear capes. \\ Let Cate be an
+arbitrary one of them. \\ So Cate wears a cape. Since anyone who wears a
+cape admires Greta, Cate admires Greta. Since Cate is a hero who
+admires Greta, some heroes admire Greta.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Existential elimination (mind the \emph{restriction}!)}
+
+\begin{itemize}[<+->]
+  \item If
+  \begin{itemize}[<+->]
+    \item we know that some object satisfies $\metav A\qv{\script{x}}$,
+    \item we hypothetically assume that $c$ is one of them (i.e.,
+  assume $\metav A\qv{\script{c}}$), 
+    \item and we can prove that $\metav B$ follows from this assumption,
+\end{itemize}
+\item[] then $\metav B$ follows already from $\qt{\exists}{\script{x}}\, \metav A\qv{\script{x}}$.
+\item Rule for existential elimination:
+
+\begin{fitchproof}
+  \have[k]{a}{\qt{\exists}{\script{x}}\, \metav A\qv{\script{x}}}
+  \open
+  \hypo[m]{b}{\metav A\qv{\script{c}}} \as{for $\exists$E}
+  \have[n]{c}{\metav B}
+\close
+\have[ ]{d}{\metav B}\Ee{a,b-c}
+\end{fitchproof}
+\medskip
+\item $\script{c}$ is special: $\script{c}$ \emph{must NOT appear outside subproof}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example}
+
+\begin{earg}
+  \item[] There are heroes who wear capes.
+  \item[] Anyone who wears a cape admires Greta.
+  \item[\therefore] Some heroes admire Greta.
+\end{earg}
+\bigskip
+\begin{earg}
+  \item[] $\qt{\exists}{x}(H\qv{x} \eand C\qv{x})$
+  \item[] $\qt{\forall}{x}(C\qv{x} \eif A\qr{x}{g})$
+  \item[\therefore] $\qt{\exists}{x}(H\qv{x} \eand A\qr{x}{g})$
+\end{earg}
+\end{frame}
+
+\begin{frame}
+\frametitle{Example (PP10.5)}
+\footnotesize
+\begin{fitchproof}
+  \hypo{a}{\qt{\exists}{x}(H\qv{x} \eand C\qv{x})} \pr{}
+  \hypo{b}{\qt{\forall}{x}(C\qv{x} \eif A\qr{x}{g}} \pr{}
+  \open
+  \hypo{c}{H\qv{c} \eand C\qv{c}} \as{for $\exists$E}
+  \have{d}{C\qv{c}}\ae{c}
+  \have{e}{C\qv{c} \eif A\qr{c}{g}}\Ae{b}
+  \have{f}{A\qr{c}{g}}\ce{d,e}
+  \have{g}{H\qv{c}}\ae{c}
+  \have{h}{H\qv{c} \eand A\qr{c}{g}}\ai{d,g}
+  \have{i}{\qt{\exists}{x}(H\qv{x} \eand A\qr{x}{g})}\Ei{h}
+  \close
+  \have{j}{\qt{\exists}{x}(H\qv{x} \eand A\qr{x}{g})}\Ei{a,c-i}
+\end{fitchproof}
+\end{frame}
+

@@ -1,48 +1,13 @@
 # TODO
 
-## Course Work
+## Book
 
-- [x] Week 0
-    - [x] Carnap Problem Set 0
-    - [x] Personal Information
-    - [x] Carnap Problem Set 1
-- [x] Week 1
-    - [x] Edit Ch 1
-    - [x] Carnap Problem Set 2
-    - [x] Link Van reading
-    - [x] Handout Th
-    - [x] Define arguments in ch. 2
-    - [x] Talk to Gareth
-    - [x] Chapter 2.4 onwards
-    - [x] Chapter 3
-- [x] Week 2
-    - [x] Edit Chapter 4
-    - [x] Paper Problem Set 3
-    - [x] Handout Tu
-    - [x] Handout Th
-- [x] Week 3
-- [x] Week 4
-    - [x] Edit Ch. 5
-        - [x] Soundness
-        - [x] Completeness
-    - [x] Tu Handout
-    - [x] Th Handout
-    - [x] Problem Set 5
-- [x] Week 5
-- [ ] Week 6
-    - [ ] Ch. 6 - Derived Rules
-    - [ ] Th handout
-    - [ ] Midterm review
-    - [x] Submit grades
-- [ ] Week 7
-- [ ] Week 8
-- [ ] Week 9
-- [ ] Week 10
-- [ ] Week 11
-    - [ ] Tu handout
-- [ ] Week 12
-    - [ ] write soundness for QD
-- [ ] Week 13
-    - [ ] write completeness for QD
-- [ ] Week 14
-- [ ] Week 15
+- [ ] revise chapters as described in the preface
+- [ ] integrate problem sets for the course
+- [ ] integrate review materials for each exam
+- [ ] include a glossary of terms
+- [ ] include a set theory appendix
+
+## Carnap
+
+- [ ] revise problem sets

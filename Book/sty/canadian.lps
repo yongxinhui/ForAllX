@@ -1,0 +1,92 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% File canadian.lps
+%%
+%% Canadian style for lecture planning
+%%
+%% This file is part of the jslectureplanner bundle.
+%%
+%% Author: Richard Zach <rzach@ucalgary.ca>
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2003/12/01 or later.
+%%
+%% This work has the LPPL maintenance status "maintained".
+%% 
+%% The Current Maintainer of this work is Juergen Spitzmueller.
+%%
+%% Code repository and issue tracker: https://github.com/jspitz/jslectureplanner
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%
+% Localization of the default strings used by the jslectureplanner
+% package for Canada
+%
+
+% Lecture types
+\DefLecType{lec}{LEC}{Lecture}{class}% lecture
+\DefLecType{tut}{TUT}{Tutorial}{class}% section
+\DefLecType{lab}{LAB}{Laboratory}{lab}% lab
+
+% Term types
+\DefSemType{f}{F}{Fall Term}% fall term
+\DefSemType{w}{W}{Winter Term}% winter term
+\DefSemType{sp}{Sp}{Spring Term}% spring half-term
+\DefSemType{su}{Su}{Summer Term}% summer half-term
+
+% Date format -- use ISO
+% Uses datetime2 syntax:
+% ##1: year
+% ##2: month
+% ##3: day
+% \DTMtwodigits: always output two digits
+\DTMrenewdatestyle{lecdate}{% long date
+\renewcommand*{\DTMdisplaydate}[4]{\DTMweekdayname{##4},
+\DTMmonthname{##2} \DTMtwodigits{##3}, ##1}%
+}
+
+\DTMrenewdatestyle{lecshortdate}{% short date: Day~Mon~dd
+\renewcommand*{\DTMdisplaydate}[4]{\DTMshortweekdayname{##4}
+\DTMshortmonthname{##2} \DTMtwodigits{##3}}%
+}
+
+% Suffix to cancelled sessions
+\renewcommand*\leccancel{\ -- No \lectypesession}
+
+% Program heading
+\renewcommand*\lecprogram{Schedule}
+
+% Indentation of program list
+\renewcommand*\lecprogramlistindent{\textbf{88/88}}
+
+% Session topic placeholder
+\renewcommand*\sestopic{Topic~\thesestopic}
+
+%
+% Strings used by the jsmembertable package
+% NOTE that these have to be defined via \newcommand
+%
+
+% 1.) Session column header
+\newcommand*\jsmsession{\lectypesession}%
+\newcommand*\jsmsessionheader{\textbf{\jsmsession~\thesession}}%
+
+% 2.) Student Name
+\newcommand*\jsmnameheader{\textbf{Last name, First name}}
+
+% 3.) Student ID
+\newcommand*\jsmidheader{\textbf{Student ID}}
+
+% 3.) E-Mail
+\newcommand*\jsemailheader{\textbf{Email Address}}
+
+% 4.) Signature advice
+\newcommand*\jssigheader{Student's signature}
+
+
+% Finis

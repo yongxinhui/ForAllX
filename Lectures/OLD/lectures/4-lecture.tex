@@ -1,0 +1,1413 @@
+﻿% !TeX root = ./4-handout.tex
+
+\setcounter{section}{3}
+\section{Truth Trees}
+
+\begin{frame}
+%\large
+
+\scriptsize{\tableofcontents}
+
+\end{frame}
+
+\subsection{Why Trees?}
+
+\begin{frame}
+\frametitle{Why Trees?}
+%\large
+
+\begin{itemize}[<+->]
+
+\item Truth tables become a bit tedious to work with
+
+\item We would like a more streamlined method for checking INconsistency (i.e. UNsatisfiability) and validity
+
+\item Trees are often faster and have less `irrelevant' information
+
+% Although, see rest all exercise 4.6: trees are no better than truthtables for worst case complexity
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Why not `Partial Truth Tables' (PTTs)?}
+%\large
+
+\begin{itemize}[<+->]
+
+\item Couldn't we just look at the `relevant' lines in a truth table?
+
+\item e.g. are the following sentences consistent? 
+
+\item $P \eand Q$; $\enot (P \eif \enot Q)$; $(S \eand R) \eor \enot J$
+%consistent: first two sentences are equivalent; would be a 32 line truth table
+
+\item What about $P \eand Q$; $\enot (P \eif \enot Q)$; $(S \eand R) \eor \enot J$; $\enot (S \eor R) \eand J$
+%could make last sentence a full negation, so that we demonstrate how the preceding formulae actually provide a valid argument for the non-negated last sentence 
+
+\medskip 
+
+\begin{itemize}
+
+\item Showing this formally would require a 32 row truth table...
+
+\item But the answer is clear from reasoning about truth conditions  
+
+\end{itemize}
+
+% Moral here is that the first two sentences are inconsistent, but to formally show this in a truth table would require showing every line, which would suck
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Where Partial Truth Tables shine}
+%\large
+
+The method of partial truth tables is already rigorous in cases where a single truth value assignment (TVA) suffices for an answer:
+
+\begin{enumerate}[<+->]
+
+\item Consistent set of sentences:
+
+\begin{itemize}
+
+\item Sufficient to find one TVA on which each sentence is true  
+
+\end{itemize}
+
+\item Invalid argument:
+
+\bi
+
+\item Find one TVA where premises are true but conclusion is false
+
+\ei 
+
+\item Logically inequivalent sentences:
+
+\begin{itemize}
+
+\item Suffices to find one TVA where they differ in truth value  
+
+\end{itemize}
+
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Where Partial Truth Tables Falter}
+%\large
+
+So far, our only rigorous method for answering some questions \textit{requires} a complete truth table, even when the answer is `obvious'
+
+\begin{enumerate}[<+->]
+
+\item INconsistent set of sentences:
+
+\begin{itemize}
+
+\item Need to show that NO TVA makes every sentence true  
+
+\end{itemize}
+
+\item Valid argument:
+
+\bi
+
+\item Need to show there is NO TVA where the premises are true but the conclusion is false
+
+\ei 
+
+\item Logically equivalent sentences:
+
+\begin{itemize}
+
+\item Need to show that the sentences agree on EVERY TVA 
+
+\end{itemize}
+
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Motivation for Trees (System STD)}
+%\large
+
+\begin{itemize}[<+->]
+
+\item Trees formalize our pattern of thinking when making PTTs
+
+\begin{itemize}
+
+\item For proofs of consistency, invalidity, or inequivalence, there is really little difference
+
+\item Trees basically `keep track of our mental work'
+
+\end{itemize}
+
+\bigskip
+
+\item But for validity, inconsistency, and logical equivalence, we really get something new:
+% %and perhaps this is intellectually significant! a genuine difference in terms of what we need to know (although w/ trees we also technically need to know the soundness and completeness results)
+
+\item Trees formalize our `shortcut' arguments  without needing to consider every TVA to the relevant atomic sentences
+
+\medskip 
+
+\item \scriptsize{(Although to be fair, the rigor of this `shortcut' is beholden to our soundness result. \\ But that's work you do once and then have FOREVER---much like a diploma!)}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Similarities with Truth Tables}
+%\large
+
+\begin{itemize}[<+->]
+
+\item Like truth tables, trees are \textit{mechanical}:
+
+\bigskip
+
+\bi
+\item No insight or creativity required (woooooooo!)
+
+\item Just execute the resolution `algorithm'
+\ei
+
+\bigskip 
+
+\item Trees give equivalent answers to truth tables
+
+\begin{itemize}
+
+\item Will prove this soon (soundness and completeness of STD)  
+
+\end{itemize}
+
+%\item Both are equally slow in worst-case scenarios
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{What we will do (soon!) to Demonstrate `Rigor'}
+%\large
+
+% % It's perhaps interesting to think about why we do not have to demonstrate soundness and completeness results for truthtables. It is almost as if the syntax for truthtables is constitutive of the semantics.
+
+% Could also make some verbal remarks about the notion of mathematical rigor, and how this has evolved over time. And how it might still be contested today, and issues of how rigorous physics ought to be remain highly relevant. Different methodological styles in physics and mathematical physics
+
+\begin{itemize}[<+->]
+
+\item By proving that our tree system is \textit{sound}, we show that these shortcut arguments are rigorous (they never lead us astray)
+
+\medskip 
+
+\bi
+
+\item \emph{Sound}: Single turnstile entails Double Turnstile 
+
+\item (syntactic to semantic: i.e. we chose `good' rules!)
+
+\ei
+
+\bigskip 
+
+\item By proving that our tree system is \textit{complete}, we will show that we never need truth tables: trees suffice
+
+\medskip 
+
+\bi
+
+\item \emph{Complete}: Double Turnstile entails  Single turnstile  
+
+\item (semantic notions are fully covered by our syntactic rules)
+
+\item (Means: we wrote down \textit{enough} rules!)
+
+\ei
+
+\end{itemize}
+\end{frame}
+
+
+\subsection{Tree Rules (trees rule!)}
+
+\begin{frame}
+\frametitle{Sentential Tree Derivations (STD)}
+%\large
+
+\begin{itemize}[<+->]
+
+\item The method of trees is our first derivation system
+
+\item To distinguish it from our later natural deduction (ND) systems, we will call this system `Sentential Tree Derivations' (STD)!
+
+\item As a proof system, it comes with its very own single turnstile: \\ \makebox[\textwidth]{$\vdash_{STD}$}
+
+\item As a proof system, it is \textit{purely syntactic}: it is defined entirely in terms of legal rules, with no explicit mention of truth or falsity 
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Whence these rules?}
+%\large
+
+\begin{itemize}[<+->]
+
+\item For negation, we have a single rule: double negation elimination
+
+\item For each binary connective, we have two rules: \\ one for an unnegated sentence; one for a negated sentence 
+
+\item Where do these rules come from? 
+
+\item They come from the truth conditions for the connectives
+
+\item If you think about what it means for a formula to be true, you can always derive the rules
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Stacking vs. Splitting (aka `branching')}
+%\large
+
+\begin{itemize}[<+->]
+
+\item There are two basic kinds of rules, \\ coming from conjunction and disjunction:
+
+\item Stacking: resolve $A \eand B$ into `$A$ stacked on $B$'
+
+\begin{itemize}
+
+\item Idea: for a conjunction to be true, both conjuncts must be true  
+
+\end{itemize}
+
+\bigskip
+
+\item Splitting: resolve $A \eor B$ into an $A$-branch and a $B$-branch
+
+\begin{itemize}
+
+\item Idea: for a disjunction to be true, either disjunct must be true
+
+\end{itemize}
+
+\bigskip 
+
+\item Atomic formulae and their negations can't be further resolved 
+
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Your Very First Tree}
+%\large
+
+\begin{itemize}[<+->]
+
+%\item Let's grow our first tree! 
+
+\item Use a tree to determine whether the following sentences are consistent (i.e. jointly satisfiable):
+
+%\item[] 
+\makebox[\textwidth]{$\enot A \eand \enot D$; $C \eand (B \eor A) $; $\enot B \eor C$; $\enot D \eand \enot F$}
+
+\item Some things to NEVER forget!
+
+\bi
+
+\item Each formula gets its own line, replete with line NUMBER
+
+\item Justify new `nodes' by citing the line number of a formula you are `resolving'; note the rule you applied in the far right `column' 
+
+\item Put a check `$\checkmark$' next to a formula once you resolve it
+
+\item (Perhaps put a colon `:' before each justification, in order to get used to what \textit{Carnap} requires for natural deduction, e.g. :3 \eand)
+
+\ei 
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{The Rules in Themselves}
+%\large
+
+Let's go through the rules!
+
+\begin{enumerate}[<+->]
+
+\item Double negation (elimination)
+
+\item Conjunction and Negated conjunction
+
+\item Disjunction and Negated disjunction
+
+\item Conditional and Negated conditional
+
+\item Biconditional and Negated biconditional
+
+\begin{itemize}
+
+\item Motivation: $A \eand B$ branch or $\enot A \eand \enot B$ branch   
+
+\end{itemize}
+
+\end{enumerate}
+\end{frame}
+
+\begin{frame}
+\frametitle{Double Negation}
+%\large
+
+\makebox[\textwidth]{\textit{Double Negation} (\enot)} \vspace{1em}
+\begin{center}
+\begin{prooftree}
+{line numbering}
+[\enot\enot\metaA{}, line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\metaA{}, line no override={j}, just={m \enot}
+	]
+	]
+]
+\end{prooftree}
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Conjunction and Negated Conjunction}
+%\large
+
+\begin{multicols}{2}
+
+\textit{Conjunction} (\eand) \vspace{1em}
+\begin{center}
+%\textit{Conjunction} (\eand) %\vspace{-1em}
+\begin{prooftree} % CONJUNCTION 
+{line numbering}
+[\metaA{}\eand\metaB{}, line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\metaA{}, line no override={j}, just={m \eand}
+	[\metaB{}, grouped, line no override={j+1}
+	]
+	]
+	]
+]
+\end{prooftree}
+\end{center}
+
+\columnbreak
+
+\textit{Negated Conjunction} (\enot \eand) \vspace{1em}
+\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\enot(\metaA{}\eand\metaB{}), line no override={m}
+[\vdots,vdotsline={\\[-0.55em] \vdots}, grouped
+	[\enot\metaA{}, line no override={j}, just={m \enot \eand}]
+	[\enot\metaB{}]
+]
+]
+\end{prooftree}
+\end{center}
+
+\end{multicols}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Disjunction and Negated Disjunction}
+%\large
+
+\begin{multicols}{2}
+
+\textit{Disjunction} (\eor) \vspace{1em}
+\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\metaA{}\eor\metaB{}, line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\metaA{}, line no override={j}, just={m \eor}]
+	[\metaB{}]
+]
+]
+\end{prooftree}
+\end{center}
+
+\columnbreak
+
+\textit{Negated Disjunction} (\enot \eor) \vspace{1em}
+\begin{center}
+\begin{prooftree} %NEGATED DISJUNCTION 
+{line numbering, single branches}
+[\enot(\metaA{}\eor\metaB{}), line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\enot\metaA{}, line no override={j}, just={m \enot \eor}
+	[\enot\metaB{}, grouped,  line no override={j+1}
+	]
+	]
+]
+]
+\end{prooftree}
+\end{center}
+
+\end{multicols}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Conditional and Negated Conditional}
+%\large
+
+\begin{multicols}{2}
+
+\textit{Conditional} (\eif) \vspace{1em}
+\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\metaA{}\eif\metaB{}, line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\enot\metaA{}, line no override={j}, just={m \eif}]
+	[\metaB{}]
+]
+]
+\end{prooftree}
+\end{center}
+
+\columnbreak
+
+\textit{Negated Conditional} (\enot \eif) \vspace{1em}
+\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\enot(\metaA{}\eif\metaB{}), line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\metaA{}, line no override={j}, just={m \enot \eif}
+	[\enot\metaB{}, grouped, line no override={j+1}
+	]
+	]
+]
+]
+\end{prooftree}
+\end{center}
+
+\end{multicols}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Biconditional and Negated Biconditional}
+%\large
+
+\begin{multicols}{2}
+
+\textit{Biconditional} (\eiff) \vspace{1em}
+\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\metaA{}\eiff\metaB{}, line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\metaA{}, line no override={j}, just={m \eiff}
+		[\metaB{}, grouped, line no override={j+1}]
+	]
+	[\enot\metaA{}
+		[\enot\metaB{}, grouped]
+	]
+]
+]
+\end{prooftree}
+\end{center}
+
+\columnbreak
+
+\textit{Negated Biconditional} (\enot \eiff) \vspace{1em}
+\begin{center}
+\begin{prooftree}
+{line numbering, single branches}
+[\enot(\metaA{}\eiff\metaB{}), line no override={m}
+[\vdots, vdotsline={\\[-0.55em] \vdots}, grouped
+	[\metaA{}, line no override={j}, just={m \enot \eiff}
+		[\enot\metaB{}, grouped]
+	]
+	[\enot\metaA{}
+		[\metaB{}, grouped, line no override={j+1}]
+	]
+]
+]
+\end{prooftree}
+\end{center}
+
+\end{multicols}
+
+\end{frame} 
+
+\subsection{Grow your own Trees!}
+
+\begin{frame}
+\frametitle{Planting Trees}
+%\large
+
+  \begin{block}{The Root of the Tree}
+    \begin{itemize}[<+->]
+      \item[] You begin a tree by writing a list of formula(s)
+
+\item Every formula sits on its own line number
+
+  \item This list is called the \emph{root} of the tree
+
+  \item[] (The list is finite and non-empty; contains at least one formula)
+\end{itemize} 
+\end{block}
+
+\begin{itemize}[<+->]
+
+\item Grow your tree by adding \emph{nodes}
+
+\item We count the root as a `node' as well 
+
+\item Each non-root node contains \textit{one or two} wffs (per the rules) \\ each new node is connected to the node above it
+
+% False statement I said on Monday lecture 4a: \item Each formula we add gets its own line number \\ (so the line numbers correspond to formulae, NOT nodes)
+
+\item Introduce a new line number for every new (row of) sentence(s) \\ (line numbers correspond to (rows of) sentence(s), NOT nodes)
+%%but even this isn't exactly true, since we develop two separate open branches s.t. one node gains two lines and the other gains only one line. so we'd be off horizontal axis it seems. maybe would could always just artifically keep uniform line numbers though. 
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Where do the non-root nodes come from?}
+%\large
+
+\begin{itemize}[<+->]
+
+%\item We \emph{resolve} all formulae! 
+
+\item We \emph{resolve} sentences!  \\ (i.e. break them down, one main connective or negated formula at a time---much like our New Year's Resolutions)
+
+\item We start by resolving the sentences in the root 
+
+\item We then resolve any new nodes created, and so on 
+
+\item Until we hit rock bottom! i.e. atomic formulae or their negations %of these 
+
+\item (Sometimes you can stop before resolving all sentences)
+
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Closed vs. Open Branches}
+%\large
+
+\begin{itemize}[<+->]
+
+\item A \emph{branch} is a path taking you from the root through a series of nodes, each connected to the one above it
+
+\bigskip
+
+\item A branch is \emph{closed} if a wff and its negation appear in its nodes
+
+\bi
+\item \emph{We write a} `\emph{$\times$}' beneath each closed branch
+
+\item Closure results from ANY wff and its negation (not just atomic) 
+\ei
+
+%\medskip $\bullet$ 
+
+\bigskip
+
+\item Otherwise, a branch is \emph{open}
+
+\bi
+
+\item As you grow your tree, any branch that is not closed is open
+
+\item We are particularly interested in branches that \textit{remain open} even after every formula has been resolved
+
+\item These branches are \emph{complete} and \emph{open} 
+
+\ei 
+
+%\medskip $\bullet$ Branches start out open before sometimes becoming closed
+
+%\item Some branches \textit{remain} open even after every formula has been resolved 
+
+%\medskip $\bullet$ We write an `$\uparrow$' beneath each open branch 
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Completing a Branch}
+%\large
+
+\begin{itemize}[<+->]
+
+\item A branch is \emph{complete} when every resolvable formula appearing on it has been resolved (you've then `completed' the branch)
+
+\item i.e., we have applied the tree rules until nothing but atomic formulae or their negations appear (remember: inclusive `or'!)
+
+\medskip
+
+\item In a \emph{complete open branch}, it is 
+
+\bi 
+
+\item (i) not the case that both a sentence and its negation appear in its nodes (i.e. no contradictions along the branch) 
+
+\item and (ii) all formulae on the nodes have been resolved \\ (so there's no possibility of a contradiction appearing later)
+
+\item \emph{We write an} `\emph{$\uparrow$}' beneath each complete open branch
+
+\ei
+
+\bigskip
+
+\item \textit{Psssst, semantic point!}: a complete open branch indicates a TVA that makes each of the sentences in the root true 
+% % there is a sense in which the complete open branch wears this truth value assignment on its sleeves
+%As we'll see later,
+
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Returning to our Earlier Examples}
+%\large
+
+Let's use trees! 
+
+\begin{itemize}[<+->]
+
+\item e.g. are the following sentences consistent? 
+
+\item $P \eand Q$; $\enot (P \eif \enot Q)$; $(S \eand R) \eor \enot J$
+%consistent: first two sentences are equivalent; would be a 32 line truth table
+
+\item What about $P \eand Q$; $\enot (P \eif \enot Q)$; $(S \eand R) \eor \enot J$; $\enot (S \eor R) \eand J$
+
+\item Question (for later): can we reinterpret this second result as a valid argument? What are the premises? What is the conclusion? 
+
+%\item $P \eand Q$; $\enot (P \eif \enot Q)$; $(S \eand R) \eor \enot T$
+%consistent: first two sentences are equivalent; would be a 32 line truth table
+
+%\item What about $P \eand Q$; $\enot (P \eif Q)$; $(S \eand R) \eor \enot T$; $\enot (S \eor R) \eand T$
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{\textit{Warning}: No Logical Equivalencies!}
+%\large
+
+\begin{itemize}[<+->]
+
+\item Keep in mind that the rules of STD are entirely syntactic
+
+\item You can use ONLY these nine rules and no others
+
+\item In particular, STD itself knows nothing about logical equivalence
+
+\item So you CANNOT replace a sentence willy-nilly with a logically equivalent one, unless this is sanctioned by one of our rules
+
+\item Likewise, you can close a branch only if some wff $\Phi$ and its negation $\enot \Phi$ appear in the branch 
+
+\end{itemize}
+\end{frame}
+
+% %pick up here!
+
+%stuff on validity! main point of whole thing; so could be nice to have earlier examples illustrate this to some extent, e.g. cases of valid and invalid arguments
+
+%maybe a logical equivalence example? e.g. the fun thing from boolean algebra? would illustrate biconditional rules well. 
+
+%advice on order to resolve formulae (from book and gb notes)
+
+%examples to fill time, or go into stuff on equivalences (e.g. de morgan)
+%or go into expressive adequacy (so look at slides 12 and split off as backup stuff)
+
+%also gb 2 more interesting induction problems on SL, and restall 3.15 both for truth tables and for trees! 
+%so lots of stuff to fill time! 
+
+
+\subsection{Using Trees}
+
+\begin{frame}
+\frametitle{Syntactic equivalents of our Semantic Notions}
+%\large
+
+\begin{itemize}[<+->]
+
+\item Recall that we are interested in assessing various semantic properties of sentences of SL:
+
+\bigskip
+
+\begin{enumerate}[1.)]
+
+\item Contradiction? Tautology? Logically Contingent?
+
+\item Equivalent? Inequivalent?
+
+\item Consistent? Inconsistent? 
+
+\item Valid argument/entailment? Invalid argument/not entailed?
+
+\end{enumerate}
+
+\bigskip
+
+\item For each semantic notion, there is a corresponding syntactic property of a tree 
+%(or treeS in the case of equivalence)
+% %presumably to show equivalence we need two trees: argument from one premise to the other is valid and vice versa. So start w/ one and negation of the other (show all branches close). Then do the same in other order. Then we see that each sentence entails the other, so valid) 
+
+%shortcut: just show that \phi \eiff \psi is a tautology! i.e. that it's negation has all closed branches (so is unsatisfiable)
+
+\medskip $\bullet$ (Although one has to prove this correspondence exists)
+
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tree-contradictions and Tree-tautologies}
+%\large
+
+ \begin{block}{\emph{Tree-contradiction}}
+    \begin{itemize}[<+->]
+      \item A sentence $\Phi$ is a tree-contradiction if there is a tree that starts with $\Phi$ that has only closed branches
+
+  \item (definition only requires the existence of a single such tree)
+
+  \item (it says nothing about \textit{all} trees starting with $\Phi$)
+\end{itemize} 
+\end{block}
+
+\begin{block}<4->{\emph{Tree-tautology}}
+    \begin{itemize}[<+->]
+      \item A sentence $\Psi$ is a tree-tautology if there is a tree that starts with $\enot \Psi$ that has only closed branches
+
+\item i.e., provided that $\enot \Psi$ is a tree-contradiction
+
+\item In this case, we write `$\vdash_{STD} \Psi$'
+
+  \item (again: this definition requires the existence of single such tree)
+
+ % \item (it says nothing about all trees starting with $\Psi$)
+\end{itemize} 
+\end{block}
+
+
+
+% \uncover<8->{Notice that these definitions leave open the possibility that a sentence could be both a tree-contradiction and a tree-tautology}
+
+
+\end{frame}
+
+\begin{frame}
+\frametitle{A limitation of these syntactic definitions}
+%\large
+
+\begin{itemize}[<+->]
+
+\item Notice that the definitions of `tree-contradiction' and `tree-tautology' leave open the possibility that a sentence could be both a tree-contradiction and a tree-tautology
+
+\item This is because each definition requires the existence of only a single tree with a given syntactic property
+
+\item Obviously, if system STD is any good, this won't be possible! \\ But we'll need to prove this (perhaps on PS 5)!
+
+\item Taking for granted that system STD is `good', any tree-contradiction is a contradiction, and any tree-tautology is a tautology
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tree-consistency}
+%\large
+
+Question: when is a set $\Gamma$ of wffs consistent (i.e. jointly satisfiable)?
+
+\begin{itemize}[<+->]
+
+\item Construct a tree whose root is all sentences in $\Gamma$ 
+
+\item Next, apply the tree-rules until either
+
+\bigskip
+
+\begin{enumerate}[1.)]
+
+\item \emph{Each branch closes}, in which case the argument is \emph{tree-inconsistent}
+
+%\medskip $\bullet$ In this case, we write $\Gamma \vdash_{STD} \Phi $
+
+\bigskip
+
+\item You have \textcolor{OGlyallpink}{a complete open branch}, in which case the argument is \textcolor{OGlyallpink}{\textbf{tree-consistent}}
+
+%\medskip $\bullet$ In this case, we write $\Gamma \nvdash_{STD}  \Phi $
+
+\end{enumerate}
+
+\bigskip 
+
+\item (Pssst semantic aside: the complete open branch indicates a truth value assignment that makes each sentence in $\Gamma$ true)
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Connections between consistency and validity}
+%\large
+
+\begin{itemize}[<+->]
+
+
+\item Recall from long ago: an argument is \emph{valid} if and only if the premise set and the negation of the conclusion is \emph{inconsistent} \\ (i.e. if the premises are true, the conclusion is not false)
+%(i.e. if the premises are true, then the conclusion cannot be false)
+
+\item An argument is \textcolor{OGlyallpink}{invalid} if and only if the premise set and the negation of the conclusion is \textcolor{OGlyallpink}{consistent} \\ (i.e. the premises and the negated-conclusion are satisfiable)
+
+\item These connections motivate our definitions of tree-validity and tree-invalidity
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Tree-valid vs. Tree-invalid}
+%\large
+
+\begin{itemize}[<+->]
+
+\item Consider an argument with premises given by a set $\Gamma$ of wffs and conclusion $\Phi $ (i.e. $\Gamma$ could be multiple sentences)
+
+\item Construct a tree with the following root: all sentences in $\Gamma$ along with $\enot \Phi $ (i.e. the NEGATION of the conclusion)
+
+\item Next, apply the tree-rules until either
+
+\bigskip
+
+\begin{enumerate}[1.)]
+
+\item \emph{Each branch closes}, in which case the argument is \emph{tree-valid}
+
+\medskip $\bullet$ In this case, we write $\Gamma \vdash_{STD} \Phi $
+
+\bigskip
+
+\item You have \textcolor{OGlyallpink}{a complete open branch}, in which case the argument is \textcolor{OGlyallpink}{\textbf{tree-invalid}}
+
+%%10-23-22: I now think the following claim might have confused some people! since we really should think about $\Gamma \nvdash_{STD}$ as saying ``it's not the case that the argument is tree-valid.'' 
+%\medskip $\bullet$ In this case, we write $\Gamma \nvdash_{STD}  \Phi $ \\ (at least, we can write this once we've shown STD is sound)
+%note that I actually SHOULDN'T say this, since later we'll use this symbol to mean `it's not the case that an argument is tree-valid', and just knowing that an argument is tree-invalid DOES NOT on its own entail that it is not tree-valid 
+
+\end{enumerate}
+
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Using trees to check for Validity}
+%\large
+
+Since most homework problems follow this pattern, let's make it really explicit!
+
+\begin{enumerate}[<+->]
+
+\item Add each premise to the root (number each line)
+
+\item Add the \textbf{NEGATION} of the conclusion to the root
+
+\item Resolve sentences until either:
+
+\medskip
+
+\begin{itemize}
+
+\item \emph{Each branch closes}, in which case the argument is \emph{valid}
+
+\item You have \textcolor{OGlyallpink}{a complete open branch} $\Rightarrow$ the argument is \textcolor{OGlyallpink}{\textbf{invalid}}
+
+\end{itemize}
+
+\end{enumerate}
+
+Don't forget to \emph{justify each new node} by citing the line you are resolving and the rule you are applying
+
+\uncover<7->{Remember that a branch closes whenever a sentence and its negation appear in its nodes (these need not be atomic sentences)}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Using trees to check Tautologies}
+%\large
+
+Likewise for whether a sentence is a tautology:
+
+\begin{enumerate}[<+->]
+
+%\item Add each premise to the root (number each line)
+
+\item Add the \textbf{NEGATION} of the sentence to the root
+
+\item Resolve sentences until either:
+
+\medskip
+
+\begin{itemize}
+
+\item \emph{Each branch closes}, in which case the sentence is \emph{tautologous} \\ (semantic aside: it's impossible to make the sentence false)
+
+\item You have \textcolor{OGlyallpink}{a complete open branch}, in which case the sentence is NOT a tautology \\ (semantic aside: it is possible to satisfy the sentence's negation, so it's possible to make the sentence in question false)
+% \textcolor{OGlyallpink}{\textbf{invalid}}
+
+\end{itemize}
+
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Never forget to justify! Always remember!}
+%\large
+
+\begin{itemize}[<+->]
+
+\item Just to repeat something you are liable to forget to do:
+
+\item Never forget to \emph{justify each new node} by 
+
+\begin{enumerate}[1.)]
+
+\item citing the line you are resolving (e.g. `3') and
+
+\item citing the rule you are applying (e.g. `$\enot \eor$')
+
+\item[] These justifications go in the `rightmost column'
+
+\end{enumerate}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Another Eternal Memory!}
+%\large
+
+\begin{itemize}[<+->]
+
+\item If your tree has branched and you are resolving a wff, you have to put the result under EVERY branch connected to the wff
+
+\item More precisely: To resolve a sentence, you have to extend \textbf{ALL} of the open branches \textit{running through the node} of the given wff
+
+\item Example: consider a root with $A \eor B$ and $P \eand Q$. Check what happens when you resolve `$A \eor B$' first, followed by `$P \eand Q$'
+
+\item If a branch is already closed, you don't have to worry about it 
+
+\end{itemize}
+\end{frame}
+
+\subsection{Topical Topiary Tips}
+
+\begin{frame}
+\frametitle{How to Sculpt a Tree}
+%\large
+
+\begin{itemize}[<+->]
+
+\item With trees, as with life, you've got options!
+
+\item You can resolve sentences in any order you please
+
+\item But some resolution orders will be faster/easier/more convenient than others (they'll at least involve `less ink', and someone is paying for that ink!)
+
+\item Corporate America and BigPharma want you to SAVE INK! 
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Rules of thumb for Green thumbs}
+%\large
+
+\begin{enumerate}[<+->]
+
+\item Temporally favor `stacking' rules over `splitting' rules
+%is `branching' more evocative than `splitting'? 
+
+\item Given a choice, resolve sentences that do not lead to new open branches:
+
+\medskip
+
+\begin{itemize}
+
+\item Save splitting until you've closed as many branches as possible  
+
+\item Otherwise, you can end up with a lot of branches! 
+
+\item[] $\Rightarrow$ and that's bad topiary! 
+
+\end{itemize}
+
+\end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}
+\frametitle{An Example to Work Through}
+%\large
+
+Let us illustrate these morals, since one burnt by the flame fears fire for life:
+
+\begin{itemize}[<+->]
+
+\item Is the argument from $C \eif P$, $P \eor D$, $\enot (Q \eiff C)$ to $D$ valid? 
+
+\item In the worst tree, resolve $C \eif P$, then $\enot (Q \eiff C)$, and then $P \eor D$
+
+\item In the best tree, resolve $P \eor D$, then $C \eif P$, and then $\enot (Q \eiff C)$
+
+\item Often we should take the road most traveled, and that will make all the difference
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Our Running Example}
+
+  Sarah lives in Chicago or Erie.\\
+  Amir lives in Chicago unless he enjoys hiking.\\
+  If Amir lives in Chicago, Sarah doesn't.\\
+  Neither Sarah nor Amir enjoy hiking.\\
+  $\therefore$ Sarah lives in Erie.
+\uncover<2->{  
+\begin{align*}
+  & C \eor E\\
+  & A \eor M\\
+  & A \eif \enot C\\
+  & \enot S \eand \enot M\\
+  \therefore & E
+  \end{align*}
+}
+\uncover<3->{Let us tree!}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Our Running Example (simplified)}
+Recall that to handle this with a truth-table, we simplified the last premise (to eliminate `$S$' and avoid a 32 row truth table): 
+\begin{quote}
+  Sarah lives in Chicago or Erie.\\
+  Amir lives in Chicago unless he enjoys hiking.\\
+  If Amir lives in Chicago, Sarah doesn't.\\
+  \textcolor{OGlyallpink}{Amir doesn't enjoy hiking}.\\
+  $\therefore$ Sarah lives in Erie.
+\end{quote}
+  \begin{align*}
+  & C \eor E\\
+  & A \eor M\\
+  & A \eif \enot C\\
+  &\textcolor{OGlyallpink}{\enot M}\\
+  \therefore & E
+  \end{align*}
+\end{frame}
+
+\begin{frame}\footnotesize
+\setbeamercovered{still covered={\opaqueness<1->{0}},
+again covered={\opaqueness<1>{20}\opaqueness<2->{10}}}
+\[
+  \begin{array}{cccc|cec|cec|ceec|ef|f}
+  A &  C & E & M & C &\eor & E & A & \eor & M & A & \eif & \enot & C & \enot & M & E\\
+  \hline
+  \True & \True & \True & \True &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3->{\False} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-5>{\True} \\
+  \True & \True & \True & \False &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3->{\False} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3-4>{\True} & \uncover<2>{\False} & \uncover<2-5>{\True} \\
+  \True & \True & \False & \True &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3->{\False} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-4>{\False} \\
+  \True & \True & \False & \False &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3->{\False} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3-4>{\True} & \uncover<2>{\False} & \uncover<2-4>{\False} \\
+
+  \True & \False & \True & \True &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-5>{\True} \\
+  \True & \False & \True & \False &
+    \uncover<2>{\False} & \uncover<3->{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3->{\True} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3->{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3->{\True} & \uncover<2>{\False} & \uncover<2-5>{\True} \\
+  \True & \False & \False & \True &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-4>{\False} \\
+  \True & \False & \False & \False &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\False} &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3-4>{\True} & \uncover<2>{\False} & \uncover<2-4>{\False} \\
+
+
+  \False & \True & \True & \True &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-5>{\True} \\
+  \False & \True & \True & \False &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3-4>{\True} & \uncover<2>{\False} & \uncover<2-5>{\True} \\
+  \False & \True & \False & \True &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-4>{\False} \\
+  \False & \True & \False & \False &
+    \uncover<2>{\True} & \uncover<3-4>{\True} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\False} & \uncover<2>{\True} &
+    \uncover<3-4>{\True} & \uncover<2>{\False} & \uncover<2-4>{\False} \\
+
+  \False & \False & \True & \True &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-4>{\True} \\
+  \False & \False & \True & \False &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3-4>{\True} & \uncover<2>{\False} & \uncover<2-5>{\True} \\
+  \False & \False & \False & \True &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<2>{\True} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3->{\False} & \uncover<2>{\True} & \uncover<2-4>{\False} \\
+  \False & \False & \False & \False &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3->{\False} & \uncover<2>{\False} &
+    \uncover<2>{\False} & \uncover<3-4>{\True} & \uncover<3>{\True} & \uncover<2>{\False} &
+    \uncover<3-4>{\True} & \uncover<2>{\False} & \uncover<2-4>{\False} \\
+    \end{array}
+    \]
+    \uncover<5>{Every valuation makes at least one premise false, or makes the
+    conclusion true: the argument is valid.}
+  \end{frame}
+
+
+\begin{frame}
+\frametitle{A fun Question}
+%\large
+
+\begin{itemize}[<+->]
+
+\item Question: how can you use a single tree to show that two sentences are logically equivalent?
+
+\item Answer is on next slide! No spoilers! 
+
+\item Example: show that $P \eor Q$ is logically equivalent to $\enot \Big( \big ( \enot (P \eiff Q) \big) \eiff (P \eand Q ) \Big )$
+
+\item (where this represents $(x + y) + (x \cdot y)$ in our Boolean algebra)
+
+
+
+%$P + Q + PQ
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Answer to our `fun Question'}
+%\large
+
+\begin{itemize}[<+->]
+
+\item Question: how can you use a single tree to show that two sentences are logically equivalent?
+
+\item Answer:
+
+\item Consider whether the biconditional of the two formulae is a tautology 
+
+\item So make a tree whose root is the negation of this biconditional
+
+\item If all branches close, then this negation is unsatisfiable, i.e. is a contradiction. In which case the biconditional is a tautology. \\ In which case the two wffs are logically equivalent. 
+
+%$P + Q + PQ
+
+\end{itemize}
+\end{frame}
+
+
+
+\subsection{Practice with Proofs}
+
+\begin{frame}
+\frametitle{Two Questions about (semantic) Entailment}
+
+Two questions we never got around to answering: 
+
+\medskip 
+
+\begin{enumerate}[<+->]
+
+\item[] Recall: `$\Gamma \nentails \Psi$' means that the (set of) sentence(s) $\Gamma$ does not semantically entail $\Psi$, i.e. an argument from $\Gamma$ to $\Psi$ is invalid. 
+
+\item True or False? If $\Phi \entails \Psi$, then $\enot \Phi \nentails \Psi$ 
+
+\bigskip
+
+\item True or False? If $\Gamma \entails \Phi$ and $\Delta, \Phi \entails \Psi$, then $\Gamma, \Delta \entails \Psi$? 
+
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{And now with trees!}
+
+Let's answer syntactic analogs of these questions in system STD:
+
+\medskip 
+
+\begin{enumerate}[<+->]
+
+\item[] Recall: `$\Gamma \nvdash_{STD} \Psi$' means that arguing from $\Gamma$ to $\Psi$ is NOT tree-valid (and with soundness, this means it is tree-invalid)
+%the (set of) sentence(s) $\Gamma$ does not semantically entail $\Psi$, i.e. an argument from $\Gamma$ to $\Psi$ is invalid. 
+
+\item True or False? If $\Phi \vdash_{STD} \Psi$, then $\enot \Phi \nvdash_{STD} \Psi$ 
+
+\bigskip
+
+%This seems to be a harder problem than GB lect 6:
+%\item True or False? If $\Gamma \vdash_{STD} \Phi$ and $\Delta, \Phi \vdash_{STD} \Psi$, then $\Gamma, \Delta \vdash_{STD} \Psi$? 
+
+\item True or False? If $\Gamma \vdash_{STD} \Phi$, then $\Gamma, \Delta \vdash_{STD} \Phi$
+%, then $\Gamma, \Delta \vdash_{STD} \Psi$? 
+
+\item True or False? If $\Gamma \vdash_{STD} \Phi$ and $\Delta, \Phi \vdash_{STD} \Psi$, then $\Gamma, \Delta \vdash_{STD} \Psi$? 
+
+\iffalse
+
+Argument:
+
+By the first assumption in the antecedent, there is a tree with root Gamma and not Phi, such that it closes.
+Gamma
+not Phi
+closes
+
+By the second assumption, there is a tree with root Delta, Phi, and NOT psi such that it also closes
+1. Delta
+2. Phi
+3. Not Psi
+closes
+
+Now, consider a tree that has root Gamma, Delta, and not Psi:
+1. Gamma
+2. Delta
+3. not Psi
+Ask: does this necessarily close? 
+
+Cheeky argument: note that adding a tautology to the premises does not change anything.
+So add the premise Phi or not Phi to the root
+resolve this sentence first.
+Then, on the Phi branch, repeat the tree from the second assumption (using Delta and Not Psi and Phi), and so this necessarily closes
+
+on the not-phi branch, we can repeat the tree from the first assumption, using Gamma and not phi, so this also closes. 
+
+so both branches close, so the tree closes 
+
+\fi 
+\end{enumerate}
+
+\end{frame}
+
+\frame{\frametitle{An Induction example because...why not?}
+\large
+
+Gotta stay sharp! 
+
+Prove the following by induction. Don't forget to explicitly state the base case and the induction step! 
+
+\begin{enumerate}[<+->]
+
+%\item No wff begins or ends with a binary connective
+
+%\item No wff contains two consecutive binary connectives (i.e. with no symbols between them)
+%note that proof of these presupposes claim 1
+
+\item[3.] If a wff doesn't contain any binary connectives, then it is contingent. \\ \normalsize{(hint: say that a wff is \textit{baller} if it either contains a binary connective or is contingent. Use induction to show that every wff is baller.)}
+
+% Proof sketch: basecase: an arbitrary atomic formula is contingent (true if assigned true; false when assigned false). Then, consider two arbitrary well-formed formula that have the property, i.e. are Baller. If $Phi$ is contingent, then so is its negation (its negation is true whenever phi is false and false whenever phi is true). If Phi has a binary connective, then so does its negation. Then, consider the four cases coming from connecting Phi and psi with a binary connective. Clearly, each of these has a binary connective, and so is Baller. Hence, every formula is Baller. Hence, if a well-formed formula does not contain any binary connectives, since it is still Baller, it must be contingent (disjunctive syllogism)
+
+\end{enumerate}
+}
+
+
+
+\iffalse
+
+\begin{frame}
+\frametitle{Two Little Proofs}
+%\large
+
+\begin{itemize}[<+->]
+
+\item 
+
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Trees}
+
+  \begin{itemize}[<+->]
+    \item d
+    \emph{d} ($\enot$, $\eor$, $\eand$, $\eif$, $\eiff$)
+  
+  \begin{block}{blah}
+    \begin{itemize}[<+->]
+      \item[] d
+
+  \item[] d
+
+  \item[] d
+\end{itemize} 
+\end{block}
+
+  \begin{definition}
+  d
+  \end{definition}
+
+
+\end{itemize}
+\end{frame}
+
+\fi 
