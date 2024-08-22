@@ -2,6 +2,55 @@
 \chapter{What is Logic?}
 \label{ch.intro}
 
+Logic is the study of \textit{formal reasoning}, that is, what follows from what in virtue of its logical form.
+There are of course many other ways to reason besides the manner with which we will be concerned in this book.
+In order to characterize the \textit{subject-matter of formal logic}, this chapter will contrast formal reasoning with a number of other types of reasoning.
+
+Reasoning moves the reasoner from some number of considerations to others.
+We will refer to the elements under considerations as \textsc{propositions} which you can think of as \textit{things being a certain way}.\footnote{Whereas italics will be used for emphasis, key vocabulary will be capitalized throughout.}
+The defining feature of propositions for our purposes is that they can be either true or false.
+For instance, Kat might be sitting down, or perhaps she is standing.
+These are both ways for things to be.
+Although Kat cannot sit and stand at once, nothing stops us from considering these propositions independent of which (if either) is true.
+Despite not knowing whether Kat is sitting or standing, we may nevertheless reason as follows:
+
+\label{argStanding}
+\begin{earg}
+  \item[(1)] Kat is sitting down.
+  \item[(2)] If Kat is sitting down, then Kat is not standing.
+  \item[\therefore] Kat is not standing.
+\end{earg}
+
+We will refer to the sentences (1) and (2) as \textsc{premises} and the sentence following the three dots as the \textsc{conclusion}, where all three of these sentences express propositions.
+In general, a finite positive number of premises followed by a single conclusion will be referred to as an \textsc{argument}.
+The three dots on the last line of each argument is pronounced `therefore', and is used to mark the conclusion of the argument.
+The premises of an argument aim to provide \textit{reasons for taking the conclusion to be true} even if not all of the premises are true, or else known to be true.
+For instance, even if we don't know whether (1) and (2) are true, we may admit that if (1) and (2) are both true, then the conclusion is also true.
+Accordingly, believing the premises above provides a strong reason to believe the conclusion independent of whether we believe the premises or not.
+Of course, not all arguments succeed in providing such strong support for their conclusions as in the argument above.
+
+Since not all arguments take such explicit forms as the argument above, part of what we will be concerned with is \textsc{regimenting} arguments in English by translating them into a formal language.
+An important first step in this process is to identify the premises and conclusion.
+However, writing an argument in premise-conclusion form doesn't mean that the argument is any good.
+For instance, consider the following argument:
+
+\label{argBunk}
+\begin{earg}
+  \item[(1)] Sia is out sailing.
+  \item[(2)] Nicky is hard at work.
+  \item[\therefore] The house is empty.
+\end{earg}
+
+Even though there might be ways to modify the argument above in order to make it more compelling, as stated it is simply a series of (logically) unrelated sentences.
+Accordingly, one might be tempted to protest that this is no argument at all, but just a list of random sentences.
+Although this book won't take a stand on how the word `argument' ought to be used in general, we will not require arguments to be compelling in order to count as arguments.
+Rather, as stated above, an argument is \textit{any} finite number of zero or more premises followed by a single conclusion.
+
+When stating arguments in English as above, it is important to limit ourselves to declarative sentences that can be true or false.
+
+
+Although the argument above is provides a first example of logical reasoning, not all arguments
+
 Logic is the business of evaluating arguments, sorting good ones from bad ones.
 In everyday language, we sometimes use the word `argument' to refer to belligerent shouting matches.
 If you and a friend have an argument in this sense, things are not going well between the two of you.
@@ -27,10 +76,6 @@ Here are two examples:
   \item[\therefore] It is snowing.
 \end{earg}
  
-The three dots on the last line of each argument mean \textit{therefore}, and they indicate that the final sentence is the \textsl{conclusion} of the argument.
-The other sentences are the \textsl{premises} of the argument.
-If you believe the premises, then the argument provides you with a reason to believe the conclusion.
-
 This chapter discusses some basic logical notions that apply to arguments in a natural language like English.
 It is important to begin with a clear understanding of what arguments are and what it means for an argument to be valid.
 Later we will translate arguments from English into a formal language.
