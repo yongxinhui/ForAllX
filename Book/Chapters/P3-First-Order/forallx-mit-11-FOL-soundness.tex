@@ -1,0 +1,1218 @@
+﻿%!TEX root = ../forallx-mit.tex
+\chapter{The Soundness of QD}
+  \label{ch.SoundQD}
+
+  % TODO: make existential case come before universal case throughout
+
+In Ch~\ref{ch.SLsoundcomplete}, we showed that the tree method was sound and complete with respect to the semantics for SL.
+In particular, soundness showed that whenever a tree with root $\Gamma\cup\set{\enot\metaA}$ closed, we could conclude that $\Gamma\cup\set{\enot\metaA}$ is unsatisfiable, and so $\Gamma \models \metaA$.
+As a result, we could rely on the tree method to evaluate whether the premises of an argument entailed its conclusion.
+The completeness result concerned the converse, showing that whenever some premises entail a conclusion, there is a closed tree that results from taking those premises together with the negation as the root.
+% Additionally, we showed that every root has a complete tree, a root has a closed tree just in case every tree with that root closes.
+Accordingly, the tree method can always be relied upon to evaluate whether some premises entail their conclusion.
+
+Although these are important results if we are to make use of the tree method, proof trees are of little independent interest.
+Moreover, when it comes to extending the tree method to accommodate quantifiers, there is no guarantee that the tree will always complete.
+This makes the tree method considerably less useful.
+Additionally, proving soundness and completeness for the tree method does not tell us anything about our natural deduction systems SD or QD.
+Even if SD and QD do a good job of modelling natural reasoning in SL and QL$^=$ respectively, we should like to know whether the reasoning that we can conduct in these proof systems tell us anything about entailment and, subsequently, about the validity of arguments.
+Specifically, we should like to establish the following biconditional: 
+  $$\Gamma \proves_{\textsc{qd}} \metaA \text{ just in case } \Gamma \models \metaA.$$
+Whereas the right-to-left direction asserts the completeness of QD, the left-to-right direction asserts the soundness of QD.
+If QD were to fail to be sound, we would have little reason to care about QD for we could not rely on it to establish valid arguments.
+Showing that QD is sound will be the focus of this chapter where it will follow as a result that SD is also sound.
+
+As in the soundness proof for the tree method, the soundness proof for QD will go by induction on the length of proof.
+In particular, we will be measuring proofs by how many lines they include.
+If we can show that soundness holds for proofs of length $1$ and, moreover, that soundness holds for proofs of length $n+1$ whenever soundness holds for proofs of length $n$, we may conclude by induction that soundness holds for proofs of any length.
+% This, of course, is no different from the statement of the soundness of QD.
+
+
+
+
+\section{Soundness}%
+  \label{sec:Soundness}
+
+Assume $\Gamma \proves_{\textsc{qd}} \metaA$.
+It follows that there is some proof in QD of $\metaA$ from the premises $\Gamma$ where we may call this proof $X$. 
+Recall that we may evaluate which lines are live at any point in the course of a natural deduction proof in QD.
+For ease of exposition, it will help to introduce some notation that we will use throughout the proof.
+In particular, we may take $\metaA_i$ to be the sentence on the $i$-th line of the proof $X$ and $\Gamma_i$ to include all and only the undischarged assumptions (including premises) at the $i$-th line in $X$.
+We will then prove the following:
+\begin{enumerate}[leftmargin=1.5in]
+  \item[\it Base:] $\Gamma_1 \models \metaA_1$.
+  \item[\it Induction:] $\Gamma_{n+1} \models \metaA_{n+1}$ if $\Gamma_k \models \metaA_k$ for every $k\leq n$.
+\end{enumerate}
+Given that we can establish these two claims, it follows by induction that $\Gamma_n \models \metaA_n$ for all $n$.
+Since every proof is finite in length, there is a last line $m$ of the proof $X$ where $\Gamma_m=\Gamma$ is the set of premises and $\metaA_m=\metaA$ is the conclusion, and so $\Gamma \models \metaA$. 
+Thus we may conclude:
+  $$\text{If } \Gamma \proves_{\textsc{qd}} \metaA, \text{ then } \Gamma \models \metaA.$$
+This establishes the soundness of QD over the semantics for QL$^=$.
+It remains, however, to establish \textit{Base} and \textit{Induction} assumed above.
+
+In order to prove \textit{Base}, we may recall from the definition of a proof in QD that $\metaA_1$ is either a premise or follows by one of the proof rules for QD. 
+Since $\metaA_1$ is the first line of the proof, the only proof rules that it could follow from are the assumption rule AS or identity introduction $=$I.
+If $\metaA_1$ is an instance of $=$I, then $\Gamma_1=\varnothing$ and $\metaA_1$ is $\alpha=\alpha$ for some constant $\alpha$. 
+Letting $\M=\tuple{\D,\I}$ be any model, it follows that $\I(\alpha)=\I(\alpha)$ where there is some variable assignment $\va{a}$.
+Thus $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\alpha)$, and so $\VV{\I}{\va{a}}(\alpha=\alpha)=1$.
+Since $\alpha=\alpha$ is a sentence, $\VV{\I}{}(\alpha=\alpha)=1$, and so $\M$ satisfies $\metaA_1$.
+Generalising on $\M$, we may conclude that $\models \metaA_1$, and so equivalently $\Gamma_1 \models \metaA_1$.
+If instead $\metaA_1$ is a premise or assumption, then $\Gamma_1=\set{\metaA_1}$ since $\metaA_1$ is not discharged in the first line.
+As a result, $\Gamma_1 \models \metaA_1$ is immediate since any model $\M$ that satisfies $\Gamma_1$ also satisfies $\metaA_1$.
+This is all that is required to establish \textit{Base}.
+
+In order to establish \textit{Induction}, assume that $\Gamma_k \models \metaA_k$ for every $k\leq n$. 
+It remains to show that $\Gamma_{n+1} \models \metaA_{n+1}$.
+By the definition of a proof in QD, $\metaA_{n+1}$ is either a premise or follows by one of the proof rules for QD. 
+If $\metaA_{n+1}$ is a premise or assumption, then $\Gamma_{n+1} \models \metaA_{n+1}$ for the same reason given above.
+If $\metaA_{n+1}$ is not not a premise or assumption, then $\metaA_{n+1}$ follows by one of the proof rules for QD. 
+There are now twelve proof rules coming from SD along with six additional rules for the quantifiers and identity in QD.
+Consider the following:
+\begin{enumerate}[leftmargin=1.5in]
+  \item[\it QD Rules:] If $\metaA_{n+1}$ follows by the proof rules for QD from sentences in $\Gamma_{n+1}$ and $\Gamma_k \models \metaA_k$ for every $k\leq n$, then $\Gamma_{n+1} \models \metaA_{n+1}$.
+\end{enumerate}
+Assuming \textit{QD Rules} for the time being, it follows that $\Gamma_{n+1} \models \metaA_{n+1}$, completing the proof of \textit{Induction}.
+All that remains is to establish \textit{QD Rules} in the following sections.
+
+
+
+
+
+\section{SD Rules}%
+  \label{sec:SDRules}
+
+We have already considered two rules in proving \textit{Base} by showing that AS and $=$I preserve entailment at least in the special case as $\Gamma_1 \models \metaA_1$.
+More generally, we should like to show that all of the rules preserve entailment, and not just in the case of proofs with one line.
+It is with this more general aim that we will seek to establish \textit{QD Rules} given above.
+
+In order to divide the proof of \textit{QD Rules} into more manageable parts, this section will focus on the proof rules for SD. 
+Accordingly, the proof begins with the assumption that $\metaA_{n+1}$ follows by the proof rules for SD from sentences in $\Gamma_{n+1}$ and that $\Gamma_k \models \metaA_k$ for every $k\leq n$.
+We will then seek to show that $\Gamma_{n+1} \models \metaA_{n+1}$ where it will help to establish a number of supporting lemmas along the way.
+This same strategy will latter be extended to show that $\Gamma_{n+1} \models \metaA_{n+1}$ when $\metaA_{n+1}$ follows from sentences in $\Gamma_{n+1}$ by the additional rules included in QD.
+As a result, we will cover all of the rules in QD, thereby completing the proof of \textit{QD Rules}.
+
+
+
+
+
+
+\subsection{Assumption and Reiteration}%
+  \label{sub:AssumptionRule}
+
+Before attending to the introduction and elimination rules for each of the logical operators included in SD, this section will focus on the assumption and reiteration rules.
+Whereas the proofs for most of the rules will appeal to the induction hypothesis given above, the proof for the assumption rule is an exception and is similar to what was given in the proof of \textit{Base}. 
+
+\factoidbox{
+\begin{Rthm} \label{rule:AS}
+  \textbf{(AS)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule AS. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows by the assumption rule AS from the sentences in $\Gamma_{n+1}$.
+  Since $\metaA_{n+1}$ is an undischarged assumption, it follows that $\metaA_{n+1}\in\Gamma_{n+1}$, and so any model that satisfies $\Gamma_{n+1}$ also satisfies $\metaA_{n+1}$. 
+  Thus $\Gamma_{n+1} \models \metaA_{n+1}$.
+\end{quote}
+
+The proof above does not require the induction hypothesis or any additional results.
+By contrast, it will help to establish the reiteration rule by first proving the following lemmas.
+These lemmas will play an important role throughout many of the proofs given below.
+
+\begin{Lthm} \label{lemma:weak}
+  If $\Gamma \models \metaA$ and $\Gamma \subseteq \Gamma'$, then $\Gamma' \models \metaA$.
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\Gamma \models \metaA$ and $\Gamma \supseteq \Gamma'$.
+  Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma'$, it follows that $\VV{\I}{}(\metaB)=1$ for all $\metaB \in \Gamma'$.
+  Since $\Gamma\subseteq \Gamma'$, it follows that $\VV{\I}{}(\metaB)=1$ for all $\metaB \in \Gamma$, and so $\M$ satisfies $\Gamma$. 
+  By assumption, $\M$ satisfies $\metaA$, and so $\Gamma \models \metaA$.
+\end{quote}
+
+
+
+\begin{Lthm} \label{lemma:live}
+  For any QD proof $X$, if $\metaA_k$ is live at line $n+1$ where $k\leq n+1$, then $\Gamma_k\subseteq \Gamma_{n+1}$.
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:} Let $X$ be a QD proof where $\metaA_k$ is live at line $n+1$ where $k\leq n+1$.
+  Assume for contradiction that some undischarged assumption $\metaB \in \Gamma_k$ is not live at $n+1$.
+  It follows that $\metaB$ has been discharged at a line $j>k$, and so $\metaA_k$ is dead at $n+1$, contradicting the above.
+  Thus $\Gamma_k\subseteq \Gamma_{n+1}$ as desired.
+\end{quote}
+
+Whereas \textbf{\ref{lemma:weak}} says that entailment is preserved upon adding premises, \textbf{\ref{lemma:live}} makes an important observation about how undischarged assumptions are inherited by live lines.
+Given these lemmas, we may now proceed to establish the reiteration rule R.
+
+\factoidbox{
+\begin{Rthm} \label{rule:R}
+  \textbf{(R)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule R. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows by the reiteration rule R from the sentences in $\Gamma_{n+1}$.
+  It follows that $\metaA_{n+1}=\metaA_{k}$ for some $k\leq n$, and so $\Gamma_k \models \metaA_k$ by hypothesis.
+  Since $\metaA_k$ is live at line $n+1$, we know by \textbf{\ref{lemma:live}} that $\Gamma_k\subseteq \Gamma_{n+1}$, and so $\Gamma_{n+1} \models \metaA_{k}$ by \bref{lemma:weak}.
+  Thus $\Gamma_{n+1} \models \metaA_{n+1}$ given the identity above.
+\end{quote}
+
+By contrast with the assumption rule, the reiteration makes an essential appeal to the induction hypothesis.
+We will see something similar in all of the rule proofs given below with the only other exception being identity introduction.
+
+
+
+\subsection{Negation Rules}%
+  \label{sub:NegationRules}
+
+The negation rules are a lot more complicated than the assumption and reiteration rules on account of citing subproofs.
+Accordingly, it will help to establish two more supporting lemmas before presenting the proofs for the negation rules.
+Whereas the first lemma asserts that a satisfiable set cannot entail a sentence and its negation, the second lemma draws an entailment out of an unsatisfiable set of sentences.
+These lemmas work nicely together and will reoccur in a number of rule proofs besides the negation rule proofs given below.
+  
+\begin{Lthm} \label{lemma:unsat}
+  If $\Gamma \models \metaA$ and $\Gamma \models \enot\metaA$, then $\Gamma$ is unsatisfiable.
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\Gamma \models \metaA$ and $\Gamma \models \enot\metaA$.
+  Assume for contradiction that $\Gamma$ is satisfiable, and so there is some model $\M$ which satisfies $\Gamma$. 
+  By assumption, $\M$ satisfies $\metaA$ and $\enot\metaA$, and so there is some variable assignment $\va{a}$ where $\VV{\I}{\va{a}}(\enot\metaA)=1$.
+  By the semantics for negation, $\VV{\I}{\va{a}}(\metaA)\neq 1$ contradicting the above.
+  Thus $\Gamma$ is unsatisfiable. 
+\end{quote}
+
+
+
+
+\begin{Lthm} \label{lemma:unsatent}
+  If $\Gamma \cup \set{\metaA}$ is unsatisfiable, then $\Gamma \models \enot\metaA$.
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\Gamma \cup \set{\metaA}$ is unsatisfiable and let $\M$ be any model that satisfies $\Gamma$. 
+  If $\M$ satisfied $\metaA$, then $\M$ would satisfy $\Gamma \cup \set{\metaA}$ contrary to assumption, and so $\M$ does not satisfy $\metaA$.
+  Thus $\VV{\I}{}(\metaA)\neq 1$, and so $\VV{\I}{\va{a}}(\metaA)\neq 1$ for all variable assignments $\va{a}$ over $\D$.
+  It follows that $\VV{\I}{\va{a}}(\enot\metaA)= 1$ for some $\va{a}$ in particular, and so $\VV{\I}{}(\enot\metaA)= 1$.
+  We may then conclude that $\M$ satisfies $\enot\metaA$, and so $\Gamma \models \enot\metaA$.
+\end{quote}
+
+Given the lemmas above, we may provide the following negation rule proofs.
+It will be important to study this carefully proof, observing how all the working parts come together.
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:NegI}
+  \textbf{($\boldsymbol\enot$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\enot$I. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by negation introduction $\enot$I.
+  Thus there is some subproof on lines $i$-$j$ where $i<j\leq n$ and $\metaA_{n+1}=\enot\metaA_i$, $\metaB=\metaA_h$, and $\enot\metaB=\metaA_k$ for $i\leq h\leq j$ and $i\leq k\leq j$.
+  By parity of reasoning, we may assume that $h<k=j$.
+  Thus we may represent the subproof as follows:
+
+  \begin{proof}
+  \open
+    \hypo[i]{na}\metaA \as{for \enot I}
+    \have[h]{b}\metaB
+    \have[j]{nb}{\enot\metaB}
+  \close
+  \have[n+1]{a}[\ ]{\enot\metaA}\ni{na-nb} %note that UBC has a more complex citation convention: {na-b, na-nb}
+  \end{proof}
+
+  By hypothesis, $\Gamma_h \models \metaB$ and $\Gamma_j \models \enot\metaB$.
+  With the exception of $\metaA_i=\metaA$, every assumption that is undischarged at lines $h$ and $j$ are also undischarged at line $n+1$.
+  It follows that $\Gamma_h,\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \models \metaB$ and $\Gamma_{n+1}\cup\set{\metaA_i} \models \enot\metaB$ by \textbf{\ref{lemma:weak}}.
+  Thus $\Gamma_{n+1}\cup\set{\metaA_i}$ is unsatisfiable by \textbf{\ref{lemma:unsat}}, and so $\Gamma_{n+1} \models \enot\metaA_i$ by \textbf{\ref{lemma:unsatent}}.
+  Equivalently, $\Gamma_{n+1} \models \metaA_{n+1}$.
+\end{quote}
+
+The proof begins by assuming the antecedent as above, unpacking the consequences by appealing to the negation introduction rule.
+This provides a number of details about the proof in which $\enot\metaA$ was derived on line $n+1$.
+In addition to applying the induction hypothesis, it is important to observe that although $\metaA$ has been discharged by line $n+1$, this is the only difference between the sets of undischarged sentences for lines $i$--$j$ and line $n+1$.
+Thus the entailments that follow by hypothesis may be related to the undischarged assumptions at line $n+1$ together with the assumption $\metaA$ which has been discharged at $n+1$.
+The core of the proof follows from the two lemmas, showing that the undischarged assumptions at $n+1$ together with $\metaA$ are unsatisfiable, and so $\enot\metaA$ is entailed by those undischarged assumptions. 
+
+Before moving on to consider the rest of the rule proofs, it is important to get clear about how this proof works so that the details given below do not wash over you.
+It can help to prove the result given above for yourself where, if successful, you might also try to prove the following rule proof which works in a similar manner.
+Once you have a sense for how these proofs work, reading the rest of the proofs will become a lot easier and more meaningful.
+
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:NegE}
+  \textbf{($\boldsymbol\enot$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\enot$E. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by negation elimination $\enot$E.
+  Thus there is some subproof on lines $i$-$j$ where $i<j\leq n$ and $\metaA_i=\enot\metaA_{n+1}$, $\metaB=\metaA_h$, and $\enot\metaB=\metaA_k$ for $i\leq h\leq j$ and $i\leq k\leq j$.
+  By parity of reasoning, we may assume that $h<k=j$.
+  Thus we may represent the subproof as follows:
+
+  \begin{proof}
+  \open
+    \hypo[i]{na}{\enot\metaA} \as{for \enot E}
+    \have[h]{b}{\metaB}
+    \have[j]{nb}{\enot\metaB}
+  \close
+  \have[n+1]{a}[\ ]{\metaA}\ne{na-nb} %note that UBC has a more complex citation convention: {na-b, na-nb}
+  \end{proof}
+
+  By hypothesis, $\Gamma_h \models \metaB$ and $\Gamma_j \models \enot\metaB$.
+  With the exception of $\metaA_i=\enot\metaA$, every assumption that is undischarged at lines $h$ and $j$ is also undischarged at line $n+1$.
+  It follows that $\Gamma_h,\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \models \metaB$ and $\Gamma_{n+1}\cup\set{\metaA_i} \models \enot\metaB$ by \textbf{\ref{lemma:weak}}.
+  Thus $\Gamma_{n+1}\cup\set{\metaA_i}$ is unsatisfiable by \textbf{\ref{lemma:unsat}}, and so $\Gamma_{n+1} \models \enot\metaA_i$ by \textbf{\ref{lemma:unsatent}}.
+  Equivalently, $\Gamma_{n+1} \models \enot\enot\metaA_{n+1}$.
+  Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma_{n+1}$, it follows that $\M$ satisfies $\enot\enot\metaA_{n+1}$, and so $\VV{\I}{\va{a}}(\enot\enot\metaA_{n+1})=1$ for some $\va{a}$. 
+  By two applications of the semantics for negation, $\VV{\I}{\va{a}}(\metaA_{n+1})=1$, and so $\M$ satisfies $\metaA_{n+1}$
+  Thus $\Gamma_{n+1} \models \metaA_{n+1}$ by generalising on $\M$.
+\end{quote}
+
+This proof is almost identical to the \textbf{\ref{rule:NegI}} insofar as an additional negation sign is introduced before eliminating the double negation by appealing to the semantics.
+If we were to make further use of the fact that double negations may be eliminated, we might separate this final step into a lemma in its own right.
+However, double negation elimination will not be needed below, and so there is little advantage to adding an additional lemma for this minor result.
+
+In general, there are two primary reasons to introduce a lemma.
+First, the lemma can be used repeatedly, simplifying the reasoning of a number of further proofs.
+In cases where a lemma is only needed once, a second reason to introduce a lemma is that doing so can often help to reduce the complexity of a proof, making it easier to digest once the lemma is established.
+Even so, adding lemmas that are only need once should be reserved for cases where clarity is improved by making the separation. 
+
+
+
+
+
+
+\subsection{Conjunction and Disjunction}%
+  \label{sub:ConjunctionDisjunction}
+
+The following lemmas have more than one application but will be convenient to present before providing the conjunction rule proofs.
+In particular, the first lemma asserts that so long as any two variable assignments agree about all of the free variables in a given sentence, that sentence will have the same truth-value when evaluated with those variable assignments in the same model.
+Although this is not surprising, the proof goes by induction on complexity where there are separate cases to check for each form that the wff in question might take.
+This makes for a long proof where many of the cases are similar and so left as exercises.
+
+\begin{Lthm} \label{lemma:assign}
+  $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$ if $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\metaA$.
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:} 
+  The proof goes by induction on the complexity of $\metaA$.
+
+  \textit{Base:} Assume $\comp(\metaA)=0$ and $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA$.
+  It follows that $\metaA$ is either $\F^n\alpha_1,\ldots\alpha_n$ or $\alpha_1=\alpha_2$.
+  Consider the following cases:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1 &\textit{ ~iff~ } \tuple{\VV{\I}{\va{a}}(\alpha_1),\ldots,\VV{\I}{\va{a}}(\alpha_n)}\in\I(\F^n)\\
+      (\star) &\textit{ ~iff~ } \tuple{\VV{\I}{\va{c}}(\alpha_1),\ldots,\VV{\I}{\va{c}}(\alpha_n)}\in\I(\F^n)\\
+      &\textit{ ~iff~ } \VV{\I}{\va{c}}(\F^n\alpha_1,\ldots,\alpha_n)=1.
+  \end{align*}
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I}{\va{a}}(\alpha_1=\alpha_2)=1 &\textit{ ~iff~ } \VV{\I}{\va{a}}(\alpha_1) = \VV{\I}{\va{a}}(\alpha_2)\\
+      (\ast) &\textit{ ~iff~ } \VV{\I}{\va{c}}(\alpha_1) = \VV{\I}{\va{c}}(\alpha_2)\\
+      &\textit{ ~iff~ } \VV{\I}{\va{c}}(\alpha_1=\alpha_2)=1.
+  \end{align*}
+
+  If $\alpha_i$ is a constant, then $\VV{\I}{\va{a}}(\alpha_i)=\I(\alpha_i)=\VV{\I}{\va{c}}(\alpha_i)$, and if $\alpha_i$ is a variable, then $\VV{\I}{\va{a}}(\alpha_i)=\va{a}(\alpha_i)=\va{c}(\alpha_i)=\VV{\I}{\va{c}}(\alpha_i)$, thereby establishing $(\star)$ and $(\ast)$.
+  Thus whenever $\comp(\metaA)=0$, if $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$.
+
+  \textit{Induction:} Assume that whenever $\comp(\metaA)\leq n$, if $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$.  
+  Letting $\comp(\metaA)=n+1$, assume that $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA$.
+  There are seven cases to consider.
+
+  \textit{Case 1:} Assume $\metaA=\enot\metaB$.
+  Since $\comp(\metaA)=n+1$ and $\comp(\enot\metaB)=\comp(\metaB)+1$, it follows that $\comp(\metaB)\leq n$.
+  It follows by hypothesis that $\VV{\I}{\va{a}}(\metaB)=\VV{\I}{\va{c}}(\metaB)$, and so $\VV{\I}{\va{a}}(\enot\metaB)=\VV{\I}{\va{c}}(\enot\metaB)$ by the semantics for negation.
+  Thus $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$. 
+  The cases for $\eand,\eor,\eif,$ and $\eiff$ are similar and so will be left as exercises.
+
+  \textit{Case 6:} Assume $\metaA=\qt{\forall}{\gamma}\metaB$.
+  For the same reasons given above, $\comp(\metaB)\leq n$.
+  We may then consider the following biconditionals:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I}{\va{a}}(\qt{\forall}{\gamma}\metaB)=1 &\textit{ ~iff~ } \VV{\I}{\va{e}}(\metaB)=1 \text{ for all } \gamma\text{-variants } \va{e} \text{ of } \va{a}\\ 
+      (\dagger) &\textit{ ~iff~ } \VV{\I}{\va{g}}(\metaB)=1 \text{ for all } \gamma\text{-variants } \va{g} \text{ of } \va{c}\\  
+      &\textit{ ~iff~ } \VV{\I}{\va{c}}(\qt{\forall}{\gamma}\metaB)=1.
+  \end{align*}
+
+  In order to establish $(\dagger)$, assume that $\VV{\I}{\va{e}}(\metaB)=1$ for all $\gamma$-variants $\va{e}$ of $\va{a}$ and let $\va{g}$ be any $\gamma$-variant of $\va{c}$.
+  Consider the $\gamma$-variant $\va{e}'$ of $\va{a}$ where $\va{e}'(\gamma)=\va{g}(\gamma)$.
+  By assumption $\VV{\I}{\va{e}'}(\metaB)=1$, and by definition $\va{e}'(\alpha)=\va{a}(\alpha)$ for all $\alpha\neq\gamma$.
+
+  Since $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA=\qt{\forall}{\gamma}\metaB$, it follows that $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha\neq\gamma$ in $\metaB$.
+  Given the above, $\va{e}'(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha\neq\gamma$ in $\metaB$. 
+  Moreover, $\va{g}$ is a $\gamma$-variant of $\va{c}$, and so $\va{g}(\alpha)=\va{c}(\alpha)$ for all $\alpha\neq\gamma$.
+  Thus $\va{e}'(\alpha)=\va{g}(\alpha)$ for all free variables $\alpha\neq\gamma$ in $\metaB$. 
+
+  Since $\va{e}'(\gamma)=\va{g}(\gamma)$ by definition, $\va{e}'(\alpha)=\va{g}(\alpha)$ for all free variables in $\metaB$.  
+  By hypothesis, $\VV{\I}{\va{e}'}(\metaB)=\VV{\I}{\va{g}}(\metaB)$, and so $\VV{\I}{\va{g}}(\metaB)=1$.
+  Generalising on $\va{g}$, it follows that $\VV{\I}{\va{g}}(\metaB)=1$ for all $\gamma$-variants $\va{g}$ of $\va{c}$.
+  An analogous argument establishes the converse direction of $(\dagger)$.
+  Thus we may conclude that $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$.
+
+  The case for $\qt{\exists}{\gamma}$ is similar, and so will be left as exercise.
+  It follows that whenever $\comp(\metaA)=n+1$, if $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$.
+  Thus the lemma follows by induction.
+\end{quote}
+
+
+Aside from keeping track of all of the notation and definitions, the only tricky part of the proof above is that we did not begin by considering some arbitrary variable assignments $\va{a}$ and $\va{c}$ and assuming $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\metaA$.
+The reason for this is that wanted to the induction hypothesis to take a general form, applying to all variable assignments so that it would be useful in establishing $(\dagger)$ in \textit{Case 6}.
+Thus the hardest part is knowing what to assume, setting up the proof accordingly.
+
+Given that the lemma above applies to all wffs, we may consider the special case where $\metaA$ is a sentence.
+As the following lemma shows, a sentence is true on some variable assignment and model just in case it is true on all variable assignments over that model.
+
+\begin{Lthm} \label{lemma:allvar}
+  $\VV{\I}{}(\metaA)= 1$ just in case $\VV{\I}{\va{a}}(\metaA)= 1$ for every v.a. $\va{a}$ over $\D$. 
+\end{Lthm}
+\begin{quote} 
+  \textit{Proof:} 
+       Assume that $\VV{\I}{}(\metaA)= 1$.
+       Thus $\VV{\I}{\va{a}}(\metaA)= 1$ for some variable assignment $\va{c}$ over $\D$.
+       Let $\va{a}$ be any variable assignment over $\D$.
+       Since $\metaA$ has no free variables, vacuously $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables in $\metaA$, and so $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$ by \textbf{\ref{lemma:assign}}.
+       Thus $\VV{\I}{\va{a}}(\metaA)=1$, and so generalising on $\va{a}$, it follows that $\VV{\I}{\va{a}}(\metaA)= 1$ for every variable assignment $\va{a}$ over $\D$.  
+
+       Assume instead that $\VV{\I}{\va{a}}(\metaA)=1$ for every variable assignment $\va{a}$ over $\D$.
+       Since $\D$ is nonempty, there is some variable assignment $\va{a}$ over $\D$, and so $\VV{\I}{\va{a}}(\metaA)=1$ follows from the assumption. 
+       Thus we may conclude that $\VV{\I}{}(\metaA)=1$.
+\end{quote}
+
+
+
+
+Given \textbf{\ref{lemma:assign}}, the proof for \textbf{\ref{lemma:allvar}} is trivial.
+Even so, it would be cumbersome to have to write the steps given above every time we wanted to make use of this convenient fact.
+As we will see, we will have a number of opportunities to make use of the lemma above beginning with the following proof rule for conjunction.
+
+\factoidbox{
+\begin{Rthm} \label{rule:ConI}
+  \textbf{(\&I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eand$I. 
+\end{Rthm}
+}
+  
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conjunction introduction $\eand$I.
+  Thus $\metaA_{n+1}=\metaA_i\eand\metaA_j$ for some lines $i,j\leq n$ that are live at line $n+1$.
+  By hypothesis, $\Gamma_i\models \metaA_i$ and $\Gamma_j\models \metaA_j$ where $\Gamma_i,\Gamma_j\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:live}}.
+  Thus $\Gamma_{n+1} \models \metaA_i$ and $\Gamma_{n+1} \models \metaA_j$ by \textbf{\ref{lemma:weak}}.
+  Letting $\M=\tuple{\D,\I}$ be a model which satisfies $\Gamma_{n+1}$, it follows that $\M$ also satisfies $\metaA_i$ and $\metaA_j$.
+  By \textbf{\ref{lemma:allvar}}, $\VV{\I}{\va{a}}(\metaA_i)=\VV{\I}{\va{a}}(\metaA_j)=1$ for every variable assignment $\va{a}$ over $\D$, and so for some $\va{a}$ in particular.
+  Thus $\VV{\I}{\va{a}}(\metaA_i\eand\metaA_j)=\VV{\I}{\va{a}}(\metaA_{n+1})=1$, and so $\M$ satisfies $\metaA_{n+1}$.
+  By generalising on $\M$, we may conclude that $\Gamma_{n+1} \models \metaA_{n+1}$.
+\end{quote}
+
+
+Whereas \textbf{\ref{lemma:allvar}} played a natural role in the proof given above, the rule proof for conjunction elimination and disjunction introduction are much more straightforward.
+
+\factoidbox{
+\begin{Rthm} \label{rule:ConE}
+  \textbf{(\&E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eand$E. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assuming $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conjunction elimination $\eand$E, there is some $i\leq n$ where either $\metaA_i=\metaA_{n+1}\eand\metaB$ or $\metaA_i=\metaB\eand\metaA_{n+1}$ is live at line $n+1$.
+  % By parity of reasoning we may assume that $\metaA_i=\metaA_{n+1}\eand\metaB$.
+  By hypothesis, $\Gamma_i\models \metaA_i$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:live}}.
+  Thus $\Gamma_{n+1} \models \metaA_i$ by \textbf{\ref{lemma:weak}}, and so any model $\M=\tuple{\D,\I}$ which satisfies $\Gamma_{n+1}$ also satisfies $\metaA_i$, and so either satisfies $\metaA_{n+1}\eand\metaB$ or $\metaB\eand\metaA_{n+1}$.
+  It follows that $\VV{\I}{\va{a}}(\metaA_{n+1}\eand\metaB)=1$ or $\VV{\I}{\va{a}}(\metaB\eand\metaA_{n+1})=1$, and so either way $\VV{\I}{\va{a}}(\metaA_{n+1})=1$ by the semantics for conjunction.
+  Thus $\M$ satisfies $\metaA_{n+1}$, and so $\Gamma_{n+1} \models \metaA_{n+1}$ by generalising on $\M$.
+\end{quote}
+
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:DisI}
+  \textbf{($\boldsymbol\eor$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eor$I. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by disjunction introduction $\eor$I.
+  Thus $\metaA_{n+1}=\metaA_i\eor\metaB$ or $\metaA_{n+1}=\metaB\eor\metaA_i$ for some line $i\leq n$ that is live at line $n+1$.
+  By hypothesis, $\Gamma_i\models \metaA_i$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:live}}, and so $\Gamma_{n+1} \models \metaA_i$ by \textbf{\ref{lemma:weak}}.
+  Letting $\M=\tuple{\D,\I}$ be a model which satisfies $\Gamma_{n+1}$, it follows that $\M$ satisfies $\metaA_i$.
+  Thus $\VV{\I}{\va{a}}(\metaA_i)=1$ for some variable assignment $\va{a}$.
+  By the semantics for disjunction, both $\VV{\I}{\va{a}}(\metaA_{i}\eor\metaB)=1$ and $\VV{\I}{\va{a}}(\metaB\eor\metaA_{i})=1$, and so $\VV{\I}{\va{a}}(\metaA_{n+1})=1$.
+  Thus $\M$ satisfies $\metaA_{n+1}$ where $\Gamma_{n+1} \models \metaA_{n+1}$ follows from generalising on $\M$.
+\end{quote}
+
+
+
+
+Neither of the rule proofs above should surprise, amounting to little more than applications of the semantic clauses for conjunction and disjunction respectively.
+Something similar may be said for the following proof though a little more care is required to keep track of all of the moving parts in the proof rule for disjunction elimination.
+
+\factoidbox{
+\begin{Rthm} \label{rule:DisE}
+  \textbf{($\boldsymbol\vee$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eor$E. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by disjunction elimination $\eor$I.
+  Thus there is some line $\metaA_i=\metaA_j\eor\metaA_k$ which is live at $n+1$ and subproofs on lines $j$-$h$ and $k$-$l$ where $i<j,k,h,l\leq n$ and $\metaA_h=\metaA_l=\metaA_{n+1}$.
+  By parity of reasoning, we may assume that $h<k$, and so represent the proof as follows:
+
+  \begin{proof}
+  \have[i]{i}{\metaA\eor\metaB}
+  \open
+    \hypo[j]{j}{\metaA} \as{for $\eor$E}
+    % \have[\vdots]{a}{}
+    \have[h]{h}{\metaC}
+  \close
+  \open
+    \hypo[k]{k}{\metaB} \as{for $\eor$E}
+    % \have[\vdots]{b}{}
+    \have[l]{l}{\metaC}
+  \close
+  \have[n+1]{a}[\ ]{\metaC}\oe{i,j-h,k-l} 
+  \end{proof}
+
+  By hypothesis, $\Gamma_i\models \metaA_i$, $\Gamma_h\models \metaA_h$, and $\Gamma_l\models \metaA_l$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:live}}, and so $\Gamma_{n+1} \models \metaA_i$ by \textbf{\ref{lemma:weak}}.
+  With the exception of $\metaA_j=\metaA$, every assumption that is undischarged at line $h$ is also undischarged at line $n+1$, and so $\Gamma_h\subseteq\Gamma_{n+1}\cup\set{\metaA_j}$.
+  Similarly, we may conclude that $\Gamma_l\subseteq\Gamma_{n+1}\cup\set{\metaA_k}$, and so $\Gamma_{n+1}\cup\set{\metaA_j} \models \metaA_h$ and $\Gamma_{n+1}\cup\set{\metaA_k} \models \metaA_l$ by \textbf{\ref{lemma:weak}}.
+
+  Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma_{n+1}$, it follows from above that $\M$ satisfies $\metaA_i$, and so $\VV{\I}{\va{a}}(\metaA_j\eor\metaA_k)=1$ for some variable assignment $\va{a}$ over $\D$.
+  By the semantics for disjunction, either $\VV{\I}{\va{a}}(\metaA_j)=1$ or $\VV{\I}{\va{a}}(\metaA_k)=1$.
+  If $\VV{\I}{\va{a}}(\metaA_j)=1$, then $\M$ satisfies $\Gamma_{n+1}\cup\set{\metaA_j}$, and so also satisfies $\metaA_h=\metaA_{n+1}$ given that $\Gamma_{n+1}\cup\set{\metaA_j} \models \metaA_h$. 
+  If $\VV{\I}{\va{a}}(\metaA_k)=1$, then $\M$ satisfies $\Gamma_{n+1}\cup\set{\metaA_k}$, and so satisfies $\metaA_l=\metaA_{n+1}$ given that$\Gamma_{n+1}\cup\set{\metaA_k} \models \metaA_l$.
+  It follows that either way, $\M$ satisfies $\metaA_{n+1}$, and so $\Gamma_{n+1} \models \metaA_{n+1}$ is the result of generalising on $\M$.
+\end{quote}
+
+As with the previous two proof rules for conjunction and disjunction, the proof above turns on little more than an application of the semantics for disjunction.
+
+
+
+
+\subsection{Conditional Rules}%
+  \label{sub:ConditionalRules}
+  
+Although the elimination rules for the conditional and the biconditional are also straightforward applications of the semantics, the introduction rules for the conditional and biconditional benefit from the following lemma which produces an entailment including a conditional from an entailment that does not.
+Even so, the following lemma turns on nothing more than the semantics for the conditional, and so has been proved separately only to avoid redundancy.
+
+\begin{Lthm} \label{lemma:cond}
+  If $\Gamma \cup \set{\metaA} \models \metaB$, then $\Gamma \models \metaA \supset \metaB$.
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\Gamma \cup \set{\metaA} \models \metaB$ and let $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma$.
+  Either $\M$ satisfies $\metaA$ or not, and so their are two cases to consider. 
+
+  \textit{Case 1:}
+  If $\M$ satisfies $\metaA$, then $\M$ satisfies $\Gamma \cup \set{\metaA}$.
+  By assumption $\M$ satisfies $\metaB$, and so $\VV{\I}{\va{a}}(\metaB)=1$ for some variable assignment $\va{a}$ over $\D$.
+  Thus $\VV{\I}{\va{a}}(\metaA \eif \metaB)=1$ by the semantics for the conditional, and so $\M$ satisfies $\metaA \supset \metaB$.
+
+  \textit{Case 2:}
+  If $\M$ does not satisfy $\metaA$, then $\VV{\I}{\va{a}}(\metaB)\neq 1$ for every variable assignment $\va{a}$ over $\D$. 
+  By the semantics for the conditional, $\VV{\I}{\va{a}}(\metaA \eif \metaB)=1$ for all $\va{a}$, and so for some $\va{a}$ in particular.
+  Thus $\M$ satisfies $\metaA \supset \metaB$.
+
+  Since $\M$ satisfies $\metaA \supset \metaB$ in both cases, we may conclude that $\Gamma \models \metaA \supset \metaB$. 
+\end{quote}
+
+
+
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:label}
+  \textbf{($\boldsymbol\eif$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eif$I. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conditional introduction $\eif$I.
+  Thus there is some subproof on lines $i$-$j$ where $i<j\leq n$ and $\metaA_{n+1}=\metaA_i \eif \metaA_j$.
+  We may represent the subproof as follows:
+
+  \begin{proof}
+  \open
+    \hypo[i]{na}\metaA \as{for $\eif$I}
+    \have[j]{nb}{\metaB}
+  \close
+  \have[n+1]{a}[\ ]{\metaA\eif\metaB}\ci{na-nb} %note that UBC has a more complex citation convention: {na-b, na-nb}
+  \end{proof}
+
+  By hypothesis, $\Gamma_j \models \metaA_j$.
+  With the exception of $\metaA_i$, every assumption that is undischarged at line $j$ is also undischarged at line $n+1$.
+  It follows that $\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \models \metaA_j$ by \textbf{\ref{lemma:weak}}.
+  Thus $\Gamma_{n+1} \models \metaA_i \eif \metaA_j$ by \textbf{\ref{lemma:cond}}.
+  Equivalently, $\Gamma_{n+1} \models \metaA_{n+1}$.
+\end{quote}
+
+
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:CondE}
+  \textbf{($\boldsymbol\eif$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eif$E. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conditional introduction $\eif$E.
+  Thus there are some lines $\metaA_i=\metaA_j\eif\metaA_{n+1}$ and $\metaA_j$ for $i,j\leq n$ which are live at $n+1$, and so $\Gamma_i,\Gamma_j\subseteq\Gamma_{n+1}$ by \textbf{\ref{lemma:live}}.
+  By hypothesis, $\Gamma_i\models \metaA_i$ and $\Gamma_j\models \metaA_j$, and so $\Gamma_{n+1} \models \metaA_i$ and $\Gamma_{n+1} \models \metaA_j$ by \textbf{\ref{lemma:weak}}.
+  Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma_{n+1}$, it follows that $\M$ satisfies $\metaA_i$ and $\metaA_j$.
+  By \textbf{\ref{lemma:allvar}}, $\VV{\I}{\va{a}}(\metaA_i)=\VV{\I}{\va{a}}(\metaA_j\eif\metaA_{n+1})=\VV{\I}{\va{a}}(\metaA_j)=1$ for all variable assignment $\va{a}$ over $\D$, and so for some $\va{a}$ in particular.
+  By the semantics for the conditional, either $\VV{\I}{\va{a}}(\metaA_j)\neq 1$ or $\VV{\I}{\va{a}}(\metaA_{n+1})=1$.
+  Given the above, $\VV{\I}{\va{a}}(\metaA_{n+1})=1$, and so $\M$ satisfies $\metaA_{n+1}$.
+  Generalising on $\M$, we may conclude that $\Gamma_{n+1} \models \metaA_{n+1}$.
+\end{quote}
+
+
+
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:BiconI}
+  \textbf{($\boldsymbol\eiff$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eiff$I. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by biconditional introduction $\eiff$E.
+  Thus there are some subproofs on lines $i$-$j$ and $h$-$k$ for some $i,j<h,k\leq n$ where $\metaA_i=\metaA_h=\metaA$, $\metaA_j=\metaA_k=\metaB$, and either $\metaA_{n+1}=\metaA\eiff\metaB$ or $\metaA_{n+1}=\metaB\eiff\metaA$.
+  By parity of reasoning, we may assume that $\metaA_{n+1}=\metaA\eiff\metaB$.
+  Thus we have:
+
+  \begin{proof}
+    \open
+      \hypo[i]{i}{\metaA} \as{for $\eor$E}
+      % \have[\vdots]{a}{}
+      \have[j]{j}{\metaB}
+    \close
+    \open
+      \hypo[h]{h}{\metaB} \as{for $\eor$E}
+      % \have[\vdots]{b}{}
+      \have[k]{k}{\metaA}
+    \close
+    \have[n+1]{a}[\ ]{\metaA \eiff \metaB}\bi{i-j,h-k} 
+  \end{proof}
+
+  By hypothesis, $\Gamma_j\models \metaA_j$, $\Gamma_k\models \metaA_k$, and $\Gamma_{n+1}\models \metaA_{n+1}$.
+  With the exception of $\metaA_i$, every assumption that is undischarged at line $j$ is also undischarged at line $n+1$, and so $\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$.
+  Similarly, we may conclude that $\Gamma_k\subseteq\Gamma_{n+1}\cup\set{\metaA_h}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \models \metaA_j$ and $\Gamma_{n+1}\cup\set{\metaA_h} \models \metaA_k$ by \textbf{\ref{lemma:weak}}.
+
+  By \textbf{\ref{lemma:cond}}, both $\Gamma_{n+1} \models \metaA_i \eif \metaA_j$ and $\Gamma_{n+1} \models \metaA_h \eif \metaA_k$.
+  Equivalently, $\Gamma_{n+1} \models \metaA \eif \metaB$ and $\Gamma_{n+1} \models \metaB \eif \metaA$.
+  Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma_{n+1}$, it follows that $\M$ satisfies $\metaA \eif \metaB$ and $\metaB \eif \metaA$ given the identities above.
+  By \textbf{\ref{lemma:allvar}}, $\VV{\I}{\va{a}}(\metaA \eif \metaB)=\VV{\I}{\va{a}}(\metaB \eif \metaA)=1$ for all variable assignments $\va{a}$, and so for some $\va{a}$ in particular. 
+  Thus $\VV{\I}{\va{a}}(\metaA)\neq 1$ or $\VV{\I}{\va{a}}(\metaB)=1$, and $\VV{\I}{\va{a}}(\metaB)\neq 1$ or $\VV{\I}{\va{a}}(\metaA)=1$ by the semantics for the conditional.
+  As a result, $\VV{\I}{\va{a}}(\metaB)=1$ if $\VV{\I}{\va{a}}(\metaA)=1$, and similarly, $\VV{\I}{\va{a}}(\metaA)=1$ if $\VV{\I}{\va{a}}(\metaB)=1$, and so $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaB)$.
+  Thus $\VV{\I}{\va{a}}(\metaA \eiff \metaB)=1$ by the semantics for the biconditional, and so $\M$ satisfies $\metaA_{n+1}$.
+  Generalising on $\M$, we may conclude that $\Gamma_{n+1}\models\metaA_{n+1}$.
+\end{quote}
+
+
+
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:Bicon}
+  \textbf{($\boldsymbol\eiff$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eiff$E. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by biconditional introduction $\eif$E.
+Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\metaA_i=\metaA_j\eiff\metaA_{n+1}$ or $\metaA_i=\metaA_{n+1}\eiff\metaA_j$.
+  By parity of reasoning, we may assume that $\metaA_i=\metaA_j\eiff\metaA_{n+1}$ where $\Gamma_i,\Gamma_j\subseteq\Gamma_{n+1}$ follows by \textbf{\ref{lemma:live}}.
+  By hypothesis, $\Gamma_i\models \metaA_i$ and $\Gamma_j\models \metaA_j$, and so $\Gamma_{n+1} \models \metaA_i$ and $\Gamma_{n+1} \models \metaA_j$ by \textbf{\ref{lemma:weak}}.
+  Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma_{n+1}$, it follows that $\M$ satisfies $\metaA_i$ and $\metaA_j$.
+  By \textbf{\ref{lemma:allvar}}, $\VV{\I}{\va{a}}(\metaA_i)=\VV{\I}{\va{a}}(\metaA_j\eiff\metaA_{n+1})=\VV{\I}{\va{a}}(\metaA_j)=1$ for every variable assignment $\va{a}$ over $\D$, and so for some $\va{a}$ in particular. 
+  By the semantics for the biconditional, $\VV{\I}{\va{a}}(\metaA_j)=\VV{\I}{\va{a}}(\metaA_{n+1})$, and so $\VV{\I}{\va{a}}(\metaA_{n+1})=1$.
+  Thus $\M$ satisfies $\metaA_{n+1}$, and so we may conclude that $\Gamma_{n+1} \models \metaA_{n+1}$ by generalising on $\M$.
+\end{quote}
+
+These final results complete the last of the proofs for all of the rules included in SD.
+Given \textbf{\ref{rule:AS}} -- \textbf{\ref{rule:Bicon}}, we may report the following preliminary result:
+
+\begin{enumerate}[leftmargin=1.5in]
+  \item[\it SD Rules:] If $\metaA_{n+1}$ follows by the proof rules for SD from sentences in $\Gamma_{n+1}$ and $\Gamma_k \models \metaA_k$ for every $k\leq n$, then $\Gamma_{n+1} \models \metaA_{n+1}$.
+\end{enumerate}
+
+It remains to extend this result to include the remaining proof rules in QD.
+In order to do so, the following section will prove two important supporting lemmas.
+
+
+
+\section{Substitution and Model Lemmas}% TODO move above
+  \label{sec:Lemmas}
+
+This section establishes two closely related results, both of which show that the truth-value of a wff is preserved by specific changes to that wff, or to the model in which it is evaluated.
+These results will play a crucial role in proving the lemmas that we will need to extend \textit{SD Rules} to include the remaining proof rules that belong to QD.
+
+In slightly greater detail, the following lemma shows that replacing $\alpha$ with $\beta$ in a wff $\metaA$ does not effect its truth-value when evaluated at a model and variable assignment so long as $\alpha$ and $\beta$ refer to the same element of the domain on that model and variable assignment.
+
+\begin{Lthm} \label{lemma:sub}
+  $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ if $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$ and $\beta$ is free for $\alpha$ in $\metaA$.
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:}
+  The proof goes by induction on the wff of QL$^=$. 
+
+  \textit{Base:} Let $\metaA$ be a wff of QL$^=$ where $\comp(\metaA)=0$.
+  Assume that $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
+  It follows that $\metaA$ is either $\F^n\alpha_1,\ldots\alpha_n$ or $\alpha_1=\alpha_2$.
+  If $\metaA$ is $\F^n\alpha_1,\ldots\alpha_n$ where $\gamma_i=\beta$ if $\alpha_i=\alpha$ and otherwise $\gamma_i=\alpha_i$, then we have:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I}{\va{a}}(\metaA)=1 &\textit{ ~iff~ } \VV{\I}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1\\
+      &\textit{ ~iff~ } \tuple{\VV{\I}{\va{a}}(\alpha_1),\ldots,\VV{\I}{\va{a}}(\alpha_n)}\in\I(\F^n)\\
+      (\star) &\textit{ ~iff~ } \tuple{\VV{\I}{\va{a}}(\gamma_1),\ldots,\VV{\I}{\va{a}}(\gamma_n)}\in\I(\F^n)\\
+      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\F^n\gamma_1,\ldots,\gamma_n)=1\\
+      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1.
+  \end{align*}
+
+  Whenever $\alpha_i=\alpha$, it follows that $\VV{\I}{\va{a}}(\alpha_i)=\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$ by assumption.
+  Since $\VV{\I}{\va{a}}(\beta)=\VV{\I}{\va{a}}(\gamma_i)$ by definition, we may conclude that $\VV{\I}{\va{a}}(\alpha_i)=\VV{\I}{\va{a}}(\gamma_i)$.
+  If $\alpha_i\neq\alpha$, then $\alpha_i=\gamma_i$ by definition, and so $\VV{\I}{\va{a}}(\alpha_i)=\VV{\I}{\va{a}}(\gamma_i)$ is immediate.
+  It follows that $\VV{\I}{\va{a}}(\alpha_i)=\VV{\I}{\va{a}}(\gamma_i)$ for all $1\leq i\leq n$, thereby justifying $(\star)$.
+  The other biconditionals hold by definition or the semantics for atomic wffs of QL$^=$.
+
+  If instead $\metaA$ is $\alpha_1=\alpha_2$, then assuming as before that $\gamma_i=\beta$ if $\alpha_i=\alpha$ and otherwise $\gamma_i=\alpha_i$, we have the following biconditionals:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I}{\va{a}}(\metaA)=1 &\textit{ ~iff~ } \VV{\I}{\va{a}}(\alpha_1=\alpha_2)=1\\
+      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\alpha_1)=\VV{\I}{\va{a}}(\alpha_n)\\
+      (\ast) &\textit{ ~iff~ } \VV{\I}{\va{a}}(\gamma_1)=\VV{\I}{\va{a}}(\gamma_2)\\
+      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\gamma_1=\gamma_2)=1\\
+      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1.
+  \end{align*}
+
+  We may justify $(\ast)$ in an analogous manner to $(\star)$, where the justifications for the other biconditionals is the same as before. 
+  It follows that $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ whenever $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$ and $\comp(\metaA)=0$. 
+
+  \textit{Induction:} Assume that if $\comp(\metaA)\leq n$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ whenever $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$. 
+  Letting $\comp(\metaA)=n+1$, there are seven cases to consider corresponding to the operators $\enot,\eand,\eor,\eif,\eiff,\qt{\forall}{\gamma},$ and $\qt{\exists}{\gamma}$.
+
+  \textit{Case 1:} Assume that $\metaA=\enot\metaB$ where $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
+  Since $\comp(\metaA)=n+1$ and $\comp(\enot\metaB)=\comp(\metaB)+1$, it follows that $\comp(\metaB)\leq n$.
+  It follows by hypothesis that $\VV{\I}{\va{a}}(\metaB)=\VV{\I}{\va{a}}(\metaB\unisub{\beta}{\alpha})$, and so $\VV{\I}{\va{a}}(\enot\metaB)=\VV{\I}{\va{a}}(\enot\metaB\unisub{\beta}{\alpha})$ by the semantics for negation.
+  Thus $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ as desired. 
+  % Since the cases for $\eand,\eor,\eif,$ and $\eiff$ are similar, these cases will be left as exercises for the reader.
+
+  % \textit{Case 2:} Assume that $\metaA=\metaB\eand\metaC$ where $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
+  % Since $\comp(\metaA)=n+1$ and $\comp(\metaB\eand\metaC)=\comp(\metaB)+\comp(\metaC)+1$, it follows that $\comp(\metaB),\comp(\metaC)\leq n$.
+  % It follows by hypothesis that $\VV{\I}{\va{a}}(\metaB)=\VV{\I}{\va{a}}(\metaB\unisub{\beta}{\alpha})$ and $\VV{\I}{\va{a}}(\metaC)=\VV{\I}{\va{a}}(\metaC\unisub{\beta}{\alpha})$, and so $\VV{\I}{\va{a}}(\metaB\eand\metaC)=\VV{\I}{\va{a}}((\metaB\eand\metaC)\unisub{\beta}{\alpha})$ by the semantics for conjunction.
+  % Thus $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ as desired. 
+  % % Since the cases for $\eand,\eor,\eif,$ and $\eiff$ are similar, these cases will be left as exercises for the reader.
+
+  \textit{Case 6:} Assume $\metaA=\qt{\forall}{\gamma}\metaB$ where $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
+  If $\gamma=\alpha$, if follows that $\alpha$ is not free in $\metaA$, and so $\metaA=\metaA\unisub{\beta}{\alpha}$.
+  As a result, $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ is immediate.
+  Assume instead that $\gamma\neq\alpha$ and consider the following biconditionals:
+  % As before, $\comp(\metaB)\leq n$, and so $\VV{\I}{\va{c}}(\metaB)=\VV{\I}{\va{c}}(\metaB\unisub{\beta}{\alpha})$ whenever $\VV{\I}{\va{c}}(\alpha)=\VV{\I}{\va{c}}(\beta)$ by hypothesis.
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I}{\va{a}}(\metaA)=1 
+      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\qt{\forall}{\gamma}\metaB)=1\\
+      &\textit{ ~iff~ } \VV{\I}{\va{e}}(\metaB)=1 \text{ for all } \gamma\text{-variants } \va{e} \text{ of } \va{a}\\ 
+      (\dagger) &\textit{ ~iff~ } \VV{\I}{\va{e}}(\metaB\unisub{\beta}{\alpha})=1 \text{ for all } \gamma\text{-variants } \va{e} \text{ of } \va{a}\\  
+      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\qt{\forall}{\gamma}\metaB\unisub{\beta}{\alpha})=1\\ 
+      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1.
+  \end{align*}
+
+  Let $\va{e}$ be an arbitrary $\gamma$-variant of $\va{a}$.
+  Since $\gamma\neq\alpha$, it follows that $\va{e}(\alpha)=\va{a}(\alpha)$ if $\alpha$ is a variable, and so $\VV{\I}{\va{e}}(\alpha)=\VV{\I}{\va{a}}(\alpha)$ regardless of whether $\alpha$ is a variable or a constant.
+  Together with starting assumption $\VV{\I}{\va{e}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
+  By assumption, $\beta$ is free for $\alpha$ in $\metaA$, and so $\gamma\neq\beta$.
+  % TODO: add case where $\alpha$ does not occur in $\metaA$ and $\gamma=\beta$ 
+  If $\beta$ is a variable, then $\va{e}(\beta)=\va{a}(\beta)$ since $\va{e}$ is a $\gamma$-variant of $\va{a}$, and so $\VV{\I}{\va{a}}(\beta)=\VV{\I}{\va{e}}(\beta)$ regardless of whether $\beta$ is a variable or a constant.
+  Thus $\VV{\I}{\va{e}}(\alpha)=\VV{\I}{\va{e}}(\beta)$.
+  As in \textit{Case 1}, $\comp(\metaB)\leq n$, and so $\VV{\I}{\va{e}}(\metaB)=\VV{\I}{\va{e}}(\metaB\unisub{\beta}{\alpha})$ by hypothesis.
+  Since $\va{e}$ was any $\gamma$-variant of $\va{a}$, it follows that $\VV{\I}{\va{e}}(\metaB)=\VV{\I}{\va{e}}(\metaB\unisub{\beta}{\alpha})$ for all $\gamma$-variants $\va{e}$ of $\va{a}$, thereby establishing $(\dagger)$.
+  The other biconditionals follow from the definitions and the semantics for the universal quantifier.
+
+  Since the cases for $\eand,\eor,\eif,\eiff,$ and $\qt{\exists}{\gamma}$ are similar, these cases will be left as exercises for the reader.
+  It follows that $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ whenever $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$ and $\comp(\metaA)=n+1$.
+  Thus the lemma follows by induction.
+\end{quote}
+
+
+The proof above works by induction on complexity where the only tricky cases are for the quantifiers.
+In a similar manner to \textbf{\ref{lemma:assign}}, we avoided assuming the antecedent of the claim to be proved at the outset so that the induction hypothesis took a general form.
+In particular, $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ whenever $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
+Since this holds for any variable assignment $\va{a}$, we were able to apply the induction hypothesis in order to prove $(\dagger)$.
+
+The next lemma proves something similar, this time holding the wff $\metaA$ fixed and varying the model. 
+In particular, any model that agrees with $\M$ on all constants and predicates which occur in $\metaA$ will yield the same truth-value at any given variable assignment. 
+
+\begin{Lthm} \label{lemma:model}
+  If $\M=\tuple{\D,\I}$ and $\M'=\tuple{\D,\I'}$ share the domain $\D$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and constant $\alpha$ that occurs in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any variable assignment $\va{a}$ over $\D$.
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:} Assume that $\M=\tuple{\D,\I}$ and $\M'=\tuple{\D,\I'}$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and constant $\alpha$ that occurs in $\metaA$.
+  The proof goes by induction on the complexity of $\metaA$.
+
+  \textit{Base:} Assume $\comp(\metaA)=0$ where $\va{a}$ is any variable assignment over $\D$.
+  It follows that $\metaA$ is either $\F^n\alpha_1,\ldots\alpha_n$ or $\alpha_1=\alpha_2$.
+  Consider the following cases:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1 &\textit{ ~iff~ } \tuple{\VV{\I}{\va{a}}(\alpha_1),\ldots,\VV{\I}{\va{a}}(\alpha_n)}\in\I(\F^n)\\
+      (\star) &\textit{ ~iff~ } \tuple{\VV{\I'}{\va{a}}(\alpha_1),\ldots,\VV{\I'}{\va{a}}(\alpha_n)}\in\I'(\F^n)\\
+      &\textit{ ~iff~ } \VV{\I'}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1.
+  \end{align*}
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I}{\va{a}}(\alpha_1=\alpha_2)=1 &\textit{ ~iff~ } \VV{\I}{\va{a}}(\alpha_1) = \VV{\I}{\va{a}}(\alpha_2)\\
+      (\ast) &\textit{ ~iff~ } \VV{\I'}{\va{a}}(\alpha_1) = \VV{\I'}{\va{a}}(\alpha_2)\\
+      &\textit{ ~iff~ } \VV{\I'}{\va{a}}(\alpha_1=\alpha_2)=1.
+  \end{align*}
+
+  Whereas $\I(\F^n)=\I'(\F^n)$ is immediate from the assumption, we may observe that $\VV{\I}{\va{a}}(\alpha_i)=\I(\alpha_i)=\I'(\alpha_i)=\VV{\I'}{\va{a}}(\alpha_i)$ if $\alpha_i$ is a constant, and if $\alpha_i$ is a variable, then $\VV{\I}{\va{a}}(\alpha_i)=\va{a}(\alpha_i)=\VV{\I'}{\va{a}}(\alpha_i)$, thereby establishing $(\star)$ and $(\ast)$. 
+  It follows that $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any variable assignment $\va{a}$ over $\D$ if $\comp(\metaA)=0$.
+
+  \textit{Induction:} Assume that if $\comp(\metaA)\leq n$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for all variable assignments $\va{a}$ over $\D$. 
+  Letting $\comp(\metaA)=n+1$, there are seven cases to consider corresponding to the operators $\enot,\eand,\eor,\eif,\eiff,\qt{\forall}{\gamma},$ and $\qt{\exists}{\gamma}$.
+
+  \textit{Case 1:} Assume $\metaA=\enot\metaB$.
+  Since $\comp(\metaA)=n+1$ and $\comp(\enot\metaB)=\comp(\metaB)+1$, it follows that $\comp(\metaB)\leq n$.
+  By hypothesis, $\VV{\I}{\va{a}}(\metaB)=\VV{\I'}{\va{a}}(\metaB)$ for all variable assignments $\va{a}$ over $\D$, and so by the semantics for negation, $\VV{\I}{\va{a}}(\enot\metaB)=\VV{\I'}{\va{a}}(\enot\metaB)$ for all variable assignments $\va{a}$ over $\D$.
+  Thus $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for all variable assignments $\va{a}$ over $\D$ as desired. 
+  The cases for $\eand,\eor,\eif,$ and $\eiff$ are similar.
+
+  \textit{Case 6:} Assume $\metaA=\qt{\forall}{\gamma}\metaB$.
+  For the same reasons given above, $\comp(\metaB)\leq n$.
+  We may then consider the following biconditionals:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I}{\va{a}}(\qt{\forall}{\gamma}\metaB)=1 &\textit{ ~iff~ } \VV{\I}{\va{e}}(\metaB)=1 \text{ for all } \gamma\text{-variants } \va{e} \text{ of } \va{a}\\ 
+      (\dagger) &\textit{ ~iff~ } \VV{\I'}{\va{e}}(\metaB)=1 \text{ for all } \gamma\text{-variants } \va{e} \text{ of } \va{a}\\  
+      &\textit{ ~iff~ } \VV{\I'}{\va{a}}(\qt{\forall}{\gamma}\metaB)=1.
+  \end{align*}
+
+  By hypothesis, $\VV{\I}{\va{e}}(\metaB)=\VV{\I'}{\va{e}}(\metaB)$ for any variable assignment $\va{e}$, thereby establishing $(\dagger)$.
+  The other biconditionals follow from the semantics for the universal quantifier.
+  Thus $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for all variable assignments $\va{a}$ over $\D$. 
+
+  Since the cases for $\eand,\eor,\eif,\eiff,$ and $\qt{\exists}{\gamma}$ are similar to those above, they will be left as exercises for the reader.
+  It follows that $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for all variable assignments $\va{a}$ if $\comp(\metaA)=n+1$.
+  Thus the lemma follows by induction.
+\end{quote}
+
+Although by no means surprising, the lemma above plays a crucial role in a number of the proofs given below.
+With these new resources in place, we may finish the proof of \textit{QD Rules}.
+
+
+
+
+
+\section{QD Rules}%
+  \label{sec:QDRules}
+
+By drawing on the previous lemmas, we may prove a number of much more usable results.
+In particular, the following lemma provides a semantic analogue for universal introduction whereby we may assert the entailment of a universal claim given only the entailment of a sufficiently arbitrary instance.
+
+\subsection{Universal Quantifier Rules}%
+  \label{sub:UniversalRules}
+  
+
+\begin{Lthm} \label{lemma:unigen}
+  For any constant $\beta$ that does not occur in $\qt{\forall}{\alpha}\metaA$ or in any sentence $\metaC\in\Gamma$, if $\Gamma \models \metaA\unisub{\beta}{\alpha}$, then $\Gamma \models \qt{\forall}{\alpha}\metaA$. 
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\Gamma \models \metaA\unisub{\beta}{\alpha}$ where $\beta$ is a constant that does not occur in $\forall\alpha\metaA$ or in any sentence $\metaC\in\Gamma$.
+  Assume for contradiction that $\Gamma \nmodels \qt{\forall}{\alpha}\metaA$, and so there is some model $\M=\tuple{\D,\I}$ which satisfies $\Gamma$ but does not satisfy $\qt{\forall}{\alpha}\metaA$.
+  Thus $\VV{\I}{}(\qt{\forall}{\alpha}\metaA)\neq 1$, and so $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)\neq 1$ for every variable assignment $\va{a}$, and so for some $\va{c}$ in particular. 
+  By the semantics for the universal quantifier, $\VV{\I}{\va{c}}(\metaA)\neq 1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$.
+  Let $\M'$ be the same as $\M$ with the exception that $\I'(\beta)=\va{c}(\alpha)$.
+  The following biconditionals hold for every $\metaB \in \Gamma$:
+
+  \vspace{-.2in}
+  \begin{align*}
+    \VV{\I}{}(\metaB)=1 &\textit{ ~iff~ } \VV{\I}{\va{e}}(\metaB)=1 \text{ for some variable assignment } \va{e}\\
+     (\star) &\textit{ ~iff~ } \VV{\I'}{\va{e}}(\metaB)=1 \text{ for some variable assignment } \va{e}\\ 
+     &\textit{ ~iff~ } \VV{\I'}{}(\metaB)=1.
+  \end{align*}
+
+  By construction, $\M$ and $\M'$ have the same domain $\D$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and every constant $\alpha\neq\beta$.
+  Since $\beta$ does not occur in any $\metaB \in \Gamma$, the biconditional $(\star)$ follows from \textbf{\ref{lemma:model}}.
+  Thus $\VV{\I}{}(\metaB)=\VV{\I'}{}(\metaB)$ for all $\metaB\in\Gamma$, and so $\M'$ satisfies $\Gamma$.
+  By the assumption, $\M'$ satisfies $\metaA\unisub{\beta}{\alpha}$, and so $\VV{\I'}{}(\metaA\unisub{\beta}{\alpha})=1$.
+  By \textbf{\ref{lemma:assign}}, $\VV{\I'}{\va{g}}(\metaA\unisub{\beta}{\alpha})=1$ for all variable assignments over $\D$, and so $\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$ in particular.
+
+  Recall $\VV{\I}{\va{c}}(\metaA)\neq 1$ from above.
+  Since $\beta$ does not occur in $\qt{\forall}{\alpha}(\metaA)$, it follows that $\beta$ does not occur in $\metaA$, and so $\VV{\I'}{\va{c}}(\metaA)\neq 1$ follows by \textbf{\ref{lemma:model}}.
+  However, since $\va{c}(\alpha)=\I'(\beta)$ where $\beta$ is a constant, $\VV{\I'}{\va{c}}(\alpha)=\VV{\I'}{\va{c}}(\beta)$ where $\beta$ is free for $\alpha$ in $\metaA$, and so $\VV{\I'}{\va{c}}(\metaA)=\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ follows from \textbf{\ref{lemma:sub}}.
+  Thus $\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})\neq 1$, contradicting the above, and so we may conclude that $\Gamma \models \qt{\forall}{\alpha}\metaA$.
+\end{quote}
+
+Given the lemma above, it easy to prove that the universal introduction proof rule preserves entailment in a similar manner to rules above.
+Consider the following proof.
+
+
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:UniI}
+  \textbf{($\boldsymbol\forall$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\forall$I. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by universal introduction $\forall$I.
+  Thus there is some $i\leq n$ where $\metaA_i=\metaA\unisub{\beta}{\alpha}$ is live at $n+1$ and $\beta$ does not occur in $\metaA_{n+1}=\qt{\forall}{\alpha}\metaA$ or in undischarged assumptions in $\Gamma_{n+1}$.
+  By \textbf{\ref{lemma:live}}, $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\models\metaA_i$ by hypotheses, and so $\Gamma_{n+1} \models \metaA_i$ by \textbf{\ref{lemma:weak}}.
+  Equivalently, $\Gamma_{n+1} \models \metaA\unisub{\beta}{\alpha}$.
+  Since $\beta$ does not occur in $\qt{\forall}{\alpha}\metaA$ or any undischarged assumptions in $\Gamma_{n+1}$, it follows by \textbf{\ref{lemma:unigen}} that $\Gamma_{n+1}\models \qt{\forall}{\alpha}\metaA$, and so $\Gamma_{n+1}\models\metaA_{n+1}$.
+\end{quote}
+
+This proof amounts to little more than an application of \textbf{\ref{lemma:unigen}}.
+In particular, there is no mention of the semantics for the universal quantifiers in the proof of \textbf{\ref{rule:UniI}} since all of these details are already contained in the supporting lemma.
+The following lemma will play an analogous role for universal elimination.
+
+
+
+\begin{Lthm} \label{lemma:uniinst}
+  $\forall\alpha\metaA \models \metaA\unisub{\beta}{\alpha}$ where $\alpha$ is a variable and $\metaA\unisub{\beta}{\alpha}$ is a sentence. 
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:} Let $\M=\tuple{\D,\I}$ be any model that satisfies $\qt{\forall}{\alpha}\metaA$, and so $\VV{\I}{}(\qt{\forall}{\alpha}\metaA)=1$.
+  Thus $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ for some $\va{a}$, and so $\VV{\I}{\va{c}}(\metaA)=1$ for every $\alpha$-variant $\va{c}$ of $\va{a}$ by the semantics for the universal quantifier.
+  Letting $\va{c}$ be an $\alpha$-variant of $\va{a}$ where $\va{c}(\alpha)=\I(\beta)$, it follows that $\VV{\I}{\va{c}}(\alpha)=\VV{\I}{\va{c}}(\beta)$.
+  Since there are no free variables in $\metaA\unisub{\beta}{\alpha}$, we know that $\beta$ is a constant, and so $\beta$ is free for $\alpha$ in $\metaA$.
+  Thus $\VV{\I}{\va{c}}(\metaA)=\VV{\I}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ follows by \textbf{\ref{lemma:sub}}, and so $\VV{\I}{}(\metaA\unisub{\beta}{\alpha})=1$ since $\metaA\unisub{\beta}{\alpha}$ is a sentence.
+  As a result, $\M$ satisfies $\metaA\unisub{\beta}{\alpha}$, and so $\forall\alpha\metaA \models \metaA\unisub{\beta}{\alpha}$.
+\end{quote}
+
+Whereas \textbf{\ref{lemma:unigen}} made use of the particular constraints that must hold for the universal introduction rule to be applied, the lemma above is much less constrained.
+This corresponds to the fact that universal claims entail all of their instances.
+
+We now turn to provide another supporting lemma which will help further streamline the proof for the universal elimination rule as well as a number of other proofs below.
+
+
+
+
+\begin{Lthm} \label{lemma:cut}
+  If $\Gamma \models \metaA$ and $\Sigma \cup \set{\metaA} \models \metaB$, then $\Gamma\cup\Sigma \models \metaB$. 
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\Gamma \models \metaA$ and $\Sigma \cup \set{\metaA} \models \metaB$.
+  Let $\M$ be any model that satisfies $\Gamma\cup\Sigma$.
+  It follows that $\M$ satisfies $\Gamma$, and so $\M$ satisfies $\metaA$.
+  Thus $\M$ satisfies $\Gamma\cup\Sigma$, and so $\M$ satisfies $\metaB$.
+  Generalising on $\M$, we may conclude that $\Gamma\cup\Sigma\models\metaB$.
+\end{quote}
+
+The proof above is a semantic analogue of a metarule that goes by the name `\textit{Cut}' since it allows us to cut out intermediaries.
+This will play a helpful role in the following proof.
+
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:UniE}
+  \textbf{($\boldsymbol\forall$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\forall$E. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by universal elimination $\forall$E.
+  Thus there is some $i\leq n$ where $\metaA_i=\qt{\forall}{\alpha}\metaA$ is live at $n+1$ and $\metaA_{n+1}=\metaA\unisub{\beta}{\alpha}$ for some variable $\alpha$ and constant $\beta$.
+  By \textbf{\ref{lemma:live}}, $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\models\metaA_i$ by hypotheses, and so $\Gamma_{n+1} \models \metaA_i$ by \textbf{\ref{lemma:weak}}.
+  Equivalently, $\Gamma_{n+1} \models \qt{\forall}{\alpha}\metaA$.
+  By \textbf{\ref{lemma:uniinst}} that $\qt{\forall}{\alpha}\metaA\models \metaA\unisub{\beta}{\alpha}$, and so $\Gamma_{n+1}\models\metaA_{n+1}$ by \textbf{\ref{lemma:cut}}.
+\end{quote}
+
+This proof turns on \textbf{\ref{lemma:uniinst}} where the other lemmas only play a supporting role.
+
+
+
+
+
+\subsection{Existential Quantifier Rules}%
+  \label{sub:ExistentialRules}
+ 
+Just as universal elimination is an easier rule to apply under fewer constraints, something similar may be said for existential introduction.
+Nevertheless, the following lemma will play a vital role in the proof for existential introduction.
+
+\begin{Lthm} \label{lemma:exigen}
+  $\metaA\unisub{\beta}{\alpha} \models \exists\alpha\metaA$ where $\alpha$ is a variable and $\metaA\unisub{\beta}{\alpha}$ is a sentence. 
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:} Let $\M=\tuple{\D,\I}$ be any model that satisfies $\metaA\unisub{\beta}{\alpha}$.
+  Thus $\VV{\I}{}(\metaA\unisub{\beta}{\alpha})=1$, and so $\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for some $\va{a}$.
+  Let $\va{c}$ be an $\alpha$-variant of $\va{a}$ where $\va{c}(\alpha)=\I(\beta)$.
+  It follows that $\VV{\I}{\va{c}}(\alpha)=\VV{\I}{\va{c}}(\beta)$ where $\beta$ is free for $\alpha$ in $\metaA$, and so $\VV{\I}{\va{c}}(\metaA\unisub{\beta}{\alpha})=\VV{\I}{\va{c}}(\metaA)$ by \textbf{\ref{lemma:sub}}.
+  By the semantics for the existential quantifier, $\VV{\I}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$.
+  Since $\metaA\unisub{\beta}{\alpha}$ is a sentence, at most $\alpha$ is free in $\metaA$, and so $\qt{\exists}{\alpha}\metaA$ is a sentence. 
+  Hence $\VV{\I}{}(\qt{\exists}{\alpha}\metaA)=1$, and so $\M$ satisfies $\qt{\exists}{\alpha}\metaA$.
+  Thus $\metaA\unisub{\beta}{\alpha} \models \exists\alpha\metaA$.
+\end{quote}
+
+This lemma follows easily from \textbf{\ref{lemma:sub}} where most of the work was already accomplished save for one critical appeal to the semantics for the existential quantifier.
+We may now turn to provide a proof for the existential introduction rule given below:
+
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:ExistI}
+  \textbf{($\boldsymbol\exists$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\exists$I. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential introduction $\exists$I.
+  Thus there is some $i\leq n$ where $\metaA_i=\metaA\unisub{\beta}{\alpha}$ is live at $n+1$ and $\metaA_{n+1}=\qt{\exists}{\alpha}\metaA$ for some variable $\alpha$ and constant $\beta$.
+  By \textbf{\ref{lemma:live}}, $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\models\metaA_i$ by hypotheses, and so $\Gamma_{n+1} \models \metaA_i$ by \textbf{\ref{lemma:weak}}.
+  Equivalently, $\Gamma_{n+1} \models \metaA\unisub{\beta}{\alpha}$.
+  Since $\metaA\unisub{\beta}{\alpha} \models \qt{\exists}{\alpha}\metaA$ by \textbf{\ref{lemma:exigen}}, $\Gamma_{n+1}\models\metaA_{n+1}$ follows from \textbf{\ref{lemma:cut}}.
+\end{quote}
+
+Like the proof for universal elimination, this proof amounts to little more than an application of \textbf{\ref{lemma:exigen}} where most of the work was already accomplished.
+Whereas universal elimination and existential introduction are relatively unconstrained, the existential elimination rule is much more restricted.
+Accordingly, the following lemma makes use of these restrictions in order to establish a semantic analogue of the existential elimination rule in a similar manner to the supporting lemma for universal introduction.
+
+
+
+\begin{Lthm} \label{lemma:exiinst}
+  For any constant $\beta$ that does not occur in $\exists\alpha\metaA$, $\metaB$, or in any sentence $\metaC\in\Gamma$, if $\Gamma \models \exists\alpha\metaA$ and $\Gamma \cup \set{\metaA\unisub{\beta}{\alpha}} \models \metaB$, then $\Gamma \models \metaB$.
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\Gamma \models \exists\alpha\metaA$ and $\Gamma \cup \set{\metaA\unisub{\beta}{\alpha}} \models \metaB$ where $\beta$ is a constant that does not occur in $\exists\alpha\metaA$, $\metaB$, or in any sentence $\metaC\in\Gamma$. 
+  Let $\M=\tuple{\D,\I}$ be a model that satisfies $\Gamma$.
+  It follows that $\M$ satisfies $\qt{\exists}{\alpha}\metaA$, and so $\VV{\I}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$ for some variable assignment $\va{a}$ over $\D$.
+  Thus $\VV{\I}{\va{c}}(\metaA)=1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$.
+
+  Let $\M'$ be the same as $\M$ with the only exception being that $\I'(\beta)=\va{c}(\alpha)$.
+  Given the assumptions about $\beta$, it follows by similar reasoning to the previous lemma that $\M'$ satisfies $\Gamma$.
+  Additionally, since $\beta$ does not occur in $\qt{\exists}{\alpha}\metaA$, it follows that $\beta$ does not occur in $\metaA$, and so $\VV{\I}{\va{c}}(\metaA)=\VV{\I'}{\va{c}}(\metaA)$ by \textbf{\ref{lemma:model}}.
+  Moreover, $\VV{\I'}{\va{c}}(\beta)=\VV{\I'}{\va{c}}(\alpha)$ where $\beta$ is free for $\alpha$ in $\metaA$ on account of being a constant, and so $\VV{\I'}{\va{c}}(\metaA)=\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{\ref{lemma:sub}}. 
+  Given the identities above, we may conclude that $\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$, and so $\VV{\I'}{}(\metaA\unisub{\beta}{\alpha})=1$ since $\metaA\unisub{\beta}{\alpha}$ is a sentence.
+  Thus $\M'$ satisfies $\Gamma \cup \set{\metaA\unisub{\beta}{\alpha}}$, and so by the assumption above, $\M'$ also satisfies $\metaB$.
+  By definition $\VV{\I'}{\va{e}}(\metaB)=1$ for some variable assignment $\va{e}$ over $\D$, and since $\beta$ does not occur in $\metaB$, we may conclude by \textbf{\ref{lemma:model}} that $\VV{\I}{\va{e}}(\metaB)=1$.
+  Thus $\M$ satisfies $\metaB$, and so by generalising on $\M$ it follows that $\Gamma \models \metaB$.
+\end{quote}
+
+Given a model $\M$ that satisfies the premises $\Gamma$, this proof makes use of \textbf{\ref{lemma:model}} in order to introduce a model variant $\M'$ which assigns the constant $\beta$ to whatever the variable $\alpha$ had been assigned.
+The variable $\alpha$ in the wff $\metaA$ is then replaced with $\beta$ where \textbf{\ref{lemma:sub}} is used to show that the truth-value remains unaffected in the model variant and variable assignment in question.
+Since $\beta$ does not occur in any premises, we know that the premises are all true on the model variant, and so may draw $\metaB$ as a consequence of the assumption. 
+We may then put this lemma to work in the proof of the following rule.
+
+
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:ExistE}
+  \textbf{($\boldsymbol\exists$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\exists$E. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential elimination $\exists$E.
+  Thus there is some $i<j<k\leq n$ where $\metaA_i=\qt{\exists}{\alpha}\metaA$ is live at $n+1$, $\metaA_j=\metaA\unisub{\beta}{\alpha}$ for some constant $\beta$ that does not occur in $\metaA_i$, $\metaA_k$, or any $\metaB\in\Gamma_i$.
+  Thus we have:
+
+  \begin{proof}
+    \have[i]{i}{\qt{\exists}{\alpha}\metaA}
+    \open	
+      \hypo[j]{j}{\metaA\unisub{\beta}{\alpha}} \as{for $\exists$E}
+      \have[ ]{x}{\vdots} 
+      \have[k]{k}{\metaB}
+    \close
+    \have[n+1]{n}{\metaB{}} \Ee{i,j-k}
+  \end{proof}
+
+  By hypothesis, $\Gamma_i\models\metaA_i$ and $\Gamma_k\models\metaA_k$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:live}}.
+  With the exception of $\metaA_i$, every assumption that is undischarged at line $k$ is also undischarged at line $n+1$, and so $\Gamma_k\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$.
+  It follows by \textbf{\ref{lemma:weak}} that $\Gamma_{n+1} \models \metaA_i$ and $\Gamma_{n+1}\cup\set{\metaA_i} \models \metaA_k$, and so $\Gamma_{n+1} \models \qt{\exists}{\alpha}\metaA$ and $\Gamma_{n+1}\cup\set{\metaA\unisub{\beta}{\alpha}} \models \metaB$.
+  Thus $\Gamma_{n+1}\models\metaB$ by \textbf{\ref{lemma:exiinst}}, and so $\Gamma_{n+1}\models\metaA_{n+1}$.
+\end{quote}
+
+Since \textbf{\ref{lemma:exiinst}} already does most of the heavy lifting, the proof above is the result of carefully setting up a generic scenario in which the existential elimination rule is applied, using the lemmas cited above to draw out the resulting consequences.
+
+
+
+\subsection{Identity Rules}%
+  \label{sub:IdentityRules}
+
+% The identity rules are much easier to prove than the quantifier rules given above.
+Recall from the proof of \textit{Base} that we have already considered identity introduction in the case of a one line proof.
+All that remains is to generalise this proof to the present setting where the $n+1$ line is the result of identity introduction. 
+Given that we were able to succeed in providing a proof for identity introduction in \textit{Base}, we will not need to appeal to the induction hypothesis.
+Nevertheless, it is important to establish the following general result.
+  
+
+\factoidbox{
+\begin{Rthm} \label{rule:IdI}
+  \textbf{($\boldsymbol=$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $=$I. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential introduction $=$I.
+  Thus $\metaA_{n+1}$ is $\alpha=\alpha$ for some constant $\alpha$. 
+  Letting $\M=\tuple{\D,\I}$ be any model, it follows that $\I(\alpha)=\I(\alpha)$, and so $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\alpha)$ for any variable assignment $\va{a}$.
+  By the semantics for identity, $\VV{\I}{\va{a}}(\alpha=\alpha)=1$, and so $\M$ satisfies $\alpha=\alpha$.
+  Generalising on $\M$, it follows that $\models \alpha=\alpha$, or equivalently $\models \metaA_{n+1}$.
+  By \textbf{\ref{lemma:weak}}, we may conclude that $\Gamma_{n+1}\models\metaA_{n+1}$.
+\end{quote}
+
+The proof above follows the same line of reasoning presented in \textit{Base}.
+In order to provide a proof for identity elimination, the following lemma establishes a semantic analogue of the identity elimination rule where this proof will draw on the substitution lemma given above.
+
+
+
+
+\begin{Lthm} \label{lemma:id}
+  If $\alpha$ and $\beta$ are constants, then $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \models \metaA\unisub{\beta}{\gamma}$.
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:} Let $\M=\tuple{\D,\I}$ be a model that satisfies $\metaA\unisub{\alpha}{\gamma}$ and $\alpha = \beta$ where $\alpha$ and $\beta$ are constants. 
+  It follows that $\VV{\I}{\va{a}}(\metaA\unisub{\alpha}{\gamma})=1$ for some variable assignment $\va{a}$ over $\D$.
+  By \textbf{\ref{lemma:allvar}}, $\VV{\I}{\va{c}}(\alpha=\beta)=1$ for all variable assignments $\va{c}$ over $\D$, and so $\VV{\I}{\va{a}}(\alpha=\beta)=1$ in particular.
+  Thus $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
+  Since $\beta$ is a constant, $\beta$ is free for $\alpha$ in $\metaA\unisub{\alpha}{\gamma}$, and so $\VV{\I}{\va{a}}(\metaA\unisub{\alpha}{\gamma})=\VV{\I}{\va{a}}((\metaA\unisub{\alpha}{\gamma})\unisub{\beta}{\alpha})$ by \textbf{\ref{lemma:sub}}.
+  However, $(\metaA\unisub{\alpha}{\gamma})\unisub{\beta}{\alpha}=\metaA\unisub{\beta}{\gamma}$, and so $\VV{\I}{\va{a}}(\metaA\unisub{\alpha}{\gamma})=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\gamma})=1$.
+  Since $\metaA\unisub{\beta}{\gamma}$ is a sentence, $\VV{\I}{}(\metaA\unisub{\beta}{\gamma})=1$, and so $\M$ satisfies $\metaA\unisub{\beta}{\gamma}$. 
+  Generalising on $\M$ we may conclude that $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \models \metaA\unisub{\beta}{\gamma}$. 
+\end{quote}
+
+This lemma amounts to little more than an application of \textbf{\ref{lemma:sub}} together with the observation that $(\metaA\unisub{\alpha}{\gamma})\unisub{\beta}{\alpha}=\metaA\unisub{\beta}{\gamma}$.
+We may then provide the following proof:
+
+
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:IdE}
+  \textbf{($\boldsymbol=$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $=$E. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential elimination $=$E.
+  Thus there are some live lines $i,j\leq n$ at $n+1$ where $\metaA_i$ is $\alpha=\beta$ for some constants $\alpha$ and $\beta$ and either $\metaA_j=\metaA\unisub{\alpha}{\gamma}$ and $\metaA_{n+1}=\metaA\unisub{\beta}{\gamma}$ or else $\metaA_j=\metaA\unisub{\beta}{\gamma}$ and $\metaA_{n+1}=\metaA\unisub{\beta}{\gamma}$.
+  By parity of reasoning, we may assume that $\metaA_j=\metaA\unisub{\alpha}{\gamma}$ and $\metaA_{n+1}=\metaA\unisub{\beta}{\gamma}$ which we may represent as follows:
+
+  \begin{proof}
+    \have[i]{i}{\alpha = \beta} 
+    \have[j]{j}{\metaA\unisub{\alpha}{\gamma}}
+    \have[n+1]{n}{\metaA\unisub{\beta}{\gamma}} \by{=E}{i,j}
+  \end{proof}
+
+  By \textbf{\ref{lemma:live}}, $\Gamma_i,\Gamma_j\subseteq \Gamma_{n+1}$ where $\Gamma_i\models\metaA_i$ and $\Gamma_j\models\metaA_j$ by hypotheses, and so $\Gamma_{n+1} \models \metaA_i$ and $\Gamma_{n+1} \models \metaA_j$ by \textbf{\ref{lemma:weak}}.
+  Equivalently, $\Gamma_{n+1} \models \alpha = \beta$ and $\Gamma_{n+1} \models \metaA\unisub{\alpha}{\gamma}$.
+  Since $\alpha$ and $\beta$ are constants, we know by \textbf{\ref{lemma:id}} that $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \models \metaA\unisub{\beta}{\gamma}$.
+  By two applications of \textbf{\ref{lemma:cut}}, we may conclude that $\Gamma_{n+1}\models\metaA\unisub{\beta}{\gamma}$, or equivalently, $\Gamma_{n+1}\models\metaA_{n+1}$.
+\end{quote}
+
+
+Since \textbf{\ref{lemma:id}} does most of the work above, and \textbf{\ref{lemma:sub}} made it easy to prove \textbf{\ref{lemma:id}}, identity elimination can be viewed as an application of \textbf{\ref{lemma:sub}}.
+Put otherwise, \textbf{\ref{lemma:sub}} is what explains why the identity elimination rule preserves validity.
+
+
+
+
+\section{Conclusion}%
+  \label{sec:Conclusion}
+
+Having provided proofs for every rule included in QD, we may draw on \textbf{\ref{rule:AS}} -- \textbf{\ref{rule:IdE}} given above in order to assert the following conclusion:
+  
+\begin{enumerate}[leftmargin=1.5in]
+  \item[\it QD Rules:] If $\metaA_{n+1}$ follows by the proof rules for QD from sentences in $\Gamma_{n+1}$ and $\Gamma_k \models \metaA_k$ for every $k\leq n$, then $\Gamma_{n+1} \models \metaA_{n+1}$.
+\end{enumerate}
+
+The result above completes the proof of \textit{Induction} which together with \textit{Base} establishes the soundness of QD over the semantics for QL$^=$.
+% Since $\Gamma \proves_{\textsc{sd}}\metaA$ implies $\Gamma \proves_{\textsc{qd}}\metaA$, 
+Assuming that $\Gamma \proves_{\textsc{sd}}\metaA$ for sentences in SL, we may go on to observe that $\Gamma \proves_{\textsc{qd}}\metaA$ follows as an immediate consequence since QD includes all of the rules in SD where QL includes all the sentences in SL. 
+It follows that $\Gamma \models \metaA$ over the semantics for QL$^=$ by the soundness of QD. %, and so SD is also sound over the semantics for QL$=$.
+Given any SL interpretation $\I$ which satisfies $\Gamma$, we may construct a corresponding model $\M=\tuple{\D,\I'}$ which also satisfies $\Gamma$ by letting $\D=\set{a}$ where $\I'(\alpha)=a$ for all constants $\alpha$ and $\I'(\F^0)=\I(\F^0)$ for all predicates $\F^0$.
+Thus $\M$ satisfies $\metaA$ where it is easy to show that $\M$ satisfies $\metaA$ just in case $\I$ satisfies $\metaA$.
+Thus we may conclude that the SL interpretation $\I$ that we began with satisfies $\metaA$, and so $\Gamma \models \metaA$ over the semantics for SL. 
+As a result, SD is also sound over the semantics for SL.
+
+It is worth comparing the soundness of SD and QD to the soundness proof for the tree method.
+Not only does the soundness of SD and QD tell us that we can rely on our natural deduction systems in order to construct valid arguments in which the premises entail the conclusion, soundness begins to close the gap between two very different approaches to logic.
+Whereas the entailment relation $\models$ is to do with truth-preservation over a class of interpretations or models depending on the language we are working with, the derivation relations $\proves_{\textsc{sd}}$ and $\proves_{\textsc{qd}}$ aim to encode natural patterns of reasoning in SL and QL$=$, respectively. 
+What soundness shows is that our purely syntactic proof-theoretic descriptions of logical reasoning in SL and QL$^=$ does not diverge from our semantics (or model-theoretic) descriptions of logical reasoning in SL and QL$^=$.
+Were either of these results to fail to hold, SD and QD could not be trusted.
+Although the soundness of the tree method similarly shows that the tree method can be relied upon to evaluate the validity of arguments, the tree method is of no independent interest since it does not claim to encode natural patterns of reasoning.
+
+
+
+\iffalse
+
+\practiceproblems
+
+\solutions
+\problempart
+\label{pr.QL.trees.tautology}
+Use a tree to test whether the following sentences are tautologies. If they are not tautologies, describe a model on which they are false.
+\begin{earg}
+\item $\qt{\forall}{x} \qt{\forall}{y} (Gxy \eif \qt{\exists}{z} Gxz)$
+\item $\qt{\forall}{x} Fx \eor \qt{\forall}{x} (Fx \eif Gx)$
+\item $\qt{\forall}{x} (Fx \eif (\enot Fx \eif \qt{\forall}{y} Gy))$
+\item $\qt{\exists}{x} (Fx \eor \enot Fx)$
+\item $\qt{\exists}{x} Jx \eiff \enot \qt{\forall}{x} \enot Jx$
+\item $\qt{\forall}{x} (Fx \eor Gx) \eif (\qt{\forall}{y} Fy \eor \qt{\exists}{x} Gx)$
+\end{earg}
+
+\solutions
+\problempart
+\label{pr.QL.trees.validity}
+Use a tree to test whether the following argument forms are valid. If they are not, give a model as a counterexample.
+\begin{earg}
+\item $Fa$, $Ga$, \therefore\ $\qt{\forall}{x} (Fx \eif Gx)$
+\item $Fa$, $Ga$, \therefore\ $\qt{\exists}{x} (Fx \eand Gx)$
+\item $\qt{\forall}{x} \qt{\exists}{y} Lxy$, \therefore\ $\qt{\exists}{x} \qt{\forall}{y} Lxy$
+\item $\qt{\exists}{x} (Fx \eand Gx)$, $Fb \eiff Fa$, $Fc \eif Fa$, \therefore\ $Fa$
+\item $\qt{\forall}{x} \qt{\exists}{y} Gyx$, \therefore\ $\qt{\forall}{x} \qt{\exists}{y} (Gxy \eor Gyx)$
+\end{earg}
+
+\problempart
+\label{pr.QL.trees.translation.and.validity}
+Translate each argument into QL, specifying a UD, then use a tree to evaluate the resulting form for validity. If it is invalid, give a model as a counterexample.
+\begin{earg}
+\item Every logic student is studying. Deborah is not studying. Therefore, Deborah is not a logic student.
+\item Kirk is a white male Captain. Therefore, some Captains are white.
+\item The Red Sox are going to win the game. Every team who wins the game will be celebrated. Therefore, the Red Sox will be celebrated.
+\item The Red Sox are going to win the game. Therefore, the Yankees are not going to win the game.
+\item All cats make Frank sneeze, unless they are hairless. Some hairless cats are cuddly. Therefore, some cuddly things make Frank sneeze.
+\end{earg}
+
+\fi

@@ -57,21 +57,21 @@
 %To add different lines, you will need to create the new command, e.g. \profPhone, in the .cls file c. line 76, and command to create the line in the side bar in the .cls file c. line 186
 
 \classname{Logic I} 
-\classnum{24.241, Fall 2023} 
+\classnum{24.241, Fall 2024} 
 
 %%%%%%%%%%%%%%% PROF INFO
 \profname{Benjamin Brast-McKie}
 \officehours{Office Hrs: Mon \& Wed 1-2p} 
-\office{32-D966}
+\office{32-D962}
 \siteA{\href{https://carnap.io}{Carnap Website}} 
 \siteB{\href{https://canvas.mit.edu/courses/22144}{Canvas Website}} 
 \email{brastmck@mit.edu}
 
 %%%%%%%%%%%%%%% TA INFO
-\taAname{Gareth Norman}
+\taAname{Philipp Mayr}
 % \taAofficehours{Office Hrs: Tues \& Thurs 10-11a}
-\taAoffice{32-D978}
-\TAemail{garethn@mit.edu}
+\taAoffice{32-D927}
+\TAemail{philmayr@mit.edu}
 % \taBname{James}
 % \taBofficehours{Office Hrs: Tues \& Thurs 3-4p}
 % \taBoffice{MCZ 104}
@@ -102,7 +102,7 @@
 \aOne{We will use formal symbols as in mathematics, but this does not make logic a type of math any more than it makes physics a type of mathematics. Rather, logic has a subject mater all its own, though saying what this is will require some care.}
 
 \qTwo{Is logic philosophy?}
-\aTwo{\textit{Philosophical Logic} concerns the philosophy of logic. There are also formal approaches to philosophy which employ methods from proof theory and model theory. \textit{Mathematical Logic} is a sub-discipline that falls considerably closer to mathematics. We will be doing a bit of all of these.}
+\aTwo{\textit{Philosophical Logic} includes the development and application of logical systems to the problems of philosophy as well as the ambition to provide a philosophical account of logic. \textit{Mathematical Logic} concerns the formal properties that logical systems have and falls considerably closer to mathematics. We will be doing a bit of both.}
 
 \qThree{Is logic a descriptive science?}
 \aThree{No! Logic is a \textit{normative} science insofar as it aims to regiment how we ought to reason in an artificial language, not merely how we happen to reason in a natural language like English.}
@@ -130,28 +130,24 @@
 %----------------------------------------------------------------------------------------
 \section{Overview}
 
-During the first part of this course, we will study sentential deduction (SD) also known as propositional logic (PL). 
-This is the logic of truth-functional connectives, including ‘not,’ ‘and,’ ‘or,’ ‘if-then,’ and ‘if and only if.’ 
+During the first part of this course, we will study \textit{propositional logic} (PL). 
+This is the logic of truth-functional connectives including: `not', `and', `or', `if-then', and `if and only if'. 
+In the second part, we will study \textit{first-order logic} (FOL). 
+This is the logic of `for all', `some', and later `is' together with the connectives from propositional logic. 
 
-In the second part, we will study quantifier deduction (QD) also known as first-order logic (FOL). 
-This is the logic of ‘for all’ and ‘some,’ plus our earlier sentential logic. 
-In both parts, we will present a syntax for a formal language along with a semantics to interpret that language.
-We will use our formal languages to regiment natural language sentences, providing proofs within a corresponding deductive system. 
-We will also cover the semantics needed to interpret our the formal languages and to define logical entailment. 
-For both parts of the course, we will do basic meta-logic, proving that our proof systems are sound and complete.
+In both parts, we will present a syntax for a formal language which we will use to regiment arguments in natural language.
+We will also introduce a model theoretic semantics in order to interpret our the formal languages and define logical consequence. 
+Lastly, we will introduce a proof system for each of our formal languages, defining what it is to be a proof in that system.
+For both parts of the course, we will cover basic metalogic, proving that our proof systems are sound and complete.
 
 %----------------------------------------------------------------------------------------
 %	 READING MATERIAL
 %----------------------------------------------------------------------------------------
 \vspace{0.5cm} %I make liberal use of the \vspace{} command to partition and place sections just how I want them. Alter as you see fit. 
-\section{Material}
+\section{Required Text}
 
-{\color{myCOLOR} Required Texts (It’s a free PDF)}\\
-ForAllX: MIT Edition (Fall 23). \\
-
-{\color{myCOLOR} Other}\\
-Any other required readings will be provided on Canvas.
-% I will also post supplemental readings written in a more philosophical vein.
+ForAllX: MIT Edition (Fall 2024). \\
+Chapters will be released each week on Canvas.
 
 %----------------------------------------------------------------------------------------
 %	 GRADING SCHEME
@@ -162,12 +158,14 @@ Any other required readings will be provided on Canvas.
 %below is the \twentyshort environment - a list with only two inputs. However, there is a \twenty environment, which creates a list with four inputs. You can find/alter details of that table in the .cls file c. lines 320. 
 \begin{twentyshort}
 	%\twentyitemshort{X\%}{Attendance/Participation}
-  \twentyitemshort{55\%}{Problem Sets (11 assignments at \%5 each)}
+  \twentyitemshort{50\%}{Problem Sets (10/12 at \%5 each)}
 	\twentyitemshort{20\%}{Midterm}
-  \twentyitemshort{25\%}{Final Exam}
+  \twentyitemshort{30\%}{Final Exam}
 \end{twentyshort}
 
-Grades will follow the standard scale: A = 89.5-100; B = 79.5-89.4; C = 69.5-79.4; D = 60-69.4; F  $<$60. Grades will not be curved.
+Grades will not be curved.
+A+ = 97-100; A = 93-96; A- = 90-92; B+ = 87-89;\\ 
+B = 83-86; B- = 80-82; C+ = 77-79; C = 73-76; C- = 70-72; D = 60-69; F $<$ 60.
 
 %----------------------------------------------------------------------------------------
 %	 EXTRAS
@@ -176,21 +174,31 @@ Grades will follow the standard scale: A = 89.5-100; B = 79.5-89.4; C = 69.5-79.
 \vspace{0.5cm}
 \section{Problem Sets}
 
-There will be 12 graded problem sets, due Fridays by 5pm.
-Your lowest score will be dropped.
-Many of these will be online using a program called ‘Carnap’ so that you can get real-time feedback as you work.
-All work submitted MUST BE YOUR OWN, instantiating a direct causal relation to your own pen, pencil, or keyboard—written in your own voice without someone there with you or texting you answers.
+There will be 12 graded problem sets due on Fridays by 5pm.
+Your two lowest score will be dropped.
+Late work will not be excepted.
+Certain problem sets will make use of the online program called `Carnap'.
+All work submitted MUST BE YOUR OWN, instantiating a direct causal relation to your own pen, pencil, or keyboard, written in your own voice without someone there with you or texting you answers.
 As you will find, even logic leaves room for creativity, and it will be important to get a sense of that for yourself.
 You are welcome to work through the problem set with at most two other students IN PREPARATION, but when it comes time to submit answers, you must be on your own.
-If you choose to work with others, please indicate your teammates’ names at the top of each assignment.
+If you choose to work with others, please indicate your collaborators' names at the top of each assignment.
 
 \vspace{0.5cm}
 \section{Carnap}
 
-Most of the problem sets will be assigned on Carnap.
+Parts of some of the problem sets will be assigned on Carnap.
 You will need to \href{https://carnap.io/enroll/Logic%20I}{\underline{enrol}} which you can find demonstrated \href{https://youtu.be/lmkWcxqxEZk}{\underline{here}}.
 Using Carnap will require some syntactic care: it is fussy about how things are entered, so you will have to learn to use the right syntax.
 Please don't hesitate to get in touch if you run into any issues.
+
+\vspace{0.5cm}
+\section{LaTeX}
+
+There will also be written problem sets.
+If your handwriting is very clear, you may scan and upload a PDF with your solutions.
+Alternatively, you are encouraged to use \LaTeX\ where I will provide optional templates with examples so as to make it easy to typeset the problem set each week.
+If you are new to \LaTeX, this is a great chance to begin to practice.
+You can also find links to the configurations that I maintain for using \href{https://github.com/benbrastmckie/VSCodium}{\underline{VSCodium}} and \href{https://github.com/benbrastmckie/.config}{\underline{NeoVim}} to write in \LaTeX\ and Markdown.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                SECOND PAGE
@@ -205,7 +213,7 @@ Please don't hesitate to get in touch if you run into any issues.
 \vspace{0.5cm}
 \section{Academic Integrity}
 
-Blindly copying someone else’s solution (written or typed) is cheating.
+Blindly copying someone else's solution (written or typed) is cheating.
 By contrast, you are encouraged to talk through a solution step-by-step with a classmate or two where in doing so, everyone involved comes to understand each part.
 However, when it comes time to write up and submit the solutions, it is important that you do this for yourself without consulting others throughout the process.
 
@@ -222,7 +230,7 @@ There is more to life than grades; don't let them distract from learning!
 
 Instead of worrying about your grade, I recommend that you focus on mastering logic, doing your best work and feeling good about it.
 Logic is an extremely deep subject, and foundational for this information age that we are all a part of.
-This course should provide you with an important tool kit that I hope you enjoy learning to use and that will serve you well beyond the end of this course.
+This course should provide you with an important tool kit that I hope you enjoy learning to use and that will serve you well beyond the end of this semester.
 % This has certainly been true for me!
 
 \vspace{0.5cm}
@@ -236,11 +244,11 @@ Making arrangements IN ADVANCE of the due date is required except in particularl
 
 %use \begin{outline} or \begin{outline}[enumerate] to create a list with subitems. 
 \begin{itemize}
-  \item Practice regimenting a range of natural language sentences into propositional and first-order languages.
-  \item Learn how to assess complex natural language arguments for validity.
-  \item Practice applying the rules of a proof system, regimenting valid reasoning.
-  \item Develop an appreciation for meta-logical proofs about our proof systems and their corresponding semantics.
-  \item Contemplate elements of the philosophy of logic, exploring such questions as: What is logic? What unites it as a discipline? What can logic do, and what are its limits? Do the rules of logic describe something universal or conventional?
+  \item Regiment natural language arguments in formal languages.
+  \item Evaluate arguments for validity, producing minimal countermodels if any.
+  \item Write formal proofs within a proof system.
+  \item Develop an appreciation for meta-logical proofs about our proof systems and their corresponding semantic theories.
+  \item Contemplate the philosophy of logic, exploring such questions as: What is logic? What unites logic as a discipline? What can logic good for, and what are its limits? Do the rules of logic describe something universal or conventional?
 \end{itemize}
 
 \vspace{0.5cm}
@@ -265,83 +273,90 @@ As someone who has used these services in the past, you can assume that you will
 \makeFullPage
 \section{Class Schedule}
 
+Any changes to this schedule will be announced on Canvas.
+
+\vspace{.25in}
+
 \begin{center}
 \begin{tabularx}{\textwidth}{p{2.5cm}p{8cm}p{9cm}} %change the width of the comments by changing these cm measurements. Add/substract columns by adding/deleting p{} sections. 
 \arrayrulecolor{myCOLOR}\hline
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% MODULE 1
-\multicolumn{3}{l}{\textbf{\textcolor{myCOLOR}{\large Part 1: Sentential Logic}}} \\
+\multicolumn{3}{l}{\textbf{\textcolor{myCOLOR}{\large Part 1: Propositional Logic (PL)}}} \\
 \hline
 % Week & Topic & Readings \\ \hline 
 %%Alternatively, instead of Week #, you can do Class date for meeting
 
 Week 0 & Introduction to Logic & ForAllX Ch. 0 \\
-Sep 07 & & Problem Set 0 (meet Carnap --- not graded)\\
+Sep 05 & & Problem Set 0 (meet Carnap --- not graded)\\
 \arrayrulecolor{maingray}\hline
 
-Week 1 & Syntax for SL & ForAllX Ch. 1\\
-Sep 12, 14 & Regimentation in SL & Problem Set 1 Due Friday 9/15  \\
+Week 1 & Syntax for PL \& Recursive Definitions & ForAllX Ch. 1\\
+Sep 10, 12 & Regimentation in PL & Problem Set 1 Due Friday 9/13  \\
 \arrayrulecolor{maingray}\hline
 
-  Week 2 & Semantics for SL & ForAllX Ch. 2 \& 3 \\
-Sep 19, 21 & Entailment, Validity, Satisfiability & Problem Set 2 Due Friday 9/22 \\
+Week 2 & Semantics for PL & ForAllX Ch. 2 \\
+  Sep 17, 19 & Logical Consequence \& Countermodels & Problem Set 2 Due Friday 9/20 \\
 \arrayrulecolor{maingray}\hline
 
-Week 3 & Trees Proof System (ST) & ForAllX Ch. 4 \\
-Sep 26, 28 & & Problem Set 3 Due Friday 9/29 \\
+Week 3 & Natural Deduction System (PL) & ForAllX Ch. 3 \\
+Sep 24, 26 & Natural Deduction Proofs & Problem Set 3 Due Friday 9/27 \\
 \arrayrulecolor{maingray}\hline
 
-Week 4 & Mathematical Induction \& Recursive Definitions & ForAllX Ch. 5 \\
-Oct 3, 5 & Soundness & Problem Set 4 Due Friday 10/6\\
+Week 4 & Mathematical Induction & ForAllX Ch. 4 \\
+Oct 1, 3 & Soundness & Problem Set 4 Due Friday 10/4\\
 \arrayrulecolor{maingray}\hline
 
 Week 5 & Completeness & ForAllX Ch. 5 \\
-Oct 12 &  & Problem Set 5 Due Friday 10/13 \\
+Oct 8, 10 & Midterm Review & Problem Set 5 Due Friday 10/11 \\
 \arrayrulecolor{maingray}\hline
 
-Week 6 & Natural Deduction (SD) & ForAllX Ch. 6 \\
-Oct 17, 19 & &  Problem Set 6 Due Friday 10/20\\
-\arrayrulecolor{myCOLOR}\hline
-
-Week 7 & Midterm Review & Review Handout \\
-Oct 24, 26 & --- MIDTERM --- &  Problem Set 7 (not graded) \\
+Week 6 & MIDTERM & 80 minute in class exam \\
+Oct 17 & &  No Problem Set 6 \\
+\arrayrulecolor{maingray}\hline
+~\\
 ~\\
 
-\arrayrulecolor{myCOLOR}\hline
 
-\multicolumn{2}{l}{\textbf{\textcolor{myCOLOR}{\large Part 2: Quantifer Logic (QL) }}} \\
+\arrayrulecolor{myCOLOR}\hline
+\multicolumn{2}{l}{\textbf{\textcolor{myCOLOR}{\large Part 2: First-Order Logic (FOL) }}} \\
 \hline
 
-Week 8 & Syntax for QL & ForAllX Ch. 8 \\
-Oct 31, Nov 2 & Regimentation in QL & Problem Set 8 Due Thurdsay 11/3 \\
+Week 7 & Syntax for FOL & ForAllX Ch. 7 \\
+Oct 22, 24 & Regimentation in FOL &  Problem Set 7 Due Friday 10/25 \\
+\arrayrulecolor{myCOLOR}\hline
+
+Week 8 & Semantics for FOL & ForAllX Ch. 8 \\
+Oct 29, 31 & Logical Consequence \& Countermodels & Problem Set 8 Due Friday 11/1 \\
 \arrayrulecolor{maingray}\hline
  
-Week 9 & Semantics for QL & ForAllX Ch. 9 \\
-Nov 7, 9 & Entailment, Validity, Satisfiability & Problem Set 9 Due Friday 11/10 \\
+Week 9 & Syntax FOL$^=$ & ForAllX Ch. 9 \\
+Nov 5, 7 & Semantics for FOL$^=$ & Problem Set 9 Due Friday 11/9 \\
 \arrayrulecolor{maingray}\hline
 
-Week 10 & Syntax QL$^=$ & ForAllX Ch. 10 \\
-Nov 14, 16 & Semantics for QL$^=$ & Problem Set 10 Due Friday 11/17 \\
-\arrayrulecolor{maingray}\hline
-
-Week 11 & Natural Deduction (QD) & ForAllX Ch. 11 \\
-Nov 14, 16 & Identity & Problem Set 10 Due Friday 11/17 \\
+Week 10 & Natural Deduction System (FOL) & ForAllX Ch. 10 \\
+Nov 12, 14 & Identity Rules (FOL$^=$) & Problem Set 10 Due Friday 11/15 \\
 \arrayrulecolor{maingray}\hline
 
 \newpage
 
+\arrayrulecolor{myCOLOR}\hline
 \multicolumn{2}{l}{\textbf{\textcolor{myCOLOR}{\large Part 3: Metalogic }}} \\
 \hline
 
-Week 12 & Soundness of QD & ForAllX Ch. 12 \\
-Nov 28, 30 & & Problem Set 12 Due Friday 12/1 \\
+Week 11 & Soundness (FOL$^=$) & ForAllX Ch. 11 \\
+Nov 19, 21 & & Problem Set 11 Due Friday 11/22 \\
 \arrayrulecolor{maingray}\hline
 
-Week 13 & Completeness of QD & ForAllX Ch. 13 \\
-Dec 5, 7 & & Problem Set 13 Due Friday 12/8 \\
+Week 12 & Completeness (FOL$^=$) & ForAllX Ch. 12 \\
+Nov 26 & & Problem Set 12 Due Friday 11/29 \\
+\arrayrulecolor{maingray}\hline
+
+Week 13 & Completeness (FOL$^=$) & ForAllX Ch. 13 \\
+Dec 3, 5 & Compactness & Problem Set 13 Due Friday 12/6 \\
 \arrayrulecolor{maingray}\hline
 
 Week 14 & Review for the Final & Handout \\
-Dec 12, 14 & & No Problem Set \\
+Dec 10 & & No Problem Set \\
 
 \arrayrulecolor{maingray}\hline\\
 
