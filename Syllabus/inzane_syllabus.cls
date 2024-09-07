@@ -29,15 +29,18 @@
 %	 COLOURS
 %----------------------------------------------------------------------------------------
 
-\definecolor{white}{RGB}{255,255,255}
+\definecolor{white}{HTML}{ebdbb2}
 \definecolor{gray}{HTML}{4D4D4D}
-\definecolor{sidecolor}{HTML}{E7E7E7}
+\definecolor{sidecolor}{HTML}{d5c4a1}%a89984}%928374}%E7E7E7}
 \definecolor{mainblue}{HTML}{0E5484}
 \definecolor{maingray}{HTML}{B9B9B9}
 \definecolor{green}{HTML}{66FF66}
+\definecolor{pagecolor}{HTML}{ebdbb2}
+\pagecolor{pagecolor}
 
 %Set the Main Thematic Color here. It is currently green. 
-\definecolor{myCOLOR}{HTML}{046D0B}%05800D}% 06930F}%0E801C}
+% \definecolor{myCOLOR}{HTML}{046D0B}%05800D}% 06930F}%0E801C}
+\definecolor{myCOLOR}{HTML}{665c54}%581845}%046D0B}%05800D}% 06930F}%0E801C}
 
 %To alternate section header colors (perhaps between green and grey, or your two school colors), define myCOLOR2, and then go to the ColorCounter section below and alternate lines between myCOLOR and myCOLOR2. 
 
@@ -110,7 +113,7 @@
 %----------------------------------------------------------------------------------------
 \newcommand{\taAname}[1]{\renewcommand{\taAname}{#1}}
 \newcommand{\TAemail}[1]{\renewcommand{\TAemail}{#1}}
-% \newcommand{\taAofficehours}[1]{\renewcommand{\taAofficehours}{#1}}
+\newcommand{\taAofficehours}[1]{\renewcommand{\taAofficehours}{#1}}
 \newcommand{\taAoffice}[1]{\renewcommand{\taAoffice}{#1}}
 % \newcommand{\taBname}[1]{\renewcommand{\taBname}{#1}}
 % \newcommand{\taBofficehours}[1]{\renewcommand{\taBofficehours}{#1}}
@@ -203,7 +206,7 @@
 
         \begin{tabular}{p{0.5cm} @{\hskip 0.5cm}p{5cm}}
             \ifthenelse{\equal{\taAname}{}}{}{\textsc{\large\icon{\faUser}} & \taAname\\}
-            % \ifthenelse{\equal{\taAofficehours}{}}{}{\textsc{\large\iconhalf{\ClockLogo}} & \taAofficehours\\}
+            \ifthenelse{\equal{\taAofficehours}{}}{}{\textsc{\large\iconhalf{\ClockLogo}} & \taAofficehours\\}
             \ifthenelse{\equal{\TAemail}{}}{}{\textsc{\large\icon{@}} & \href{mailto:\TAemail}{\TAemail}\\}
             \ifthenelse{\equal{\taAoffice}{}}{}{\textsc{\large\iconhalf{\faMapMarker}} & \taAoffice}
             % \ifthenelse{\equal{\taBname}{}}{}{\textsc{\large\icon{\faUser}} & \taBname\\}

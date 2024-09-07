@@ -34,16 +34,27 @@
 %
 \def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
 % disjunction
-\def\eor{\ensuremath{\mkern1mu\vee\mkern1mu}}
+\def\eor{\ensuremath{\vee}}
+% \def\eor{\ensuremath{\mkern1mu\vee\mkern1mu}}
 % conjunction: 
 % {\,^{_{_{_{_{\mbox{\footnotesize\textbullet}}}}}}} gives the dot
-\def\eand{\ensuremath{\mathrel\&}}
+\def\eand{\ensuremath{\wedge}}
+% \def\eand{\ensuremath{\mathrel\&}}
 % conditional: \rightarrow gives the right arrow
-\def\eif{\ensuremath{\supset}}
+\def\eif{\ensuremath{\rightarrow}}
+% \def\eif{\ensuremath{\supset}}
+% biconditional: \leftrightarrow gives the left and right arrow
+\def\eiff{\ensuremath{\leftrightarrow}}
+% negation: {\sim} gives the swung dash 
+\def\enot{\ensuremath{\neg}}
+%\def\enot{\ensuremath{\sim}} %note that \sim is defined as a relation, which leads to spacing issues. adding a \! leads to more spacing issues (piled up double negations).  
+% \def\enot{\ensuremath{{\sim}}} %redefining as {\sim} treats the tilde as a unary operator, rather than a relation, solving a lot of the spacing issues. 
+
 
 % \def\corner[1]{\ensuremath\ulcorner#1\urcorner}
 
 \newcommand{\corner}[1]{\ulcorner#1\urcorner} %%Corner quotes
+\newcommand{\concat}[2]{{#1}{\raisebox{4pt}{\smallfrown}}{#2}} %%Corner quotes
 \newcommand{\tuple}[1]{\langle#1\rangle} %%Corner quotes
 \newcommand{\set}[1]{\lbrace#1\rbrace} %%Corner quotes
 \newcommand{\I}{\mathcal{I}} %%
@@ -51,6 +62,8 @@
 \newcommand{\B}{\mathcal{B}} %%
 \newcommand{\M}{\mathcal{M}} %%
 \newcommand{\N}{\mathbb{N}} %%
+\newcommand{\PL}{\mathcal{L}^{\textsc{pl}}} %%
+\newcommand{\FOL}{\mathcal{L}^{\textsc{fol}}} %%
 \newcommand{\C}{\mathbb{C}} %%
 \newcommand{\F}{\mathcal{F}} %%
 \newcommand{\D}{\mathbb{D}} %%
@@ -75,16 +88,8 @@
 % }
 % \makeatother
 
-% biconditional: \leftrightarrow gives the left and right arrow
-\def\eiff{\ensuremath{\equiv}}
-% negation: {\sim} gives the swung dash 
-%\def\enot{\ensuremath{\neg}}
-%\def\enot{\ensuremath{\sim}} %note that \sim is defined as a relation, which leads to spacing issues. adding a \! leads to more spacing issues (piled up double negations).  
-
-\def\enot{\ensuremath{{\sim}}} %redefining as {\sim} treats the tilde as a unary operator, rather than a relation, solving a lot of the spacing issues. 
-
-\let\oldsim\sim %renames any \sim commands as \oldsim. 
-\renewcommand{\sim}{{\oldsim}} %redefines \sim as unary operator version of \sim, in case there are any straggling \sim commands in the wild
+% \let\oldsim\sim %renames any \sim commands as \oldsim. 
+% \renewcommand{\sim}{{\oldsim}} %redefines \sim as unary operator version of \sim, in case there are any straggling \sim commands in the wild
 
 %for explanations of these spacing issues, see here:
 %https://tex.stackexchange.com/questions/55701/how-do-i-write-sim-approximately-with-the-correct-spacing
@@ -111,12 +116,12 @@
 
 
 % metalanguage variables: change greek to A and B if you prefer
-\def\metaA{\ensuremath{\varPhi}}
-\def\metaB{\ensuremath{\varPsi}}
-\def\metaC{\ensuremath{\varOmega}}
-\def\metaSetX{\ensuremath{\mathcal{X}}}
-\def\metaSetY{\ensuremath{\mathcal{Y}}}
-\def\metaSetZ{\ensuremath{\mathcal{Z}}}
+\def\metaA{\ensuremath{\varphi}}
+\def\metaB{\ensuremath{\psi}}
+\def\metaC{\ensuremath{\chi}}
+\def\metaSetX{\ensuremath{\Gamma}}
+\def\metaSetY{\ensuremath{\Sigma}}
+\def\metaSetZ{\ensuremath{\varPhi}}
 
 % Latex's hyphenation algorithm cannot decide how to hyphenate
 % some common words in the book. The definitions below define 
@@ -283,18 +288,69 @@
 %    ****************************************
 % The {earg} environment is used for arguments and example sentences.
 % The {ekey} environment is used for symbolization keys.
-\newcounter{eargnum}
-\newcounter{OLDeargnum}
-\newenvironment{earg}%
-{\begin{list}{\arabic{eargnum}.}{\usecounter{eargnum}\setlength{\itemsep}{-.4em}}}%
-{\setcounter{OLDeargnum}{\arabic{eargnum}}\end{list}}
+
+% \newcounter{eargnum}
+% \newcounter{earg}
+% \newenvironment{earg}%
+% {\begin{list}{\arabic{earg}\arabic{eargnum}.}{\usecounter{eargnum}\setlength{\itemsep}{-.4em}}}%
+% {\stepcounter{earg}\end{list}}
+
+\newcounter{eargletter}[chapter] % Counter for the environment (resets per section)
+\newcounter{eargnum}[eargletter]
+\newenvironment{earg}[1][] % Optional argument to customize numbering
+{%
+  \refstepcounter{eargletter}% Step the environment counter
+  \begin{enumerate}[label=\Alph{eargletter}\arabic{eargnum}., #1]%
+  \usecounter{eargnum}
+  \setlength{\itemsep}{-.4em}% Adjust item spacing
+}
+{%
+  \end{enumerate}%
+}
+
+\newcommand{\eitem}[1]{%
+  \refstepcounter{eargnum}% Step the item counter
+  \item[\Alph{eargletter}\arabic{eargnum}.] {#1}\label{\theeargletter\theeargnum}
+  \label{\theeargletter\theeargnum}}% Create a label for referencing
+
+\newcommand{\uitem}[1]{% use to insert line before conclusion
+  \refstepcounter{eargnum}% Step the item counter
+  \item[\Alph{eargletter}\arabic{eargnum}.] \underline{#1}\label{\theeargletter\theeargnum}\vspace{2pt} % Label with underline format
+  \label{\theeargletter\theeargnum}}% Create a label for referencing
+
+% % Define a counter for the letter and number
+% \newcounter{eargletter}
+% \newcounter{eargnum}[eargletter]
+%
+% % Define the custom environment
+% \newenvironment{earg}{
+%     \refstepcounter{eargletter} % Increment the letter counter
+%     \setcounter{eargnum}{0} % Reset the number counter
+%     \begin{enumerate}[label=\Alph{eargletter}\arabic{eargnum}., leftmargin=*]
+%     \stepcounter{eargnum} % Start numbering from 1
+% }{
+%     \end{enumerate}
+% }
+
+% \newcommand{\uitem}[1]{% use to insert line before conclusion
+%   \item \underline{#1}\vspace{2pt}
+% }
 
 \newenvironment{ebullet}% In calgary remix: TB: added to give a nice bulleted enivronment
 {\begin{list}{\textbullet}{\itemsep=0pt \parsep=0pt}}%
 {\end{list}}
 
 \newcommand{\ekeylabel}[1]{{\makebox[8ex][r]{\textbf{ #1}}}}
-\newenvironment{ekey}{\begin{list}{}{\renewcommand{\makelabel}{\ekeylabel}\setlength{\itemsep}{-.5em}}}{\end{list}}
+% \newenvironment{ekey}{\begin{list}{}{\renewcommand{\makelabel}{\ekeylabel}\setlength{\itemsep}{-.5em}}}{\end{list}}
+
+\newenvironment{ekey}[1][] % Optional argument to customize numbering
+{%
+  \begin{enumerate}[#1]%
+  \setlength{\itemsep}{-.4em}% Adjust item spacing
+}
+{%
+  \end{enumerate}%
+}
 
 % Used in conjunction with {earg}, this handles the numbering and
 % references to example sentences:

@@ -1,0 +1,306 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs} %%Math packages
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep={}}
+
+\newcounter{eargletter} % Counter for the environment (resets per section)
+\newcounter{eargnum}[eargletter]
+\newenvironment{earg}[1][] % Optional argument to customize numbering
+{%
+  \refstepcounter{eargletter}% Step the environment counter
+  \begin{enumerate}[label=\Alph{eargletter}\arabic{eargnum}., #1]%
+  \usecounter{eargnum}
+  \setlength{\itemsep}{-.4em}% Adjust item spacing
+  % \newcommand{\eitem}{%
+  %     \refstepcounter{eargnum}% Step the item counter
+  %     \item[\Alph{eargletter}\arabic{eargnum}.]% Label format
+  %     \label{earg:\theeargletter\theeargnum}}% Create a label for referencing
+}
+{%
+  \end{enumerate}%
+}
+
+\newcommand{\uitem}[1]{% use to insert line before conclusion
+  \item \underline{#1}\vspace{2pt}
+}
+
+\newcommand{\corner}[1]{\ulcorner#1\urcorner} %%Corner quotes
+\newcommand{\tuple}[1]{\langle#1\rangle} %%Angle brackets
+\newcommand{\set}[1]{\lbrace#1\rbrace} %%Set brackets
+\newcommand{\interpret}[1]{\llbracket#1\rrbracket} %%Double brackets
+%\DeclarePairedDelimiter\ceil{\lceil}{\rceil}    
+\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\V}[1]{\mathcal{V}_{#1}} %%
+\newcommand{\PL}{\mathcal{L}^{\textsc{pl}}}
+\newcommand{\FOL}{\mathcal{L}^{\textsc{fol}}}
+
+\makeatletter
+\renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
+\renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+
+\renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
+\begin{flushright} % Right align
+{\LARGE\@title} % Increase the font size of the title
+
+\vspace{10pt} % Some vertical space between the title and author name
+
+{\@author} % Author name
+\\\@date % Date
+
+\vspace{-10pt} % Some vertical space between the author block and abstract
+\end{flushright}
+}
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{What is Logic?}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+\section*{Motivations}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in]
+  \item[\it Reasoning:] Logic is the study of formal reasoning.
+    \item By `formal' we don't mean that it uses mathematical symbols.
+    \item Rather, what follows from what \textit{in virtue of logical form}.
+    \item Abstracting from specific subject-matters, logic describes general patterns of reasoning that apply across the disciplines. %, but is not exhaustive, describing all reasoning in every discipline.
+  \item[\it Normativity:] Logic is not a \textit{descriptive} science studying how human beings in fact reason across the various disciplines.
+    \item Logic is a \textit{normative} science, describing an especially strong form of reasoning that may serve as an ideal.
+  \item[\it Artifical:] We will primarily work in artificial languages where we will stipulate how to reason in these languages.
+    \item Regimenting English will expose and remove ambiguities.
+    \item We will provide proof systems for our artificial languages by which to compute what follows from what in a manner that vastly extends our natural cognitive capacities.
+\end{itemize}
+
+
+
+\section*{Interpretations}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in]
+  \item[\it Proposition:] We will begin with propositional logic where a \textsc{proposition} is a way for things to be which either obtains or does not.
+  \item[\it Declarative Sentence:] Given an interpretation of the language, an English sentence is \textsc{declarative} just in case it expresses a proposition.
+    % \item A declarative sentence is true in an interpretation if the proposition it expresses obtains, and false otherwise.
+    \item Interrogative, imperative, and exclamatory sentences are not declarative sentences and typically do not have truth-values. 
+    \item We will restrict to declarative sentences throughout.
+  \item[\it Truth-Values:] A declarative sentence is \textsc{true} in an interpretation if, given that interpretation, it expresses a proposition that obtains and \textsc{false} in that interpretation otherwise.
+  \item[\it Interpretations:] We will only be concerned with the truth-values of sentences in this course, and so it is enough to take an \textsc{interpretation} to be an assignment of truth-values to sentences.
+    \item This amounts to taking there to be just two propositions. % called `True' and `False', or later, `1' and `0'.
+  % \item[\it Informal Interpretation:] An interpretation of a declarative English sentence assigns either the \textsc{truth-value} `True' or `False'.
+  % \item[\it Deductive Argument:] A \textsc{deductive argument} in English is a nonempty sequence of declarative sentences where a single sentence is designated as the \textsc{conclusion} (typically the last line) and all of the other sentences (if any) are the \textsc{premises}.
+\end{itemize}
+
+
+
+
+\section*{Examples}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in]
+  \item[\it Deductive Argument:] A \textsc{deductive argument} in English is a nonempty sequence of declarative sentences where a single sentence is designated as the \textsc{conclusion} (typically the last line) and all of the other sentences (if any) are the \textsc{premises}.
+\end{itemize}
+
+\subsection*{\it \textbf{Snow}: This argument may be compelling, but it is not certain.}
+
+\begin{earg}
+  \uitem{It's snowing.}
+  \item John drove to work.
+\end{earg}
+
+% \noindent
+% \textit{This argument may be compelling, but it is not certain.}
+
+\subsection*{\it \textbf{Red}: This argument provides certainty, but not on all interpretations.}
+
+\begin{earg}
+  \uitem{The ball is crimson.}
+  \item The ball is red.
+\end{earg}
+
+% \noindent
+% \textit{This argument provides certainty, but not on all interpretations.}
+
+\subsection*{\it \textbf{Museum}: This argument's certainty is independent of the interpretation.}
+
+\begin{earg}
+  \item Kate is either at home or at the Museum.
+  \uitem{Kate is not at home.}
+  \item Kate is at the Museum.
+\end{earg}
+
+% \noindent
+% \textit{This argument's certainty is independent of the interpretation.}
+
+
+
+
+\section*{Informal Validity}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in]
+  \item[\bf Question 1:] What goes wrong if we assume the premises but deny the conclusion in \textit{Snow}, \textit{Red}, and \textit{Museum}?
+  \item[\it Snow:] Improbable but possible.
+  \item[\it Red:] Impossible on the intended interpretation.
+  \item[\it Museum:] Impossible on all interpretations so long as we hold the meanings of logical terms `not' and `or' fixed. 
+  % \item[\it Variance:] Allow the interpretation of non-logical terms to vary, holding the meaning of the logical terms constant.
+  \item[\bf Task 1:] Clarify what it is to hold the logical terms fixed.
+  \item[\it Informal Interpretation:] An \textsc{informal interpretation} assigns every declarative sentence of English to exactly one \textsc{truth-value} without offending the following informal semantic clauses:
+    \item A \textit{negation} is true just in case the negand is false.
+    \item A \textit{disjunction} is true just in case either disjunct is true.
+    % \item Restrict to interpretations which respect the semantics.
+  \item[\it Informal Validity:] An argument in English is \textsc{informally valid} just in case its conclusion is true in every informal interpretation in which all of its premises are true.
+  % \item[\it Complex Sentences:] Observe that complex sentences in \textit{Museum} are composed from simpler sentences \textit{via} `not' and `or'.
+  % \item[\it Atomic Sentences:] A declarative sentence is \textsc{atomic} just in case it is not composed of simpler declarative sentences.
+  % \item[\bf Task 2:] Identify atomic sentences in \textit{Museum}.
+\end{itemize}
+
+
+
+
+
+\section*{Formal Languages}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in]
+  \item[\bf Problem 1:] There is no set of all declarative sentences of English, and so no clear notion of an informal interpretation of English.
+  \item[\it Suggestion:] Could choose some large set of atomic English sentences, but this would be arbitrary and hard to specify precisely.
+  \item[\bf Solution 1:] We will \textit{regiment} English arguments in artificial languages that are both general and easy to specify precisely.
+  \item[\it Propositional Language:] The \textsc{sentences} of $\PL$ are composed of \textsc{sentence letters} $A, B, C, \ldots$ and sentential operators $\neg$ and $\vee$.
+  \item[\bf Task 2:] Regiment \textit{Museum} in $\PL$: $H\vee M, \neg H \vDash M$.
+    \item $H$ = `Kat is at home'. 
+    \item $M$ = `Kat is at the Museum'. 
+  \item[\bf Task 3:] Provide a way to interpret the sentences of $\PL$.
+  % \item[\it Atomic:] If $\varphi$ is atomic, then the truth-value of $\varphi$ is given by the interpretation. 
+  \item[\it Schematic Variables:] Let $\varphi, \psi, \ldots$ be variables with sentences of $\PL$ as values, and let $\Gamma, \Sigma, \ldots$ be variables for sets of sentences of $\PL$. 
+  \item[\it Interpretation:] An \textsc{interpretation} $\V{}$ of $\PL$ assigns exactly one truth-value (1 or 0) to all sentences of $\PL$ where for any $\varphi$ and $\psi$: 
+  % \item[\it Atomic:] $\V{\I}(\varphi)=\I(\varphi)$ if $\varphi$ is a sentence letter.
+  \item $\V{}(\neg\varphi)=1$ just in case $\V{}(\varphi)=0$.
+  \item $\V{}(\varphi\vee\psi)=1$ just in case $\V{}(\varphi)=1$ or $\V{}(\psi)=1$ (or both).
+  \item[\it Logical Consequence:] $\Gamma \vDash \varphi$ just in case $\V{}(\varphi)=1$ for any interpretation $\V{}$ of $\PL$ where $\V{}(\gamma)=1$ for all $\gamma \in \Gamma$.
+  \item[\it Logical Validity:] An argument is \textsc{logically valid} just in case its conclusion $\varphi$ is a logical consequence of its set of premises $\Gamma$, i.e. $\Gamma \vDash \varphi$.
+  \item[\bf Task 4:] Show that \textit{Museum} is logically valid.
+\end{itemize}
+
+
+
+
+\section*{Logic}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in]
+  \item[\it Model Theory:] We have characterized logical reasoning as truth-preservation across a space of interpretations for an artificial language.
+  % \item[\bf Task 6:] Can we make \textit{Snow} and \textit{Red} logically valid?
+  \item[\it Proof Theory:] Another approach focuses entirely on syntactic rules that specify which inferences in a language are logically valid. % given the meanings of the logical constants.
+    \item A system of basic rules for reasoning in an artificial language is referred to as a \textsc{logic} for that language.
+    \item By composing basic rules, we will define what counts as a \textsc{proof} in each of the logics that we will study.
+  \item[\it Metalogic:] Despite their differences, these two strategies will be shown to coincide for the languages that we will study in this book.
+  % \item[\it Neutrality:] These methods accommodate reasoning about anything whatsoever, though not all logical constants are equally well understood.
+\end{itemize}
+
+
+
+\section*{Logical Form}
+
+\subsection*{\it \textbf{Picasso}}
+
+\begin{earg}
+  \item The painting is either a Picasso or a counterfeit and illegally traded.
+  \uitem{The painting is not a Picasso.}
+  \item The painting is a counterfeit and illegally traded.
+\end{earg}
+
+% \noindent
+% \textit{This argument is also logically valid.}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in]
+  \item[\bf Task 5:] Regiment \textit{Picasso} in $\PL$: $P\vee (Q\wedge R), \neg P \vDash Q\wedge R$.
+    \item $P$ = `The painting is a Picasso'. 
+    \item $Q$ = `The painting is a counterfeit'. 
+    \item $R$ = `The painting is illegally traded'. 
+  \item[\bf Question 2:] How does this argument relate to \textit{Museum}? 
+  \item[\it Logical Form:] Both arguments are instances of $\varphi \vee \psi, \neg\varphi \vDash \psi$ which is a logically valid argument schema, i.e., all instances are valid. 
+  \item[\bf Question 3:] How many logically valid argument schemata are there, and how could we hope to describe this space?
+  \item[\it Suggestion:] The logical consequence relation $\vDash$ for $\PL$ describes the space of logically valid arguments, where the logically valid argument schemata are patterns in this space.
+  \item[\bf Problem 2:] $\PL$ cannot regiment all logically valid arguments.
+  \item[\it Socrates:] Every man is mortal, Socrates is a man $\vDash$ Socrates is mortal. 
+    \item Our intuitive grasp on logical validity is not exhaustively captured by what we can regiment in $\PL$.
+  \item[\bf Solution 2:] Rather, logical validity in $\PL$ provides a partial answer, where we may extend the language to provide a broader description of logical validity, e.g., $\FOL$.
+    \item We will consider further extensions to $\FOL$ in later chapters. 
+\end{itemize}
+
+
+
+
+
+% \section*{Further Notions}
+%
+% \begin{itemize}[leftmargin=1.2in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+%   \item[\it Soundness:] An argument is \textit{sound} just in case it is both logically valid and has true premises.
+%   \item[\it Truth:] Soundness reaches beyond the scope of any logic course since truth on a single interpretation requires subject-specific knowledge.
+%   \item[\it Logical Truth:] Instead we can talk about sentences of formal languages being \textit{logically true} just in case they are true on all interpretations.
+%   \item[\it Contradiction:] A sentence is a \textit{contradiction} (or \textit{logically false}) just in case it is false on all interpretations.
+%   \item[\it Logical Entailment:] One sentence \textit{logically entails} another just in case every interpretation in which the former is true also makes the latter true.
+%   \item[\it Logical Equivalence:] One sentence is \textit{logically equivalent} to another just in case they logically entail each other.
+%   \item[\it Consistency:] A set of sentences is \textit{consistent} just in case there is an interpretation which makes every sentence in the set true, and \textit{inconsistent} otherwise.
+% \end{itemize}
+%
+%
+%
+% \section*{Examples}
+%
+% \noindent
+% Which sets of sentences are consistent? (e.g., is $\set{(1),(2)}$ consistent?)
+%
+% \subsection*{\it \textbf{Taller}}
+%
+% \begin{itemize}
+%   \item[(1)] Liza is taller than Sue.
+%   \item[(2)] Sue is taller than Paul.
+%   \item[(3)] Paul is taller than Liza.
+% \end{itemize}
+%
+%
+%
+%
+% \subsection*{\it \textbf{Lost}}
+%
+% \begin{itemize}
+%   \item[(4)] Kim is either in Somerville or Cambridge.
+%   \item[(5)] If Kim is in Somerville, then she is not far from home.
+%   \item[(6)] If Kim is not far from home, then she is in Cambridge.
+%   \item[(7)] Kim is not in Cambridge.
+% \end{itemize}
+%
+
+
+
+
+
+
+% \vfill
+%
+% \bibliographystyle{Phil_Review} %%bib style found in bst folder, in bibtex folder, in texmf folder.
+% \bibliography{Zotero} %%bib database found in bib folder, in bibtex folder
+
+
+\end{document}

@@ -1,17 +1,17 @@
-%!TEX root = forallx-ubc.tex
+%!TEX root = ../../forallx-mit.tex
 
-\chapter*{Preface to the Fall 2023 MIT Edition}
+\chapter*{Preface to the Fall 2024 MIT Edition}
 \label{ch.preface2}
 \addcontentsline{toc}{chapter}{Preface to the MIT edition}
 
-I inherited a version of Ichikawa's {\tt forall\script{x}} from Josh Hunt who worked to bring the text closer to \textit{The Logic Book} by Bergmann, Moor, and Nelson for the purposes of teaching Logic I at MIT.
-Since then, I have dropped certain chapters, substantially rewritten the chapters that have been kept, and included new chapters on soundness and completeness for a natural deduction system for first-order logic.
+I inherited a version of Ichikawa's {\tt forall\script{x}} from Josh Hunt who worked to bring the text closer to \textit{The Logic Book} by Bergmann, Moor, and Nelson for teaching Logic I at MIT.
+Since then, I have dropped certain chapters, substantially rewritten the chapters that have been preserved, and included new chapters on soundness and completeness for a natural deduction system for first-order logic.
 Here is the list of changes that I have made. % throughout the course of revising the textbook.
 
 \begin{itemize}
   \item Chapter 0 has been largely rewritten to provide a more compelling description of the subject matter of logic, and to remove distracting glosses and inaccurate examples of validity which are apt to mislead and confuse the introduction of the course.
-  \item Chapter 1 has also been substantially rewritten, clarifying the use of schematic variables in the definition of the wffs of SL, fixing conventions for dropping parentheses and quotes, reducing certain discussions, and polishing examples throughout.
-  \item Chapter 2 has been largely rewritten, explaining the relationship between validity in English and valid regimentations which does not rely on a circumstantial modal reading of validity. The connection between interpretations of the language and the lines on a truth table has been clarified and certain inaccurate examples have been modified or removed to avoid confusion. The validity of argument schemata has also been avoided, focusing on the validity of SL arguments themselves.
+  \item Chapter 1 has also been substantially rewritten, clarifying the use of schematic variables in the definition of the wffs of PL, fixing conventions for dropping parentheses and quotes, reducing certain discussions, and polishing examples throughout.
+  \item Chapter 2 has been largely rewritten, explaining the relationship between validity in English and valid regimentations which does not rely on a circumstantial modal reading of validity. The connection between interpretations of the language and the lines on a truth table has been clarified and certain inaccurate examples have been modified or removed to avoid confusion. The validity of argument schemata has also been avoided, focusing on the validity of PL arguments themselves.
   \item Chapter 3 has been substantially rewritten, including a definition of satisfaction which is used to define entailment and satisfiability. Consideration of the weakening principle has been added and the relationship between validity and entailment has been clarified. 
   \item Chapter 4 has been revised for consistency, simplifying the rules and definitions in accordance with standard conventions, introducing rules in a systematic order.
   \item Chapter 5 has been substantially rewritten, fixing errors and including proofs of soundness and completeness instead of rough sketches. The chapter begins with an extended discussion of mathematical induction.
@@ -19,9 +19,9 @@ Here is the list of changes that I have made. % throughout the course of revisin
   \item Chapter 8 has been largely rewritten, eliminating reference to a universe of discourse, including recursive definitions of free and bound variables, clearly distinguishing between sentences and wffs, and otherwise adapting the conventions for consistency and elegance.
   \item Chapter 9 has been completely rewritten to include a standard semantics for first-order logic which does not take constants to be rigid designators and defines truth relative to both a model and variable assignment, before defining truth at a model for sentences. Minimal models have been carefully motivated and presented along with a range of techniques for establishing entailments as well as evaluating sentences on a given model.
   \item Chapter 10 has been largely rewritten to reflect the same semantic conventions presented in Chapter 9. The motivations for adding identity to the language have been connected to ideas about the logical and non-logical terms of the language. Definitions of free-for and substitution has been included and discussions of inequality quantifiers, cardinality quantifiers, definite descriptions, and Leibniz's law have been added or adjusted.
-  \item Chapter 11 has been substantially rewritten. Substitution has been carefully defined and used to articulate the rules for the quantifiers and identity in a standard manner. The chapter closes with some discussion of undecidability, motivating proofs of soundness and completeness for QD instead of the tree method for QL$^=$.
-  \item Chapter 12 has been written from scratch, establishing the soundness of QD.
-  \item Chapter 13 has been written from scratch, establishing the completeness of QD.
+  \item Chapter 11 has been substantially rewritten. Substitution has been carefully defined and used to articulate the rules for the quantifiers and identity in a standard manner. The chapter closes with some discussion of undecidability, motivating proofs of soundness and completeness for FOL instead of the tree method.
+  \item Chapter 12 has been written from scratch, establishing the soundness of FOL.
+  \item Chapter 13 has been written from scratch, establishing the completeness of FOL.
   % \item Chapters have been rearranged and re-numbered so as to match the week numbers at MIT, starting with a half-week `0', and leaving a space for the midterm on week 7.
 \end{itemize}
 
@@ -30,8 +30,8 @@ These include the following primary changes:
   \begin{itemize}
     \item Move elements of the discussion of logical constants into Chapter 0.
     \item Banish the tree proof method and its metalogic entirely (or move it to an appendix).
-    \item Divide the metalogical results in half, proving SD is sound and complete prior to the midterm and later extending these results to QD prior to the final.
-    \item Include some consideration of the size of the sentences of SL and QL$^=$.
+    \item Divide the metalogical results in half, proving SD is sound and complete prior to the midterm and later extending these results to FOL prior to the final.
+    \item Include some consideration of the size of the sentences of PL and FOL.
     \item Change to a modern notation that is easy to write on the board. % for greater congruence between the notation used in class and what is used in the textbook.
     \item Expand on the brief discussions of decidability and compactness included in the text, drawing connections with inequality and cardinality quantifiers.
     \item Include a primer on set theory, relations, and functions in the appendix along with a revised glossary of symbols, rules, semantic clauses, and lemmas/corollaries/theorems.
@@ -41,7 +41,7 @@ If you find any errors throughout this text, please let me know and I'll happily
 
 \begin{flushright}
 \textsf{Benjamin Brast-McKie} \\
-\textsf{MIT, July 2023} \\
+\textsf{MIT, August 2024} \\
 \texttt{brastmck@mit.edu}
 \end{flushright}
 
@@ -68,9 +68,9 @@ The book begins with a systematic engagement with sentential logic in convention
 
 The first book I used for teaching was Greg Restall's \emph{Logic} (McGill--Queen's University Press, 2006), which I used for several years. My approach to teaching logic is heavily informed by that book; its influence in this text is particularly clear in the discussion of trees. (The natural deduction system I use is rather different from Restall's.)
 
-In preparing this text, I began with Magnus's original and edited freely. There are sections where Magnus's prose has been retained entirely, and many of the exercises I have taken unchanged from the original. But I have also restructured many things and added quite a bit of new material. Unlike my version, which focuses on sentential logic before introducing predicates and quantification, Magnus's version integrated the discussion of sentential and quantificational systems, e.g.\ covering translation for both before discussing models and proofs for either. The original also did not include trees or soundness and completeness proofs. The two chapters on trees (\ref{ch.sl.trees} and \ref{ch.QLTrees}) and soundness and completeness (\ref{ch.SLsoundcomplete} and \ref{ch.QLsoundcomplete}) were written from scratch; my chapter on identity (\ref{ch.identity}) is also original. The other material in this edition incorporates Magnus's original material, some parts more heavily edited than others. I have slightly modified Magnus's natural deduction rules.
+In preparing this text, I began with Magnus's original and edited freely. There are sections where Magnus's prose has been retained entirely, and many of the exercises I have taken unchanged from the original. But I have also restructured many things and added quite a bit of new material. Unlike my version, which focuses on sentential logic before introducing predicates and quantification, Magnus's version integrated the discussion of sentential and quantificational systems, e.g.\ covering translation for both before discussing models and proofs for either. The original also did not include trees or soundness and completeness proofs. The two chapters on trees (\ref{ch.PL.trees} and \ref{ch.FOL}) and soundness and completeness (\ref{ch.SLsoundcomplete} and \ref{ch.FOL}) were written from scratch; my chapter on identity (\ref{ch.identity}) is also original. The other material in this edition incorporates Magnus's original material, some parts more heavily edited than others. I have slightly modified Magnus's natural deduction rules.
 
-After a couple of years working with `beta' versions of the text online, I released the 1.0 version, along with the source code, in December 2018. The 2.0 version is new in summer 2020. The biggest changes in the latest round of revisions are in Chapter \ref{ch.ND.proofs}, where the order of presentation of the natural deduction rules has changed, and more examples have been added within the text. The rationale of the change was to start illustrating proofs earlier in the presentation of the rules. I've also put a bit more emphasis on the importance of exact matching of rule forms, and written a bit more precisely about the difference between SL proofs and proof schemas, when discussing derived rules. The other slightly substantive change I've made is to attend more precisely to how I'm using the term `interpretation' in the formal semantics for SL and QL. One of my aims is to emphasize the continuity between the two languages --- in my system, QL is literally a generalization of SL, and definitions of truth, entailment, etc., can be preserved. Various other smaller changes have been made as well, mostly stylistic changes and typo corrections. In summer 2021, I standardized and slightly modified the notation for assumptions in natural deduction proofs. I frequently make quite small corrections; the latest version is always on Github.
+After a couple of years working with `beta' versions of the text online, I released the 1.0 version, along with the source code, in December 2018. The 2.0 version is new in summer 2020. The biggest changes in the latest round of revisions are in Chapter \ref{ch.ND.proofs}, where the order of presentation of the natural deduction rules has changed, and more examples have been added within the text. The rationale of the change was to start illustrating proofs earlier in the presentation of the rules. I've also put a bit more emphasis on the importance of exact matching of rule forms, and written a bit more precisely about the difference between PL proofs and proof schemas, when discussing derived rules. The other slightly substantive change I've made is to attend more precisely to how I'm using the term `interpretation' in the formal semantics for PL and FOL. One of my aims is to emphasize the continuity between the two languages --- in my system, FOL is literally a generalization of PL, and definitions of truth, entailment, etc., can be preserved. Various other smaller changes have been made as well, mostly stylistic changes and typo corrections. In summer 2021, I standardized and slightly modified the notation for assumptions in natural deduction proofs. I frequently make quite small corrections; the latest version is always on Github.
 
 Many thanks, first and foremost, to P.D.\ Magnus for providing this wonderful resource under a Creative Commons license, which made it freely available and gave me the right to modify and distribute it under the same licensing agreement. I hope other instructors will also feel free to either teach directly from this version, or to modify it to develop their own. The typesetting for trees is via Clea F.\ Rees's prooftrees package; thanks to her for making it available.
 
