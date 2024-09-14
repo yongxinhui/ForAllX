@@ -3,7 +3,7 @@
 \ProvidesPackage{forallx-ubc}[2011/10/29 support for a logic textbook]
 \usepackage[dvipsnames]{xcolor}
 \usepackage{enumitem} %%Enables control over enumerate and itemize environments
-\RequirePackage{graphicx,adjustbox,amssymb,colonequals,amsmath,lmodern,microtype,multicol,ifthen,prooftrees,titlesec, apptools}
+\RequirePackage{graphicx,adjustbox,amssymb,colonequals,amsmath,lmodern,microtype,multicol,ifthen,prooftrees,titlesec, apptools,mathtools}
 
 \usepackage[linktocpage=true]{hyperref}
 \definecolor{URLblue}{RGB}{0,0,150}
@@ -295,8 +295,15 @@
 % {\begin{list}{\arabic{earg}\arabic{eargnum}.}{\usecounter{eargnum}\setlength{\itemsep}{-.4em}}}%
 % {\stepcounter{earg}\end{list}}
 
+% Set labels in enumerate to use capital letters
+% \renewcommand{\labelenumi}{\Alph{enumi}.}
+% \renewcommand{\theenumi}{\Alph{enumi}}
+
 \newcounter{eargletter}[chapter] % Counter for the environment (resets per section)
+\renewcommand{\theeargletter}{\Alph{eargletter}} % Use capital letters for the counter
+
 \newcounter{eargnum}[eargletter]
+
 \newenvironment{earg}[1][] % Optional argument to customize numbering
 {%
   \refstepcounter{eargletter}% Step the environment counter
@@ -310,13 +317,21 @@
 
 \newcommand{\eitem}[1]{%
   \refstepcounter{eargnum}% Step the item counter
-  \item[\Alph{eargletter}\arabic{eargnum}.] {#1}\label{\theeargletter\theeargnum}
-  \label{\theeargletter\theeargnum}}% Create a label for referencing
+  \item[\Alph{eargletter}\arabic{eargnum}.] {#1}
+  \label{\theeargnum}
+  % \label{\Alph{eargletter}\arabic{eargnum}}
+  % \label{\theeargletter\theeargnum}}% Create a label for referencing
+}
 
 \newcommand{\uitem}[1]{% use to insert line before conclusion
   \refstepcounter{eargnum}% Step the item counter
-  \item[\Alph{eargletter}\arabic{eargnum}.] \underline{#1}\label{\theeargletter\theeargnum}\vspace{2pt} % Label with underline format
-  \label{\theeargletter\theeargnum}}% Create a label for referencing
+  \item[\Alph{eargletter}\arabic{eargnum}.] \underline{#1}\vspace{2pt}
+  \label{\theeargnum}
+  % \label{\Alph{eargletter}\arabic{eargnum}} % Label with underline format
+  % \label{\theeargletter\theeargnum}
+}
+
+\newcommand{\eref}[2]{\ref{#1}\ref{#2}}
 
 % % Define a counter for the letter and number
 % \newcounter{eargletter}

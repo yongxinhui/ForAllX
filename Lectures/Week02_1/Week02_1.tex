@@ -62,6 +62,94 @@
 
 %----------------------------------------------------------------------------------------
 
+% NOT USED LAST TIME
+
+% \section*{The Material Conditional}
+%
+% \subsubsection*{\it \textbf{Roses}}
+%
+% \begin{earg}
+%   \uitem{Sugar is sweet.}
+%   \eitem{The roses are only red if sugar is sweet.}
+% \end{earg}
+%
+%
+% \begin{itemize}[leftmargin=1in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+%   % \item[\bf Task:] Regiment this argument and construct its truth table.
+%   \item[\bf Observe:] First paradox of the material conditional.
+% \end{itemize}
+%
+%
+%
+%
+% \subsubsection*{\it \textbf{Vacation}}
+%
+% \begin{earg}
+%   \uitem{Casey is not on vacation.}
+%   \eitem{If Casey is on vacation, then he is in Paris.}
+% \end{earg}
+%
+%
+%
+%
+%
+% \subsubsection*{\it \textbf{Crimson}}
+%
+% \begin{earg}
+%   \eitem{Mary doesn't like the ball unless it is crimson.}
+%   \uitem{Mary likes the ball.}
+%   \eitem{If the ball is blue, then Mary likes it.}
+% \end{earg}
+%
+%
+%
+%
+%
+%
+% \section*{The Biconditional}
+%
+% \subsubsection*{\it \textbf{Rectangle}}
+%
+% \begin{earg}
+%   \eitem{The room is a square.}
+%   \uitem{The room is a rectangle.}
+%   \eitem{The room is a square if and only if it is a rectangle.}
+% \end{earg}
+%
+%
+%
+%
+%
+% \subsubsection*{\it \textbf{Work}}
+%
+% \begin{earg}
+%   \eitem{Kin isn't a professor.}
+%   \uitem{Sue isn't a chef.}
+%   \eitem{Kin is a professor just in case Sue is a chef.}
+% \end{earg}
+
+
+% \section*{Logical Consequence}
+%
+% \begin{itemize}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+%   \item[\it Logical Truths:] $\metaA$ is a \textsc{tautology} of $\PL$ iff $\V{\I}(\metaA) = 1$ for all $\I$. 
+%   \item[\it Logical Falsehoods:] $\metaA$ is a \textsc{contradiction} of $\PL$ iff $\V{\I}(\metaA) = 0$ for all $\I$. 
+%   \item[\it Logical Entailment:] $\metaA$ \textsc{logically entails} $\metaB$ iff $\V{\I}(\metaA) \leq \V{\I}(\metaB)$ for all $\I$. 
+%   \item[\it Logical Consequence:] \mbox{$\Gamma \vDash \metaA$ iff $\V{\I}(\metaA)=1$ for all $\I$ where $\V{\I}(\gamma)=1$ for all $\gamma \in \Gamma$.}
+%   \item[\bf Question:] Which arguments might we hope to show to have valid regimentations in $\PL$?
+% \end{itemize}
+
+
+  % \item[\it Truth:] Soundness reaches beyond the scope of any logic course since truth on an interpretation requires subject-specific knowledge.
+  % \item[\it Tautology:] We can talk about sentences of formal languages being \textit{tautologies} just in case they are true on all interpretations.
+  % \item[\it Contradiction:] A sentence is a \textit{contradiction} just in case it is false on all interpretations.
+  % \item[\it Logical Entailment:] One sentence \textit{logically entails} another just in case every interpretation in which the former is true also makes the latter true.
+  % \item[\it Logical eiffalence:] One sentence is \textit{logically eiffalent} to another just in case they logically entail each other.
+  % \item[\it Consistency:] A set of sentences is \textit{consistent} just in case there is an interpretation which makes every sentence in the set true, and \textit{inconsistent} otherwise.
+
+
+
+
 \section*{Logical Entailment}
 
 \begin{enumerate}[leftmargin=1.2in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
@@ -161,10 +249,89 @@ Which sets of sentences are consistent? (e.g., is $\set{(1),(2)}$ consistent?)
 
 
 
-% \vfill
+% \subsection*{\it \textbf{Roses}}
 %
-% \bibliographystyle{Phil_Review} %%bib style found in bst folder, in bibtex folder, in texmf folder.
-% \bibliography{Zotero} %%bib database found in bib folder, in bibtex folder
+% \begin{earg}
+%   \item[(1)] Sugar is sweet.
+%   \item[] Roses are only red if sugar is sweet.
+% \end{earg}
+%
+%
+%
+%
+% \subsection*{\it \textbf{Vacation}}
+%
+% \begin{earg}
+%   \item[(1)] Casey is not on vacation.
+%   \item[] If Casey is on vacation, then he is in Paris.
+% \end{earg}
+%
+%
+%
+%
+%
+% \subsection*{\it \textbf{Crimson}}
+%
+% \begin{earg}
+%   \item[(1)] Mary only likes the ball if it is crimson.
+%   \item[(2)] Mary likes the ball.
+%   \item[] If the ball is blue, then Mary likes it.
+% \end{earg}
+%
+%
+%
+%
+%
+%
+% \section*{Biconditional}
+%
+% \subsection*{\it \textbf{Rectangle}}
+%
+% \begin{earg}
+%   \item[(1)] The room is a square.
+%   \item[(2)] The room is a rectangle.
+%   \item[] The room is a square if and only if it is a rectangle.
+% \end{earg}
+%
+%
+%
+%
+%
+% \subsection*{\it \textbf{Roses}}
+%
+% \begin{earg}
+%   \item[(1)] Kin isn't a professor.
+%   \item[(2)] Sue isn't a chef.
+%   \item[] Kin is a professor just in case Sue is a chef.
+% \end{earg}
+
+
+
+% \section*{Examples}
+%
+% \noindent
+% Which sets of sentences are consistent? (e.g., is $\set{(1),(2)}$ consistent?)
+%
+% \subsection*{\it \textbf{Taller}}
+%
+% \begin{enumerate}
+%   \item[(1)] Liza is taller than Sue.
+%   \item[(2)] Sue is taller than Paul.
+%   \item[(3)] Paul is taller than Liza.
+% \end{enumerate}
+%
+%
+%
+%
+% \subsection*{\it \textbf{Lost}}
+%
+% \begin{enumerate}
+%   \item[(4)] Kim is either in Somerville or Cambridge.
+%   \item[(5)] If Kim is in Somerville, then she is not far from home.
+%   \item[(6)] If Kim is not far from home, then she is in Cambridge.
+%   \item[(7)] Kim is not in Cambridge.
+% \end{enumerate}
+
 
 
 \end{document}

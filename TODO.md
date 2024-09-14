@@ -3,17 +3,30 @@
 ## Book
 
 - [ ] revise chapters as described in the preface
-- [ ] integrate problem sets for the course
-  - [ ] debug solutions
-- [ ] integrate review materials for each exam
-- [ ] include a glossary of terms
-- [ ] include a set theory appendix
-- [ ] add book pdf to canvas
+- [ ] revise chapters
+  - [x] chapter 0
+    - [x] revise
+    - [x] add point about only two propositions: the true and the false
+    - [x] polish
+  - [:] chapter 1
+    - [x] revise
+    - [x] make Philipp's suggestions
+    - [ ] polish
+  - [ ] chapter 2
+    - [ ] revise
+  - [ ] chapter 3
+  - [ ] chapter 4
+  - [ ] chapter 5
+  - [ ] chapter 6
+    - [ ] set theory, functions, orders
+    - [ ] mathematical induction review
+  - [ ] chapter 7
+  - [ ] chapter 8
+  - [ ] chapter 9
+  - [ ] chapter 10
+  - [ ] chapter 11
+  - [ ] chapter 12
+  - [ ] glossary
+  - [ ] problem sets
+    - [ ] debug solutions
 
-## Carnap
-
-- [x] setup carnap
-- [x] fix link in syllabus
-- [ ] revise problem sets
-  - [x] week 0
-  - [ ] week 1

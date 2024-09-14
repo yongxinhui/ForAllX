@@ -1,0 +1,221 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{../lecture} %calls local modified style file
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs} %%Math packages
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep={}}
+
+\makeatletter
+\renewcommand{\maketitle}{
+\begin{flushright}
+{\LARGE\@title}
+
+\vspace{10pt}
+
+{\@author}
+\\ \@date
+\end{flushright}
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\bf Syntax for $\mathcal{L}^{\textsc{lp}}$} % Subtitle
+
+\author{\textsc{Logic I}\\ \it Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+% object vs metalanguage
+  % use mention
+  % expressions of $\PL$
+  % schematic variables
+  % corner quotes
+  % define expressions and wfs of $\PL$
+  % parentheses
+  % metalinguistic abbreviations
+
+% truth-functions
+
+% regimentation
+  % negation
+  % conjunction
+  % disjunction
+  % material conditional
+  % biconditional
+  % unless
+
+
+\section*{Object Language and Metalanguage}
+
+\begin{itemize}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  % \item[\it Previously:] We sketched a rough outline for this course in order to characterize its subject-matter.
+  \item[\it Object Language:] $\PL$ is the \textsc{object language} under study. % which we will define in the \textsc{metalanguage} of mathematical English. % , where the language of $\PL = \tuple{\mathbb{L},\neg,\wedge,\vee,\rightarrow,\leftrightarrow,(,)}$ will be referred to as the \textsc{object language}.
+  \item[\it Metalanguage:] Mathematical English is the \textsc{metalangauge} with which we will conduct our study.
+  \item[\it Quotation:] To talk about $\PL$ we will take a quoted expression to be the \textsc{canonical name} for the expression quoted.
+  \item[\it Use/Mention:] We \textsc{mention} expressions by putting them in quotes, whereas otherwise they are \textsc{used}.
+  \item `Sue' is a nickname for Susanna.
+  \item The complex sentence `$A \rightarrow B$' includes the sentence letters `$A$' and `$B$'.
+  % \item ``\,`$A$'\,'' is the canonical name for `$A$'.
+  \item `$A$' belongs to $\PL$, but ``\,`$A$'\,'' and $A$ do not. 
+\end{itemize}
+
+
+
+
+\section*{The Expressions of $\PL$}
+
+\begin{itemize}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Sentential Operators:] `$\enot$',`$\eand$',`$\eor$',`$\eif$', and `$\eiff$'.
+    \item `$\sim$', `$\&$', `$.$', `$|$', `$\supset$', and `$\equiv$' are also sometimes used.
+  \item[\it Punctuation:] `$($' and `$)$'.
+  \item[\it Sentence Letter:] `$A_0$', `$A_1$', \ldots, `$B_0$', `$B_1$', \ldots, `$Z_0$', `$Z_1$', \ldots
+  \item[\bf Question:] How can we specify all sentence letter explicitly?
+    \item A \textsc{sentence letter} is the result of subscripting a capital English letter with a numeral.
+  \item[\it Corner Quotes:] Let $\corner{\varphi_x}$ refer to the result of concatenating $\varphi$ with $_x$.
+    \item $\corner{\varphi_x}$ is a \textsc{sentence letter} for any capital letter $\varphi$ and numeral for a natural number $x$. 
+  \item[\it Primitive Symbols:] The sentential operators, punctuation, and sentence letters are the \textsc{primitive symbols} of $\PL$.
+  \item[\it Expressions:] The \textsc{expressions} of $\PL$ are defined recursively: 
+    \item The primitive symbol of $\PL$ are expression of $\PL$.
+    \item If $\metaA$ and $\metaB$ are expressions of $\PL$, then so is $\corner{\metaA\metaB}$.
+    \item Nothing else is an expression of $\PL$.
+\end{itemize}
+
+
+
+
+
+\section*{The Sentences of $\PL$}
+
+\begin{itemize}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Uninterpretable:] The expressions `$\enot\enot\enot\enot$', `$B_3A_0$', `$)){\eiff}$', and `$A_4\eor$' cannot be assigned truth-values in a meaningful way.
+    \item Compare `MIT is in session' and `$A_4 \wedge P_1$'.
+  \item[\it Well-Formed Sentences:] Letting $\varphi,\psi,\chi,\ldots$ be variables with expressions for values, we may define the \textsc{wfss} of $\PL$ as follows:
+    \item Every sentence letter of $\PL$ is a wfs of $\PL$.
+    \item If the expressions $\varphi$ and $\psi$ are wfss of $\PL$, then:
+      \begin{enumerate}
+        \item $\corner{\neg\varphi}$ is a wff of $\PL$;
+        \item $\corner{(\varphi\wedge\psi)}$ is a wff of $\PL$;
+        \item $\corner{(\varphi\vee\psi)}$ is a wff of $\PL$;
+        \item $\corner{(\varphi\rightarrow\psi)}$ is a wff of $\PL$; and
+        \item $\corner{(\varphi\leftrightarrow\psi)}$ is a wff of $\PL$.
+      \end{enumerate}
+    \item Nothing else is a wff of $\PL$.
+  \item[\it Sentential Variables:] We will often restrict `$\varphi$', `$\psi$', `$\chi$',\ldots to the wfs of $\PL$.
+  \item[\it Main Operator:] The \textsc{main operator} is the last operator used in the construction of a sentence.
+  \item[\it Arguments:] The inputs to a main operator are its \textsc{arguments}.
+  \item[\it Scope:] The main operator has \textsc{scope} over its arguments.
+\end{enumerate}
+
+
+
+
+\section*{Metalinguistic Conventions}
+
+\begin{itemize}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Subscripts:] We will suppress the subscript `$_0$' to ease exposition.
+  \item[\bf Task:] Build increasingly complex sentences from just $A$.
+  \item[\it Naming:] We will refer to the \textsc{negand} in a \textsc{negation}, the \textsc{conjuncts} in a \textsc{conjunction}, the \textsc{disjuncts} in a \textsc{disjunction}, the \textsc{antecedent} and \textsc{consequent} in a \textsc{material conditional}, and the \textsc{arguments} in a \textsc{material biconditional}.
+  \item[\it Quotation:] We will sometimes drop quotes and corner quotes when the intended meaning is clear from the context.
+    \item We will only do so when this improves readability.
+  \item[\it Punctuation:] We will drop outermost parentheses for ease.
+    \item Compare $A\wedge B$, $A\vee B\vee C$, and $A\vee B\wedge C$.
+  \item[\it Therefore:] We will use `$\therefore$' for inline arguments.
+  \item[\it Metalinguistic:] These abbreviations all happen in the metalanguage.
+\end{itemize}
+
+
+
+
+
+
+\section*{Truth Functionality}
+
+\begin{itemize}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Interpretations:] Improving on last time, an \textsc{interpretation} $\I$ is an assignment of truth-values to sentence letters of $\PL$.
+  \item[\it Valuation:] We may then define a \textsc{valuation} function $\V{\I}$ which assigns truth-values to every sentence of $\PL$ by way of the following semantic clauses:
+    \item $\V{\I}(\varphi)=\I(\varphi)$ if $\varphi$ is a sentence letter of $\PL$.
+    \item $\V{\I}(\neg\varphi)=1$ iff $\V{\I}(\varphi)=0$~~ (i.e., $\V{\I}(\varphi)\neq 1$).
+    \item $\V{\I}(\varphi \wedge \psi)=1$ iff $\V{\I}(\varphi)=1$ and $\V{\I}(\psi)=1$.
+    \item $\V{\I}(\varphi \vee \psi)=1$ iff $\V{\I}(\varphi)=1$ or $\V{\I}(\psi)=1$ (or both).
+    \item $\V{\I}(\varphi \rightarrow \psi)=1$ iff $\V{\I}(\varphi)=0$ or $\V{\I}(\psi)=1$ (or both).
+    \item $\V{\I}(\varphi \leftrightarrow \psi)=1$ iff $\V{\I}(\varphi)=\V{\I}(\psi)$.
+  \item[\bf Observe:] These clauses resemble the composition rules for $\PL$.
+  \item[\it Homophonic Semantics:] The clauses for $\neg$, $\wedge$, and $\vee$ use analogous operators in the metalanguage, but not so for $\rightarrow$ and $\leftrightarrow$. 
+  % \item[\it Truth Functional:] $\V{\I}(\neg\varphi)=1-\V{\I}(\varphi)$;\\
+  %   $\V{\I}(\varphi\wedge\psi)=\V{\I}(\varphi)\times\V{\I}(\psi)$.
+  % \item[\sc Homework:] Given an interpretation $\I$, specify the truth-values of $\varphi\vee\psi$, $\varphi\rightarrow\psi$, and $\varphi\leftrightarrow\psi$ as a function of the truth-values of $\varphi$ and $\psi$ in a similar fashion as above.
+  %   % $\V{\I}(\varphi\vee\psi)=1-([1-\V{\I}(\varphi)]\times[1-\V{\I}(\psi)])$;\\
+  %   % $\V{\I}(\varphi\rightarrow\psi)=1-(\V{\I}(\varphi)\times[1-\V{\I}(\psi)])$;\\
+  %   % \mbox{$\V{\I}(\varphi\leftrightarrow\psi)=[1-(\V{\I}(\varphi)\times[1-\V{\I}(\psi)])]\times[1-(\V{\I}(\psi)\times[1-\V{\I}(\varphi)])]$.}
+  % \item[\bf Task:] How many unary/binary truth-functions are there?
+  % \item[\it Quantified Logic:] Later in the course, we will provide semantic clauses for the quantifiers `for all' and `there is' which will also have homophonic semantic clauses.
+  \item[\it Truth Tables:] Use the semantics to fill out the \textsc{truth tables} below:
+\end{itemize}
+
+
+\begin{table}[htb]
+\begin{center}
+\begin{tabular}{c|c}
+$\metaA$ & $\enot\metaA$\\
+\hline
+1 & 0\\
+0 & 1\\ 
+~\\
+~
+\end{tabular}
+\ \ \ \ 
+\begin{tabular}{c|c|c|c|c|c}
+$\metaA$ & $\psi$ & $\metaA\eand\psi$ & $\metaA\eor\psi$ & $\metaA\eif\psi$ & $\metaA\eiff\psi$\\
+\hline
+1 & 1 & 1 & 1 & 1 & 1\\
+1 & 0 & 0 & 1 & 0 & 0\\
+0 & 1 & 0 & 1 & 1 & 0\\
+0 & 0 & 0 & 0 & 1 & 1
+\end{tabular}
+\end{center}
+% \caption{The characteristic truth tables for the connectives of SL.}
+% \label{table.CharacteristicTTs}
+\end{table}
+
+
+
+\begin{enumerate}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Truth Functions:] The sentential operators express truth-functions, and so are often called \textsc{truth-functional operators}.
+    % $\V{\I}(\neg\varphi)=1-\V{\I}(\varphi)$;\\
+    % $\V{\I}(\varphi\wedge\psi)=\V{\I}(\varphi)\times\V{\I}(\psi)$.
+  % \item[\sc Homework:] Given an interpretation $\I$, specify the truth-values of $\varphi\vee\psi$, $\varphi\supset\psi$, and $\varphi\equiv\psi$ as a function of the truth-values of $\varphi$ and $\psi$ in a similar fashion as above.
+    % $\V{\I}(\varphi\vee\psi)=1-([1-\V{\I}(\varphi)]\times[1-\V{\I}(\psi)])$;\\
+    % $\V{\I}(\varphi\supset\psi)=1-(\V{\I}(\varphi)\times[1-\V{\I}(\psi)])$;\\
+    % \mbox{$\V{\I}(\varphi\equiv\psi)=[1-(\V{\I}(\varphi)\times[1-\V{\I}(\psi)])]\times[1-(\V{\I}(\psi)\times[1-\V{\I}(\varphi)])]$.}
+  \item[\bf Question:] How many unary/binary truth-functions are there?
+  \item[\it Adequacy:] Given these limitations, what should we hope to be able to adequately regiment in $\PL$?
+  \item[\it Logical Truths:] $\metaA$ is a \textsc{logical truth} of $\PL$ iff $\V{\I}(\metaA) = 1$ for all $\I$. 
+\end{enumerate}
+
+
+
+
+\end{document}

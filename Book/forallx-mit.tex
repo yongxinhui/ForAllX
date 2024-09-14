@@ -27,8 +27,8 @@
 % \includeonly{Chapters/P1-Introduction/forallx-mit-preface}
 % \includeonly{Chapters/P1-Introduction/forallx-mit-00-introduction}
 
-\includeonly{Chapters/P2-Propositional/forallx-mit-01-PL-syntax}
-% \includeonly{Chapters/P2-Propositional/forallx-mit-02-PL-semantics}
+% \includeonly{Chapters/P2-Propositional/forallx-mit-01-PL-syntax}
+\includeonly{Chapters/P2-Propositional/forallx-mit-02-PL-semantics}
 % \includeonly{Chapters/P2-Propositional/forallx-mit-03-PL-deduction}
 % \includeonly{Chapters/P2-Propositional/forallx-mit-04-PL-soundness}
 % \includeonly{Chapters/P2-Propositional/forallx-mit-05-PL-completeness}
@@ -68,26 +68,27 @@
 \setlength{\parskip}{1em}
 
 \thispagestyle{empty} %kills headers on a page 
- %\pagestyle{frontmatter}
+\pagestyle{frontmatter}
+\pagenumbering{roman}
 
+% \includepdf[page=-]{forallx-frontcover.pdf}
 \include{Chapters/P1-Introduction/forallx-mit-frontmatter}
 
 %%Table of Contents:
- \pagestyle{plain}
+ % \pagestyle{plain}
 {
 \setlength{\parskip}{0em}
 \setlength{\cftsecnumwidth}{3em}
 \tableofcontents
 \markboth{Contents}{}
 }
+\newpage
 
- % \includepdf[page=-]{forallx-frontcover.pdf}
-
-\pagestyle{prefacestyle}
-
+% \pagestyle{prefacestyle}
 % \include{Chapters/P1-Introduction/forallx-mit-preface}
 
 \pagestyle{mainmatter}
+\pagenumbering{arabic}
 
 \include{Chapters/P1-Introduction/forallx-mit-00-introduction}
 

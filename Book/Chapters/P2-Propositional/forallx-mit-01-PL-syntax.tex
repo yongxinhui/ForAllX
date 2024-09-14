@@ -1,9 +1,10 @@
 %!TEX root = ../forallx-ubc.tex
-\chapter{Sentential Logic}
+\chapter{Propositional Logic}
   \label{ch.PL-syntax}
 
-
-
+% TODO mention other notations for the operators
+% TODO move use mention and corner quotes up front to match the handout
+% TODO define faithful to be how good a regimentation is
 
 This chapter introduces an artificial language $\PL$ for \textit{Propositional Logic}.
 The basic units of this language are complete sentences which, given an interpretation, express propositions.
@@ -39,7 +40,7 @@ Since a sentence letter could regiment any English sentence, it is important to 
 % The key provides an English language sentence for each sentence letter used in the regimentation.
 For example, consider this argument:
 
-\begin{earg}
+\begin{earg} \label{newyear}
   \eitem{Today is New Year's Day.}
   \uitem{If today is New Year's Day, then people are swimming in English Bay.}
   \eitem{People are swimming in English Bay.}
@@ -65,17 +66,17 @@ We could then regiment the argument in this way:
 \end{earg}
 
 This is a regimentation of the argument, but it's not a very interesting one.
-In particular, our regimentation does not encode any logical connection between A1, A2, and A3.
+In particular, our regimentation does not encode any logical connection between \eref{newyear}{1}, \eref{newyear}{2}, and \eref{newyear}{3}.
 What was compelling about the original argument has been lost in translation.
 % Whereas the original argument was valid, the regimentation given above is not.
-After all, $A$, $B$, and $C$ could be any sentences whatsoever.
-Just because $A$ and $B$ are true (on a given interpretation), it does not follow that $C$ is also true (on that interpretation).\footnote{We will provide a formal definition of validity for $\PL$ in Chapters $\ref{ch.PL-semantics}$ and $\ref{ch.FOL-semantics}$.}
+After all, `$A$', `$B$', and `$C$' could be any sentences whatsoever.
+Just because `$A$' and `$B$' are true (on a given interpretation), it does not follow that `$C$' is also true (on that interpretation).\footnote{We will provide a formal definition of validity for $\PL$ in Chapters $\ref{ch.PL-semantics}$ and $\ref{ch.FOL-semantics}$.}
 
 
 The symbolization key provided above is by no means the only symbolization key that we could have provided.
-It is important to observe that A2 is not just \emph{any} sentence.
-Rather, A2 contains the A1 and A3 \emph{as parts}.
-Thus, our symbolization key for the New Year's argument only needs to include the following sentences since we can build A2 from just these pieces.
+It is important to observe that \eref{newyear}{2} is not just \emph{any} sentence.
+Rather, \eref{newyear}{2} contains the \eref{newyear}{1} and \eref{newyear}{3} \emph{as parts}.
+Thus, our symbolization key for the New Year's argument only needs to include the following sentences since we can build \eref{newyear}{2} from just these pieces.
 Consider the following alternative to the symbolization key given above:
 
 \begin{ekey}
@@ -134,11 +135,11 @@ Although the sentence letters can be used to build up more complex sentences, th
 
 
 
-\section{The Connectives}
-  \label{sec.connectives}
+\section{The Sentential Operators}
+  \label{sec.operators}
 
-Logical connectives are used to build complex sentences from sentence letters.
-Here are five common logical connectives which we will be able to express in $\PL$:
+Sentential operators are used to build complex sentences from sentence letters.
+Here are five common sentential operators which we will be able to express in $\PL$:
 
 \begin{table}[h]
 \center
@@ -177,37 +178,60 @@ Despite the advantages afforded by the classical logics we will be studying, the
 Consequently, the ``translations'' provided by the table above are only approximate.
 We'll see some of the differences come out below.
 
+It is also important to mention that although the conventions we will use here are common, there are other conventions used elsewhere.
+Here is a table with some alternatives that you might come across elsewhere (and should avoid using here):
+
+\begin{table}[h]
+\center
+\begin{tabular}{|c|c|}
+\hline
+symbols used here & symbols used elsewhere \\
+\hline
+  $\enot$ & $\sim$ \\
+  $\eand$ & $\&$ \\
+  $\eor$  & $\mid$ \\
+  $\eif$  & $\supset$ \\
+  $\eiff$ & $\equiv$ \\
+\hline
+\end{tabular}
+\end{table}
+
+Although these symbols would do just as well, they are not quite as common in modern texts or else have come to take on other meanings.
+They can also be somewhat harder to write on the blackboard with the exception of $\sim$ which we will use in class in order to ease exposition. 
+
+It is also worth noting that just because the same symbol that we will use has been used elsewhere does not mean that it picks out the same thing.
+In general, formal texts like this define their own conventions and you should assume the same for other texts.
+Nevertheless, the conventions used here are extremely common.
 
 
 
-
-\subsection{Negation}
-  \label{sub.negation}
+\section{Negation}
+  \label{sec.negation}
 
 Consider how we might regiment these sentences:
 
-\begin{earg}
+\begin{earg} \label{logic}
   \eitem{Logic is hard.}
   \eitem{It is false that logic is hard.}
   \eitem{Logic isn't hard.}
 \end{earg}
 
-In order to regiment sentence D1, we will need one sentence letter as below:
+In order to regiment sentence \eref{logic}{1}, we will need one sentence letter as below:
 
 \begin{ekey}
   \item[$H$:] Logic is hard.
 \end{ekey}
 
-Since sentence D2 is obviously related to sentence D1, we do not want to introduce a different sentence letter since this would obscure their logical relationship.
-To put it partly in English, D2 may be partially regimented as `It is not the case that $H$.'
-In order to regiment D2 along these lines, we will use the symbol `\enot' for negation.
-Thus we may regiment D2 as `$\enot H$'.
+Since sentence \eref{logic}{2} is obviously related to sentence \eref{logic}{1}, we do not want to introduce a different sentence letter since this would obscure their logical relationship.
+To put it partly in English, \eref{logic}{2} may be partially regimented as `It is not the case that $H$.'
+In order to regiment \eref{logic}{2} along these lines, we will use the symbol `\enot' for negation.
+Thus we may regiment \eref{logic}{2} as `$\enot H$'.
 A sentence of this type--- one that begins with a `\enot' symbol--- is called a \define{negation}.
-The sentence it negates--- in this case $H$--- is called the \define{negand}.
+The sentence it negates--- in this case `$H$'--- is called the \define{negand}.
 
-What of D3?
-It says that logic isn't hard, which is just another way of negating D1.
-Accordingly, we can regiment D3 in the same way that we regimented D2: $\enot H$.
+What of \eref{logic}{3}?
+It says that logic isn't hard, which is just another way of negating \eref{logic}{3}.
+Accordingly, we can regiment \eref{logic}{3} in the same way that we regimented \eref{logic}{3} with `$\enot H$'.
 
 When regimenting English sentences in $\PL$, the word `not' is usually a pretty good clue that `\enot' will be an appropriate symbol to use.
 But it's important to think about the actual meaning of the sentence, and not rely too much on which words appear in it.
@@ -220,18 +244,18 @@ But it's important to think about the actual meaning of the sentence, and not re
 
 Consider the following examples:
 
-\begin{earg}
+\begin{earg} \label{rodrigo}
   \eitem{Rodrigo is mortal.}
   \eitem{Rodrigo is immortal.}
   \eitem{Rodrigo is not immortal.}
 \end{earg}
 
-Suppose we let `$R$' regiment E1.
-What about sentence E2?
-Since being immortal is the same as not being mortal, it makes sense to take E2 to be the negation of E1, regimenting it: $\enot R$.
+Suppose we let `$R$' regiment \eref{rodrigo}{1}.
+What about sentence \eref{rodrigo}{2}?
+Since being immortal is the same as not being mortal, we may take \eref{rodrigo}{2} to be the negation of \eref{rodrigo}{1}, regimenting it with `$\enot R$'.
 
-Sentence E3 can be paraphrased as `It is not the case that Rodrigo is immortal'.
-Using negation twice, we may regiment E3 as: $\enot \enot R$.
+Sentence \eref{rodrigo}{3} can be paraphrased as `It is not the case that Rodrigo is immortal'.
+Using negation twice, we may regiment \eref{rodrigo}{3} by `$\enot \enot R$'.
 The two negations in a row each work as negations, so the sentence means `It is not the case that, it is not the case that $R$'.
 It is the negation of the negation of `$R$'.
 One can negate any sentence of $\PL$--- even a negation--- by putting the `\enot' symbol in front of it.
@@ -240,21 +264,20 @@ In the case of `$\enot\enot R$', this is a negation whose negand is `$\enot R$',
 But sometimes things are not quite a simple as we might initially expect.
 Here is an example that illustrates some of the complexities to look out for:
 
-\begin{earg}
+\begin{earg} \label{elliott}
   \eitem{Elliott is happy.}
   \eitem{Elliott is unhappy.}
 \end{earg}
 
-Suppose we take `$H$' to F1.
-We might be tempted to regiment sentence F2 as: $\enot{H}$.
+Suppose we take `$H$' to \eref{elliott}{1}.
+We might be tempted to regiment sentence \eref{elliott}{2} by `$\enot{H}$'.
 But is being unhappy the same thing as not being happy? 
 Here the answer is, `No'.
 For instance, Elliott might simply be meh.
 If you find out that someone is not happy, you cannot infer that they are unhappy (though in some cases this inference might well make sense).
-Hence, we shouldn't treat F2 as the negation of F1.
-So long as we are allowing `unhappy' to mean something besides `not happy', then we need to use a new sentence letter to regiment F2.
+Hence, we shouldn't treat \eref{elliott}{2} as the negation of \eref{elliott}{1}.
+So long as we are allowing `unhappy' to mean something besides `not happy', then we need to use a new sentence letter to regiment \eref{elliott}{2}.
 
-% TODO: move to next chapter or keep here or neither?
 Although we will have more to say about this in the following chapter, it is important to provide a preliminary sense of when a negation is true.
 In particular, for any sentence $\metaA$, if $\metaA$ is true, then $\enot\metaA$ is false.
 % Since truth and falsity are the only truth values that we will consider, we may conclude that \enot\metaA is false.
@@ -271,88 +294,93 @@ Using `1' in place of `true' and `0' in place of `false', we can summarize this 
 \end{center}
 
 The left column shows the possible truth-values for the negand and the right column shows the corresponding truth-value of the negation.
-Accordingly, the truth table given above specifies the \textit{truth conditions} for $\enot$, i.e., the conditions under which a negated sentence is true (similarly false).
+Accordingly, the truth table given above specifies the \textit{truth-conditions} for `$\enot$', i.e., the conditions under which a negated sentence is true (similarly false).
 By using numerals, we avoid any clash with our sentence letters.\footnote{Note that \textit{Carnap} will not have this virtue: truth tables will use `T' for \textit{true} and `F' for \textit{false}.}
+
 Since 1 and 0, are the only possible values that we will consider in this course, the truth table above defines a function from the truth-value of the negand to the truth-value of the negation.
 We will refer to such functions from truth-values to truth-values as \define{truth-functions}.
+You can think of these as providing a meaning for the logical terms that we will use where these meanings are held fixed across all interpretations of our language.
+It is for this reason that the sentential operators are also sometimes called \define{logical constants}.
+We will have much more to say about all of this in the following chapter.
+For now we may continue to introduce the remaining sentential operators that we will include in the language $\PL$.
 
 
 
-\subsection{Conjunction}
-  \label{sub.conjunction}
+\section{Conjunction}
+  \label{sec.conjunction}
 
 Consider the following sentences:
 
-\begin{earg}
+\begin{earg} \label{strong}
   \eitem{Jessica is strong.}
   \eitem{Luke is strong.}
   \eitem{Jessica is strong and Luke is also strong.}
 \end{earg}
 
-At the very least, we will need separate sentence letters for G1 and G2:
+At the very least, we will need separate sentence letters for \eref{strong}{1} and \eref{strong}{2}:
 
 \begin{ekey}
   \item[$J$:] Jessica is strong.
   \item[$L$:] Luke is strong.
 \end{ekey}
 
-Sentence G3 can be paraphrased as `$J$ and $L$'.
+Sentence \eref{strong}{3} can be paraphrased as `$J$ and $L$'.
 In order to fully regiment this sentence, we will use the \define{conjunction} symbol `\eand' for `and'.
-We may then take `$J\eand L$' to regiment G3.
+We may then take `$J\eand L$' to regiment \eref{strong}{3}.
 Given any conjunction, the sentences to the left and right of `\eand' are referred to as \define{conjuncts}.
-In the case of G3, both `$J$' and `$L$' are conjuncts.
+In the case of \eref{strong}{3}, both `$J$' and `$L$' are conjuncts.
 
-Notice that we make no attempt to provide a distinct symbol for `also' as it occurs in sentence G3.
+Notice that we make no attempt to provide a distinct symbol for `also' as it occurs in sentence \eref{strong}{3}.
 Words like `both' and `also' function to draw our attention to the fact that two sentences are being conjoined but are not doing any further logical work.
 Thus we do not need to represent `both' and `also' in $\PL$.
-Note that Sentence G3 would have meant the same thing had it simply said `Jessica is strong and Luke is strong'.
+Note that Sentence \eref{strong}{3} would have meant the same thing had it simply said `Jessica is strong and Luke is strong'.
 
 Here are some more examples:
 
-\begin{earg}
+\begin{earg} \label{grumpy}
   \eitem{Jessica is strong and grumpy.}
   \eitem{Jessica and Matt are strong.}
   \eitem{Although Luke is strong, he is not grumpy.}
   \eitem{Matt is strong, but Jessica is stronger than Matt.}
 \end{earg}
 
-Sentence H1 is a conjunction.
+Sentence \eref{grumpy}{1} is a conjunction.
 Since the sentence says two things about Jessica, it is natural to use her name only once.
-It might be tempting to try this when regimenting H1.
-Letting `$J$' regiment `Jessica is strong', one might attempt to begin by paraphrasing H1 as `$J$ and grumpy', but this would be a mistake.
+It might be tempting to try this when regimenting \eref{grumpy}{1}.
+Letting `$J$' regiment `Jessica is strong', one might attempt to begin by paraphrasing \eref{grumpy}{1} as `$J$ and grumpy', but this would be a mistake.
 % Once we regiment part of a sentence as $J$, any further structure within the original sentence is lost.
 After all, `$J$' is just a sentence letter and $\PL$ doesn't keep track of the fact that it was intended to be about Jessica.
 Moreover, `grumpy' is not a sentence, and so on its own it is neither true nor false.
-Instead, we may paraphrase sentence H2 as the conjunction `$J \eand G_{1}$' where `$G_{1}$' regiments `Jessica is grumpy'.
+Instead, we may paraphrase sentence \eref{grumpy}{2} as the conjunction `$J \eand G_{1}$' where `$G_{1}$' regiments `Jessica is grumpy'.
 More generally:
 
 \factoidbox{
   \textsc{Conjunction Test:} A sentence can be regimented by ($\metaA{}\eand\metaB{}$) if it can be paraphrased in English as `Both \metaA{} and \metaB{}' where each conjunct is a sentence.
 }
 
-Sentence H2 says one thing about two different subjects.
+Sentence \eref{grumpy}{2} says one thing about two different subjects.
 It says of both Jessica and Matt that they are strong, and in English we use the word `strong' only once.
-In regimenting sentences in $\PL$, we want to make sure each conjunct is a sentence on its own, and so we may paraphrase H2 by repeating the predicate: `Jessica is strong and Matt is strong.'
-Once we add a new sentence letter `$M$' for `Matt is strong', we may take `$J\eand M$' to regiment H2.\footnote{One might contest this claim by instead taking `Jessica and Matt' to name a plurality where `are strong' is a plural predicate. We will be overlooking such complexities which are better handled in plural logics.}
+In regimenting sentences in $\PL$, we want to make sure each conjunct is a sentence on its own, and so we may paraphrase \eref{grumpy}{2} by repeating the predicate: `Jessica is strong and Matt is strong.'
+Once we add a new sentence letter `$M$' for `Matt is strong', we may take `$J\eand M$' to regiment \eref{grumpy}{2}.\footnote{One might contest this claim by instead taking `Jessica and Matt' to name a plurality where `are strong' is a plural predicate. We will be overlooking such complexities which are better handled in plural logics.}
 
-Sentence H3 is a bit more complicated.
+Sentence \eref{grumpy}{3} is a bit more complicated.
 The word `although' tends to suggest a kind of contrast between the first part of the sentence and the second part.
 Nevertheless, the sentence is still telling us two things: Luke is strong and he is not grumpy.
-So we can paraphrase sentence H3 as, `Luke is strong and Luke is not grumpy.'
+So we can paraphrase sentence \eref{grumpy}{3} as, `Luke is strong and Luke is not grumpy.'
 The second conjunct contains a negation, so we may paraphrase further: `Luke is strong and it is not the case that Luke is grumpy'.
-Letting `$G_{2}$' regiment `Luke is grumpy', we can take `$L\eand\enot G_{2}$' to regiment H3.
+Letting `$G_{2}$' regiment `Luke is grumpy', we can take `$L\eand\enot G_{2}$' to regiment \eref{grumpy}{3}.
 
-Once again, this is an imperfect translation of the English sentence H3.
-Whereas H3 suggests that there is a contrast between Luke begin strong and not grumpy, our regimentation merely says that Luke is strong and not grumpy.
+Once again, this is an imperfect translation of the English sentence \eref{grumpy}{3}.
+Whereas \eref{grumpy}{3} suggests that there is a contrast between Luke begin strong and not grumpy, our regimentation merely says that Luke is strong and not grumpy.
 Nevertheless, our regimentation preserves some of the important features of the original sentence, specifically the logical features of that sentence.
 That is, the sentences says that Luke is strong and that Luke is not grumpy.
 
-The word `but' in H4 indicates a similar contrast between its conjuncts.
+The word `but' in \eref{grumpy}{4} indicates a similar contrast between its conjuncts.
 Since contrasts like this are irrelevant for the purpose of regimenting sentences in $\PL$, we can paraphrase the sentence as `Matt is strong and Jessica is stronger than Matt.
 It remains to say how to regiment the second conjunct.
-We already have the sentence letters $J$ and $M$, but neither of these says anything comparative.
+We already have the sentence letters `$J$' and `$M$', but neither of these says anything comparative.
 Thus we need an entirely new sentence letter.
-Letting `$S$' regiment `Jessica is stronger than Matt', we may take `$M \eand S$' to regiment H4.\footnote{In chapter \ref{ch.FOL-syntax}, we will learn an even better way to regiment relations.}
+Letting `$S$' regiment `Jessica is stronger than Matt', we may take `$M \eand S$' to regiment \eref{grumpy}{4}.\footnote{In chapter \ref{ch.FOL-syntax}, we will learn an even better way to regiment relations.}
 
 Here is the resulting symbolization key:
 
@@ -367,13 +395,14 @@ Here is the resulting symbolization key:
 % \factoidbox{Sentences that can be paraphrased `\metaA{}, but \metaB{}' or `Although \metaA{}, \metaB{}' are best regimented using conjunction: ($\metaA\eand\metaB$).
 % }
 
-It is important to keep in mind that the sentence letters $J$, $G_{1}$, $M$, $G_{2}$, and $S$ have no meaning beyond being true or false.
-We used $J$ and $M$ to regiment different English sentences that are about people being strong, but this similarity is completely lost when we regiment sentences in $\PL$.
-Nor does $\PL$ recognize any particular similarity between $G_{1}$ and $G_{2}$.
+It is important to keep in mind that the sentence letters `$J$', `$G_{1}$', `$M$', `$G_{2}$', and `$S$' have no meaning beyond their truth-values.
+We used `$J$' and `$M$' to regiment different English sentences that are about people being strong, but this similarity is completely lost when we regiment sentences in $\PL$.
+Nor does $\PL$ recognize any similarity between `$G_{1}$' and `$G_{2}$'.
 Such connections will be preserved in $\FOL$, but for the time being we will accept these limitations.
 
-% TODO: move to next chapter or keep here or neither
-For any two sentences $\metaA$ and $\metaB$ of $\PL$, the conjunction $\metaA\eand\metaB$ is true if and only if the conjuncts--- $\metaA$ and $\metaB$--- are both true. We can summarize this in the truth table for conjunction:
+For any two sentences $\metaA$ and $\metaB$ of $\PL$, the conjunction $\metaA \eand \metaB$ is true if and only if both of its conjuncts--- $\metaA$ and $\metaB$--- are true.
+We can summarize this in the truth table for conjunction:
+
 \begin{center}
 \begin{tabular}{c|c|c}
 \metaA{} & \metaB{} & $\metaA{} \eand \metaB{}$\\
@@ -390,14 +419,14 @@ Since there are four possible combinations of truth-values, there are four rows.
 The conjunction is true when both conjuncts are true, and false otherwise.
 Whereas negation takes one truth-value as input, and returns one truth-value as output, conjunction takes two truth-values as inputs (the truth-values of its conjuncts) and returns a single truth-value as an output (the truth-value of the conjunction). 
 Put otherwise, conjunction is a \textit{binary operator} and negation is a \textit{unary operator}.
-Despite this difference, the truth table given above specifies the truth conditions for conjunction in a similar manner to the way we specified truth conditions for negation.
+Despite this difference, the truth table given above specifies the truth-conditions for conjunction in a similar manner to the way we specified truth-conditions for negation.
 % In particular, a conjunction is true just in case both of its conjuncts are true, and it is false otherwise.
 
 Note that conjunction is commutative: $\metaA{}\eand\metaB{}$ always has the same truth-value as $\metaB{}\eand\metaA{}$.
 We may then ask: is `and' in English commutative?
 Consider the following claims:
 
-\begin{earg}
+\begin{earg} \label{order}
   \eitem{Dan went home and took a shower.}
   \eitem{Dan took a shower and went home.}
 \end{earg}
@@ -405,7 +434,7 @@ Consider the following claims:
 Do these sentences say the same thing?
 Not really.
 Often the order of the conjuncts suggests the temporal order of the events.
-Accordingly, we may take I1 to claim that \textit{first} Dan went home, and only \textit{then} did he take a shower, whereas I2 says that these events happened in the opposite order.
+Accordingly, we may take \eref{order}{1} to claim that \textit{first} Dan went home, and only \textit{then} did he take a shower, whereas \eref{order}{2} says that these events happened in the opposite order.
 But what of our truth table for conjunction?
 
 Although $\PL$ helps to identify certain logical features in English, it cannot recover everything that we might want to recover.
@@ -426,37 +455,37 @@ Moreover, even if one were concerned to encode temporal order, getting to grips 
 
 
 
-\subsection{Disjunction}
-  \label{sub.disjunction}
+\section{Disjunction}
+  \label{sec.disjunction}
 
 Consider the following sentences and symbolization key:
 
-\begin{earg}
-  \eitem{Denison will golf with me or he will watch movies.}
-  \eitem{Either Denison or Ellery will golf with me. }
+\begin{earg} \label{climb}
+  \eitem{Denison will climb with me or he will watch movies.}
+  \eitem{Either Denison or Ellery will climb with me. }
 \end{earg}
 
 \begin{ekey}
-  \item[$D$:] Denison will golf with me.
-  \item[$E$:] Ellery will golf with me.
+  \item[$D$:] Denison will climb with me.
+  \item[$E$:] Ellery will climb with me.
   \item[$M$:] Denison will watch movies.
 \end{ekey}
 
-Sentence J1 may be paraphrased `Either $D$ or $M$'.
-To fully regiment J1, we will introduce the \define{disjunction} symbol `$\eor$' where the sentences to its left and right are called \define{disjuncts}.
-We may then take the disjunction `$D \eor M$' to regiment J1 where and $D$ and $M$ are the disjuncts.
+Sentence \eref{climb}{1} may be paraphrased `Either $D$ or $M$'.
+To fully regiment \eref{climb}{1}, we will introduce the \define{disjunction} symbol `$\eor$' where the sentences to its left and right are called \define{disjuncts}.
+We may then take the disjunction `$D \eor M$' to regiment \eref{climb}{1} where and $D$ and $M$ are the disjuncts.
 It is important to stress that `$\eor$' expresses an \emph{inclusive} reading of disjunction which requires \emph{at least one disjunct} to be true, admitting the possibility where both disjuncts are true.
 
 Sentence I2 is only slightly more complicated.
 Although there are two subjects, the English sentence only includes the verb once.
-We can paraphrase I2 as `Either Denison will golf with me or Ellery will golf with me.'
+We can paraphrase I2 as `Either Denison will climb with me or Ellery will climb with me.'
 We may then take `$D \eor E$' to regiment I2.
 
 \factoidbox{
   \textsc{Disjunction Test:} A sentence can be regimented by $(\metaA{}\eor\metaB{})$ if it can be paraphrased in English as `Either \metaA{} or \metaB{}' where each disjunct is a sentence.
 }
 
-Since `$\eor$' is a symbol that we have introduced, we get to \textit{stipulate} its truth conditions.
+Since `$\eor$' is a symbol that we have introduced, we get to \textit{stipulate} its truth-conditions.
 And we stipulate that we are using inclusive or, so that $A \eor B$ is true provided that at least one disjunct is true, including the scenario where both are true.
 Is this a good stipulation for how to treat `or'?
 In a study of the semantics of English, it would be appropriate to pursue this question much further.
@@ -480,13 +509,13 @@ $\metaA$ & $\metaB$ & $\metaA\eor\metaB$ \\
 \end{center}
 
 Like conjunction, disjunction is a binary operator which takes two truth-values as inputs and returns a single truth-value as output.
-The truth table above stipulates a meaning for `$\eor$' by indicating the truth conditions for $\metaA \eor \metaB$ where $\metaA$ and $\metaB$ are any sentences whatsoever.
-We may succinctly restate the truth conditions for conjunction by observing that $\metaA\eor \metaB$ is false when $\metaA$ and $\metaB$ are false, and true otherwise.
+The truth table above stipulates a meaning for `$\eor$' by indicating the truth-conditions for $\metaA \eor \metaB$ where $\metaA$ and $\metaB$ are any sentences whatsoever.
+We may succinctly restate the truth-conditions for conjunction by observing that $\metaA\eor \metaB$ is false when $\metaA$ and $\metaB$ are false, and true otherwise.
 This makes disjunction inclusive.
 
 Consider the following sentences and symbolization key:
 
-\begin{earg}
+\begin{earg} \label{soup}
   \eitem{Either you will not have soup or you will not have salad.}
   \eitem{You will have neither soup nor salad.}
   \eitem{You will have soup or salad, but not both.}
@@ -497,32 +526,34 @@ Consider the following sentences and symbolization key:
 \item[S$_2$:] You will get salad.
 \end{ekey}
 
-Sentence K1 may be paraphrased by `Either it is not the case that you will have soup, or it is not the case that you get salad.' 
-Regimenting this claim requires both disjunction and negation since it is a disjunction of two negations: $\enot S_1 \eor \enot S_2$.
+Sentence \eref{soup}{1} may be paraphrased by `Either it is not the case that you will have soup, or it is not the case that you get salad.' 
+Regimenting this claim requires both disjunction and negation since it is the disjunction of two negations `$\enot S_1 \eor \enot S_2$'.
 
-Sentence K2 also requires negation.
+Sentence \eref{soup}{2} also requires negation.
 It can be paraphrased as, `It is not the case that: either that you get soup or that you get salad.'
 In other words, it is a negation of a disjunction.
 We need some way of indicating that the negation does not just negate the right or left disjunct, but rather the entire disjunction.
-In order to do this, we will put parentheses around the disjunction: $\enot (S_1 \eor S_2)$.\footnote{A second, equivalent, way to regiment K2 is `$(\enot S_1 \eand \enot S_2)$'. We'll see why this is equivalent later on. The equivalence of $\enot (A \eor B)$ and $(\enot A \eand \enot B)$ is an instance of one of De Morgan's laws.}
+In order to do this, we will put parentheses around the disjunction as in `$\enot (S_1 \eor S_2)$'.\footnote{A second, equivalent, way to regiment \eref{soup}{2} is `$(\enot S_1 \eand \enot S_2)$'. We'll see why this is equivalent later on. The equivalence of `$\enot (A \eor B)$' and `$(\enot A \eand \enot B)$' is an instance of one of De Morgan's laws.}
 The parentheses are doing important work, since the sentence `$\enot S_1 \eor S_2$' regiments `Either you will not have soup or you will have salad', which is different.
 
-Since K3 has a more complicated structure, we can avoid making mistakes by break it into two parts.
+Since \eref{soup}{3} has a more complicated structure, we can avoid making mistakes by break it into two parts.
 The first part says that you will have soup or you will have salad.
 We regiment this by `$(S_1 \eor S_2)$`, including parentheses so that we don't get mixed up later on.
 The second part says that you will not have both soup and salad.
-We can paraphrase this as, `It is not the case that you will have soup and you will have salad' which we may regiment as: $\enot(S_1 \eand S_2)$.
+We can paraphrase this as, `It is not the case that you will have soup and you will have salad' which we may regiment with `$\enot(S_1 \eand S_2)$'.
 In order to put these two parts together we may recall that `but' is typically regimented by conjunction.
-Thus we may take `$(S_1 \eor S_2) \eand \enot(S_1 \eand S_2)$' to regiment K3.
+Thus we may take `$(S_1 \eor S_2) \eand \enot(S_1 \eand S_2)$' to regiment \eref{soup}{3}.
 
 
 
-\subsection{The Material Conditional}
+
+
+\section{The Material Conditional}
   \label{sec.conditional}
 
 Consider the following sentences and symbolization key:
 
-\begin{earg}
+\begin{earg} \label{bomb}
   \eitem{If you cut the red wire, then the bomb will explode.}
   \eitem{The bomb will explode only if you cut the red wire.}
   \eitem{The bomb will explode if you cut the red wire.}
@@ -533,34 +564,33 @@ Consider the following sentences and symbolization key:
 \item[$B$:] The bomb will explode.
 \end{ekey}
 
-Sentence L1 can be partially regimented by `If $R$, then $B$'.
+Sentence \eref{bomb}{1} can be partially regimented by `If $R$, then $B$'.
 We will use the \define{material conditional} symbol `$\eif$' (or \define{conditional} for short) where the sentence on the left is the \define{antecedent} and the sentence on the right is the \define{consequent}.
-Thus we may take `$R\eif B$' to regiment L1 where `$R$' is the antecedent and `$B$' is the consequent.
+Thus we may take `$R\eif B$' to regiment \eref{bomb}{1} where `$R$' is the antecedent and `$B$' is the consequent.
 
-The sentence L2 is also a conditional sentence.
-Since the word `if' appears in the second half of the sentence, it might be tempting to regiment this in the same way as sentence L1.
-However, the conditional `$R \eif B$' says that \textit{if} $R$, \textit{then} $B$.
-Equivalently, we may express this claim in English with the partial regimentation `$B$ \textit{if} $R$'. 
+The sentence \eref{bomb}{2} is also a conditional sentence.
+Since the word `if' appears in the second half of the sentence, it might be tempting to regiment this in the same way as sentence \eref{bomb}{1}.
+However, the conditional `$R \eif B$' says what the partial regimentation `\textit{if} $R$, \textit{then} $B$' says or, equivalently, what `$B$ \textit{if} $R$' says. 
 Neither of these claims say that your cutting the red wire is the \textit{only} way that the bomb will explode.
 For instance, someone else might cut the wire, or else the bomb might be on a timer.
-The sentence `$R\eif B$' does not say anything about what to expect if $R$ is false. 
-By contrast, L2 says that the only conditions under which the bomb will explode are ones where you cut the red wire, i.e., if the bomb explodes, then you have cut the wire.
-Thus sentence L2 may be regimented by `$B \eif R$'. 
+The sentence `$R\eif B$' does not say anything about what to expect if `$R$' is false. 
+By contrast, \eref{bomb}{2} says that the only conditions under which the bomb will explode are ones where you cut the red wire, i.e., if the bomb explodes, then you have cut the wire.
+Thus sentence \eref{bomb}{2} may be regimented by `$B \eif R$'. 
 
 Notice that we have the same antecedent/consequent pattern for both sentences: the sentence before the `only if' is the antecedent and the sentence after the `only if' is the consequent.
-Hence, we could also write sentence L1 as `You cut the red wire only if the bomb will explode', which we could regiment by `$R\eif B$'.
-We find something different in the sentence L3 where the `if' occurs in the middle.
-Sentence L3 can be paraphrased by L1, and so regimented in the same way by `$R \eif B$'.
+Hence, we could also write sentence \eref{bomb}{1} as `You cut the red wire only if the bomb will explode', which we could regiment by `$R\eif B$'.
+We find something different in the sentence \eref{bomb}{3} where the `if' occurs in the middle.
+Sentence \eref{bomb}{3} can be paraphrased by \eref{bomb}{1}, and so regimented in the same way by `$R \eif B$'.
 Regimenting conditional claims in English is tricky business and will require considerably more care than regimenting negations, conjunctions, and disjunctions.
 % This is equivalent to saying `If you cut the red wire, then the bomb will explode.' 
 
-It is important to remember that the connective `\eif' says only that, if the antecedent is true, then the consequent is true.
+It is important to remember that the operator `$\eif$' says only that, if the antecedent is true, then the consequent is true.
 It says nothing about the \emph{explanatory} connection between the antecedent and consequent.
-For instance, regimenting sentence L2 as $B \eif R$ does not mean that the bomb exploding would somehow have caused you to cut the wire.
-Both sentence L1 and L2 suggest that, if you cut the red wire, your cutting the red wire would explain why the bomb exploded.
+For instance, regimenting sentence \eref{bomb}{2} as `$B \eif R$' does not mean that the bomb exploding would somehow have caused you to cut the wire.
+Both sentence \eref{bomb}{1} and \eref{bomb}{2} suggest that, if you cut the red wire, your cutting the red wire would explain why the bomb exploded.
 Nevertheless, they differ in the \textit{logical} connection that they assert.
-If sentence L2 were true, then an explosion would tell us that you had cut the red wire.
-Without an explosion, sentence L2 tells us nothing about what you did with the red wire.
+If sentence \eref{bomb}{2} were true, then an explosion would tell us that you had cut the red wire.
+Without an explosion, sentence \eref{bomb}{2} tells us nothing about what you did with the red wire.
 
 \factoidbox{
   \textsc{Material Conditional Test:} A sentence can be regimented by $(\metaA \eif \metaB)$ if it can be paraphrased in English as `If $\metaA$, then $\metaB$', where the antecedent and consequent are both sentences.
@@ -600,44 +630,46 @@ We will specify this truth-function with the following truth table:
 \end{tabular}
 \end{center}
  
-% The truth table given above specifies the truth conditions for sentences includeing the \textit{material conditional} $\eif$.
+% The truth table given above specifies the truth-conditions for sentences includeing the \textit{material conditional} $\eif$.
 Observe that when the antecedent $\metaA$ is false, the conditional $\metaA \eif \metaB$ is true regardless of the truth-value of the consequent $\metaB$.
 If both $\metaA$ and $\metaB$ are true, then the conditional $\metaA \eif \metaB$ is true.
 In short, $\metaA \eif \metaB$ is false just in case $\metaA$ is true and $\metaB$ is false.
 
-More than any other connective, regimenting English conditional claims in $\PL$ is an extremely rough approximation with some very counter-intuitive consequences.
-For example, a conditional in $\PL$ is true any time the consequent is true, independent of the truth-value of the antecedent.
+More than any other sentential operator, the material conditional provides an extremely rough approximation of English conditional claims in $\PL$ with some counter-intuitive consequences.
+For example, a conditional in $\PL$ is true whenever the consequent is true, independent of the truth-value of the antecedent.
 Additionally, a conditional in $\PL$ is true any time the antecedent is false, independent of the truth-value of the consequent.
 These are odd consequence since at least some conditionals in English with true consequents and/or false antecedents seem clearly to be false.
 For instance, consider the following examples:
 
-\begin{earg}
+\begin{earg} \label{mit}
   \eitem{If there are no philosophy courses at MIT, then Logic I is a philosophy course at MIT.}
   \eitem{If this book has fewer than thirty pages, then it will win the Pulitzer prize.}
 \end{earg}
 
-Both M1 and M2 seem clearly false.
+Both \eref{mit}{1} and \eref{mit}{2} seem clearly false.
 But each of them, regimented in $\PL$, would come out true.
 % (If this isn't obvious, it's worth taking a moment to regiment them and consider the truth table.) 
-Sentences such as M1 and M2 are sometimes referred to as \textit{paradoxes for the material conditional} since their regimentations in terms of the material conditional are true.
+Sentences such as \eref{mit}{1} and \eref{mit}{2} are sometimes referred to as \textit{paradoxes for the material conditional} since their regimentations in terms of the material conditional are true.
 However, such sentences are only paradoxical if we take `$\eif$' to mean what `If \ldots, then \ldots' means in English.
 % Not only does the material conditional \textit{not} mean what `If \ldots, then \ldots' means in English, there is no common English expression which means what the material conditional means.
 Rather, the material conditional is a purely artificial piece of formal vocabulary which we have introduced by stipulating how it's truth-value is determined.
 Although the material conditional only provides a rough approximation of the `If \ldots, then \ldots' in English, who said that English has the best vocabulary for theoretical applications?
 After all, mathematics is also full of artificial, entirely stipulated definitions which are nevertheless of great utility in part because of the precise nature of their meanings given their explicit definitions.
 
-Despite the oddness of taking the regimentations of sentences such as M1 and M2 to be true, the material conditional preserves many of the most important logical features of conditionals.
-Rather than trying to capture all the subtleties of conditional claims in English, the material conditional proves its worth by abstracting a simple and extremely useful conditional relationship which we can be put to work in a wide range of applications.
+Despite the oddness of taking the regimentations of sentences such as \eref{mit}{1} and \eref{mit}{2} to be true, the material conditional preserves many of the most important logical features of conditionals claims in English.
 Indeed, the material conditional is perfectly adapted to the purposes of mathematics, and this alone covers a very important part of human reasoning.
 Programming languages also make use of material conditional claims, and these have proved to be profoundly useful.
+Rather than trying to capture all the subtleties of conditional English constructions, we may take the material conditional to be an approximation of and abstraction from the complexities of a natural language such as English. 
 
-Whereas the truth conditions for material conditional sentences are precisely defined, there is very little in English for which we have clear definitions, and certainly not the word `if'!
+Whereas the truth-conditions for material conditional sentences are precisely defined, there is very little in English for which we have clear definitions, and certainly not the word `if'!
 Indeed, philosophers, linguists, and logicians have spent over a century developing sophisticated mathematical theories to model the behaviour of `If \ldots, then \ldots' in English, and we are still very far from any kind of conclusive theory.
 Given how unclear we are about the meaning of conditionals constructions like `If \ldots, then \ldots' in English, it is difficult to rely on these constructions in theoretical applications.
 By contrast, the material conditional is easy to understand completely even if it pulls apart from similar sounding claims in English.
 
 We will have lots of occasions to observe the utility of the material conditional throughout this course.
 For now, I'll just ask you to go along with this approach to conditionals even if the material conditional sometimes seems to provide strange results.
+Believe it or not, the methods of modern logic have been applied for now over a hundred years attempting, among many other things, to provide a fully adequate regimentation of `if' as it occurs in English.
+Although considerable progress has been made, conclusive success is still forthcoming.
 
 % Note that unlike conjunction and disjunction, the conditional is \emph{asymmetrical}. You cannot swap the antecedent and consequent without changing the meaning of the sentence, because (\metaA{}\eif\metaB{}) and (\metaB{}\eif\metaA{}) are not logically equivalent.
 
@@ -673,11 +705,12 @@ For now, I'll just ask you to go along with this approach to conditionals even i
 %If I say this, it means that I will be on the porch, regardless of whether anyone wants to see me or not --- but if someone did want to see me, then they should look for me there. If we let $P$ mean `I will be on the porch,' then sentence \ref{if5} can be regimented simply as $P$.
 %
 
-\subsection{The Material Biconditional}
+\section{The Material Biconditional}
   \label{sec.biconditional}
 
 Consider the following sentences and symbolization key:
-\begin{earg}
+
+\begin{earg} \label{triangle}
   \eitem{The figure on the board is a triangle only if it has exactly three sides.}
   \eitem{The figure on the board is a triangle if it has exactly three sides.}
   \eitem{The figure on the board is a triangle if and only if it has exactly three sides.}
@@ -688,22 +721,22 @@ Consider the following sentences and symbolization key:
 \item[S:] The figure has three sides.
 \end{ekey}
 
-Sentence N1, for reasons discussed above, can be regimented as `$T\eif S$'.
+Sentence \eref{triangle}{1}, for reasons discussed above, can be regimented as `$T\eif S$'.
 
-Sentence N2 is different.
-Since N2 can be paraphrased as, `If the figure has three sides, then it is a triangle', we may take `$S\eif T$' to regiment N2.
+Sentence \eref{triangle}{2} is different.
+Since \eref{triangle}{2} can be paraphrased as, `If the figure has three sides, then it is a triangle', we may take `$S\eif T$' to regiment \eref{triangle}{2}.
 
-Sentence N3 says that $T$ is true \emph{if and only if} $S$ is true.
+Sentence \eref{triangle}{3} says that $T$ is true \emph{if and only if} $S$ is true.
 % This is called a \define{material biconditional}--- or \define{biconditional} for short--- because it entails the two conditionals $S\eif T$ and $T \eif S$.
 % We will use `$\eiff$' to express the biconditional.
-% Accordingly, we could regiment N3 as $(T \eif S)\eand(S\eif T)$.
-Although we could regiment N3 by conjoining two conditional claims, we will introduce the \define{material biconditional} symbol `$\eiff$' (or \define{biconditional} for short) for this purpose.
+% Accordingly, we could regiment \eref{triangle}{3} as $(T \eif S)\eand(S\eif T)$.
+Although we could regiment \eref{triangle}{3} by conjoining two conditional claims, we will introduce the \define{material biconditional} symbol `$\eiff$' (or \define{biconditional} for short) for this purpose.
 Because we could always write $(\metaA \eif \metaB) \eand (\metaB \eif \metaA)$ instead of $\metaA \eiff \metaB$, we do not strictly speaking \textit{need} to introduce a new symbol for the biconditional.\footnote{If fact the only truth-function we really need is called `nand' (not-both), but doing so would be tedious!} 
 % Rather, we could easily make do without a new symbol for the biconditional.
 Nevertheless, logical languages often include such a symbol, and in our case $\PL$ will include one, making it easier to regiment phrases like `if and only if'.
 
 Instead of referring to the sentence on the left-hand side of a biconditional as the antecedent and the sentence on the right-hand side as the consequent, we will refer to the sentences on either side of a biconditional as the \define{arguments} of the biconditional, where this is a general term for the sentences on which a logical constant operates.
-Whereas negation takes one argument (the negand), all of the other logical connectives in $\PL$ take two arguments.
+Whereas negation takes one argument (the negand), all of the other operators in $\PL$ take two arguments.
 It is important to clarify that the arguments of an operator have nothing to do with the arguments consisting of sentences which we will evaluate for logical validity.
 
 \factoidbox{
@@ -724,20 +757,20 @@ In order to specify the truth-conditions for sentences like $\metaA\eiff\metaB$,
 \end{tabular}
 \end{center}
 
-The truth table above indicates the truth conditions for the biconditional by taking $\metaA \eiff \metaB$ to be true if $\metaA$ and $\metaB$ have the same truth-value, and false if $\metaA$ and $\metaB$ have different truth-values.
+The truth table above indicates the truth-conditions for the biconditional by taking $\metaA \eiff \metaB$ to be true if $\metaA$ and $\metaB$ have the same truth-value, and false if $\metaA$ and $\metaB$ have different truth-values.
 Although we know that $\metaA$ and $\metaB$ will have different truth-values if $\metaA \eiff \metaB$ is false, this does not tell us whether $\metaA$ is true and $\metaB$ is false, or \textit{vice versa}.
 Similarly, knowing that $\metaA \eiff \metaB$ is true does not tell us whether both $\metaA$ and $\metaB$ are true, or whether both are false. 
 
 
 
-\subsection{Unless}
-  \label{sub.unless}
+\section{Unless}
+  \label{sec.unless}
 
-We have now introduced all of the connectives of $\PL$.
+We have now introduced all of the operators for $\PL$.
 We can use them together to regiment many kinds of sentences.
 Consider the following examples and associated symbolization key:%
 
-\begin{earg}
+\begin{earg} \label{cold}
   \eitem{Unless you wear a jacket, you will catch a cold. }
   \eitem{You will catch a cold unless you wear a jacket. }
 \end{earg}
@@ -748,27 +781,27 @@ Consider the following examples and associated symbolization key:%
   \item[$D$:] You will catch a cold.
 \end{ekey}
 
-We can paraphrase sentence O1 as `Unless $J$, $D$.'
-This means that if you do not wear a jacket, then you will catch a cold, and so we may regiment O1 as $\enot J \eif D$.
+We can paraphrase sentence \eref{cold}{1} as `Unless $J$, $D$.'
+This means that if you do not wear a jacket, then you will catch a cold, and so we may regiment \eref{cold}{1} as `$\enot J \eif D$.'
 
-This same sentence O1 also means that if you do not catch a cold, then you must have worn a jacket.
-With this in mind, we might regiment O1 as $\enot D \eif J$.
-You might then wonder which of these is the correct regimentation of sentence O1.
+This same sentence \eref{cold}{1} also means that if you do not catch a cold, then you must have worn a jacket.
+With this in mind, we might regiment \eref{cold}{1} as `$\enot D \eif J$'.
+You might then wonder which of these is the correct regimentation of sentence \eref{cold}{1}.
 The answer is that both regimentations are correct.
 Not only are these regimentations logically equivalent, there no reason to prefer one regimentation to another.
 Rather, both regimentations are equally natural.
 %, where one is the \textit{contrapositive} of the other: the contrapositive of $P \eif Q$ is $\enot Q \eif \enot P$, i.e. you flip the order and negate both sides.
 % In general, sentences and arguments may have more than one regimentation, although as we saw in the previous chapter, regimentations are not always equally good.
 
-What about O2?
-We may begin by taking `Unless you wear a jacket, you will catch a cold' to paraphrase O2, and so either `$\enot J \eif D$' or `$\enot D \eif J$' may be taken to regiment O2 where neither is better than the other.
-As a result, O2 is logically equivalent to sentence O1.
+What about \eref{cold}{2}?
+We may begin by taking `Unless you wear a jacket, you will catch a cold' to paraphrase \eref{cold}{2}, and so either `$\enot J \eif D$' or `$\enot D \eif J$' may be taken to regiment \eref{cold}{2} where neither is better than the other.
+As a result, \eref{cold}{2} is logically equivalent to sentence \eref{cold}{1}.
 
-When regimenting sentences like sentence O1 and sentence O2, it is easy to get turned around.
+When regimenting sentences like sentence \eref{cold}{1} and sentence \eref{cold}{2}, it is easy to get turned around.
 Since the conditional is not symmetric, it would be wrong to regiment either sentence as `$J \eif \enot D$' or `$D \eif \enot J$'.
-Fortunately, there are symmetric ways to regiment O1 and O2.
+Fortunately, there are symmetric ways to regiment \eref{cold}{1} and \eref{cold}{2}.
 In particular, both sentences say that you will wear a jacket or--- if you do not wear a jacket--- then you will catch a cold.
-So we can regiment O1 and O2 as `$J \eor D$'.
+So we can regiment \eref{cold}{1} and \eref{cold}{2} as `$J \eor D$'.
 Although linguistically less natural, this regimentation is easier to remember.
 It helps that  `$Q \eor P$' is logically equivalent to `$P \eor Q$', so if you use disjunction, you don't have to worry about the order.
 % Thus we have:
@@ -816,13 +849,13 @@ So far, we have talked a lot \textit{about} sentences and will continue to do so
 Of course, we have also used sentences to say things, e.g., that there is no precise mathematical definition of the declarative sentences of English.
 In order to sharpen this contrast, consider these the following sentences:
 
-\begin{earg}
+\begin{earg} \label{kamala}
   \eitem{Kamala Harris is the Democratic Nominee.}
   \eitem{`Kamala Harris' is composed of two uppercase letters and ten lowercase letters.}
 \end{earg}
 
-When we want to talk about Kamala Harris, we \textit{use} her name as in P1.
-When we want to talk about Kamala Harris' name, we \textit{mention} her name which we do by putting her name in quotation marks as in P2.
+When we want to talk about Kamala Harris, we \textit{use} her name as in \eref{kamala}{1}.
+When we want to talk about Kamala Harris' name, we \textit{mention} her name which we do by putting her name in quotation marks as in \eref{kamala}{2}.
 Similarly, whereas it is true to say that you are learning logic, the expression `logic' is the name of the subject that you are learning. 
 
 In general, when we want to talk about how things are, we \textit{use} expressions in a language.
@@ -837,6 +870,8 @@ Here is the first convention that we will use:
 }
 
 For instance `ABC' is the name for the expression consisting of the first letter of the alphabet, followed by the second letter of the alphabet, followed by the third letter of the alphabet.
+Put otherwise, `ABC' is the result of \define{concatenating} the symbols `A', `B', and `C' where speaking loosely, this means that the complex symbol `ABC' is formed by putting the others together one after the next.
+Concatenation will play an important role below. 
 
 Consider the following sentences:
 
@@ -848,7 +883,7 @@ Consider the following sentences:
 Sentence Q1 says that the expression `Kamala Harris' is the Democratic Nominee which is false.
 Rather, it is the \textit{woman} named by the expression `Kamala Harris' who is the Democratic Nominee, not her \textit{name}.
 % After all, names do not run for president.
-We find a related mistake in P2 which says that the woman Kamala Harris is composed of letters which is also false. % despite the fact that P2 true. 
+We find a related mistake in \eref{kamala}{2} which says that the woman Kamala Harris is composed of letters which is also false. % despite the fact that \eref{kamala}{2} true. 
 Here is another important type of example:
 
   \begin{earg}
@@ -879,7 +914,7 @@ By way of motivation, the following section will begin to introduce the primitiv
 
 
 \subsection{Primitive Symbols}
-  \label{sub:primitives}
+  \label{sub.primitives}
 
 In order to define the sentences of $\PL$ in a more careful way than we have so far, it will be important to introduce the primitive symbols of $\PL$. 
 Some of these we have already seen above.
@@ -892,7 +927,7 @@ In particular, consider the following definitions for $\PL$:
 
 Quotes have been used above in order to explicitly indicate the symbols that are taken to be sentential operators and parentheses, respectively.
 The sentential operators are also commonly called \define{connectives} since they connect sentences to form new sentences of greater complexity.
-In our case, the sentential operators above are all truth-functional since the truth-value of a sentence with any of the sentential operators given above as its main connective is determined by the truth-values of its arguments.
+In our case, the sentential operators above are all truth-functional since the truth-value of a sentence with any of the sentential operators given above as its main operator is determined by the truth-values of its arguments.
 Accordingly, the sentential operators indicated above are also sometimes called the \define{truth-functional connectives} (or \define{truth-functions}) as well as \define{extensional operators}.
 For simplicity, we will refer to the sentential operators above as the \define{operators} of $\PL$ since we will not consider non-extensional operators.
 Additionally, the parentheses indicated above provide the necessary punctuation needed to specify the order of operations in complex sentences in which multiple operators occur.
@@ -934,7 +969,7 @@ It is for this reason that we will improve on the third attempt however pedantic
 
 
 \subsection{Corner Quotes}%
-  \label{sub:corner-quotes}
+  \label{sub.corner-quotes}
 
 % Recall from Chapter $\ref{ch.introduction}$ the manner in which we used metavariables to provide a recursive definition of the wfss of $\PL$.
 % This included such claims as: If $\metaA{}$ is a wfs, then $\enot \metaA{}$ is a wfs.
@@ -968,7 +1003,7 @@ It is in this way that we may explicitly specify all sentence letters of $\PL$.
 
 
 \subsection{Expressions}%
-  \label{sub:expressions}
+  \label{sub.expressions}
 
 Given the definitions above, we may now define the \define{primitive symbols} of $\PL$ to include the operators, punctuation, and sentence letters for $\PL$ given above, and nothing besides.
 The \define{expressions} of $\PL$ may the be defined recursively as follows: 
@@ -976,7 +1011,7 @@ The \define{expressions} of $\PL$ may the be defined recursively as follows:
 \factoidbox{
   \begin{enumerate}
     \item Every primitive symbol of $\PL$ is an expression of $\PL$.
-      \item For any expressions $\metaA$ and $\metaB$ of $\PL$, $\corner{\metaA\metaB}$ is an expression of $\PL$.
+    \item For any expressions $\metaA$ and $\metaB$ of $\PL$, $\corner{\metaA\metaB}$ is an expression of $\PL$.
     \item Nothing else is an expression of $\PL$.
   \end{enumerate}
 }
@@ -989,7 +1024,7 @@ This definition specifies the expressions of $\PL$ in an explicit and exhaustive
 
 
 \subsection{Well-Formed Sentences}
-  \label{sub:wfs}
+  \label{sub.wfs}
 
 Since any sequence of symbols is an expression, many expressions of $\PL$ will fail to be candidates for interpretation.
 That is, not only do they fail to mean something on a particular interpretation, there is no good way to interpret them at all.
@@ -1008,7 +1043,7 @@ Put otherwise, we may ask which expressions of $\PL$ are grammatical, or as we w
 For ease of exposition, we will use the acronym `wfs' throughout what follows where the plural is `wfss'.
 
 Sentence letters like `$A_1$' and `$G_{13}$' are certainly wfss.
-We can form further wfss out of these by using the various connectives.
+We can form further wfss out of these by using the various operators.
 Using negation, we can get `$\enot A_1$' and `$\enot G_{13}$'.
 Using conjunction, we can get `$A_1 \eand G_{13}$', `$G_{13} \eand A_1$', `$A_1 \eand A_1$', and `$G_{13} \eand G_{13}$'.
 We could also apply negation repeatedly to get `$\enot \enot A_1$' or apply negation along with conjunction to get wfss like `$\enot(A_1 \eand G_{13})$' and `$\enot(G_{13} \eand \enot G_{13})$'.
@@ -1051,9 +1086,10 @@ We do this in all the ways that we can, adding as much to $\Lambda_0'$ as possib
 Once we stop getting anything new, we may take $\Lambda_1 = \Lambda_0 \cup \Lambda_0'$ which contains all and only the wfss which belong to either $\Lambda_0$ or $\Lambda_0'$.
 We then repeat the process to build $\Lambda_2$ from $\Lambda_1$ in the same way.
 More generally, given any $\Lambda_n$ we may build $\Lambda_{n+1}$ by the same procedure.
-Finally we consider the union $\bigcup_{n\in \mathbb{N}}\Lambda_n$ which gathers together the members from each $\Lambda_n$ for all $n \in \mathbb{N}$.
+Finally we consider the union which gathers together the members from each $\Lambda_n$ for all $n \in \mathbb{N}$.
+$$\Lambda = \bigcup_{n\in \mathbb{N}}\Lambda_n.$$
 % Although we cannot do this in \textit{time}, we can do this in \textit{math}.
-A simpler way to describe the same thing is to take the set of wfs of $\PL$ to be the smallest set--- this corresponds to condition (3) above--- to satisfy conditions (1) and (2) above.
+A simpler way to describe the same thing is to take the set $\Lambda$ of wfs of $\PL$ to be the smallest set--- this corresponds to condition (3) above--- to satisfy conditions (1) and (2) above.
 % To get another perspective on the same thing, we may define the set of wfss to be the smallest set to satisfy the rules above.
 By imposing condition (3), we are making sure that nothing else ends up a wfs of $\PL$ like the number 2 or the Eiffel tower, thereby specifying a unique set of wfs of $\PL$.
 
@@ -1067,22 +1103,22 @@ For now, our concern is limited to the rules for writing sequences of symbols in
 
 
 \subsection{Main Operator}%
-  \label{sub:main-operator}
+  \label{sub.main-operator}
 
-It is worth computing whether a number of different expressions are wfss of $\PL$ or not.
-For instance, suppose that we want to know whether or not $\enot \enot \enot D$ is a wfs of $\PL$.
-Looking at the second clause of the definition, we know that $\enot \enot \enot D$ is a wfs \emph{if} $\enot \enot D$ is a wfs.
-So now we need to ask whether or not $\enot \enot D$ is a wfs.
-Again looking at the second clause of the definition, $\enot \enot D$ is a wfs \emph{if} $\enot D$ is.
-Again, $\enot D$ is a wfs \emph{if} $D$ is a wfs.
-Now $D$ is a sentence letter, so we know that $D$ is a wfs by the first clause of the definition.
-Thus $\enot \enot \enot D$ is in fact a wfs. 
+It is worth computing whether an expression is a wfss of $\PL$ or not.
+For instance, suppose that we want to know whether or not `$\enot \enot \enot D$' is a wfs of $\PL$.
+Looking at the second clause of the definition, we know that `$\enot \enot \enot D$' is a wfs \emph{if} `$\enot \enot D$' is a wfs.
+So now we need to ask whether or not `$\enot \enot D$' is a wfs.
+Again looking at the second clause of the definition, `$\enot \enot D$' is a wfs \emph{if} `$\enot D$' is.
+Again, `$\enot D$' is a wfs \emph{if} `$D$' is a wfs.
+Now `$D$' is a sentence letter, so we know that `$D$' is a wfs by the first clause of the definition.
+Thus `$\enot \enot \enot D$' is in fact a wfs. 
 
-The connective that you look to first in decomposing a sentence is called the \define{main operator} of that sentence.
-For example, the main connective of $\enot (E \eor (F \eif G))$ is negation, and the main connective of $(\enot E \eor (F \eif G))$ is disjunction.
-Conversely, if you're building up a wfs from simpler sentences, the connective introduced by the last composition rule you apply is the main connective of the resulting sentence.
-It is the connective that governs the interpretation of the entire sentence.
-Being able to identify the main connective of sometimes convoluted sentences in $\PL$ is going to be an essential skill in your logical tool kit.
+The operator that you look to first in decomposing a sentence is called the \define{main operator} of that sentence.
+For example, the main operator of `$\enot (E \eor (F \eif G))$' is negation, and the main operator of `$(\enot E \eor (F \eif G))$' is disjunction.
+Conversely, if you're building up a wfs from simpler sentences, the operator introduced by the last composition rule you apply is the main operator of the resulting sentence.
+It is the operator that governs the interpretation of the entire sentence.
+Being able to identify the main operator of sometimes convoluted sentences in $\PL$ is going to be an essential skill in your logical tool kit.
 
 % \subsection{Sentences}
 
@@ -1145,16 +1181,15 @@ Being able to identify the main connective of sometimes convoluted sentences in 
 \section{Metalinguistic Abbreviation}%
   \label{sec:abbreviation}
   
-So far we have been very careful to be precise.
-This is sort of precision is important when being introduced to a formal theory of syntax for a language for the first time.
-However, maintaining this level of precision is not only tedious, but can often be hard to read, or ease to mix up.
-Accordingly, it is common to introduce certain simplifications as a convenient shorthand.
-As a first example of this kind of simplification, we will often suppress the `$0$' in sentence letters, writing `$A$' and `$B$' in place of `$A_0$' and `$B_0$', and so on for the other twenty-four sentence letters in which `$0$' is the subscript.
-Since subscripts are rarely required, we can avoid quite a bit of trouble by simply using different capital letters. % , suppressing the subscript altogether
+So far we have been careful to be precise.
+This is sort of precision is important when introducing a formal theory of syntax for the first time.
+However, maintaining this level of precision is both tedious and can often be hard to read, and so it is common to introduce certain simplifications as a convenient shorthand.
+For instance, we will often suppress the subscript `$_0$', writing `$A$' and `$B$' in place of `$A_0$' and `$B_0$', and so on for the other twenty-four sentence letters in which `$_0$' is the subscript.
+In this way, subscripts are rarely required, avoiding quite a bit of trouble by simply using different capital letters. % , suppressing the subscript altogether
 
 However simple, suppressing the subscript `$_0$' in sentence letters provides a paradigm case of the kinds of simplifications that we will introduce in this section.
-It is important to specify that these notational conventions do change the official definitions.
-For instance, just because we have started writing `$A$' instead of `$A_0$' does not mean that now `$A$' is officially a wfss of $\PL$ and `$A_0$' is not.
+It is important to specify that these notational conventions do not change the official definitions.
+For instance, just because we have started writing `$A$' instead of `$A_0$' does not mean that `$A$' is officially a wfss of $\PL$ and `$A_0$' is not.
 Rather, we have simply provided a shorthand which can be done away with, recovering the official sentence letters of $\PL$.
 More generally, our notational conventions provide a convenient shorthand that eases the expression of the sentences of $\PL$ given a clear understanding of the official definitions.
 Accordingly, these notational conventions are called \define{metalinguistic abbreviations} since they do not happen in our object language, but rather in the metalanguage that we use for talking \textit{about} elements of the object language in a natural and abbreviated way.
@@ -1165,7 +1200,7 @@ Before indulging in the simplifications indicated below, it is important to ensu
 % In stipulating conventions for relaxing the level of precision that we have so far maintained, we will be careful to to uphold (2) throughout what follows.
 % As a reader, it is worth bearing in mind something similar: if you choose to indulge in the simplifications offered below, it is important that you do so in fully knowledge of how to recover the official form that your simplified claims are intended to express.
 For instance, the following section will explain how to drop parentheses. 
-However, unless and until you are very confident about the use of parentheses in the definition of the wfss of $\PL$, it is good advice to stick to the official definition of the wfss of $\PL$.
+However, until you are confident about the use of parentheses in the definition of the wfss of $\PL$, it is good advice to stick to the official definition of the wfss of $\PL$.
 The notational conventions that we provide are a way to skip steps when writing things down, but they will not help you master the official definitions.
 If you're unsure about whether it's OK to take a certain shortcut, the safest thing is to continue to use the official definitions.
 With this health warning in place, we may proceed with caution.
@@ -1181,75 +1216,73 @@ With this health warning in place, we may proceed with caution.
 
 
 \subsection{Parentheses}
-  \label{sub:parentheses}
+  \label{sub.parentheses}
 
 Given the definition of the wfs of $\PL$, we are now in a position to observe that neither of the following are wfss of $\PL$, and for good reason:
 
-\begin{earg}
-  \eitem{$A \eand \enot B$.}
+\begin{earg} \label{parens}
+  \eitem{$Q \eand R$.}
   \eitem{$C \eor D \eand E$.}
 \end{earg}
 
-The reason that Q1 is not a wfs is the boring but crucial reason that it lacks outermost parentheses.
-Officially, a wfs like $Q \eand R$ must have outermost parentheses because we might want to use this sentence to construct further, more complicated sentences which have this sentence as a part. 
-For instance, if we negate $(Q \eand R)$, we get $\enot(Q \eand R)$.
-If we just had $Q \eand R$ without the parentheses and put a negation in front of it, we would have $\enot Q \eand R$.
-It is most natural to read this as meaning the same thing as $(\enot Q \eand R)$, something very different than $\enot(Q\eand R)$.
-The sentence $\enot(Q \eand R)$ means that it is not the case that both $Q$ and $R$ are true; $Q$ might be false or $R$ might be false, but the sentence does not tell us which.
-The sentence $(\enot Q \eand R)$ means specifically that $Q$ is false and that $R$ is true.
-This highlights the critical role that parentheses play in interpreting the wfss of $\PL$.
-
+The reason that \eref{parens}{1} is not a wfs is the boring but crucial reason that it lacks outermost parentheses.
+Officially, a wfs like `$Q \eand R$' must have outermost parentheses because we might want to use this sentence to construct further, more complicated sentences which have this sentence as a part. 
+For instance, if we negate `$(Q \eand R)$', we get `$\enot(Q \eand R)$'.
+If we just had `$Q \eand R$' without the parentheses and put a negation in front of it, we would have `$\enot Q \eand R$' which it would be hard to distinguish from `$(\enot Q \eand R)$', something very different than `$\enot(Q\eand R)$'.
+The sentence `$\enot(Q \eand R)$' means that it is not the case that both `$Q$' and `$R$' are true; `$Q$' might be false or `$R$' might be false, but the sentence does not tell us which.
+The sentence `$(\enot Q \eand R)$' means specifically that `$Q$' is false and that `$R$' is true.
+This highlights the critical role that parentheses will play when we go on to interpret the wfss of $\PL$.
 
 Officially, a conjunction is a sentence of the form $\corner{(\metaA \eand \metaB)}$ for any sentences $\metaA$ and $\metaB$, not a sentence of the form $\corner{\metaA \eand \metaB}$.
 % At numerous places throughout this text, we have not followed the strict letter of this law. %, dropping parentheses when there is no risk of confusion.
-Nevertheless, dropping the outermost parentheses is both permissible and common when it does not lead to any ambiguities, i.e., when there is a unique wfss $\PL$ which is easy to recover by adding an outermost pair, or else when the ambiguity that result do not make any substantial difference.
-For instance, we may recover the following wfs from Q1 without any ambiguity whatsoever:
+Nevertheless, dropping the outermost parentheses is both permissible and common when it does not lead to any ambiguities, i.e., when there is a unique wfs $\PL$ which is easy to recover by adding an outermost pair, or else when the ambiguity that results does not make any substantial difference (more on this in the next chapter).
+
+For example, we may recover the following wfs from \eref{parens}{1} without any ambiguity whatsoever:
 
 \begin{earg}
-  \eitem{$(A \eand \enot B)$.}
+  \eitem{$(Q \eand R)$.}
 \end{earg}
 
-The same cannot be said for Q2.
+The same cannot be said for \eref{parens}{2}.
 Rather, we must choose between the following candidates:
 
-\begin{earg}
+\begin{earg} \label{scope}
   \eitem{$((C \eor D) \eand E)$.}
   \eitem{$(C \eor (D \eand E))$.}
 \end{earg}
 
 Apart from anything to do with their meaning, the two wfss above are different.
-Whereas neither Q1 nor Q2 are officially wfss of $\PL$, both S1 and S2 are wfss of $\PL$ in the most official sense.
+Whereas neither \eref{parens}{1} nor \eref{parens}{2} are officially wfss of $\PL$, both \eref{scope}{1} and \eref{scope}{2} are wfss of $\PL$ in the most official sense.
 Of course, we could have defined the wfss not to include outermost parentheses, so what's the reason for this stipulation?
-As it will turn out, S1 and S2 will have different truth conditions, providing good reason to distinguish between them syntactically.
+As it will turn out, \eref{scope}{1} and \eref{scope}{2} will have different truth-conditions, providing good reason to distinguish between them syntactically.
 % Semantics aside, it is important to be clear about what it is \textit{officially} to be a wfs.
-% The answer is that without adding the parentheses, our syntax fails to keep track of the order in which a sentence has been constructed, and as a result, runs together sentences like \ref{paren4} and \ref{paren5} above, turning both back into \ref{paren2}.
 
-Although strictly speaking, $Q \eand R$ is \emph{not} a wfs of $\PL$, we will sometimes drop the parentheses to make things easier for ourselves.
+Without including any parentheses at all, our syntax would fail to keep track of the order in which a sentence has been constructed, and as a result, would run together sentences like \eref{scope}{1} and \eref{scope}{2} above, turning both of them back into the sentence \eref{parens}{2}.
+% Although strictly speaking, $Q \eand R$ is \emph{not} a wfs of $\PL$, we will sometimes 
+Although it will be convenient to sometimes drop parentheses to make things easier for ourselves, it is important to do this carefully so that we do not lose important information that we need in order to get back to the original form of the sentence.
 We will do this in several ways.
 
-First, we understand that $Q \eand R$ is short for $(Q \eand R)$.
+First, we understand that `$Q \eand R$' is short for `$(Q \eand R)$'.
 As a matter of convention, we can leave off parentheses that occur \emph{around the entire sentence}.
 Even though we don't always write out the outermost parentheses, we know that they really should be there.
-It is important to stress that this is only possible when $Q \eand R$ occurs by itself, and not as a part of some more complex sentence. 
-If we were able to drop parentheses even when some sentence occurs as a part of a bigger sentence, we would be able to turn both S1 and S2 into Q2, and that is not what we want because then there would be no way to determine the main connective.
+It is important to stress that this is only possible when `$Q \eand R$' occurs by itself, and not as a part of some more complex sentence. 
+If we were able to drop parentheses even when some sentence occurs as a part of a bigger sentence, we would be able to turn both \eref{scope}{1} and \eref{scope}{2} into \eref{parens}{2}, and that is not what we want because then there would be no way to determine the main operator.
 
 Second, it can sometimes be confusing to look at long sentences with nested sets of parentheses.
 We adopt the convention of using square brackets `[' and `]' in place of parenthesis.
-There is no logical difference between $(P\eor Q)$ and $[P\eor Q]$, for example.
-The unwieldy sentence
-  $$(((H \eif I) \eor (I \eif H)) \eand (J \eor K))$$
-could be written in the following way, omitting the outermost parentheses and using square brackets to make the inner structure easier to see:
+There is no logical difference between `$(P\eor Q)$' and `$[P\eor Q]$', for example.
+The unwieldy sentence `$(((H \eif I) \eor (I \eif H)) \eand (J \eor K))$' could be written in the following way, omitting the outermost parentheses and using square brackets to make the structure of the sentence clear:
   $$\bigl[(H \eif I) \eor (I \eif H)\bigr] \eand (J \eor K).$$
-Unfortunately, the online \textit{Carnap} system will not allow you to use square brackets when working in system LogicBookSD.
-\textit{Carnap} will also always add the outer parentheses which can make things a bit harder to parse.
+% Unfortunately, the online \textit{Carnap} system will not allow you to use square brackets when working in system LogicBookSD.
+Note that \textit{Carnap} will always add the outer parentheses which can make things a bit harder to parse.
 So be careful when using that system.
 
 Third, we will sometimes want to regiment the conjunction or disjunction of three or more sentences.
 For instance, consider the following sentence and symbolization key: 
 
-\begin{earg}
-  \eitem{Alice, Bob, and Candice all went to the party.}
-  \eitem{Either Alice, Bob, and Candice went to the party.}
+\begin{earg} \label{assoc}
+  \eitem{Alice, Bob, and Candice all went to the party.} \label{1}
+  \eitem{Either Alice, Bob, and Candice went to the party.} \label{2}
 \end{earg}
 
 \begin{ekey}
@@ -1258,125 +1291,129 @@ For instance, consider the following sentence and symbolization key:
   \item[$C$:] Candice went to the party.
 \end{ekey}
 
-The composition rules only allow us to form a conjunction out of two sentences, so we can regiment T1 as either $(A \eand B) \eand C$ or $A \eand (B \eand C)$.
-However, there is no reason to distinguish between these regimentation since the two are logically equivalent.
-That is, there is no logical difference between the first, in which $(A \eand B)$ is conjoined with $C$, and the second, in which $A$ is conjoined with $(B \eand C)$.
-So we might as well just write $A \eand B \eand C$.
+The composition rules only allow us to form a conjunction out of two sentences, so we can regiment \eref{assoc}{1} as either `$(A \eand B) \eand C$' or `$A \eand (B \eand C)$'.
+However, there is no reason to distinguish between these regimentation since the two are logically equivalent, or put otherwise, the two are true in exactly the same interpretations.
+% That is, there is no logical difference between the first, in which $(A \eand B)$ is conjoined with $C$, and the second, in which $A$ is conjoined with $(B \eand C)$.
+So we might as well just write `$A \eand B \eand C$'.
 As a matter of convention, we can leave out parentheses when we conjoin three or more sentences.
 
-A similar situation arises in considering multiple disjunctions.
-For instance, T2 can be regimented as either $(A \eor B) \eor C$ or $A \eor (B \eor C)$.
-Since these two regimentations are logically equivalent, we may write $A \eor B \eor C$.
+A similar situation arises in disjoining multiple sentences.
+For instance, \eref{assoc}{2} can be regimented as either `$(A \eor B) \eor C$' or `$A \eor (B \eor C)$'.
+Since these two regimentations are logically equivalent, we may write `$A \eor B \eor C$'.
 These two conventions only apply to multiple conjunctions or multiple disjunctions, not any combination of conjunctions and disjunctions.
-If a series of connectives includes both disjunctions and conjunctions, then the parentheses are essential, as with $(A \eand B) \eor C$ and $A \eand (B \eor C)$.
-The parentheses are also required if there is a series of conditionals or biconditionals, as with $(A \eif B) \eif C$ and $A \eiff (B \eiff C)$.
+If a series of operators includes both disjunctions and conjunctions, then the parentheses are essential, as with `$(A \eand B) \eor C$' and `$A \eand (B \eor C)$'.
+The parentheses are also required if there is a series of conditionals or biconditionals, as with `$(A \eif B) \eif C$' and `$A \eiff (B \eiff C)$'.
 
 If we had given a different definition of the wfss of $\PL$, strings of conjunctions or disjunctions could have counted as wfss of $\PL$, obviating the need for the conventions indicated above.
-For instance, we might have permitted $(\metaA \eand \ldots \eand \metaB)$ to be a wfs of $\PL$ whenever $\metaA, \ldots, \metaB$ are all wfss of $\PL$.
+For instance, we might have permitted $\corner{(\metaA \eand \ldots \eand \metaB)}$ to be a wfs of $\PL$ whenever $\metaA, \ldots, \metaB$ are all wfss of $\PL$.
 This would have made it a little easier to regiment some English sentences, but it would have also come at the cost of making our the language $\PL$ much more complicated.
-In particular, we would have to keep this more complex definition in mind when we develop truth tables and a proof system.
+In particular, we would have to keep this more complex definition in mind when we provide a semantics and proof system for $\PL$.
 Rather, we want $\PL$ to be as simple as possible without reducing its expressive power.
-Since no expressive power is added by permitted $(\metaA \eand \ldots \eand \metaB)$ to be a wfs of $\PL$, there is little reason to indulge in this complication, keeping the semantics and proof theory as simple as possible.
+Since no expressive power is added by permitted $\corner{(\metaA \eand \ldots \eand \metaB)}$ to be a wfs of $\PL$, there is little reason to indulge in this complication, keeping the semantics and proof theory as simple as possible.
 % or complicating the regimentation easily from English, but we also want a \emph{formally simple} language for which it is relatively easy to provide semantic clauses.\footnote{As we'll see later, this is important if we want to be able to prove things \emph{about} our language.}
-Nevertheless, insisting that conjunctions and disjunctions have exactly two conjuncts or disjuncts on the official definition does raise certain syntactic redundancies that are not motivated by corresponding semantic differences, e.g., between the equivalent regimentations of T1 and T2.
-Adopting notational conventions is a compromise between the competing desires to simplify the syntax, semantics, and proof theory of $\PL$ on the one hand and to avoid needless syntactic redundancies on the other.
+Nevertheless, insisting that conjunctions and disjunctions have exactly two conjuncts or disjuncts on the official definition does raise certain syntactic redundancies that are not motivated by corresponding semantic differences, e.g., between the equivalent regimentations of \eref{assoc}{1} and \eref{assoc}{2}.
+Adopting notational conventions is a compromise between the competing desires to avoid complicating the semantics and proof theory of $\PL$ on the one hand and to avoid needless syntactic redundancies on the other.
 % Adopting notational conventions is a way to maintain simple definitions of the wfss of $\PL$ in order to simplify the semantics and proof theory while 
 
 
 % TODO: transition
 
-Strictly speaking, $A \eor B \eor C$ is still not a sentence of $\PL$.
-We write it for the sake of convenience, but we really mean the sentence $(A \eor (B \eor C))$.
+Strictly speaking, `$A \eor B \eor C$' and `$A \eand B \eand C$' are not sentences of $\PL$.
+We write them this way for the sake of convenience, but really these sentences are ambiguous.
+The only reason we can get away with this is that the ambiguities do not amount to any logical differences since any way of adding parentheses will amount to sentences with the same truth-conditions.
 
 
 
 
 \subsection{Dropping Quotes}
-  \label{sub:DropQuote}
+  \label{sub.DropQuote}
 
-We have taken uppercase letters to be the sentence letters of $\PL$:
+% TODO: mention dropping corner quotes
+
+We have taken subscripted uppercase letters in English to be sentence letters of $\PL$:
 	$$A, B, C, Z, A_1, B_4, A_{25}, J_{375},\ldots$$
-These are sentences of the object language $\PL$.
-They are not sentences of our metalanguage, i.e., mathematical English.
-So we must not say, for example:
+Although we could have added quotes around each of the letters above, it is clear in this context that we mean to be mentioning and not using these sentences.
+After all, this text is written in the metalanguage of mathematical English and the sentences above are sentences of the object language $\PL$ that we intend to be discussing.
+% Thus \eref{disquote}{1} is officially nonsense:
+Consider the following examples:
 
-	\begin{earg}
-    \item[\ex{use5}] $D$ is a sentence letter of $\PL$.
+  \begin{earg} \label{disquote}
+    \eitem{$D$ is a sentence letter of $\PL$.} \label{1}
+    \eitem{`$D$' is a sentence letter of $\PL$.} \label{2}
 	\end{earg}
 
-Obviously, we are trying to come out with an English sentence that says something about the object language ($\PL$), but `$D$' is a sentence of $\PL$, and not part of English.
-Put flatly, the sentences of $\PL$ \textit{do not} belong to our metalanguage, i.e., mathematical English.
-So \ref{use5} is gibberish.
-To take another example along the same lines, consider:
+Since `$D$' is a sentence of $\PL$ and not our metalanguage, \eref{disquote}{1} is nonsense.
+Put flatly, the sentences of $\PL$ do not belong to our metalanguage mathematical English.
+Rather, it is the canonical names for the sentences of $\PL$ which belong to our metalanguage, and for this we must use quotes as before.
+Thus whereas \eref{disquote}{1} is gibberish, \eref{disquote}{2} is true.
 
-	\begin{earg}
-    \item[\ex{use6}] Schnee ist wei\ss\ is a German sentence.
+We may then compare:
+% It will help to compare this case to the following example:
+
+  \begin{earg} \label{german}
+    \eitem{Schnee ist wei\ss\ is a German sentence.} \label{1}
+    \eitem{`Schnee ist wei\ss' is a German sentence.} \label{2}
 	\end{earg}
 
-What we surely meant to say, in this case, is:
+Whereas \eref{german}{1} is again gibberish belonging to no single natural language, \eref{german}{2} is a perfectly intelligible sentence of English which happens to mention a sentence of German.
 
-	\begin{earg}
-    \item[\ex{use7}] `Schnee ist wei\ss' is a German sentence.
-	\end{earg}
+Although quotes are officially required for \eref{german}{2} to be true, it is nevertheless pretty clear what this sentence intends.
+Matters are even clearer in the case of \eref{disquote}{1} and \eref{disquote}{2} above.
+Accordingly, it is permissible to drop the quotes in \eref{disquote}{2}, using \eref{disquote}{1} in its place for ease.
+% By contrast to claims like \eref{german}{2} which are far and few between in English, 
+Since we will be talking about the sentences of $\PL$ a lot and the quotes can get cumbersome, we will often drop the quotes, relying on context and the reader's competence to know where they belong.
 
-Equally, what we meant to say in \ref{use5} is:
+In addition to a convenience that we will indulge in throughout this course, dropping quotes is common practice throughout logic, and so it is good to get some practice with these conventions.
+This applies as much to corner quotes as it does to standard quotes.
+For instance, in defining the wfss of a language, it is common practice to do so \textit{without} using corner quotes by relying on the reader's competence to know where they belong.
+Since this is an introductory text, the definitions above have been made explicit.
+Nevertheless, when we go on to setup further languages such as $\FOL$ below, we will have occasion to indulge in certain simplifications, leaving off the corner quotes.
 
-	\begin{earg}
-    \item[\ex{use8}] `$D$' is a sentence letter of $\PL$.
-	\end{earg}
+In making such simplifications, what matters is that the conveniences that we indulge do not lead to any real ambiguities.
+Additionally, we should maintain quotes when clarity is improved. 
+After all, the goal is to make things to read, not harder, so bear this in mind if you choose to drop quotes.
+Certainly in some contexts using quotes is invaluable.
 
-Given how easy it was to guess that by \ref{use5} we really intended \ref{use8}, it is permissible to drop the quotes in \ref{use5}.
-This is common practice, and a convenience we will indulge in throughout this course.
-What matters is that such indulgences don't lead to real ambiguities and that, as a result, it is always possible and easy to reconstruct the intended claim.
-
-% TODO: transition to corner quotes
-
-This is all very pedantic, but it is important if our definition of a wfs is going to do what we want it to do.
-Nevertheless, once we have understood what is at stake, and have provided a cleaned up version of our definition of a wfs, we may go right back to speaking of $\enot \metaA{}$ as if it were a wfs and doing something similar for the other connectives. 
-The reason that we can get away with this is that it is easy to reconstruct what we had in mind: what we \textit{really} mean to say is that given any value for $\metaA{}$ (i.e., some wfs), the result of concatenating `$\enot$' with that value is also a wfs.
-Instead of saying all of this, we may indulge in some loose talk by saying that $\enot \metaA{}$ is a wfs, claiming that $\enot \metaA{}$ is a wfs. 
-Given this important caveat, we may make use of the original definition of a wfs, bearing in mind what it is that we really intend.
+% This is all very pedantic, but it is important if our definition of a wfs is going to do what we want it to do.
+% Nevertheless, once we have understood what is at stake, and have provided a cleaned up version of our definition of a wfs, we may go right back to speaking of $\enot \metaA{}$ as if it were a wfs and doing something similar for the other connectives. 
+% The reason that we can get away with this is that it is easy to reconstruct what we had in mind: what we \textit{really} mean to say is that given any value for $\metaA{}$ (i.e., some wfs), the result of concatenating `$\enot$' with that value is also a wfs.
+% Instead of saying all of this, we may indulge in some loose talk by saying that $\enot \metaA{}$ is a wfs, claiming that $\enot \metaA{}$ is a wfs. 
+% Given this important caveat, we may make use of the original definition of a wfs, bearing in mind what it is that we really intend.
 
 
 
 \subsection{Conventions for Arguments}
-  \label{sub:QuoteArguments}
+  \label{sub.QuoteArguments}
 
-One of the main purposes of using $\PL$ is to study arguments, and that will be our concern in chapter \ref{ch.TruthTables}.
+One of the main purposes of using $\PL$ is to study arguments.
 In English, the premises of an argument are often expressed by individual sentences, and the conclusion by a further sentence.
-Since we can regiment English sentences in $\PL$, we can also regiment English arguments using $\PL$ by regiment each of the sentences used in an English argument.
-However, $\PL$ itself has no way to flag some sentences as the \emph{premises} and another sentence as the \emph{conclusion} of the argument.
-In contrast, English uses words like `so', `therefore', etc., to mark that a sentence is the conclusion of an argument.
+Since we can regiment English sentences in $\PL$, we can also regiment English arguments using $\PL$ by regimenting each of the sentences used in an English argument.
+Sometimes English arguments run all the sentences together where clarity is helped by dividing things up when we go about giving our regimentation.
+Even so, $\PL$ itself has no way to flag some sentence as the conclusion and the other sentences as the premises.
+By contrast, English uses words like `so', `therefore', etc., to mark which sentence is the conclusion.
 
 %An obvious thought would be to add a new symbol to the \emph{object} language of $\PL$ itself, which we could use to separate the premises from the conclusion of an argument. However, adding a new symbol to our object language would add significant complexity to that language, since that symbol would require an official syntax.\footnote{\emph{The following footnote should be read only after you have finished the entire book!} And it would require a semantics. Here, there are deep barriers concerning the semantics. First: an object-language symbol which adequately expressed `therefore' for $\PL$ would not be truth-functional. (\emph{Exercise}: why?) Second: a paradox known as `validity Curry' shows that FOL itself \emph{cannot} be augmented with an adequate, object-language `therefore'.} 
 
-So, we need another bit of notation. Suppose we want to regiment the premises of an argument with $\metaA{}_1$, \dots,~$\metaA{}_n$ and the conclusion with $\metaC{}$. Then we will write:
-$$\metaA{}_1, \ldots, \metaA{}_n \; \therefore \; \metaC{}$$
-The role of the symbol `$\therefore$' is simply to indicate which sentences are the premises and which is the conclusion.
-Strictly speaking, this extra notation is unnecessary.
-After all, we could always just write things down long-hand, saying: the premises of the argument are well symbolised by $\metaA{}_1, \ldots \metaA{}_n$, and the conclusion of the argument is well symbolised by $\metaC{}$.
-But having some convention will save us some time.
-The particular convention we chose was fairly arbitrary.
-After all, an equally good convention would have been to underline the conclusion of the argument.
-Even so, this is not the convention that we will use.
+In Chapter \ref{ch.introduction}, we specified that we will arrange arguments so that the conclusion is the final sentence, separating the premises with a horizontal line.
+Although we will maintain this convention below, it is worth emphasizing that $\PL$ does not include any such horizontal lines. 
+Rather, these presentational details are taking place in the metalanguage in order to help us specify which sentences are the premises and conclusion.
+Nevertheless, this convention has the downside that it makes use of vertical space, and so cannot be present in line.
+Thus it will occasionally be helpful to use the symbol `$\therefore$' in order to indicate that what follows is the conclusion. 
+For instance, suppose we want to regiment an argument with the premises and conclusion with $\metaB$.
+We may write `$\metaA_1, \ldots, \metaA_n \; \therefore \; \metaB$' without breaking the paragraph.
 
-It is important to stress that, like the metavariables, the symbol `$\therefore$' will not be a part of the object language $\PL$, but rather a part of the metalanguage.
-As such, one might think that we would need to put quote-marks around the $\PL$-sentences which flank it.
-That is a sensible thought, but adding these quote-marks would make things harder to read.
-Moreover--- and as above--- recall that \emph{we} are stipulating some new conventions.
-So, we can simply stipulate that these quote-marks are unnecessary.
-That is, we can simply write
-$$A, A \eif B \; \therefore \; B$$
-without any quotation marks, to indicate an argument in $\PL$ whose premises are `$A$' and `$A \eif B$' and whose conclusion is `$B$'.
-It can take some practice for these conventions to sink into place.
-The problem sets will provide an opportunity, but don't limit your practice to the problem sets alone.
-Below are a number of further practice problems for the chapter.
+% The role of the symbol `$\therefore$' is simply to indicate which sentences are the premises and which is the conclusion.
+% Strictly speaking, this extra notation is unnecessary.
+% After all, we could always just write things down long-hand, saying: the premises of the argument are well symbolised by $\metaA{}_1, \ldots \metaA{}_n$, and the conclusion of the argument is well symbolised by $\metaC{}$.
+% But having some convention will save us some time.
+% The particular convention we chose was fairly arbitrary.
+% After all, an equally good convention would have been to underline the conclusion of the argument.
+% Even so, this is not the convention that we will use.
 
-
-
-
-
-
+Since the symbol `$\therefore$' belongs to the metalanguage not $\PL$, one might think that we would need to put quotes around the $\PL$-sentences which flank it, referring to the result as an argument with $\PL$ sentences.
+That is a sensible thought, but adding these quotes would only make things more cumbersome and rather than easier to read.
+While we are stipulating conventions, we can simply stipulate that quotes around arguments are unnecessary.
+For instance, we may say that $A, A \eif B \; \therefore \; B$ is an argument in $\PL$ whose premises are $A$ and $A \eif B$ and whose conclusion is $B$, leaving the quotes off for ease.
 
 
 

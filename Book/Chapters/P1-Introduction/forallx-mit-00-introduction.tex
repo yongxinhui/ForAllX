@@ -8,6 +8,9 @@
 Logic is the study of \textit{formal reasoning}, that is, what follows from what in virtue of logical form.
 % By `formal' we don't just mean that we will be using mathematical symbols, although we will.
 % After all, mathematics, physics, and many other fields use mathematical symbols, but that doesn't make all of those fields logic.
+Although the reasoning that we will be concerned with will include mathematical symbols, the choice of symbols is arbitrary, and so this is not the sense of formality at issue.
+After all, many fields engage in reasoning with mathematical looking symbols but we will not be concerned to describe all of what goes on in reasoning in those fields.
+
 There are of course many other ways to reason besides the manner we will be concerned with in this book.
 In order to characterize the subject-matter of logic, this chapter will contrast formal reasoning with a number of other common types of reasoning.
 This will provide a theoretical target which subsequent chapters will describe first \textit{semantically} and then \textit{syntactically}, proving that these two accounts describe the same thing.
@@ -29,11 +32,11 @@ The premises of an argument aim to provide \textit{reasons for taking the conclu
 For instance, even if we don't know whether A1 and A2 are true, we may admit that if A1 and A2 are both true, then the conclusion A3 is also true.
 % Put otherwise, the conclusion (3) follows from the premises (1) and (2) by virtue of the logical form of this argument.
 
-Since not all arguments in English take such explicit forms as the argument above, part of what we will be concerned with is regimenting arguments in English by translating them into a formal language.
+Since not all arguments in English take such explicit forms as the argument above, part of what we will be concerned with is regimenting arguments in English by translating them into an artificial formal language.
 Although there is often more than one way to regiment an argument stated in English, once an argument has been regimented in a formal language, no further ambiguity remains as to how to evaluate that formalized argument.
 An important first step in this process is to identify the premises and conclusion, writing them as a numbered list where the conclusion occurs on the last line with a line separating it from the premises.
 
-In the following chapter, we will introduce the syntax of a formal language.
+In the course of this book, we will introduce the syntax for the formal languages $\PL$ and $\FOL$.
 For the time being, this chapter will restrict consideration to arguments in English written in premise-conclusion form.
 In the case of the argument above, we may observe that believing the premises provides a strong reason to believe the conclusion independent of whether we happen to believe the premises or not.
 Of course, not all arguments succeed in providing such strong support for their conclusions.
@@ -91,10 +94,10 @@ Put otherwise, the conclusion in this final argument is not a purely logical con
 Whereas later chapters will carefully define what it is for a sentence to be a logical consequence of a set of sentences in formal languages, the remainder of the present chapter will focus on characterizing an informal analogue for arguments in English.
 These considerations will provide an intuitive conception of what it is for a conclusion to follow as a matter of logic from some number of premises, motivating the study of the formal languages with which we will be concerned.
 
-In addition to providing a means by which to resolve the ambiguities of natural language, regimenting English arguments in formal languages will provide a crisp account of their logical form.
+In addition to providing a means by which to resolve the ambiguities of natural language, regimenting English arguments in formal languages will provide an account of their logical form.
 % Roughly speaking, you can think of the logical form of an argument as the mechanisms by which logical consequence is conveyed.
 As we will see, much will turn on the expressive power of our formal languages since the conclusion of an argument in English may be a logical consequence of its premises when regimented in one formal language but not in another.
-Whereas this book will focus attention on three formal languages, this is no stopping point but rather a place to begin.
+Whereas this book will introduce certain formal languages, this is not a stopping point but rather a place to begin.
 
 
 
@@ -106,9 +109,9 @@ Whereas this book will focus attention on three formal languages, this is no sto
 A crucial part of analyzing an argument is identifying its conclusion.
 Every argument has a conclusion--- the conclusion is the claim the argument aims to establish.
 Premises are starting-points, used to lend support to the conclusion.
-Often, the conclusion will be signified by words like `so' or `therefore'.
+In English, the conclusion is often signified by words like `so' or `therefore'.
 Premises might be marked by words like `because'.
-These words can give a clue as to just what the argument is supposed to be.
+These words can provide some clue as to just what the argument is supposed to be.
 
 \begin{description}
   \item[Premise indicators:] `since', `because', `given that'
@@ -121,7 +124,8 @@ Since arguments in which the conclusion does not occur at the end may be rearran
 % Let's define (a slightly technical notion of) an \define{argument} as a sequence of sentences.
 % The sentences at the beginning of the sequence are premises.
 % The final sentence in the sequence is the conclusion.
-For instance, in a single sentence, one might argue that, ``People often get wet in Cambridge because it often rains in Cambridge and people get wet when it rains,'' rearranging this argument as follows:
+For instance, in a single sentence, one might argue that, ``People often get wet in Cambridge because it often rains in Cambridge and people get wet when it rains.''
+We may then We may then rearranging this argument as follows:
 
 \begin{earg}
   \eitem{People get wet when it rains.}
@@ -192,14 +196,14 @@ The `Ouch' does not add anything that could be true or false, and so will simply
 % TODO: add consideration of the interpretation when introducing 'expresses'
 % TODO: since we will only be concerned with whether a proposition obtains or not, we may model the space of propositions by just two propositions, one which obtains and one which does not
 
-In contrast to the types of sentences mentioned above, declarative sentences are used to describe \textit{ways for some particular things to be} which we may refer to as \define{propositions}.
+In contrast to the types of sentences mentioned above, declarative sentences are used to describe \textit{ways for some particular things to be} which we will refer to as \define{propositions}.
 Put otherwise, declarative sentences are used to \textit{express} propositions, where the very same proposition may be expressed in many different ways by different sentences in different languages.
 For instance, the English sentence `snow is white' expresses the same proposition as the German sentence `Schnee ist wei\ss'.
 Both express the proposition that snow is white.
 
 For our purposes, the defining feature of a proposition is that it either \textit{obtains} or it does not.
 For instance, suppose that Kat is sitting down.
-The proposition that Kat is sitting down is a thing--- namely Kat--- being a certain way, i.e., sitting down.
+The proposition that Kat is sitting down is a thing (a person)--- namely Kat--- being a certain way, i.e., sitting down.
 Given our supposition, the proposition that Kat is sitting down obtains.
 Similarly, we may suppose Tsovinar is not singing, and so the proposition that Tsovinar is signing does not obtain.
 Despite failing to obtain, the proposition that Tsovinar is signing is a way for things to be all the same--- i.e., Tsovinar singing--- it is just that things are not in fact that way.
@@ -211,8 +215,13 @@ Whereas a proposition is a way for some things to be which may either obtain or 
 For instance, supposing that that Kat is sitting down--- i.e., the proposition that Kat is sitting down obtains--- the sentence `Kat is sitting down' is true.
 More generally, a declarative sentences in English is true on an interpretation if it expresses a proposition that obtains, and false otherwise.
 The \define{truth-value} of a declarative sentence is either the value `True' or `False' depending on whether the proposition that sentence expresses happens to obtain.
-The present investigation belongs to classical logic insofar as we will restrict consideration to sentences which are either true or false and not both.
-Once we introduce a formal language, it will be convenient to use `1' in place of `True' and `0' in place of `False'.
+
+Given that we will only be concerned with whether a proposition obtains or not, we may make the simplifying assumption that there are only two proposition: \define{truth} which obtains and \define{falsity} which does not.
+Simpler still, we may ignore talk of propositions altogether by focusing on the corresponding truth-values of the sentences of our languages, using `$1$' in place of `True' and `$0$' in place of `False'.
+More specifically, we will interpret the sentences of our various languages by assigning them truth-values, ignoring any further differences that may occur between the propositions that those sentences may express on an interpretation.
+The present investigation belongs to classical logic insofar as we will restrict consideration to sentences which are either true or false and never both at once.
+
+% TODO: equivalent to just two propositions
 
 % Of course, there are many other types of sentences in English that do not have truth-values.
 % For instance, commands like `Shut the door', 
@@ -229,7 +238,7 @@ Think of sentences such as `Almonds are yummy' or `The U.S.\ invasion of Iraq wa
 In an argument, we can assign a truth-value to such sentences, even if one might be skeptical that they have a truth-value independent of any subject.
 We will handle these sentences just like sentences which have objective truth-values such as the sentence, `Tsovinar is signing'.
 Indeed, often what is at stake in our more interesting arguments is whether various normative or evaluative claims are true or false.
-So clearly, we have \textit{some} way of reasoning about such sentences using truth-values where this is all that we will aim to describe.
+So clearly, we have \textit{some} way of reasoning about such sentences using truth-values where this is all that we will aim to describe here.
 What else there is to say about normative and evaluative sentences is beyond the scope of this course.
 
 %Ichikawa: Don't confuse the idea that a sentence can be true or false with the difference between fact and opinion. Often, sentences in logic will express things that would count as facts --- such as `Kierkegaard was a hunchback' or `Kierkegaard liked almonds.' They can also express things that you might think of as matters of opinion --- such as, `Almonds are yummy' or `the U.S.\ invasion of Iraq was unjustified'. These are all examples of things that are either true or false.
@@ -237,7 +246,7 @@ What else there is to say about normative and evaluative sentences is beyond the
 
 It is also important to keep clear the distinction between truth and knowledge.
 Although a declarative sentence is the kind of thing that can be true or false, this does not mean that we will always be in a position to know whether it is true or false.
-For example, assuming a clear account of what it is to be a human to be provided, the sentence, `There are an even number of humans on Earth right now' may be taken to have a truth-value even though it would be virtually impossible to determine.
+For example, assuming a clear account of what it is to be a human to be provided, the sentence, `There are an even number of humans on Earth right now' may be taken to have a truth-value even though it would be virtually impossible to determine.\footnote{There are other concerns to do with vagueness which we will also ignore.}
 Similarly, there are many controversies where people disagree about what is true or false, and it very hard to settle the debate.
 However, for the sake of an argument, we may treat controversial premises as true in order to see what follows as a result without committing ourselves to these assumptions.
 % JH: not sure about the humans example. There are issues of vagueness regarding both conjoined twins and also when humans come into existence (e.g. at what point does a baby have to exit the womb? do late-stage fetuses count as babies and if so when)
@@ -312,7 +321,7 @@ Consider the following argument:
 \end{earg}
 
 Here too the premises strictly imply the conclusion since there is no possibility in which the premises are true and the conclusion is false.
-However, unlike the previous arguments, we do not need to know what `Socrates', `man', or `mortal' mean.
+However, unlike the previous arguments, we do not need to know what `Socrates', `man', or `mortal' each mean.
 In order to get a sense of this, let's consider one more argument:
 
 \begin{earg}
@@ -323,9 +332,9 @@ In order to get a sense of this, let's consider one more argument:
 
 Even without knowing who Gyre is, anything about mome raths, or what it is to be slithy, we may say with equal certainty that it is not possible for the premises to be true and the conclusion false.
 In fact we can say more than this: there is no \textit{interpretation} of the premises and conclusion where the former are true and the latter is false.
-So what's an interpretation?
+% So what's an interpretation?
 
-We will provide a precise definition of what an interpretation is when we set up semantic theories for the languages that we will study throughout this book (chapters $\ref{ch.PL-semantics}$, $\ref{ch.FOL.Consequence}$, and $\ref{ch.Identity}$).
+We will provide a precise definition of what an interpretation is when we set up semantic theories for the languages that we will study throughout this book (chapters $\ref{ch.PL-semantics}$, $\ref{ch.FOL-semantics}$, and $\ref{ch.Identity}$).
 For the time being, it will help to get some sense of an informal analogue with which we are already familiar.
 To do so, let's return to the gold argument from before.
 
@@ -335,7 +344,7 @@ Who could argue with that?
 
 Although no one should balk at the gold argument given the normal interpretation of its sentences--- what is often called the \textit{intended interpretation}--- the same cannot be said if we entertain unintended interpretations.
 For instance, suppose we were to take `gold' to mean what `carbon' means in the intended interpretation, that is: carbon.
-What the premise means on this unintended interpretation could equally be said by an intended interpretation of the sentence `The gold atom is carbon'.
+What the premise mean on this unintended interpretation could equally be said by an intended interpretation of the sentence `The gold atom is carbon'.
 Since carbon only has 6 protons and not 79, the conclusion is false when the premise is true on this unintended interpretation.
 But why should we care about unintended interpretations?
 Shouldn't we restrict attention to just the intended interpretations of our sentences that we are accustomed to using?
@@ -428,7 +437,7 @@ Schematic variables allow us to talk about the sentences of a language but they 
 Rather $\metaA$, $\metaB$, and $\metaC$ have sentences as \textit{values}.
 It is helpful to compare the use of variables like `$x$' in mathematics.
 The symbol `$x$' is used to stand for a number but `$x$' is not itself a name for a number the way that `2' is a name for the number two.
-We'll return to this distinction in \S\ref{sec:sentencesofSL}, and again later on when we discuss proving general facts the formal languages and proof systems introduced below.
+We'll return to this distinction in Chapter \ref{ch.PL-syntax}, and again later on when we discuss proving general facts the formal languages and proof systems introduced below.
 
 Without introducing any notation beyond schematic variables for sentences, we may represent the logical form of the previous argument as follows:
 
@@ -447,8 +456,8 @@ We will introduce more elegant representations of these logical constants in the
 Until then, it is worth considering whether we can identify an argument schema for the Socrates argument in the very same way as in the raining argument.
 % Yes, but we need more than schematic variables to do so.
 
-Suppose that we were to maintain our restriction to schematic variables from before.
-The plan is to replace sentences with variables and try to recover an argument schema just like we did before.
+Suppose that we were to maintain our restriction to schematic variables for sentences from before.
+The plan is to replace sentences with variables and try to recover an argument schema just like we did previously.
 Since `Socrates is a man' is a sentence and doesn't have any parts that are also sentences, it is an \define{atomic sentence}, and so all we can do is replace it with a variable.
 Let's choose `$\metaA$'. 
 We find something similar for the second premise `Every man is mortal'.
@@ -508,6 +517,7 @@ Moreover, O2 is true no matter how you interpret `It is hot outside', and so O2 
 Accordingly, O2 is a \define{logical truth}, or what is also called a \define{tautology}.
 By contrast, sentence O3 is false on all interpretations, and so is referred to as \define{logically false} or a \define{contradiction}.
 In particular, you do not need to know what John is up to, or know how to interpret the sentence `John is sitting down' in order to know that O3 is false.
+% TODO add contingent definition for English sentences here to mirror def for PL later
 
 % I said above that a contingent sentence could be true on some interpretations and false on others.
 % We can also define contingency in terms of tautologies and contradictions thus: a \define{contingent sentence} is a sentence that is neither a tautology nor a contradiction.
@@ -528,7 +538,7 @@ Put otherwise, P1 \define{logically entails} P2.
 Whereas logical consequence related zero or more premises two a single conclusion, logical entailment relates exactly two sentences.
 Nevertheless, one sentence logically entails another just in case the latter is a logical consequence of the former.
 
-When two sentences logically entail each other, those sentences are said to be logically equivalent.
+When two sentences logically entail each other, those sentences are said to be \define{logically equivalent}.
 For instance, consider the following sentences:
 
 \begin{earg}
@@ -536,7 +546,7 @@ For instance, consider the following sentences:
   \eitem{If Sunil did not wash the dishes, then he did not go to the store.}
 \end{earg}
 
-Not only does Q1 logically entail Q2 but Q1 is also logically entailed by Q2
+Not only does Q1 logically entail Q2 but Q1 is also logically entailed by Q2.
 It follows that Q1 and Q2 have the same truth-value in all interpretations.
 For contrast, consider:
 
@@ -583,7 +593,7 @@ Here is another concrete example of a satisfiable set of sentences:
 
 \begin{earg}
   \eitem{The Earth has more than one moon.}
-  \eitem{Jupiter doesn't have any moons}
+  \eitem{Jupiter has exactly one moon.}
 \end{earg}
 
 Even though both of the sentences above are false on the intended interpretation, the set of sentences $\set{\text{T1}, \text{T2}}$ is satisfiable on account of the existence of an interpretation in which both sentences are true.

@@ -1,0 +1,257 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{../lecture} %calls local modified style file
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs} %%Math packages
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep={}}
+
+\makeatletter
+\renewcommand{\maketitle}{
+\begin{flushright}
+{\LARGE\@title}
+
+\vspace{10pt}
+
+{\@author}
+\\ \@date
+\end{flushright}
+
+\vspace{0pt}
+
+}
+\makeatother
+
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Regimentation}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+\section*{From Last Time\ldots}
+
+\begin{itemize}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Definitions:] Here is slightly different take on the same definitions:
+  \item[\it Well-Formed Sentences:] The set \textsc{wfss} of $\PL$ is the smallest set to satisfy:
+    \item $\metaA$ is a wfs of $\PL$ if $\metaA$ is a sentence letter of $\PL$;
+    \item $\neg\metaA$ is a wfs of $\PL$ if $\metaA$ is a wfs of $\PL$;
+    \item $(\metaA\eand\metaB)$ is a wff of $\PL$ if $\metaA$ and $\metaB$ are wfss of $\PL$;
+    \item $(\metaA\eor\metaB)$ is a wff of $\PL$ if $\metaA$ and $\metaB$ are wfss of $\PL$;
+    \item $(\metaA\eif\metaB)$ is a wff of $\PL$ if $\metaA$ and $\metaB$ are wfss of $\PL$; 
+    \item $(\metaA\eiff\metaB)$ is a wff of $\PL$ if $\metaA$ and $\metaB$ are wfss of $\PL$.
+  \item[\it Semantics:] For an interpretation $\I$, a \textsc{valuation} function $\V{\I}$ is the smallest function to assign truth-values to every sentence of SL that satisfies the semantic clauses:
+    \item $\V{\I}(\metaA)=\I(\metaA)$ if $\metaA$ is a sentence letter of $\PL$.
+    \item $\V{\I}(\neg\metaA)=1$ iff $\V{\I}(\metaA)=0$~~ (i.e., $\V{\I}(\metaA)\neq 1$).
+    \item $\V{\I}(\metaA \eand \metaB)=1$ iff $\V{\I}(\metaA)=1$ and $\V{\I}(\metaB)=1$.
+    \item $\V{\I}(\metaA \eor \metaB)=1$ iff $\V{\I}(\metaA)=1$ or $\V{\I}(\metaB)=1$ (or both).
+    \item $\V{\I}(\metaA \eif \metaB)=1$ iff $\V{\I}(\metaA)=0$ or $\V{\I}(\metaB)=1$ (or both).
+    \item $\V{\I}(\metaA \eiff \metaB)=1$ iff $\V{\I}(\metaA)=\V{\I}(\metaB)$.
+  \item[\bf Observe:] Observe the symmetry between the above.
+  \item[\it Recall:] The hierarchy of sentences from before\ldots
+\end{itemize}
+
+
+
+
+\section*{Complexity}
+
+\begin{itemize}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Complexity:] $\comp{\metaA}$ is the smallest function to satisfy all of the following conditions for all wfss $\metaA$ and $\metaB$ of $\PL$: 
+    \item $\comp{\metaA} = 0$ if $\metaA$ is a sentence letter; 
+    \item $\comp{\enot\metaA} = \comp{\metaA} + 1$; 
+    \item $\comp{\metaA \eand \metaB} = \comp{\metaA} + \comp{\metaB} + 1$; 
+    \item $\ldots$
+  \item[\bf Question:] Do we need to include corner quotes?
+\end{itemize}
+
+
+
+
+\section*{Validity}
+
+\begin{itemize}[leftmargin=1.2in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it $\PL$ Validity:] An argument in SL is \textit{valid} iff its conclusion is a logical consequence of its premises.
+  \item[\it English Validity:] An argument in English is \textit{valid} iff it has a (faithful) regimentation (in some language) that is valid.
+    \item Note the imprecision here; there is no avoiding this.
+  \item[\it Soundness:] An argument is \textit{sound} iff it is valid and has true premises (on an interpretation we care about, probably the intended interpretation).
+\end{itemize}
+
+
+
+
+
+\section*{Examples}
+
+
+\subsection*{\it \textbf{Rain}}
+
+\begin{enumerate}
+  \eitem{If it is raining on a week day, Sam took his car.}
+  \eitem{Kate borrowed Sam's car only if Sam did not take it.}
+  \eitem{Kate borrowed Sam's car just in case she visited her parents.}
+  \uitem{It is raining and Kate visited her parents.}
+  \eitem{Either it is not a week day or it is not raining.}
+\end{enumerate}
+
+\noindent
+\textbf{Task 2:} Regiment this argument and construct its truth table.
+\vspace{.05in}
+
+\noindent
+\textit{Observe:} This argument can be adequately regimented and evaluate in SL.
+
+
+
+
+
+
+\section*{Negation}
+
+\subsection*{\it \textbf{Uninitiated}}
+
+\begin{earg}
+  \eitem{If Sam attended the gathering, then he has been initiated.}
+  \uitem{Sam is uninitiated.}
+  \eitem{Sam did not attend the gathering.}
+\end{earg}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  % \item[\bf Task:] Regiment this argument and construct its truth table.
+  \item[\bf Observe:] Being uninitiated is the same as not being initiated.
+\end{itemize}
+
+
+
+
+
+\subsection*{\it \textbf{Uninvited}}
+
+\begin{earg}
+  \uitem{Arden is not invited.}
+  \eitem{Arden is uninvited.}
+\end{earg}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\bf Observe:] Arden can fail to be invited without being uninvited.
+  \item[\bf Question:] What about the converse?
+\end{itemize}
+
+
+
+\section*{Disjunction}
+
+\subsection*{\it \textbf{Party}}
+
+\begin{earg}
+  \uitem{If Adi or James make it to the party, Isa will be happy. }
+  \eitem{If Adi and James make it to the party, Isa will be happy. }
+\end{earg}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\bf Observe:] This argument suggests an inclusive reading of `or'.
+\end{itemize}
+
+
+
+
+
+\subsection*{\it \textbf{Race}}
+
+\begin{earg}
+  \eitem{Sasha won the 100 meter dash. }
+  \uitem{Josh won the high jump. }
+  \eitem{Either Sasha won the 100 meter dash or Josh won the high jump}
+\end{earg}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\bf Observe:] We could strengthen the conclusion.
+\end{itemize}
+
+
+
+
+
+\subsection*{\it \textbf{Vault}}
+
+\begin{earg}
+  \eitem{If Kin uses the remote, the trunk will open. }
+  \eitem{If Yu tries the handle, the trunk will open.}
+  \uitem{If Kin uses the remote and Yu tries the handle, the trunk won't open.}
+  \eitem{If Kin uses the remote or Yu tries the handle, the trunk will open. }
+\end{earg}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\bf Observe:] We cannot regiment the conclusion with inclusive-`or'.
+  \item[\bf Question:] Can we salvage the validity of this argument?
+\end{itemize}
+
+
+
+
+
+\section*{Conjunction}
+
+\subsubsection*{\it \textbf{Exam}}
+
+\begin{earg}
+  \uitem{Henry failed and Megan passed.}
+  \eitem{Megan passed and Henry failed.}
+\end{earg}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\bf Observe:] Perfectly adequate and valid regimentation.
+\end{itemize}
+
+
+
+
+\subsubsection*{\it \textbf{Gym}}
+
+\begin{earg}
+  \uitem{Kate took a shower and went to the gym.}
+  \eitem{Kate went to the gym and took a shower.}
+\end{earg}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\bf Observe:] Conjunction in English can track temporal order.
+  \item[\bf Question:] How can we capture the invalidity of this argument in $\PL$?
+\end{itemize}
+
+
+
+
+
+
+
+% \vfill
+%
+% \bibliographystyle{Phil_Review} %%bib style found in bst folder, in bibtex folder, in texmf folder.
+% \bibliography{Zotero} %%bib database found in bib folder, in bibtex folder
+
+
+\end{document}
+
