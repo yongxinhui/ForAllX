@@ -231,7 +231,6 @@ This approach depends on the truth-functionality of the sentential operators.
 % We may then put this method to work to define a \define{tautology} to be any wfs of $\PL$ which is true in every row of its complete truth table, and a \define{contradiction} to be any wfs of $\PL$ which is false in every row of its complete truth table. 
 % Similarly, a wfs of $\PL$ is \define{logically contingent} just in case it is true in at least one row of its complete truth table and false in another row. 
 % Given a complete truth table for a wfs of $\PL$, ther
-
 We may then put this method to work to define a \define{tautology} of $\PL$ to be any sentence of $\PL$ whose truth table only has $1$s under its main operator.
 Accordingly, a tautology is a sentence of $\PL$ whose truth does not depend on the particular truth-values of the sentence letters from which it was constructed, but rather follows from the \textit{logical form} of that sentence.
 Similarly, a sentence is a \define{contradiction} in $\PL$ just in case the column under its main operator is $0$ on every row of its complete truth table.
@@ -243,14 +242,32 @@ A sentence is \define{logically contingent} in $\PL$ just in case the column und
 
 \subsection{Logical Entailment and Equivalence}
 
-Two sentences are logically equivalent in English if they have the same truth-value on all interpretations.
-We can now define two sentences to be \define{logically equivalent} in $\PL$ if the truth-values under their main operators are the same on every row of a complete truth table.
-Since the rows of a complete truth table exhaust the different interpretations of the relevant sentence letters, this amounts to requiring the two sentences of $\PL$ to have the same truth-value on every interpretation.
-% TODO this also turns on the equivalence mentioned in the TODO above
+A sentence in English was said to logically entail another just in case the latter is true on any interpretation on which the former is true.
+Two sentences were then said to be logically equivalent in English just in case they logically entail each other, and so have the same truth-value on all interpretations.
+We can now say with greater precision that a sentence of $\PL$ \define{logically entails} another just in case the complete truth table for these two sentences is such that on any row, the latter has a $1$ under its main operator whenever the former has a $1$ on that row under its main operator. 
+Consider the following example:
 
-Consider the sentences $\enot(A \eor B)$ and $\enot A \eand \enot B$.
-Are they logically equivalent? 
-To find out, we construct a composite truth table which includes both sentences.
+\begin{center}
+\begin{tabular}{c|c|@{\TTon}*{2}{c}@{\TToff}|@{\TTon}*{4}{c}@{\TToff}}
+  $A$ & $B$ & $\enot$ & $A$ & $\enot$ & $(A$ & $\eand$ & $B)$ \\
+\hline
+ 1 & 1 & \TTbf{0} & 1 & \TTbf{0} & 1 & 1 & 1 \\
+ 1 & 0 & \TTbf{0} & 1 & \TTbf{1} & 1 & 0 & 0 \\
+ 0 & 1 & \TTbf{1} & 0 & \TTbf{1} & 0 & 0 & 1 \\
+ 0 & 0 & \TTbf{1} & 0 & \TTbf{1} & 0 & 0 & 0 
+\end{tabular}
+\end{center}
+
+Whereas before we only considered truth tables for one wfs at a time, the truth table above interprets two wfs of $\PL$ at once.
+By including a column for all sentence letters contained in either wfs, the complete truth table exhausts all possible combinations of truth-values for the sentence letters upon which the truth of the wfss as a whole depend.
+We may the observe that every row in which $\enot A$ has a $1$ under its main connective is also a row in which $\enot (A \eand B)$ has a $1$ under its main connective, and so $\enot A$ logically entails $\enot (A \eand B)$.
+By contrast, given the second row of truth-values, $\enot (A \eand B)$ does not logically entail $\enot A$.
+% Since the rows correspond to the interpretations of these two sentences, this captures the idea that 
+
+In the special case where two wfs of $\PL$ logically entail each other, we may say that those sentences are \define{logically equivalent}.
+It follows that any two wfs of $\PL$ are logically equivalent just in case the truth-values under their main operators are the same on every row of their complete truth table.
+For instance, consider the sentences $\enot(A \eor B)$ and $\enot A \eand \enot B$.
+In order to find out if they are logically equivalent we may construct their complete truth table:
 
 \begin{center}
 \begin{tabular}{c|c|@{\TTon}*{4}{c}@{\TToff}|@{\TTon}*{5}{c}@{\TToff}}
@@ -263,10 +280,10 @@ $A$&$B$&\enot&$(A$&\eor&$B)$&\enot&$A$&\eand&\enot&$B$\\
 \end{tabular}
 \end{center}
 
-Look at the columns for the main operators: negation for the first sentence, conjunction for the second.
-% On the first three rows, both are 0.
-% On the final row, both are 1.
-Since they match on every row, the two sentences are logically equivalent.
+The columns under the main operators for the two wfs on the right are identical.
+Since the rows of a complete truth table exhaust the different interpretations of the relevant sentence letters, this amounts to requiring the two wfs of $\PL$ to have the same truth-value on every interpretation.
+It is for this reason that the two wfs of $\PL$ are logically equivalent.
+% TODO this also turns on the equivalence mentioned in the TODO above
 
 
 
@@ -275,20 +292,19 @@ Since they match on every row, the two sentences are logically equivalent.
 \subsection{Satisfiability}
 \label{sub:PL-Satisfiability}
 
-In the previous example, a truth table was constructed for two sentences at once.
-More generally, we may take a \define{complete truth table} for a set of sentences $\Gamma$ to be the result of listing each sentence in $\Gamma$ side-by-side on the top right of a table and then completing the table for each sentence in a similar manner to what was described above.
+In the previous example, a truth table was constructed for two wfss of $\PL$ at once.
+More generally, we may take a \define{complete truth table} for a set $\Gamma$ of wfss of $\PL$ to be the result of listing each wfs in $\Gamma$ side-by-side on the top right of a table and then completing the table for each wfs in a similar manner to what was described above.
 
 Recall that a set of sentences in English is satisfiable just in case there is an interpretation which makes them all true.
-Analogously, we may say that a set of sentences in $\PL$ is \define{satisfiable} just in case there is at least one line of a complete truth table including every sentence in the set where every sentences is true, and \define{unsatisfiable} otherwise.
+Analogously, we may wish to say that a set $\Gamma$ of wfss in $\PL$ is \define{satisfiable} just in case there is at least one line of a complete truth table including every wfs in the set where the main operator under every sentence is $1$, and \define{unsatisfiable} otherwise.
 For instance, look again at the truth table above.
-We can see that $\enot(A \eor B)$ and $\enot A \eand \enot B$ are satisfiable, because there is at least one row where both sentences are true.
+We can see that $\set{\enot(A \eor B), \enot A \eand \enot B}$ is satisfiable, because there is at least one row where both sentences are true.
 
-To take another example, we may ask if $A$, $B$, and $\enot A \eand \enot B$ logically satisfiable.
-The answer is `No'.
-If they were, there would be a row where all three sentences are assigned true.
-But examination of the truth table above reveals that there is no such row.
+To take another example, we may ask if the set $\set{A, \enot (A \eor \enot B)}$ is satisfiable.
+Here the answer is `No', where constructing a truth table for the set shows that there is no row in which both sentences are true.
+Thus we may conclude that the set is unsatisfiable.
 
-
+Although the truth table definitions of satisfiability and unsatisfiability are perfectly good for finite sets, a question arises.
 
 
 
