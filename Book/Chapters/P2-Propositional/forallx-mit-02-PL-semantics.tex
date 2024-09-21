@@ -2,8 +2,8 @@
 \chapter{Logical Consequence}
 \label{ch.PL-semantics}
 
-Whereas the previous chapter introduced truth-tables, this chapter will present the truth-table method which provides a decidable procedure for evaluating the validity of arguments in $\PL$.
-Given the (albeit limited) expressive power of $\PL$, this amounts to a formal way of evaluating the natural language arguments that admit of reasonably faithful regimentations in $\PL$.
+Whereas the previous chapter introduced truth tables, this chapter will present the truth table method which provides a decidable procedure for evaluating the validity of arguments in $\PL$.
+Given the (albeit limited) expressive power of $\PL$, this amounts to a mechanical way of evaluating the natural language arguments that admit of reasonably faithful regimentations in $\PL$.
 After reviewing both the advantages and disadvantages of this procedure, the second half of the chapter will present a more versatile alternative.
 
 
@@ -11,31 +11,32 @@ After reviewing both the advantages and disadvantages of this procedure, the sec
 
 \section{Truth-Functional Operators}
 
-Any sentence of $\PL$ that is not a sentence letter is composed of sentence letters together with the sentential operators.
+Any wfs of $\PL$ that is not a sentence letter is composed of sentence letters together with the sentential operators.
 In Chapter \ref{ch.PL-syntax}, we offered truth tables for each operator.
 The fact that it is possible to give truth tables like this is very significant.
 It means that our operators are \define{truth-functional}.
-That is to say, the only thing that matters for determining the truth-value of a given sentence of $\PL$ is the truth-values of its constituent.
-To determine the truth-value of a sentence $\enot A$, the only thing that matters is the truth-value of $A$.
+That is to say, the only thing that matters for determining the truth-value of a given wfs of $\PL$ is the truth-values of its constituent.
+For instance, to determine the truth-value of a sentence $\enot A$, the only thing that matters is the truth-value of $A$.
 % You don't have to know what $A$ means, or where it came from, or what evidence there is for it and what that evidence might depend on.
 Given any interpretation, the truth-value of a negation on that interpretation is a \textit{function} of the truth-value of its negand on that interpretation, and likewise for the other operators.
 
 We are using the same notion of a function that you have probably encountered in mathematics.
 First we may define the \define{cartesian product} $X \times Y$ of the sets $X$ and $Y$ to be the set of all ordered pairs $\tuple{x, y}$ where $x \in X$ and $y \in Y$ which we may write in set-builder notation as $X \times Y \coloneq \set{\tuple{x, y} \mid x \in X, y \in Y}$.\footnote{The `$\coloneq$' symbol signifies that a definition is being provided.}
 A \define{relation} from $X$ to $Y$ is any subset $A \subseteq X \times Y$.
-Given a set called the  $D$ and a set called the $R$, 
-A \define{function} $f: D \to R$ with \define{domain} $D$ and \define{range} $R$ is any relation $f \subseteq D \times R$ where $f(x) = f(y)$ for any $x, y \in D$ where $x = y$. 
+% Given a set $D$ and a set called the $R$, 
+A \define{function} $f: D \to R$ from the \define{domain} $D$ to the \define{range} $R$ is any relation $f \subseteq D \times R$ from $D$ to $R$ where $f(x) = f(y)$ for any $x, y \in D$ where $x = y$. 
 Intuitively, a function from one set to another associates each member of the first set (the domain) with exactly one member of the second set (the range).
-Once the first element is fixed, the function uniquely selects an element of the second set, and so it makes sense to write $f(x)$ for the unique element in the range given any element $x$ in the domain.
-For instance, any given numerical value of $x$, we may unambiguously determine the value of $x^{2}$, and so $f(x)=x^{2}$ is a function.
+Once the first element is fixed, the function uniquely selects an element of the second set.
+Instead of always writing $f(x, y)$, it makes sense to write $f(x) = y$ for the unique element in the range $y$ to which the element $x$ in the domain is mapped.
+For instance, given any numerical value of $x$, we may unambiguously determine the value of $x^{2}$, and so $f(x)=x^{2}$ is a function.
 In the same way, the truth-value of $A$ on an interpretation will unambiguously determine the truth-value of $\enot A$ on that interpretation.
 
 Truth-functionality is not inevitable.
-The syntax of English, for example, permits one to make a new, more complex English declarative sentence by prefixing the phrase `Ted Cruz doesn't care whether' in front of any declarative English sentence.
+The syntax of English, for example, permits one to make a new declarative English sentence by prefixing the phrase `Ted Cruz doesn't care whether' in front of any declarative English sentence.
 In this respect, `Ted Cruz doesn't care whether' is syntactically similar to `$\enot$' in $\PL$: it is a sentential operator, producing new sentences from old. 
-Nevertheless, it is impossible to give a truth-functional characterization of the `Ted Cruz doesn't care whether' operator in English that respects its intuitive meaning in English.
+Nevertheless, it is impossible to give a truth-functional characterization of the operator `Ted Cruz doesn't care whether' in English that respects its intuitive meaning in English.
 If you want to know whether Ted Cruz cares about fixing Texas's electrical grid, it's not enough to know whether anyone is fixing Texas's electrical grid.
-If it is being fixed, he might or might not care.
+If it is being fixed, he might care or he might not.
 If it is not be fixed, again he might care or might not. 
 Thus `Ted Cruz doesn't care whether' is not truth-functional: it operates on more than just the truth-value of its argument. % \footnote{Recall the other meaning that `argument' has from $\S\ref{sec.Bicon}$.}
 By contrast, the sentential operators included in $\PL$ are truth-functional, and it is for this reason that we are able to construct truth tables.
@@ -53,7 +54,7 @@ We then proceed to the next sentence letter (if there is one), following the sam
 Continue this process until all sentence letters in the table have truth-values below them.
 This completes the truth table setup.
 
-In order to assign truth-values to complex sentences, consider the following characteristic truth tables where instead of particular sentence letters, we will use metalinguistic variables:
+In order to assign truth-values to complex sentences, consider the following \define{characteristic truth tables} where instead of particular sentence letters, we will use schematic variables:
 
 \begin{table}[htb]
 \begin{center}
@@ -79,9 +80,9 @@ In order to assign truth-values to complex sentences, consider the following cha
 \label{table.CharacteristicTTs}
 \end{table}
 
-The table above provides a general recipe for calculating truth-values for any sentences \metaA and \metaB, however complex.
+The table above provides a general recipe for calculating truth-values for any sentences $\metaA$ and $\metaB,$ however complex.
 The characteristic truth table for conjunction, for example, gives the truth conditions for any sentence of the form $\metaA\eand\metaB$.
-Even if the conjuncts \metaA and \metaB are complex sentences, the conjunction is true if and only if both \metaA and \metaB are true.
+Even if the conjuncts $\metaA$ and $\metaB$ are complex sentences, the conjunction is true if and only if both $\metaA$ and $\metaB$ are true.
 
 Let's construct a truth table for the complex sentence $(H\eand I)\eif H$.
 We consider all possible combinations of $1$ and $0$ for $H$ and $I$, which gives us four rows.
@@ -101,7 +102,7 @@ So far, all we have done is duplicate the first two columns.
 We have written the $H$ column twice--- once under each $H$--- and the $I$ column once under the $I$.
 
 Now consider the subsentence $H \eand I$ which is a conjunction. 
-Since $H$ and $I$ are both true on the first row, and a conjunction is true when both conjuncts are true, we write a 1 underneath the conjunction symbol.
+Since $H$ and $I$ are both true on the first row and a conjunction is true when both conjuncts are true, we write a 1 underneath the conjunction symbol.
 In the other three rows, at least one of the conjuncts is false, so the conjunction $H \eand I$ is false.
 So we write 0s under the conjunction symbol on those rows:
 \begin{center}
@@ -137,7 +138,7 @@ It is crucial that we have considered all of the possible combinations.
 If we only had a two-line truth table, we could not be sure that the sentence was not false for some other combination of truth-values.
 Since each row of the truth table represents a different way of interpreting the relevant sentence letters $H$ and $I$, each row corresponds to a distinct interpretation of the sentence letters in question. 
 Moreover, every possible combination of truth-values for $H$ and $I$ have been included.
-Since the truth-values of all other sentence letters does not effect the truth-value of the sentence in question, we may conclude that $(H \eand I)\eif H$ is \textit{true in all interpretations} whatsoever.
+Since the truth-values of all other sentence letters do not effect the truth-value of the sentence in question, we may conclude that $(H \eand I)\eif H$ is \textit{true in all interpretations} whatsoever.
 In other words, $(H \eand I)\eif H$ is a \textit{tautology}.
 
 In this example, we have not repeated all of the entries in every successive table, so that it's easier for you to see which parts are new. When actually writing truth tables on paper, however, it is impractical to erase whole columns or rewrite the whole table for every step. Although it is more crowded, the truth table can be written in this way:
@@ -157,7 +158,7 @@ Most of the columns underneath the sentence are only there for bookkeeping purpo
 When you become more adept with truth tables, you will probably no longer need to copy over the columns for each of the sentence letters.
 In any case, the truth-values for the original sentence is given by the column underneath the main logical operator of the sentence which in this case is the column underneath the conditional, marked in \textbf{bold} for clarity.
 
-A \define{complete truth table} has a row for all the possible combinations of 1 and 0 for all of the sentence letters.
+A \define{complete truth table} has a row for all possible combinations of $1$ and $0$ for the sentence letters and the characteristic truth tables have been used to write truth-values below all the operators.
 The size of the complete truth table depends on the number of different sentence letters in the table.
 A sentence that contains only one sentence letter requires only two rows, as in the characteristic truth table for negation.
 This is true even if the same letter is repeated many times, as in the sentence $[(C\eiff C) \eif C] \eand \enot(C \eif C)$.
@@ -177,7 +178,7 @@ $C$ & [( & $C$ & \eiff & $C$ & ) & \eif & $C$ & ]  & \eand & \enot & ( & $C$ &\e
 Looking at the column underneath the main operator, we see that the sentence is false on both rows of the table, and so it is false regardless of whether $C$ is true or false.
 Since the rows of the truth table correspond to the different possible interpretations of the relevant sentence letters, the sentence above is false on all interpretations, and so it is a \textit{contradiction}.
 
-A sentence that contains two sentence letters requires $2^2$ lines for a complete truth table, as in the other characteristic truth tables and the table for $(H \eand I)\eif I$ above.
+A sentence that contains two sentence letters requires $2^2$ lines for a complete truth table as in the other characteristic truth tables and the table for $(H \eand I)\eif I$ above.
 A sentence that contains three sentence letters requires $2^3$ lines.
 For example:
   
@@ -212,9 +213,9 @@ This is a significant limitation of this method.
 \section{Truth Table Definitions}
 \label{sec.usingtruthtables}
 
-Recall from \S\ref{sec-tautologydef} that an English sentence was said to be a tautology just in case it true on all interpretations, a contradiction just in case it is false on all interpretations, and contingent just in case it is true on some interpretations and false on others.
+Recall from \S\ref{sec-tautologydef} that an English sentence was said to be a tautology just in case it is true on all interpretations, a contradiction just in case it is false on all interpretations, and logically contingent just in case it is true on some interpretations and false on others.
 Similarly, an English sentence logically entails another just in case the latter is true on any interpretation on which the former is true, and two English sentences are logically equivalent just in case they logically entail each other and so are true on exactly the same interpretations.
-Even in restricting consideration to truth-values in interpreting the sentences of English, there is no well-defined set of English sentences, and so no corresponding definition of an interpretation as an assignment of every English sentence to a single truth-value.
+Even in restricting consideration to truth-values in interpreting the sentences of English, there is no well-defined set of English sentences, and so no corresponding definition of an interpretation as an assignment of every English sentence to a unique truth-value.
 It is for this reason that we introduced $\PL$ in Chapter $\ref{ch.PL-syntax}$, carefully defining the wfss of $\PL$.
 
 Given the definition of the wfs of $\PL$ together with the characteristic truth tables for the sentential operators of $\PL$, we are now in a position to define the interpretations of $\PL$ in a way that we could not do so for English.
@@ -259,8 +260,8 @@ Consider the following example:
 \end{center}
 
 Whereas before we only considered truth tables for one wfs at a time, the truth table above interprets two wfs of $\PL$ at once.
-By including a column for all sentence letters contained in either wfs, the complete truth table exhausts all possible combinations of truth-values for the sentence letters upon which the truth of the wfss as a whole depend.
-We may the observe that every row in which $\enot A$ has a $1$ under its main connective is also a row in which $\enot (A \eand B)$ has a $1$ under its main connective, and so $\enot A$ logically entails $\enot (A \eand B)$.
+By including a column for all sentence letters contained in either wfs, the complete truth table exhausts all possible combinations of truth-values for the sentence letters upon which the truth of the wfss depend.
+We may the observe that every row in which $\enot A$ has a $1$ under its main operator is also a row in which $\enot (A \eand B)$ has a $1$ under its main operator, and so $\enot A$ logically entails $\enot (A \eand B)$.
 By contrast, given the second row of truth-values, $\enot (A \eand B)$ does not logically entail $\enot A$.
 % Since the rows correspond to the interpretations of these two sentences, this captures the idea that 
 
@@ -271,7 +272,7 @@ In order to find out if they are logically equivalent we may construct their com
 
 \begin{center}
 \begin{tabular}{c|c|@{\TTon}*{4}{c}@{\TToff}|@{\TTon}*{5}{c}@{\TToff}}
-$A$&$B$&\enot&$(A$&\eor&$B)$&\enot&$A$&\eand&\enot&$B$\\
+$A$ & $B$ & $\enot$ & $(A$ & $\eor$ & $B)$ & $\enot$ & $A$ & \eand & \enot & $B$ \\
 \hline
  1 & 1 & \TTbf{0} & 1 & 1 & 1 & 0 & 1 & \TTbf{0} & 0 & 1\\
  1 & 0 & \TTbf{0} & 1 & 1 & 0 & 0 & 1 & \TTbf{0} & 1 & 0\\
@@ -296,37 +297,56 @@ In the previous example, a truth table was constructed for two wfss of $\PL$ at 
 More generally, we may take a \define{complete truth table} for a set $\Gamma$ of wfss of $\PL$ to be the result of listing each wfs in $\Gamma$ side-by-side on the top right of a table and then completing the table for each wfs in a similar manner to what was described above.
 
 Recall that a set of sentences in English is satisfiable just in case there is an interpretation which makes them all true.
-Analogously, we may wish to say that a set $\Gamma$ of wfss in $\PL$ is \define{satisfiable} just in case there is at least one line of a complete truth table including every wfs in the set where the main operator under every sentence is $1$, and \define{unsatisfiable} otherwise.
+Analogously, we may wish to say that a set $\Gamma$ of wfss in $\PL$ is \define{satisfiable} just in case there is a row of a complete truth table including every wfs in the set where the main operator under every sentence is $1$, and \define{unsatisfiable} otherwise.
 For instance, look again at the truth table above.
-We can see that $\set{\enot(A \eor B), \enot A \eand \enot B}$ is satisfiable, because there is at least one row where both sentences are true.
+We see that $\set{\enot(A \eor B), \enot A \eand \enot B}$ is satisfiable, because there is at least one row where both sentences have $1$ under their main operators.
 
 To take another example, we may ask if the set $\set{A, \enot (A \eor \enot B)}$ is satisfiable.
-Here the answer is `No', where constructing a truth table for the set shows that there is no row in which both sentences are true.
-Thus we may conclude that the set is unsatisfiable.
+Here the answer is `No' as the following truth table shows:
 
-Although the truth table definitions of satisfiability and unsatisfiability are perfectly good for finite sets, a question arises.
+\begin{center}
+\begin{tabular}{c|c|@{\TTon}*{5}{c}@{\TToff}}
+$A$ & $B$ & $\enot$ & $(A$ & $\eor$ & $\enot$ & $B)$ \\
+\hline
+\TTbf{1} & 1 & \TTbf{0} & 1 & 1 & 0 & 1 \\
+\TTbf{1} & 0 & \TTbf{0} & 1 & 1 & 1 & 0 \\
+\TTbf{0} & 1 & \TTbf{1} & 0 & 0 & 0 & 1 \\
+\TTbf{0} & 0 & \TTbf{0} & 0 & 1 & 1 & 0 
+\end{tabular}
+\end{center}
+
+Since there is no row in which both of the sentences in the set $\set{A, \enot (A \eor \enot B)}$ have a $1$ under their main operator, we may conclude that the set is unsatisfiable.
 
 
 
-\subsection{Logical Consequence}
+
+\subsection{Logical Consequence and Validity}
 \label{sub:Consequence}
 
 % TODO introduce truth table notion of validity in contrast to informal def as with the other concepts above
 
-It will often be convenient to drop `logically' from `logically valid' and to leave reference to the valuation function corresponding to an interpretation implicit.
-Given these simplifications, it follows by the lights of the first definition of validity that an argument in $\PL$ is valid just in case there is no interpretation $\I$ of $\PL$ in which the premises are true and the conclusion is false.\footnote{Or more completely, it follows that an argument in $\PL$ is valid just in case there is no interpretation $\I$ where $\V{\I}(\metaA)=1$ for every premise $\metaA$ and yet $\V{\I}(\metaB)=1$ for the conclusion $\metaB$.}
-Accordingly, an argument whose premises are unsatisfiable is \textit{vacuously valid} since there is no interpretation $\I$ in which its premises are true, and so trivially no interpretation $\I$ in which its premises are true and its conclusion is false.
-For instance, consider:
+Whereas Chapter $\ref{ch.introduction}$ provided an intuitive definition of logical consequence for the sentences of English, we may now appeal to complete truth tables in order to provide a correlate for $\PL$.
+In particular, a wfs $\metaA$ of $\PL$ is a \define{logical consequence} of a set of wfss $\Gamma$ of $\PL$ just in case every row of a complete truth table for the wfs in $\Gamma$ together with $\metaA$ is such that $\metaA$ has a $1$ under its main operator whenever every sentence in $\Gamma$ has a $1$ under its main operator. 
+We may then say that an argument in $\PL$ with premises $\Gamma$ and conclusion $\metaA$ is \define{valid} just in case the conclusion is a logical consequence of the premises. 
+
+Instead of saying that an English argument is valid by appealing to the interpretations of English, we may say that an argument in English has a $\PL$ regimentation that is valid. 
+Regimenting an English argument in $\PL$ and constructing its complete truth table provides a way to identify the logical features which explain why the argument in English is valid.
+Although there is a precise mathematical definition of validity in $\PL$, the same cannot be said for what does and does not count as a faithful regimentation of the argument.
+Rather, this much remains intuitive, relying on and individual's best judgment.
+In many cases, there may not be a uniquely best regimentation, or indeed any good regimentation at all.
+
+% just in case there is no interpretation $\I$ of $\PL$ in which the premises are true and the conclusion is false.\footnote{Or more completely, it follows that an argument in $\PL$ is valid just in case there is no interpretation $\I$ where $\V{\I}(\metaA)=1$ for every premise $\metaA$ and yet $\V{\I}(\metaB)=1$ for the conclusion $\metaB$.}
+Given any argument in $\PL$ whose premises are unsatisfiable, it follows that the argument is \textit{vacuously valid} since there is no row in a complete truth table for the premises with a $1$ under the main operator of every premise, and so vacuously, every row in a complete truth table in which there is a $1$ under the main operator of every premises also has a $1$ under the main operator for the conclusion.
+For instance, consider the following argument:
     
 \begin{earg}
-  \item[] $\neg A \eand B$
-  \item[] $\enot B$
-  \item[\therefore] $B$
+  \eitem{$\neg A \eand B$}
+  \uitem{$\enot B$ \quad}
+  \eitem{$B$}
 \end{earg}
 
-Is it valid? 
-Ask yourself if there's a way for the two premises to be 1 while the conclusion is 0.
-To check your work, we can construct the following truth table:
+Given the truth table method presented above, it is straightforward to show that the argument is indeed valid.
+In particular, consider the following complete truth table:
 
 \begin{center}
 \begin{tabular}{c|c|@{\TTon}*{4}{c}@{\TToff}|@{\TTon}*{2}{c}@{\TToff}|c}
@@ -340,25 +360,28 @@ To check your work, we can construct the following truth table:
 \end{tabular}
 \end{center}
 
-It is easy to see that there is no row in which the premises are all 1, and so it follows trivially that there are no rows in which the premises are 1 and the conclusion is 0.
+It is easy to see that there is no row in which the premises all have $1$ under their main operators, and so trivially, there is no rows in which the premises all have a $1$ under their main operators and the conclusion has a $0$ under its main operator.
+Put otherwise, every row in which the premises all have $1$ under their main operators--- all zero of them--- is such that the conclusion has a $1$ under its main operator.
 Thus the argument is valid.
-Instead of appealing to the truth table for this argument, we may prove that the argument is valid by assuming that there is an interpretation $\I$ which makes the premises true and the conclusion false. 
-Accordingly $\V{\I}(\enot A \eand B)=\V{\I}(\enot B)=1$ and $\V{\I}(B)=0$.
-It follows by the semantic clause for conjunction that $\V{\I}(B)=1$, and from the semantic clause for negation that $\V{\I}(B)=0$, and so both $\I(B)=1$ and $\I(B)=0$ by the semantic clause for sentence letters.
-This is a contradiction, since $B$ cannot be both true and not true on any given interpretation.
-Thus there is no such interpretation $\I$, and so the argument is valid.
-More generally, any argument with unsatisfiable premises is valid.
 
-It is worth contrasting the case above with the following argument:
+% Instead of appealing to the truth table for this argument, we may prove that the argument is valid by assuming that there is an interpretation $\I$ which makes the premises true and the conclusion false. 
+% Accordingly $\V{\I}(\enot A \eand B)=\V{\I}(\enot B)=1$ and $\V{\I}(B)=0$.
+% It follows by the semantic clause for conjunction that $\V{\I}(B)=1$, and from the semantic clause for negation that $\V{\I}(B)=0$, and so both $\I(B)=1$ and $\I(B)=0$ by the semantic clause for sentence letters.
+% This is a contradiction, since $B$ cannot be both true and not true on any given interpretation.
+% Thus there is no such interpretation $\I$, and so the argument is valid.
+% More generally, any argument with unsatisfiable premises is valid.
+
+It is worth contrasting the example above with the following argument:
 
 \begin{earg}
-\item[] $\enot L \eif (J \eor L)$
-\item[] $\enot L$
-\item[\therefore] $J$
+  \eitem{$\enot L \eif (J \eor L)$}
+  \uitem{$\enot L$ \quad}
+  \eitem{$J$}
 \end{earg}
 
-It is good practice to consult your intuitions in evaluating arguments before beginning to compute its truth table.
-Once you have a guess about its validity, consider the following:
+It is good practice to consult your intuitions about whether an argument is valid before beginning to complete its truth table.
+For instance, without looking any further, consider whether the argument above is valid.
+Once you have a guess we may construct the following:
 
 \begin{center}
 \begin{tabular}{c|c|@{\TTon}*{6}{c}@{\TToff}|@{\TTon}*{2}{c}@{\TToff}|@{\TTon}c@{\TToff}}
@@ -372,22 +395,24 @@ $J$&$L$&\enot&$L$&\eif&$(J$&\eor&$L)$&\enot&L&J\\
 \end{tabular}
 \end{center}
 
-To determine whether the argument is valid, check to see whether there are any rows on which both premises are assigned 1, but where the conclusion is assigned 0.
-Notice that unlike the previous argument, there is a row in which both premises are 1.
-Nevertheless, the only row in which both the premises are 1 is the second row, and in that row the conclusion is also 1.
-So the argument is valid in $\PL$, though it is not vacuously valid as before.\footnote{Can you use the semantics to prove that the argument is valid in the style presented above?}
+To determine whether the argument is valid, check to see whether there are any rows on which both premises have a $1$ under their main operators, but the conclusion has a $0$ under its main operator.
+Notice that unlike the previous argument, there is a row in which both premises have a $1$ under their main operators.
+Nevertheless, the only row in which both the premises have a $1$ under their main operators is the second row, and in that row the conclusion also has a $1$ under its main operator.
+It follows that the argument is valid in $\PL$, though it is not vacuously valid as before.
+Rather, vacuous validity is a special case.
 
 Here is another example.
-Is this argument valid?
-Again, try to think about it first.
+Is the following argument valid?
+Try to check intuitively first.
 
 \begin{earg}
-\item[] $P \eif Q$
-\item[] $\enot P$
-\item[\therefore] $\enot Q$
+  \eitem{$P \eif Q$}
+  \uitem{$\enot P$ \quad}
+  % \eitem{$\enot Q \eif (Q \eif Q)$}
+  \eitem{$\enot Q$}
 \end{earg}
 
-To evaluate it, construct a truth table and check whether there is a row that assigns 1 to the premises and 0 to the conclusion:
+% We may now evaluate the validity of the argument, by constructing a complete truth table: % and check whether there is a row that assigns 1 to the premises and 0 to the conclusion:
 
 \begin{center}
 \begin{tabular}{@{ }c@{ }@{ }c | c@{ }@{ }c@{ }@{ }c@{ }@{ }c@{ }@{ }c | c@{ }@{ }c | c@{ }@{ }c}
@@ -400,181 +425,256 @@ $P$ & $Q$ &  & $P$ & $\eif$ & $Q$ &  & $\enot$ & $P$ & $\enot$ & $Q$\\
 \end{tabular}
 \end{center}
 
-On the third row, the premises are true and the conclusion is false.
-Thus the argument is invalid in $\PL$.
-We may establish much the same by taking $\I$ to be an interpretation of $\PL$ which makes the premises true and the conclusion false. 
-Thus $\V{\I}(P \eif Q)=\V{\I}(\enot P)=1$ and $\V{\I}(\enot Q)=0$. 
-By the semantic clause for negation we know that $\V{\I}(P)=0$ and $\V{\I}(Q)=1$, and so $\I(P)=0$ and $\I(Q)=1$ by the semantic clause for sentence letters.
-Moreover, this is perfectly satisfiable with $\V{\I}(P \eif Q)=1$.
-Accordingly, any interpretation $\I$ in which $\I(P)=0$ and $\I(Q)=1$ where the truth-values of all other sentence letters are arbitrary counts as a counterexample to the validity of the argument above. 
+On the third row, each premise has a $1$ under its main operator but the conclusion does not, and so the argument is invalid: the conclusion is not a logical consequence of its premises.
 
-Taking the truth-values of the sentence letters that do not occur in a given argument to be arbitrary is akin to simply ignoring all other sentence letters as we do in constructing complete truth tables for arguments.
-Although the functional definition of an interpretation and valuation provides an elegant account of validity in $\PL$, evaluating sentences and arguments by constructing truth tables provides a simple mechanical procedure that is easy to employ.
-For this reason, the remainder of this chapter will focus on constructing truth tables.
+% We may establish much the same by taking $\I$ to be an interpretation of $\PL$ which makes the premises true and the conclusion false. 
+% Thus $\V{\I}(P \eif Q)=\V{\I}(\enot P)=1$ and $\V{\I}(\enot Q)=0$. 
+% By the semantic clause for negation we know that $\V{\I}(P)=0$ and $\V{\I}(Q)=1$, and so $\I(P)=0$ and $\I(Q)=1$ by the semantic clause for sentence letters.
+% Moreover, this is perfectly satisfiable with $\V{\I}(P \eif Q)=1$.
+% Accordingly, any interpretation $\I$ in which $\I(P)=0$ and $\I(Q)=1$ where the truth-values of all other sentence letters are arbitrary counts as a counterexample to the validity of the argument above. 
 
-
-
+% Taking the truth-values of the sentence letters that do not occur in a given argument to be arbitrary is akin to simply ignoring all other sentence letters as we do in constructing complete truth tables for arguments.
+% Although the functional definition of an interpretation and valuation provides an elegant account of validity in $\PL$, 
 
 
 \section{Decidability}%
   \label{sec:Decidability}
   
-  % TODO say that truth tables are decidable for finite sets of sentences
-  % TODO however, the process is very slow for many sentence letters
+Evaluating wfss in $\PL$ by constructing complete truth tables provides a simple mechanical procedure that is straightforward to systematically employ.
+Moreover, since every wfs of $\PL$ is of finite length and contains a finite number of sentence letters, constructing a complete truth table for a wfs of $\PL$ provides a finite procedure which determines whether that sentence is a tautology, contradiction, or logical contingent.
+Put otherwise, constructing a complete truth table for a wfs of $\PL$ provides an \define{effective method} for determining whether that wfs is a tautology or not, and similarly for the other logical properties that sentence may or may not have.
+Since there is an effective method for determining whether a wfs of $\PL$ is a tautology, we may say that it is \define{decidable} whether a wfs of $\PL$ is a tautology.
+It is similarly decidable whether a wfs of $\PL$ is a contradiction or logically contingent.
+
+Given a finite set $\Gamma$ of wfss of $\PL$, constructing a complete truth table for those wfss provides an effective method for determining whether $\Gamma$ is satisfiable or not, and so the question of whether $\Gamma$ is satisfiable is decidable. 
+However, the same cannot be said for infinite sets of wfss of $\PL$.
+Even though each wfs of $\PL$ is of finite length with finitely many sentence letters, an infinite set of wfss of $\PL$ may contain infinitely many sentence letters, requiring an infinitely large truth table.
+Although there is nothing to prevent us from \textit{defining} infinitely large truth tables mathematically, there is of course little hope of \textit{using} such an infinite truth table to determine whether an infinite set of sentences is satisfiable.
+It is for this reason that the truth table method does not provide an effective procedure for deciding whether a set of wfs of $\PL$ is satisfiable. 
+Of course, there could be another effective method for determining whether a set of $\PL$ sentences is satisfiable, and so we cannot claim that it is \define{undecidable} whether a set of sentences is satisfiable just because one method cannot be used.
+
+Although it is beyond the scope of this course, it is in fact undecidable whether an infinite set of wfs of $\PL$ is satisfiable or not.
+That is, there is no effective procedure that we could hope to use to determine whether any infinite set of wfs of $\PL$ is satisfiable. %, though there may be particular infinite sets that we may are or are not satisfiable.
+However, even in restricting consideration to finite sets, we may observe that it is often infeasible to construct truth tables for a wfs or set of wfss of $\PL$ which include too many sentence letters.
+For instance, a wfs or set of wfss of $\PL$ which includes $5$ sentence letters would require $32$ lines, and double that again for $6$ sentence letters. 
+At least for humans using pen and paper, this is at about the limit for what it is possible to use without making mistakes.
+
+Here one might be tempted to respond by appealing to computers.
+Instead of attempting to write out truth tables by hand, perhaps the method is best developed with computational assistance to avoid making mistakes.
+This leads into the \textit{Boolean satisfiability problem} in computer science, and also falls outside the scope of this course.
+Rather, we will be concerned with methods for working out reasoning on paper in a finite amount of time.
+In later chapters, we will have reason to require these methods to simulate certain natural patterns of reasoning.
+However, before then it will be important to clean up a few loose ends in order to set the stage for these developments.
+We will begin by presenting a different procedure.
 
 
 
 
-% \section{Partial Truth Tables}
-%
-% In order to show that a sentence is a tautology, we need to show that it is assigned 1 on every row of its complete truth table, or equivalently, that it is true on all interpretations of $\PL$.
-% So we need a complete truth table.
-% To show that a sentence is \emph{not} a tautology, however, we only need one line: a line on which the sentence is 0.
-% Therefore, in order to show that something is not a tautology, it is enough to provide a \emph{partial truth table} regardless of how many sentence letters the sentence might include.
-%
-% Consider, for example, the sentence $(U \eand T) \eif (S \eand W)$.
-% We want to show that it is \emph{not} a tautology by providing a partial truth table.
-% We fill in 0 for the entire sentence.
-% The main operator of the sentence is a conditional.
-% In order for the conditional to be false, the antecedent must be true (1) and the consequent must be false (0).
-% So we fill these in:
-% \begin{center}
-% \begin{tabular}{c|c|c|c|@{\TTon}*{7}{c}@{\TToff}}
-% $S$&$T$&$U$&$W$&$(U$&\eand&$T)$&\eif    &$(S$&\eand&$W)$\\
-% \hline
-%    &   &   &   &    &  1  &    &\TTbf{0}&    &   0 &   
-% \end{tabular}
-% \end{center}
-% In order for $(U\eand T)$ to be true, both $U$ and $T$ must be true. So we put a 1 under those letters:
-% \begin{center}
-% \begin{tabular}{c|c|c|c|@{\TTon}*{7}{c}@{\TToff}}
-% $S$&$T$&$U$&$W$&$(U$&\eand&$T)$&\eif    &$(S$&\eand&$W)$\\
-% \hline
-%    & 1 & 1 &   &  1 &  1  & 1  &\TTbf{0}&    &   0 &   
-% \end{tabular}
-% \end{center}
-% Remember that each instance of a given sentence letter must be assigned the same truth-value in a given row of a truth table.
-% You can't assign 1 to one instance of $U$ and 0 to another instance of $U$ in the same row.
-% So here we put a 1 under \emph{each} instance of $U$ and $T$.
-%
-% Now we just need to make $(S\eand W)$ false.
-% To do this, we need to make at least one of $S$ and $W$ false.
-% We can make both $S$ and $W$ false if we want.
-% All that matters is that the whole sentence turns out false on this line.
-% Making an arbitrary decision, we finish the table:
-% \begin{center}
-% \begin{tabular}{c|c|c|c|@{\TTon}*{7}{c}@{\TToff}}
-% $S$&$T$&$U$&$W$&$(U$&\eand&$T)$&\eif    &$(S$&\eand&$W)$\\
-% \hline
-%  0 & 1 & 1 & 0 &  1 &  1  & 1  &\TTbf{0}&  0 &   0 & 0  
-% \end{tabular}
-% \end{center}
-%
-% Showing that something is a tautology requires a complete truth table.
-% Showing that something is \emph{not} a tautology requires only a one-line partial truth table, where the sentence is false on that one line.
-% That's what we've just done.
-% In the same way, to show that something is a contradiction, you must show that it is false on every row; to show that it is not a contradiction, you need only find one row where it is true.
-%
-% A sentence is contingent if it is neither a tautology nor a contradiction.
-% Showing that a sentence is contingent requires a \emph{two-line} partial truth table where the sentence is true on one line and false on the other.
-% For example, we can show that the sentence above is contingent:
-% \begin{center}
-% \begin{tabular}{c|c|c|c|@{\TTon}*{7}{c}@{\TToff}}
-% $S$&$T$&$U$&$W$&$(U$&\eand&$T)$&\eif    &$(S$&\eand&$W)$\\
-% \hline
-%  0 & 1 & 1 & 0 &  1 &  1  & 1  &\TTbf{0}&  0 &   0 & 0 \\
-%  0 & 1 & 0 & 0 &  0 &  0  & 1  &\TTbf{1}&  0 &   0 & 0
-% \end{tabular}
-% \end{center}
-% Note that there are many combinations of truth-values that would have made the sentence true, so there are many ways we could have written the second line.
-%
-% Showing that a sentence is \emph{not} contingent requires providing a complete truth table, because it requires showing that the sentence is a tautology or that it is a contradiction.
-% If you do not know whether a particular sentence is contingent, then you do not know whether you will need a complete or partial truth table.
-% You can always start working on a complete truth table.
-% If you complete rows that show the sentence is contingent, then you can stop.
-% If not, then complete the truth table. Even though two carefully selected rows will show that a contingent sentence is contingent, there is nothing wrong with filling in more rows.
-%
-% Showing that two sentences are logically equivalent requires providing a complete truth table.
-% Showing that two sentences are \emph{not} logically equivalent requires only a one-line partial truth table: find a line (i.e. an interpretation of the sentence letters) where one sentence is true and the other false.
-%
-% Showing that a set of sentences is satisfiable requires providing one row of a truth table on which all of the sentences are true.
+\section{Partial Truth Tables}
+
+To show that a wfs of $\PL$ is a tautology, we need to show that $1$ occurs below its main operator on every row of its complete truth table.
+So we need a complete truth table.
+However, to show that a wfs is \textit{not} a tautology we only need to complete a row in which $0$ is beneath its main operator.
+Therefore, in order to show that a wfs is not a tautology, it is enough to provide a \textit{partial truth table} regardless of how many sentence letters the wfs might include.
+
+For example, consider $(U \eand T) \eif (S \eand W)$.
+We want to show that it is \textit{not} a tautology by providing a partial truth table.
+To do so, we begin by writing $0$ under the main operator which is a material conditional.
+In order for the conditional to be false, there must be a $1$ under the antecedent and a $0$ under the consequent.
+We fill these in as follows:
+
+\begin{center}
+\begin{tabular}{c|c|c|c|@{\TTon}*{7}{c}@{\TToff}}
+$S$&$T$&$U$&$W$&$(U$&\eand&$T)$&\eif    &$(S$&\eand&$W)$\\
+\hline
+   &   &   &   &    &  1  &    &\TTbf{0}&    &   0 &   
+\end{tabular}
+\end{center}
+
+In order for a $1$ to occur under $U\eand T$, a $1$ must also occur under both $U$ and $T$ as follows:
+
+\begin{center}
+\begin{tabular}{c|c|c|c|@{\TTon}*{7}{c}@{\TToff}}
+$S$&$T$&$U$&$W$&$(U$&\eand&$T)$&\eif    &$(S$&\eand&$W)$\\
+\hline
+   & 1 & 1 &   &  1 &  1  & 1  &\TTbf{0}&    &   0 &   
+\end{tabular}
+\end{center}
+
+Remember that each instance of a given sentence letter must have the same truth-value in a given row of a truth table.
+You can't have $1$ occur under one instance of $U$ and $0$ occur under another instance of $U$ in the same row.
+Thus we put a $1$ under each instance of $U$ and $T$.
+
+Now we just need to work out what follows from the $0$ under $S\eand W$.
+In particular, a $0$ must occur under either $S$ or $W$, or both.
+Making an arbitrary decision, we may finish the table:
+
+\begin{center}
+\begin{tabular}{c|c|c|c|@{\TTon}*{7}{c}@{\TToff}}
+$S$&$T$&$U$&$W$&$(U$&\eand&$T)$&\eif    &$(S$&\eand&$W)$\\
+\hline
+ 0 & 1 & 1 & 0 &  1 &  1  & 1  &\TTbf{0}&  0 &   0 & 0  
+\end{tabular}
+\end{center}
+
+Although showing that a wfs of $\PL$ is a tautology requires a complete truth table, showing that a wfs of $\PL$ is not a tautology only requires a partial truth table with a single row where $0$ occurs below the main operator of that wfs.
+That's what we've just done.
+In just the same way, to show that a wfs of $\PL$ is not a contradiction, you only need to construct a single row of a truth table where $1$ occurs below the main operator of that wfs.
+By contrast, to show that a wfs of $\PL$ is a contradiction, you must show that a $0$ occurs below the main operator on \textit{every} row of a complete truth table, and so you need a complete truth table.
+
+
+A wfs of $\PL$ is contingent just in case its complete truth table has a row in which $1$ occurs below the main operator and another row in which $0$ occurs below the main operator.
+Thus to show that a wfs of $\PL$ is contingent requires a partial truth table with just two rows.
+For example, we can show that the sentence above is contingent as follows:
+
+\begin{center}
+\begin{tabular}{c|c|c|c|@{\TTon}*{7}{c}@{\TToff}}
+$S$&$T$&$U$&$W$&$(U$&\eand&$T)$&\eif    &$(S$&\eand&$W)$\\
+\hline
+ 0 & 1 & 1 & 0 &  1 &  1  & 1  &\TTbf{0}&  0 &   0 & 0 \\
+ 0 & 1 & 0 & 0 &  0 &  0  & 1  &\TTbf{1}&  0 &   0 & 0
+\end{tabular}
+\end{center}
+
+Just as there happens to be more than one combination of truth-values which makes the sentence false, there are even more ways to make the sentence true.
+However, this is not always the case.
+For instance, given a sentence letter $A$, there is exactly two lines in its complete truth table, one in which it is true, and the other in which it is false.
+
+Showing that a wfs of $\PL$ is not contingent requires providing a complete truth table. %, because it requires showing that the sentence is a tautology or that it is a contradiction.
+In particular, one must either show that the complete truth table for the wfs has a $1$ under its main operator on all rows, or show that the wfs has a $0$ under its main operator on all rows.
+If you do not know whether a particular sentence is contingent or not, then you do not know whether you will need a complete or partial truth table.
+One way to proceed is to start working on a complete truth table, stopping as soon as you complete rows that show the sentence is contingent.
+If not, then you must complete the truth table in full.
+% Even though two carefully selected rows will show that a contingent sentence is contingent, there is nothing wrong with filling in more rows.
+
+Showing that two wfss of $\PL$ are logically equivalent requires providing a complete truth table.
+By contrast, showing that two wfss of $\PL$ are not logically equivalent only requires a partial truth table with one row in which a $1$ occurs below the main operator of one of the wfss and a $0$ occurs below the main operator of the other wfs. 
+
+Showing that a set of wfss of $\PL$ is satisfiable requires a single row of a truth table in which a $1$ occurs below the main operator of every wfs in the set.
 % The rest of the table is irrelevant, so a one-line partial truth table will do.
-% Showing that a set of sentences is unsatisfiable, on the other hand, requires a complete truth table: you must show that on every row of the table at least one of the sentences is false.
-%
-% Showing that an argument is valid requires a complete truth table.
-% Showing that an argument is \emph{invalid} only requires providing a one-line truth table: if you can produce a line on which the premises are all true and the conclusion is false, then the argument is invalid.
-%
-% \begin{table}[ht]
-% \begin{center}
-% \begin{tabular}{c|c|c|}
-% \cline{2-3}
-%  & YES & NO\\
-% \cline{2-3}
-% tautology? & complete truth table & one-line partial truth table\\
-% contradiction? &  complete truth table  & one-line partial truth table\\
-% contingent? & two-line partial truth table & complete truth table\\
-% equivalent? & complete truth table & one-line partial truth table\\
-% satisfiable? & one-line partial truth table & complete truth table\\
-% valid? & complete truth table & one-line partial truth table\\
-% \cline{2-3}
-% \end{tabular}
-% \end{center}
+However, to show that a set of wfss of $\PL$ is unsatisfiable requires a complete truth table since you must show that on every row of a complete truth table for the set, there is a $0$ below the main operator of at least one of the wfss in the set.
+Of course, we could only hope to succeed if the set of wfss is finite.
+
+Showing that an argument is valid requires a complete truth table.
+Showing that an argument is invalid only requires providing a single row of a partial truth table in which a $1$ occurs below the main operator of every premise and a $0$ occurs below the conclusion.
+Thus we have:
+
+\begin{table}[ht]
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\cline{1-3}
+TYPE & YES & NO\\
+\cline{1-3}
+Tautology & complete truth table & one-line partial truth table\\
+Contradiction &  complete truth table  & one-line partial truth table\\
+Contingent & two-line partial truth table & complete truth table\\
+Entailment & complete truth table & one-line partial truth table\\
+Equivalent & complete truth table & one-line partial truth table\\
+Satisfiable & one-line partial truth table & complete truth table\\
+Valid & complete truth table & one-line partial truth table\\
+\cline{1-3}
+\end{tabular}
+\end{center}
 % \caption{When to use a partial truth table}
 % \label{table.CompleteVsPartial}
-% \end{table}
-%
-% Table \ref{table.CompleteVsPartial} summarizes when a complete truth table is required and when a partial truth table will do.
-% If you are trying to remember whether you need a complete truth table or not, the general rule is, if you're looking to establish a claim about \emph{every} interpretation, you need a complete table.
+\end{table}
 
-%%% BEGIN
+The table above summarizes when a complete truth table is required and when a partial truth table will suffice.
+If you are trying to remember whether you need a complete truth table or not, the general rule is, if you're looking to establish a claim about \emph{every} interpretation, you need a complete table.
+Otherwise, a one-line or perhaps two-line truth table may do instead.
 
-\section{Functional Definitions}%
-  \label{sec:Functional}
 
-% TODO bring out shortcomings of the truth table approach above to motivate the functional approach
-  % don't want to appeal to tables in formal definitions
+
+
+
+
+
+\section{Semantics}%
+  \label{sec:Semantics}
+
+Although partial truth tables might help to avoid doing some amount of work, invariably you will end up needing to construct complete truth tables for sometimes long wfs of $\PL$ or else for arguments or sets which include many wfss of $\PL$.
+In addition to being extremely tedious and time consuming, constructing large truth tables is also highly prone to human error.
+These provide some initial reasons that one might hope to devise an alternative.
+
+Complete truth tables also played an important role in defining what it is for a wfs of $\PL$ to be a tautology, where something similar may be said for the definitions of a contradiction as well as a logically contingent wfs of $\PL$. 
+Similarly, the definitions for logically entailment, logical equivalence, satisfiability, logical consequence, and the validity of arguments given above all appealed to complete truth tables.
+Whereas the corresponding definitions for the sentences of English could not be made precise given that there is no well-defined sense of what counts as a grammatical sentence of English, the sections above appealed to complete truth tables for the wfss of $\PL$ in order to avoid this problem. % for the logical properties which a wfs or set of wfss of $\PL$ may be said to h 
+Nevertheless, the truth table definitions of the logical notions considered above still leave something to be desired.
+
+So far we have identified the rows of a truth table for a relevant wfs or set of wfss of $\PL$ with the relevant range of interpretations for that wfs or set of wfss.
+Of course, the truth tables that we can write down are are finite in size and so cannot specify truth-values for every sentence letter of $\PL$.
+Rather, the rows of a truth table provide \define{partial interpretations} of $\PL$ by specifying all combinations of truth-values for some finite set of sentence letters.
+Insofar as a truth table includes all of the sentence letters that occur in the wfs(s) in question, the truth-values for all other sentence letters do not make a difference, and so may be safely ignored.
+Nevertheless, we cannot define the interpretations of $\PL$ as the rows of any finite truth table since no finite truth table specifies truth-values for every sentence letter.
+This provides further motivation to present a more general approach.
+
+Next we may consider the definition of a complete truth table itself.
+Rather than providing a formal definition, we appealed to the table that results from writing the wfs(s) of $\PL$ in question at the top right of the table with all of the sentence letters it contains at the top left. 
+We then provided a procedure for adding the appropriate number of rows depending on how many sentence letters were involved and distributing truth-values accordingly.
+The rest of the values in the table were then to be added by appealing to the characteristic truth tables as a rubric.
+% Although this does not interpret the language in full, we claimed that the resulting truth table exhausts the different distributions of truth-values that are relevant to the wfs(s) in question.
+This left open certain ambiguities like the order of the sentence letters as well as the order of the wfss in a complete truth table for a set of wfss of $\PL$.
+Additionally, at least given what we have said so far, one must rely on an intuitive grasp of the main operator for each subsentence, as well as how to correctly apply the characteristic truth tables.
+
+Although with some ingenuity we could tighten up all of these details by either eliminating ambiguities or else establishing that the ambiguities do not make a difference, the definitions themselves are bound to become even more cumbersome to state precisely.
+Rather, the truth table definitions given above are best understood as intuitive approximations of the precise definitions to which we will soon turn.
+Despite their imprecision, the truth table definitions provide a natural and accessible account of the logical notions that we are after, and so may be preserved as helpful heuristics in contemplating the abstract definitions to follow.
+
 % TODO mention that operators express truth functions in connection with above
 
-So far we have identified the rows of a truth-table for a relevant sentence or set of sentences with the relevant range of interpretations for that sentence or set of sentences.
-Of course, the truth tables that we can write down are are finite in size and so cannot specify truth-values for every sentence letter of $\PL$.
-Rather, the rows of a truth table provide partial interpretations of $\PL$ by specifying all combinations of truth-values for some finite set of sentence letters.
-Insofar as the truth table includes all of the sentence letters that occur in the sentence(s) in question, the truth-values for all other sentence letters do not make a difference, and so may be safely ignored.
-Nevertheless, we cannot define the interpretations of $\PL$ as the rows of a truth table since no finite truth table specifies truth-values for every sentence letter.
-This motivates a slightly more general approach.
+Rather than relying on diagrams, officially we will take an \define{interpretation} of $\PL$ to be any function $\I$ from the set of sentence letters for $\PL$ to the set of truth-values $\set{1, 0}$, thereby assigning every sentence letter to exactly one truth-value.
+Although interpretations only specify the truth-values of sentence letters, we may draw on any interpretation $\I$ of $\PL$ in order to define another function which assigns every wfs of $\PL$ to exactly one truth-value in accordance with the characteristic truth tables but without appealing to the characteristic truth tables.
+More precisely, given any interpretation $\I$ of $\PL$, we may recursively define the \define{valuation function} $\V{\I}$ over the domain of wfss for $\PL$ by way of the following semantics: % for each of the sentential operators included in $\PL$:
 
-Officially, we will take an \define{interpretation} of $\PL$ to be any function $\I$ which maps sentence letters to truth-values, thereby assigning every sentence letter to exactly one truth-value (either 1 or 0).
-Although interpretations only specify the truth-values of sentence letters, we may extend the domain of an interpretation to all sentences of $\PL$ by appealing to the characteristic truth tables given above.
-Somewhat more precisely, we may use any interpretation $\I$ to recursively define a \define{valuation} function $\V{\I}$ by way of the following semantic clauses for the operators included in $\PL$:
+% \factoidbox{
+%   \textsc{Valuation Function:} $\V{\I}(\metaA)=1$ \textit{iff} either:
+%   \begin{itemize}[leftmargin=.25in]
+%     \item $\I(\metaA)=1$ (and so $\metaA$ is a sentence letter of $\PL$);
+%     \item $\metaA = \enot\metaB$ where $\V{\I}(\metaB)=0$;
+%     \item $\metaA = (\metaB \eor \metaC)$ where either $\V{\I}(\metaB)=1$ or $\V{\I}(\metaC)=1$ (or both);
+%     \item $\metaA = (\metaB \eand \metaC)$ where both $\V{\I}(\metaB)=1$ and $\V{\I}(\metaC)=1$;
+%     \item $\metaA = (\metaB \eif \metaC)$ where either $\V{\I}(\metaB)=0$ or $\V{\I}(\metaC)=1$ (or both);
+%     \item $\metaA = (\metaB \eiff \metaC)$ where $\V{\I}(\metaB)=\V{\I}(\metaC)$;
+%   \end{itemize}
+% }
 
-\begin{enumerate}[labelsep=.15in]
-  \item[($A$)] $\V{\I}(\metaA)=\I(\metaA)$ just in case $\metaA$ is a sentence letter of $\PL$.
-  \item[(\enot)] $\V{\I}(\enot\metaA)=1$ just in case $\V{\I}(\metaA)=0$.
-  \item[(\eor)] $\V{\I}(\metaA \eor \metaB)=1$ just in case $\V{\I}(\metaA)=1$ or $\V{\I}(\metaB)=1$ (or both).
-  \item[(\eand)] $\V{\I}(\metaA \eand \metaB)=1$ just in case $\V{\I}(\metaA)=1$ and $\V{\I}(\metaB)=1$.
-  \item[(\eif)] $\V{\I}(\metaA \eif \metaB)=1$ just in case $\V{\I}(\metaA)=0$ or $\V{\I}(\metaB)=1$ (or both).
-  \item[(\eiff)] $\V{\I}(\metaA \eiff \metaB)=1$ just in case $\V{\I}(\metaA)=\V{\I}(\metaB)$.
-\end{enumerate}
+\factoidbox{
+  \textsc{Valuation Function:} For any wfss $\metaA$ and $\metaB$ of $\PL$: 
+  \begin{enumerate}[leftmargin=.25in]
+    \item[] $\V{\I}(\metaA)=\I(\metaA)$ \textit{if} $\metaA$ is a sentence letter of $\PL$.
+    \item[] $\V{\I}(\enot\metaA)=1$ \textit{iff} $\V{\I}(\metaA)=0$.
+    \item[] $\V{\I}(\metaA \eor \metaB)=1$ \textit{iff} $\V{\I}(\metaA)=1$ or $\V{\I}(\metaB)=1$ (or both).
+    \item[] $\V{\I}(\metaA \eand \metaB)=1$ \textit{iff} $\V{\I}(\metaA)=1$ and $\V{\I}(\metaB)=1$.
+    \item[] $\V{\I}(\metaA \eif \metaB)=1$ \textit{iff} $\V{\I}(\metaA)=0$ or $\V{\I}(\metaB)=1$ (or both).
+    \item[] $\V{\I}(\metaA \eiff \metaB)=1$ \textit{iff} $\V{\I}(\metaA)=\V{\I}(\metaB)$.
+  \end{enumerate}
+}
 
-The clauses above hold for all sentences \metaA and \metaB of $\PL$, thereby extending any interpretation $\I$ of $\PL$ to $\V{\I}$ which specifies unique truth-values for every sentence of $\PL$.
-Whereas the characteristic truth tables for the operators specifies the truth-values of complex sentences visually, the semantic clauses specify the same information functionally.
+% As brought out above, a function is a set of ordered pairs.
+% Accordingly, a function $g$ may be said to be \define{contained in} $f$ just in case $g \subseteq f$.
+% The valuation function $\V{\I}$ is the \define{smallest function} to satisfy the constraints above insofar as it is contained in every function to 
+% By requiring $\V{\I}$ to be the \textit{smallest} function to satisfy the above, we guarantee that there is `$\V{\I}$' refers to a unique 
 
-Formal languages are built from three kinds of elements: \define{logical symbols}, \define{non-logical symbols}, and \define{punctuation} i.e., the left and right parentheses.
-operators like `\eand' and `\eif' are logical symbols (also called \define{logical constants}) because their meaning is specified by semantic clauses which hold their meanings fixed.
-When interpreting a formal argument, you are not allowed to change the meaning of the logical symbols.
-You cannot say, for instance, that the `\enot' symbol will mean what `\eand' usually does.
-Rather, the `\enot' symbol will always have the same semantic clause, and so will always express negation.
+% TODO 
 
-The sentence letters in $\PL$ are non-logical symbols because their meaning is not specified by the semantics for $\PL$.
-When we translate an argument from English into $\PL$, the sentence letter `$M$' (for example) does not have its meaning fixed as a result.
-Instead, we rely on interpretations to assign truth-values to `$M$' (and all other sentence letters), where the truth-values provide a rough way to model what those sentence letters mean.
+The clauses above hold for all sentences $\metaA$ and $\metaB$ of $\PL$, thereby extending any interpretation $\I$ of $\PL$ to $\V{\I}$ in order to specify a unique truth-value for every wfs of $\PL$.
+Whereas the characteristic truth tables for the operators specify the truth-values for complex sentences visually, the semantic clauses above specify the same information functionally.
 
-An argument in $\PL$ is \define{logically valid} just in case for every interpretation $\I$ of $\PL$, if the valuation $\V{\I}$ makes the premises true (i.e., $\V{\I}(\metaA)=1$ for every premise $\metaA$), then $\V{\I}$ also makes the conclusion true (i.e., $\V{\I}(\metaB)=1$ where $\metaB$ is the conclusion).
-Alternatively, we could take an argument in $\PL$ to be \define{logically valid} just in case every line in a complete truth table which includes every sentence in the argument is such that if the premises are true on that line, the conclusion is also true on that line.
-Even though the lines of a truth table do not specify truth-values for all sentence letters of $\PL$, only the sentence letters that occur in the argument are relevant, and so the truth-values of all other sentence letters may be safely ignored.
-Accordingly, these two definitions are equivalent.
-Nevertheless, it is definitionally simpler to quantify over all interpretations $\I$ of $\PL$ rather than the lines of an appropriately constructed complete truth table for the argument in question.
+In Chapter $\ref{ch.PL-syntax}$, we specified the primitive symbols for $\PL$.
+These included the sentence letters, punctuation, and sentential operators. 
+% Whereas the sentence letters make up the non-logical vocabulary of $\PL$ and are interpreted by truth-values, the sentential operators make up the logical vocabulary of $\PL$ and are assigned to truth-functions once and for all.\footnote{If you like, the punctuation can be understood as built into the operators, i.e., $\corner{(\underline{~~} \star \underline{~~})}$ where $\star$ is any binary sentential operator of $\PL$ and the blanks are where the arguments go.}
+When interpreting $\PL$, you are not allowed to change the meaning of the sentential operators.
+For instance, you cannot take the `$\enot$' symbol to mean what `$\eand$' usually does.
+Rather, the `$\enot$' symbol will always have the same semantic clause, and so will always express the same truth-function for negation.
+Since the meanings for the sentential operators are fixed by the semantic clauses given in the definition of the valuation function, it is common to refer to the sentential operators as \define{logical constants}.
 
-%%% END
+The sentence letters are sometimes referred to as the \define{non-logical vocabulary} and are interpreted by assigning them to either $1$ or $0$, where it is the combination of assignments which may differ between interpretations of $\PL$.
+% Formal languages are built from three kinds of elements: \define{logical symbols}, \define{non-logical symbols}, and \define{punctuation} i.e., the left and right parentheses.
+% operators like `\eand' and `\eif' are logical symbols (also called \define{logical constants}) because their meaning is specified by semantic clauses which hold their meanings fixed.
+% The sentence letters in $\PL$ are non-logical symbols because their meaning is not specified by the semantics for $\PL$.
+Accordingly, when we translate an argument from English into $\PL$, the sentence letter `$M$' does not have its meaning fixed as a result.
+Rather, we rely on interpretations to assign truth-values to sentence letter such as `$M$', where the truth-values provide a maximally course-grained way to model what those sentence letters mean, i.e., whether they express a proposition that obtains or does not obtain.
+
 
 % TODO turn next two sections into a formal revision of the truth table definitions
 
@@ -582,91 +682,160 @@ Nevertheless, it is definitionally simpler to quantify over all interpretations 
 \section{Formal Definitions}
   \label{sec:Definitions}
 
-A set of $\PL$ sentences $\Gamma$ \define{logically entails} $\metaA$ just in case every interpretation that satisfies $\Gamma$ also satisfies $\metaA$.
-Logical entailment is also called the \define{logical consequence} relation, or \define{semantic consequence}, and is written: $\Gamma \models \metaA$. 
-An entire chapter is named after this relation for good reason: it is the most important semantic concept that we will introduce and will later be shown to have the same extension as a corresponding syntactic notion.
+% Instead of defining what it is for a wfs of $\PL$ to be a tautology, contradiction, or contingent in terms 
+Having provided a definition of the interpretations of $\PL$ that is both mathematically precise and simple to state, we may now put this definition to work to redefine the logical properties and relations discussed above.
+Letting $\metaA$ and $\metaB$ be wfs of $\PL$, $\MetaG$ be a set of wfss of $\PL$, and $\I$ and $\J$ be interpretations of $\PL$, we may present the following official definitions: 
+% In particular, consider the following:
 
-Note that the double turnstile `$\models$' is--- like the metavariable `\metaA'--- part of the \emph{metalanguage} we use to discuss $\PL$, and not a part of $\PL$.
-For ease of exposition, we will often drop `logically', speaking simply of entailment.
-Although officially $\models$ takes a set of $\PL$ sentences on the left together with a single $\PL$ sentence on the right, it is both common and convenient to drop the set notation, writing `$\metaA_1,\ldots,\metaA_n \models \metaB$' instead of `$\set{\metaA_1,\ldots,\metaA_n} \models \metaB$'.
+\factoidbox{
+  \begin{itemize}[leftmargin=0in]
+    \item[] \define{tautology}: $\metaA$ is a \textit{tautology iff} $\V{\I}(\metaA) = 1$ for all $\I$.
+    \item[] \define{contradiction}: $\metaA$ is a \textit{contradiction iff} $\V{\I}(\metaA) = 0$ for all $\I$.
+    \item[] \define{contingent}: $\metaA$ is \textit{logically contingent iff} $\V{\I}(\metaA) \neq \V{\J}(\metaA)$ for some $\I$ and $\J$.
+    \item[] \define{entailment}: $\metaA$ \textit{logically entails} $\metaB$ \textit{iff} $\V{\I}(\metaA) \leq \V{\I}(\metaB)$ for all $\I$.
+    \item[] \define{equivalence}: $\metaA$ is \textit{logically equivalent} to $\metaB$ \textit{iff} $\V{\I}(\metaA) = \V{\I}(\metaB)$ for all $\I$.
+    \item[] \define{satisfiable}: $\Gamma$ is \textit{satisfiable iff} there is some $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \Gamma$.
+    \item[] \define{consequence}: $\MetaG \vDash \metaA$ \textit{iff} $\V{\I}(\metaA) = 1$ for every $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \Gamma$.
+  \end{itemize}
+}
+
+% An argument in $\PL$ is \define{logically valid} just in case for every interpretation $\I$ of $\PL$, if the valuation $\V{\I}$ makes the premises true (i.e., $\V{\I}(\metaA)=1$ for every premise $\metaA$), then $\V{\I}$ also makes the conclusion true (i.e., $\V{\I}(\metaB)=1$ where $\metaB$ is the conclusion).
+% Alternatively, we could take an argument in $\PL$ to be \define{logically valid} just in case every line in a complete truth table which includes every sentence in the argument is such that if the premises are true on that line, the conclusion is also true on that line.
+% Even though the lines of a truth table do not specify truth-values for all sentence letters of $\PL$, only the sentence letters that occur in the argument are relevant, and so the truth-values of all other sentence letters may be safely ignored.
+% Accordingly, these two definitions are equivalent.
+% Nevertheless, it is definitionally simpler to quantify over all interpretations $\I$ of $\PL$ rather than the lines of an appropriately constructed complete truth table for the argument in question.
+
+% A set of $\PL$ sentences $\Gamma$ \define{logically entails} $\metaA$ just in case every interpretation that satisfies $\Gamma$ also satisfies $\metaA$.
+% Logical entailment is also called the \define{logical consequence} relation, or \define{semantic consequence}, and is written: $\Gamma \vDash \metaA$. 
+% An entire chapter is named after this relation for good reason: 
+
+Note that the double turnstile `$\vDash$' has been introduced for the logical consequence relation which--- like the schematic variable `$\metaA$'--- is part of the \emph{metalanguage} that we are using to discuss $\PL$, and not a part of $\PL$ itself.
+Although officially $\vDash$ takes a set of $\PL$ wfss on the left together with a single $\PL$ wfs on the right, it is both common and convenient to drop the set notation, writing `$\metaA_1,\ldots,\metaA_n \vDash \metaB$' instead of `$\set{\metaA_1,\ldots,\metaA_n} \vDash \metaB$'.
 % Even though entailment is connected in important ways to the validity of arguments, it is important to remember to apply the definitions rigorously and precisely.
 
-Recall that an argument in $\PL$ is a sequence of $\PL$ sentences, and so a completely different type of thing than a set of sentences of $\PL$.
+As before, we may say that an argument in $\PL$ is \define{valid} just in case it's conclusion is a logical consequence of its set of premises.
+Recall that an argument in $\PL$ is a sequence of $\PL$ wfs, and so a completely different type of thing than a set of wfs of $\PL$.
 After all, sets do not specify the order of their members.
-Nevertheless, we may say that for any $\PL$ argument, that argument is valid if and only if it's premises entail it's conclusion.
-What we cannot say is that for any set of $\PL$ sentences $\Gamma$ and further sentence $\metaA$, if $\Gamma \models \metaA$, then \textit{the} argument whose premises are the sentences in $\Gamma$ and whose conclusion is $\metaA$ is valid.
-This is because there may fail to be a unique argument that we can construct from a set of $\PL$ sentences $\Gamma$ and a further $\PL$ sentence $\metaA$.
-For instance, assuming $\Gamma$ includes at least two sentences, we can construct different arguments by ordering the premises in different ways.
-Instead, we may claim something general: if $\Gamma \models \metaA$, then \textit{every} argument where the sentence in $\Gamma$ are the premises (in some order or other) and $\metaA$ is the conclusion is valid.
+Accordingly, we cannot say that for any set of $\PL$ wfss $\Gamma$ and wfs $\metaA$, if $\Gamma \vDash \metaA$, then \textit{the} argument whose premises are the wfss in $\Gamma$ and whose conclusion is $\metaA$ is valid.
+This is because there may fail to be a unique argument that we can construct from a set of $\PL$ wfss $\Gamma$ and a further $\PL$ wfs $\metaA$.
+For instance, assuming $\Gamma$ includes at least two wfss, we can construct different arguments by reversing the order of the premises.
+Instead, we may claim something more general: $\Gamma \vDash \metaA$ just in case \textit{every} argument where the wfss in $\Gamma$ are the premises (in some order or other) and $\metaA$ is the conclusion is valid.
 
-It will help to consider a simple example.
-For instance, take the following entailment claim: 
-  $$P, Q \models P\eor Q.$$ 
-The entailment above is true since every interpretation that satisfies the set $\set{P, Q}$ also satisfies $P\eor Q$.
-Accordingly, we may say that the argument with $P$ as its first premise, $Q$ as its second premise, and $P\eand Q$ as its conclusion is logically valid. 
-Although closely related, this is a different claim than our original entailment, one to do with arguments.
-For instance, there is a distinct argument which takes $Q$ to be its first premise, $P$ as its second premise, and $P\eand Q$ as its conclusion, though this second argument is just as valid as the first.
-By contrast, permuting $P$ and $Q$ in the entailment claim above does not amount to a distinct entailment claim, but rather a distinct means of expressing the very same entailment claim. 
-This is because sets do not preserve order: $\set{P,Q}=\set{Q,P}$.
+% It will help to consider a simple example.
+% For instance, take the following claim: 
+%   $$P, Q \vDash P\eor Q.$$ 
+% The logical consequence above is true since for every interpretation $\I$ of $\PL$, if $\V{\I}(P) = 1$ and $\V{\I}(Q) = 1$, then $\V{\I}(P \eor Q) = 1$.
+% Accordingly, we may say that the argument $P, Q\ \therefore P \eor Q$ which has $P$ as its first premise, $Q$ as its second premise, and $P\eand Q$ as its conclusion is logically valid. 
+% Although closely related, this is different claim from the logical consequence stated above. 
+% % Rather, it is a claim about an argument.
+% Moreover, there is a distinct argument which takes $Q$ to be its first premise, $P$ as its second premise, and $P\eand Q$ as its conclusion--- i.e., $Q, P\ \therefore P \eor Q$--- though this second argument is also valid.
+% By contrast, the $P$ and $Q$ in the logical consequence claim do not have an order, though we happened to write $P$ before $Q$.
+% % This is because sets do not preserve order: $\set{P,Q}=\set{Q,P}$.
+% On the other hand, permuting $P$ and $Q$ in $P \eor Q$ results in a sentence that does not occur above, namely $Q \eor P$, and so this would be a distinct logical consequence from the claim above.
 
-
-
-
-\subsection{Satisfiability}
-\label{sub:PL-Satisfiability}
-
-% TODO define satisfaction and characterize logical consequence in these terms
-
-Recall that an \define{interpretation} is any function which assigns a truth-value to every sentence letter of $\PL$.
-We will also refer to interpretations of $\PL$ as \define{models} of $\PL$ since interpretations provide an extensional way to represent the meanings of the sentence letters in $\PL$.\footnote{Intensional and hyperintensional semantic frameworks provide much more fine-grained representations of meanings, but this doesn't make extensional frameworks irrelevant. After all, first-order set theory is an extensional theory which many take to provide a foundation for mathematics.}
-
-Whereas a sentence $\metaA$ may be either true of false on a given interpretation $\I$ (i.e., the valuation function $\V{\I}$ induced by $\I$ assigns that sentence to $1$), sets of sentences do not have truth-values.
-Accordingly, we may say that an $\PL$ interpretation $\I$ \define{satisfies} a set of $\PL$ sentences $\Gamma=\set{\metaA_{1},\metaA_{2},\ldots}$ just in case $\V{\I}(\metaA)=1$ for all $\metaA \in \Gamma$.
-Derivatively, it is convenient to say that an interpretation $\I$ of $\PL$ \define{satisfies} a single sentence $\metaA$ just in case it satisfies the singleton set $\set{\metaA}$, i.e., the set which includes $\metaA$ as its only member. 
-
-% TODO define tautology and contradiction again in terms of satisfiability
+Logical consequence is the most important semantic concept that we will study in this course.
+In the following chapter, we will introduce a proof theoretic analogue for derivability which we will represent with the single turnstile `$\vdash$'.
+As we will then go on to show in the metalogical portions of this book, these two relations have the same extension, providing two radically different perspectives on one and the same thing, i.e., formal reasoning.
+We will then repeat this same methodology for languages with greater expressive power.
+For the time being, we only pause to indicate the central role that logical consequence will play throughout this text.
 
 
 
+% \subsection{Satisfiability}
+% \label{sub:PL-Satisfiability}
+%
+% % TODO define satisfaction and characterize logical consequence in these terms
+%
+% Recall that an \define{interpretation} is any function which assigns a truth-value to every sentence letter of $\PL$.
+% We will also refer to interpretations of $\PL$ as \define{models} of $\PL$ since interpretations provide an extensional way to represent the meanings of the sentence letters in $\PL$.\footnote{Intensional and hyperintensional semantic frameworks provide much more fine-grained representations of meanings, but this doesn't make extensional frameworks irrelevant. After all, first-order set theory is an extensional theory which many take to provide a foundation for mathematics.}
+%
+% Whereas a sentence $\metaA$ may be either true of false on a given interpretation $\I$ (i.e., the valuation function $\V{\I}$ induced by $\I$ assigns that sentence to $1$), sets of sentences do not have truth-values.
+% Accordingly, we may say that an $\PL$ interpretation $\I$ \define{satisfies} a set of $\PL$ sentences $\Gamma=\set{\metaA_{1},\metaA_{2},\ldots}$ just in case $\V{\I}(\metaA)=1$ for all $\metaA \in \Gamma$.
+% Derivatively, it is convenient to say that an interpretation $\I$ of $\PL$ \define{satisfies} a single sentence $\metaA$ just in case it satisfies the singleton set $\set{\metaA}$, i.e., the set which includes $\metaA$ as its only member. 
+%
+% % TODO define tautology and contradiction again in terms of satisfiability
 
-\section{Evaluating Arguments}
-  \label{sec:Evaluating}
 
-Arguments in English have an intended interpretation insofar as they are meaningful to us in the form they are presented purely in virtue of our understanding of English.
-The same cannot be said for $\PL$ which includes such sentences as $A$, $\enot (B \eor \enot C)$, $A \eif \enot (B \eif C)$, etc., which do not \textit{already} mean something to us.
-This gap is filled by: (1) providing a symbolization key which specifies the English sentences that some sentences in $\PL$ are intended to regiment; and (2) interpreting the relevant sentences of $\PL$ by specifying truth-values for the sentence letters that they contain.
-If an argument in English can be naturally regimented by an $\PL$ argument that is valid, we have good reason to take the argument in English to be valid.
 
-As we have already seen, sentences and arguments in English can be regimented in many different ways, some better than others.
-Accordingly, we cannot conclude that an English argument is invalid just because it has an invalid regimentation in $\PL$ since there could be a better regimentation that is valid.
-Even when an English argument does not have any valid regimentation in $\PL$, this does not mean that it could not have a valid regimentation in some expressively more powerful language like QL which we will study later on in this course.
-For the time being, we will focus on regimenting and evaluating the validity of arguments in English with the resources of $\PL$.
-Consider the following example:
+
+\section{Semantic Proofs}
+  \label{sec:SemanticProofs}
+
+The formal definitions given above are certainly much more elegant than the truth table definitions for the corresponding terms, avoiding all the ambiguities that we mentioned but did not take the time to fully resolve above.
+Although these new definitions do not provide effective methods for deciding logical questions in the same way as the truth table definitions, they will nevertheless allow us to prove things about the wfss of $\PL$ and their various logical properties and relationships.
+For instance, consider the following set of wfss:
+$$ \MetaG = \set{A \eand  C,\ B \eiff \enot A,\ C \eif (B \eand D),\ E} $$
+It turns out that this set is unsatisfiable.
+However, to show this using a truth table would requiring constructing a complete truth table with five sentence letters and thirty-two rows.
+In addition to the tedium, the chances of making a mistake cannot be overlooked.
+Instead of attempting this, we can draw on the formal definition to prove that $\MetaG$ is unsatisfiable by assuming that it is satisfiable and deriving a contradiction by unpacking the definitions: 
+
+\begin{quote} 
+  \textit{Proof:} Assume for contradiction that the set $\MetaG$ is satisfiable.
+  By the definition of satisfiability, $\V{\I}(A \eand  C) = \V{\I}(B \eiff \enot A) = \V{\I}(C \eif (B \eand D)) = \V{\I}(E) = 1$ for some interpretation $\I$ of $\PL$. 
+  So $\V{\I}(A) = \V{\I}(C) = 1$ by the semantics for conjunction and $\V{\I}(B) = \V{\I}(\enot A)$ by the semantics for the biconditional. 
+  Thus $\V{\I}(\enot A) = 0$ by the semantics for negation, and so $\V{\I}(B) = 0$. 
+
+  Since $\V{\I}(C \eif (B \eand D)) = 1$, we know by the semantics for the conditional that either $\V{\I}(C) = 0$ or $\V{\I}(B \eand D) = 1$.
+  Having already shown that $\V{\I}(C) \neq 0$, we may conclude that $\V{\I}(B \eand D) = 1$, and so $\V{\I}(B) = 1$ and $\V{\I}(D) = 1$ by the semantics for conjunction.
+  Thus $\V{\I}(B) \neq 0$, contradicting the above.
+  \qed
+\end{quote}
+
+This proof has been made fully explicit so as to make it easy to follow.
+A proof that is hard to follow is not a very good proof.
+However, using too many words is not a good thing either, cluttering what might be easier to see otherwise.
+Writing clear and readable proofs is a skill that requires judgment and practice.
+If you are new to proof writing, it is best to begin by making everything explicit before tightening things up to write with concision.
+
+Note that the proof stopped once we got a contradiction.
+Although we might have continued by saying that our assumption must be false given the contradiction that we derived, this much is automatic given the introductory clause ``Assume for contradiction\ldots'' which sets up this expectation.
+This is a good example of the kinds of writing strategies that you can use to write \define{informal proofs}.
+By contrast to the formal proofs that we will go on to write in the following chapter, informal proofs are written in the metalanguage mathematical English and are often about wfss of our object language $\PL$.
+In the case above, we established that $\MetaG$ is unsatisfiable. 
+% In the following chapter we will introduce a proof system in which to write formal proofs in $\PL$ itself. 
+In order to give you a sense of some of the other methods and terms phrasing for writing clear and concise informal proofs, it will help to consider a few more examples.
+
 
 \begin{earg}
-  \item[] Either the butler is the murderer or the gardener isn't who he says he is. 
-  \item[] The gardener is who he says he is.
-  \item[\therefore] The butler is the murderer.
+  \eitem{Either the butler is the murderer or the gardener isn't who he says he is. }
+  \uitem{The gardener is who he says he is.}
+  \eitem{The butler is the murderer.}
 \end{earg}
 
 In order to determine its validity, let's translate this argument into $\PL$ and evaluate the resulting formal argument for validity with a truth table.
-We begin with a symbolization key:
+In particular:
 
 \begin{ekey}
   \item[B:] The butler is the murderer.
   \item[G:] The gardener is who he says he is.
 \end{ekey}
 
-With this key, the argument, regimented in $\PL$, looks like this:
-
 \begin{earg}
-  \item $B\eor\enot G$
-  \item $G$
-  \item[\therefore] $B$
+  \eitem{$B \eor \enot G$}
+  \uitem{$G$ \quad\quad }
+  \eitem{$B$}
 \end{earg}
 
-We can now evaluate this argument in $\PL$ for validity using a truth table.
-We'll set up a table with the two sentence letters included above, and check to see whether there is a row that assigns `1' to both premises and assigns `0' to the conclusion.
+It should be pretty clear that this is a valid argument, but to show this we may now write a semantic proof which establishes its validity.
+Whereas the proof given above proceeded by \textit{reductio ad absurdum}, deriving a contradiction from the negation of what we wanted to prove, it is perhaps easiest to write a direct proof that the argument above is valid.
+
+\begin{quote} 
+  \textit{Proof:}
+  Let $\I$ be an arbitrary interpretation of $\PL$ for which both of the premises are true, i.e., $\V{\I}(B \eor \enot G) = \V{\I}(G) = 1$. 
+  We know by the semantics for negation that $\V{\I}(\enot G) = 0$, where either $\V{\I}(B) = 1$ or $\V{\I}(\enot G) = 1$ by the semantics for disjunction, and so may conclude that $\V{\I}(B) = 1$.
+  Since $\I$ was arbitrary, we may conclude more generally that $\V{\I}(B) = 1$ for any $\I$ where $\V{\I}(B \eor \enot G) = \V{\I}(G) = 1$, and so the argument is indeed valid.
+  \qed
+\end{quote}
+
+It is typical to leave this final sentence off assuming that it is sufficiently clear what you are setting out to prove and how you are intended to do so.
+Nevertheless, it doesn't hurt to include this extra line to make it especially clear in case you are uncertain whether your proof is easy to interpret.
+In the case above, the key signpost that we used was the construction `Let $\I$ be an arbitrary interpretation of $\PL$ \ldots' since this signals to the reader that we will go on to establish something general.
+We then restrict consideration to those interpretations $\I$ of $\PL$ which make the premises true with `for which both of the premises are true', checking to see that such an arbitrary interpretation makes the conclusion true.
+
+Whereas the first semantic argument that we gave allowed us to show that $\MetaG$ is unsatisfiable without having to draw a truth table with thirty-two rows, the winnings in the case above are somewhat less substantial. 
+In particular, the truth table only requires that we include four rows since there are just two sentence letters.
+% We'll set up a table with the two sentence letters included above, and check to see whether there is a row that assigns `1' to both premises and assigns `0' to the conclusion.
 Thus we have:
 
 \begin{center}
@@ -680,79 +849,149 @@ Thus we have:
   \end{tabular}
 \end{center}
 
-If the argument were invalid, there would be a line on which the first two bold values are `1' but the third is `0'.
-There is no such line, so the argument is valid.
-This helps explain why the English argument is valid: it can be regimented by a valid argument in $\PL$.
+If the argument were invalid, there would be a row on which the first two bold values are $1$ but the third is $0$.
+There is no such row, so the argument is valid.
+Put otherwise, every row in which the premises have a $1$ under their main operators is a row in which the conclusion has a $1$ under its main operator. 
+% Just as in the case of our semantic proof, we may 
+Thus the argument in $\PL$ is valid. 
 
-There are at least two advantages to evaluating a natural language argument for validity by translating it into $\PL$.
-For one thing, using truth tables to evaluate arguments is a formal method that does not require any particular rational insight or intuition.
-Although it is sometimes easy to tell whether an argument in English is valid, there are many complex arguments where it is next to impossible.
-It is an advantage to have a mechanical procedure by which to check an argument for validity that is easy to carry out without running into errors.
-A second advantage, alluded to in Chapter \ref{ch.PL-syntax}, is that regimenting English arguments in $\PL$ can help to identify a common logical form.
-For example, consider this argument:
+In this case, both the semantic proof and truth table methods require a similar amount of work.
+Given either method, we may conclude that argument in $\PL$ is valid. 
+We may then go on to explain that the English argument is valid by appealing to the fact that the English argument can be regimented by a valid argument in $\PL$.
+
+Before pressing on, it will be important to consider one more type of semantic argument which appeal to cases.
+Consider the following case:
 
 \begin{earg}
-  \item Either Barney is a purple dinosaur or I don't have a really weird-looking cat.
-  \item I do have a really weird-looking cat.
-  \item[\therefore] Barney is a purple dinosaur.
+  \eitem{Either Kat or Lu will with the race.}
+  \eitem{If Kat wins, then she will celebrate.}
+  \uitem{If Lu wins, then she will celebrate.}
+  \eitem{Either Kat or Lu will celebrate.}
 \end{earg}
 
 This argument can be regimented as follows:
 
 \begin{ekey}
-  \item[D:] Barney is a purple dinosaur.
-  \item[C:] I have a really weird-looking cat.
+  \item[$K$:] Kat will win.
+  \item[$L$:] Lu will win.
+  \item[$C_1$:] Kat will celebrate.
+  \item[$C_2$:] Lu will celebrate.
 \end{ekey}
 
 \begin{earg}
-  \item $D\eor\enot C$
-  \item $C$
-  \item[\therefore] $D$
+  \eitem{$K \eor L$}
+  \eitem{$K \eif C_1$}
+  \uitem{$L \eif C_2$}
+  \eitem{$C_1 \eor C_2$}
 \end{earg}
 
-Although we have used different sentence letters, both arguments in $\PL$ are instances of the following argument form:
+This argument may again seem plain enough since this is just the kind of day-to-day reasoning that we are all accustomed to doing.
+Nevertheless, providing a truth table would require sixteen rows.
+Although the semantic proof is easier than attempting to fill out so many rows without making any mistakes, there is no way to avoid a \textit{proof by cases}, at least insofar as we are to provide a direct proof that the argument is valid.
 
-\begin{earg}
-  \item $\metaA\eor\enot \metaB$
-  \item $\metaB$
-  \item[\therefore] $\metaA$
-\end{earg}
+Writing with slightly more concision than before, we may reason as follows:
 
-Any argument which has this logical form is valid.
-More generally, we may say that:
+\begin{quote} 
+  \textit{Proof:}
+  Let $\I$ be an arbitrary interpretation of $\PL$ where:
+    $$\V{\I}(K \eor L) = \V{\I}(K \eif C_1) = \V{\I}(L \eif C_2) = 1.$$ 
+  By the semantics for disjunction, either $\V{\I}(K) = 1$ or $\V{\I}(L) = 1$.
+  Consider:
+  
+  \textit{Case 1:}
+  Assume $\V{\I}(K) = 1$.
+  By the semantics for the conditional, it follows from the above that either $\V{\I}(K) = 0$ or $\V{\I}(C_1) = 1$, and so $\V{\I}(C_1) = 1$.
+  Thus $\V{\I}(C_1 \eor C_2) = 1$ follows from the semantics for disjunction.
 
-\factoidbox{
-Any English argument that can be regimented by a valid $\PL$ argument is valid.
-}
+  \textit{Case 2:}
+  Assume $\V{\I}(L) = 1$.
+  By the semantics for the conditional, it follows from the above that either $\V{\I}(L) = 0$ or $\V{\I}(C_2) = 1$, and so $\V{\I}(C_1) = 1$.
+  Thus $\V{\I}(C_1 \eor C_2) = 1$ follows from the semantics for disjunction.
 
-What we have not commented on is what does and does not count as a proper regimentation, where one might hope to specify this as well so as to remove all indeterminacy.
-To do so, one would have to be able to specify the logical form of English sentences and the arguments that they form.
-However, we cannot even manage to provide an account of which expressions count as English sentences, much less agree about their true logical form.
-Despite this shortcoming, it is often possible to provide natural regimentations of English arguments in $\PL$, where doing so is a matter of practice and judgement rather than the mechanical application of some broader theory.
-Even for complex arguments, it is sometimes easy to provide a valid regimentation in $\PL$ or some other formal language.
-For instance, consider the following case:
+  Thus $\V{\I}(C_1 \eor C_2) = 1$ in both cases. 
+  Since $\I$ was arbitrary, the conclusion is true on any interpretation where the premises true, and so the argument is valid. 
+  \qed
+\end{quote}
 
-\begin{earg}
-  \item Either Canada is a democracy if and only if Poland is neither part of the European Union nor majority Catholic, or my dog is not not lazy.
-  \item My dog is not lazy.
-  \item[\therefore] Canada is a democracy if and only if Poland is neither part of the European Union nor majority Catholic.
-\end{earg}
+Although the method of proof by cases is an essential tool to have in your toolkit, these proofs are often harder to read and can also be harder to write clearly.
+Accordingly, proofs by cases are to be avoided whenever possible.
+In the case above, we could have avoided introducing cases by using a \textit{reductio} argument (short for \textit{reductio ad absurdum}) instead.
 
-One could translate this argument by identifying atomic sentences, symbolising them by sentence letters, and building up the complex sentences in these terms.
-In this instance, however, that extra structure isn't needed to capture the validity of the argument.
-Instead, we can use this symbolization key:
+\begin{quote} 
+  \textit{Proof:}
+  Assume for contradiction that the argument is invalid.
+  Thus the conclusion is not a logical consequence of the premises, and so there is some interpretation $\I$ of $\PL$ where $\V{\I}(K \eor L) = \V{\I}(K \eif C_1) = \V{\I}(L \eif C_2) = 1$ and $\V{\I}(C_1 \eor C_2) = 0$. 
+  By the semantics for disjunction, both $\V{\I}(C_1) = \V{\I}(C_2) = 0$.  
 
-\begin{ekey}
-\item[A:] Canada is a democracy if and only if Poland is neither part of the European Union nor majority Catholic.
-\item[L:] My dog is not lazy.
-\end{ekey}
+  By the semantics for the material conditional, either $\V{\I}(K) = 0$ or $\V{\I}(C_1) = 1$, and similarly, either $\V{\I}(L) = 0$ or $\V{\I}(C_2) = 1$.
+  Given the above, $\V{\I}(K) = \V{\I}(L) = 0$, and so $\V{\I}(K \eor L) = 0$ by the semantics for disjunction, contradicting the above. 
+  \qed
+\end{quote}
 
-For many purposes, this would be a poor choice of symbolization keys.
-It ignores the internal structure of two central sentences.
-But if, as here, that structure is irrelevant, you can save yourself some work by engaging at a higher level of abstraction.
+This proof doesn't worry about cases and in that way is a bit easier to follow.
+Nevertheless, direct proofs are often preferable to \textit{reductio} style proofs since deriving a contradiction is not quite as explanatory as what a direct proof shows.
+Which proof strategy to try is a judgment call and it can take some practice to know which approach is best to use when.
+Even once you have chosen a basic strategy, the way that you order the steps of your proof can also have a significant effect on the clarity of your resulting proof.
+These are points that are worth considering as you practice writing clear and concise proofs in this course.
 
+So far, we have only provided semantic proofs for claims that would have required a complete truth table.
+This is no accident.
+For instance, in the case where a set of $\PL$ wfss is satisfiable, or an argument $\PL$ is valid, all we need to do is find a particular interpretation of the relevant sentence letters of $\PL$ in order to draw the desired conclusion. 
+Here we may observe that providing a partial truth table does just that, and so is often to be preferred.
+We may then go on to record a particular row of a truth table by using the notation $\I(\metaA)$ to specify a truth value for each sentence letter $\metaA$ that occurs in the truth table.
 
+% % TODO: SAVE?
+% There are at least two advantages to evaluating a natural language argument for validity by translating it into $\PL$.
+% For one thing, using truth tables to evaluate arguments is a formal method that does not require any particular rational insight or intuition.
+% Although it is sometimes easy to tell whether an argument in English is valid, there are many complex arguments where it is next to impossible.
+% It is an advantage to have a mechanical procedure by which to check an argument for validity that is easy to carry out without running into errors.
+% A second advantage, alluded to in Chapter \ref{ch.PL-syntax}, is that regimenting English arguments in $\PL$ can help to identify a common logical form.
+%
+% As we have already seen, sentences and arguments in English can be regimented in many different ways where some regimentations are better than others.
+% Accordingly, we cannot conclude that an English argument is invalid just because it has an invalid regimentation in $\PL$ since there could be a better regimentation that is valid.
+% Even when an English argument does not have any valid regimentation in $\PL$, this does not mean that it could not have a valid regimentation in some expressively more powerful language like $\FOL$ which we will study later on in this course.
+% For the time being, we will focus on regimenting and evaluating the validity of arguments in English with the resources of $\PL$.
+%
+% Arguments in English have an intended interpretation insofar as they are meaningful to us in the form they are presented purely in virtue of our understanding of English.
+% The same cannot be said for $\PL$ which includes such sentences as $A$, $\enot (B \eor \enot C)$, $A \eif \enot (B \eif C)$, etc., which do not \textit{already} mean something to us.
+% This gap is filled by: (1) providing a symbolization key which specifies the English sentences that some sentences in $\PL$ are intended to regiment; and (2) interpreting the relevant sentences of $\PL$ by specifying truth-values for the sentence letters that they contain.
+% If an argument in English can be naturally regimented by an $\PL$ argument that is valid, we have good reason to take the argument in English to be valid.
 
+% Any argument which has this logical form is valid.
+% More generally, we may say that:
+%
+% \factoidbox{
+% Any English argument that can be regimented by a valid $\PL$ argument is valid.
+% }
+%
+% What we have not commented on is what does and does not count as a proper regimentation, where one might hope to specify this as well so as to remove all indeterminacy.
+% To do so, one would have to be able to specify the logical form of English sentences and the arguments that they form.
+% However, we cannot even manage to provide an account of which expressions count as English sentences, much less agree about their true logical form.
+% Despite this shortcoming, it is often possible to provide natural regimentations of English arguments in $\PL$, where doing so is a matter of practice and judgement rather than the mechanical application of some broader theory.
+% Even for complex arguments, it is sometimes easy to provide a valid regimentation in $\PL$ or some other formal language.
+% For instance, consider the following case:
+%
+% \begin{earg}
+%   \item Either Canada is a democracy if and only if Poland is neither part of the European Union nor majority Catholic, or my dog is not not lazy.
+%   \item My dog is not lazy.
+%   \item[\therefore] Canada is a democracy if and only if Poland is neither part of the European Union nor majority Catholic.
+% \end{earg}
+%
+% One could translate this argument by identifying atomic sentences, symbolising them by sentence letters, and building up the complex sentences in these terms.
+% In this instance, however, that extra structure isn't needed to capture the validity of the argument.
+% Instead, we can use this symbolization key:
+%
+% \begin{ekey}
+% \item[A:] Canada is a democracy if and only if Poland is neither part of the European Union nor majority Catholic.
+% \item[L:] My dog is not lazy.
+% \end{ekey}
+%
+% For many purposes, this would be a poor choice of symbolization keys.
+% It ignores the internal structure of two central sentences.
+% But if, as here, that structure is irrelevant, you can save yourself some work by engaging at a higher level of abstraction.
+%
+
+%%%
 
 % \iffalse
 %
@@ -999,58 +1238,52 @@ But if, as here, that structure is irrelevant, you can save yourself some work b
 
 
 
-% %!TEX root = ../forallx-ubc.tex
-% \chapter{Logical Entailment in $\PL$}
-% \label{ch.$\PL$models}
-
-In Ch.~\ref{ch.PL-syntax} we defined the sentences of $\PL$, and in Ch.~\ref{ch.TruthTables} we defined the interpretations of $\PL$ and provided semantic clauses for the logical operators.
-Given these definitions, we are now in a position to introduce the notion of \textit{logical entailment}, relating this notion to the semantic concepts of validity, tautology, contradiction, satisfiability, and logical equivalence.
-
-
-
-
 \section{Tautologies}
 
+% TODO every sentence corresponds to a set of interpretations
+
 What should we make of the following claim:
-
-\begin{quote}
-  $P\eand Q \models A\eiff\enot\enot A$.
-\end{quote}
-
+  $$P\eand Q \vDash A\eiff\enot\enot A.$$
 Notice that the sentence letters on the left-hand-side are completely different letters from those on the right-hand-side.
 So there is a straightforward sense in which the two sides of the entailment have \emph{nothing to do with one another}.
-Nevertheless, the entailment above is true: every interpretation that satisfies the sentences on the left, also satisfes the sentence on the right for the simple reason that every interpretation whatsoever satisfies $A\eiff\enot\enot A$.
+Nevertheless, the entailment above is true: every interpretation that satisfies the sentences on the left, also satisfies the sentence on the right for the simple reason that every interpretation whatsoever satisfies $A\eiff\enot\enot A$.
+As a result, we could have dropped the wfs on the left entirely, writing:
+  $$\vDash A\eiff\enot\enot A.$$
+The claim above is short for $\varnothing\vDash A\eiff\enot\enot A$ where $\varnothing$ is a convenient notation for the empty set $\set{}$.
+Since we said above that we are often going to drop the set notation when stating logical consequences, we do not need to write the empty set at all when a wfs is a logical consequence of the empty set of wfss as above.
 
-Whereas before we said that an $\PL$ sentence $\metaA$ is a tautology just in case it was true on all interpretations of $\PL$ (equivalently, all lines of a complete truth table for that sentence), we may now define the $\PL$ tautologies in terms of entailment.
-Officially, a sentence $\metaA$ of $\PL$ is a \define{tautology} just in case $\metaA$ is entailed by the empty set, i.e., $\varnothing \models \metaA$.
-Dropping set notation, it is typical to leave off the empty set entirely, writing $\models \metaA$ for brevity.
+Whereas before we said that a wfs $\metaA$ of $\PL$ is a tautology just in case it is true, i.e., $\V{\I}(\metaA) = 1$, on all interpretations $\I$ of $\PL$, we may now define the $\PL$ tautologies in terms of logical consequence.
+Officially, a sentence $\metaA$ of $\PL$ is a \define{tautology} just in case $\metaA$ is entailed by the empty set, i.e., $\varnothing \vDash \metaA$.
+Dropping set notation, it is typical to leave off the empty set entirely, writing $\vDash \metaA$ for brevity.
 
 In order to see why this definition makes sense, we may observe that every $\PL$ interpretation satisfies the empty set $\varnothing$.
 After all, an $\PL$ interpretation $\I$ could only fail to satisfy a set $\Gamma$ of $\PL$ sentences if there were some sentence in $\Gamma$ that fails to be true on $\I$.
 Since there are no sentences in $\varnothing$, the empty set $\varnothing$ is vacuously satisfied by every $\PL$ interpretation whatsoever.
-By definition, an $\PL$ sentence $\metaA$ is entailed by the empty set (i.e., $\models \metaA$) just in case every interpretation to satisfy the empty set $\varnothing$ also satisfies $\metaA$.
+By definition, an $\PL$ sentence $\metaA$ is entailed by the empty set (i.e., $\vDash \metaA$) just in case every interpretation to satisfy the empty set $\varnothing$ also satisfies $\metaA$.
 Since we have shown that every interpretation satisfies the empty set, this is equivalent to claiming that every $\PL$ interpretation satisfies $\metaA$. 
-Thus, $\models \metaA$ if and only if $\V{\I}(A)=1$ for all $\PL$ interpretations $\I$.   
+Thus, $\vDash \metaA$ if and only if $\V{\I}(A)=1$ for all $\PL$ interpretations $\I$.   
 
 Consider the following claims:
 
 \begin{earg}
-  \item[] $\models P \eor \enot P$
-  \item[] $\models P \eiff P$
-  \item[] $\models (P \eand\enot P)\eif (A \eor B)$
+  \item[] $\vDash P \eor \enot P$
+  \item[] $\vDash P \eiff P$
+  \item[] $\vDash (P \eand\enot P)\eif (A \eor B)$
 \end{earg}
 
 Although for different reasons, each of the entailments above are true, and so the $\PL$ sentences on the right are tautologies.
 For contrast, the following claims are not tautologies:
 
 \begin{earg}
-  \item[] $\models P$
-  \item[] $\models P \eand \enot P$
-  \item[] $\models \enot(P \eif \enot P)$
+  \item[] $\vDash P$
+  \item[] $\vDash P \eand \enot P$
+  \item[] $\vDash \enot(P \eif \enot P)$
 \end{earg}
 
 If you ever want to compute whether a sentence is a tautology, you can always write out its truth table.
 This can be practical so long as it does not include too many sentence letters.
+
+% TODO show that the logical consequences of a finite set of sentences can be encoded by tautologies
 
 
 
@@ -1061,7 +1294,7 @@ This can be practical so long as it does not include too many sentence letters.
 
 Having defined what it is for a sentence to be a tautology in terms of entailment, it is natural to consider how we might use the notion of entailment to define what it is for a sentence to be a contradiction.
 Here it will help to begin by considering the following entailment:
-$$P \eand \enot P \models Q.$$
+$$P \eand \enot P \vDash Q.$$
 This statement is true.
 It says that every interpretation satisfying $P \eand \enot P$ also satisfies $Q$.
 This follows vacuously since no interpretation satisfies $P \eand \enot P$, and so every interpretation which satisfies $P \eand \enot P$ (all zero of them) also satisfies $Q$.
@@ -1069,33 +1302,33 @@ Or to take another approach, think about what it would take for the entailment a
 But there are no interpretations that satisfy $P \eand \enot P$, and so the entailment above is true.
 
 Observe that the reason that the entailment above is true has nothing to do with the sentence $Q$.
-Thus the same considerations would demonstrate that $P \eand \enot P \models \metaA$ for any sentence \metaA of $\PL$.
+Thus the same considerations would demonstrate that $P \eand \enot P \vDash \metaA$ for any sentence \metaA of $\PL$.
 Moreover, the same conclusion holds were we to replace $P \eand \enot P$ with any other $\PL$ sentence that is not true on any interpretation.
 For instance, consider:
 
 \begin{earg}
-\item[] $A \eand \enot A \models \enot Q \eif R$.
-\item[] $\enot (P \eor \enot P) \models (A_1 \eor A_2) \eif \enot (A_3 \eiff (A_4 \eand \enot A_2))$.
+\item[] $A \eand \enot A \vDash \enot Q \eif R$.
+\item[] $\enot (P \eor \enot P) \vDash (A_1 \eor A_2) \eif \enot (A_3 \eiff (A_4 \eand \enot A_2))$.
 \end{earg}
 
 Since there are no interpretations that satisfy the sentences on the left, you do not need to examine the sentence on the right to confirm that the entailment claims above are true.
 Given that the sentences on the right do not matter, it would be nice to have a way to represent that the sentences on the left entail any sentence whatsoever.
 There are two common ways to do this, but both make use of the same notation where $\Gamma$ is a set of $\PL$ sentences:
-$$\Gamma \models \bot.$$
+$$\Gamma \vDash \bot.$$
 One way to interpret the entailment above is as a universal claim that $\Gamma$ entails every sentence of $\PL$ whatsoever. 
 Another way to interpret this entailment is to take `$\bot$' to abbreviate some particular sentence of $\PL$ (it doesn't matter which) that is not true on any $\PL$ interpretation.
 These conventions turn out to amount to the very same thing.
 For simplicity, we will assume the latter convention where `$\bot$' abbreviates `$A \eand \enot A$' for definiteness.
 
-A sentence $\Gamma$ of $\PL$ is \define{unsatisfiable} just in case $\Gamma \models \bot$.
+A sentence $\Gamma$ of $\PL$ is \define{unsatisfiable} just in case $\Gamma \vDash \bot$.
 In order to see why this definition makes sense, we may show that a set of $\PL$ sentences $\Gamma$ is unsatisfiable just in case there is no $\PL$ interpretation $\I$ which satisfies $\Gamma$.
-To do so, suppose that $\Gamma$ is unsatisfiable, and so $\Gamma \models \bot$.
+To do so, suppose that $\Gamma$ is unsatisfiable, and so $\Gamma \vDash \bot$.
 It follows that every $\PL$ interpretation that satisfies $\Gamma$ also satisfies $\bot$.
 However, by design, there is no interpretation that satisfies $\bot$.
 Thus there is no $\PL$ interpretation $\I$ that satisfies $\Gamma$, for otherwise $\I$ would have to satisfy $\bot$.
 Conversely, suppose that there is no $\PL$ interpretation $\I$ that satisfies $\Gamma$.
 It follows vacuously that every $\PL$ interpretation that satisfies $\Gamma$ (all zero of them) also satisfies $\bot$.
-Hence $\Gamma \models \bot$, and so $\Gamma$ is unsatisfiable.
+Hence $\Gamma \vDash \bot$, and so $\Gamma$ is unsatisfiable.
 This shows that $\Gamma$ is unsatisfiable if and only if there is no $\PL$ interpretation $\I$ that satisfies $\Gamma$.
 % Haven taken unsatisfiability to be the basic notion, we may now define a set of $\PL$ sentences $\Gamma$ to be \define{satisfiable} just in case $\Gamma$ is not unsatisfiable. 
 It follows that $\Gamma$ is \define{satisfiable} just in case there is an $\PL$ interpretation $\I$ that satisfies $\Gamma$.
@@ -1103,13 +1336,13 @@ It follows that $\Gamma$ is \define{satisfiable} just in case there is an $\PL$ 
 Consider the following examples:
 
 \begin{earg}
-\item[] $A \eand \enot A \models \bot$.
-\item[] $P, \enot P \models \bot$.
-\item[] $P \eiff Q, Q \eiff\enot P \models \bot$.
+\item[] $A \eand \enot A \vDash \bot$.
+\item[] $P, \enot P \vDash \bot$.
+\item[] $P \eiff Q, Q \eiff\enot P \vDash \bot$.
 \end{earg}
 
 The sets of sentences on the left of each entailment above are unsatisfiable.\footnote{Recall that we have omitted set notation for ease of exposition.}
-As a special case, we may say that an $\PL$ sentence $\metaA$ is a \define{contradiction} just in case its singleton set $\set{\metaA}$ is unsatisfiable, i.e., $\metaA \models \bot$.
+As a special case, we may say that an $\PL$ sentence $\metaA$ is a \define{contradiction} just in case its singleton set $\set{\metaA}$ is unsatisfiable, i.e., $\metaA \vDash \bot$.
 Whereas contradictions are sentences of $\PL$, only \textit{sets} of sentences of $\PL$ may be said to be unsatisfiable.
 Nevertheless, it follows by the weakening principle given above that any set of $\PL$ sentences which contains a contradiction is unsatisfiable.
 By contrast, there are lots of unsatisfiable sets of sentences that do not contain contradictions.
@@ -1118,16 +1351,16 @@ Nevertheless, the set $\set{P \eiff Q, Q \eiff \neg P}$ is unsatisfiable.
 Compare the following examples to those given above:
 
 \begin{earg}
-\item[] $(P \eor \enot P) \models\bot$
-\item[] $P, \enot Q, (R \eor Q) \models\bot$
-\item[] $\enot P, \enot Q, (P \eif \enot\enot Q) \models\bot$
+\item[] $(P \eor \enot P) \vDash\bot$
+\item[] $P, \enot Q, (R \eor Q) \vDash\bot$
+\item[] $\enot P, \enot Q, (P \eif \enot\enot Q) \vDash\bot$
 \end{earg}
 
 Since the sentences on the left can be satisfied, the three entailments given above are false.
 
 % TODO transition
 
-Recall that the definition of satisfiability given in $\S\ref{sub:PL-Satisfiability}$ appealed to complete truth-tables: a set of $\PL$ sentences $\Gamma$ is \define{satisfiable} just in case there is at least one line of a complete truth table including every sentence in $\Gamma$ on which all of the sentences in $\Gamma$ are true.
+Recall that the definition of satisfiability given in $\S\ref{sub:PL-Satisfiability}$ appealed to complete truth tables: a set of $\PL$ sentences $\Gamma$ is \define{satisfiable} just in case there is at least one line of a complete truth table including every sentence in $\Gamma$ on which all of the sentences in $\Gamma$ are true.
 Alternatively, we may avoid appealing to complete truth tables by saying that a set of $\PL$ sentences $\Gamma$ is \define{satisfiable} just in case there is an interpretation $\I$ of $\PL$ where every sentence in $\Gamma$ is true, i.e., $\V{\I}(\metaA)$ for all $\metaA$ in $\Gamma$.\label{def.PL-satisfiability}
 Accordingly, we may show that any set of $\PL$ sentences $\Gamma$ is satisfiable just in case it is satisfiable. 
 Put otherwise, satisfiability and satisfiablility have the same \textit{extension} insofar as they apply to the very same sets of $\PL$ sentences.
@@ -1142,18 +1375,18 @@ If there is no row which assigns a `1` to every sentence in the set, then the se
 \section{Weakening}
 
 If the right-hand-side of an entailment claim is a tautology, it doesn't matter what's on the left for the entailment to hold.
-For instance, given that $\models P \eor \enot P$, we may conclude that $Q \models P \eor \enot P$.
+For instance, given that $\vDash P \eor \enot P$, we may conclude that $Q \vDash P \eor \enot P$.
 More generally, we may observe the following:
-$$\text{If}~ \Gamma \models \metaA, ~\text{then}~ \Gamma \cup \Sigma\models \metaA.$$
+$$\text{If}~ \Gamma \vDash \metaA, ~\text{then}~ \Gamma \cup \Sigma\vDash \metaA.$$
 This principle is referred to as \define{weakening}.
-As a special case (i.e., $\Gamma=\varnothing$), we may conclude that if $\metaA$ is a tautology (i.e., $\models \metaA$), then every set of $\PL$ sentences $\Sigma$ entails $\metaA$ (i.e., $\Sigma \models \metaA$).
+As a special case (i.e., $\Gamma=\varnothing$), we may conclude that if $\metaA$ is a tautology (i.e., $\vDash \metaA$), then every set of $\PL$ sentences $\Sigma$ entails $\metaA$ (i.e., $\Sigma \vDash \metaA$).
 
 In particular, we may draw the following conclusions from the entailments above:
 
 \begin{earg}
-  \item[] $Q \models P \eor \enot P$
-  \item[] $R \eif (Q \eand \enot Q)\models P \eiff P$
-  \item[] $A \eand \enot A \models (P \eand\enot P)\eif (A \eor B)$
+  \item[] $Q \vDash P \eor \enot P$
+  \item[] $R \eif (Q \eand \enot Q)\vDash P \eiff P$
+  \item[] $A \eand \enot A \vDash (P \eand\enot P)\eif (A \eor B)$
 \end{earg}
 
 In $\S\ref{sec:entailment}$, we said that if an argument is valid, then its premises entail its conclusion.
@@ -1318,30 +1551,30 @@ Each of the following claims can be evaluated with truth tables. For each, what 
 \begin{earg}
 		\item[0.] $\Phi$ is a tautology.
 		To evaluate this claim, check to see whether the main operator of $\Phi$ has a 1 under it in every row. If so, it is true.
-		\item $\Phi \models \Psi$. 
+		\item $\Phi \vDash \Psi$. 
 		To evaluate this claim, check to see whether... 
 		
 		\item $\Phi$ is contingent.
-\item $\Phi \models \bot$
-		\item $\emptyset \models \Phi$
+\item $\Phi \vDash \bot$
+		\item $\emptyset \vDash \Phi$
 	\end{earg}
 
 
 \problempart
 Determine whether each entailment claim is true. You may construct a truth table to test it if you like, but these examples are simple enough so that you may be able to just think it through and get the right answer.
 \begin{earg}
-\item $Q \models (P \eor Q)$
-\item $P, Q \models (P \eor P)$
-\item $P \eiff Q, P \models Q$ %  \textcolor{red}{True.}
-\item $S \models (Q \eif Q)$   %\textcolor{red}{True.}
-\item $P \eand \enot P \models (Q \eor \enot Q)$%   \textcolor{red}{True.}
-\item $(P \eand \enot P) \models (Q \eand \enot Q)$
-\item $(P \eor \enot P) \models \bot$
-\item $(P \eor \enot P) \models Q$%   \textcolor{red}{False: $\{P=1, Q=0\}$.}
-\item $\models (P \eor \enot P)$
-\item $\models (P \eand \enot P)$
-\item $(A \eor B) \eif \enot P \models (P \eor \enot P)$
-\item $(P \eiff Q) \models ((P \eand Q) \eor \enot (P \eor Q))$
+\item $Q \vDash (P \eor Q)$
+\item $P, Q \vDash (P \eor P)$
+\item $P \eiff Q, P \vDash Q$ %  \textcolor{red}{True.}
+\item $S \vDash (Q \eif Q)$   %\textcolor{red}{True.}
+\item $P \eand \enot P \vDash (Q \eor \enot Q)$%   \textcolor{red}{True.}
+\item $(P \eand \enot P) \vDash (Q \eand \enot Q)$
+\item $(P \eor \enot P) \vDash \bot$
+\item $(P \eor \enot P) \vDash Q$%   \textcolor{red}{False: $\{P=1, Q=0\}$.}
+\item $\vDash (P \eor \enot P)$
+\item $\vDash (P \eand \enot P)$
+\item $(A \eor B) \eif \enot P \vDash (P \eor \enot P)$
+\item $(P \eiff Q) \vDash ((P \eand Q) \eor \enot (P \eor Q))$
 \end{earg}
 
 \fi 

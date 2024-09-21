@@ -1,0 +1,249 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{../lecture} %calls local modified style file
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs} %%Math packages
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{multicol} 
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage{prooftrees} 
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep={}}
+
+\makeatletter
+\renewcommand{\maketitle}{
+\begin{flushright}
+{\LARGE\@title}
+
+\vspace{10pt}
+
+{\@author}
+\\ \@date
+\end{flushright}
+
+\vspace{-20pt}
+
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Semantic Proofs}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+\section*{From Before\ldots}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Semantics:] For any interpretation $\I$ of $\PL$, the \textsc{valuation} function $\V{\I}$ from the wfs of $\PL$ to truth-values is defined:
+    \item $\V{\I}(\metaA)=\I(\metaA)$ if $\metaA$ is a sentence letter of $\PL$.
+    \item $\V{\I}(\enot\metaA)=1$ iff $\V{\I}(\metaA)=0$~~ (i.e., $\V{\I}(\metaA)\neq 1$).
+    \item $\V{\I}(\metaA \eand \metaB)=1$ iff $\V{\I}(\metaA)=1$ and $\V{\I}(\metaB)=1$.
+    \item $\V{\I}(\metaA \eor \metaB)=1$ iff $\V{\I}(\metaA)=1$ or $\V{\I}(\metaB)=1$ (or both).
+    \item $\V{\I}(\metaA \eif \metaB)=1$ iff $\V{\I}(\metaA)=0$ or $\V{\I}(\metaB)=1$ (or both).
+    \item $\V{\I}(\metaA \eiff \metaB)=1$ iff $\V{\I}(\metaA)=\V{\I}(\metaB)$.
+\end{itemize}
+
+
+
+
+
+\section*{Formal Definitions}
+
+\begin{itemize}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Interpretation:] $\I$ is an \textit{interpretation} of $\PL$ \textit{iff} $\I(\metaA) \in \set{1, 0}$ for every sentence letter $\metaA$ of $\PL$. 
+  \item[\it Tautology:] $\metaA$ is a \textit{tautology iff} $\V{\I}(\metaA) = 1$ for all $\I$.
+  \item[\it Contradiction:] $\metaA$ is a \textit{contradiction iff} $\V{\I}(\metaA) = 0$ for all $\I$.
+  \item[\it Logically Contingent:] $\metaA$ is \textit{contingent iff} $\V{\I}(\metaA) \neq \V{\J}(\metaA)$ for some $\I$ and $\J$.
+  \item[\it Logical Entailment:] $\metaA$ \textit{entails} $\metaB$ \textit{iff} $\V{\I}(\metaA) \leq \V{\I}(\metaB)$ for all $\I$.
+  \item[\it Logical Equivalence:] $\metaA$ is \textit{equivalent} to $\metaB$ \textit{iff} $\V{\I}(\metaA) = \V{\I}(\metaB)$ for all $\I$.
+  \item[\it Satisfiable:] $\MetaG$ is \textit{satisfiable iff} $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$ for some $\I$.
+  \item[\it Logical Consequence:] \mbox{$\MetaG \vDash \metaA$ \textit{iff} $\V{\I}(\metaA) = 1$ whenever $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$.}
+\end{itemize}
+
+
+
+\section*{Satisfiability}
+
+\noindent
+Which sets of sentences are satisfiable?
+
+\subsection*{\it \textbf{Taller}}
+
+\begin{enumerate}
+  \item[(1)] Liza is taller than Sue.
+  \item[(2)] Sue is taller than Paul.
+  \item[(3)] Paul is taller than Liza.
+\end{enumerate}
+
+
+
+
+\subsection*{\it \textbf{Lost}}
+
+\begin{enumerate}
+  \item[(4)] Kim is either in Somerville or Cambridge.
+  \item[(5)] If Kim is in Somerville, then she is not far from home.
+  \item[(6)] If Kim is not far from home, then she is in Cambridge.
+  \item[(7)] Kim is not in Cambridge.
+\end{enumerate}
+
+
+
+
+
+
+\section*{Validity}
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Arguments:] Sequences of wfss of $\PL$, not sets. 
+  % \item[\bf Question:] How do validity and logical consequence relate?
+  \item[\it Valid:] For any argument, it is valid \textit{iff} its conclusion is a logical consequence of its set of premises.
+    \item Many arguments may have the same set of premises.
+    \item An argument is valid \textit{iff} its conclusion is true in every interpretation $\I$ of $\PL$ to satisfy the set of premises. 
+  \item[\it Tautology:] A wfs $\metaA$ of $\PL$ is a \textit{tautology} just in case $\vDash \metaA$.
+    \item Every $\I$ of $\PL$ satisfies the empty set.
+    \item Each premise constrains the set of interpretations the conclusion must be true in where the empty set has no constraints.
+  \item[\it Weakening:] If $\MetaG \vDash \metaA$, then $\MetaG \cup \Sigma \vDash \metaA$.
+    \item Each wfs of $\PL$ corresponds to a set of all interpretations which make that sentence true: $\vert{\metaA} \coloneq \set{\I : \V{\I}(\metaA) = 1}$.
+    \item Is the interpretation set for the conclusion a subset of the intersection of the premise interpretation sets?
+\end{itemize}
+
+
+
+
+
+
+\section*{Examples}
+
+\begin{enumerate}
+  \item Show that $\enot R \eif \enot Q,\ P \eand Q \vDash P \eand R$.
+  \item Show that $A \eor B,\ B \eif C,\ A \eiff C \vDash C$.
+  \item Show that $P,\ P \eif Q,\ \enot Q \vDash A$.
+  \item Show that $(P \eif Q) \eiff (\enot Q \eif \enot P)$ is a tautology.
+  \item Show that $A \eiff \enot A$ is a contradiction.
+  \item Show that $\{P,\ P \eif Q,\ Q \eif \enot P\}$ is unsatisfiable. 
+  \item Show that $\set{P \eif Q,\ \enot P \eor \enot Q,\ Q \eif P}$ is satisfiable.
+  \item[\bf Observe:] There seem to be patterns.
+  \item[\bf Question:] How could we systematize these proofs?
+\end{enumerate}
+
+
+
+
+\section*{Methods}
+
+\begin{itemize}[leftmargin=1.2in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Truth Tables:] Mechanical but tedious.
+    \item Bad if there are lots of sentence letters.
+    \item Good for counterexamples.\\
+      $A \eiff (B \eif C),\ A \eand \enot B,\ D \eor \enot A\ \vDash C$.
+  \item[\it Semantic Arguments:] Good if there are lots of sentence letters.\\
+        $(A \eor B) \eif (C \eand D),\ \enot C \eand \enot E\ \vDash \enot A$.
+\end{itemize}
+
+
+
+
+\section*{The Material Conditional}
+
+\subsubsection*{\it \textbf{Roses}}
+
+\begin{earg}
+  \uitem{Sugar is sweet.}
+  \eitem{The roses are only red if sugar is sweet.}
+\end{earg}
+
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  % \item[\bf Task:] Regiment this argument and construct its truth table.
+  \item[\bf Observe:] First paradox of the material conditional.
+\end{itemize}
+
+
+
+
+\subsubsection*{\it \textbf{Vacation}}
+
+\begin{earg}
+  \uitem{Casey is not on vacation.}
+  \eitem{If Casey is on vacation, then he is in Paris.}
+\end{earg}
+
+
+\begin{itemize}[leftmargin=1in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  % \item[\bf Task:] Regiment this argument and construct its truth table.
+  \item[\bf Observe:] Second paradox of the material conditional.
+\end{itemize}
+
+
+
+
+
+
+
+\subsubsection*{\it \textbf{Crimson}}
+
+\begin{earg}
+  \eitem{Mary doesn't like the ball unless it is crimson.}
+  \uitem{Mary likes the ball.}
+  \eitem{If the ball is blue, then Mary likes it.}
+\end{earg}
+
+
+
+
+
+
+\section*{The Biconditional}
+
+\subsubsection*{\it \textbf{Rectangle}}
+
+\begin{earg}
+  \eitem{The room is a square.}
+  \uitem{The room is a rectangle.}
+  \eitem{The room is a square if and only if it is a rectangle.}
+\end{earg}
+
+
+
+
+
+\subsubsection*{\it \textbf{Work}}
+
+\begin{earg}
+  \eitem{Kin isn't a professor.}
+  \uitem{Sue isn't a chef.}
+  \eitem{Kin is a professor just in case Sue is a chef.}
+\end{earg}
+
+
+
+
+
+
+
+
+\end{document}
+

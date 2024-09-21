@@ -1,0 +1,193 @@
+% % TREE STUFF
+%
+% \section*{Resolution Rules}
+%
+% \begin{enumerate}
+%   \item[\it Root:] A \textit{root} is any finite sequence of SL sentences.
+%   % \item[\it Ordered Dyadic Tree:] An \textit{ordered dyadic tree} (\textsc{odt}) of SL sentences may be defined recursively:
+%   %   \begin{enumerate}
+%   %     \item[\it Base:] Any root $X$ is an \textsc{odt} of SL whose final sentence is the only leaf in $X_L$.
+%   %     \item[\it Recursion:] If $X$ is an \textsc{odt} of SL, then the result $X'$ of extending any leaf $\varphi$ in $X_L$ by adding at most two branches to SL sentences $\psi$ and $\chi$ is an \textsc{odt} of SL where $X'_L=(X_L/\set{\varphi})\cup\set{\psi,\chi}$.
+%   %   \end{enumerate}
+%   \item[\it Tree:] An SL \textit{tree} consists of a root followed by any number of applications of the resolution rules given below:
+% \end{enumerate}
+%
+%
+% \begin{multicols}{2}
+%   
+% \subsection*{\bf \textit{Conjunction}}
+%
+% \hspace{.2in}
+%   \begin{prooftree}
+%     {not line numbering}
+%     [\varphi\wedge\psi
+%       [\varphi,
+%       [\psi, grouped
+%       ]
+%       ]
+%     ]
+%   \end{prooftree}
+% \hspace{.2in}
+%   \begin{prooftree}
+%     {not line numbering,
+%     single branches}
+%     [\neg(\varphi\wedge\psi)
+%       [\neg\varphi]
+%       [\neg\psi]
+%     ]
+%   \end{prooftree}
+%
+%
+%
+%
+%
+% \subsection*{\bf \textit{Disjunction}}
+%
+% \hspace{.2in}
+%   \begin{prooftree}
+%   {not line numbering,
+%   single branches}
+%   [\varphi\vee\psi
+%     [\varphi]
+%     [\psi]
+%   ]
+%   \end{prooftree}
+% \hspace{.2in}
+%   \begin{prooftree}
+%   {not line numbering}
+%   [\neg(\varphi\vee\psi)
+%     [\neg\varphi,
+%     [\neg\psi, grouped
+%     ]
+%     ]
+%   ]
+%   \end{prooftree}
+%
+%
+%
+%
+%
+%   \subsection*{\bf \textit{Double Negation}}
+%
+% \hspace{.2in}
+%   \begin{prooftree}
+%     {not line numbering, single branches}
+%     [\neg\neg\varphi
+%       [\varphi, grouped]
+%     ]
+%   \end{prooftree}
+%
+%
+%
+%
+%
+% \subsection*{\bf \textit{The Material Conditional}}
+%
+% \hspace{.2in}
+%   \begin{prooftree}
+%   {not line numbering,
+%   single branches}
+%   [\varphi\supset\psi
+%     [\neg\varphi]
+%     [\psi]
+%   ]
+%   \end{prooftree}
+% \hspace{.2in}
+%   \begin{prooftree}
+%   {not line numbering}
+%   [\neg(\varphi\supset\psi)
+%     [\varphi,
+%     [\neg\psi, grouped
+%     ]
+%     ]
+%   ]
+%   \end{prooftree}
+%
+%
+%
+%
+%
+% \subsection*{\bf \textit{The Biconditional}}
+%
+% \hspace{.2in}
+%   \begin{prooftree}
+%     {not line numbering,
+%     single branches}
+%     [\varphi\equiv\psi
+%       [\varphi
+%         [\psi, grouped]
+%       ]
+%       [\neg\varphi
+%         [\neg\psi, grouped]
+%       ]
+%     ]
+%   \end{prooftree}
+% \hspace{.2in}
+%   \begin{prooftree}
+%     {not line numbering,
+%     single branches}
+%     [\varphi\equiv\psi
+%       [\varphi
+%         [\neg\psi, grouped]
+%       ]
+%       [\neg\varphi
+%         [\psi, grouped]
+%       ]
+%     ]
+%   \end{prooftree}
+%
+% \end{multicols}
+%
+%
+% \vspace{.1in}
+% \begin{enumerate}
+%   \item[\it Child:] A \textit{child} of $\varphi$ in an SL tree is any sentence $\psi$ immediately following $\varphi$.
+%   \item[\it Leaf:] A \textit{leaf} in an SL tree is any sentence which does not have a child.
+%   \item[\it Branch:] A \textit{branch} in an SL tree is any sequence of sentences beginning with the root of the tree and ending with a leaf of the tree where every sentence in the sequence besides the first is a child of its predecessor.
+%   \item[\it Note:] Officially, an SL tree is an \textit{ordered dyadic tree} of SL sentences where every sentence in the tree either belongs to the root, or results from resolving one of its ancestors.
+% \end{enumerate}
+%
+%
+%
+%
+%
+% \section*{Closure and Completion}
+%
+% \begin{enumerate}
+%   \item[\it Branch Closure:] A branch in an SL tree is \textit{closed} just in case it includes $\varphi$ and $\neg \varphi$ for some SL sentence $\varphi$, and \textit{open} otherwise.
+%   \item[\it Tree Closure:] A tree is \textit{closed} just in case every branch is closed, and \textit{open} otherwise.
+%   \item[\it Resolvable:] A sentence is \textit{resolvable} in a branch just in case it has a resolution rule and the branch is open.
+%   \item[\it Resolved:] A sentence is \textit{resolved} in a branch just in case the resolution rule for that sentence has been applied in that branch.
+%   % \item[\it Resolved:] A sentence in an SL tree is \textit{resolved} just in case it is resolved in every branch in which it is resolvable.
+%   \item[\it Branch Completion:] A branch is \textit{complete} just in case every resolvable sentence in that branch has been resolved in that branch.
+%   \item[\it Tree Completion:] A tree is \textit{complete} if and only if every branch in the tree is complete.
+% \end{enumerate}
+%
+%
+%
+%
+% \section*{Derivability}
+%
+% \begin{enumerate}
+%   \item[\it STL:] $\Gamma \vdash \bot$ just in case there is a closed tree with root $\Gamma$. 
+%   \item[\it Derivability:] $\Gamma \vdash \varphi$ just in case $\Gamma,\neg\varphi \vdash \bot$.
+%   \item[\bf Question 1:] Why should we care about $\vdash$?
+%   \item[\it Answer:] So far, we shouldn't, but soon we will show that: $\Gamma \vdash \varphi$ iff $\Gamma \vDash \varphi$. 
+%   \item[\it Suppose:] Let's suppose $\Gamma \vdash \varphi$ iff $\Gamma \vDash \varphi$ for now. 
+%   \item[\bf Question 2:] How can we determine whether $\Gamma$ is satisfiable?
+%   \item[\it Answer:] Show that $\Gamma \nvdash \bot$.
+% \end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

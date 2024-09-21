@@ -11,9 +11,9 @@
   - [:] chapter 1
     - [x] revise
     - [x] make Philipp's suggestions
-    - [ ] polish
-  - [ ] chapter 2
-    - [ ] revise
+    - [x] polish
+  - [.] chapter 2
+    - [.] revise
   - [ ] chapter 3
   - [ ] chapter 4
   - [ ] chapter 5

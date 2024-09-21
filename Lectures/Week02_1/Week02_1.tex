@@ -1,5 +1,6 @@
 \documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
 \usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{../lecture} %calls local modified style file
 \usepackage{graphicx} % Required for including pictures
 \usepackage{wrapfig} % Allows in-line images
 \usepackage{enumitem} %%Enables control over enumerate and itemize environments
@@ -14,39 +15,27 @@
 \usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
 \setcitestyle{aysep={}}
 
-% \linespread{1} % Change line spacing here, Palatino benefits from a slight increase by default
-
-\newcommand{\corner}[1]{\ulcorner#1\urcorner} %%Corner quotes
-\newcommand{\tuple}[1]{\langle#1\rangle} %%Angle brackets
-\newcommand{\set}[1]{\lbrace#1\rbrace} %%Set brackets
-\newcommand{\interpret}[1]{\llbracket#1\rrbracket} %%Double brackets
-%\DeclarePairedDelimiter\ceil{\lceil}{\rceil}    
-\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
-\newcommand{\I}{\mathcal{I}}
-\newcommand{\V}[1]{\mathcal{V}_{#1}} %%Corner quotes
-
 \makeatletter
-\renewcommand\@biblabel[1]{\textbf{#1.}} % Change the square brackets for each bibliography item from '[1]' to '1.'
-\renewcommand{\@listI}{\itemsep=0pt} % Reduce the space between items in the itemize and enumerate environments and the bibliography
+\renewcommand{\maketitle}{
+\begin{flushright}
+{\LARGE\@title}
 
-\renewcommand{\maketitle}{ % Customize the title - do not edit title and author name here, see the TITLE block below
-\begin{flushright} % Right align
-{\LARGE\@title} % Increase the font size of the title
+\vspace{10pt}
 
-\vspace{10pt} % Some vertical space between the title and author name
-
-{\@author} % Author name
-\\\@date % Date
-
-\vspace{-10pt} % Some vertical space between the author block and abstract
+{\@author}
+\\ \@date
 \end{flushright}
+
+\vspace{-20pt}
+
 }
+\makeatother
 
 %----------------------------------------------------------------------------------------
 %	TITLE
 %----------------------------------------------------------------------------------------
 
-\title{\textbf{Logical Entailment}} % Subtitle
+\title{\textbf{Logical Consequence}} % Subtitle
 
 \author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
 
@@ -62,184 +51,97 @@
 
 %----------------------------------------------------------------------------------------
 
-% NOT USED LAST TIME
 
-% \section*{The Material Conditional}
-%
-% \subsubsection*{\it \textbf{Roses}}
-%
-% \begin{earg}
-%   \uitem{Sugar is sweet.}
-%   \eitem{The roses are only red if sugar is sweet.}
-% \end{earg}
-%
-%
-% \begin{itemize}[leftmargin=1in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
-%   % \item[\bf Task:] Regiment this argument and construct its truth table.
-%   \item[\bf Observe:] First paradox of the material conditional.
-% \end{itemize}
-%
-%
-%
-%
-% \subsubsection*{\it \textbf{Vacation}}
-%
-% \begin{earg}
-%   \uitem{Casey is not on vacation.}
-%   \eitem{If Casey is on vacation, then he is in Paris.}
-% \end{earg}
-%
-%
-%
-%
-%
-% \subsubsection*{\it \textbf{Crimson}}
-%
-% \begin{earg}
-%   \eitem{Mary doesn't like the ball unless it is crimson.}
-%   \uitem{Mary likes the ball.}
-%   \eitem{If the ball is blue, then Mary likes it.}
-% \end{earg}
-%
-%
-%
-%
-%
-%
-% \section*{The Biconditional}
-%
-% \subsubsection*{\it \textbf{Rectangle}}
-%
-% \begin{earg}
-%   \eitem{The room is a square.}
-%   \uitem{The room is a rectangle.}
-%   \eitem{The room is a square if and only if it is a rectangle.}
-% \end{earg}
-%
-%
-%
-%
-%
-% \subsubsection*{\it \textbf{Work}}
-%
-% \begin{earg}
-%   \eitem{Kin isn't a professor.}
-%   \uitem{Sue isn't a chef.}
-%   \eitem{Kin is a professor just in case Sue is a chef.}
-% \end{earg}
+\section*{From Last Time\ldots}
 
-
-% \section*{Logical Consequence}
-%
-% \begin{itemize}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
-%   \item[\it Logical Truths:] $\metaA$ is a \textsc{tautology} of $\PL$ iff $\V{\I}(\metaA) = 1$ for all $\I$. 
-%   \item[\it Logical Falsehoods:] $\metaA$ is a \textsc{contradiction} of $\PL$ iff $\V{\I}(\metaA) = 0$ for all $\I$. 
-%   \item[\it Logical Entailment:] $\metaA$ \textsc{logically entails} $\metaB$ iff $\V{\I}(\metaA) \leq \V{\I}(\metaB)$ for all $\I$. 
-%   \item[\it Logical Consequence:] \mbox{$\Gamma \vDash \metaA$ iff $\V{\I}(\metaA)=1$ for all $\I$ where $\V{\I}(\gamma)=1$ for all $\gamma \in \Gamma$.}
-%   \item[\bf Question:] Which arguments might we hope to show to have valid regimentations in $\PL$?
-% \end{itemize}
-
-
-  % \item[\it Truth:] Soundness reaches beyond the scope of any logic course since truth on an interpretation requires subject-specific knowledge.
-  % \item[\it Tautology:] We can talk about sentences of formal languages being \textit{tautologies} just in case they are true on all interpretations.
-  % \item[\it Contradiction:] A sentence is a \textit{contradiction} just in case it is false on all interpretations.
-  % \item[\it Logical Entailment:] One sentence \textit{logically entails} another just in case every interpretation in which the former is true also makes the latter true.
-  % \item[\it Logical eiffalence:] One sentence is \textit{logically eiffalent} to another just in case they logically entail each other.
-  % \item[\it Consistency:] A set of sentences is \textit{consistent} just in case there is an interpretation which makes every sentence in the set true, and \textit{inconsistent} otherwise.
+\begin{itemize}[leftmargin=1in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Semantics:] For any interpretation $\I$ of $\PL$, the \textsc{valuation} function $\V{\I}$ from the wfs of $\PL$ to truth-values is defined:
+    \item $\V{\I}(\metaA)=\I(\metaA)$ if $\metaA$ is a sentence letter of $\PL$.
+    \item $\V{\I}(\neg\metaA)=1$ iff $\V{\I}(\metaA)=0$~~ (i.e., $\V{\I}(\metaA)\neq 1$).
+    \item $\V{\I}(\metaA \eand \metaB)=1$ iff $\V{\I}(\metaA)=1$ and $\V{\I}(\metaB)=1$.
+    \item $\V{\I}(\metaA \eor \metaB)=1$ iff $\V{\I}(\metaA)=1$ or $\V{\I}(\metaB)=1$ (or both).
+    \item $\V{\I}(\metaA \eif \metaB)=1$ iff $\V{\I}(\metaA)=0$ or $\V{\I}(\metaB)=1$ (or both).
+    \item $\V{\I}(\metaA \eiff \metaB)=1$ iff $\V{\I}(\metaA)=\V{\I}(\metaB)$.
+  \item[\it Characteristic Truth Tables:] As drawn in the textbook\ldots
+  % \item[\it Complexity:] $\comp{\metaA}$ is the function from the wfss of $\PL$ to the natural number $\N$ which satisfies the following for any wfss $\metaA$ and $\metaB$ of $\PL$ and $\star \in \set{\eand, \eor, \eif, \eiff}$: 
+  %   \item $\comp{\metaA} = 0$ if $\metaA$ is a sentence letter; 
+  %   \item $\comp{\enot\metaA} = \comp{\metaA} + 1$; and
+  %   \item $\comp{\metaA \star \metaB} = \comp{\metaA} + \comp{\metaB} + 1$.
+\end{itemize}
 
 
 
 
-\section*{Logical Entailment}
 
-\begin{enumerate}[leftmargin=1.2in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
-  % \item[\it Soundness:] An argument is \textit{sound} just in case it is both valid and has true premises.
-  % \item[\it Truth:] Soundness reaches beyond the scope of any logic course since truth on an interpretation requires subject-specific knowledge.
-  \item[\it Satisfaction:] An interpretation $\I$ of SL \textit{satisfies} a set of SL sentences $\Gamma$ \textit{iff} $\V{\I}(\varphi)=1$ for all $\varphi \in \Gamma$. Derivatively, an interpretation $\I$ of SL \textit{satisfies} a sentence $\varphi$ of SL \textit{iff} $\I$ satisfies $\set{\varphi}$.
-  \item[\it Logical Entailment:] $\Gamma \vDash \varphi$ \textit{iff} every SL interpretation $\I$ that satisfies $\Gamma$ also satisfies $\varphi$.
-  \item[\it Validity:] An argument in SL is \textit{valid} just in case its conclusion is true in any interpretation in which its premises are true.
-  \item[\it Question:] How are we to describe the space of all valid arguments?
-  \item[\it Answer:] In terms of entailment.
-  \item[\bf Task 1:] Show that validity and entailment are distinct:
+
+
+\section*{Complete Truth Tables}
+
+\begin{itemize}[leftmargin=.75in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Setup:] Write the sentence on the top right, add the constituent sentence letters on the left, and use the characteristic truth tables.
+  \item[\it Constituents:] We define $[\metaA]$ to be the set of sentence letters that occur in $\metaA$: % by taking $[\cdot]:\text{SL}\to\mathcal{P}(\text{SL})$ to be the smallest function to satisfy:
+      \item $[\metaA]=\set{\metaA}$ if $\metaA$ is a sentence letter of $\PL$.
+      \item For any wfss $\metaA$ and $\metaB$ of $\PL$, and $\star \in \set{\eand,\eor,\eif,\eiff}$: 
     \begin{itemize}
-      \item $\Gamma \vDash \varphi$ does not determine a unique argument. 
-      \item Entailment does not order the premises.
-      \item Entailment admits of infinitely many premises.
-      \item Entailment admits of no premises.
+      \item[$(\neg)$] $[\neg \metaA]=[\metaA]$;
+      \item[$(\hspace{1pt}\star\hspace{1pt})$] $[\metaA \star \metaB]=[\metaA] \cup [\metaB]$;
     \end{itemize}
-  \item[\it Tautology:] An SL sentence $\varphi$ is a \textit{tautology} just in case $\vDash \varphi$.
-  \item[\it Weakening:] If $\Gamma \vDash \varphi$, then $\Gamma \cup \Sigma \vDash \varphi$.
-\end{enumerate}
+  \item[\it Rows:] Add $2^n$ rows for $n$ constituent sentence letters.
+  \item[\bf Examples:] $[A \eand (B \eor A)] \eif A$, $C \eiff \enot C$, $D$.
+  \item[\it Tautology:] Only $1$s under its main connective in its complete truth table.
+  \item[\it Contradiction:] Only $0$s under its main connective in its complete truth table.
+  % \item[\it Sets of wfss:] Can construct a complete truth table in a similar fashion. 
+  \item[\it Logically Contingent:] A $1$ and a $0$ under its main connective in its complete truth table.
+  \item[\it Logical Entailment:] On any row of a complete truth table, the consequent has a $1$ under its main connective whenever the antecedent does. 
+  \item[\it Logical equivalence:] Identical columns under the main connectives for the sentences.
+  \item[\it Satisfiable:] There is a row where all wfss have a $1$ under all main connectives. 
+  \item[\it Logical Consequence:] The conclusion has a $1$ under its main connective in every row in which every premise has a $1$ under its main connectives.
+\end{itemize}
 
 
 
 
-\section*{Unsatisfiable}
 
-\begin{enumerate}[leftmargin=1.2in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
-  \item[\it Absurdity:] A contradiction entails everything: $A \wedge \neg A \vDash B$. 
-  \item[\it Bottom:] Let `$\bot$' abbreviate any contradiction.
-  \item[\it Unsatisfiable:] A sentence is \textit{unsatisfiable} just in case $\Gamma \vDash \bot$.
-  \item[\bf Task 2:] Show that a set of SL sentences is unsatisfiable just in case no SL interpretation satisfies it.
-  \item[\it Consistency:] Recall: a set of SL sentences is \textit{consistent} just in case there is a line on the complete truth table for those sentences which makes them all true, and \textit{inconsistent} otherwise.
-  \item[\bf Task 3:] Show that consistency and satisfiability are co-extensional.
-\end{enumerate}
+\section*{Decidability}
 
-
-
-\section*{Examples}
-
-\noindent
-Which sets of sentences are consistent? (e.g., is $\set{(1),(2)}$ consistent?)
-
-\subsection*{\it \textbf{Taller}}
-
-\begin{enumerate}
-  \item[(1)] Liza is taller than Sue.
-  \item[(2)] Sue is taller than Paul.
-  \item[(3)] Paul is taller than Liza.
-\end{enumerate}
-
-
-
-
-\subsection*{\it \textbf{Lost}}
-
-\begin{enumerate}
-  \item[(4)] Kim is either in Somerville or Cambridge.
-  \item[(5)] If Kim is in Somerville, then she is not far from home.
-  \item[(6)] If Kim is not far from home, then she is in Cambridge.
-  \item[(7)] Kim is not in Cambridge.
-\end{enumerate}
+\begin{itemize}[leftmargin=.75in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
+  \item[\it Effective Procedure:] A finitely describable and (in principle) usable procedure that always finishes and produces a correct answer to the question asked, requiring only that the instructions be followed accurately.
+  \item[\bf Question:] How to define the main operators and distribute truth-values?
+    \item Recursively, like the formation rules for the wfs of $\PL$.
+  \item[\bf Question:] Is it always possible to construct a complete truth table for a wfs?
+    \item Sentences have a finite number of constituent sentence letters.
+  \item[\it Decidable:] If there is an effective procedure for determining the answer to a question, that question is \textit{decidable}.
+    \item It is decidable whether a wfs of $\PL$ is a tautology, etc. 
+  \item[\bf Question:] What about a complete truth table for a set of sentences?
+    \item Could require infinitely many sentence letters.
+    \item We might be able to define an infinite table, but we can't use it.
+  \item[\bf Question:] If one procedure is not effective, couldn't there be another one?
+    \item It turns out that there is no effective procedure\ldots
+    \item There is always an effective procedure for finite sets of sentences.
+  \item[\it Validity:] So the validity of finite arguments is decidable.
+\end{itemize}
 
 
 
 
 
 
-\section*{Methods}
+\section*{Partial Truth Tables}
 
-\begin{enumerate}[leftmargin=1.2in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
-  \item[\it Truth Tables:] Mechanical but tedious.
-  \begin{itemize}
-    \item Bad if there are lots of sentence letters.
-    \item Good for counterexamples.\\
-      $A \equiv (B \supset C),\ A \wedge \neg B,\ D \vee \neg A\ \therefore C$.
-  \end{itemize}
-  \item[\it Semantic Arguments:] Good if there are lots of sentence letters.\\
-        $(A \vee B) \supset (C \wedge D),\ \neg C \wedge \neg E\ \therefore \neg A$.
-  \item[\bf Task 4:] Provide a semantic argument.
-  \item[\it Inference Rules:] Suppose we were to schematize inferences.
-    \begin{itemize}
-      \item $\varphi \wedge \psi\ \vdash \varphi$.
-      \item $\neg \varphi\ \vdash \neg(\varphi \wedge \psi)$.
-      \item $\varphi \supset \psi,\ \neg \psi\ \vdash \neg \varphi$.
-      \item $\neg(\varphi \vee \psi)\ \vdash \neg \varphi$.
-    \end{itemize}
-  \item[\it Observe:] Rules are valid.
-  \item[\bf Task 5:] Use rules to derive above.
-  \item[\it Proof Theory:] How many rules are there, and how should we describe the space of all of them?
-\end{enumerate}
+\begin{itemize}[leftmargin=.75in,labelsep=.15in]
+  \item[\bf Worry 1:] It is not \textit{that} effective\ldots\ in practice it is daunting for $n > 4$.
+  \item[\it Partial Truth Tables:] Sometimes only one or two lines are needed.
+    \item $A \eif \enot (A \eor B)$: not a tautology or contradiction, so contingent. 
+    \item $B \eiff \enot (A \eor B)$ is a contradiction, so we need a complete table. 
+    \item $C \eor (A \eif A)$ is a tautology, so we need a complete table. 
+  \item[\it Complete:] To affirm equivalence, entailment, and logical consequence.
+  \item[\it Partial:] To affirm that a set is satisfiable.
+  \item[\bf Worry 2:] Still daunting sometimes.
+  \item[\bf Worry 3:] Definitions all refer to complete truth tables.
+    \item Definition of a complete truth table has some minor ambiguities.
+    \item These could be fixed, but the result is cumbersome.
+  \item[\it Heuristic:] The truth table definitions are best taken to be a heuristic guide for grasping the abstract definitions we may now provide.
+\end{itemize}
 
 
 
@@ -248,89 +150,6 @@ Which sets of sentences are consistent? (e.g., is $\set{(1),(2)}$ consistent?)
 
 
 
-
-% \subsection*{\it \textbf{Roses}}
-%
-% \begin{earg}
-%   \item[(1)] Sugar is sweet.
-%   \item[] Roses are only red if sugar is sweet.
-% \end{earg}
-%
-%
-%
-%
-% \subsection*{\it \textbf{Vacation}}
-%
-% \begin{earg}
-%   \item[(1)] Casey is not on vacation.
-%   \item[] If Casey is on vacation, then he is in Paris.
-% \end{earg}
-%
-%
-%
-%
-%
-% \subsection*{\it \textbf{Crimson}}
-%
-% \begin{earg}
-%   \item[(1)] Mary only likes the ball if it is crimson.
-%   \item[(2)] Mary likes the ball.
-%   \item[] If the ball is blue, then Mary likes it.
-% \end{earg}
-%
-%
-%
-%
-%
-%
-% \section*{Biconditional}
-%
-% \subsection*{\it \textbf{Rectangle}}
-%
-% \begin{earg}
-%   \item[(1)] The room is a square.
-%   \item[(2)] The room is a rectangle.
-%   \item[] The room is a square if and only if it is a rectangle.
-% \end{earg}
-%
-%
-%
-%
-%
-% \subsection*{\it \textbf{Roses}}
-%
-% \begin{earg}
-%   \item[(1)] Kin isn't a professor.
-%   \item[(2)] Sue isn't a chef.
-%   \item[] Kin is a professor just in case Sue is a chef.
-% \end{earg}
-
-
-
-% \section*{Examples}
-%
-% \noindent
-% Which sets of sentences are consistent? (e.g., is $\set{(1),(2)}$ consistent?)
-%
-% \subsection*{\it \textbf{Taller}}
-%
-% \begin{enumerate}
-%   \item[(1)] Liza is taller than Sue.
-%   \item[(2)] Sue is taller than Paul.
-%   \item[(3)] Paul is taller than Liza.
-% \end{enumerate}
-%
-%
-%
-%
-% \subsection*{\it \textbf{Lost}}
-%
-% \begin{enumerate}
-%   \item[(4)] Kim is either in Somerville or Cambridge.
-%   \item[(5)] If Kim is in Somerville, then she is not far from home.
-%   \item[(6)] If Kim is not far from home, then she is in Cambridge.
-%   \item[(7)] Kim is not in Cambridge.
-% \end{enumerate}
 
 
 

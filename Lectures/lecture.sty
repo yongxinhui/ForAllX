@@ -6,6 +6,7 @@
 \def\eif{\ensuremath{\rightarrow}}
 \def\eiff{\ensuremath{\leftrightarrow}}
 \def\enot{\ensuremath{\neg}}
+\renewcommand{\vert}[1]{\lvert#1\rvert}
 \newcommand{\corner}[1]{\ulcorner#1\urcorner} %%Corner quotes
 \newcommand{\concat}[2]{{#1}{\raisebox{4pt}{\smallfrown}}{#2}} %%Corner quotes
 \newcommand{\tuple}[1]{\langle#1\rangle} %%Corner quotes
@@ -34,9 +35,13 @@
 \def\metaA{\ensuremath{\varphi}}
 \def\metaB{\ensuremath{\psi}}
 \def\metaC{\ensuremath{\chi}}
+\def\metaG{\ensuremath{\gamma}}
 \def\metaSetX{\ensuremath{\Gamma}}
 \def\metaSetY{\ensuremath{\Sigma}}
 \def\metaSetZ{\ensuremath{\varPhi}}
+\def\MetaG{\ensuremath{\Gamma}}
+\def\MetaS{\ensuremath{\Sigma}}
+\def\MetaP{\ensuremath{\varPhi}}
 
 \newcounter{eargletter} % Counter for the environment (resets per section)
 \renewcommand{\theeargletter}{\Alph{eargletter}} % Use capital letters for the counter
