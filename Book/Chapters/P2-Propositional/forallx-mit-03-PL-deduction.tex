@@ -1,50 +1,129 @@
-%!TEX root = ../forallx-ubc.tex
-\chapter{Natural Deduction Proofs in SL}
+%!TEX root = ../../forallx-mit.tex
+\chapter{Natural Deduction}
 \label{ch.ND.proofs}
 
 %JRH to-do: add in some \ellipsesline commands in the proofs 
 %take out stuff in strategy about rules of replacement! not legal in SND! 
 
-This chapter introduces a different proof system for Sentential Logic (SL) than the tree method.
-The tree method has advantages and disadvantages.
-One advantage of trees is that, for the most part, they can be produced in a purely mechanical way where no flash of insight is necessary.
-Another advantage is that producing a complete open tree provides a recipe for constructing an interpretation that satisfies the root.
-A disadvantage of the tree method is that trees do not provide an intuitive line of reasoning from the premises to the conclusion. 
-Although a closed tree shows that the premises together with the negation of the conclusion leads to a contradiction, we don't learn what it is about the premises which lead to the conclusion.
-Remember that logic is the study of logically valid arguments, and it would be nice if our proof system gave us a way to argue from the premises to the conclusion in logically valid ways that nevertheless resemble natural forms of reasoning.
+This chapter introduces a natural deduction proof system for $\PL$ which we will refer to as \textit{Propositional Logic} (PL).
+This is the logic of sentences which aims to describe formal reasoning which is valid in virtue of the logical form of the sentences involved where the syntactic primitives are all sentences and sentential operators.
+In future chapters, we will introduce \textit{First-Order Logic} (FOL) for $\FOL$ which includes predicates, constants, variables, and quantifiers. 
+Until then, we will continue to restrict attention to what can be expressed with the resources included in $\PL$.
+Accordingly, PL does not aim to describe \textit{all} formal reasoning, but rather only the formal reasoning that can be carried out in $\PL$.
 
-Providing such a system of \define{natural deduction} (SD) for SL is the aim of the present chapter.
-By contrast with the tree method, SD is intended to model human reasoning, illustrating the connections between various claims.
-Consequently, working through a natural deduction proof requires a bit more insight than a tree proof does.
-Although natural deduction proofs can be used to prove that an argument is valid, natural deduction system will not tell you if an argument is invalid, nor will it produce an interpretation that invalidates the argument.
-That is, there is no equivalent to a completed open tree in natural deduction.
+In Chapter \ref{ch.PL-semantics}, the logical consequence relation $\vDash$ provided a first answer to the question of what logic aims to study.
+Additionally, we presented the truth table method and semantic proof method for establishing which logical consequences hold and which do not.
+Nevertheless, these methods leave something to be desired.
+To begin with, we saw just how poorly the truth table method scales with the number of sentence letters, making this method practically infeasible for more than four sentence letters.
+Although the semantic proof method did not face this same problem, semantic proofs were often cumbersome to write where their construction was completely unconstrained.
+That is, we never said, and indeed cannot say, what counts as an adequate semantic proof.
+Rather, these proofs took place in our metalanguage mathematical English, a language that we admitted has not clear cut boundaries or rules.
 
-Despite these disadvantages, there is good reason to care about natural deduction systems. % independent of what metalogical properties they may be shown to have.
-Recall that the only reason we provided for caring about SL tree proofs is that the tree proof system was shown to be sound and complete.
-Accordingly, tree proofs can be used to determine something that we already care about, i.e., which SL arguments are logically valid.
-By contrast, we may argue that the natural deduction rules included in SD are forced upon us by the meanings of the connectives included in SL.
-For instance, given that $A\eand B$, one may deduce $A$ since what it is for a conjunction like $A\eand B$ to be true is for both of its conjuncts to be true, and so in particular we may conclude that $A$ is true. 
-Given a compelling range of inference rules for each of the connectives in SL, one may ask whether it is possible to argue from the premises to the conclusion.
-This is to ask whether an argument is \textit{deductively valid}, where knowing the answer to such a question holds interest independent of what metalogical properties the natural deduction system in question may be shown to have.
+% % TREE LOGIC
+% Whereas the previous chapter provided two methods 
+% The tree method has advantages and disadvantages.
+% One advantage of trees is that, for the most part, they can be produced in a purely mechanical way where no flash of insight is necessary.
+% Another advantage is that producing a complete open tree provides a recipe for constructing an interpretation that satisfies the root.
+% A disadvantage of the tree method is that trees do not provide an intuitive line of reasoning from the premises to the conclusion. 
+% Although a closed tree shows that the premises together with the negation of the conclusion leads to a contradiction, we don't learn what it is about the premises which lead to the conclusion.
 
-It will turn out that there is a natural deduction derivation in SD corresponding to every valid SL argument.
-Put otherwise, SD is, like the tree method, complete.
-Moreover, there are no derivations in SD of a conclusion that fails to be entailed by its premises, and so SD is also sound.
-Nevertheless, when an argument is invalid, there is no way to use SD to see that it is valid.
-Instead, we get stuck trying different ways to derive the conclusion from the premises, though in the case of an invalid argument, no such attempt will succeed.
+Recall the strategies for writing semantic proofs that we began to describe in the previous chapter.
+For instance, these included proof by contradiction and proof by cases.
+This raises a question about what are \textit{all} of the strategies that one might employ along these lines.
+More than strategies, we want to know what are all of the moves that we can make when writing a proof, and what inferences are absolutely basic and cannot be subdivided into further steps.
+Questions of these kinds lead to a completely different approach to our present inquiry into the nature of formal reasoning.
+Instead of asking what is a logical consequence of what by quantifying over the interpretations of a language, we may seek to describe a collection of basic inferences, chaining these together in order to say what can be derived from what.
+% By contrast to the semantic (or model theoretic) approach that we have already seen, 
+This chapter will be concerned to answer this question by providing a proof theory for $\PL$.
 
-In what follows, we will introduce ten basic derivation rules for our five logical connectives in SL.
-Each connective will have an introduction and an elimination rule where, taken together, these rules may be taken to capture a certain dimension of the \textit{meaning} of that connective.
-In particular, the introduction and elimination rules describe how to reason with each connective.
-There is also a trivial rule which lets you reiterate an earlier line in the proof.
-This corresponds to the idea that we can always conclude $A$ if $A$ is true.
-However trivial, such an inference rule will turn out to have an important role to play in our proof system.
+Although Chapter \ref{ch.introduction} considered a number of arguments in English, we observed that natural languages do not have well-defined boundaries, frustrating any attempt to say something completely general about \textit{all} sentences and arguments in English.
+Chapter \ref{ch.PL-syntax} avoided this problem by presenting the artificial language $\PL$ which has a well-defined notion of a wfs that we may use to regiment English sentences and arguments.
+Although regimentation itself remains a matter of judgment with no definite answers, this method nevertheless provided a way to identify the logical forms that explain why certain patterns of reasoning in English are especially compelling.
+In particular, we defined the interpretations of $\PL$ to be functions from the wfss of $\PL$ to truth-values, drawing on this definition in order to introduce logical consequence along with a number of other logical properties and relations.
+However, none of this would have been possible were we to attempt these definitions for English.
+ 
+In just the same way that it was important to work with an artificial language in order to provide a mathematically precise definition of logical consequence, it will also be important to draw on a well-defined language in order to describe the basic inferences that hold in virtue of their logical forms.
+Rather than introducing another artificial language, we will continue to work with $\PL$ maintaining all of the definitions from before in order to provide the proof theory PL, also called a \textit{logic}, for reasoning in $\PL$. 
+Functionally, you can think of PL as including rules somewhat akin to the proof strategies and steps that we used in writing informal proofs before, only now they will take a precise mathematical form.
 
-The following section will present the basic rules of inference included in SD.
-Given these rules, we will be in a position to provide a precise definition of a proof in SD.
-In contrast to trees, SD proofs are sequences of sentences satisfying certain properties.
-Already there is something much more natural about sequences of sentences instead of trees.
-After all, natural reasoning takes place in time, and time is linear.
+What of our informal proofs from before?
+Are they to be trusted given that they are written in the vague natural language English together with some mathematical conventions? 
+What of mathematics proofs in general which are also written in this kind of language?
+Are these really mere approximations whose validity is only to be accounted for by regimenting them in some more precise language?
+You might be surprised to know that the answer is `No'.
+
+Rather than encoding some final truth, the logical systems that we will present are better understood to be abstractions from the intuitive bedrock from which we must begin: natural language, and in our case, English.
+After all, how would you ever hope to learn what the sentential operators (much less the sentence letters) of $\PL$ mean? 
+The semantic answer we provided above used mathematical English to do so, and this was no mistake since meanings have to get going somewhere and in this respect $\PL$ is no place to begin.
+
+Instead of undercutting the meanings that you understand in English, introducing formal languages provides a way to distill certain elements of meaning that we have reason to care about even if they depart from their natural correlates. 
+In analogy, you can think of this like refining the raw materials found in nature into the sorts of materials that are of considerable use to us in constructing the build environment.
+Rather than the material world, our concern is with the conceptual world, and what we are doing here is a kind of conceptual engineering.
+Of course, these are only metaphors, but hopefully they help to shed some light on what we have been doing and will continue to do throughout this course.
+In particular, it is important to appreciate that English cannot be given up any more than the natural world around us.
+Accordingly, we will continue to write informal proofs to establish claims about our object language $\PL$.
+Soon we will have an analogue for also proving things \textit{in} $\PL$.
+
+Whereas the semantic clauses for $\PL$ drew on our grasp of certain elements of mathematical English in order to provide a systematic way to interpret the wfss of $\PL$, this chapter will also draw on mathematical English in order describe how to reason in $\PL$.
+One way to think about our target here is to contemplate the extension of the logical consequence relation $\vDash$.
+That is, think of the set of ordered pairs which relate any set of wfss of $\PL$ to a further wfs of $\PL$ where the latter is a logical consequence of the former, or in set notation: $\set{\tuple{\MetaG, \metaA} : \MetaG \vDash \metaA}$.
+Needless to say, this is a large, though not unruly space.
+Although our definition of logical consequence $\vDash$ provides an essential account of this space of logical consequences, it is hard work to check which wfss are logical consequences of which sets of wfss of $\PL$. 
+Thus it would be convenient to streamline the process by which we may determine whether $\MetaG \vDash \metaA$.
+
+As with all of our methods, writing formal proofs with PL has its range of natural applications where sometimes it is more trouble than it is worth and a semantic proof would have been better.
+Nevertheless, convenience is not our only motivation.
+Rather, what we should like to describe are the most basic inferences that make up the practice of formal reasoning, composing those inferences in order to not only say what follows from what in virtue of logical form, but also how. % from a radically different perspective.
+Of course, not any rational seeming maneuvers ought to be included.
+In particular, we will require the basic inferences that make up PL to be valid.
+This is referred to as \textit{soundness}: if $\metaA$ can be inferred from $\MetaG$, then $\metaA$ is a logical consequence of $\MetaG$. 
+However, this is not all of what we want.
+Rather, we also want our basic inferences to be inherently compelling.
+Put otherwise, we are look to find the atoms that make up formal reasoning.
+
+Insofar as the proof systems that we will be concerned with in this course aim to encode the natural patterns of formal reasoning, we will refer to these systems as \define{natural deduction} systems.
+In particular, PL is a natural deduction system for $\PL$ where later chapters will present a natural deduction system for $\FOL$.
+These systems provide a way to argue from the premises to a conclusion in logically valid ways while resembling natural forms of reasoning.
+In addition to being familiar, reasoning in this way helps to illustrate the logical connections between various claims in a way that is compelling \textit{on its own terms}.
+That is, you don't have to take a course in logic or learn the semantics for an artificial language in order to appreciate the patterns of reasoning that we will consider, finding them compelling.
+
+% TREE STUFF
+% By contrast with the tree method, PL is intended to model human reasoning, 
+% Consequently, working through a natural deduction proof requires a bit more insight than a tree proof does.
+% Although natural deduction proofs can be used to prove that an argument is valid, natural deduction system will not tell you if an argument is invalid, nor will it produce an interpretation that invalidates the argument.
+% That is, there is no equivalent to a completed open tree in natural deduction.
+%
+% Despite these disadvantages, there is good reason to care about natural deduction systems. % independent of what metalogical properties they may be shown to have.
+% Recall that the only reason we provided for caring about $\PL$ tree proofs is that the tree proof system was shown to be sound and complete.
+% Accordingly, tree proofs can be used to determine something that we already care about, i.e., which $\PL$ arguments are logically valid.
+% By contrast, we may argue that the natural deduction rules included in PL are forced upon us by the meanings of the connectives included in $\PL$.
+% For instance, given that $A\eand B$, one may deduce $A$ since what it is for a conjunction like $A\eand B$ to be true is for both of its conjuncts to be true, and so in particular we may conclude that $A$ is true. 
+% Given a compelling range of inference rules for each of the connectives in $\PL$, one may ask whether it is possible to argue from the premises to the conclusion.
+% This is to ask whether an argument is \textit{deductively valid}, where knowing the answer to such a question holds interest independent of what metalogical properties the natural deduction system in question may be shown to have.
+%
+% It will turn out that there is a natural deduction derivation in PL corresponding to every valid $\PL$ argument.
+% Put otherwise, PL is, like the tree method, complete.
+% Moreover, there are no derivations in PL of a conclusion that fails to be entailed by its premises, and so PL is also sound.
+% Nevertheless, when an argument is invalid, there is no way to use PL to see that it is valid.
+% Instead, we get stuck trying different ways to derive the conclusion from the premises, though in the case of an invalid argument, no such attempt will succeed.
+
+In what follows, we will introduce ten basic derivation rules for the five sentential operators in $\PL$.
+Each operator will have an introduction and an elimination rule which, taken together, describe a certain dimension of the \textit{meaning} of that operator.
+In particular, the introduction and elimination rules describe how to reason with the operators in $\PL$.
+There is also a rule for introducing assumptions and a trivial rule for reiterating earlier lines of a proof.
+% This corresponds to the idea that we can always conclude $A$ if $A$ has already been derived.
+% However trivial reiteration, such an inference rule will turn out to have an important role to play in our proof system.
+Given these twelve rules in all, we will be in a position to provide a precise definition of a proof in PL, where it is for this reason that PL is referred to as a proof system, or \textit{logic} for $\PL$.
+
+As finite and familiar as all of this will turn out to be, PL may nevertheless be shown to have some remarkable properties.
+In addition to showing that $\metaA$ is a logical consequence of $\MetaG$ whenever $\metaA$ can be proved from $\MetaG$, we will also show that nothing is missing: our proof system is capable of deriving \textit{all} logical consequences whatsoever. 
+That is, PL is \textit{complete} in addition to being \textit{sound}.
+We will prove these results in later chapters.
+
+% The following section will present the basic rules of inference included in PL.
+% In contrast to trees, PL proofs are sequences of sentences satisfying certain properties.
+% Already there is something much more natural about sequences of sentences instead of trees.
+% After all, natural reasoning takes place in time, and time is linear.
 
 
 
@@ -56,8 +135,8 @@ After all, natural reasoning takes place in time, and time is linear.
 % If you can use the rules to derive a sentence from what you have already written down, then you can add this derived sentence on a new numbered line.
 % If, following the rules, you manage to derive the conclusion from the premises, then you've shown that the argument from the premises to the conclusion is \textit{deductively valid}.
 %
-% We will provide a precise definition of a proof in SD once we have introduced the basic rules of inference.
-% However, to get a sense of things, consider the following SL arguments:
+% We will provide a precise definition of a proof in PL once we have introduced the basic rules of inference.
+% However, to get a sense of things, consider the following $\PL$ arguments:
 %
 % \begin{multicols}{2}
 % \emph{Modus Ponens:}
@@ -92,9 +171,9 @@ After all, natural reasoning takes place in time, and time is linear.
 \section{Premises and Assumptions}
 \label{sec:PremiseAssumption}
 
-Before introducing the rules, it will help to get a sense of what SD proofs look like in order to articulate some important constraints on the lines to which a rule may appeal.
+Before introducing the rules, it will help to get a sense of what PL proofs look like in order to articulate some important constraints on the lines to which a rule may appeal.
 
-A SD proof begins with a (possibly empty) list of premises, where these will be indicated by writing `:PR' on the right.
+A PL proof begins with a (possibly empty) list of premises, where these will be indicated by writing `:PR' on the right.
 It is often helpful to also include a note of what we want to derive.
 For instance, consider the following list of premises:
 \begin{fitchproof}
@@ -228,7 +307,7 @@ Consider the rule for \textit{conjunction introduction} ($\eand$I):
 	\have[\ ]{c}{\metaA{}\eand\metaB{}} \ai{a, b}
 \end{proof}}
 
-This rule says that if any SL sentences $\metaA$ and $\metaB$ are on live lines, you may derive their conjunction $\metaA \eand \metaB$.
+This rule says that if any $\PL$ sentences $\metaA$ and $\metaB$ are on live lines, you may derive their conjunction $\metaA \eand \metaB$.
 It is worth noting that $m$ and $n$ need not be consecutive lines, nor do they need to appear in the order listed.
 We require only that each line has been established somewhere in the proof, and that both lines are live at the line of application.
 
@@ -384,7 +463,7 @@ We may then construct the following proof:
 	\have{con}{(A \eand B) \eor (A \eand C)}\oe{boc, b-abo, c-aco}
 	\end{fitchproof}
 As natural as the rules may seem in isolation, it is not always obvious how to put them together to get from some premises to a conclusion.
-The ability to construct SD proofs requires practice like any skill, and we'll cover some strategies for finding proofs at the end of the chapter.
+The ability to construct PL proofs requires practice like any skill, and we'll cover some strategies for finding proofs at the end of the chapter.
 Nevertheless, once a natural deduction proof has been constructed, each step is easy to justify, making the derivation in total impervious to doubts.
 Moreover, this certainty does not stem from any semantic considerations.
 Rather, the proof rules are directly justified by our intuitive understanding of how to use the logical connectives in our language.
@@ -413,7 +492,7 @@ We may regiment this argument as a natural deduction proof by starting with one 
 	\end{fitchproof}
 We may now make an additional assumption $L$ for `Ludwig is libertarian'.
 In common parlance, we might say something like, ``suppose for the sake of argument,'' or in writing informal proofs, we might say, ``assume for conditional proof.''
-However, in our proof system SD, we will indicate that we are adding an assumption by writing `AS' on the right, where it is often helpful to also include `for $\eif$Intro' as a note to yourself or your reader.
+However, in our proof system PL, we will indicate that we are adding an assumption by writing `AS' on the right, where it is often helpful to also include `for $\eif$Intro' as a note to yourself or your reader.
 	\begin{fitchproof}
 		\hypo{r}{R} \pr{}
 		\open
@@ -739,15 +818,15 @@ In this case, we establish that $\enot P$ follows from the assumption that $\eno
 Even though $P$ occurs on a live line, we must use the reiteration rule in order to include $P$ in our subproof.
 Only then may we draw $Q$ as a conclusion by way of negation elimination. 
 
-This concludes our discussion of the rules of SD.
-In the following section we will move to discuss some of the mistakes that are easy to make in first learning to write SD proofs.
+This concludes our discussion of the rules of PL.
+In the following section we will move to discuss some of the mistakes that are easy to make in first learning to write PL proofs.
 
 
 
 % \section{Exact Matches}
 %
 % Conditional elimination, as well as all of our other natural deduction rules, are syntactically defined.
-% That is to say, the application of the rules depends on the exact shape of the SL sentences in question.
+% That is to say, the application of the rules depends on the exact shape of the $\PL$ sentences in question.
 % Here, again, is the formal statement of the rule:
 %
 % \begin{proof}
@@ -756,7 +835,7 @@ In the following section we will move to discuss some of the mistakes that are e
 % 	\have[\ ]{b}\metaB{} \ce{ab,a}
 % \end{proof}
 %
-% It says that any time one has, on one line, a sentence made up of some sentence \metaA{}, followed by the `\eif' symbol, followed by some sentence \metaB{}, where one also has \metaA{} on another line, one may derive \metaB{}. This is the only pattern of inference that this rule permits. \metaA{} and \metaB{} can be any sentences of SL, but a line justified by Conditional Elimination must fit this pattern exactly. It is not enough that one can `just see' that a given sentence follows via a similar pattern of inference.
+% It says that any time one has, on one line, a sentence made up of some sentence \metaA{}, followed by the `\eif' symbol, followed by some sentence \metaB{}, where one also has \metaA{} on another line, one may derive \metaB{}. This is the only pattern of inference that this rule permits. \metaA{} and \metaB{} can be any sentences of $\PL$, but a line justified by Conditional Elimination must fit this pattern exactly. It is not enough that one can `just see' that a given sentence follows via a similar pattern of inference.
 %
 % For example, this is \emph{not} a legal derivation in our system:
 %
@@ -768,7 +847,7 @@ In the following section we will move to discuss some of the mistakes that are e
 %
 % The Conditional Elimination rule requires that the new sentence derived be the consequent of the conditional cited. But in this example, $B$ is not the consequent of $P\eif (A \eand B)$ --- $A \eand B$ is. It is true that $B$ obviously follows from $A \eand B$, but the Conditional Elimination rule doesn't allow you to derive things just because they obviously follow. (Neither does any other rule in our formal system.) To derive $B$ from these premises we'll need to use another rule. (In particular, we will want to use the Conjunction Elimination rule, given below.)
 %
-% To check to make sure you are applying the rules correctly, one good heuristic is to think about whether you are relying on the rule itself, or on your intuitive understanding of the meanings of the symbols we use in SL. Your intuitive understanding is a good way to think about which rules to use, but to check to make sure you're using the rules properly, think about whether the rules' exact formulations could explain why it is permissible to extend the derivation in the exact way you're working with. Pretend, for instance, that you have no idea what the `\eif' symbol means, but you do know that if you have two sentences joined by it on one line, and the first of those two sentences on another line, then you are allowed to copy down the second sentence exactly on a new line. This --- and no more --- is what the Conditional Elimination rule permits you to do. (This is what we mean when we say the rule is syntactically defined.) It would be pretty trivial to write a computer program to check to see whether a line is properly derived via Conditional Elimination (unlike us, computers are VERY good at following rules, since computers are defined via rules).
+% To check to make sure you are applying the rules correctly, one good heuristic is to think about whether you are relying on the rule itself, or on your intuitive understanding of the meanings of the symbols we use in $\PL$. Your intuitive understanding is a good way to think about which rules to use, but to check to make sure you're using the rules properly, think about whether the rules' exact formulations could explain why it is permissible to extend the derivation in the exact way you're working with. Pretend, for instance, that you have no idea what the `\eif' symbol means, but you do know that if you have two sentences joined by it on one line, and the first of those two sentences on another line, then you are allowed to copy down the second sentence exactly on a new line. This --- and no more --- is what the Conditional Elimination rule permits you to do. (This is what we mean when we say the rule is syntactically defined.) It would be pretty trivial to write a computer program to check to see whether a line is properly derived via Conditional Elimination (unlike us, computers are VERY good at following rules, since computers are defined via rules).
 
 
 \section{Subproofs}
@@ -898,13 +977,13 @@ By contrast, the reiteration rule R requires you to cite an individual line that
 
 However obvious these mistakes may seem, it can be tempting to bend the rules when writing natural deduction proofs.
 This is like bending the rules while playing chess: you simply are no longer playing chess, but rather moving chess pieces around a boards in a manner that is no longer constrained by the rules of chess, or any other game for that matter.
-So in writing your own proofs in SD, keep these rules in mind, sticking to them precisely.
+So in writing your own proofs in PL, keep these rules in mind, sticking to them precisely.
 
 
 
 
 \section{Proof Strategy}
-\label{sec.SL.ND.strategy}
+\label{sec.PL.ND.strategy}
 
 So far the examples have been simple, but perhaps you can already get a sense of the strategy that natural deduction proofs sometimes require.
 For instance, although it is always permissible to open a subproof with any assumption, there is some strategy involved in picking a useful assumption.
@@ -917,7 +996,7 @@ However, it will not be helpful to do so until you have reached something useful
 Once the subproof is closed, you can only cite the entire subproof in a justification for a line following that subproof.
 Those rules that call for a subproof, or multiple subproofs, require that the last line of the subproof is a sentence of some form or other.
 For instance, you are only allowed to cite a subproof for $\eif$I if the line you are justifying is of the form $\metaA \eif \metaB$, $\metaA$ is the assumption of your subproof, and $\metaB$ is the last line of your subproof.
-This constrains the strategies that one might hope to employ in attempting to construct proof in SD.
+This constrains the strategies that one might hope to employ in attempting to construct proof in PL.
 
 Getting good at natural deduction will take some practice.
 The good news is that natural deduction proofs are a lot more interesting to construct than tree proofs, and a much more beneficial skill: practising natural deduction will streamline your reasoning well beyond the scope of this course, where the same cannot be said for constructing truth-tables or tree proofs.
@@ -964,14 +1043,14 @@ In general, there are typically many ways to construct a proof.
 Given the natural deduction rules specified above, we may present the following definition:
 
 \factoidbox{
-  A natural deduction \define{proof} (or \define{derivation}) of a conclusion $\metaA$ from a set of premises $\Gamma$ in SD is any sequence of lines ending with $\metaA$ on a live line where every line in the sequence is either: (1) a premise in $\Gamma$; (2) a discharged assumption; or (3) follows from previous lines by one of the natural deduction rules for SD. 
+  A natural deduction \define{proof} (or \define{derivation}) of a conclusion $\metaA$ from a set of premises $\Gamma$ in PL is any sequence of lines ending with $\metaA$ on a live line where every line in the sequence is either: (1) a premise in $\Gamma$; (2) a discharged assumption; or (3) follows from previous lines by one of the natural deduction rules for PL. 
 }
 
-An SL sentence $\metaA$ is \define{provable} (or \define{derivable}) from $\Gamma$ in SD just in case there is a natural deduction proof (derivation) of $\metaA$ from $\Gamma$ in SD, where we may write this: $\Gamma \proves \metaA$. 
+An $\PL$ sentence $\metaA$ is \define{provable} (or \define{derivable}) from $\Gamma$ in PL just in case there is a natural deduction proof (derivation) of $\metaA$ from $\Gamma$ in PL, where we may write this: $\Gamma \proves \metaA$. 
 % Whereas `$\Gamma \proves_{T} \metaA$' was shorthand for `$\Gamma, \enot \metaA \proves_{T} \bot$', 
 
 Two sentences $\metaA$ and $\metaB$ are \define{provably equivalent} (or \define{interderivable}) if and only if both $\metaA\proves\metaB$ and $\metaB\proves\metaA$.
-% Additionally, we will take $\Gamma\proves\bot$ to mean that $\Gamma\proves\metaB\eand\enot\metaB$ for some SL sentence $\metaB$.
+% Additionally, we will take $\Gamma\proves\bot$ to mean that $\Gamma\proves\metaB\eand\enot\metaB$ for some $\PL$ sentence $\metaB$.
 % It is relatively easy to show that two sentences are provably equivalent since this requires a pair of proofs.
 % Showing that sentences are \emph{not} provably equivalent would be much harder.
 % It would be just as hard as showing that a sentence is not a theorem.
@@ -980,15 +1059,15 @@ A set of sentences $\Gamma$ is \define{provably inconsistent} if and only if $\G
 
 
 Provability is relative to a proof system, so the meaning of the `$\proves$' symbol featured in this chapter should be distinguished from the one we used for trees.
-When necessary, we can specify which turnstile we intend by including a reference to the proof system in question, letting `$\proves_{T}$' stand for provability in the tree system, and `$\proves_{SD}$' stand for provability in this natural deduction system.
-Since this chapter is concerned with natural deduction, you can take `$\proves$' to mean `$\proves_{SD}$' in this chapter unless specified otherwise.
-% For instance, it is important to disambiguate the turnstiles in making the following observation: whereas $\Gamma \proves_{T} \metaA$ was defined as $\Gamma, \enot \metaA \proves_{T} \bot$ for the tree proof system, here we have defined $\Gamma \proves_{SD} \bot$ in terms of $\Gamma \proves_{SD} \metaB\eand\enot\metaB$ for some $\metaB$. 
+When necessary, we can specify which turnstile we intend by including a reference to the proof system in question, letting `$\proves_{T}$' stand for provability in the tree system, and `$\proves_{PL}$' stand for provability in this natural deduction system.
+Since this chapter is concerned with natural deduction, you can take `$\proves$' to mean `$\proves_{PL}$' in this chapter unless specified otherwise.
+% For instance, it is important to disambiguate the turnstiles in making the following observation: whereas $\Gamma \proves_{T} \metaA$ was defined as $\Gamma, \enot \metaA \proves_{T} \bot$ for the tree proof system, here we have defined $\Gamma \proves_{PL} \bot$ in terms of $\Gamma \proves_{PL} \metaB\eand\enot\metaB$ for some $\metaB$. 
 
 % So $\Gamma\proves\metaA$ can be read as: $\metaA$ is derivable from $\Gamma$.
 As above, it is often convenient to write `$\metaA_1,\metaA_2,\ldots\proves\metaB$' as a shorthand for $\set{\metaA_1,\metaA_2,\ldots}\proves\metaB$.
-We will refer to an SL sentence $\metaA$ as a \define{theorem} of SD just in case $\proves\metaA$, i.e., $\varnothing\proves\metaA$.
-It is important to note that the sentences of SL are only theorems \textit{relative to a proof system}, so there is no sense in which $A\eor\enot A$ is a theorem full stop.
-Nevertheless, it is natural to expect $A\eor\enot A$ to be a theorem of any respectable (i.e., complete) proof system for SL.
+We will refer to an $\PL$ sentence $\metaA$ as a \define{theorem} of PL just in case $\proves\metaA$, i.e., $\varnothing\proves\metaA$.
+It is important to note that the sentences of $\PL$ are only theorems \textit{relative to a proof system}, so there is no sense in which $A\eor\enot A$ is a theorem full stop.
+Nevertheless, it is natural to expect $A\eor\enot A$ to be a theorem of any respectable (i.e., complete) proof system for $\PL$.
 
 In order to show that something is a theorem we have to derive it from no premises.
 But how could we show that something is \emph{not} a theorem?
@@ -1008,37 +1087,37 @@ Whereas the tree method will determine whether $\Gamma \proves_{T} \metaA$ or no
 
 The double turnstile `$\models$' for logical entailment remains unchanged, and so no subscript is required.
 % Put otherwise, entailment is not relative to a proof system, but rather to a class of interpretations.
-% In particular, we were concerned with interpretations which assigned the sentence letters of SL to exactly one truth-value.
-% Since this is the only definition of an interpretation that we will consider for SL, there is only one corresponding notion of entailment $\models$.
-Although the soundness and completeness proofs showed that $\Gamma \proves_{T} \metaA$ if and only if $\Gamma \models \metaA$, a question remains as to whether a similar result may be established for SD.
-% A natural strategy for establishing this connection is to show that $\Gamma \proves_{SD} \metaA$ if and only if $\Gamma \proves_{T} \metaA$.
+% In particular, we were concerned with interpretations which assigned the sentence letters of $\PL$ to exactly one truth-value.
+% Since this is the only definition of an interpretation that we will consider for $\PL$, there is only one corresponding notion of entailment $\models$.
+Although the soundness and completeness proofs showed that $\Gamma \proves_{T} \metaA$ if and only if $\Gamma \models \metaA$, a question remains as to whether a similar result may be established for PL.
+% A natural strategy for establishing this connection is to show that $\Gamma \proves_{PL} \metaA$ if and only if $\Gamma \proves_{T} \metaA$.
 
 Although the soundness proof for natural deduction is easy, the completeness proof is considerably more difficult.
-Rather, we will simply state that SD is both sound and complete:
+Rather, we will simply state that PL is both sound and complete:
 
 \factoidbox{
-  SD is both sound and complete, i.e., $\Gamma \proves_{SD} \metaA$ if and only if $\Gamma \models \metaA$.
+  PL is both sound and complete, i.e., $\Gamma \proves_{PL} \metaA$ if and only if $\Gamma \models \metaA$.
 }
 
-Given the soundness and completeness of the tree method, it follows that our two proof systems are equivalent in the sense that anything provable in one is also provable in the other: $\Gamma\proves_{T}\metaA$ if and only if $\Gamma\proves_{SD}\metaA$.
+Given the soundness and completeness of the tree method, it follows that our two proof systems are equivalent in the sense that anything provable in one is also provable in the other: $\Gamma\proves_{T}\metaA$ if and only if $\Gamma\proves_{PL}\metaA$.
 In practice, this is a good thing.
-For instance, suppose you are not sure if $\Gamma \proves_{SD} \metaA$, but if it does, you would like to provide a derivation.
+For instance, suppose you are not sure if $\Gamma \proves_{PL} \metaA$, but if it does, you would like to provide a derivation.
 Using the tree method, you could check whether $\Gamma \proves_{T} \metaA$, and if the tree you construct closes, then go on to look for a natural deduction proof of $\metaA$ from $\Gamma$. 
 If we can show that $\Gamma \nproves_{T} \metaA$ by constructing a complete open tree, then we can conclude that there is no natural deduction derivation of $\metaA$ from $\Gamma$, and so no use looking for one. 
-Nevertheless, a direct proof of $\metaA$ from $\Gamma$ in SD is more compelling than a closed tree.
+Nevertheless, a direct proof of $\metaA$ from $\Gamma$ in PL is more compelling than a closed tree.
 Whereas it is easy to justify every move in a natural deduction derivation, it is a lot harder to use a closed tree to create a compelling argument.
 
-Given that SD is sound and complete, the \emph{theorems} of SD are coextensive with the \emph{tautologies} of SL.
+Given that PL is sound and complete, the \emph{theorems} of PL are coextensive with the \emph{tautologies} of $\PL$.
 Whereas showing that a sentence is a tautology involves checking a truth-table or constructing a semantic argument, showing that a sentence is a theorem involves constructing a proof.
 Some proofs are easier to construct than others, but even for very long proofs, it is easy to check whether each line follows from the previous lines.
 % Moreover, the resulting argument is the kind of argument that you could present an analogue of in English in order to be persuasive.
-Although there is no formal way of showing that a sentence is \emph{not} a theorem, there is a method for showing that a sentence is not a tautology: construct an SL tree and read off the interpretation.
+Although there is no formal way of showing that a sentence is \emph{not} a theorem, there is a method for showing that a sentence is not a tautology: construct an $\PL$ tree and read off the interpretation.
 % We need only construct a model in which the sentence is false. Given a choice between showing that a sentence is not a theorem and showing that it is not a tautology, it would be easier to show that it is not a tautology.
 
 
 \section{Logical Analysis}
 
-If we can translate an argument into SL, we now have a number of tools that we can use to investigate that argument's logical properties.
+If we can translate an argument into $\PL$, we now have a number of tools that we can use to investigate that argument's logical properties.
 Consider the following options:
 
 \begin{table}[h]
@@ -1074,7 +1153,7 @@ Is `$\metaA, \metaB, \ldots\ \therefore\ \metaC$' valid? & Prove $\metaA{}, \met
 % \FloatBarrier
 
 Answering the questions on the left may sometimes be easy, and other times far from obvious.
-Whereas the tree proof system provides a fail-safe way to determine the answer, the SD proof system provides a way to construct compelling arguments.
+Whereas the tree proof system provides a fail-safe way to determine the answer, the PL proof system provides a way to construct compelling arguments.
 
 
 
@@ -1097,7 +1176,7 @@ Like the basic rule, derived rules will use meta-variables since they hold for a
 
 %We have so far introduced five rules: Conditional Elimination, \emph{modus tollens}, Disjunction Elimination, Conjunction Elimination, and Conjunction Introduction. There are still more rules still to learn, but it is helpful first to pause and draw a distinction between different kinds of rules.
 
-%Many of our rules, we have seen, carry the name `Elimination' or `Introduction', along with the name of one of our SL connectives. In fact, every rule we've seen so far except \emph{modus tollens} has had such a name. Such rules are the \emph{basic} rules in our natural deduction system. The basic rules comprise an Introduction and an Elimination rule for each connective, plus one more rule. \emph{Modus tollens} is NOT a basic rule; we will call it a \emph{derived} rule.
+%Many of our rules, we have seen, carry the name `Elimination' or `Introduction', along with the name of one of our $\PL$ connectives. In fact, every rule we've seen so far except \emph{modus tollens} has had such a name. Such rules are the \emph{basic} rules in our natural deduction system. The basic rules comprise an Introduction and an Elimination rule for each connective, plus one more rule. \emph{Modus tollens} is NOT a basic rule; we will call it a \emph{derived} rule.
 
 %A derived rule is a non-basic rule whose validity we can derive using basic rules only. 
 
@@ -1119,7 +1198,7 @@ We abbreviate the justification for this rule as `MT' for \emph{modus tollens}.
 For instance, if you know that if Sue found the treasure, then she is happy, and you also know that Sue isn't happy, then you can infer that Sue didn't find the treasure.
 Inferences of this form are extremely common.
 
-In order to derive MT from our basic rules we will construct a derivation in the manner above while using meta-variables instead of sentences of SL to provide the following proof schema:
+In order to derive MT from our basic rules we will construct a derivation in the manner above while using meta-variables instead of sentences of $\PL$ to provide the following proof schema:
 
 \begin{proof}
 	\hypo{p}{\metaA{}}
@@ -1132,10 +1211,10 @@ In order to derive MT from our basic rules we will construct a derivation in the
 	\have{nq}{\enot \metaB{}}\ni{q-nnp}
 \end{proof}
 
-Since \metaA{} and \metaB{} are meta-variables, the lines above do not constitute an SD proof.
+Since \metaA{} and \metaB{} are meta-variables, the lines above do not constitute an PL proof.
 Rather, the lines above are a \define{proof schema} which is a kind of recipe for constructing proofs.
-Given any values for $\metaA$ and $\metaB$, the proof schema for MT will yield an SD proof as an instance.
-Accordingly, applications of MT can always be replaced with an appropriate instance of the proof schema for MT which only refers to the basic rules included in SD.
+Given any values for $\metaA$ and $\metaB$, the proof schema for MT will yield an PL proof as an instance.
+Accordingly, applications of MT can always be replaced with an appropriate instance of the proof schema for MT which only refers to the basic rules included in PL.
 Nevertheless, MT is a convenient shortcut and so we will add it to our list of derived rules.
 
 Here is an example employing \textit{modus tollens} several times over.
@@ -1384,7 +1463,7 @@ Although some philosophers of logic contest DN, arguing instead for \textit{intu
 After all, what is meant by saying that it is not the case that the ball is not round, and yet it fails to be the case that the ball is round?
 Or to take the converse, what is meant by saying that the ball is round, but it fails to be the case that the ball is not not round.
 Classical logic avoids this mess by accepting DN even if it is derived instead of being included as a basic rule.
-Here is the derivation of DN in the present system SD:
+Here is the derivation of DN in the present system PL:
 
 \begin{proof}
 	\hypo[1]{dna}{\enot\enot\metaA}
@@ -1433,18 +1512,18 @@ This puts a syntactic spin on a semantic idea that we considered before: just as
 \section{Schemata}
 
 You might be beginning to wonder just how many derived rules there are.
-Indeed, this way of thinking inspires an important approach to logic: instead of focusing of theorems and proofs in SL, perhaps we should really be focusing on the \textit{rule schemata} themselves.
+Indeed, this way of thinking inspires an important approach to logic: instead of focusing of theorems and proofs in $\PL$, perhaps we should really be focusing on the \textit{rule schemata} themselves.
 As a special case we have \textit{axiom schemata} which amount to rule schemata which do not cite any lines.
 For instance, here is an axiom schemata called the \textit{Law of Excluded Middle} (LEM): $\metaA\eor\enot\metaA$.
 Once we have derived LEM--- a worthwhile exercise--- we may write any instance of $\metaA\eor\enot\metaA$ on any line of a proof without citing any previous lines whatsoever.
 
-Instead of thinking about valid SL arguments and their corresponding proofs, one might think about a logic as a set of rule schemata.
+Instead of thinking about valid $\PL$ arguments and their corresponding proofs, one might think about a logic as a set of rule schemata.
 This approach to logic has some advantages since it cuts to the chase, focusing on what we are ultimately concerned with, namely \textit{logical forms}.
 It is also easy to prove things about such systems since they are easy to characterise abstractly.
 The disadvantage of such an approach is that these proof systems are somewhat harder to think about.
-By contrast, it is nice to have concrete instances of SL sentences and arguments instead of logical forms all the way down.
+By contrast, it is nice to have concrete instances of $\PL$ sentences and arguments instead of logical forms all the way down.
 This more concrete approach will be maintained throughout this text, however, it is nevertheless worth drawing the connection given all of our derived rules above.
-Indeed, we may think of the system of natural deduction SD as the smallest set to include the basic rule schemata in SD together with all rule schemata that are derivable from these basic rules.
+Indeed, we may think of the system of natural deduction PL as the smallest set to include the basic rule schemata in PL together with all rule schemata that are derivable from these basic rules.
 This set of logical forms of reasoning may be taken to provide an abstract answer to the question, ``What is logic about?''
 
 
@@ -1614,7 +1693,7 @@ $[(\metaA{}\eif\metaB{})\eand(\metaB{}\eif\metaA{})] \Longleftrightarrow (\metaA
 
 \solutions
 \problempart
-\label{pr.justifySLproof}
+\label{pr.justifyPLproof}
 Provide a justification (rule and line numbers) for each line of proof that requires one {\color{black}(which for \textit{Carnap} means ALL of them!)}
 \begin{multicols}{2}
 \begin{proof}
@@ -1662,8 +1741,8 @@ Provide a justification (rule and line numbers) for each line of proof that requ
 
 \solutions
 \problempart
-\label{pr.solvedSLproofs}
-Give a proof for each argument in SL.
+\label{pr.solvedPLproofs}
+Give a proof for each argument in $\PL$.
 \begin{earg}
 \item $K\eand L$, \therefore $K\eiff L$
 \item $A\eif (B\eif C)$, \therefore $(A\eand B)\eif C$
@@ -1674,7 +1753,7 @@ Give a proof for each argument in SL.
 \end{earg}
 
 \problempart
-Give a proof for each argument in SL.
+Give a proof for each argument in $\PL$.
 \begin{earg}
 \item $Q\eif(Q\eand\enot Q)$, \therefore\ $\enot Q$
 \item $J\eif\enot J$, \therefore\ $\enot J$
@@ -1689,8 +1768,8 @@ Give a proof for each argument in SL.
 
 \solutions
 \problempart
-\label{pr.SLND.theorems}
-Show that each of the following sentences is a theorem in SL.
+\label{pr.PLND.theorems}
+Show that each of the following sentences is a theorem in $\PL$.
 \begin{earg}
 \item $O \eif O$
 \item $N \eor \enot N$
@@ -1700,7 +1779,7 @@ Show that each of the following sentences is a theorem in SL.
 \end{earg}
 
 \problempart
-Show that each of the following pairs of sentences are provably equivalent in SL.
+Show that each of the following pairs of sentences are provably equivalent in $\PL$.
 \begin{earg}
 \item $\enot\enot\enot\enot G$, $G$
 \item $T\eif S$, $\enot S \eif \enot T$
@@ -1711,7 +1790,7 @@ Show that each of the following pairs of sentences are provably equivalent in SL
 
 \solutions
 \problempart
-\label{pr.solvedSLproofs2}
+\label{pr.solvedPLproofs2}
 Provide proofs to show each of the following.
 \begin{earg}
 \item $M \eand (\enot N \eif \enot M) \proves (N \eand M) \eor \enot M$

@@ -1,4 +1,4 @@
-%!TEX root = ../forallx-ubc.tex
+%!TEX root = ../../forallx-mit.tex
 \chapter{Logical Consequence}
 \label{ch.PL-semantics}
 
@@ -21,7 +21,7 @@ For instance, to determine the truth-value of a sentence $\enot A$, the only thi
 Given any interpretation, the truth-value of a negation on that interpretation is a \textit{function} of the truth-value of its negand on that interpretation, and likewise for the other operators.
 
 We are using the same notion of a function that you have probably encountered in mathematics.
-First we may define the \define{cartesian product} $X \times Y$ of the sets $X$ and $Y$ to be the set of all ordered pairs $\tuple{x, y}$ where $x \in X$ and $y \in Y$ which we may write in set-builder notation as $X \times Y \coloneq \set{\tuple{x, y} \mid x \in X, y \in Y}$.\footnote{The `$\coloneq$' symbol signifies that a definition is being provided.}
+First we may define the \define{cartesian product} $X \times Y$ of the sets $X$ and $Y$ to be the set of all ordered pairs $\tuple{x, y}$ where $x \in X$ and $y \in Y$ which we may write in set-builder notation as $X \times Y \coloneq \set{\tuple{x, y} : x \in X,\ y \in Y}$.\footnote{The `$\coloneq$' symbol signifies that a definition is being provided.}
 A \define{relation} from $X$ to $Y$ is any subset $A \subseteq X \times Y$.
 % Given a set $D$ and a set called the $R$, 
 A \define{function} $f: D \to R$ from the \define{domain} $D$ to the \define{range} $R$ is any relation $f \subseteq D \times R$ from $D$ to $R$ where $f(x) = f(y)$ for any $x, y \in D$ where $x = y$. 
@@ -323,6 +323,8 @@ Since there is no row in which both of the sentences in the set $\set{A, \enot (
 \subsection{Logical Consequence and Validity}
 \label{sub:Consequence}
 
+% TODO say that logical consequences that hold may nevertheless be said to be valid though this is loose
+
 % TODO introduce truth table notion of validity in contrast to informal def as with the other concepts above
 
 Whereas Chapter $\ref{ch.introduction}$ provided an intuitive definition of logical consequence for the sentences of English, we may now appeal to complete truth tables in order to provide a correlate for $\PL$.
@@ -563,7 +565,7 @@ Thus we have:
 \begin{center}
 \begin{tabular}{|c|c|c|}
 \cline{1-3}
-TYPE & YES & NO\\
+& YES & NO\\
 \cline{1-3}
 Tautology & complete truth table & one-line partial truth table\\
 Contradiction &  complete truth table  & one-line partial truth table\\
@@ -695,7 +697,7 @@ Letting $\metaA$ and $\metaB$ be wfs of $\PL$, $\MetaG$ be a set of wfss of $\PL
     \item[] \define{entailment}: $\metaA$ \textit{logically entails} $\metaB$ \textit{iff} $\V{\I}(\metaA) \leq \V{\I}(\metaB)$ for all $\I$.
     \item[] \define{equivalence}: $\metaA$ is \textit{logically equivalent} to $\metaB$ \textit{iff} $\V{\I}(\metaA) = \V{\I}(\metaB)$ for all $\I$.
     \item[] \define{satisfiable}: $\Gamma$ is \textit{satisfiable iff} there is some $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \Gamma$.
-    \item[] \define{consequence}: $\MetaG \vDash \metaA$ \textit{iff} $\V{\I}(\metaA) = 1$ for every $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \Gamma$.
+    \item[] \define{consequence}: $\MetaG \vDash \metaA$ \textit{iff} $\V{\I}(\metaA) = 1$ for all $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \Gamma$.
   \end{itemize}
 }
 
@@ -768,13 +770,13 @@ $$ \MetaG = \set{A \eand  C,\ B \eiff \enot A,\ C \eif (B \eand D),\ E} $$
 It turns out that this set is unsatisfiable.
 However, to show this using a truth table would requiring constructing a complete truth table with five sentence letters and thirty-two rows.
 In addition to the tedium, the chances of making a mistake cannot be overlooked.
-Instead of attempting this, we can draw on the formal definition to prove that $\MetaG$ is unsatisfiable by assuming that it is satisfiable and deriving a contradiction by unpacking the definitions: 
+Instead of attempting this, we can prove that $\MetaG$ is unsatisfiable by assuming that it is satisfiable and appealing to the formal definitions in order to derive a contradiction: 
 
 \begin{quote} 
   \textit{Proof:} Assume for contradiction that the set $\MetaG$ is satisfiable.
   By the definition of satisfiability, $\V{\I}(A \eand  C) = \V{\I}(B \eiff \enot A) = \V{\I}(C \eif (B \eand D)) = \V{\I}(E) = 1$ for some interpretation $\I$ of $\PL$. 
-  So $\V{\I}(A) = \V{\I}(C) = 1$ by the semantics for conjunction and $\V{\I}(B) = \V{\I}(\enot A)$ by the semantics for the biconditional. 
-  Thus $\V{\I}(\enot A) = 0$ by the semantics for negation, and so $\V{\I}(B) = 0$. 
+  It follows that $\V{\I}(A) = \V{\I}(C) = 1$ by the semantics for conjunction, and so $\V{\I}(\enot A) = 0$ given the semantics for negation. 
+  Since $\V{\I}(B) = \V{\I}(\enot A)$ by the semantics for the biconditional, $\V{\I}(B) = 0$. 
 
   Since $\V{\I}(C \eif (B \eand D)) = 1$, we know by the semantics for the conditional that either $\V{\I}(C) = 0$ or $\V{\I}(B \eand D) = 1$.
   Having already shown that $\V{\I}(C) \neq 0$, we may conclude that $\V{\I}(B \eand D) = 1$, and so $\V{\I}(B) = 1$ and $\V{\I}(D) = 1$ by the semantics for conjunction.
@@ -794,7 +796,7 @@ This is a good example of the kinds of writing strategies that you can use to wr
 By contrast to the formal proofs that we will go on to write in the following chapter, informal proofs are written in the metalanguage mathematical English and are often about wfss of our object language $\PL$.
 In the case above, we established that $\MetaG$ is unsatisfiable. 
 % In the following chapter we will introduce a proof system in which to write formal proofs in $\PL$ itself. 
-In order to give you a sense of some of the other methods and terms phrasing for writing clear and concise informal proofs, it will help to consider a few more examples.
+In order to give you a sense of some of the other methods and phrasing for writing clear and concise informal proofs, it will help to consider a few more examples.
 
 
 \begin{earg}
@@ -830,7 +832,7 @@ Whereas the proof given above proceeded by \textit{reductio ad absurdum}, derivi
 
 It is typical to leave this final sentence off assuming that it is sufficiently clear what you are setting out to prove and how you are intended to do so.
 Nevertheless, it doesn't hurt to include this extra line to make it especially clear in case you are uncertain whether your proof is easy to interpret.
-In the case above, the key signpost that we used was the construction `Let $\I$ be an arbitrary interpretation of $\PL$ \ldots' since this signals to the reader that we will go on to establish something general.
+In the case above, the key signpost that we used was the construction `\textit{Let} $\I$ be an \textit{arbitrary} interpretation of $\PL$ \ldots' since this signals that we will establish something general about $\PL$ interpretations.
 We then restrict consideration to those interpretations $\I$ of $\PL$ which make the premises true with `for which both of the premises are true', checking to see that such an arbitrary interpretation makes the conclusion true.
 
 Whereas the first semantic argument that we gave allowed us to show that $\MetaG$ is unsatisfiable without having to draw a truth table with thirty-two rows, the winnings in the case above are somewhat less substantial. 
@@ -856,11 +858,11 @@ Put otherwise, every row in which the premises have a $1$ under their main opera
 Thus the argument in $\PL$ is valid. 
 
 In this case, both the semantic proof and truth table methods require a similar amount of work.
-Given either method, we may conclude that argument in $\PL$ is valid. 
+Given either method, we may conclude that the argument in $\PL$ is valid. 
 We may then go on to explain that the English argument is valid by appealing to the fact that the English argument can be regimented by a valid argument in $\PL$.
 
-Before pressing on, it will be important to consider one more type of semantic argument which appeal to cases.
-Consider the following case:
+Before pressing on, it will be important to consider one more type of semantic proof which appeals to cases.
+Consider the following argument:
 
 \begin{earg}
   \eitem{Either Kat or Lu will with the race.}
@@ -885,9 +887,9 @@ This argument can be regimented as follows:
   \eitem{$C_1 \eor C_2$}
 \end{earg}
 
-This argument may again seem plain enough since this is just the kind of day-to-day reasoning that we are all accustomed to doing.
+This argument may seem plain enough since this is just the kind of day-to-day reasoning that we are all accustomed to doing.
 Nevertheless, providing a truth table would require sixteen rows.
-Although the semantic proof is easier than attempting to fill out so many rows without making any mistakes, there is no way to avoid a \textit{proof by cases}, at least insofar as we are to provide a direct proof that the argument is valid.
+Although the semantic proof is easier than attempting to fill out so many rows without making any mistakes, there is no way to avoid a \textit{proof by cases}, at least insofar as we are to provide a direct proof that the $\PL$ argument is valid.
 
 Writing with slightly more concision than before, we may reason as follows:
 
@@ -930,7 +932,7 @@ In the case above, we could have avoided introducing cases by using a \textit{re
 
 This proof doesn't worry about cases and in that way is a bit easier to follow.
 Nevertheless, direct proofs are often preferable to \textit{reductio} style proofs since deriving a contradiction is not quite as explanatory as what a direct proof shows.
-Which proof strategy to try is a judgment call and it can take some practice to know which approach is best to use when.
+Which proof strategy to use is a judgment call and it can take some practice to know which approach is best to use when.
 Even once you have chosen a basic strategy, the way that you order the steps of your proof can also have a significant effect on the clarity of your resulting proof.
 These are points that are worth considering as you practice writing clear and concise proofs in this course.
 
@@ -1238,161 +1240,239 @@ We may then go on to record a particular row of a truth table by using the notat
 
 
 
-\section{Tautologies}
-
-% TODO every sentence corresponds to a set of interpretations
+\section{Tautologies and Weakening}
+  \label{sec:TautologyWeakening}
 
 What should we make of the following claim:
   $$P\eand Q \vDash A\eiff\enot\enot A.$$
-Notice that the sentence letters on the left-hand-side are completely different letters from those on the right-hand-side.
-So there is a straightforward sense in which the two sides of the entailment have \emph{nothing to do with one another}.
-Nevertheless, the entailment above is true: every interpretation that satisfies the sentences on the left, also satisfies the sentence on the right for the simple reason that every interpretation whatsoever satisfies $A\eiff\enot\enot A$.
+Notice that the sentence letters on the left-hand-side are unrelated to the sentence letters on the right-hand-side.
+So there is a straightforward sense in which the two sides of the logical consequence above have \emph{nothing to do with one another}.
+Nevertheless, the claim above is true: every interpretation for which the wfs on the left is true is also an interpretation on which the wfs on the right is true for the simple reason that $A\eiff\enot\enot A$ is true on every interpretation whatsoever.
 As a result, we could have dropped the wfs on the left entirely, writing:
   $$\vDash A\eiff\enot\enot A.$$
-The claim above is short for $\varnothing\vDash A\eiff\enot\enot A$ where $\varnothing$ is a convenient notation for the empty set $\set{}$.
+The claim above is short for $\varnothing\vDash A\eiff\enot\enot A$ where $\varnothing$ is a convenient notation for the empty set $\set{}$, i.e., the set of no wfs of $\PL$.
 Since we said above that we are often going to drop the set notation when stating logical consequences, we do not need to write the empty set at all when a wfs is a logical consequence of the empty set of wfss as above.
 
-Whereas before we said that a wfs $\metaA$ of $\PL$ is a tautology just in case it is true, i.e., $\V{\I}(\metaA) = 1$, on all interpretations $\I$ of $\PL$, we may now define the $\PL$ tautologies in terms of logical consequence.
-Officially, a sentence $\metaA$ of $\PL$ is a \define{tautology} just in case $\metaA$ is entailed by the empty set, i.e., $\varnothing \vDash \metaA$.
-Dropping set notation, it is typical to leave off the empty set entirely, writing $\vDash \metaA$ for brevity.
+It is easy to show that a wfs $\metaA$ of $\PL$ is a tautology just in case $\vDash \metaA$. 
+Since there are no wfss in $\varnothing$, every interpretation $\I$ of $\PL$ vacuously makes all of the wfs in $\varnothing$ true, and so $\vDash \metaA$ just in case $\V{\I}(\metaA) = 1$ for every interpretation $\I$ of $\PL$, i.e., $\metaA$ is a tautology. 
+Given this equivalence, it is common to define the $\PL$ tautologies in terms of logical consequence.
+In particular, we could have said that a wfs $\metaA$ of $\PL$ is a \define{tautology} just in case $\vDash \metaA$.
+% Dropping set notation, we may leave off the empty set entirely, writing $\vDash \metaA$ for brevity.
 
-In order to see why this definition makes sense, we may observe that every $\PL$ interpretation satisfies the empty set $\varnothing$.
-After all, an $\PL$ interpretation $\I$ could only fail to satisfy a set $\Gamma$ of $\PL$ sentences if there were some sentence in $\Gamma$ that fails to be true on $\I$.
-Since there are no sentences in $\varnothing$, the empty set $\varnothing$ is vacuously satisfied by every $\PL$ interpretation whatsoever.
-By definition, an $\PL$ sentence $\metaA$ is entailed by the empty set (i.e., $\vDash \metaA$) just in case every interpretation to satisfy the empty set $\varnothing$ also satisfies $\metaA$.
-Since we have shown that every interpretation satisfies the empty set, this is equivalent to claiming that every $\PL$ interpretation satisfies $\metaA$. 
-Thus, $\vDash \metaA$ if and only if $\V{\I}(A)=1$ for all $\PL$ interpretations $\I$.   
+In order to get another perspective on why $\metaA$ is a tautology just in case $\vDash \metaA$, it will help to consider the set of interpretations that make a wfs $\metaA$ of $\PL$ true. 
+For brevity, we may define the \define{interpretation set} $\vert{\metaA} \coloneq \set{\I : \V{\I}(\metaA) = 1}$ to be the set of all and only those $\PL$ interpretations $\I$ for which $\V{\I}(\metaA) = 1$.
+That is, given the set of all interpretations, each wfs $\metaA$ of $\PL$ corresponds to a unique subset of interpretations in which $\metaA$ is true, i.e., $\V{\I}(\metaA) = 1$.
+Or to put it another way, each wfs $\metaA$ of $\PL$ amounts to a \textit{constraint} on the interpretations of $\PL$ where only those interpretations $\I$ for which $\V{\I}(\metaA) = 1$ satisfy the constraint. 
 
-Consider the following claims:
+Given the definition of an interpretation sets for the wfss of $\PL$, we may provide a slightly more abstract characterization of logical consequence.
+By the official definition, $\MetaG \vDash \metaA$ asserts that every $\PL$ interpretation $\I$ which makes every $\metaG \in \MetaG$ true also makes $\metaA$ true. 
+Another way to say this is that the intersection of all of the interpretation sets $\vert{\metaG}$ for $\metaG \in \MetaG$ is a subset of the interpretation set for the conclusion $\vert{\metaA}$.
+Formally, we may write this as follows:
+  $$ \bigcap \set{ \vert{\metaG} : \metaG \in \MetaG} \subseteq \vert{\metaA}. $$
+What this says is that every interpretation $\I$ which belongs to every interpretation set $\vert{\metaG}$ for $\metaG \in \MetaG$ is also in the interpretation set $\vert{\metaA}$ for the conclusion.
+Since an interpretation $\I$ belongs to an interpretation set $\vert{\metaB}$ just in case $\V{\I}(\metaB) = 1$, this is equivalent to requiring every interpretation $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$ to be such that $\V{\I}(\metaA) = 1$.
+But this is exactly what is asserted by $\MetaG \vDash \metaA$, only in the language of set theory.
 
-\begin{earg}
-  \item[] $\vDash P \eor \enot P$
-  \item[] $\vDash P \eiff P$
-  \item[] $\vDash (P \eand\enot P)\eif (A \eor B)$
+Despite the equivalence, we will maintain our notation and definition for logical consequence $\MetaG \vDash \metaA$ rather than the set theoretic analogue given above. 
+Nevertheless, it can help to take more than one perspective on the same thing, especially for a concept that is as important as logical consequence.
+The set theoretic analogue given above provides a vivid account of the way that each $\metaG \in \MetaG$ may constrain the interpretations of $\PL$ in which $\metaA$ is said to be true. 
+If there are no wfss in $\MetaG$ at all, i.e., $\MetaG = \varnothing$, this corresponds to imposing no constraints on the interpretations of $\PL$ in which $\metaA$ is said to be true. 
+Put otherwise, all interpretations belong to $\vert{\metaA}$, and so $\V{\I}(\metaA) = 1$ for all interpretations $\I$ of $\PL$, i.e., $\metaA$ is a tautology. 
+
+% In order to see why this definition makes sense, we may observe that every $\PL$ interpretation satisfies the empty set $\varnothing$.
+% After all, an $\PL$ interpretation $\I$ could only fail to satisfy a set $\Gamma$ of $\PL$ sentences if there were some sentence in $\Gamma$ that fails to be true on $\I$.
+% Since there are no sentences in $\varnothing$, the empty set $\varnothing$ is vacuously satisfied by every $\PL$ interpretation whatsoever.
+% By definition, an $\PL$ sentence $\metaA$ is entailed by the empty set (i.e., $\vDash \metaA$) just in case every interpretation to satisfy the empty set $\varnothing$ also satisfies $\metaA$.
+% Since we have shown that every interpretation satisfies the empty set, this is equivalent to claiming that every $\PL$ interpretation satisfies $\metaA$. 
+% Thus, $\vDash \metaA$ if and only if $\V{\I}(A)=1$ for all $\PL$ interpretations $\I$.   
+
+In order to make this more concrete, consider the following claims:
+
+\begin{earg} \label{tauts}
+  \eitem{$\vDash P \eor \enot P$.}
+  \eitem{$\vDash P \eiff (P \eor (P \eand Q))$.}
+  \eitem{$\vDash (P \eand\enot P)\eif (A \eor B)$.}
 \end{earg}
 
-Although for different reasons, each of the entailments above are true, and so the $\PL$ sentences on the right are tautologies.
-For contrast, the following claims are not tautologies:
+Although for different reasons, each of the claims above is true, and so the wfss on the right are all tautologies.
+It follows that the following claims are also true:
 
-\begin{earg}
-  \item[] $\vDash P$
-  \item[] $\vDash P \eand \enot P$
-  \item[] $\vDash \enot(P \eif \enot P)$
+\begin{earg} \label{weaker}
+  \eitem{$A, B\ \vDash P \eor \enot P$.}
+  \eitem{$\enot P\ \vDash P \eiff (P \eor (P \eand Q))$.}
+  \eitem{$C \eor \enot C\ \vDash (P \eand\enot P)\eif (A \eor B)$.}
 \end{earg}
 
-If you ever want to compute whether a sentence is a tautology, you can always write out its truth table.
-This can be practical so long as it does not include too many sentence letters.
+Given that the wfss on the right are all tautologies, we can add whatever wfss that we like on the left.
+More generally, it is easy to prove the following principle:
 
-% TODO show that the logical consequences of a finite set of sentences can be encoded by tautologies
+\begin{Lthm}[\it Weakening] \label{lemma:weakening}
+  If $\MetaG \vDash \metaA$, then $\MetaG \cup \MetaS \vDash \metaA$.
+\end{Lthm}
+
+% \factoidbox{
+%   \textsc{Weakening:} If $\MetaG \vDash \metaA$, then $\MetaG \cup \MetaS \vDash \metaA$.
+% }
+
+This principle says that whenever $\metaA$ is a logical consequence of $\MetaG$, then $\metaA$ is also a logical consequence of $\MetaG \cup \MetaS$ for any set of wfss $\MetaS$ of $\PL$ whatsoever where $\MetaG \cup \MetaS$ is the union set including all of the wfss in either $\MetaG$ or $\MetaS$ and nothing besides. 
+In the special case where $\MetaG = \varnothing$ is empty, we may conclude that if $\metaA$ is a tautology (i.e., $\vDash \metaA$), then $\metaA$ is also a logical consequence of every set $\MetaS$ of wfss of $\PL$ (i.e., $\MetaS \vDash \metaA$).
+It is an inference of this kind which is what justified drawing \ref{weaker}\ref{1} -- \ref{weaker}\ref{3} as conclusions from \ref{tauts}\ref{1} -- \ref{tauts}\ref{3} above.
+
+The reason that weakening holds is easy to see given the set theoretic perspective on logical consequence presented before.
+Given that a logical consequence $\MetaG \vDash \metaA$ holds, adding further conditions beyond just those included in $\MetaG$ will only further restrict the interpretations of $\PL$ for which $\metaA$ is said to be true. 
+Since we already know that all interpretations that make every $\metaG \in \MetaG$ true also make $\metaA$ true given that $\MetaG \vDash \metaA$, then any subset of the interpretations that make every $\metaG \in \MetaG$ true is sure to also make $\metaA$ true, and so $\MetaG \cup \MetaS \vDash \metaA$ for any set of wfss $\MetaS$.
+% Replacing $\MetaG$ with the potentially larger set of wfss $\MetaG \cup \MetaS$ amounts to imposing further constraints that the interpretations in question must satisfy. 
+To put the point set theoretically, $\bigcap \set{ \vert{\metaG} : \metaG \in \MetaG \cup \MetaS} \subseteq \bigcap \set{ \vert{\metaG} : \metaG \in \MetaG}$ since $\MetaG \subseteq \MetaG \cup \MetaS$. 
+% That is, $\MetaG \cup \MetaS$ imposes at least as many constraints as $\MetaG$ on its own. 
 
 
 
 
 
 
-\section{Unsatisfiable}
 
-Having defined what it is for a sentence to be a tautology in terms of entailment, it is natural to consider how we might use the notion of entailment to define what it is for a sentence to be a contradiction.
-Here it will help to begin by considering the following entailment:
-$$P \eand \enot P \vDash Q.$$
-This statement is true.
-It says that every interpretation satisfying $P \eand \enot P$ also satisfies $Q$.
-This follows vacuously since no interpretation satisfies $P \eand \enot P$, and so every interpretation which satisfies $P \eand \enot P$ (all zero of them) also satisfies $Q$.
-Or to take another approach, think about what it would take for the entailment above to be false: there would have to be some interpretation which satisfies $P \eand \enot P$ but does not satisfy $Q$.
-But there are no interpretations that satisfy $P \eand \enot P$, and so the entailment above is true.
+\section{Contradictions and Unsatisfiability}
+  \label{sec:ContradictionUnsat}
 
-Observe that the reason that the entailment above is true has nothing to do with the sentence $Q$.
-Thus the same considerations would demonstrate that $P \eand \enot P \vDash \metaA$ for any sentence \metaA of $\PL$.
-Moreover, the same conclusion holds were we to replace $P \eand \enot P$ with any other $\PL$ sentence that is not true on any interpretation.
-For instance, consider:
-
-\begin{earg}
-\item[] $A \eand \enot A \vDash \enot Q \eif R$.
-\item[] $\enot (P \eor \enot P) \vDash (A_1 \eor A_2) \eif \enot (A_3 \eiff (A_4 \eand \enot A_2))$.
-\end{earg}
-
-Since there are no interpretations that satisfy the sentences on the left, you do not need to examine the sentence on the right to confirm that the entailment claims above are true.
-Given that the sentences on the right do not matter, it would be nice to have a way to represent that the sentences on the left entail any sentence whatsoever.
-There are two common ways to do this, but both make use of the same notation where $\Gamma$ is a set of $\PL$ sentences:
-$$\Gamma \vDash \bot.$$
-One way to interpret the entailment above is as a universal claim that $\Gamma$ entails every sentence of $\PL$ whatsoever. 
-Another way to interpret this entailment is to take `$\bot$' to abbreviate some particular sentence of $\PL$ (it doesn't matter which) that is not true on any $\PL$ interpretation.
-These conventions turn out to amount to the very same thing.
-For simplicity, we will assume the latter convention where `$\bot$' abbreviates `$A \eand \enot A$' for definiteness.
-
-A sentence $\Gamma$ of $\PL$ is \define{unsatisfiable} just in case $\Gamma \vDash \bot$.
-In order to see why this definition makes sense, we may show that a set of $\PL$ sentences $\Gamma$ is unsatisfiable just in case there is no $\PL$ interpretation $\I$ which satisfies $\Gamma$.
-To do so, suppose that $\Gamma$ is unsatisfiable, and so $\Gamma \vDash \bot$.
-It follows that every $\PL$ interpretation that satisfies $\Gamma$ also satisfies $\bot$.
-However, by design, there is no interpretation that satisfies $\bot$.
-Thus there is no $\PL$ interpretation $\I$ that satisfies $\Gamma$, for otherwise $\I$ would have to satisfy $\bot$.
-Conversely, suppose that there is no $\PL$ interpretation $\I$ that satisfies $\Gamma$.
-It follows vacuously that every $\PL$ interpretation that satisfies $\Gamma$ (all zero of them) also satisfies $\bot$.
-Hence $\Gamma \vDash \bot$, and so $\Gamma$ is unsatisfiable.
-This shows that $\Gamma$ is unsatisfiable if and only if there is no $\PL$ interpretation $\I$ that satisfies $\Gamma$.
-% Haven taken unsatisfiability to be the basic notion, we may now define a set of $\PL$ sentences $\Gamma$ to be \define{satisfiable} just in case $\Gamma$ is not unsatisfiable. 
-It follows that $\Gamma$ is \define{satisfiable} just in case there is an $\PL$ interpretation $\I$ that satisfies $\Gamma$.
+What if a given set $\MetaG$ of wfss $\PL$ imposes so many constraints that there is no interpretation $\I$ of $\PL$ which makes all the wfss $\metaG \in \MetaG$ true, i.e., $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$? 
+Put otherwise, what if $\MetaG$ is unsatisfiable? 
+In such a case, $\bigcap \set{ \vert{\metaG} : \metaG \in \MetaG} = \varnothing$, and since the empty set $\varnothing$ is a subset of every set, we know that $\varnothing \subseteq \vert{\metaA}$ for any wfs $\metaA$ of $\PL$. 
+That is if there are no interpretations that make all of the wfss $\metaG \in \MetaG$ true, then it follows vacuously that all zero of those interpretations are guaranteed to make $\metaA$ true.
+More succinctly, every wfs $\metaA$ of $\PL$ is a logical consequence of any unsatisfiable set $\MetaG$ of wfss of $\PL$ whatsoever.
 
 Consider the following examples:
 
-\begin{earg}
-\item[] $A \eand \enot A \vDash \bot$.
-\item[] $P, \enot P \vDash \bot$.
-\item[] $P \eiff Q, Q \eiff\enot P \vDash \bot$.
+\begin{earg} \label{contra}
+  \eitem{$Q, \enot Q\ \vDash P$.}
+  \eitem{$R \eif (Q \eand \enot Q), R\ \vDash \enot R$.}
+  \eitem{$\enot (A \eif A) \vDash (P \eand\enot P)\eif (A \eor B)$.}
 \end{earg}
 
-The sets of sentences on the left of each entailment above are unsatisfiable.\footnote{Recall that we have omitted set notation for ease of exposition.}
-As a special case, we may say that an $\PL$ sentence $\metaA$ is a \define{contradiction} just in case its singleton set $\set{\metaA}$ is unsatisfiable, i.e., $\metaA \vDash \bot$.
-Whereas contradictions are sentences of $\PL$, only \textit{sets} of sentences of $\PL$ may be said to be unsatisfiable.
-Nevertheless, it follows by the weakening principle given above that any set of $\PL$ sentences which contains a contradiction is unsatisfiable.
-By contrast, there are lots of unsatisfiable sets of sentences that do not contain contradictions.
-For instance, neither $P \eiff Q$ nor $Q \eiff \neg P$ are contradictions. 
-Nevertheless, the set $\set{P \eiff Q, Q \eiff \neg P}$ is unsatisfiable. 
-Compare the following examples to those given above:
+Some of the above are more obvious than others.
+For instance, it is easy to see that there is no interpretation of $\PL$ in which both $\V{\I}(Q) = 1$ and $\V{\I}(\enot Q) = 1$ since a contradiction follows immediately from the semantics for negation were we to assume otherwise.
+% Put otherwise, we may show that the intersection $\bigcap\set{\vert{Q}, \vert{\enot Q}} = \varnothing$.
+As a result, \ref{contra}\ref{1} is valid for the vacuous reason that no interpretation satisfies $\set{Q, \enot Q}$.
+Although slightly more work is required, \ref{contra}\ref{2} is also valid since $\set{R \eif (Q \eand \enot Q), R}$ is also unsatisfiable.
+
+By similar reasoning, we can show that \ref{contra}\ref{3} is valid since $\set{\enot (A \eif A)}$ is also unsatisfiable. 
+However, unlike the previous cases, this set has only one member, namely the wfs $\enot (A \eif A)$.
+Since $\enot (A \eif A)$ can be shown to be a contradiction, it follows that any set of wfss to which it belongs is unsatisfiable.
+In particular, the singleton set $\set{\enot (A \eif A)}$ is unsatisfiable, and so every wfs $\metaA$ of $\PL$ is a logical consequence of $\set{\enot (A \eif A)}$. 
+More generally, any set containing a contradiction is unsatisfiable for the simple reason that there is no interpretation which makes a contradiction true.
+As a result, every wfs of $\PL$ is a logical consequence of a set of wfss of $\PL$ which includes a contradiction. 
+
+% TODO: transition
+
+Having defined what it is for a wfs of $\PL$ to be a tautology in terms of logical consequence, it is natural to consider how to use the notion of logical consequence to define what it is for a wfs of $\PL$ to be a contradiction.
+It will help to consider the following claim:
+  $$P \eand \enot P \vDash Q.$$
+This statement is true.
+It says that $Q$ is true in every $\PL$ interpretation in which $P \eand \enot P$ is true.
+This follows vacuously since $P \eand \enot P$ is not true in any $\PL$ interpretations, and so $Q$ is true in every interpretation in which $P \eand \enot P$ is true (all zero of them).
+Or to take another approach, think about what it would take for the logical consequence above to be false: there would have to be a $\PL$ interpretation in which $P \eand \enot P$ is true and $Q$ is false.
+But there are no $\PL$ interpretations in which $P \eand \enot P$ is true, and so $Q$ is a logical consequence.
+
+Observe that the reason that the logical consequence above is true has nothing to do with the wfs $Q$.
+That is, we do not need to appeal to anything about the logical form of $Q$ in order to explain why $P \eand \enot P \vDash Q$. 
+Thus the same considerations would demonstrate that $P \eand \enot P \vDash \metaA$ for any wfs $\metaA$ of $\PL$.
+Moreover, the same conclusion holds were we to replace $P \eand \enot P$ with any other $\PL$ wfs that is not true on any interpretation.
+For instance, consider:
 
 \begin{earg}
-\item[] $(P \eor \enot P) \vDash\bot$
-\item[] $P, \enot Q, (R \eor Q) \vDash\bot$
-\item[] $\enot P, \enot Q, (P \eif \enot\enot Q) \vDash\bot$
+  \eitem{$A \eand \enot A \vDash \enot Q \eif R$.}
+  \eitem{$\enot (P \eor \enot P) \vDash (A_1 \eor A_2) \eif \enot (A_3 \eiff (A_4 \eand \enot A_2))$.}
 \end{earg}
 
-Since the sentences on the left can be satisfied, the three entailments given above are false.
+Since there are no $\PL$ interpretations in which the wfss on the left are true, you do not need to examine the wfss on the right to confirm that the logical consequences above are true.
+Given that the wfss on the right do not matter, it would be nice to have a way to represent that any wfs $\metaA$ of $\PL$ is a logical consequence of the wfss on the left.
+There are two common ways to do this, but both make use of the same notation: $\Gamma \vDash \bot$.
+One way to interpret the logical consequence above is as a universal claim that $\Gamma$ entails every wfs $\metaA$ of $\PL$ whatsoever. 
+Another way to interpret this logical consequence is to take `$\bot$' to abbreviate some particular contradiction of $\PL$, though it doesn't matter which.
+These conventions turn out to amount to the very same thing.
+For simplicity, we will assume the latter convention where `$\bot$' abbreviates the contradiction `$A \eand \enot A$' for definiteness.
 
-% TODO transition
+We have already observed that every wfs $\metaA$ of $\PL$ is a logical consequence of an unsatisfiable set $\MetaG$ of wfss of $\PL$.
+Given any unsatisfiable set $\MetaG$ of wfss of $\PL$, it follows that $\bot$ in particular is a logical consequence of $\MetaG$, i.e., $\MetaG \vDash \bot$. 
+Conversely, we may prove the following: 
 
-Recall that the definition of satisfiability given in $\S\ref{sub:PL-Satisfiability}$ appealed to complete truth tables: a set of $\PL$ sentences $\Gamma$ is \define{satisfiable} just in case there is at least one line of a complete truth table including every sentence in $\Gamma$ on which all of the sentences in $\Gamma$ are true.
-Alternatively, we may avoid appealing to complete truth tables by saying that a set of $\PL$ sentences $\Gamma$ is \define{satisfiable} just in case there is an interpretation $\I$ of $\PL$ where every sentence in $\Gamma$ is true, i.e., $\V{\I}(\metaA)$ for all $\metaA$ in $\Gamma$.\label{def.PL-satisfiability}
-Accordingly, we may show that any set of $\PL$ sentences $\Gamma$ is satisfiable just in case it is satisfiable. 
-Put otherwise, satisfiability and satisfiablility have the same \textit{extension} insofar as they apply to the very same sets of $\PL$ sentences.
-As a result, if you ever need help seeing whether a given set of sentences can be satisfied, you can always draw out its truth table to check if any row assigns a `1' every sentence in the set.
-If there is no row which assigns a `1` to every sentence in the set, then the set is unsatisfiable.
+\begin{Lthm} \label{lemma:unsat_bot}
+  If $\MetaG \vDash \bot$, then $\MetaG$ is unsatisfiable. 
+\end{Lthm} \vspace{-.2in}
 
+\begin{quote} 
+  \textit{Proof:}
+  Let $\Gamma$ be an arbitrary set of wfss of $\PL$ where $\Gamma \vDash \bot$.
+  Assume that $\Gamma$ is satisfiable for contradiction.
+  Thus there is a $\PL$ interpretation $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$, and so $\V{\I}(\bot) = 1$ given the assumption that $\Gamma \vDash \bot$.
+  Given the definition of $\bot$, we may conclude that $\V{\I}(A \eand \enot A) = 1$.
+  By the semantics for conjunction $\V{\I}(A) = \V{\I}(\enot A) = 1$, and so $\V{\I}(A) = 0$ by the semantics for negation, resulting in a direct contradiction.
+  Thus $\Gamma$ is unsatisfiable. 
+  \qed
+\end{quote}
 
+This shows that a set $\MetaG$ of wfss of $\LP$ is unsatisfiable if and only if $\MetaG \vDash \bot$.
+In the special case where $\MetaG = \set{\metaA}$, we may say that $\metaA$ is a contradiction just in case $\metaA \vDash \bot$. 
+This provides a way to characterize contradictions in terms of logical consequence.
 
+We may close by mentioning a connection between logical consequence and unsatisfiability that we will have occasion to return to later in the metalogical portions of this text.
 
+\begin{Lthm} \label{lemma:unsat_consequence}
+  $\MetaG \vDash \metaA$ just in case $\MetaG \cup \set{\enot \metaA}$ is unsatisfiable. 
+\end{Lthm}
 
-
-\section{Weakening}
-
-If the right-hand-side of an entailment claim is a tautology, it doesn't matter what's on the left for the entailment to hold.
-For instance, given that $\vDash P \eor \enot P$, we may conclude that $Q \vDash P \eor \enot P$.
-More generally, we may observe the following:
-$$\text{If}~ \Gamma \vDash \metaA, ~\text{then}~ \Gamma \cup \Sigma\vDash \metaA.$$
-This principle is referred to as \define{weakening}.
-As a special case (i.e., $\Gamma=\varnothing$), we may conclude that if $\metaA$ is a tautology (i.e., $\vDash \metaA$), then every set of $\PL$ sentences $\Sigma$ entails $\metaA$ (i.e., $\Sigma \vDash \metaA$).
-
-In particular, we may draw the following conclusions from the entailments above:
-
-\begin{earg}
-  \item[] $Q \vDash P \eor \enot P$
-  \item[] $R \eif (Q \eand \enot Q)\vDash P \eiff P$
-  \item[] $A \eand \enot A \vDash (P \eand\enot P)\eif (A \eor B)$
-\end{earg}
-
-In $\S\ref{sec:entailment}$, we said that if an argument is valid, then its premises entail its conclusion.
-Given weakening, it follows that if an argument is valid, then any set containing the arguments premises will entail the argument's conclusion.
+We will make considerable use of this principle in proving things about the proof system for $\PL$ that we will now turn to introduce in the following chapter.
 
 
+
+
+
+
+% Consider the following examples:
+%
+% \begin{earg}
+% \item[] $A \eand \enot A \vDash \bot$.
+% \item[] $P, \enot P \vDash \bot$.
+% \item[] $P \eiff Q, Q \eiff\enot P \vDash \bot$.
+% \end{earg}
+%
+% The sets of sentences on the left of each logical consequence above are unsatisfiable.\footnote{Recall that we have omitted set notation for ease of exposition.}
+% As a special case, we may say that an $\PL$ sentence $\metaA$ is a \define{contradiction} just in case its singleton set $\set{\metaA}$ is unsatisfiable, i.e., $\metaA \vDash \bot$.
+% Whereas contradictions are sentences of $\PL$, only \textit{sets} of sentences of $\PL$ may be said to be unsatisfiable.
+% Nevertheless, it follows by the weakening principle given above that any set of $\PL$ sentences which contains a contradiction is unsatisfiable.
+% By contrast, there are lots of unsatisfiable sets of sentences that do not contain contradictions.
+% For instance, neither $P \eiff Q$ nor $Q \eiff \neg P$ are contradictions. 
+% Nevertheless, the set $\set{P \eiff Q, Q \eiff \neg P}$ is unsatisfiable. 
+% Compare the following examples to those given above:
+%
+% \begin{earg}
+% \item[] $(P \eor \enot P) \vDash\bot$
+% \item[] $P, \enot Q, (R \eor Q) \vDash\bot$
+% \item[] $\enot P, \enot Q, (P \eif \enot\enot Q) \vDash\bot$
+% \end{earg}
+%
+% Since the sentences on the left can be satisfied, the three entailments given above are false.
+%
+% % TODO transition
+%
+% Recall that the definition of satisfiability given in $\S\ref{sub:PL-Satisfiability}$ appealed to complete truth tables: a set of $\PL$ sentences $\Gamma$ is \define{satisfiable} just in case there is at least one line of a complete truth table including every sentence in $\Gamma$ on which all of the sentences in $\Gamma$ are true.
+% Alternatively, we may avoid appealing to complete truth tables by saying that a set of $\PL$ sentences $\Gamma$ is \define{satisfiable} just in case there is an interpretation $\I$ of $\PL$ where every sentence in $\Gamma$ is true, i.e., $\V{\I}(\metaA)$ for all $\metaA$ in $\Gamma$.\label{def.PL-satisfiability}
+% Accordingly, we may show that any set of $\PL$ sentences $\Gamma$ is satisfiable just in case it is satisfiable. 
+% Put otherwise, satisfiability and satisfiablility have the same \textit{extension} insofar as they apply to the very same sets of $\PL$ sentences.
+% As a result, if you ever need help seeing whether a given set of sentences can be satisfied, you can always draw out its truth table to check if any row assigns a `1' every sentence in the set.
+% If there is no row which assigns a `1` to every sentence in the set, then the set is unsatisfiable
+
+
+
+
+
+
+
+
+% \section{Unsatisfiability and Logical Consequence}
+%
+% We have begun to see that there are some important connections between satisfiability and logical consequence which helped us to get a better sense of the logical properties that tautologies and contradictions each enjoy.
+% Rather than merely appealing to examples, it will help to say something more systematic about some of the connections that we have already drawn as well as some which we have not.
+% This section will provide such an account.
 
 
 

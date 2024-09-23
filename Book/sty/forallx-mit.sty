@@ -123,6 +123,7 @@
 \def\metaD{\ensuremath{\delta}}
 \def\metaG{\ensuremath{\gamma}}
 \def\MetaG{\ensuremath{\Gamma}}
+\def\MetaS{\ensuremath{\Sigma}}
 \def\metaSetX{\ensuremath{\Gamma}}
 \def\metaSetY{\ensuremath{\Sigma}}
 \def\metaSetZ{\ensuremath{\varPhi}}
@@ -388,7 +389,15 @@
 % \factoidbox{...} produces an inset paragraph of text with a line around it
 % Neither for lists nor an environment, but it really didn't
 % belong anywhere else.
-\newcommand{\factoidbox}[1]{\begin{quote}\framebox{\parbox{\dimexpr\linewidth-3\fboxsep\relax}{#1}}\end{quote}}
+% \newcommand{\factoidbox}[1]{\begin{quote}\framebox{\parbox{\dimexpr\linewidth-3\fboxsep\relax}{#1}}\end{quote}}
+\newcommand{\factoidbox}[1]{%
+  \setlength{\fboxsep}{10pt}% Adjust the padding inside the frame
+  \begin{quote}
+    \framebox{%
+      \parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}%
+    }%
+  \end{quote}%
+}
 
 % \tablefbox{...} is used in certain tables to put a box around the contents of specific table cells without having lines that run the whole length of the table
 \newcommand{\tablefbox}[1]{\multicolumn{1}{|p{10em}|}{#1}}
