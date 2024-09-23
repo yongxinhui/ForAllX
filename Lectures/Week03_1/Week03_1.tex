@@ -16,6 +16,7 @@
 \usepackage{prooftrees} 
 \usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
 \setcitestyle{aysep={}}
+% \usepackage{fitchproof} 
 
 \makeatletter
 \renewcommand{\maketitle}{
@@ -28,7 +29,7 @@
 \\ \@date
 \end{flushright}
 
-\vspace{-20pt}
+\vspace{20pt}
 
 }
 \makeatother
@@ -37,7 +38,7 @@
 %	TITLE
 %----------------------------------------------------------------------------------------
 
-\title{\textbf{Mathematical Induction}} % Subtitle
+\title{\textbf{Natural Deduction in PL}} % Subtitle
 
 \author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
 
@@ -53,147 +54,339 @@
 
 %----------------------------------------------------------------------------------------
 
-\section*{Examples}
+\section*{Review from Last Time\ldots}
 
 \begin{enumerate}
-  \item Show that $\enot R \eif \enot Q,\ P \eand Q \vDash P \eand R$.
   \item Show that $A \eor B,\ B \eif C,\ A \eiff C \vDash C$.
-  \item Show that $P,\ P \eif Q,\ \enot Q \vDash A$.
-  \item Show that $(P \eif Q) \eiff (\enot Q \eif \enot P)$ is a tautology.
-  \item Show that $A \eiff \enot A$ is a contradiction.
   \item Show that $\{P,\ P \eif Q,\ Q \eif \enot P\}$ is unsatisfiable. 
   \item Show that $\set{P \eif Q,\ \enot P \eor \enot Q,\ Q \eif P}$ is satisfiable.
-  \item[\bf Observe:] There seem to be patterns.
-  \item[\bf Question:] How could we systematize these proofs?
 \end{enumerate}
 
 
 
+% TODO other semantic results to talk about?
 
 
-% \begin{itemize}[leftmargin=1.5in,labelsep=.15in] %,label=(\arabic*)]%,label=\roman*]
-  % \item[\it Complexity:] $\comp{\metaA}$ is the function from the wfss of $\PL$ to the natural number $\N$ which satisfies the following for any wfss $\metaA$ and $\metaB$ of $\PL$ and $\star \in \set{\eand, \eor, \eif, \eiff}$: 
-  %   \item $\comp{\metaA} = 0$ if $\metaA$ is a sentence letter; 
-  %   \item $\comp{\enot\metaA} = \comp{\metaA} + 1$; and
-  %   \item $\comp{\metaA \star \metaB} = \comp{\metaA} + \comp{\metaB} + 1$.
-  % \item[\bf Task 4:] Provide a semantic argument.
-  % \item[\it Inference Rules:] Suppose we were to schematize inferences.
-  %   \begin{itemize}
-  %     \item $\metaA \wedge \metaB\ \vdash \metaA$.
-  %     \item $\neg \metaA\ \vdash \neg(\metaA \wedge \metaB)$.
-  %     \item $\metaA \eif \metaB,\ \neg \metaB\ \vdash \neg \metaA$.
-  %     \item $\neg(\metaA \vee \metaB)\ \vdash \neg \metaA$.
-  %   \end{itemize}
-  % \item[\it Observe:] Rules are valid.
-  % \item[\bf Task 5:] Use rules to derive above.
-  % \item[\it Proof Theory:] How many rules are there, and how should we describe the space of all of them?
-% \end{itemize}
-
-
-\section*{Review from Last Time}
+\section*{Motivation}
 
 \begin{enumerate}
-  \item Show that $A \vee B, B \supset C, A \equiv C \vDash C$.
-  \item Show that $\{P, P \supset Q, Q \supset \neg P\}$ is unsatisfiable. 
-  \item Show that $\set{P \supset Q, \neg P \vee \neg Q, Q \supset P}$ is satisfiable.
-  \item Evaluate $P, P \supset Q, \neg Q \vDash A$.
-  \item Evaluate $(A \wedge B) \supset C, C \equiv (D \wedge E), \neg D \wedge B \vdash \neg A$.
+  \item[\it Homophonic:] Prove that $P \eor Q,\ \enot P\ \vDash Q$. 
+    \begin{itemize}
+      \item The semantic proof makes the same inference.
+      \item So why not just draw this inference directly in $\PL$?
+      \item What are the basic steps we are allowed to make in a proof?
+    \end{itemize}
+  \item[\it Semantic Proofs:] Provide a reasonably efficient way to evaluate validity.
+    \begin{itemize}
+      \item But they can be cumbersome to write.
+      \item They explain why a logical consequence holds.
+      \item Doesn't say how to reason from some premises to a conclusion.
+      \item Thus semantic proofs are not persuasive to the uninitiated.
+    \end{itemize}
+  \item[\it Natural Deduction:] How would we describe the patterns of natural deduction?
+    \begin{itemize}
+      \item Want to describe inference itself, starting with the most basic.
+      \item Such inferences hold in virtue of the meanings of the operators.
+      \item Define a proof to be any composition of basic inferences.
+    \end{itemize}
+  \item[\it Rules:] Each operator will have an introduction and elimination rule.
+    \begin{itemize}
+      \item These rules will describe how to reason with the connectives.
+      \item Want these rules to be valid.
+      \item Also want these rules to be natural.
+    \end{itemize}
+  \item[\it Metalogic:] 
+    \begin{itemize}
+      \item This is a completely different approach to formal reasoning.
+      \item Nevertheless, these two approaches have the same extension.
+      \item Our proof system will help us relate to the logical consequence.
+    \end{itemize}
 \end{enumerate}
 
 
-\section*{Soundness and Completeness}
+
+
+
+\section*{Basic Anatomy of a Proof}
 
 \begin{enumerate}
-  \item[\it Soundness:] If $\Gamma \vdash \varphi$, then $\Gamma \vDash \varphi$.
-  \item[\it Completeness:] If $\Gamma \vDash \varphi$, then $\Gamma \vdash \varphi$.
-  \item[\it Induction:] These proofs will require mathematical induction. 
-  \item[\it Definitions:] We will also need a few more recursive definitions.
+  \item[\it Numbers:] Every line is numbered. 
+  \item[\it Sentences:] Each line contains exactly one wfs of $\PL$. 
+  \item[\it Justification:] Each line includes a justification.
+  \item[\it Assumptions:] The justification for a premise is `:PR'.
+  \item[\it Bars:] A horizontal bar separates the premises from the steps in the proof.
+  \item[\it Conclusion:] The last line is the conclusion. 
 \end{enumerate}
 
 
-
-\section*{Recursive Definitions}
-
-\begin{itemize}
-  \item[\it Complexity:] We define $\comp(\varphi)$ to be the number of connectives in $\varphi$.
-      \item If $\varphi$ is a sentence letter of SL, then $\comp(\varphi)=0$.
-      \item For any SL sentences $\varphi$ and $\psi$: 
-    \begin{itemize}
-      \item[$(\neg)$] $\comp(\neg \varphi)=\comp(\varphi)+1$;
-      \item[$(\wedge)$] $\comp(\varphi \wedge \psi)=\comp(\varphi)+\comp(\psi)+1$;
-      \item[] $\vdots$
-    \end{itemize}
-  \item[\bf Note:] Could avoid redundancy by taking $\star$ to be any binary connective. 
-  \item[\it Constituents:] We define $[\varphi]$ to be the set of sentence letters that occur in $\varphi$. % by taking $[\cdot]:\text{SL}\to\mathcal{P}(\text{SL})$ to be the smallest function to satisfy:
-      \item If $\comp(\varphi)=0$, then $[\varphi]=\set{\varphi}$.
-      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
-    \begin{itemize}
-      \item[$(\neg)$] $[\neg \varphi]=[\varphi]$;
-      \item[$(\hspace{1pt}\star\hspace{1pt})$] $[\varphi \star \psi]=[\varphi] \cup [\psi]$;
-    \end{itemize}
-  \item[\it Simplicity:] We define $\simp(\varphi)$ to hold just in case the SL sentence $\varphi$ has at most one occurrence of each sentence letter in SL.
-      \item If $\comp(\varphi)=0$, then $\simp(\varphi)$.
-      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
-    \begin{itemize}
-      \item[$(\neg)$] $\simp(\neg \varphi)$ if $\simp(\varphi)$;
-      \item[$(\hspace{1pt}\star\hspace{1pt})$] $\simp(\varphi \star \psi)$ if $\simp(\varphi)$, $\simp(\psi)$, and $[\varphi]\cap[\psi]=\varnothing$;
-    \end{itemize}
-  \item[\it Substitution:] We define $\varphi_{[\chi/\alpha]}$ to be the result of replacing every occurrence of the sentence letter $\alpha$ in $\varphi$ with $\chi$.
-      \item If $\comp(\varphi)=0$, then $\varphi_{[\chi/\alpha]}=
-        \begin{cases}
-          \chi \quad\text{if } \varphi=\alpha,\\
-          \varphi \quad\text{otherwise.}
-        \end{cases}$
-      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
-    \begin{itemize}
-      \item[$(\neg)$] $(\neg\varphi)_{[\chi/\alpha]}=\neg(\varphi_{[\chi/\alpha]})$;
-      \item[$(\hspace{1pt}\star\hspace{1pt})$] $(\varphi\star\psi)_{[\chi/\alpha]}=\varphi_{[\chi/\alpha]}\star\psi_{[\chi/\alpha]}$;
-    \end{itemize}
-\end{itemize}
-
-
-
-
-
-\section*{Strong Induction}
+\section*{Conditional}
 
 \begin{enumerate}
-  \item[\it Step 1:] Identify the set of elements and the property in question.
-  \item[\it Step 2:] Partition the set into a sequence of stages to run induction on.
-  \item[\it Step 3:] Establish that every element in the base stage has the property.
-  \item[\it Step 4:] Assume every element in stage $n$ and below have the property. 
-  \item[\it Step 5:] Show that every element in stage $n+1$ have the property. 
+  \item[\it Elimination:] $A,\ A \eif B,\ B \eif C\ \vdash C$. 
+    \begin{itemize}
+      \item Easy to derive $C$ using $\eif$E.
+      \item What if $A$ was excluded from the premises? 
+    \end{itemize}
+  \item[\it Introduction:] $A \eif B,\ B \eif C\ \vdash A \eif C$. 
+    \begin{itemize}
+      \item Need something to work with.
+      \item Want to conclude with a conditional claim.
+      \item Assumption of $A$ justified by `:AS'.
+    \end{itemize}
+  \item[\it Subproofs:] Lines in a closed subproof are dead and all else are live.
+    \begin{itemize}
+      \item $\eif$E can only cite to live lines.
+      \item $\eif$I can only cite an appropriate subproof.
+    \end{itemize}
 \end{enumerate}
 
 
 
 
 
-\section*{Examples}
+\section*{Assumption}
 
 \begin{enumerate}
-  \item[\bf Task 1:] Show that every SL sentence has an even number of parentheses. 
-  \item[\bf Task 2:] Show that for every SL sentence $\varphi$, if $\simp(\varphi)$, then there are SL interpretations $\I$ and $\J$ where $\V{\I}(\varphi)=1$ and $\V{\J}(\varphi)=0$. 
-  \item[\bf Task 3:] For any SL sentences $\varphi,\psi,\chi$ and SL sentence letter $\alpha$, if $\vDash \varphi \equiv \psi$, then $\vDash \chi_{[\varphi/\alpha]}\equiv\chi_{[\psi/\alpha]}$.
-  \item[\bf Task 4:] Let $\I^+(\alpha)=1$ for every sentence letter $\alpha$ in SL. Show that $\V{\I^+}(\varphi)=1$ for every SL sentence $\varphi$ that does not include negation. 
+  \item[\it Example:] $A\ \vdash D \eif [C \eif (B \eif A)]$.
+\end{enumerate}
+
+
+
+
+\section*{Conjunction}
+
+\begin{enumerate}
+  \item[\it Elimination:] $A \eif (B\eand C),\ B \eif D\ \vdash A \eif D$.
+  \item[\it Introduction:] $A \eand B,\ B \eif C\ \vdash A \eand C$.
+\end{enumerate}
+
+
+
+\section*{Disjunction}
+
+\begin{enumerate}
+  \item[\it Introduction:] $A \vdash B \eor ((A \eor C) \eor D)$.
+  \item[\it Elimination:] $A\eor(B\eand C)\ \vdash (A \eor B) \eand (A \eor C)$. 
 \end{enumerate}
 
 
 
 
 
-% \section*{Weak Induction}
 
+
+\section*{Biconditional}
+
+\begin{enumerate}
+  \item[\it Elimination:] $A \eiff (B \eif [(A \eand C)\eiff D])\ \vdash (A\eand B) \eif (D \eif C)$. 
+  \item[\it Introduction:] $A \eif (B \eand C),\ C \eif (B \eand A) \vdash A \eiff C$.
+\end{enumerate}
+
+
+
+
+
+
+\section*{Negation}
+
+\begin{enumerate}
+  \item[\it Elimination:] $\enot\enot A\ \vdash A$. 
+  \item[\it Introduction:] $A \eif (B \eand C),\ C \eif (B \eand A) \vdash A \eiff C$.
+\end{enumerate}
+
+
+\section*{Reiteration}
+
+\begin{enumerate}
+  \item[\it Example:] $A,\ B \eif C\ \vdash B \eif (C \eand A)$.
+\end{enumerate}
+
+
+
+
+
+\section*{Proof}
+
+\begin{enumerate}
+  \item[\it Proof:] A natural deduction \textsc{proof} (or \textsc{derivation}) of a conclusion $\varphi$ from a set of premises $\Gamma$ in PL is any sequence of lines ending with $\varphi$ on a live line where every line in the sequence is either:
+      \begin{itemize}
+        \item[(1)] a premise in $\Gamma$; 
+        \item[(2)] a discharged assumption; or
+        \item[(3)] follows from previous lines by the rules for PL.
+      \end{itemize}
+  \item[\it Provable:] An wfs $\varphi$ of $\PL$ is \textsc{provable} (or \textsc{derivable}) from $\Gamma$ in PL \textit{iff} there is a natural deduction proof (derivation) of $\varphi$ from $\Gamma$ in PL, i.e., $\Gamma \vdash \varphi$. 
+  \item[\it Equivalent:] Two sentences $\varphi$ and $\psi$ are \textsc{provably equivalent} (or \textsc{interderivable}) if and only if both $\varphi\vdash\psi$ and $\psi\vdash\varphi$.
+  \item[\it Inconsistent:] A set of sentences $\Gamma$ is \textsc{provably inconsistent} if and only if $\Gamma\vdash\bot$ where $\bot$ is our arbitrarily chosen contradiction, e.g., $A\eand\enot A$.
+\end{enumerate}
+
+
+
+% \section*{Further Problems}
+%
+%
 % \begin{enumerate}
-%   \item[\it Even:] If $\varphi$ is a sentence letter of SL, then $\even(\varphi)$.\\
-%     For any SL sentences $\varphi$ and $\psi$: 
+%   \begin{multicols}{2}
+%   \item[\it Law of Excluded Middle:] $A \eor \enot A$. 
 %     \begin{itemize}
-%       \item[$(\neg)$] $\even(\neg \varphi)$ if $\even(\varphi)$;
-%       \item[$(\wedge)$] $\even(\varphi \wedge \psi)$ if $\even(\varphi)$ and $\even(\psi)$;
-%       \item[] $\vdots$
+%       \item $\enot(A \eor \enot A)$ \quad:AS
+%       \begin{itemize}
+%         \item $A$ \quad:AS 
+%         \item $A\eor \enot A$ \quad:$\eor$I 
+%         \item $\enot (A\eor \enot A)$ \quad:R 
+%       \end{itemize}
+%       \item $\enot A$ \quad:$\enot$I 
+%       \item $A \eor \enot A$ \quad:$\eor$I 
+%       \item $A\eor \enot A$ \quad:$\enot$E 
 %     \end{itemize}
+%   \item[\it LNC:] $\enot(A \eand \enot A)$. 
+%     \item[\it EXQ:] $A,\ \enot A \vdash B$. (\textit{Ex Falso Quodlibet})
+%     \begin{itemize}
+%       \item $\enot B$ \quad:AS 
+%       \begin{itemize}
+%         \item $A$ \quad:R 
+%         \item $\enot A$ \quad:R 
+%       \end{itemize}
+%       \item $B$ \quad:$\enot$E 
+%       \item[] ~
+%       \item[] ~
+%     \end{itemize}
+%   \end{multicols}
+%   \item $L\eiff \enot O,\ L\eor \enot O\ \vdash L$.
+%   \item $A\eiff B,\ \vdash \enot A\eiff\enot B$.
+%   \item $Z \eif (C \eand \enot N),\ \enot Z \eif (N \eand \enot C)\ \vdash N \eor C$.
 % \end{enumerate}
 
+  % \begin{multicols}{2}
+  % \end{multicols}
+
+
+
+\iffalse
+
+\begin{multicols}{2}
+
+
+\textit{Conjunction Introduction} (\eand I) \vspace{-1em}
+\begin{proof}
+	\have[m]{a}{\metaA{}}
+	\have[n]{b}{\metaB{}}
+	\have[\ ]{c}{\metaA{}\eand\metaB{}} \ai{a, b}
+	\have[\ ]{d}{\metaB{}\eand\metaA{}} \ai{a, b}
+\end{proof}
+
+\vspace{1em}
+
+\textit{Conditional Introduction} (\eif I) \vspace{-1em}
+%\nopagebreak
+\begin{proof}
+	\open
+		\hypo[m]{a}{\metaA{}} \as{for \eif I}{}%\by{want \metaB{}}{}
+		\have[n]{b}{\metaB{}}
+	\close
+	\have[\ ]{ab}{\metaA{}\eif\metaB{}}\ci{a-b}
+\end{proof}
+
+\vspace{0.6em}
+
+\textit{Negatation Introduction} (\enot I) \vspace{-1em}
+\begin{proof}
+\open
+	\hypo[m]{na}\metaA{} \as{for \enot I}   %\by{:AS for \enot I}{}
+	\have[n]{b}\metaB{}
+	\have[o]{nb}{\enot\metaB{}}
+\close
+\have[\ ]{a}[\ ]{\enot\metaA{}}\ni{na-nb}
+\end{proof}
+
+\vspace{0.6em}
+
+\textit{Disjunction Introduction} (\eor I) \vspace{-1em}
+
+\begin{proof}
+	\have[m]{a}{\metaA{}}
+	\have[\ ]{ab}{\metaA{}\eor\metaB{}}\oi{a}
+	\have[\ ]{ba}{\metaB{}\eor\metaA{}}\oi{a}
+\end{proof}
+
+%\vspace{1.9em} %3.9 for no extra vspaces
+\vspace{0.6em}
+
+\textit{Biconditional Introduction} (\eiff I) \vspace{-1em}
+
+\begin{fitchproof}
+	\open
+		\hypo[i]{a1}{\metaA{}} \as{for \eiff I}
+		\have[j]{b1}{\metaB{}}
+	\close
+\breakline
+	\open
+		\hypo[k]{b2}{\metaB{}} \as{for \eiff I}
+		\have[l]{a2}{\metaA{}}
+	\close
+	\have[\ ]{ab}{\metaA{}\eiff\metaB{}}\bi{a1-b1,b2-a2}
+\end{fitchproof}
+
+
+\vfill\null
+\columnbreak
+
+%\newpage
+
+\textit{Conjunction Elimination} (\eand E) \vspace{-1em}
+
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eand\metaB{}}
+	\have[\ ]{a}{\metaA{}} \ae{ab}
+	\have[\ ]{b}{\metaB{}} \ae{ab}
+\end{proof}
+
+%\vspace{1.9em}
+%\vspace{2.9em}
+\vspace{0.75em}
+
+\textit{Conditional Elimination} (\eif E)  \vspace{-1em}
+
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eif\metaB{}}
+	\have[n]{a}{\metaA{}}
+	\have[\ ]{b}{\metaB{}} \ce{ab,a}
+\end{proof}
+
+%\vspace{1em}
+\vspace{0.45em}
+
+\textit{Negation Elimination} (\enot E)  \vspace{-1em}
+%%note that I think I'm missing some brackets around the sentences on various liens below! works in proof environment but less robust in nd environment. so i ought to fix these here and in Negation intro 
+
+\begin{proof}
+\open
+	\hypo[m]{na}{\enot\metaA{}} \as{for \enot E}
+	\ellipsesline
+	\have[n]{b}\metaB{}
+	\have[o]{nb}{\enot\metaB{}}
+\close
+\have[\ ]{a}[\ ]\metaA{}\ne{na-nb}
+\end{proof}
+
+\vspace{1em}
+
+\textit{Disjunction Elimination} (\eor E)  \vspace{-1em}
+
+\begin{proof}
+\have[m]{ab}{\metaA{}\eor\metaB{}}
+	\open
+		\hypo[i]{a}{\metaA{}} \as{for \eor E}
+		\have[j]{c1}{\metaC{}}
+	\close
+\breakline
+	\open
+		\hypo[k]{b}{\metaB{}} \as{for \eor E}
+		\have[l]{c2}{\metaC{}}
+	\close
+	\have[\ ]{c}{\metaC{}} \oe{ab,a-c1, b-c2}
+\end{proof}
+
+\fi
 
 
 
@@ -201,4 +394,5 @@
 
 
 \end{document}
+
 

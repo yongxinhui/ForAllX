@@ -1,0 +1,158 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{../lecture} %calls local modified style file
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs} %%Math packages
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{multicol} 
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage{prooftrees} 
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep={}}
+
+\makeatletter
+\renewcommand{\maketitle}{
+\begin{flushright}
+{\LARGE\@title}
+
+\vspace{10pt}
+
+{\@author}
+\\ \@date
+\end{flushright}
+
+\vspace{-20pt}
+
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Mathematical Induction}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+
+
+\section*{Soundness and Completeness}
+
+\begin{enumerate}
+  \item[\it Soundness:] If $\Gamma \vdash \varphi$, then $\Gamma \vDash \varphi$.
+  \item[\it Completeness:] If $\Gamma \vDash \varphi$, then $\Gamma \vdash \varphi$.
+  \item[\it Induction:] These proofs will require mathematical induction. 
+  \item[\it Definitions:] We will also need a few more recursive definitions.
+\end{enumerate}
+
+
+
+\section*{Recursive Definitions}
+
+\begin{itemize}
+  \item[\it Complexity:] We define $\comp(\varphi)$ to be the number of connectives in $\varphi$.
+      \item If $\varphi$ is a sentence letter of SL, then $\comp(\varphi)=0$.
+      \item For any SL sentences $\varphi$ and $\psi$: 
+    \begin{itemize}
+      \item[$(\neg)$] $\comp(\neg \varphi)=\comp(\varphi)+1$;
+      \item[$(\wedge)$] $\comp(\varphi \wedge \psi)=\comp(\varphi)+\comp(\psi)+1$;
+      \item[] $\vdots$
+    \end{itemize}
+  \item[\bf Note:] Could avoid redundancy by taking $\star$ to be any binary connective. 
+  \item[\it Constituents:] We define $[\varphi]$ to be the set of sentence letters that occur in $\varphi$. % by taking $[\cdot]:\text{SL}\to\mathcal{P}(\text{SL})$ to be the smallest function to satisfy:
+      \item If $\comp(\varphi)=0$, then $[\varphi]=\set{\varphi}$.
+      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
+    \begin{itemize}
+      \item[$(\neg)$] $[\neg \varphi]=[\varphi]$;
+      \item[$(\hspace{1pt}\star\hspace{1pt})$] $[\varphi \star \psi]=[\varphi] \cup [\psi]$;
+    \end{itemize}
+  \item[\it Simplicity:] We define $\simp(\varphi)$ to hold just in case the SL sentence $\varphi$ has at most one occurrence of each sentence letter in SL.
+      \item If $\comp(\varphi)=0$, then $\simp(\varphi)$.
+      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
+    \begin{itemize}
+      \item[$(\neg)$] $\simp(\neg \varphi)$ if $\simp(\varphi)$;
+      \item[$(\hspace{1pt}\star\hspace{1pt})$] $\simp(\varphi \star \psi)$ if $\simp(\varphi)$, $\simp(\psi)$, and $[\varphi]\cap[\psi]=\varnothing$;
+    \end{itemize}
+  \item[\it Substitution:] We define $\varphi_{[\chi/\alpha]}$ to be the result of replacing every occurrence of the sentence letter $\alpha$ in $\varphi$ with $\chi$.
+      \item If $\comp(\varphi)=0$, then $\varphi_{[\chi/\alpha]}=
+        \begin{cases}
+          \chi \quad\text{if } \varphi=\alpha,\\
+          \varphi \quad\text{otherwise.}
+        \end{cases}$
+      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
+    \begin{itemize}
+      \item[$(\neg)$] $(\neg\varphi)_{[\chi/\alpha]}=\neg(\varphi_{[\chi/\alpha]})$;
+      \item[$(\hspace{1pt}\star\hspace{1pt})$] $(\varphi\star\psi)_{[\chi/\alpha]}=\varphi_{[\chi/\alpha]}\star\psi_{[\chi/\alpha]}$;
+    \end{itemize}
+\end{itemize}
+
+
+
+
+
+\section*{Strong Induction}
+
+\begin{enumerate}
+  \item[\it Step 1:] Identify the set of elements and the property in question.
+  \item[\it Step 2:] Partition the set into a sequence of stages to run induction on.
+  \item[\it Step 3:] Establish that every element in the base stage has the property.
+  \item[\it Step 4:] Assume every element in stage $n$ and below have the property. 
+  \item[\it Step 5:] Show that every element in stage $n+1$ have the property. 
+\end{enumerate}
+
+
+
+
+
+\section*{Examples}
+
+\begin{enumerate}
+  \item[\bf Task 1:] Show that every SL sentence has an even number of parentheses. 
+  \item[\bf Task 2:] Show that for every SL sentence $\varphi$, if $\simp(\varphi)$, then there are SL interpretations $\I$ and $\J$ where $\V{\I}(\varphi)=1$ and $\V{\J}(\varphi)=0$. 
+  \item[\bf Task 3:] For any SL sentences $\varphi,\psi,\chi$ and SL sentence letter $\alpha$, if $\vDash \varphi \equiv \psi$, then $\vDash \chi_{[\varphi/\alpha]}\equiv\chi_{[\psi/\alpha]}$.
+  \item[\bf Task 4:] Let $\I^+(\alpha)=1$ for every sentence letter $\alpha$ in SL. Show that $\V{\I^+}(\varphi)=1$ for every SL sentence $\varphi$ that does not include negation. 
+\end{enumerate}
+
+
+
+
+
+% \section*{Weak Induction}
+
+% \begin{enumerate}
+%   \item[\it Even:] If $\varphi$ is a sentence letter of SL, then $\even(\varphi)$.\\
+%     For any SL sentences $\varphi$ and $\psi$: 
+%     \begin{itemize}
+%       \item[$(\neg)$] $\even(\neg \varphi)$ if $\even(\varphi)$;
+%       \item[$(\wedge)$] $\even(\varphi \wedge \psi)$ if $\even(\varphi)$ and $\even(\psi)$;
+%       \item[] $\vdots$
+%     \end{itemize}
+% \end{enumerate}
+
+
+
+
+
+
+
+\end{document}
+

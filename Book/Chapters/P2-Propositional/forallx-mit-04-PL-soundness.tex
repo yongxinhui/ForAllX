@@ -1,6 +1,496 @@
-﻿%!TEX root = ../forallx-mit.tex
-\chapter{The Soundness of QD}
-  \label{ch.SoundQD}
+﻿%!TEX root = ../../forallx-mit.tex
+\chapter{The Soundness of PL}
+  \label{ch.PL-Soundness}
+
+\section{Proofs and Provability}
+
+Given the natural deduction rules specified above, we may present the following definition:
+
+\factoidbox{
+  A natural deduction \define{proof} (or \define{derivation}) of a conclusion $\metaA$ from a set of premises $\Gamma$ in PL is any sequence of lines ending with $\metaA$ on a live line where every line in the sequence is either: (1) a premise in $\Gamma$; (2) a discharged assumption; or (3) follows from previous lines by one of the natural deduction rules for PL. 
+}
+
+An $\PL$ sentence $\metaA$ is \define{provable} (or \define{derivable}) from $\Gamma$ in PL just in case there is a natural deduction proof (derivation) of $\metaA$ from $\Gamma$ in PL, where we may write this: $\Gamma \proves \metaA$. 
+% Whereas `$\Gamma \proves_{T} \metaA$' was shorthand for `$\Gamma, \enot \metaA \proves_{T} \bot$', 
+
+Two sentences $\metaA$ and $\metaB$ are \define{provably equivalent} (or \define{interderivable}) if and only if both $\metaA\proves\metaB$ and $\metaB\proves\metaA$.
+% Additionally, we will take $\Gamma\proves\bot$ to mean that $\Gamma\proves\metaB\eand\enot\metaB$ for some $\PL$ sentence $\metaB$.
+% It is relatively easy to show that two sentences are provably equivalent since this requires a pair of proofs.
+% Showing that sentences are \emph{not} provably equivalent would be much harder.
+% It would be just as hard as showing that a sentence is not a theorem.
+% (In fact, these problems are interchangeable. Can you think of a sentence that would be a theorem if and only if \metaA{} and \metaB{} were provably equivalent?)
+A set of sentences $\Gamma$ is \define{provably inconsistent} if and only if $\Gamma\proves\bot$ where $\bot$ is our arbitrarily chosen contradiction, e.g., $A\eand\enot A$.
+
+
+Provability is relative to a proof system, so the meaning of the `$\proves$' symbol featured in this chapter should be distinguished from the one we used for trees.
+When necessary, we can specify which turnstile we intend by including a reference to the proof system in question, letting `$\proves_{T}$' stand for provability in the tree system, and `$\proves_{PL}$' stand for provability in this natural deduction system.
+Since this chapter is concerned with natural deduction, you can take `$\proves$' to mean `$\proves_{PL}$' in this chapter unless specified otherwise.
+% For instance, it is important to disambiguate the turnstiles in making the following observation: whereas $\Gamma \proves_{T} \metaA$ was defined as $\Gamma, \enot \metaA \proves_{T} \bot$ for the tree proof system, here we have defined $\Gamma \proves_{PL} \bot$ in terms of $\Gamma \proves_{PL} \metaB\eand\enot\metaB$ for some $\metaB$. 
+
+% So $\Gamma\proves\metaA$ can be read as: $\metaA$ is derivable from $\Gamma$.
+As above, it is often convenient to write `$\metaA_1,\metaA_2,\ldots\proves\metaB$' as a shorthand for $\set{\metaA_1,\metaA_2,\ldots}\proves\metaB$.
+We will refer to an $\PL$ sentence $\metaA$ as a \define{theorem} of PL just in case $\proves\metaA$, i.e., $\varnothing\proves\metaA$.
+It is important to note that the sentences of $\PL$ are only theorems \textit{relative to a proof system}, so there is no sense in which $A\eor\enot A$ is a theorem full stop.
+Nevertheless, it is natural to expect $A\eor\enot A$ to be a theorem of any respectable (i.e., complete) proof system for $\PL$.
+
+In order to show that something is a theorem we have to derive it from no premises.
+But how could we show that something is \emph{not} a theorem?
+More generally, how could we show that $\Gamma \nproves \metaA$?
+Showing that there is no proof of $\metaA$ from $\Gamma$ would seem to require searching the space of all natural deduction proofs, and this is not bound to be easy. 
+For instance, even if you (or a computer program) failed to derive $\metaA$ from $\Gamma$ in a thousand different ways, perhaps their is a proof that has not yet been considered.
+As we've emphasized already, this brings out an important difference between our natural deduction system and the tree proof system.
+Whereas the tree method will determine whether $\Gamma \proves_{T} \metaA$ or not, the natural deduction system does not provide a straightforward way to demonstrate that an argument is invalid.
+
+% It is easy to show that a set is provably inconsistent: You just need to assume the sentences in the set and prove a contradiction. Showing that a set is \emph{not} provably inconsistent will be much harder. It would require more than just providing a proof or two; it would require showing that proofs of a certain kind are \emph{impossible}.
+
+
+
+
+
+\section{Provability and Entailment}
+
+The double turnstile `$\models$' for logical entailment remains unchanged, and so no subscript is required.
+% Put otherwise, entailment is not relative to a proof system, but rather to a class of interpretations.
+% In particular, we were concerned with interpretations which assigned the sentence letters of $\PL$ to exactly one truth-value.
+% Since this is the only definition of an interpretation that we will consider for $\PL$, there is only one corresponding notion of entailment $\models$.
+Although the soundness and completeness proofs showed that $\Gamma \proves_{T} \metaA$ if and only if $\Gamma \models \metaA$, a question remains as to whether a similar result may be established for PL.
+% A natural strategy for establishing this connection is to show that $\Gamma \proves_{PL} \metaA$ if and only if $\Gamma \proves_{T} \metaA$.
+
+Although the soundness proof for natural deduction is easy, the completeness proof is considerably more difficult.
+Rather, we will simply state that PL is both sound and complete:
+
+\factoidbox{
+  PL is both sound and complete, i.e., $\Gamma \proves_{PL} \metaA$ if and only if $\Gamma \models \metaA$.
+}
+
+Given the soundness and completeness of the tree method, it follows that our two proof systems are equivalent in the sense that anything provable in one is also provable in the other: $\Gamma\proves_{T}\metaA$ if and only if $\Gamma\proves_{PL}\metaA$.
+In practice, this is a good thing.
+For instance, suppose you are not sure if $\Gamma \proves_{PL} \metaA$, but if it does, you would like to provide a derivation.
+Using the tree method, you could check whether $\Gamma \proves_{T} \metaA$, and if the tree you construct closes, then go on to look for a natural deduction proof of $\metaA$ from $\Gamma$. 
+If we can show that $\Gamma \nproves_{T} \metaA$ by constructing a complete open tree, then we can conclude that there is no natural deduction derivation of $\metaA$ from $\Gamma$, and so no use looking for one. 
+Nevertheless, a direct proof of $\metaA$ from $\Gamma$ in PL is more compelling than a closed tree.
+Whereas it is easy to justify every move in a natural deduction derivation, it is a lot harder to use a closed tree to create a compelling argument.
+
+Given that PL is sound and complete, the \emph{theorems} of PL are coextensive with the \emph{tautologies} of $\PL$.
+Whereas showing that a sentence is a tautology involves checking a truth-table or constructing a semantic argument, showing that a sentence is a theorem involves constructing a proof.
+Some proofs are easier to construct than others, but even for very long proofs, it is easy to check whether each line follows from the previous lines.
+% Moreover, the resulting argument is the kind of argument that you could present an analogue of in English in order to be persuasive.
+Although there is no formal way of showing that a sentence is \emph{not} a theorem, there is a method for showing that a sentence is not a tautology: construct an $\PL$ tree and read off the interpretation.
+% We need only construct a model in which the sentence is false. Given a choice between showing that a sentence is not a theorem and showing that it is not a tautology, it would be easier to show that it is not a tautology.
+
+
+\section{Logical Analysis}
+
+If we can translate an argument into $\PL$, we now have a number of tools that we can use to investigate that argument's logical properties.
+Consider the following options:
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular*}{\textwidth}{p{12em}|p{10em}|p{12em}|}
+\cline{2-3}
+
+ & \multicolumn{1}{|c|}{YES} & \multicolumn{1}{|c|}{NO}\\
+\cline{2-3}
+
+Is \metaA{} a tautology? & Prove $\proves\metaA{}$ & Give a model in which \metaA{} is false\\
+\cline{2-3}
+
+Is \metaA{} a contradiction? &  Prove $\proves\enot\metaA{}$ & Give a model in which \metaA{} is true\\
+\cline{2-3}
+
+Is \metaA{} contingent? & Give a model in which \metaA{} is true and another in which \metaA{} is false & Prove $\proves\metaA{}$ or $\proves\enot\metaA{}$\\
+\cline{2-3}
+
+Are \metaA{} and \metaB{} equivalent? & Prove \mbox{$\metaA{}\proves\metaB{}$} and \mbox{$\metaB{}\proves\metaA{}$}  & Give a model in which \metaA{} and \metaB{} have different truth values\\
+\cline{2-3}
+
+Is the set $\Gamma$ consistent? & Give a model in which all the sentences in $\Gamma$ are true & Taking the sentences in $\Gamma$, prove $\metaB$ and $\enot\metaB$\\
+\cline{2-3}
+
+Is `$\metaA, \metaB, \ldots\ \therefore\ \metaC$' valid? & Prove $\metaA{}, \metaB{}, \ldots \proves\metaC{}$ & Give a model that satisfies $\set{\metaA, \metaB, \ldots,\ \enot \metaC}$\\
+\cline{2-3}
+\end{tabular*}
+\end{center}
+% \caption{Sometimes it is easier to show something by providing proofs than it is by providing models. Sometimes it is the other way round.  It depends on what you are trying to show.}
+\label{table.ProofOrModel}
+\end{table}
+% \FloatBarrier
+
+Answering the questions on the left may sometimes be easy, and other times far from obvious.
+Whereas the tree proof system provides a fail-safe way to determine the answer, the PL proof system provides a way to construct compelling arguments.
+
+
+
+
+
+% \iffalse
+
+\section{Derived Rules}
+\label{sec:basic}
+
+A \define{derived rule} is a rule of inference that has not been included as a basic rule of the proof system but may be derived using the basic rules included in that system.
+Accordingly, anything that can be proven with a derived rule can be proven without it.
+
+You can think of derived rules as subroutines which can be used to shorten proofs, making some proofs easier to write and more intuitive to read.
+Like the basic rule, derived rules will use meta-variables since they hold for any sentences whatsoever.
+
+
+%\section{Basic and derived rules}
+
+
+%We have so far introduced five rules: Conditional Elimination, \emph{modus tollens}, Disjunction Elimination, Conjunction Elimination, and Conjunction Introduction. There are still more rules still to learn, but it is helpful first to pause and draw a distinction between different kinds of rules.
+
+%Many of our rules, we have seen, carry the name `Elimination' or `Introduction', along with the name of one of our $\PL$ connectives. In fact, every rule we've seen so far except \emph{modus tollens} has had such a name. Such rules are the \emph{basic} rules in our natural deduction system. The basic rules comprise an Introduction and an Elimination rule for each connective, plus one more rule. \emph{Modus tollens} is NOT a basic rule; we will call it a \emph{derived} rule.
+
+%A derived rule is a non-basic rule whose validity we can derive using basic rules only. 
+
+%We have already seen the Introduction and Elimination rules for conjunction, and the elimination rules for disjunction and conditionals. In the next several sections, we'll finish canvassing the basic rules, then say a bit more about \emph{modus tollens} and other derived rules.
+
+\subsection{\textit{Modus Tollens}}
+
+Modus tollens is an extremely important and common inference rule in ordinary reasoning.
+Here is the derived rule for \textit{modus tollens} (MT):
+
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eif\metaB{}}
+	\have[n]{a}{\enot\metaB{}}
+	\have[\ ]{b}{\enot\metaA{}} \by{MT}{ab,a}
+\end{proof}
+
+If you have a conditional on one numbered line and the negation of its consequent on another line, you may derive the negation of its antecedent on a new line.
+We abbreviate the justification for this rule as `MT' for \emph{modus tollens}.
+For instance, if you know that if Sue found the treasure, then she is happy, and you also know that Sue isn't happy, then you can infer that Sue didn't find the treasure.
+Inferences of this form are extremely common.
+
+In order to derive MT from our basic rules we will construct a derivation in the manner above while using meta-variables instead of sentences of $\PL$ to provide the following proof schema:
+
+\begin{proof}
+	\hypo{p}{\metaA{}}
+	\hypo{qnp}{\metaB{} \eif \enot \metaA{}} \want{\enot \metaB{}}
+	\open
+		\hypo{q}{\metaB{}} \by{:AS for $\enot$I}{}
+		\have{np}{\enot \metaA{}}\ce{qnp,q}
+		\have{nnp}{\metaA{}}\by{R}{p}
+	\close
+	\have{nq}{\enot \metaB{}}\ni{q-nnp}
+\end{proof}
+
+Since \metaA{} and \metaB{} are meta-variables, the lines above do not constitute an PL proof.
+Rather, the lines above are a \define{proof schema} which is a kind of recipe for constructing proofs.
+Given any values for $\metaA$ and $\metaB$, the proof schema for MT will yield an PL proof as an instance.
+Accordingly, applications of MT can always be replaced with an appropriate instance of the proof schema for MT which only refers to the basic rules included in PL.
+Nevertheless, MT is a convenient shortcut and so we will add it to our list of derived rules.
+
+Here is an example employing \textit{modus tollens} several times over.
+
+\begin{proof}
+	\hypo{ab}{A \eif B}
+	\hypo{bc}{B \eif C}
+	\hypo{cd}{C \eif D}
+	\hypo{nd}{\enot D} \want{\enot A}
+	\have{c}{\enot C} \by{MT}{cd,nd}
+	\have{b}{\enot B} \by{MT}{bc,c}
+	\have{a}{\enot A} \by{MT}{ab,b}
+\end{proof}
+
+At each of lines 5--7, we cite a conditional and the negation of its consequent to infer the negation of its antecedent.
+Without citing MT, this proof would be much more cumbersome.
+
+
+\subsection{Dilemma}
+
+One of the most difficult proof rules to apply is disjunction elimination, and so it will be convenient to derive proof rules that streamline arguments from disjunctive sentences.
+Consider the \textit{dilemma rule} (DL):
+
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eor\metaB{}} 
+	\have[n]{ac}{\metaA{}\eif\metaC{}}
+	\have[o]{bc}{\metaB{}\eif\metaC{}}
+	\have[\ ]{c}{\metaC{}} \by{DL}{ab,ac,bc}
+\end{proof}
+
+If you know that two conditionals are true, and they have the same consequent, and you also know that one of the two antecedents is true, then conclusion is true no matter which antecedent is true.
+We may derive this rule as follows:
+
+\begin{proof}
+	\hypo{ab}{\metaA{}\eor\metaB{}}
+	\hypo{ac}{\metaA{}\eif\metaC{}}
+	\hypo{bc}{\metaB{}\eif\metaC{}}\by{want \metaC{}}{}
+	\open
+		\hypo{nc}{\metaA}\as{}
+		\have{na}{\metaC}\ce{ac,nc}
+  \close
+  \open
+    \hypo{b2}\metaB\as{}
+    \have{c2}{\metaC}\ce{bc,b2}
+  \close
+	\have{c}{\metaC} \oe{ab,nc-na,b2-c2}
+\end{proof}
+
+Whereas $\eor$E cites subproofs, DL only appeals to live lines in a proof, and so may be easier to apply in certain contexts.
+For example, suppose you know all of the following:
+
+\begin{earg}
+\item[] If it is raining, the car is wet.
+\item[] If it is snowing, the car is wet.
+\item[] It is raining or it is snowing.
+\end{earg}
+
+From these premises, you can definitely establish that the car is wet.
+This is the form that DL captures, nicely resonating with a common form of reasoning.
+
+As in the case of MT, the DL rule doesn't allow us to prove anything we couldn't prove via basic rules.
+Anytime you wanted to use the DL rule, you could always include a few extra steps to prove the same result without DL.
+Nevertheless, DL captures an natural form of reasoning in its own right, and so is well worth including in our stock of derived rules.
+
+
+
+
+\subsection{Disjunctive Syllogism}
+  \label{DS}
+
+Although DL is occasionally useful, there other common forms of reasoning from a disjunction which DL does not capture.
+In particular, consider the following argument.
+
+\begin{earg}
+\item[] $P \eor Q$
+\item[] $\enot P$
+\item[\therefore] $Q$
+\end{earg}
+
+Even small children and non-human animals can engage in reasoning of the form given above.
+For instance, if a ball is under one of two cups but you don't know which, and then it is revealed that it is not under one of the cups, it is natural to conclude that the ball must be under the other cup.
+This inference is called \textit{disjunctive syllogism} (DS):
+
+\begin{multicols}{2}
+
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eor\metaB{}}
+	\have[n]{nb}{\enot\metaB{}}
+	\have[\ ]{a}\metaA{} \by{DS}{ab,nb}
+\end{proof}
+
+\begin{proof}
+	\have[m]{ab}{\metaA{}\eor\metaB{}}
+	\have[n]{na}{\enot\metaA{}}
+	\have[\ ]{b}\metaB{} \by{DS}{ab,nb}
+\end{proof}
+
+\end{multicols}
+
+We represent two different inference patterns here, because the rule allows you to conclude \emph{either} disjunct from the negation of the other.
+Nevertheless, both go by the same name as is the case for other symmetrical rules like $\eand$E.
+
+Consider the following argument:
+
+\begin{earg}
+\item[] $\enot L \eif (J \eor L)$
+\item[] $\enot L$
+\item[\therefore] $J$
+\end{earg}
+
+It is easy to see that $J\eor L$ follows by $\eif$E from the two premises, but it is difficult to see how the proof will go next were we constrained to our basic rules.
+However, given DS, it is plain to see that $J$ follows immediately from $J\eor L$ and $\enot L$. 
+So the proof is easy:
+
+\begin{proof}
+	\hypo{c}{\enot L \eif (J \eor L)}
+	\hypo{a}{\enot L}  \want {J}
+	\have{3}{J \eor L} \ce{c,a}
+	\have{4}{J} \by{DS}{a,3}
+\end{proof}
+
+Like DL, the derived rule DS makes it easier to derive proofs.
+
+
+
+
+\subsection{Hypothetical Syllogism}
+
+We also add \textit{hypothetical syllogism} (HS) as a derived rule:
+
+\begin{proof}
+	\have[m]{ab}{\metaA\eif\metaB}
+	\have[n]{bc}{\metaB\eif\metaC}
+	\have[\ ]{ac}{\metaA\eif\metaC}\by{HS}{ab,bc}
+\end{proof}
+
+Note that HS does not cite any subproofs, and so makes for elegant proofs that are easy to read.
+The same cannot be said for the proof schema for HS:
+
+\begin{proof}
+	\hypo[1]{ab}{\metaA\eif\metaB}
+	\hypo[2]{bc}{\metaB\eif\metaC}
+  \open 
+    \hypo[3]{a}{\metaA} \as{}
+    \have[4]{b}{\metaB} \ce{ab,a}
+    \have[5]{c}{\metaC} \ce{bc,b}
+  \close
+  \have[6]{ac}{\metaA\eif\metaC} \ci{a-c}
+\end{proof}
+
+
+\subsection{Contraposition}
+
+We also add \textit{contraposition} (CP) as a derived rule:
+
+\begin{proof}
+	\have[m]{ab}{\metaA\eif\metaB}
+	\have[\ ]{ba}{\enot\metaA\eif\enot\metaB}\by{CP}{ab}
+\end{proof}
+
+Not only is this inference natural, it is extremely useful.
+We have had various occasions to use CP in the informal proofs in the previous chapter.
+The derivation goes as follows:
+
+\begin{proof}
+	\hypo[1]{ab}{\metaA\eif\metaB}
+  \open 
+    \hypo[2]{nb}{\enot\metaB} \as{}
+    \open
+    \hypo[3]{a}{\metaA} \as{}
+    \have[4]{b}{\metaB} \ce{ab,a}
+    \have[5]{xb}{\enot\metaB} \r{nb}
+    \close
+  \have[6]{na}{\enot\metaA} \ni{a-xb}
+  \close
+  \have[7]{ba}{\enot\metaB\eif\enot\metaA} \ci{nb-na}
+\end{proof}
+
+Whereas the proof above involves two subproofs, one embedded in the other, applications of CP directly cite live lines of a proof, greatly simplifying the resulting argument.
+
+
+
+
+
+\subsection{Negative Biconditionals}
+
+Biconditional elimination only works when we have a biconditional together with one of the arguments of the biconditional on live lines.
+However, it in cases where we have the negation of one of the arguments of a biconditional, it is convenient to make use of the following derived rule for \textit{negative biconditionals} (NB):
+
+\begin{multicols}{2}
+
+\begin{proof}
+	\have[m]{ab}{\metaA\eiff\metaB}
+	\have[n]{na}{\enot\metaA}
+	\have[\ ]{nb}{\enot\metaB}\by{NB}{ab,na}
+\end{proof}
+
+\begin{proof}
+	\have[m]{ab}{\metaA\eiff\metaB}
+	\have[n]{nb}{\enot\metaB}
+	\have[\ ]{na}{\enot\metaA}\by{NB}{ab,nb}
+\end{proof}
+
+\end{multicols}
+
+The derivations for NB go as follows:
+
+\begin{multicols}{2}
+
+\begin{proof}
+	\hypo[1]{ab}{\metaA\eiff\metaB}
+	\hypo[2]{na}{\enot\metaA}
+  \open 
+    \hypo[3]{b}{\metaB} \as{}
+    \have[4]{a}{\metaA} \be{ab,b}
+    \have[5]{xa}{\enot\metaA} \r{na}
+  \close
+  \have[6]{nb}{\enot\metaB} \ni{b-xa}
+\end{proof}
+
+\begin{proof}
+	\hypo[1]{ab}{\metaA\eiff\metaB}
+	\hypo[2]{nb}{\enot\metaB}
+  \open 
+    \hypo[3]{a}{\metaA} \as{}
+    \have[4]{b}{\metaB} \be{ab,a}
+    \have[5]{xb}{\enot\metaB} \r{nb}
+  \close
+  \have[6]{na}{\enot\metaA} \ni{a-xb}
+\end{proof}
+
+\end{multicols}
+
+
+
+\subsection{Double Negation}
+
+Whereas we have included two similar rules for negation introduction and elimination, some texts only include negation introduction together with the following rule for \textit{double negation elimination} (DN):
+
+\begin{proof}
+	\have[m]{dna}{\enot\enot\metaA}
+	\have[\ ]{a}{\metaA}\by{DN}{dna}
+\end{proof}
+
+Although some philosophers of logic contest DN, arguing instead for \textit{intuitionistic logics} in which DN is neither basic nor derivable, most take DN to be a useful and extremely natural inference to draw.
+After all, what is meant by saying that it is not the case that the ball is not round, and yet it fails to be the case that the ball is round?
+Or to take the converse, what is meant by saying that the ball is round, but it fails to be the case that the ball is not not round.
+Classical logic avoids this mess by accepting DN even if it is derived instead of being included as a basic rule.
+Here is the derivation of DN in the present system PL:
+
+\begin{proof}
+	\hypo[1]{dna}{\enot\enot\metaA}
+  \open 
+    \hypo[3]{da}{\enot\metaA} \as{}
+    \have[4]{xa}{\enot\enot\metaA} \r{dna}
+  \close
+  \have[5]{a}{\metaA} \ne{da-xa}
+\end{proof}
+
+As in the other case, our derived rule DN allows us to draw natural inferences with minimal complexity, avoiding the need to open any subproofs.
+
+
+
+
+\subsection{Ex Falso Quodlibet}
+  \label{EFQ}
+
+From a falsehood anything follows, or in Latin, \textit{ex falso quodlibet}.
+For instance, if $A$ is false, then $\enot A$ is true, and so if we were to take $A$ to also be true, then together we may derive $B$ from this contradiction. 
+More generally, we have the following rule (EFQ):
+
+\begin{proof}
+	\have[m]{a}{\metaA}
+	\have[n]{na}{\enot\metaA}
+	\have[\ ]{b}{\metaB}\by{EFQ}{a,na}
+\end{proof}
+
+This inference is occasionally convenient since, given $\metaA$ and $\enot\metaA$ on live lines we may draw any conclusion that might happen to want on the next line. 
+Here is the derivation of EFQ.
+
+\begin{proof}
+	\hypo[1]{a}{\metaA}
+	\hypo[2]{na}{\enot\metaA}
+  \open 
+    \hypo[3]{nb}{\enot\metaB} \as{}
+    \have[4]{xa}{\metaA} \r{a}
+    \have[5]{xna}{\enot\metaA} \r{na}
+  \close
+  \have[6]{b}{\metaB} \ne{nb-xna}
+\end{proof}
+
+This puts a syntactic spin on a semantic idea that we considered before: just as unsatisfiable sets of sentences entail everything, everything can be proven from any $\metaA$ and $\enot\metaA$. 
+
+
+\section{Schemata}
+
+You might be beginning to wonder just how many derived rules there are.
+Indeed, this way of thinking inspires an important approach to logic: instead of focusing of theorems and proofs in $\PL$, perhaps we should really be focusing on the \textit{rule schemata} themselves.
+As a special case we have \textit{axiom schemata} which amount to rule schemata which do not cite any lines.
+For instance, here is an axiom schemata called the \textit{Law of Excluded Middle} (LEM): $\metaA\eor\enot\metaA$.
+Once we have derived LEM--- a worthwhile exercise--- we may write any instance of $\metaA\eor\enot\metaA$ on any line of a proof without citing any previous lines whatsoever.
+
+Instead of thinking about valid $\PL$ arguments and their corresponding proofs, one might think about a logic as a set of rule schemata.
+This approach to logic has some advantages since it cuts to the chase, focusing on what we are ultimately concerned with, namely \textit{logical forms}.
+It is also easy to prove things about such systems since they are easy to characterise abstractly.
+The disadvantage of such an approach is that these proof systems are somewhat harder to think about.
+By contrast, it is nice to have concrete instances of $\PL$ sentences and arguments instead of logical forms all the way down.
+This more concrete approach will be maintained throughout this text, however, it is nevertheless worth drawing the connection given all of our derived rules above.
+Indeed, we may think of the system of natural deduction PL as the smallest set to include the basic rule schemata in PL together with all rule schemata that are derivable from these basic rules.
+This set of logical forms of reasoning may be taken to provide an abstract answer to the question, ``What is logic about?''
+
+% %%%%%%%%%%%%%%%%%%%%%% BEGIN SOUNDNESS
 
   % TODO: make existential case come before universal case throughout
 
