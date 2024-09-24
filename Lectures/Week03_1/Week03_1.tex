@@ -29,7 +29,7 @@
 \\ \@date
 \end{flushright}
 
-\vspace{20pt}
+\vspace{-20pt}
 
 }
 \makeatother
@@ -79,12 +79,15 @@
   \item[\it Semantic Proofs:] Provide a reasonably efficient way to evaluate validity.
     \begin{itemize}
       \item But they can be cumbersome to write.
-      \item They explain why a logical consequence holds.
+      \item They explain why a logical property or relation holds.
       \item Doesn't say how to reason from some premises to a conclusion.
       \item Thus semantic proofs are not persuasive to the uninitiated.
+      \item Not so for semantic proofs of invalidity, satisfiability, etc.
     \end{itemize}
-  \item[\it Natural Deduction:] How would we describe the patterns of natural deduction?
+  \item[\it Logical Consequence:] How do we describe the extension of $\vDash$? 
+  \item[\it Natural Deduction:] How should we describe the patterns of natural deduction?
     \begin{itemize}
+      \item What moves can we make in a proof, \textit{viz.} semantic proofs?
       \item Want to describe inference itself, starting with the most basic.
       \item Such inferences hold in virtue of the meanings of the operators.
       \item Define a proof to be any composition of basic inferences.
@@ -99,7 +102,7 @@
     \begin{itemize}
       \item This is a completely different approach to formal reasoning.
       \item Nevertheless, these two approaches have the same extension.
-      \item Our proof system will help us relate to the logical consequence.
+      \item Our proof system will help us relate to logical consequence.
     \end{itemize}
 \end{enumerate}
 
@@ -110,6 +113,7 @@
 \section*{Basic Anatomy of a Proof}
 
 \begin{enumerate}
+  \item[\it List:] Finite list of lines.
   \item[\it Numbers:] Every line is numbered. 
   \item[\it Sentences:] Each line contains exactly one wfs of $\PL$. 
   \item[\it Justification:] Each line includes a justification.
@@ -174,219 +178,6 @@
 
 
 
-
-\section*{Biconditional}
-
-\begin{enumerate}
-  \item[\it Elimination:] $A \eiff (B \eif [(A \eand C)\eiff D])\ \vdash (A\eand B) \eif (D \eif C)$. 
-  \item[\it Introduction:] $A \eif (B \eand C),\ C \eif (B \eand A) \vdash A \eiff C$.
-\end{enumerate}
-
-
-
-
-
-
-\section*{Negation}
-
-\begin{enumerate}
-  \item[\it Elimination:] $\enot\enot A\ \vdash A$. 
-  \item[\it Introduction:] $A \eif (B \eand C),\ C \eif (B \eand A) \vdash A \eiff C$.
-\end{enumerate}
-
-
-\section*{Reiteration}
-
-\begin{enumerate}
-  \item[\it Example:] $A,\ B \eif C\ \vdash B \eif (C \eand A)$.
-\end{enumerate}
-
-
-
-
-
-\section*{Proof}
-
-\begin{enumerate}
-  \item[\it Proof:] A natural deduction \textsc{proof} (or \textsc{derivation}) of a conclusion $\varphi$ from a set of premises $\Gamma$ in PL is any sequence of lines ending with $\varphi$ on a live line where every line in the sequence is either:
-      \begin{itemize}
-        \item[(1)] a premise in $\Gamma$; 
-        \item[(2)] a discharged assumption; or
-        \item[(3)] follows from previous lines by the rules for PL.
-      \end{itemize}
-  \item[\it Provable:] An wfs $\varphi$ of $\PL$ is \textsc{provable} (or \textsc{derivable}) from $\Gamma$ in PL \textit{iff} there is a natural deduction proof (derivation) of $\varphi$ from $\Gamma$ in PL, i.e., $\Gamma \vdash \varphi$. 
-  \item[\it Equivalent:] Two sentences $\varphi$ and $\psi$ are \textsc{provably equivalent} (or \textsc{interderivable}) if and only if both $\varphi\vdash\psi$ and $\psi\vdash\varphi$.
-  \item[\it Inconsistent:] A set of sentences $\Gamma$ is \textsc{provably inconsistent} if and only if $\Gamma\vdash\bot$ where $\bot$ is our arbitrarily chosen contradiction, e.g., $A\eand\enot A$.
-\end{enumerate}
-
-
-
-% \section*{Further Problems}
-%
-%
-% \begin{enumerate}
-%   \begin{multicols}{2}
-%   \item[\it Law of Excluded Middle:] $A \eor \enot A$. 
-%     \begin{itemize}
-%       \item $\enot(A \eor \enot A)$ \quad:AS
-%       \begin{itemize}
-%         \item $A$ \quad:AS 
-%         \item $A\eor \enot A$ \quad:$\eor$I 
-%         \item $\enot (A\eor \enot A)$ \quad:R 
-%       \end{itemize}
-%       \item $\enot A$ \quad:$\enot$I 
-%       \item $A \eor \enot A$ \quad:$\eor$I 
-%       \item $A\eor \enot A$ \quad:$\enot$E 
-%     \end{itemize}
-%   \item[\it LNC:] $\enot(A \eand \enot A)$. 
-%     \item[\it EXQ:] $A,\ \enot A \vdash B$. (\textit{Ex Falso Quodlibet})
-%     \begin{itemize}
-%       \item $\enot B$ \quad:AS 
-%       \begin{itemize}
-%         \item $A$ \quad:R 
-%         \item $\enot A$ \quad:R 
-%       \end{itemize}
-%       \item $B$ \quad:$\enot$E 
-%       \item[] ~
-%       \item[] ~
-%     \end{itemize}
-%   \end{multicols}
-%   \item $L\eiff \enot O,\ L\eor \enot O\ \vdash L$.
-%   \item $A\eiff B,\ \vdash \enot A\eiff\enot B$.
-%   \item $Z \eif (C \eand \enot N),\ \enot Z \eif (N \eand \enot C)\ \vdash N \eor C$.
-% \end{enumerate}
-
-  % \begin{multicols}{2}
-  % \end{multicols}
-
-
-
-\iffalse
-
-\begin{multicols}{2}
-
-
-\textit{Conjunction Introduction} (\eand I) \vspace{-1em}
-\begin{proof}
-	\have[m]{a}{\metaA{}}
-	\have[n]{b}{\metaB{}}
-	\have[\ ]{c}{\metaA{}\eand\metaB{}} \ai{a, b}
-	\have[\ ]{d}{\metaB{}\eand\metaA{}} \ai{a, b}
-\end{proof}
-
-\vspace{1em}
-
-\textit{Conditional Introduction} (\eif I) \vspace{-1em}
-%\nopagebreak
-\begin{proof}
-	\open
-		\hypo[m]{a}{\metaA{}} \as{for \eif I}{}%\by{want \metaB{}}{}
-		\have[n]{b}{\metaB{}}
-	\close
-	\have[\ ]{ab}{\metaA{}\eif\metaB{}}\ci{a-b}
-\end{proof}
-
-\vspace{0.6em}
-
-\textit{Negatation Introduction} (\enot I) \vspace{-1em}
-\begin{proof}
-\open
-	\hypo[m]{na}\metaA{} \as{for \enot I}   %\by{:AS for \enot I}{}
-	\have[n]{b}\metaB{}
-	\have[o]{nb}{\enot\metaB{}}
-\close
-\have[\ ]{a}[\ ]{\enot\metaA{}}\ni{na-nb}
-\end{proof}
-
-\vspace{0.6em}
-
-\textit{Disjunction Introduction} (\eor I) \vspace{-1em}
-
-\begin{proof}
-	\have[m]{a}{\metaA{}}
-	\have[\ ]{ab}{\metaA{}\eor\metaB{}}\oi{a}
-	\have[\ ]{ba}{\metaB{}\eor\metaA{}}\oi{a}
-\end{proof}
-
-%\vspace{1.9em} %3.9 for no extra vspaces
-\vspace{0.6em}
-
-\textit{Biconditional Introduction} (\eiff I) \vspace{-1em}
-
-\begin{fitchproof}
-	\open
-		\hypo[i]{a1}{\metaA{}} \as{for \eiff I}
-		\have[j]{b1}{\metaB{}}
-	\close
-\breakline
-	\open
-		\hypo[k]{b2}{\metaB{}} \as{for \eiff I}
-		\have[l]{a2}{\metaA{}}
-	\close
-	\have[\ ]{ab}{\metaA{}\eiff\metaB{}}\bi{a1-b1,b2-a2}
-\end{fitchproof}
-
-
-\vfill\null
-\columnbreak
-
-%\newpage
-
-\textit{Conjunction Elimination} (\eand E) \vspace{-1em}
-
-\begin{proof}
-	\have[m]{ab}{\metaA{}\eand\metaB{}}
-	\have[\ ]{a}{\metaA{}} \ae{ab}
-	\have[\ ]{b}{\metaB{}} \ae{ab}
-\end{proof}
-
-%\vspace{1.9em}
-%\vspace{2.9em}
-\vspace{0.75em}
-
-\textit{Conditional Elimination} (\eif E)  \vspace{-1em}
-
-\begin{proof}
-	\have[m]{ab}{\metaA{}\eif\metaB{}}
-	\have[n]{a}{\metaA{}}
-	\have[\ ]{b}{\metaB{}} \ce{ab,a}
-\end{proof}
-
-%\vspace{1em}
-\vspace{0.45em}
-
-\textit{Negation Elimination} (\enot E)  \vspace{-1em}
-%%note that I think I'm missing some brackets around the sentences on various liens below! works in proof environment but less robust in nd environment. so i ought to fix these here and in Negation intro 
-
-\begin{proof}
-\open
-	\hypo[m]{na}{\enot\metaA{}} \as{for \enot E}
-	\ellipsesline
-	\have[n]{b}\metaB{}
-	\have[o]{nb}{\enot\metaB{}}
-\close
-\have[\ ]{a}[\ ]\metaA{}\ne{na-nb}
-\end{proof}
-
-\vspace{1em}
-
-\textit{Disjunction Elimination} (\eor E)  \vspace{-1em}
-
-\begin{proof}
-\have[m]{ab}{\metaA{}\eor\metaB{}}
-	\open
-		\hypo[i]{a}{\metaA{}} \as{for \eor E}
-		\have[j]{c1}{\metaC{}}
-	\close
-\breakline
-	\open
-		\hypo[k]{b}{\metaB{}} \as{for \eor E}
-		\have[l]{c2}{\metaC{}}
-	\close
-	\have[\ ]{c}{\metaC{}} \oe{ab,a-c1, b-c2}
-\end{proof}
-
-\fi
 
 
 
