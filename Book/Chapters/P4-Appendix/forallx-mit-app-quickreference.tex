@@ -599,7 +599,7 @@ A branch closes if and only if either (i) it contains some sentence \metaA{} alo
 
 
 
-\section*{\hfill \normalsize \bf Derivation Rules of Natural Deduction (System SD) \hfill} 
+\section*{\hfill \normalsize \bf Natural Deduction Rules of Inference for PL \hfill} 
 \label{nd-proofrules}
 				
 				\vspace{-1em}
@@ -770,8 +770,8 @@ A branch closes if and only if either (i) it contains some sentence \metaA{} alo
 
 \begin{proof}
 	\have[m]{ab}{\metaA{}\eiff\metaB{}}
-	\have[n]{a}{\metaB{}}
-	\have[\ ]{b}{\metaA{}} \be{ab,a}
+	\have[n]{a}{\metaB/\metaA}
+	\have[\ ]{b}{\metaA/\metaB} \be{ab,a}
 \end{proof}
 %Can also go from \metaA{} to \metaB{} using \eiff E
 

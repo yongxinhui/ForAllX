@@ -12,10 +12,11 @@
     - [x] revise
     - [x] make Philipp's suggestions
     - [x] polish
-  - [.] chapter 2
-    - [.] revise
-  - [ ] chapter 3
-  - [ ] chapter 4
+  - [x] chapter 2
+  - [x] chapter 3
+    - [x] repost with last section
+  - [:] chapter 4
+    - [ ] repost with final sections
   - [ ] chapter 5
   - [ ] chapter 6
     - [ ] set theory, functions, orders

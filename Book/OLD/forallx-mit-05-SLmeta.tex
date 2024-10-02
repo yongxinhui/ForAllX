@@ -126,91 +126,92 @@ We will prove that it is not.
 
 
 
-\section{Inductive Proofs}
-
-Note that the claim that we are attempting to establish holds for all sets of SL sentences $\Gamma$.
-Since we cannot check all such sets individually, one might attempt to proceed by \textit{reductio ad absurdum}, assuming that there is a counterexample and producing a contradiction.
-This would be to assume that there is some $\Gamma$ as above where $\Gamma \proves \bot$ and yet $\Gamma \nvDash \bot$.
-However, just because we are assuming that there is some closed tree with root $\Gamma$, we can't conclude much more than that, and so it is hard to see how we might produce a contradiction with $\Gamma \nvDash \bot$.
-
-Our predicament is a common one: we are attempting to show something about an infinite number of cases and it is unclear how to do so by assuming there are any exceptions.
-In order to overcome this challenge we will employ \emph{mathematical induction} which proceeds in stages.
-
-\textit{Stage 1:} 
-We must identify a domain of objects and the property which we are attempting to show is had by every object in that domain.
-In the case of soundness, we want to show that every tree with a satisfiable root $\Gamma$ has a satisfiable branch.
-Note that this property is a little different than what one might have expected it to be.
-In particular, one might have thought that we were going to show that every tree that closes has an unsatisfiable root.
-As we will see, showing that all trees have the former property is sufficient to show that all trees have the latter property, though the former makes for an easier induction proof.
-This brings to light one of the trickiest part of an induction proof: not only is it important to accurately identify the domain of interest, the property in question must also be carefully chosen.
-
-\textit{Stage 2:} 
-We must now provide some way of organizing the domain into a sequence of stages.
-For instance, if our domain was the set of natural numbers, we might consider their natural ordering where every number in the sequence is followed by its successor.
-In the case of the trees of SL sentences, there is no similarly natural ordering already given to us.
-The second stage is to come up with such an ordering, making sure that the ordering serves our needs without including any unnecessary complications.
-Instead of directly ordering the trees themselves, we will partition the domain of all trees into stages that can be ordered into a sequence.
-In particular, we will take two trees to belong to the same stage just in case they employ the same number of resolution rules.
-This way of organizing the domain of trees (or proofs more generally) is called \textit{length of proof}, or in our case, \textit{length of trees}.
-So we will have the stage of trees with length zero, the stage with length one, and so on.
-
-\textit{Stage 3:} 
-Next we will establish that the first stage (the set of trees with length zero) has the property in question.
-That is, every tree of length zero with a satisfiable root has a satisfiable branch.
-This step is often called the \textit{base case} of our induction proof.
-Although the base case is often the easiest part of an induction proof--- sometimes so obvious it is hard to know what to write--- this is not always the case, and so should still be carefully considered.
-
-\textit{Stage 4:} 
-Now we will help ourselves to an important assumption called the \textit{induction hypothesis}.
-This assumption can come in both weak and strong varieties.
-In particular, we could assume for \textit{weak induction} that the property in question holds for the $n$-th stage, or we could assume for \textit{strong induction} that the property in question holds for the $n$-th stage and all previous stages.
-Although weak induction is sometimes sufficient for a proof, there is typically no reason not to help ourselves to the stronger assumption.
-In the case of soundness, weak induction will suffice, though it costs us nothing to make the stronger assumption that every tree with a satisfiable root that is length $n$ or shorter has a satisfiable branch. 
-
-\textit{Stage 5:} 
-We will complete the induction proof by showing that the property in question also holds for the $n+1$-th stage.
-If we can establish this claim, then it follows that the property in question holds for every stage.
-After all, we have shown that the property in question holds for the first stage, and that if property holds up through the $n$-th stage, then it holds for the $n+1$-th stage.
-It is common for the property that we are concerned with to have a conditional form such as: if $x$ is $F$, then $x$ is $G$.
-In the case of soundness, we want to show that if a tree has a satisfiable root, then that tree has a satisfiable branch.
-Moreover, we may want to show that all objects belonging to a given stage have this property, e.g., all trees that are of length $n+1$ have the conditional property: if they have a satisfiable root, then they have a satisfiable branch. 
-This is a common predicament.
-
-In order to establish a general claim of the form `Everything in $D$ that is $F$ is also $G$', there is a tried a true method: choose an \textit{arbitrary} $D$ that is $F$ and show that it is also $G$.
-In the case of soundness, we will choose an arbitrary tree of length $n+1$ and assume that it has a satisfiable root.
-By drawing on the induction hypothesis, we will then endeavour to show that this arbitrary tree has a satisfiable branch. 
-This step typically constitutes the core of the induction proof.
-Since our choice was arbitrary, we may conclude what we want: every tree of length $n+1$ with a satisfiable root has a satisfiable branch. 
-Having shown that our conditional property applies to all trees of length $n+1$, we may conclude what we want to show by induction: every tree (of any length) with a satisfiable root has a satisfiable branch.
-Accordingly, we may leave mention of the length of the tree off entirely.
-
-Although the induction part of the proof is finished, it remains to establish soundness.
-As we will see, soundness follows easily from what we have shown, i.e., that every tree with a satisfiable root has a satisfiable branch.
-Drawing this final connection completes the proof.
-
-This provides the rough outline of proof by induction with some reference to the induction proof for soundness.
-In actual practice, the hardest part about induction proofs is staying organised and figuring out which properties to focus on, since sometimes you can make things a lot easier by proving something related to what you really want to show.
-
-
-
-
-
-\section{Tree Length}
-
-Before attempting to establish soundness, it will be important to provide a precise definition of the length of an SL tree.
-This definition will take a recursive form.
-
-Consider any root consisting of SL sentences.
-Since no resolution rules have been applied, we will refer to such a tree as having length 0.
-Even if the root includes many sentences, we are only measuring the number of applications of resolution rules, and a root on its own doesn't include any applications of resolution rules.
-Now consider any tree of length $n$, i.e., any tree which results from $n$ applications of the resolution rules. 
-We may refer to the result of applying any application rule on any one branch as a tree of length $n+1$.
-A little more precisely, we will define $\length$ to be the smallest function satisfying:%
-\begin{enumerate}[leftmargin=1in,labelsep=.15in]
-  \item[\it Base:] $\length(X)=0$ for any root $X$.
-  \item[\it Recursive:] For any tree $X$, if $\length(X)=n$ and $X'$ is the result of resolving a sentence in exactly one branch in $X$, then $\length(X')=n+1$.
-\end{enumerate}
-Even if the same sentence can be resolved on different branches, each time we resolve that sentence on a branch we get a tree with greater length.
+% NOTE: repurposed for soundness chapter
+% \section{Inductive Proofs}
+%
+% Note that the claim that we are attempting to establish holds for all sets of SL sentences $\Gamma$.
+% Since we cannot check all such sets individually, one might attempt to proceed by \textit{reductio ad absurdum}, assuming that there is a counterexample and producing a contradiction.
+% This would be to assume that there is some $\Gamma$ as above where $\Gamma \proves \bot$ and yet $\Gamma \nvDash \bot$.
+% However, just because we are assuming that there is some closed tree with root $\Gamma$, we can't conclude much more than that, and so it is hard to see how we might produce a contradiction with $\Gamma \nvDash \bot$.
+%
+% Our predicament is a common one: we are attempting to show something about an infinite number of cases and it is unclear how to do so by assuming there are any exceptions.
+% In order to overcome this challenge we will employ \emph{mathematical induction} which proceeds in stages.
+%
+% \textit{Stage 1:} 
+% We must identify a domain of objects and the property which we are attempting to show is had by every object in that domain.
+% In the case of soundness, we want to show that every tree with a satisfiable root $\Gamma$ has a satisfiable branch.
+% Note that this property is a little different than what one might have expected it to be.
+% In particular, one might have thought that we were going to show that every tree that closes has an unsatisfiable root.
+% As we will see, showing that all trees have the former property is sufficient to show that all trees have the latter property, though the former makes for an easier induction proof.
+% This brings to light one of the trickiest part of an induction proof: not only is it important to accurately identify the domain of interest, the property in question must also be carefully chosen.
+%
+% \textit{Stage 2:} 
+% We must now provide some way of organizing the domain into a sequence of stages.
+% For instance, if our domain was the set of natural numbers, we might consider their natural ordering where every number in the sequence is followed by its successor.
+% In the case of the trees of SL sentences, there is no similarly natural ordering already given to us.
+% The second stage is to come up with such an ordering, making sure that the ordering serves our needs without including any unnecessary complications.
+% Instead of directly ordering the trees themselves, we will partition the domain of all trees into stages that can be ordered into a sequence.
+% In particular, we will take two trees to belong to the same stage just in case they employ the same number of resolution rules.
+% This way of organizing the domain of trees (or proofs more generally) is called \textit{length of proof}, or in our case, \textit{length of trees}.
+% So we will have the stage of trees with length zero, the stage with length one, and so on.
+%
+% \textit{Stage 3:} 
+% Next we will establish that the first stage (the set of trees with length zero) has the property in question.
+% That is, every tree of length zero with a satisfiable root has a satisfiable branch.
+% This step is often called the \textit{base case} of our induction proof.
+% Although the base case is often the easiest part of an induction proof--- sometimes so obvious it is hard to know what to write--- this is not always the case, and so should still be carefully considered.
+%
+% \textit{Stage 4:} 
+% Now we will help ourselves to an important assumption called the \textit{induction hypothesis}.
+% This assumption can come in both weak and strong varieties.
+% In particular, we could assume for \textit{weak induction} that the property in question holds for the $n$-th stage, or we could assume for \textit{strong induction} that the property in question holds for the $n$-th stage and all previous stages.
+% Although weak induction is sometimes sufficient for a proof, there is typically no reason not to help ourselves to the stronger assumption.
+% In the case of soundness, weak induction will suffice, though it costs us nothing to make the stronger assumption that every tree with a satisfiable root that is length $n$ or shorter has a satisfiable branch. 
+%
+% \textit{Stage 5:} 
+% We will complete the induction proof by showing that the property in question also holds for the $n+1$-th stage.
+% If we can establish this claim, then it follows that the property in question holds for every stage.
+% After all, we have shown that the property in question holds for the first stage, and that if property holds up through the $n$-th stage, then it holds for the $n+1$-th stage.
+% It is common for the property that we are concerned with to have a conditional form such as: if $x$ is $F$, then $x$ is $G$.
+% In the case of soundness, we want to show that if a tree has a satisfiable root, then that tree has a satisfiable branch.
+% Moreover, we may want to show that all objects belonging to a given stage have this property, e.g., all trees that are of length $n+1$ have the conditional property: if they have a satisfiable root, then they have a satisfiable branch. 
+% This is a common predicament.
+%
+% In order to establish a general claim of the form `Everything in $D$ that is $F$ is also $G$', there is a tried a true method: choose an \textit{arbitrary} $D$ that is $F$ and show that it is also $G$.
+% In the case of soundness, we will choose an arbitrary tree of length $n+1$ and assume that it has a satisfiable root.
+% By drawing on the induction hypothesis, we will then endeavour to show that this arbitrary tree has a satisfiable branch. 
+% This step typically constitutes the core of the induction proof.
+% Since our choice was arbitrary, we may conclude what we want: every tree of length $n+1$ with a satisfiable root has a satisfiable branch. 
+% Having shown that our conditional property applies to all trees of length $n+1$, we may conclude what we want to show by induction: every tree (of any length) with a satisfiable root has a satisfiable branch.
+% Accordingly, we may leave mention of the length of the tree off entirely.
+%
+% Although the induction part of the proof is finished, it remains to establish soundness.
+% As we will see, soundness follows easily from what we have shown, i.e., that every tree with a satisfiable root has a satisfiable branch.
+% Drawing this final connection completes the proof.
+%
+% This provides the rough outline of proof by induction with some reference to the induction proof for soundness.
+% In actual practice, the hardest part about induction proofs is staying organised and figuring out which properties to focus on, since sometimes you can make things a lot easier by proving something related to what you really want to show.
+%
+%
+%
+%
+%
+% \section{Tree Length}
+%
+% Before attempting to establish soundness, it will be important to provide a precise definition of the length of an SL tree.
+% This definition will take a recursive form.
+%
+% Consider any root consisting of SL sentences.
+% Since no resolution rules have been applied, we will refer to such a tree as having length 0.
+% Even if the root includes many sentences, we are only measuring the number of applications of resolution rules, and a root on its own doesn't include any applications of resolution rules.
+% Now consider any tree of length $n$, i.e., any tree which results from $n$ applications of the resolution rules. 
+% We may refer to the result of applying any application rule on any one branch as a tree of length $n+1$.
+% A little more precisely, we will define $\length$ to be the smallest function satisfying:%
+% \begin{enumerate}[leftmargin=1in,labelsep=.15in]
+%   \item[\it Base:] $\length(X)=0$ for any root $X$.
+%   \item[\it Recursive:] For any tree $X$, if $\length(X)=n$ and $X'$ is the result of resolving a sentence in exactly one branch in $X$, then $\length(X')=n+1$.
+% \end{enumerate}
+% Even if the same sentence can be resolved on different branches, each time we resolve that sentence on a branch we get a tree with greater length.
 
 
 
@@ -236,18 +237,18 @@ Even if the same sentence can be resolved on different branches, each time we re
 
 
 
-
-\section{Soundness Lemmas}
-
-Although we could dive into proving soundness, it will streamline our proof to first establish some supporting results which we can draw on in the course of our proof of soundness.
-It is typical to call supporting results such as these \textit{lemmas} in order to flag their instrumental interest.
-Were a lemma to have significant and far reaching consequences that are of interest in their own right, we would do better to call it a \textit{proposition} or even a \textit{theorem}.
-For instance, it would be inappropriate to refer to soundness as a lemma given the significance of this result.
-However, in the case of the claims established below, we are just looking to better organise our proof of soundness, presenting some minor results to help us to do so.
-Knowing when to carve off a lemma to establish separately from a proof of primary interest is a skill in its own right, one that takes lots of practice writing proofs to cultivate.
-
-Before presenting these results, let a branch $\B$ of a tree $X$ be \define{satisfied} by an SL interpretation $\I$ just in case $\V{\I}(\metaA)=1$ for every SL sentence $\metaA$ which occurs in $\B$.
-It will also be convenient to refer to a tree whose root consists of the sentences in $\Gamma$ as a tree \define{with} root $\Gamma$.
+% NOTE: moved to soundness chapter
+% \section{Soundness Lemmas}
+%
+% Although we could dive into proving soundness, it will streamline our proof to first establish some supporting results which we can draw on in the course of our proof of soundness.
+% It is typical to call supporting results such as these \textit{lemmas} in order to flag their instrumental interest.
+% Were a lemma to have significant and far reaching consequences that are of interest in their own right, we would do better to call it a \textit{proposition} or even a \textit{theorem}.
+% For instance, it would be inappropriate to refer to soundness as a lemma given the significance of this result.
+% However, in the case of the claims established below, we are just looking to better organise our proof of soundness, presenting some minor results to help us to do so.
+% Knowing when to carve off a lemma to establish separately from a proof of primary interest is a skill in its own right, one that takes lots of practice writing proofs to cultivate.
+%
+% Before presenting these results, let a branch $\B$ of a tree $X$ be \define{satisfied} by an SL interpretation $\I$ just in case $\V{\I}(\metaA)=1$ for every SL sentence $\metaA$ which occurs in $\B$.
+% It will also be convenient to refer to a tree whose root consists of the sentences in $\Gamma$ as a tree \define{with} root $\Gamma$.
 
 
 

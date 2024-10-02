@@ -1243,6 +1243,8 @@ We may then go on to record a particular row of a truth table by using the notat
 \section{Tautologies and Weakening}
   \label{sec:TautologyWeakening}
 
+% TODO make the claim that every interpretation satisfies the empty set a lemma for ch4 to refer to
+
 What should we make of the following claim:
   $$P\eand Q \vDash A\eiff\enot\enot A.$$
 Notice that the sentence letters on the left-hand-side are unrelated to the sentence letters on the right-hand-side.
@@ -1306,7 +1308,7 @@ It follows that the following claims are also true:
 Given that the wfss on the right are all tautologies, we can add whatever wfss that we like on the left.
 More generally, it is easy to prove the following principle:
 
-\begin{Lthm}[\it Weakening] \label{lemma:weakening}
+\begin{Lthm}[Weakening] \label{lemma:PL-weakening}
   If $\MetaG \vDash \metaA$, then $\MetaG \cup \MetaS \vDash \metaA$.
 \end{Lthm}
 
@@ -1395,7 +1397,7 @@ We have already observed that every wfs $\metaA$ of $\PL$ is a logical consequen
 Given any unsatisfiable set $\MetaG$ of wfss of $\PL$, it follows that $\bot$ in particular is a logical consequence of $\MetaG$, i.e., $\MetaG \vDash \bot$. 
 Conversely, we may prove the following: 
 
-\begin{Lthm} \label{lemma:unsat_bot}
+\begin{Lthm} \label{lemma:PL-consequence_unsat}
   If $\MetaG \vDash \bot$, then $\MetaG$ is unsatisfiable. 
 \end{Lthm} \vspace{-.2in}
 
@@ -1410,7 +1412,7 @@ Conversely, we may prove the following:
   \qed
 \end{quote}
 
-This shows that a set $\MetaG$ of wfss of $\LP$ is unsatisfiable if and only if $\MetaG \vDash \bot$.
+This shows that a set $\MetaG$ of wfss of $\PL$ is unsatisfiable if and only if $\MetaG \vDash \bot$.
 In the special case where $\MetaG = \set{\metaA}$, we may say that $\metaA$ is a contradiction just in case $\metaA \vDash \bot$. 
 This provides a way to characterize contradictions in terms of logical consequence.
 

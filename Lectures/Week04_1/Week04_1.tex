@@ -28,7 +28,7 @@
 \\ \@date
 \end{flushright}
 
-\vspace{-20pt}
+\vspace{0pt}
 
 }
 \makeatother
@@ -53,56 +53,48 @@
 
 %----------------------------------------------------------------------------------------
 
-
-
-\section*{Soundness and Completeness}
+\section*{From Last Time\ldots}
 
 \begin{enumerate}
-  \item[\it Soundness:] If $\Gamma \vdash \varphi$, then $\Gamma \vDash \varphi$.
-  \item[\it Completeness:] If $\Gamma \vDash \varphi$, then $\Gamma \vdash \varphi$.
-  \item[\it Induction:] These proofs will require mathematical induction. 
-  \item[\it Definitions:] We will also need a few more recursive definitions.
+  \item[\it Bottom:] We take $\bot \coloneq A\eand\enot A$ to abbreviate an arbitrarily chosen contradiction.
+  \item[\it Inconsistent:] A set of wfss $\MetaG$ of $\PL$ is \textsc{inconsistent} if and only if $\MetaG\vdash\bot$.
+  \item[\it Ex Falso Quodlibet:] $\metaA,\ \enot \metaA \vdash \metaB$.
 \end{enumerate}
+
+
+
 
 
 
 \section*{Recursive Definitions}
 
 \begin{itemize}
-  \item[\it Complexity:] We define $\comp(\varphi)$ to be the number of connectives in $\varphi$.
-      \item If $\varphi$ is a sentence letter of SL, then $\comp(\varphi)=0$.
-      \item For any SL sentences $\varphi$ and $\psi$: 
-    \begin{itemize}
-      \item[$(\neg)$] $\comp(\neg \varphi)=\comp(\varphi)+1$;
-      \item[$(\wedge)$] $\comp(\varphi \wedge \psi)=\comp(\varphi)+\comp(\psi)+1$;
-      \item[] $\vdots$
-    \end{itemize}
-  \item[\bf Note:] Could avoid redundancy by taking $\star$ to be any binary connective. 
-  \item[\it Constituents:] We define $[\varphi]$ to be the set of sentence letters that occur in $\varphi$. % by taking $[\cdot]:\text{SL}\to\mathcal{P}(\text{SL})$ to be the smallest function to satisfy:
-      \item If $\comp(\varphi)=0$, then $[\varphi]=\set{\varphi}$.
-      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
-    \begin{itemize}
-      \item[$(\neg)$] $[\neg \varphi]=[\varphi]$;
-      \item[$(\hspace{1pt}\star\hspace{1pt})$] $[\varphi \star \psi]=[\varphi] \cup [\psi]$;
-    \end{itemize}
-  \item[\it Simplicity:] We define $\simp(\varphi)$ to hold just in case the SL sentence $\varphi$ has at most one occurrence of each sentence letter in SL.
-      \item If $\comp(\varphi)=0$, then $\simp(\varphi)$.
-      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
-    \begin{itemize}
-      \item[$(\neg)$] $\simp(\neg \varphi)$ if $\simp(\varphi)$;
-      \item[$(\hspace{1pt}\star\hspace{1pt})$] $\simp(\varphi \star \psi)$ if $\simp(\varphi)$, $\simp(\psi)$, and $[\varphi]\cap[\psi]=\varnothing$;
-    \end{itemize}
-  \item[\it Substitution:] We define $\varphi_{[\chi/\alpha]}$ to be the result of replacing every occurrence of the sentence letter $\alpha$ in $\varphi$ with $\chi$.
-      \item If $\comp(\varphi)=0$, then $\varphi_{[\chi/\alpha]}=
+  \item[\it Expressions:] The expressions of $\PL$ are defined recursively: 
+    \item The primitive symbol of $\PL$ are expression of $\PL$.
+    \item If $\metaA$ and $\metaB$ are expressions of $\PL$, then so is $\corner{\metaA\metaB}$.
+    \item Nothing else is an expression of $\PL$.
+  \item[\it Complexity:] $\comp{\metaA}$ is the number of operator instances that occur in $\metaA$: 
+    \item $\comp{\metaA} = 0$ if $\metaA$ is a sentence letter; 
+    \item $\comp{\enot\metaA} = \comp{\metaA} + 1$; and 
+    \item $\comp{\metaA \star \metaB} = \comp{\metaA} + \comp{\metaB} + 1$ for $\star \in \set{\eand,\eor,\eif,\eiff}$.
+  \item[\it Constituents:] $[\metaA]$ is the set of sentence letters that occur in $\metaA$:
+      \item $[\metaA]=\set{\metaA}$ if $\metaA$ is a sentence letter of $\PL$.
+      \item $[\neg \metaA]=[\metaA]$; and
+      \item $[\metaA \star \metaB]=[\metaA] \cup [\metaB]$ if $\star \in \set{\eand,\eor,\eif,\eiff}$.
+  \item[\it Simplicity:] $\simp{\metaA}$ just in case the $\metaA$ has at most one sentence letter in $\PL$:
+      \item $\simp{\metaA}$ if $\metaA$ is a sentence letter of $\PL$.
+      \item $\simp{\neg \metaA}$ if $\simp{\metaA}$; and
+      \item $\simp{\metaA \star \psi}$ if $\simp{\metaA}$, $\simp{\psi}$, and $[\metaA]\cap[\psi]=\varnothing$.
+  \item[\it Substitution:] We define $\metaA_{[\chi/\alpha]}$ to be the result of replacing every occurrence of the sentence letter $\alpha$ in $\metaA$ with $\chi$.
+      \vspace{-.12in}
+      \item If $\metaA$ is a sentence letter, then $\metaA_{[\chi/\alpha]}=
         \begin{cases}
-          \chi \quad\text{if } \varphi=\alpha,\\
-          \varphi \quad\text{otherwise.}
+          \chi \quad\text{if } \metaA=\alpha,\\
+          \metaA \quad\text{otherwise.}
         \end{cases}$
-      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
-    \begin{itemize}
-      \item[$(\neg)$] $(\neg\varphi)_{[\chi/\alpha]}=\neg(\varphi_{[\chi/\alpha]})$;
-      \item[$(\hspace{1pt}\star\hspace{1pt})$] $(\varphi\star\psi)_{[\chi/\alpha]}=\varphi_{[\chi/\alpha]}\star\psi_{[\chi/\alpha]}$;
-    \end{itemize}
+      \vspace{-.12in}
+      \item $(\neg\metaA)_{[\chi/\alpha]}=\neg(\metaA_{[\chi/\alpha]})$; and
+      \item $(\metaA\star\psi)_{[\chi/\alpha]}=\metaA_{[\chi/\alpha]}\star\psi_{[\chi/\alpha]}$ if $\star \in \set{\eand,\eor,\eif,\eiff}$.
 \end{itemize}
 
 
@@ -115,7 +107,7 @@
   \item[\it Step 1:] Identify the set of elements and the property in question.
   \item[\it Step 2:] Partition the set into a sequence of stages to run induction on.
   \item[\it Step 3:] Establish that every element in the base stage has the property.
-  \item[\it Step 4:] Assume every element in stage $n$ and below have the property. 
+  \item[\it Step 4:] Assume every element in stage $n$ (and below) have the property. 
   \item[\it Step 5:] Show that every element in stage $n+1$ have the property. 
 \end{enumerate}
 
@@ -126,26 +118,91 @@
 \section*{Examples}
 
 \begin{enumerate}
-  \item[\bf Task 1:] Show that every SL sentence has an even number of parentheses. 
-  \item[\bf Task 2:] Show that for every SL sentence $\varphi$, if $\simp(\varphi)$, then there are SL interpretations $\I$ and $\J$ where $\V{\I}(\varphi)=1$ and $\V{\J}(\varphi)=0$. 
-  \item[\bf Task 3:] For any SL sentences $\varphi,\psi,\chi$ and SL sentence letter $\alpha$, if $\vDash \varphi \equiv \psi$, then $\vDash \chi_{[\varphi/\alpha]}\equiv\chi_{[\psi/\alpha]}$.
-  \item[\bf Task 4:] Let $\I^+(\alpha)=1$ for every sentence letter $\alpha$ in SL. Show that $\V{\I^+}(\varphi)=1$ for every SL sentence $\varphi$ that does not include negation. 
+  \item[\bf Task 1:] Every wfs of $\PL$ has an even number of parentheses. 
+  % \item[\bf Task 2:] If $\I$ is a $\PL$ interpretation, then $\V{\I}(\metaA) \in \set{1,0}$ for all wfss $\metaA$ of $\PL$. 
+  \item[\bf Task 2:] All expressions of $\PL$ are finite length.
+  \item[\bf Task 3:] If $\I(\metaA) = \J(\metaA)$ for all $\metaA \in [\metaB]$, then $\V{\I}(\metaB) = \V{\J}(\metaB)$. 
+  \item[\bf Task 4:] For every wfs $\metaA$ of $\PL$, if $\simp{\metaA}$, then $\nvDash\metaA$. %there are $\PL$ interpretations $\I$ and $\J$ where $\V{\I}(\metaA)=1$ and $\V{\J}(\metaA)=0$. 
+  \item[\bf Task 5:] For any wfss $\metaA,\psi,\chi$ and sentence letter $\alpha$ of $\PL$, if $\vDash \metaA \eiff \psi$, then $\vDash \chi_{[\metaA/\alpha]}\eiff\chi_{[\psi/\alpha]}$.
+  % \item[\bf Task 4:] Let $\I^+(\alpha)=1$ for every sentence letter $\alpha$ in $\PL$. Show that $\V{\I^+}(\metaA)=1$ for every wfs $\metaA$ of $\PL$ that does not include negation. 
 \end{enumerate}
 
 
 
 
 
-% \section*{Weak Induction}
+\section*{PL Soundness}
 
-% \begin{enumerate}
-%   \item[\it Even:] If $\varphi$ is a sentence letter of SL, then $\even(\varphi)$.\\
-%     For any SL sentences $\varphi$ and $\psi$: 
-%     \begin{itemize}
-%       \item[$(\neg)$] $\even(\neg \varphi)$ if $\even(\varphi)$;
-%       \item[$(\wedge)$] $\even(\varphi \wedge \psi)$ if $\even(\varphi)$ and $\even(\psi)$;
-%       \item[] $\vdots$
-%     \end{itemize}
+\begin{itemize}
+  \item Assume $\MetaG \vdash \metaA$ for an arbitrary set wfss $\MetaG$ and wfs $\metaA$ of $\PL$.
+  \item There is some PL derivation $X$ of $\metaA$ from $\MetaG$. 
+  \item Let $\metaA_i$ be the wfs on the $i$-th line of the derivation $X$.
+  \item Let $\MetaG_i$ be the set of premises and undischarged assumptions on $j \leq i$.
+  \item[\it Base Case:] $\MetaG_1 \vDash \metaA_1$.
+    \item $\metaA_1$ is either a premise or undischarged assumption.
+    \item Either way, $\MetaG_1=\set{\metaA_1}$ since $\metaA_1$ is not discharged at the first line.
+    \item $\MetaG_1 \vDash \metaA_1$ is immediate.
+  \item[\it Induction Step:] $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\MetaG_k \vDash \metaA_k$ for every $k\leq n$.
+    (To be proven separately.)
+  \item By strong induction, $\MetaG_n \vDash \metaA_n$ for all $n$.
+  \item Since every proof is finite in length, there is a last line $m$ of $X$ where $\metaA_m=\metaA$ is the conclusion.
+  \item Since every assumption in $X$ is eventually discharged, $\MetaG_m=\MetaG$ is the set of premises.
+  \item Thus $\MetaG \vDash \metaA$. 
+\end{itemize}
+
+
+
+
+
+\section*{Lemmas}
+
+\begin{itemize}
+  \item[\bf (AS)] $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by AS. 
+    \item Assume that $\metaA_{n+1}$ is justified by AS.
+    \item So $\metaA_{n+1}$ is an undischarged assumption at line $n+1$.
+    \item So $\metaA_{n+1}\in\MetaG_{n+1}$ by the definition of $\MetaG_{n+1}$.
+    \item $\MetaG_{n+1} \vDash \metaA_{n+1}$ follows immediately.
+  \item[\it Inheritance:] If $\metaA_k$ is live at line $n$ of a PL derivation where $k\leq n$, then $\MetaG_k\subseteq \MetaG_n$.
+    \item Let $X$ be a PL derivation.
+    \item Assume there is some $\metaB \in \MetaG_k$ where $\metaB \notin \MetaG_n$ for $n > k$.
+    \item So $\metaB$ has been discharged at a line $j > k$ where $j \leq n$.
+    \item So $\metaA_k$ is dead at $n$.
+    \item By contraposition, if $\metaA_k$ is live at line $n > k$, then $\MetaG_k\subseteq \MetaG_n$ as desired.
+  \item[\bf (R)] $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by R. 
+    \item Assume that $\metaA_{n+1}$ is justified by R.
+    \item So $\metaA_{n+1}=\metaA_{k}$ for some $k\leq n$.
+    \item By hypothesis, $\MetaG_k \vDash \metaA_k$.
+    \item Since $\metaA_k$ is live at line $n+1$, $\MetaG_k\subseteq \MetaG_{n+1}$ by \textit{Inheritance} (\textbf{Lemma 4.3}).
+    \item So $\MetaG_{n+1} \vDash \metaA_{k}$ by \textit{Weakening} (\textbf{Lemma 2.1}).
+    \item Thus $\MetaG_{n+1} \vDash \metaA_{n+1}$.
+\end{itemize}
+
+  
+  
+% \section*{More Derivations}
+%
+% \begin{enumerate}[leftmargin=1.5in]
+%   % \item[\it Law of Excluded Middle:] $\vdash \metaA\eor\enot\metaA$.
+%   % \item[\it Law of Non-Contradiction:] $\vdash \enot(\metaA\eand\enot\metaA)$.
+%   % \item[\it Ex Falso Quodlibet:] $\metaA,\ \enot\metaA\ \vdash \metaB$.
+%   \item[\it Hypothetical Syllogism:] $\metaA \eif \metaB,\ \metaB \eif \metaC\ \vdash \metaA \eif \metaC$.
+%   \item[\it Modus Tollens:] $\metaA \eif \metaB,\ \enot\metaB\ \vdash \enot\metaA$.
+%   \item[\it Contraposition:] $\metaA \eif \metaB\ \vdash \enot\metaB \eif \enot\metaA$.
+%   % \item[\it Dilemma:] $\metaA \eor \metaB,\ \metaA \eif \metaC,\ \metaB \eif \metaC\ \vdash \metaC$.
+%   \item[\it Disjunctive Syllogism:] $\metaA \eor \metaB,\ \enot \metaA \vdash \metaB$.
+%   % \item[\it $\eor$-Commutativity:] $\metaA \eor \metaB\ \vdash \metaB \eor \metaA$.
+%   % \item[\it $\eand$-Commutativity:] $\metaA \eand \metaB\ \vdash \metaB \eand \metaA$.
+%   \item[\it Biconditional MP:] $\metaA \eiff \metaB,\ \enot\metaA\ \vdash \enot\metaB$.
+%   % \item[\it $\eiff$-Commutativity:] $\metaA \eiff \metaB\ \vdash \metaB \eiff \metaA$.
+%   % \item[\it Double Negation:] $\enot\enot\metaA\ \dashv\vdash \metaA$.
+%   \item[\it $\eand$-De Morgan's:] $\enot(\metaA\eand\metaB)\dashv\vdash\enot\metaA\eor\enot\metaB$.
+%   \item[\it $\eor$-De Morgan's:] $\enot(\metaA\eor\metaB)\dashv\vdash\enot\metaA\eand\enot\metaB$.
+%   \item[\it ${\eor}{\eand}$-Distribution:] $\metaA\eor(\metaB\eand\metaC) \dashv\vdash (\metaA\eor\metaB)\eand(\metaA\eor\metaC)$.
+%   \item[\it ${\eand}{\eor}$-Distribution:] $\metaA\eand(\metaB\eor\metaC) \dashv\vdash (\metaA\eand\metaB)\eor(\metaA\eand\metaC)$.
+%   \item[\it ${\eor}{\eand}$-Absorption:] $\metaA\eor(\metaA\eand\metaB) \dashv\vdash \metaA$.
+%   \item[\it ${\eand}{\eor}$-Absorption:] $\metaA\eand(\metaA\eor\metaB) \dashv\vdash \metaA$.
+%   % \item[\it $\eand$-Associativity:] $\metaA\eand(\metaB\eand\metaC) \dashv\vdash (\metaA\eand\metaB)\eand\metaC$.
+%   % \item[\it $\eor$-Associativity:] $\metaA\eor(\metaB\eor\metaC) \dashv\vdash (\metaA\eor\metaB)\eor\metaC$.
 % \end{enumerate}
 
 

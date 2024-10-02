@@ -38,7 +38,7 @@
 %	TITLE
 %----------------------------------------------------------------------------------------
 
-\title{\textbf{Natural Deduction in SL: Part II}} % Subtitle
+\title{\textbf{Natural Deduction in PL: Part II}} % Subtitle
 
 \author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
 
@@ -66,19 +66,16 @@
 
 
 
-\section*{Negation}
+\section*{Negation and Reiteration}
 
 \begin{enumerate}
-  \item[\it Elimination:] $\enot\enot A\ \vdash A$. 
-  \item[\it Introduction:] $A \eif (B \eand C),\ C \eif (B \eand A) \vdash A \eiff C$.
+  \item[\it Elimination Rule:] $\enot\enot A\ \vdash A$. \quad(\textit{Double Negation Elimination})
+  \item $A \eor \enot A$. \quad(\textit{Law of Excluded Middle})
+  \item $A,\ \enot A \vdash B$. \quad(\textit{Ex Falso Quodlibet})
+  \item[\it Introduction Rule:] $\enot(A \eand \enot A)$. \quad(\textit{Law of Non-Contradiction})
+  \item $A \vdash \enot\enot A$. \quad(\textit{Double Negation Introduction}) 
 \end{enumerate}
 
-
-\section*{Reiteration}
-
-\begin{enumerate}
-  \item[\it Example:] $A,\ B \eif C\ \vdash B \eif (C \eand A)$.
-\end{enumerate}
 
 
 
@@ -87,15 +84,17 @@
 \section*{Proof}
 
 \begin{enumerate}
-  \item[\it Proof:] A natural deduction \textsc{proof} (or \textsc{derivation}) of a conclusion $\varphi$ from a set of premises $\Gamma$ in PL is any sequence of lines ending with $\varphi$ on a live line where every line in the sequence is either:
+  \item[\it Proof:] A natural deduction \textsc{derivation} (or \textsc{proof}) of a conclusion $\metaA$ from a set of premises $\MetaG$ in PL is any finite sequence of lines ending with $\metaA$ on a live line where every line in the sequence is either:
       \begin{itemize}
-        \item[(1)] a premise in $\Gamma$; 
+        \item[(1)] a premise in $\MetaG$; 
         \item[(2)] a discharged assumption; or
         \item[(3)] follows from previous lines by the rules for PL.
       \end{itemize}
-  \item[\it Provable:] An wfs $\varphi$ of $\PL$ is \textsc{provable} (or \textsc{derivable}) from $\Gamma$ in PL \textit{iff} there is a natural deduction proof (derivation) of $\varphi$ from $\Gamma$ in PL, i.e., $\Gamma \vdash \varphi$. 
-  \item[\it Equivalent:] Two sentences $\varphi$ and $\psi$ are \textsc{provably equivalent} (or \textsc{interderivable}) if and only if both $\varphi\vdash\psi$ and $\psi\vdash\varphi$.
-  \item[\it Inconsistent:] A set of sentences $\Gamma$ is \textsc{provably inconsistent} if and only if $\Gamma\vdash\bot$ where $\bot$ is our arbitrarily chosen contradiction, e.g., $A\eand\enot A$.
+  \item[\it Provable:] An wfs $\metaA$ of $\PL$ is \textsc{derivable} (or \textsc{provable}) from $\MetaG$ in PL (i.e., $\MetaG \vdash \metaA$) \textit{iff} there is a natural deduction derivation (proof ) of $\metaA$ from $\MetaG$ in PL. 
+  \item[\it Theorem:] A wfs $\metaA$ is a \textit{theorem} of PL (often written $\metaA \in$ PL) \textit{iff} $\vdash \metaA$. 
+  \item[\it Interderivable:] Two wfss $\metaA$ and $\metaB$ of $\PL$ are \textsc{interderivable} (i.e., $\metaA \dashv\vdash \metaB$) \textit{iff} both $\metaA\vdash\metaB$ and $\metaB\vdash\metaA$.
+  \item[\it Bottom:] We take $\bot \coloneq A\eand\enot A$ to abbreviate an arbitrarily chosen contradiction.
+  \item[\it Inconsistent:] A set of sentences $\MetaG$ is \textsc{inconsistent} if and only if $\MetaG\vdash\bot$.
 \end{enumerate}
 
 
@@ -167,7 +166,7 @@
 
 \vspace{0.6em}
 
-\textit{Negatation Introduction} (\enot I) \vspace{-1em}
+\textit{enotatation Introduction} (\enot I) \vspace{-1em}
 \begin{proof}
 \open
 	\hypo[m]{na}\metaA{} \as{for \enot I}   %\by{:AS for \enot I}{}
@@ -272,35 +271,9 @@
 %%% OLD
 
 
-\section*{Negation}
-
-\begin{enumerate}
-  \item[\it Elimination Rule:] $\neg\neg A\ \vdash A$. \quad(\textit{Double Negation Elimination})
-  \item $A \vee \neg A$. \quad(\textit{Law of Excluded Middle})
-  \item $A,\ \neg A \vdash B$. \quad(\textit{Ex Falso Quodlibet})
-  \item[\it Introduction Rule:] $\neg(A \wedge \neg A)$. \quad(\textit{Law of Non-Contradiction})
-  \item $A \vdash \neg\neg A$. \quad(\textit{Double Negation Introduction}) 
-\end{enumerate}
 
 
 
-
-
-
-\section*{Proof}
-
-\begin{enumerate}
-  \item[\it Proof:] A natural deduction \textsc{proof} (or \textsc{derivation}) of a conclusion $\varphi$ from a set of premises $\Gamma$ in SD is any finite sequence of lines ending with $\varphi$ on a live line where every line in the sequence is either:
-      \begin{itemize}
-        \item[(1)] A premise in $\Gamma$; 
-        \item[(2)] A discharged assumption; or
-        \item[(3)] Follows from previous lines by the rules for SD.
-      \end{itemize}
-  \item[\it Provable:] An SL sentence $\varphi$ is \textsc{provable} (or \textsc{derivable}) from $\Gamma$ in SD \textit{iff} there is a natural deduction proof (derivation) of $\varphi$ from $\Gamma$ in SD, i.e., $\Gamma \vdash \varphi$. 
-  \item[\it Theorems:] An SL sentence $\varphi$ is a \textsc{theorem} of SD \textit{iff}~ $\vdash\varphi$.
-  \item[\it Equivalent:] Sentences $\varphi$ and $\psi$ are \textsc{provably equivalent} (or \textsc{interderivable}) if and only if both $\varphi\vdash\psi$ and $\psi\vdash\varphi$, i.e., $\varphi\dashv\vdash\psi$.
-  \item[\it Inconsistent:] A set of sentences $\Gamma$ is \textsc{provably inconsistent} \textit{iff} $\Gamma\vdash\bot$ where $\bot$ is the arbitrarily contradiction we chose, i.e., $A\wedge\neg A$.
-\end{enumerate}
 
 
 
@@ -308,134 +281,138 @@
 %
 % \begin{enumerate}
 %   \item[\it Arbitrary:] Does it really not matter which contradiction we choose?
-%   \item[\bf Task 1:] Show that $\varphi\dashv\vdash\psi$ \textit{iff} $\varphi\vdash\bot$ and $\psi\vdash\bot$. 
+%   \item[\bf Task 1:] Show that $\metaA\dashv\vdash\metaB$ \textit{iff} $\metaA\vdash\bot$ and $\metaB\vdash\bot$. 
 %     \begin{itemize}
-%       \item Assume $\bot = A \wedge \neg A$.
-%       \item Show that if $\varphi\vdash\bot$, then $\varphi\vdash\psi$. 
+%       \item Assume $\bot = A \eand \enot A$.
+%       \item Show that if $\metaA\vdash\bot$, then $\metaA\vdash\metaB$. 
 %     \end{itemize}
-%   \item[\bf Task 2:] Show that $\varphi\dashv\vdash\psi$ \textit{iff} $\varphi\vDash\bot$ and $\psi\vDash\bot$. 
+%   \item[\bf Task 2:] Show that $\metaA\dashv\vdash\metaB$ \textit{iff} $\metaA\vDash\bot$ and $\metaB\vDash\bot$. 
 % \end{enumerate}
 %
 
 
-\section*{Soundness and Completeness}
 
-\begin{enumerate}
-  \item[\it Assume:] $\Gamma \vdash \varphi$ \textit{iff} $\Gamma \vDash \varphi$.
-  \item[\it Tautologies:] Coextensive with the theorems.
-  \item[\it Validity:] The valid SL arguments are derivable in SD, and \textit{vice versa}.
-  \item[\bf Task 1:] Can we ever use SD to determine that an argument is invalid?
-  \item[\it Uncertainty:] If we haven't found a proof, that doesn't mean one doesn't exist. 
-  % \item[\bf Task 2:] What if we can derive the negation of the conclusion from the premises?
-  %   \begin{itemize}
-  %     \item Does $\Gamma \vdash \neg \varphi$ entail $\Gamma \nvdash \varphi$?
-  %   \end{itemize}
-  % \item[\bf Task 3:] What can we conclude if both $\Gamma \vdash \neg \varphi$ and $\Gamma \vdash \varphi$?
-\end{enumerate}
+
+
+% \section*{Soundness and Completeness}
+%
+% \begin{enumerate}
+%   \item[\it Tautologies:] Coextensive with the theorems.
+%   \item[\it Validity:] The valid SL arguments are derivable in SD, and \textit{vice versa}.
+%   \item[\bf Task 1:] Can we ever use SD to determine that an argument is invalid?
+%   \item[\it Uncertainty:] If we haven't found a proof, that doesn't mean one doesn't exist. 
+%   % \item[\bf Task 2:] What if we can derive the Negation of the conclusion from the premises?
+%   %   \begin{itemize}
+%   %     \item Does $\MetaG \vdash \enot \metaA$ entail $\MetaG \nvdash \metaA$?
+%   %   \end{itemize}
+%   % \item[\bf Task 3:] What can we conclude if both $\MetaG \vdash \enot \metaA$ and $\MetaG \vdash \metaA$?
+% \end{enumerate}
 
 
 
 \section*{Logical Analysis}
 
-\begin{enumerate}
-  \item[\bf Task 2:] How can we tell if an argument is valid? 
-    \begin{itemize}
-      \item Use a semantic argument: true premises and false conclusion. 
-      \item Construct a tree proof.
-      % \vspace{-.1in}
-    \end{itemize}
-      \item[\it Pro:] Both methods provide a countermodel if there is one.
-      \item[\it Con:] Neither method derives the conclusion from the premises if valid.
-    \item[\bf Task 3:] How can we tell if a theorem is valid?
+\begin{itemize}
+  \item[\it Sound and Complete:] $\MetaG \vdash \metaA$ \textit{iff} $\MetaG \vDash \metaA$.
+    \item $\vdash \metaA$ \textit{iff} $\vDash \metaA$.
+    \item $\MetaG \vdash \bot$ \textit{iff} $\MetaG \vDash \bot$. 
+    % \item $\MetaG \vdash \metaA$ \textit{iff} $\MetaG \cup \set{\enot \metaA} \vdash \bot$. 
+    % \item $\MetaG \vDash \metaA$ \textit{iff} $\MetaG \cup \set{\enot \metaA} \vDash \bot$. 
+  \item[\bf Question:] How can we tell if an argument is valid? 
+    \item Construct a truth table.
+    \item Write a semantic proof.
+    \item Derive the conclusion from the premises.
+  \item[\bf Question:] What if we can mange to find a derivation?
+    \item Natural deduction won't tell you if there is no proof.
+    \item A semantic proof will yield a counterexample.
+  \item[\bf Question:] How can we tell what the logical properties are for a wfs of $\PL$?
   \begin{multicols}{2}
-    \item[\it Tautology?] \quad If YES, prove $\vdash\varphi$.\hfill
-    \item[\it Contradiction?] \quad If YES, prove $\vdash\neg\varphi$.\hfill
-    \item[\it Contingent?] \quad If YES, provide a models.\hfill
-    \item[\it Equivalent?] \quad If YES, prove $\varphi\dashv\vdash\psi$.\hfill
+    \item[\it Tautology?] \quad If YES, prove $\vdash\metaA$.\hfill
+    \item[\it Contradiction?] \quad If YES, prove $\vdash\enot\metaA$.\hfill
+    \item[\it Contingent?] \quad If YES, provide two models.\hfill
+    \item[\it Equivalent?] \quad If YES, prove $\metaA\dashv\vdash\metaB$.\hfill
     \item[] If NO, provide a countermodel.
     \item[] If NO, provide a model.
-    \item[] If NO, prove $\vdash\varphi$ or $\vdash\neg\varphi$. 
+    \item[] If NO, prove $\vdash\metaA$ or $\vdash\enot\metaA$. 
     \item[] If NO, provide a countermodel.
   \end{multicols}
-\end{enumerate}
+\end{itemize}
 
 
 
-\section*{Schemata}
+\section*{Rule Schemata}
 
-\begin{enumerate}
-  \item[\bf Observe:] Compare rules of inference in SD to SL proofs in SD.
-    \begin{itemize}
-      \item Whereas the rules are general, SL proofs are particular.
-      \item But nothing in our SL proofs depend on the particulars.
-    \end{itemize}
-  \item[\bf Task 3:] How might we generalise our proofs beyond any instance?
-  \item[\it Rule Schemata:] Replace sentence letters in SL proofs with metavariables.
-    \begin{itemize}
-      \item Premises are replaced with the lines cited by that rule.
-      \item New rules require new names if we are to use them.
-    \end{itemize}
-  \item[\bf Task 4:] Can we also generalise proofs of theorems?
-  \item[\it Axiom Schemata:] Amount to lines that can be added without citing lines. 
-  \item[\bf Goal:] We want to derive intuitive rule schemata.
-\end{enumerate}
+\begin{itemize}
+  \item[\bf Task:] Compare the rules of inference for PL to their instances.
+    \item Whereas the rules are general, PL proofs are particular.
+    \item But nothing in our PL proofs depend on the particulars.
+  \item[\bf Question:] How might we generalize our proofs beyond any instance?
+  \item[\it Rule Schemata:] Replace sentence letters in PL proofs with schematic variables.
+    \item Premises are replaced with the lines cited by that rule.
+    \item New rules require new names if we are to use them.
+  \item[\bf Question:] Can we also generalize proofs of theorems?
+  \item These amount to lines that can be added without citing lines. 
+  \item[\it Derived Schemata:] To speed up proofs, we want to derive rule schemata.
+    \item These can then be employed just like our basic rules.
+    \item This avoids having to rewrite the same types of proofs over and over.
+\end{itemize}
 
 
 \section*{Derivable Schemata}
 
 \begin{enumerate}[leftmargin=1.5in]
-  \item[\it Double Negation:] $\neg\neg\varphi\ \dashv\vdash \varphi$.
-  \item[\it Ex Falso Quodlibet:] $\varphi,\ \neg\varphi\ \vdash \psi$.
-  \item[\it Law of Excluded Middle:] $\vdash \varphi\vee\neg\varphi$.
-  \item[\it Law of Non-Contradiction:] $\vdash \neg(\varphi\wedge\neg\varphi)$.
-  \item[\it Hypothetical Syllogism:] $\varphi \supset \psi,\ \psi \supset \chi\ \vdash \varphi \supset \chi$.
-  \item[\it Modus Tollens:] $\varphi \supset \psi,\ \neg\psi\ \vdash \neg\varphi$.
-  \item[\it Contraposition:] $\varphi \supset \psi\ \vdash \neg\psi \supset \neg\varphi$.
-  \item[\it Dilemma:] $\varphi \vee \psi,\ \varphi \supset \chi,\ \psi \supset \chi\ \vdash \chi$.
-  \item[\it Disjunctive Syllogism:] $\varphi \vee \psi,\ \neg \varphi \vdash \psi$.
-  \item[\it $\vee$-Commutativity:] $\varphi \vee \psi\ \vdash \psi \vee \varphi$.
-  \item[\it $\wedge$-Commutativity:] $\varphi \wedge \psi\ \vdash \psi \wedge \varphi$.
-  \item[\it Biconditional MP:] $\varphi \equiv \psi,\ \neg\varphi\ \vdash \neg\psi$.
-  \item[\it $\equiv$-Commutativity:] $\varphi \equiv \psi\ \vdash \psi \equiv \varphi$.
-  \item[\it $\wedge$-De Morgan's:] $\neg(\varphi\wedge\psi)\dashv\vdash\neg\varphi\vee\neg\psi$.
-  \item[\it $\vee$-De Morgan's:] $\neg(\varphi\vee\psi)\dashv\vdash\neg\varphi\wedge\neg\psi$.
-  \item[\it ${\vee}{\wedge}$-Distribution:] $\varphi\vee(\psi\wedge\chi) \dashv\vdash (\varphi\vee\psi)\wedge(\varphi\vee\chi)$.
-  \item[\it ${\wedge}{\vee}$-Distribution:] $\varphi\wedge(\psi\vee\chi) \dashv\vdash (\varphi\wedge\psi)\vee(\varphi\wedge\chi)$.
-  \item[\it ${\vee}{\wedge}$-Absorption:] $\varphi\vee(\varphi\wedge\psi) \dashv\vdash \varphi$.
-  \item[\it ${\wedge}{\vee}$-Absorption:] $\varphi\wedge(\varphi\vee\psi) \dashv\vdash \varphi$.
-  \item[\it $\wedge$-Associativity:] $\varphi\wedge(\psi\wedge\chi) \dashv\vdash (\varphi\wedge\psi)\wedge\chi$.
-  \item[\it $\vee$-Associativity:] $\varphi\vee(\psi\vee\chi) \dashv\vdash (\varphi\vee\psi)\vee\chi$.
+  \item[\it Law of Excluded Middle:] $\vdash \metaA\eor\enot\metaA$.
+  \item[\it Law of Non-Contradiction:] $\vdash \enot(\metaA\eand\enot\metaA)$.
+  \item[\it Ex Falso Quodlibet:] $\metaA,\ \enot\metaA\ \vdash \metaB$.
+  \item[\it Hypothetical Syllogism:] $\metaA \eif \metaB,\ \metaB \eif \metaC\ \vdash \metaA \eif \metaC$.
+  \item[\it Modus Tollens:] $\metaA \eif \metaB,\ \enot\metaB\ \vdash \enot\metaA$.
+  \item[\it Contraposition:] $\metaA \eif \metaB\ \vdash \enot\metaB \eif \enot\metaA$.
+  \item[\it Dilemma:] $\metaA \eor \metaB,\ \metaA \eif \metaC,\ \metaB \eif \metaC\ \vdash \metaC$.
+  \item[\it Disjunctive Syllogism:] $\metaA \eor \metaB,\ \enot \metaA \vdash \metaB$.
+  \item[\it $\eor$-Commutativity:] $\metaA \eor \metaB\ \vdash \metaB \eor \metaA$.
+  \item[\it $\eand$-Commutativity:] $\metaA \eand \metaB\ \vdash \metaB \eand \metaA$.
+  \item[\it Biconditional MP:] $\metaA \eiff \metaB,\ \enot\metaA\ \vdash \enot\metaB$.
+  \item[\it $\eiff$-Commutativity:] $\metaA \eiff \metaB\ \vdash \metaB \eiff \metaA$.
+  \item[\it Double Negation:] $\enot\enot\metaA\ \dashv\vdash \metaA$.
+  \item[\it $\eand$-De Morgan's:] $\enot(\metaA\eand\metaB)\dashv\vdash\enot\metaA\eor\enot\metaB$.
+  \item[\it $\eor$-De Morgan's:] $\enot(\metaA\eor\metaB)\dashv\vdash\enot\metaA\eand\enot\metaB$.
+  \item[\it ${\eor}{\eand}$-Distribution:] $\metaA\eor(\metaB\eand\metaC) \dashv\vdash (\metaA\eor\metaB)\eand(\metaA\eor\metaC)$.
+  \item[\it ${\eand}{\eor}$-Distribution:] $\metaA\eand(\metaB\eor\metaC) \dashv\vdash (\metaA\eand\metaB)\eor(\metaA\eand\metaC)$.
+  \item[\it ${\eor}{\eand}$-Absorption:] $\metaA\eor(\metaA\eand\metaB) \dashv\vdash \metaA$.
+  \item[\it ${\eand}{\eor}$-Absorption:] $\metaA\eand(\metaA\eor\metaB) \dashv\vdash \metaA$.
+  \item[\it $\eand$-Associativity:] $\metaA\eand(\metaB\eand\metaC) \dashv\vdash (\metaA\eand\metaB)\eand\metaC$.
+  \item[\it $\eor$-Associativity:] $\metaA\eor(\metaB\eor\metaC) \dashv\vdash (\metaA\eor\metaB)\eor\metaC$.
 \end{enumerate}
 
 
 
 
-\section*{Axiom System for SL}
-
-\begin{enumerate}
-  \item[\it Axiom System:] Consider the axiom and rule schemata, writing `$/$' for deduction.
-    \begin{itemize}
-      \item $\varphi \supset (\psi \supset \varphi)$.
-      \item $(\varphi \supset (\psi \supset \chi)) \supset ((\varphi \supset \psi) \supset (\varphi \supset \chi))$.
-      \item $(\neg\varphi \supset \neg\psi) \supset ((\neg\varphi \supset \psi) \supset \varphi)$.
-      \item $\varphi \supset \psi,\ \varphi\ /\ \psi$.
-    \end{itemize}
-  \item[\it PL-Proof:] $\Gamma \vdash_{PL} \varphi$ \textit{iff} there is a finite sequence of SL sentences where every sentence in the sequence is either: (1) a member of $\Gamma$; (2) an axiom schemata; or (3) follows from previous sentences in the sequence by the single rule schemata given above.
-  \item[\it Equivalence:] Amazingly, it is possible to show that $\Gamma \vdash_{PL} \varphi$ \textit{iff} $\Gamma \vdash_{SD} \varphi$. 
-  \item[\it Definitions:] Given that the axioms and rule schemata only include $\neg$ and $\supset$, we may take these to be the \textit{only} primitive logical connectives, defining all other connectives in their terms. 
-    \begin{itemize}
-      \item This makes for a very compact description of the same logic.
-      \item This logic is much less natural to use, requiring that a lot of derived rules be added to system.
-      \item We don't have this problem, though our system is more complex.
-    \end{itemize}   
-\end{enumerate}
+% \section*{Axiom System for SL}
+%
+% \begin{enumerate}
+%   \item[\it Axiom System:] Consider the axiom and rule schemata, writing `$/$' for deduction.
+%     \begin{itemize}
+%       \item $\metaA \eif (\metaB \eif \metaA)$.
+%       \item $(\metaA \eif (\metaB \eif \metaC)) \eif ((\metaA \eif \metaB) \eif (\metaA \eif \metaC))$.
+%       \item $(\enot\metaA \eif \enot\metaB) \eif ((\enot\metaA \eif \metaB) \eif \metaA)$.
+%       \item $\metaA \eif \metaB,\ \metaA\ /\ \metaB$.
+%     \end{itemize}
+%   \item[\it PL-Proof:] $\MetaG \vdash_{PL} \metaA$ \textit{iff} there is a finite sequence of SL sentences where every sentence in the sequence is either: (1) a member of $\MetaG$; (2) an axiom schemata; or (3) follows from previous sentences in the sequence by the single rule schemata given above.
+%   \item[\it eiffalence:] Amazingly, it is possible to show that $\MetaG \vdash_{PL} \metaA$ \textit{iff} $\MetaG \vdash_{SD} \metaA$. 
+%   \item[\it Definitions:] Given that the axioms and rule schemata only include $\enot$ and $\eif$, we may take these to be the \textit{only} primitive logical connectives, defining all other connectives in their terms. 
+%     \begin{itemize}
+%       \item This makes for a very compact description of the same logic.
+%       \item This logic is much less natural to use, requiring that a lot of derived rules be added to system.
+%       \item We don't have this problem, though our system is more complex.
+%     \end{itemize}   
+% \end{enumerate}
 
 % \section*{Further Problems}
 %
 % \begin{enumerate}
-%   \item $L\equiv \neg O,\ L\vee \neg O\ \vdash L$.
-%   \item $A\equiv B\ \vdash \neg A\equiv\neg B$.
-%   \item $Z \supset (C \wedge \neg N),\ \neg Z \supset (N \wedge \neg C)\ \vdash N \vee C$.
+%   \item $L\eiff \enot O,\ L\eor \enot O\ \vdash L$.
+%   \item $A\eiff B\ \vdash \enot A\eiff\enot B$.
+%   \item $Z \eif (C \eand \enot N),\ \enot Z \eif (N \eand \enot C)\ \vdash N \eor C$.
 % \end{enumerate}
 
 

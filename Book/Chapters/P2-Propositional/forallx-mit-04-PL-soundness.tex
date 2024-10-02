@@ -2,138 +2,774 @@
 \chapter{The Soundness of PL}
   \label{ch.PL-Soundness}
 
-\section{Proofs and Provability}
+Chapter \ref{ch.introduction} provided an informal account of logic as the study of formal reasoning which was glossed as \textit{what follows from what in virtue of logical form}.
+Rather than attempting to describe all of what follows from what in English which lacks a precise definition of a grammatical sentence, Chapter \ref{ch.PL-syntax} introduced an artificial language $\PL$ in which we stipulated a definition of the well-formed sentences (wfss) of $\PL$.
+Given the definition of the wfss of $\PL$, Chapter \ref{ch.PL-semantics} defined the interpretations of $\PL$ in order to provide a theory of logical consequence $\vDash$ which answered the question of what follows from what in $\PL$. 
+Nevertheless, we did not say \textit{how} one wfs follows from a set of wfss in $\PL$ since nothing in the theory of logical consequence described how to reason with the wfss of $\PL$.
+Chapter \ref{ch.PL-deduction} filled this lacuna by identifying a collection of deduction rules which were both basic and natural, allowing us to draw inferences between the wfss of $\PL$. 
+By considering any way of chaining together individual applications of these rules into a finite sequence of inferences, we defined what it is to derive a wfs from a set of wfss in $\PL$ where the derivation relation $\vdash$ asserts that there is at least one derivation of the wfs on the right from the set of wfss on the left.
 
-Given the natural deduction rules specified above, we may present the following definition:
+Despite providing a completely different account of formal reasoning, Chapter \ref{ch.PL-deduction} closed by asserting that the derivation relation $\vdash$ and the logical consequence relation $\vDash$ have the same extension.  
+Given the extensional equivalence of these two relations together with the naturalness of the basic rules for PL, we have every right to take PL to provide an adequate natural deduction system for $\PL$. %, describing what follows from what by providing a way to reason in $\PL$.
+In order to establish the extensional equivalence of the derivation and logical consequence relations, this chapter will prove \textsc{PL Soundness} and the next chapter will prove \textsc{PL Completeness}.
+Although these results may appear to be very similar in form, they differ considerably in significance.
+For instance, suppose that we had provided a logic X where \textsc{X Soundness} failed to hold. % \textsc{PL Soundness} were to fail to hold.
+This means that there is some line of reasoning that we could carry out in X, i.e., $\MetaG \vdash_X \metaA$, where the conclusion fails to be a logical consequence of the premises, i.e., $\MetaG \nvDash \metaA$.
+Assuming that logical consequence provides an accurate guide to \textit{what} follows from what even if it does not say how, we may take a failure of \textsc{X Soundness} to disqualify X from providing an adequate logic for $\PL$.
+Put otherwise, X could not be relied upon to reason in $\PL$ since it is possible to begin with certain premises and reason to a conclusion that does not follow as a logical consequence.
+
+Establishing \textsc{PL Soundness} shows that PL can be relied on to reason in $\PL$ without ever deriving a conclusion that does not follow as a logical consequence of the premises with which one begins. 
+In order to appreciate the importance of \textsc{PL Soundness}, it is helpful to compare \textsc{PL Soundness} to an analogous property that we may expect any calculator to satisfy.
+In particular, any calculator must have the property that no matter what arithmetical operations you enter, if it gives you an answer, that answer is guaranteed to be a truth of arithmetic.
+Otherwise the calculator is not really a calculator at all but rather something more like a magic eight ball, turning up incorrect answers in an unpredictable manner.
+
+% % Considering the analogy with the calculator also helps to shed light on why 
+% \textsc{PL Completeness} is not mandatory in the same way as \textsc{PL Soundness}.
+% Continuing the analogy above, we may observe that no calculator is complete for the simple reason that every calculator has a finite amount of memory which is exhausted by arithmetical operations with sufficiently large numbers.
+% Even so, this does not stop calculators from being of considerable utility.
+% These considerations might lead one to give up any hope of finding a complete logic for $\PL$.
+% Instead of disqualifying a logic 
+%
+% For instance, if \textsc{Completeness} were to fail to hold, then there would be some logical consequence $\MetaG \vDash \metaA$ where $\MetaG \nvdash \metaA$ and so there is no PL derivation of $\metaA$ from $\MetaG$.
+% Put otherwise, PL does not provide a complete description of the extension of logical consequence.
+% Even so, we may 
+
+Since we should like to be able to rely on PL in order to carry out reasoning in $\PL$, it is important to establish \textsc{PL Soundness}.
+% Insofar as its concern is with the properties that the logical system PL may be said to possess, 
+This result belongs to \define{metalogic} insofar as it concerns the properties that our logical system PL may be said to possess.
+Given that our present aim is to show that PL can be relied upon by proving \textsc{PL Soundness}, it does not make sense to to use PL in order to prove \textsc{PL Soundness} since this would beg the question.
+Put otherwise, we cannot rely on PL to show that PL can be relied upon.
+Rather, the proofs of metalogic are developed in mathematical English in a similar manner to the semantic proofs that we provided in Chapter \ref{ch.PL-semantics}.
+That is the proofs in metalogic are \define{informal} in contrast to the \define{formal} derivations in PL that we presented in Chapter \ref{ch.PL-deduction}.
+
+In order to establish that \textsc{PL Soundness} holds for any set of wfss $\MetaG$ and wfs $\metaA$ of $\PL$, it is natural to consider an arbitrary $\MetaG$ and $\metaA$ for which $\MetaG \vdash \metaA$. 
+It follows from the definition of the derivation relation that there is some PL derivation $X$ where $\metaA$ is the conclusion and $\MetaG$ is the set of premises. 
+Despite knowing that there is such a PL derivation as $X$, we cannot conclude much more than that, and so it is hard to see how we might show that $\MetaG \vDash \metaA$.
+In particular, we do not know how the derivation $X$ proceeds, and so cannot say which wfss of $\PL$ are on which lines of $X$ nor can we appeal to any of their justifications.
+Although $X$ is finite, we do not know how long $X$ is and so are left contemplating an infinite number of proofs of finite length, any one of which $X$ might be. 
+This is a common predicament.
+
+One thought is to attempt a \textit{reductio} style proof by assuming that $\MetaG \nvDash \metaA$ and attempting to derive a contradiction. 
+Even so, we still do not have much to work with.
+In particular, we do not know what $\metaA$ is or what $\MetaG$ includes, and so the \textit{reductio} assumption is of little help.
+
+In order to overcome these challenges we will employ \define{mathematical induction} which uses a recursive strategy for showing that $\MetaG \vDash \metaA$.
+In particular, we will show that every line of $X$ is a logical consequence of the premises and undischarged assumptions of $X$ at that line.
+Since the last line cannot have any undischarged assumptions, it follows that the last line of $X$ is a logical consequence of just the premises.
+Before presenting the details of this proof, the following section will provide a detailed guide for writing clear and concise induction proofs.
+In addition to helping you to write your own induction proofs, this guide will help you to understand how the proof of \textsc{PL Soundness} works.
+% As we will see, induction proofs will continue to play an 
+If you are already familiar with mathematical induction, consider the following section a review.
+
+
+
+
+
+
+
+\section{Mathematical Induction}
+
+\textit{Step 1:} 
+Whenever a domain of objects has a recursive definition, it is natural to appeal to an induction proof in order to show that every object in that domain has a given property.
+Accordingly, we must identify the relevant domain of objects and the property which we are attempting to show is had by every object in that domain.
+In the case of \textsc{PL Soundness}, we will begin by assuming that $\MetaG \vdash \metaA$, and so there is a PL derivation $X$ of $\metaA$ from $\MetaG$.
+We will then present an induction argument that each line is a logical consequence of the premises and undischarged assumptions at that line.
+So the domain of objects in question are the lines of the derivation $X$ of $\metaA$ from $\MetaG$, and the property in question is \textit{being a logical consequence of its premises and undischarged assumptions}. 
+% it might be tempting to take the domain to be the ordered pairs $\tuple{\MetaG, \metaA}$ for which $\MetaG \vdash \metaA$, claiming that all such ordered pairs are such that $\MetaG \vDash \metaA$.
+This brings to light what can be one of the trickiest part of an induction proof: not only is it important to accurately identify the relevant domain of objects, the property of interest must also be carefully chosen.
+% In the case of \textsc{PL Soundness}, the 
+
+\textit{Step 2:} 
+We must now provide some way of organizing the domain into a sequence of stages.
+For instance, if our domain was the set of natural numbers, we might consider their natural ordering where every number in the sequence is followed by its successor.
+In the case of the PL derivation $X$, we will consider the sequence of lines that constitute $X$.
+Sometimes the ordering is not so obvious, or else one must reconsider the domain of objects such that they may be ordered in an manner which is advantageous.
+% The second step is to come up with such an ordering, making sure that the ordering serves our needs without including any unnecessary complications.
+% Instead of imposing an ordering on the individual PL derivations themselves, we will partition the set of all PL derivations according to the number of derivation rules that are applied in the course of each derivation, referring to this number as the length of the derivation.
+% It is typical to refer to the resulting proof as proceeding by \textit{induction on the length of a derivation}.
+% So we will have a stage with all PL derivations of length one, a stage with all PL derivations of length two, and so on.
+
+\textit{Step 3:} 
+Next we will establish that the first stage has the property in question.
+This step is often called the \textit{base case} of our induction proof.
+For instance, we may show that the first line of the derivation $X$ follows from the premises and undischarged assumptions at that first line. % every PL derivation in which no deduction rules are applied is such that the conclusion is a logical consequence of its premises.
+Although the base case is often easy--- sometimes so obvious it is hard to know what to write--- this is not always the true, and so should not be dismissed.
+
+\textit{Step 4:} 
+We will then help ourselves to an important assumption called the \textit{induction hypothesis}.
+This assumption can come in both weak and strong varieties.
+Whereas \textit{weak induction} assumes that the property in question holds for the $n$-th stage, \textit{strong induction} assumes that the property in question holds for the $n$-th stage and all previous stages.
+% Although weak induction is sometimes sufficient for a proof, there is typically little reason not to help ourselves to the stronger assumption.
+For instance, below we will make the stronger assumption that every line $k \leq n$ is a logical consequence of the premises and undischarged assumptions at $k$.
+
+\textit{Step 5:} 
+We will complete the induction proof by showing that the property in question also holds for the $n+1$-th stage.
+If we can establish this claim, then it follows that the property in question holds for every stage.
+After all, we have shown that the property in question holds for the first stage, and that if property holds at (or up through) the $n$-th stage, then it holds for the $n+1$-th stage.
+% It is common for the property that we are concerned with to have a conditional form such as: if $x$ is $F$, then $x$ is $G$.
+In the case of \textsc{PL Soundness}, we show that the $n+1$-th line of $X$ is a logical consequence of its premises and undischarged assumptions at that line. 
+
+% In order to establish a general claim of the form `Everything in $D$ that is $F$ is also $G$', there is a tried a true method: choose an \textit{arbitrary} $D$ that is $F$ and show that it is also $G$.
+% In the case of soundness, we will choose an arbitrary tree of length $n+1$ and assume that it has a satisfiable root.
+% By drawing on the induction hypothesis, we will then endeavour to show that this arbitrary tree has a satisfiable branch. 
+% This step typically constitutes the core of the induction proof.
+% Since our choice was arbitrary, we may conclude what we want: every tree of length $n+1$ with a satisfiable root has a satisfiable branch. 
+% Having shown that our conditional property applies to all trees of length $n+1$, we may conclude what we want to show by induction: every tree (of any length) with a satisfiable root has a satisfiable branch.
+% Accordingly, we may leave mention of the length of the tree off entirely.
+
+% Although the induction part of the proof is finished, it remains to establish soundness.
+% As we will see, soundness follows easily from what we have shown, i.e., that every tree with a satisfiable root has a satisfiable branch.
+% Drawing this final connection completes the proof.
+
+This provides the rough outline of proof by induction with some reference to the induction proof for soundness.
+In actual practice, the hardest part about induction proofs is staying organized and figuring out which properties to focus on, since sometimes you can make things a lot easier by proving something related to what you really want to show.
+
+
+
+
+
+
+
+% \section{Scope}%
+%   \label{sec:Scope}
+%   
+% Chapter \ref{ch.PL-deduction} referred to lines of a PL derivation as being either live or dead.
+% It will be important to improve of the intuitive characterization given above by defining the \define{scope} of each line of a proof to include .
+
+
+
+
+
+
+
+
+\section{Soundness}%
+  \label{sec:Soundness}
+
+Although we could attempt to prove \textsc{PL Soundness} in one shot, it is common to break up long proofs into parts by establishing a number of supporting lemmas.
+In addition to making the over all structure of a proof easier to read, it is common for certain lemmas to be used again and again throughout different parts of a proof, or else in other proofs entirely, thereby reducing redundancy.
+Were a lemma to have significant and far reaching consequences that are of interest in their own right, we would do better to call it a \textit{proposition} or even a \textit{theorem}.
+For instance, it would be inappropriate to refer to \textsc{PL Soundness} as a lemma given the significance of this result.
+Although lemmas can often help to streamline the presentation of a proof, too many lemmas can clutter a proof that would have been better to present all at once.
+% However, in the case of the lemmas established below, we are just looking to better organize our proof of \textsc{PL Soundness}, presenting some minor results to help us to do so in an elegant manner.
+Knowing when to carve off a lemma to establish separately from a proof of primary interest is a skill in its own right, one that takes lots of practice to cultivate.
 
 \factoidbox{
-  A natural deduction \define{proof} (or \define{derivation}) of a conclusion $\metaA$ from a set of premises $\Gamma$ in PL is any sequence of lines ending with $\metaA$ on a live line where every line in the sequence is either: (1) a premise in $\Gamma$; (2) a discharged assumption; or (3) follows from previous lines by one of the natural deduction rules for PL. 
+  \textsc{PL Soundness:}
+  Assume that $\MetaG \vdash \metaA$ for an arbitrary set $\MetaG$ of wfss of $\PL$ and wfs $\metaA$ of $\PL$.
+  It follows that there is some PL derivation $X$ of $\metaA$ from $\MetaG$. 
+  % Recall that we may evaluate which lines are live at any point in the course of a natural deduction proof in PL.
+  % For ease of exposition, it will help to introduce some notation that we will use throughout the proof.
+  Letting $\metaA_i$ be the sentence on the $i$-th line of the derivation $X$ and $\MetaG_i$ be the set of premises that occur on any line $j \leq i$ of $X$ together with the assumptions that are undischarged at line $i$, we may prove the following:
+    \vspace{-.1in}
+
+    \begin{Lthm}[Base Step] \label{lemma:PL-soundness-base}
+      $\MetaG_1 \vDash \metaA_1$.
+    \end{Lthm}
+    % \vspace{-.2in}
+
+    \begin{quote} 
+      \textit{Proof:} 
+      % In order to prove \textbf{\ref{lemma:PL-soundness-base}}, we may recall from the 
+      By the definition of a PL derivation, $\metaA_1$ is either a premise, an assumption that is eventually discharged, or follows by one of the natural deduction rules for PL besides AS. 
+      Since $\metaA_1$ is the first line of the proof, there are no earlier lines to be cited, and so $\metaA_1$ is either a premise or an assumption.
+      Either way, $\MetaG_1=\set{\metaA_1}$ since $\metaA_1$ is not discharged at the first line.
+      As a result, $\MetaG_1 \vDash \metaA_1$ is immediate.
+      \qed
+    \end{quote}
+
+    \begin{Lthm}[Induction Step] \label{lemma:PL-soundness-ind}
+      $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\MetaG_k \vDash \metaA_k$ for every $k\leq n$.
+    \end{Lthm}
+    \vspace{.1in}
+
+  % \factoidbox{
+    % \begin{enumerate}[leftmargin=2in]
+    %   \item[\bf Base Lemma:] $\MetaG_1 \vDash \metaA_1$.
+    %   \item[\bf Induction Lemma:] $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\MetaG_k \vDash \metaA_k$ for every $k\leq n$.
+    % \end{enumerate}
+  % }
+
+  Given the lemmas above, it follows by strong induction that $\MetaG_n \vDash \metaA_n$ for all $n$.
+  Since every proof is finite in length, there is a last line $m$ of $X$ where $\metaA_m=\metaA$ is the conclusion.
+  By the definition of a PL derivation, we know that every assumption in $X$ is eventually discharged, and so $\MetaG_m=\MetaG$ is the set of premises.
+  Thus we may conclude that $\MetaG \vDash \metaA$. 
+  Discharging the assumption that $\MetaG \vdash \metaA$ and generalizing on $\MetaG$ and $\metaA$ completes the proof.
+  \qed
 }
 
-An $\PL$ sentence $\metaA$ is \define{provable} (or \define{derivable}) from $\Gamma$ in PL just in case there is a natural deduction proof (derivation) of $\metaA$ from $\Gamma$ in PL, where we may write this: $\Gamma \proves \metaA$. 
-% Whereas `$\Gamma \proves_{T} \metaA$' was shorthand for `$\Gamma, \enot \metaA \proves_{T} \bot$', 
-
-Two sentences $\metaA$ and $\metaB$ are \define{provably equivalent} (or \define{interderivable}) if and only if both $\metaA\proves\metaB$ and $\metaB\proves\metaA$.
-% Additionally, we will take $\Gamma\proves\bot$ to mean that $\Gamma\proves\metaB\eand\enot\metaB$ for some $\PL$ sentence $\metaB$.
-% It is relatively easy to show that two sentences are provably equivalent since this requires a pair of proofs.
-% Showing that sentences are \emph{not} provably equivalent would be much harder.
-% It would be just as hard as showing that a sentence is not a theorem.
-% (In fact, these problems are interchangeable. Can you think of a sentence that would be a theorem if and only if \metaA{} and \metaB{} were provably equivalent?)
-A set of sentences $\Gamma$ is \define{provably inconsistent} if and only if $\Gamma\proves\bot$ where $\bot$ is our arbitrarily chosen contradiction, e.g., $A\eand\enot A$.
-
-
-Provability is relative to a proof system, so the meaning of the `$\proves$' symbol featured in this chapter should be distinguished from the one we used for trees.
-When necessary, we can specify which turnstile we intend by including a reference to the proof system in question, letting `$\proves_{T}$' stand for provability in the tree system, and `$\proves_{PL}$' stand for provability in this natural deduction system.
-Since this chapter is concerned with natural deduction, you can take `$\proves$' to mean `$\proves_{PL}$' in this chapter unless specified otherwise.
-% For instance, it is important to disambiguate the turnstiles in making the following observation: whereas $\Gamma \proves_{T} \metaA$ was defined as $\Gamma, \enot \metaA \proves_{T} \bot$ for the tree proof system, here we have defined $\Gamma \proves_{PL} \bot$ in terms of $\Gamma \proves_{PL} \metaB\eand\enot\metaB$ for some $\metaB$. 
-
-% So $\Gamma\proves\metaA$ can be read as: $\metaA$ is derivable from $\Gamma$.
-As above, it is often convenient to write `$\metaA_1,\metaA_2,\ldots\proves\metaB$' as a shorthand for $\set{\metaA_1,\metaA_2,\ldots}\proves\metaB$.
-We will refer to an $\PL$ sentence $\metaA$ as a \define{theorem} of PL just in case $\proves\metaA$, i.e., $\varnothing\proves\metaA$.
-It is important to note that the sentences of $\PL$ are only theorems \textit{relative to a proof system}, so there is no sense in which $A\eor\enot A$ is a theorem full stop.
-Nevertheless, it is natural to expect $A\eor\enot A$ to be a theorem of any respectable (i.e., complete) proof system for $\PL$.
-
-In order to show that something is a theorem we have to derive it from no premises.
-But how could we show that something is \emph{not} a theorem?
-More generally, how could we show that $\Gamma \nproves \metaA$?
-Showing that there is no proof of $\metaA$ from $\Gamma$ would seem to require searching the space of all natural deduction proofs, and this is not bound to be easy. 
-For instance, even if you (or a computer program) failed to derive $\metaA$ from $\Gamma$ in a thousand different ways, perhaps their is a proof that has not yet been considered.
-As we've emphasized already, this brings out an important difference between our natural deduction system and the tree proof system.
-Whereas the tree method will determine whether $\Gamma \proves_{T} \metaA$ or not, the natural deduction system does not provide a straightforward way to demonstrate that an argument is invalid.
-
-% It is easy to show that a set is provably inconsistent: You just need to assume the sentences in the set and prove a contradiction. Showing that a set is \emph{not} provably inconsistent will be much harder. It would require more than just providing a proof or two; it would require showing that proofs of a certain kind are \emph{impossible}.
+  Whereas \textbf{\ref{lemma:PL-soundness-base}} is easy to prove, \textbf{\ref{lemma:PL-soundness-ind}} requires checking that all of the natural deduction rules for PL preserve logical consequence.
+  Since there are twelve rules, this proof will require quite a bit more work.
+  % Rather than presenting these details here, we may assume that \textbf{\ref{lemma:PL-soundness-ind}} has been established for the time being.
+  Having presented the over all structure of the proof of \textsc{PL Soundness}, the following section will fill in the missing details by proving \textbf{\ref{lemma:PL-soundness-ind}}.
 
 
 
 
 
-\section{Provability and Entailment}
 
-The double turnstile `$\models$' for logical entailment remains unchanged, and so no subscript is required.
-% Put otherwise, entailment is not relative to a proof system, but rather to a class of interpretations.
-% In particular, we were concerned with interpretations which assigned the sentence letters of $\PL$ to exactly one truth-value.
-% Since this is the only definition of an interpretation that we will consider for $\PL$, there is only one corresponding notion of entailment $\models$.
-Although the soundness and completeness proofs showed that $\Gamma \proves_{T} \metaA$ if and only if $\Gamma \models \metaA$, a question remains as to whether a similar result may be established for PL.
-% A natural strategy for establishing this connection is to show that $\Gamma \proves_{PL} \metaA$ if and only if $\Gamma \proves_{T} \metaA$.
+\section{Induction Step}%
+  \label{sec:PL-rules}
 
-Although the soundness proof for natural deduction is easy, the completeness proof is considerably more difficult.
-Rather, we will simply state that PL is both sound and complete:
+In order to prove \textbf{\ref{lemma:PL-soundness-ind}}, assume for strong induction that $\MetaG_k \vDash \metaA_k$ for every $k\leq n$. 
+It remains to show that $\MetaG_{n+1} \vDash \metaA_{n+1}$.
+By the definition of a PL derivation, $\metaA_{n+1}$ is either a premise, assumption that is eventually discharged, or follows by a PL deduction rule besides AS. 
+If $\metaA_{n+1}$ is a premise, then $\MetaG_{n+1} \vDash \metaA_{n+1}$ for the same reason given in \textbf{\ref{lemma:PL-soundness-base}}.
+Thus it remains to show that $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ has been justified by a deduction rule for PL. 
+% There are now twelve deduction rules coming from PL along with six additional rules for the quantifiers and identity in PL.
+% Consider the following:
+%
+%   \begin{Lthm}[PL Rules] \label{lemma:PL-rules}
+%     If $\metaA_{n+1}$ follows by the deduction rules for PL from sentences in $\MetaG_{n+1}$ and $\MetaG_k \vDash \metaA_k$ for every $k\leq n$, then $\MetaG_{n+1} \vDash \metaA_{n+1}$.
+%   \end{Lthm}
+%
+% Assuming \textbf{\ref{lemma:PL-rules}} for the time being, it follows that $\MetaG_{n+1} \vDash \metaA_{n+1}$, completing the proof of \textit{Induction}.
+% All that remains is to establish \textit{PL Rules} in the following sections.
+%
+% We have already considered two rules in proving \textit{Base} by showing that AS and $=$I preserve entailment at least in the special case as $\MetaG_1 \vDash \metaA_1$.
+% More generally, we should like to show that all of the rules preserve entailment, and not just in the case of proofs with one line.
+% It is with this more general aim that we will seek to establish \textit{PL Rules} given above.
+%
+% In order to divide the proof of \textit{PL Rules} into more manageable parts, this section will focus on the deduction rules for PL. 
+% Accordingly, the proof begins with the assumption that $\metaA_{n+1}$ follows by the deduction rules for PL from sentences in $\MetaG_{n+1}$ and that $\MetaG_k \vDash \metaA_k$ for every $k\leq n$.
+% We will then seek to show that $\MetaG_{n+1} \vDash \metaA_{n+1}$ 
+There are twelve rule in all, and so we must check each case.
+The following subsections will attend to this task, establishing a number of supporting lemmas along the way.
+% This same strategy will latter be extended to show that $\MetaG_{n+1} \vDash \metaA_{n+1}$ when $\metaA_{n+1}$ follows from sentences in $\MetaG_{n+1}$ by the additional rules included in PL.
+% As a result, we will cover all of the rules in PL, thereby completing the proof of \textit{PL Rules}.
+
+
+
+
+
+
+\subsection{Assumption and Reiteration}%
+  \label{sub:AssumptionRule}
+
+Before attending to the introduction and elimination rules for each of the sentential operators included in PL, this section focuses on the assumption and reiteration rules.
+Whereas the proofs for most of the rules will appeal to the induction hypothesis assumed above, the proof for the assumption rule is an exception, employing the same reasoning given in \textbf{\ref{lemma:PL-soundness-base}}. 
 
 \factoidbox{
-  PL is both sound and complete, i.e., $\Gamma \proves_{PL} \metaA$ if and only if $\Gamma \models \metaA$.
+\begin{Rthm} \label{rule:PL-AS}
+  \textbf{(AS)}~~ $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by AS. 
+\end{Rthm}
 }
 
-Given the soundness and completeness of the tree method, it follows that our two proof systems are equivalent in the sense that anything provable in one is also provable in the other: $\Gamma\proves_{T}\metaA$ if and only if $\Gamma\proves_{PL}\metaA$.
-In practice, this is a good thing.
-For instance, suppose you are not sure if $\Gamma \proves_{PL} \metaA$, but if it does, you would like to provide a derivation.
-Using the tree method, you could check whether $\Gamma \proves_{T} \metaA$, and if the tree you construct closes, then go on to look for a natural deduction proof of $\metaA$ from $\Gamma$. 
-If we can show that $\Gamma \nproves_{T} \metaA$ by constructing a complete open tree, then we can conclude that there is no natural deduction derivation of $\metaA$ from $\Gamma$, and so no use looking for one. 
-Nevertheless, a direct proof of $\metaA$ from $\Gamma$ in PL is more compelling than a closed tree.
-Whereas it is easy to justify every move in a natural deduction derivation, it is a lot harder to use a closed tree to create a compelling argument.
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ is justified by AS.
+  Since $\metaA_{n+1}$ is an undischarged assumption at line $n+1$, it follows from the definition of $\MetaG_{n+1}$ that $\metaA_{n+1}\in\MetaG_{n+1}$, and so $\MetaG_{n+1} \vDash \metaA_{n+1}$ follows immediately.
+  \qed
+\end{quote}
 
-Given that PL is sound and complete, the \emph{theorems} of PL are coextensive with the \emph{tautologies} of $\PL$.
-Whereas showing that a sentence is a tautology involves checking a truth-table or constructing a semantic argument, showing that a sentence is a theorem involves constructing a proof.
-Some proofs are easier to construct than others, but even for very long proofs, it is easy to check whether each line follows from the previous lines.
-% Moreover, the resulting argument is the kind of argument that you could present an analogue of in English in order to be persuasive.
-Although there is no formal way of showing that a sentence is \emph{not} a theorem, there is a method for showing that a sentence is not a tautology: construct an $\PL$ tree and read off the interpretation.
-% We need only construct a model in which the sentence is false. Given a choice between showing that a sentence is not a theorem and showing that it is not a tautology, it would be easier to show that it is not a tautology.
+The proof above does not require the induction hypothesis or any additional results.
+By contrast, it will help to establish the reiteration rule by first proving the following lemma.
+% This lemma will play an important role throughout many of the proofs given below.
 
+% \begin{Lthm} \label{lemma:PL-weakening}
+%   If $\MetaG \vDash \metaA$ and $\MetaG \subseteq \MetaG'$, then $\MetaG' \vDash \metaA$.
+% \end{Lthm}
+% % \vspace{-.3in}
+%
+% \begin{quote} 
+%   \textit{Proof:} Assume $\MetaG \vDash \metaA$ and $\MetaG \supseteq \MetaG'$.
+%   Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\MetaG'$, it follows that $\VV{\I}{}(\metaB)=1$ for all $\metaB \in \MetaG'$.
+%   Since $\MetaG\subseteq \MetaG'$, it follows that $\VV{\I}{}(\metaB)=1$ for all $\metaB \in \MetaG$, and so $\M$ satisfies $\MetaG$. 
+%   By assumption, $\M$ satisfies $\metaA$, and so $\MetaG \vDash \metaA$.
+% \end{quote}
+%
+%
 
-\section{Logical Analysis}
+\begin{Lthm} \label{lemma:PL-live}
+  If $\metaA_k$ is live at line $n$ of a PL derivation where $k\leq n$, then $\MetaG_k\subseteq \MetaG_n$.
+\end{Lthm}
+\vspace{-.2in}
 
-If we can translate an argument into $\PL$, we now have a number of tools that we can use to investigate that argument's logical properties.
-Consider the following options:
+\begin{quote} 
+  \textit{Proof:} Let $X$ be a PL derivation where $\MetaG_k$ is the set of premises and undischarged assumptions at line $k$.
+  Assume there is some $\metaB \in \MetaG_k$ where $\metaB \notin \MetaG_n$ for $n > k$.
+  It follows that $\metaB$ has been discharged at a line $j > k$ where $j \leq n$, and so $\metaA_k$ is dead at $n$.
+  By contraposition, if $\metaA_k$ is live at line $n > k$, then $\MetaG_k\subseteq \MetaG_n$ as desired.
+  \qed
+\end{quote}
 
-\begin{table}[h]
-\begin{center}
-\begin{tabular*}{\textwidth}{p{12em}|p{10em}|p{12em}|}
-\cline{2-3}
+Although the proof is short, the lemma above makes an important observation about how the undischarged assumptions of live lines are inherited.
+As we will see, this lemma plays a critical role throughout many of the following proofs and so is important to understand.
+Given this lemma, we may now move to establish the reiteration rule R.
 
- & \multicolumn{1}{|c|}{YES} & \multicolumn{1}{|c|}{NO}\\
-\cline{2-3}
+\factoidbox{
+\begin{Rthm} \label{rule:PL-R}
+  \textbf{(R)}~~ $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by R. 
+\end{Rthm}
+}
 
-Is \metaA{} a tautology? & Prove $\proves\metaA{}$ & Give a model in which \metaA{} is false\\
-\cline{2-3}
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ is justified by R.
+  It follows that $\metaA_{n+1}=\metaA_{k}$ for some $k\leq n$, and so $\MetaG_k \vDash \metaA_k$ by hypothesis.
+  Since $\metaA_k$ is live at line $n+1$, $\MetaG_k\subseteq \MetaG_{n+1}$ by \textbf{\ref{lemma:PL-live}}, and so $\MetaG_{n+1} \vDash \metaA_{k}$ by \bref{lemma:PL-weakening}.
+  Thus $\MetaG_{n+1} \vDash \metaA_{n+1}$.
+\end{quote}
 
-Is \metaA{} a contradiction? &  Prove $\proves\enot\metaA{}$ & Give a model in which \metaA{} is true\\
-\cline{2-3}
-
-Is \metaA{} contingent? & Give a model in which \metaA{} is true and another in which \metaA{} is false & Prove $\proves\metaA{}$ or $\proves\enot\metaA{}$\\
-\cline{2-3}
-
-Are \metaA{} and \metaB{} equivalent? & Prove \mbox{$\metaA{}\proves\metaB{}$} and \mbox{$\metaB{}\proves\metaA{}$}  & Give a model in which \metaA{} and \metaB{} have different truth values\\
-\cline{2-3}
-
-Is the set $\Gamma$ consistent? & Give a model in which all the sentences in $\Gamma$ are true & Taking the sentences in $\Gamma$, prove $\metaB$ and $\enot\metaB$\\
-\cline{2-3}
-
-Is `$\metaA, \metaB, \ldots\ \therefore\ \metaC$' valid? & Prove $\metaA{}, \metaB{}, \ldots \proves\metaC{}$ & Give a model that satisfies $\set{\metaA, \metaB, \ldots,\ \enot \metaC}$\\
-\cline{2-3}
-\end{tabular*}
-\end{center}
-% \caption{Sometimes it is easier to show something by providing proofs than it is by providing models. Sometimes it is the other way round.  It depends on what you are trying to show.}
-\label{table.ProofOrModel}
-\end{table}
-% \FloatBarrier
-
-Answering the questions on the left may sometimes be easy, and other times far from obvious.
-Whereas the tree proof system provides a fail-safe way to determine the answer, the PL proof system provides a way to construct compelling arguments.
-
-
-
+By contrast with the assumption rule, the reiteration makes an essential appeal to the induction hypothesis.
+We will see something similar in all of the rule proofs given below.
 
 
-% \iffalse
+
+\subsection{Negation Rules}%
+  \label{sub:NegationRules}
+
+The negation rules are much more complicated than the assumption and reiteration rules on account of citing subproofs rather than individual lines.
+Accordingly, it will help to establish two supporting lemmas before presenting the proofs for the negation rules.
+Whereas the first lemma asserts that a satisfiable set of wfss of $\PL$ cannot have both a wfs of $\PL$ and its negation logical consequences, the second lemma draws a connection between logical consequence and unsatisfiability.
+These lemmas work nicely together and will reoccur in a number of rule proofs besides the negation rule proofs given below.
+  
+\begin{Lthm} \label{lemma:PL-unsat}
+  If $\MetaG \vDash \metaA$ and $\MetaG \vDash \enot\metaA$, then $\MetaG$ is unsatisfiable.
+\end{Lthm}
+\vspace{-.2in}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\MetaG \vDash \metaA$ and $\MetaG \vDash \enot\metaA$.
+  Assume for contradiction that $\MetaG$ is satisfiable, and so there is some $\PL$ interpretation $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$. 
+  By assumption, it follows that $\V{\I}(\metaA) = 1$ and $\V{\I}(\enot \metaA) = 1$.
+  By the semantics for negation, $\V{\I}(\metaA) \neq 1$, contradicting the above.
+  Thus $\MetaG$ is unsatisfiable. 
+  % Assuming instead that $\MetaG$ is unsatisfiable, $\MetaG \vDash \metaA$ and $\MetaG \vDash \enot\metaA$ follow vacuously. 
+  \qed
+\end{quote}
+
+
+
+
+\begin{Lthm} \label{lemma:PL-unsatent}
+  $\MetaG \cup \set{\metaA}$ is unsatisfiable just in case $\MetaG \vDash \enot\metaA$.
+\end{Lthm}
+\vspace{-.2in}
+
+\begin{quote} 
+  \textit{Proof:}
+  Assume $\MetaG \cup \set{\metaA}$ is unsatisfiable and let $\I$ be an arbitrary $\PL$ interpretation where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$. 
+  Assume for contradiction that $\V{\I}(\enot \metaA) = 0$.
+  It follows that $\V{\I}(\metaA) = 1$, and so $\MetaG \cup \set{\metaA}$ is satisfiable contrary to assumption.
+  Thus $\V{\I}(\enot \metaA) = 1$.
+  Generalizing on $\I$, it follows that $\V{\I}(\enot \metaA) = 1$ for any $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$.
+  By definition, $\MetaG \vDash \enot\metaA$.
+
+  Assume instead that $\MetaG \cup \set{\metaA}$ is satisfiable.
+  It follows that there is some $\PL$ interpretation $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG \cup \set{\metaA}$, and so $\V{\I}(\enot \metaA) = 1$ by the semantics for negation. 
+  Since $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$, it follows that $\MetaG \nvDash \enot \metaA$.
+  Thus we may conclude by contraposition that $\MetaG \cup \set{\metaA}$ is unsatisfiable if $\MetaG \vDash \enot \metaA$.
+  \qed
+\end{quote}
+
+Given the lemmas above, we may provide the following negation rule proofs.
+It will be important to study this proof carefully, observing how all the working parts come together.
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:PL-NegI}
+  \textbf{($\boldsymbol\enot$I)}~~ $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by $\enot$I. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows by $\enot$I.
+  Thus there is some subproof on lines $i$-$j$ where $i<j\leq n$ and $\metaA_{n+1}=\enot\metaA_i$, $\metaB=\metaA_h$, and $\enot\metaB=\metaA_k$ for $i\leq h\leq j$ and $i\leq k\leq j$.
+  By parity of reasoning, we may assume that $h<k=j$.
+  Thus we may represent the subproof as follows:
+
+  \begin{proof}
+  \open
+    \hypo[i]{na}\metaA \as{for \enot I}
+    \have[h]{b}\metaB
+    \have[j]{nb}{\enot\metaB}
+  \close
+  \have[n+1]{a}[\ ]{\enot\metaA}\ni{na-nb} %note that UBC has a more complex citation convention: {na-b, na-nb}
+  \end{proof}
+
+  By hypothesis, $\MetaG_h \vDash \metaB$ and $\MetaG_j \vDash \enot\metaB$.
+  With the exception of $\metaA_i=\metaA$, every assumption that is undischarged at lines $h$ and $j$ are also undischarged at line $n+1$.
+  It follows that $\MetaG_h,\MetaG_j\subseteq\MetaG_{n+1}\cup\set{\metaA_i}$, and so $\MetaG_{n+1}\cup\set{\metaA_i} \vDash \metaB$ and $\MetaG_{n+1}\cup\set{\metaA_i} \vDash \enot\metaB$ by \textbf{\ref{lemma:PL-weakening}}.
+  By \textbf{\ref{lemma:PL-unsat}}, $\MetaG_{n+1}\cup\set{\metaA_i}$ is unsatisfiable, and so $\MetaG_{n+1} \vDash \enot\metaA_i$ by \textbf{\ref{lemma:PL-unsatent}}.
+  Equivalently, $\MetaG_{n+1} \vDash \metaA_{n+1}$.
+  \qed
+\end{quote}
+
+The proof begins by assuming $\metaA_{n+1}$ follows from $\MetaG_{n+1}$ by negation introduction $\enot$I and unpacking the consequences.
+This provides a number of details about the proof that are required for $\enot\metaA$ to be derived on line $n+1$ by $\enot$I.
+In particular, we know that $\metaB$ and $\enot \metaB$ must occur on earlier lines in a subproof.
+After appealing to the induction hypothesis to conclude $\MetaG_h \vDash \metaB$ and $\MetaG_j \vDash \enot\metaB$, the proof observes that although $\metaA$ has been discharged by line $n+1$, this is the only difference between the sets of undischarged sentences for lines $i$--$j$ and line $n+1$.
+Thus the logical consequences $\MetaG_h \vDash \metaB$ and $\MetaG_j \vDash \enot\metaB$ may be related to the undischarged assumptions at line $n+1$ together with the assumption $\metaA$ which has been discharged at $n+1$.
+The core of the proof follows from the two lemmas given above which show that the undischarged assumptions at $n+1$ together with $\metaA$ are unsatisfiable, and so $\enot\metaA$ is a logical consequences of those undischarged assumptions. 
+
+Before moving on to consider the rest of the rule proofs, it can help to try writing the proof for yourself. 
+% , it is important to get clear about how this proof works. %  so that the details given below do not wash over you
+% In order to get a better sense of the result given above, it can help to try writing the proof for yourself.
+You might also give the following proof a try which works in a similar manner.
+Getting a good understanding of how these proofs work will make reading the rest of the proofs in this chapter a lot easier and more meaningful than they would be otherwise.
+% It is better to study these proofs carefully and slowly get faster making sense of the proofs in this chapter than to skim over the details and for these proofs to make no sense at all.
+
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:PL-NegE}
+  \textbf{($\boldsymbol\enot$E)}~~ $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by $\enot$E. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:}
+  This proof is left as an exercise for the reader.
+  % Assume $\metaA_{n+1}$ follows from $\MetaG_{n+1}$ by negation elimination $\enot$E.
+  % Thus there is some subproof on lines $i$-$j$ where $i<j\leq n$ and $\metaA_i=\enot\metaA_{n+1}$, $\metaB=\metaA_h$, and $\enot\metaB=\metaA_k$ for $i\leq h\leq j$ and $i\leq k\leq j$.
+  % By parity of reasoning, we may assume that $h<k=j$.
+  % Thus we may represent the subproof as follows:
+  %
+  % \begin{proof}
+  % \open
+  %   \hypo[i]{na}{\enot\metaA} \as{for \enot E}
+  %   \have[h]{b}{\metaB}
+  %   \have[j]{nb}{\enot\metaB}
+  % \close
+  % \have[n+1]{a}[\ ]{\metaA}\ne{na-nb} %note that UBC has a more complex citation convention: {na-b, na-nb}
+  % \end{proof}
+  %
+  % By hypothesis, $\MetaG_h \vDash \metaB$ and $\MetaG_j \vDash \enot\metaB$.
+  % With the exception of $\metaA_i=\enot\metaA$, every assumption that is undischarged at lines $h$ and $j$ is also undischarged at line $n+1$.
+  % It follows that $\MetaG_h,\MetaG_j\subseteq\MetaG_{n+1}\cup\set{\metaA_i}$, and so $\MetaG_{n+1}\cup\set{\metaA_i} \vDash \metaB$ and $\MetaG_{n+1}\cup\set{\metaA_i} \vDash \enot\metaB$ by \textbf{\ref{lemma:PL-weakening}}.
+  % Thus $\MetaG_{n+1}\cup\set{\metaA_i}$ is unsatisfiable by \textbf{\ref{lemma:PL-unsat}}, and so $\MetaG_{n+1} \vDash \enot\metaA_i$ by \textbf{\ref{lemma:PL-unsatent}}.
+  % Equivalently, $\MetaG_{n+1} \vDash \enot\enot\metaA_{n+1}$.
+  % Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\MetaG_{n+1}$, it follows that $\M$ satisfies $\enot\enot\metaA_{n+1}$, and so $\VV{\I}{\va{a}}(\enot\enot\metaA_{n+1})=1$ for some $\va{a}$. 
+  % By two applications of the semantics for negation, $\VV{\I}{\va{a}}(\metaA_{n+1})=1$, and so $\M$ satisfies $\metaA_{n+1}$
+  % Thus $\MetaG_{n+1} \vDash \metaA_{n+1}$ by generalising on $\M$.
+  \qed
+\end{quote}
+
+% This proof is almost identical to the \textbf{\ref{rule:PL-NegI}} insofar as an additional negation sign is introduced before eliminating the double negation by appealing to the semantics.
+% If we were to make further use of the fact that double negations may be eliminated, we might separate this final step into a lemma in its own right.
+% However, double negation elimination will not be needed below, and so there is little advantage to adding an additional lemma for this minor result.
+
+% TODO: move this to intro lemmas?
+% In general, there are two primary reasons to introduce a lemma.
+% First, the lemma can be used repeatedly, simplifying the reasoning of a number of further proofs.
+% In cases where a lemma is only needed once, a second reason to introduce a lemma is that doing so can often help to reduce the complexity of a proof, making it easier to digest once the lemma is established.
+% Even so, adding lemmas that are only need once should be reserved for cases where clarity is improved by making the separation. 
+
+
+
+
+
+
+\subsection{Conjunction and Disjunction}%
+  \label{sub:ConjunctionDisjunction}
+
+Whereas the rule proofs given above for negation drew on two lemmas established for just this purpose, the rule proof for conjunction introduction is straightforward:
+
+\factoidbox{
+\begin{Rthm} \label{rule:PL-ConI}
+  \textbf{(\&I)}~~ $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by $\eand$I. 
+\end{Rthm}
+}
+  
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ is justified by $\eand$I.
+  Thus $\metaA_{n+1}=\metaA_i\eand\metaA_j$ for some lines $i,j\leq n$ that are live at line $n+1$.
+  By hypothesis, $\MetaG_i\vDash \metaA_i$ and $\MetaG_j\vDash \metaA_j$ where $\MetaG_i,\MetaG_j\subseteq \MetaG_{n+1}$ by \textbf{\ref{lemma:PL-live}}.
+  Thus $\MetaG_{n+1} \vDash \metaA_i$ and $\MetaG_{n+1} \vDash \metaA_j$ by \textbf{\ref{lemma:PL-weakening}}.
+  Letting $\I$ be an arbitrary $\PL$ interpretation where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG_{n+1}$, it follows that $\V{\I}(\metaA_i) = \V{\I}(\metaA_j) = 1$ and so $\V{\I}(\metaA_i \eand \metaA_j) = \V{\I}(\metaA_{n+1}) = 1$.
+  By generalizing on $\I$, we may conclude that $\MetaG_{n+1} \vDash \metaA_{n+1}$.
+  \qed
+\end{quote}
+
+In addition to drawing on the induction hypothesis, the proof above makes an essential appeal to the semantic clause for conjunction.
+The rule proofs for conjunction elimination and disjunction introduction work by similar reasoning, and so have been left as exercises.
+
+\factoidbox{
+\begin{Rthm} \label{rule:PL-ConE}
+  \textbf{(\&E)}~~ $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by $\eand$E. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:}
+  This proof is left as an exercise for the reader.
+  % Assuming $\metaA_{n+1}$ is justified by $\eand$E, there is some $i\leq n$ where either $\metaA_i=\metaA_{n+1}\eand\metaB$ or $\metaA_i=\metaB\eand\metaA_{n+1}$ is live at line $n+1$.
+  % % By parity of reasoning we may assume that $\metaA_i=\metaA_{n+1}\eand\metaB$.
+  % By hypothesis, $\MetaG_i\vDash \metaA_i$ where $\MetaG_i\subseteq \MetaG_{n+1}$ by \textbf{\ref{lemma:PL-live}}.
+  % Thus $\MetaG_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:PL-weakening}}, and so any model $\M=\tuple{\D,\I}$ which satisfies $\MetaG_{n+1}$ also satisfies $\metaA_i$, and so either satisfies $\metaA_{n+1}\eand\metaB$ or $\metaB\eand\metaA_{n+1}$.
+  % It follows that $\VV{\I}{\va{a}}(\metaA_{n+1}\eand\metaB)=1$ or $\VV{\I}{\va{a}}(\metaB\eand\metaA_{n+1})=1$, and so either way $\VV{\I}{\va{a}}(\metaA_{n+1})=1$ by the semantics for conjunction.
+  % Thus $\M$ satisfies $\metaA_{n+1}$, and so $\MetaG_{n+1} \vDash \metaA_{n+1}$ by generalising on $\M$.
+  \qed
+\end{quote}
+
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:PL-DisI}
+  \textbf{($\boldsymbol\eor$I)}~~ $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\MetaG_{n+1}$ by the rule $\eor$I. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:}
+  This proof is left as an exercise for the reader.
+  % Assume that $\metaA_{n+1}$ follows from $\MetaG_{n+1}$ by disjunction introduction $\eor$I.
+  % Thus $\metaA_{n+1}=\metaA_i\eor\metaB$ or $\metaA_{n+1}=\metaB\eor\metaA_i$ for some line $i\leq n$ that is live at line $n+1$.
+  % By hypothesis, $\MetaG_i\vDash \metaA_i$ where $\MetaG_i\subseteq \MetaG_{n+1}$ by \textbf{\ref{lemma:PL-live}}, and so $\MetaG_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:PL-weakening}}.
+  % Letting $\M=\tuple{\D,\I}$ be a model which satisfies $\MetaG_{n+1}$, it follows that $\M$ satisfies $\metaA_i$.
+  % Thus $\VV{\I}{\va{a}}(\metaA_i)=1$ for some variable assignment $\va{a}$.
+  % By the semantics for disjunction, both $\VV{\I}{\va{a}}(\metaA_{i}\eor\metaB)=1$ and $\VV{\I}{\va{a}}(\metaB\eor\metaA_{i})=1$, and so $\VV{\I}{\va{a}}(\metaA_{n+1})=1$.
+  % Thus $\M$ satisfies $\metaA_{n+1}$ where $\MetaG_{n+1} \vDash \metaA_{n+1}$ follows from generalising on $\M$.
+  \qed
+\end{quote}
+
+
+
+
+Given the induction hypothesis, the rule proofs above amount to little more than applications of the semantic clauses for conjunction and disjunction respectively.
+Something similar may be said for the rule proof for disjunction elimination though a little more care is required to keep track of all of the moving parts, and so the details have been provided in full.
+
+\factoidbox{
+\begin{Rthm} \label{rule:PL-DisE}
+  \textbf{($\boldsymbol\vee$E)}~~ $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\MetaG_{n+1}$ by the rule $\eor$E. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:}
+  Assume that $\metaA_{n+1}$ is justified by $\eor$I.
+  Thus there is some $\metaA_i=\metaA_j\eor\metaA_h$ which is live at $n+1$ and subproofs on lines $j$-$h$ and $k$-$l$ where $i<j,k,h,l\leq n$ and $\metaA_k=\metaA_l=\metaA_{n+1}$.
+  By parity of reasoning, we represent the proof as follows:
+
+  \begin{proof}
+  \have[i]{i}{\metaA\eor\metaB}
+  \open
+    \hypo[j]{j}{\metaA} \as{for $\eor$E}
+    % \have[\vdots]{a}{}
+    \have[k]{h}{\metaC}
+  \close
+  \open
+    \hypo[h]{k}{\metaB} \as{for $\eor$E}
+    % \have[\vdots]{b}{}
+    \have[l]{l}{\metaC}
+  \close
+  \have[n+1]{a}[\ ]{\metaC}\oe{i,j-h,k-l} 
+  \end{proof}
+
+  By hypothesis, $\MetaG_i\vDash \metaA_i$, $\MetaG_k\vDash \metaA_k$, and $\MetaG_l\vDash \metaA_l$.
+  Given \textbf{\ref{lemma:PL-live}}, $\MetaG_i\subseteq \MetaG_{n+1}$, and so $\MetaG_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:PL-weakening}}.
+  With the exception of $\metaA_j=\metaA$, every assumption that is undischarged at line $k$ is also undischarged at line $n+1$, and so $\MetaG_k\subseteq\MetaG_{n+1}\cup\set{\metaA_j}$.
+  By the similar reasoning, we may conclude that $\MetaG_l\subseteq\MetaG_{n+1}\cup\set{\metaA_h}$, and so $\MetaG_{n+1}\cup\set{\metaA_j} \vDash \metaA_k$ and $\MetaG_{n+1}\cup\set{\metaA_h} \vDash \metaA_l$ follows by \textbf{\ref{lemma:PL-weakening}}.
+
+  Letting $\I$ be an arbitrary $\PL$ interpretation where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG_{n+1}$, it follows from the above that $\V{\I}(\metaA_i) = \V{\I}(\metaA_j \eor \metaA_h) = 1$, and so either $\V{\I}(\metaA_j) = 1$ or $\V{\I}(\metaA_h) = 1$ by the semantics for disjunction.
+
+  \begin{enumerate}[leftmargin=.75in]
+    \item[\it Case 1:] 
+      If $\V{\I}(\metaA_j) = 1$, then $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG_{n+1}\cup\set{\metaA_j}$, and so $\V{\I}(\metaA_k) = 1$ since $\MetaG_{n+1}\cup\set{\metaA_j} \vDash \metaA_k$.
+      Thus $\V{\I}(\metaA_{n+1}) = 1$ since $\metaA_k=\metaA_{n+1}$. 
+    \item[\it Case 2:] 
+      If $\V{\I}(\metaA_h) = 1$, then $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG_{n+1}\cup\set{\metaA_h}$, and so $\V{\I}(\metaA_l) = 1$ since $\MetaG_{n+1}\cup\set{\metaA_h} \vDash \metaA_l$. 
+      Thus $\V{\I}(\metaA_{n+1}) = 1$ since $\metaA_l=\metaA_{n+1}$. 
+  \end{enumerate}
+
+  In either case, $\V{\I}(\metaA_{n+1}) = 1$, and so $\MetaG_{n+1} \vDash \metaA_{n+1}$ by generalizing on $\I$.
+  \qed
+\end{quote}
+
+As with the previous two deduction rules for conjunction and disjunction, the proof above turns on little more than an application of the semantics for disjunction given the induction hypothesis.
+Nevertheless, it is very easy for parts to become tangled and a lot of care is required to write a proof that is both clear and concise for your reader.
+
+
+
+
+\subsection{Conditional Rules}%
+  \label{sub:ConditionalRules}
+  
+In order to streamline the rule proof for $\eif$I, it will help to prove the following. % which produces an entailment including a conditional from an entailment that does not.
+% Even so, the following lemma turns on nothing more than the semantics for the conditional, and so has been proved separately only to avoid redundancy.
+
+\begin{Lthm} \label{lemma:PL-conditional}
+  If $\MetaG \cup \set{\metaA} \vDash \metaB$, then $\MetaG \vDash \metaA \supset \metaB$.
+\end{Lthm}
+\vspace{-.2in}
+
+\begin{quote} 
+  \textit{Proof:} Assume $\MetaG \cup \set{\metaA} \vDash \metaB$ and let $\I$ be an arbitrary $\PL$ interpretation where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$.
+  Since $\V{\I}(\metaA) = 1$ or not, there are two cases to consider. 
+
+  \begin{enumerate}[leftmargin=.75in]
+    \item[\it Case 1:] 
+      If $\V{\I}(\metaA) = 1$, then $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG \cup \set{\metaA}$, and so $\V{\I}(\metaB) = 1$ given the starting assumption.
+      Thus $\V{\I}(\metaA \eif \metaB) = 1$ by the semantics for the conditional.
+    \item[\it Case 2:] 
+      If $\V{\I}(\metaA) \neq 1$, then $\V{\I}(\metaA \eif \metaB) = 1$ by the semantics for the conditional.
+  \end{enumerate}
+
+  Since $\V{\I}(\metaA \eif \metaB) = 1$ in both cases, $\MetaG \vDash \metaA \supset \metaB$ follows by generalizing on $\I$. 
+  \qed
+\end{quote}
+
+
+
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:PL-label}
+  \textbf{($\boldsymbol\eif$I)}~~ $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by $\eif$I. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ is justified by $\eif$I.
+  Thus there is a subproof on lines $i$-$j$ where $i<j\leq n$ and $\metaA_{n+1}=\metaA_i \eif \metaA_j$.
+  We may represent the subproof as follows:
+
+  \begin{proof}
+  \open
+    \hypo[i]{na}\metaA \as{for $\eif$I}
+    \have[j]{nb}{\metaB}
+  \close
+  \have[n+1]{a}[\ ]{\metaA\eif\metaB}\ci{na-nb} %note that UBC has a more complex citation convention: {na-b, na-nb}
+  \end{proof}
+
+  By hypothesis, we know that $\MetaG_j \vDash \metaA_j$.
+  With the exception of $\metaA_i$, every assumption that is undischarged at line $j$ is also undischarged at line $n+1$.
+  It follows that $\MetaG_j\subseteq\MetaG_{n+1}\cup\set{\metaA_i}$, and so $\MetaG_{n+1}\cup\set{\metaA_i} \vDash \metaA_j$ by \textbf{\ref{lemma:PL-weakening}}.
+  Thus $\MetaG_{n+1} \vDash \metaA_i \eif \metaA_j$ by \textbf{\ref{lemma:PL-conditional}}.
+  Equivalently, $\MetaG_{n+1} \vDash \metaA_{n+1}$.
+  \qed
+\end{quote}
+
+
+Whereas the proof above appealed to \textbf{\ref{lemma:PL-conditional}}, the following proof proceeds in a similar manner to the proofs given above, and so the details have been left as an exercise.
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:PL-CondE}
+  \textbf{($\boldsymbol\eif$E)}~~ $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by $\eif$E. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:}
+  This proof is left as an exercise for the reader.
+  % Assume that $\metaA_{n+1}$ is justified by $\eif$E.
+  % It follows that there are some lines of the proof $\metaA_i=\metaA_j\eif\metaA_{n+1}$ and $\metaA_j$ for $i,j\leq n$ which are live at $n+1$, and so $\MetaG_i,\MetaG_j\subseteq\MetaG_{n+1}$ by \textbf{\ref{lemma:PL-live}}.
+  % By hypothesis, $\MetaG_i\vDash \metaA_i$ and $\MetaG_j\vDash \metaA_j$, and so $\MetaG_{n+1} \vDash \metaA_i$ and $\MetaG_{n+1} \vDash \metaA_j$ by \textbf{\ref{lemma:PL-weakening}}.
+  % Letting $\I$ be any $\PL$ interpretation where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG_{n+1}$, it follows that $\V{\I}(\metaA_i) = \V{\I}(\metaA_j) = 1$, and so $\V{\I}(\metaA_j \eif \metaA_{n+1}) = 1$.
+  % By the semantics for the conditional, either $\V{\I}(\metaA_j) \neq 1$ or $\V{\I}(\metaA_{n+1}) = 1$.
+  % Since $\V{\I}(\metaA_j) = 1$, it follows that $\V{\I}(\metaA_{n+1}) = 1$.
+  % Generalizing on $\I$, we may conclude that $\MetaG_{n+1} \vDash \metaA_{n+1}$.
+  \qed
+\end{quote}
+
+
+% In a similar manner to the rule proof for $\eif$I, the following rule proof for $\eiff$I given below appeals to \textbf{\ref{lemma:PL-conditional}} in order to streamline the argument. 
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:PL-BiconI}
+  \textbf{($\boldsymbol\eiff$I)}~~ $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by $\eiff$I. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:}
+  Assume $\metaA_{n+1}$ is justified by $\eiff$E.
+  Thus there are some subproofs on lines $i$-$j$ and $h$-$k$ for some $i<j\leq n$ and $h<k\leq n$ where $\metaA_i=\metaA_k=\metaA$, $\metaA_j=\metaA_h=\metaB$, and either $\metaA_{n+1}=\metaA\eiff\metaB$ or $\metaA_{n+1}=\metaB\eiff\metaA$.
+  By parity of reasoning, we may assume that $\metaA_{n+1}=\metaA\eiff\metaB$.
+  Thus we have:
+
+  \begin{proof}
+    \open
+      \hypo[i]{i}{\metaA} \as{for $\eor$E}
+      % \have[\vdots]{a}{}
+      \have[j]{j}{\metaB}
+    \close
+    \open
+      \hypo[h]{h}{\metaB} \as{for $\eor$E}
+      % \have[\vdots]{b}{}
+      \have[k]{k}{\metaA}
+    \close
+    \have[n+1]{a}[\ ]{\metaA \eiff \metaB}\bi{i-j,h-k} 
+  \end{proof}
+
+  By hypothesis, $\MetaG_j\vDash \metaA_j$, $\MetaG_k\vDash \metaA_k$, and $\MetaG_{n+1}\vDash \metaA_{n+1}$.
+  With the exception of $\metaA_i$, every assumption that is undischarged at line $j$ is also undischarged at line $n+1$, and so $\MetaG_j\subseteq\MetaG_{n+1}\cup\set{\metaA_i}$.
+  Similarly, we may conclude that $\MetaG_k\subseteq\MetaG_{n+1}\cup\set{\metaA_h}$, and so $\MetaG_{n+1}\cup\set{\metaA_i} \vDash \metaA_j$ and $\MetaG_{n+1}\cup\set{\metaA_h} \vDash \metaA_k$ by \textbf{\ref{lemma:PL-weakening}}.
+
+  % TODO: replace below with Cut plus A \eif B, B \eif A \vdash A \eiff B
+  Let $\I$ be an arbitrary $\PL$ interpretation where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG_{n+1}$.
+  Assuming $\V{\I}(\metaA) = 1$, it follows that $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG_{n+1} \cup \set{\metaA_i}$, and so $\V{\I}(\metaA_j) = 1$ given that $\MetaG_{n+1}\cup\set{\metaA_i} \vDash \metaA_j$.
+  Thus $\V{\I}(\metaB) = 1$.
+  Assuming instead that $\V{\I}(\metaB) = 1$, it follows that $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG_{n+1} \cup \set{\metaA_h}$, and so $\V{\I}(\metaA_k) = 1$ given that $\MetaG_{n+1}\cup\set{\metaA_h} \vDash \metaA_k$.
+  Thus $\V{\I}(\metaA) = 1$.
+  We may then conclude that $\V{\I}(\metaA) = 1$ if and only if $\V{\I}(\metaB) = 1$, and so $\V{\I}(\metaA) = \V{\I}(\metaB)$.
+  By the semantics for the biconditional, $\V{\I}(\metaA \eiff \metaB) = 1$, and so $\MetaG_{n+1}\vDash\metaA_{n+1}$ by generalizing on $\I$.
+  \qed
+\end{quote}
+
+
+
+
+
+\factoidbox{
+\begin{Rthm} \label{rule:PL-Bicon}
+  \textbf{($\boldsymbol\eiff$E)}~~ $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by $\eiff$E. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:}
+  This proof is left as an exercise for the reader.
+%   Assume that $\metaA_{n+1}$ is justified by $\eif$E.
+% Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\metaA_i=\metaA_j\eiff\metaA_{n+1}$ or $\metaA_i=\metaA_{n+1}\eiff\metaA_j$.
+%   By parity of reasoning, we may assume that $\metaA_i=\metaA_j\eiff\metaA_{n+1}$ where $\MetaG_i,\MetaG_j\subseteq\MetaG_{n+1}$ follows by \textbf{\ref{lemma:PL-live}}.
+%   By hypothesis, $\MetaG_i\vDash \metaA_i$ and $\MetaG_j\vDash \metaA_j$, and so $\MetaG_{n+1} \vDash \metaA_i$ and $\MetaG_{n+1} \vDash \metaA_j$ by \textbf{\ref{lemma:PL-weakening}}.
+%   Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\MetaG_{n+1}$, it follows that $\M$ satisfies $\metaA_i$ and $\metaA_j$.
+%   By \textbf{\ref{lemma:allvar}}, $\VV{\I}{\va{a}}(\metaA_i)=\VV{\I}{\va{a}}(\metaA_j\eiff\metaA_{n+1})=\VV{\I}{\va{a}}(\metaA_j)=1$ for every variable assignment $\va{a}$ over $\D$, and so for some $\va{a}$ in particular. 
+%   By the semantics for the biconditional, $\VV{\I}{\va{a}}(\metaA_j)=\VV{\I}{\va{a}}(\metaA_{n+1})$, and so $\VV{\I}{\va{a}}(\metaA_{n+1})=1$.
+%   Thus $\M$ satisfies $\metaA_{n+1}$, and so we may conclude that $\MetaG_{n+1} \vDash \metaA_{n+1}$ by generalising on $\M$.
+  \qed
+\end{quote}
+
+Given \textbf{\ref{rule:PL-AS}} -- \textbf{\ref{rule:PL-Bicon}}, it follows that $\MetaG_{n+1} \vDash \metaA_{n+1}$ no matter how $\metaA_{n+1}$ has been derived, thereby completing the proof of \textbf{\ref{lemma:PL-soundness-ind}} as well as the proof of \textsc{PL Soundness}.
+Accordingly, we may carry out reasoning in PL while remaining confident that the our derivations preserve logical consequence, and so there is no risk of using PL to reason from some premises to a conclusion that does not follow as a logical consequence.
+% Additionally, \textsc{PL Soundness} begins to close the gap between two very different approaches to logic.
+% Whereas the logical consequence relation $\vDash$ is to do with truth-preservation over a class of interpretations or models depending on the language we are working with, the derivation relations $\vdash_{\textsc{sd}}$ and $\vdash$ aim to encode natural patterns of reasoning in SL and QL$=$, respectively. 
+% What soundness shows is that our purely syntactic proof-theoretic descriptions of logical reasoning in SL and $\PL$ does not diverge from our semantics (or model-theoretic) descriptions of logical reasoning in SL and $\PL$.
+% Were either of these results to fail to hold, PL and PL could not be trusted.
+% Although the soundness of the tree method similarly shows that the tree method can be relied upon to evaluate the validity of arguments, the tree method is of no independent interest since it does not claim to encode natural patterns of reasoning.
+
+
+
+
+
 
 \section{Derived Rules}
 \label{sec:basic}
 
-A \define{derived rule} is a rule of inference that has not been included as a basic rule of the proof system but may be derived using the basic rules included in that system.
-Accordingly, anything that can be proven with a derived rule can be proven without it.
+Having established \textsc{PL Soundness}, we may now proceed to put this theorem to work.
+In particular, we may explore the range of logical consequences without having to write semantic proofs.
+Rather, we can use PL in order to write derivations where each conclusion follows as a logical consequences from its premises given \textsc{PL Soundness}.
 
-You can think of derived rules as subroutines which can be used to shorten proofs, making some proofs easier to write and more intuitive to read.
-Like the basic rule, derived rules will use meta-variables since they hold for any sentences whatsoever.
+Suppose that we have managed to construct a PL derivation, for instance that $\enot A \vdash \enot (A \eand B)$.
+Even though this derivation is written in terms of particular wfss of $\PL$, we could have written a similar derivation by substituting any wfss of $\PL$ for `$A$' and `$B$'. 
+Thus instead of merely asserting that $\enot A \vdash \enot (A \eand B)$, we may wish to assert the schema $\enot \metaA \vdash \enot (\metaA \eand \metaB)$ where $\metaA$ and $\metaB$ are any wfss of $\PL$ whatsoever.
+More generally, given any particular derivation, we may assert a generalization by replacing the sentence letters with schematic variables, referring to the result as a \define{rule schema} or, what is also often called a \define{derived rule}.
 
+The reason it makes sense to refer to the schematic generalizations of particular derivations as \textit{rules} at all is that although they have not been included as basic rules of the proof system PL, they may be used in much the same way as the basic rules are used.
+This is because anything that can be proven with a derived rule can also be proven using just the basic rules included in PL.
+Accordingly, we may think of the derived rules as abbreviating subroutines which only appeal to the basic rules of PL.
+Derived rules can then be used to shorten proofs, making some proofs easier to write and more intuitive to read.
+
+Given \textsc{PL Soundness}, derived rules may also be used to indicate logical consequences that are of interest, bringing the vast range of logical consequences that there are into better view.
+Nevertheless, little is to be gained be restating every derived rule of the form $\MetaG \vdash \metaA$ as a logical consequence of the form $\MetaG \vDash \metaA$. 
+Rather, this much is understood given \textsc{PL Soundness}.
+Moreover, as brought out above, soundness is an absolutely essential property of any proof system of interest, and so it goes without saying that the derivations in a proof system indicate a corresponding range of logical consequences.
+
+With these general points in order, we may now turn to provide a range of derived rules in PL.
+Despite being derived rather than basic, many of the derived rules will look familiar, capturing standard ways of reasoning.
+In addition to shedding light on the logical consequence relation for $\PL$, these rules will help to write tricky proofs since they may be cited much like the basic rules, vastly simplifying otherwise lengthy derivations within PL.
 
 %\section{Basic and derived rules}
 
@@ -160,9 +796,10 @@ Here is the derived rule for \textit{modus tollens} (MT):
 If you have a conditional on one numbered line and the negation of its consequent on another line, you may derive the negation of its antecedent on a new line.
 We abbreviate the justification for this rule as `MT' for \emph{modus tollens}.
 For instance, if you know that if Sue found the treasure, then she is happy, and you also know that Sue isn't happy, then you can infer that Sue didn't find the treasure.
-Inferences of this form are extremely common.
+Inferences of this form should feel familiar.
 
-In order to derive MT from our basic rules we will construct a derivation in the manner above while using meta-variables instead of sentences of $\PL$ to provide the following proof schema:
+In order to derive MT from our basic rules, we will construct a derivation in the manner above while using schematic variables instead of wfss of $\PL$.
+Consider the following:
 
 \begin{proof}
 	\hypo{p}{\metaA{}}
@@ -175,13 +812,13 @@ In order to derive MT from our basic rules we will construct a derivation in the
 	\have{nq}{\enot \metaB{}}\ni{q-nnp}
 \end{proof}
 
-Since \metaA{} and \metaB{} are meta-variables, the lines above do not constitute an PL proof.
-Rather, the lines above are a \define{proof schema} which is a kind of recipe for constructing proofs.
-Given any values for $\metaA$ and $\metaB$, the proof schema for MT will yield an PL proof as an instance.
-Accordingly, applications of MT can always be replaced with an appropriate instance of the proof schema for MT which only refers to the basic rules included in PL.
+Since $\metaA$ and $\metaB$ are schematic variables, the lines above do not constitute a PL derivation.
+Rather, what we have above is a \define{derivation schema} which is a kind of recipe for constructing derivations.
+Given any wfss $\metaA$ and $\metaB$, the derivation schema for MT returns a PL derivation as an instance.
+Accordingly, applications of MT can always be replaced with an appropriate instance of the derivation schema for MT which only refers to the basic rules included in PL.
 Nevertheless, MT is a convenient shortcut and so we will add it to our list of derived rules.
 
-Here is an example employing \textit{modus tollens} several times over.
+Here is a simple example that would have been much more cumbersome without using MT:
 
 \begin{proof}
 	\hypo{ab}{A \eif B}
@@ -193,13 +830,13 @@ Here is an example employing \textit{modus tollens} several times over.
 	\have{a}{\enot A} \by{MT}{ab,b}
 \end{proof}
 
-At each of lines 5--7, we cite a conditional and the negation of its consequent to infer the negation of its antecedent.
-Without citing MT, this proof would be much more cumbersome.
+% At each of lines 5--7, we cite a conditional and the negation of its consequent to infer the negation of its antecedent.
+% Without citing MT, this proof would be much more cumbersome.
 
 
 \subsection{Dilemma}
 
-One of the most difficult proof rules to apply is disjunction elimination, and so it will be convenient to derive proof rules that streamline arguments from disjunctive sentences.
+One of the most difficult deduction rules to apply is disjunction elimination, and so it will be convenient to derive deduction rules that streamline arguments from disjunctive sentences.
 Consider the \textit{dilemma rule} (DL):
 
 \begin{proof}
@@ -209,7 +846,7 @@ Consider the \textit{dilemma rule} (DL):
 	\have[\ ]{c}{\metaC{}} \by{DL}{ab,ac,bc}
 \end{proof}
 
-If you know that two conditionals are true, and they have the same consequent, and you also know that one of the two antecedents is true, then conclusion is true no matter which antecedent is true.
+If you know that two conditionals are true, and they have the same consequent, and you also know that one of the two antecedents is true, then the conclusion is true no matter which antecedent is true.
 We may derive this rule as follows:
 
 \begin{proof}
@@ -231,13 +868,13 @@ Whereas $\eor$E cites subproofs, DL only appeals to live lines in a proof, and s
 For example, suppose you know all of the following:
 
 \begin{earg}
-\item[] If it is raining, the car is wet.
-\item[] If it is snowing, the car is wet.
-\item[] It is raining or it is snowing.
+  \eitem{If it is raining, the car is wet.}
+  \eitem{If it is snowing, the car is wet.}
+  \eitem{It is raining or it is snowing.}
 \end{earg}
 
 From these premises, you can definitely establish that the car is wet.
-This is the form that DL captures, nicely resonating with a common form of reasoning.
+This is an example of the argument form that DL captures, nicely describing a common way of reasoning.
 
 As in the case of MT, the DL rule doesn't allow us to prove anything we couldn't prove via basic rules.
 Anytime you wanted to use the DL rule, you could always include a few extra steps to prove the same result without DL.
@@ -253,9 +890,9 @@ Although DL is occasionally useful, there other common forms of reasoning from a
 In particular, consider the following argument.
 
 \begin{earg}
-\item[] $P \eor Q$
-\item[] $\enot P$
-\item[\therefore] $Q$
+  \eitem{$P \eor Q$}
+  \uitem{$\enot P$ \quad\quad }
+  \eitem{$Q$}
 \end{earg}
 
 Even small children and non-human animals can engage in reasoning of the form given above.
@@ -280,18 +917,59 @@ This inference is called \textit{disjunctive syllogism} (DS):
 
 We represent two different inference patterns here, because the rule allows you to conclude \emph{either} disjunct from the negation of the other.
 Nevertheless, both go by the same name as is the case for other symmetrical rules like $\eand$E.
+The derivations for DS go as follows:
 
-Consider the following argument:
+\begin{multicols}{2}
 
-\begin{earg}
-\item[] $\enot L \eif (J \eor L)$
-\item[] $\enot L$
-\item[\therefore] $J$
-\end{earg}
+\begin{proof}
+	\hypo[1]{ab}{\metaA\eor\metaB}
+	\hypo[2]{na}{\enot\metaA}
+  \open 
+    \hypo[3]{b}{\metaA} \as{for $\eor$E}
+      \open
+        \hypo[4]{bb}{\enot\metaB} \as{for $\enot$E}
+        \have[5]{xa}{\enot\metaA} \r{na}
+        \have[6]{a}{\metaA} \r{b}
+      \close
+    \have[7]{nb}{\metaB} \ni{bb-a}
+  \close
+  \open
+    \hypo[8]{c}{\metaB} \as{for $\eor$E}
+    \have[9]{cc}{\metaB} \r{c}
+  \close
+  \have[10]{d}{\metaB} \oe{ab,b-nb,c-cc}
+\end{proof}
 
-It is easy to see that $J\eor L$ follows by $\eif$E from the two premises, but it is difficult to see how the proof will go next were we constrained to our basic rules.
-However, given DS, it is plain to see that $J$ follows immediately from $J\eor L$ and $\enot L$. 
-So the proof is easy:
+\begin{proof}
+	\hypo[1]{ab}{\metaA\eor\metaB}
+	\hypo[2]{na}{\enot\metaB}
+  \open 
+    \hypo[3]{b}{\metaB} \as{for $\eor$E}
+      \open
+        \hypo[4]{bb}{\enot\metaA} \as{for $\enot$E}
+        \have[5]{xa}{\enot\metaB} \r{na}
+        \have[6]{a}{\metaB} \r{b}
+      \close
+    \have[7]{nb}{\metaA} \ni{bb-a}
+  \close
+  \open
+    \hypo[8]{c}{\metaA} \as{for $\eor$E}
+    \have[9]{cc}{\metaA} \r{c}
+  \close
+  \have[10]{d}{\metaA} \oe{ab,b-nb,c-cc}
+\end{proof}
+
+    
+\end{multicols}
+
+Like DL, the derived rule DS makes it easier to write derivations while capturing a natural way of reasoning.
+In order to put DS to work, consider the following derivation:
+
+% \begin{earg}
+%   \eitem{$\enot L \eif (J \eor L)$}
+%   \uitem{$\enot L$ \quad\quad }
+%   \eitem{$J$}
+% \end{earg}
 
 \begin{proof}
 	\hypo{c}{\enot L \eif (J \eor L)}
@@ -300,7 +978,10 @@ So the proof is easy:
 	\have{4}{J} \by{DS}{a,3}
 \end{proof}
 
-Like DL, the derived rule DS makes it easier to derive proofs.
+It is easy to see that $J\eor L$ follows by $\eif$E from the two premises, but it is difficult to see how the proof will go next were we constrained to the basic rules.
+However, given DS, it is plain to see that $J$ follows immediately from $J\eor L$ and $\enot L$. 
+So the proof is easy.
+
 
 
 
@@ -316,7 +997,7 @@ We also add \textit{hypothetical syllogism} (HS) as a derived rule:
 \end{proof}
 
 Note that HS does not cite any subproofs, and so makes for elegant proofs that are easy to read.
-The same cannot be said for the proof schema for HS:
+The same cannot be said for the derivation schema for HS:
 
 \begin{proof}
 	\hypo[1]{ab}{\metaA\eif\metaB}
@@ -332,7 +1013,7 @@ The same cannot be said for the proof schema for HS:
 
 \subsection{Contraposition}
 
-We also add \textit{contraposition} (CP) as a derived rule:
+Next we may add \textit{contraposition} (CP) as a derived rule:
 
 \begin{proof}
 	\have[m]{ab}{\metaA\eif\metaB}
@@ -340,8 +1021,8 @@ We also add \textit{contraposition} (CP) as a derived rule:
 \end{proof}
 
 Not only is this inference natural, it is extremely useful.
-We have had various occasions to use CP in the informal proofs in the previous chapter.
-The derivation goes as follows:
+We have had various occasions to use CP in the informal proofs given above.
+The derivation in PL goes as follows:
 
 \begin{proof}
 	\hypo[1]{ab}{\metaA\eif\metaB}
@@ -426,13 +1107,14 @@ Whereas we have included two similar rules for negation introduction and elimina
 Although some philosophers of logic contest DN, arguing instead for \textit{intuitionistic logics} in which DN is neither basic nor derivable, most take DN to be a useful and extremely natural inference to draw.
 After all, what is meant by saying that it is not the case that the ball is not round, and yet it fails to be the case that the ball is round?
 Or to take the converse, what is meant by saying that the ball is round, but it fails to be the case that the ball is not not round.
-Classical logic avoids this mess by accepting DN even if it is derived instead of being included as a basic rule.
+The classical logician may claim that there is no difference at all here by accepting DN.
+Although, DN is a derived rule in PL rather than basic, this much is only a difference in convention.
 Here is the derivation of DN in the present system PL:
 
 \begin{proof}
 	\hypo[1]{dna}{\enot\enot\metaA}
   \open 
-    \hypo[3]{da}{\enot\metaA} \as{}
+    \hypo[3]{da}{\enot\metaA} \as{for $\enot$E}
     \have[4]{xa}{\enot\enot\metaA} \r{dna}
   \close
   \have[5]{a}{\metaA} \ne{da-xa}
@@ -456,1212 +1138,272 @@ More generally, we have the following rule (EFQ):
 	\have[\ ]{b}{\metaB}\by{EFQ}{a,na}
 \end{proof}
 
-This inference is occasionally convenient since, given $\metaA$ and $\enot\metaA$ on live lines we may draw any conclusion that might happen to want on the next line. 
+This inference is occasionally convenient since, given $\metaA$ and $\enot\metaA$ on live lines we may draw any conclusion that we might happen to want on the next line. 
 Here is the derivation of EFQ.
 
 \begin{proof}
 	\hypo[1]{a}{\metaA}
 	\hypo[2]{na}{\enot\metaA}
   \open 
-    \hypo[3]{nb}{\enot\metaB} \as{}
+    \hypo[3]{nb}{\enot\metaB} \as{for $\enot$E}
     \have[4]{xa}{\metaA} \r{a}
     \have[5]{xna}{\enot\metaA} \r{na}
   \close
   \have[6]{b}{\metaB} \ne{nb-xna}
 \end{proof}
 
-This puts a syntactic spin on a semantic idea that we considered before: just as unsatisfiable sets of sentences entail everything, everything can be proven from any $\metaA$ and $\enot\metaA$. 
+This puts a syntactic spin on a semantic idea that we considered before: just as every wfs of $\PL$ is a logical consequence of an unsatisfiable sets of wfss of $\PL$, every wfs of $\PL$ can be derived from any wfss $\metaA$ and $\enot\metaA$ of $\PL$, and indeed from any set $\MetaG$ containing $\metaA$ and $\enot\metaA$. 
+% TODO add syntactic weakening lemma
 
-
-\section{Schemata}
-
-You might be beginning to wonder just how many derived rules there are.
-Indeed, this way of thinking inspires an important approach to logic: instead of focusing of theorems and proofs in $\PL$, perhaps we should really be focusing on the \textit{rule schemata} themselves.
-As a special case we have \textit{axiom schemata} which amount to rule schemata which do not cite any lines.
-For instance, here is an axiom schemata called the \textit{Law of Excluded Middle} (LEM): $\metaA\eor\enot\metaA$.
-Once we have derived LEM--- a worthwhile exercise--- we may write any instance of $\metaA\eor\enot\metaA$ on any line of a proof without citing any previous lines whatsoever.
-
-Instead of thinking about valid $\PL$ arguments and their corresponding proofs, one might think about a logic as a set of rule schemata.
-This approach to logic has some advantages since it cuts to the chase, focusing on what we are ultimately concerned with, namely \textit{logical forms}.
-It is also easy to prove things about such systems since they are easy to characterise abstractly.
-The disadvantage of such an approach is that these proof systems are somewhat harder to think about.
-By contrast, it is nice to have concrete instances of $\PL$ sentences and arguments instead of logical forms all the way down.
-This more concrete approach will be maintained throughout this text, however, it is nevertheless worth drawing the connection given all of our derived rules above.
-Indeed, we may think of the system of natural deduction PL as the smallest set to include the basic rule schemata in PL together with all rule schemata that are derivable from these basic rules.
-This set of logical forms of reasoning may be taken to provide an abstract answer to the question, ``What is logic about?''
-
-% %%%%%%%%%%%%%%%%%%%%%% BEGIN SOUNDNESS
-
-  % TODO: make existential case come before universal case throughout
-
-In Ch~\ref{ch.SLsoundcomplete}, we showed that the tree method was sound and complete with respect to the semantics for SL.
-In particular, soundness showed that whenever a tree with root $\Gamma\cup\set{\enot\metaA}$ closed, we could conclude that $\Gamma\cup\set{\enot\metaA}$ is unsatisfiable, and so $\Gamma \models \metaA$.
-As a result, we could rely on the tree method to evaluate whether the premises of an argument entailed its conclusion.
-The completeness result concerned the converse, showing that whenever some premises entail a conclusion, there is a closed tree that results from taking those premises together with the negation as the root.
-% Additionally, we showed that every root has a complete tree, a root has a closed tree just in case every tree with that root closes.
-Accordingly, the tree method can always be relied upon to evaluate whether some premises entail their conclusion.
-
-Although these are important results if we are to make use of the tree method, proof trees are of little independent interest.
-Moreover, when it comes to extending the tree method to accommodate quantifiers, there is no guarantee that the tree will always complete.
-This makes the tree method considerably less useful.
-Additionally, proving soundness and completeness for the tree method does not tell us anything about our natural deduction systems SD or QD.
-Even if SD and QD do a good job of modelling natural reasoning in SL and QL$^=$ respectively, we should like to know whether the reasoning that we can conduct in these proof systems tell us anything about entailment and, subsequently, about the validity of arguments.
-Specifically, we should like to establish the following biconditional: 
-  $$\Gamma \proves_{\textsc{qd}} \metaA \text{ just in case } \Gamma \models \metaA.$$
-Whereas the right-to-left direction asserts the completeness of QD, the left-to-right direction asserts the soundness of QD.
-If QD were to fail to be sound, we would have little reason to care about QD for we could not rely on it to establish valid arguments.
-Showing that QD is sound will be the focus of this chapter where it will follow as a result that SD is also sound.
-
-As in the soundness proof for the tree method, the soundness proof for QD will go by induction on the length of proof.
-In particular, we will be measuring proofs by how many lines they include.
-If we can show that soundness holds for proofs of length $1$ and, moreover, that soundness holds for proofs of length $n+1$ whenever soundness holds for proofs of length $n$, we may conclude by induction that soundness holds for proofs of any length.
-% This, of course, is no different from the statement of the soundness of QD.
-
-
-
-
-\section{Soundness}%
-  \label{sec:Soundness}
-
-Assume $\Gamma \proves_{\textsc{qd}} \metaA$.
-It follows that there is some proof in QD of $\metaA$ from the premises $\Gamma$ where we may call this proof $X$. 
-Recall that we may evaluate which lines are live at any point in the course of a natural deduction proof in QD.
-For ease of exposition, it will help to introduce some notation that we will use throughout the proof.
-In particular, we may take $\metaA_i$ to be the sentence on the $i$-th line of the proof $X$ and $\Gamma_i$ to include all and only the undischarged assumptions (including premises) at the $i$-th line in $X$.
-We will then prove the following:
-\begin{enumerate}[leftmargin=1.5in]
-  \item[\it Base:] $\Gamma_1 \models \metaA_1$.
-  \item[\it Induction:] $\Gamma_{n+1} \models \metaA_{n+1}$ if $\Gamma_k \models \metaA_k$ for every $k\leq n$.
-\end{enumerate}
-Given that we can establish these two claims, it follows by induction that $\Gamma_n \models \metaA_n$ for all $n$.
-Since every proof is finite in length, there is a last line $m$ of the proof $X$ where $\Gamma_m=\Gamma$ is the set of premises and $\metaA_m=\metaA$ is the conclusion, and so $\Gamma \models \metaA$. 
-Thus we may conclude:
-  $$\text{If } \Gamma \proves_{\textsc{qd}} \metaA, \text{ then } \Gamma \models \metaA.$$
-This establishes the soundness of QD over the semantics for QL$^=$.
-It remains, however, to establish \textit{Base} and \textit{Induction} assumed above.
-
-In order to prove \textit{Base}, we may recall from the definition of a proof in QD that $\metaA_1$ is either a premise or follows by one of the proof rules for QD. 
-Since $\metaA_1$ is the first line of the proof, the only proof rules that it could follow from are the assumption rule AS or identity introduction $=$I.
-If $\metaA_1$ is an instance of $=$I, then $\Gamma_1=\varnothing$ and $\metaA_1$ is $\alpha=\alpha$ for some constant $\alpha$. 
-Letting $\M=\tuple{\D,\I}$ be any model, it follows that $\I(\alpha)=\I(\alpha)$ where there is some variable assignment $\va{a}$.
-Thus $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\alpha)$, and so $\VV{\I}{\va{a}}(\alpha=\alpha)=1$.
-Since $\alpha=\alpha$ is a sentence, $\VV{\I}{}(\alpha=\alpha)=1$, and so $\M$ satisfies $\metaA_1$.
-Generalising on $\M$, we may conclude that $\models \metaA_1$, and so equivalently $\Gamma_1 \models \metaA_1$.
-If instead $\metaA_1$ is a premise or assumption, then $\Gamma_1=\set{\metaA_1}$ since $\metaA_1$ is not discharged in the first line.
-As a result, $\Gamma_1 \models \metaA_1$ is immediate since any model $\M$ that satisfies $\Gamma_1$ also satisfies $\metaA_1$.
-This is all that is required to establish \textit{Base}.
-
-In order to establish \textit{Induction}, assume that $\Gamma_k \models \metaA_k$ for every $k\leq n$. 
-It remains to show that $\Gamma_{n+1} \models \metaA_{n+1}$.
-By the definition of a proof in QD, $\metaA_{n+1}$ is either a premise or follows by one of the proof rules for QD. 
-If $\metaA_{n+1}$ is a premise or assumption, then $\Gamma_{n+1} \models \metaA_{n+1}$ for the same reason given above.
-If $\metaA_{n+1}$ is not not a premise or assumption, then $\metaA_{n+1}$ follows by one of the proof rules for QD. 
-There are now twelve proof rules coming from SD along with six additional rules for the quantifiers and identity in QD.
-Consider the following:
-\begin{enumerate}[leftmargin=1.5in]
-  \item[\it QD Rules:] If $\metaA_{n+1}$ follows by the proof rules for QD from sentences in $\Gamma_{n+1}$ and $\Gamma_k \models \metaA_k$ for every $k\leq n$, then $\Gamma_{n+1} \models \metaA_{n+1}$.
-\end{enumerate}
-Assuming \textit{QD Rules} for the time being, it follows that $\Gamma_{n+1} \models \metaA_{n+1}$, completing the proof of \textit{Induction}.
-All that remains is to establish \textit{QD Rules} in the following sections.
+The explosion of wfss of $\PL$ that can be derived from a set containing $\metaA$ and $\enot \metaA$ helps to shed light on why a set $\MetaG$ of wfss of $\PL$ was said to be inconsistent just in case $\MetaG \vdash \bot$.
+Since $\bot \coloneq A \eand \enot A$, both $\bot \vdash A$ and $\bot \vdash \enot A$ by $\eand$E, and so by EFQ, any $\metaB$ can be derived from $\bot$. 
+% TODO add cut
+Thus if $\MetaG \vdash \bot$, it follows that $\MetaG \vdash \metaB$ for any wfs $\metaB$ of $\PL$ whatsoever. 
 
 
 
 
 
-\section{SD Rules}%
-  \label{sec:SDRules}
+\subsection{Law of Excluded Middle}
+  \label{LEM}
 
-We have already considered two rules in proving \textit{Base} by showing that AS and $=$I preserve entailment at least in the special case as $\Gamma_1 \models \metaA_1$.
-More generally, we should like to show that all of the rules preserve entailment, and not just in the case of proofs with one line.
-It is with this more general aim that we will seek to establish \textit{QD Rules} given above.
+Recall from Chapter \ref{ch.PL-semantics} that the $\PL$ interpretations assign every sentence letter of $\PL$ to exactly one of just two truth-values $1$ and $0$.
+% TODO: show this as an induction proof above
+It follows that every wfs $\metaA$ of $\PL$ is assigned to either $1$ or $0$ and not both, i.e., $\V{\I}(\metaA) \in \set{1,0}$. 
+Thus $\V{\I}(\metaA \eor \enot \metaA) = 1$ for any wfs $\metaA$ and interpretation $\I$ of $\PL$, and so every instance of $\metaA \eor \enot \metaA$ is a tautology. 
+The syntactic analogue of this semantic claim asserts that every instance of $\metaA \eor \enot \metaA$ is a theorem of PL which, given its central place within classical logic, is referred to as \textit{the law of excluded middle}:
 
-In order to divide the proof of \textit{QD Rules} into more manageable parts, this section will focus on the proof rules for SD. 
-Accordingly, the proof begins with the assumption that $\metaA_{n+1}$ follows by the proof rules for SD from sentences in $\Gamma_{n+1}$ and that $\Gamma_k \models \metaA_k$ for every $k\leq n$.
-We will then seek to show that $\Gamma_{n+1} \models \metaA_{n+1}$ where it will help to establish a number of supporting lemmas along the way.
-This same strategy will latter be extended to show that $\Gamma_{n+1} \models \metaA_{n+1}$ when $\metaA_{n+1}$ follows from sentences in $\Gamma_{n+1}$ by the additional rules included in QD.
-As a result, we will cover all of the rules in QD, thereby completing the proof of \textit{QD Rules}.
-
-
-
-
-
-
-\subsection{Assumption and Reiteration}%
-  \label{sub:AssumptionRule}
-
-Before attending to the introduction and elimination rules for each of the logical operators included in SD, this section will focus on the assumption and reiteration rules.
-Whereas the proofs for most of the rules will appeal to the induction hypothesis given above, the proof for the assumption rule is an exception and is similar to what was given in the proof of \textit{Base}. 
-
-\factoidbox{
-\begin{Rthm} \label{rule:AS}
-  \textbf{(AS)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule AS. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume that $\metaA_{n+1}$ follows by the assumption rule AS from the sentences in $\Gamma_{n+1}$.
-  Since $\metaA_{n+1}$ is an undischarged assumption, it follows that $\metaA_{n+1}\in\Gamma_{n+1}$, and so any model that satisfies $\Gamma_{n+1}$ also satisfies $\metaA_{n+1}$. 
-  Thus $\Gamma_{n+1} \models \metaA_{n+1}$.
-\end{quote}
-
-The proof above does not require the induction hypothesis or any additional results.
-By contrast, it will help to establish the reiteration rule by first proving the following lemmas.
-These lemmas will play an important role throughout many of the proofs given below.
-
-\begin{Lthm} \label{lemma:weak}
-  If $\Gamma \models \metaA$ and $\Gamma \subseteq \Gamma'$, then $\Gamma' \models \metaA$.
-\end{Lthm}
-% \vspace{-.3in}
-
-\begin{quote} 
-  \textit{Proof:} Assume $\Gamma \models \metaA$ and $\Gamma \supseteq \Gamma'$.
-  Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma'$, it follows that $\VV{\I}{}(\metaB)=1$ for all $\metaB \in \Gamma'$.
-  Since $\Gamma\subseteq \Gamma'$, it follows that $\VV{\I}{}(\metaB)=1$ for all $\metaB \in \Gamma$, and so $\M$ satisfies $\Gamma$. 
-  By assumption, $\M$ satisfies $\metaA$, and so $\Gamma \models \metaA$.
-\end{quote}
-
-
-
-\begin{Lthm} \label{lemma:live}
-  For any QD proof $X$, if $\metaA_k$ is live at line $n+1$ where $k\leq n+1$, then $\Gamma_k\subseteq \Gamma_{n+1}$.
-\end{Lthm}
-% \vspace{-.3in}
-
-\begin{quote} 
-  \textit{Proof:} Let $X$ be a QD proof where $\metaA_k$ is live at line $n+1$ where $k\leq n+1$.
-  Assume for contradiction that some undischarged assumption $\metaB \in \Gamma_k$ is not live at $n+1$.
-  It follows that $\metaB$ has been discharged at a line $j>k$, and so $\metaA_k$ is dead at $n+1$, contradicting the above.
-  Thus $\Gamma_k\subseteq \Gamma_{n+1}$ as desired.
-\end{quote}
-
-Whereas \textbf{\ref{lemma:weak}} says that entailment is preserved upon adding premises, \textbf{\ref{lemma:live}} makes an important observation about how undischarged assumptions are inherited by live lines.
-Given these lemmas, we may now proceed to establish the reiteration rule R.
-
-\factoidbox{
-\begin{Rthm} \label{rule:R}
-  \textbf{(R)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule R. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume that $\metaA_{n+1}$ follows by the reiteration rule R from the sentences in $\Gamma_{n+1}$.
-  It follows that $\metaA_{n+1}=\metaA_{k}$ for some $k\leq n$, and so $\Gamma_k \models \metaA_k$ by hypothesis.
-  Since $\metaA_k$ is live at line $n+1$, we know by \textbf{\ref{lemma:live}} that $\Gamma_k\subseteq \Gamma_{n+1}$, and so $\Gamma_{n+1} \models \metaA_{k}$ by \bref{lemma:weak}.
-  Thus $\Gamma_{n+1} \models \metaA_{n+1}$ given the identity above.
-\end{quote}
-
-By contrast with the assumption rule, the reiteration makes an essential appeal to the induction hypothesis.
-We will see something similar in all of the rule proofs given below with the only other exception being identity introduction.
-
-
-
-\subsection{Negation Rules}%
-  \label{sub:NegationRules}
-
-The negation rules are a lot more complicated than the assumption and reiteration rules on account of citing subproofs.
-Accordingly, it will help to establish two more supporting lemmas before presenting the proofs for the negation rules.
-Whereas the first lemma asserts that a satisfiable set cannot entail a sentence and its negation, the second lemma draws an entailment out of an unsatisfiable set of sentences.
-These lemmas work nicely together and will reoccur in a number of rule proofs besides the negation rule proofs given below.
+\begin{multicols}{2}
   
-\begin{Lthm} \label{lemma:unsat}
-  If $\Gamma \models \metaA$ and $\Gamma \models \enot\metaA$, then $\Gamma$ is unsatisfiable.
-\end{Lthm}
-% \vspace{-.3in}
-
-\begin{quote} 
-  \textit{Proof:} Assume $\Gamma \models \metaA$ and $\Gamma \models \enot\metaA$.
-  Assume for contradiction that $\Gamma$ is satisfiable, and so there is some model $\M$ which satisfies $\Gamma$. 
-  By assumption, $\M$ satisfies $\metaA$ and $\enot\metaA$, and so there is some variable assignment $\va{a}$ where $\VV{\I}{\va{a}}(\enot\metaA)=1$.
-  By the semantics for negation, $\VV{\I}{\va{a}}(\metaA)\neq 1$ contradicting the above.
-  Thus $\Gamma$ is unsatisfiable. 
-\end{quote}
-
-
-
-
-\begin{Lthm} \label{lemma:unsatent}
-  If $\Gamma \cup \set{\metaA}$ is unsatisfiable, then $\Gamma \models \enot\metaA$.
-\end{Lthm}
-% \vspace{-.3in}
-
-\begin{quote} 
-  \textit{Proof:} Assume $\Gamma \cup \set{\metaA}$ is unsatisfiable and let $\M$ be any model that satisfies $\Gamma$. 
-  If $\M$ satisfied $\metaA$, then $\M$ would satisfy $\Gamma \cup \set{\metaA}$ contrary to assumption, and so $\M$ does not satisfy $\metaA$.
-  Thus $\VV{\I}{}(\metaA)\neq 1$, and so $\VV{\I}{\va{a}}(\metaA)\neq 1$ for all variable assignments $\va{a}$ over $\D$.
-  It follows that $\VV{\I}{\va{a}}(\enot\metaA)= 1$ for some $\va{a}$ in particular, and so $\VV{\I}{}(\enot\metaA)= 1$.
-  We may then conclude that $\M$ satisfies $\enot\metaA$, and so $\Gamma \models \enot\metaA$.
-\end{quote}
-
-Given the lemmas above, we may provide the following negation rule proofs.
-It will be important to study this carefully proof, observing how all the working parts come together.
-
-
-\factoidbox{
-\begin{Rthm} \label{rule:NegI}
-  \textbf{($\boldsymbol\enot$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\enot$I. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by negation introduction $\enot$I.
-  Thus there is some subproof on lines $i$-$j$ where $i<j\leq n$ and $\metaA_{n+1}=\enot\metaA_i$, $\metaB=\metaA_h$, and $\enot\metaB=\metaA_k$ for $i\leq h\leq j$ and $i\leq k\leq j$.
-  By parity of reasoning, we may assume that $h<k=j$.
-  Thus we may represent the subproof as follows:
-
-  \begin{proof}
-  \open
-    \hypo[i]{na}\metaA \as{for \enot I}
-    \have[h]{b}\metaB
-    \have[j]{nb}{\enot\metaB}
-  \close
-  \have[n+1]{a}[\ ]{\enot\metaA}\ni{na-nb} %note that UBC has a more complex citation convention: {na-b, na-nb}
-  \end{proof}
-
-  By hypothesis, $\Gamma_h \models \metaB$ and $\Gamma_j \models \enot\metaB$.
-  With the exception of $\metaA_i=\metaA$, every assumption that is undischarged at lines $h$ and $j$ are also undischarged at line $n+1$.
-  It follows that $\Gamma_h,\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \models \metaB$ and $\Gamma_{n+1}\cup\set{\metaA_i} \models \enot\metaB$ by \textbf{\ref{lemma:weak}}.
-  Thus $\Gamma_{n+1}\cup\set{\metaA_i}$ is unsatisfiable by \textbf{\ref{lemma:unsat}}, and so $\Gamma_{n+1} \models \enot\metaA_i$ by \textbf{\ref{lemma:unsatent}}.
-  Equivalently, $\Gamma_{n+1} \models \metaA_{n+1}$.
-\end{quote}
-
-The proof begins by assuming the antecedent as above, unpacking the consequences by appealing to the negation introduction rule.
-This provides a number of details about the proof in which $\enot\metaA$ was derived on line $n+1$.
-In addition to applying the induction hypothesis, it is important to observe that although $\metaA$ has been discharged by line $n+1$, this is the only difference between the sets of undischarged sentences for lines $i$--$j$ and line $n+1$.
-Thus the entailments that follow by hypothesis may be related to the undischarged assumptions at line $n+1$ together with the assumption $\metaA$ which has been discharged at $n+1$.
-The core of the proof follows from the two lemmas, showing that the undischarged assumptions at $n+1$ together with $\metaA$ are unsatisfiable, and so $\enot\metaA$ is entailed by those undischarged assumptions. 
-
-Before moving on to consider the rest of the rule proofs, it is important to get clear about how this proof works so that the details given below do not wash over you.
-It can help to prove the result given above for yourself where, if successful, you might also try to prove the following rule proof which works in a similar manner.
-Once you have a sense for how these proofs work, reading the rest of the proofs will become a lot easier and more meaningful.
-
-
-
-\factoidbox{
-\begin{Rthm} \label{rule:NegE}
-  \textbf{($\boldsymbol\enot$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\enot$E. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by negation elimination $\enot$E.
-  Thus there is some subproof on lines $i$-$j$ where $i<j\leq n$ and $\metaA_i=\enot\metaA_{n+1}$, $\metaB=\metaA_h$, and $\enot\metaB=\metaA_k$ for $i\leq h\leq j$ and $i\leq k\leq j$.
-  By parity of reasoning, we may assume that $h<k=j$.
-  Thus we may represent the subproof as follows:
-
-  \begin{proof}
-  \open
-    \hypo[i]{na}{\enot\metaA} \as{for \enot E}
-    \have[h]{b}{\metaB}
-    \have[j]{nb}{\enot\metaB}
-  \close
-  \have[n+1]{a}[\ ]{\metaA}\ne{na-nb} %note that UBC has a more complex citation convention: {na-b, na-nb}
-  \end{proof}
-
-  By hypothesis, $\Gamma_h \models \metaB$ and $\Gamma_j \models \enot\metaB$.
-  With the exception of $\metaA_i=\enot\metaA$, every assumption that is undischarged at lines $h$ and $j$ is also undischarged at line $n+1$.
-  It follows that $\Gamma_h,\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \models \metaB$ and $\Gamma_{n+1}\cup\set{\metaA_i} \models \enot\metaB$ by \textbf{\ref{lemma:weak}}.
-  Thus $\Gamma_{n+1}\cup\set{\metaA_i}$ is unsatisfiable by \textbf{\ref{lemma:unsat}}, and so $\Gamma_{n+1} \models \enot\metaA_i$ by \textbf{\ref{lemma:unsatent}}.
-  Equivalently, $\Gamma_{n+1} \models \enot\enot\metaA_{n+1}$.
-  Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma_{n+1}$, it follows that $\M$ satisfies $\enot\enot\metaA_{n+1}$, and so $\VV{\I}{\va{a}}(\enot\enot\metaA_{n+1})=1$ for some $\va{a}$. 
-  By two applications of the semantics for negation, $\VV{\I}{\va{a}}(\metaA_{n+1})=1$, and so $\M$ satisfies $\metaA_{n+1}$
-  Thus $\Gamma_{n+1} \models \metaA_{n+1}$ by generalising on $\M$.
-\end{quote}
-
-This proof is almost identical to the \textbf{\ref{rule:NegI}} insofar as an additional negation sign is introduced before eliminating the double negation by appealing to the semantics.
-If we were to make further use of the fact that double negations may be eliminated, we might separate this final step into a lemma in its own right.
-However, double negation elimination will not be needed below, and so there is little advantage to adding an additional lemma for this minor result.
-
-In general, there are two primary reasons to introduce a lemma.
-First, the lemma can be used repeatedly, simplifying the reasoning of a number of further proofs.
-In cases where a lemma is only needed once, a second reason to introduce a lemma is that doing so can often help to reduce the complexity of a proof, making it easier to digest once the lemma is established.
-Even so, adding lemmas that are only need once should be reserved for cases where clarity is improved by making the separation. 
-
-
-
-
-
-
-\subsection{Conjunction and Disjunction}%
-  \label{sub:ConjunctionDisjunction}
-
-The following lemmas have more than one application but will be convenient to present before providing the conjunction rule proofs.
-In particular, the first lemma asserts that so long as any two variable assignments agree about all of the free variables in a given sentence, that sentence will have the same truth-value when evaluated with those variable assignments in the same model.
-Although this is not surprising, the proof goes by induction on complexity where there are separate cases to check for each form that the wff in question might take.
-This makes for a long proof where many of the cases are similar and so left as exercises.
-
-\begin{Lthm} \label{lemma:assign}
-  $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$ if $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\metaA$.
-\end{Lthm}
-% \vspace{-.3in}
-
-\begin{quote} 
-  \textit{Proof:} 
-  The proof goes by induction on the complexity of $\metaA$.
-
-  \textit{Base:} Assume $\comp(\metaA)=0$ and $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA$.
-  It follows that $\metaA$ is either $\F^n\alpha_1,\ldots\alpha_n$ or $\alpha_1=\alpha_2$.
-  Consider the following cases:
-
-  \vspace{-.2in}
-  \begin{align*}
-    \VV{\I}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1 &\textit{ ~iff~ } \tuple{\VV{\I}{\va{a}}(\alpha_1),\ldots,\VV{\I}{\va{a}}(\alpha_n)}\in\I(\F^n)\\
-      (\star) &\textit{ ~iff~ } \tuple{\VV{\I}{\va{c}}(\alpha_1),\ldots,\VV{\I}{\va{c}}(\alpha_n)}\in\I(\F^n)\\
-      &\textit{ ~iff~ } \VV{\I}{\va{c}}(\F^n\alpha_1,\ldots,\alpha_n)=1.
-  \end{align*}
-
-  \vspace{-.2in}
-  \begin{align*}
-    \VV{\I}{\va{a}}(\alpha_1=\alpha_2)=1 &\textit{ ~iff~ } \VV{\I}{\va{a}}(\alpha_1) = \VV{\I}{\va{a}}(\alpha_2)\\
-      (\ast) &\textit{ ~iff~ } \VV{\I}{\va{c}}(\alpha_1) = \VV{\I}{\va{c}}(\alpha_2)\\
-      &\textit{ ~iff~ } \VV{\I}{\va{c}}(\alpha_1=\alpha_2)=1.
-  \end{align*}
-
-  If $\alpha_i$ is a constant, then $\VV{\I}{\va{a}}(\alpha_i)=\I(\alpha_i)=\VV{\I}{\va{c}}(\alpha_i)$, and if $\alpha_i$ is a variable, then $\VV{\I}{\va{a}}(\alpha_i)=\va{a}(\alpha_i)=\va{c}(\alpha_i)=\VV{\I}{\va{c}}(\alpha_i)$, thereby establishing $(\star)$ and $(\ast)$.
-  Thus whenever $\comp(\metaA)=0$, if $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$.
-
-  \textit{Induction:} Assume that whenever $\comp(\metaA)\leq n$, if $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$.  
-  Letting $\comp(\metaA)=n+1$, assume that $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA$.
-  There are seven cases to consider.
-
-  \textit{Case 1:} Assume $\metaA=\enot\metaB$.
-  Since $\comp(\metaA)=n+1$ and $\comp(\enot\metaB)=\comp(\metaB)+1$, it follows that $\comp(\metaB)\leq n$.
-  It follows by hypothesis that $\VV{\I}{\va{a}}(\metaB)=\VV{\I}{\va{c}}(\metaB)$, and so $\VV{\I}{\va{a}}(\enot\metaB)=\VV{\I}{\va{c}}(\enot\metaB)$ by the semantics for negation.
-  Thus $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$. 
-  The cases for $\eand,\eor,\eif,$ and $\eiff$ are similar and so will be left as exercises.
-
-  \textit{Case 6:} Assume $\metaA=\qt{\forall}{\gamma}\metaB$.
-  For the same reasons given above, $\comp(\metaB)\leq n$.
-  We may then consider the following biconditionals:
-
-  \vspace{-.2in}
-  \begin{align*}
-    \VV{\I}{\va{a}}(\qt{\forall}{\gamma}\metaB)=1 &\textit{ ~iff~ } \VV{\I}{\va{e}}(\metaB)=1 \text{ for all } \gamma\text{-variants } \va{e} \text{ of } \va{a}\\ 
-      (\dagger) &\textit{ ~iff~ } \VV{\I}{\va{g}}(\metaB)=1 \text{ for all } \gamma\text{-variants } \va{g} \text{ of } \va{c}\\  
-      &\textit{ ~iff~ } \VV{\I}{\va{c}}(\qt{\forall}{\gamma}\metaB)=1.
-  \end{align*}
-
-  In order to establish $(\dagger)$, assume that $\VV{\I}{\va{e}}(\metaB)=1$ for all $\gamma$-variants $\va{e}$ of $\va{a}$ and let $\va{g}$ be any $\gamma$-variant of $\va{c}$.
-  Consider the $\gamma$-variant $\va{e}'$ of $\va{a}$ where $\va{e}'(\gamma)=\va{g}(\gamma)$.
-  By assumption $\VV{\I}{\va{e}'}(\metaB)=1$, and by definition $\va{e}'(\alpha)=\va{a}(\alpha)$ for all $\alpha\neq\gamma$.
-
-  Since $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA=\qt{\forall}{\gamma}\metaB$, it follows that $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha\neq\gamma$ in $\metaB$.
-  Given the above, $\va{e}'(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha\neq\gamma$ in $\metaB$. 
-  Moreover, $\va{g}$ is a $\gamma$-variant of $\va{c}$, and so $\va{g}(\alpha)=\va{c}(\alpha)$ for all $\alpha\neq\gamma$.
-  Thus $\va{e}'(\alpha)=\va{g}(\alpha)$ for all free variables $\alpha\neq\gamma$ in $\metaB$. 
-
-  Since $\va{e}'(\gamma)=\va{g}(\gamma)$ by definition, $\va{e}'(\alpha)=\va{g}(\alpha)$ for all free variables in $\metaB$.  
-  By hypothesis, $\VV{\I}{\va{e}'}(\metaB)=\VV{\I}{\va{g}}(\metaB)$, and so $\VV{\I}{\va{g}}(\metaB)=1$.
-  Generalising on $\va{g}$, it follows that $\VV{\I}{\va{g}}(\metaB)=1$ for all $\gamma$-variants $\va{g}$ of $\va{c}$.
-  An analogous argument establishes the converse direction of $(\dagger)$.
-  Thus we may conclude that $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$.
-
-  The case for $\qt{\exists}{\gamma}$ is similar, and so will be left as exercise.
-  It follows that whenever $\comp(\metaA)=n+1$, if $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$.
-  Thus the lemma follows by induction.
-\end{quote}
-
-
-Aside from keeping track of all of the notation and definitions, the only tricky part of the proof above is that we did not begin by considering some arbitrary variable assignments $\va{a}$ and $\va{c}$ and assuming $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\metaA$.
-The reason for this is that wanted to the induction hypothesis to take a general form, applying to all variable assignments so that it would be useful in establishing $(\dagger)$ in \textit{Case 6}.
-Thus the hardest part is knowing what to assume, setting up the proof accordingly.
-
-Given that the lemma above applies to all wffs, we may consider the special case where $\metaA$ is a sentence.
-As the following lemma shows, a sentence is true on some variable assignment and model just in case it is true on all variable assignments over that model.
-
-\begin{Lthm} \label{lemma:allvar}
-  $\VV{\I}{}(\metaA)= 1$ just in case $\VV{\I}{\va{a}}(\metaA)= 1$ for every v.a. $\va{a}$ over $\D$. 
-\end{Lthm}
-\begin{quote} 
-  \textit{Proof:} 
-       Assume that $\VV{\I}{}(\metaA)= 1$.
-       Thus $\VV{\I}{\va{a}}(\metaA)= 1$ for some variable assignment $\va{c}$ over $\D$.
-       Let $\va{a}$ be any variable assignment over $\D$.
-       Since $\metaA$ has no free variables, vacuously $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables in $\metaA$, and so $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$ by \textbf{\ref{lemma:assign}}.
-       Thus $\VV{\I}{\va{a}}(\metaA)=1$, and so generalising on $\va{a}$, it follows that $\VV{\I}{\va{a}}(\metaA)= 1$ for every variable assignment $\va{a}$ over $\D$.  
-
-       Assume instead that $\VV{\I}{\va{a}}(\metaA)=1$ for every variable assignment $\va{a}$ over $\D$.
-       Since $\D$ is nonempty, there is some variable assignment $\va{a}$ over $\D$, and so $\VV{\I}{\va{a}}(\metaA)=1$ follows from the assumption. 
-       Thus we may conclude that $\VV{\I}{}(\metaA)=1$.
-\end{quote}
-
-
-
-
-Given \textbf{\ref{lemma:assign}}, the proof for \textbf{\ref{lemma:allvar}} is trivial.
-Even so, it would be cumbersome to have to write the steps given above every time we wanted to make use of this convenient fact.
-As we will see, we will have a number of opportunities to make use of the lemma above beginning with the following proof rule for conjunction.
-
-\factoidbox{
-\begin{Rthm} \label{rule:ConI}
-  \textbf{(\&I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eand$I. 
-\end{Rthm}
-}
-  
-\begin{quote} 
-  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conjunction introduction $\eand$I.
-  Thus $\metaA_{n+1}=\metaA_i\eand\metaA_j$ for some lines $i,j\leq n$ that are live at line $n+1$.
-  By hypothesis, $\Gamma_i\models \metaA_i$ and $\Gamma_j\models \metaA_j$ where $\Gamma_i,\Gamma_j\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:live}}.
-  Thus $\Gamma_{n+1} \models \metaA_i$ and $\Gamma_{n+1} \models \metaA_j$ by \textbf{\ref{lemma:weak}}.
-  Letting $\M=\tuple{\D,\I}$ be a model which satisfies $\Gamma_{n+1}$, it follows that $\M$ also satisfies $\metaA_i$ and $\metaA_j$.
-  By \textbf{\ref{lemma:allvar}}, $\VV{\I}{\va{a}}(\metaA_i)=\VV{\I}{\va{a}}(\metaA_j)=1$ for every variable assignment $\va{a}$ over $\D$, and so for some $\va{a}$ in particular.
-  Thus $\VV{\I}{\va{a}}(\metaA_i\eand\metaA_j)=\VV{\I}{\va{a}}(\metaA_{n+1})=1$, and so $\M$ satisfies $\metaA_{n+1}$.
-  By generalising on $\M$, we may conclude that $\Gamma_{n+1} \models \metaA_{n+1}$.
-\end{quote}
-
-
-Whereas \textbf{\ref{lemma:allvar}} played a natural role in the proof given above, the rule proof for conjunction elimination and disjunction introduction are much more straightforward.
-
-\factoidbox{
-\begin{Rthm} \label{rule:ConE}
-  \textbf{(\&E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eand$E. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assuming $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conjunction elimination $\eand$E, there is some $i\leq n$ where either $\metaA_i=\metaA_{n+1}\eand\metaB$ or $\metaA_i=\metaB\eand\metaA_{n+1}$ is live at line $n+1$.
-  % By parity of reasoning we may assume that $\metaA_i=\metaA_{n+1}\eand\metaB$.
-  By hypothesis, $\Gamma_i\models \metaA_i$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:live}}.
-  Thus $\Gamma_{n+1} \models \metaA_i$ by \textbf{\ref{lemma:weak}}, and so any model $\M=\tuple{\D,\I}$ which satisfies $\Gamma_{n+1}$ also satisfies $\metaA_i$, and so either satisfies $\metaA_{n+1}\eand\metaB$ or $\metaB\eand\metaA_{n+1}$.
-  It follows that $\VV{\I}{\va{a}}(\metaA_{n+1}\eand\metaB)=1$ or $\VV{\I}{\va{a}}(\metaB\eand\metaA_{n+1})=1$, and so either way $\VV{\I}{\va{a}}(\metaA_{n+1})=1$ by the semantics for conjunction.
-  Thus $\M$ satisfies $\metaA_{n+1}$, and so $\Gamma_{n+1} \models \metaA_{n+1}$ by generalising on $\M$.
-\end{quote}
-
-
-
-\factoidbox{
-\begin{Rthm} \label{rule:DisI}
-  \textbf{($\boldsymbol\eor$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eor$I. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by disjunction introduction $\eor$I.
-  Thus $\metaA_{n+1}=\metaA_i\eor\metaB$ or $\metaA_{n+1}=\metaB\eor\metaA_i$ for some line $i\leq n$ that is live at line $n+1$.
-  By hypothesis, $\Gamma_i\models \metaA_i$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:live}}, and so $\Gamma_{n+1} \models \metaA_i$ by \textbf{\ref{lemma:weak}}.
-  Letting $\M=\tuple{\D,\I}$ be a model which satisfies $\Gamma_{n+1}$, it follows that $\M$ satisfies $\metaA_i$.
-  Thus $\VV{\I}{\va{a}}(\metaA_i)=1$ for some variable assignment $\va{a}$.
-  By the semantics for disjunction, both $\VV{\I}{\va{a}}(\metaA_{i}\eor\metaB)=1$ and $\VV{\I}{\va{a}}(\metaB\eor\metaA_{i})=1$, and so $\VV{\I}{\va{a}}(\metaA_{n+1})=1$.
-  Thus $\M$ satisfies $\metaA_{n+1}$ where $\Gamma_{n+1} \models \metaA_{n+1}$ follows from generalising on $\M$.
-\end{quote}
-
-
-
-
-Neither of the rule proofs above should surprise, amounting to little more than applications of the semantic clauses for conjunction and disjunction respectively.
-Something similar may be said for the following proof though a little more care is required to keep track of all of the moving parts in the proof rule for disjunction elimination.
-
-\factoidbox{
-\begin{Rthm} \label{rule:DisE}
-  \textbf{($\boldsymbol\vee$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eor$E. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by disjunction elimination $\eor$I.
-  Thus there is some line $\metaA_i=\metaA_j\eor\metaA_k$ which is live at $n+1$ and subproofs on lines $j$-$h$ and $k$-$l$ where $i<j,k,h,l\leq n$ and $\metaA_h=\metaA_l=\metaA_{n+1}$.
-  By parity of reasoning, we may assume that $h<k$, and so represent the proof as follows:
-
-  \begin{proof}
-  \have[i]{i}{\metaA\eor\metaB}
-  \open
-    \hypo[j]{j}{\metaA} \as{for $\eor$E}
-    % \have[\vdots]{a}{}
-    \have[h]{h}{\metaC}
-  \close
-  \open
-    \hypo[k]{k}{\metaB} \as{for $\eor$E}
-    % \have[\vdots]{b}{}
-    \have[l]{l}{\metaC}
-  \close
-  \have[n+1]{a}[\ ]{\metaC}\oe{i,j-h,k-l} 
-  \end{proof}
-
-  By hypothesis, $\Gamma_i\models \metaA_i$, $\Gamma_h\models \metaA_h$, and $\Gamma_l\models \metaA_l$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:live}}, and so $\Gamma_{n+1} \models \metaA_i$ by \textbf{\ref{lemma:weak}}.
-  With the exception of $\metaA_j=\metaA$, every assumption that is undischarged at line $h$ is also undischarged at line $n+1$, and so $\Gamma_h\subseteq\Gamma_{n+1}\cup\set{\metaA_j}$.
-  Similarly, we may conclude that $\Gamma_l\subseteq\Gamma_{n+1}\cup\set{\metaA_k}$, and so $\Gamma_{n+1}\cup\set{\metaA_j} \models \metaA_h$ and $\Gamma_{n+1}\cup\set{\metaA_k} \models \metaA_l$ by \textbf{\ref{lemma:weak}}.
-
-  Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma_{n+1}$, it follows from above that $\M$ satisfies $\metaA_i$, and so $\VV{\I}{\va{a}}(\metaA_j\eor\metaA_k)=1$ for some variable assignment $\va{a}$ over $\D$.
-  By the semantics for disjunction, either $\VV{\I}{\va{a}}(\metaA_j)=1$ or $\VV{\I}{\va{a}}(\metaA_k)=1$.
-  If $\VV{\I}{\va{a}}(\metaA_j)=1$, then $\M$ satisfies $\Gamma_{n+1}\cup\set{\metaA_j}$, and so also satisfies $\metaA_h=\metaA_{n+1}$ given that $\Gamma_{n+1}\cup\set{\metaA_j} \models \metaA_h$. 
-  If $\VV{\I}{\va{a}}(\metaA_k)=1$, then $\M$ satisfies $\Gamma_{n+1}\cup\set{\metaA_k}$, and so satisfies $\metaA_l=\metaA_{n+1}$ given that$\Gamma_{n+1}\cup\set{\metaA_k} \models \metaA_l$.
-  It follows that either way, $\M$ satisfies $\metaA_{n+1}$, and so $\Gamma_{n+1} \models \metaA_{n+1}$ is the result of generalising on $\M$.
-\end{quote}
-
-As with the previous two proof rules for conjunction and disjunction, the proof above turns on little more than an application of the semantics for disjunction.
-
-
-
-
-\subsection{Conditional Rules}%
-  \label{sub:ConditionalRules}
-  
-Although the elimination rules for the conditional and the biconditional are also straightforward applications of the semantics, the introduction rules for the conditional and biconditional benefit from the following lemma which produces an entailment including a conditional from an entailment that does not.
-Even so, the following lemma turns on nothing more than the semantics for the conditional, and so has been proved separately only to avoid redundancy.
-
-\begin{Lthm} \label{lemma:cond}
-  If $\Gamma \cup \set{\metaA} \models \metaB$, then $\Gamma \models \metaA \supset \metaB$.
-\end{Lthm}
-% \vspace{-.3in}
-
-\begin{quote} 
-  \textit{Proof:} Assume $\Gamma \cup \set{\metaA} \models \metaB$ and let $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma$.
-  Either $\M$ satisfies $\metaA$ or not, and so their are two cases to consider. 
-
-  \textit{Case 1:}
-  If $\M$ satisfies $\metaA$, then $\M$ satisfies $\Gamma \cup \set{\metaA}$.
-  By assumption $\M$ satisfies $\metaB$, and so $\VV{\I}{\va{a}}(\metaB)=1$ for some variable assignment $\va{a}$ over $\D$.
-  Thus $\VV{\I}{\va{a}}(\metaA \eif \metaB)=1$ by the semantics for the conditional, and so $\M$ satisfies $\metaA \supset \metaB$.
-
-  \textit{Case 2:}
-  If $\M$ does not satisfy $\metaA$, then $\VV{\I}{\va{a}}(\metaB)\neq 1$ for every variable assignment $\va{a}$ over $\D$. 
-  By the semantics for the conditional, $\VV{\I}{\va{a}}(\metaA \eif \metaB)=1$ for all $\va{a}$, and so for some $\va{a}$ in particular.
-  Thus $\M$ satisfies $\metaA \supset \metaB$.
-
-  Since $\M$ satisfies $\metaA \supset \metaB$ in both cases, we may conclude that $\Gamma \models \metaA \supset \metaB$. 
-\end{quote}
-
-
-
-
-
-\factoidbox{
-\begin{Rthm} \label{rule:label}
-  \textbf{($\boldsymbol\eif$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eif$I. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conditional introduction $\eif$I.
-  Thus there is some subproof on lines $i$-$j$ where $i<j\leq n$ and $\metaA_{n+1}=\metaA_i \eif \metaA_j$.
-  We may represent the subproof as follows:
-
-  \begin{proof}
-  \open
-    \hypo[i]{na}\metaA \as{for $\eif$I}
-    \have[j]{nb}{\metaB}
-  \close
-  \have[n+1]{a}[\ ]{\metaA\eif\metaB}\ci{na-nb} %note that UBC has a more complex citation convention: {na-b, na-nb}
-  \end{proof}
-
-  By hypothesis, $\Gamma_j \models \metaA_j$.
-  With the exception of $\metaA_i$, every assumption that is undischarged at line $j$ is also undischarged at line $n+1$.
-  It follows that $\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \models \metaA_j$ by \textbf{\ref{lemma:weak}}.
-  Thus $\Gamma_{n+1} \models \metaA_i \eif \metaA_j$ by \textbf{\ref{lemma:cond}}.
-  Equivalently, $\Gamma_{n+1} \models \metaA_{n+1}$.
-\end{quote}
-
-
-
-
-\factoidbox{
-\begin{Rthm} \label{rule:CondE}
-  \textbf{($\boldsymbol\eif$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eif$E. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conditional introduction $\eif$E.
-  Thus there are some lines $\metaA_i=\metaA_j\eif\metaA_{n+1}$ and $\metaA_j$ for $i,j\leq n$ which are live at $n+1$, and so $\Gamma_i,\Gamma_j\subseteq\Gamma_{n+1}$ by \textbf{\ref{lemma:live}}.
-  By hypothesis, $\Gamma_i\models \metaA_i$ and $\Gamma_j\models \metaA_j$, and so $\Gamma_{n+1} \models \metaA_i$ and $\Gamma_{n+1} \models \metaA_j$ by \textbf{\ref{lemma:weak}}.
-  Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma_{n+1}$, it follows that $\M$ satisfies $\metaA_i$ and $\metaA_j$.
-  By \textbf{\ref{lemma:allvar}}, $\VV{\I}{\va{a}}(\metaA_i)=\VV{\I}{\va{a}}(\metaA_j\eif\metaA_{n+1})=\VV{\I}{\va{a}}(\metaA_j)=1$ for all variable assignment $\va{a}$ over $\D$, and so for some $\va{a}$ in particular.
-  By the semantics for the conditional, either $\VV{\I}{\va{a}}(\metaA_j)\neq 1$ or $\VV{\I}{\va{a}}(\metaA_{n+1})=1$.
-  Given the above, $\VV{\I}{\va{a}}(\metaA_{n+1})=1$, and so $\M$ satisfies $\metaA_{n+1}$.
-  Generalising on $\M$, we may conclude that $\Gamma_{n+1} \models \metaA_{n+1}$.
-\end{quote}
-
-
-
-
-
-\factoidbox{
-\begin{Rthm} \label{rule:BiconI}
-  \textbf{($\boldsymbol\eiff$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eiff$I. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by biconditional introduction $\eiff$E.
-  Thus there are some subproofs on lines $i$-$j$ and $h$-$k$ for some $i,j<h,k\leq n$ where $\metaA_i=\metaA_h=\metaA$, $\metaA_j=\metaA_k=\metaB$, and either $\metaA_{n+1}=\metaA\eiff\metaB$ or $\metaA_{n+1}=\metaB\eiff\metaA$.
-  By parity of reasoning, we may assume that $\metaA_{n+1}=\metaA\eiff\metaB$.
-  Thus we have:
-
-  \begin{proof}
+\begin{proof}
+	\have[\ ]{a}{\metaA \eor \enot \metaA} \by{:LEM}{}
+\end{proof}
+
+\begin{proof}
+  \open 
+    \hypo[1]{a}{\enot(\metaA \eor \enot \metaA)} \as{for $\enot$E}
     \open
-      \hypo[i]{i}{\metaA} \as{for $\eor$E}
-      % \have[\vdots]{a}{}
-      \have[j]{j}{\metaB}
+      \hypo[2]{b}{\metaA} \as{for $\enot$I}
+      \have[3]{c}{\metaA \eor \enot \metaA} \oi{b}
+      \have[4]{d}{\enot(\metaA \eor \enot \metaA)} \r{a}
     \close
-    \open
-      \hypo[h]{h}{\metaB} \as{for $\eor$E}
-      % \have[\vdots]{b}{}
-      \have[k]{k}{\metaA}
-    \close
-    \have[n+1]{a}[\ ]{\metaA \eiff \metaB}\bi{i-j,h-k} 
-  \end{proof}
+    \have[5]{e}{\enot \metaA} \ni{b-d}
+    \have[6]{f}{\metaA \eor \enot \metaA} \oi{e}
+  \close
+  \have[7]{g}{\metaA \eor \enot \metaA} \ne{a-f}
+\end{proof}
 
-  By hypothesis, $\Gamma_j\models \metaA_j$, $\Gamma_k\models \metaA_k$, and $\Gamma_{n+1}\models \metaA_{n+1}$.
-  With the exception of $\metaA_i$, every assumption that is undischarged at line $j$ is also undischarged at line $n+1$, and so $\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$.
-  Similarly, we may conclude that $\Gamma_k\subseteq\Gamma_{n+1}\cup\set{\metaA_h}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \models \metaA_j$ and $\Gamma_{n+1}\cup\set{\metaA_h} \models \metaA_k$ by \textbf{\ref{lemma:weak}}.
+\end{multicols}
 
-  By \textbf{\ref{lemma:cond}}, both $\Gamma_{n+1} \models \metaA_i \eif \metaA_j$ and $\Gamma_{n+1} \models \metaA_h \eif \metaA_k$.
-  Equivalently, $\Gamma_{n+1} \models \metaA \eif \metaB$ and $\Gamma_{n+1} \models \metaB \eif \metaA$.
-  Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma_{n+1}$, it follows that $\M$ satisfies $\metaA \eif \metaB$ and $\metaB \eif \metaA$ given the identities above.
-  By \textbf{\ref{lemma:allvar}}, $\VV{\I}{\va{a}}(\metaA \eif \metaB)=\VV{\I}{\va{a}}(\metaB \eif \metaA)=1$ for all variable assignments $\va{a}$, and so for some $\va{a}$ in particular. 
-  Thus $\VV{\I}{\va{a}}(\metaA)\neq 1$ or $\VV{\I}{\va{a}}(\metaB)=1$, and $\VV{\I}{\va{a}}(\metaB)\neq 1$ or $\VV{\I}{\va{a}}(\metaA)=1$ by the semantics for the conditional.
-  As a result, $\VV{\I}{\va{a}}(\metaB)=1$ if $\VV{\I}{\va{a}}(\metaA)=1$, and similarly, $\VV{\I}{\va{a}}(\metaA)=1$ if $\VV{\I}{\va{a}}(\metaB)=1$, and so $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaB)$.
-  Thus $\VV{\I}{\va{a}}(\metaA \eiff \metaB)=1$ by the semantics for the biconditional, and so $\M$ satisfies $\metaA_{n+1}$.
-  Generalising on $\M$, we may conclude that $\Gamma_{n+1}\models\metaA_{n+1}$.
-\end{quote}
+By contrast with the basic and derived rules given above, theorems do not cite previous lines of the proofs in which they occur, though they are justified all the same.
+This is because applications of LEM abbreviate proofs of the form given above on the right.
 
 
 
 
+\subsection{Law of Non-Contradiction}
+  \label{LNC}
 
-\factoidbox{
-\begin{Rthm} \label{rule:Bicon}
-  \textbf{($\boldsymbol\eiff$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\eiff$E. 
-\end{Rthm}
-}
+Given that $\V{\I}(\metaA) \in \set{1,0}$ for any wfs $\metaA$ of $\PL$, it also follows by the semantics for negation and conjunction that $\V{\I}(\metaA \eand \enot \metaA) = 0$ for any wfs $\metaA$ and interpretation $\I$ of $\PL$, and so every instance of $\metaA \eand \enot \metaA$ is a contradiction. 
+Equivalently, all instances of $\enot(\metaA \eand \enot \metaA)$ are tautologies, and so we may expect $\enot(\metaA \eand \enot \metaA)$ to be a theorem for any wfs $\metaA$ of $\PL$. 
+In order to cover all instances, we may provide the following derivation:
 
-\begin{quote} 
-  \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by biconditional introduction $\eif$E.
-Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\metaA_i=\metaA_j\eiff\metaA_{n+1}$ or $\metaA_i=\metaA_{n+1}\eiff\metaA_j$.
-  By parity of reasoning, we may assume that $\metaA_i=\metaA_j\eiff\metaA_{n+1}$ where $\Gamma_i,\Gamma_j\subseteq\Gamma_{n+1}$ follows by \textbf{\ref{lemma:live}}.
-  By hypothesis, $\Gamma_i\models \metaA_i$ and $\Gamma_j\models \metaA_j$, and so $\Gamma_{n+1} \models \metaA_i$ and $\Gamma_{n+1} \models \metaA_j$ by \textbf{\ref{lemma:weak}}.
-  Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma_{n+1}$, it follows that $\M$ satisfies $\metaA_i$ and $\metaA_j$.
-  By \textbf{\ref{lemma:allvar}}, $\VV{\I}{\va{a}}(\metaA_i)=\VV{\I}{\va{a}}(\metaA_j\eiff\metaA_{n+1})=\VV{\I}{\va{a}}(\metaA_j)=1$ for every variable assignment $\va{a}$ over $\D$, and so for some $\va{a}$ in particular. 
-  By the semantics for the biconditional, $\VV{\I}{\va{a}}(\metaA_j)=\VV{\I}{\va{a}}(\metaA_{n+1})$, and so $\VV{\I}{\va{a}}(\metaA_{n+1})=1$.
-  Thus $\M$ satisfies $\metaA_{n+1}$, and so we may conclude that $\Gamma_{n+1} \models \metaA_{n+1}$ by generalising on $\M$.
-\end{quote}
+\begin{multicols}{2}
+  
+\begin{proof}
+	\have[\ ]{a}{\enot(\metaA \eand \enot \metaA)} \by{:LNC}{}
+\end{proof}
 
-These final results complete the last of the proofs for all of the rules included in SD.
-Given \textbf{\ref{rule:AS}} -- \textbf{\ref{rule:Bicon}}, we may report the following preliminary result:
+\begin{proof}
+  \open 
+    \hypo[1]{a}{\metaA \eand \enot \metaA} \as{for $\enot$I}
+    \have[2]{b}{\metaA} \ae{a}
+    \have[3]{c}{\enot \metaA} \ae{a}
+  \close
+  \have[4]{d}{\enot(\metaA \eand \enot \metaA)} \ni{a-c}
+\end{proof}
 
-\begin{enumerate}[leftmargin=1.5in]
-  \item[\it SD Rules:] If $\metaA_{n+1}$ follows by the proof rules for SD from sentences in $\Gamma_{n+1}$ and $\Gamma_k \models \metaA_k$ for every $k\leq n$, then $\Gamma_{n+1} \models \metaA_{n+1}$.
-\end{enumerate}
+\end{multicols}
 
-It remains to extend this result to include the remaining proof rules in QD.
-In order to do so, the following section will prove two important supporting lemmas.
+Having observed that every instance of $\metaA \eor \enot \metaA$ and $\enot(\metaA \eand \enot \metaA)$ are tautologies, one might reasonably expect these to be derivable in PL though nothing so far allows us to jump to this conclusion.
+Rather, the derivations above do important work, indicating that PL is doing what it should do by allowing us to reason our way to the logical consequences of any set of premises where the logical consequences of the empty set are a special case.
+Nevertheless, we should like to know if there is anything missing.
+That is, we may ask whether there are logical consequences of $\PL$ which PL is unable to derive.
+It turns out that this is not the case: every logical consequences of $\PL$ whatsoever is derivable in PL.
+In a word, PL is \textit{complete}.
+
+We will turn to prove \textsc{PL Completeness} in the following chapter.
+For the time being, there is an important consequence of \textsc{PL Soundness} that we are now in a position to draw.
 
 
 
-\section{Substitution and Model Lemmas}% TODO move above
-  \label{sec:Lemmas}
 
-This section establishes two closely related results, both of which show that the truth-value of a wff is preserved by specific changes to that wff, or to the model in which it is evaluated.
-These results will play a crucial role in proving the lemmas that we will need to extend \textit{SD Rules} to include the remaining proof rules that belong to QD.
 
-In slightly greater detail, the following lemma shows that replacing $\alpha$ with $\beta$ in a wff $\metaA$ does not effect its truth-value when evaluated at a model and variable assignment so long as $\alpha$ and $\beta$ refer to the same element of the domain on that model and variable assignment.
 
-\begin{Lthm} \label{lemma:sub}
-  $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ if $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$ and $\beta$ is free for $\alpha$ in $\metaA$.
-\end{Lthm}
-% \vspace{-.3in}
+\section{Consistency}
+
+In the previous section we set about deriving a host of rules and theorems.
+You might begin to wonder just how many derived rules and theorems there are where it might be natural to think that the more the better.
+Another way to put this point is in terms of the \textsc{strength} of PL as a proof system where this refers to how much we can derive with the basic rules that PL provides.
+Accordingly, one might be tempted to think that stronger logics are better.
+After all, what could be bad about being able to derive more rather than less?
+
+Tempting as it may be to think that strength is only a good thing, we have already seen some cases where being able to derive too much is not a good thing.
+In particular, we saw that everything can be derived from a set containing a wfs of $\PL$ and its negation.
+More generally, all wfss of $\PL$ are derivable from an inconsistent set of wfss of $\PL$.
+We may then prove:
+
+\begin{Cthm} \label{cor:PL-inconsistent_unsat}
+  If $\MetaG$ is inconsistent, then $\MetaG$ is unsatisfiable. 
+\end{Cthm}
+ \vspace{-.2in}
+% Letting $\MetaG$ be any inconsistent set of wfss of $\PL$, we know by definition that $\MetaG \vdash \bot$, and so $\MetaG \vDash \bot$ follows \textsc{PL Soundness}.
+
+Having established \textsc{PL Soundness} and \textbf{\ref{lemma:PL-consequence_unsat}}, the proof of \textbf{\ref{cor:PL-inconsistent_unsat}} follows easily and so has been left as an exercise for the reader.
+By contrast with lemmas which are used to establish important results, \define{corollaries} are the consequences of important results.
+What the corollary above shows is that any set of wfss of $\PL$ that is strong enough to be able to derive all wfss of $\PL$ is also unsatisfiable. 
+Thus we also have the immediate consequence:
+% By contraposition, we also have the following obvious consequence:
+% every satisfiable set of wfss of $\PL$ is consistent, where we define a set of wfss of $\PL$ to be \define{consistent} just in case it is not inconsistent. 
+
+\begin{Cthm} \label{cor:PL-sat_consistent}
+  If $\MetaG$ is satisfiable, then $\MetaG$ is consistent.
+\end{Cthm}
+ \vspace{-.2in}
 
 \begin{quote} 
   \textit{Proof:}
-  The proof goes by induction on the wff of QL$^=$. 
-
-  \textit{Base:} Let $\metaA$ be a wff of QL$^=$ where $\comp(\metaA)=0$.
-  Assume that $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
-  It follows that $\metaA$ is either $\F^n\alpha_1,\ldots\alpha_n$ or $\alpha_1=\alpha_2$.
-  If $\metaA$ is $\F^n\alpha_1,\ldots\alpha_n$ where $\gamma_i=\beta$ if $\alpha_i=\alpha$ and otherwise $\gamma_i=\alpha_i$, then we have:
-
-  \vspace{-.2in}
-  \begin{align*}
-    \VV{\I}{\va{a}}(\metaA)=1 &\textit{ ~iff~ } \VV{\I}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1\\
-      &\textit{ ~iff~ } \tuple{\VV{\I}{\va{a}}(\alpha_1),\ldots,\VV{\I}{\va{a}}(\alpha_n)}\in\I(\F^n)\\
-      (\star) &\textit{ ~iff~ } \tuple{\VV{\I}{\va{a}}(\gamma_1),\ldots,\VV{\I}{\va{a}}(\gamma_n)}\in\I(\F^n)\\
-      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\F^n\gamma_1,\ldots,\gamma_n)=1\\
-      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1.
-  \end{align*}
-
-  Whenever $\alpha_i=\alpha$, it follows that $\VV{\I}{\va{a}}(\alpha_i)=\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$ by assumption.
-  Since $\VV{\I}{\va{a}}(\beta)=\VV{\I}{\va{a}}(\gamma_i)$ by definition, we may conclude that $\VV{\I}{\va{a}}(\alpha_i)=\VV{\I}{\va{a}}(\gamma_i)$.
-  If $\alpha_i\neq\alpha$, then $\alpha_i=\gamma_i$ by definition, and so $\VV{\I}{\va{a}}(\alpha_i)=\VV{\I}{\va{a}}(\gamma_i)$ is immediate.
-  It follows that $\VV{\I}{\va{a}}(\alpha_i)=\VV{\I}{\va{a}}(\gamma_i)$ for all $1\leq i\leq n$, thereby justifying $(\star)$.
-  The other biconditionals hold by definition or the semantics for atomic wffs of QL$^=$.
-
-  If instead $\metaA$ is $\alpha_1=\alpha_2$, then assuming as before that $\gamma_i=\beta$ if $\alpha_i=\alpha$ and otherwise $\gamma_i=\alpha_i$, we have the following biconditionals:
-
-  \vspace{-.2in}
-  \begin{align*}
-    \VV{\I}{\va{a}}(\metaA)=1 &\textit{ ~iff~ } \VV{\I}{\va{a}}(\alpha_1=\alpha_2)=1\\
-      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\alpha_1)=\VV{\I}{\va{a}}(\alpha_n)\\
-      (\ast) &\textit{ ~iff~ } \VV{\I}{\va{a}}(\gamma_1)=\VV{\I}{\va{a}}(\gamma_2)\\
-      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\gamma_1=\gamma_2)=1\\
-      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1.
-  \end{align*}
-
-  We may justify $(\ast)$ in an analogous manner to $(\star)$, where the justifications for the other biconditionals is the same as before. 
-  It follows that $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ whenever $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$ and $\comp(\metaA)=0$. 
-
-  \textit{Induction:} Assume that if $\comp(\metaA)\leq n$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ whenever $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$. 
-  Letting $\comp(\metaA)=n+1$, there are seven cases to consider corresponding to the operators $\enot,\eand,\eor,\eif,\eiff,\qt{\forall}{\gamma},$ and $\qt{\exists}{\gamma}$.
-
-  \textit{Case 1:} Assume that $\metaA=\enot\metaB$ where $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
-  Since $\comp(\metaA)=n+1$ and $\comp(\enot\metaB)=\comp(\metaB)+1$, it follows that $\comp(\metaB)\leq n$.
-  It follows by hypothesis that $\VV{\I}{\va{a}}(\metaB)=\VV{\I}{\va{a}}(\metaB\unisub{\beta}{\alpha})$, and so $\VV{\I}{\va{a}}(\enot\metaB)=\VV{\I}{\va{a}}(\enot\metaB\unisub{\beta}{\alpha})$ by the semantics for negation.
-  Thus $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ as desired. 
-  % Since the cases for $\eand,\eor,\eif,$ and $\eiff$ are similar, these cases will be left as exercises for the reader.
-
-  % \textit{Case 2:} Assume that $\metaA=\metaB\eand\metaC$ where $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
-  % Since $\comp(\metaA)=n+1$ and $\comp(\metaB\eand\metaC)=\comp(\metaB)+\comp(\metaC)+1$, it follows that $\comp(\metaB),\comp(\metaC)\leq n$.
-  % It follows by hypothesis that $\VV{\I}{\va{a}}(\metaB)=\VV{\I}{\va{a}}(\metaB\unisub{\beta}{\alpha})$ and $\VV{\I}{\va{a}}(\metaC)=\VV{\I}{\va{a}}(\metaC\unisub{\beta}{\alpha})$, and so $\VV{\I}{\va{a}}(\metaB\eand\metaC)=\VV{\I}{\va{a}}((\metaB\eand\metaC)\unisub{\beta}{\alpha})$ by the semantics for conjunction.
-  % Thus $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ as desired. 
-  % % Since the cases for $\eand,\eor,\eif,$ and $\eiff$ are similar, these cases will be left as exercises for the reader.
-
-  \textit{Case 6:} Assume $\metaA=\qt{\forall}{\gamma}\metaB$ where $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
-  If $\gamma=\alpha$, if follows that $\alpha$ is not free in $\metaA$, and so $\metaA=\metaA\unisub{\beta}{\alpha}$.
-  As a result, $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ is immediate.
-  Assume instead that $\gamma\neq\alpha$ and consider the following biconditionals:
-  % As before, $\comp(\metaB)\leq n$, and so $\VV{\I}{\va{c}}(\metaB)=\VV{\I}{\va{c}}(\metaB\unisub{\beta}{\alpha})$ whenever $\VV{\I}{\va{c}}(\alpha)=\VV{\I}{\va{c}}(\beta)$ by hypothesis.
-
-  \vspace{-.2in}
-  \begin{align*}
-    \VV{\I}{\va{a}}(\metaA)=1 
-      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\qt{\forall}{\gamma}\metaB)=1\\
-      &\textit{ ~iff~ } \VV{\I}{\va{e}}(\metaB)=1 \text{ for all } \gamma\text{-variants } \va{e} \text{ of } \va{a}\\ 
-      (\dagger) &\textit{ ~iff~ } \VV{\I}{\va{e}}(\metaB\unisub{\beta}{\alpha})=1 \text{ for all } \gamma\text{-variants } \va{e} \text{ of } \va{a}\\  
-      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\qt{\forall}{\gamma}\metaB\unisub{\beta}{\alpha})=1\\ 
-      &\textit{ ~iff~ } \VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1.
-  \end{align*}
-
-  Let $\va{e}$ be an arbitrary $\gamma$-variant of $\va{a}$.
-  Since $\gamma\neq\alpha$, it follows that $\va{e}(\alpha)=\va{a}(\alpha)$ if $\alpha$ is a variable, and so $\VV{\I}{\va{e}}(\alpha)=\VV{\I}{\va{a}}(\alpha)$ regardless of whether $\alpha$ is a variable or a constant.
-  Together with starting assumption $\VV{\I}{\va{e}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
-  By assumption, $\beta$ is free for $\alpha$ in $\metaA$, and so $\gamma\neq\beta$.
-  % TODO: add case where $\alpha$ does not occur in $\metaA$ and $\gamma=\beta$ 
-  If $\beta$ is a variable, then $\va{e}(\beta)=\va{a}(\beta)$ since $\va{e}$ is a $\gamma$-variant of $\va{a}$, and so $\VV{\I}{\va{a}}(\beta)=\VV{\I}{\va{e}}(\beta)$ regardless of whether $\beta$ is a variable or a constant.
-  Thus $\VV{\I}{\va{e}}(\alpha)=\VV{\I}{\va{e}}(\beta)$.
-  As in \textit{Case 1}, $\comp(\metaB)\leq n$, and so $\VV{\I}{\va{e}}(\metaB)=\VV{\I}{\va{e}}(\metaB\unisub{\beta}{\alpha})$ by hypothesis.
-  Since $\va{e}$ was any $\gamma$-variant of $\va{a}$, it follows that $\VV{\I}{\va{e}}(\metaB)=\VV{\I}{\va{e}}(\metaB\unisub{\beta}{\alpha})$ for all $\gamma$-variants $\va{e}$ of $\va{a}$, thereby establishing $(\dagger)$.
-  The other biconditionals follow from the definitions and the semantics for the universal quantifier.
-
-  Since the cases for $\eand,\eor,\eif,\eiff,$ and $\qt{\exists}{\gamma}$ are similar, these cases will be left as exercises for the reader.
-  It follows that $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ whenever $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$ and $\comp(\metaA)=n+1$.
-  Thus the lemma follows by induction.
+  Follows immediately from \textbf{\ref{cor:PL-inconsistent_unsat}} by contraposition.
+  \qed
 \end{quote}
 
+Whereas inconsistency has witnesses, consistency does not.
+That is, although you might show how to derive $\bot$ from some set $\MetaG$ of wfss of $\PL$ by providing a particular derivation in PL, to claim that $\MetaG$ is consistent is to say that there is no way to derive $\bot$ from $\MetaG$ in PL. 
+This might seem like a hard thing to show since how should we expect to survey the entire space of possible derivations in order to claim that there are none in which $\bot$ is the conclusion and $\MetaG$ is the set of premises?
+Were one to proceed by \textit{reductio}, it is not clear how to derive a contradiction from the assumption that there is a derivation of $\bot$ from $\MetaG$ in PL. 
+
+Given \textbf{\ref{cor:PL-sat_consistent}}, there is a much easier way to show that a set $\MetaG$ of wfss of $\PL$ is consistent: simply show that it is satisfiable. 
+Whereas consistency does not have witnesses on account of asserting something general, satisfiability does have witnesses.
+That is, given any satisfiable set $\MetaG$, there is a least one particular interpretation $\I$ of $\PL$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$. 
+Assuming that we can identify an interpretation $\I$ which witnesses the satisfiability of $\MetaG$, we may draw on \textbf{\ref{cor:PL-sat_consistent}} in order to conclude that $\MetaG$ is consistent. 
+
+There is a particularly important application of this general procedure.
+That is, something we should like to know is whether the theorems of PL are consistent, since if the theorems of PL turned out to be inconsistent, then PL would be so strong as to be able to derive anything from nothing.
+But that is not what we want.
+Rather, our hope in setting up PL was to describe what follows from what in virtue of logical form where we had previously characterized this by defining logical consequence.
+If it turns out that everything is derivable from nothing, then all our hard work will have been for nothing since PL will have been shown to massively overshoot its intended target: formal reasoning.
+
+Given our present strategy, all that remains is to find an interpretation of $\PL$ that satisfies all of the theorems of PL. 
+But how shall we choose?
+The answer is that we don't need to: any interpretation at all will do.
+Since we know by \textsc{PL Soundness} that every theorem of PL is a $\PL$ tautology, $\V{\I}(\metaA) = 1$ for any theorem $\metaA$ of PL and interpretation $\I$ of $\PL$ whatsoever. 
+As our witness, suppose we choose the $\PL$ interpretation $\I^+$ where $\V{\I^+}(\metaB) = 1$ for every sentence letter $\metaB$ of $\PL$. 
+Since, like any $\PL$ interpretation, $\V{\I^+}(\metaA) = 1$ for every theorem $\metaA$ of PL, it follows that the theorems of PL are indeed satisfiable, and so consistent by \textbf{\ref{cor:PL-sat_consistent}} above.
+Thus we may conclude that despite all of the rules and theorems we derived, PL is not so strong as to be able to derive everything from nothing.
+% Although strong logics are good thing
+% Circling back to our original temptation to claim that the strength of a logic is a good thing, we may now 
+
+
+% \section{Schemata}
+%
+% Indeed, this way of thinking inspires an important approach to logic: instead of focusing of theorems and proofs in $\PL$, perhaps we should really be focusing on the \textit{rule schemata} themselves.
+% As a special case we have \textit{axiom schemata} which amount to rule schemata which do not cite any lines.
+% For instance, here is an axiom schemata called the \textit{Law of Excluded Middle} (LEM): $\metaA\eor\enot\metaA$.
+% Once we have derived LEM--- a worthwhile exercise--- we may write any instance of $\metaA\eor\enot\metaA$ on any line of a proof without citing any previous lines whatsoever.
+%
+% Instead of thinking about valid $\PL$ arguments and their corresponding proofs, one might think about a logic as a set of rule schemata.
+% This approach to logic has some advantages since it cuts to the chase, focusing on what we are ultimately concerned with, namely \textit{logical forms}.
+% It is also easy to prove things about such systems since they are easy to characterise abstractly.
+% The disadvantage of such an approach is that these proof systems are somewhat harder to think about.
+% By contrast, it is nice to have concrete instances of $\PL$ sentences and arguments instead of logical forms all the way down.
+% This more concrete approach will be maintained throughout this text, however, it is nevertheless worth drawing the connection given all of our derived rules above.
+% Indeed, we may think of the system of natural deduction PL as the smallest set to include the basic rule schemata in PL together with all rule schemata that are derivable from these basic rules.
+% This set of logical forms of reasoning may be taken to provide an abstract answer to the question, ``What is logic about?''
+
+
+
+
+% \section{Derivation Length}
+%   \label{sec.PL-length}
+%
+% Before attempting to establish soundness, it will be important to provide a precise definition of the length of an SL tree.
+% This definition will take a recursive form.
+%
+% Consider any root consisting of SL sentences.
+% Since no resolution rules have been applied, we will refer to such a tree as having length 0.
+% Even if the root includes many sentences, we are only measuring the number of applications of resolution rules, and a root on its own doesn't include any applications of resolution rules.
+% Now consider any tree of length $n$, i.e., any tree which results from $n$ applications of the resolution rules. 
+% We may refer to the result of applying any application rule on any one branch as a tree of length $n+1$.
+% A little more precisely, we will define $\length$ to be the smallest function satisfying:%
+% \begin{enumerate}[leftmargin=1in,labelsep=.15in]
+%   \item[\it Base:] $\length(X)=0$ for any root $X$.
+%   \item[\it Recursive:] For any tree $X$, if $\length(X)=n$ and $X'$ is the result of resolving a sentence in exactly one branch in $X$, then $\length(X')=n+1$.
+% \end{enumerate}
+% Even if the same sentence can be resolved on different branches, each time we resolve that sentence on a branch we get a tree with greater length.
+
+% \subsection{Complexity}
+%
+% Whereas $\length$ applies to SL trees, it will also help to have a measure of the complexity of SL sentences.
+% Intuitively, the complexity of an SL sentence is the number of connectives that it contains.
+% However, we will often be quantifying over all SL sentences, and so will be using metavariables like $\metaA, \metaB,$ etc., to do so.
+% Whereas we might be able to count the connectives in particular SL sentence, we cannot count the number of connectives in some arbitrary SL sentence $\metaA$. 
+% Instead, we will define a function $\comp$ which provides the complexity of any SL sentence whatsoever.
+% In order to conform to the recursive definition of SL sentences, we will define complexity recursively where $\comp$ is the smallest function to satisfy: 
+% \begin{enumerate}[leftmargin=1in,labelsep=.15in]
+%   \item[\it Base:] $\comp(\metaA)=0$ for any sentence letter $\metaA$ of SL. 
+%   \item[\it Recursive:] For any sentences $\metaA$ and $\metaB$ of SL and connective $\star\in\set{\eand,\eor,\eif,\eiff}$:
+%     \begin{itemize}
+%       \item[($\enot$)] $\comp(\enot\metaA)=\comp(\metaA)+1$
+%       \item[(\hspace{1.5pt}$\star$\hspace{1.5pt})] $\comp(\metaA \star \metaB)=\comp(\metaA)+\comp(\metaB)+1$.
+%     \end{itemize}
+% \end{enumerate}
+% Instead of writing our clauses for each binary connective, we have used the metavariable $\star$ to range over the binary connectives included in SL. 
+% Accordingly, we know that $\comp(\metaA \eand \metaB)=\comp(\metaA)+\comp(\metaB)+1$ for $\star=\;\eand$, and similarly for the other binary connectives.
+
+
+
+% \section{Logical Analysis}
+%
+% If we can translate an argument into $\PL$, we now have a number of tools that we can use to investigate that argument's logical properties.
+% Consider the following options:
+%
+% \begin{table}[h]
+% \begin{center}
+% \begin{tabular*}{\textwidth}{p{12em}|p{10em}|p{12em}|}
+% \cline{2-3}
+%
+%  & \multicolumn{1}{|c|}{YES} & \multicolumn{1}{|c|}{NO}\\
+% \cline{2-3}
+%
+% Is \metaA{} a tautology? & Prove $\vdash\metaA{}$ & Give a model in which \metaA{} is false\\
+% \cline{2-3}
+%
+% Is \metaA{} a contradiction? &  Prove $\vdash\enot\metaA{}$ & Give a model in which \metaA{} is true\\
+% \cline{2-3}
+%
+% Is \metaA{} contingent? & Give a model in which \metaA{} is true and another in which \metaA{} is false & Prove $\vdash\metaA{}$ or $\vdash\enot\metaA{}$\\
+% \cline{2-3}
+%
+% Are \metaA{} and \metaB{} equivalent? & Prove \mbox{$\metaA{}\vdash\metaB{}$} and \mbox{$\metaB{}\vdash\metaA{}$}  & Give a model in which \metaA{} and \metaB{} have different truth values\\
+% \cline{2-3}
+%
+% Is the set $\MetaG$ consistent? & Give a model in which all the sentences in $\MetaG$ are true & Taking the sentences in $\MetaG$, prove $\metaB$ and $\enot\metaB$\\
+% \cline{2-3}
+%
+% Is `$\metaA, \metaB, \ldots\ \therefore\ \metaC$' valid? & Prove $\metaA{}, \metaB{}, \ldots \vdash\metaC{}$ & Give a model that satisfies $\set{\metaA, \metaB, \ldots,\ \enot \metaC}$\\
+% \cline{2-3}
+% \end{tabular*}
+% \end{center}
+% % \caption{Sometimes it is easier to show something by providing proofs than it is by providing models. Sometimes it is the other way round.  It depends on what you are trying to show.}
+% \label{table.ProofOrModel}
+% \end{table}
+% % \FloatBarrier
+%
+% Answering the questions on the left may sometimes be easy, and other times far from obvious.
+% Whereas the tree proof system provides a fail-safe way to determine the answer, the PL proof system provides a way to construct compelling arguments.
 
-The proof above works by induction on complexity where the only tricky cases are for the quantifiers.
-In a similar manner to \textbf{\ref{lemma:assign}}, we avoided assuming the antecedent of the claim to be proved at the outset so that the induction hypothesis took a general form.
-In particular, $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ whenever $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
-Since this holds for any variable assignment $\va{a}$, we were able to apply the induction hypothesis in order to prove $(\dagger)$.
-
-The next lemma proves something similar, this time holding the wff $\metaA$ fixed and varying the model. 
-In particular, any model that agrees with $\M$ on all constants and predicates which occur in $\metaA$ will yield the same truth-value at any given variable assignment. 
-
-\begin{Lthm} \label{lemma:model}
-  If $\M=\tuple{\D,\I}$ and $\M'=\tuple{\D,\I'}$ share the domain $\D$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and constant $\alpha$ that occurs in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any variable assignment $\va{a}$ over $\D$.
-\end{Lthm}
-% \vspace{-.3in}
-
-\begin{quote} 
-  \textit{Proof:} Assume that $\M=\tuple{\D,\I}$ and $\M'=\tuple{\D,\I'}$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and constant $\alpha$ that occurs in $\metaA$.
-  The proof goes by induction on the complexity of $\metaA$.
-
-  \textit{Base:} Assume $\comp(\metaA)=0$ where $\va{a}$ is any variable assignment over $\D$.
-  It follows that $\metaA$ is either $\F^n\alpha_1,\ldots\alpha_n$ or $\alpha_1=\alpha_2$.
-  Consider the following cases:
-
-  \vspace{-.2in}
-  \begin{align*}
-    \VV{\I}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1 &\textit{ ~iff~ } \tuple{\VV{\I}{\va{a}}(\alpha_1),\ldots,\VV{\I}{\va{a}}(\alpha_n)}\in\I(\F^n)\\
-      (\star) &\textit{ ~iff~ } \tuple{\VV{\I'}{\va{a}}(\alpha_1),\ldots,\VV{\I'}{\va{a}}(\alpha_n)}\in\I'(\F^n)\\
-      &\textit{ ~iff~ } \VV{\I'}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1.
-  \end{align*}
 
-  \vspace{-.2in}
-  \begin{align*}
-    \VV{\I}{\va{a}}(\alpha_1=\alpha_2)=1 &\textit{ ~iff~ } \VV{\I}{\va{a}}(\alpha_1) = \VV{\I}{\va{a}}(\alpha_2)\\
-      (\ast) &\textit{ ~iff~ } \VV{\I'}{\va{a}}(\alpha_1) = \VV{\I'}{\va{a}}(\alpha_2)\\
-      &\textit{ ~iff~ } \VV{\I'}{\va{a}}(\alpha_1=\alpha_2)=1.
-  \end{align*}
-
-  Whereas $\I(\F^n)=\I'(\F^n)$ is immediate from the assumption, we may observe that $\VV{\I}{\va{a}}(\alpha_i)=\I(\alpha_i)=\I'(\alpha_i)=\VV{\I'}{\va{a}}(\alpha_i)$ if $\alpha_i$ is a constant, and if $\alpha_i$ is a variable, then $\VV{\I}{\va{a}}(\alpha_i)=\va{a}(\alpha_i)=\VV{\I'}{\va{a}}(\alpha_i)$, thereby establishing $(\star)$ and $(\ast)$. 
-  It follows that $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any variable assignment $\va{a}$ over $\D$ if $\comp(\metaA)=0$.
-
-  \textit{Induction:} Assume that if $\comp(\metaA)\leq n$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for all variable assignments $\va{a}$ over $\D$. 
-  Letting $\comp(\metaA)=n+1$, there are seven cases to consider corresponding to the operators $\enot,\eand,\eor,\eif,\eiff,\qt{\forall}{\gamma},$ and $\qt{\exists}{\gamma}$.
-
-  \textit{Case 1:} Assume $\metaA=\enot\metaB$.
-  Since $\comp(\metaA)=n+1$ and $\comp(\enot\metaB)=\comp(\metaB)+1$, it follows that $\comp(\metaB)\leq n$.
-  By hypothesis, $\VV{\I}{\va{a}}(\metaB)=\VV{\I'}{\va{a}}(\metaB)$ for all variable assignments $\va{a}$ over $\D$, and so by the semantics for negation, $\VV{\I}{\va{a}}(\enot\metaB)=\VV{\I'}{\va{a}}(\enot\metaB)$ for all variable assignments $\va{a}$ over $\D$.
-  Thus $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for all variable assignments $\va{a}$ over $\D$ as desired. 
-  The cases for $\eand,\eor,\eif,$ and $\eiff$ are similar.
 
-  \textit{Case 6:} Assume $\metaA=\qt{\forall}{\gamma}\metaB$.
-  For the same reasons given above, $\comp(\metaB)\leq n$.
-  We may then consider the following biconditionals:
-
-  \vspace{-.2in}
-  \begin{align*}
-    \VV{\I}{\va{a}}(\qt{\forall}{\gamma}\metaB)=1 &\textit{ ~iff~ } \VV{\I}{\va{e}}(\metaB)=1 \text{ for all } \gamma\text{-variants } \va{e} \text{ of } \va{a}\\ 
-      (\dagger) &\textit{ ~iff~ } \VV{\I'}{\va{e}}(\metaB)=1 \text{ for all } \gamma\text{-variants } \va{e} \text{ of } \va{a}\\  
-      &\textit{ ~iff~ } \VV{\I'}{\va{a}}(\qt{\forall}{\gamma}\metaB)=1.
-  \end{align*}
-
-  By hypothesis, $\VV{\I}{\va{e}}(\metaB)=\VV{\I'}{\va{e}}(\metaB)$ for any variable assignment $\va{e}$, thereby establishing $(\dagger)$.
-  The other biconditionals follow from the semantics for the universal quantifier.
-  Thus $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for all variable assignments $\va{a}$ over $\D$. 
-
-  Since the cases for $\eand,\eor,\eif,\eiff,$ and $\qt{\exists}{\gamma}$ are similar to those above, they will be left as exercises for the reader.
-  It follows that $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for all variable assignments $\va{a}$ if $\comp(\metaA)=n+1$.
-  Thus the lemma follows by induction.
-\end{quote}
-
-Although by no means surprising, the lemma above plays a crucial role in a number of the proofs given below.
-With these new resources in place, we may finish the proof of \textit{QD Rules}.
-
-
-
-
-
-\section{QD Rules}%
-  \label{sec:QDRules}
-
-By drawing on the previous lemmas, we may prove a number of much more usable results.
-In particular, the following lemma provides a semantic analogue for universal introduction whereby we may assert the entailment of a universal claim given only the entailment of a sufficiently arbitrary instance.
-
-\subsection{Universal Quantifier Rules}%
-  \label{sub:UniversalRules}
-  
-
-\begin{Lthm} \label{lemma:unigen}
-  For any constant $\beta$ that does not occur in $\qt{\forall}{\alpha}\metaA$ or in any sentence $\metaC\in\Gamma$, if $\Gamma \models \metaA\unisub{\beta}{\alpha}$, then $\Gamma \models \qt{\forall}{\alpha}\metaA$. 
-\end{Lthm}
-% \vspace{-.3in}
-
-\begin{quote} 
-  \textit{Proof:} Assume $\Gamma \models \metaA\unisub{\beta}{\alpha}$ where $\beta$ is a constant that does not occur in $\forall\alpha\metaA$ or in any sentence $\metaC\in\Gamma$.
-  Assume for contradiction that $\Gamma \nmodels \qt{\forall}{\alpha}\metaA$, and so there is some model $\M=\tuple{\D,\I}$ which satisfies $\Gamma$ but does not satisfy $\qt{\forall}{\alpha}\metaA$.
-  Thus $\VV{\I}{}(\qt{\forall}{\alpha}\metaA)\neq 1$, and so $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)\neq 1$ for every variable assignment $\va{a}$, and so for some $\va{c}$ in particular. 
-  By the semantics for the universal quantifier, $\VV{\I}{\va{c}}(\metaA)\neq 1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$.
-  Let $\M'$ be the same as $\M$ with the exception that $\I'(\beta)=\va{c}(\alpha)$.
-  The following biconditionals hold for every $\metaB \in \Gamma$:
-
-  \vspace{-.2in}
-  \begin{align*}
-    \VV{\I}{}(\metaB)=1 &\textit{ ~iff~ } \VV{\I}{\va{e}}(\metaB)=1 \text{ for some variable assignment } \va{e}\\
-     (\star) &\textit{ ~iff~ } \VV{\I'}{\va{e}}(\metaB)=1 \text{ for some variable assignment } \va{e}\\ 
-     &\textit{ ~iff~ } \VV{\I'}{}(\metaB)=1.
-  \end{align*}
-
-  By construction, $\M$ and $\M'$ have the same domain $\D$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and every constant $\alpha\neq\beta$.
-  Since $\beta$ does not occur in any $\metaB \in \Gamma$, the biconditional $(\star)$ follows from \textbf{\ref{lemma:model}}.
-  Thus $\VV{\I}{}(\metaB)=\VV{\I'}{}(\metaB)$ for all $\metaB\in\Gamma$, and so $\M'$ satisfies $\Gamma$.
-  By the assumption, $\M'$ satisfies $\metaA\unisub{\beta}{\alpha}$, and so $\VV{\I'}{}(\metaA\unisub{\beta}{\alpha})=1$.
-  By \textbf{\ref{lemma:assign}}, $\VV{\I'}{\va{g}}(\metaA\unisub{\beta}{\alpha})=1$ for all variable assignments over $\D$, and so $\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$ in particular.
-
-  Recall $\VV{\I}{\va{c}}(\metaA)\neq 1$ from above.
-  Since $\beta$ does not occur in $\qt{\forall}{\alpha}(\metaA)$, it follows that $\beta$ does not occur in $\metaA$, and so $\VV{\I'}{\va{c}}(\metaA)\neq 1$ follows by \textbf{\ref{lemma:model}}.
-  However, since $\va{c}(\alpha)=\I'(\beta)$ where $\beta$ is a constant, $\VV{\I'}{\va{c}}(\alpha)=\VV{\I'}{\va{c}}(\beta)$ where $\beta$ is free for $\alpha$ in $\metaA$, and so $\VV{\I'}{\va{c}}(\metaA)=\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ follows from \textbf{\ref{lemma:sub}}.
-  Thus $\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})\neq 1$, contradicting the above, and so we may conclude that $\Gamma \models \qt{\forall}{\alpha}\metaA$.
-\end{quote}
-
-Given the lemma above, it easy to prove that the universal introduction proof rule preserves entailment in a similar manner to rules above.
-Consider the following proof.
-
-
-
-
-\factoidbox{
-\begin{Rthm} \label{rule:UniI}
-  \textbf{($\boldsymbol\forall$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\forall$I. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by universal introduction $\forall$I.
-  Thus there is some $i\leq n$ where $\metaA_i=\metaA\unisub{\beta}{\alpha}$ is live at $n+1$ and $\beta$ does not occur in $\metaA_{n+1}=\qt{\forall}{\alpha}\metaA$ or in undischarged assumptions in $\Gamma_{n+1}$.
-  By \textbf{\ref{lemma:live}}, $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\models\metaA_i$ by hypotheses, and so $\Gamma_{n+1} \models \metaA_i$ by \textbf{\ref{lemma:weak}}.
-  Equivalently, $\Gamma_{n+1} \models \metaA\unisub{\beta}{\alpha}$.
-  Since $\beta$ does not occur in $\qt{\forall}{\alpha}\metaA$ or any undischarged assumptions in $\Gamma_{n+1}$, it follows by \textbf{\ref{lemma:unigen}} that $\Gamma_{n+1}\models \qt{\forall}{\alpha}\metaA$, and so $\Gamma_{n+1}\models\metaA_{n+1}$.
-\end{quote}
-
-This proof amounts to little more than an application of \textbf{\ref{lemma:unigen}}.
-In particular, there is no mention of the semantics for the universal quantifiers in the proof of \textbf{\ref{rule:UniI}} since all of these details are already contained in the supporting lemma.
-The following lemma will play an analogous role for universal elimination.
-
-
-
-\begin{Lthm} \label{lemma:uniinst}
-  $\forall\alpha\metaA \models \metaA\unisub{\beta}{\alpha}$ where $\alpha$ is a variable and $\metaA\unisub{\beta}{\alpha}$ is a sentence. 
-\end{Lthm}
-% \vspace{-.3in}
-
-\begin{quote} 
-  \textit{Proof:} Let $\M=\tuple{\D,\I}$ be any model that satisfies $\qt{\forall}{\alpha}\metaA$, and so $\VV{\I}{}(\qt{\forall}{\alpha}\metaA)=1$.
-  Thus $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ for some $\va{a}$, and so $\VV{\I}{\va{c}}(\metaA)=1$ for every $\alpha$-variant $\va{c}$ of $\va{a}$ by the semantics for the universal quantifier.
-  Letting $\va{c}$ be an $\alpha$-variant of $\va{a}$ where $\va{c}(\alpha)=\I(\beta)$, it follows that $\VV{\I}{\va{c}}(\alpha)=\VV{\I}{\va{c}}(\beta)$.
-  Since there are no free variables in $\metaA\unisub{\beta}{\alpha}$, we know that $\beta$ is a constant, and so $\beta$ is free for $\alpha$ in $\metaA$.
-  Thus $\VV{\I}{\va{c}}(\metaA)=\VV{\I}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ follows by \textbf{\ref{lemma:sub}}, and so $\VV{\I}{}(\metaA\unisub{\beta}{\alpha})=1$ since $\metaA\unisub{\beta}{\alpha}$ is a sentence.
-  As a result, $\M$ satisfies $\metaA\unisub{\beta}{\alpha}$, and so $\forall\alpha\metaA \models \metaA\unisub{\beta}{\alpha}$.
-\end{quote}
-
-Whereas \textbf{\ref{lemma:unigen}} made use of the particular constraints that must hold for the universal introduction rule to be applied, the lemma above is much less constrained.
-This corresponds to the fact that universal claims entail all of their instances.
-
-We now turn to provide another supporting lemma which will help further streamline the proof for the universal elimination rule as well as a number of other proofs below.
-
-
-
-
-\begin{Lthm} \label{lemma:cut}
-  If $\Gamma \models \metaA$ and $\Sigma \cup \set{\metaA} \models \metaB$, then $\Gamma\cup\Sigma \models \metaB$. 
-\end{Lthm}
-% \vspace{-.3in}
-
-\begin{quote} 
-  \textit{Proof:} Assume $\Gamma \models \metaA$ and $\Sigma \cup \set{\metaA} \models \metaB$.
-  Let $\M$ be any model that satisfies $\Gamma\cup\Sigma$.
-  It follows that $\M$ satisfies $\Gamma$, and so $\M$ satisfies $\metaA$.
-  Thus $\M$ satisfies $\Gamma\cup\Sigma$, and so $\M$ satisfies $\metaB$.
-  Generalising on $\M$, we may conclude that $\Gamma\cup\Sigma\models\metaB$.
-\end{quote}
-
-The proof above is a semantic analogue of a metarule that goes by the name `\textit{Cut}' since it allows us to cut out intermediaries.
-This will play a helpful role in the following proof.
-
-
-
-\factoidbox{
-\begin{Rthm} \label{rule:UniE}
-  \textbf{($\boldsymbol\forall$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\forall$E. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by universal elimination $\forall$E.
-  Thus there is some $i\leq n$ where $\metaA_i=\qt{\forall}{\alpha}\metaA$ is live at $n+1$ and $\metaA_{n+1}=\metaA\unisub{\beta}{\alpha}$ for some variable $\alpha$ and constant $\beta$.
-  By \textbf{\ref{lemma:live}}, $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\models\metaA_i$ by hypotheses, and so $\Gamma_{n+1} \models \metaA_i$ by \textbf{\ref{lemma:weak}}.
-  Equivalently, $\Gamma_{n+1} \models \qt{\forall}{\alpha}\metaA$.
-  By \textbf{\ref{lemma:uniinst}} that $\qt{\forall}{\alpha}\metaA\models \metaA\unisub{\beta}{\alpha}$, and so $\Gamma_{n+1}\models\metaA_{n+1}$ by \textbf{\ref{lemma:cut}}.
-\end{quote}
-
-This proof turns on \textbf{\ref{lemma:uniinst}} where the other lemmas only play a supporting role.
-
-
-
-
-
-\subsection{Existential Quantifier Rules}%
-  \label{sub:ExistentialRules}
- 
-Just as universal elimination is an easier rule to apply under fewer constraints, something similar may be said for existential introduction.
-Nevertheless, the following lemma will play a vital role in the proof for existential introduction.
-
-\begin{Lthm} \label{lemma:exigen}
-  $\metaA\unisub{\beta}{\alpha} \models \exists\alpha\metaA$ where $\alpha$ is a variable and $\metaA\unisub{\beta}{\alpha}$ is a sentence. 
-\end{Lthm}
-% \vspace{-.3in}
-
-\begin{quote} 
-  \textit{Proof:} Let $\M=\tuple{\D,\I}$ be any model that satisfies $\metaA\unisub{\beta}{\alpha}$.
-  Thus $\VV{\I}{}(\metaA\unisub{\beta}{\alpha})=1$, and so $\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for some $\va{a}$.
-  Let $\va{c}$ be an $\alpha$-variant of $\va{a}$ where $\va{c}(\alpha)=\I(\beta)$.
-  It follows that $\VV{\I}{\va{c}}(\alpha)=\VV{\I}{\va{c}}(\beta)$ where $\beta$ is free for $\alpha$ in $\metaA$, and so $\VV{\I}{\va{c}}(\metaA\unisub{\beta}{\alpha})=\VV{\I}{\va{c}}(\metaA)$ by \textbf{\ref{lemma:sub}}.
-  By the semantics for the existential quantifier, $\VV{\I}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$.
-  Since $\metaA\unisub{\beta}{\alpha}$ is a sentence, at most $\alpha$ is free in $\metaA$, and so $\qt{\exists}{\alpha}\metaA$ is a sentence. 
-  Hence $\VV{\I}{}(\qt{\exists}{\alpha}\metaA)=1$, and so $\M$ satisfies $\qt{\exists}{\alpha}\metaA$.
-  Thus $\metaA\unisub{\beta}{\alpha} \models \exists\alpha\metaA$.
-\end{quote}
-
-This lemma follows easily from \textbf{\ref{lemma:sub}} where most of the work was already accomplished save for one critical appeal to the semantics for the existential quantifier.
-We may now turn to provide a proof for the existential introduction rule given below:
-
-
-
-\factoidbox{
-\begin{Rthm} \label{rule:ExistI}
-  \textbf{($\boldsymbol\exists$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\exists$I. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential introduction $\exists$I.
-  Thus there is some $i\leq n$ where $\metaA_i=\metaA\unisub{\beta}{\alpha}$ is live at $n+1$ and $\metaA_{n+1}=\qt{\exists}{\alpha}\metaA$ for some variable $\alpha$ and constant $\beta$.
-  By \textbf{\ref{lemma:live}}, $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\models\metaA_i$ by hypotheses, and so $\Gamma_{n+1} \models \metaA_i$ by \textbf{\ref{lemma:weak}}.
-  Equivalently, $\Gamma_{n+1} \models \metaA\unisub{\beta}{\alpha}$.
-  Since $\metaA\unisub{\beta}{\alpha} \models \qt{\exists}{\alpha}\metaA$ by \textbf{\ref{lemma:exigen}}, $\Gamma_{n+1}\models\metaA_{n+1}$ follows from \textbf{\ref{lemma:cut}}.
-\end{quote}
-
-Like the proof for universal elimination, this proof amounts to little more than an application of \textbf{\ref{lemma:exigen}} where most of the work was already accomplished.
-Whereas universal elimination and existential introduction are relatively unconstrained, the existential elimination rule is much more restricted.
-Accordingly, the following lemma makes use of these restrictions in order to establish a semantic analogue of the existential elimination rule in a similar manner to the supporting lemma for universal introduction.
-
-
-
-\begin{Lthm} \label{lemma:exiinst}
-  For any constant $\beta$ that does not occur in $\exists\alpha\metaA$, $\metaB$, or in any sentence $\metaC\in\Gamma$, if $\Gamma \models \exists\alpha\metaA$ and $\Gamma \cup \set{\metaA\unisub{\beta}{\alpha}} \models \metaB$, then $\Gamma \models \metaB$.
-\end{Lthm}
-% \vspace{-.3in}
-
-\begin{quote} 
-  \textit{Proof:} Assume $\Gamma \models \exists\alpha\metaA$ and $\Gamma \cup \set{\metaA\unisub{\beta}{\alpha}} \models \metaB$ where $\beta$ is a constant that does not occur in $\exists\alpha\metaA$, $\metaB$, or in any sentence $\metaC\in\Gamma$. 
-  Let $\M=\tuple{\D,\I}$ be a model that satisfies $\Gamma$.
-  It follows that $\M$ satisfies $\qt{\exists}{\alpha}\metaA$, and so $\VV{\I}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$ for some variable assignment $\va{a}$ over $\D$.
-  Thus $\VV{\I}{\va{c}}(\metaA)=1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$.
-
-  Let $\M'$ be the same as $\M$ with the only exception being that $\I'(\beta)=\va{c}(\alpha)$.
-  Given the assumptions about $\beta$, it follows by similar reasoning to the previous lemma that $\M'$ satisfies $\Gamma$.
-  Additionally, since $\beta$ does not occur in $\qt{\exists}{\alpha}\metaA$, it follows that $\beta$ does not occur in $\metaA$, and so $\VV{\I}{\va{c}}(\metaA)=\VV{\I'}{\va{c}}(\metaA)$ by \textbf{\ref{lemma:model}}.
-  Moreover, $\VV{\I'}{\va{c}}(\beta)=\VV{\I'}{\va{c}}(\alpha)$ where $\beta$ is free for $\alpha$ in $\metaA$ on account of being a constant, and so $\VV{\I'}{\va{c}}(\metaA)=\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{\ref{lemma:sub}}. 
-  Given the identities above, we may conclude that $\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$, and so $\VV{\I'}{}(\metaA\unisub{\beta}{\alpha})=1$ since $\metaA\unisub{\beta}{\alpha}$ is a sentence.
-  Thus $\M'$ satisfies $\Gamma \cup \set{\metaA\unisub{\beta}{\alpha}}$, and so by the assumption above, $\M'$ also satisfies $\metaB$.
-  By definition $\VV{\I'}{\va{e}}(\metaB)=1$ for some variable assignment $\va{e}$ over $\D$, and since $\beta$ does not occur in $\metaB$, we may conclude by \textbf{\ref{lemma:model}} that $\VV{\I}{\va{e}}(\metaB)=1$.
-  Thus $\M$ satisfies $\metaB$, and so by generalising on $\M$ it follows that $\Gamma \models \metaB$.
-\end{quote}
-
-Given a model $\M$ that satisfies the premises $\Gamma$, this proof makes use of \textbf{\ref{lemma:model}} in order to introduce a model variant $\M'$ which assigns the constant $\beta$ to whatever the variable $\alpha$ had been assigned.
-The variable $\alpha$ in the wff $\metaA$ is then replaced with $\beta$ where \textbf{\ref{lemma:sub}} is used to show that the truth-value remains unaffected in the model variant and variable assignment in question.
-Since $\beta$ does not occur in any premises, we know that the premises are all true on the model variant, and so may draw $\metaB$ as a consequence of the assumption. 
-We may then put this lemma to work in the proof of the following rule.
-
-
-
-
-\factoidbox{
-\begin{Rthm} \label{rule:ExistE}
-  \textbf{($\boldsymbol\exists$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\exists$E. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential elimination $\exists$E.
-  Thus there is some $i<j<k\leq n$ where $\metaA_i=\qt{\exists}{\alpha}\metaA$ is live at $n+1$, $\metaA_j=\metaA\unisub{\beta}{\alpha}$ for some constant $\beta$ that does not occur in $\metaA_i$, $\metaA_k$, or any $\metaB\in\Gamma_i$.
-  Thus we have:
-
-  \begin{proof}
-    \have[i]{i}{\qt{\exists}{\alpha}\metaA}
-    \open	
-      \hypo[j]{j}{\metaA\unisub{\beta}{\alpha}} \as{for $\exists$E}
-      \have[ ]{x}{\vdots} 
-      \have[k]{k}{\metaB}
-    \close
-    \have[n+1]{n}{\metaB{}} \Ee{i,j-k}
-  \end{proof}
-
-  By hypothesis, $\Gamma_i\models\metaA_i$ and $\Gamma_k\models\metaA_k$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:live}}.
-  With the exception of $\metaA_i$, every assumption that is undischarged at line $k$ is also undischarged at line $n+1$, and so $\Gamma_k\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$.
-  It follows by \textbf{\ref{lemma:weak}} that $\Gamma_{n+1} \models \metaA_i$ and $\Gamma_{n+1}\cup\set{\metaA_i} \models \metaA_k$, and so $\Gamma_{n+1} \models \qt{\exists}{\alpha}\metaA$ and $\Gamma_{n+1}\cup\set{\metaA\unisub{\beta}{\alpha}} \models \metaB$.
-  Thus $\Gamma_{n+1}\models\metaB$ by \textbf{\ref{lemma:exiinst}}, and so $\Gamma_{n+1}\models\metaA_{n+1}$.
-\end{quote}
-
-Since \textbf{\ref{lemma:exiinst}} already does most of the heavy lifting, the proof above is the result of carefully setting up a generic scenario in which the existential elimination rule is applied, using the lemmas cited above to draw out the resulting consequences.
-
-
-
-\subsection{Identity Rules}%
-  \label{sub:IdentityRules}
-
-% The identity rules are much easier to prove than the quantifier rules given above.
-Recall from the proof of \textit{Base} that we have already considered identity introduction in the case of a one line proof.
-All that remains is to generalise this proof to the present setting where the $n+1$ line is the result of identity introduction. 
-Given that we were able to succeed in providing a proof for identity introduction in \textit{Base}, we will not need to appeal to the induction hypothesis.
-Nevertheless, it is important to establish the following general result.
-  
-
-\factoidbox{
-\begin{Rthm} \label{rule:IdI}
-  \textbf{($\boldsymbol=$I)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $=$I. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential introduction $=$I.
-  Thus $\metaA_{n+1}$ is $\alpha=\alpha$ for some constant $\alpha$. 
-  Letting $\M=\tuple{\D,\I}$ be any model, it follows that $\I(\alpha)=\I(\alpha)$, and so $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\alpha)$ for any variable assignment $\va{a}$.
-  By the semantics for identity, $\VV{\I}{\va{a}}(\alpha=\alpha)=1$, and so $\M$ satisfies $\alpha=\alpha$.
-  Generalising on $\M$, it follows that $\models \alpha=\alpha$, or equivalently $\models \metaA_{n+1}$.
-  By \textbf{\ref{lemma:weak}}, we may conclude that $\Gamma_{n+1}\models\metaA_{n+1}$.
-\end{quote}
-
-The proof above follows the same line of reasoning presented in \textit{Base}.
-In order to provide a proof for identity elimination, the following lemma establishes a semantic analogue of the identity elimination rule where this proof will draw on the substitution lemma given above.
-
-
-
-
-\begin{Lthm} \label{lemma:id}
-  If $\alpha$ and $\beta$ are constants, then $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \models \metaA\unisub{\beta}{\gamma}$.
-\end{Lthm}
-% \vspace{-.3in}
-
-\begin{quote} 
-  \textit{Proof:} Let $\M=\tuple{\D,\I}$ be a model that satisfies $\metaA\unisub{\alpha}{\gamma}$ and $\alpha = \beta$ where $\alpha$ and $\beta$ are constants. 
-  It follows that $\VV{\I}{\va{a}}(\metaA\unisub{\alpha}{\gamma})=1$ for some variable assignment $\va{a}$ over $\D$.
-  By \textbf{\ref{lemma:allvar}}, $\VV{\I}{\va{c}}(\alpha=\beta)=1$ for all variable assignments $\va{c}$ over $\D$, and so $\VV{\I}{\va{a}}(\alpha=\beta)=1$ in particular.
-  Thus $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
-  Since $\beta$ is a constant, $\beta$ is free for $\alpha$ in $\metaA\unisub{\alpha}{\gamma}$, and so $\VV{\I}{\va{a}}(\metaA\unisub{\alpha}{\gamma})=\VV{\I}{\va{a}}((\metaA\unisub{\alpha}{\gamma})\unisub{\beta}{\alpha})$ by \textbf{\ref{lemma:sub}}.
-  However, $(\metaA\unisub{\alpha}{\gamma})\unisub{\beta}{\alpha}=\metaA\unisub{\beta}{\gamma}$, and so $\VV{\I}{\va{a}}(\metaA\unisub{\alpha}{\gamma})=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\gamma})=1$.
-  Since $\metaA\unisub{\beta}{\gamma}$ is a sentence, $\VV{\I}{}(\metaA\unisub{\beta}{\gamma})=1$, and so $\M$ satisfies $\metaA\unisub{\beta}{\gamma}$. 
-  Generalising on $\M$ we may conclude that $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \models \metaA\unisub{\beta}{\gamma}$. 
-\end{quote}
-
-This lemma amounts to little more than an application of \textbf{\ref{lemma:sub}} together with the observation that $(\metaA\unisub{\alpha}{\gamma})\unisub{\beta}{\alpha}=\metaA\unisub{\beta}{\gamma}$.
-We may then provide the following proof:
-
-
-
-
-\factoidbox{
-\begin{Rthm} \label{rule:IdE}
-  \textbf{($\boldsymbol=$E)}~~ $\Gamma_{n+1} \models \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $=$E. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential elimination $=$E.
-  Thus there are some live lines $i,j\leq n$ at $n+1$ where $\metaA_i$ is $\alpha=\beta$ for some constants $\alpha$ and $\beta$ and either $\metaA_j=\metaA\unisub{\alpha}{\gamma}$ and $\metaA_{n+1}=\metaA\unisub{\beta}{\gamma}$ or else $\metaA_j=\metaA\unisub{\beta}{\gamma}$ and $\metaA_{n+1}=\metaA\unisub{\beta}{\gamma}$.
-  By parity of reasoning, we may assume that $\metaA_j=\metaA\unisub{\alpha}{\gamma}$ and $\metaA_{n+1}=\metaA\unisub{\beta}{\gamma}$ which we may represent as follows:
-
-  \begin{proof}
-    \have[i]{i}{\alpha = \beta} 
-    \have[j]{j}{\metaA\unisub{\alpha}{\gamma}}
-    \have[n+1]{n}{\metaA\unisub{\beta}{\gamma}} \by{=E}{i,j}
-  \end{proof}
-
-  By \textbf{\ref{lemma:live}}, $\Gamma_i,\Gamma_j\subseteq \Gamma_{n+1}$ where $\Gamma_i\models\metaA_i$ and $\Gamma_j\models\metaA_j$ by hypotheses, and so $\Gamma_{n+1} \models \metaA_i$ and $\Gamma_{n+1} \models \metaA_j$ by \textbf{\ref{lemma:weak}}.
-  Equivalently, $\Gamma_{n+1} \models \alpha = \beta$ and $\Gamma_{n+1} \models \metaA\unisub{\alpha}{\gamma}$.
-  Since $\alpha$ and $\beta$ are constants, we know by \textbf{\ref{lemma:id}} that $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \models \metaA\unisub{\beta}{\gamma}$.
-  By two applications of \textbf{\ref{lemma:cut}}, we may conclude that $\Gamma_{n+1}\models\metaA\unisub{\beta}{\gamma}$, or equivalently, $\Gamma_{n+1}\models\metaA_{n+1}$.
-\end{quote}
-
-
-Since \textbf{\ref{lemma:id}} does most of the work above, and \textbf{\ref{lemma:sub}} made it easy to prove \textbf{\ref{lemma:id}}, identity elimination can be viewed as an application of \textbf{\ref{lemma:sub}}.
-Put otherwise, \textbf{\ref{lemma:sub}} is what explains why the identity elimination rule preserves validity.
-
-
-
-
-\section{Conclusion}%
-  \label{sec:Conclusion}
-
-Having provided proofs for every rule included in QD, we may draw on \textbf{\ref{rule:AS}} -- \textbf{\ref{rule:IdE}} given above in order to assert the following conclusion:
-  
-\begin{enumerate}[leftmargin=1.5in]
-  \item[\it QD Rules:] If $\metaA_{n+1}$ follows by the proof rules for QD from sentences in $\Gamma_{n+1}$ and $\Gamma_k \models \metaA_k$ for every $k\leq n$, then $\Gamma_{n+1} \models \metaA_{n+1}$.
-\end{enumerate}
-
-The result above completes the proof of \textit{Induction} which together with \textit{Base} establishes the soundness of QD over the semantics for QL$^=$.
-% Since $\Gamma \proves_{\textsc{sd}}\metaA$ implies $\Gamma \proves_{\textsc{qd}}\metaA$, 
-Assuming that $\Gamma \proves_{\textsc{sd}}\metaA$ for sentences in SL, we may go on to observe that $\Gamma \proves_{\textsc{qd}}\metaA$ follows as an immediate consequence since QD includes all of the rules in SD where QL includes all the sentences in SL. 
-It follows that $\Gamma \models \metaA$ over the semantics for QL$^=$ by the soundness of QD. %, and so SD is also sound over the semantics for QL$=$.
-Given any SL interpretation $\I$ which satisfies $\Gamma$, we may construct a corresponding model $\M=\tuple{\D,\I'}$ which also satisfies $\Gamma$ by letting $\D=\set{a}$ where $\I'(\alpha)=a$ for all constants $\alpha$ and $\I'(\F^0)=\I(\F^0)$ for all predicates $\F^0$.
-Thus $\M$ satisfies $\metaA$ where it is easy to show that $\M$ satisfies $\metaA$ just in case $\I$ satisfies $\metaA$.
-Thus we may conclude that the SL interpretation $\I$ that we began with satisfies $\metaA$, and so $\Gamma \models \metaA$ over the semantics for SL. 
-As a result, SD is also sound over the semantics for SL.
-
-It is worth comparing the soundness of SD and QD to the soundness proof for the tree method.
-Not only does the soundness of SD and QD tell us that we can rely on our natural deduction systems in order to construct valid arguments in which the premises entail the conclusion, soundness begins to close the gap between two very different approaches to logic.
-Whereas the entailment relation $\models$ is to do with truth-preservation over a class of interpretations or models depending on the language we are working with, the derivation relations $\proves_{\textsc{sd}}$ and $\proves_{\textsc{qd}}$ aim to encode natural patterns of reasoning in SL and QL$=$, respectively. 
-What soundness shows is that our purely syntactic proof-theoretic descriptions of logical reasoning in SL and QL$^=$ does not diverge from our semantics (or model-theoretic) descriptions of logical reasoning in SL and QL$^=$.
-Were either of these results to fail to hold, SD and QD could not be trusted.
-Although the soundness of the tree method similarly shows that the tree method can be relied upon to evaluate the validity of arguments, the tree method is of no independent interest since it does not claim to encode natural patterns of reasoning.
 
 
 

@@ -1,6 +1,6 @@
 %!TEX root = ../../forallx-mit.tex
 \chapter{Natural Deduction in PL}
-\label{ch.ND.proofs}
+\label{ch.PL-deduction}
 
 %JRH to-do: add in some \ellipsesline commands in the proofs 
 %take out stuff in strategy about rules of replacement! not legal in SND! 
@@ -84,7 +84,7 @@ Put otherwise, we are looking to find the atoms that make up formal reasoning.
 Insofar as the proof systems that we will be concerned with in this course aim to encode the natural patterns of formal reasoning, we will refer to these systems as \define{natural deduction} systems.
 In particular, PL is a natural deduction system for $\PL$ where later chapters will consider a natural deduction system for $\FOL$.
 These systems provide a way to argue from the premises to a conclusion in logically valid ways while resembling natural forms of reasoning.
-In addition to being familiar, reasoning in this way helps to illustrate the logical connections between various claims in a manner that is compelling \textit{on its own terms}.
+In addition to being familiar, reasoning in this way helps to illustrate the logical connections between various claims in a way that is compelling \textit{on its own terms}.
 That is, you don't have to take a course in logic or learn the semantics for an artificial language in order to appreciate the patterns of reasoning that we will consider, finding them compelling.
 
 % TREE STUFF
@@ -861,13 +861,73 @@ Only then may we draw $Q$ as a conclusion by way of negation elimination.
 %
 % To check to make sure you are applying the rules correctly, one good heuristic is to think about whether you are relying on the rule itself, or on your intuitive understanding of the meanings of the symbols we use in $\PL$. Your intuitive understanding is a good way to think about which rules to use, but to check to make sure you're using the rules properly, think about whether the rules' exact formulations could explain why it is permissible to extend the derivation in the exact way you're working with. Pretend, for instance, that you have no idea what the `\eif' symbol means, but you do know that if you have two sentences joined by it on one line, and the first of those two sentences on another line, then you are allowed to copy down the second sentence exactly on a new line. This --- and no more --- is what the Conditional Elimination rule permits you to do. (This is what we mean when we say the rule is syntactically defined.) It would be pretty trivial to write a computer program to check to see whether a line is properly derived via Conditional Elimination (unlike us, computers are VERY good at following rules, since computers are defined via rules).
 
+\section{Proof Strategy}
+  \label{sec.PL.Strategy}
 
-\section{Subproofs}
+The examples have been relatively simple so far, but perhaps you can already get a sense of the kinds of strategic thinking that natural deduction proofs sometimes require.
+For instance, although it is always permissible to open a subproof with any assumption, knowing which assumption to introduce and when to do so can require some care.
+Starting a subproof with any arbitrary assumption may clutter your proof.
+In order to obtain a conditional by $\eif$I, for example, it makes sense to assume the antecedent of the conditional in a subproof and see if you can derive the consequent.
+This is an example of a good proof strategy.
 
-Having introduced all of the rules of PL, we may now move to discuss some of the mistakes that are easy to make when first learning to write proofs in PL.
-We will begin by reviewing some of the common mistakes that can occur when using subproofs.
+It is also always permissible to close a subproof, discharging its assumptions.
+However, it will not be helpful to do so until you have reached something useful.
+Once the subproof is closed, you can only cite the entire subproof in a justification for a line following that subproof.
+Those rules that call for a subproof, or multiple subproofs, require that the last line of the subproof is a wfs of $\PL$ of some form or other.
+For instance, you are only allowed to cite a subproof for $\eif$I if the line you are justifying is of the form $\metaA \eif \metaB$ where $\metaA$ is the assumption of your subproof and $\metaB$ is the last line of your subproof.
+This constrains the strategies that one might hope to employ in attempting to construct proofs in PL.
 
-Consider the following:
+Getting good at natural deduction will take some practice.
+The good news is that natural deduction proofs are a lot more interesting to construct than truth tables, and a much more beneficial skill: practicing natural deduction will streamline your reasoning well beyond the scope of this course, where the same cannot be said for filling out arrays with $1$s and $0$s.
+Although there are no fail-safe methods, and certainly no substitute for practice, there are some general rules of thumb and strategies that are worth keeping in mind.
+
+
+\paragraph{Work backwards from what you want.}
+The ultimate goal is to derive the conclusion.
+Look at the conclusion and ask what the introduction rule is for its main operator.
+This gives you an idea of what should happen just before the last line of the proof.
+Then you can treat this line as if it were your goal, asking what you could do to derive this new goal.
+
+For example, if your conclusion is a conditional $\metaA \eif \metaB$, plan to use the $\eif$I rule.
+This requires starting a subproof in which you assume $\metaA$.
+In the subproof, you want to derive $\metaB$.
+
+\paragraph{Work forwards from what you have.}
+When you are starting a proof, look at the premises and consider what implications they might have, or what you would need to derive in order to make use of the premises.
+It can help to think about the elimination rules for the main operators of the premises, or the wfss that you have derived so far.
+
+For example, if you have a conditional $\metaA\eif\metaB$, and you also have $\metaA$ on a line, $\eif$E is a pretty natural move to make.
+Sometimes it is a lot trickier to know what to do next, but not always.
+
+% \paragraph{Change what you are looking at.}
+% Replacement rules can often make your life easier. If a proof seems impossible, try out some different substitutions.
+%
+% For example: It is often difficult to prove a disjunction using the basic rules. If you want to show $\metaA{}\eor\metaB{}$, it is often easier to show $\enot\metaA{}\eif\metaB{}$ and use the MC rule.
+%
+% Some replacement rules should become second nature. If you see a negated disjunction, for instance, you should immediately think of DeMorgan's rule.
+
+\paragraph{Repeat as necessary.}
+A long proof is just a number of short proofs linked together, so you can fill the gap by alternately working back from the conclusion and forward from the premises.
+Once you have decided how you might be able to get to the conclusion, ask what you might be able to do with the premises.
+Then consider these new targets, asking how you might reach each them, slowly connecting the dots of your proof.
+
+\paragraph{Try a reductio when nothing else works.}
+If you cannot find a way to show something directly, try assuming its negation and see where this leads.
+Sometimes this can help unlock a proof, perhaps even leading you to a direct line of argument.
+
+\paragraph{Persist.}
+Try different things.
+If one approach fails, then try something else.
+In general, there are typically many ways to construct a proof.
+
+
+
+% \section{Subproofs}
+
+% Having introduced all of the rules of PL,
+Although these guidelines can help if you get stuck, it is worth mentioning some of the mistakes that are easy to make.
+In particular, we will review some of the common errors that can occur when using subproofs.
+Consider the following example:
 \begin{fitchproof}
 	\hypo{a}{A} \pr{}
 	\open
@@ -996,65 +1056,75 @@ So in writing your own proofs in PL, keep these rules in mind, sticking to them 
 
 
 
-\section{Proof Strategy}
-\label{sec.PL.ND.strategy}
-
-The examples have been relatively simple so far, but perhaps you can already get a sense of the kinds of strategic thinking that natural deduction proofs sometimes require.
-For instance, although it is always permissible to open a subproof with any assumption, knowing which assumption to introduce and when to do so can require some care.
-Starting a subproof with any arbitrary assumption may clutter your proof.
-In order to obtain a conditional by $\eif$I, for example, it makes sense to assume the antecedent of the conditional in a subproof and see if you can derive the consequent.
-This is an example of a good proof strategy.
-
-It is also always permissible to close a subproof, discharging its assumptions.
-However, it will not be helpful to do so until you have reached something useful.
-Once the subproof is closed, you can only cite the entire subproof in a justification for a line following that subproof.
-Those rules that call for a subproof, or multiple subproofs, require that the last line of the subproof is a wfs of $\PL$ of some form or other.
-For instance, you are only allowed to cite a subproof for $\eif$I if the line you are justifying is of the form $\metaA \eif \metaB$ where $\metaA$ is the assumption of your subproof and $\metaB$ is the last line of your subproof.
-This constrains the strategies that one might hope to employ in attempting to construct proofs in PL.
-
-Getting good at natural deduction will take some practice.
-The good news is that natural deduction proofs are a lot more interesting to construct than truth tables, and a much more beneficial skill: practicing natural deduction will streamline your reasoning well beyond the scope of this course, where the same cannot be said for filling out arrays with $1$s and $0$s.
-Although there are no fail-safe methods, and certainly no substitute for practice, there are some general rules of thumb and strategies that are worth keeping in mind.
 
 
-\paragraph{Work backwards from what you want.}
-The ultimate goal is to derive the conclusion.
-Look at the conclusion and ask what the introduction rule is for its main operator.
-This gives you an idea of what should happen just before the last line of the proof.
-Then you can treat this line as if it were your goal, asking what you could do to derive this new goal.
 
-For example, if your conclusion is a conditional $\metaA \eif \metaB$, plan to use the $\eif$I rule.
-This requires starting a subproof in which you assume $\metaA$.
-In the subproof, you want to derive $\metaB$.
 
-\paragraph{Work forwards from what you have.}
-When you are starting a proof, look at the premises and consider what implications they might have, or what you would need to derive in order to make use of the premises.
-It can help to think about the elimination rules for the main operators of the premises, or the wfss that you have derived so far.
+\section{Derivability}
+  \label{sec:Derivability}
 
-For example, if you have a conditional $\metaA\eif\metaB$, and you also have $\metaA$ on a line, $\eif$E is a pretty natural move to make.
-Sometimes it is a lot trickier to know what to do next, but not always.
+Given the natural deduction rules specified above, we may present the following definition:
 
-% \paragraph{Change what you are looking at.}
-% Replacement rules can often make your life easier. If a proof seems impossible, try out some different substitutions.
-%
-% For example: It is often difficult to prove a disjunction using the basic rules. If you want to show $\metaA{}\eor\metaB{}$, it is often easier to show $\enot\metaA{}\eif\metaB{}$ and use the MC rule.
-%
-% Some replacement rules should become second nature. If you see a negated disjunction, for instance, you should immediately think of DeMorgan's rule.
+\factoidbox{
+  A \define{derivation} (or \define{proof}) of $\metaA$ from $\Gamma$ in PL is any finite sequence of wfs of $\PL$ ending in $\metaA$ where every wfs in the sequence is either: (1) a premise in $\Gamma$; (2) an assumption which is eventually discharged; or (3) follows from previous lines by a natural deduction rule for PL besides AS. 
+}
 
-\paragraph{Repeat as necessary.}
-A long proof is just a number of short proofs linked together, so you can fill the gap by alternately working back from the conclusion and forward from the premises.
-Once you have decided how you might be able to get to the conclusion, ask what you might be able to do with the premises.
-Then consider these new targets, asking how you might reach each them, slowly connecting the dots of your proof.
+A wfs $\metaA$ of $\PL$ is \define{derivable} (or \define{provable}) from $\Gamma$ in PL, i.e., $\Gamma \vdash \metaA$, just in case there is a natural deduction derivation (proof) of $\metaA$ from $\Gamma$ in PL. 
+% Whereas `$\Gamma \vdash_{T} \metaA$' was shorthand for `$\Gamma, \enot \metaA \vdash_{T} \bot$', 
+Whereas logical consequence provides a semantic answer to the question of what follows from what in virtue of logical form by quantifying over interpretations, the derivation relation $\vdash$ provides a purely syntactic answer to this question by specifying which wfs of $\PL$ can be written after which in a manner which constitutes a derivation.
+Perhaps surprisingly, these two relations will be shown to have the same extension, describing formal reasoning in $\PL$ in two different ways.
 
-\paragraph{Try a reductio when nothing else works.}
-If you cannot find a way to show something directly, try assuming its negation and see where this leads.
-Sometimes this can help unlock a proof, perhaps even leading you to a direct line of argument.
+Given the definition of the derivation relation, we are now in a position to introduce a number of other important definitions.
+Two sentences $\metaA$ and $\metaB$ of $\PL$ are \define{interderivable} (or \define{provably equivalent}) in PL--- i.e., $\metaA \dashv\vdash \metaB$--- just in case both $\metaA\vdash\metaB$ and $\metaB\vdash\metaA$.
+% Additionally, we will take $\Gamma\vdash\bot$ to mean that $\Gamma\vdash\metaB\eand\enot\metaB$ for some $\PL$ sentence $\metaB$.
+% It is relatively easy to show that two sentences are provably equivalent since this requires a pair of proofs.
+% Showing that sentences are \emph{not} provably equivalent would be much harder.
+% It would be just as hard as showing that a sentence is not a theorem.
+% (In fact, these problems are interchangeable. Can you think of a sentence that would be a theorem if and only if \metaA{} and \metaB{} were provably equivalent?)
+Letting \define{bottom} (also called the \define{falsum}) be the arbitrary contradiction $\bot \colonequals A \wedge \enot A$, we may take a set of sentences $\Gamma$ to be \define{inconsistent} just in case $\Gamma \vdash \bot$, and \define{consistent} otherwise.
 
-\paragraph{Persist.}
-Try different things.
-If one approach fails, then try something else.
-In general, there are typically many ways to construct a proof.
+Provability is relative to a proof system.
+Whereas the meaning of the `$\vdash$' symbol featured in this chapter concerns PL, later we will use the same symbol for the derivation relation in FOL, distinguishing these with subscripts as in `$\vdash_{\textsc{pl}}$' and `$\vdash_{\textsc{fol}}$' if need be.
+% When necessary, we can specify which turnstile we intend by including a reference to the proof system in question, letting `$\vdash_{T}$' stand for provability in the tree system, and `$\vdash_{PL}$' stand for provability in this natural deduction system.
+% Since this chapter is concerned with natural deduction, you can take `$\vdash$' to mean `$\vdash_{PL}$' in this chapter unless specified otherwise.
+% % For instance, it is important to disambiguate the turnstiles in making the following observation: whereas $\Gamma \vdash_{T} \metaA$ was defined as $\Gamma, \enot \metaA \vdash_{T} \bot$ for the tree proof system, here we have defined $\Gamma \vdash_{PL} \bot$ in terms of $\Gamma \vdash_{PL} \metaB\eand\enot\metaB$ for some $\metaB$. 
+% So $\Gamma\vdash\metaA$ can be read as: $\metaA$ is derivable from $\Gamma$.
+As with logical consequence, it is often convenient to write `$\metaA_1,\metaA_2,\ldots\vdash\metaB$' as a shorthand for $\set{\metaA_1,\metaA_2,\ldots}\vdash\metaB$.
+A wfs $\metaA$ of $\PL$ is a \define{theorem} of PL just in case $\vdash\metaA$.
+As with the derivations in PL, it is important to note that the wfss of $\PL$ are only theorems relative to a proof system, and so there is no sense in which $A\eor\enot A$ is a theorem full stop.
+Nevertheless, it is natural to expect $A\eor\enot A$ to be a theorem of most any proof system for $\PL$.
 
+In order to show that something is a theorem we have to derive it from no premises.
+But how could we show that something is \emph{not} a theorem?
+More generally, how could we show that $\Gamma \nproves \metaA$?
+Showing that there is no proof of $\metaA$ from $\Gamma$ would seem to require searching the space of all natural deduction proofs, and this is not bound to be easy. 
+For instance, even if you (or a computer program) failed to derive $\metaA$ from $\Gamma$ in a thousand different ways, perhaps their is a proof that has not yet been considered.
+This brings out an important difference between our natural deduction system PL and the truth table method presented above for deciding whether $\MetaG \vDash \metaA$.
+In particular, PL does not provide an effective method for determining whether $\MetaG \vDash \metaA$.
+However, consider the following:
+
+\factoidbox{
+  \textsc{PL Soundness:} If $\MetaG \vdash \metaA$, then $\MetaG \vDash \metaA$.
+}
+
+Given the above, we may show that $\MetaG \nvdash \metaA$ by proving that $\MetaG \nvDash \metaA$ by finding an interpretation $\I$ of $\PL$ in which $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$ but $\V{\I}(\metaA) = 0$. 
+The reasoning goes by contraposition.
+After all, if $\MetaG \vdash \metaA$, then $\MetaG \vDash \metaA$ follows by \textsc{Soundness}, and so $\MetaG \vdash \metaA$ cannot be the case so long as we have shown that $\MetaG \nvDash \metaA$.
+Thus we may conclude that $\MetaG \nvdash \metaA$.
+
+Suppose instead that we want to show that $\MetaG \vdash \metaA$ but cannot seem to find a proof however hard we look. 
+Here is another important principle to which we might appeal:
+
+\factoidbox{
+  \textsc{PL Completeness:} If $\MetaG \vDash \metaA$, then $\MetaG \vdash \metaA$.
+}
+
+If we can show that $\MetaG \vDash \metaA$ either by constructing a truth table or writing a semantic proof, \textsc{Completeness} permits us to conclude that $\MetaG \vdash \metaA$, and so we know that there is a derivation of $\metaA$ from $\MetaG$ even if we haven't managed to find one.
+This is different from knowing \textit{how} to derive $\metaA$ from $\MetaG$, but valuable information nonetheless. 
+In order to make use of the principles above, the following two chapters will establish the soundness and completeness of PL.
+
+
+% It is easy to show that a set is provably inconsistent: You just need to assume the sentences in the set and prove a contradiction. Showing that a set is \emph{not} provably inconsistent will be much harder. It would require more than just providing a proof or two; it would require showing that proofs of a certain kind are \emph{impossible}.
 
 
 
@@ -1326,10 +1396,10 @@ Show that each of the following pairs of sentences are provably equivalent in $\
 \label{pr.solvedPLproofs2}
 Provide proofs to show each of the following.
 \begin{earg}
-\item $M \eand (\enot N \eif \enot M) \proves (N \eand M) \eor \enot M$
-\item \{$C\eif(E\eand G)$, $\enot C \eif G$\} $\proves$ $G$
-\item \{$(Z\eand K)\eiff(Y\eand M)$, $D\eand(D\eif M)$\} $\proves$ $Y\eif Z$
-\item \{$(W \eor X) \eor (Y \eor Z)$, $X\eif Y$, $\enot Z$\} $\proves$ $W\eor Y$
+\item $M \eand (\enot N \eif \enot M) \vdash (N \eand M) \eor \enot M$
+\item \{$C\eif(E\eand G)$, $\enot C \eif G$\} $\vdash$ $G$
+\item \{$(Z\eand K)\eiff(Y\eand M)$, $D\eand(D\eif M)$\} $\vdash$ $Y\eif Z$
+\item \{$(W \eor X) \eor (Y \eor Z)$, $X\eif Y$, $\enot Z$\} $\vdash$ $W\eor Y$
 \end{earg}
 
 
@@ -1348,8 +1418,8 @@ For the following, provide proofs using only the basic rules. The proofs will be
 
 \problempart
 \begin{earg}
-\item If you know that $\metaA{}\proves\metaB{}$, what can you say about $(\metaA{}\eand\metaC{})\proves\metaB{}$? Explain your answer.
-\item If you know that $\metaA{}\proves\metaB{}$, what can you say about $(\metaA{}\eor\metaC{})\proves\metaB{}$? Explain your answer.
+\item If you know that $\metaA{}\vdash\metaB{}$, what can you say about $(\metaA{}\eand\metaC{})\vdash\metaB{}$? Explain your answer.
+\item If you know that $\metaA{}\vdash\metaB{}$, what can you say about $(\metaA{}\eor\metaC{})\vdash\metaB{}$? Explain your answer.
 \end{earg}
 
 

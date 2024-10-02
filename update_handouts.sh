@@ -23,5 +23,5 @@ cd "$target_directory"
 # Combine all PDF files in the directory
 pdftk *.pdf cat output "$output_file"
 
-echo "All PDF files with 'Handout' in the filename have been copied to $target_directory."
+echo "All PDF files with 'Week' in the filename have been copied to $target_directory."
 echo "All PDF in $target_directory have been combined."
