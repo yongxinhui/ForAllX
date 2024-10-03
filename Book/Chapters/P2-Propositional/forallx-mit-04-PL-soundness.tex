@@ -271,7 +271,7 @@ By contrast, it will help to establish the reiteration rule by first proving the
 % % \vspace{-.3in}
 %
 % \begin{quote} 
-%   \textit{Proof:} Assume $\MetaG \vDash \metaA$ and $\MetaG \supseteq \MetaG'$.
+%   \textit{Proof:} Assume $\MetaG \vDash \metaA$ and $\MetaG \eifeq \MetaG'$.
 %   Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\MetaG'$, it follows that $\VV{\I}{}(\metaB)=1$ for all $\metaB \in \MetaG'$.
 %   Since $\MetaG\subseteq \MetaG'$, it follows that $\VV{\I}{}(\metaB)=1$ for all $\metaB \in \MetaG$, and so $\M$ satisfies $\MetaG$. 
 %   By assumption, $\M$ satisfies $\metaA$, and so $\MetaG \vDash \metaA$.
@@ -341,7 +341,7 @@ These lemmas work nicely together and will reoccur in a number of rule proofs be
 
 
 \begin{Lthm} \label{lemma:PL-unsatent}
-  $\MetaG \cup \set{\metaA}$ is unsatisfiable just in case $\MetaG \vDash \enot\metaA$.
+  If $\MetaG \cup \set{\metaA}$ is unsatisfiable, then $\MetaG \vDash \enot\metaA$.
 \end{Lthm}
 \vspace{-.2in}
 
@@ -353,11 +353,10 @@ These lemmas work nicely together and will reoccur in a number of rule proofs be
   Thus $\V{\I}(\enot \metaA) = 1$.
   Generalizing on $\I$, it follows that $\V{\I}(\enot \metaA) = 1$ for any $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$.
   By definition, $\MetaG \vDash \enot\metaA$.
-
-  Assume instead that $\MetaG \cup \set{\metaA}$ is satisfiable.
-  It follows that there is some $\PL$ interpretation $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG \cup \set{\metaA}$, and so $\V{\I}(\enot \metaA) = 1$ by the semantics for negation. 
-  Since $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$, it follows that $\MetaG \nvDash \enot \metaA$.
-  Thus we may conclude by contraposition that $\MetaG \cup \set{\metaA}$ is unsatisfiable if $\MetaG \vDash \enot \metaA$.
+  % Assume instead that $\MetaG \cup \set{\metaA}$ is satisfiable.
+  % It follows that there is some $\PL$ interpretation $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG \cup \set{\metaA}$, and so $\V{\I}(\enot \metaA) = 1$ by the semantics for negation. 
+  % Since $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$, it follows that $\MetaG \nvDash \enot \metaA$.
+  % Thus we may conclude by contraposition that $\MetaG \cup \set{\metaA}$ is unsatisfiable if $\MetaG \vDash \enot \metaA$.
   \qed
 \end{quote}
 
@@ -530,7 +529,7 @@ Something similar may be said for the rule proof for disjunction elimination tho
 
 \factoidbox{
 \begin{Rthm} \label{rule:PL-DisE}
-  \textbf{($\boldsymbol\vee$E)}~~ $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\MetaG_{n+1}$ by the rule $\eor$E. 
+  \textbf{($\boldsymbol\eor$E)}~~ $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\MetaG_{n+1}$ by the rule $\eor$E. 
 \end{Rthm}
 }
 
@@ -588,7 +587,7 @@ In order to streamline the rule proof for $\eif$I, it will help to prove the fol
 % Even so, the following lemma turns on nothing more than the semantics for the conditional, and so has been proved separately only to avoid redundancy.
 
 \begin{Lthm} \label{lemma:PL-conditional}
-  If $\MetaG \cup \set{\metaA} \vDash \metaB$, then $\MetaG \vDash \metaA \supset \metaB$.
+  If $\MetaG \cup \set{\metaA} \vDash \metaB$, then $\MetaG \vDash \metaA \eif \metaB$.
 \end{Lthm}
 \vspace{-.2in}
 
@@ -604,7 +603,7 @@ In order to streamline the rule proof for $\eif$I, it will help to prove the fol
       If $\V{\I}(\metaA) \neq 1$, then $\V{\I}(\metaA \eif \metaB) = 1$ by the semantics for the conditional.
   \end{enumerate}
 
-  Since $\V{\I}(\metaA \eif \metaB) = 1$ in both cases, $\MetaG \vDash \metaA \supset \metaB$ follows by generalizing on $\I$. 
+  Since $\V{\I}(\metaA \eif \metaB) = 1$ in both cases, $\MetaG \vDash \metaA \eif \metaB$ follows by generalizing on $\I$. 
   \qed
 \end{quote}
 

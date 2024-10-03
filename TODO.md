@@ -15,8 +15,8 @@
   - [x] chapter 2
   - [x] chapter 3
     - [x] repost with last section
-  - [:] chapter 4
-    - [ ] repost with final sections
+  - [x] chapter 4
+    - [x] repost with final sections
   - [ ] chapter 5
   - [ ] chapter 6
     - [ ] set theory, functions, orders

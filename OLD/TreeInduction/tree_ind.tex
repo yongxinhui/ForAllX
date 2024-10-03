@@ -1,0 +1,55 @@
+
+\section*{Recursive Definitions}
+
+\begin{itemize}
+  \item[\it Length:] For any SL tree $X$, we define $\leng(X)$ to be the number of resolution rules that have been applied.
+      \item $\leng(X)=0$ for any root $X$.
+      \item For any SL tree $X$, if $\leng(X)=n$ and $X'$ is the result of resolving a sentence in exactly one branch in $X$, then $\leng(X')=n+1$.
+  \item[\it Constituents:] We define $[\varphi]$ to be the set of sentence letters that occur in $\varphi$. % by taking $[\cdot]:\text{SL}\to\mathcal{P}(\text{SL})$ to be the smallest function to satisfy:
+      \item If $\comp(\varphi)=0$, then $[\varphi]=\set{\varphi}$.
+      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
+    \begin{itemize}
+      \item[$(\neg)$] $[\neg \varphi]=[\varphi]$; and
+      \item[$(\hspace{1pt}\star\hspace{1pt})$] $[\varphi \star \psi]=[\varphi] \cup [\psi]$.
+    \end{itemize}
+  \item[\it Simplicity:] We define $\simp(\varphi)$ to hold just in case the SL sentence $\varphi$ has at most one occurrence of each sentence letter in SL.
+      \item If $\comp(\varphi)=0$, then $\simp(\varphi)$.
+      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
+    \begin{itemize}
+      \item[$(\neg)$] $\simp(\neg \varphi)$ if $\simp(\varphi)$; and
+      \item[$(\hspace{1pt}\star\hspace{1pt})$] $\simp(\varphi \star \psi)$ if $\simp(\varphi)$, $\simp(\psi)$, and $[\varphi]\cap[\psi]=\varnothing$.
+    \end{itemize}
+  \item[\it Substitution:] We define $\varphi_{[\chi/\alpha]}$ to be the result of replacing every occurrence of the sentence letter $\alpha$ in $\varphi$ with $\chi$.
+      \item If $\comp(\varphi)=0$, then $\varphi_{[\chi/\alpha]}=
+        \begin{cases}
+          \chi \quad\text{if } \varphi=\alpha,\\
+          \varphi \quad\text{otherwise.}
+        \end{cases}$
+      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
+    \begin{itemize}
+      \item[$(\neg)$] $(\neg\varphi)_{[\chi/\alpha]}=\neg(\varphi_{[\chi/\alpha]})$; and
+      \item[$(\hspace{1pt}\star\hspace{1pt})$] $(\varphi\star\psi)_{[\chi/\alpha]}=\varphi_{[\chi/\alpha]}\star\psi_{[\chi/\alpha]}$.
+    \end{itemize}
+  \item[\it Resolution:] We define $\res(\varphi)$ to be the maximum number of times that we may resolve $\varphi$ and any of its descendants. 
+      \item $\res(\varphi)=0$ if $\varphi$ is a literal.
+      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
+        \begin{itemize}
+          \item[$(\neg)$] $\res(\neg\neg\varphi)=\res(\varphi)+1$; and
+          \item[$(\hspace{1pt}\star\hspace{1pt})$] $\res(\varphi \star \psi)=\res(\varphi)+\res(\psi)+1$.
+          \item[$(\hspace{1pt}\star\hspace{1pt})$] $\res(\neg(\varphi \star \psi))=\res(\neg\varphi)+\res(\neg\psi)+1$.
+        \end{itemize}
+  \item[\it Set Binary:] We extend the definition of $\res$ to sets of sentences as follows:
+    $$\res(\Gamma)=\sum\limits_{\varphi\in\Gamma}\res(\varphi).$$
+  \item[\it Unresolved:] We define $[X]$ to be the set of unresolved sentences in the SL tree $X$. 
+      \item $\varphi\in[X]$ if $X$ is a root and $\varphi$ occurs in $X$.
+      \item For any SL tree $X'$ which results from resolving $\varphi\in[X]$ on every open branch in $X$ in which $\varphi$ occurs:
+        \begin{itemize}
+          \item[$(\neg)$] $[X']=([X]/\set{\varphi})\cup\set{\psi}$ if $\varphi=\neg\neg\psi$;
+          \item[$(+)$] $[X']=([X]/\set{\varphi})\cup\set{\psi,\chi}$ if $\varphi\in\set{\psi\wedge\chi,\psi\vee\chi}$;  
+          \item[$(-)$] $[X']=([X]/\set{\varphi})\cup\set{\neg\psi,\neg\chi}$ if $\varphi\in\set{\neg(\psi\wedge\chi),\neg(\psi\vee\chi)}$;
+          \item[$(\supset)$] $[X']=([X]/\set{\varphi})\cup\set{\neg\psi,\chi}$ if $\varphi=\psi\supset\chi$; 
+          \item[$(\not\supset)$] $[X']=([X]/\set{\varphi})\cup\set{\psi,\neg\chi}$ if $\varphi=\neg(\psi\supset\chi)$; 
+          \item[$(\equiv)$] $[X']=([X]/\set{\varphi})\cup\set{\psi,\chi, \neg\psi,\neg\chi}$ if $\varphi\in\set{\psi\equiv\chi,\neg(\psi\equiv\chi)}$.
+        \end{itemize}
+  \item[\it Resolvable:] Letting $\mathbb{L}$ be the set of SL literals, we define $X_U=[X]/\mathbb{L}$ to be the set of SL sentences in $X$ that can be resolved. 
+\end{itemize}

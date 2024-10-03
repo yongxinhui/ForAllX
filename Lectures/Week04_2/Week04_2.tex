@@ -28,7 +28,7 @@
 \\ \@date
 \end{flushright}
 
-\vspace{0pt}
+\vspace{-20pt}
 
 }
 \makeatother
@@ -53,9 +53,11 @@
 
 %----------------------------------------------------------------------------------------
 
-\section*{Continuing from Last Time...}
+\section*{Lemmas}
 
-\begin{enumerate}
+\begin{itemize}
+  \item[\it Weakening:] If $\MetaG \vDash \metaA$, then $\MetaG \cup \MetaS \vDash \metaA$.
+  \item[\it Inheritance:] If $\metaA_k$ is live at line $n$ of a PL derivation where $k\leq n$, then $\MetaG_k\subseteq \MetaG_n$.
   \item[\it Contradiction:] If $\MetaG \vDash \metaA$ and $\MetaG \vDash \enot\metaA$, then $\MetaG$ is unsatisfiable.
     \item Assume $\MetaG \vDash \metaA$ and $\MetaG \vDash \enot\metaA$.
     \item Assume for contradiction that $\MetaG$ is satisfiable. 
@@ -70,134 +72,143 @@
     \item So $\V{\I}(\metaA) = 1$, and so $\MetaG \cup \set{\metaA}$ is satisfiable contrary to assumption.
     \item Thus for any $\I$, $\V{\I}(\enot \metaA) = 1$ if $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$.
     \item By definition, $\MetaG \vDash \enot\metaA$.
-  \item[\bf Task 1:] Let $\I^+(\alpha)=1$ for every sentence letter $\alpha$ in SL. Show that $\V{\I^+}(\varphi)=1$ for every SL sentence $\varphi$ that does not include negation. 
-  \item[\bf Task 2:] Every tree has a finite number of branches.
-  \item[\bf Task 3:] Show that for every SL sentence $\varphi$, if $\simp(\varphi)$, then there are SL interpretations $\I$ and $\J$ where $\V{\I}(\varphi)=1$ and $\V{\J}(\varphi)=0$. 
-  \item[\bf Task 4:] For any SL sentences $\varphi,\psi,\chi$ and SL sentence letter $\alpha$, if $\vDash \varphi \equiv \psi$, then $\vDash \chi_{[\varphi/\alpha]}\equiv\chi_{[\psi/\alpha]}$.
-  \item[\bf Task 5:] Every tree can be completed in a finite number of steps.
-\end{enumerate}
-
-
-
-
-\section*{Recursive Definitions}
-
-\begin{itemize}
-  \item[\it Length:] For any SL tree $X$, we define $\leng(X)$ to be the number of resolution rules that have been applied.
-      \item $\leng(X)=0$ for any root $X$.
-      \item For any SL tree $X$, if $\leng(X)=n$ and $X'$ is the result of resolving a sentence in exactly one branch in $X$, then $\leng(X')=n+1$.
-  \item[\it Constituents:] We define $[\varphi]$ to be the set of sentence letters that occur in $\varphi$. % by taking $[\cdot]:\text{SL}\to\mathcal{P}(\text{SL})$ to be the smallest function to satisfy:
-      \item If $\comp(\varphi)=0$, then $[\varphi]=\set{\varphi}$.
-      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
+  \item[\it Interpretation:] If $\I$ is a $\PL$ interpretation, then $\V{\I}(\metaA) \in \set{1,0}$ for all wfss $\metaA$ of $\PL$. 
+  \item[\it Conditional:] If $\MetaG \cup \set{\metaA} \vDash \metaB$, then $\MetaG \vDash \metaA \eif \metaB$.
+    \item Assume $\MetaG \cup \set{\metaA} \vDash \metaB$.
+    \item Let $\I$ be an arbitrary $\PL$ interpretation where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$.
+    \item Since $\V{\I}(\metaA) = 1$ or not by \textit{Interpretation}, there are two cases to consider. 
     \begin{itemize}
-      \item[$(\neg)$] $[\neg \varphi]=[\varphi]$; and
-      \item[$(\hspace{1pt}\star\hspace{1pt})$] $[\varphi \star \psi]=[\varphi] \cup [\psi]$.
+      \item[\it Case 1:] Assume $\V{\I}(\metaA) = 1$.
+        \item So $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG \cup \set{\metaA}$.
+        \item So $\V{\I}(\metaB) = 1$ by the starting assumption.
+        \item Thus $\V{\I}(\metaA \eif \metaB) = 1$ by the semantics for the conditional.
+      \item[Case 2:] Assume $\V{\I}(\metaA) \neq 1$.
+        \item So $\V{\I}(\metaA \eif \metaB) = 1$ by the semantics for the conditional.
     \end{itemize}
-  \item[\it Simplicity:] We define $\simp(\varphi)$ to hold just in case the SL sentence $\varphi$ has at most one occurrence of each sentence letter in SL.
-      \item If $\comp(\varphi)=0$, then $\simp(\varphi)$.
-      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
-    \begin{itemize}
-      \item[$(\neg)$] $\simp(\neg \varphi)$ if $\simp(\varphi)$; and
-      \item[$(\hspace{1pt}\star\hspace{1pt})$] $\simp(\varphi \star \psi)$ if $\simp(\varphi)$, $\simp(\psi)$, and $[\varphi]\cap[\psi]=\varnothing$.
-    \end{itemize}
-  \item[\it Substitution:] We define $\varphi_{[\chi/\alpha]}$ to be the result of replacing every occurrence of the sentence letter $\alpha$ in $\varphi$ with $\chi$.
-      \item If $\comp(\varphi)=0$, then $\varphi_{[\chi/\alpha]}=
-        \begin{cases}
-          \chi \quad\text{if } \varphi=\alpha,\\
-          \varphi \quad\text{otherwise.}
-        \end{cases}$
-      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
-    \begin{itemize}
-      \item[$(\neg)$] $(\neg\varphi)_{[\chi/\alpha]}=\neg(\varphi_{[\chi/\alpha]})$; and
-      \item[$(\hspace{1pt}\star\hspace{1pt})$] $(\varphi\star\psi)_{[\chi/\alpha]}=\varphi_{[\chi/\alpha]}\star\psi_{[\chi/\alpha]}$.
-    \end{itemize}
-  \item[\it Resolution:] We define $\res(\varphi)$ to be the maximum number of times that we may resolve $\varphi$ and any of its descendants. 
-      \item $\res(\varphi)=0$ if $\varphi$ is a literal.
-      \item For any SL sentences $\varphi$ and $\psi$, and binary connective $\star\in\set{\wedge,\vee,\supset,\equiv}$: 
-        \begin{itemize}
-          \item[$(\neg)$] $\res(\neg\neg\varphi)=\res(\varphi)+1$; and
-          \item[$(\hspace{1pt}\star\hspace{1pt})$] $\res(\varphi \star \psi)=\res(\varphi)+\res(\psi)+1$.
-          \item[$(\hspace{1pt}\star\hspace{1pt})$] $\res(\neg(\varphi \star \psi))=\res(\neg\varphi)+\res(\neg\psi)+1$.
-        \end{itemize}
-  \item[\it Set Binary:] We extend the definition of $\res$ to sets of sentences as follows:
-    $$\res(\Gamma)=\sum\limits_{\varphi\in\Gamma}\res(\varphi).$$
-  \item[\it Unresolved:] We define $[X]$ to be the set of unresolved sentences in the SL tree $X$. 
-      \item $\varphi\in[X]$ if $X$ is a root and $\varphi$ occurs in $X$.
-      \item For any SL tree $X'$ which results from resolving $\varphi\in[X]$ on every open branch in $X$ in which $\varphi$ occurs:
-        \begin{itemize}
-          \item[$(\neg)$] $[X']=([X]/\set{\varphi})\cup\set{\psi}$ if $\varphi=\neg\neg\psi$;
-          \item[$(+)$] $[X']=([X]/\set{\varphi})\cup\set{\psi,\chi}$ if $\varphi\in\set{\psi\wedge\chi,\psi\vee\chi}$;  
-          \item[$(-)$] $[X']=([X]/\set{\varphi})\cup\set{\neg\psi,\neg\chi}$ if $\varphi\in\set{\neg(\psi\wedge\chi),\neg(\psi\vee\chi)}$;
-          \item[$(\supset)$] $[X']=([X]/\set{\varphi})\cup\set{\neg\psi,\chi}$ if $\varphi=\psi\supset\chi$; 
-          \item[$(\not\supset)$] $[X']=([X]/\set{\varphi})\cup\set{\psi,\neg\chi}$ if $\varphi=\neg(\psi\supset\chi)$; 
-          \item[$(\equiv)$] $[X']=([X]/\set{\varphi})\cup\set{\psi,\chi, \neg\psi,\neg\chi}$ if $\varphi\in\set{\psi\equiv\chi,\neg(\psi\equiv\chi)}$.
-        \end{itemize}
-  \item[\it Resolvable:] Letting $\mathbb{L}$ be the set of SL literals, we define $X_U=[X]/\mathbb{L}$ to be the set of SL sentences in $X$ that can be resolved. 
+    \item So $\V{\I}(\metaA \eif \metaB) = 1$ in both cases.
+    \item Thus $\MetaG \vDash \metaA \eif \metaB$ follows by generalizing on $\I$. 
 \end{itemize}
 
 
-\section*{Task 5}
 
-\textit{Proof:}
-Given any SL tree $X$, let $X_U$ be the set of resolvable sentences in $X$.
-The proof goes by induction on $\res(X_U)$ for any SL tree $X$. 
 
-\textit{Base Case:}
-Let $X$ be an SL tree where $\res(X_U)=0$.
-By definition, every branch is complete, and so the tree is complete.
-Accordingly, $X$ can be completed in a finite number of steps, namely $0$. 
+\section*{PL Deduction Rules}
 
-\textit{Hypothesis:}
-Assume that for every SL tree $X$, if $\res(X_U)\leq n$, then $X$ can be completed in a finite number of steps. 
-
-\textit{Induction:}
-Let $X$ be an SL tree where $\res(X_U)=n+1$.
-Thus there is some $\varphi \in X_U$.
-Letting $X'$ be the SL tree that results from resolving $\varphi$ on every open branch in $X$, we may observe that $\varphi \notin X'_U$.
-Consider the following cases where $\star\in\set{\wedge,\vee,\supset,\equiv}$ is a binary connective:
-
-\textit{Case 1:} 
-If $\varphi=\neg\neg\psi$ and $\res(\psi)\neq 0$, then $X'_U=(X_U/\set{\varphi})\cup\set{\psi}$.
-If instead $\res(\psi)=0$, then $X'_U=X_U/\set{\varphi}$.
-Since $\res(\psi)=\res(\varphi)-1$, it follows either way that $\res(X'_U) \leq \res(X_U)-1=n$.
-
-\textit{Case 2:} 
-If $\varphi=\psi\star\chi$ and $\res(\psi)\neq 0$ and $\res(\chi)\neq 0$, then we know that $X'_U=(X_U/\set{\varphi})\cup\set{\psi,\chi}$.
-Since $\res(\psi)+\res(\chi)=\res(\varphi)-1$, it follows that $\res(X'_U)=\res(X_U)-1=n$.
-If instead $\res(\psi)=0$ or $\res(\chi)=0$, then $\res(X'_U)$ will be even smaller, and so $\res(X'_U)\leq n$.
-
-\textit{Case 3:} 
-If $\varphi=\neg(\psi\star\chi)$ and $\res(\neg\psi)\neq 0$ and $\res(\neg\chi)\neq 0$, then $X'_U=(X_U/\set{\varphi})\cup\set{\neg\psi,\neg\chi}$.
-Since $\res(\neg\psi)+\res(\neg\chi)=\res(\varphi)-1$, it follows that $\res(X'_U)=\res(X_U)-1=n$.
-If instead $\res(\neg\psi)=0$ or $\res(\neg\chi)=0$, then $\res(X'_U)$ will be even smaller, and so $\res(X'_U)\leq n$.
-
-Since in all cases $\res(X'_U)\leq n$, it follows by hypothesis that $X'$ can be completed in a finite number of steps.
-We know by \textbf{Task 2} that $X'$ is the result of resolving $\varphi$ in at most a finite number of branches in $X$.
-Since the sum of finite numbers is finite, we may conclude that $X$ may be completed in a finite number of steps. 
-Thus it follows by induction that every tree $X$ can be completed in a finite number of steps. 
+\begin{itemize}
+  \item[\it Induction Hypothesis:] Recall the assumption that $\MetaG_k \vDash \metaA_k$ for all $k \leq n$.
+  \item[\bf ($\boldsymbol\enot$I)] \textit{Proof:} $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by $\enot$I.
+    \item There is a subproof from $\metaA$ on line $i$ with $\metaB$ at line $j$ and $\enot\metaB$ at line $k$. 
+    \item By hypothesis $\MetaG_j\vDash \metaB$ and $\MetaG_k\vDash\enot\metaB$, where $\MetaG_j,\MetaG_k\subseteq\MetaG_{n+1}\cup\set{\metaA_i}$.
+    \item By \textit{Weakening}, $\MetaG_{n+1}\cup\set{\metaA_i}\vDash\metaB$ and $\MetaG_{n+1}\cup\set{\metaA_i}\vDash\enot\metaB$.
+    \item So $\MetaG_{n+1}\cup\set{\metaA_i}$ is unsatisfiable by \textit{Contradiction}.
+    \item So $\MetaG_{n+1}\vDash\metaA_{n+1}$ by \textit{Unsatisfiable}.
+  \item[\bf ($\boldsymbol\eand$I)] \textit{Proof:} $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by $\eand$I.
+    \item $\metaA_{n+1} = \metaA_i\eand\metaA_j$ where lines $i,j\leq n$ are live at $n+1$.
+    \item By hypothesis, $\MetaG_i\vDash\metaA_i$ and $\MetaG_j\vDash\metaA_j$.
+    \item By \textit{Inheritance}, $\MetaG_i, \MetaG_j \subseteq \MetaG_{n+1}$.
+    \item By \textit{Unsatisfiable}, $\MetaG_{n+1} \vDash \metaA_i$ and $\MetaG_{n+1} \vDash \metaA_j$.
+    \item Let $\I$ be a $\PL$ interpretation where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG_{n+1}$. 
+    \item So $\V{\I}(\metaA_i) = \V{\I}(\metaA_j) = 1$, and so $\V{\I}(\metaA_i \eand \metaA_j) = 1$ by the semantics.
+    \item Thus $\MetaG_{n+1}\vDash\metaA_{n+1}$ by generalizing on $\I$.
+  \item[\bf ($\boldsymbol\eif$I)] \textit{Proof:} $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by $\eif$I.
+    \item So $\metaA_{n+1} = \metaA_i \eif \metaA_j$, where there is a subproof of $\metaA_j$ from $\metaA_i$. 
+    \item By hypothesis $\MetaG_j\vDash \metaA_j$, where $\MetaG_j\subseteq\MetaG_{n+1}\cup\set{\metaA_i}$.
+    \item By \textit{Weakening}, $\MetaG_{n+1}\cup\set{\metaA_i}\vDash\metaA_j$.
+    \item By \textit{Conditional}, $\MetaG_{n+1}\vDash\metaA_i\eif\metaA_j$, and so $\MetaG_{n+1}\vDash\metaA_{n+1}$.
+  \item[\bf ($\boldsymbol\eif$E)] \textit{Proof:} $\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ is justified by $\eif$E.
+    \item So $\metaA_i = \metaA_j \eif \metaA_{n+1}$ where the lines $i,j \leq n+1$ are live at $n+1$. 
+    \item By hypothesis $\MetaG_i\vDash \metaA_i$ and $\MetaG_j\vDash \metaA_j$.
+    \item By \textit{Inheritance}, $\MetaG_i,\MetaG_j \subseteq \MetaG_{n+1}$.
+    \item By \textit{Weakening}, $\MetaG_{n+1}\vDash\metaA_i$ and $\MetaG_{n+1}\vDash\metaA_j$, and so $\MetaG_{n+1}\vDash\metaA_j \eif \metaA_{n+1}$.
+    \item Let $\I$ be a $\PL$ interpretation where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG_{n+1}$. 
+    \item Thus $\V{\I}(\metaA_j) = 1$ and $\V{\I}(\metaA_j \eif \metaA_{n+1}) = 1$.
+    \item By the semantics, $\V{\I}(\metaA_j) = 0$ or $\V{\I}(\metaA_{n+1}) = 1$.
+    \item To avoid contradiction, $\V{\I}(\metaA_{n+1}) = 1$.
+    \item Thus $\MetaG_{n+1}\vDash\metaA_{n+1}$ follows from by generalizing on $\I$.
+\end{itemize}
 
 
 
 
-
-
-
-
-
-
-
-
-% \section*{Weak Induction}
-
+% \section*{Natural to Normative}
+%
 % \begin{enumerate}
-%   \item[\it Even:] If $\varphi$ is a sentence letter of SL, then $\even(\varphi)$.\\
-%     For any SL sentences $\varphi$ and $\psi$: 
+%   \item[\it Soundness:] If $\MetaG \vdash \metaA$, then $\MetaG \vDash \metaA$.
 %     \begin{itemize}
-%       \item[$(\neg)$] $\even(\neg \varphi)$ if $\even(\varphi)$;
-%       \item[$(\wedge)$] $\even(\varphi \wedge \psi)$ if $\even(\varphi)$ and $\even(\psi)$;
-%       \item[] $\vdots$
+%       \item[\it Ease:] Can be easier to provide a derivation than a semantic argument.
+%       \item[\it Natural:] PL describes (approximately) how we in fact reason.
+%       \item[\it Trust:] Shows that we can trust PL to derive logical consequences.
+%       \item[\it Normative:] Soundness explains why we ought to use PL to reason.
 %     \end{itemize}
 % \end{enumerate}
+
+
+
+
+
+
+\section*{Consistency}
+  \label{Consistency}
+
+\begin{itemize}
+  \item[\it Corollary:] If $\MetaG$ is inconsistent, then $\MetaG$ is unsatisfiable. 
+    \item Assume $\MetaG$ is inconsistent, so $\MetaG \vdash \bot$. 
+    \item Thus $\MetaG \vDash \bot$ follows by \textsc{PL Soundness}. 
+    \item Assume for \textit{reductio} that $\MetaG$ is satisfiable. 
+    \item So $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$.
+    \item So $\V{\I}(\bot) = 1$, i.e., $\V{\I}(A \eand \enot A) = 1$.
+    \item By the semantics, $\V{\I}(A) = 1$ and $\V{\I}(\enot A) = 1$, so $\V{\I}(A) \neq 1$.
+    \item By \textit{reductio}, $\MetaG$ is unsatisfiable. 
+  \item[\it Contrapositive:] If $\MetaG$ is satisfiable, then $\MetaG$ is consistent.
+    \item The inconsistency of $\MetaG$ may be witnessed by a derivation of $\bot$ from $\MetaG$.
+    \item There are no witnesses that $\bot$ can't be derived from a consistent set.
+    \item We would somehow need to survey the space of all derivations.
+    \item Could try a reductio, but this is hardly promising.
+    \item Rather, we need only find an interpretation to witness satisfiability.
+  \item[\it Theorems:] How do we know that the theorems of PL are consistent?
+    \item Because every theorem is a tautology by \textsc{PL Soundness}.
+    \item So every interpretation witnesses the truth of all of the theorems.
+    \item So the set of theorems are indeed consistent.
+    \item Otherwise we could derive anything from nothing.
+  \item[\it Strength:] Let $(\metaA) \coloneq \set{\metaC : \metaA \vdash \metaC}$ be the wfs of $\PL$ derivable from $\metaA$.
+    \item We may show that $(\metaB) \subseteq (\metaA)$ if $\metaA \vdash \metaB$. 
+    \item So $(\metaA)$ provides a way to think about the \textsc{strength} of $\metaA$.
+    \item Observe that $\metaA \in (\bot)$ for every wfs $\metaA$ of $\PL$.
+    \item Strength is good, but not if it explodes into inconsistency.
+\end{itemize}
+
+
+
+
+
+
+\section*{More Derivations}
+
+\begin{enumerate}[leftmargin=1.5in]
+  % \item[\it Law of Excluded Middle:] $\vdash \metaA\eor\enot\metaA$.
+  % \item[\it Law of Non-Contradiction:] $\vdash \enot(\metaA\eand\enot\metaA)$.
+  % \item[\it Ex Falso Quodlibet:] $\metaA,\ \enot\metaA\ \vdash \metaB$.
+  \item[\it Hypothetical Syllogism:] $\metaA \eif \metaB,\ \metaB \eif \metaC\ \vdash \metaA \eif \metaC$.
+  \item[\it Modus Tollens:] $\metaA \eif \metaB,\ \enot\metaB\ \vdash \enot\metaA$.
+  \item[\it Contraposition:] $\metaA \eif \metaB\ \vdash \enot\metaB \eif \enot\metaA$.
+  % \item[\it Dilemma:] $\metaA \eor \metaB,\ \metaA \eif \metaC,\ \metaB \eif \metaC\ \vdash \metaC$.
+  \item[\it Disjunctive Syllogism:] $\metaA \eor \metaB,\ \enot \metaA \vdash \metaB$.
+  % \item[\it $\eor$-Commutativity:] $\metaA \eor \metaB\ \vdash \metaB \eor \metaA$.
+  % \item[\it $\eand$-Commutativity:] $\metaA \eand \metaB\ \vdash \metaB \eand \metaA$.
+  \item[\it Biconditional MP:] $\metaA \eiff \metaB,\ \enot\metaA\ \vdash \enot\metaB$.
+  % \item[\it $\eiff$-Commutativity:] $\metaA \eiff \metaB\ \vdash \metaB \eiff \metaA$.
+  % \item[\it Double Negation:] $\enot\enot\metaA\ \dashv\vdash \metaA$.
+  % \item[\it $\eand$-De Morgan's:] $\enot(\metaA\eand\metaB)\dashv\vdash\enot\metaA\eor\enot\metaB$.
+  % \item[\it $\eor$-De Morgan's:] $\enot(\metaA\eor\metaB)\dashv\vdash\enot\metaA\eand\enot\metaB$.
+  % \item[\it ${\eor}{\eand}$-Distribution:] $\metaA\eor(\metaB\eand\metaC) \dashv\vdash (\metaA\eor\metaB)\eand(\metaA\eor\metaC)$.
+  % \item[\it ${\eand}{\eor}$-Distribution:] $\metaA\eand(\metaB\eor\metaC) \dashv\vdash (\metaA\eand\metaB)\eor(\metaA\eand\metaC)$.
+  % \item[\it ${\eor}{\eand}$-Absorption:] $\metaA\eor(\metaA\eand\metaB) \dashv\vdash \metaA$.
+  % \item[\it ${\eand}{\eor}$-Absorption:] $\metaA\eand(\metaA\eor\metaB) \dashv\vdash \metaA$.
+  % \item[\it $\eand$-Associativity:] $\metaA\eand(\metaB\eand\metaC) \dashv\vdash (\metaA\eand\metaB)\eand\metaC$.
+  % \item[\it $\eor$-Associativity:] $\metaA\eor(\metaB\eor\metaC) \dashv\vdash (\metaA\eor\metaB)\eor\metaC$.
+\end{enumerate}
+
+
 
 
 
