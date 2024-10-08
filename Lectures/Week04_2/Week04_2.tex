@@ -58,6 +58,7 @@
 \begin{itemize}
   \item[\it Weakening:] If $\MetaG \vDash \metaA$, then $\MetaG \cup \MetaS \vDash \metaA$.
   \item[\it Inheritance:] If $\metaA_k$ is live at line $n$ of a PL derivation where $k\leq n$, then $\MetaG_k\subseteq \MetaG_n$.
+  \item[\it Interpretation:] If $\I$ is a $\PL$ interpretation, then $\V{\I}(\metaA) \in \set{1,0}$ for all wfss $\metaA$ of $\PL$. 
   \item[\it Contradiction:] If $\MetaG \vDash \metaA$ and $\MetaG \vDash \enot\metaA$, then $\MetaG$ is unsatisfiable.
     \item Assume $\MetaG \vDash \metaA$ and $\MetaG \vDash \enot\metaA$.
     \item Assume for contradiction that $\MetaG$ is satisfiable. 
@@ -72,17 +73,16 @@
     \item So $\V{\I}(\metaA) = 1$, and so $\MetaG \cup \set{\metaA}$ is satisfiable contrary to assumption.
     \item Thus for any $\I$, $\V{\I}(\enot \metaA) = 1$ if $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$.
     \item By definition, $\MetaG \vDash \enot\metaA$.
-  \item[\it Interpretation:] If $\I$ is a $\PL$ interpretation, then $\V{\I}(\metaA) \in \set{1,0}$ for all wfss $\metaA$ of $\PL$. 
   \item[\it Conditional:] If $\MetaG \cup \set{\metaA} \vDash \metaB$, then $\MetaG \vDash \metaA \eif \metaB$.
     \item Assume $\MetaG \cup \set{\metaA} \vDash \metaB$.
     \item Let $\I$ be an arbitrary $\PL$ interpretation where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$.
-    \item Since $\V{\I}(\metaA) = 1$ or not by \textit{Interpretation}, there are two cases to consider. 
+    \item Since $\V{\I}(\metaA) \in \set{1,0}$ by \textit{Interpretation}, there are two cases to consider. 
     \begin{itemize}
       \item[\it Case 1:] Assume $\V{\I}(\metaA) = 1$.
         \item So $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG \cup \set{\metaA}$.
         \item So $\V{\I}(\metaB) = 1$ by the starting assumption.
         \item Thus $\V{\I}(\metaA \eif \metaB) = 1$ by the semantics for the conditional.
-      \item[Case 2:] Assume $\V{\I}(\metaA) \neq 1$.
+      \item[Case 2:] Assume $\V{\I}(\metaA) = 0$.
         \item So $\V{\I}(\metaA \eif \metaB) = 1$ by the semantics for the conditional.
     \end{itemize}
     \item So $\V{\I}(\metaA \eif \metaB) = 1$ in both cases.
@@ -106,7 +106,7 @@
     \item $\metaA_{n+1} = \metaA_i\eand\metaA_j$ where lines $i,j\leq n$ are live at $n+1$.
     \item By hypothesis, $\MetaG_i\vDash\metaA_i$ and $\MetaG_j\vDash\metaA_j$.
     \item By \textit{Inheritance}, $\MetaG_i, \MetaG_j \subseteq \MetaG_{n+1}$.
-    \item By \textit{Unsatisfiable}, $\MetaG_{n+1} \vDash \metaA_i$ and $\MetaG_{n+1} \vDash \metaA_j$.
+    \item By \textit{Weakening}, $\MetaG_{n+1} \vDash \metaA_i$ and $\MetaG_{n+1} \vDash \metaA_j$.
     \item Let $\I$ be a $\PL$ interpretation where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG_{n+1}$. 
     \item So $\V{\I}(\metaA_i) = \V{\I}(\metaA_j) = 1$, and so $\V{\I}(\metaA_i \eand \metaA_j) = 1$ by the semantics.
     \item Thus $\MetaG_{n+1}\vDash\metaA_{n+1}$ by generalizing on $\I$.

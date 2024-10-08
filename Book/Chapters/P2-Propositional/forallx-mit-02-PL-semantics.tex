@@ -10,6 +10,7 @@ After reviewing both the advantages and disadvantages of this procedure, the sec
 
 
 \section{Truth-Functional Operators}
+  \label{sec:PL-truthfuctions}
 
 Any wfs of $\PL$ that is not a sentence letter is composed of sentence letters together with the sentential operators.
 In Chapter \ref{ch.PL-syntax}, we offered truth tables for each operator.
@@ -1374,8 +1375,8 @@ This follows vacuously since $P \eand \enot P$ is not true in any $\PL$ interpre
 Or to take another approach, think about what it would take for the logical consequence above to be false: there would have to be a $\PL$ interpretation in which $P \eand \enot P$ is true and $Q$ is false.
 But there are no $\PL$ interpretations in which $P \eand \enot P$ is true, and so $Q$ is a logical consequence.
 
-Observe that the reason that the logical consequence above is true has nothing to do with the wfs $Q$.
-That is, we do not need to appeal to anything about the logical form of $Q$ in order to explain why $P \eand \enot P \vDash Q$. 
+The logical consequence above has nothing to do with the wfs $Q$.
+In particular, we do not need to appeal to anything about the logical form of $Q$ in order to explain why $P \eand \enot P \vDash Q$. 
 Thus the same considerations would demonstrate that $P \eand \enot P \vDash \metaA$ for any wfs $\metaA$ of $\PL$.
 Moreover, the same conclusion holds were we to replace $P \eand \enot P$ with any other $\PL$ wfs that is not true on any interpretation.
 For instance, consider:
@@ -1418,11 +1419,21 @@ This provides a way to characterize contradictions in terms of logical consequen
 
 We may close by mentioning a connection between logical consequence and unsatisfiability that we will have occasion to return to later in the metalogical portions of this text.
 
-\begin{Lthm} \label{lemma:unsat_consequence}
+\begin{Lthm} \label{lemma:PL-unsat_consequence}
   $\MetaG \vDash \metaA$ just in case $\MetaG \cup \set{\enot \metaA}$ is unsatisfiable. 
 \end{Lthm}
 
-We will make considerable use of this principle in proving things about the proof system for $\PL$ that we will now turn to introduce in the following chapter.
+% \begin{quote} 
+%   \textit{Proof:}
+%   This proof is left as an exercise for the reader.
+%   % Assume for contraposition that $\MetaG \cup \set{\enot \metaA}$ is satisfiable.
+%   % Thus there is some $\PL$ interpretation $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG \cup \set{\enot \metaA}$, and so $\V{\I}(\metaA) = 0$ by the semantics for negation. 
+%   % Given that $\V{\I}(\metaG) = 1$ for all $\metaG \in \MetaG$, it follows that $\MetaG \nvDash \metaA$.
+%   % By contraposition, $\MetaG \cup \set{\enot \metaA}$ is unsatisfiable if $\MetaG \vDash \metaA$.
+%   \qed
+% \end{quote}
+
+We will make use of this principle in proving things about the proof system for $\PL$ that we will now turn to introduce in the following chapter.
 
 
 

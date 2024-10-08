@@ -2,8 +2,8 @@
 \chapter{Natural Deduction in PL}
 \label{ch.PL-deduction}
 
-%JRH to-do: add in some \ellipsesline commands in the proofs 
-%take out stuff in strategy about rules of replacement! not legal in SND! 
+% TODO: prove cut
+% TODO: use the language of 'admissible rules' and 'basic rules'
 
 This chapter introduces a natural deduction proof system for $\PL$ which we will refer to as \textit{Propositional Logic} (PL).
 This is the logic of sentences which aims to describe formal reasoning which is valid in virtue of the logical form of the sentences involved where the syntactic primitives are all sentences or sentential operators.
@@ -487,9 +487,9 @@ Rather, the proof rules are directly justified by our intuitive understanding of
 The rule for conditional introduction has already been used in the examples used to first set up the proof system, and should have felt both compelling an familiar.
 % Here is an abbreviated version of the reasoning which showed up in the completeness proof:
 % 	\begin{quote}
-% 		Assume $\Gamma \nproves \bot$.
-%     Given the lemmas we have proven, it follows from this assumption that $\Gamma \nmodels \bot$.
-%     Although we don't know whether $\Gamma \nmodels \bot$ holds independent of our assumption, we may conclude that \textit{if} $\Gamma \nproves \bot$, \textit{then} $\Gamma \nmodels \bot$. 
+% 		Assume $\MetaG \nproves \bot$.
+%     Given the lemmas we have proven, it follows from this assumption that $\MetaG \nmodels \bot$.
+%     Although we don't know whether $\MetaG \nmodels \bot$ holds independent of our assumption, we may conclude that \textit{if} $\MetaG \nproves \bot$, \textit{then} $\MetaG \nmodels \bot$. 
 % 	\end{quote}
 The idea here is that you help yourself to something that you may not know is true, do some reasoning to arrive at some further claim, then conclude by asserting a conditional claim: if the assumption is true, then the further claim is true.
 This conclusion follows despite not knowing if the original assumption is true.
@@ -1066,29 +1066,29 @@ So in writing your own proofs in PL, keep these rules in mind, sticking to them 
 Given the natural deduction rules specified above, we may present the following definition:
 
 \factoidbox{
-  A \define{derivation} (or \define{proof}) of $\metaA$ from $\Gamma$ in PL is any finite sequence of wfs of $\PL$ ending in $\metaA$ where every wfs in the sequence is either: (1) a premise in $\Gamma$; (2) an assumption which is eventually discharged; or (3) follows from previous lines by a natural deduction rule for PL besides AS. 
+  A \define{derivation} (or \define{proof}) of $\metaA$ from $\MetaG$ in PL is any finite sequence of wfs of $\PL$ ending in $\metaA$ where every wfs in the sequence is either: (1) a premise in $\MetaG$; (2) an assumption which is eventually discharged; or (3) follows from previous lines by a natural deduction rule for PL besides AS. 
 }
 
-A wfs $\metaA$ of $\PL$ is \define{derivable} (or \define{provable}) from $\Gamma$ in PL, i.e., $\Gamma \vdash \metaA$, just in case there is a natural deduction derivation (proof) of $\metaA$ from $\Gamma$ in PL. 
-% Whereas `$\Gamma \vdash_{T} \metaA$' was shorthand for `$\Gamma, \enot \metaA \vdash_{T} \bot$', 
+A wfs $\metaA$ of $\PL$ is \define{derivable} (or \define{provable}) from $\MetaG$ in PL, i.e., $\MetaG \vdash \metaA$, just in case there is a natural deduction derivation (proof) of $\metaA$ from $\MetaG$ in PL. 
+% Whereas `$\MetaG \vdash_{T} \metaA$' was shorthand for `$\MetaG, \enot \metaA \vdash_{T} \bot$', 
 Whereas logical consequence provides a semantic answer to the question of what follows from what in virtue of logical form by quantifying over interpretations, the derivation relation $\vdash$ provides a purely syntactic answer to this question by specifying which wfs of $\PL$ can be written after which in a manner which constitutes a derivation.
 Perhaps surprisingly, these two relations will be shown to have the same extension, describing formal reasoning in $\PL$ in two different ways.
 
-Given the definition of the derivation relation, we are now in a position to introduce a number of other important definitions.
-Two sentences $\metaA$ and $\metaB$ of $\PL$ are \define{interderivable} (or \define{provably equivalent}) in PL--- i.e., $\metaA \dashv\vdash \metaB$--- just in case both $\metaA\vdash\metaB$ and $\metaB\vdash\metaA$.
-% Additionally, we will take $\Gamma\vdash\bot$ to mean that $\Gamma\vdash\metaB\eand\enot\metaB$ for some $\PL$ sentence $\metaB$.
+Having defined the derivation relation for PL, we are now in a position to introduce a number of other definitions.
+Two wfss $\metaA$ and $\metaB$ of $\PL$ are \define{interderivable} in PL--- i.e., $\metaA \dashv\vdash \metaB$--- just in case both $\metaA\vdash\metaB$ and $\metaB\vdash\metaA$.
+% Additionally, we will take $\MetaG\vdash\bot$ to mean that $\MetaG\vdash\metaB\eand\enot\metaB$ for some $\PL$ sentence $\metaB$.
 % It is relatively easy to show that two sentences are provably equivalent since this requires a pair of proofs.
 % Showing that sentences are \emph{not} provably equivalent would be much harder.
 % It would be just as hard as showing that a sentence is not a theorem.
 % (In fact, these problems are interchangeable. Can you think of a sentence that would be a theorem if and only if \metaA{} and \metaB{} were provably equivalent?)
-Letting \define{bottom} (also called the \define{falsum}) be the arbitrary contradiction $\bot \colonequals A \wedge \enot A$, we may take a set of sentences $\Gamma$ to be \define{inconsistent} just in case $\Gamma \vdash \bot$, and \define{consistent} otherwise.
+Letting \define{bottom} (also called the \define{falsum}) be the arbitrary contradiction $\bot \colonequals A \wedge \enot A$, we may take a set $\MetaG$ of wfss of $\PL$ to be \define{inconsistent} in PL just in case $\MetaG \vdash \bot$, and \define{consistent} in PL otherwise.
 
 Provability is relative to a proof system.
 Whereas the meaning of the `$\vdash$' symbol featured in this chapter concerns PL, later we will use the same symbol for the derivation relation in FOL, distinguishing these with subscripts as in `$\vdash_{\textsc{pl}}$' and `$\vdash_{\textsc{fol}}$' if need be.
 % When necessary, we can specify which turnstile we intend by including a reference to the proof system in question, letting `$\vdash_{T}$' stand for provability in the tree system, and `$\vdash_{PL}$' stand for provability in this natural deduction system.
 % Since this chapter is concerned with natural deduction, you can take `$\vdash$' to mean `$\vdash_{PL}$' in this chapter unless specified otherwise.
-% % For instance, it is important to disambiguate the turnstiles in making the following observation: whereas $\Gamma \vdash_{T} \metaA$ was defined as $\Gamma, \enot \metaA \vdash_{T} \bot$ for the tree proof system, here we have defined $\Gamma \vdash_{PL} \bot$ in terms of $\Gamma \vdash_{PL} \metaB\eand\enot\metaB$ for some $\metaB$. 
-% So $\Gamma\vdash\metaA$ can be read as: $\metaA$ is derivable from $\Gamma$.
+% % For instance, it is important to disambiguate the turnstiles in making the following observation: whereas $\MetaG \vdash_{T} \metaA$ was defined as $\MetaG, \enot \metaA \vdash_{T} \bot$ for the tree proof system, here we have defined $\MetaG \vdash_{PL} \bot$ in terms of $\MetaG \vdash_{PL} \metaB\eand\enot\metaB$ for some $\metaB$. 
+% So $\MetaG\vdash\metaA$ can be read as: $\metaA$ is derivable from $\MetaG$.
 As with logical consequence, it is often convenient to write `$\metaA_1,\metaA_2,\ldots\vdash\metaB$' as a shorthand for $\set{\metaA_1,\metaA_2,\ldots}\vdash\metaB$.
 A wfs $\metaA$ of $\PL$ is a \define{theorem} of PL just in case $\vdash\metaA$.
 As with the derivations in PL, it is important to note that the wfss of $\PL$ are only theorems relative to a proof system, and so there is no sense in which $A\eor\enot A$ is a theorem full stop.
@@ -1096,9 +1096,9 @@ Nevertheless, it is natural to expect $A\eor\enot A$ to be a theorem of most any
 
 In order to show that something is a theorem we have to derive it from no premises.
 But how could we show that something is \emph{not} a theorem?
-More generally, how could we show that $\Gamma \nproves \metaA$?
-Showing that there is no proof of $\metaA$ from $\Gamma$ would seem to require searching the space of all natural deduction proofs, and this is not bound to be easy. 
-For instance, even if you (or a computer program) failed to derive $\metaA$ from $\Gamma$ in a thousand different ways, perhaps their is a proof that has not yet been considered.
+More generally, how could we show that $\MetaG \nproves \metaA$?
+Showing that there is no proof of $\metaA$ from $\MetaG$ would seem to require searching the space of all natural deduction proofs, and this is not bound to be easy. 
+For instance, even if you (or a computer program) failed to derive $\metaA$ from $\MetaG$ in a thousand different ways, perhaps their is a proof that has not yet been considered.
 This brings out an important difference between our natural deduction system PL and the truth table method presented above for deciding whether $\MetaG \vDash \metaA$.
 In particular, PL does not provide an effective method for determining whether $\MetaG \vDash \metaA$.
 However, consider the following:

@@ -17,10 +17,8 @@
     - [x] repost with last section
   - [x] chapter 4
     - [x] repost with final sections
-  - [ ] chapter 5
+  - [x] chapter 5
   - [ ] chapter 6
-    - [ ] set theory, functions, orders
-    - [ ] mathematical induction review
   - [ ] chapter 7
   - [ ] chapter 8
   - [ ] chapter 9
@@ -28,6 +26,9 @@
   - [ ] chapter 11
   - [ ] chapter 12
   - [ ] glossary
+  - [ ] appendix
+    - [ ] set theory, functions, orders
+    - [ ] mathematical induction review
   - [ ] problem sets
     - [ ] debug solutions
 

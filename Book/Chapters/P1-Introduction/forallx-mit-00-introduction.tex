@@ -9,11 +9,11 @@ Logic is the study of \textit{formal reasoning}, that is, what follows from what
 % By `formal' we don't just mean that we will be using mathematical symbols, although we will.
 % After all, mathematics, physics, and many other fields use mathematical symbols, but that doesn't make all of those fields logic.
 Although the reasoning that we will be concerned with will include mathematical symbols, the choice of symbols is arbitrary, and so this is not the sense of formality at issue.
-After all, many fields engage in reasoning with mathematical looking symbols but we will not be concerned to describe all of what goes on in reasoning in those fields.
+After all, many fields engage in reasoning with mathematical looking symbols but we will not be concerned to describe the reasoning that goes on in those fields.
 
 There are of course many other ways to reason besides the manner we will be concerned with in this book.
 In order to characterize the subject-matter of logic, this chapter will contrast formal reasoning with a number of other common types of reasoning.
-This will provide a theoretical target which subsequent chapters will describe first \textit{semantically} and then \textit{syntactically}, proving that these two accounts describe the same thing.
+This will help to provide a theoretical target which subsequent chapters describe first \textit{semantically} and then \textit{syntactically} before proving that these two accounts describe the same thing twice over.
 
 Reasoning moves the reasoner from some number of considerations to a further consideration.
 In particular, we will be concerned with \define{declarative sentences} in English, that is, English sentences that are either true or false, and not both at once.\footnote{Whereas italics will be used for emphasis, key vocabulary will be capitalized throughout.}
@@ -83,21 +83,21 @@ Here is an example:
 % \end{earg}
 
 \begin{earg}
-  \eitem{San Francisco is West of Cambridge.}
-  \uitem{Cambridge is West of Oxford.}
-  \eitem{San Francisco is West of Oxford.}
+  \eitem{Berkeley is to the West of MIT.}
+  \uitem{MIT is to the West of Oxford.}
+  \eitem{Berkeley is to the West of Oxford.}
 \end{earg}
  
  
 Although this argument might seem to be much more compelling than the second argument, its conclusion does not follows from its premises by virtue of logic alone. 
 Put otherwise, the conclusion in this final argument is not a purely logical consequence of its premises, where something similar may be said for the second argument given above.
 Whereas later chapters will carefully define what it is for a sentence to be a logical consequence of a set of sentences in formal languages, the remainder of the present chapter will focus on characterizing an informal analogue for arguments in English.
-These considerations will provide an intuitive conception of what it is for a conclusion to follow as a matter of logic from some number of premises, motivating the study of the formal languages with which we will be concerned.
+These considerations will provide an intuitive conception of what it is for a conclusion to follow as a matter of logic from some number of premises, motivating the study of the formal languages presented in the next chapter.
 
-In addition to providing a means by which to resolve the ambiguities of natural language, regimenting English arguments in formal languages will provide an account of their logical form.
+In addition to providing a means by which to resolve the ambiguities of natural language, regimenting English arguments in formal languages may be used to provide an account of their logical form.
 % Roughly speaking, you can think of the logical form of an argument as the mechanisms by which logical consequence is conveyed.
-As we will see, much will turn on the expressive power of our formal languages since the conclusion of an argument in English may be a logical consequence of its premises when regimented in one formal language but not in another.
-Whereas this book will introduce certain formal languages, this is not a stopping point but rather a place to begin.
+As we will see, much will turn on the expressive power of the formal language since the conclusion of an argument in English may be a logical consequence of its premises when regimented in one formal language and not in another.
+Whereas this book will introduce two formal languages, this is not a stopping point but rather a place to begin.
 
 
 
@@ -176,7 +176,7 @@ For example, questions count as grammatical English sentences, but logical argum
 As mentioned above, we are specifically interested in declarative sentences that can be true or false, and never both true and false at once.
 In order to set them aside, here are some types of the sentences we will not be concerned with:
 
-\paragraph{Questions} `Are you sleepy yet?' is a perfectly grammatical interrogative sentence.
+\textbf{Questions} `Are you sleepy yet?' is a perfectly grammatical interrogative sentence.
 Whether you are sleepy or not, the question itself is neither true nor false.
 % Thus `Are you sleepy yet?' is not a declarative sentence--- it does not express a proposition that is either true or false.
 Suppose you answer the question: `I am not sleepy.'
@@ -184,12 +184,12 @@ This answer is either true or false, and so is a declarative sentence.
 Generally, questions will not be declarative sentences, but answers to questions often will. 
 For instance, `What is this course about?' is not a declarative sentence, but `No one knows what this course is about' is a declarative sentence.
 
-\paragraph{Imperatives} Commands such as `Wake up!', `Sit up straight!', and so on are grammatical imperative sentences.
+\textbf{Imperatives} Commands such as `Wake up!', `Sit up straight!', and so on are grammatical imperative sentences.
 Although it might be good for you to sit up straight or it might not, the command is neither true nor false.
 Note, however, that commands are not always phrased with imperatives.
 `You will respect my authority' \emph{is} either true or false--- either you will or you will not--- and so it counts as a declarative sentence.
 
-\paragraph{Exclamations} Expressions like `Ouch!' or `Boo, Yankees!' are sometimes described as exclamatory sentences, but they are neither true nor false.
+\textbf{Exclamations} Expressions like `Ouch!' or `Boo, Yankees!' are sometimes described as exclamatory sentences, but they are neither true nor false.
 We will treat `Ouch, I hurt my toe!' as meaning the same thing as `I hurt my toe.'
 The `Ouch' does not add anything that could be true or false, and so will simply be dropped if it occurs at all.
 
@@ -197,7 +197,7 @@ The `Ouch' does not add anything that could be true or false, and so will simply
 % TODO: since we will only be concerned with whether a proposition obtains or not, we may model the space of propositions by just two propositions, one which obtains and one which does not
 
 In contrast to the types of sentences mentioned above, declarative sentences are used to describe \textit{ways for some particular things to be} which we will refer to as \define{propositions}.
-Put otherwise, declarative sentences are used to \textit{express} propositions, where the very same proposition may be expressed in many different ways by different sentences in different languages.
+Put otherwise, declarative sentences are used to \textit{express} propositions, where the same proposition may be expressed in many different ways by different sentences in different languages.
 For instance, the English sentence `snow is white' expresses the same proposition as the German sentence `Schnee ist wei\ss'.
 Both express the proposition that snow is white.
 
@@ -246,7 +246,7 @@ What else there is to say about normative and evaluative sentences is beyond the
 
 It is also important to keep clear the distinction between truth and knowledge.
 Although a declarative sentence is the kind of thing that can be true or false, this does not mean that we will always be in a position to know whether it is true or false.
-For example, assuming a clear account of what it is to be a human to be provided, the sentence, `There are an even number of humans on Earth right now' may be taken to have a truth-value even though it would be virtually impossible to determine.\footnote{There are other concerns to do with vagueness which we will also ignore.}
+For example, assuming a clear account of what it is to be a human to be provided, the sentence, `There are an even number of humans on Earth right now' may be taken to have a truth-value even though it would be virtually impossible to determine. % TODO: SAVE? \footnote{There are other concerns to do with vagueness which we will also ignore.}
 Similarly, there are many controversies where people disagree about what is true or false, and it very hard to settle the debate.
 However, for the sake of an argument, we may treat controversial premises as true in order to see what follows as a result without committing ourselves to these assumptions.
 % JH: not sure about the humans example. There are issues of vagueness regarding both conjoined twins and also when humans come into existence (e.g. at what point does a baby have to exit the womb? do late-stage fetuses count as babies and if so when)
@@ -281,8 +281,7 @@ This is the first way that an argument can go wrong: not all of the premises are
 
 Assuming that the premises E1 -- E4 are true, the conclusion E5 would seem to follow.
 What we mean by `follow' in this instance is that the truth of the premises makes the truth of the conclusion extremely likely, and perhaps so likely that it is beyond a reasonable doubt, compelling a jury to find the defendant guilty.
-
-What may be good enough for the law is not good enough for logic.
+However, what may be good enough for the law is not good enough for logic.
 This is not to disparage the criminal justice system but to observe that the truth of the conclusion in the argument above does not follow \textit{logically} from the truth of its premises.
 However likely the conclusion may be given the truth of its premises, it is still \textit{possible} for the premises to be true and the conclusion false.
 For instance, consider a possibility in which it was the defendant's partner who shot the victim.

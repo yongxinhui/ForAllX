@@ -2,6 +2,8 @@
 \chapter{The Soundness of PL}
   \label{ch.PL-Soundness}
 
+  % TODO: add lemma names to match the handouts
+
 Chapter \ref{ch.introduction} provided an informal account of logic as the study of formal reasoning which was glossed as \textit{what follows from what in virtue of logical form}.
 Rather than attempting to describe all of what follows from what in English which lacks a precise definition of a grammatical sentence, Chapter \ref{ch.PL-syntax} introduced an artificial language $\PL$ in which we stipulated a definition of the well-formed sentences (wfss) of $\PL$.
 Given the definition of the wfss of $\PL$, Chapter \ref{ch.PL-semantics} defined the interpretations of $\PL$ in order to provide a theory of logical consequence $\vDash$ which answered the question of what follows from what in $\PL$. 
@@ -407,6 +409,24 @@ You might also give the following proof a try which works in a similar manner.
 Getting a good understanding of how these proofs work will make reading the rest of the proofs in this chapter a lot easier and more meaningful than they would be otherwise.
 % It is better to study these proofs carefully and slowly get faster making sense of the proofs in this chapter than to skim over the details and for these proofs to make no sense at all.
 
+% TODO: use to establish PL-unsat_con_neg below
+% \begin{Lthm} \label{lemma:PL-semantic_cut}
+%   If $\Gamma \models \metaA$ and $\Sigma \cup \set{\metaA} \models \metaB$, then $\Gamma\cup\Sigma \models \metaB$. 
+% \end{Lthm}
+%
+% \begin{quote} 
+%   \textit{Proof:} Assume $\Gamma \models \metaA$ and $\Sigma \cup \set{\metaA} \models \metaB$.
+%   Let $\M$ be any model that satisfies $\Gamma\cup\Sigma$.
+%   It follows that $\M$ satisfies $\Gamma$, and so $\M$ satisfies $\metaA$.
+%   Thus $\M$ satisfies $\Gamma\cup\Sigma$, and so $\M$ satisfies $\metaB$.
+%   Generalizing on $\M$, we may conclude that $\Gamma\cup\Sigma\models\metaB$.
+% \end{quote}
+
+% TODO: use to prove the following
+% \begin{Lthm} \label{lemma:PL-unsat_con_neg}
+%   If $\MetaG \cup \set{\enot \metaA}$ is unsatisfiable, then $\MetaG \vDash \metaA$.
+% \end{Lthm}
+% \vspace{-.2in}
 
 
 \factoidbox{
@@ -1095,6 +1115,7 @@ The derivations for NB go as follows:
 
 
 \subsection{Double Negation}
+  \label{sub:PL-double_negation}
 
 Whereas we have included two similar rules for negation introduction and elimination, some texts only include negation introduction together with the following rule for \textit{double negation elimination} (DN):
 
@@ -1154,7 +1175,7 @@ Here is the derivation of EFQ.
 This puts a syntactic spin on a semantic idea that we considered before: just as every wfs of $\PL$ is a logical consequence of an unsatisfiable sets of wfss of $\PL$, every wfs of $\PL$ can be derived from any wfss $\metaA$ and $\enot\metaA$ of $\PL$, and indeed from any set $\MetaG$ containing $\metaA$ and $\enot\metaA$. 
 % TODO add syntactic weakening lemma
 
-The explosion of wfss of $\PL$ that can be derived from a set containing $\metaA$ and $\enot \metaA$ helps to shed light on why a set $\MetaG$ of wfss of $\PL$ was said to be inconsistent just in case $\MetaG \vdash \bot$.
+The explosion of wfss of $\PL$ that can be derived from a set containing $\metaA$ and $\enot \metaA$ helps to shed light on why a set $\MetaG$ of wfss of $\PL$ was said to be inconsistent in PL just in case $\MetaG \vdash \bot$.
 Since $\bot \coloneq A \eand \enot A$, both $\bot \vdash A$ and $\bot \vdash \enot A$ by $\eand$E, and so by EFQ, any $\metaB$ can be derived from $\bot$. 
 % TODO add cut
 Thus if $\MetaG \vdash \bot$, it follows that $\MetaG \vdash \metaB$ for any wfs $\metaB$ of $\PL$ whatsoever. 
