@@ -37,7 +37,7 @@
 %	TITLE
 %----------------------------------------------------------------------------------------
 
-\title{\textbf{PL Completeness}} % Subtitle
+\title{\textbf{PL Completeness: Part I}} % Subtitle
 
 \author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
 
@@ -58,7 +58,7 @@
 \begin{itemize}
   \item[\bf Corollary 4.2] If $\MetaG$ is satisfiable, then $\MetaG$ is consistent.
     \item This followed from \textsc{PL Soundness}.
-    \item We will no establish the converse of \textbf{Corollary 4.2} as a theorem.
+    \item We will now establish the converse of \textbf{Corollary 4.2} as a theorem.
     \item \textsc{PL Completeness} will follow as a corollary.
 \end{itemize}
 
@@ -91,13 +91,19 @@
     \item Append lines for $A$ and $\neg A$ by $\wedge$E. 
     \item Discharge $\metaA$, concluding $\neg \metaA$ by $\neg$I, so $\Lambda \vdash \metaA$. 
   % \item[\bf Cut:] If $\Lambda \vdash \metaA$ and $\Pi\cup\set{\metaA} \vdash \metaB$, then $\Lambda\cup\Pi \vdash \metaB$.
+  \item[\bf Lemma 5.4] If $\Lambda\vdash\metaA$ and $\Lambda\vdash\neg\metaA$, then $\Lambda$ is inconsistent.
+    \item Assume $\Lambda\vdash\metaA$ and $\Lambda\vdash\enot\metaA$.
+    \item $X$ derives $\metaA$ from $\Lambda$, and $Y$ derives $\enot\metaA$ from $\Lambda$. 
+    \item Let $Z$ append $Y$ to $X$, renumbering lines.
+    \item Use EFQ on the last lines of $X$ and $Y$ to derive $\bot$ from $\Lambda$. 
+    \item By definition, $\Lambda$ is inconsistent.
   \item[\bf Lemma 5.2] If $\Lambda \cup \set{\metaA}$ and $\Lambda\cup \set{\neg\metaA}$ are both inconsistent, then $\Lambda$ is inconsistent.
     \item Assume $\Lambda \cup \set{\metaA}$ and $\Lambda\cup \set{\neg\metaA}$ are both inconsistent.
     \item $\Lambda\vdash \enot\metaA$ and $\Lambda\vdash\enot\enot\metaA$ by \textbf{Lemma 5.1}.
-    \item $X$ derives $\enot\metaA$ from $\Lambda$, and $Y$ derives $\enot\enot\metaA$ from $\Lambda$. 
-    \item Let $Z$ append $Y$ to $X$, renumbering $Y$ accordingly
-    \item Use EFQ on the last lines of $X$ and $Y$ to derive $\bot$ from $\Lambda$. 
-    \item Thus $\Lambda$ is inconsistent. 
+    % \item $X$ derives $\enot\metaA$ from $\Lambda$, and $Y$ derives $\enot\enot\metaA$ from $\Lambda$. 
+    % \item Let $Z$ append $Y$ to $X$, renumbering $Y$ accordingly
+    % \item Use EFQ on the last lines of $X$ and $Y$ to derive $\bot$ from $\Lambda$. 
+    \item Thus $\Lambda$ is inconsistent by \textbf{Lemma 5.4}. 
 \end{itemize}
 
 
@@ -113,7 +119,7 @@
     \item $\Delta_0 = \MetaG$
     \item $\Delta_{n+1} =
       \begin{cases}
-        \Delta_n\cup\set{\metaB_n}      & \text{ if } \MetaG_n\cup\set{\metaB_n} \text{ is consistent}\\
+        \Delta_n\cup\set{\metaB_n}      & \text{ if } \MetaD_n\cup\set{\metaB_n} \text{ is consistent}\\
         \Delta_n\cup\set{\neg\metaB_n}  & \text{ otherwise}.
       \end{cases}$
     \item $\Delta_\MetaG = \bigcup_{i\in\N}\Delta_n$. 
@@ -151,12 +157,6 @@
     \item Let $m \in \N$ be the first number where $\Delta_m$ includes all premises in $X$.
     \item So $\Delta_m\vdash\bot$, and so $\Delta_k$ is inconsistent for some $k\in\N$.
     \item Since this contradicts the above, $\Delta_\Gamma$ is consistent. 
-  \item[\bf Lemma 5.4] If $\Lambda\vdash\metaA$ and $\Lambda\vdash\neg\metaA$, then $\Lambda$ is inconsistent.
-    \item Assume $\Lambda\vdash\metaA$ and $\Lambda\vdash\enot\metaA$.
-    \item $X$ derives $\metaA$ from $\Lambda$, and $Y$ derives $\enot\metaA$ from $\Lambda$. 
-    \item Let $Z$ append $Y$ to $X$, renumbering lines.
-    \item Use EFQ on the last lines of $X$ and $Y$ to derive $\bot$ from $\Lambda$. 
-    \item By definition, $\Lambda$ is inconsistent.
   \item[\it Deductive Closure:] A set $\MetaD$ of wfss of $\PL$ is \textsc{deductively closed} in PL just in case for any wfs $\metaA$ of $\PL$, if $\MetaD\vdash\metaA$, then $\metaA\in\MetaD$.
   \item[\bf Lemma 5.5] If $\MetaD$ is maximal consistent, then $\MetaD$ is deductively closed.
     \item Assume $\MetaD$ is maximal consistent.
@@ -166,54 +166,8 @@
     \item By \textbf{Lemma 5.4}, $\Delta$ is inconsistent, contradicting the above.
     \item So $\neg\metaA\notin\Delta$, and so $\metaA \in \Delta$ by maximality. 
     \item Generalizing on $\metaA$, we may conclude that $\Delta$ is deductively closed. 
-  \item[\bf Lemma 5.6] If $\Lambda\vdash\metaA$, then $\Lambda\cup\Pi\vdash\metaA$.
-    \item Assuming that $\Lambda\vdash\metaA$, there is a derivation $X$ of $\metaA$ from $\Lambda$ in PL.
-    \item Since $\Lambda\subseteq\Lambda\cup\Pi$, $X$ is also a derivation of $\metaA$ from $\Lambda\cup\Pi$ in PL.
-    \item Thus $\Lambda\cup\Pi\vdash\metaA$. 
-  \item[\bf Lemma 5.7] If $\MetaD$ is a maximal consistent set of wfss of $\PL$, then every wfs $\metaA$ of $\PL$ is such that $\V{\I_{\MetaD}}(\metaA) = 1$ just in case $\metaA\in\MetaD$.  
-    \item Assume $\MetaD$ is a maximal consistent set of $\PL$ wfss.
-    \item The proof goes by induction on complexity.
-    \item[\it Base:] Assume $\comp{\metaA}=0$, so $\metaA$ is a sentence letter.
-      \item $\V{\I_\MetaD}(\metaA)=1$ ~\textit{iff}~ $\I_{\MetaD}(\metaA) = 1$ by the semantics.
-      \item[] \hspace{.75in} ~\textit{iff}~ $\metaA \in \MetaD$ by the definition of $\I_\MetaD$.
-      \item Thus whenever $\comp{\metaA} = 0$:~~ $\V{\I_\MetaD}(\metaA) = 1$ \textit{iff} $\metaA\in\MetaD$.
-    \item[\it Induction:] Assume that whenever $\comp{\metaA}\leq n$:~~ $\V{\I_\Delta}(\metaA)=1$ \textit{iff} $\metaA\in\Delta$.
-    \item Let $\metaA$ be a wfs of $\PL$ where $\comp{\metaA}=n+1$.
-    \item There are five cases to consider, one for each operator.
-    \item[\it Case 1:] $\V{\I_\Delta}(\neg\metaB)=1$ \textit{iff} $\V{\I_\Delta}(\metaB) = 0$ by the semantics. 
-      \item[] \hspace{.86in} \textit{iff} $\metaB\notin\Delta$ by hypothesis.
-      \item[] \hspace{.86in} \textit{iff} $\neg\metaB\in\Delta$ by by maximality.
-    \item[\it Case 2:] $\V{\I_\Delta}(\metaB\wedge\metaC)=1$ \textit{iff} $\V{\I_\Delta}(\metaB)=\V{\I_\Delta}(\metaC)=1$ by the semantics.     
-      \item[] \hspace{.86in} \textit{iff} $\metaB,\metaC\in\Delta$ by hypothesis.
-      \item[] \hspace{.86in} \textit{iff} $\metaB\wedge\metaC\in\Delta$ by hypothesis.
-      \item 
-      \item 
-    \item[\it Conclusion:] So $\V{\I_\Delta}(\metaA)=1$ just in case $\metaA\in\Delta$, from which the lemma follows.
 \end{itemize}
 
-
-
-
-
-
-\section*{Satisfiability}
-
-\begin{enumerate}
-  \item[\bf Lemma 5.8] $\MetaG\subseteq\MetaD_{\MetaG}$.
-  \item[\bf Theorem 5.1] Every consistent set of $\PL$ wfss $\MetaG$ is satisfiable.
-\end{enumerate}
-
-
-
-
-
-
-% \section*{Compactness}
-%
-% \begin{itemize}
-%   \item[\bf C13.2] If $\MetaG\vDash\metaA$, then there is a finite subset $\Lambda\subseteq\MetaG$ where $\Lambda\vDash\metaA$.
-%   \item[\bf C13.3] $\MetaG$ is satisfiable if every finite subset $\Lambda\subseteq\MetaG$ is satisfiable.
-% \end{itemize}
 
 \end{document}
 

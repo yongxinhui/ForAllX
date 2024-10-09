@@ -94,7 +94,7 @@ To do so, we will begin enumerating all wfss $\metaB_0,\metaB_1,\metaB_2,\ldots$
   \MetaD_0     &= \MetaG \\
   \MetaD_{n+1} &= 
     \begin{cases}
-      \MetaD_n\cup\set{\metaB_n} &\text{if } \MetaG_n\cup\set{\metaB_n} \text{ is consistent}\\
+      \MetaD_n\cup\set{\metaB_n} &\text{if } \MetaD_n\cup\set{\metaB_n} \text{ is consistent}\\
       \MetaD_n\cup\set{\enot\metaB_n} &\text{otherwise}.
     \end{cases}\\
   \MetaD_\MetaG &= \bigcup_{i\in\N}\MetaD_n. 
@@ -104,6 +104,7 @@ Given these two properties, we may then show that $\MetaD_{\MetaG}$ is deductive
 Moreover, we may show $\MetaG\subseteq\MetaD_{\MetaG}$.
 These properties will form the basis upon which we will construct the Henkin interpretation in $\S\ref{sub:HenkinInterpretation}$.
 In order to establish these results, we will begin by proving some supporting lemmas.
+Whereas some of these lemmas are substantial, others are simply convenient, allowing us to streamline the presentation of the proofs of the results to come.
 
 
 % % TODO show that the wfss are enumerable
@@ -165,15 +166,31 @@ In order to establish these results, we will begin by proving some supporting le
 
 
 
+\begin{Lthm} \label{lemma:PL-cont}
+  If $\Lambda\vdash\metaA$ and $\Lambda\vdash\enot\metaA$, then $\Lambda$ is inconsistent. 
+\end{Lthm} \vspace{-.2in}
+
+\begin{quote} 
+  \textit{Proof:} 
+  Assume $\Lambda\vdash\metaA$ and $\Lambda\vdash\enot\metaA$.
+  Thus there is a PL derivation $X$ of $\metaA$ from $\Lambda$ as well as a PL derivation $Y$ of $\enot\metaA$ from $\Lambda$. 
+  Letting $Z$ be the result of concatenating $X$ and $Y$ and renumbering lines.
+  We may then extend the derivation by using EFQ from $\S\ref{EFQ}$ to derive $A\eand\enot A$, observing that $Z$ is a derivation of $A\eand\enot A$ from $\Lambda$.
+  By definition, $\Lambda$ is inconsistent.
+  \qed
+\end{quote}
+
+
+
+
+
 \begin{Lthm} \label{lemma:PL-conin}
   If $\Lambda \cup \set{\metaA}$ and $\Lambda\cup \set{\enot\metaA}$ are both inconsistent, then $\Lambda$ is inconsistent. 
 \end{Lthm} \vspace{-.2in}
 
 \begin{quote} 
-  \textit{Proof:} Assume that $\Lambda \cup \set{\metaA}$ and $\Lambda\cup \set{\enot\metaA}$ are both inconsistent.
-  It follows that $\Lambda\vdash \enot\metaA$ and $\Lambda\vdash\enot\enot\metaA$ by \textbf{\ref{lemma:PL-incon}}, and so there is a derivation $X$ of $\enot\metaA$ from $\Lambda$, and a derivation $Y$ of $\enot\enot\metaA$ from $\Lambda$. 
-  Let $Z$ be the result of concatenating $X$ and $Y$ and using EFQ from $\S\ref{EFQ}$ on the last lines of $X$ and $Y$ to derive $A\eand\enot A$. 
-  Since the only premises in $Z$ are the premises in $X$ and $Y$, we may conclude that $\Lambda\vdash A\eand\enot A$, and so $\Lambda$ is inconsistent. 
+  \textit{Proof:} Assuming that $\Lambda \cup \set{\metaA}$ and $\Lambda\cup \set{\enot\metaA}$ are both inconsistent, it follows that $\Lambda\vdash \enot\metaA$ and $\Lambda\vdash\enot\enot\metaA$ by \textbf{\ref{lemma:PL-incon}}.
+  Given \textbf{\ref{lemma:PL-cont}} above, it follows immediately that $\Lambda$ is inconsistent. 
   \qed
 \end{quote}
 
@@ -218,9 +235,9 @@ In order to establish these results, we will begin by proving some supporting le
   % It follows that $\MetaD_n\vdash\enot\enot\metaB_n$ by \textbf{\ref{lemma:PL-incon}}, and so $\MetaD_n\vdash\metaB_n$ by DN.
   % Since $\MetaD_n\cup\set{\metaB_n}$ is also not consistent, $\MetaD_n\cup\set{\metaB_n} \vdash A\eand\enot A$.
   % By \textbf{\ref{lemma:PL-prcut}}, $\MetaD_n \vdash A\eand\enot A$, and so $\MetaD_n$ is not consistent, contradicting the hypothesis. 
-  Thus $\MetaG_{n+1}$ is consistent. 
+  Thus $\MetaD_{n+1}$ is consistent. 
 
-  Since $\MetaG_{n+1}$ is consistent, it follows by induction that $\MetaG_n$ is consistent for all $n\in\N$.
+  Since $\MetaD_{n+1}$ is consistent, it follows by induction that $\MetaD_k$ is consistent for all $k\in\N$.
   Assume for contradiction that $\MetaD_{\MetaG}$ is inconsistent.
   Thus $\MetaD_{\MetaG}\vdash \bot$, and so there is a proof $Y$ of $A\eand\enot A$ from $\MetaD_{\MetaG}$ given the definition of $\bot$. 
     % TODO: remove particular contradiction
@@ -232,31 +249,13 @@ In order to establish these results, we will begin by proving some supporting le
 
 
 
+Whereas maximality is relatively cheap--- \textit{viz.} the set of all wfss of $\PL$ is maximal--- showing that a set of wfss is both maximal and consistent is much more difficult and, as we will soon see, much more significant.
+Intuitively, the Henkin construction given above specifies a way to increase the strength (i.e., deductive power) of a consistent set as much as possible without crossing over into inconsistency.
+Maximal consistent sets of this kind may be shown to have a very important property which we may now turn to define.
 
-\section{Deductive Closure}%
-  \label{sec:DeductiveClosure}
-
-We begin by defining a set $\MetaD$ of wfss of $\PL$ to be \define{deductively closed} in PL just in case for any wfs $\metaA$ of $\PL$, if $\MetaD\vdash\metaA$, then $\metaA\in\MetaD$.
+A set $\MetaD$ of wfss of $\PL$ is \define{deductively closed} in PL just in case for any wfs $\metaA$ of $\PL$, if $\MetaD\vdash\metaA$, then $\metaA\in\MetaD$.
 Accordingly, deductively closed sets of wfss are identical to the set of wfss which they derive.
 In order to show that every maximal consistent set of wfss of $\PL$ is deductively closed, we begin by establishing the following lemma.
-
-\begin{Lthm} \label{lemma:PL-cont}
-  If $\Lambda\vdash\metaA$ and $\Lambda\vdash\enot\metaA$, then $\Lambda$ is inconsistent. 
-\end{Lthm} \vspace{-.2in}
-
-\begin{quote} 
-  \textit{Proof:} 
-  Assume $\Lambda\vdash\metaA$ and $\Lambda\vdash\enot\metaA$.
-  Thus there is a PL derivation $X$ of $\metaA$ from $\Lambda$ as well as a PL derivation $Y$ of $\enot\metaA$ from $\Lambda$. 
-  Letting $Z$ be the result of concatenating $X$ and $Y$ and renumbering lines.
-  We may then extend the derivation by using EFQ from $\S\ref{EFQ}$ to derive $A\eand\enot A$, observing that $Z$ is a derivation of $A\eand\enot A$ from $\Lambda$.
-  By definition, $\Lambda$ is inconsistent.
-  \qed
-\end{quote}
-  
-
-
-
 
 \begin{Lthm} \label{lemma:PL-deductive}
   If $\MetaD$ is maximal consistent, then $\MetaD$ is deductively closed.
@@ -271,7 +270,8 @@ In order to show that every maximal consistent set of wfss of $\PL$ is deductive
   \qed
 \end{quote}
 
-Given these results, we are now ready to construct the Henkin interpretation of $\PL$.
+Given these results, we are now ready to draw on  $\MetaD_{\MetaG}$ in order define the Henkin interpretation of $\PL$.
+We will then direct our efforts towards showing that this interpretation witnesses the satisfiability of $\MetaD_{\MetaG}$, and so so of $\MetaG$ in particular. 
 
 
 
@@ -291,7 +291,7 @@ In particular, consider the following definitions:
       \end{cases}
   \]
 Since $\I_{\MetaD}$ assigns every sentence letter of $\PL$ to a truth-value, $\I_{\MetaD}$ satisfies the definition of a $\PL$ interpretation.
-Since this construction was introduced by Leon Henkin (1949), we will refer to $\M_\MetaD$ as the \define{henkin interpretation} of $\PL$ for $\MetaG$ (recall that $\MetaD=\MetaD_{\MetaG}$).
+Since this construction was introduced by Leon Henkin (1949), we will refer to $\I_\MetaD$ as the \define{henkin interpretation} of $\PL$ for $\MetaG$ (recall that $\MetaD=\MetaD_{\MetaG}$).
 
 It remains to show that $\I_{\MetaD}$ satisfies $\MetaD$, and so satisfies $\MetaG$ as a result.
 To do so, we will begin by proving the following lemmas where the first is a proof theoretic analogue of \textbf{\ref{lemma:PL-weakening}}.
@@ -417,7 +417,7 @@ To do so, we will begin by proving the following lemmas where the first is a pro
   Whereas $(1)$ follows from the semantics for conjunction, $(2)$ holds by hypothesis.
 
   In order to establish $(3)$, assume that $\metaB \notin \MetaD$.
-  It follows by \textbf{\ref{lemma:PL-max}} that $\enot \metaB \in \MetaD$.
+  Since $\MetaD$ is maximal, it follows that $\enot \metaB \in \MetaD$.
   We may then derive $\enot \metaB \vdash \metaB \eif \metaC$ since given $\enot \metaB$ as a premise, we may use the rule AS to write $\metaB$ on a second line, deriving $\metaC$ by EFQ from $\S\ref{EFQ}$ and using $\eif$I to discharge the assumption.
   % TODO: derive this in an earlier chapter
   Thus $\MetaD\vdash\metaB\eif\metaC$ by \textbf{\ref{lemma:PL-prweak}}, and so $\metaB\eif\metaC\in\MetaD$ by \textbf{\ref{lemma:PL-deductive}}.
@@ -500,7 +500,7 @@ Given this result, the completeness of PL over the semantics for $\PL$ follows a
   \qed
 \end{quote}
 
-Completeness may seems like a good property for any proof system to have.
+Completeness may seem like a good property for any proof system to have.
 In particular, the completeness of PL shows that there is no (extensionally) better proof system which allows us to derive a valid inference that PL leaves out.
 However, there is another perspective which takes completeness to describe a certain limitation on what sorts of entailments hold between wfss in $\PL$, calling the notion of entailment in $\PL$ into question.
 We will close the chapter with an important consequence of completeness.
