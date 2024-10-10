@@ -91,13 +91,13 @@
     \item Append lines for $A$ and $\neg A$ by $\wedge$E. 
     \item Discharge $\metaA$, concluding $\neg \metaA$ by $\neg$I, so $\Lambda \vdash \metaA$. 
   % \item[\bf Cut:] If $\Lambda \vdash \metaA$ and $\Pi\cup\set{\metaA} \vdash \metaB$, then $\Lambda\cup\Pi \vdash \metaB$.
-  \item[\bf Lemma 5.4] If $\Lambda\vdash\metaA$ and $\Lambda\vdash\neg\metaA$, then $\Lambda$ is inconsistent.
+  \item[\bf Lemma 5.2] If $\Lambda\vdash\metaA$ and $\Lambda\vdash\neg\metaA$, then $\Lambda$ is inconsistent.
     \item Assume $\Lambda\vdash\metaA$ and $\Lambda\vdash\enot\metaA$.
     \item $X$ derives $\metaA$ from $\Lambda$, and $Y$ derives $\enot\metaA$ from $\Lambda$. 
     \item Let $Z$ append $Y$ to $X$, renumbering lines.
     \item Use EFQ on the last lines of $X$ and $Y$ to derive $\bot$ from $\Lambda$. 
     \item By definition, $\Lambda$ is inconsistent.
-  \item[\bf Lemma 5.2] If $\Lambda \cup \set{\metaA}$ and $\Lambda\cup \set{\neg\metaA}$ are both inconsistent, then $\Lambda$ is inconsistent.
+  \item[\bf Lemma 5.3] If $\Lambda \cup \set{\metaA}$ and $\Lambda\cup \set{\neg\metaA}$ are both inconsistent, then $\Lambda$ is inconsistent.
     \item Assume $\Lambda \cup \set{\metaA}$ and $\Lambda\cup \set{\neg\metaA}$ are both inconsistent.
     \item $\Lambda\vdash \enot\metaA$ and $\Lambda\vdash\enot\enot\metaA$ by \textbf{Lemma 5.1}.
     % \item $X$ derives $\enot\metaA$ from $\Lambda$, and $Y$ derives $\enot\enot\metaA$ from $\Lambda$. 
@@ -136,10 +136,10 @@
 
 
 
-\section*{Henkin Lemmas}
+\section*{Lindenbaum's Lemmas}
 
 \begin{itemize}
-  \item[\bf Lemma 5.3] If $\MetaG$ is consistent in $\PL$, then $\MetaD_{\MetaG}$ is maximal consistent. 
+  \item[\bf Lemma 5.4] If $\MetaG$ is consistent in $\PL$, then $\MetaD_{\MetaG}$ is maximal consistent. 
     \item Assume $\MetaG$ is consistent and let $\metaA$ be any wfs of $\PL$.
     \item $\metaA=\metaB_i$ for some $i\in\N$ given the enumeration above.
     \item Either $\metaB_i\in\MetaD_{i+1}$ or $\enot\metaB_i\in\MetaD_{i+1}$.
@@ -157,6 +157,14 @@
     \item Let $m \in \N$ be the first number where $\Delta_m$ includes all premises in $X$.
     \item So $\Delta_m\vdash\bot$, and so $\Delta_k$ is inconsistent for some $k\in\N$.
     \item Since this contradicts the above, $\Delta_\Gamma$ is consistent. 
+\end{itemize}
+
+
+
+\section*{Deductive Closure}%
+  \label{sec:DeductiveClosue}
+
+\begin{itemize}
   \item[\it Deductive Closure:] A set $\MetaD$ of wfss of $\PL$ is \textsc{deductively closed} in PL just in case for any wfs $\metaA$ of $\PL$, if $\MetaD\vdash\metaA$, then $\metaA\in\MetaD$.
   \item[\bf Lemma 5.5] If $\MetaD$ is maximal consistent, then $\MetaD$ is deductively closed.
     \item Assume $\MetaD$ is maximal consistent.

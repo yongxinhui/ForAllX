@@ -69,10 +69,10 @@
 \section*{Basic Lemmas}
 
 \begin{itemize}
-  \item[\bf Lemma 5.1] If $\Lambda\cup\set{\metaA}$ is inconsistent, then $\Lambda\vdash\neg\metaA$.
-  \item[\bf Lemma 5.2] If $\Lambda \cup \set{\metaA}$ and $\Lambda\cup \set{\neg\metaA}$ are both inconsistent, then $\Lambda$ is inconsistent.
-  \item[\bf Lemma 5.3] If $\MetaG$ is consistent in $\PL$, then $\MetaD_{\MetaG}$ is maximal consistent. 
-  \item[\bf Lemma 5.4] If $\Lambda\vdash\metaA$ and $\Lambda\vdash\neg\metaA$, then $\Lambda$ is inconsistent.
+  % \item[\bf Lemma 5.1] If $\Lambda\cup\set{\metaA}$ is inconsistent, then $\Lambda\vdash\neg\metaA$.
+  % \item[\bf Lemma 5.2] If $\Lambda\vdash\metaA$ and $\Lambda\vdash\neg\metaA$, then $\Lambda$ is inconsistent.
+  % \item[\bf Lemma 5.3] If $\Lambda \cup \set{\metaA}$ and $\Lambda\cup \set{\neg\metaA}$ are both inconsistent, then $\Lambda$ is inconsistent.
+  \item[\bf Lindenbaum's Lemma:] If $\MetaG$ is consistent in $\PL$, then $\MetaD_{\MetaG}$ is maximal consistent. 
   \item[\it Deductive Closure:] A set $\MetaD$ of wfss of $\PL$ is \textsc{deductively closed} in PL just in case for any wfs $\metaA$ of $\PL$, if $\MetaD\vdash\metaA$, then $\metaA\in\MetaD$.
   \item[\bf Lemma 5.5] If $\MetaD$ is maximal consistent, then $\MetaD$ is deductively closed.
   \item[\bf Lemma 5.6] If $\Lambda\vdash\metaA$, then $\Lambda\cup\Pi\vdash\metaA$.
@@ -127,7 +127,7 @@
     \item There are five cases to consider, one for each operator.
     \item[\it Case 1:] $\V{\I_\Delta}(\neg\metaB)=1$ \textit{iff} $\V{\I_\Delta}(\metaB) = 0$ by the semantics. 
       \item[] \hspace{.86in} \textit{iff} $\metaB\notin\Delta$ by hypothesis since $\comp{\metaB} \leq n$.
-      \item[] \hspace{.86in} \textit{iff} $\neg\metaB\in\Delta$ by by maximality.
+      \item[] \hspace{.86in} \textit{iff} $\neg\metaB\in\Delta$ by maximal consistency.
     \item[\it Case 2:] $\V{\I_\Delta}(\metaB\wedge\metaC)=1$ \textit{iff} $\V{\I_\Delta}(\metaB)=\V{\I_\Delta}(\metaC)=1$ by the semantics.     
       \item[] \hspace{1.02in} \textit{iff} $\metaB,\metaC\in\Delta$ by hypothesis since $\comp{\metaB}, \comp{\metaC} \leq n$.
       \item[] \hspace{1.02in} \textit{iff} $\metaB\wedge\metaC\in\Delta$ by $(*)$.
@@ -149,11 +149,10 @@
       \item If $\metaB\in\MetaD$, then $\MetaD\vdash\metaC$ by the rule $\eif$E, and so $\metaC\in\MetaD$ by \textbf{Lemma 5.5}.
       \item So if $\metaB\eif\metaC\in\MetaD$, then $\metaB\notin\MetaD$ or $\metaC\in\MetaD$.  
     \item[\it Case 5:] Exercise for this weeks PSet.
-    \item[\it Conclusion:] So $\V{\I_\Delta}(\metaA)=1$ just in case $\metaA\in\Delta$ whenever $\comp{\metaA} = n + 1$.
+    \item[\it Conclusion:] So whenever $\comp{\metaA} = n + 1$: $\V{\I_\Delta}(\metaA)=1$ just in case $\metaA\in\Delta$.
       \item Thus for all wfss $\metaA$ of $\PL$:~~ $\V{\I_\MetaD}(\metaA) = 1$ \textit{iff} $\metaA\in\MetaD$.
 \end{itemize}
-  
-  
+
 
 
 
@@ -164,26 +163,35 @@
   \item[\bf Lemma 5.8] $\MetaG\subseteq\MetaD_{\MetaG}$.
     \item Immediate from the definition.
   \item[\bf Theorem 5.1] If $\MetaG$ is consistent, then $\MetaG$ is satisfiable.
-    \item 
+    \item Let $\MetaG$ be a consistent set of wfss of $\PL$.
+    \item $\MetaD_{\MetaG}$ is a maximal consistent by \textbf{Lemma 5.5}.
+    \item Let $\MetaD=\MetaD_{\MetaG}$ and $\I_{\MetaD}$ be the Henkin interpretation of $\PL$ defined above.
+    \item By \textbf{Lemma 5.7}, for every wfs $\metaA$ of $\PL$: $\V{\I}(\metaA) = 1$ just in case $\metaA \in \MetaD$.
+    \item Thus $\V{\I}(\metaA) = 1$ for all $\metaA \in \MetaD$.
+    \item Since $\MetaG \subseteq \MetaD$ by \textbf{Lemma 5.8}, $\V{\I}(\metaA) = 1$ for all $\metaA \in \MetaG$.
+    \item By definition, $\MetaG$ is satisfiable.
 \end{itemize}
 
 
-  Let $\MetaG$ be a consistent set of wfss of $\PL$.
-  By \textbf{\ref{lemma:PL-max}}, $\MetaD_{\MetaG}$ is a maximal consistent set of wfss in $\PL$.
-  Letting $\MetaD=\MetaD_{\MetaG}$ and $\I_{\MetaD}$ be the Henkin interpretation of $\PL$ defined above, \textbf{\ref{lemma:PL-truth}} shows that for every wfs $\metaA$ of $\PL$, $\V{\I}(\metaA) = 1$ just in case $\metaA \in \MetaD$.
-  Thus $\V{\I}(\metaA) = 1$ for all $\metaA \in \MetaD$.
-  Since $\MetaG \subseteq \MetaD$ by \textbf{\ref{lemma:PL-include}}, $\V{\I}(\metaA) = 1$ for all $\metaA \in \MetaG$.
-  By definition, $\MetaG$ is satisfiable.
 
 
 
+\section*{Compactness}
 
-% \section*{Compactness}
-%
-% \begin{itemize}
-%   \item[\bf C13.2] If $\MetaG\vDash\metaA$, then there is a finite subset $\Lambda\subseteq\MetaG$ where $\Lambda\vDash\metaA$.
-%   \item[\bf C13.3] $\MetaG$ is satisfiable if every finite subset $\Lambda\subseteq\MetaG$ is satisfiable.
-% \end{itemize}
-
+\begin{itemize}
+  \item[\bf Corollary 5.4] If $\MetaG\vDash\metaA$, then there is a finite subset $\Lambda\subseteq\MetaG$ where $\Lambda\vDash\metaA$.
+    \item Assume $\MetaG\vDash\metaA$. 
+    \item $\MetaG\vdash\metaA$ by completeness, and so $X$ derives $\metaA$ from $\MetaG$. 
+    \item $\MetaG_X\vdash\metaA$ where $\MetaG_X$ is the set of premises in $X$.
+    \item $\MetaG_X\vDash\metaA$ by soundness. 
+    \item Since $X$ is finite, $\MetaG_X$ is also finite. 
+  \item[\bf Corolary 5.5] $\MetaG$ is satisfiable if every finite subset $\Lambda\subseteq\MetaG$ is satisfiable.
+    \item Assume for contraposition that $\MetaG$ is unsatisfiable. 
+    \item $\MetaG\vDash\bot$ follows vacuously.
+    \item $\Lambda\vDash\bot$ by \textbf{Corollary 5.4} for some finite subset $\Lambda\subseteq\MetaG$.
+    \item So some finite subset $\Lambda\subseteq\MetaG$ is unsatisfiable. 
+    \item By contraposition, QED.
+\end{itemize}
+  
 \end{document}
 
