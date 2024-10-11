@@ -505,7 +505,7 @@ In particular, the completeness of PL shows that there is no (extensionally) bet
 However, there is another perspective which takes completeness to describe a certain limitation on what sorts of entailments hold between wfss in $\PL$, calling the notion of entailment in $\PL$ into question.
 We will close the chapter with an important consequence of completeness.
 
-\begin{Cthm} \label{cor:compact}
+\begin{Cthm} \label{cor:PL-compact}
   If $\MetaG\vDash\metaA$, then there is a finite subset $\Lambda\subseteq\MetaG$ where $\Lambda\vDash\metaA$.
 \end{Cthm} \vspace{-.2in}
 
@@ -527,7 +527,7 @@ We will close the chapter with an important consequence of completeness.
 \begin{quote} 
   \textit{Proof:} 
   Assume for contraposition that $\MetaG$ is unsatisfiable. 
-  It follows vacuously that $\MetaG\vDash\bot$, and so $\Lambda\vDash\bot$ by \textbf{\ref{cor:compact}} for some finite subset $\Lambda\subseteq\MetaG$.
+  It follows vacuously that $\MetaG\vDash\bot$, and so $\Lambda\vDash\bot$ by \textbf{\ref{cor:PL-compact}} for some finite subset $\Lambda\subseteq\MetaG$.
   Thus there is some finite subset $\Lambda\subseteq\MetaG$ that is unsatisfiable. 
   By contraposition, if every finite subset $\Lambda\subseteq\MetaG$ is satisfiable, then $\MetaG$ is satisfiable. 
   \qed

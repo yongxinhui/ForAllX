@@ -602,9 +602,9 @@ A branch closes if and only if either (i) it contains some sentence \metaA{} alo
 \section*{\hfill \normalsize \bf Natural Deduction Rules of Inference for PL \hfill} 
 \label{nd-proofrules}
 				
-				\vspace{-1em}
+\vspace{-1em}
 				
-				\iffalse %suppressing Rule R to fit others on page
+\iffalse %suppressing Rule R to fit others on page
 \begin{center}
 %\textsc{Reiteration}
 \textit{Reiteration} (R) \vspace{-1em}
@@ -616,7 +616,6 @@ A branch closes if and only if either (i) it contains some sentence \metaA{} alo
 \fi 
 
 \begin{multicols}{2}
-
 
 \textit{Conjunction Introduction} (\eand I) \vspace{-1em}
 \begin{proof}
@@ -678,14 +677,6 @@ A branch closes if and only if either (i) it contains some sentence \metaA{} alo
 	\have[\ ]{ab}{\metaA{}\eiff\metaB{}}\bi{a1-b1,b2-a2}
 \end{fitchproof}
 
-\iffalse %Ichikawa version:
-\begin{proof}
-	\have[m]{ab}{\metaA{}\eif\metaB{}}
-	\have[n]{ba}{\metaB{}\eif\metaA{}}
-	\have[\ ]{c}{\metaA{}\eiff\metaB{}} \bi{ab, ba}
-\end{proof}
-\fi 
-
 \vfill\null
 \columnbreak
 
@@ -746,24 +737,6 @@ A branch closes if and only if either (i) it contains some sentence \metaA{} alo
 \end{proof}
 
 
-\iffalse %Ichikawa Disjunction Syllogism version:
-\begin{proof}
-	\have[m]{ab}{\metaA{}\eor\metaB{}}
-	\have[n]{nb}{\enot\metaB{}}
-	\have[\ ]{a}{\metaA{}} \oe{ab,nb}
-\end{proof}
-
-\begin{proof}
-	\have[m]{ab}{\metaA{}\eor\metaB{}}
-	\have[n]{na}{\enot\metaA{}}
-	\have[\ ]{b}{\metaB{}} \oe{ab,nb}
-\end{proof}
-
-\fi 
-
-
-%\pagebreak
-
 
 
 \textit{Biconditional Elimination} (\eiff E) \vspace{-1em}
@@ -774,16 +747,6 @@ A branch closes if and only if either (i) it contains some sentence \metaA{} alo
 	\have[\ ]{b}{\metaA/\metaB} \be{ab,a}
 \end{proof}
 %Can also go from \metaA{} to \metaB{} using \eiff E
-
-\iffalse
-\begin{proof}
-	\have[m]{ab}{\metaA{}\eiff\metaB{}}
-	\have[n]{a}{\metaA{}}
-	\have[\ ]{b}{\metaB{}} \be{ab,a}
-\end{proof}
-\fi 
-
-
 
 \end{multicols} %ends multicol started for SD rules 
 

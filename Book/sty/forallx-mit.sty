@@ -151,7 +151,7 @@
 {.18in}               % Space after theorem head
 {}                % Theorem head spec
 \theoremstyle{Tthm}
-\newtheorem{Tthm}{}% theorem counter resets every \subsection
+\newtheorem{Tthm}{}[chapter]% theorem counter resets every \subsection
 \renewcommand{\theTthm}{Theorem \arabic{chapter}.\arabic{Tthm}}% Remove subsection from theorem counter representation
 
 
@@ -178,7 +178,7 @@
 {.18in}               % Space after theorem head
 {}                % Theorem head spec
 \theoremstyle{Cthm}
-\newtheorem{Cthm}{}[]% theorem counter resets every \subsection
+\newtheorem{Cthm}{}[chapter]% theorem counter resets every \subsection
 \renewcommand{\theCthm}{Corollary \arabic{chapter}.\arabic{Cthm}}% Remove subsection from theorem counter representation
 
 \newtheoremstyle{Rthm}
@@ -191,7 +191,7 @@
 {4pt}               % Space after theorem head
 {}                % Theorem head spec
 \theoremstyle{Rthm}
-\newtheorem{Rthm}{}[]% theorem counter resets every \subsection
+\newtheorem{Rthm}{}[chapter]% theorem counter resets every \subsection
 \renewcommand{\theRthm}{Rule \arabic{Rthm}}% Remove subsection from theorem counter representation
 
 % \newtheorem{manualtheoreminner}{Theorem}
