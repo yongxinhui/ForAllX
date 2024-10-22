@@ -1,177 +1,193 @@
-%!TEX root = ../forallx-ubc.tex
-\chapter{Quantifier Logic}
-\label{ch.FOL-syntax}
+%!TEX root = ../forallx-mit.tex
+\chapter{First-Order Logic}
+  \label{ch.FOL-syntax}
 
-This chapter introduces a logical language called QL which includes quantifiers like `for all' ($\qt{\forall}{}$) and `there is' ($\qt{\exists}{}$).
-Quantifier logic is also sometimes called \emph{predicate logic} because the basic units of the language are predicates and singular terms.
-Whereas a one-place predicate is a term for property, two-place predicates are terms for relations, and $n$-place predicates are similar but relate more objects.
-Quantifier logic is also often called \textit{first-order logic} because the quantifiers range over objects and not over properties or relations as in \textit{second-order logic}.
-For instance, QL has the expressive power to quantify over people, animals, or things, but not over their various properties such as \textit{being blue}, or relations like \textit{being taller than}, etc.
+This chapter introduces the formal language called $\FOL$--- pronounced, \textit{the language of first-order logic}--- which includes quantifiers like `for all' ($\qt{\forall}{}$) and `there is' ($\qt{\exists}{}$).
+In contrast to $\PL$ whose primitive symbols were limited to sentence letters and sentential operators, $\FOL$ includes \textit{predicates} and \textit{singular terms} among its primitive symbols.
+Whereas one-place predicates are terms for properties, two-place predicates are terms for relations, and $n$-place predicates are similar but relate $n$ objects.
+Singular terms include \textit{constants} which name objects and \textit{variables} which may refer to any object.
+First-order logic is \textit{first-order} because the quantifiers bind variables that are singular term (type $e$), and so range over a domain of objects rather than properties and relations as in \textit{second-order logic}, or the higher-order entities of \textit{higher-order logic} (e.g., the lambda calculus and simple type theories).
+For instance, $\FOL$ has the expressive power to quantify over people, animals, or things, but not over their various properties such as \textit{being blue}, or relations like \textit{being taller than}, etc.
+
+Despite its limitations, first-order logic is extremely useful, nicely balancing the theoretical virtues of simplicity and intuitive appeal on the one hand with expressive power and logical strength on the other hand.
+Mastering first-order logic is also an important stepping stone to studying logics for more expressive languages.
+Although $\FOL$ will introduce a number of new expressive resources, all of the primitive symbols which we included before will be present in $\FOL$, and so $\FOL$ is said to be an \textit{extension} of $\PL$. 
+We will also be repeating the same methodology carried out before, and so much should seem familiar.
+Whereas this chapter develops the syntax for first-order logic by presenting $\FOL$ and using this language to regiment sentences and arguments in English, Chapter $\ref{ch.FOL-semantics}$ will provide a semantics and definition of logical consequence for $\FOL$.
+Chapter $\ref{ch.FOL-identity}$ will repeat these two steps for a language with even more expressive power by including a primitive symbol for identity along with a stock of function symbols.
+We will then turn to present a proof system for first-order logic called FOL in Chapter $\ref{ch.FOL-deduction}$ before establishing the soundness and completeness of FOL in Chapter $\ref{ch.FOL-soundness}$ and Chapter $\ref{ch.FOL-completeness}$, respectively.
+As is the case with the syntax and semantics for FOL, the proof system FOL itself will extend PL from before, and so the proofs of the soundness and completeness of FOL will similarly extend the work that we have already done.
 
 
 
 
-\section{The Expressive Limitations of SL}
+
+\section{Expressive Limitations}
 
 Consider the following argument:
 
 \begin{earg}
-  \item[] Every human is mortal.
-  \item[] Socrates is human.
-  \item[\therefore] Socrates is mortal.
+  \eitem{Every human is mortal.}
+  \uitem{Socrates is human.}
+  \eitem{Socrates is mortal.}
 \end{earg}
 
-In order to symbolize this argument in SL, we will need a symbolization key. 
+In order to regiment this argument in $\PL$, we will need a symbolization key. 
 
 \begin{ekey}
-  \item[E:] Every human is mortal.
-  \item[H:] Socrates is human.
-  \item[M:] Socrates is mortal.
+  \item[$E$:] Every human is mortal.
+  \item[$H$:] Socrates is human.
+  \item[$M$:] Socrates is mortal.
 \end{ekey}
 
 Notice that there is no way to break down the sentences above into smaller parts.
-However, consider the resulting regimentation of the argument in SL:
+However, consider the resulting regimentation of the argument in $\PL$:
 
 \begin{earg}
-  \item[] $E$
-  \item[] $H$
-  \item[\therefore] $M$
+  \eitem{$E$}
+  \uitem{$H$\quad\quad}
+  \eitem{$M$}
 \end{earg}
 
 It is easy to show that this argument is invalid.
 However, the argument in English is intuitively valid.
-Notice that although the sentences given above include the same terms, this is not captured by the regimentation in SL.
-Moreover, there is no better regimentation in SL.
+Notice that although the English sentences given above include the same terms, this is not captured by the regimentation in $\PL$.
+Moreover, there is no better regimentation in $\PL$.
 
 Here's another common case:
 
 \begin{earg}
-  \item[] All humans are mammals.
-  \item[] All mammals are multi-celled organisms.
-  \item[\therefore] All humans are multi-celled organisms.
+  \eitem{All humans are mammals.}
+  \uitem{All mammals are multi-celled organisms.}
+  \eitem{All humans are multi-celled organisms.}
 \end{earg}
 
-This argument is clearly valid.
-However, were we to symbolize this argument in SL, the best we could do looks like this:
+This argument is intuitively valid since the conclusion follows from the premises in virtue of the logical form of the argument.
+However, were we to regiment this argument in $\PL$, the best we could do would look something like the following:
 
 \begin{ekey}
-  \item[H:] All humans are mammals.
-  \item[M:] All mammals are multi-celled organisms.
-  \item[O:] All humans are multi-celled organisms.
+  \item[$H$:] All humans are mammals.
+  \item[$M$:] All mammals are multi-celled organisms.
+  \item[$O$:] All humans are multi-celled organisms.
 \end{ekey}
 
 Again, there is no way to further decompose the sentences given above into smaller parts.
-However, the resulting argument in SL is invalid for the same reason:
+However, the resulting argument in $\PL$ is invalid for the same reason:
 
 \begin{earg}
-  \item[] $H$
-  \item[] $M$
-  \item[\therefore] $O$
+  \eitem{$H$}
+  \uitem{$M$\quad\quad}
+  \eitem{$O$}
 \end{earg}
 
-Since there is nothing wrong with our regimentation when restricted to SL, we may take issue with the language SL itself, concluding that we have simply reached the limit of what can be captured with the expressive resources which SL provides.
+Since there is nothing wrong with our regimentation when restricted to $\PL$, we may take issue with the language $\PL$ itself, concluding that we have simply reached the limit of what can be captured with the expressive resources which $\PL$ provides.
 Instead of carving arguments up into \textit{sentences}, we have to look deeper into the sentences themselves in order to capture the validity of the English arguments considered above.
-In particular, we need to be able to regiment predicates like `is human', `is mortal', `is a mammal', etc., as well as the quantifiers `every' and `all', and also names like `Socrates'.
-Providing the expressive resources to do so will be the ambition of this chapter, where the following chapters will develop a semantics, theory of entailment, and proof system for the resulting language QL.
+In particular, we need to be able to regiment predicates like `is human', `is mortal', `is a mammal', etc., as well as the quantifiers `every' and `all', as well as names like `Socrates'.
+More generally, we should like to provide a language which can regiment any such argument at this level of logical resolution power.
+Providing the expressive resources to do so will be the ambition of this chapter.
 
-As we will see, QL is extremely powerful.
+As we will see, $\FOL$ is extremely powerful.
 Indeed, most of mathematics is developed in a first-order language.
 Understanding this language and its limits will prove to be an invaluable resource, shedding light on a wide range of theoretical applications as well as extending your powers of logical thinking in day-to-day reasoning. 
-The development of first-order logics and their applications constitute some of the most important and influential theories that human beings have developed, and modern logic is still at its very beginning.
+The development of first-order logics and their applications constitute some of the most important and influential theories that human beings have developed so far.
+Nevertheless, modern logic is still at its very beginning.
 
 
 
 
 
-\section{Primitive Expressions in QL}
+\section{Primitive Expressions in $\FOL$}
 
-Our first key idea will be to include \textit{predicates} in QL.
+Our first key idea will be to include \textit{predicates} in $\FOL$.
 An easy way to think about predicates is as terms for properties: the predicate `is red' stands for the property of being red.
 We use predicates to ascribe properties to objects.
 On their own, predicates are neither true nor false, though they are meaningful nevertheless.
 For instance, English speakers will know what the predicate `is red' means and how to use it to make claims about the world.
-Nevertheless, it doesn't make sense to assign a truth-value to `is red', `loves', `is between Sam and Mary in birth order', `is careful and quite', or any other predicate, however complex.
-Rather predicates are used to ascribe properties and relations to objects, where those objects may or may not have the properties and relations which are ascribed to them.
+Nevertheless, it doesn't make sense to assign a truth-value to `is red', `is loved by John', `is careful and quite', `is between Sam and Mary in birth order', or any other predicate, however complex.
+Rather predicates are used to ascribe properties and relations to objects where those objects may or may not have the properties and relations which are ascribed to them.
 
 In order to refer to objects, we will need another basic type of expression for \textit{names}.
 For instance, the name `Christoph' refers to a particular object, in this case a person.
-Accordingly, we may construct the sentence `Christoph is Italian', where this may be true or false depending on whether the object that `Christoph' names has the property expressed by the predicate `is Italian'.
+Accordingly, we may construct the sentence `Christoph is Italian', where this may be true or false depending on whether the object that `Christoph' names has the property that the predicate `is Italian' expresses.
 Although names like `Christoph' are meaningful on their own, they do not have truth-values any more than predicates have truth-values.
 Rather, it is by combining predicates with singular terms that we will construct \textit{atomic sentences} which do have truth-values.
-Given the same sentential operators included in SL, we may then construct complex sentences which inherit their truth-values from their parts.
-Despite introducing a range of new symbols to the language, QL will maintain our previous convention that only sentences have truth-values.
+Given the same sentential operators included in $\PL$, we may construct complex sentences which inherit their truth-values from their parts.
+Despite introducing a range of new symbols to the language, $\FOL$ will maintain the convention that only sentences have truth-values.
 
 Given that we can construct sentences with nothing more than names and predicates, you might be wondering where the quantifiers fit in.
 After all, there is no grammatical way to append `every', `all', or `some' to sentences like `Christoph is Italian'.
-What is missing are the \define{variables}.
-In order to bring this out, consider the following version of \textbf{H}:
+What is missing are the \textit{variables}.
+In order to bring this out, consider the following version of $H$ from before:
 
 \begin{ekey}
-\item[H$'$:] Everything is such that if it is human, then it is a mammal.
+  \item[$H'$:] Everything is such that if it is human, then it is a mammal.
 \end{ekey}
 
-However stilted, this claim is perfectly intelligible and express exactly what \textbf{H} expressed before.
+However stilted, this claim is perfectly intelligible and express exactly what $H$ expressed before.
 Three observations are in order.
-Whereas \textbf{H} includes the plural terms `humans' and `mammals', we now have the clearly identifiable predicates `is human' and `is a mammal'.
+Whereas $H$ includes the plural terms `humans' and `mammals', we now have the singular predicates `is human' and `is a mammal'.
 For instance, whereas we may combine `is human' with a name like `Christoph' in order to produce the perfectly intelligible declarative sentence `Christoph is human', the same cannot be said for the plural term `humans' since `Christoph humans' is nonsense. 
 
-Second, we may consider the role that `it' plays in \textbf{H$'$}.
-Whereas a name like `Christoph' refers to an object, the term `it' also appears to indicate an object.
+Second, we may consider the role that `it' plays in $H'$.
+Whereas a name like `Christoph' refers to an object, the term `it' also appears to indicate an object, but not particular object.
 Rather, `it' is playing the role of a variable.
 Since both constants and variables refer to objects, we will refer to both as \textit{singular terms}.
 % Although it is not always clear which object a variable may refer to, variables are also singular terms. % just like names such as `Christoph'.
 % Although it is not clear what `it' refers to, `it' is a singular term insofar as it belongs to the right grammatical category to refer to an object. 
 Accordingly, `it' may be combined with a predicate to form a sentence.
-In particular, `it' may be combined with predicates to produce `it is human' and `it is a mammal'.
-Considered on their own, both `it is human' and `it is a mammal' are sentences though they include the \textit{free variable} `it', and so are said to be \textit{open sentences}.
-Nevertheless, these sentences may be combined with a conditional operator to form `if it is human, then it is mammal' which is also an open sentence.
-Appending `Everything is such that' to the conditional sentence `if it is human, then it is mammal' produces \textbf{H$'$}. %, where the former is said to \textit{bind} the unbound variables in the latter.
-Instead of speaking about a particular, \textbf{H$'$} says of each object that \textit{it} is a mammal if \textit{it} is human.
-Given any object, both occurrences of `it' refer to that object, at least until we move on to the next object since we are making a general claim about everything.
+In particular, we may combine `it' with the predicates above to produce `it is human' and `it is a mammal'.
+On their own, `it is human' and `it is a mammal' are both atomic sentences though they include the \textit{free variable} `it', and so are \textit{open sentences}.
+Nevertheless, these sentences may be combined with a conditional operator to form `if it is human, then it is mammal' which is also an open sentence but not atomic.
+Appending `Everything is such that' to the conditional sentence `if it is human, then it is mammal' produces $H'$. %, where the former is said to \textit{bind} the unbound variables in the latter.
+Instead of speaking about a particular, $H'$ says of each object that \textit{it} is a mammal if \textit{it} is human.
+For each object, both occurrences of `it' refer to that object, at least until we move on to the next object since we are making a general claim about everything.
 % If you like, you could imagine that such a claim is equivalent to a very long conjunction were each conjunct says of a different thing that it is a mammal if human.
-Put otherwise, both occurrences of `it' are \textit{bound} by the same quantifier `Everything is such that'.
+Put otherwise, both occurrences of `it' are \textit{bound} by the quantifier `Everything is such that'.
 
-Third, we may observe that the perfectly natural occurrence of `All' in \textbf{H} has been replaced with the somewhat cumbersome `Everything is such that'.
-Whereas `All' is a \textit{generalised quantifier}, `Everything is such that' is an attempt to express the \textit{universal quantifier} $\qt{\forall}{x}$ with the resources of English.
+Third, we may observe that the perfectly natural occurrence of `All' in $H$ has been replaced with the somewhat cumbersome `Everything is such that'.
+Whereas `All' is a \textit{generalized quantifier}, `Everything is such that' is an attempt to express the first-order \textit{universal quantifier} $\qt{\forall}{}$ with the resources of English.
 These quantifiers differ in a number of important respects.
-In particular, generalised quantifiers like `every', `some', `all', `most', `many', etc., combine with two descriptive terms in order to produce a grammatical sentence.
-By contrast, we may observe that `Everything is such that' combines with the open sentence `if it is human, then it is mammal' to produce \textbf{H$'$}.
-Although `it' is unbound in `if it is human, then it is mammal' when considered on its own, both occurrences `it' are bound by `Everything is such that' in \textbf{H$'$}.
-Accordingly, \textbf{H$'$} is a \textit{closed sentence} since it does not include any unbound variables.
+In particular, generalized quantifiers like `every', `some', `all', `most', `many', etc., combine with two descriptive terms in order to produce a grammatical sentence.
+By contrast, we may observe that `Everything is such that' combines with the open sentence `if it is human, then it is mammal' to produce $H'$.
+Although `it' is unbound in `if it is human, then it is mammal' when considered on its own, both occurrences `it' are bound by `Everything is such that' in $H'$.
+Thus $H'$ is a \textit{closed sentence} since it does not include any unbound variables.
 
-Although universal quantifiers can be approximated within English, generalised quantifiers are much more common and natural to use in English.
-Despite this disparity, generalised quantifiers are more complicated than universal quantifiers, making them much less useful for systematic theorising.
-Moreover, we may use universal quantifiers to regiment claims in English which are expressed with generalised quantifiers without too much trouble. 
-For these reasons, we will not include formal analogues of generalised quantifiers in QL.
+Although first-order quantifiers can be approximated within English, generalized quantifiers are often more natural to use in English.
+Despite this disparity, generalized quantifiers are much more complicated than first-order quantifiers, making them not as useful for systematic theorizing.
+Nevertheless, we may use first-order quantifiers to regiment claims in English which are expressed with generalized quantifiers without too much trouble. 
+For these reasons, we will not include formal analogues of generalized quantifiers in $\FOL$.
 
-Given this overview of the new expressive resources that we will include in QL, the following sections will provide a much more details introduction of each of the elements that we touched on above.
-We will begin with names and variables.
+Given this overview of the new expressive resources that we will include in $\FOL$, the following sections will provide a much more details introduction to each of the elements that we have touched on above.
+We will begin again with names and variables.
+
+
 
 
 \subsection{Singular Terms}
 
 In English, a proper name is a term that refers to a person, place, or thing.
 For instance, `Christoph' refers to Christoph.
-In QL, we will take lower-case letters `$a$', `$b$', `$c$',\ldots from the beginning of the alphabet with optional subscripts to be \define{constants} which we will make use of to regiment names.
-Constants are the formal analogue of the names in English. 
-% Constants are singular terms since they refer to a unique individual.
+In $\FOL$, we will take lower-case letters `$a$', `$b$', `$c$', \ldots, `$s$', `$t$' subscripted by a numeral to be the \define{constants} of $\FOL$.
+For convenience, we will drop the subscript `$_0$' from constants, using subscripts only as needed. 
+ % which we will make use of to regiment names
+Constants are singular terms since they refer to an object and will be used to regiment names in English. 
 
 In English, the same name may refer to different objects in different contexts.
-Whereas `Willard' might pick out different people in different contexts who have the same name, we will avoid this ambiguity in QL by insisting that constants refer to at most one individual on any given interpretation.
+Whereas `Willard' might pick out different people in different contexts who have the same name, we will avoid this ambiguity in $\FOL$ by insisting that constants refer to at most one individual on any given interpretation.
 It is for this reason that we have included infinitely many constants (with the help of the subscripts) so that we don't run out of names.
 
 % TODO: save definite descriptions if we include an operator to make definite descriptions singular terms
-% There are other ways to refer to individuals besides using names.
-% In particular, we often use descriptions.
-% Whereas it is indeterminate to say `the person standing next to the podium' if more than one person is standing next to the podium or nobody is, this expression succeeds in picking out a unique individual if there is just one person standing next to the podium.
-% Or to take another case, we may use `the tallest person in the room' to refer to a unique individual assuming that there are at least some people in the room and that one of them is taller than all the others.
-% Such terms are referred to as \define{definite descriptions}.
-% Although the definite descriptions that succeed in referring to unique objects are singular terms, we will not need to include primitive terms in our language to express definite descriptions.
-% Instead, we will construct definite descriptions with the resources of QL.
+There are other ways to refer to individuals besides using names.
+In particular, we often use descriptions.
+Whereas it is indeterminate to say `the person standing next to the podium' if more than one person is standing next to the podium or nobody is, this expression succeeds in picking out a unique individual if there is just one person standing next to the podium.
+Or to take another case, we may use `the tallest person in the room' to refer to a unique individual assuming that there are at least some people in the room and that one of them is taller than all the others.
+Such terms are referred to as \define{definite descriptions}.
+Although the definite descriptions that succeed in referring to unique objects are singular terms, we will not need to include primitive terms in our language to express definite descriptions.
+Instead, we will construct definite descriptions with the resources of $\FOL$.
 
-Another important type of singular term are the \define{variables} that we considered above.
+Another important type of singular term are the \define{variables} that we mentioned above.
 In English, terms such as `it', `her', etc., often play this role.
-In QL, we will use lower-case letters `$x$', `$y$', `$z$',\ldots from the end of the alphabet with optional subscripts as variables.
+In $\FOL$, we will use the lower-case letters `$u$', `$v$', `$w$', `$x$', `$y$', `$z$', from the end of the alphabet with optional subscripts as variables.
 We will use variables in combination with the quantifiers in order to make claims about every object, or about some object, specifying what properties those objects have.
 However, in order to make claims about objects, we will need more than singular terms.
 
@@ -194,17 +210,16 @@ Given a two-place predicate together with two singular terms, we may make a clai
 For instance, `Sam is taller than John' is true just in case Sam is taller than John.
 It is worth noting that it is possible to use a two-place predicate together with two instances of the same singular term.
 Just as we may say that `Jay loves Cary', we may say, `Jay loves Jay', or somewhat more naturally, `Jay loves himself'.
-Although there is just one object at issue in such cases, the predicate `knows' is two-place all the same. 
+Although there is just one object at issue in such cases, the predicate `loves' is two-place all the same. 
 
 The singular terms that a predicate requires to form a formula are referred to as the \define{arguments} of that predicate.
 Whereas one-place predicates require one argument and two-place predicates require two arguments, in general we may consider $n$-place predicates which require $n$ arguments. 
-Although it is easy to generalise, it is uncommon to consider more than three-place predicates in English.
+Although it is easy to generalize, it is uncommon to consider more than three-place predicates in English.
 For instance, we may say that Sue is between Henry and Tom in birth order, where `between' has three arguments.
-Even if it is uncommon to do so in English, nothing stops us from including predicates with more than three arguments in QL.
-It is convenient to refer to the number of arguments that a predicate has as the \define{adicity} of that predicate, where this comes from the convention of referring to one-place predicates as \define{monadic}, two-place predicates as \define{dyadic}, three-place predicates as \define{triadic}, etc.
-Predicates with more than one place are called \define{polyadic}.
+Even if it is uncommon to do so in English, nothing stops us from including predicates with more than three arguments in $\FOL$.
+It is convenient to refer to the number of arguments that a predicate has as the \define{adicity} (also called \define{arity}) of that predicate, where this comes from the convention of referring to one-place predicates as \define{monadic}, two-place predicates as \define{dyadic}, three-place predicates as \define{triadic}, an predicates with more than one place as \define{polyadic}.
 % You can make an $n$-adic predicate by replacing $n$ names in any sentence with blanks.
-We will also include $0$-place predicates which correspond to the sentence letters with which we are familiar from before.
+We will also include $0$-place predicates which we will refer to as \define{sentence letters} and are familiar from before.
 
 
 % In general, you can think about predicates as schematic sentences that need to be filled out with some number of terms. Conversely, you can start with sentences and make predicates out of them by removing terms. Consider the sentence, `Buchanan Tower is North of Barber but South of Buchanan E.' By removing a singular term, we can recognize this sentence as using any of three different monadic predicates:
@@ -226,42 +241,45 @@ We will also include $0$-place predicates which correspond to the sentence lette
 % \item[] \blank is North of \blank but South of \blank.\\
 % \end{center}
 %
-% If we are translating this sentence into QL, should we translate it with a one-, two-, or three-place predicate? It depends on what we want to be able to say. If we're only interested in discussing the location of buildings relative to Barber, then the generality of the three-place predicate is unnecessary. If we only want to discuss whether buildings are North of Barber and South of Buchanan E, a one-place predicate will be enough.
+% If we are translating this sentence into $\FOL$, should we translate it with a one-, two-, or three-place predicate? It depends on what we want to be able to say. If we're only interested in discussing the location of buildings relative to Barber, then the generality of the three-place predicate is unnecessary. If we only want to discuss whether buildings are North of Barber and South of Buchanan E, a one-place predicate will be enough.
 %
 % In general, we can have predicates with as many places as we need {\color{black}(you might get squeamish at infinity though!)}. 
 
-In order to symbolize  $n$-place predicates in QL, we will use capital letters $A^n$ through $Z^n$, with or without subscripts, where the superscripts indicate the arity of the predicate.
-Although officially the predicates include superscripts, we will almost always drop the superscripts.
-After all, in most contexts it is clear that `$A$' is intended to be a tryadic predicate in `$Axcy$', and a dyadic predicate in `$Aaz$'.
-Thus in order to indicate both the arity and interpretation of predicates, symbolization keys will use variables.
-For instance, consider the following:
+In order to regiment  $n$-place predicates in $\FOL$, we will use capital letters $A^n$ through $Z^n$ where the superscripts indicate the arity of the predicate.
+As above, we will drop the superscript `$0$' so that $A_i, B_i, C_i, \ldots$ and the like are the same sentence letters from before. 
+% Although officially the predicates include superscripts, we will almost always drop the superscripts.
+We will also drop superscripts when the arity is indicated by the number of arguments.
+For instance, it is clear that `$A$' is a tryadic predicate in `$Axcy$' and a dyadic predicate in `$Aaz$', though we would do well to use different letters if we needed to consider both at once.
+Symbolization keys may also rely on the number of arguments to indicate the arity and interpretation as follows:
 
-\begin{ekey}
-\item[Ax:] $x$ is angry.
-\item[Hx:] $x$ is happy.
-\item[Sxy:] $x$ is shorter than $y$.
-\item[T$_1$xy:] $x$ is at least as tall as $y$.
-\item[T$_2$xy:] $x$ is at least as tough as $y$.
-\item[Bxyz:] $y$ is between $x$ and $z$.
-% \item[d:] Donald
-% \item[g:] Gregor
-% \item[m:] Marybeth
+\begin{ekey}[leftmargin=.7in]
+  \begin{multicols}{2}
+  \item[$Ax$:] $x$ is angry.
+  \item[$Hx$:] $x$ is happy.
+  \item[$Sxy$:] $x$ is shorter than $y$.
+  \item[$T_1xy$:] $x$ is at least as tall as $y$.
+  \item[$T_2xy$:] $x$ is at least as tough as $y$.
+  \item[$Bxyz$:] $y$ is between $x$ and $z$.
+  \end{multicols}
+  % \item[d:] Donald
+  % \item[g:] Gregor
+  % \item[m:] Marybeth
 \end{ekey}
 
 It is worth emphasising that the variables above do no further work than to specify the order of the arguments in a given predicate. 
 Since monadic predicates only have one argument, the variable merely indicates its adicity.
-By contrast, the order of the variables does matter for dyadic predicates like $T_1$.
+By contrast, the order of the variables also matters for dyadic predicates like $T_1$.
 For instance, we could have introduced the predicate:
 
-\begin{ekey}
-\item[T$_3$xy:] $y$ is at least as tall as $x$.
+\begin{ekey}[leftmargin=.7in]
+  \item[$T_3xy$:] $y$ is at least as tall as $x$.
 \end{ekey}
 
 Having reversed the order of the variables above, `$T_3$' expresses the converse of the relation expressed by `$T_1$'.
 This makes a big difference.
 However, it would not have mattered if we were to have replaced `$x$' with some other variable such as `$z$' or `$y_{13}$'.
 
-In order to put these predicates to work, we may now turn to combine the primitive symbols that we have included in QL in order to produce atomic sentences.
+In order to put these predicates to work, we may now turn to combine the primitive symbols that we have included in $\FOL$ in order to produce atomic sentences.
 
 
 
@@ -271,43 +289,47 @@ In order to put these predicates to work, we may now turn to combine the primiti
 
 Consider the following sentences:
 
-\begin{earg}
-\nix{I am inclined to change these to Cordelia, Hamlet, and Macbeth}
-\item[\ex{terms1}] Donald is angry.
-\item[\ex{terms2}] Donald is shorter than Gregor.
-\item[\ex{terms3}] If Donald is angry, then so are Gregor and Marybeth.
-\item[\ex{terms4}] Marybeth is at least as tall and as tough as Gregor.
-% \item[\ex{terms5}] Gregor is between Donald and Marybeth.
+% \setcounter{eargletter}{0}
+\begin{earg} \label{hamlet}
+  \eitem{Cordelia is angry.}
+  \eitem{Cordelia is shorter than Hamlet.}
+  \eitem{If Cordelia is angry, then so are Hamlet and Macbeth.}
+  \eitem{Macbeth is at least as tall and tough as Hamlet.}
+  % \item Hamlet is between Cordelia and Macbeth.
 \end{earg}
 
 We have already provided the predicates that we will need to regiment the sentences above, but we have not introduced any constants.
 Consider the following:
 
-\begin{groupitems}
+% \begin{groupitems}
 \begin{ekey}
-\item[d:] Donald
-\item[g:] Gregor
-\item[m:] Marybeth
+  \begin{multicols}{2}
+    \item[$c$:] Cordelia
+    \item[$h$:] Hamlet
+    \item[$m$:] Macbeth
+    \item[] ~
+    \item[$Ax$:] $x$ is angry. 
+    \item[$Sxy$:] $x$ is shorter than $y$. 
+    \item[$T_1xy$:] $x$ is at least as tall as $y$. 
+    \item[$T_2xy$:] $x$ is at least as tough as $y$. 
+  \end{multicols}
 \end{ekey}
-\end{groupitems}
+% \end{groupitems}
 
-Given these resources, we may regiment sentence \ref{terms1} as: $Ad$.
-Since the `$x$' in the symbolization key entry for `$Ax$' is just a placeholder, we have replaced the variable with the constant which names Donald, resulting in what we will refer to as an atomic formula.
+Given these resources, we may regiment sentence \eref{hamlet}{1} as: $Ac$.
+Since the `$x$' in the symbolization key entry for `$Ax$' is just a placeholder, we have replaced the variable with the constant which names Cordelia, resulting in an atomic sentence.
+Whereas `$Ac$' includes the monadic predicate `$A$', atomic sentences may include predicates of any adicity.
+More generally, an \define{atomic sentence} of $\FOL$ is an $n$-place predicate followed by $n$ constants where $n$ is any natural number.
+Accordingly, $0$-place predicates are atomic sentences of $\FOL$ which, as above, we will refer to as sentence letters.
+Or to take another example from above, the sentence \eref{hamlet}{2} can be regimented with the dyadic predicate `$S$' as: $Sch$.
+% In general, atomic sentences will include an $n$-place predicate followed by $n$ constants. 
 
-More precisely, an \define{atomic sentence} of QL is an $n$-place predicate followed by $n$ constants where $n$ is any non-negative integer.
-Accordingly, $0$-place predicates are atomic formulas of QL where we will refer to $0$-place predicates as \define{sentence letters}.
+By contrast with sentences \eref{hamlet}{1} and \eref{hamlet}{2}, sentence \eref{hamlet}{3} is not atomic on account of including sentential operators.
+Nevertheless, we may regiment this sentence by identifying its atomic parts: $Ac$, $Ah$, and $Am$.
+These atomic sentences will play a similar role to the sentence letters included in $\PL$.
+In particular, we may regiment sentence \eref{hamlet}{3} by: $Ad \eif (Ag \eand Am)$.
 
-
-Whereas `$Ad$' includes the monadic predicate `$A$', atomic sentences may include predicates of any adicity.
-For instance, sentence \ref{terms2} can be regimented with the dyadic predicate `$S$' as: $Sdg$.
-In general, atomic sentences will include an $n$-place predicate followed by $n$ constants. 
-
-By contrast with sentences \ref{terms1} and \ref{terms2}, sentence \ref{terms3} is not atomic on account of including sentential operators.
-Nevertheless, we may regiment this sentence by identifying its atomic parts: $Ad$, $Ag$, and $Am$.
-These atomic sentences will play a similar role to the sentence letters included in SL.
-In particular, we may regiment sentence \ref{terms3} by: $Ad \eif (Ag \eand Am)$.
-
-Sentence \ref{terms4} is similar though the atomic sentences are a little trickier to identify.
+Sentence \eref{hamlet}{4} is similar though the atomic sentences are a little trickier to identify.
 We begin by observing that two things are said of Marybeth and Gregor: first, Marybeth is at least as tall as Gregor; and second, Marybeth is at least as tough as Gregor.
 Thus we can build the atomic sentences: $T_1mg$ and $T_2mg$. 
 The last step is to put these together: $T_1mg \eand T_2mg$.
@@ -320,67 +342,68 @@ The last step is to put these together: $T_1mg \eand T_2mg$.
 
 Consider the following sentence:
 
-\begin{earg}
-\item[\ex{open1}] Either it is crimson or ruby since she wants to impress him.
+\begin{earg} \label{open}
+  \eitem{Either it is crimson or ruby since she wants to impress him.}
 \end{earg}
 
-In considering the predicates we will need, we may introduce the following:
+In contemplating the predicates that we will need, we may introduce the following:
 
-\begin{ekey}
-% \item[Fx:] $x$ is frustrated.
-% \item[Ux:] $x$ is upset.
-% \item[Hx:] $x$ is human.
-% \item[Mx:] $x$ is mammal.
-\item[Cx:] $x$ is crimson.
-\item[Rx:] $x$ is ruby.
-\item[Wxy:] $x$ wants to impress $y$.
+\begin{ekey}[leftmargin=.7in]
+  % \item[Fx:] $x$ is frustrated.
+  % \item[Ux:] $x$ is upset.
+  % \item[Hx:] $x$ is human.
+  % \item[Mx:] $x$ is mammal.
+  \item[$Cx$:] $x$ is crimson.
+  \item[$Rx$:] $x$ is ruby.
+  \item[$Wxy$:] $x$ wants to impress $y$.
 \end{ekey}
 
-Since there are no names in the sentence above, we do need to include constants in our symbolization key.
+Since there are no names in the sentence \eref{open}{1} above, we do need to include constants in our symbolization key.
 Instead, we can get by with variables alone.
-In particular, we may regiment sentence \ref{open1} by first identifying its atomic parts.
+In particular, we may regiment sentence \eref{open}{1} by first identifying its atomic parts.
 To do so, we may observe that the object in question is said to be one of two colors, and that the person in question wants to impress someone else.
 Since the same object is either crimson or ruby, we will use the same variable for each: $Cx$, $Rx$.
 We use different variables for `she' and `him', where this yields: $Wyz$.
 Putting these pieces together, we get: $(Cx \eor Rx) \eand Wyz$.
 
-Although $Cx$, $Rx$, and $Wyz$ are atomic, these expressions are not sentences since it is hard to assign truth-values to such expressions.
-Rather, these expressions include \textit{free variables} that are not bound by quantifiers, and so will be referred to as \textit{open sentences} where the precise definitions will be given shortly.
-Nevertheless, it is important to get a sense of open sentences in order to appreciate the role that the quantifiers play.
+Although $Cx$, $Rx$, and $Wyz$ are atomic, these expressions are not sentences since it is hard to assign truth-values to such expressions since there is no telling which objects the variables refer to.
+Matters would be different if the variables were bound by quantifiers since then we would know that we need only find some object which bears the relevant property or relation, or else that every object must do so.
+Since these atomic expressions include variables that are not bound by quantifiers, we will be refer to such expressions as \textit{open sentences} and the unbound variables in them as \textit{free variables}.
+Although the precise definitions will be given shortly, it is important to get a sense of the open sentences and the free variables that then include in order to appreciate the role that the quantifiers play in $\FOL$.
 
-In order to get a better sense of open sentences as well as some of the subtleties of regimenting sentences in QL, consider the closely related sentence:
+In order to get a better sense of open sentences as well as some of the subtleties of regimenting sentences in $\FOL$, consider the closely related sentence:
 
-\begin{earg}
-\item[\ex{open2}] Either it is crimson or ruby since she likes those colors.
+\begin{earg} \label{colors}
+  \eitem{Either it is crimson or ruby since she likes those colors.}
 \end{earg}
 
 Now we will need the following symbolization key:
 
-\begin{ekey}
-\item[Hxy:] $x$ has the color $y$.
-\item[Lxy:] $x$ likes $y$.
-\item[c:] Crimson
-\item[r:] Ruby
+\begin{ekey}[leftmargin=.7in]
+  \item[$Hxy$:] $x$ has the color $y$.
+  \item[$Lxy$:] $x$ likes $y$.
+  \item[$c$:] Crimson
+  \item[$r$:] Ruby
 \end{ekey}
 
 Instead of taking `is crimson' and `is ruby' to be monadic predicates, we have included constants for each together with a new dyadic predicate for `has the color'.
 This is useful since now we can say that she likes each color by using its name.
 Thus we have the atomic open sentences: $Hxc$, $Hxr$, $Lyc$, and $Lyr$.
 We can then build the following regimentation: $(Hxc \eor Hxr) \eand (Lyc \eand Lyr)$.
-Despite how similar the sentences \ref{open1} and \ref{open2} are to each other, their regimentations are very different, and by no means exhaustive.
+Despite how similar the sentences \eref{open}{1} and \eref{colors}{1} are to each other, their regimentations are very different, and by no means exhaustive.
 
 We may conclude this subsection with a final example:
 
-\begin{earg}
-\item[\ex{open3}] If it is a dolphin, then it is a mammal and he won't eat it.
+\begin{earg} \label{dolphin}
+  \eitem{If it is a dolphin, then it is a mammal and he won't eat it.}
 \end{earg}
 
-Here we only need the following predicates:
+% Here we only need the following predicates:
 
-\begin{ekey}
-\item[Dx:] $x$ is dolphin.
-\item[Mx:] $x$ is mammal.
-\item[Eyx:] $y$ will eat $x$.
+\begin{ekey}[leftmargin=.7in]
+\item[$Dx$:] $x$ is dolphin.
+\item[$Mx$:] $x$ is mammal.
+\item[$Eyx$:] $y$ will eat $x$.
 \end{ekey}
 
 As before, we may build the atomic open sentences $Hx$, $Mx$, and $\enot Eyx$, drawing on these to construct: $Hx \eif (Mx \eand \enot Eyx)$.
@@ -392,49 +415,53 @@ Indeed, such claims are common throughout mathematics, the sciences, and day-to-
 
 \subsection{Quantifiers}
 
-We are now ready to introduce quantifiers.
-Unlike singular terms and predicates, quantifiers are a new kind of monadic logical connective similar to negation.
-Instead of relying on an interpretation of our language to specify the meaning of the quantifiers, we will provide semantic clauses for the quantifiers in an analogous manner to the semantic clauses that we provided for the sentential connectives $\enot$, $\eand$, $\eor$, $\eif$, and $\eiff$.
+We are now ready to introduce the first-order quantifiers.
+Unlike singular terms and predicates, quantifiers are a new kind of unary logical operator similar to negation.
+% Rather than relying on an interpretation of our language to specify the meaning of the quantifiers, we will provide semantic clauses for the quantifiers in an analogous manner to the semantic clauses that we provided for the sentential connectives $\enot$, $\eand$, $\eor$, $\eif$, and $\eiff$.
+Consider the sentences:%
 
-Consider the sentences:
-
-\begin{earg}
-\item[\ex{qu1}] Someone is happy.
-\item[\ex{qu2}] Nobody is as guilty as Donald.
-\item[\ex{qu3}] Everybody loves somebody.
+\begin{multicols}{2}
+  
+\begin{earg} \label{quant}
+  \eitem{Someone is happy.}
+  \eitem{Nobody is as guilty as Donald.}
+  \eitem{Everybody loves somebody.}
+  \item[] ~
 \end{earg}
 
-We will need the following symbolization key:
+% We will need the following symbolization key:
 
 \begin{ekey}
-\item[Hx:] $x$ is happy.
-\item[Gxy:] $x$ is as guilty as $y$.
-\item[Lxy:] $x$ loves $y$.
-\item[d:] Donald.
+  \item[$Hx$:] $x$ is happy.
+  \item[$Gxy$:] $x$ is as guilty as $y$.
+  \item[$Lxy$:] $x$ loves $y$.
+  \item[$d$:] Donald.
 \end{ekey}
 
-It might be tempting to regiment sentence \ref{qu1} as: $Hx$.
+\end{multicols}
+
+It might be tempting to regiment sentence \eref{quant}{1} as: $Hx$.
 After all, if `It is happy' is true, then surely someone--- whoever `It' refers to--- must be happy.
 Tempting as this may be, these are very different claims.
 In order to see how these claims differ, we may consider who these claims \textit{concern} or \textit{are about}.
-Although it may not be clear who exactly, the sentence `It is happy' is presumable about whoever `It' refers to where this is some individual.
-By contrast, claiming that someone is happy does not appear to be about any particular individual at all.
-For instance, suppose there are many happy people but `It' happens to be used to refer to a tables.
-Although sentence \ref{qu1} may be true, `It is happy' is false.
+Although it may not be clear who exactly, `It is happy' is about whoever `It' refers to where this is some particular individual.
+By contrast, claiming that someone is happy is not about any particular individual at all.
+For instance, suppose there are many happy people but `It' happens to be used to refer to a broken table sitting in the corner.
+Although sentence \eref{quant}{2} may be true, `It is happy' is false.
 
 Instead of asserting anything about a particular, quantifiers make claims about a \textit{domain} of individuals which we will introduce in the following chapter.
 Depending on the context of assertion, the domain may differ.
-Nevertheless, quantified claims may be understood to make claims about all of the individuals in the domain in question.
-By contrast, open sentences make claims about at most one individual.
-These are important differences, and we will have a lot more to say about them when we introduce the semantics for QL.
+Nevertheless, quantified claims may be understood to make claims about the domain which includes all of the individuals that there are.
+By contrast, open sentences make claims about particular individuals.
+These are important differences, and we will have a lot more to say about them when we introduce the semantics for $\FOL$.
 
-Although the sentence `It is happy' does not say the same thing as sentence \ref{qu1}, we may nevertheless begin by regimenting `It is happy'.
-Given the symbolization key above, this yields: $Hx$.
-What is missing is to add that \textit{there is something such that} it is happy.
+Although the sentence `It is happy' does not say the same thing as sentence \eref{quant}{1}, their regimentations start off the same.
+Given the symbolization key above, `It is happy' is just: $Hx$.
+What is needed to regiment \eref{quant}{1} is to add that \textit{there is something such that} it is happy.
 We will accomplish this by appending an \define{existential quantifier} $\qt{\exists}{x}$, where this yields: $\qt{\exists}{x} Hx$.
 % On its own, `$\qt{\exists}{x}$' may be read `there is something such that', and similarly, `$\qt{\forall}{x}$' may be read `everything is such that'.
-As defined below, the quantifier \textit{binds} the variable in $Hx$ which is said to be \textit{bound}.
-Since the result does not contain any free variables, $\qt{\exists}{x} Hx$ is a sentence of QL. 
+As defined below, the quantifier \textit{binds} the variable $x$ in $Hx$.
+Since the result does not contain any free variables, $\qt{\exists}{x} Hx$ is not an open sentence, but rather a sentence of $\FOL$. 
 % Here the quantifier `$\qt{\exists}{x}$' \define{binds} all instances of the variable `$x$' in the open sentence `$Hx$'.
 % We may refer to the variable following the quantifier as the \define{binding variable} and the variable `$x$' in `$Hx$' as a \define{bound variable}.
 % Whereas `$x$' is \define{unbound} in the open sentence `$Hx$', the variable `$x$' is \define{bound} in `$\qt{\exists}{x} Hx$'.
@@ -442,20 +469,20 @@ Since the result does not contain any free variables, $\qt{\exists}{x} Hx$ is a 
 % As we will see in the following chapter, the closed sentences are the primary targets for interpretation since they may be assigned truth-values independent of an assignment of variables to elements of the domain.
 % In the following chapter, we will consider \define{assignments} of variables to individuals where this will allow us to interpret quantified sentences.
 
-In order to regiment sentence \ref{qu2}, we may ask what this sentence says.
-One way to read this sentence is that: it is not the case that someone is as guilty as Donald.
-Unpacking this claim even further: it is not the case that something is such that it is as guilty as Donald.
-However cumbersome, this reading makes the following open sentence plain to see: $Gxd$.
+In order to regiment sentence \eref{quant}{2}, we may ask what this sentence says.
+One way to read this sentence is that it is not the case that someone is as guilty as Donald.
+Unpacking this claim even further: it is not the case that something is such that \textit{it is as guilty as Donald}.
+However cumbersome, this reading makes the italicized open sentence easy to regiment: $Gxd$.
 Although $Gxd$ contains the constant $d$, it also contains the free variable $x$ which we may bind with an existential quantifier as before: $\qt{\exists}{x} Gxd$.
 We may then negate the result: $\enot \qt{\exists}{x} Gxd$.
 
-Although this provides a fine regimentation of sentence \ref{qu2}, there is another natural reading.
-Instead of beginning with negation, we may take sentence \ref{qu2} to express that everyone is not as guilty as Donald.
-Put otherwise, everything is such that it is not as guilty as Donald.
+Although this provides a fine regimentation of sentence \eref{quant}{2}, there is another natural reading.
+Instead of beginning with negation, we may take sentence \eref{quant}{2} to express that everyone is not as guilty as Donald.
+Put otherwise, everything is such that it is not the case that \textit{it is as guilty as Donald}.
 Here we begin as before with $Gxd$ but then immediately add negation: $\enot Gxd$.
 Note that this sentence is open since it includes the free variable $x$. 
 Finally, we add the \define{universal quantifier} $\qt{\forall}{x}$, where this yields: $\qt{\forall}{x} \enot Gxd$.
-It turns out that this reading is logically equivalent to the first regimentation of sentence \ref{qu2} considered above.
+It turns out that this reading is logically equivalent to the first regimentation of sentence \eref{quant}{2} considered above.
 % Nevertheless, in many cases sentences will admit of multiple regimentations which are not all logically equivalent.
 
 % In these quantified sentences, the variable $x$ serves as a kind of placeholder. The expression $\qt{\forall}{x}$ means that you can pick anything from the domain of discourse and put it in as $x$. There is no special reason to use $x$ rather than some other variable. The sentence $\qt{\forall}{x} Hx$ means exactly the same thing as $\qt{\forall}{y} Hy$, $\qt{\forall}{z} Hz$, and $(\qt{\forall}{x_5}) Hx_5$.
@@ -474,41 +501,50 @@ It turns out that this reading is logically equivalent to the first regimentatio
 % The sentence following the quantifier is said to be in the \define{scope} of the quantifier.
 % We will provide a formal definition of scope later on, but intuitively it is the part of the sentence that the quantifier is able to .
 In general, $\qt{\forall}{x} \metaA$ is logically equivalent to $\enot\qt{\exists}{x}\enot\metaA$, and similarly, $\qt{\exists}{x} \metaA$ is logically equivalent to $\enot\qt{\forall}{x}\enot\metaA$.
-This means that any sentence which can be symbolized with a universal quantifier can be symbolized with an existential quantifier together with an appropriate number of negation signs, and \textit{vice versa}.
-Even though there is no logical difference in translating with one quantifier rather than the other, sometimes one translation might seem more natural than the other.
-Other times, the difference between regimenting with an existential as opposed to a universal quantifier will simply be a matter of taste.
+This means that any sentence which can be regimented with a universal quantifier can be regimented with an existential quantifier together with an appropriate number of negation signs, and \textit{vice versa}.
+Even though there is no logical difference in regimenting a sentence with one quantifier rather than the other, sometimes one regimentation might seem more natural than the other.
+Other times, the difference between regimenting with an existential as opposed to a universal quantifier will make no difference at all.
 
-It remains to regiment sentence \ref{qu3}.
+It remains to regiment sentence \eref{quant}{3}.
 This says of everything that it loves something.
-Focusing on `it loves something', we may unpack this to mean that there is something where it loves that thing.
-Thus we have: everything is such that there is something where it loves that thing.
+Focusing on `it loves something', we may take this to mean that there is something such that \textit{it loves that thing}.
+Thus we have: everything is such that there is something such that it loves that thing.
 Notice that without the help of variables, it is easy to lose track of which quantifier is binding which variable.
-It is for this reason that the method that we have employed above of unpacking the sentence in stilted English is of limited use.
-Nevertheless, we do need to make sure we know what the claim is saying, and sometimes it helps to write it out a few different ways in English.
-Often the best method is to proceed in stages.
+It is for this reason that the method that we have employed above of unpacking the sentence in stilted English is of limited utility.
+Nevertheless, we do need to make sure we know what the claim is saying, and sometimes it helps to write it out a few different ways in English, proceeding in stages as we have above.
 
-We may begin by taking sentence \ref{qu3} to say that something is such that it loves somebody.
-Thus we have: $\qt{\forall}{x} LS x$ where we have temporarily introduced `$LSx$' for `$x$ loves somebody'.
+Instead of using English to successively unpack \eref{quant}{3}, we may employ a similar process in $\FOL$ itself. 
+For instance, we may begin by taking sentence \eref{quant}{3} to say that something is such that it loves somebody which we may partially regiment as $\qt{\forall}{x} LS x$ by temporarily introducing `$LSx$' for `$x$ loves somebody'.
 Next we may take `$LS x$' to mean `there is some $y$ where $x$ loves $y$' which we may regiment: $\qt{\exists}{y} Lxy$.
 Replacing `$LS x$' in our first pass regimentation with `$\qt{\exists}{y} Lxy$' yields the final product: $\qt{\forall}{x} \qt{\exists}{y} Lxy$.
 In general, sentences with mixed quantifiers are tricky and require a lot of care to get right.
 Even if some cases you can immediately intuit a correct regimentation, it is important to learn how to systematically decompose complex sentences into simpler parts before putting the pieces back together.
 This will take some practice.
 
-Having introduced each of the new primitives included in QL, we may proceed to define the well formed formulas as well as the sentences of QL a little more carefully.
+Having introduced the new primitives symbols included in $\FOL$, we may now proceed to define the sentences of $\FOL$ a little more rigorously.
+Nevertheless, the informal remarks that we have made so far should help to provide an intuitive target for our definition to strike.
 
 
 
 
 
-\section{The Well-Formed Formulas of QL}
+\section{The Well-Formed Formulas}
 
-We have already seen each of the primitive symbols included in QL.
-It remains to draw on these elements in order to define the well-formed formulae of QL, as well as the sentences of QL.
-In many respects this will resemble the treatment of the well-formed formulas of SL, however, in other respects these two languages will differ.
-In particular, we will not identify the well-formed formulas of QL with the sentences of QL.
+Whereas the well-formed sentences (wfss) of $\PL$ were defined recursively in terms of the primitive symbols included in $\PL$, this approach will not do $\FOL$. 
+In order to see why, it is important to appreciate that the wfss of any language are intended to include all and only those expressions which may ultimately be assigned a truth-value by an interpretation.
+If the wfss of $\FOL$ are to be built up in similar manner to the way they were in $\PL$, then there will invariably be stages of construction which include the unbound variables that are then bound by quantifiers introduced in later stages of construction.
+For instance, if we are to construct $\qt{\forall}{x} \qt{\exists}{y} Lxy$ as above, we must start with $Lxy$, building up to $\qt{\exists}{y} Lxy$, and only then add the final quantifier.
+However, as mentioned above, there is no easy way to interpret open sentences such as $Lxy$ and $\qt{\exists}{y} Lxy$ which includes a free variable.
 
-Collecting the elements that we have introduced so far, the primitive symbols of QL include:
+Rather that admitting sentences which cannot be assigned truth-values by an interpretation of our language, we will arrive at the well-formed sentences of $\FOL$ by first defining the more modest notion of a \textit{well-formed formula} of $\FOL$, or wff for short.
+This definition will proceed much as before.
+Only then will we move to identify those wffs of $\FOL$ which do not have free variables and so may be said to be well-formed sentences of $\FOL$ whose truth-values will turn out not depend on anything besides the interpretation of $\FOL$.
+As we will see in the following chapter, not all wffs of $\FOL$ may claim this virtue.
+% It remains to draw on these elements in order to define the well-formed formulae of $\FOL$, as well as the sentences of $\FOL$.
+% In many respects this will resemble the treatment of the well-formed formulas of $\PL$, however, in other respects these two languages will differ.
+% In particular, we will not identify the well-formed formulas of $\FOL$ with the sentences of $\FOL$.
+
+Collecting the elements that we have introduced so far, the primitive symbols of $\FOL$ include:
 
 
 \begin{center}
@@ -517,13 +553,13 @@ Collecting the elements that we have introduced so far, the primitive symbols of
 $n$-place predicates for $n\geq 0$ & $A^n,B^n,C^n,\ldots,Z^n$\\
 with subscripts, as needed & $A_1^n, B_1^n, Z_1^n, A_2^n, A_{25}^n, J_{375}^n,\ldots$\\
 \hline
-constants & $a,b,c,\ldots,v$\\ % %Josh: Ichikawa language goes up to `w'
+constants & $a,b,c,\ldots,t$\\
 with subscripts, as needed & $a_1, w_4, h_7, m_{32},\ldots$\\
 \hline
 variables & $w, x,y,z$\\ % % JH: Ichikawa language excludes `w' as a variable 
 with subscripts, as needed & $x_1, y_1, z_1, x_2,\ldots$\\
 \hline
-sentential connectives & \enot, \eand, \eor, \eif, \eiff\\
+sentential operators & \enot, \eand, \eor, \eif, \eiff\\
 \hline
 quantifiers& $\forall, \exists$\\
 \hline
@@ -541,81 +577,81 @@ parentheses&( , )\\
 %   \item[\it Parentheses:] $(,)$.
 % \end{enumerate}
 
-Just as we did for SL, we will define the \define{well-formed formulas} (wffs) of QL recursively:
+In a similar manner to the definition of the wfss of $\PL$, we will recursively define the \define{well-formed formulas} (wffs) of $\FOL$ as follows:
 
-\begin{enumerate}
-  \item $\F^n\alpha_1,\ldots,\alpha_n$ is a wff if $\F^n$ is an $n$-place predicate and $\alpha_1,\ldots,\alpha_n$ are singular terms.
-\item If \metaA{} and \metaB{} are wffs and $\alpha$ is a variable, then:
-	\begin{enumerate}
-    % \begin{multicols}{2}
-      \item $\qt{\exists}{\alpha}\metaA{}$ is a wff;
-      \item $\qt{\forall}{\alpha}\metaA{}$ is a wff;
-      \item $\enot\metaA{}$ is a wff;
-      % \item[] ~
-      \item $(\metaA{}\eand\metaB{})$ is a wff;
-      \item $(\metaA{}\eor\metaB{})$ is a wff;
-      \item $(\metaA{}\eif\metaB{})$ is a wff; and
-      \item $(\metaA{}\eiff\metaB{})$ is a wff.
-    % \end{multicols}
-	\end{enumerate}
-\item Nothing else is a wff.
-\end{enumerate}
+\factoidbox{
+  \begin{enumerate}
+    \item $\F^n\alpha_1,\ldots,\alpha_n$ is a wff of $\FOL$ if $\F^n$ is an $n$-place predicate of $\FOL$ and $\alpha_1,\ldots,\alpha_n$ are singular terms (i.e., variables or constants) of $\FOL$.
+    \item For any wffs $\metaA$ and $\metaB$ of $\FOL$ and variable $\alpha$ of $\FOL$:
+      \begin{enumerate}
+          \item $\qt{\exists}{\alpha}\metaA{}$ is a wff of $\FOL$;
+          \item $\qt{\forall}{\alpha}\metaA{}$ is a wff of $\FOL$;
+          \item $\enot\metaA{}$ is a wff of $\FOL$;
+          \item $(\metaA{}\eand\metaB{})$ is a wff of $\FOL$;
+          \item $(\metaA{}\eor\metaB{})$ is a wff of $\FOL$;
+          \item $(\metaA{}\eif\metaB{})$ is a wff of $\FOL$; and
+          \item $(\metaA{}\eiff\metaB{})$ is a wff of $\FOL$.
+      \end{enumerate}
+    \item Nothing else is a wff of $\FOL$.
+  \end{enumerate}
+}
 
-As brought out in Ch.~\ref{ch.SL}, the definitions above are strictly speaking nonsense.
+As brought out in Chapter \ref{ch.PL-syntax}, the definitions above are strictly speaking nonsense.
 This is because the clauses above \textit{use} rather than \textit{mention} the meta-variables $\metaA$ and $\metaB$ for wffs, as well as new meta-variables for $n$-place predicates $\F^n$ and singular terms $\alpha_1,\ldots,\alpha_n$.
-Moreover, it would not help to simply add quotes since the meta-variables that we have used above do not belong to QL.
+Moreover, it would not help to simply add quotes since the meta-variables that we have used above do not belong to $\FOL$.
 This is what motivated the introduction of corner quotes before, and we may reproduce a similar tactic here.
 However, instead of doing so, we will follow the common convention of relying on the reader to know where the corner quotes are supposed to go.
-If you do not remember how to do this, look back to $\S\ref{sec:quotation}$ for review. 
+If you do not remember how to do this, look back to $\S\ref{sub.corner-quotes}$ to review before proceeding.
 
-It is common to refer to the clauses included in the definition of the wffs of QL as the \define{composition rules} for the wffs of QL since they tell us how to \textit{compose} wffs from the primitive symbols included in QL.
+As before, we will refer to the clauses included in the definition of the wffs of $\FOL$ as the \define{composition rules} for the wffs of $\FOL$ since they tell us how to \textit{compose} wffs from the primitive symbols included in $\FOL$.
 In particular, the first clauses allows us to construct \define{atomic wffs} where the other clauses allow us to construct \define{complex wffs}.
-Since we have already seen a number of paradigm cases of wffs in QL, it will help to consider some examples which do not follow the composition rules above.
+Since we have already seen a number of paradigm cases of wffs in $\FOL$, it will help to consider some examples which do not follow the composition rules above.
 For the sake of readability, we will drop subscripts and superscripts below and throughout much of what follows:
 
-\begin{earg}
-  \item[\ex{sen1}] $aFbx$.
-  \item[\ex{sen2}] $\qt{\forall}{a}Fbx$.
-  \item[\ex{sen3}] $\qt{\forall}{y}Fbx$.
-  \item[\ex{sen4}] $\qt{\forall}{x}Fbx$.
-  \item[\ex{sen5}] $\qt{\exists}{y} \qt{\forall}{x}Fbx$.
-  \item[\ex{sen6}] $GFbx$.
-  \item[\ex{sen7}] $G \eand Fbx$.
+\begin{earg} \label{nonsense}
+  \eitem{$aFbx$.}
+  \eitem{$\qt{\forall}{a}Fbx$.}
+  \eitem{$\qt{\forall}{y}Fbx$.}
+  \eitem{$\qt{\forall}{x}Fbx$.}
+  \eitem{$\qt{\exists}{y} \qt{\forall}{x}Fbx$.}
+  \eitem{$GFbx$.}
+  \eitem{$G \eand Fbx$.}
 \end{earg}
 
-The expression in \ref{sen1} is complete nonsense, or to use the definition given above, \ref{sen1} is \textit{not} a wff of QL.
+The expression in \eref{nonsense}{1} is complete nonsense, or to use the definition given above, \eref{nonsense}{1} is \textit{not} a wff of $\FOL$.
 The reason is that a constant $a$ occurs before the predicate $F$, but there is no way to achieve this given the composition rules provided above.
-Were we to remove this misplaced constant, the result would be $Fbx$ which is a wff of QL. 
+Were we to remove this misplaced constant, the result would be $Fbx$ which is a wff of $\FOL$. 
 
-The expression in \ref{sen2} is not a wff of QL since the constant $a$ follows the quantifier $\forall$.
+The expression in \eref{nonsense}{2} is not a wff of $\FOL$ since the constant $a$ follows the quantifier $\forall$.
 There is no way to achieve this given our composition rules, and for good reason.
 For instance, consider the English analogue `for every Sally, Jim loves it'.
-Although we might be able to contrive a way to make sense of this in English--- something natural languages are very good at--- our initial point remains: there is no way to construct \ref{sen2} given the composition rules for QL, and so \ref{sen2} is not a wff of QL.
+Although we might be able to contrive a way to make sense of this in English--- something natural languages are very good at--- our initial point remains: there is no way to construct \eref{nonsense}{2} given the composition rules for $\FOL$, and so \eref{nonsense}{2} is not a wff of $\FOL$.
 
-The expression in \ref{sen3} is a wff of QL.
+The expression in \eref{nonsense}{3} is a wff of $\FOL$.
 Perhaps this comes as a surprise.
-After all, the binding variable $y$ differs from what we might expect to be the bound variable $x$.
+After all, the binding variable $y$ which occurs after the quantifier differs from what we might expect to bind the variable $x$.
 Accordingly, the quantifier does not make any substantive contribution to the sentence.
-Be this as it may, we may construct $\ref{sen3}$ all the same.
+Be this as it may, we may construct $\eref{nonsense}{3}$ all the same.
 We may simulate this effect in English by saying: everything is such that Jim loves Raha.
-Here, the quantifier `everything is such that' does no substantive work, where something similar may be said for $\qt{\forall}{y}$ in \ref{sen3}.
+Here, the quantifier `everything is such that' does no substantive work, where something similar may be said for $\qt{\forall}{y}$ in \eref{nonsense}{3}.
 
-The expression in \ref{sen4} is also a wff of QL, but this time the quantifier succeeds in binding the variable $x$.
+The expression in \eref{nonsense}{4} is also a wff of $\FOL$, but this time the quantifier succeeds in binding the variable $x$.
 For instance, we might use this wff to regiment the claim `Everything is such that Jim loves it', or more naturally, `Jim loves everything'.
 
-The expression in \ref{sen5} is a wff of QL, but includes an extra quantifier that does no work.
+The expression in \eref{nonsense}{5} is a wff of $\FOL$, but includes an extra quantifier that does no work.
 This is because the binding variable $y$ does not bind any variables. 
-Perhaps surprisingly, the very same may be said were we to replace $y$ with $x$.
+Perhaps surprisingly, the same may be said were we to replace $y$ with $x$.
 We will have more to say about such cases in the following subsection where we will introduce the notion of \textit{scope}.
 
-The expression in \ref{sen6} is not a wff of QL since it includes two concatenated predicates $F$ and $G$.
-There is no more latitude for this in QL than there is for concatenating two sentence letters in SL.
+The expression in \eref{nonsense}{6} is not a wff of $\FOL$ since it includes two concatenated predicates $F$ and $G$.
+There is no more latitude for this in $\FOL$ than there is for concatenating two sentence letters in $\PL$.
 After all, this would be like saying in English: is red Jim loves it. 
 
-The expression in \ref{sen7} is not a wff of QL, but only for the pedantic reason that we have not included parentheses.
+The expression in \eref{nonsense}{7} is not a wff of $\FOL$, but only for the pedantic reason that we have not included parentheses.
 Leaving such pedantry to the side, we will go on dropping outermost parentheses when no ambiguity results.
 For instance, were to wish to bind the variable $x$ with a quantifier, parentheses would be required.
-Although both $\qt{\forall}{x} G \eand Fbx$ and $\qt{\forall}{x}(G \eand Fbx)$ are wffs of QL, the quantifier only succeeds in binding the variable $x$ in the latter.
+Although both $(\qt{\forall}{x} G \eand Fbx)$ and $\qt{\forall}{x}(G \eand Fbx)$ are wffs of $\FOL$, the quantifier only succeeds in binding the variable $x$ in the latter.
+This provides some indication of the role that parentheses play in defining the scope of a quantifier.
 
 
 
@@ -624,7 +660,7 @@ Although both $\qt{\forall}{x} G \eand Fbx$ and $\qt{\forall}{x}(G \eand Fbx)$ a
 
 \section{Quantifier Scope}
 
-Given a quantified wff of QL with the form $\qt{\exists}{\alpha}\metaA$ or $\qt{\forall}{\alpha}\metaA$, we may define $\metaA$ to be the \define{scope} of each of these quantifiers.
+Given a quantified wff of $\FOL$ of the form $\qt{\exists}{\alpha}\metaA$ or $\qt{\forall}{\alpha}\metaA$, we may define $\metaA$ to be the \define{scope} of each of these quantifiers.
 % existential quantifier $\qt{\exists}{\alpha}$ in $\qt{\exists}{\alpha} \metaA$, and similarly, $\metaA$ is the \define{scope} of the universal quantifier $\qt{\forall}{\alpha}$ in $\qt{\forall}{\alpha} \metaA$.
 In considering the composition rules above, the scope of a quantifier is the wff to which that quantifier is applied.
 Although it is easy to identify the scope of a quantifier when the quantifier is the main connective, this is not always the case.
@@ -633,14 +669,14 @@ In the sentence $\qt{\exists}{x} Gx \eif Gl$, the scope of the existential quant
 Would it make a difference if the scope of the quantifier were the whole sentence as in $\qt{\exists}{x}(Gx \eif Gl)$?
 In order to answer this question, consider the following symbolization key:
 
-\begin{ekey}
-\item[Gx:] $x$ is a guitarist.
-\item[l:] Lenny.
+\begin{ekey}[leftmargin=.6in]
+  \item[$Gx$:] $x$ is a guitarist.
+  \item[$l$:] Lenny.
 \end{ekey}
 
 Given this key above, $\qt{\exists}{x} Gx \eif Gl$ reads: if there is some guitarist, then Lenny is a guitarist.
-By contrast, $\qt{\exists}{x} (Gx \eif Gl)$ reads: there is some person such that if that person were a guitarist, then Lenny would be a guitarist.
-Recall that the conditional here is a material conditional, and so true any time the antecedent is false.
+By contrast, $\qt{\exists}{x} (Gx \eif Gl)$ reads: something is such that if it is a guitarist, then Lenny is a guitarist.
+Recall that the material conditional is true any time the antecedent is false.
 Let the constant $j$ denote Jack who we may assume is not a guitarist.
 It follows that the sentence $Gj \eif Gl$ is true because $Gj$ is false.
 Since Jack is such that if he is a guitarist then Lenny is a guitarist, it follows that $\qt{\exists}{x} (Gx \eif Gl)$ is true.
@@ -652,24 +688,29 @@ It turns out that $\qt{\exists}{x} Gx \eif Gl$ is logically equivalent to $\qt{\
 This oddity does not arise with other connectives, nor does it arise if the variable only occurs in the consequent.
 For example, $\qt{\exists}{x} Gx \eand Gl$ is logically equivalent to $\qt{\exists}{x} (Gx \eand Gl)$, and $Gl \eif \qt{\exists}{x} Gx$ is logically equivalent to $\qt{\exists}{x}(Gl \eif Gx)$.
 What this brings out is yet another unusual features of the material conditional.
+Nevertheless, these examples indicate just how important it is to be clear about the scope of a quantifier.
 
-% Note that quantifiers count as logical connectives, so one can sensibly ask whether the main connective of a given sentence is a quantifier or something else. (Calling it a `connective' can be slightly confusing, since, unlike connectives like conjunction and disjunction, it doesn't literally \emph{connect} two sentences. Quantifiers are like negations in this respect --- each does count as a connective.) If the scope of the quantifier is the entire sentence, then that quantifier is the main connective, as in $\qt{\forall}{x} (Gx \eif Gl)$. If the scope of the quantifier is limited to a subsentence, then that quantifier is not the main connective. For example, in $\qt{\exists}{x} Gx \eif Gl$, the main connective is the conditional; the existential is part of the antecedent.
+Another type of case to watch out for is when quantifiers occur within each other's scope.
+For instance, suppose we have an open sentence $\qt{\forall}{x}(Lxy \eif Px)$ which includes the free variable $y$. 
+Now suppose we conjoin this sentence with $Kxy$, wrapping the result in two further quantifiers to produce the wfs $\qt{\forall}{y}\qt{\exists}{x}(Kxy \eand \qt{\forall}{x}(Lxy \eif Px))$.
+Since $\qt{\forall}{x}$ binds the $x$ variables in the innermost parentheses, those variables are not also bound by the $\qt{\exists}{x}$ quantifier, though the $x$ in $Kxy$ is bound by this latter existential quantifier.
+Nevertheless, the existential quantifier has all of $Kxy \eand \qt{\forall}{x}(Lxy \eif Px)$ as its scope.
 
 
 
 
 
 
-\subsection{QL Sentences}
+\subsection{First-Order Sentences}
 
-Recall that a declarative sentence (or just sentence for short) is an expression that can either be true or false.
-In SL, every wff was a sentence insofar as it made sense to interpret every wff of SL.
-But this is not true for many of the wffs which QL includes.
-For instance, consider the following symbolization key:
+Recall that a declarative sentence (\textit{sentence} for short) is an expression that can either be true or false on an interpretation.
+In $\PL$, every wfs could be assigned a truth-value given an interpretation, thereby justifying the name `wfs of $\PL$'.
+By contrast, not all wffs of $\FOL$ have truth-values given an interpretation alone.
+For instance, consider the following:
 
-\begin{ekey}
-\item[\bf Lxy:] $x$ loves $y$
-\item[\bf b:] Boris
+\begin{ekey}[leftmargin=.6in]
+  \item[$Lxy$:] $x$ loves $y$
+  \item[$b$:] Boris
 \end{ekey}
 
 The expression $Lzz$ is an atomic wff since a two-place predicate is followed by two singular terms, in this case both of which are instances of the variable $z$.
@@ -677,140 +718,144 @@ We may then ask what it would mean for $Lzz$ to be true.
 For instance, perhaps it means that $z$ is self loving in the same way that $Lbb$ means that Boris loves himself.
 However, since $z$ is a variable, it does not name something the way that a constant like $b$ does.
 Whereas there is a clear way to interpret constants, there is no equally determinate way to interpret variables.
-% It is for this reason that we will introduce \textit{assignments} in the following chapter where an assignment fixes the reference of variables since we cannot rely on the interpretation of QL to do so.
+% It is for this reason that we will introduce \textit{assignments} in the following chapter where an assignment fixes the reference of variables since we cannot rely on the interpretation of $\FOL$ to do so.
 
 % In order to make sense of a variable, we need a quantifier to tell us how to interpret that variable.
-In order to be able to say which wffs of QL can be interpreted and which cannot, it will help to provide precise definitions of some of the notions that we made intuitive use of above.
+In order to be able to say which wffs of $\FOL$ can be assigned truth-values and which cannot, it will help to provide precise definitions of some of the notions that we made intuitive use of above.
 To begin with, we may provide the following recursive definition of \define{free variables}:
 
-\begin{enumerate}
-  \item $\alpha$ is free in $\F^n\alpha_1,\ldots,\alpha_n$ if $\alpha=\alpha_i$ for some $1\leq i\leq n$ where $\alpha$ is a variable, $\F^n$ is an $n$-place predicate, and $\alpha_1,\ldots,\alpha_n$ are singular terms.
-  \item If $\metaA$ and $\metaB$ are wffs and $\alpha$ and $\beta$ are variables, then:
-    \begin{enumerate}
-        \item $\alpha$ is free in $\qt{\exists}{\beta}\metaA$ if $\alpha$ is free in $\metaA$ and $\alpha\neq\beta$;
-        \item $\alpha$ is free in $\qt{\forall}{\beta}\metaA$ if $\alpha$ is free in $\metaA$ and $\alpha\neq\beta$;
-        \item $\alpha$ is free in $\enot\metaA$ if $\alpha$ is free in $\metaA$;
-        \item $\alpha$ is free in $(\metaA\eand\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
-        \item $\alpha$ is free in $(\metaA\eor\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
-        \item $\alpha$ is free in $(\metaA\eif\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
-        \item $\alpha$ is free in $(\metaA\eiff\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
-    \end{enumerate}
-  \item Nothing else is a free variable. 
-\end{enumerate}
+\factoidbox{
+  \begin{enumerate}
+    \item $\alpha$ is free in $\F^n\alpha_1,\ldots,\alpha_n$ if $\alpha=\alpha_i$ for some $1\leq i\leq n$ where $\alpha$ is a variable, $\F^n$ is an $n$-place predicate, and $\alpha_1,\ldots,\alpha_n$ are singular terms.
+    \item If $\metaA$ and $\metaB$ are wffs of $\FOL$ and $\alpha$ and $\beta$ are variables, then:
+      \begin{enumerate}
+          \item $\alpha$ is free in $\qt{\exists}{\beta}\metaA$ if $\alpha$ is free in $\metaA$ and $\alpha\neq\beta$;
+          \item $\alpha$ is free in $\qt{\forall}{\beta}\metaA$ if $\alpha$ is free in $\metaA$ and $\alpha\neq\beta$;
+          \item $\alpha$ is free in $\enot\metaA$ if $\alpha$ is free in $\metaA$;
+          \item $\alpha$ is free in $(\metaA\eand\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
+          \item $\alpha$ is free in $(\metaA\eor\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
+          \item $\alpha$ is free in $(\metaA\eif\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
+          \item $\alpha$ is free in $(\metaA\eiff\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
+      \end{enumerate}
+    \item Nothing else is a free variable. 
+  \end{enumerate}
+}
 
-Observe the manner in which the definition above follows the same recursive structure as the composition rules for QL.
+Observe the manner in which the definition above follows the same recursive structure as the composition rules for $\FOL$.
 Given any wffs of the form $\qt{\exists}{\alpha} \metaA$ or $\qt{\forall}{\alpha} \metaA$, we may refer to $\alpha$ as the \define{binding variable} of these quantifiers where every free occurrence of $\alpha$ in $\metaA$ is \define{bound} by the quantifiers $\qt{\exists}{\alpha}$ and $\qt{\forall}{\alpha}$ in $\qt{\exists}{\alpha} \metaA$ and $\qt{\forall}{\alpha} \metaA$, respectively. 
 Accordingly, quantifiers \define{bind} all free occurrences of their binding variable which occur within their scope.
 
-An \define{open sentence} of QL is any wff of QL that includes free variables.
-A \define{sentence} of QL is any wff of QL which does not include any free variables.
-% Letting the \define{degree} of a wff of QL be the number of distinct variables in that wff (excluding multiple instances of the same variable), sentences are of degree zero.
+% An \define{open sentence} of $\FOL$ is any wff of $\FOL$ that includes free variables.
+A wff of $\FOL$ is a \define{well-formed sentence} (wfs) of $\FOL$ if it does not include any free variables, and an \define{open sentence} of $\FOL$ otherwise.
+% Letting the \define{degree} of a wff of $\FOL$ be the number of distinct variables in that wff (excluding multiple instances of the same variable), sentences are of degree zero.
 % We may also observe that 
-Since there are wffs of QL that include free variables, not all wffs are sentences of QL.
+Since there are wffs of $\FOL$ that include free variables, not all wffs are wffs of $\FOL$.
 Consider the examples:
 
-\begin{earg}
-  \item[\ex{sen8}] $\qt{\forall}{x}\qt{\forall}{x}(Ex \eor Dy) \eif \qt{\exists}{z}(Rzx \eif Lzx).$ 
-  \item[\ex{sen9}] $\qt{\forall}{x}(\qt{\forall}{x}(Ex \eor Dy) \eif \qt{\exists}{z}(Rzx \eif Lzx)).$ 
-  \item[\ex{sen10}] $\qt{\exists}{y}\qt{\forall}{x}(\qt{\forall}{x}(Ex \eor Dy) \eif \qt{\exists}{z}(Rzx \eif Lzx)).$ 
+\begin{earg} \label{wfswff}
+  \eitem{$\qt{\forall}{x}\qt{\forall}{x}(Ex \eor Dy) \eif \qt{\exists}{z}(Rzx \eif Lzx).$}
+  \eitem{$\qt{\forall}{x}(\qt{\forall}{x}(Ex \eor Dy) \eif \qt{\exists}{z}(Rzx \eif Lzx)).$}
+  \eitem{$\qt{\exists}{y}\qt{\forall}{x}(\qt{\forall}{x}(Ex \eor Dy) \eif \qt{\exists}{z}(Rzx \eif Lzx)).$}
 \end{earg}
 
-The scope of the first universal quantifier on the left in \ref{sen8} is $\qt{\forall}{x}(Ex \eor Dy)$.
+The scope of the first universal quantifier on the left in \eref{wfswff}{1} is $\qt{\forall}{x}(Ex \eor Dy)$.
 Although $x$ occurs in $\qt{\forall}{x}(Ex \eor Dy)$, it is a bound occurrence. 
 Rather, $y$ is the only free variable in $\qt{\forall}{x}(Ex \eor Dy)$.
 Since $y\neq x$, we may observe that $y$ remains free in $\qt{\forall}{x}\qt{\forall}{x}(Ex \eor Dy)$. 
-Moving to the consequent of \ref{sen8}, both occurrences of $z$ are bound, and neither occurrence of $x$ are bound.
-Accordingly, \ref{sen8} is a wff of QL, but not a sentence of QL.
+Moving to the consequent of \eref{wfswff}{1}, both occurrences of $z$ are bound, and neither occurrence of $x$ are bound.
+Accordingly, \eref{wfswff}{1} is a wff of $\FOL$, but not a sentence of $\FOL$.
 
-We may change the scope of the universal quantifier on the far left in \ref{sen8} by adding an additional pair of parentheses as given by \ref{sen9}.
+We may change the scope of the universal quantifier on the far left in \eref{wfswff}{1} by adding an additional pair of parentheses as given in \eref{wfswff}{2}.
 Now the scope of the left most universal quantifier is $\qt{\forall}{x}(Ex \eor Dy) \eif \qt{\exists}{z}(Rzx \eif Lzx)$.
-Whereas $x$ is bound by the universal quantifier in the antecedent, $x$ is free in the consequent, and so only these latter occurrences of $x$ are bound by the outermost universal quantifier in \ref{sen9}. 
-Nevertheless, $y$ remains free throughout, and so \ref{sen9} is not a sentence of QL though it is a wff of QL.
+Whereas $x$ is bound by the universal quantifier in the antecedent, $x$ is free in the consequent, and so only these latter occurrences of $x$ are bound by the outermost universal quantifier in \eref{wfswff}{2}. 
+Nevertheless, $y$ remains free throughout, and so \eref{wfswff}{2} is not a sentence of $\FOL$ though it is a wff of $\FOL$.
 
-In order to bind the free occurrence of $y$ in \ref{sen9}, we may add an additional quantifier whose binding variable is $y$ as given by \ref{sen10}.
-Since \ref{sen10} does not include any free variables, \ref{sen10} is a sentence of QL and so amenable to interpretation.
-
-
+In order to bind the free occurrence of $y$ in \eref{wfswff}{2}, we may add a quantifier whose binding variable is $y$ as given by \eref{wfswff}{3}.
+Since \eref{wfswff}{3} does not include any free variables, \eref{wfswff}{3} is a sentence of $\FOL$ and so may be assigned a truth-value given an appropriate interpretation of $\FOL$.
 
 
 
 
 
-\section{Regimentation in QL}
 
-We now have the basic pieces of QL.
+\section{First-Order Regimentation}
+
+We now have the basic elements of $\FOL$ in place.
 Translating more complicated sentences will only be a matter of knowing the right way to combine predicates, constants, quantifiers, variables, and sentential connectives.
-Consider these sentences:
+Consider these sentences and symbolization key:
 
-\begin{earg}
-\item[\ex{quan1}] Every coin in my pocket is a loonie.
-\item[\ex{quan2}] Some coin on the table is a dime.
-\item[\ex{quan3}] Not all the coins on the table are loonies.
-\item[\ex{quan4}] None of the coins in my pocket are dimes.
+\begin{earg} \label{loonie}
+  \eitem{Every coin in my pocket is a loonie.}
+  \eitem{Some coin on the table is a dime.}
+  \eitem{Not all the coins on the table are loonies.}
+  \eitem{None of the coins in my pocket are dimes.}
 \end{earg}
 
-In order to regiment these sentences, we may provide the following symbolization key:
+% In order to regiment these sentences, we may provide the following symbolization key:
 
 \begin{ekey}
-\item[Cx:] $x$ is a coin.
-\item[Px:] $x$ is in my pocket.
-\item[Tx:] $x$ is on the table.
-\item[Lx:] $x$ is a loonie.
-\item[Dx:] $x$ is a dime.
+  \begin{multicols}{2}
+    \item[$Cx$:] $x$ is a coin.
+    \item[$Px$:] $x$ is in my pocket.
+    \item[$Tx$:] $x$ is on the table.
+    \item[$Lx$:] $x$ is a loonie.
+    \item[$Dx$:] $x$ is a dime.
+    \item[] ~
+  \end{multicols}
 \end{ekey}
 
-Sentence \ref{quan1} is most naturally translated with a universal quantifier.
+Sentence \eref{loonie}{1} is most naturally translated with a universal quantifier.
 The universal quantifier says something about everything, not just about coins, or the coins in my pocket.
-Accordingly, we may take \ref{quan1} to say that, for anything, \textit{if} it is a coin and in my pocket, \textit{then} it is a loonie.
+Accordingly, we may take \eref{loonie}{1} to say that, for anything, \textit{if} it is a coin and in my pocket, \textit{then} it is a loonie.
 So we can translate it as $\qt{\forall}{x}((Cx \eand Px) \eif Lx)$.
 
-Since sentence \ref{quan1} is about coins that are both in my pocket \emph{and} that are loonies, it might be tempting to translate it using a conjunction.
+Since sentence \eref{loonie}{1} is about coins that are both in my pocket \emph{and} that are loonies, it might be tempting to translate it using a conjunction.
 However, the sentence $\qt{\forall}{x}((Cx \eand Px) \eand Lx)$ would mean that everything is a coin in my pocket and a loonie.
-It would also be wrong to regiment sentence \ref{quan1} as $\qt{\forall}{x}(Cx \eif (Px \eand Lx))$ since this say that everything that is a coin is in my pocket and a loonie. 
+It would also be wrong to regiment sentence \eref{loonie}{1} as $\qt{\forall}{x}(Cx \eif (Px \eand Lx))$ since this say that everything that is a coin is in my pocket and a loonie. 
 This is a very strong claim, and is unlikely to be true since there are a lot of coins out there which are neither in my pocket or loonies.
 
-These examples bring out the idea of \define{restricting} a universal quantifier.
+These examples bring out the idea of \textit{restricting} a universal quantifier.
 Since saying something about everything in an unrestricted way is only very rarely something that we intend to do, universal claims almost always take the following form:
 
-\begin{earg}
-\item[\ex{quan5}] $\forall\alpha(\metaA(\alpha) \eif \metaB).$ 
+\begin{earg} \label{restrict}
+\item $\forall\alpha(\metaA(\alpha) \eif \metaB).$ 
 \end{earg}
 
-Here $\metaA(\alpha)$ is a wff of QL in which $\alpha$ occurs as a free variable, and so $\alpha$ as it occurs in $\metaA(\alpha)$ is bound by the quantifier $\forall\alpha$.
-Accordingly, the sentence \ref{quan5} says that $\metaB$ holds of everything that satisfies the condition $\metaA$.
+Here $\metaA(\alpha)$ is a wff of $\FOL$ in which $\alpha$ occurs as a free variable, and so $\alpha$ as it occurs in $\metaA(\alpha)$ is bound by the quantifier $\forall\alpha$.
+Accordingly, the sentence \eref{restrict}{1} says that $\metaB$ holds of everything that satisfies the condition $\metaA$.
 Although we have not required $\metaB$ to also include $\alpha$ as a free variable, it is typical that $\metaB$ would include free occurrences of $\alpha$.
 For instance, in the case above, we compared taking $Cx \eand Px$ to restrict the quantifier with taking just $Cx$ to restrict the quantifier. 
 Whereas the former allows us to make universal claims about just the coins in my pocket, the latter allows us to make claims about all coins.
 
-Sentence \ref{quan2} is most naturally translated with an existential quantifier.
+Sentence \eref{loonie}{2} is most naturally translated with an existential quantifier.
 It says that there is some coin which is both on the table and which is a dime.
 So we can translate it as $\qt{\exists}{x}(Cx \eand (Tx \eand Dx))$.
 Notice that we did not use a conditional to restrict the existential quantifier in the same way as we did with the universal quantifier.
 Instead, we used conjunction to say that there is at least one thing which is a coin and moreover it is on the table and is a dime.
-Using conjunction with an existential quantifier is common pattern.
+Using conjunction with an existential quantifier is a common pattern.
 
 What would it mean to write $\qt{\exists}{x}(Cx \eif (Tx \eand Dx))$?
 This says that there is something which is a dime on the table \textit{if it is a coin}.
-Suppose that there are no coins that are dimes on the table, but there is at least one thing which is not a coin, say the planet Jupiter which we will symbolize by the constant $j$.
+Suppose that there are no coins that are dimes on the table, but there is at least one thing which is not a coin, say the planet Jupiter which we will regiment by the constant $j$.
 Since the planet Jupiter is not a coin, it follows that $Cj \eif (Tj \eand Dj)$ is true since the antecedent $Cj$ is false. 
 As a result, $\qt{\exists}{x}(Cx \eif (Tx \eand Dx))$ is true even though we have assumed that there are no coins that are dimes on the table.
 More generally, whenever there is something that is not a coin, $\qt{\exists}{x}(Cx \eif (Tx \eand Dx))$ will be true, making this an extremely weak claim.
 Although the conditional is often used to restrict a universal quantifier, a conditional within the scope of an existential quantifier results in extremely week claims which we almost never intend to assert.
-Accordingly, it's a good rule of thumb that you shouldn't be putting conditionals in the scope of existential quantifiers.
+Thus it's a good rule of thumb that you should avoid putting conditionals in the scope of existential quantifiers.
 
-Sentence \ref{quan3} can be paraphrased as, `It is not the case that every coin on the table is a loonie'.
+Sentence \eref{loonie}{3} can be paraphrased as, `It is not the case that every coin on the table is a loonie'.
 So we can translate it as $\enot \qt{\forall}{x}((Cx \eand Tx) \eif Lx)$.
-Alternatively, we paraphrase sentence \ref{quan3} as, `Some coin on the table is not a loonie'.
-We would then translate sentence \ref{quan3} as $\qt{\exists}{x}((Cx \eand Tx) \eand \enot Lx)$.
-These two translations are logically equivalent.
+Alternatively, we paraphrase sentence \eref{loonie}{3} as, `Some coin on the table is not a loonie'.
+We would then translate sentence \eref{loonie}{3} as $\qt{\exists}{x}((Cx \eand Tx) \eand \enot Lx)$.
+Despite their superficial differences, these two regimentations are logically equivalent.
 More generally, $\enot\qt{\forall}{x}\metaA{}$ and $\qt{\exists}{x}\enot\metaA{}$ are logically equivalent, as are $\enot(\metaA{}\eif\metaB{})$ and $\metaA{}\eand\enot\metaB{}$.
-This is something that we will return to in the following chapter.
+This is something that we will prove to in the following chapter.
 % Whereas we already have resources to establish the latter equivalence, the next chapter will allow us to also prove the former equivalence.
 
-Sentence \ref{quan4} can be paraphrased as, `It is not the case that there is a coin in my pocket that is a dime'.
+Sentence \eref{loonie}{4} can be paraphrased as, `It is not the case that there is a coin in my pocket that is a dime'.
 This can be regimented by $\enot\qt{\exists}{x}(Cx \eand (Px \eand Dx))$.
 It might also be paraphrased as `Every coin in my pocket is not a dime' which we may regiment by $\qt{\forall}{x}((Cx \eand Px) \eif \enot Dx)$.
-These two translations are logically equivalent, and so both correctly regiment sentence \ref{quan4}.
+These two translations are logically equivalent, and so equally regiment sentence \eref{loonie}{4}.
 
 
 
@@ -819,46 +864,45 @@ These two translations are logically equivalent, and so both correctly regiment 
 
 \section{Paraphrasing Pronouns}
 
-When regimenting English sentences in QL, it is often helpful to paraphrase the sentence in English in a manner that exposes the logical features of that sentence.
+When regimenting English sentences in $\FOL$, it is often helpful to paraphrase the sentence in English in a manner that exposes the logical features of that sentence.
 We have already provided a number of examples of this above.
 When paraphrasing, it is important that you do not accidentally make changes to the logical structure of the sentence since mistakes at this stage will end up resulting in the wrong regimentation.
 % Sometimes it will help to move through multiple stages paraphrasing a single sentence.
-% Each successive paraphrase should move from the original sentence closer to something that you can directly regiment in QL.
+% Each successive paraphrase should move from the original sentence closer to something that you can directly regiment in $\FOL$.
 
-Paraphrasing often requires departing from the superficial structure that the sentence has.
-For instance, consider the following symbolization key:
+Paraphrasing often requires departing from the superficial structure of the target sentence.
+For instance, consider the following examples and symbolization key:
+
+\begin{earg} \label{pronoun}
+  \eitem{If MIT is in session, then it is full of activity.}
+  \eitem{If some institute is in session, then it is full of activity.}
+\end{earg}
 
 \begin{ekey}
-  \item[Sx:] $x$ is in session.
-  \item[Ax:] $x$ is full of activity.
-  \item[m:] MIT
+  \item[$Sx$:] $x$ is in session.
+  \item[$Ax$:] $x$ is full of activity.
+  \item[$m$:] MIT
 \end{ekey}
 
-Now consider these sentences:
+Sentence \eref{pronoun}{1} and sentence \eref{pronoun}{2} have the same words in the consequent, but they cannot be regimented in the same way.
+This is because the `it' in sentence \eref{pronoun}{1} is not bound by a quantifier but rather indicates the same subject while avoiding repetition.
+By contrast, both occurrences of `it' in sentence \eref{pronoun}{2} are bound by the outermost quantifier.
+Whereas there is nothing to change about sentence \eref{pronoun}{2}, we may paraphrase sentence \eref{pronoun}{1} as follows:
 
-\begin{earg}
-  \item[\ex{pronoun1}] If MIT is in session, then it is full of activity.
-  \item[\ex{pronoun2}] If some institute is in session, then it is full of activity.
+\begin{earg} \label{propara}
+  \eitem{If MIT is in session, then MIT is full of activity.}
 \end{earg}
 
-Sentence \ref{pronoun1} and sentence \ref{pronoun2} have the same words in the consequent, but they cannot be regimented in the same way.
-This is because the `it' in sentence \ref{pronoun1} is not bound by a quantifier but rather indicates the same subject while avoiding repetition.
-By contrast, both occurrences of `it' in sentence \ref{pronoun2} are bound by the outermost quantifier.
-Whereas there is nothing to change about sentence \ref{pronoun2}, we may paraphrase sentence \ref{pronoun1} as follows:
+Compare the following regimentations of the sentences \eref{pronoun}{1}:
 
-\begin{earg}
-  \item[\ex{pronoun3}] If MIT is in session, then MIT is full of activity.
+\begin{earg} \label{proreg}
+  \eitem{$Sm \eif Ax$.}
+  \eitem{$Sm \eif Am$.}
 \end{earg}
 
-Compare the following regimentations of sentences \ref{pronoun1} and \ref{pronoun3} respectively:
+Although it might be tempting to try to regiment the `it' in the original sentence \eref{pronoun}{1} by a variable, this would result in the open sentence \eref{proreg}{1} in place of the wfs \eref{proreg}{2}.
+Since the original sentence says something entirely about MIT and nothing about some yet to be bound variable the way `It is red' does, sentence \eref{proreg}{2} provides a better regimentation than \eref{proreg}{1} does.
 
-\begin{earg}
-  \item[\ex{pronoun4}] $Sm \eif Am$.
-  \item[\ex{pronoun5}] $Sm \eif Ax$.
-\end{earg}
-
-Although it might be tempting to try to regiment the `it' in the original sentence \ref{pronoun1} by a variable, this would result in the open sentence \ref{pronoun5} in place of the sentence \ref{pronoun4}.
-Since the original sentence says something entirely about MIT and nothing about some yet to be bound variable the way `It is red' does, sentence \ref{pronoun4} provides a better regimentation than \ref{pronoun5} does.
 
 
 
@@ -867,128 +911,135 @@ Since the original sentence says something entirely about MIT and nothing about 
 
 Suppose we want to regiment this sentence:
 
-\begin{earg}
-  \item[\ex{amb1}] Adina is a skilled surgeon.
+\begin{earg} \label{amb1}
+  \eitem{Jeni is a skilled surgeon.}
 \end{earg}
 
 Consider the following symbolization key:
 
 \begin{ekey}
-  \item[Kx:] $x$ is skilled
-  \item[Rx:] $x$ is a surgeon
-  \item[a:] Adina
+  \item[$Kx$:] $x$ is skilled
+  \item[$Rx$:] $x$ is a surgeon
+  \item[$j$:] Jeni
 \end{ekey}
 
 This yields the following:
 
-\begin{earg}
-  \item[\ex{amb2}] $Ka \eand Ra$.
+\begin{earg} \label{amb2}
+  \eitem{$Kj \eand Rj$.}
 \end{earg}
 
-In English, this reads: Adina is skilled and Adina is a surgeon.
+In English, this reads: Jeni is skilled and Jeni is a surgeon.
 Here one may object that being skilled and also being a surgeon is not the same thing as being a skilled surgeon.
 For instance, perhaps it is possible to be both skilled and a surgeon without being a skilled surgeon.
 Accordingly, we could have specified the following predicate instead:
 
 \begin{ekey}
-  \item[Sx:] $x$ is a skilled surgeon
-  \item[a:] Adina
+  \item[$Sx$:] $x$ is a skilled surgeon
+  \item[$j$:] Jeni
 \end{ekey}
 
 We may then provide the following regimentation:
 
-\begin{earg}
-  \item[\ex{amb3}] $Sa$.
+\begin{earg} \label{amb3}
+  \eitem{$Sa$.}
 \end{earg}
 
-Considering sentence \ref{amb1} on its own, it may be unclear whether to go with regimentation \ref{amb2} or \ref{amb3}.
+Considering sentence \eref{amb1}{1} on its own, it may be unclear whether to go with regimentation \eref{amb2}{1} or \eref{amb3}{1}.
 However, in the context of an argument, there may be good reason to go one way rather than the other.
 For instance, suppose that we want to regiment this argument:
 
-\begin{earg}
-  \item[] The hospital will only hire a skilled surgeon. 
-  \item[] Adina is a skilled.
-  \item[] Billy is a surgeon, but is not skilled.
-  \item[\therefore] Therefore, the hospital will hire Adina and not Billy.
+\begin{earg} \label{hospital}
+  \eitem{The hospital will only hire a skilled surgeon. }
+  \eitem{Adina is skilled but not a surgeon.}
+  \eitem{Billy is a surgeon, but not skilled.}
+  \uitem{Jeni is a skilled surgeon.}
+  \eitem{Therefore, the hospital will hire Jeni and not Billy or Adina.}
 \end{earg}
 
 Here we need to distinguish being a \textit{skilled surgeon} from merely being a \textit{surgeon}.
 Consider this symbolization key:
 
 \begin{ekey}
-  \item[Gx:] $x$ is greedy
-  \item[Hx:] The hospital will hire $x$
-  \item[Kx:] $x$ is skilled
-  \item[Rx:] $x$ is a surgeon
-  \item[a:] Adina
-  \item[b:] Billy
+  \begin{multicols}{2}
+    \item[$Hx$:] The hospital hires $x$.
+    \item[$Kx$:] $x$ is skilled.
+    \item[$Rx$:] $x$ is a surgeon.
+    \item[$a$:] Adina.
+    \item[$b$:] Billy.
+    \item[$j$:] Jeni.
+  \end{multicols}
 \end{ekey}
 
 Now the argument can be regimented this way:
 
-\begin{earg}
-\label{surgeon2}
-  \item[] $\qt{\forall}{x}(Hx \eif (Kx \eand Rx))$
-  \item[] $Ka$
-  \item[] $Rb \eand \enot Kb$
-  \item[\therefore] $\enot Hb \eand (Ha \eif Ra)$
+\begin{earg} \label{surgeon2}
+  \eitem{$\qt{\forall}{x}(Hx \eif (Kx \eand Rx))$}
+  \eitem{$Ka \eand \enot Ka$}
+  \eitem{$Rb \eand \enot Kb$}
+  \uitem{$Kj \eand Rj$}
+  \eitem{$Hj \eand \enot (Hb \eor Ha)$}
 \end{earg}
 
-Next suppose that we want to translate this argument:
+Although we have not yet provided a semantic nor theory of logical consequence for $\FOL$, it is worth considering whether the formal argument in $\FOL$ is valid. 
+Whereas the argument in English might have seemed somewhat compelling--- at least it is the kind of argument that it is common to hear--- its formalization may be used to reveal its invalidity.
+The next chapter will provide resources to prove that this is so by providing a counterexample.
 
-\begin{earg}
-\label{surgeon3}
-  \item[] Carol is a skilled surgeon and a tennis player.
-  \item[\therefore] Therefore, Carol is a skilled tennis player.
+Compare the previous argument to the following:
+
+\begin{earg} \label{surgeon3}
+  \uitem{Carol is a skilled surgeon and a tennis player.}
+  \eitem{Therefore, Carol is a skilled tennis player.}
 \end{earg}
 
-Suppose that we were to use the symbolization key given above along with the following additions:
+We may regiment this argument as follows:
+
+\begin{multicols}{2}
+
+\begin{earg}
+  \uitem{$(Rc \eand Kc) \eand Tc$}
+  \eitem{$Tc \eand Kc$}
+\end{earg}
 
 \begin{ekey}
-  \item[Tx:] $x$ is a tennis player
-  \item[c:] Carol
+  \item[$Tx$:] $x$ is a tennis player
+  \item[$c$:] Carol
 \end{ekey}
 
-Then the argument becomes:
+\end{multicols}
 
-\begin{earg}
-\item[] $(Rc \eand Kc) \eand Tc$
-\item[\therefore] $Tc \eand Kc$
-\end{earg}
-
-This argument in QL is valid, but the original argument in English is not.
+This argument is valid in $\FOL$, but the original argument in English is not.
 Something has gone wrong with our regimentation.
 The problem is that there is a difference between being \emph{skilled as a surgeon} and \emph{skilled as a tennis player}.
 Regimenting this argument correctly requires two separate predicates, one for each type of skill.
 Thus we may add the following:
 
 \begin{ekey}
-  \item[K$_1$x:] $x$ is skilled as a tennis player
-  \item[K$_2$x:] $x$ is skilled as a surgeon
+  \item[$K_1x$:] $x$ is skilled as a tennis player
+  \item[$K_2x$:] $x$ is skilled as a surgeon
 \end{ekey}
 
 We may now regiment the argument in this way:
 
-\begin{earg}
-\label{surgeon3correct}
-\item[] $(K_2c \eand Rc) \eand Tc$
-\item[\therefore] $K_1c \eand Tc$
+\begin{earg} \label{surgeon3correct}
+  \uitem{$(K_2c \eand Rc) \eand Tc$}
+  \eitem{$K_1c \eand Tc$}
 \end{earg}
 
-Like the English argument it regiments, this QL argument is invalid. 
+Like the English argument it regiments, this $\FOL$ argument is invalid. 
 % Notice that there is no logical connection between $K_2c$ and $Rc$.
-% As symbols of QL, they might be any one-place predicates.
+% As symbols of $\FOL$, they might be any one-place predicates.
 % In English there is a connection between being a \textit{surgeon} and being a \textit{skilled surgeon} since every skilled surgeon is a surgeon.
-% In order to capture this connection, we symbolize `Carol is a skilled surgeon' as $Rc \eand K_1c$. This means: `Carol is a surgeon and is skilled as a surgeon.'
+% In order to capture this connection, we regiment `Carol is a skilled surgeon' as $Rc \eand K_1c$. This means: `Carol is a surgeon and is skilled as a surgeon.'
 
 Similar problems can arise with predicates like `is good', `is big', `is tall', etc.
-Just as skilled surgeons and skilled tennis players have different skills, big dogs, big mice, and big problems are all big in different ways.
+Just as skilled surgeons and skilled tennis players have different skills, it's obvious that big dogs, big mice, and big problems are all big in different ways.
 Must we always distinguish between different ways of being skilled, good, big, or tall? 
-No.
-As the argument about Billy shows, sometimes we only need to talk about one kind of skill.
+Not necessarily.
+% There may well be arguments where only one kind of skill is in question.
 If you are translating an argument that is just about dogs, it is fine to use the predicate `$x$ is big'.
 However, if the argument is also about mice, it might be important to let use the predicate `$x$ is big for a dog' instead.
-In general, we try to introduce as few predicates as possible while nevertheless capturing the intended meaning of the sentence or argument in question.
+In general, we try to introduce as few predicates as possible while nevertheless capturing the intended meaning of the sentence or argument in question, as well as the intuitive validity or invalidity of the arguments in English that we might consider.
 
 
 
@@ -997,81 +1048,87 @@ In general, we try to introduce as few predicates as possible while nevertheless
 
 \section{Multiple Quantifiers}
 
-Consider this following symbolization key and the sentences that follow it:
+Consider the following sentences and symbolization key:
 
+\begin{multicols}{2}
+  
 \begin{ekey}
-\item{Dx:} $x$ is a dog.
-\item{Fxy:} $x$ is a friend of $y$.
-\item{Oxy:} $x$ owns $y$.
-\item{f:} Fifi
-\item{g:} Gerald
+  \item[$Dt$:] $x$ is a dog.
+  \item[$Fxy$:] $x$ is a friend of $y$.
+  \item[$Oxy$:] $x$ owns $y$.
+  \item[$f$:] Fifi
+  \item[$g$:] Gerald
 \end{ekey}
 
-\begin{earg}
-\item[\ex{dog1}] Fifi is a dog.
-\item[\ex{dog2}] Gerald is a dog owner.
-\item[\ex{dog3}] Someone is a dog owner.
-\item[\ex{dog4}] All of Gerald's friends are dog owners.
-\item[\ex{dog5}] Every dog owner is the friend of a dog owner.
+\begin{earg} \label{dog}
+  \eitem{Fifi is a dog.}
+  \eitem{Gerald is a dog owner.}
+  \eitem{Someone is a dog owner.}
+  \eitem{All of Gerald's friends are dog owners.}
+  \eitem{Dog owners are friends with dog owners.}
 \end{earg}
 
-Sentence \ref{dog1} is easy: $Df$.
+\end{multicols}
 
-Sentence \ref{dog2} can be paraphrased as, `There is a dog that Gerald owns.
-This can be translated as $\qt{\exists}{x}(Dx \eand Ogx)$.
+Sentence \eref{dog}{1} is easy: $Df$.
 
-Sentence \ref{dog3} can be paraphrased as, `There is someone such that that person is a dog owner.'
-The subsentence `that person is a dog owner' is just like sentence \ref{dog2}, except that it is about \textit{that person} rather than being about Gerald.
-We can save ourselves some writing by paraphrasing \ref{dog3} as `There is some $y$ such that $y$ is a dog owner'.
-So we can translate sentence \ref{dog3} as $\qt{\exists}{y} \qt{\exists}{x}(Dx \eand Oyx)$, replacing `is a dog owner' with our previous regimentation. 
+Sentence \eref{dog}{2} can be paraphrased as, `There is a dog that Gerald owns' which can be translated as $\qt{\exists}{x}(Dx \eand Ogx)$.
+Also no so difficult.
+
+Sentence \eref{dog}{3} can be paraphrased as, `There is something such that it is a dog owner'.
+The subsentence `it is a dog owner' is just like sentence \eref{dog}{2}, except that it is about \textit{it} rather than being about Gerald.
+% We can save ourselves some writing by paraphrasing \eref{dog}{3} as `There is some $y$ such that $y$ is a dog owner'.
+We can then regiment the sentence \eref{dog}{3} as $\qt{\exists}{y} \qt{\exists}{x}(Dx \eand Oyx)$, replacing `is a dog owner' with our previous regimentation. 
 %(Although we could swap the $x$s and $y$s, it is important that we use two different variables here.)
 
-Sentence \ref{dog4} can be paraphrased as, `Every friend of Gerald is a dog owner.
-We can expand this as, `Everything is such that, if it is a friend of Gerald, then it is a dog owner'.
+Sentence \eref{dog}{4} can be paraphrased as, `Every friend of Gerald is a dog owner'.
+We can expand this to: `Everything is such that, if it is a friend of Gerald, then it is a dog owner'.
 Translating part of this sentence, we get $\qt{\forall}{x}(Fxg \eif\mbox{$x$ is a dog owner})$.
-Again, it is important to recognize that `$x$ is a dog owner' is structurally just like sentence \ref{dog2}.
+Again, it is important to recognize that `$x$ is a dog owner' is structurally just like sentence \eref{dog}{2}.
 Since we already have a quantifier binding $x$, we will need a different variable for the existential quantifier.
 Any other variable will do.
-Using $z$, sentence \ref{dog4} can be translated as $\qt{\forall}{x}(Fxg \eif\qt{\exists}{z}(Dz \eand Oxz))$.
+Using $z$, sentence \eref{dog}{4} can be translated as $\qt{\forall}{x}(Fxg \eif\qt{\exists}{z}(Dz \eand Oxz))$.
 
-Sentence \ref{dog5} can be paraphrased as `For any $x$ that is a dog owner, there is a dog owner who is $x$'s friend'.
+Sentence \eref{dog}{5} can be paraphrased as `For any $x$ that is a dog owner, there is a dog owner who is a friend of $x$'.
 Partially translated, this becomes: 
   $$\qt{\forall}{x}\bigl[\mbox{$x$ is a dog owner}\eif\qt{\exists}{y}(\mbox{$y$ is a dog owner}\eand Fxy)\bigr].$$
-Completing the translation, sentence \ref{dog5} becomes: 
+Completing the translation, sentence \eref{dog}{5} becomes: 
   $$\qt{\forall}{x}\bigl[\qt{\exists}{z}(Dz \eand Oxz)\eif\qt{\exists}{y}\bigl(\qt{\exists}{z}(Dz \eand Oyz)\eand Fxy\bigr)\bigr].$$
 
-Regimenting English sentences in QL will take some practice, and often there will be more than one way to go.
+Regimenting English sentences in $\FOL$ will take some practice, and often there will be more than one way to go.
 When you come up with a regimentation, it is often worth considering if there are any other regimentations that you could have provided.
 Often there are, and they are not always logically equivalent.
 Sometimes what this means is that the original claim is ambiguous.
-Other times, some regimentations will be more natural than that others.
+Other times, some regimentations will be more natural than others.
 
 % \iffalse
 
-Consider the following symbolization key and sentences:
-\begin{ekey}
-\item[Lxy:] $x$ likes $y$.
-\item[i:] Imre.
-\item[k:] Karl.
-\end{ekey}
-\begin{earg}
-\item[\ex{likes1}]Imre likes everyone that Karl likes.
-\item[\ex{likes2}]There is someone who likes everyone who likes everyone that he likes.
+Consider the following sentences and symbolization key:
+
+\begin{earg} \label{likes}
+  \eitem{Imre likes everyone that Karl likes.}
+  \eitem{There is someone who likes everyone who likes everyone that he likes.}
 \end{earg}
 
-Sentence \ref{likes1} can be partially translated as $\qt{\forall}{x}(\mbox{Karl likes $x$}\eif\mbox{Imre likes $x$})$.
-This becomes $\qt{\forall}{x}(Lkx\eif Lix)$.
+\begin{ekey}
+  \eitem{$x$ likes $y$.}
+  \eitem{Imre.}
+  \eitem{Karl.}
+\end{ekey}
 
-Sentence \ref{likes2} is complex.
-There is little hope of writing down the whole translation immediately, but we can proceed in stages.
-An initial, partial translation might look like this: $$\qt{\exists}{x}\ \mbox{everyone who likes everyone that $x$ likes is liked by $x$}$$
+Sentence \eref{likes}{1} can be partially regimented as: $\qt{\forall}{x}(\mbox{Karl likes $x$}\eif\mbox{Imre likes $x$})$ which becomes $\qt{\forall}{x}(Lkx\eif Lix)$.
+But we might have been able to skip to this final regimentation.
+
+Sentence \eref{likes}{2} is much more complex.
+There is little hope of writing down the whole regimentation at once, so we will proceed in stages.
+An initial regimentation might look like:
+  $$\qt{\exists}{x}\ \mbox{everyone who likes everyone that $x$ likes is liked by $x$}$$
 The part that remains in English is a universal sentence, so we translate further: $$\qt{\exists}{x}\qt{\forall}{y}(\mbox{$y$ likes everyone that $x$ likes}\eif\mbox{$x$ likes $y$}).$$
-The antecedent of the conditional is structurally just like sentence \ref{likes1}, with $y$ and $x$ in place of Imre and Karl.
-So sentence \ref{likes2} can be completely translated in this way $$\qt{\exists}{x}\qt{\forall}{y}\bigl[\qt{\forall}{z}(Lxz \eif Lyz) \eif Lxy\bigr]$$
-
+The antecedent of the conditional is structurally just like sentence \eref{likes}{1}, with $y$ and $x$ in place of Imre and Karl.
+So sentence \eref{likes}{2} can be completely regimented as follows: $$\qt{\exists}{x}\qt{\forall}{y}\bigl[\qt{\forall}{z}(Lxz \eif Lyz) \eif Lxy\bigr]$$
 When symbolizing sentences with multiple quantifiers, it is best to proceed by small steps.
-Paraphrase the English sentence so that the logical structure is readily regimented in QL.
-Then translate piecemeal, replacing the daunting task of translating a long sentence with the simpler task of translating shorter formulae.
+Paraphrase the English sentence so that the logical structure is readily regimented in $\FOL$.
+Then regiment piecemeal, replacing the daunting task of regimenting a long or dense sentence with many simple tasks of regimenting shorter sentences.
 
 
 
@@ -1120,8 +1177,8 @@ If you find yourself offering, as a translation of some English sentence, an exi
 \practiceproblems
 
 \problempart
-\label{pr.QLbojackall}
-Using the symbolization key given, translate each English-language sentence into QL. Hint: all of these sentences are well-translated as universals governing conditionals.
+\label{pr.$\FOL$bojackall}
+Using the symbolization key given, translate each English-language sentence into $\FOL$. Hint: all of these sentences are well-translated as universals governing conditionals.
 \begin{ekey}
 \item[UD:] all humans and animals in the world of \emph{Bojack Horseman}
 \item[Dx:] $x$ is a dog.
@@ -1150,8 +1207,8 @@ Using the symbolization key given, translate each English-language sentence into
 
 \solutions
 \problempart
-\label{pr.QLbojacksome}
-Using the same symbolization key, translate each English-language sentence into QL. Hint: all of these sentences are well-translated as existentials governing conjunctions.
+\label{pr.$\FOL$bojacksome}
+Using the same symbolization key, translate each English-language sentence into $\FOL$. Hint: all of these sentences are well-translated as existentials governing conjunctions.
 \begin{earg}
 \item Mr.\ Peanutbutter lives with a human.
 \item Dianne lives with a dog who worked on a movie with Bojack.
@@ -1162,8 +1219,8 @@ Using the same symbolization key, translate each English-language sentence into 
 \end{earg}
 
 \problempart
-\label{pr.QLbojackother}
-Using the same symbolization key, translate each English-language sentence into QL. Hint: these should have different forms than the cases above.
+\label{pr.$\FOL$bojackother}
+Using the same symbolization key, translate each English-language sentence into $\FOL$. Hint: these should have different forms than the cases above.
 \begin{earg}
 \item If Mr.\ Peanutbutter is a movie star, then all dogs are movie stars.
 \item A dog who lives with Dianne and Princess Caroline represents a horse.
@@ -1178,8 +1235,8 @@ Using the same symbolization key, translate each English-language sentence into 
 
 \solutions
 \problempart
-\label{pr.QLalligators}
-Using the symbolization key given, translate each English-language sentence into QL.
+\label{pr.$\FOL$alligators}
+Using the symbolization key given, translate each English-language sentence into $\FOL$.
 \begin{ekey}
 \item[UD:] all animals
 \item[Ax:] $x$ is an alligator.
@@ -1213,7 +1270,7 @@ Using the symbolization key given, translate each English-language sentence into
 
 \problempart
 \label{pr.BarbaraEtc}
-These are syllogistic figures identified by Aristotle and his successors, along with their medieval names. Translate each argument into QL.
+These are syllogistic figures identified by Aristotle and his successors, along with their medieval names. Translate each argument into $\FOL$.
 \begin{description}
 \item[Barbara] All $B$s are $C$s. All $A$s are $B$s.
 	\therefore\  All $A$s are $C$s.
@@ -1251,8 +1308,8 @@ These are syllogistic figures identified by Aristotle and his successors, along 
 
 
 \solutions
-\problempart Using the symbolization key given, translate each English-language sentence into QL.
-\label{pr.QLdogtrans}
+\problempart Using the symbolization key given, translate each English-language sentence into $\FOL$.
+\label{pr.$\FOL$dogtrans}
 \begin{ekey}
 \item[UD:] all animals
 \item[Dx:] $x$ is a dog.
@@ -1282,8 +1339,8 @@ These are syllogistic figures identified by Aristotle and his successors, along 
 
 
 \problempart
-\label{pr.QLarguments}
-For each argument, write a symbolization key and translate the argument into QL.
+\label{pr.$\FOL$arguments}
+For each argument, write a symbolization key and translate the argument into $\FOL$.
 \begin{earg}
 \item Nothing on my desk escapes my attention. There is a computer on my desk. As such, there is a computer that does not escape my attention.
 \item All my dreams are black and white. Old TV shows are in black and white. Therefore, some of my dreams are old TV shows.
@@ -1295,8 +1352,8 @@ For each argument, write a symbolization key and translate the argument into QL.
 
 \solutions
 \problempart
-\label{pr.QLcandies}
-Using the symbolization key given, translate each English-language sentence into QL.
+\label{pr.$\FOL$candies}
+Using the symbolization key given, translate each English-language sentence into $\FOL$.
 \begin{ekey}
 \item[UD:] candies
 \item[Cx:] $x$ has chocolate in it.
@@ -1320,8 +1377,8 @@ Using the symbolization key given, translate each English-language sentence into
 
 \solutions
 \problempart
-\label{pr.QLpotluck}
-Using the symbolization key given, translate each English-language sentence into QL.
+\label{pr.$\FOL$potluck}
+Using the symbolization key given, translate each English-language sentence into $\FOL$.
 \begin{ekey}
 \item[UD:] people and dishes at a potluck
 \item[Rx:] $x$ has run out.
@@ -1348,8 +1405,8 @@ Using the symbolization key given, translate each English-language sentence into
 
 \solutions
 \problempart
-\label{pr.QLballet}
-Using the symbolization key given, translate each English-language sentence into QL.
+\label{pr.$\FOL$ballet}
+Using the symbolization key given, translate each English-language sentence into $\FOL$.
 \begin{ekey}
 \item[UD:] people
 \item[Dx:] $x$ dances ballet.
@@ -1377,7 +1434,7 @@ Using the symbolization key given, translate each English-language sentence into
 \end{earg}
 
 \problempart
-\label{pr.freeQL}
+\label{pr.free$\FOL$}
 Identify which variables are bound and which are free.
 \begin{earg}
 \item $\qt{\exists}{x} Lxy \eand \qt{\forall}{y} Lyx$
@@ -1389,7 +1446,7 @@ Identify which variables are bound and which are free.
 
 \solutions
 \problempart
-\label{pr.subinstanceQL}
+\label{pr.subinstance$\FOL$}
 \begin{earg}
 \item Identify which of the following are substitution instances of $\qt{\forall}{x} Rcx$: $Rac$, $Rca$, $Raa$, $Rcb$, $Rbc$, $Rcc$, $Rcd$, $Rcx$
 \item Identify which of the following are substitution instances of $\qt{\exists}{x}\qt{\forall}{y} Lxy$:

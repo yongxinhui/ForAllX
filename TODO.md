@@ -8,7 +8,7 @@
     - [x] revise
     - [x] add point about only two propositions: the true and the false
     - [x] polish
-  - [:] chapter 1
+  - [x] chapter 1
     - [x] revise
     - [x] make Philipp's suggestions
     - [x] polish
@@ -18,7 +18,7 @@
   - [x] chapter 4
     - [x] repost with final sections
   - [x] chapter 5
-  - [ ] chapter 6
+  - [x] chapter 6
   - [ ] chapter 7
   - [ ] chapter 8
   - [ ] chapter 9

@@ -110,7 +110,7 @@ Complete the following tasks for arguments (A) and (B):
 \begin{enumerate}
   \item[\bf Task 1:] Write a symbolization key and regiment the argument.
   \item[\bf Task 2:] Determine if the argument is valid.
-  \item[\bf Task 3:] Provide an SD proof if valid, and a countermodel otherwise.
+  \item[\bf Task 3:] Provide a derivation in PL if valid, and a countermodel otherwise.
   \bigskip
   \item[(A)] If Dorothy plays the piano in the morning, then Roger wakes up cranky.
     Dorothy plays piano in the morning unless she is distracted.
@@ -143,46 +143,46 @@ Complete the following tasks for arguments (A) and (B):
 %   \end{multicols}
 % \end{enumerate}
 
-\section*{Lemmas}
-
-\begin{enumerate}
-  \item[\tt Lemma 1:] Every satisfiable branch $\B$ in an SL tree $X$ is open. 
-  \item[\tt Lemma 2:] If $X$ is an SL tree with a satisfiable branch $\B$, then any tree $X'$ which is the result of resolving a sentence in $\B$ has a satisfiable branch $\B'$.  
-  \item[\tt Lemma 3:] Every SL tree with a satisfiable root has a satisfiable branch.
-  \item[\tt Lemma 4:] Every SL tree $X$ has a finite number of branches.  
-  \item[\tt Lemma 5:] For any SL tree $X$ with root $\Gamma$ and $\varphi\in[X]$, there is an SL tree $Y$ with root $\Gamma$ where $\res(Y)<\res(X)$. 
-  \item[\tt Lemma 6:] For any tree $X$ with root $\Gamma$, there is a complete tree $X'$ with root $\Gamma$. 
-  \item[\tt Lemma 7:] Every complete open branch in an SL tree is satisfiable.
-\end{enumerate}
-
-
-
-
-
-\section*{Soundness}
-
-\begin{enumerate}
-  \item Assume $\Gamma$ is satisfiable. 
-  \item Let $X$ be an SL tree with root $\Gamma$. 
-  \item So $X$ has a satisfiable branch $\B$ by \textit{Lemma 3}. 
-  \item So $\B$ is open by \textit{Lemma 1}. 
-  \item So $X$ is not closed. 
-  \item More generally, there is no closed SL tree with root $\Gamma$. 
-  \item By contraposition, QED.
-\end{enumerate}
-
-
-
-
-\section*{Completeness}
-
-\begin{enumerate}
-  \item Assume there is no closed tree with root $\Gamma$.
-  \item Roots are trees, and so $\Gamma$ has a complete tree $X$ by \texttt{Lemma 6}.
-  \item So $X$ is a complete open tree with a complete open branch $\B$.
-  \item By \textit{Lemma 7}, $\B$ is satisfiable, and so $\Gamma$ is satisfiable. 
-  \item By contraposition, if $\Gamma \vDash \bot$, then $\Gamma \vdash \bot$.
-\end{enumerate}
+% \section*{Lemmas}
+%
+% \begin{enumerate}
+%   \item[\tt Lemma 1:] Every satisfiable branch $\B$ in an SL tree $X$ is open. 
+%   \item[\tt Lemma 2:] If $X$ is an SL tree with a satisfiable branch $\B$, then any tree $X'$ which is the result of resolving a sentence in $\B$ has a satisfiable branch $\B'$.  
+%   \item[\tt Lemma 3:] Every SL tree with a satisfiable root has a satisfiable branch.
+%   \item[\tt Lemma 4:] Every SL tree $X$ has a finite number of branches.  
+%   \item[\tt Lemma 5:] For any SL tree $X$ with root $\Gamma$ and $\varphi\in[X]$, there is an SL tree $Y$ with root $\Gamma$ where $\res(Y)<\res(X)$. 
+%   \item[\tt Lemma 6:] For any tree $X$ with root $\Gamma$, there is a complete tree $X'$ with root $\Gamma$. 
+%   \item[\tt Lemma 7:] Every complete open branch in an SL tree is satisfiable.
+% \end{enumerate}
+%
+%
+%
+%
+%
+% \section*{Soundness}
+%
+% \begin{enumerate}
+%   \item Assume $\Gamma$ is satisfiable. 
+%   \item Let $X$ be an SL tree with root $\Gamma$. 
+%   \item So $X$ has a satisfiable branch $\B$ by \textit{Lemma 3}. 
+%   \item So $\B$ is open by \textit{Lemma 1}. 
+%   \item So $X$ is not closed. 
+%   \item More generally, there is no closed SL tree with root $\Gamma$. 
+%   \item By contraposition, QED.
+% \end{enumerate}
+%
+%
+%
+%
+% \section*{Completeness}
+%
+% \begin{enumerate}
+%   \item Assume there is no closed tree with root $\Gamma$.
+%   \item Roots are trees, and so $\Gamma$ has a complete tree $X$ by \texttt{Lemma 6}.
+%   \item So $X$ is a complete open tree with a complete open branch $\B$.
+%   \item By \textit{Lemma 7}, $\B$ is satisfiable, and so $\Gamma$ is satisfiable. 
+%   \item By contraposition, if $\Gamma \vDash \bot$, then $\Gamma \vdash \bot$.
+% \end{enumerate}
 
 
 
