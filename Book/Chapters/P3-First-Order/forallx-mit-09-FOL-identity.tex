@@ -2,27 +2,29 @@
 \chapter{Identity}
   \label{ch.FOL-identity}
 
-The last two chapters introduced the syntax and semantics for QL.
-In this chapter, we will extend both the syntax and semantics of QL to accommodate the \define{identity} predicate `$=$', referring to this extended language as QL$^=$.
+The last two chapters introduced the syntax and semantics for $\FOL$.
+In this chapter, we will extend both the syntax and semantics of $\FOL$ to accommodate the \define{identity} predicate `$=$', referring to this extended language as $\FI$.
 
-It is important to emphasises that to say that $\v{x}$ and $\v{y}$ are identical is different from saying that $\v{x}$ and $\v{y}$ are \textit{duplicates} though this is a common way of using the word `identity' in English.
+It is important to emphasize that to say that $\v{x}$ and $\v{y}$ are identical is different from saying that $\v{x}$ and $\v{y}$ are \textit{duplicates} though this is a common way of using the word `identical' in English.
 For instance, consider the use of the word `identical' in the following case:
 
   \begin{quote}
     \texttt{Spheres}: Consider a possible world in which there is nothing but two identical spheres, similar in every way to each other, separated by just one meter.
-    Although there is no property that they do not share, the two spheres are distinct.
+    Although there is no property that they do not share in common, the two spheres are distinct.
     After all, there are two spheres, not just one.
   \end{quote}
 
-Insofar as the spheres are distinct--- there are two of them, not one--- we will say that they are not \textit{numerically identical}, or just \textit{non-identical} for short.
-If `$a$' names one sphere and `$b$' names the other, we may express this with the sentence `$\neg{=}ab$' where `$=$' is a two place predicate, or `$a\neq b$' for the sake of readability and familiarity.
+Insofar as the spheres are distinct--- there are two of them, not one--- we will say that they are not \textit{numerically identical}, or just not \textit{identical} for short.
+If `$a$' names one sphere and `$b$' names the other, we may express this with the sentence `$\neg{=}ab$' where `$=$' is a two place predicate, or with `$a\neq b$' for the sake of readability and familiarity.
 In this sense of identity, it is not true that the two spheres are identical as claimed in \texttt{Spheres}.
 Indeed, no two things whatsoever are identical in our sense since if they were, then there would not be two of them but rather just one thing perhaps with different names.
 
-Before showing how to include a designated predicate for identity in the syntax and semantics for QL$^=$, it will help to guide our ambitions by considering some of what motivates this addition.
-After all, QL is very powerful language, at least by comparison to SL.
-Why should we need to further extend QL?
-Can't we get by without including identity in the language? % by instead taking any $2$-place predicate in the language (e.g., $I$) to symbolize identity as we would for any other $2$-place predicate?
+Before showing how to include a designated predicate for identity in the syntax and semantics for $\FI$, it will help to guide our ambitions by considering some of what motivates this addition.
+After all, $\FOL$ is a very powerful language, at least by comparison to $\PL$.
+Why should we need to further extend $\FOL$?
+Can't we get by without including identity in the language?
+In particular, we could take a $2$-place predicate in the language (e.g., $I$) to symbolize identity in just the same way as we would for any other $2$-place predicate.
+Why should identity deserve special treatment, and how should we think about the difference between identity and the other predicates that we will included in the language $\FI$?
 
 
 
@@ -30,36 +32,36 @@ Can't we get by without including identity in the language? % by instead taking 
   \label{sec:IdentityLogic}
 
 It turns out that there is a lot that cannot be said without an identity predicate.
-You might be wondering why we can't just declare that a certain predicate be used to express identity the way that we do in regimenting other predicates in QL.
+You might be wondering why we can't just declare that a certain predicate be used to express identity the way that we do in regimenting other predicates in $\FOL$.
 For instance, suppose we were to regiment `Hesperus is Phosphorus' as `$Ihp$' given the following symbolization key:
 
 \begin{ekey}
-% \begin{multicols}{2}
-\item[Ixy:] $x$ is $y$
-\item[h:] Hesperus
-\item[p:] Phosphorus
-\item[v:] Venus
-% \end{multicols}
+  \item[Ixy:] $x$ is $y$
+  \item[h:] Hesperus
+  \item[p:] Phosphorus
+  \item[v:] Venus
 \end{ekey}
 
-One might take the regimentation given above to do as good a job as any of our regimentations in QL.
+One might take the regimentation given above to do as good a job as any of our regimentations in $\FOL$.
 Why does identity deserve special treatment?
 
 Consider the following English argument regimented with the symbolization given above:
 
 \begin{multicols}{2}
   
-\begin{earg}
-  \item[] Hesperus is Phosphorus.
-  \item[] Phosphorus is Venus.
-  \item[\therefore] Hesperus is Venus.
-\end{earg}
+  \begin{earg} \label{frege}
+    \eitem{Hesperus is Phosphorus.}
+    \uitem{Phosphorus is Venus.\quad\quad}
+    \eitem{Hesperus is Venus.}
+  \end{earg}
+  
+  \columnbreak
 
-\begin{earg}
-  \item[] $Ihp$
-  \item[] $Ipv$
-  \item[\therefore] $Ihv$
-\end{earg}
+  \begin{earg} \label{noid}
+    \eitem{$Ihp$}
+    \uitem{$Ipv$\quad\quad}
+    \eitem{$Ihv$}
+  \end{earg}
 
 \end{multicols}
 
@@ -74,117 +76,110 @@ For instance, consider the following countermodel:
 	$\I(v)$	& $v$
 \end{partialmodel}
 
-Since $\tuple{h,p},\tuple{p,v}\in\I(I)$ but $\tuple{h,v}\notin\I(I)$, it follows that $\tuple{\I(h),\I(p)},\tuple{\I(p),\I(v)}\in\I(I)$ and $\tuple{\I(h),\I(v)}\notin\I(I)$, and so by definition $\tuple{\VV{\I}{\va{a}}(h),\VV{\I}{\va{a}}(p)},\tuple{\VV{\I}{\va{a}}(p),\VV{\I}{\va{a}}(v)}\in\I(I)$ and $\tuple{\VV{\I}{\va{a}}(h),\VV{\I}{\va{a}}(v)}\notin\I(I)$ where $\va{a}$ is any variable assignment that does no substantive work here.
-It follows that $\VV{\I}{\va{a}}(Ihp)=\VV{\I}{\va{a}}(Ipv)=1$ and yet $\VV{\I}{\va{a}}(Ihv)\neq 1$.
-Since there is such a v.a. as $\hat{a}$ and $Ihp$, $Ipv$, and $Ihv$ are all sentences, we may conclude that $\VV{\I}{}(Ihp)=\VV{\I}{}(Ipv)=1$ and yet $\VV{\I}{}(Ihv)\neq 1$.
+Since $\tuple{h,p},\tuple{p,v}\in\I(I)$ but $\tuple{h,v}\notin\I(I)$, it follows that $\tuple{\I(h),\I(p)},\tuple{\I(p),\I(v)}\in\I(I)$ but $\tuple{\I(h),\I(v)}\notin\I(I)$.
+Given any variable assignment $\va{a}$, it follows by definition that both $\tuple{\val{\I}{\va{a}}(h),\val{\I}{\va{a}}(p)},\tuple{\val{\I}{\va{a}}(p),\val{\I}{\va{a}}(v)}\in\I(I)$ while $\tuple{\val{\I}{\va{a}}(h),\val{\I}{\va{a}}(v)}\notin\I(I)$.
+It follows from the semantics that $\VV{\I}{\va{a}}(Ihp)=\VV{\I}{\va{a}}(Ipv)=1$ and yet $\VV{\I}{\va{a}}(Ihv)\neq 1$.
+Since $\va{a}$ was an arbitrary v.a. and $Ihp$, $Ipv$, and $Ihv$ are all wfss of $\FOL$, we may conclude that $\VV{\I}{}(Ihp)=\VV{\I}{}(Ipv)=1$ and yet $\VV{\I}{}(Ihv)\neq 1$.
 Having produced a model which makes the premises true and the conclusion false, it follows that the argument is not valid.
 
 An analogous argument shows that the following argument is also invalid:
 
 \begin{multicols}{2}
 
-\begin{ekey}
-  \item[Txy:] $x$ is taller than $y$
-  \item[k:] Kate
-  \item[s:] Sam
-  \item[l:] Lu
-\end{ekey}
+  \begin{ekey}
+    \item[Txy:] $x$ is taller than $y$
+    \item[k:] Kate
+    \item[s:] Sam
+    \item[l:] Lu
+  \end{ekey}
 
-\begin{earg}
-  \item[] Kate is taller than Sam.
-  \item[] Sam is taller than Lu.
-  \item[\therefore] Kate is taller than Lu.
-  \item[] ~
-\end{earg}
+  \begin{earg}
+    \eitem{Kate is taller than Sam.}
+    \uitem{Sam is taller than Lu.\quad\quad}
+    \eitem{Kate is taller than Lu.}
+    \item[] ~
+  \end{earg}
 
 \end{multicols}
 
 \begin{multicols}{2}
 
-\begin{partialmodel}
-	$\D$		& $\set{k,s,l}$\\
-  $\I(T)$ & $\set{\tuple{k,s},\tuple{s,l}}$\\
-	$\I(k)$	& $k$\\
-	$\I(s)$	& $s$\\
-	$\I(l)$	& $l$
-\end{partialmodel}
+  \begin{partialmodel}
+    $\D$		& $\set{k,s,l}$\\
+    $\I(T)$ & $\set{\tuple{k,s},\tuple{s,l}}$\\
+    $\I(k)$	& $k$\\
+    $\I(s)$	& $s$\\
+    $\I(l)$	& $l$
+  \end{partialmodel}
 
-\begin{earg}
-  \item[] $Tks$
-  \item[] $Tsl$
-  \item[\therefore] $Tkl$
-\end{earg}
-\vfill
-\strut
+  \begin{earg}
+    \eitem{$Tks$}
+    \uitem{$Tsl$\quad\quad}
+    \eitem{$Tkl$}
+    \vfill\strut
+  \end{earg}
 
 \end{multicols}
 
-Replacing `$I$' with `$T$' and similarly replacing `$h$' with `$k$' and so on for the other constants, a very similar semantic proof could be repurposed to show that the premises in the argument above do not entail the conclusion.
+Replacing `$I$' with `$T$' and similarly replacing `$h$' with `$k$' and so on for the other constants, the semantic proof given above could be adapted to show that the premises in the previous argument do not entail the conclusion.
 Here we may ask if this is right, and if so, why we shouldn't say the very same thing about the identity argument.
 
 Certainly it should be admitted that the taller-than argument is a very strong argument in ordinary contexts.
 After all, given the intended interpretation of English, any \textit{possibility} in which Kate is taller than Sam and in which Sam is taller than Lu is also a possibility in which Kate is taller than Lu. 
 The reason the argument is invalid is that nothing forces us to interpret the predicate `is taller than' as meaning what it usually means.
-Put otherwise, the dyadic predicate `is taller than' is a \define{non-logical} term of our language, and is to be regimented by a non-logical dyadic predicate in QL which we may interpret by any subset of $\D^2$ given any domain $\D$ whatsoever. 
+Put otherwise, the dyadic predicate `is taller than' is a \define{non-logical} term of our language, and is to be regimented by a non-logical dyadic predicate in $\FOL$ which we may interpret by any subset of $\D^2$ given any domain $\D$ whatsoever. 
 This makes the argument easy to invalidate.
 
-Were to want to make the taller-than argument valid, we would have to add an additional premise as in the follow arguments:
+In order to make the taller-than argument valid, we would have to add an additional premise.
+For instance, here are two ways that we might make the argument valid:
 
 \begin{multicols}{2}
   
-\begin{earg}
-  \item[] $(Tks \eand Tsl) \eif Tkl$
-  \item[] $Tks$
-  \item[] $Tsl$
-  \item[\therefore] $Tkl$
-\end{earg}
+  \begin{earg}
+    \eitem{$\forall x\forall y \forall z((Txy \eand Tyz) \eif Txz)$}
+    \eitem{$Tks$}
+    \uitem{$Tsl$\quad\quad}
+    \eitem{$Tkl$}
+  \end{earg}
 
-\begin{earg}
-  \item[] $\forall x\forall y \forall z((Txy \eand Tyz) \eif Txz)$
-  \item[] $Tks$
-  \item[] $Tsl$
-  \item[\therefore] $Tkl$
-\end{earg}
+  \begin{earg}
+    \eitem{$(Tks \eand Tsl) \eif Tkl$}
+    \eitem{$Tks$}
+    \uitem{$Tsl$\quad\quad}
+    \eitem{$Tkl$}
+  \end{earg}
 
 \end{multicols}
 
 Both of the arguments above are valid.
-Whereas the argument on the right starts off by asserting that the taller-than relation is transitive, the argument on the left appeals to a particular instances of the transitivity of the taller-than relation.
+Whereas the argument on the left starts off by asserting that the taller-than relation is transitive, the argument on the right appeals to a particular instances of the transitivity of the taller-than relation.
 
 It is natural to assume that on the intended interpretation of `is taller than' in English, we mean to express a transitive relation since this is how heights behave.
 In reasoning from $Tks$ and $Tsl$ to $Tkl$, we are implicitly relying on our intuitive grasp of a particular interpretation rather than general logical features of the sentences involved. 
 That is, the argument is convincing not because of its logical form, but because of the particular interpretation that we are assuming, i.e., where `is taller than' expresses a transitive relation.
-When we add a premises which requires $T$ to be transitive (or else add the relevant instance), we are making our assumptions explicit in a way that avoids reliance on a particular intended interpretation of our language.
-Instead, the amended arguments given above are valid since any model which makes these premises true makes their conclusions true. 
-Put otherwise, the conclusion follows by virtue of the logical forms of the sentences and not a particular interpretation.
+
+When we add a premises which requires $T$ to be transitive (or else add the relevant instance), we are making our assumptions about how to interpret `is taller than' explicit in a way that avoids reliance on a particular intended interpretation of our language.
+The amended arguments are valid since the conclusions are true in any model in which all of the premises true. 
+By showing that the conclusion is true when the premises are true in any model of $\FOL$ whatsoever, we are interpreting the non-logical terms in all possible ways while holding the meanings of the logical terms fixed.
+Accordingly, we may conclude that the conclusion follows by virtue of the logical forms of the sentences involved and not a particular interpretation.
 
 What about the identity argument?
 Certainly we could reproduce a similar story, claiming that as it stands, the identity argument we started off with is not valid but could be made valid by adding a premise that requires identity to be transitive.
-The question is whether this would be appropriate in the case of an identity predicate.
+The question is whether this would be appropriate in the case of the identity predicate.
 More specifically, is it permissible to interpret identity as \textit{any} subset of $\D^2$ over any domain $\D$?
 
-The answer is certainly `Yes' since this is exactly how we would interpret the identity argument in QL.
-Nevertheless, there is good reason not to go this way, choosing instead to include a designated predicate for identity in QL$^=$.
-Recast in QL$^=$, the identity argument becomes:
-
-\begin{multicols}{2}
-  
-\begin{earg}
-  \item[] Hesperus is Phosphorus.
-  \item[] Phosphorus is Venus.
-  \item[\therefore] Hesperus is Venus.
-\end{earg}
+The answer is certainly `Yes' since this is exactly how we would interpret the identity argument in $\FOL$.
+Nevertheless, there is good reason not to go this way, choosing instead to include a designated predicate for identity in $\FI$.
+Recast in $\FI$, the identity argument becomes:
 
 \begin{earg}
-  \item[] $h=p$
-  \item[] $p=v$
-  \item[\therefore] $h=v$
+  \eitem{$h=p$}
+  \uitem{$p=v$\quad\quad}
+  \eitem{$h=v$}
 \end{earg}
-
-\end{multicols}
 
 Instead of taking this argument to only be convincing when we restrict consideration to an intended interpretation where `$=$' means identity, we are taking identity to be a logical notion akin to negation, conjunction, and the quantifiers.
-Rather than relying on the intended interpretation of our language to tell us what identity means, we are going to provide semantic clauses in just the same way that we did for the other logical terms of our language.
+Rather than relying on the intended interpretation of our language to tell us what identity means, we are going to provide a semantic clause for identity which holds its meaning fixed across all interpretations in just the same way that we did for the other logical terms included in our language.
 % Roughly, `$\alpha=\beta$' is true in a model $\M=\tuple{\D,\I}$ given a variable assignment $\va{a}$ just in case $\alpha$ and $\beta$ refer to the same individual in the model.
 % Note that we have used `the same individual' to provide the semantics for identity.
 As a result, the argument above will turn out to be valid as it stands.
@@ -197,27 +192,27 @@ This in itself does not require that we do so--- we could just choose to include
 The second reason is more forceful: in order to provide a semantic clause for the taller-than predicate `$T$', we would have to provide a theory of what it is for one thing to be taller than another.
 Without providing such a theory, nothing guarantees that $T$ is transitive, and so the taller-than argument would remain invalid. 
 
-% Suppose one were to attempt to provide a theory of the taller-than predicate by taking $T$ to be transitive and irreflexive, using QL to state these assumptions.
+% Suppose one were to attempt to provide a theory of the taller-than predicate by taking $T$ to be transitive and irreflexive, using $\FOL$ to state these assumptions.
 % Here we may object that there are lots of relations that are transitive and irreflexive, and so given these constraints alone, we have no reason to think that $T$ picks out the taller-than relation rather than some other relation.
 % For instance `is older than' is also transitive and irreflexive, but means something completely different than `is taller than'.
 %
 % Although one might attempt to improve on our initial theory of being taller than, doing so reaches beyond the subject-matter of logic.
 % Rather, logic is concerned with the so called \define{logical terms} like negation, conjunction, quantification, and identity, where these notions do not concern any particular ways for things to be (e.g., one thing being taller than another), but rather provide very general conceptual resources for articulating theories in the first place.
-% For instance, one may point out that we might use a language like QL in order to provide a theory constraining the interpretation of $T$.
+% For instance, one may point out that we might use a language like $\FOL$ in order to provide a theory constraining the interpretation of $T$.
 % In particular, consider the following constraint:
 %   $$(\alpha=\beta) \supset (T\alpha\gamma\equiv T\beta\gamma).$$
 % This says that if $\alpha=\beta$, then $\alpha$ is taller than $\gamma$ just in case $\beta$ is taller than $\gamma$. 
 % Certainly this seems true, and yet it is unclear how we would state such a principle for our theory of the taller-than relation without recourse to the identity predicate.
-% This gives us reason to think that the theory of the taller-than relation should be presented in QL$^=$ instead of QL. 
+% This gives us reason to think that the theory of the taller-than relation should be presented in $\FI$ instead of $\FOL$. 
 % By contrast, we do not need to appeal to $T$ in order to provide a theory of identity.
 
 
 Although one might attempt to provide a theory of the taller-than relation, doing so reaches beyond the subject-matter of logic.
-Moreover, it would be natural to use a language like QL$^=$ in order to develop such a theory. 
+Moreover, it would be natural to use a language like $\FI$ in order to develop such a theory. 
 The same cannot so easily be said for identity.
-Instead of falling outside the subject-matter of logic, identity is taken to fit squarely within our present aim to develop the conceptual resources that we need to articulate theories in the first place.
-Instead of requiring that we develop an independent theory of identity, the semantics for identity will rely on our understanding of identity in the metalanguage in much the same way that the semantics for negation relied on an understanding of negation in the metalanguage.
-
+Instead of falling outside the subject-matter of logic, identity is taken to fit squarely within our present aim to develop the most basic conceptual resources that we need to articulate theories.
+Instead of requiring that we develop an independent theory of identity, the semantics for identity will rely on our understanding of identity in the metalanguage in the same way that the semantics for negation relied on an understanding of negation in the metalanguage.
+In doing so, we are making our intuitive grasp on the logical terms in English explicit.
 
 Before pressing on, it is worth considering three more cases involving identity.
 To begin with, consider the following example originally presented by Gottlob Frege:
@@ -233,111 +228,115 @@ To begin with, consider the following example originally presented by Gottlob Fr
 \end{ekey}
 
 \begin{earg}
-  \item[] Hesperus is rising.
-  \item[] Hesperus is Phosphorus.
-  \item[\therefore] Phosphorus is rising.
+  \eitem{Hesperus is rising.}
+  \uitem{Hesperus is Phosphorus.\quad\quad}
+  \eitem{Phosphorus is rising.}
 \end{earg}
 
 \end{multicols}
 
-As specified below, identity is a primitive symbol of QL$^=$.
+As specified below, identity is a primitive symbol of $\FI$.
 Accordingly, we do not need to include identity in the symbolization key given above to provide the following regimentation.
 
 \begin{earg}
-  \item[] $Rh$
-  \item[] $h=p$
-  \item[\therefore] $Rp$
+  \eitem{$Rh$}
+  \uitem{$h=p$\quad\quad}
+  \eitem{$Rp$}
 \end{earg}
 
-This is a valid argument.
-Instead of restricting consideration to an intended interpretation, or else adding some further assumptions, the conclusion is entailed by the premises given the semantics that we will provide for QL$^=$.
+As we will soon see, this is a perfectly valid argument.
+Instead of restricting consideration to an intended interpretation, or else adding some further assumptions, the conclusion is entailed by the premises given the semantics that we will provide for $\FI$.
 
 % However, insofar as different models may have different domains, the interpretation of the identity predicate will have to change accordingly.
-% Instead of assigning the identity predicate to some subset of $\D^2$ for some particular domain $\D$ once and for all, we will provide a semantic clause for identity in much the same way that we did for the other logical terms included in QL. 
+% Instead of assigning the identity predicate to some subset of $\D^2$ for some particular domain $\D$ once and for all, we will provide a semantic clause for identity in much the same way that we did for the other logical terms included in $\FOL$. 
 % We will provide these details in due course, but for now we will focus on the motivations for doing so.
 
-Next consider the regimentation of the following argument:
+Next consider the regimentation of the following arguments:
 
 \begin{multicols}{2}
 
-\begin{ekey}
-  \item[Lxy:] $x$ loves $y$
-  \item[Dx:] $x$ is a DJ
-  \item[c:] Cara
-  \item[p:] Pedro
-  \item[d:] DJ Faro
-\end{ekey}
+  \begin{ekey}
+    \item[Lxy:] $x$ loves $y$
+    \item[c:] Cara
+    \item[p:] Pedro
+    \item[d:] DJ Faro
+  \end{ekey}
 
-\vfill
-\strut
-\columnbreak
+  \vfill
+  \strut
+  \columnbreak
 
-\begin{earg}
-  \item[] Only Cara loves Pedro.
-  \item[] DJ Faro loves Pedro.
-  \item[\therefore] Cara is DJ Faro.
-\end{earg}
+  \begin{earg}
+    \eitem{Only Cara loves Pedro.}
+    \uitem{DJ Faro loves Pedro.\quad\quad}
+    \eitem{Cara is DJ Faro.}
+  \end{earg}
 
-\begin{earg}
-  \item[] $\forall x(Lxp \eiff x=c)$
-  \item[] $Ldp$
-  \item[\therefore] $c=d$
-\end{earg}
+  \begin{earg}
+    \eitem{$\forall x(Lxp \eiff x=c)$}
+    \uitem{$Ldp$\quad\quad}
+    \eitem{$c=d$}
+  \end{earg}
 
 \end{multicols}
 
 This is a valid argument.
-Although we could say that Cara loves Pedro in QL, we could not say that \textit{only} Cara loves Pedro in QL since to do so we would need to say that anything that loves Pedro is identical to Cara in addition to saying that Cara loves Pedro.
+Although we could say that Cara loves Pedro in $\FOL$, we could not say that \textit{only} Cara loves Pedro in $\FOL$ since to do so we would need to say that anything that loves Pedro is identical to Cara in addition to saying that Cara loves Pedro.
 Here we may accomplish both claims at once by saying that for anything, it loves Pedro just in case it is identical to Cara.
 Since Cara is identical to herself, she must love Pedro, and moreover, for anything that loves Pedro, it must be identical to Cara.
 Since DJ Faro loves Pedro, we may conclude that DJ Faro must be identical to Cara.
-Reasoning in this way requires that we extend the expressive power of QL by including identity in the language.
+Reasoning in this way requires that we extend the expressive power of $\FOL$ by including identity in the language.
 
-Here is a third example. 
-Consider the following regimentations of sentence $\ref{M1}$:
+The example above suggests the manner in which certain properties may serve to uniquely identify a given object.
+In doing so, we are effectively saying there is one thing which has a given property.
+More generally, identity can be used to say how many things have a given property, or else satisfy some combination of properties.
+For instance, consider the following sentence and its various competing regimentations:
 
-\begin{earg}
-  \item[\ex{M1}] Mozart composed at least two things.
+\begin{earg} \label{mo}
+  \eitem{Mozart composed at least two things.}
 \end{earg}
 
 \begin{multicols}{2}
 
-\begin{ekey}
-  \item[Cxy:] $x$ composed $y$
-  % \item[Sx:] $x$ is a thing. 
-  \item[m:] Mozart
-  \item[] ~
-\end{ekey}
+  \begin{ekey}
+    \item[Cxy:] $x$ composed $y$
+    % \item[Sx:] $x$ is a thing. 
+    \item[m:] Mozart
+    % \item[] ~
+  \end{ekey}
 
-\begin{earg}
-  \item[\ex{M2}] $\qt{\exists}{x} Cmx \eand \qt{\exists}{y} Cmy$.
-  \item[\ex{M3}] $(\qt{\exists}{x} Cmx \eand \qt{\exists}{y} Cmy) \eand x\neq y$.
-  \item[\ex{M4}] $\qt{\exists}{x}\qt{\exists}{y}((Cmx \eand Cmy) \eand x\neq y)$.
-\end{earg}
+  \begin{earg} \label{mozart}
+    \eitem{$\qt{\exists}{x} Cmx \eand \qt{\exists}{y} Cmy$.}
+    \eitem{$(\qt{\exists}{x} Cmx \eand \qt{\exists}{y} Cmy) \eand x\neq y$.}
+    \eitem{$\qt{\exists}{x}\qt{\exists}{y}((Cmx \eand Cmy) \eand x\neq y)$.}
+  \end{earg}
 
 \end{multicols}
 
-Although sentence $\ref{M2}$ can be stated in QL, this regimentation does not require that there are at least two things that Mozart composed.
-This is because both conjuncts could be satisfied by the same thing, and so the sentence would be true if there was just one thing that Mozart composed.
-Sentence $\ref{M3}$ is worse since this is not even a sentence. 
-Rather, it includes free variables which fall outside of the scope of both quantifiers.
-By contrast, sentence $\ref{M4}$ provides an adequate regimentation, though does so by making the quantifiers have scope over all instances of $x$ and $y$. 
-The success of this regimentation has profound consequences for it means that we can regiment `at least two' in QL$^=$.
+Although \eref{mozart}{1} regiments the sentence \eref{mo}{1} in $\FOL$, this regimentation does not require that there are at least two things that Mozart composed.
+This is because both conjuncts could be satisfied by the same thing, and so \eref{mo}{1} would be true if there was just one thing that Mozart composed.
+The regimentation given in \eref{mozart}{2} is worse since this is not a wfs of $\FOL$. 
+Rather, \eref{mozart}{2} is an open sentence since it includes two free variables which fall outside of the scope of the quantifiers.
+By contrast, sentence \eref{mozart}{3} provides an adequate regimentation, though does so by making the quantifiers have scope over all instances of $x$ and $y$. 
+
+The success of \eref{mozart}{3} as a regimentation of \eref{mo}{1} has profound consequences for it means that we can regiment `at least two' in $\FI$.
 As we will soon see, we may also regiment `at most two', where `exactly two' will be regimented by their conjunction.
+This means that cardinality may be expressed in $\FI$ by answering questions of the form ``How many things are such that $\metaA$'' with wfss that regiment claims of the form ``Exactly $n$ things are such that $\metaA$''.
+By contrast, such expressions cannot be regimented in $\FOL$ without identity.
 
-What all of these cases show us is that if we want to reflect the logical relationships having to do with identity, we need special logical vocabulary to do so.
+The cases considered above demonstrate that if we want to capture the logical relationships having to do with identity, we need designated logical vocabulary to do so.
 Just as we introduced the `$\forall$' and `$\exists$' to regiment quantified claims, we also need a special symbol `$=$' for identity.
+Whereas the following section will specify a syntax for our expanded language, we will then proceed to provide its semantics the section after.
 
 
 
 
-\section{The Syntax for QL$^=$}
-  \label{sec:SyntaxQL=}
+\section{The Syntax for $\FI$}
+  \label{sec:FI-Syntax}
 
-The primitive symbols included in QL$^=$ are exactly the same as those included in QL with the single addition of the identity predicate `$=$'.
+The primitive symbols included in $\FI$ are exactly the same as those included in $\FOL$ with the single addition of the identity predicate `$=$'.
 Thus we have the following:
 
-\vspace{.2in}
 \begin{center}
   \begin{tabular}{|c|c|}
     \hline
@@ -363,150 +362,235 @@ Thus we have the following:
 \vspace{.2in}
 
 Here we have included `$=$' in our alphabet of primitive symbols.
-This may seem like a small change and given the examples above, it may be obvious to you how to build up sentences in QL$^=$.
-Nevertheless, we need to define the wffs of QL$^=$ afresh, where something similar will be repeated for our other recursive definitions that we provided before. 
+This may seem like a small change and given the examples above, it may be obvious to you how to build up sentences in $\FI$.
+Nevertheless, we need to define the wffs of $\FI$ afresh, where something similar will be repeated for our other recursive definitions that we provided before. 
+
 Although much will be as it was before, it is important to attend to the differences that occur throughout the definitions given in the following two sections. %, and it never hurts to review these essential definitions which give shape to our language.
+In addition to reviewing the details that remain the same, hopefully our methodology should be beginning to feel familiar.
+As we expand the expressive power of our language, we need to say what counts as a wfs of that language.
+If the language includes variables, we will need to first say what counts as a wff of the language.
+By defining what it is for a variable to be free in a wff, we may specify that the wfss of the language are those wffs without free variables.
+In just the same way that we did for $\FOL$, we will now provide these definitions for $\FI$.
 
+Whereas there was one way to form atomic wffs in $\FOL$, we now have two ways to form atomic wffs.
+Thus we will define the \define{well-formed formulas} (wffs) of $\FI$ as follows:
 
-Whereas in QL there was just one way to form atomic wffs, now we will have two separate ways to form wffs.
-Consider the following recursive definition of the wffs in QL$^=$:
-
-\begin{enumerate}
-  \item $\F^n\alpha_1,\ldots,\alpha_n$ is a wff if $\F^n$ is an $n$-place predicate and $\alpha_1,\ldots,\alpha_n$ are singular terms.
-  \item $\alpha=\beta$ is a wff if $\alpha$ and $\beta$ are singular terms.
-\item If $\metaA$ and $\metaB$ are wffs and $\alpha$ is a variable, then:
-	\begin{enumerate}
-    % \begin{multicols}{2}
-      \item $\qt{\exists}{\alpha}\metaA$ is a wff;
-      \item $\qt{\forall}{\alpha}\metaA$ is a wff;
-      \item $\enot\metaA$ is a wff;
-      % \item[] ~
-      \item $(\metaA\eand\metaB)$ is a wff;
-      \item $(\metaA\eor\metaB)$ is a wff;
-      \item $(\metaA\eif\metaB)$ is a wff; and
-      \item $(\metaA\eiff\metaB)$ is a wff.
-    % \end{multicols}
-	\end{enumerate}
-\item Nothing else is a wff.
-\end{enumerate}
+\factoidbox{
+  \begin{enumerate}
+    \item $\F^n\alpha_1,\ldots,\alpha_n$ is a wff of $\FI$ if $\F^n$ is an $n$-place predicate of $\FI$ and $\alpha_1,\ldots,\alpha_n$ are singular terms (i.e., variables or constants) of $\FI$.
+    \item $\alpha=\beta$ is a wff of $\FI$ if $\alpha$ and $\beta$ are singular terms of $\FI$.
+    \item For any wffs $\metaA$ and $\metaB$ of $\FI$ and variable $\alpha$ of $\FI$:
+      \begin{enumerate}
+          \item $\qt{\exists}{\alpha}\metaA{}$ is a wff of $\FI$;
+          \item $\qt{\forall}{\alpha}\metaA{}$ is a wff of $\FI$;
+          \item $\enot\metaA{}$ is a wff of $\FI$;
+          \item $(\metaA{}\eand\metaB{})$ is a wff of $\FI$;
+          \item $(\metaA{}\eor\metaB{})$ is a wff of $\FI$;
+          \item $(\metaA{}\eif\metaB{})$ is a wff of $\FI$; and
+          \item $(\metaA{}\eiff\metaB{})$ is a wff of $\FI$.
+      \end{enumerate}
+    \item Nothing else is a wff of $\FI$.
+  \end{enumerate}
+}
 
 Officially, the clauses above are non-sense, and can only be made sense of by adding corner quotes in appropriate places.
-Having explained how to do this above, we will rely on the reader to know where these corner quotes are implicitly intended.
+Having explained how to do this above, we will rely on the reader to know where these corner quotes are implicitly intended as we did before.
 
-We may either form atomic wffs as we did in QL, or we may form wffs with the identity predicate together with two singular terms.
-Nevertheless, nothing requires identity wffs to be sentences since they may include free variables in just the same way that $2$-place predicates may combine with free variables.
+We may either form atomic wffs as we did in $\FOL$, or we may form wffs with the identity predicate together with two singular terms.
+Nevertheless, nothing requires identity wffs to be wfss since they may include free variables in just the same way that $2$-place predicates may combine with free variables.
 This means that there is a new way for free variables to occur in wffs and so we will have to extend our definition of free variables accordingly:
 
-\begin{enumerate}
-  \item $\alpha$ is free in $\F^n\alpha_1,\ldots,\alpha_n$ if $\alpha=\alpha_i$ for some $1\leq i\leq n$ where $\alpha$ is a variable, $\F^n$ is an $n$-place predicate, and $\alpha_1,\ldots,\alpha_n$ are singular terms.
-  \item $\alpha$ is free in $\beta=\gamma$ if $\alpha=\beta$ or $\alpha=\gamma$ where $\alpha$ is a variable.
-  \item If $\metaA$ and $\metaB$ are wffs and $\alpha$ and $\beta$ are variables, then:
-    \begin{enumerate}
-        \item $\alpha$ is free in $\qt{\exists}{\beta}\metaA$ if $\alpha$ is free in $\metaA$ and $\alpha\neq\beta$;
-        \item $\alpha$ is free in $\qt{\forall}{\beta}\metaA$ if $\alpha$ is free in $\metaA$ and $\alpha\neq\beta$;
-        \item $\alpha$ is free in $\enot\metaA$ if $\alpha$ is free in $\metaA$;
-        \item $\alpha$ is free in $(\metaA\eand\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
-        \item $\alpha$ is free in $(\metaA\eor\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
-        \item $\alpha$ is free in $(\metaA\eif\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
-        \item $\alpha$ is free in $(\metaA\eiff\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
-    \end{enumerate}
-  \item Nothing else is a free variable. 
-\end{enumerate}
+\factoidbox{
+  \begin{enumerate}
+    \item $\alpha$ is free in $\F^n\alpha_1,\ldots,\alpha_n$ if $\alpha=\alpha_i$ for some $1\leq i\leq n$ where $\alpha$ is a variable, $\F^n$ is an $n$-place predicate, and $\alpha_1,\ldots,\alpha_n$ are singular terms.
+    \item $\alpha$ is free in $\beta=\gamma$ if $\alpha=\beta$ or $\alpha=\gamma$ where $\alpha$ is a variable.
+    \item If $\metaA$ and $\metaB$ are wffs of $\FI$ and $\alpha$ and $\beta$ are variables, then:
+      \begin{enumerate}
+          \item $\alpha$ is free in $\qt{\exists}{\beta}\metaA$ if $\alpha$ is free in $\metaA$ and $\alpha\neq\beta$;
+          \item $\alpha$ is free in $\qt{\forall}{\beta}\metaA$ if $\alpha$ is free in $\metaA$ and $\alpha\neq\beta$;
+          \item $\alpha$ is free in $\enot\metaA$ if $\alpha$ is free in $\metaA$;
+          \item $\alpha$ is free in $(\metaA\eand\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
+          \item $\alpha$ is free in $(\metaA\eor\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
+          \item $\alpha$ is free in $(\metaA\eif\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
+          \item $\alpha$ is free in $(\metaA\eiff\metaB)$ if $\alpha$ is free in $\metaA$ or $\alpha$ is free in $\metaB$;
+      \end{enumerate}
+    \item Nothing else is a free variable. 
+  \end{enumerate}
+}
 
-Given the definition of free variables in QL$^=$, we may define an \define{open sentence} of QL$^=$ to be any wff of QL$^=$ which includes free variables.
-In just the same way as before, a \define{sentence} of QL$^=$ is any wffs of QL$^=$ which does not include any free variables. 
-Given these definitions, the syntax for QL$^=$ is complete.
-We may now turn to interpret the sentences of QL$^=$. 
+Given the definition of free variables in $\FI$, we may define a \define{well-formed sentence} (wfs) of $\FI$ to be any wffs of $\FI$ which does not include any free variables, and an \define{open sentence} of $\FI$ is any wff of $\FI$ which does include free variables.
 
-% TODO: add regimentation examples
+In order to establish that all wfss of $\FI$ have certain properties, it will be important to be able to organize the wfss of $\FI$ into a countable sequence of stages.
+To do so, we will define the \define{complexity} $\comp(\metaA) \in \N$  of any wff of $\FI$ to be the number of occurrences of sentential operators that belong to $\FI$, where both $\qt{\forall}{\alpha}$ and $\qt{\exists}{\alpha}$ are unary operators for any variable $\alpha$. % where the complexity of the wfss of $\FI$ is thereby included.
+% More precisely, we may recursively define the $\comp(\metaA) \in \N$ for all wffs of $\FI$ as follows:
+
+\factoidbox{
+  \begin{enumerate}
+    \item $\comp(\F^n\alpha_1,\ldots,\alpha_n) = 0$ if $\F^n$ is an $n$-place predicate of $\FI$ and $\alpha_1,\ldots,\alpha_n$ are singular terms (i.e., variables or constants) of $\FI$.
+    \item $\comp(\alpha=\beta) = 0$ if $\alpha$ and $\beta$ are singular terms of $\FI$.
+    \item For any wffs $\metaA$ and $\metaB$ of $\FI$ and variable $\alpha$ of $\FI$:
+      \begin{enumerate}
+        \item $\comp(\qt{\exists}{\alpha}\metaA) = \comp(\metaA) + 1$;
+        \item $\comp(\qt{\forall}{\alpha}\metaA) = \comp(\metaA) + 1$;
+        \item $\comp(\enot \metaA) = \comp(\metaA) + 1$;
+        \item $\comp(\metaA \eand \metaB) = \comp(\metaA) + \comp(\metaB) + 1$;
+        \item $\comp(\metaA \eor \metaB) = \comp(\metaA) + \comp(\metaB) + 1$;
+        \item $\comp(\metaA \eif \metaB) = \comp(\metaA) + \comp(\metaB) + 1$;
+        \item $\comp(\metaA \eiff \metaB) = \comp(\metaA) + \comp(\metaB) + 1$;
+      \end{enumerate}
+  \end{enumerate}
+}
+
+% As before, the complexity $\comp(\metaA)$ of a wff $\metaA$ is just the number of sentential operators that it includes, 
+Given these definitions, we may now turn to interpret the sentences of $\FI$. 
 
 
 
-\section{The Semantics for QL$^=$}%
-  \label{sec:SemanticsQL=}
+
+
+\section{The Semantics for $\FI$}%
+  \label{sec:FI-Semantics}
   
-In $\S\ref{ch9.ModelsQL}$, we defined a \define{model} of QL to be any ordered pair $\M=\tuple{\D,\I}$ where the \define{domain} $\D$ is any nonempty set and the \define{interpretation} $\I$ over $\D$ satisfies the following conditions: 
+Since the identity predicate `$=$' belongs to the logical vocabulary of $\FI$, including identity in the list or primitive symbols does not effect the manner in which the non-logical symbols are interpreted (i.e., the constants or predicates), no change is required to the definition of a model.
+Accordingly, $\FI$ and $\FOL$ have precisely the same models. 
+As in Chapter $\ref{ch.FOL-semantics}$, we may define a \define{model} of $\FI$ to be any ordered pair $\M=\tuple{\D,\I}$ where the \define{domain} $\D$ is any nonempty set and the \define{interpretation} $\I$ over $\D$ satisfies the following conditions:%
 
 \begin{enumerate}[leftmargin=1.5in]
-  \item[\sc Constants:] $\I(\alpha)\in\D$ for every constant $\alpha$ of QL. 
-  \item[\sc Predicates:] $\I(\F^n)\subseteq\D^n$ for every $n$-place predicate $\F^n$ of QL where $n\geq 0$.
+  \item[\it Constants:] $\I(\alpha)\in\D$ for every constant $\alpha$ of $\FI$. 
+  \item[\it Predicates:] $\I(\F^n)\subseteq\D^n$ for every $n$-place predicate $\F^n$ of $\FI$ where $n\geq 0$.
 \end{enumerate}
 
-Since adding identity to the list or primitive symbols does not effect the manner in which the constants or predicates are interpreted, no change is required to the definition of a model for QL$^=$.
-Accordingly, QL$^=$ and QL have precisely the same models. 
 
-Recall the manner in which \define{variable assignments} were defined over a domain $\D$ to be any function $\va{a}$ from the variables in QL to elements of $\D$.
+Recall the manner in which \define{variable assignments} were defined over a domain $\D$ to be any function $\va{a}$ from the variables in $\FOL$ to elements of $\D$.
 Again, no change is required since neither the variables nor the domains that we might consider are effected by the addition of the identity predicate to the language.
-For a similar reason, we may also preserve the definition of a \define{$\alpha$-variant} of $\va{a}$ as any variable assignment $\va{c}$ where $\va{c}(\beta)=\va{a}(\beta)$ for all $\beta\neq\alpha$.
-Lastly, we include for the sake of completeness the aggregation function from before:
+For a similar reason, we may also preserve the definition of a \define{$\alpha$-variant} of $\va{a}$ as any variable assignment $\va{c}$ where $\va{c}(\beta)=\va{a}(\beta)$ for every variable $\beta\neq\alpha$.
+Lastly, we define the \define{value} (\define{reference}) of singular terms as before:
 
 \vspace{-.2in}
 \begin{align*}
-  \VV{\I}{\va{a}}{(\alpha)}=
+  \val{\I}{\va{a}}{(\alpha)}=
     \begin{cases}
       \I(\alpha) & \text{if } \alpha \text{ is a constant} \\
       \va{a}(\alpha) & \text{if } \alpha \text{ is a variable.}
     \end{cases}
 \end{align*}
 
-So far, all of the semantic definitions have remained the same as they were in QL.
-Nevertheless, the semantics for QL$^=$ will differ insofar as it includes an extra clause for identity, mirroring the changes we made to the definition of the wffs of QL$^=$ given above. 
+So far, all of the semantic definitions have remained just as they were in $\FOL$.
+Nevertheless, the semantics for $\FI$ will differ insofar as it includes an extra clause for identity, mirroring the changes we made to the definition of the wffs of $\FI$ given above. 
 
-\begin{enumerate}[labelsep=.15in]
-  \item[($A$)] $\VV{\I}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1$ just in case $\tuple{\VV{\I}{\va{a}}{(\alpha_1)},\ldots,\VV{\I}{\va{a}}{(\alpha_n)}}\in\I(\F^n)$.
-  \item[($=$)] $\VV{\I}{\va{a}}(\alpha=\beta)=1$ just in case $\VV{\I}{\va{a}}(\alpha)=\VV{\I}{\va{a}}(\beta)$.
-  \item[(\hspace{1pt}$\forall$\hspace{1pt})] $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ just in case $\VV{\I}{\va{c}}(\metaA)=1$ for every $\alpha$-variant $\va{c}$ of $\va{a}$.
-  \item[(\hspace{1pt}$\exists$\hspace{1pt})] $\VV{\I}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$ just in case $\VV{\I}{\va{c}}(\metaA)=1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$.
-  \item[(\enot)] $\VV{\I}{\va{a}}(\enot\metaA{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})\neq 1$.
-  \item[(\eor)] $\VV{\I}{\va{a}}(\metaA{} \eor \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})=1$ or $\VV{\I}{\va{a}}(\metaB{})=1$ (or both).
-  \item[(\eand)] $\VV{\I}{\va{a}}(\metaA{} \eand \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})=1$ and $\VV{\I}{\va{a}}(\metaB{})=1$.
-  \item[(\eif)] $\VV{\I}{\va{a}}(\metaA{} \eif \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})\neq 1$ or $\VV{\I}{\va{a}}(\metaB{})=1$ (or both).
-  \item[(\eiff)] $\VV{\I}{\va{a}}(\metaA{} \eiff \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})=\VV{\I}{\va{a}}(\metaB{})$.
-\end{enumerate}
+\factoidbox{
+  \textsc{Valuation Function:} For any wffs $\metaA$ and $\metaB$ of $\FI$, $n$-place predicate $\F^n$ of $\FI$, and $n$ singular terms $\alpha_1, \ldots, \alpha_n$ of $\FI$: 
+  \begin{enumerate}[leftmargin=.25in]
+    \item[] $\VV{\I}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1$ ~\textit{iff}~ $\tuple{\val{\I}{\va{a}}{(\alpha_1)},\ldots,\val{\I}{\va{a}}{(\alpha_n)}}\in\I(\F^n)$.
+    \item[] $\VV{\I}{\va{a}}(\alpha=\beta)=1$ just in case $\val{\I}{\va{a}}(\alpha)=\val{\I}{\va{a}}(\beta)$.
+    \item[] $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ ~\textit{iff}~ $\VV{\I}{\va{c}}(\metaA)=1$ for every $\alpha$-variant $\va{c}$ of $\va{a}$.
+    \item[] $\VV{\I}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$ ~\textit{iff}~ $\VV{\I}{\va{c}}(\metaA)=1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$.
+    \item[] $\VV{\I}{\va{a}}(\enot\metaA{})=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA{})\neq 1$.
+    \item[] $\VV{\I}{\va{a}}(\metaA{} \eor \metaB{})=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA{})=1$ or $\VV{\I}{\va{a}}(\metaB{})=1$ (or both).
+    \item[] $\VV{\I}{\va{a}}(\metaA{} \eand \metaB{})=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA{})=1$ and $\VV{\I}{\va{a}}(\metaB{})=1$.
+    \item[] $\VV{\I}{\va{a}}(\metaA{} \eif \metaB{})=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA{})=0$ or $\VV{\I}{\va{a}}(\metaB{})=1$ (or both).
+    \item[] $\VV{\I}{\va{a}}(\metaA{} \eiff \metaB{})=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA{})=\VV{\I}{\va{a}}(\metaB{})$.
+  \end{enumerate}
+}
+
 
 Having added the clause for identity, the other clauses continue to apply.
 It is worth comparing the semantic clause for identity to the clause for negation and considering the following worry.
 
 \begin{quote}
-  \texttt{Gripe}:
+  \texttt{Homophonic}:
   The semantic clause for identity doesn't tell us anything because we have used identity--- indeed the same symbol--- on both sides of the semantic clause.
   So in order to know about whether an identity sentence such as $\alpha=\beta$ is true in a model on an assignment, we already need to know what is identical to what.
   Thus the semantics does not tell us anything we didn't already know.
 \end{quote}
 
-If we were attempting to understand what `$=$' means without drawing on any previous understanding, then certainly we should agree that the semantic clauses given above get us nowhere.
-However, the very same thing may be said for at least negation, conjunction, disjunction, and the quantifiers.
+If we were attempting to understand what `$=$' means without drawing on any previous understanding, then certainly we should agree that the semantic clauses given above would be a complete failure.
+As brought out before, the very same thing may be said for negation, conjunction, disjunction, and the quantifiers.
 In each of these cases, analogues of the terms with which we are concerned appear in the metalanguage and play a critical role in stating the semantic clauses.
 Thus we cannot lean on our semantics to learn what these terms mean without any prior understanding of at least their analogues in the metalanguage.
 
 All of this we must learn to accept.
-Where the grip goes wrong is in thinking that there is any other way in which semantics might proceed.
-Instead of constructing something out nothing, the semantic clauses allow us to use the meanings we already grasp in order to interpret a simplified formal language in a systematic way.
+Where the complaint above goes wrong is in assuming that semantics ought to draw on independently understood terms in order to shed light on new terms.
+Instead of constructing something out nothing, the semantic clauses allow us to use the meanings we already grasp in English to interpret a simplified formal language in a way that is both systematic and explicit.
 Identity is no exception, though perhaps even more poignant given that we have used the same symbol in the metalanguage for identity.
 
-Having defined truth relative to a model and assignment function, we are now in a position to specify what it is for a sentence of QL$^=$ to be true in a model (independent of assignments):
+Having defined truth relative to a model and a v.a., we are now in a position to specify what it is for a wfs of $\FI$ to be true in a model independent of an v.a.:
 
-\begin{enumerate}[labelsep=.15in]
-  \item[($\metaA$)] $\VV{\I}{}(\metaA)=1$ just in case $\VV{\I}{\va{a}}(\metaA)=1$ for some $\va{a}$ where $\metaA$ is a sentence of QL$^=$.
-\end{enumerate}
+\factoidbox{
+  \textsc{Theory of Truth:} For any wfs $\metaA$ and model $\M = \tuple{\D, \I}$ of $\FI$: 
+  \begin{enumerate}[labelsep=.15in]
+    \item[] $\VV{\I}{}(\metaA)=1$ just in case $\VV{\I}{\va{a}}(\metaA)=1$ for every v.a. $\va{a}$ defined over $\D$.
+  \end{enumerate}
+}
 
-This definition is just as it was before save that `QL' has been replaced by `QL$^=$'.
-For completeness, we will copy over the definitions of satisfaction and entailment given their importance, where the other semantic notions are the same as they were before.
+This definition is just as it was before save that `$\FOL$' has been replaced by `$\FI$'.
+For completeness, we will copy over the definitions of logical consequence $\vDash$ given its importance, though the other semantic definitions are just as they were in $\FOL$ and $\PL$.
 
-\begin{enumerate}[leftmargin=1.5in]
-  \item[\sc Satisfaction:] $\M=\tuple{\D,\I}$ satisfies $\Gamma$ just in case $\VV{\I}{}(\metaA)=1$ for every $\metaA\in\Gamma$.
-  \item[\sc Entailment:] $\Gamma\models\metaA$ just in case every model that satisfies $\Gamma$ also satisfies $\metaA$.
-\end{enumerate}
+\factoidbox{
+  \textsc{Logical Consequence:} For any set of wfss $\MetaG\cup\set{\metaA}$ of $\FI$: 
+    \begin{enumerate}[labelsep=.15in]
+    \item[] $\Gamma\vDash\metaA$ ~\textit{iff}~ for any model $\M = \tuple{\D, \I}$ of $\FI$, if $\VV{\I}{}(\metaG) = 1$ for all $\metaG \in \MetaG$, then $\VV{\I}{}(\metaA) = 1$.
+    \end{enumerate}
+}
 
-Although there is a lot of redundancy with the syntax and semantics that we provided for QL, hopefully this gives you a good overview of all of the working piece that make up these theories.
-In the remaining sections of this chapter, we will put these theories to work in order to evaluate sentences and arguments in QL$^=$ that we could not adequate regiment in QL.
-As we will see, this language is very powerful and perhaps for this reason has become the \textit{lingua franca} in which a wide range of theories have been developed.
-One prominent example is set theory where the dyadic predicate `$\in$' for set-membership may be axiomatized in QL$^=$.
+Although there is a lot of redundancy with the syntax and semantics that we provided for $\FOL$, hopefully providing the details in full helps to give you a good overview of all of the working piece that make up these theories.
+In the remaining sections of this chapter, we will put these theories to work in order to evaluate sentences and arguments in $\FI$ that we could not adequate regiment in $\FOL$.
+As we will see, the language $\FI$ is very powerful and perhaps for this reason has become a \textit{lingua franca} by which a wide range of theories have been developed.
+One especially prominent example is set theory where the dyadic predicate `$\in$' for set-membership may be axiomatized in $\FI$.
+
+As already evident from the previous chapter, the semantics for $\FOL$ and $\FI$ has a lot of moving parts and it can be very easy to get tied up in knots while attempting to write semantic proofs. 
+The good news is that soon we will introduce a sound and complete proof system for $\FI$, limiting the need to writing semantic proofs that $\MetaG \vDash \metaA$, or that $\metaA$ is a tautology or, similarly, a contradiction.
+Nevertheless, we will need to write semantic proofs to show that $\MetaG \nvDash \metaA$, or $\metaA$ is not a tautology or, not a contradiction.
+In order to streamline the semantic proofs that we will write, it will help to establish two supporting lemmas which will help us simplify the use of v.a.s in our proofs.
+We will establish these results in the following section before presenting a number applications in later sections.
 
 
 
 
+\section{Assignment Lemmas}%
+  \label{sec:AssignmentLemmas}
 
+Recall that a wfs $\metaA$ of $\FI$ is true in a model $\M = \tuple{\D, \I}$ just in case it is true in true in that model relative to all v.a.s defined over the domain $\D$.
+This definition captures the intuition that the truth-value of a wfs $\metaA$ in a given model of $\FI$ should be independent of the v.a.s defined over the domain of that model since $\metaA$ does not have any free variables.
+Nevertheless, it is not always convenient to be told that $\metaA$ is true in a model $\M$ relative to \textit{all} v.a.s defined over the domain of that model, and similarly, it is not always convenient to show that $\metaA$ is true in a model $\M$ relative to \textit{all} v.a.s defined over the domain of that model.
+Since a wfs has no free variables, if a wfs $\metaA$ is true in all v.a.s defined over the domain of the model in question, then $\metaA$ should be true in \textit{some} v.a. defined over the domain, and \textit{vice versa}.
+In order to establish this equivalence, we may now provide proofs of the following lemmas.
+
+\vspace{.05in}
+\begin{Lthm} \label{VarAgree}
+  If $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\varphi$ of $\FI$, then $\VV{\I}{\va{a}}(\varphi)=\VV{\I}{\va{c}}(\varphi)$.
+\end{Lthm}
+
+\begin{quote}
+  Letting $\metaA$ be a wff and $\M = \tuple{\D, \I}$ be a model of $\FI$ where both $\va{a}$ and $\va{c}$ are v.a.s defined over $\D$, we may assume that $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\varphi$.
+  The proof proceeds by 
+
+  \qed
+\end{quote}
+
+
+
+\vspace{.05in}
+\begin{Lthm} \label{VarAssign}
+  If $\varphi$ is a wfs of $\FOL$: $\VV{\I}{}(\varphi)= 1$ \textit{iff} $\VV{\I}{\va{a}}(\varphi)= 1$ for some v.a. $\va{a}$ over $\D$.
+\end{Lthm}
+
+\begin{quote}
+  
+    \begin{itemize}
+      \item[\it LTR:] Assume $\VV{\I}{}(\varphi)= 1$, so $\VV{\I}{\va{a}}(\varphi)= 1$ for all v.a. $\va{a}$ over $\D$.
+      \item Since $\D$ is nonempty, there is some $d \in \D$.
+      \item Let $\va{a}(\alpha) = d$ for every variable $\alpha$ of $\FOL$.
+      \item Thus $\VV{\I}{\va{a}}(\varphi)= 1$ for some v.a. $\va{a}$ defined over $\D$.
+      \item[\it RTL:] Assume $\VV{\I}{\va{a}}(\varphi)=1$ for some v.a. $\va{a}$ defined over $\D$.
+      \item Let $\va{c}$ be any v.a. defined over $\D$.
+      \item Since $\varphi$ has no free variables, $\VV{\I}{\va{a}}(\varphi)=\VV{\I}{\va{c}}(\varphi)$ by \textit{Lemma 1}.
+      \item Since $\va{c}$ was arbitrary, $\VV{\I}{\va{c}}(\varphi)=1$ for all v.a. $\va{c}$ over $\D$.
+      \item Thus $\VV{\I}{}(\varphi)=1$.
+    \end{itemize}
+
+  \qed
+\end{quote}
 
 
 \section{Uniqueness}
@@ -534,7 +618,7 @@ We are now in a position to show that this argument is valid.
 \begin{quote}
 \label{unique1}
   \textit{Proof:}
-  Let $\M=\tuple{\D,\I}$ be a QL model where $\VV{\I}{}(\forall x(Lxp \eiff x=c))=1$ and $\VV{\I}{}(Ldp)=1$.
+  Let $\M=\tuple{\D,\I}$ be a $\FOL$ model where $\VV{\I}{}(\forall x(Lxp \eiff x=c))=1$ and $\VV{\I}{}(Ldp)=1$.
   Thus $\VV{\I}{\va{a}}(\forall x(Lxp \eiff x=c))=1$ and $\VV{\I}{\va{c}}(Ldp)=1$ for some $\va{a}$ and $\va{c}$, and so $\tuple{\VV{\I}{\va{c}}(d),\VV{\I}{\va{c}}(p)}\in\I(L)$.
   It follows that $\tuple{\I(d),\I(p)}\in\I(L)$.
 
@@ -585,10 +669,10 @@ This is to claim that the \emph{one and only baby} (in the vicinity) is hungry.
 Russell was motivated in part by the apparent fact that one can use this sort of language in a meaningful way even if one is wrong about whether there's any baby around.
 If there is no baby--- the crying is a recording --- the statement is false, but it's still meaningful.
 For this reason, Russell was reluctant to suppose that we should understand `the baby' as a name.
-Remember, in QL, all names have to refer to objects in the domain.
+Remember, in $\FOL$, all names have to refer to objects in the domain.
 Instead, the sentence can be understood to be an existentially quantified claim about a unique baby.
 Saying `the baby is hungry', according to Russell, is to say three things: there is a baby, there's no other baby than that one, and that baby is hungry.
-That second element, the uniqueness claim, can be expressed in QL with identity. 
+That second element, the uniqueness claim, can be expressed in $\FOL$ with identity. 
 
 In order to bring out the contrast, consider the following symbolization key:
 
@@ -629,7 +713,7 @@ We may expand our symbolization key to regiment this claim.
 
 Instead of the single predicate `$B$', we have used `$C$' together with `$B$' in order to form the open sentence `$Cy \eand By$' which describes the individual to which we intend to refer.
 
-In order to speak generally about the means by which we may refer to some unique individual satisfying a certain condition, let $\metaA(\alpha)$ be any wff of QL$^=$ in which the variable $\alpha$ is free. 
+In order to speak generally about the means by which we may refer to some unique individual satisfying a certain condition, let $\metaA(\alpha)$ be any wff of $\FI$ in which the variable $\alpha$ is free. 
 If $\alpha$ is the only free variable in $\metaA(\alpha)$, we may take $\metaA(\alpha)$ to be a \define{description}.
 Moreover, $\metaA(\alpha)$ provides a \define{definite description} just in case $\metaA(\alpha)$ is a description which just one thing satisfies, i.e., $\qt{\exists}{\beta}\qt{\forall}{\alpha}(\metaA(\alpha)\eiff \alpha = \beta)$ where $\alpha$ and $\beta$ are distinct variables.
 Given a definite description $\metaA(\alpha)$, we may make claims about the object satisfying that description by conjoining another description $\metaB(\beta)$ within the scope of the existential quantifier as follows: 
@@ -671,7 +755,7 @@ For instance, consider the following case:
 Some philosophers of language think that sentences that seem to presuppose the existence of something that isn't there aren't straightforwardly false, but are rather defective in some other way--- perhaps they fail to be meaningful, or perhaps they take on some truth value other than true or false.
 These matters are beyond the scope of this book, and so we will remain neutral on whether Russell's theory is an accurate treatment of English.
 Nevertheless, without including identity in the language, this question would not even arise.
-This helps to bring out what is distinctive about the expressive power of QL$^=$ in contrast to QL. 
+This helps to bring out what is distinctive about the expressive power of $\FI$ in contrast to $\FOL$. 
 
 
 
@@ -682,7 +766,7 @@ This helps to bring out what is distinctive about the expressive power of QL$^=$
 \section{Quantities}
   \label{sec:Quantities}
 
-Including identity in QL$^=$ permits us to express claims about quantities that we couldn't in QL.
+Including identity in $\FI$ permits us to express claims about quantities that we couldn't in $\FOL$.
 In \S\ref{sec:IdentityLogic} we considered the sentence `Mozart composed at least two things' where identity was found to play a critical role.
 In particular, we provided the following regimentation:
 
@@ -711,7 +795,7 @@ It is important to stress that we can only drop parentheses in sentences which \
 Even so, these sentences are bound to get very long for large values of $n$.
 
 In order to characterize quantities in a more general way, it can be useful to introduce some abbreviations for what we will refer to as the \define{inequality quantifiers}.
-Instead of adding new primitive symbols to QL$^=$, we are only providing conventions for abbreviating long expression with much shorter expressions for the sake of readability.
+Instead of adding new primitive symbols to $\FI$, we are only providing conventions for abbreviating long expression with much shorter expressions for the sake of readability.
 
 In order to state these abbreviations in a general way, we will take $\beta$ to be \define{free for} $\alpha$ in $\metaA$ just in case there is no free occurrence of $\alpha$ in $\metaA$ in the scope of a quantifier that binds $\beta$. 
 For instance, $y$ is not free for $x$ in `$\forall y Fxy$' since replacing `$x$' with `$y$' would yield `$\forall yFyy$' where the quantifier `$\forall y$' would end up binding an extra variable.
@@ -740,9 +824,9 @@ We can put these quantifiers to work to consider sets of sentences like:
 
 For any natural number $n$, the set $\Gamma_\infty$ includes a sentence that says at least $n$ things that are self-identical.
 Not only may we show that there are models which satisfy $\Gamma$, these models must have infinite domains.
-That we can begin to express claims about the infinite further demonstrates just how much more expressive power QL$^=$ has than QL. 
+That we can begin to express claims about the infinite further demonstrates just how much more expressive power $\FI$ has than $\FOL$. 
 
-In addition to being able to say that there are at least $n$ things that satisfy a certain condition, QL$^=$ permits us to say that that there are at most $n$ things that satisfy a certain condition. 
+In addition to being able to say that there are at least $n$ things that satisfy a certain condition, $\FI$ permits us to say that that there are at most $n$ things that satisfy a certain condition. 
 Consider the following sentence and its regimentation:
 
 \begin{earg}
@@ -855,8 +939,8 @@ Given these recursive definitions, we may work out the following quantifiers:
 \end{align*}
 
 Although the results differ in logical form from those that we may derive from $\qt{\exists_{(n,n)}}$ for different values of $n$, they are logically equivalent.
-% The fact that these cardinality quantifiers are definable in QL$^=$ demonstrates the expressive power of this language in contrast to QL. 
-Whereas the inequality operators are interesting in their own right, the cardinality operators express something very specific, further demonstrating the expressive power of QL$^=$.
+% The fact that these cardinality quantifiers are definable in $\FI$ demonstrates the expressive power of this language in contrast to $\FOL$. 
+Whereas the inequality operators are interesting in their own right, the cardinality operators express something very specific, further demonstrating the expressive power of $\FI$.
 % For instance, we may consider a set of sentence $\Gamma=\set{}$
 % Given these definitions, we may consider the following set of sentences.
 
@@ -919,7 +1003,7 @@ For instance, consider the following argument:
 Since the identity of Hesperus and Phosphorus was not always known, we might imagine a time when Thales believed that Hesperus is rising without also believing that Phosphorus is rising.
 As a result, the argument above may have true premises and a false conclusion.
 To take another case, we may imagine that Lois loves Clark Kent and Lois does not love Superman despite the fact that Clark Kent is Superman.
-Nevertheless, both of these arguments are valid given the semantics for QL$^=$.
+Nevertheless, both of these arguments are valid given the semantics for $\FI$.
 Has something gone wrong?
 % Do we need to somehow modify the semantics we provided for identity?
 
@@ -929,18 +1013,18 @@ Belief claims are paradigmatic of opacity: just because one believes that $\meta
 For instance, suppose that Kaya is learning arithmetic and has come to believe that $2$ is even.
 Nevertheless, she hasn't learned anything about prime numbers and so does not believe that the first prime number is even despite the fact that $2$ is the first prime number. 
 
-% In QL$^=$, we will take co-referring terms to always be substitutable for each other as claimed by the schema above.
-Given that Leibniz's Law is valid over the semantics for QL$^=$, restricting Leibniz's Law requires significant revisions to the present semantics.
+% In $\FI$, we will take co-referring terms to always be substitutable for each other as claimed by the schema above.
+Given that Leibniz's Law is valid over the semantics for $\FI$, restricting Leibniz's Law requires significant revisions to the present semantics.
 For our purposes here, we will assume that co-referring terms can always be substituted for each other as asserted by the schema above.
 This amounts to the assumption that none of the sentences with which we will be concerned are opaque.
 This is a significant limitation since it is easy to introduce predicates like $B$ given above. 
 % One way to remedy the situation is to introduce a set of \textit{opaque predicates} $O^n_1,O^n_2,\ldots$ for each $n\geq 0$ which do not admit of free substitution. 
 % Whereas the arguments above are valid when regimented with predicates that are not opaque, they are invalid when regimented with opaque predicates.
 Nevertheless, overcoming this limitation is far from straightforward and lies outside the scope of our present concern.
-Although QL$^=$ is a flexible and expressive powerful language, every language has its limits.
-Nevertheless, QL$^=$ is perfectly adequate for a wide range of applications. 
+Although $\FI$ is a flexible and expressive powerful language, every language has its limits.
+Nevertheless, $\FI$ is perfectly adequate for a wide range of applications. 
 In particular, it is natural to assume that mathematics is \textit{transparent} insofar as it does not include any opaque claims.
-% Although QL$^=$ will remain useful for taking about the way things are, QL$^=$ will not permit us to speak  
+% Although $\FI$ will remain useful for taking about the way things are, $\FI$ will not permit us to speak  
 
 
 
@@ -956,8 +1040,8 @@ In particular, it is natural to assume that mathematics is \textit{transparent} 
 
 \solutions
 \problempart
-\label{pr.QL-ID-spies}
-Using the symbolization key given, translate each English-language sentence into QL with identity. For sentences containing definite descriptions, assume Russell's theory.
+\label{pr.$\FOL$-ID-spies}
+Using the symbolization key given, translate each English-language sentence into $\FOL$ with identity. For sentences containing definite descriptions, assume Russell's theory.
 \begin{ekey}
 \item[UD:] people
 \item[Kx:] $x$ knows the combination to the safe.
@@ -983,8 +1067,8 @@ Using the symbolization key given, translate each English-language sentence into
 
 \solutions
 \problempart
-\label{pr.QL-ID-cards}
-Using the symbolization key given, translate each English-language sentence into QL with identity. For sentences containing definite descriptions, assume Russell's theory.
+\label{pr.$\FOL$-ID-cards}
+Using the symbolization key given, translate each English-language sentence into $\FOL$ with identity. For sentences containing definite descriptions, assume Russell's theory.
 \begin{ekey}
 \item[UD:] cards in a standard deck
 \item[Bx:] $x$ is black.
@@ -1012,8 +1096,8 @@ Using the symbolization key given, translate each English-language sentence into
 
 \solutions
 \problempart
-\label{pr.QLbuffy}
-Using the symbolization key given, translate each English-language sentence into QL with identity.
+\label{pr.$\FOL$buffy}
+Using the symbolization key given, translate each English-language sentence into $\FOL$ with identity.
 \begin{ekey}
 \item[UD:] people, generations, and monsters
 \item[Gx:] $x$ is a generation.
@@ -1044,7 +1128,7 @@ Using the symbolization key given, translate each English-language sentence into
 
 
 
-\problempart Using the symbolization key given, translate each English-language sentence into QL with identity. For sentences containing definite descriptions, assume Russell's theory.
+\problempart Using the symbolization key given, translate each English-language sentence into $\FOL$ with identity. For sentences containing definite descriptions, assume Russell's theory.
 \begin{ekey}
 \item[UD:] animals in the world
 \item[Bx:] $x$ is in Farmer Brown's field.
@@ -1103,7 +1187,7 @@ is consistent.
 
 \problempart In \S \ref{sec.quantity} we looked at two different translations of `Mozart composed exactly two things'. Use trees to prove that they are equivalent.
 
-\problempart Translate these arguments into QL with identity, and evaluate them for validity with a tree. (Don't be surprised or discouraged if some of these trees end up very complex.)
+\problempart Translate these arguments into $\FOL$ with identity, and evaluate them for validity with a tree. (Don't be surprised or discouraged if some of these trees end up very complex.)
 \label{pr.IdentityArguments}
 \begin{earg}
 \item Dudley will threaten anyone who threatens anyone. Therefore, Dudley will threaten himself.

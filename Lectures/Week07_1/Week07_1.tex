@@ -135,59 +135,6 @@
 
 
 
-\section*{Binary Predicates}
-
-\begin{enumerate}
-  \item[\it Height:]
-    \underline{Kin is taller than Prema.\quad}\\ 
-    Prema is shorter than Kin.
-  \item[\bf Task:] Regiment the argument above.
-  \item[\it Predicates:] `is taller than', `is shorter than', and `is the same height as'.
-  \item[\it Relations:] Binary predicates express $2$-place properties, i.e., \textit{relations}. 
-  \item[\bf Question:] Is the argument above valid? How about the following arguments?
-    \begin{itemize}
-      \item $Tkp\ \therefore\ Spk$.
-      \item $Tkp\ \therefore\ \enot Tpk$.
-      \item $Tkp\ \therefore\ \enot Tpk \eand \enot Epk$.
-    \end{itemize}
-  \item[\bf Question:] What can we add to make the arguments valid?
-    \begin{itemize}
-      \item $Tkp,\ Tkp \eif Spk\ \therefore\ Spk$.
-      \item $Tkp,\ \forall x \forall y(Txy \eif Syx)\ \therefore\ Spk$.
-    \end{itemize}
-  \item[\bf Task:] Regiment the following argument.
-  \item[\it Age:] 
-    Jon is older than Sara.\\ 
-    \underline{Sara is older than Ethan.\quad}\\
-    Jon is older than Ethan.
-  \item[\it Predicates:] `is older than'.
-    \begin{itemize}
-      \item $Ojs,\ Ose\ \therefore\ Oje$.
-    \end{itemize}
-  \item[\bf Question:] Is this argument valid, and if not how can we make it valid?
-    \begin{itemize}
-      \item $Ojs,\ Ose,\ (Ojs \eand Ose) \eif Oje\ \therefore\ Oje$.
-      \item $Ojs,\ Ose,\ \forall x \forall y \forall z((Oxy \eand Oyz) \eif Oxz)\ \therefore\ Oje$.
-    \end{itemize}
-\end{enumerate}
-
-
-
-
-\section*{Polyadic Predicates}
-
-\begin{enumerate}
-  \item[\it Triadic:] 
-    `$x$ is between $y$ and $z$',\\
-    `$x$ is more similar to $y$ than to $z$',\\
-    `$x$ is closer to $y$ than to $z$', \ldots 
-  \item[\it Polyadic:] We may refer to predicates as $n$-place or $n$-adic.
-  \item[\it Properties:] $n$-place predicates express $n$-place properties.
-\end{enumerate}
-
-
-
-
 
 \section*{Primitive Symbols of $\FOL$}
 
@@ -195,7 +142,7 @@
   \item[\it Predicates:] $n$-place predicates $A^n,\ldots,Z^n$  for $n\geq 0$ with subscripts, dropping `$_0$'.
   \item[\it Constants:] $a,b,c,\ldots,t$ with subscripts, dropping `$_0$'.
   \item[\it Variables:] $u,v,w,x,y,z$ with subscripts, dropping `$_0$'.
-  \item[\it Connectives:] $\enot, \eand, \eor, \eif, \eiff$.
+  \item[\it Operators:] $\enot, \eand, \eor, \eif, \eiff$.
   \item[\it Quantifiers:] $\forall, \exists$.
   \item[\it Parentheses:] $(,)$.
 \end{enumerate}
@@ -209,20 +156,20 @@
   \item[\it Singular Terms:] Constants and variables are called \textit{singular terms}.
   \item[\it Sentences:] We reserve the term `sentence' for expressions that can be interpreted.
   \item[\it Formulas:] We use `formula' to refer to expressions that are grammatical.
-  \item[\it Definition:] All sentences are formulas but not \textit{vice versa}.
+  % \item[\it Definition:] All sentences are formulas but not \textit{vice versa}.
   \item[\it Well-Formed Formulas:] We may define the well-formed formulas (wffs) of $\FOL$ as follows:
   \item $\mathcal{F}^n\alpha_1,\ldots,\alpha_n$ is a wff of $\FOL$ if $\mathcal{F}^n$ is an $n$-place predicate and $\alpha_1,\ldots,\alpha_n$ are singular terms.
-  \item If $\varphi$ and $\psi$ are wffs and $\alpha$ is a variable, then:
+  \item If $\varphi$ and $\psi$ are wffs, $\alpha$ is a variable, and $\ast \in \set{\eand, \eor, \eif, \eiff}$, then:
     \begin{enumerate}
       \begin{multicols}{2}
-        \item $\exists\alpha\varphi$ is a wff of $\FOL$;
-        \item $\forall\alpha\varphi$ is a wff of $\FOL$;
         \item $\enot\varphi$ is a wff of $\FOL$;
-        \item[] ~
-        \item $(\varphi\eand\psi)$ is a wff of $\FOL$;
-        \item $(\varphi\eor\psi)$ is a wff of $\FOL$;
-        \item $(\varphi\eif\psi)$ is a wff of $\FOL$; and
-        \item $(\varphi\eiff\psi)$ is a wff of $\FOL$.
+        \item $(\varphi\ast\psi)$ is a wff of $\FOL$;
+        \item $\exists\alpha\varphi$ is a wff of $\FOL$; and
+        \item $\forall\alpha\varphi$ is a wff of $\FOL$.
+        % \item[] ~
+        % \item $(\varphi\eor\psi)$ is a wff of $\FOL$;
+        % \item $(\varphi\eif\psi)$ is a wff of $\FOL$; and
+        % \item $(\varphi\eiff\psi)$ is a wff of $\FOL$.
       \end{multicols}
     \end{enumerate}
   \item Nothing else is a wff of $\FOL$.

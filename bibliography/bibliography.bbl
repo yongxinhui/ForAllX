@@ -1,0 +1,79 @@
+\begin{thebibliography}{12}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\natexlab}[1]{#1}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[{Bacon(2023)}]{Bacon2023}
+Bacon, Andrew. 2023.
+\newblock \emph{A {{Philosophical Introduction}} to {{Higher-order Logics}}}.
+\newblock New York London: Routledge, 1st edition edition.
+\newblock ISBN 978-0-367-48301-2.
+
+\bibitem[{Blackburn et~al.(2002)Blackburn, {de Rijke}, and Venema}]{Blackburn2002}
+Blackburn, Patrick, {de Rijke}, Maarten, and Venema, Yde. 2002.
+\newblock \emph{Modal {{Logic}}}.
+\newblock Cambridge University Press.
+\newblock ISBN 978-0-521-52714-9.
+
+\bibitem[{Boolos and Jeffrey(1999)}]{Boolos1999}
+Boolos, George and Jeffrey. 1999.
+\newblock \emph{Logic, {{Logic}}, and {{Logic}}}.
+\newblock Cambridge, Mass.: Harvard University Press, reprint edition edition.
+\newblock ISBN 978-0-674-53767-5.
+
+\bibitem[{Boolos et~al.(2007)Boolos, Burgess, and Jeffrey}]{Boolos2007}
+Boolos, George~S., Burgess, John~P., and Jeffrey, Richard~C. 2007.
+\newblock \emph{Computability and {{Logic}}}.
+\newblock Cambridge ; New York: Cambridge University Press, 5th edition edition.
+\newblock ISBN 978-0-521-70146-4.
+
+\bibitem[{Enderton(2001)}]{Enderton2001}
+Enderton, Herbert~B. 2001.
+\newblock \emph{A {{Mathematical Introduction}} to {{Logic}}}.
+\newblock San Diego: Academic Press, 2 edition edition.
+\newblock ISBN 978-0-12-238452-3.
+
+\bibitem[{Hindley(2008{\natexlab{a}})}]{hindley2008a}
+Hindley, J.~Roger. 2008{\natexlab{a}}.
+\newblock \emph{Basic {{Simple Type Theory}}}.
+\newblock Cambridge, U.K.: Cambridge University Press, 1 edition edition.
+\newblock ISBN 978-0-521-05422-5.
+
+\bibitem[{Hindley(2008{\natexlab{b}})}]{hindley2008}
+Hindley, Jonathan P. Seldin J.~Roger. 2008{\natexlab{b}}.
+\newblock \emph{Lambda-{{Calculus}} and {{Combinators}}: {{An Introduction}}}.
+\newblock Cambridge, UK ; New York: Cambridge University Press, 2 edition edition.
+\newblock ISBN 978-0-521-89885-0.
+
+\bibitem[{Hughes and Cresswell(1996)}]{Hughes1996}
+Hughes, G.~E. and Cresswell, Max. 1996.
+\newblock \emph{A {{New Introduction}} to {{Modal Logic}}}.
+\newblock Routledge.
+
+\bibitem[{Mendelson(2015)}]{Mendelson2015}
+Mendelson, Elliott. 2015.
+\newblock \emph{Introduction to {{Mathematical Logic}}}.
+\newblock Boca Raton: {Chapman and Hall/CRC}, sixth edition edition.
+\newblock ISBN 978-1-4822-3772-6.
+
+\bibitem[{Oliver and Smiley(2013)}]{Oliver2013}
+Oliver, Alex and Smiley, Timothy. 2013.
+\newblock \emph{Plural {{Logic}}: {{Second Edition}}, {{Revised}} and {{Enlarged}}}.
+\newblock Oxford: Oxford University Press.
+\newblock ISBN 978-0-19-957042-3.
+
+\bibitem[{Priest(2008)}]{Priest2008}
+Priest, Graham. 2008.
+\newblock \emph{An {{Introduction}} to {{Non-Classical Logic}}, {{Second Edition}}: {{From If}} to {{Is}}}.
+\newblock Cambridge ; New York: Cambridge University Press, 2nd revised ed. edition edition.
+\newblock ISBN 978-0-521-67026-5.
+
+\bibitem[{Sider(2010)}]{Sider2010}
+Sider, Theodore. 2010.
+\newblock \emph{Logic for {{Philosophy}}}.
+\newblock Oxford University Press.
+\newblock ISBN 978-0-19-957558-9.
+
+\end{thebibliography}

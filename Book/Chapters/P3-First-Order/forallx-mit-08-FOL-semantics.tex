@@ -1,23 +1,21 @@
 ﻿%!TEX root = ../forallx-ubc.tex
-\chapter{A Semantics for QL}
+\chapter{A Semantics for First-Order Logic}
 \label{ch.FOL-semantics}
 
 % % TODO
 % More generally, $\enot\qt{\forall}{x}\metaA{}$ and $\qt{\exists}{x}\enot\metaA{}$ are logically equivalent, as are $\enot(\metaA{}\eif\metaB{})$ and $\metaA{}\eand\enot\metaB{}$.
 % This is something that we will prove to in the following chapter.
 
-\chaptermark{Semantics for QL}
+\chaptermark{Semantics for $\FOL$}
 %see here: looks complicated:
 %https://tex.stackexchange.com/questions/476957/capitalize-first-letter-of-words-in-chapter-mark
-% Need to figure out how to capitalize `QL' in the running header, maybe need to define a special label (like i did in dissertation)
+% Need to figure out how to capitalize `$\FOL$' in the running header, maybe need to define a special label (like i did in dissertation)
 
 % TODO: add quantifier exchange entailments in anticipation of the derived natural deduction rules
 
-In this chapter, we will provide a \emph{semantics} for QL in much the same way that we did for SL.
-Like truth in SL, truth in QL is determined by an interpretation.
-By quantifying over all interpretations of QL, we may define entailment in QL along with the other semantic notions we introduced before.
-Recall that an interpretation of SL assigns exactly one truth-value to each sentence letter.
-For example, a model $\I$ might have included these assignments:
+In this chapter, we will provide a \textit{semantics} for $\FOL$ in much the same way that we did for $\PL$.
+Recall that an interpretation of $\PL$ assigns exactly one truth-value to each sentence letter.
+For example, an interpretation $\I$ might have included these assignments:
 
 \begin{displaymath}
 	\begin{array}{ll}
@@ -27,30 +25,23 @@ For example, a model $\I$ might have included these assignments:
 	\end{array}
 \end{displaymath}
 
-Since all the sentential connectives in SL are truth-functional, the interpretation $\I$ settles the truth-value of any SL sentence that can be constructed from $P$, $Q$, and $R$ given the sentential connectives included in SL.
-Because QL includes more expressive vocabulary than SL, it requires a much richer interpretation than merely assigning truth-values to sentence letters.
-Defining the interpretations of QL and providing its semantics will the focus of this chapter.
+Since all the sentential operators in $\PL$ are truth-functional, the interpretation $\I$ settles the truth-value of any $\PL$ sentence that can be constructed from $P$, $Q$, and $R$ given the sentential connectives included in $\PL$.
+Because $\FOL$ is much more expressive than $\PL$, it requires a richer interpretation than merely assigning truth-values to sentence letters.
+% Whereas each interpretation of $\PL$ determined the truth-values of all other wfs in $\PL$ by assigning truth-values to the sentence letters, 
+% In particular, we must now interpret $n$-place predicates and constants. 
+In order to do so, we will define the \textit{models} of $\FOL$ which you can think of as austere representations of what all the terms in $\FOL$ mean. 
+Intuitively, a predicate for `is a dog' might be assigned to the set of all the dogs, though in general we will not limit ourselves to only the intuitive (or \textit{intended}) interpretations in providing a theory of logical consequence for $\FOL$.
+Similarly, constants for names such as `Fred' will be assigned to individuals, all of which exist within the \textit{domain} of a given model.
+Rather than also assigning variables to individuals once and for all, we will introduce variable assignment functions to fix the reference of variables so that we may change the reference of variables without changing the model.
+After all, the model is intended to fix the meanings of the non-logical terms in our language, and we don't want to have to change how we interpret our language in total in order to quantify over the domain of individuals provided by a given model with which we intend to interpret $\FOL$.
+
+Whereas open sentences will require both a model and a variable assignment in order to determine their truth-values, the truth-values for the wfs of $\FOL$ are entirely determined by each model of the language.
+By providing semantic clauses for the logical terms in our language, we will define logical consequence in $\FOL$ by quantifying over all models of $\FOL$.
+% Defining the interpretations of $\FOL$ and providing its semantics will the focus of this chapter.
+Spelling out these details will be the focus of this chapter.
 
 
 
-
-
-\section{Predicate Extensions}
-
-Whereas SL could be interpreted by assigning sentence letters to truth-values without recourse to any other structure, the same cannot be said for QL.
-In order to bring this out, consider the following atomic sentences:
-
-\begin{earg}
-  \item[\ex{Q1}] Casey is dancing.
-  \item[\ex{Q2}] Al loves Max.
-  % \item[\ex{Q1}] Everyone at the party is dancing.
-  % \item[\ex{Q2}] Someone at the party already left.
-\end{earg}
-
-In order to interpret the sentences \ref{Q1} and \ref{Q2}, we need to know what the names `Casey', `Al', and `Max' refer to, who is dancing, and who love who.
-Accordingly, it matters what objects there are.
-Matters are different in SL since we can directly provide an interpretation function $\I$ which assigns truth-values to sentences without specifying what there is or what predicates express what properties.
-By contrast, each interpretation in QL will be based on a \define{domain} $\D$ which we will take to be any nonempty set of objects whatsoever.
 
 % We use curly brackets `$\{$' and `$\}$' to denote sets.
 % The members of the set can be listed in any order, separated by commas, where sets either include an element or they don't.
@@ -59,6 +50,24 @@ By contrast, each interpretation in QL will be based on a \define{domain} $\D$ w
 % Although the empty set is sometimes written as `$\set{}$', it is usually written as the single symbol `$\varnothing$'.
 % % TODO: move above
 
+
+\section{Predicate Extensions}
+
+Whereas $\PL$ was interpreted by assigning sentence letters to truth-values without recourse to any other structure, the same cannot be said for $\FOL$.
+Consider the following sentences:
+
+\begin{earg} \label{simple}
+  \eitem{Casey is at the party and not dancing.}
+  \eitem{Max loves Casey.}
+  \eitem{Everyone at the party is dancing.}
+  % \item[\ex{Q2}] Someone at the party already left.
+\end{earg}
+
+In order to interpret the sentences \eref{simple}{1} -- \eref{simple}{3}, we need to know what the names `Casey' and `Max' refer to, who is dancing, who is at the party, and who love who.
+Were we to merely assign truth-values to these sentences, the fact that the name `Casey' occurs in both \eref{simple}{1} and \eref{simple}{2} would be lost.
+Additionally, there would be no way to detect the fact that \eref{simple}{1} and \eref{simple}{3} cannot both be true at once.
+Since it matters what objects there are and which names refer to which objects, each model in $\FOL$ will be based on a nonempty set of objects $\D$ which we will refer to as the \define{domain} of that model.
+% Things are different in $\PL$ since we can directly provide an interpretation function $\I$ which assigns truth-values to sentences without specifying what there is or what predicates express what properties.
 You can think of the domain as including everything that there is for the purposes of the interpretation in question.
 For instance, we might take $\D=\set{1,2,3}$ to include just three natural numbers, or we might introduce a domain $\D'=\set{Cam, Sara, Kaya, Mel}$ which includes just four people.
 Domains can be infinite--- e.g., the domain which includes all of the natural numbers, or all of the real numbers--- but they cannot be empty.
@@ -70,30 +79,32 @@ This is permitted so long as we are clear that the letter `$c$' is doing double 
 
 Given a domain $\D$, we will interpret predicates by assigning them to sets which we will construct from the domain $\D$.
 For instance, suppose that we symbolize `is taller than' with the $2$-place predicate `$T^2$'.
-To interpret `$T^2$', we consider ordered pairs of elements from $\D$, where an \define{ordered pair} is any set $\set{x,\set{y}}$ which we write $\tuple{x,y}$ for convenience. 
+% To interpret `$T^2$', we consider ordered pairs of elements from $\D$, where an \define{ordered pair} is any set $\set{\v{x},\set{\v{x}, \v{y}}}$ which we write $\tuple{\v{x},\v{y}}$ for convenience. 
+To interpret `$T^2$', we consider \define{ordered pairs} of elements from $\D$ which we will write $\tuple{\v{x},\v{y}}$ for convenience, using bold font to avoid confusion with the variables in $\FOL$. 
 Accordingly, we may interpret `$T^2$' by assigning it to a set of ordered pairs of elements from $\D$ where the first is taller than the second.
-We will refer to the set of elements to which a predicate is assigned by an interpretation of QL as the \define{extension} of that predicate.
+We will refer to the set of elements to which a predicate is assigned by an interpretation of $\FOL$ as the \define{extension} of that predicate.
 For example $\tuple{a,b}$ might belong to the extension of `$T^2$' on a given interpretation. 
 
 You might be wondering: how do we know which elements in the domain are taller than which?
-This is analogous to asking: how do we know which sentence letters in SL are true?
-Instead of relying on some prior interpret of the sentence letters in SL, each interpretation stipulates the truth-values of the sentence letters in SL.
-In a similar manner, the interpretations of the predicates in QL stipulates their extensions.
-These stipulations provide the different interpretations of QL in just the same way the stipulations of the truth-values of the sentence letters in SL provide different interpretations of SL.
+This is analogous to asking: how do we know which sentence letters in $\PL$ are true?
+Instead of relying on some prior interpret of the sentence letters in $\PL$, each interpretation stipulates the truth-values of the sentence letters in $\PL$.
+In a similar manner, the interpretations of the predicates in $\FOL$ stipulates their extensions in a given model.
+It is by considering all models that we may define a sentence $\metaA$ to be a logical consequence of a set of sentences $\MetaG$ just in case $\metaA$ is true in every model for which every sentence in $\MetaG$ is true.
+% These stipulations provide the different interpretations of $\FOL$ in just the same way the stipulations of the truth-values of the sentence letters in $\PL$ provide different interpretations of $\PL$.
 % But what about $n$-place predicates for $n>1$?
 
-Whereas the extension of a $2$-place predicate is a set of ordered pairs of elements from $\D$, how are we to interpret the $0$-place and $1$-place predicates, not to mention the $n$-place predicates of QL for $n>2$?
-Moreover, how are we going to do this all at once instead of having to provide separate instructions for the $n$-place predicates for each $n\geq 0$.
+Whereas the extension of a $2$-place predicate is a set of ordered pairs of elements from $\D$, how are we to interpret the $0$-place and $1$-place predicates, not to mention the $n$-place predicates of $\FOL$ for $n>2$?
+Moreover, how are we going to do this all at once instead of having to provide separate instructions for the $n$-place predicates for each value of $n$.
 
-We begin by drawing on $\D$ to construct Cartesian products of the domain.
+We begin by drawing on the domain $\D$ to construct Cartesian products of the domain.
 For instance, if we want to interpret a $2$-place predicate `$L^2$', we must construct the Cartesian product $\D^2=\D\times\D$ which includes all ordered pairs of the form $\tuple{\v{x},\v{y}}$ where both $\v{x}$ and $\v{y}$ are elements of $\D$.
 In set builder notation, we may define the following Cartesian product: 
-  $$ \D^2 = \set{\tuple{\v{x},\v{y}}:\v{x},\v{y}\in\D}. $$
-The identity above reads: $\D^2$ is the set which includes all and only the ordered pair $\tuple{\v{x},\v{y}}$ where both $\v{x}$ and $\v{y}$ are members of $\D$. 
-Given this notation, we may require QL interpretations to assign the $2$-place predicates of QL to subsets of $\D^2$. 
+  $$ \D^2 \coloneq \set{\tuple{\v{x},\v{y}}:\v{x},\v{y}\in\D}. $$
+The definition given above reads: $\D^2$ is the set which includes all and only the ordered pair $\tuple{\v{x},\v{y}}$ where both $\v{x}$ and $\v{y}$ are members of $\D$. 
+Given this notation, we may require $\FOL$ interpretations to assign the $2$-place predicates of $\FOL$ to subsets of $\D^2$. 
 For instance, given $\D=\set{a,b,c,d}$, we might specify an interpretation where $\I(T^2)=\set{\tuple{a,b},\tuple{b,c}}\subseteq\D^2$.
 
-In order to interpret all $n$-place predicates of QL, we will generalise on the same pattern.
+In order to interpret all $n$-place predicates of $\FOL$, we will generalise on the same pattern.
 Given any domain $\D$, we will begin by defining the $n$-ary Cartesian product: 
   $$ \D^n = \set{\tuple{\v{x}_1,\ldots,\v{x}_n}:\v{x}_1,\ldots,\v{x}_n\in\D}.$$ % ~~\text{for}~~ n\geq2 
 In place of ordered pairs, now we have ordered $n$-tuples.
@@ -109,158 +120,175 @@ Accordingly, $\D^1\neq\D$ where $1$-place predicates will be assigned to sets of
 For example, if we take `$H^1$' to symbolize the predicate `is happy', then $\I(H^1)\subseteq\D^1$ might include such elements as $\tuple{a}$.
 
 Next we may consider $\D^0$. 
-Setting $n=0$ in the definition above, it follows that $\D^0=\set{\varnothing}$ since $\tuple{}=\varnothing$.
-Since we will use $\D^0$ to interpret sentence letters, we may maintain consistency with the conventions introduced for SL by taking $1=\set{\varnothing}$ and $0=\varnothing$.
-As it happens, these are the standard von Neumann definitions of the first two ordinal numbers 0 and 1.
-Following the pattern above, a QL interpretation $\I$ will assign $A^0$ to a subset of $\set{\varnothing}$ where there are just two options: either $\I(A^0)=\set{\varnothing}=1$ or $\I(A^0)=\varnothing=0$.
-In both cases, $\I(A^0)\subseteq\D^0=\set{\varnothing}$, and so our present conventions subsume the conventions that we provided for SL.
+Setting $n=0$ in the definition above, it follows that $\D^0=\set{\varnothing}$ given that $\tuple{}=\varnothing$.
+We will use $\D^0$ to interpret sentence letters so that every sentence letter is assigned to a subset of $\D^0$, i.e., to either $\varnothing$ or $\set{\varnothing}$.
+As it happens, these are the standard von Neumann definitions of the first two ordinal numbers $0=\varnothing$ and $1=\set{\varnothing}$, and so our present approach will maintain consistency with the conventions introduced for $\PL$.
+Following the pattern above, a $\FOL$ interpretation $\I$ may assign a 0-place predicate $A^0$ to a subset of $\set{\varnothing}$, and so either $\I(A^0)=\varnothing=0$ or $\I(A^0)=\set{\varnothing}=1$.
+% In both cases, $\I(A^0)\subseteq\D^0=\set{\varnothing}$, and so our present conventions subsume the conventions that we provided for $\PL$.
 
-Having provided some sense of the extensions of $n$-place predicates on an interpretation of QL, we may now move to provide the definition of an interpretation of QL.
-As already noted, QL interpretations are parasitic on a domain, and so we cannot provide interpretations of QL on their own.
-Rather, to interpret QL we will specify an interpretation together with a domain where this pair will be referred to as a \textit{model} of QL.
+% Having provided some sense of the extensions of $n$-place predicates on an interpretation of $\FOL$, we may now move to provide the definition of an interpretation of $\FOL$.
+As already noted, $\FOL$ interpretations are parasitic on a domain, and so we cannot provide interpretations of $\FOL$ on their own.
+Rather, to interpret $\FOL$ we will specify an interpretation together with a domain where this pair will be referred to as a \textit{model} of $\FOL$.
 
 
-\section{QL Models}
-\label{ch9.ModelsQL}
+\section{Models}
+\label{ch9.FOL-Models}
 
-We are now in a position to interpret the constants and $n$-place predicates of QL over a given domain.
-In particular, $\I$ is an \define{interpretation} of QL over $\D$ just in case it satisfies:
+We are now in a position to interpret the constants and $n$-place predicates of $\FOL$ over a given domain.
+In particular, $\I$ is an \define{interpretation} of $\FOL$ over $\D$ just in case it satisfies:
 
 \begin{enumerate}[leftmargin=1.5in]
-  \item[\sc Constants:] $\I(\alpha)\in\D$ for every constant $\alpha$ of QL. 
-  \item[\sc Predicates:] $\I(\F^n)\subseteq\D^n$ for every $n$-place predicate $\F^n$ of QL where $n\geq 0$.
+  \item[\it Constants:] $\I(\alpha)\in\D$ for every constant $\alpha$ of $\FOL$. 
+  \item[\it Predicates:] $\I(\F^n)\subseteq\D^n$ for every $n$-place predicate $\F^n$ of $\FOL$ where $n\geq 0$.
 \end{enumerate}
 
-Whereas \textsc{Constants} requires that every constant $\alpha$ of QL is assigned to a unique individual in the domain $\D$, \textsc{Predicates} requires that every $n$-place predicate is assigned to a subset of $\D^n$.
-Note that if the domain could be empty, there would be no way to satisfy \textsc{Constants}.
-Hence we will require $\D\neq\varnothing$.
-More specifically, a \define{model} of QL is any ordered pair $\M=\tuple{\D,I}$ where $\D$ is any nonempty set and $\I$ is an interpretation of QL over $\D$.
+Whereas \textit{Constants} requires the constants of $\FOL$ to be assigned to individuals in the domain $\D$, \textit{Predicates} requires the $n$-place predicates to be assigned to subsets of $\D^n$.
+Since there would be no way to satisfy \textit{Constants} if the domain were empty, we will require the domain to be nonempty $\D\neq\varnothing$.
+More specifically, a \define{model} of $\FOL$ is any ordered pair $\M=\tuple{\D,I}$ where $\D$ is a nonempty set and $\I$ is any interpretation of $\FOL$ over $\D$.
 
-Consider the following symbolization key for the sentences \ref{Q1} and \ref{Q2} given above:
+Consider the following regimentation for the sentences \eref{simple}{1} -- \eref{simple}{3} given above:
+
+\begin{multicols}{2}
+
+\begin{earg} \label{regsimp}
+  \eitem{$Pc \eand \enot Dc$.}
+  \eitem{$Lmc$.}
+  \eitem{$\qt{\forall}{x}(Px \eif Dx)$.}
+\end{earg}
+
+\vfill
+\strut
 
 \begin{ekey}
+  \item[Px:] $x$ is at the party.
   \item[Dx:] $x$ is dancing. 
-  \item[Lx:] $x$ loves $y$.
+  \item[Lxy:] $x$ loves $y$.
   \item[c:] Casey.
-  \item[a:] Al.
   \item[m:] Max.
 \end{ekey}
 
-We may regiment the sentences \ref{Q1} and \ref{Q2} as follows:
+\end{multicols}
 
-\begin{earg}
-  \item[\ex{RQ1}] $Dc$.
-  \item[\ex{RQ2}] $Lam$.
-\end{earg}
-
-Given the definition of a QL model above, we may consider what it would look like to interpret these sentences.
-In particular, we must specify a domain $\D$ along with interpretations of the constants and predicates in QL.
-Since this would take a long time--- there are infinitely many constants and predicates--- we will restrict our ambitions to the more modest task of interpreting the constants and predicates with which we are concerned, officially referring to this as a \define{partial model} of QL, often calling it a \define{model} for short.
+Given the definition of a $\FOL$ model above, we may consider what it would look like to interpret these sentences.
+In particular, we must specify a domain $\D$ along with interpretations of the constants and predicates in $\FOL$.
+Since this would take a long time--- there are infinitely many constants and predicates--- we will restrict our ambitions to the more modest task of interpreting the constants and predicates with which we are concerned, officially referring to this as a \define{partial model} of $\FOL$, often calling it a \define{model} for short.
 Consider the following:
 
 \begin{partialmodel}
-	$\D$		& $\set{c,a,m}$\\
-  $\I(D)$	& $\set{\tuple{c}}$\\
-  $\I(L)$ & $\set{\tuple{a,m}}$\\
+	$\D$		& $\set{c,m}$\\
 	$\I(c)$	& $c$\\
-	$\I(a)$	& $a$\\
-	$\I(m)$	& $m$
+	$\I(m)$	& $m$\\
+  $\I(P)$	& $\set{\tuple{c}}$\\
+  $\I(D)$	& $\varnothing$\\
+  $\I(L)$ & $\set{\tuple{m,c}}$
 \end{partialmodel}
 
-Here the domain consists of three elements $c$, $a$, and $m$ where the extension of the predicate $D$ is the set $\set{c}$ and the extension of the predicate $L$ is the set $\set{\tuple{a,m}}$.
-Moreover, the constants $c$, $a$, and $m$ are assigned to themselves, $c$, $a$, and $m$, respectively. 
+Here the domain consists of two elements $c$ and $m$ where the extension of the predicate $P$ is the set $\set{\tuple{c}}$, the extension of the predicate $D$ is empty, and the extension of the predicate $L$ is the set $\set{\tuple{a,m}}$.
+It is important to observe that the constants $c$ and $m$ are doing double duty since they are each assigned to themselves. 
 That is, we happened to pick a domain consisting of the constants which we are using to name themselves as elements of the domain.
 This is often convenient, but by no means necessary.
-For instance, we could have let $\D=\set{1,2,3}$ where $\I(c)=1$, $\I(a)=2$, $\I(m)=3$, $\I(D)=\set{\tuple{1}}$, and $\I(L)=\set{\tuple{2,3}}$.
-The only reason to prefer our first model as opposed to the second is that it is easy to keep track of what refers to what by taking the constants to do double duty.
+For instance, we could have let $\D=\set{1,2}$ where $\I(c)=1$, $\I(m)=2$, $\I(P)=\set{\tuple{1}}$, $\I(D)=\varnothing$, and $\I(L)=\set{\tuple{2,1}}$.
+The only reason to prefer our first model as opposed to the second is that it is easy to keep track of what refers to what by taking the constants to name themselves.
 
-Although we have succeeded in providing interpretations of the constants and predicates included in the symbolization key, we have not yet provided any way to determine whether the sentences \ref{RQ1} and \ref{RQ2} are true or false.
-Whereas the truth-values of at least the sentence letters are provided by the interpretations of SL, the same cannot be said for QL.
-Even in the case of atomic sentences, a model of QL does not determine truth and falsity.
-Rather, the truth and falsity of the sentences of QL are determined by the semantic clauses for QL.
-
-In order to provide the semantics for QL in full, it will also be necessary to include consideration of the variables.
-Although QL models do not interpret variables, this does not mean that quantified sentences which include variables do not have truth-values.
-Rather, we will rely on the notion of an \textit{assignment} of variables to elements of the domain, where this will resemble the interpretation of the constants, but may be varied independently of the model.
-It is by appealing to assignments that we will provide semantic clauses for the quantifiers in QL.
+Although we have interpreted the constants and predicates included in the symbolization key, we have not yet said anything about how variables are to be understood, nor have we provided a way to determine whether the sentences \eref{regsimp}{1} -- \eref{regsimp}{3} are true or false.
+% In order to do so, we must provide a semantics for $\FOL$, it will also be necessary to include consideration of the variables.
+Although $\FOL$ models do not interpret variables directly, this does not mean that quantified sentences which include variables do not have truth-values.
+Rather, we will rely on the notion of a variable assignment which maps variables to elements of the domain, where this will resemble the interpretation of the constants, but may be varied independently of the model.
+It is by appealing to variable assignments that we may provide semantic clauses for the quantifiers.
 
 
 \section{Variable Assignments}
 \label{ch9.VariableAssignments}
 
 Recall from before that every domain is required to be nonempty.
-Accordingly, there is guaranteed to be a way to interpret all of the constants included in QL even if many of those constants end up referring to the same elements of the domain.
-If there is just one element $d$ in the domain $\D=\set{d}$, every constant will be assigned to $d$, and so there is no latitude at all for how to interpret the constants in QL.
-By contrast, if $\D$ includes more than one element, suddenly there are many different ways for a QL interpretation to assign constants to elements of the domain. 
-For instance, given infinitely many constants in QL and just two elements in the domain, each interpretation of QL will decide which element in the domain each constant is assigned to.
-That is already a lot of decisions!
+Accordingly, there is guaranteed to be a way to interpret all of the constants included in $\FOL$ even if many of those constants end up referring to the same elements of the domain.
+If there is just one element $d$ in the domain $\D=\set{d}$, every constant will be assigned to $d$, and so there is no latitude at all for how to interpret the constants in $\FOL$.
+By contrast, if $\D$ includes more than one element, suddenly there are many different ways for a $\FOL$ interpretation over $\D$ to assign constants to elements of the domain. 
+For instance, given a domain $\D$ with just two elements in the domain, each interpretation of $\FOL$ will decide which element in the domain each of the infinitely many constants in $\FOL$ is assigned to.
+That is already a lot of decisions.
 
 Something similar may be observed in the case of assigning variables to elements of the domain.
-Given a domain $\D$, a \define{variable assignment} $\hat{a}$ over $\D$ is a function from the variables in QL to elements of $\D$.
-Accordingly, $\hat{a}(\alpha)\in\D$ for all variables $\alpha$ in QL. 
-As in the case of assigning constants to elements in the domain, there are typically many different variable assignments so long as $\D$ includes more than one element. 
-Nevertheless, we may quantify over the variable assignments defined for a given domain where it is by doing so that we will provide semantic clauses for the quantifiers included in QL.
+Given a domain $\D$, a \define{variable assignment} $\hat{a}$ over $\D$ is any function from the variables in $\FOL$ to elements of $\D$.
+Accordingly, $\hat{a}(\alpha)\in\D$ for all variables $\alpha$ in $\FOL$. 
+As in the case of assigning constants to elements in the domain, there are many different variable assignments so long as $\D$ includes more than one element. 
+Nevertheless, we may quantify over the variable assignments defined for a given domain where it is by doing so that we will provide homophonic semantic clauses for the quantifiers included in $\FOL$.
 
 Suppose that we have a variable assignment (v.a. for short) $\va{a}$.
-In considering another v.a. $\va{b}$, there is no guarantee that $\va{a}$ and $\va{b}$ will agree about the elements of the domain that they assign to the different variables in QL.
+In considering another v.a. $\va{b}$, there is no guarantee that $\va{a}$ and $\va{b}$ will agree about the elements of the domain that they assign to the different variables in $\FOL$.
 Instead of considering any other v.a. $\va{b}$ at all, it will often be convenient to consider \textit{variations} of $\va{a}$ which agree with $\va{a}$ about the elements they assign to every variable with the only possible exception being some particular variable with which we happen to be concerned.
 More precisely, we will take $\va{c}$ to be an $\alpha$-\define{variant} of $\va{a}$ just in case $\va{c}(\beta)=\va{a}(\beta)$ for every variable $\beta\neq\alpha$.
 Accordingly, $\alpha$-variants of $\va{a}$ differ with $\va{a}$ in at most the variable $\alpha$, and may even agree about $\alpha$.
 All we know is that $\alpha$-variants agree with $\va{a}$ about all variables with the only possible exception of $\alpha$.
 
 Given a domain $\D=\set{1,2,3,4,5}$, suppose that $\va{a}(x)=1$, $\va{a}(y)=2$, and $\va{a}(z)=3$.
-Letting $\va{c}$ be a $y$-variant of $\va{a}$, we know conclusively that $\va{c}(x)=\va{a}(x)=1$ and $\va{c}(z)=\va{a}(z)=3$.
+Letting $\va{c}$ be a $y$-variant of $\va{a}$, we know by definition that $\va{c}(x)=\va{a}(x)=1$ and $\va{c}(z)=\va{a}(z)=3$.
 What we don't know is the identity of $\va{c}(y)$.
 Although it is possible that $\va{c}(y)=\va{a}(y)=2$, all that we know is that $\va{c}(y)\in\D$, and so there are exactly five possibilities given the size of our domain $\D$.
-It is by quantifying over variants of a v.a. that we will interpret the quantifiers in QL.
+It is by quantifying over variants of a v.a. that we will interpret the quantifiers in $\FOL$.
 
-Given a model $\M=\tuple{\D,\I}$ and a variable assignment $\va{a}$, it will be important to provide a general way to interpret singular terms.
-After all, a well-formed atomic formula of the form $\F^n\alpha_1,\ldots,\alpha_n$ may include both constants and variables, and we want to be able to treat these together in order to assign $\F^n\alpha_1,\ldots,\alpha_n$ a truth-value. 
-Thus we may define:
+Given a model $\M=\tuple{\D,\I}$ and a v.a. $\va{a}$, it will be important to provide a uniform way to interpret singular terms.
+After all, a well-formed atomic formula of the form $\F^n\alpha_1,\ldots,\alpha_n$ may include both constants and variables, and we want to be able to treat these together in order to assign $\F^n\alpha_1,\ldots,\alpha_n$ a truth-value relative to both a modal and v.a. defined over the domain of that model. 
+Thus we may define the \define{value} (or \define{reference}) of a singular term:
 
 \begin{align*}
-  \VV{\I}{\va{a}}{(\alpha)}=
+  \val{\I}{\va{a}}{(\alpha)}=
     \begin{cases}
       \I(\alpha) & \text{if } \alpha \text{ is a constant} \\
       \va{a}(\alpha) & \text{if } \alpha \text{ is a variable.}
     \end{cases}
 \end{align*}
 
-If $\alpha$ happens to be a constant, then our function $\VV{\I}{\va{a}}{}$ appeals to the interpretation $\I$ in order to specify the element of the domain to which it refers. 
-If, however, $\alpha$ is a variable, then $\VV{\I}{\va{a}}{}$ appeals to the v.a. $\va{a}$ in order to specify an element of the domain.
-Given $\I$ and $\va{a}$, we may don't need to know whether $\alpha$ is a constant or a variable in order to specify the element in the domain to which it refers.
-This will turn out to be very important for providing truth-values for the atomic wffs of QL since they may include both constants and variables.
+If $\alpha$ happens to be a constant, then our function $\val{\I}{\va{a}}{}$ appeals to the interpretation $\I$ in order to specify the element of the domain to which it refers. 
+If, however, $\alpha$ is a variable, then $\val{\I}{\va{a}}{}$ appeals to the v.a. $\va{a}$ in order to specify an element of the domain.
+Given $\I$ and $\va{a}$, we don't need to know whether $\alpha$ is a constant or a variable in order to specify the element in the domain to which it refers.
+This will turn out to be very important for providing truth-values for the atomic wffs of $\FOL$ since they may include both constants and variables.
 
 
 
 
 
-\section{Semantics for QL}
+\section{Semantics}
 
-Having defined the models for QL as well as the variable assignments for a given domain, we are now in a position to provide the semantic clauses by which we will assign truth and falsity to the sentences of QL.
-Here it is important to recall the difference between open sentences which include free variables and the sentences of QL which do not.
-Whereas every model of QL will determine the truth-value of the sentences of QL, the same does not hold for the open sentences of QL which include free variables.
+Having defined the models for $\FOL$ as well as the variable assignments for a given domain, we are now in a position to provide the semantic clauses by which we will assign truth and falsity to the sentences of $\FOL$.
+Here it is important to recall the difference between open sentences which include free variables and the sentences of $\FOL$ which do not.
+Whereas every model of $\FOL$ will determine the truth-value of the sentences of $\FOL$, the same does not hold for the open sentences of $\FOL$ which include free variables.
 Rather, such sentences must be interpreted at a model together with a variable assignment.
 
 
-This takes the following form:
+In order to interpret all wfs of $\FOL$ given only a model of the language, we will begin by interpreting all wff of $\FOL$ given both a model $\M = \tuple{\D, \I}$ and a v.a. $\va{a}$ defined over $\D$. 
+Given these ingredients, we may provide a recursive definition of the \define{valuation function} $\VV{\I}{\va{a}}$ which assigns ever wffs of $\FOL$ to a unique truth-value. 
+Since wfs do not have free variables, it will turn out that if $\VV{\I}{\va{a}}(\metaA) = \VV{\I}{\va{c}}(\metaA)$ for any model $\M$ of $\FOL$, wfs $\metaA$, and v.a.s $\va{a}$ and $\va{c}$.
+% Moreover, since every domain is nonempty, there is at least one v.a. for each model $\M$ of $\FOL$. 
+Put otherwise, v.a.s only make a difference to the truth-values assigned to open sentences.
+Accordingly, we will take a wfs of $\FOL$ to be true in a model $\M = \tuple{\D, \I}$ just in case it is true in $\M$ for every v.a. $\va{a}$ defined over $\D$.
+It is in terms of this definition of truth in a model independent of any v.a. that we will go on to define logical consequence for $\FOL$.
 
-\begin{enumerate}[labelsep=.15in]
-  \item[($A$)] $\VV{\I}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1$ just in case $\tuple{\VV{\I}{\va{a}}{(\alpha_1)},\ldots,\VV{\I}{\va{a}}{(\alpha_n)}}\in\I(\F^n)$.
-  \item[(\hspace{1pt}$\forall$\hspace{1pt})] $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ just in case $\VV{\I}{\va{c}}(\metaA)=1$ for every $\alpha$-variant $\va{c}$ of $\va{a}$.
-  \item[(\hspace{1pt}$\exists$\hspace{1pt})] $\VV{\I}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$ just in case $\VV{\I}{\va{c}}(\metaA)=1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$.
-  \item[(\enot)] $\VV{\I}{\va{a}}(\enot\metaA{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})\neq 1$.
-  \item[(\eor)] $\VV{\I}{\va{a}}(\metaA{} \eor \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})=1$ or $\VV{\I}{\va{a}}(\metaB{})=1$ (or both).
-  \item[(\eand)] $\VV{\I}{\va{a}}(\metaA{} \eand \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})=1$ and $\VV{\I}{\va{a}}(\metaB{})=1$.
-  \item[(\eif)] $\VV{\I}{\va{a}}(\metaA{} \eif \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})=0$ or $\VV{\I}{\va{a}}(\metaB{})=1$ (or both).
-  \item[(\eiff)] $\VV{\I}{\va{a}}(\metaA{} \eiff \metaB{})=1$ just in case $\VV{\I}{\va{a}}(\metaA{})=\VV{\I}{\va{a}}(\metaB{})$.
-\end{enumerate}
+With these ambitions in mind, given any model $\M = \tuple{\D, \I}$ and v.a. $\va{a}$ defined over $\D$, we may assign truth-values to all wffs of $\FOL$ by recursively defining the \define{valuation function} $\VV{\I}{\va{a}}$ from the domain of wffs for $\FOL$ to truth values $\set{0,1}$ by way of the following semantics: % for each of the sentential operators included in $\PL$:
+% the following semantics for $\FOL$ allow us to  :
 
-The semantic clauses for the truth-functional operators $\enot,\eand,\eor,\eif,\eiff$ have been preserved from SL with the exception that a parameter has been added for a variable assignment. 
+\factoidbox{
+  \textsc{Valuation Function:} For any wffs $\metaA$ and $\metaB$ of $\FOL$, $n$-place predicate $\F^n$ of $\FOL$, and $n$ singular terms $\alpha_1, \ldots, \alpha_n$ of $\FOL$: 
+  \begin{enumerate}[leftmargin=.25in]
+    \item[] $\VV{\I}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1$ ~\textit{iff}~ $\tuple{\val{\I}{\va{a}}{(\alpha_1)},\ldots,\val{\I}{\va{a}}{(\alpha_n)}}\in\I(\F^n)$.
+    \item[] $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ ~\textit{iff}~ $\VV{\I}{\va{c}}(\metaA)=1$ for every $\alpha$-variant $\va{c}$ of $\va{a}$.
+    \item[] $\VV{\I}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$ ~\textit{iff}~ $\VV{\I}{\va{c}}(\metaA)=1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$.
+    \item[] $\VV{\I}{\va{a}}(\enot\metaA{})=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA{})\neq 1$.
+    \item[] $\VV{\I}{\va{a}}(\metaA{} \eor \metaB{})=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA{})=1$ or $\VV{\I}{\va{a}}(\metaB{})=1$ (or both).
+    \item[] $\VV{\I}{\va{a}}(\metaA{} \eand \metaB{})=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA{})=1$ and $\VV{\I}{\va{a}}(\metaB{})=1$.
+    \item[] $\VV{\I}{\va{a}}(\metaA{} \eif \metaB{})=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA{})=0$ or $\VV{\I}{\va{a}}(\metaB{})=1$ (or both).
+    \item[] $\VV{\I}{\va{a}}(\metaA{} \eiff \metaB{})=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA{})=\VV{\I}{\va{a}}(\metaB{})$.
+  \end{enumerate}
+}
+
+The semantic clauses for the truth-functional operators $\enot,\eand,\eor,\eif,\eiff$ have been preserved from $\PL$ with the exception that a parameter has been added for a variable assignment. 
 Nevertheless, variable assignments do not do any work in the semantic clauses for the truth-functional operators, and so we may focus attention on the first three clauses in which variables assignments make an essential contribution.
 
-For any interpretation $\I$ and v.a. $\va{a}$, an atomic wff such as $G^3axy$ is true on $\I$ given $\va{a}$ just in case $\tuple{\VV{\I}{\va{a}}(a),\VV{\I}{\va{a}}(x),\VV{\I}{\va{a}}(y)}$ is a member of $\I(G^3)$.
-In this case $\VV{\I}{\va{a}}(a)=\I(a)$, $\VV{\I}{\va{a}}(x)=\va{a}(x)$, and $\VV{\I}{\va{a}}(y)=\va{a}(y)$, and so $\tuple{\VV{\I}{\va{a}}(a),\VV{\I}{\va{a}}(x),\VV{\I}{\va{a}}(y)}=\tuple{\I(a),\va{a}(x),\va{a}(y)}$. 
+It will be convenient to refer to an interpretation and v.a. while leaving reference to the model over which they are defined implicit.
+For instance, we might consider some interpretation $\I$ and $\va{a}$, where it is assumed that $\I$ belongs to a model $\M = \tuple{\D, \I}$ of $\FOL$ where $\va{a}$ is defined over the domain of that model $\D$.
+This convention will ease the following exposition.
+
+Given any interpretation $\I$ and v.a. $\va{a}$, an atomic wff such as $G^3axy$ is true on $\I$ given $\va{a}$ just in case $\tuple{\val{\I}{\va{a}}(a),\val{\I}{\va{a}}(x),\val{\I}{\va{a}}(y)}$ is a member of $\I(G^3)$.
+In this case $\val{\I}{\va{a}}(a)=\I(a)$, $\val{\I}{\va{a}}(x)=\va{a}(x)$, and $\val{\I}{\va{a}}(y)=\va{a}(y)$, and so $\tuple{\val{\I}{\va{a}}(a), \val{\I}{\va{a}}(x), \val{\I}{\va{a}}(y)}=\tuple{\I(a),\va{a}(x),\va{a}(y)}$. 
 Since $G^3$ is a $3$-place predicate, we know that $\I(G^3)\subseteq \D^3$ is a set of ordered triples. 
 The question remains whether $\tuple{\I(a),\va{a}(x),\va{a}(y)}\in\I(G^3)$.
 If so, $G^3axy$ is true on $\I$ given $\va{a}$, and false otherwise.
@@ -273,76 +301,85 @@ Thus by quantifying over all $x$-variants of $\va{a}$, we are requiring $\tuple{
 For instance, assuming $\D=\set{1,2,3}$ where $\I(a)=1$ and $\va{a}(y)=3$, it follows that $\forall xG^3axy$ is true on $\I$ given $\va{a}$ just in case $\tuple{1,1,3}$, $\tuple{1,2,3}$, and $\tuple{1,3,3}$ are all members of $\I(G^3)$.
 
 Suppose that some wff $\metaA$ is true on an interpretation $\I$ given a v.a. $\va{a}$.
-For instance, perhaps $\forall xG^3axy$ is true on $\I$ given $\va{a}$ since $\I(G^3)=\set{\tuple{1,1,3},\tuple{1,2,3},\tuple{1,3,3},\tuple{2,3,1},\tuple{1,1,1}}$.
 What can we conclude?
 Very little.
-Even though $\VV{\I}{\va{a}}(G^3axy)=1$, we don't know whether this sentence will remain true on other variable assignments.
+Even though $\VV{\I}{\va{a}}(\metaA)=1$, we don't know whether this wff will remain true on other variable assignments.
 Moreover, it is not clear what to make of truth on an interpretation \textit{given a variable assignment}.
 What we want to know is whether the sentence is true on an interpretation independent of the variable assignment.
 
-So long as a wff of QL includes free variables, there is no way to assign that sentence a truth-value without appealing to a variable assignment.
-This is not true for the sentences of QL which do not include free variables.
-For instance, consider the sentence $\exists y\forall xG^3axy$.
-Because $\VV{\I}{\va{a}}(\forall xG^3axy)=1$ and $\va{a}$ is a $y$-variant of itself, it follows that $\va{e}=\va{a}$ has a $y$-variant $\va{a}$ where $\VV{\I}{\va{a}}(\forall xG^3axy)=1$, and so $\VV{\I}{\va{e}}(\exists y\forall xG^3axy)=1$ by the semantic clause for the existential quantifier. 
+So long as a wff of $\FOL$ includes free variables, there is no way to assign that sentence a truth-value without appealing to a variable assignment.
+For instance, perhaps $\forall xG^3axy$ is true on $\I$ given $\va{a}$ since $\I(G^3)=\set{\tuple{1,1,3},\tuple{1,2,3},\tuple{1,3,3},\tuple{2,3,1},\tuple{1,1,1}}$.
+By contrast, the wfss of $\FOL$ which do not include free variables may have truth-values that are independent of any particular v.a. and determined entirely by the models of $\FOL$.
+For instance, consider the sentence $\qt{\exists}{y}\qt{\forall}{x}G^3axy$.
+Because $\VV{\I}{\va{a}}(\forall xG^3axy)=1$ and $\va{a}$ is a $y$-variant of itself, it follows that $\va{e}=\va{a}$ has a $y$-variant $\va{a}$ where $\VV{\I}{\va{a}}(\forall xG^3axy)=1$, and so $\VV{\I}{\va{e}}(\exists y\forall xG^3axy)=1$ by the semantics for the existential quantifier. 
 Whereas we chose $\va{e}=\va{a}$ for convenience, we could have taken $\va{e}$ to be any v.a. whatsoever. 
 This is because for any v.a. $\va{e}$, it will have a $y$-variant $\va{g}$ where $\va{g}(y)=\va{a}(y)=3$, and so $\VV{\I}{\va{g}}(\forall xG^3axy)=1$ for the same reasons given above. 
 
-This case brings out a general point: if $\metaA$ is a sentence of QL and so does not have any free variables, then $\VV{\I}{\va{a}}(\metaA)=1$ just in case $\VV{\I}{\va{c}}(\metaA)=1$ for every v.a. $\va{c}$.
-This is perhaps easiest to see in the case where a sentence of QL does not have any variables at all.
+This case brings out the general point mentioned above: if $\metaA$ is a wfs of $\FOL$ and so does not have any free variables, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$ for any v.a.s $\va{a}$ and $\va{c}$.
+This is perhaps easiest to see in the case where a sentence of $\FOL$ does not have any variables at all.
 For instance $\VV{\I}{\va{a}}(F^1b)=1$ just in case $\tuple{\I(b)}\in\I(F^1)$.
 Since the v.a. $\va{a}$ does not appear in $\tuple{\I(b)}\in\I(F^1)$, we can be sure that $\VV{\I}{\va{a}}(F^1b)=1$ just in case $\VV{\I}{\va{c}}(F^1b)=1$ for every v.a. $\va{c}$ whatsoever.
 
-Although variable assignments play a critical role in assigning truth-values to the open sentences of QL, they play at most an auxiliary role in assigning truth-values to the sentences of QL. 
-Accordingly, we may define the truth-values of the sentences of QL as follows:
-
-\begin{enumerate}[labelsep=.15in]
-  \item[($\metaA$)] $\VV{\I}{}(\metaA)=1$ just in case $\VV{\I}{\va{a}}(\metaA)=1$ for some $\va{a}$ where $\metaA$ is a sentence of QL.
-\end{enumerate}
-
-Our primary concern is as it was in SL: to interpret the sentences of QL across a range of interpretations.
-To do so, we needed to consider variable assignments, since this is how we provided the semantics for the quantifiers.
-Even so, the variable assignments were merely instrumental.
-By the time that we are evaluating the sentences that we actually care about--- those without free variables--- the variable assignments have no work left to do.
-
-Having specified what it is for a sentence of QL to be true in an interpretation, we may now proceed to specify a range of semantic notions that are of interest as we did before.
+Although variable assignments play a critical role in assigning truth-values to the open sentences of $\FOL$, they play at most an auxiliary role in assigning truth-values to the sentences of $\FOL$. 
+We may then define the truth-values of the wfss of $\FOL$ as follows:
 
 
+\factoidbox{
+  \textsc{Theory of Truth:} For any wfs $\metaA$ and model $\M = \tuple{\D, \I}$ of $\FOL$: 
+  \begin{enumerate}[labelsep=.15in]
+    \item[] $\VV{\I}{}(\metaA)=1$ just in case $\VV{\I}{\va{a}}(\metaA)=1$ for every v.a. $\va{a}$ defined over $\D$.
+  \end{enumerate}
+}
+
+Whereas the semantics for $\PL$ provided a theory of truth for the wfss of $\PL$ all by itself, the same cannot be said for the semantics for $\FOL$.
+Rather, the semantics for $\FOL$ defined truth relative to both a model of $\FOL$ and variable assignment defined over the domain of that model. 
+% To do so, we considered variable assignments in order to provide a semantics for the quantifiers.
+Nevertheless, out primary concern is the same as it was in $\PL$: to interpret the wfs of $\FOL$ across a range of interpretations (models) of the language, independent of any other parameter.
+Instead of defining truth relative to both a model and v.a., the truth theory for $\FOL$ given above provides a way to abstract from the v.a.s upon which the truth-values of the wffs of $\FOL$ depend. 
+This abstraction is licensed by the fact that the wfs of $\FOL$ do not contain free variables, and so the variable assignments have no work left to do.
+
+Having specified what it is for a sentence of $\FOL$ to be true in a model, we may now move to define a range of semantic notions that are of interest as we did before where most prominent among them is the theory of logical consequence for $\FOL$.
 
 
 
 
-\section{Satisfaction and Entailment}
-\label{sec.Entailment}
 
-A QL model $\M=\tuple{\D,\I}$ \define{satisfies} a set of QL sentences $\Gamma$ just in case every $\metaA\in\Gamma$ is true in $\M$, i.e. $\VV{\I}{}(\metaA)=1$ for every $\metaA\in\Gamma$.
-As before, a model $\M$ satisfies a single sentence $\metaA$ just in case it satisfies its singleton $\set{\metaA}$.
-Using the double turnstile symbol `$\models$' for entailment in QL in the same way as we did for SL, we may define entailment as follows:
 
-\begin{enumerate}[leftmargin=1.5in]
-  \item[\sc Entailment:] $\Gamma\models\metaA$ just in case every model that satisfies $\Gamma$ also satisfies $\metaA$.
-\end{enumerate}
+\section{Logical Consequence}
+\label{sec.FOL-logical-consequence}
 
-As before, $\models\metaA$ is shorthand for $\varnothing\models\metaA$, which means that $\metaA$ is satisfied by every QL model.
-We may then import all the same semantic definitions that we introduced in Chapter \ref{ch.SLmodels}.
+% A $\FOL$ model $\M=\tuple{\D,\I}$ \define{satisfies} a set of $\FOL$ sentences $\Gamma$ just in case every $\metaA\in\Gamma$ is true in $\M$, i.e. $\VV{\I}{}(\metaA)=1$ for every $\metaA\in\Gamma$.
+% As before, a model $\M$ satisfies a single sentence $\metaA$ just in case it satisfies its singleton $\set{\metaA}$.
+Using the double turnstile symbol `$\vDash$' for logical consequence in $\FOL$ in the same way as we did for $\PL$, we may define logical consequence as follows:
 
-\begin{quote}
-A \define{tautology in QL} is a sentence $\metaA$ where $\models\metaA$.
+\factoidbox{
+  \textsc{Logical Consequence:} For any set of wfss $\MetaG\cup\set{\metaA}$ of $\FOL$: 
+    \begin{enumerate}[labelsep=.15in]
+    \item[] $\Gamma\vDash\metaA$ ~\textit{iff}~ for any model $\M = \tuple{\D, \I}$ of $\FOL$, if $\VV{\I}{}(\metaG) = 1$ for all $\metaG \in \MetaG$, then $\VV{\I}{}(\metaA) = 1$.
+    \end{enumerate}
+}
 
-A \define{contradiction in QL} is a sentence $\metaA$ where $\models\enot\metaA$.
+% It is important to understand the way in which `whenever' is implicitly quantifying over all models of $\FOL$.
+% Put explicitly, the definition above can be restated: $\Gamma\vDash\metaA$ just in case for every model $\M = \tuple{\D, \I}$ of $\FOL$, if $\VV{\I}{}(\metaG) = 1$ for all $\metaG \in \MetaG$, then $\VV{\I}{}(\metaA) = 1$.
+As before, $\vDash\metaA$ is shorthand for $\varnothing\vDash\metaA$, which requires that $\VV{\I}{}(\metaA) = 1$ in every $\FOL$ model.
+We may now restated all of the same semantic definitions that we introduced in Chapter \ref{ch.PL-semantics} where it is understood that by quantifying overt all $\I$ and $\J$ we are implicitly quantifying over all models $\M = \tuple{\D, \I}$ and $\M' = \tuple{\D', \J}$ of $\FOL$ whatsoever.
 
-A sentence is \define{contingent in QL} if and only if $\nmodels\metaA$ and $\nmodels\enot\metaA$.
+\factoidbox{
+  \begin{itemize}[leftmargin=0in]
+    \item[] \define{tautology}: $\metaA$ is a \textit{tautology iff} $\V{\I}(\metaA) = 1$ for all $\I$.
+    \item[] \define{contradiction}: $\metaA$ is a \textit{contradiction iff} $\V{\I}(\metaA) = 0$ for all $\I$.
+    \item[] \define{contingent}: $\metaA$ is \textit{logically contingent iff} $\V{\I}(\metaA) \neq \V{\J}(\metaA)$ for some $\I$ and $\J$.
+    \item[] \define{entailment}: $\metaA$ \textit{logically entails} $\metaB$ \textit{iff} $\V{\I}(\metaA) \leq \V{\I}(\metaB)$ for all $\I$.
+    \item[] \define{equivalence}: $\metaA$ is \textit{logically equivalent} to $\metaB$ \textit{iff} $\V{\I}(\metaA) = \V{\I}(\metaB)$ for all $\I$.
+    \item[] \define{satisfiable}: $\Gamma$ is \textit{satisfiable iff} there is some $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \Gamma$.
+    % \item[] \define{consequence}: $\MetaG \vDash \metaA$ \textit{iff} $\V{\I}(\metaA) = 1$ for all $\I$ where $\V{\I}(\metaG) = 1$ for all $\metaG \in \Gamma$.
+  \end{itemize}
+}
 
-  An argument $\metaA_1,\metaA_2,\ldots\ \therefore\ \metaB$ is \define{valid in QL} if and only if $\set{\metaA_1,\metaA_2,\ldots}\models\metaB$ and \define{invalid in QL} otherwise.
-
-Two sentences $\metaA$ and $\metaB$ are \define{logically equivalent in QL} if and only if both $\metaA\models\metaB$ and $\metaB\models\metaA$.
-
-The set $\Gamma$ is \define{consistent in QL} if and only if there is at least one model $\M$ that satisfies $\Gamma$ and \define{inconsistent in QL} otherwise.
-\end{quote}
-
-These semantic notions will play much the same role that they did in SL.
-The only difference is that now we have a much more expressively powerful language QL in place of SL.
-As a result, it is a lot harder to show that a sentence is true or false in a model.
-Just as we constructed interpretations to make sentences of SL either true or false depending on our aims, we will do something similar for the sentences of QL.
+These semantic notions will play much the same role that they did in $\PL$.
+The only difference is that $\FOL$ is a much more expressively powerful language than $\PL$.
+% As a result, it is a lot harder to show that a sentence is true or false in a model.
+Just as we constructed interpretations to make sentences of $\PL$ either true or false depending on our aims, we will do something similar for the sentences of $\FOL$ in order to construct countermodels.
 
 
 
@@ -357,25 +394,25 @@ If we can provide a model in which the sentence is false, then we will have show
 What would such a model look like?
 In order for $\qt{\forall}{x}Axx \eif Bd$ to be false, the antecedent $\qt{\forall}{x} Axx$ must be true, and the consequent $Bd$ must be false.
 Whenever a sentence is true in a model, it is typically true in more than one model, and some models are more complicated than others.
-To keep things as simple, we will construct \define{minimal models} which do what we want but only adds the elements that are required for our aims to succeed.
+To avoid confusion, we will strive to keep things as simple as possible, constructing \define{minimal models} which do what we want without adding any unnecessary elements.
 
-We being by taking $\D=\{d,$\ leaving off the bracket on the right to indicate that we may end up adding more elements to the domain, but only if we must.
-The reason we added $d$ to the domain is that we know $\D$ is nonempty insofar as it is a domain at all, and so without any further consideration we may add an element to $\D$.
+We being by writing `$\D=\{d,$'\ leaving off the bracket on the right to indicate that we may end up adding more elements to the domain, but only if we must.
+The reason we added $d$ to the domain is that we know $\D$ is nonempty given that it is a domain.
 Note that we chose $d$ instead of another element. 
 This was not necessary but it is convenient since $d$ appears in the sentence with which we are concerned.
-In general, it is common to let constants play double duty, and we will continue with this practice here. 
+As brought out above, we will take constants to play double duty. 
 Note that it does not matter whether $Bd$ is true or false in the model since either way we will need to talk about what `$d$' refers to, i.e., itself. 
 
 In order to make $\qt{\forall}{x} Axx$ true, all members of the domain $\D$ must bear the relation $A$ to themselves.
 So far we just have one element $d$ in the domain, and so all that is required is that $\tuple{d,d}\in\I(A)$.
-Accordingly, we may suppose that $\I(A)=\{\tuple{d,d}$,\ leaving off the bracket on the right as before since we might want to add more elements.
+Accordingly, we may write `$\I(A)=\{\tuple{d,d}$,'\ leaving off the bracket on the right as before since we might want to add more elements.
 
 Next we want $Bd$ to be false.
-Letting $\I(d)=d$ as we intended all along, we may need $\tuple{d}\notin\I(B)$.
-Accordingly, we may take $\I(B)=\{$ to be the empty extension for the time being, leaving off the right bracket as before.
+By setting $\I(d)=d$, we may take $d$ to refer to itself as we intended all along, assuming that $\tuple{d}\notin\I(B)$.
+Accordingly, we may take `$\I(B)=\{$'\ to be the empty extension for the time being, leaving off the right bracket as before.
 
 Given that we made some changes to the model in order to make $Bd$ false, it is always prudent to check that we have not changed the truth-value of $\qt{\forall}{x} Axx$. 
-However, in this case, all we did was assign a constant to the only element in the domain, letting $B$ have the empty extension.
+However, in this case, all we did was assign a constant to the only element in the domain and took $B$ to have the empty extension.
 Accordingly, $\qt{\forall}{x} Axx$ is true for the same reason as before.  
 
 For contrast, if we had added another element to the domain, then further changes would be required.
@@ -392,23 +429,23 @@ Accordingly, we have constructed the following model $\M=\tuple{\D,\I}$:
 	$\I(d)$	  & $d$
 \end{partialmodel}
 
-Strictly speaking, a model specifies an extension for \textit{every} predicate of QL and a referent for \textit{every} constant, and $\M$ does not do this.
+Strictly speaking, a model specifies an extension for \textit{every} predicate of $\FOL$ and a referent for \textit{every} constant, and $\M$ does not do this.
 That would require specifying infinitely many extensions and infinitely many referents.
 We may do this all at once by saying that the extension of every other predicate is empty, and that every constant refers to $d$.
 Although we may add these details to complete our model, doing so is hardly necessary since these details don't effect the truth-value of the sentence with which we are concerned.
-Accordingly we will typically omit this extra step where this is similar to only specifying the truth-values of the sentence letters which occur in the SL sentences with which we are concerned and not worrying about the rest.
-Although we could always go on to say that all other sentence letters are false, there is no need to do so.
+Accordingly we will typically omit this extra step where this is similar to only specifying the truth-values of the sentence letters which occur in the $\PL$ wfss with which we are concerned and not worrying about the rest.
+Although we could always go on to say that all other sentence letters are false, or true, there is no need to do so given our limited aims.
 
-Instead of providing a model of QL, $\M$ provides a partial model which fully specifies the truth-value of the sentence with which we are concerned, but does not fix the truth-values of other sentences.
+Instead of providing a model of $\FOL$, $\M$ provides a partial model which fully specifies the truth-value of the sentence with which we are concerned, but does not fix the truth-values of other sentences.
 Moreover, the model above may be said to be minimal insofar as it does not add any superfluous details.
 Rather, we only made forced moves.
 
-Perhaps you are wondering what the predicate $A$ mean in English?
+Perhaps you are wondering what the predicate $A$ means in English?
 It doesn't really matter.
 For formal purposes, the existence of models like the one described above is enough to show that $\qt{\forall}{x} Axx \eif Bd$ is not a tautology.
 But we can offer an interpretation in English if we like.
 
-\begin{ekey}
+\begin{ekey}[leftmargin=.7in]
   \item[$Axy$:] $x$ knows $y$'s biggest secret.
   \item[$Bx$:] $x$'s powers derive from gamma radiation.
   \item[$d$:] Miles Morales
@@ -423,7 +460,7 @@ There are indefinitely many predicates in English that have this extension.
 For instance, $Axy$ might instead mean `$x$ is the same size as $y$' or `$x$ and $y$ live in the same city'.
 Similarly, $Bx$ might translate as `$x$ is a billionaire' or `$x$ has an uncle'.
 In constructing a model and giving extensions for $A$ and $B$, we do not need to specify what English predicates $A$ and $B$ should be used to translate.
-We are concerned with whether the sentence `$\qt{\forall}{x}Axx \eif Bd$' comes out true or false, and all that matters for truth and falsity in QL is the information included in the model that we construct.
+We are concerned with whether the wfs $\qt{\forall}{x}Axx \eif Bd$ comes out true or false, and all that matters for truth and falsity in $\FOL$ is the information included in the model that we construct.
 
 We can just as easily show that $\qt{\forall}{x}Axx \eif Bd$ is not a contradiction.
 We need only specify a model in which $\qt{\forall}{x}Axx \eif Bd$ is true, i.e., a model in which either $\qt{\forall}{x} Axx$ is false or $Bd$ is true.
@@ -436,54 +473,53 @@ Here is a minimal partial model $\M'=\tuple{\D,\J}$ with the same domain as befo
 	$\J(d)$	  & $d$
 \end{partialmodel}
 
-On this model, $\qt{\forall}{x}Axx \eif Bd$ is true, because it is a conditional with a true consequent.
-Thus $\qt{\forall}{x}Axx \eif Bd$ is neither a tautology nor a contradiction.
-By definition, $\qt{\forall}{x}Axx \eif Bd$ is contingent.
+On this model, $\qt{\forall}{x}Axx \eif Bd$ is true, since it is a conditional with a true consequent.
+Alternatively, since conditionals with false antecedents are true, we could have taken the extensions of both $A$ and $B$ to be empty, where this is even simpler. 
+Either way, $\qt{\forall}{x}Axx \eif Bd$ is not a contradiction, and so together with what was shown before, $\qt{\forall}{x}Axx \eif Bd$ is contingent.
 As before, showing that a sentence is contingent will require two models: one in which the sentence is true and another in which the sentence is false.
 
 You might be wondering what happened to the variable assignments from before.
-In order to prove that a quantified sentence in QL is true or false in a given model, shouldn't we have to say something about variable assignments?
+In order to prove that a quantified sentence in $\FOL$ is true or false in a given model, shouldn't we have to say something about variable assignments?
 The answer is `Yes', but sometimes we can say very little.
-For instance, given any v.a. $\va{a}$, we may observe that $Bd$ is true in $\M'$ given $\va{a}$, and so $\qt{\forall}{x}Axx \eif Bd$ is true in $\M'$ given $\va{a}$ by the semantics for the material conditional.
+For instance, letting $\va{a}$ be any v.a., we may observe that $Bd$ is true in $\M'$ given $\va{a}$, and so $\qt{\forall}{x}Axx \eif Bd$ is true in $\M'$ given $\va{a}$ by the semantics for the material conditional.
 Officially what this looks like is that $\VV{\J}{\va{a}}(\qt{\forall}{x}Axx \eif Bd)=1$.
-Since $\qt{\forall}{x}Axx \eif Bd$ has no free variables, we may conclude that $\VV{\J}{}(\qt{\forall}{x}Axx \eif Bd)=1$. 
-Although the variable assignment $\va{a}$ comes along for the ride, it does no substantive work.
+Since $\qt{\forall}{x}Axx \eif Bd$ has no free variables and $\va{a}$ was arbitrary, we may conclude that $\VV{\J}{}(\qt{\forall}{x}Axx \eif Bd)=1$. 
+Although the variable assignment $\va{a}$ comes along for the ride, it does not do any substantive work.
 
 In order to show that $\qt{\forall}{x}Axx \eif Bd$ is false, the variable assignments are no longer free wheels.
-In particular, to show that $\qt{\forall}{x}Axx$ is true in our first model $\M$, we need to produce some v.a. $\va{a}$ where $\VV{\I}{\va{a}}(\qt{\forall}{x}Axx)=1$.
-Since $\qt{\forall}{x}Axx$ does not have any free variables, it doesn't matter which v.a. we choose. 
-Thus we may let $\va{a}$ be any v.a. whatsoever that is defined over $\D$.
-Since $\D$ only has one element, it turns out that there is only one v.a. that we might choose, i.e., the v.a. which assigns every variable to $d$.
-This makes things very easy.
+Letting $\va{a}$ be an arbitrary v.a. defined over $\D$, we may show that $\qt{\forall}{x}Axx$ is true in our first model $\M$ by choosing an arbitrary $x$-variant $\va{c}$ of $\va{a}$. % producing some v.a. $\va{a}$ where $\VV{\I}{\va{a}}(\qt{\forall}{x}Axx)=1$.
+% Since $\qt{\forall}{x}Axx$ does not have any free variables, it doesn't matter which v.a. we choose. 
+% Thus we may let $\va{a}$ be any v.a. whatsoever that is defined over $\D$.
+Since $\D$ only has one element, there is only one v.a. that can be defined over $\D$ which assigns every variable to $d$, and so $\va{c}(x) = \va{a}(x) = d$.
+% This makes things very easy.
+We may then observe that $\tuple{\va{c}(x),\va{c}(x)}\in\I(A)$ where $\va{c}(x) = \val{\I}{\va{c}}(x)$, and so $\VV{\I}{\va{c}}(Axx)=1$ by the semantics.
+Given that $\va{c}$ was arbitrary, $\VV{\I}{\va{a}}(\qt{\forall}{x}Axx)=1$ follows by the semantics.
+Since $\tuple{\I(d)} \notin \I(B)$, we may observe that $\VV{\I}{\va{a}}(Bd) = 0$, and so $\VV{\I}{\va{a}}(\qt{\forall}{x}Axx \eif Bd) = 0$.
+Generalizing on $\va{a}$, it follows that that $\VV{\I}{}(\qt{\forall}{x}Axx \eif Bd) = 0$ as desired. 
 
-Given the semantics, $\VV{\I}{\va{a}}(\qt{\forall}{x}Axx)=1$ just in case every $x$-variant $\va{c}$ of $\va{a}$ is such that $\VV{\I}{\va{c}}(Axx)=1$.
-Accordingly, we must check that $\tuple{\va{c}(x),\va{c}(x)}\in\I(A)$.
-Since there is only one element in the domain, and so only one v.a. at all, we need only check that $\tuple{d,d}\in\I(A)$, and indeed it is.
-Thus $\VV{\I}{\va{a}}(\qt{\forall}{x}Axx)=1$ as desired. 
 Although officially we need to go through all of these mechanics to show that a quantified sentence is true or false, it is often easy to see what is required to construct a minimal partial model.
 For instance, to show that $\qt{\forall}{x}Axx$ is true, we need everything in the domain to be $A$-related to itself, i.e., $\tuple{\v{x},\v{x}}$ must be in the extension of $A$ for all $\v{x}\in\D$.
 In other cases, especially when multiple quantifiers are involved, a lot more care may be required to keep things straight and to produce appropriate models.
 
 Suppose that we want to show that $\qt{\forall}{x} Sx$ and $\qt{\exists}{x} Sx$ are not logically equivalent.
-We need to construct a model in which the two sentences have different truth-values, where one of them is true while the other is false.
-We start by specifying a nonempty domain $\D=\{a$.
+We need to construct a model in which the two sentences have different truth-values.
+We start by specifying a nonempty domain $\D=\{1$.
 Since the sentences with which we are concerned include the same predicate, there is no chance that $S$ may have different extensions. 
 Moreover, given a domain with just one member, there is no difference between something being $S$ and everything being $S$.
-Thus we must add another element to the domain $\D=\{a,b$.
+Thus we must add another element to the domain $\D=\{1,2$.
 In order to make $\qt{\exists}{x} Sx$ true without making $\qt{\forall}{x} Sx$ true, we may take $\I(S)=\{\tuple{a}$.
-Letting $\va{a}$ be a v.a. where $\va{a}(x)=a$, it follows that $\tuple{\va{a}(x)}\in\I(S)$, and so by definition $\tuple{\VV{\I}{\va{a}}(x)}\in\I(S)$.
-Thus $\VV{\I}{\va{a}}(Sx)=1$, and so $\VV{\I}{\va{a}}(\exists xSx)=1$ since $\va{a}$ is an $x$-variant of itself.
-Having produced some v.a. $\va{a}$ where $\VV{\I}{\va{a}}(\exists xSx)=1$, it follows that $\VV{\I}{}(\exists xSx)=1$ given that $\exists xSx$ is a sentence of QL (it has no free variables). 
+Letting $\va{a}$ be an arbitrary v.a. defined over $\D$, we may take $\va{c}$ to be an $x$-variant of $\va{a}$ where $\va{c}(x)=1$, it follows that $\tuple{\va{c}(x)}\in\I(S)$, and so by definition $\tuple{\val{\I}{\va{c}}(x)}\in\I(S)$.
+Thus $\VV{\I}{\va{c}}(Sx)=1$, and so $\VV{\I}{\va{a}}(\exists xSx)=1$ since $\va{c}$ is an $x$-variant of $\va{a}$.
+By generalizing on $\va{a}$, it follows that $\VV{\I}{}(\exists xSx)=1$ given that $\exists xSx$ is a wfs of $\FOL$ on account of having no free variables. 
 
 What about $\qt{\forall}{x} Sx$?
-For $\VV{\I}{}(\forall xSx)\neq 1$, we need to show that $\VV{\I}{\va{c}}(\forall xSx)\neq 1$ for any v.a. $\va{c}$.
-Accordingly, we may let $\va{c}$ be an arbitrary v.a. over the domain $\D$.
-We may then observe that $\tuple{b}\notin\I(S)$.
-Accordingly, it will serve our purposes to let $\va{e}$ be a $x$-variant of $\va{c}$ where $\va{e}(x)=b$.
-It follows that $\tuple{\va{e}(x)}\notin\I(S)$, and so $\tuple{\VV{\I}{\va{e}}(x)}\notin\I(S)$.
-Thus $\VV{\I}{\va{e}}(Sx)\neq 1$, and so $\VV{\I}{\va{c}}(\forall xSx)\neq 1$ since it is not the case that every $x$-variant $\va{e}$ of $\va{c}$ is such that $\VV{\I}{\va{e}}(Sx)=1$. 
-Now we may recall that $\va{c}$ was an arbitrary v.a. over $\D$, and so $\VV{\I}{\va{c}}(\forall xSx)\neq 1$ for every v.a. $\va{c}$ over $\D$.
-As a result, it is not the case that there is some v.a. $\va{c}$ over $\D$ where $\VV{\I}{\va{c}}(\forall xSx)=1$, and so we may conclude that $\VV{\I}{}(\forall xSx)\neq 1$ as desired. 
+In order to show that $\VV{\I}{}(\forall xSx) = 0$, we must find some v.a. $\va{a}$ where $\VV{\I}{\va{a}}(\forall xSx) = 0$.
+Since $\tuple{2}\notin\I(S)$, we may let $\va{a}$ be a v.a. defined over $\D$ where $\va{a}(x) = 2$.
+It follows that $\tuple{\va{a}(x)}\notin\I(S)$, and so $\tuple{\VV{\I}{\va{a}}(x)}\notin\I(S)$.
+Thus $\VV{\I}{\va{a}}(Sx)\neq 1$, and so $\VV{\I}{\va{a}}(\forall xSx)\neq 1$ since $\va{a}$ is an $x$-variant of itself and so not every $x$-variant $\va{c}$ of $\va{a}$ is such that $\VV{\I}{\va{c}}(Sx) = 1$. 
+% Now we may recall that $\va{c}$ was an arbitrary v.a. over $\D$, and so $\VV{\I}{\va{c}}(\forall xSx)\neq 1$ for every v.a. $\va{c}$ over $\D$.
+% As a result, it is not the case that there is some v.a. $\va{c}$ over $\D$ where $\VV{\I}{\va{c}}(\forall xSx)=1$, and
+Since $\qt{\forall}{x}Sx$ is a wfs of $\FOL$, we may conclude that $\VV{\I}{}(\forall xSx) = 0$ as desired. 
 
 Having produced a partial model where $\qt{\forall}{x} Sx$ and $\qt{\exists}{x} Sx$ have different truth-values, we may close off the sets we defined above. 
 The result may be stated as follows:
@@ -494,14 +530,14 @@ The result may be stated as follows:
 \end{partialmodel}
 
 This partial model shows that the two sentences are \emph{not} logically equivalent since $\qt{\exists}{x} Sx$ is true on this model and $\qt{\forall}{x} Sx$ is false.
-Whereas only one model is required to show that two sentences of QL are not logically equivalent, to show that two sentences are logically equivalent we will need to quantify over all QL models.
+Whereas only one model is required to show that two sentences of $\FOL$ are not logically equivalent, to show that two sentences are logically equivalent we will need to quantify over all $\FOL$ models.
 We will attend to this in the following section.
 However, before doing so, let's wrap up one loose end from before.
 
-Back on p.~\pageref{surgeon3correct}, we said that this argument would be invalid in QL:
+Back in $\S\ref{sec:ambiguous}$, we said that this argument would be invalid in $\FOL$:
 \begin{earg}
-\item[] $(K_2c \eand Rc) \eand Tc$
-\item[\therefore] $K_1c \eand Tc$
+  \uitem{$(K_2c \eand Rc) \eand Tc$}
+  \eitem{$K_1c \eand Tc$}
 \end{earg}
 Now we can prove that this is so. To show that this argument is invalid, we need to show that there is some model in which the premise is true and the conclusion is false. We can construct such a model as follows:
 
@@ -518,22 +554,20 @@ This time, no variable assignments are required in any substantive capacity.
 All we need to do is observe that $\tuple{c}$ is a member of the extensions $\I(K_2)$, $\I(R)$, and $\I(T)$.
 Since $\I(c)=c$ where `$c$' is a constant, it follows that $\tuple{\VV{\I}{\va{a}}(c)}=\tuple{\I(c)}=\tuple{c}$ is a member of the same extensions where $\va{a}$ is any v.a. over $\D$.
 Thus $\VV{\I}{\va{a}}(K_2c)=\VV{\I}{\va{a}}(Rc)=\VV{\I}{\va{a}}(Tc)=1$, and so $\VV{\I}{\va{a}}((K_2c \eand Rc) \eand Tc)=1$ by the semantics for conjunction.
-Since there are no free variables in this sentence, we may conclude that $\VV{\I}{}((K_2c \eand Rc) \eand Tc)=1$.
+Since there are no free variables in this sentence and $\va{a}$ was arbitrary, we may conclude that $\VV{\I}{}((K_2c \eand Rc) \eand Tc)=1$.
 
-Next we may let $\va{e}$ be any v.a. over $\D$.
-Given that $\tuple{c}\notin\I(K_2)$, it follows from the definitions that $\VV{\I}{\va{e}}(c)\notin\I(K_2)$, and so $\VV{\I}{\va{a}}(K_2c)\neq 1$.
-By the semantics for conjunction $\VV{\I}{\va{a}}(K_2c \eand Tc)\neq 1$.
-Since $\va{e}$ was arbitrary, we may conclude that $\VV{\I}{}(K_2c \eand Tc)\neq 1$. 
-Thus the partial model above makes the premise true and the conclusion false, proving that the argument is invalid.
+Next we may let $\va{e}$ be a particular v.a. over $\D$.
+Given that $\tuple{c}\notin\I(K_2)$, it follows from the definitions that $\VV{\I}{\va{e}}(c)\notin\I(K_2)$, and so $\VV{\I}{\va{e}}(K_2c)\neq 1$.
+By the semantics for conjunction $\VV{\I}{\va{e}}(K_2c \eand Tc)\neq 1$, and so $\VV{\I}{}(K_2c \eand Tc)\neq 1$ given that $K_2c \eand Tc$ is a wfs of $\FOL$. 
+Since the partial model above makes the premise true and the conclusion false, the argument is invalid.
 
-Suppose that we want to show that a set of sentences is consistent.
+Suppose that we want to show that a set of sentences is satisfiable.
 For instance, consider the set $\Gamma=\set{(K_2c \eand Rc) \eand Tc,\ K_1c \eand Tc}$ which includes the premise and conclusion from the argument above. 
 We may tweak our model from before in order to satisfy this set, thereby proving that it is consistent.
 In particular, we may take $\J$ to be just like $\I$ given above except that $\J(K_1)=\set{\tuple{c}}$.
-It is easy to show by similar reasoning that $\VV{\J}{}(K_2c \eand Tc)=1$, and so $\J$ satisfies $\Gamma$.
+It is easy to show by similar reasoning that $\VV{\J}{}(K_2c \eand Tc)=1$, and so $\Gamma$ is satisfiable.
 Thus we may conclude that $\Gamma$ is consistent. 
-
-Although officially \textit{models} satisfy sets of sentences and interpretations like $\J$ do not, it is often convenient to refer directly to the interpretation when the model is clear from context.
+Although officially \textit{models} of $\FOL$ satisfy sets of sentences and interpretations like $\J$ do not, it is often convenient to refer directly to the interpretation when the model is clear from context.
 Thus it is common to use `true in a model $\M$' and `true in an interpretation $\I$' interchangeably.
 
 
@@ -545,17 +579,18 @@ Thus it is common to use `true in a model $\M$' and `true in an interpretation $
 \section{Reasoning About all Models}
 \label{sec.allmodelreasoning}
 
-We can show that a sentence is not a tautology by providing a carefully specified model in which the sentence in question is false.
-Similarly, to show that a sentence is not a contradiction, we only need to produce one model in which the sentence is true.
-In order to show that a sentence is contingent, we need to produce two models where the sentence is true in one model and false in the other.
-By contrast, only one model is required to show that two sentences are not equivalent on account of having different truth-values in that model.
-Similarly, only one model is required to show that a set of sentences is consistent.
+We can show that a wfs of $\FOL$ is not a tautology by providing a carefully specified model in which the wfs in question is false.
+Similarly, to show that a wfs is not a contradiction, we only need to produce one model in which the wfs is true.
+In order to show that a wfs is contingent, we need to produce two models where the wfs is true in one model and false in the other.
+By contrast, only one model is required to show that two wfss are not equivalent on account of having different truth-values in that model.
+Similarly, only one model is required to show that a set of wfss is satisfiable.
 
-It is important to observe that we cannot appeal to any one or two models in order to show that a sentence is a tautology since this requires showing that the sentence is true in every model.
-Whereas producing one or two models is constructive in nature, establishing that a sentence is true in all models takes a general form where no individual constructions will suffice.
-For the same reason, we cannot show that a sentence is a contradiction by constructing a particular model, since what we need to show is that the sentence is false in every model.
-In both cases, we must reason about all models of QL where this will require a distinct set of strategies to those brought out above.
-Reasoning about all models is also required to show that an argument is valid, that two sentences are logically equivalent, or that a set of sentences is inconsistent.
+For the same reasons observed in Chapter $\ref{ch.PL-semantics}$, we cannot appeal to any one or two models in order to show that a wfs of $\FOL$ is a tautology since this requires showing that the wfs is true in every model.
+Whereas producing one or two models is constructive in nature, establishing that a wfs is true in all models takes a general form where no individual constructions will suffice.
+For the same reason, we cannot show that a wfs is a contradiction by constructing a particular model, since what we need to show is that the wfs is false in every model.
+In both cases, we must reason about all models of $\FOL$ where this will require a distinct set of strategies to those brought out above.
+
+In addition to showing that a wfs is a tautology or contradiction, reasoning about all models is also required to show that an argument is valid, that two wfss are logically equivalent, or that a set of wfss is inconsistent.
 To summarizes, consider the following table:
 
 \begin{table}[htb]
@@ -578,7 +613,7 @@ $\metaA$ is contingent & \tablefbox{\emph{construct two models}, one where \meta
 $\metaA$ and $\metaB$ are equivalent & {show that \metaA{} and \metaB{} have the same truth-value in any model} & \tablefbox{\emph{construct a model} in which \metaA{} and \metaB{} have different truth-values}\\
 \cline{2-3}
 
-$\Gamma$ is consistent & \tablefbox{\emph{construct a model} in which all the sentences in $\Gamma$ are true} & {show that there is no model that satisfies $\Gamma$}\\
+$\Gamma$ is consistent & \tablefbox{\emph{construct a model} in which all the wfss in $\Gamma$ are true} & {show that there is no model that satisfies $\Gamma$}\\
 \cline{2-3}
 
   $\metaA_1,\metaA_2,\ldots \therefore\ \metaB$ is valid & {show that any model that satisfies $\set{\metaA_1,\metaA_2,\ldots}$ also satisfies $\metaB$} & \tablefbox{\emph{construct a model} that satisfies $\set{\metaA_1,\metaA_2,\ldots}$ but does not satisfy $\metaB$}\\
@@ -587,36 +622,38 @@ $\Gamma$ is consistent & \tablefbox{\emph{construct a model} in which all the se
 \end{center}
 \end{table}
 
-Consider, for example, the sentence $Raa\eiff Raa$.
-In order to show that this sentence is a tautology, we need to show something about all models.
-Since there is no hope of doing so one at a time, it is typical to proceed by \textit{reductio}.
+Consider, for example, the wfs $Raa\eiff Raa$.
+In order to show that this wfs of $\FOL$ is a tautology, we need to show something about all models.
+Since there is no hope of doing so one at a time, one way to proceed is by \textit{reductio}.
 Consider the following proof:
 
 \begin{quote}
 \label{allmodels1}
   \textit{Proof:}
-  Assume that there is a QL model $\M=\tuple{\D,\I}$ where $\VV{\I}{}(Raa\eiff Raa)\neq 1$.
-  Letting $\va{a}$ be any v.a. over $\D$, it follows that $\VV{\I}{\va{a}}(Raa\eiff Raa)\neq 1$.
+  Assume that there is a $\FOL$ model $\M=\tuple{\D,\I}$ where $\VV{\I}{}(Raa\eiff Raa)\neq 1$.
+  It follows that $\VV{\I}{\va{a}}(Raa\eiff Raa)\neq 1$ for some v.a. $\va{a}$ defined over $\D$.
   Accordingly, $\VV{\I}{\va{a}}(Raa)\neq\VV{\I}{\va{a}}(Raa)$, and so $\tuple{\VV{\I}{\va{a}}(a),\VV{\I}{\va{a}}(a)}\notin\I(R)$ and $\tuple{\VV{\I}{\va{a}}(a),\VV{\I}{\va{a}}(a)}\in\I(R)$.
-  But this is a contradiction, and so $\VV{\I}{}(Raa\eiff Raa)=1$ for every QL model $\M$.
+  But this is a contradiction, and so $\VV{\I}{}(Raa\eiff Raa)=1$ for every $\FOL$ model $\M$.
+  \qed
 \end{quote}
 
 The variable assignment $\va{a}$ did no substantive work above. 
 By contrast, consider the tautology $\qt{\forall}{x}(Rxx\eiff Rxx)$.
 It might be tempting to reason in this way: $Rxx\eiff Rxx$ is true in every model, so $\qt{\forall}{x}(Rxx\eiff Rxx)$ must also be true.
 The problem is that $Rxx\eiff Rxx$ is \emph{not} true in every model.
-Since $x$ is a variable rather than a constant, $Rxx\eiff Rxx$ is not a sentence, and so it is neither true nor false in any model.
+Since $x$ is a variable rather than a constant, $Rxx\eiff Rxx$ is not a wfs, and so it is neither true nor false in any model.
 Rather, $Rxx\eiff Rxx$ is an open sentence, and so only has a truth-value in a model \textit{given a variable assignment}. 
 Consider the following proof:
 
 \begin{quote}
 \label{allmodels2}
   \textit{Proof:}
-  Assume there is a QL model $\M=\tuple{\D,\I}$ where $\VV{\I}{}(\forall x(Rxx\eiff Rxx))\neq 1$.
-  Letting $\va{a}$ be any v.a. over $\D$, it follows that $\VV{\I}{\va{a}}(\forall x(Rxx\eiff Rxx))\neq 1$.
+  Assume there is a $\FOL$ model $\M=\tuple{\D,\I}$ where $\VV{\I}{}(\forall x(Rxx\eiff Rxx))\neq 1$.
+  It follows that $\VV{\I}{\va{a}}(\forall x(Rxx\eiff Rxx))\neq 1$ for some v.a. $\va{a}$ defined over $\D$.
   As a result there is some $x$-variant $\va{c}$ of $\va{a}$ where $\VV{\I}{\va{c}}(Rxx\eiff Rxx)\neq 1$.
   Accordingly, $\VV{\I}{\va{c}}(Rxx)\neq\VV{\I}{\va{c}}(Rxx)$, and so $\tuple{\VV{\I}{\va{c}}(x),\VV{\I}{\va{c}}(x)}\notin\I(R)$ and $\tuple{\VV{\I}{\va{c}}(x),\VV{\I}{\va{c}}(x)}\in\I(R)$.
-  But this is a contradiction, so $\VV{\I}{}(\qt{\forall}{x}(Rxx\eiff Rxx))=1$ for every QL model $\M$.
+  But this is a contradiction, so $\VV{\I}{}(\qt{\forall}{x}(Rxx\eiff Rxx))=1$ for every $\FOL$ model $\M$.
+  \qed
 \end{quote}
 
 This proof is very similar.
@@ -627,7 +664,7 @@ It can take some time to become familiar with these definitions, but no better w
 % Rather, we included only the necessary steps to derive a contradiction.
 
 Once multiple quantifiers are involved, things get a lot trickier.
-For instance, suppose we want to show that $\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx) \models \qt{\forall}{x}\enot Fxx$.
+For instance, suppose we want to show that $\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx) \vDash \qt{\forall}{x}\enot Fxx$.
 The proof proceeds in a similar fashion, assuming that there is a model which makes the premise true and the conclusion false.
 However, instead of relying solely on the definitions to lead us to a contradiction, a little bit of strategy will be required.
 Consider the following proof:
@@ -635,14 +672,15 @@ Consider the following proof:
 \begin{quote}
 \label{allmodels3}
   \textit{Proof:}
-  Assume for contradiction that there is a QL model $\M=\tuple{\D,\I}$ where $\VV{\I}{}(\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$ and $\VV{\I}{}(\qt{\forall}{x}\enot Fxx)\neq 1$. 
-  It follows from the former claim that $\VV{\I}{\va{a}}(\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$ for some v.a. $\va{a}$, where $\VV{\I}{\va{c}}(\qt{\forall}{x}\enot Fxx)\neq 1$ for every v.a. $\va{c}$ follows from the latter claim, so $\VV{\I}{\va{a}}(\qt{\forall}{x}\enot Fxx)\neq 1$ in particular.
+  Assume for contradiction that there is a $\FOL$ model $\M=\tuple{\D,\I}$ where $\VV{\I}{}(\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$ and $\VV{\I}{}(\qt{\forall}{x}\enot Fxx)\neq 1$. 
+  It follows from the former claim that $\VV{\I}{\va{a}}(\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$ for all v.a. $\va{a}$ defined over $\D$, where $\VV{\I}{\va{c}}(\qt{\forall}{x}\enot Fxx)\neq 1$ for some particular v.a. $\va{c}$ defined over $\D$ follows from the latter claim.
+  Thus $\VV{\I}{\va{c}}(\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx))\neq 1$ follows from the former.
 
-  By the semantics, $\VV{\I}{\va{e}}(\enot Fxx)\neq 1$ for some $x$-variant of $\va{e}$ of $\va{a}$, and so $\VV{\I}{\va{e}}(Fxx)=1$.
+  By the semantics, $\VV{\I}{\va{e}}(\enot Fxx)\neq 1$ for some $x$-variant of $\va{e}$ of $\va{c}$, and so $\VV{\I}{\va{e}}(Fxx)=1$ by the semantics.
   Thus $\tuple{\VV{\I}{\va{e}}(x),\VV{\I}{\va{e}}(x)}\in\I(F)$, and so $\tuple{\va{e}(x),\va{e}(x)}\in\I(F)$.
 
-  Since $\va{e}$ is an $x$-variant of $\va{a}$, we know from above that $\VV{\I}{\va{e}}(\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$.
-  Let $\va{g}$ be the $y$-variant of $\va{a}$ where $\va{g}(y)=\va{e}(x)$.
+  Since $\va{e}$ is an $x$-variant of $\va{c}$, we know from above that $\VV{\I}{\va{e}}(\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$.
+  Let $\va{g}$ be the $y$-variant of $\va{e}$ where $\va{g}(y)=\va{e}(x)$.
   Thus $\VV{\I}{\va{g}}(Fxy \eif \enot Fyx)=1$.
   By the semantics, $\VV{\I}{\va{g}}(Fxy)\neq 1$ or $\VV{\I}{\va{g}}(\enot Fyx)=1$, and so $\VV{\I}{\va{g}}(Fxy)\neq 1$ or $\VV{\I}{\va{g}}(Fyx)\neq 1$.
   Thus $\tuple{\VV{\I}{\va{g}}(x),\VV{\I}{\va{g}}(y)}\notin\I(F)$ or $\tuple{\VV{\I}{\va{g}}(y),\VV{\I}{\va{g}}(x)}\notin\I(F)$, and since $x$ and $y$ are variables, $\tuple{\va{g}(x),\va{g}(y)}\notin\I(F)$ or $\tuple{\va{g}(y),\va{g}(x)}\notin\I(F)$.
@@ -650,16 +688,16 @@ Consider the following proof:
   Since $\va{g}$ is a $y$-variant of $\va{e}$ and $x\neq y$, it follows that $\va{g}(x)=\va{e}(x)$.
   Moreover, $\va{g}(y)=\va{e}(x)$ by stipulation, and so $\tuple{\va{e}(x),\va{e}(x)}\notin\I(F)$, contradicting the above.
   Thus there is no model $\M=\tuple{\D,\I}$ where $\VV{\I}{}(\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$ and $\VV{\I}{}(\qt{\forall}{x}\enot Fxx)\neq 1$. 
-  It follows that every model to make $\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx)$ true also makes $\qt{\forall}{x}\enot Fxx$ true, and so $\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx) \models \qt{\forall}{x}\enot Fxx$.
-
+  It follows that every model to make $\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx)$ true also makes $\qt{\forall}{x}\enot Fxx$ true, and so $\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx) \vDash \qt{\forall}{x}\enot Fxx$.
+  \qed
 \end{quote}
 
 This proof was a lot more complicated, and required some careful moves.
-In particular, we used $\VV{\I}{}(\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$ to identify the v.a. $\va{a}$, and used $\VV{\I}{}(\qt{\forall}{x}\enot Fxx)\neq 1$ to conclude that $\VV{\I}{\va{a}}(\qt{\forall}{x}\enot Fxx)\neq 1$. 
-We then unpacked this latter claim since it produced an $x$-variant $\va{e}$ where $\tuple{\va{e}(x),\va{e}(x)}\in\I(F)$.
-The remainder of the proof drew on the former general claim $\VV{\I}{\va{a}}(\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$ to show that $\tuple{\va{e}(x),\va{e}(x)}\notin\I(F)$.  
-It was important to observe that $\va{e}$ was a $x$-variant of $\va{a}$, and to have carefully chosen the $y$-variant $\va{g}$ of $\va{e}$ so that $\va{g}(y)=\va{e}(x)$.
-The rest follows from the semantics and definitions.
+In particular, we used $\VV{\I}{}(\qt{\forall}{x}\enot Fxx)\neq 1$  to conclude that $\VV{\I}{\va{c}}(\qt{\forall}{x}\enot Fxx)\neq 1$ for a particular v.a. $\va{c}$, and used $\VV{\I}{}(\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$ for every v.a. $\va{a}$, and so for $\va{c}$ in particular. 
+We then unpacked the former claim since it produced an $x$-variant $\va{e}$ where $\tuple{\va{e}(x),\va{e}(x)}\in\I(F)$.
+The remainder of the proof drew on the general claim $\VV{\I}{\va{a}}(\qt{\forall}{x}\qt{\forall}{y}(Fxy \eif \enot Fyx))=1$ to show that $\tuple{\va{e}(x),\va{e}(x)}\notin\I(F)$.  
+It was important to observe that $\va{e}$ was a $x$-variant of $\va{c}$, and to have carefully chosen the $y$-variant $\va{g}$ of $\va{e}$ so that $\va{g}(y)=\va{e}(x)$.
+The rest follows by the definitions.
 
 
 
@@ -667,80 +705,93 @@ The rest follows from the semantics and definitions.
 
 \section{Constants and Quantifiers}
 
-In writing semantic proofs, it is best to unpack existential claims before universal claims.\footnote{We will see an analogue of this same idea show up in the proof system that we will introduce for QL.}
-You can think of this as analogous to the idea that it is best to unpack conjunctions before disjunctions, for instance in using the tree method for SL.
+In writing semantic proofs, it is best to unpack existential claims before universal claims.\footnote{We will see an analogue of this same idea show up in the proof system that we will introduce for $\FOL$.}
+This as analogous to the idea that it is best to unpack conjunctions before disjunctions in writing PL derivations.
 Just as a negated conjunction has a similar character to a disjunction, and a negated disjunction has a similar character to a conjunction, something similar holds for the quantifiers.
 In particular, a negated (or false) universal claim has a similar character to a existential claim, and a negated (or false) existential claim has a similar character to a universal claim. 
-With this in mind, we may restate our previous recommendation: it is best to unpack claims with an \textit{existential character} before unpacking claims with a \textit{universal character}.
+We may then restate our previous recommendation: it is best to unpack claims with an \textit{existential character} before unpacking claims with a \textit{universal character}.
 
-Consider the sentences $\qt{\forall}{x}\enot Fxx$, $\enot \qt{\exists}{y} \enot Gy$, $\exists z \enot Kz$, and $\enot Hbc$.
+Consider the wfss of $\FOL$ $\qt{\forall}{x}\enot Fxx$, $\enot \qt{\exists}{y} \enot Gy$, $\exists z \enot Kz$, and $\enot Hbc$.
 Which of these has an existential character, and which has a universal character?
 Although $\qt{\forall}{x}\enot Fxx$ includes a negation sign, it is making a general claim--- i.e., that nothing is $F$-related to itself--- and so has a universal character.
 Next consider $\enot \qt{\exists}{y} \enot Gy$ which, says that nothing is not $G$, and so everything is $G$.
 Again this has a universal character.
 Although $\exists z \enot Kz$ includes a negation sign, what we are saying is that something is not $K$, where this has an existential character. 
 Lastly, what are we to make of $\enot Hbc$?
-Although this sentence does not include any quantifiers at all, this sentence has in some ways the most existential character of all.
+Although this wfs does not include any quantifiers at all, this wfs has in some ways the most existential character of all.
 Not only does $\enot Hbc$ say that \textit{something} is $H$-related to \textit{something}, it names the things that are $H$-related, though we don't know if `$a$' and `$c$' name the same thing or not.
 
-In order to bring out the existential character that constants have, consider the entailment $\enot Hbc \models \exists x \exists y \enot Hxy$.
-We may establish this claim with a direct proof:
+In order to bring out the existential character that constants have, consider the logical consequence $\enot Hbc \vDash \exists x \exists y \enot Hxy$.
+Whereas above we used a \textit{reductio} style proof, this time we may write a direct proof without too much trouble:
+% Which proof style is more convenient and results in a clear and concise proof depends on the case at hand.
+% Nevertheless, it is often good to see if a direct proof is possible before reaching for a \textit{reductio} since direct proofs can be more informative.
 
 \begin{quote}
 \label{allmodels4}
   \textit{Proof:}
-  Let $\M=\tuple{\D,\I}$ be a QL model where $\VV{\I}{}(\enot Hbc)=1$, and so $\VV{\I}{\va{a}}(\enot Hbc)=1$ for some v.a. $\va{a}$.
-  It follows that $\VV{\I}{\va{a}}(Hbc)\neq 1$, and so $\tuple{\VV{\I}{\va{a}}(b),\VV{\I}{\va{a}}(c)}\notin \I(H)$.
+  Let $\M=\tuple{\D,\I}$ be a model of $\FOL$ where $\VV{\I}{}(\enot Hbc)=1$.
+  It follows that $\VV{\I}{\va{a}}(\enot Hbc)=1$ for every v.a. $\va{a}$ defined over $\D$, and so $\VV{\I}{\va{c}}(\enot Hbc) = 1$ for some $\va{c}$ in particular.
+  Thus $\VV{\I}{\va{c}}(Hbc) \neq 1$, and so $\tuple{\val{\I}{\va{c}}(b),\val{\I}{\va{c}}(c)}\notin \I(H)$.
   % Since $b$ and $c$ are constants, we know that $\tuple{\I(b),\I(c)}\notin \I(H)$. 
 
-  Let $\va{e}$ be the $x$-variant of $\va{a}$ where $\va{e}(x)=\VV{\I}{\va{a}}(b)$, and let $\va{g}$ be the $y$-variant of $\va{e}$ where $\va{g}(y)=\VV{\I}{\va{a}}(c)$.
-  Since $x\neq y$, we know that $\va{g}(x)=\va{e}(x)$, and so $\tuple{\va{g}(x),\va{g}(y)}\notin \I(H)$.
-  It follows that $\tuple{\VV{\I}{\va{g}}(x),\VV{\I}{\va{g}}(y)}\notin \I(H)$, and so $\VV{\I}{\va{g}}(Hxy)\neq 1$.
-  Thus $\VV{\I}{\va{g}}(\enot Hxy)=1$.
+  Let $\va{e}$ be an arbitrary v.a. defined over $\D$ where $\va{g}$ is the $x$-variant of $\va{e}$ where $\va{g}(x)=\val{\I}{\va{c}}(b)$.
+  We may then let $\va{h}$ be the $y$-variant of $\va{g}$ where $\va{h}(y)=\val{\I}{\va{c}}(c)$.
+  Since $x\neq y$, we know that $\va{h}(x)=\va{g}(x)$, and so $\tuple{\va{h}(x),\va{h}(y)}\notin \I(H)$ given the above.
+  It follows that $\tuple{\val{\I}{\va{h}}(x),\val{\I}{\va{h}}(y)}\notin \I(H)$, and so $\VV{\I}{\va{h}}(Hxy)\neq 1$.
+  Thus $\VV{\I}{\va{h}}(\enot Hxy)=1$.
 
-  Since $\va{g}$ is a $y$-variant of $\va{e}$, it follows that $\VV{\I}{\va{e}}(\qt{\exists}{y}\enot Hxy)=1$.
-  By the same reasoning, $\VV{\I}{\va{a}}(\qt{\exists}{x}\qt{\exists}{y}\enot Hxy)=1$ since $\va{e}$ is a $x$-variant of $\va{a}$.
-  Thus $\VV{\I}{}(\qt{\exists}{x}\qt{\exists}{y}\enot Hxy)=1$ since $\qt{\exists}{x}\qt{\exists}{y}\enot Hxy$ is a sentence of QL. 
+  Since $\va{h}$ is a $y$-variant of $\va{g}$, it follows that $\VV{\I}{\va{g}}(\qt{\exists}{y}\enot Hxy)=1$.
+  By the same reasoning, $\VV{\I}{\va{e}}(\qt{\exists}{x}\qt{\exists}{y}\enot Hxy)=1$ since $\va{g}$ is a $x$-variant of $\va{e}$.
+  Thus $\VV{\I}{}(\qt{\exists}{x}\qt{\exists}{y}\enot Hxy)=1$ since $\qt{\exists}{x}\qt{\exists}{y}\enot Hxy$ is a sentence of $\FOL$ and $\va{e}$ was arbitrary. 
 
-  Generalising on $\M$, it follows that $\exists x \exists y \enot Hxy$ is true in every QL model in which $\enot Hbc$ is true, and so $\enot Hbc \models \exists x \exists y \enot Hxy$.
+  Generalizing on $\M$, it follows that $\exists x \exists y \enot Hxy$ is true in every $\FOL$ model in which $\enot Hbc$ is true, and so $\enot Hbc \vDash \exists x \exists y \enot Hxy$ as desired.
+  \qed
 \end{quote}
 
 Although it is sometimes easier to write \textit{reductio} style proofs, direct proofs are typically more illuminating.
 In this case, we may observe that the premise requires $b$ and $c$ to not be $H$-related, and so by existentially generalising on $b$ and $c$, we may conclude that there is some $x$ and some $y$ which are not $H$-related. 
 This sort of reasoning is common.
 
-Note that the entailment moved from a particular claim about some individuals to a quantified claim about some individuals so that the quantifiers only appear on the right side of the entailment.
-Were we to reverse the order of these sentences, the entailment would no longer hold: just because there are some things that are not $H$-related, it does not follow that $b$ and $c$ in particular are not $H$-related. 
-We find just the opposite pattern of entailment with universal quantifiers.
+Note that the logical consequence moved from a particular claim about some individuals to a quantified claim about some individuals so that the quantifiers only appear on the right side of the logical consequence.
+Were we to reverse the order of these sentences, the logical consequence would no longer hold: just because there are some things that are not $H$-related, it does not follow that $b$ and $c$ in particular are not $H$-related. 
+We find just the opposite pattern of reasoning with universal quantifiers.
 For instance, suppose that we know that everybody loves Deeya: $\qt{\forall}{x}Lxd$.
 It follows that Deeya loves herself since she is also somebody: $Ldd$.
-Thus we may establish the entailment $\qt{\forall}{x}Lxd \models Ldd$ with the following proof: 
+Thus we may establish the logical consequence $\qt{\forall}{x}Lxd \vDash Ldd$ with the following proof: 
 
 \begin{quote}
 \label{allmodels5}
   \textit{Proof:}
-  Let $\M=\tuple{\D,\I}$ be a QL model where $\VV{\I}{}(\qt{\forall}{x}Lxd)=1$.
-  It follows that $\VV{\I}{\va{a}}(\qt{\forall}{x}Lxd)=1$ for some v.a. $\va{a}$, and so $\VV{\I}{\va{c}}(Lxd)=1$ for every $x$-variant $\va{c}$ of $\va{a}$.
-  In particular, $\VV{\I}{\va{e}}(Lxd)=1$ where $\va{e}$ of $x$-variant $\va{a}$ for which $\va{e}(x)=\I(d)$.
-  As a result, $\tuple{\VV{\I}{\va{e}}(x),\VV{\I}{\va{e}}(d)}\in\I(L)$ where $\VV{\I}{\va{e}}(x)=\VV{\I}{\va{e}}(d)$, and so $\tuple{\VV{\I}{\va{e}}(d),\VV{\I}{\va{e}}(d)}\in\I(L)$.
-  Thus $\VV{\I}{\va{e}}(Ldd)=1$, and so $\VV{\I}{}(Ldd)=1$ as desired.
-  Since $\M$ was an arbitrary model in which $\VV{\I}{}(\qt{\forall}{x}Lxd)=1$, it follows that $\qt{\forall}{x}Lxd \models Ldd$.
+  Let $\M=\tuple{\D,\I}$ be a $\FOL$ model where $\VV{\I}{}(\qt{\forall}{x}Lxd)=1$.
+  It follows that $\VV{\I}{\va{a}}(\qt{\forall}{x}Lxd)=1$ for every v.a. $\va{a}$. %, and so $\VV{\I}{\va{c}}(Lxd)=1$ for every $x$-variant $\va{c}$ of $\va{a}$.
+  Assume for \textit{reductio} that $\VV{\I}{}(Ldd) \neq 1$, and so $\VV{\I}{\va{c}}(Ldd) \neq 1$ for some v.a. $\va{c}$ defined over $\D$.
+  Thus $\tuple{\val{\I}{\va{c}}(d),\val{\I}{\va{c}}(d)}\notin\I(L)$.
+  Since $d$ is a constant, we know by definition that $\tuple{\I(d),\I(d)} \notin \I(L)$. 
+
+  Let $\va{e}$ be an $x$-variant of $\va{c}$ where $\va{e}(x) = \I(d)$.
+  Given the above, we know that $\VV{\I}{\va{c}}(\qt{\forall}{x}Lxd) = 1$, and so $\VV{\I}{\va{e}}(Lxd)=1$ since $\va{e}$ is an $x$-variant of $\va{c}$.
+  As a result, $\tuple{\val{\I}{\va{e}}(x),\val{\I}{\va{e}}(d)}\in\I(L)$ where $\val{\I}{\va{e}}(x)=\va{e}(x)=\I(d)$ and $\val{\I}{\va{e}}(d) = \I(d)$.
+  Thus we may conclude that $\tuple{\I(d),\I(d)}\in\I(L)$, contradicting the above.
+
+  By \textit{reductio}, it follows that $\VV{\I}{}(Ldd) = 1$.
+  Since $\M$ was an arbitrary model in which $\VV{\I}{}(\qt{\forall}{x}Lxd)=1$, it follows that $\qt{\forall}{x}Lxd \vDash Ldd$ as desired.
+  \qed
 \end{quote}
 
 This proof was considerably easier than the previous proof given above.
 Although reasoning from universal claims to particular claims tends to be easier than reasoning from particular claims to existential claims, each case requires careful consideration.
 
-We will conclude with an example which includes mixed quantifiers, where such cases are typically require the most care.
-In particular, consider the entailment: $\qt{\exists}{x}\qt{\forall}{y}Lxy \models \qt{\forall}{y}\qt{\exists}{x}Lxy$.
+We will conclude with an example which includes mixed quantifiers, where such cases typically require the most care.
+In particular, consider the logical consequence: $\qt{\exists}{x}\qt{\forall}{y}Lxy \vDash \qt{\forall}{y}\qt{\exists}{x}Lxy$.
 For simplicity, we will provide a \textit{reductio} proof as before:
 
 \begin{quote}
 \label{allmodels6}
   \textit{Proof:}
-  Assume for contradiction that there is a QL model $\M=\tuple{\D,\I}$ where $\VV{\I}{}(\qt{\exists}{x}\qt{\forall}{y}Lxy)=1$ and $\VV{\I}{}(\qt{\forall}{y}\qt{\exists}{x}Lxy)=0$.
-  It follows that $\VV{\I}{\va{a}}(\qt{\exists}{x}\qt{\forall}{y}Lxy)=1$ for some v.a. $\va{a}$, and $\VV{\I}{\va{c}}(\qt{\forall}{y}\qt{\exists}{x}Lxy)=0$ for every v.a. $\va{c}$, and so $\VV{\I}{\va{a}}(\qt{\forall}{y}\qt{\exists}{x}Lxy)=0$ in particular.
-  Thus $\VV{\I}{\va{e}}(\qt{\forall}{y}Lxy)=1$ for some $x$-variant $\va{e}$ of $\va{a}$, and $\VV{\I}{\va{g}}(\qt{\exists}{x}Lxy)=0$ for some $y$-variant $\va{g}$ of $\va{a}$.
-  It follows that $\va{e}(y)=\va{a}(y)$ and $\va{g}(x)=\va{a}(x)$.
+  Assume for contradiction that there is a $\FOL$ model $\M=\tuple{\D,\I}$ where $\VV{\I}{}(\qt{\exists}{x}\qt{\forall}{y}Lxy)=1$ and $\VV{\I}{}(\qt{\forall}{y}\qt{\exists}{x}Lxy)=0$.
+  It follows that $\VV{\I}{\va{a}}(\qt{\exists}{x}\qt{\forall}{y}Lxy)=1$ for every v.a. $\va{a}$, and $\VV{\I}{\va{c}}(\qt{\forall}{y}\qt{\exists}{x}Lxy)=0$ for some v.a. $\va{c}$, and so $\VV{\I}{\va{c}}(\qt{\forall}{y}\qt{\exists}{x}Lxy)=0$ in particular.
+  Thus $\VV{\I}{\va{e}}(\qt{\forall}{y}Lxy)=1$ for some $x$-variant $\va{e}$ of $\va{c}$, and $\VV{\I}{\va{g}}(\qt{\exists}{x}Lxy)=0$ for some $y$-variant $\va{g}$ of $\va{c}$.
+  It follows that $\va{e}(y)=\va{c}(y)$ and $\va{g}(x)=\va{c}(x)$.
 
   Given the above, $\VV{\I}{\va{e_1}}(Lxy)=1$ for the $y$-variant $\va{e_1}$ of $\va{e}$ where $\va{e_1}(y)=\va{g}(y)$.
   Additionally, $\VV{\I}{\va{g_1}}(Lxy)=0$ for the $x$-variant $\va{g_1}$ of $\va{g}$ where $\va{g_1}(x)=\va{e_1}(x)$.
@@ -748,11 +799,12 @@ For simplicity, we will provide a \textit{reductio} proof as before:
 
   It follows that $\tuple{\VV{\I}{\va{e_1}}(x),\VV{\I}{\va{e_1}}(y)}\in\I(L)$ and $\tuple{\VV{\I}{\va{g_1}}(x),\VV{\I}{\va{g_1}}(y)}\notin\I(L)$, and since $x$ and $y$ are variables, $\tuple{\va{e_1}(x),\va{e_1}(y)}\in\I(L)$ and $\tuple{\va{g_1}(x),\va{g_1}(y)}\notin\I(L)$.
   However, given the identities above, if follows from the former that $\tuple{\va{g_1}(x),\va{g_1}(y)}\in\I(L)$, thereby contradicting the latter.
-  Thus $\qt{\exists}{x}\qt{\forall}{y}Lxy \models \qt{\forall}{y}\qt{\exists}{x}Lxy$.
+  Thus $\qt{\exists}{x}\qt{\forall}{y}Lxy \vDash \qt{\forall}{y}\qt{\exists}{x}Lxy$.
+  \qed
 \end{quote}
 
 % As in the cases above, this proof included some careful choices.
-Given our \textit{reductio} assumption, we began with two claims with an existential character evaluated at the same variable assignment $\va{a}$.
+Given our \textit{reductio} assumption, we began with two claims with an existential character evaluated at the same variable assignment $\va{c}$.
 However, unpacking these claims split in two direction, yielding the $x$-variant $\va{e}$ and the $y$-variant $\va{g}$, where the result was two claims with a universal character.
 Since these claim entail something about \textit{all} $y$-variants of $\va{e}$ and \textit{all} $x$-variants of $\va{g}$ respectively, we chose $\va{e_1}(y)=\va{g}(y)$ and $\va{g_1}(x)=\va{e_1}(x)$ in order to get these variable assignments to clash. 
 Since $\va{g_1}$ was an $x$-variant of $\va{g}$, we know that $\va{g}(y)=\va{g_1}(y)$, where making appropriate substitutions resulted in a contradiction.
@@ -767,7 +819,7 @@ Since $\va{g_1}$ was an $x$-variant of $\va{g}$, we know that $\va{g}(y)=\va{g_1
 We have already seen some tricky examples that require reasoning about all models.
 It remains to evaluate sentences at particular models.
 This differs from constructing models in which a given sentence is true or false since we are supposing the model to be provided.
-For instance, consider the following model $\M$:
+For instance, consider the following partial model $\M$:
 
 \begin{partialmodel}
 	$\D$			& $\set{1,2,3}$ \\
@@ -785,11 +837,12 @@ It remains to provide a proof.
   \textit{Proof:}
   Let $\va{a}$ be a v.a. over $\D$ and $\va{c}$ be an $x$-variant of $\va{a}$ where $\va{c}(x)=3$.
   Next, we may let $\va{g}$ be an arbitrary $y$-variant of $\va{c}$.
-  Since $\va{g}$ is a $y$-variant and $x\neq y$, it follows that $\va{g}(x)=\va{c}(x)=3$ where $\va{g}(y)\in\D$.
-  However, since $\tuple{3,\v{x}}\notin\I(R)$ for all $\v{x}\in\D$, we may conclude that $\tuple{\va{g}(x),\va{g}(y)}\notin\I(R)$, and so $\tuple{\VV{\I}{\va{g}}(x),\VV{\I}{\va{g}}(y)}\notin\I(R)$. 
+  Since $\va{g}$ is a $y$-variant of $\va{c}$ and $x\neq y$, it follows that $\va{g}(x)=\va{c}(x)=3$ where $\va{g}(y)\in\D$.
+  However, since $\tuple{3,\v{x}}\notin\I(R)$ for all $\v{x}\in\D$, we may conclude that $\tuple{\va{g}(x),\va{g}(y)}\notin\I(R)$, and so $\tuple{\val{\I}{\va{g}}(x),\val{\I}{\va{g}}(y)}\notin\I(R)$. 
   Thus $\VV{\I}{\va{g}}(Rxy)\neq 1$ where $\va{g}$ was an arbitrary $y$-variant of $\va{c}$.
   It follows that $\VV{\I}{\va{c}}(\qt{\exists}{y}Rxy)\neq 1$, and so $\VV{\I}{\va{a}}(\qt{\forall}{x}\qt{\exists}{y}Rxy)\neq 1$ since $\va{c}$ is an $x$-variant of $\va{a}$.
-  Given that $\va{a}$ was arbitrary, we may conclude that $\VV{\I}{}(\qt{\forall}{x}\qt{\exists}{y}Rxy)\neq 1$ as desired. 
+  We may then conclude that $\VV{\I}{}(\qt{\forall}{x}\qt{\exists}{y}Rxy)\neq 1$ as desired. 
+  \qed
 \end{quote}
 
 This proof shows that $\forall x\exists y Rxy$ is false in $\M$.
@@ -802,40 +855,42 @@ We can show that this sentence is true in the same model $\M$ by means of the fo
 \begin{quote}
 \label{somemodel2}
   \textit{Proof:}
-  Let $\va{a}$ be a v.a. over $\D$ and $\va{c}$ be an $x$-variant of $\va{a}$.
+  Let $\va{a}$ be a v.a. defined over $\D$ and $\va{c}$ be an $x$-variant of $\va{a}$.
   It follows that $\va{c}(x)\in\set{1,2,3}$, and so there are three cases to consider:
 
   \textit{Case 1:}
   Assume $\va{c}(x)=1$ and let $\va{e}$ be a $y$-variant of $\va{c}$ where $\va{e}(y)=2$.
-  Thus $\tuple{\va{e}(y),\va{e}(x)}\in\I(R)$ since $\va{e}(x)=\va{c}(x)=1$, and so $\tuple{\VV{\I}{\va{e}}(y),\VV{\I}{\va{e}}(x)}\in\I(R)$.
+  Thus $\tuple{\va{e}(y),\va{e}(x)}\in\I(R)$ since $\va{e}(x)=\va{c}(x)=1$, and so $\tuple{\val{\I}{\va{e}}(y),\val{\I}{\va{e}}(x)}\in\I(R)$.
   Hence $\VV{\I}{\va{e}}(Ryx)=1$, and so $\VV{\I}{\va{c}}(\qt{\exists}{y}Ryx)=1$ since $\va{e}$ is a $y$-variant of $\va{c}$. 
 
   \textit{Case 2:}
   Assume $\va{c}(x)=2$ and let $\va{e}$ be a $y$-variant of $\va{c}$ where $\va{e}(y)=1$.
-  Thus $\tuple{\va{e}(y),\va{e}(x)}\in\I(R)$ since $\va{e}(x)=\va{c}(x)=2$, and so $\tuple{\VV{\I}{\va{e}}(y),\VV{\I}{\va{e}}(x)}\in\I(R)$.
+  Thus $\tuple{\va{e}(y),\va{e}(x)}\in\I(R)$ since $\va{e}(x)=\va{c}(x)=2$, and so $\tuple{\val{\I}{\va{e}}(y),\val{\I}{\va{e}}(x)}\in\I(R)$.
   Hence $\VV{\I}{\va{e}}(Ryx)=1$, and so $\VV{\I}{\va{c}}(\qt{\exists}{y}Ryx)=1$ since $\va{e}$ is a $y$-variant of $\va{c}$. 
 
   \textit{Case 3:}
   Assume $\va{c}(x)=3$ and let $\va{e}$ be a $y$-variant of $\va{c}$ where $\va{e}(y)=1$.
-  Thus $\tuple{\va{e}(y),\va{e}(x)}\in\I(R)$ since $\va{e}(x)=\va{c}(x)=3$, and so $\tuple{\VV{\I}{\va{e}}(y),\VV{\I}{\va{e}}(x)}\in\I(R)$.
+  Thus $\tuple{\va{e}(y),\va{e}(x)}\in\I(R)$ since $\va{e}(x)=\va{c}(x)=3$, and so $\tuple{\val{\I}{\va{e}}(y),\val{\I}{\va{e}}(x)}\in\I(R)$.
   Hence $\VV{\I}{\va{e}}(Ryx)=1$, and so $\VV{\I}{\va{c}}(\qt{\exists}{y}Ryx)=1$ since $\va{e}$ is a $y$-variant of $\va{c}$. 
 
   Thus $\VV{\I}{\va{c}}(\qt{\exists}{y}Ryx)=1$ for every $x$-variant $\va{c}$ of $\va{a}$, and so $\VV{\I}{\va{a}}(\qt{\forall}{x}\qt{\exists}{y}Ryx)=1$.
   We may conclude that $\VV{\I}{}(\qt{\forall}{x}\qt{\exists}{y}Ryx)=1$ as desired. 
+  \qed
 \end{quote}
 
+% Although we could have attempted a \textit{reductio}, the result is not much simpler.
 
 
 \section{Conclusion}
 
 This chapter has presented one of the trickiest topics that we will cover in this course.
-Unlike the semantics for SL, the semantics for QL has a lot of moving pieces, and it is can be hard to avoid getting them tangled up.
+Unlike the semantics for $\PL$, the semantics for $\FOL$ has a lot of moving pieces, and it is can be hard to prevent them from getting tangled.
 Even once you have mastered the definitions and can use them effectively to provide semantic arguments in the manner demonstrated above, this still takes quite a bit of work.
-To avoid having to provide complicated semantic arguments, the following chapter will extend the tree method we used for SL to QL.
-This will be convenient, but no substitute for understanding the semantics for QL itself.
-After all, it is the validity of arguments that we ultimately care about, where we only have reason to care about the tree method for QL if it can be shown to be sound and complete with respect to the semantics for QL.
+To avoid having to provide complicated semantic arguments, the following chapter will extend PL to provide a natural deduction system for $\FOL$ called \textit{first-order logic} (FOL). 
+Although it will be somewhat easier to write proofs in FOL, there is no substitute for understanding the semantics for $\FOL$ itself.
+After all, logical consequence provides an important account of formal reasoning that we ought to expect our proof system to accommodate.
 We will attend to these details in due course.
-For the time being, there is no better way to master the semantics of QL than working through problems for yourself.
+For the time being, there is no better way to master the semantics of $\FOL$ than working through problems for yourself.
 
 
 
@@ -1005,9 +1060,9 @@ Construct models to show that the following arguments are invalid.
 \label{pr.SemanticsEssay}
 \begin{earg}
 \item Many logic books define consistency and inconsistency in this way:
-`` A set $\{\metaA{}_1,\metaA{}_2,\metaA{}_3,\cdots\}$ is inconsistent if and only if $\{\metaA{}_1,\metaA{}_2,\metaA{}_3,\cdots\}\models(\metaB{}\eand\enot\metaB{})$ for some sentence \metaB{}. A set is consistent if it is not inconsistent.''
+`` A set $\{\metaA{}_1,\metaA{}_2,\metaA{}_3,\cdots\}$ is inconsistent if and only if $\{\metaA{}_1,\metaA{}_2,\metaA{}_3,\cdots\}\vDash(\metaB{}\eand\enot\metaB{})$ for some sentence \metaB{}. A set is consistent if it is not inconsistent.''
 
-Does this definition lead to any different sets being consistent than the definition on  p.~\pageref{def.consistencySL}? Explain your answer.
+Does this definition lead to any different sets being consistent than the definition on  p.~\pageref{def.consistency$\PL$}? Explain your answer.
 
 \item\leftsolutions\ Our definition of truth says that a sentence \metaA{} is \define{true in} \model{M} if and only if some variable assignment satisfies \metaA{} in $M$. Would it make any difference if we said instead that \metaA{} is \define{true in} \model{M} if and only if \emph{every} variable assignment satisfies \metaA{} in $M$? Explain your answer.
 \end{earg}

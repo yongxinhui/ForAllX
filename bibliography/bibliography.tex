@@ -1,0 +1,122 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{bibentry}
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep={}}
+
+\makeatletter
+\renewcommand{\maketitle}{
+\begin{flushright}
+{\LARGE\@title}
+
+\vspace{10pt}
+
+{\@author}
+\\ \@date
+\end{flushright}
+
+\vspace{-20pt}
+
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Bibliography}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+\section*{Philosophical Logic}%
+  \label{sec:PhilosophicalLogic}
+
+  \begin{enumerate}
+    \item \cite{Boolos1999} -- essays in philosophical logic and the philosophy of mathematics (some more advanced than others).
+  \end{enumerate}
+
+
+
+
+\section*{Modal Logic}%
+  \label{sec:ModalLogic}
+
+  \begin{enumerate}
+    \item \cite{Sider2010} -- logical toolkit for philosophy (accessible).
+    \item \cite{Hughes1996} -- classic text in modal logic (intermediate).
+    \item \cite{Blackburn2002} -- modern text in modal logic (advanced).
+    % \item \cite{Williamson2013} -- philosophy of modal logic (intermediate).
+  \end{enumerate}
+
+
+
+\section*{Mathematical Logic}%
+  \label{sec:MathematicalLogic}
+
+  \begin{enumerate}
+    \item \cite{Enderton2001} -- classic introduction to metalogic (intermediate).
+    \item \cite{Boolos2007} -- computability and incompleteness (intermediate).
+    \item \cite{Mendelson2015} -- extensive textbook in metalogic (intermediate).
+  \end{enumerate}
+
+
+
+
+\section*{Type Theory and Lambda Calculus}%
+  \label{sec:TypeTheory}
+
+  \begin{enumerate}
+    \item \cite{hindley2008a} -- austere treatment of type theory (advanced).
+    \item \cite{ hindley2008} -- textbook in lambda calculus (advanced).
+  \end{enumerate}
+
+
+
+
+\section*{Higher-Order Logic}%
+  \label{sec:HigherOrderLogic}
+  
+  \begin{enumerate}
+    \item \cite{Bacon2023} -- philosophical take on higher-order logic (intermediate).
+  \end{enumerate}
+
+
+
+
+\section*{Plural Logic}%
+  \label{sec:PluralLogic}
+  
+  \begin{enumerate}
+    \item \cite{Oliver2013} -- introduction to plural logic (intermediate).
+  \end{enumerate}
+
+
+
+\section*{Nonclassical Logic}%
+  \label{sec:Nonclassical Logic}
+
+  \begin{enumerate}
+    \item \cite{Priest2008} -- textbook covering nonclassical logics (intermediate).
+  \end{enumerate}
+
+
+
+\bibliographystyle{Phil_Review} %%bib style found in bst folder, in bibtex folder, in texmf folder.
+\setlength{\bibsep}{5pt} %%Changes spacing between bib entries
+\bibliography{Zotero} %%bib database found in bib folder, in bibtex folder
+
+\end{document}
+
+

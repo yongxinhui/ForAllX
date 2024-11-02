@@ -1,0 +1,193 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{../lecture} %calls local modified style file
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs} %%Math packages
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{multicol} 
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage{prooftrees} 
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep=}
+
+\makeatletter
+\renewcommand{\maketitle}{
+\begin{flushright}
+{\LARGE\@title}
+
+\vspace{10pt}
+
+{\@author}
+\\ \@date
+\end{flushright}
+
+\vspace{-20pt}
+
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{The Semantics for $\FOL$}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+\section*{Examples}%
+  \label{sec:Examples}
+  
+\begin{enumerate}
+  \item[\it Monadic:] Casey is dancing.
+  \item[\it Dyadic:] Al loves Max.
+  \item[\it Triadic:] Kim is between Boston and New York.
+\end{enumerate}
+
+\section*{Constants and Referents}%
+  \label{sec:Extensions and Referents}
+  
+\begin{enumerate}
+  \item[\it Constants:] Constants are interpreted as referring to individuals.
+  \item[\it Existence:] Thus we need to know what things there are.
+  \item[\it Domain:] A \textit{domain} is any nonempty set $\D$.
+  \item[\it Referents:] Interpretations assign constants to elements of $\D$.
+  \item[\bf Question 1:] How are we going to interpret predicates?
+\end{enumerate}
+
+
+
+\section*{Predicates and Extensions}%
+  \label{sec:Extensions}
+  
+\begin{enumerate}
+  \item[\it Example:] `Al loves Max' is true \textit{iff} Al bears the loves-relation to Max.
+  \item[\it Dyadic Predicates:] Dyadic predicates are interpreted by sets of \textit{ordered pairs} in $\D^2$.
+  \item[\bf Question 2:] How are we to interpret $n$-place predicates?
+  \item[\it Cartesian Power:] $\D^n=\set{\tuple{\v{x}_1,\ldots,\v{x}_n}:\v{x}_1,\ldots,\v{x}_n\in\D}$.
+  \item[\it Extensions:] $n$-place predicates are interpreted by subsets of $\D^n$.
+  \item[\it Singletons:] $1$-place predicates are interpreted by subsets of $\D^1=\set{\tuple{\v{x}}:\v{x}\in\D}$.
+  \item[\bf Question 3:] How are we to interpret $0$-place predicates? What is $\D^0$?
+    \begin{itemize}
+      % \item[\it Ordered Pairs:] An ordered pair $\tuple{\v{x}_1,\v{x}_2}=\set{\set{\v{x}_1},\set{\v{x}_1,\v{x}_2}}$.
+      \item[\it $n$-Tuples:] Let $\tuple{\v{x}_1,\ldots,\v{x}_n}=\set{\tuple{1,\v{x}_1},\ldots,\tuple{n,\v{x}_n}}$.
+      \item[\it $0$-Tuple:] $\tuple{}=\varnothing$.
+        % \item\tuple{\tuple{\v{x}_1,\ldots,\v{x}_{n-1}},\v{x}_n}$.
+        % \item\tuple{\v{x}_1,\tuple{\v{x}_2,\ldots,\tuple{\v{x}_n,\varnothing}}}$.
+      % \item[\it $0$-Tuple:] $\tuple=\varnothing$ is the $0$-tuple.
+        % \item $\tuple{\v{x}_1}=\set{1,\v{x}_1}$ is a $1$-tuple.
+        % \item $\tuple{\v{x}_1,\ldots,\v{x}_n}=\tuple{\vec{\v{X}}_{n-1},\v{x}_n}$ is an $n+1$-tuple if $X_n$ is a $n$-tuple. 
+      \end{itemize}
+  \item[\it Truth-Values:] $0$-place predicates are interpreted by subsets of $\D^0=\set{\varnothing}$.
+  \item[\it Ordinals:] Note that $0=\varnothing$ and $1=\set{\varnothing}$ are the first two von Neumann ordinals.
+\end{enumerate}
+
+
+
+\section*{$\FOL$ Models}
+
+\begin{itemize}
+  \item[\it Interpretations:] $\I$ is an $\FOL$ interpretation over $\D$ \textit{iff} both: 
+    \item $\I(\alpha)\in\D$ for every constant $\alpha$ in $\FOL$. 
+    \item $\I(\F^n)\subseteq\D^n$ for every $n$-place predicate $\F^n$.
+  \item[\bf Question 4:] What happens if $\D=\varnothing$?
+  \item[\it Model:] $\M=\tuple{\D,\I}$ is a model of $\FOL$ \textit{iff} $\I$ is an interpretation over $\D\neq\varnothing$.
+  \item[\bf Task 1:] Regiment and interpret the sentences above.
+    \item $Dc$, $Lam$, $Bkbn$.
+    \item $\D=\set{c,a,m,k,b,n}$.
+    \item $\I(D)=\set{\tuple{c}}$.
+    \item $\I(L)=\set{\tuple{a,m}}$.
+    \item $\I(B)=\set{\tuple{k,b,n}}$.
+    \item $\I(c)=c,\ \I(a)=a,\ \ldots$
+  \item[\it Lagadonian:] We often take constants to name themselves.
+  \item[\bf Question 5:] Do models give us truth-values?
+\end{itemize}
+
+
+
+\section*{Variable Assignments}
+
+\begin{enumerate}
+  \item[\it Assignments:] A variable assignment (v.a.) $\hat{a}(\alpha)\in\D$ for every variable $\alpha$ in $\FOL$.
+  \item[\it Referents:] We may define the referent of $\alpha$ in $\M=\tuple{\D,\I}$ as follows:
+    \begin{align*}
+      \val{\I}{\hat{a}}{(\alpha)}=
+        \begin{cases}
+          \I(\alpha) & \text{if } \alpha \text{ is a constant} \\
+          \hat{a}(\alpha) & \text{if } \alpha \text{ is a variable.}
+        \end{cases}
+    \end{align*}
+  \item[\it Variants:] A v.a. $\hat{c}$ is an $\alpha$-variant of $\hat{a}$ \textit{iff} $\hat{c}(\beta)=\hat{a}(\beta)$ for all $\beta\neq\alpha$.
+  \item[\it Example:] Let $\D=\set{1,2,3,4,5}$ where $\hat{a}(x)=1$, $\hat{a}(y)=2$, and $\hat{a}(z)=3$.
+    \begin{itemize}
+      \item[\bf Task 2:] If $\hat{c}$ is a $y$-variant of $\hat{a}$, what is $\hat{c}(x)$, $\hat{c}(y)$, and $\hat{c}(z)$?
+    \end{itemize}
+\end{enumerate}
+
+
+
+\section*{Example}
+
+\begin{enumerate}
+  \item[\it Universal:] Al loves everything, i.e., $\forall xLax$.
+  \item[\it Existential:] Someone is dancing, i.e., $\exists x(Px \eand Dx)$.
+  \item[\it Mixed:] Everyone loves someone, i.e., $\forall x(Px \eif \exists yLxy)$. 
+  \item[\it Complex:] Everything everything loves loves something, i.e., $\forall x(\forall yLyx \eif \exists zLxz)$.
+\end{enumerate}
+
+
+
+\section*{Semantics for $\FOL$}
+
+\begin{enumerate}
+  \item[] $\VV{\I}{\hat{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1$ ~\textit{iff}~ $\tuple{\val{\I}{\hat{a}}{(\alpha_1)},\ldots,\val{\I}{\hat{a}}{(\alpha_n)}}\in\I(\F^n)$.
+  \item[] $\VV{\I}{\hat{a}}(\forall\alpha\metaA)=1$ ~\textit{iff}~ $\VV{\I}{\hat{c}}(\metaA)=1$ for every $\alpha$-variant $\hat{c}$ of $\hat{a}$.
+  \item[] $\VV{\I}{\hat{a}}(\exists\alpha\metaA)=1$ ~\textit{iff}~ $\VV{\I}{\hat{c}}(\metaA)=1$ for some $\alpha$-variant $\hat{c}$ of $\hat{a}$.
+  \item[] $\VV{\I}{\hat{a}}(\enot\metaA)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\metaA)=0$.
+  \item[] $\VV{\I}{\hat{a}}(\metaA \eor \metaB)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\metaA)=1$ or $\VV{\I}{\hat{a}}(\metaB)=1$ (or both).
+  \item[] $\VV{\I}{\hat{a}}(\metaA \eand \metaB)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\metaA)=1$ and $\VV{\I}{\hat{a}}(\metaB)=1$.
+  \item[] $\VV{\I}{\hat{a}}(\metaA \eif \metaB)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\metaA)=0$ or $\VV{\I}{\hat{a}}(\metaB)=1$ (or both).
+  \item[] $\VV{\I}{\hat{a}}(\metaA \eiff \metaB)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\metaA)=\VV{\I}{\hat{a}}(\metaB)$.
+\end{enumerate}
+
+
+
+\section*{Truth and Entailment}
+
+\begin{enumerate}
+  \item[\it Truth:] $\VV{\I}{}(\metaA)=1$ ~\textit{iff}~ $\VV{\I}{\hat{a}}(\metaA)=1$ for every v.a. $\hat{a}$ where $\metaA$ is a wfs of $\FOL$. 
+  % \item[\it Satisfaction:] $\M=\tuple{\D,\I}$ satisfies $\MetaG$ \textit{iff} $\VV{\I}{}(\metaA)=1$ for every $\metaA\in\MetaG$.
+  % \item[\it Singletons:] As before $\M$ satisfies $\metaA$ \textit{iff} $\M$ satisfies $\set{\metaA}$.
+  \item[\it Logical Consequence:] $\MetaG\vDash\metaA$ just in case $\VV{\I}{}(\metaA) = 1$ whenever $\VV{\I}{}(\metaG) = 1$ for all $\metaG \in \MetaG$.
+  \item[\it Tautology:] $\metaA$ is a tautology \textit{iff} $\VV{\I}{}(\metaA) = 1$ for all every model $\M = \tuple{\D, \I}$.
+  \item[\it Contradiction:] $\metaA$ is a contradiction \textit{iff} $\VV{\I}{}(\metaA) = 0$ for all every model $\M = \tuple{\D, \I}$.
+  \item[\it Contingent:] $\metaA$ is contingent \textit{iff} $\VV{\I}{}(\metaA) \neq \VV{\J}{}(\metaA)$ for some $\I$ and $\J$.
+  \item[\it Satisfiable:] $\MetaG$ is satisfiable \textit{iff} there some $\I$ where $\VV{\I}{}(\metaG) = 1$ for all $\metaG \in \MetaG$.
+\end{enumerate}
+
+
+
+
+
+
+
+\end{document}
+

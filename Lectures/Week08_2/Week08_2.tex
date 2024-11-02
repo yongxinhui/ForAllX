@@ -1,0 +1,362 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs, mathabx} %%Math packages
+\usepackage{../lecture} %calls local modified style file
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{multicol} 
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage{prooftrees} 
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep=}
+
+\makeatletter
+\renewcommand{\maketitle}{
+\begin{flushright}
+{\LARGE\@title}
+
+\vspace{10pt}
+
+{\@author}
+\\ \@date
+\end{flushright}
+
+\vspace{-20pt}
+
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Minimal Models}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+
+\section*{From Last Time\ldots}
+
+\begin{itemize}
+  \item[\it Model:] $\M=\tuple{\D,\I}$ is a model of $\FOL$ \textit{iff} where $\D\neq\varnothing$ and both:
+    \item $\I(\alpha)\in\D$ for every constant $\alpha$ in $\FOL$. 
+    \item $\I(\F^n)\subseteq\D^n$ for every $n$-place predicate $\F^n$.
+  \item[\it Assignments:] A variable assignment (v.a.) $\va{a}(\alpha)\in\D$ for every variable $\alpha$ in $\FOL$.
+  \item[\it Referents:] We may define the referent of $\alpha$ in $\M=\tuple{\D,\I}$ as follows:
+    \begin{align*}
+      \val{\I}{\va{a}}{(\alpha)}=
+        \begin{cases}
+          \I(\alpha) & \text{if } \alpha \text{ is a constant} \\
+          \va{a}(\alpha) & \text{if } \alpha \text{ is a variable.}
+        \end{cases}
+    \end{align*}
+  \item[\it Variants:] A v.a. $\va{c}$ is an $\alpha$-variant of $\va{a}$ \textit{iff} $\va{c}(\beta)=\va{a}(\beta)$ for all $\beta\neq\alpha$.
+  \item[\it Semantics:] Given a model $\M = \tuple{\D, \I}$ and v.a., $\va{a}$ defined over $\D$, we recursively define $\VV{\I}{\va{a}}$ to be a function from wffs of $\FOL$ to $\set{0,1}$ as follows: 
+  \item[] $\VV{\I}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1$ ~\textit{iff}~ $\tuple{\val{\I}{\va{a}}{(\alpha_1)},\ldots,\val{\I}{\va{a}}{(\alpha_n)}}\in\I(\F^n)$.
+  \item[] $\VV{\I}{\va{a}}(\forall\alpha\metaA)=1$ ~\textit{iff}~ $\VV{\I}{\va{c}}(\metaA)=1$ for every $\alpha$-variant $\va{c}$ of $\va{a}$.
+  \item[] $\VV{\I}{\va{a}}(\exists\alpha\metaA)=1$ ~\textit{iff}~ $\VV{\I}{\va{c}}(\metaA)=1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$.
+  \item[] $\VV{\I}{\va{a}}(\enot\metaA)=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA)=0$.
+  \item[] $\VV{\I}{\va{a}}(\metaA \eor \metaB)=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA)=1$ or $\VV{\I}{\va{a}}(\metaB)=1$ (or both).
+  \item[] $\VV{\I}{\va{a}}(\metaA \eand \metaB)=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA)=1$ and $\VV{\I}{\va{a}}(\metaB)=1$.
+  \item[] $\VV{\I}{\va{a}}(\metaA \eif \metaB)=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA)=0$ or $\VV{\I}{\va{a}}(\metaB)=1$ (or both).
+  \item[] $\VV{\I}{\va{a}}(\metaA \eiff \metaB)=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaB)$.
+\end{itemize}
+
+
+
+\section*{Truth and Entailment}
+
+\begin{enumerate}
+  \item[\it Truth:] $\VV{\I}{}(\metaA)=1$ ~\textit{iff}~ $\VV{\I}{\va{a}}(\metaA)=1$ for every v.a. $\va{a}$ where $\metaA$ is a wfs of $\FOL$. 
+  % \item[\it Satisfaction:] $\M=\tuple{\D,\I}$ satisfies $\MetaG$ \textit{iff} $\VV{\I}{}(\metaA)=1$ for every $\metaA\in\MetaG$.
+  % \item[\it Singletons:] As before $\M$ satisfies $\metaA$ \textit{iff} $\M$ satisfies $\set{\metaA}$.
+  \item[\it Logical Consequence:] $\MetaG\vDash\metaA$ just in case $\VV{\I}{}(\metaA) = 1$ whenever $\VV{\I}{}(\metaG) = 1$ for all $\metaG \in \MetaG$.
+  \item[\it Tautology:] $\metaA$ is a tautology \textit{iff} $\VV{\I}{}(\metaA) = 1$ for all every model $\M = \tuple{\D, \I}$.
+  \item[\it Contradiction:] $\metaA$ is a contradiction \textit{iff} $\VV{\I}{}(\metaA) = 0$ for all every model $\M = \tuple{\D, \I}$.
+  \item[\it Contingent:] $\metaA$ is contingent \textit{iff} $\VV{\I}{}(\metaA) \neq \VV{\J}{}(\metaA)$ for some $\I$ and $\J$.
+  \item[\it Satisfiable:] $\MetaG$ is satisfiable \textit{iff} there some $\I$ where $\VV{\I}{}(\metaG) = 1$ for all $\metaG \in \MetaG$.
+\end{enumerate}
+
+
+
+
+
+\section*{Assignment Lemmas}
+
+\begin{enumerate}
+  \item[\it Lemma 1:] If $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\varphi$, then $\VV{\I}{\va{a}}(\varphi)=\VV{\I}{\va{c}}(\varphi)$.
+    % \begin{itemize}
+    %   \item Goes by routine induction on complexity.
+    % \end{itemize}
+  \item[\it Lemma 2:] If $\varphi$ is a wfs of $\FOL$: $\VV{\I}{}(\varphi)= 1$ \textit{iff} $\VV{\I}{\va{a}}(\varphi)= 1$ for some v.a. $\va{a}$ over $\D$.
+    \begin{itemize}
+      \item[\it LTR:] Assume $\VV{\I}{}(\varphi)= 1$, so $\VV{\I}{\va{a}}(\varphi)= 1$ for all v.a. $\va{a}$ over $\D$.
+      \item Since $\D$ is nonempty, there is some $d \in \D$.
+      \item Let $\va{a}(\alpha) = d$ for every variable $\alpha$ of $\FOL$.
+      \item Thus $\VV{\I}{\va{a}}(\varphi)= 1$ for some v.a. $\va{a}$ defined over $\D$.
+      \item[\it RTL:] Assume $\VV{\I}{\va{a}}(\varphi)=1$ for some v.a. $\va{a}$ defined over $\D$.
+      \item Let $\va{c}$ be any v.a. defined over $\D$.
+      \item Since $\varphi$ has no free variables, $\VV{\I}{\va{a}}(\varphi)=\VV{\I}{\va{c}}(\varphi)$ by \textit{Lemma 1}.
+      \item Since $\va{c}$ was arbitrary, $\VV{\I}{\va{c}}(\varphi)=1$ for all v.a. $\va{c}$ over $\D$.
+      \item Thus $\VV{\I}{}(\varphi)=1$.
+    \end{itemize}
+  % \item[\it Corollary:] For any sentence $\varphi$: $\VV{\I}{}(\varphi) = 0$ \textit{iff} $\VV{\I}{\va{a}}(\varphi) = 
+  % 0$ for all v.a. $\va{a}$ over $\D$.
+\end{enumerate}
+
+
+
+\section*{Minimal Models}
+
+\begin{itemize}
+  % \item[\bf Task 1:] Provide minimal models in which the following are true/false.
+  \item[\it Example 1:] Al loves everything, i.e., $\forall xLax$.
+    \begin{itemize}
+      \item[\it True:] Let $\D=\set{a}$ and $\va{a}$ be any v.a. defined over $\D$.
+      \item Let $\va{c}$ be any $x$-variant of $\va{a}$.
+      \item So $\va{c}(x)=a$ and $\I(a)=a$.
+      \item Letting $\I(L)=\set{\tuple{a,a}}$, we know $\tuple{\val{\I}{\va{c}}(a),\val{\I}{\va{c}}(x)}\in\I(L)$.
+      \item So $\VV{\I}{\va{c}}(Lax)=1$, and so $\VV{\I}{\va{a}}(\forall xLax)=1$ since $\va{c}$ was arbitrary.
+      \item Thus $\VV{\I}{}(Lax)=1$ by since $\va{a}$ was arbitrary. 
+      \item[\it False:] Let $\D=\set{a}$ and $\I(L)=\varnothing$.
+      \item Assume $\VV{\I}{}(\forall xLax)=1$ for contradiction. 
+      \item So $\VV{\I}{\va{a}}(\forall xLax)=1$ for some v.a. $\va{a}$ by \textit{Lemma 2}.
+      \item So $\VV{\I}{\va{a}}(Lax)=1$ since $\va{a}$ is an $x$-variant of itself.
+      \item So $\tuple{\val{\I}{\va{a}}(a),\val{\I}{\va{a}}(x)}\in\I(L)$, and so $\I(L)\neq\varnothing$.
+      % \item[\it False:] Let $\va{a}$ be a v.a. over $\D=\set{a}$ and $\I(L)=\varnothing$.
+      % \item So $\tuple{\VV{\I}{\va{a}}(a),\VV{\I}{\va{a}}(x)}\notin\I(L)$.
+      % \item So $\VV{\I}{\va{a}}(Lax) = 0$.
+      % \item Since $\va{a}$ is a $x$-variant of itself, $\VV{\I}{\va{a}}(\forall xLax) = 0$.
+      % \item So $\VV{\I}{}(\forall xLax) = 0$ by \textit{Lemma 2}.
+    \end{itemize}
+  \item[\it Example 2:] Someone is dancing, i.e., $\exists x(Px \eand Dx)$.
+    \begin{itemize}
+      \item[\it True:] Let $\va{a}$ be a v.a. over $\D=\set{a}$, and so $\va{a}(x)=a$.
+      \item Letting $\I(P)=\I(D)=\set{\tuple{a}}$, we know $\tuple{\val{\I}{\va{a}}(x)}\in\I(P)=\I(D)$.
+      \item So $\VV{\I}{\va{a}}(Px)=\VV{\I}{\va{a}}(Dx)=1$, and so $\VV{\I}{\va{a}}(Px \eand Dx)=1$.
+      \item Since $\va{a}$ is a $x$-variant of itself, $\VV{\I}{\va{a}}(\exists x(Px \eand Dx))=1$.
+      \item Thus $\VV{\I}{}(\exists x(Px \eand Dx))=1$ by \textit{Lemma 1}.
+      \item[\it False:] Let $\D=\set{a}$ and $\I(P)=\varnothing$.
+      \item Assume $\VV{\I}{}(\exists x(Px \eand Dx))=1$ for contradiction.
+      \item So $\VV{\I}{\va{a}}(\exists x(Px \eand Dx))=1$ for some v.a. $\va{a}$ by \textit{Lemma 2}.
+      \item So $\VV{\I}{\va{c}}(Px \eand Dx)= 1$ for some $x$-variant $\va{c}$ of $\va{a}$.
+      \item So $\VV{\I}{\va{c}}(Px)= 1$, and so $\tuple{\val{\I}{\va{c}}(x)}\in\I(P)$.
+      \item Thus $\I(P)\neq\varnothing$.
+    \end{itemize}
+  \item No set is a member of itself. \quad \texttt{[contingent]}\\
+    $\enot\exists x(Sx \eand x\in x)$
+  \item There is a set with no members. \quad \texttt{[contingent]}\\
+    $\exists x(Sx \eand \forall y(y\notin x))$
+  \item Everyone loves someone. \quad \texttt{[contingent]}\\ 
+    $\forall x(Px \eif \exists yLxy)$.
+  \item The guests that remained were pleased with the party. \quad \texttt{[contingent]}\\  
+    $\forall x(Rxp \eif Px)$.
+  \item I haven't met a cat that likes Merra. \quad \texttt{[contingent]}\\
+    $\enot\exists x(Mbx \eand Cx \eand Lmx)$
+  \item Kate found a job that she loved. \quad \texttt{[contingent]}\\
+    $\exists x(Fkx \eand Jx \eand Lkx)$
+  \item Everything everything loves loves something. \quad \texttt{[contingent]}\\  
+    $\forall x(\forall yLyx \eif \exists zLxz)$.
+\end{itemize}
+
+
+
+
+
+\section*{Quantifier Exchange}
+
+\begin{enumerate}
+  \item[$({\enot}{\forall})$] $\enot\forall x \varphi \Dashv\vDash \exists x\enot \varphi$.
+    \begin{itemize}
+      \item[\it LTR:] Let $\M=\tuple{\D,\I}$ be any model of $\FOL$ where $\VV{\I}{}(\enot\forall x \varphi) = 1$.
+      \item So $\VV{\I}{\va{a}}(\enot\forall x \varphi)=1$ for some v.a. $\va{a}$ by \textit{Lemma 2}.
+      \item So $\VV{\I}{\va{a}}(\forall x \varphi) = 0$.
+      \item So $\VV{\I}{\va{c}}(\varphi) = 0$ for some $x$-variants $\va{c}$ of $\va{a}$.
+      \item So $\VV{\I}{\va{c}}(\enot\varphi) = 1$ for some $x$-variants $\va{c}$ of $\va{a}$.
+      \item So $\VV{\I}{\va{a}}(\exists x\enot\varphi)=1$, and so $\VV{\I}{}(\exists x\enot\varphi)=1$ by \textit{Lemma 2}.
+    \end{itemize}
+  \item[$({\enot}{\exists})$] $\enot\exists x \varphi \Dashv\vDash \forall x\enot \varphi$.
+    \begin{itemize}
+      \item[\it LTR:] Let $\M=\tuple{\D,\I}$ be any model of $\FOL$ where $\VV{\I}{}(\enot\exists x \varphi) = 1$.
+      \item So $\VV{\I}{\va{a}}(\enot\exists x \varphi)=1$ for some v.a. $\va{a}$ by \textit{Lemma 2}.
+      \item So $\VV{\I}{\va{a}}(\exists x \varphi) = 0$.
+      \item So $\VV{\I}{\va{c}}(\varphi) = 0$ for all $x$-variants $\va{c}$ of $\va{a}$.
+      \item So $\VV{\I}{\va{c}}(\enot\varphi) = 1$ for all $x$-variants $\va{c}$ of $\va{a}$.
+      \item So $\VV{\I}{\va{a}}(\forall x\enot\varphi) = 1$, and so $\VV{\I}{}(\forall x\enot\varphi)=1$ by \textit{Lemma 2}.
+    \end{itemize}
+  % \item[$({\forall}{\enot})$] $\forall x\enot \varphi \vDash \enot\exists x \varphi$.
+    % \begin{itemize}
+    %   \item[\it Proof:] Let $\M=\tuple{\D,\I}$ satisfy $\enot\exists x \varphi$.
+    % \end{itemize}
+  % \item[$({\exists}{\enot})$] $\exists x\enot \varphi \vDash \enot\forall x \varphi$.
+    % \begin{itemize}
+    %   \item[\it Proof:] Let $\M=\tuple{\D,\I}$ satisfy $\enot\forall x \varphi$.
+    % \end{itemize}
+\end{enumerate}
+
+
+
+
+
+\section*{Arguments}
+
+\begin{enumerate}
+  \item[\it Bigger:] Regiment the following argument:
+    \begin{enumerate}
+      \item Whenever something is bigger than another, the latter is not bigger than the former.\\
+        \underline{$\forall x\forall y(Bxy \eif \enot Byx)$.\quad}
+      \item Nothing is bigger than itself.\\
+        $\enot\exists x Bxx$.
+    \end{enumerate}
+  \item[\it Proof:] Let $\M=\tuple{\D,\I}$ be any model where $\VV{\I}{}(\forall x\forall y(Bxy \eif \enot Byx)) = 1$.
+    \begin{itemize}
+      \item Assume $\VV{\I}{}(\enot\exists x Bxx) = 0$ for contradiction. 
+      \item So $\VV{\I}{\va{a}}(\enot\exists x Bxx) = 0$ for $\va{a}$ in particular.
+      \item So $\VV{\I}{\va{a}}(\exists x Bxx)=1$.
+      \item So $\VV{\I}{\va{c}}(Bxx)=1$ for some $x$-variant $\va{c}$ of $\va{a}$.
+      \item So $\tuple{\val{\I}{\va{c}}(x),\val{\I}{\va{c}}(x)}\in\I(B)$, and so $\tuple{\va{c}(x),\va{c}(x)}\in\I(B)$.
+      \item From the assumption, $\VV{\I}{\va{c}}(\forall x\forall y(Bxy \eif \enot Byx))=1$.
+      \item So $\VV{\I}{\va{c}}(\forall y(Bxy \eif \enot Byx))=1$ since $\va{c}$ is a $x$-variant of itself.
+      \item So $\VV{\I}{\va{e}}(Bxy \eif \enot Byx)=1$ for $y$-variant $\va{e}$ of $\va{c}$ where $\va{e}(y)=\va{c}(x)$.
+      \item So $\VV{\I}{\va{e}}(Bxy) = 0$ or $\VV{\I}{\va{e}}(\enot Byx)=1$.
+      \item So $\VV{\I}{\va{e}}(Bxy) = 0$ or $\VV{\I}{\va{e}}(Byx) = 0$.
+      \item So $\tuple{\va{e}(x),\va{e}(y)}\notin\I(B)$ or $\tuple{\va{e}(y),\va{e}(x)}\notin\I(B)$.
+      \item So $\tuple{\va{c}(x),\va{c}(x)}\notin\I(B)$ or $\tuple{\va{c}(x),\va{c}(x)}\notin\I(B)$ since $\va{e}(x)=\va{c}(x)$.
+      \item So $\tuple{\va{c}(x),\va{c}(x)}\notin\I(B)$, contradicting the above.
+    \end{itemize}
+  \item[\it Love:] Regiment the following argument:
+    \begin{itemize}
+      \item Cam doesn't love anyone who loves him back.\\
+        $\forall x(Lxc \eif \enot Lcx)$.
+      \item May loves everyone who loves themselves.\\
+        \underline{$\forall y(Lyy \eif Lmy)$.\quad}
+      \item If Cam loves himself, he doesn't love May.\\
+        $Lcc \eif \enot Lcm$.
+    \end{itemize}
+  % \item[\it Valid:] Let $\M=\tuple{\D,\I}$ be any model which satisfies the premises.
+  %   \begin{itemize}
+  %     \item So $\VV{\I}{\va{a}}(\forall x(Lxc \eif \enot Lcx))=\VV{\I}{\va{c}}(\forall y(Lyy \eif Lmy))=1$.
+  %     \item Let $\va{b}$ be a $x$-variant of $\va{a}$ where $\va{b}(x)=\I(m)$.
+  %     \item Let $\va{d}$ be a $y$-variant of $\va{c}$ where $\va{d}(y)=\I(c)$.
+  %     \item So $\VV{\I}{\va{b}}(Lxc \eif \enot Lcx)=\VV{\I}{\va{d}}(Lyy \eif Lmy)=1$.
+  %     % \item Assume $\VV{\I}{}(Lcc \eif \enot Lcm) = 0$ for contradiction.
+  %     % \item So $\VV{\I}{\va{e}}(Lcc \eif \enot Lcm) = 0$ for some v.a. $\va{e}$.
+  %     % \item Thus $\VV{\I}{\va{e}}(Lcc)= 1$ and $\VV{\I}{\va{e}}(\enot Lcm) = 0$, so $\VV{\I}{\va{e}}(Lcm)=1$.
+  %     % \item So $\tuple{\VV{\I}{\va{e}}(c),\VV{\I}{\va{e}}(c)}\in\I(L)$ and $\tuple{\VV{\I}{\va{e}}(c),\VV{\I}{\va{e}}(m)}\in\I(L)$. 
+  %     % \item So $\tuple{\I(c),\I(c)}\in\I(L)$ and $\tuple{\I(c),\I(m)}\in\I(L)$. 
+  %     \item From the first, $\VV{\I}{\va{b}}(Lxc) = 0$ or $\VV{\I}{\va{b}}(Lcx) = 0$.
+  %     % \item So $\tuple{\VV{\I}{\va{b}}(x),\VV{\I}{\va{b}}(c)}\notin\I(L)$ or $\tuple{\VV{\I}{\va{b}}(c),\VV{\I}{\va{b}}(x)}\notin\I(L)$. 
+  %     \item So $\tuple{\va{b}(x),\I(c)}\notin\I(L)$ or $\tuple{\I(c),\va{b}(x)}\notin\I(L)$. 
+  %     \item So $\tuple{\I(m),\I(c)}\notin\I(L)$ or $\tuple{\I(c),\I(m)}\notin\I(L)$. 
+  %     \item From the latter, $\VV{\I}{\va{d}}(Lyy) = 0$ or $\VV{\I}{\va{d}}(Lmy)=1$.
+  %     \item So $\tuple{\va{d}(y),\va{d}(y)}\notin\I(L)$ or $\tuple{\I(m),\va{d}(y)}\in\I(L)$. 
+  %     \item So $\tuple{\I(c),\I(c)}\notin\I(L)$ or $\tuple{\I(m),\I(c)}\in\I(L)$. 
+  %     \item Assume $\tuple{\I(c),\I(c)}\in\I(L)$ for discharge. 
+  %     \item So $\tuple{\I(m),\I(c)}\in\I(L)$, and so $\tuple{\I(c),\I(m)}\notin\I(L)$. 
+  %     \item Thus 
+  %   \end{itemize}
+  % \item[\it Gunk] Regiment the following argument:
+  %   \item Nothing is a part of itself.
+  %   \item Whenever one thing is bigger than a second thing, and the second thing is bigger than a third thing, then the first thing is bigger than the third thing. 
+  %   \item[\therefore] Whenever something is bigger than a second thing, the second thing is not bigger than the first.
+  %   % \item[\therefore] Nothing is bigger 
+  \item[\it Taller:] Regiment the following argument:
+    \begin{itemize}
+      \item If a first is taller than a second who is taller than a third, then the first is taller than the third.\\
+        $\forall x\forall y\forall z((Txy \eand Tyz) \eif Txz)$.
+      \item Nothing is taller than itself.\\
+        \underline{$\enot\exists xTxx$.\quad}
+      \item \mbox{If a first is taller than a second, the second isn't taller than the first.}\\
+        $\forall x\forall y(Txy \eif \enot Tyx)$.
+    \end{itemize}
+\end{enumerate}
+
+
+
+
+% \section*{Relations}
+%
+% \begin{enumerate}
+%   \item[\it Domain:] Let the \textit{domain} $D$ be any set.
+%   \item[\it Relation:] A \textit{relation} $R$ on $D$ is any subset of $D^2$.
+%   \item[\it Reflexive:] A relation $R$ is \textit{reflexive} on $D$ \textit{iff} $\tuple{x,x}\in R$ for all $x\in D$.
+%   \item[\it Non-Reflexive:] A relation $R$ is \textit{non-reflexive} on $D$ \textit{iff} $R$ is not reflexive on $D$.
+%   \item[\bf Question 1:] What is it to be \textit{irreflexive}?
+%   \item[\it Irreflexive:] A relation $R$ is \textit{irreflexive} on $D$ \textit{iff} $\tuple{x,x}\notin R$ for all $x\in D$.
+%   \item[\it Symmetric:] A relation $R$ is \textit{symmetric iff} $\tuple{y,x}\in R$ whenever ${x,y}\in R$.
+%   \item[\bf Question 2:] Why don't we need to specify a domain?
+%   \item[\bf Question 3:] Why is a relation reflexive or irreflexive with respect to a domain?
+%   \item[\it Asymmetric:] A relation $R$ is \textit{asymmetric iff} $\tuple{y,x}\notin R$ whenever $\tuple{x,y}\in R$.
+%   \item[\bf Question 4:] What is it to be non-symmetric? How about non-asymmetric?
+%   \item[\bf Task 1:] Show that every asymmetric relation is irreflexive.
+%   \item[\it Transitive:] A relation $R$ is \textit{transitive iff} $\tuple{x,z}\in R$ whenever $\tuple{x,y},\tuple{y,z}\in R$.
+%   \item[\it Intransitive:] A relation $R$ is \textit{intransitive iff} $\tuple{x,z}\notin R$ whenever $\tuple{x,y},\tuple{y,z}\in R$.
+%   \item[\bf Question 5:] Is every symmetric transitive relation reflexive? (No: $R=\varnothing$)
+%   \item[\bf Task 2:] Show that every transitive irreflexive relation asymmetric?
+%   \item[\it Euclidean:] A relation $R$ is \textit{euclidean iff} $\tuple{y,z}\in R$ whenever $\tuple{x,y},\tuple{x,z}\in R$.
+%   \item[\bf Task 3:] Show that every transitive symmetric relation is euclidean.
+% \end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% \section*{Relations}
+
+% \begin{enumerate}
+%   % \item[\it Domain:] Let the \textit{domain} $D$ be any set.
+%   \item[\it Relation:] A \textit{relation} $R$ on $D$ is any subset of $D^2$.
+%   \item[\it Reflexive:] A relation $R$ is \textit{reflexive} on $D$ \textit{iff} $\tuple{x,x}\in R$ for all $x\in D$.
+%   \item[\it Non-Reflexive:] A relation $R$ is \textit{non-reflexive} on $D$ \textit{iff} $R$ is not reflexive on $D$.
+%   \item[\bf Question 1:] What is it to be \textit{irreflexive}?
+%   \item[\it Irreflexive:] A relation $R$ is \textit{irreflexive} on $D$ \textit{iff} $\tuple{x,x}\notin R$ for all $x\in D$.
+%   \item[\it Symmetric:] A relation $R$ is \textit{symmetric iff} $\tuple{y,x}\in R$ whenever ${x,y}\in R$.
+%   \item[\bf Question 2:] Why don't we need to specify a domain?
+%   \item[\bf Question 3:] Why is a relation reflexive or irreflexive with respect to a domain?
+%   \item[\it Asymmetric:] A relation $R$ is \textit{asymmetric iff} $\tuple{y,x}\notin R$ whenever $\tuple{x,y}\in R$.
+%   \item[\bf Question 4:] What is it to be non-symmetric? How about non-asymmetric?
+%   \item[\bf Task 1:] Show that every asymmetric relation is irreflexive.
+%   \item[\it Transitive:] A relation $R$ is \textit{transitive iff} $\tuple{x,z}\in R$ whenever $\tuple{x,y},\tuple{y,z}\in R$.
+%   \item[\it Intransitive:] A relation $R$ is \textit{intransitive iff} $\tuple{x,z}\notin R$ whenever $\tuple{x,y},\tuple{y,z}\in R$.
+%   \item[\bf Question 5:] Is every symmetric transitive relation reflexive? (No: $R=\varnothing$)
+%   \item[\bf Task 2:] Show that every transitive irreflexive relation asymmetric?
+%   \item[\it Euclidean:] A relation $R$ is \textit{euclidean iff} $\tuple{y,z}\in R$ whenever $\tuple{x,y},\tuple{x,z}\in R$.
+%   \item[\bf Task 3:] Show that every transitive symmetric relation is euclidean.
+% \end{enumerate}
+
+
+  % \item Diamonds last forever.
+
+
+
+
+\end{document}
+
