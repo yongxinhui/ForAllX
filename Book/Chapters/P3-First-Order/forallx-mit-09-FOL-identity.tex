@@ -529,7 +529,7 @@ For completeness, we will copy over the definitions of logical consequence $\vDa
 \factoidbox{
   \textsc{Logical Consequence:} For any set of wfss $\MetaG\cup\set{\metaA}$ of $\FI$: 
     \begin{enumerate}[labelsep=.15in]
-    \item[] $\Gamma\vDash\metaA$ ~\textit{iff}~ for any model $\M = \tuple{\D, \I}$ of $\FI$, if $\VV{\I}{}(\metaG) = 1$ for all $\metaG \in \MetaG$, then $\VV{\I}{}(\metaA) = 1$.
+    \item[] $\MetaG\vDash\metaA$ ~\textit{iff}~ for any model $\M = \tuple{\D, \I}$ of $\FI$, if $\VV{\I}{}(\metaG) = 1$ for all $\metaG \in \MetaG$, then $\VV{\I}{}(\metaA) = 1$.
     \end{enumerate}
 }
 
@@ -557,40 +557,145 @@ Since a wfs has no free variables, if a wfs $\metaA$ is true in all v.a.s define
 In order to establish this equivalence, we may now provide proofs of the following lemmas.
 
 \vspace{.05in}
-\begin{Lthm} \label{VarAgree}
-  If $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\varphi$ of $\FI$, then $\VV{\I}{\va{a}}(\varphi)=\VV{\I}{\va{c}}(\varphi)$.
+\begin{Lthm} \label{lemma:VarAgree}
+  If $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\metaA$ of $\FI$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$.
 \end{Lthm}
 
 \begin{quote}
-  Letting $\metaA$ be a wff and $\M = \tuple{\D, \I}$ be a model of $\FI$ where both $\va{a}$ and $\va{c}$ are v.a.s defined over $\D$, we may assume that $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\varphi$.
-  The proof proceeds by 
+  Letting $\M = \tuple{\D, \I}$ be a model of $\FI$, the proof proceeds by induction on the complexity of wffs of $\FI$ where now there are two cases in the base step.
 
+  \textit{Base Step:}
+  Letting $\metaA$ be a wff of $\FI$ where $\metaA(\comp) = 0$ and both $\va{a}$ and $\va{c}$ are v.a.s defined over $\D$, we may assume that $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA$.
+  It follows that either $\metaA = \corner{\F^n\alpha_1,\ldots,\alpha_n}$ or $\metaA = \corner{\alpha_1 = \alpha_n}$ where in the latter case $n = 2$ and using corner quotes to improve clarity.
+  In either case, $\val{\I}{\va{a}}(\alpha_i) = \val{\I}{\va{c}}(\alpha_i)$ for all $1 \leq i \leq n$. 
+  We may then consider the following biconditionals:
+
+  \begin{multicols}{2}
+  
+    \begin{align*}
+      \VV{\I}{\va{a}}(\metaA) = 1
+        ~~\textit{iff}~~  & \VV{\I}{\va{a}}(\F\alpha_1,\ldots,\alpha_n) = 1\\
+        ~~\textit{iff}~~  & \tuple{\val{\I}{\va{a}}(\alpha_1),\ldots,\val{\I}{\va{a}}(\alpha_n)} \in \I(\F^n)\\
+        (\star) ~~\textit{iff}~~  & \tuple{\val{\I}{\va{c}}(\alpha_1),\ldots,\val{\I}{\va{c}}(\alpha_n)} \in \I(\F^n)\\
+        ~~\textit{iff}~~  & \VV{\I}{\va{c}}(\F\alpha_1,\ldots,\alpha_n) = 1\\
+        ~~\textit{iff}~~  & \VV{\I}{\va{c}}(\metaA) = 1.
+    \end{align*}
+
+    \begin{align*}
+      \strut\quad\quad
+      \VV{\I}{\va{a}}(\metaA) = 1
+        ~~\textit{iff}~~  & \VV{\I}{\va{a}}(\alpha_1 = \alpha_n) = 1\\
+        ~~\textit{iff}~~  & \val{\I}{\va{a}}(\alpha_1) = \val{\I}{\va{a}}(\alpha_n)\\
+        (\star) ~~\textit{iff}~~  & \val{\I}{\va{c}}(\alpha_1) = \val{\I}{\va{c}}(\alpha_n)\\
+        ~~\textit{iff}~~  & \VV{\I}{\va{c}}(\alpha_1 = \alpha_n) = 1\\
+        ~~\textit{iff}~~  & \VV{\I}{\va{c}}(\metaA) = 1.
+    \end{align*}
+
+  \end{multicols}
+
+  Whereas the starred biconditionals follow by the identities above, the other biconditionals are immediate from case assumptions and semantics for $\FI$.
+  Thus the lemma holds for any wff $\metaA$ of $\FI$ where $\comp(\metaA) = 0$.
+
+  \textit{Induction Step:}
+  Assume for induction that the lemma holds for every wff $\metaA$ of $\FI$ where $\comp(\metaA) \leq n$.
+  Letting $\metaA$ be a wff of $\FI$ where $\comp(\metaA) = n + 1$ and both $\va{a}$ and $\va{c}$ are v.a.s defined over $\D$, we may assume that $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA$. 
+  It remains to show that $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$.
+
+  \textit{Case 1:}
+  Assume $\metaA = \enot \metaB$.
+  Since $\comp(\enot \metaB) = \comp(\metaB) + 1 = n + 1$ by assumption and the definition of complexity, we know that $\comp(\metaB) = n$, and so $\VV{\I}{\va{a}}(\metaB)=\VV{\I}{\va{c}}(\metaB)$ by hypothesis.
+  We may then observe the following biconditionals:
+  \begin{align*}
+    \VV{\I}{\va{a}}(\metaA) = 1
+      ~~\textit{iff}~~  & \VV{\I}{\va{a}}(\enot \metaB) = 1\\
+      ~~\textit{iff}~~  & \VV{\I}{\va{a}}(\metaB) = 0\\
+      (\star) ~~\textit{iff}~~  & \VV{\I}{\va{c}}(\metaB) = 0\\
+      ~~\textit{iff}~~  & \VV{\I}{\va{c}}(\enot \metaB) = 1\\
+      ~~\textit{iff}~~  & \VV{\I}{\va{c}}(\metaA) = 1.
+  \end{align*}
+  Whereas the starred biconditional follows from the induction hypothesis, the other biconditionals hold by the semantics and case assumption.
+
+  \textit{Case 2:}
+  Assume $\metaA = \metaB \eand \metaC$.
+  Since $\comp(\metaB \eand \metaC) = \comp(\metaB) + \comp(\metaC) + 1 = n + 1$ by assumption and the definition of complexity, we know that $\comp(\metaB), \comp(\metaC) \leq n$, and so $\VV{\I}{\va{a}}(\metaB)=\VV{\I}{\va{c}}(\metaB)$ and $\VV{\I}{\va{a}}(\metaC)=\VV{\I}{\va{c}}(\metaC)$ by hypothesis.
+  Now consider:
+  \begin{align*}
+    \VV{\I}{\va{a}}(\metaA) = 1
+      ~~\textit{iff}~~  & \VV{\I}{\va{a}}(\metaB \eand \metaC) = 1\\
+      ~~\textit{iff}~~  & \VV{\I}{\va{a}}(\metaB) = \VV{\I}{\va{a}}(\metaC) = 1\\
+      (\star) ~~\textit{iff}~~  & \VV{\I}{\va{c}}(\metaB) = \VV{\I}{\va{c}}(\metaC) = 1\\
+      ~~\textit{iff}~~  & \VV{\I}{\va{c}}(\metaB \eand \metaC) = 1\\
+      ~~\textit{iff}~~  & \VV{\I}{\va{c}}(\metaA) = 1.
+  \end{align*}
+  Whereas the starred biconditional follows from the induction hypothesis, the other biconditionals hold by the semantics and case assumption.
+
+  \textit{Case 3:}
+  Assume $\metaA = \metaB \eor \metaC$.
+  (Exercise for the reader.)
+
+  \textit{Case 4:}
+  Assume $\metaA = \metaB \eif \metaC$.
+  (Exercise for the reader.)
+
+  \textit{Case 5:}
+  Assume $\metaA = \metaB \eiff \metaC$.
+  (Exercise for the reader.)
+
+  \textit{Case 6:}
+  Assume $\metaA = \qt{\forall}{\gamma}\metaB$.
+  Since $\comp(\qt{\forall}{\gamma} \metaB) = \comp(\metaB) + 1 = n + 1$ by assumption and the definition of complexity, we know that $\comp(\metaB) = n$, and so by hypothesis, $\VV{\I}{\va{e}}(\metaB)=\VV{\I}{\va{g}}(\metaB)$ for any v.a.s $\va{e}$ and $\va{g}$ defined over $\D$ where $\va{e}(\alpha) = \va{g}(\alpha)$ for all free variables $\alpha$ in $\metaB$.
+  We may then observe the following biconditionals:
+  \begin{align*}
+    \VV{\I}{\va{a}}(\metaA) = 1
+      ~~\textit{iff}~~  & \VV{\I}{\va{a}}(\qt{\forall}{\gamma} \metaB) = 1\\
+      ~~\textit{iff}~~  & \VV{\I}{\va{e}}(\metaB) = 1 \text{ for every $\gamma$-variant } \va{e} \text{ of } \va{a}\\
+      (\star) ~~\textit{iff}~~  & \VV{\I}{\va{e}}(\metaB) = 1 \text{ for every $\gamma$-variant } \va{e} \text{ of } \va{c}\\
+      ~~\textit{iff}~~  & \VV{\I}{\va{c}}(\qt{\forall}{\gamma} \metaB) = 1\\
+      ~~\textit{iff}~~  & \VV{\I}{\va{c}}(\metaA) = 1.
+  \end{align*}
+  Letting $\va{e}$ be any $\gamma$-variant of $\va{a}$, it follows that $\va{e}(\beta) = \va{a}(\beta)$ for every variable $\beta \neq \gamma$. 
+  By assumption, $\va{a}(\alpha) = \va{c}(\alpha)$ for all free variables $\alpha$ in $\metaA$.
+  Since $\metaA = \qt{\forall}{\gamma} \metaB$, we know by the definition of free variables that $\gamma$ is not free in $\metaA$, and so $\va{e}(\beta) = \va{c}(\beta)$ for every variable $\beta \neq \gamma$. 
+  By generalizing on $\va{e}$, it follows that every $\gamma$-variant $\va{e}$ of $\va{a}$ is also a $\gamma$-variant of $\va{c}$, where the converse holds by parity of reasoning. 
+  This establishes the stared biconditional.
+  As before, the other biconditionals given above follow by the semantics and case assumption.
+
+  \textit{Case 7:}
+  Assume $\metaA = \qt{\exists}{\gamma}\metaB$.
+  (Exercise for the reader.)
   \qed
 \end{quote}
 
 
 
 \vspace{.05in}
-\begin{Lthm} \label{VarAssign}
-  If $\varphi$ is a wfs of $\FOL$: $\VV{\I}{}(\varphi)= 1$ \textit{iff} $\VV{\I}{\va{a}}(\varphi)= 1$ for some v.a. $\va{a}$ over $\D$.
+\begin{Lthm} \label{lemma:VarAssign}
+  If $\metaA$ is a wfs of $\FI$: $\VV{\I}{}(\metaA) = 1$ \textit{iff} $\VV{\I}{\va{a}}(\metaA) = 1$ for some v.a. $\va{a}$ over $\D$.
 \end{Lthm}
 
 \begin{quote}
-  
-    \begin{itemize}
-      \item[\it LTR:] Assume $\VV{\I}{}(\varphi)= 1$, so $\VV{\I}{\va{a}}(\varphi)= 1$ for all v.a. $\va{a}$ over $\D$.
-      \item Since $\D$ is nonempty, there is some $d \in \D$.
-      \item Let $\va{a}(\alpha) = d$ for every variable $\alpha$ of $\FOL$.
-      \item Thus $\VV{\I}{\va{a}}(\varphi)= 1$ for some v.a. $\va{a}$ defined over $\D$.
-      \item[\it RTL:] Assume $\VV{\I}{\va{a}}(\varphi)=1$ for some v.a. $\va{a}$ defined over $\D$.
-      \item Let $\va{c}$ be any v.a. defined over $\D$.
-      \item Since $\varphi$ has no free variables, $\VV{\I}{\va{a}}(\varphi)=\VV{\I}{\va{c}}(\varphi)$ by \textit{Lemma 1}.
-      \item Since $\va{c}$ was arbitrary, $\VV{\I}{\va{c}}(\varphi)=1$ for all v.a. $\va{c}$ over $\D$.
-      \item Thus $\VV{\I}{}(\varphi)=1$.
-    \end{itemize}
+  Letting $\metaA$ be a wfs and $\M = \tuple{\D, \I}$ of $\FI$, we aim to prove both directions of the biconditional: $\VV{\I}{}(\metaA)= 1$ just in case $\VV{\I}{\va{a}}(\metaA)= 1$ for some v.a. $\va{a}$ over $\D$.
 
+  Assume $\VV{\I}{}(\metaA) = 1$.
+  By definition, $\VV{\I}{\va{a}}(\metaA) = 1$ for every v.a. $\va{a}$ defined over $\D$.
+  Since $\D \neq \varnothing$, we know that there is some $d \in \D$.
+  We may then consider the constant v.a. where $\va{c}(\alpha) = d$ for every variable $\alpha$ of $\FI$.
+  Given the above, $\VV{\I}{\va{c}}(\metaA)= 1$, and so we may conclude that $\VV{\I}{\va{a}}(\metaA)= 1$ for some v.a. $\va{a}$ defined over $\D$.
+  
+  Assume instead that $\VV{\I}{\va{a}}(\metaA)=1$ for some v.a. $\va{a}$ defined over $\D$.
+  Let $\va{c}$ be any v.a. defined over $\D$.
+  Since $\metaA$ has no free variables, $\va{a}(\alpha) = \va{c}(\alpha)$ holds vacuously for all free variables $\alpha$ in $\metaA$, and so $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$ follows by \textbf{\ref{lemma:VarAgree}}.
+  Since $\va{c}$ was arbitrary, $\VV{\I}{\va{c}}(\metaA)=1$ for all v.a. $\va{c}$ over $\D$, and so $\VV{\I}{}(\metaA)=1$.
   \qed
 \end{quote}
+
+Given \textbf{\ref{lemma:VarAgree}}, the lemma given above follows easily.
+As we will see, \textbf{\ref{lemma:VarAssign}} will never be entirely necessary, but often convenient.
+After all, we made do just fine without \textbf{\ref{lemma:VarAssign}} until now.
+Nevertheless, it will help to streamline our semantic proofs to be able to appeal to these lemmas when convenient since it is often easier to work with a particular v.a. rather than a claim about all v.a.s defined over a given domain.
+
+
+
 
 
 \section{Uniqueness}
@@ -599,17 +704,17 @@ Recall the following argument from before:
 
 \begin{multicols}{2}
 
-\begin{earg}
-  \item[] Only Cara loves Pedro.
-  \item[] DJ Faro loves Pedro.
-  \item[\therefore] DJ Faro is Cara.
-\end{earg}
+  \begin{earg}
+    \eitem{Only Cara loves Pedro.}
+    \uitem{DJ Faro loves Pedro.\quad\quad}
+    \eitem{DJ Faro is Cara.}
+  \end{earg}
 
-\begin{earg}
-  \item[] $\qt{\forall}{x}(Lxp \eiff x=c)$
-  \item[] $Ldp$
-  \item[\therefore] $d=c$
-\end{earg}
+  \begin{earg}
+    \eitem{$\qt{\forall}{x}(Lxp \eiff x=c)$}
+    \uitem{$Ldp$\quad\quad}
+    \eitem{$d=c$}
+  \end{earg}
 
 \end{multicols}
 
@@ -618,20 +723,24 @@ We are now in a position to show that this argument is valid.
 \begin{quote}
 \label{unique1}
   \textit{Proof:}
-  Let $\M=\tuple{\D,\I}$ be a $\FOL$ model where $\VV{\I}{}(\forall x(Lxp \eiff x=c))=1$ and $\VV{\I}{}(Ldp)=1$.
-  Thus $\VV{\I}{\va{a}}(\forall x(Lxp \eiff x=c))=1$ and $\VV{\I}{\va{c}}(Ldp)=1$ for some $\va{a}$ and $\va{c}$, and so $\tuple{\VV{\I}{\va{c}}(d),\VV{\I}{\va{c}}(p)}\in\I(L)$.
-  It follows that $\tuple{\I(d),\I(p)}\in\I(L)$.
+  Let $\M=\tuple{\D,\I}$ be a $\FI$ model where: (1) $\VV{\I}{}(\forall x(Lxp \eiff x=c))=1$; and (2) $\VV{\I}{}(Ldp)=1$.
+  It follows from the latter assumption by \textbf{\ref{lemma:VarAssign}} that $\VV{\I}{\va{c}}(Ldp)=1$ for some $\va{c}$ defined over $\D$, and so $\tuple{\val{\I}{\va{c}}(d),\val{\I}{\va{c}}(p)}\in\I(L)$.
+  Since $d$ and $p$ are constants, we know by definition that $\tuple{\I(d),\I(p)}\in\I(L)$.
 
-  Let $\va{e}$ be an $x$-variant of $\va{a}$ where $\va{e}(x)=\I(d)$.
-  Given the universal claim above, $\VV{\I}{\va{e}}(Lxp \eiff x=c)=1$, and so $\VV{\I}{\va{e}}(Lxp)=\VV{\I}{\va{e}}(x=c)$.
-  Thus $\tuple{\VV{\I}{\va{e}}(x),\VV{\I}{\va{e}}(p)}\in\I(L)$ just in case $\VV{\I}{\va{e}}(x)=\VV{\I}{\va{e}}(c)$, and so $\tuple{\va{e}(x),\I(p)}\in\I(L)$ just in case $\va{e}(x)=\I(c)$.
+  Let $\va{e}$ be a v.a. defined over $\D$ where $\va{e}(x)=\I(d)$.
+  Since $\VV{\I}{\va{a}}(\forall x(Lxp \eiff x=c))=1$ for every $\va{a}$ defined over $\D$ by (1), we know that $\VV{\I}{\va{e}}(\forall x(Lxp \eiff x=c))=1$ in particular.
+  By the semantics, $\VV{\I}{\va{e}}(Lxp)=\VV{\I}{\va{e}}(x=c)$.
+  Thus $\tuple{\val{\I}{\va{e}}(x),\val{\I}{\va{e}}(p)}\in\I(L)$ just in case $\val{\I}{\va{e}}(x)=\val{\I}{\va{e}}(c)$, and so $\tuple{\va{e}(x),\I(p)}\in\I(L)$ just in case $\va{e}(x)=\I(c)$.
   Since $\va{e}(x)=\I(d)$, we know that $\tuple{\I(d),\I(p)}\in\I(L)$ just in case $\I(d)=\I(c)$.
 
   Given the above, we may conclude that $\I(d)=\I(c)$.
-  Thus $\VV{\I}{\va{g}}(d)=\VV{\I}{\va{g}}(c)$ where $\va{g}$ is any v.a., and so $\VV{\I}{\va{g}}(d=c)=1$.
-  Since $d=c$ is a sentence, we may conclude that $\VV{\I}{}(d=c)=1$. 
-  Hence $\forall x(Lxp \eiff x=c), Ldp \models d=c$ as desired. 
+  Thus $\val{\I}{\va{g}}(d)=\val{\I}{\va{g}}(c)$ where $\va{g}$ is any v.a., and so $\VV{\I}{\va{g}}(d=c)=1$.
+  Since $d=c$ is a wfs, we may conclude that $\VV{\I}{}(d=c)=1$ by \textbf{\ref{lemma:VarAssign}}. 
+  Hence $\forall x(Lxp \eiff x=c), Ldp \models d=c$. 
+  \qed
 \end{quote}
+
+% TODO: continue
 
 The proof above only requires one critical choice.
 Given that $\VV{\I}{\va{a}}(\forall x(Lxp \eiff x=c))=1$, we know that $\VV{\I}{\va{b}}(Lxp \eiff x=c)=1$ for any $x$-variant $\va{b}$ of $\va{a}$ whatsoever.
@@ -818,12 +927,12 @@ We can put these quantifiers to work to consider sets of sentences like:
 
 \vspace{-.2in}
 \begin{align*}
-  \Gamma_{\infty} &\colonequals \set{\qt{\exists_{\geq n}}{x}(x=x): n\in\mathbb{N}}.
+  \MetaG_{\infty} &\colonequals \set{\qt{\exists_{\geq n}}{x}(x=x): n\in\mathbb{N}}.
 \end{align*}
 \vspace{-.2in}
 
-For any natural number $n$, the set $\Gamma_\infty$ includes a sentence that says at least $n$ things that are self-identical.
-Not only may we show that there are models which satisfy $\Gamma$, these models must have infinite domains.
+For any natural number $n$, the set $\MetaG_\infty$ includes a sentence that says at least $n$ things that are self-identical.
+Not only may we show that there are models which satisfy $\MetaG$, these models must have infinite domains.
 That we can begin to express claims about the infinite further demonstrates just how much more expressive power $\FI$ has than $\FOL$. 
 
 In addition to being able to say that there are at least $n$ things that satisfy a certain condition, $\FI$ permits us to say that that there are at most $n$ things that satisfy a certain condition. 
@@ -941,7 +1050,7 @@ Given these recursive definitions, we may work out the following quantifiers:
 Although the results differ in logical form from those that we may derive from $\qt{\exists_{(n,n)}}$ for different values of $n$, they are logically equivalent.
 % The fact that these cardinality quantifiers are definable in $\FI$ demonstrates the expressive power of this language in contrast to $\FOL$. 
 Whereas the inequality operators are interesting in their own right, the cardinality operators express something very specific, further demonstrating the expressive power of $\FI$.
-% For instance, we may consider a set of sentence $\Gamma=\set{}$
+% For instance, we may consider a set of sentence $\MetaG=\set{}$
 % Given these definitions, we may consider the following set of sentences.
 
 
