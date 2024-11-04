@@ -3,7 +3,7 @@
 \ProvidesPackage{forallx-ubc}[2011/10/29 support for a logic textbook]
 \usepackage[dvipsnames]{xcolor}
 \usepackage{enumitem} %%Enables control over enumerate and itemize environments
-\RequirePackage{graphicx,adjustbox,amssymb,colonequals,amsmath,lmodern,microtype,multicol,ifthen,prooftrees,titlesec, apptools,mathtools}
+\RequirePackage{graphicx,adjustbox,amssymb,colonequals,amsmath,mathabx,lmodern,microtype,multicol,ifthen,prooftrees,titlesec, apptools,mathtools}
 
 \usepackage[linktocpage=true]{hyperref}
 \definecolor{URLblue}{RGB}{0,0,150}
@@ -308,6 +308,7 @@
 % \renewcommand{\theenumi}{\Alph{enumi}}
 
 \newcounter{eargletter}[chapter] % Counter for the environment (resets per section)
+% \newcounter{oldletter}[chapter] % Counter for the custom letter prefix
 \renewcommand{\theeargletter}{\Alph{eargletter}} % Use capital letters for the counter
 
 \newcounter{eargnum}[eargletter]
@@ -321,6 +322,30 @@
 }
 {%
   \end{enumerate}%
+}
+
+\newenvironment{oarg}[1][] % Optional argument for custom prefix
+{%
+  \def\customprefix{#1}% Define the prefix as the provided argument
+  \begin{enumerate}[label=\customprefix\arabic{eargnum}.]%
+  \usecounter{eargnum}
+  \setlength{\itemsep}{-.4em}% Adjust item spacing
+}
+{%
+  \end{enumerate}%
+}
+
+
+\newcommand{\oeitem}[1]{%
+  \refstepcounter{eargnum} % Step the item counter
+  \item[\customprefix\arabic{eargnum}.] {#1}
+  % \label{\customprefix\arabic{eargnum}} % Create a label for referencing
+}
+
+\newcommand{\ouitem}[1]{%
+  \refstepcounter{eargnum} % Step the item counter
+  \item[\customprefix\arabic{eargnum}.] \underline{#1}\vspace{2pt}
+  % \label{\customprefix\arabic{eargnum}} % Create a label for referencing
 }
 
 \newcommand{\eitem}[1]{%

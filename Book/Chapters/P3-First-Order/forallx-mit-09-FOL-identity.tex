@@ -15,7 +15,7 @@ For instance, consider the use of the word `identical' in the following case:
   \end{quote}
 
 Insofar as the spheres are distinct--- there are two of them, not one--- we will say that they are not \textit{numerically identical}, or just not \textit{identical} for short.
-If `$a$' names one sphere and `$b$' names the other, we may express this with the sentence `$\neg{=}ab$' where `$=$' is a two place predicate, or with `$a\neq b$' for the sake of readability and familiarity.
+If `$a$' names one sphere and `$b$' names the other, we may express this with the sentence `$\enot{=}ab$' where `$=$' is a two place predicate, or with `$a\neq b$' for the sake of readability and familiarity.
 In this sense of identity, it is not true that the two spheres are identical as claimed in \texttt{Spheres}.
 Indeed, no two things whatsoever are identical in our sense since if they were, then there would not be two of them but rather just one thing perhaps with different names.
 
@@ -48,21 +48,19 @@ Why does identity deserve special treatment?
 Consider the following English argument regimented with the symbolization given above:
 
 \begin{multicols}{2}
-  
-  \begin{earg} \label{frege}
-    \eitem{Hesperus is Phosphorus.}
-    \uitem{Phosphorus is Venus.\quad\quad}
-    \eitem{Hesperus is Venus.}
-  \end{earg}
-  
-  \columnbreak
+    \begin{earg} \label{frege}
+      \eitem{Hesperus is Phosphorus.}
+      \uitem{Phosphorus is Venus.\quad\quad}
+      \eitem{Hesperus is Venus.}
+    \end{earg}
+    
+    \columnbreak
 
-  \begin{earg} \label{noid}
-    \eitem{$Ihp$}
-    \uitem{$Ipv$\quad\quad}
-    \eitem{$Ihv$}
-  \end{earg}
-
+    \begin{earg} \label{noid}
+      \eitem{$Ihp$}
+      \uitem{$Ipv$\quad\quad}
+      \eitem{$Ihv$}
+    \end{earg}
 \end{multicols}
 
 This argument is invalid.
@@ -85,7 +83,6 @@ Having produced a model which makes the premises true and the conclusion false, 
 An analogous argument shows that the following argument is also invalid:
 
 \begin{multicols}{2}
-
   \begin{ekey}
     \item[Txy:] $x$ is taller than $y$
     \item[k:] Kate
@@ -99,11 +96,9 @@ An analogous argument shows that the following argument is also invalid:
     \eitem{Kate is taller than Lu.}
     \item[] ~
   \end{earg}
-
 \end{multicols}
 
 \begin{multicols}{2}
-
   \begin{partialmodel}
     $\D$		& $\set{k,s,l}$\\
     $\I(T)$ & $\set{\tuple{k,s},\tuple{s,l}}$\\
@@ -118,7 +113,6 @@ An analogous argument shows that the following argument is also invalid:
     \eitem{$Tkl$}
     \vfill\strut
   \end{earg}
-
 \end{multicols}
 
 Replacing `$I$' with `$T$' and similarly replacing `$h$' with `$k$' and so on for the other constants, the semantic proof given above could be adapted to show that the premises in the previous argument do not entail the conclusion.
@@ -134,7 +128,6 @@ In order to make the taller-than argument valid, we would have to add an additio
 For instance, here are two ways that we might make the argument valid:
 
 \begin{multicols}{2}
-  
   \begin{earg}
     \eitem{$\forall x\forall y \forall z((Txy \eand Tyz) \eif Txz)$}
     \eitem{$Tks$}
@@ -148,7 +141,6 @@ For instance, here are two ways that we might make the argument valid:
     \uitem{$Tsl$\quad\quad}
     \eitem{$Tkl$}
   \end{earg}
-
 \end{multicols}
 
 Both of the arguments above are valid.
@@ -200,7 +192,7 @@ Without providing such a theory, nothing guarantees that $T$ is transitive, and 
 % Rather, logic is concerned with the so called \define{logical terms} like negation, conjunction, quantification, and identity, where these notions do not concern any particular ways for things to be (e.g., one thing being taller than another), but rather provide very general conceptual resources for articulating theories in the first place.
 % For instance, one may point out that we might use a language like $\FOL$ in order to provide a theory constraining the interpretation of $T$.
 % In particular, consider the following constraint:
-%   $$(\alpha=\beta) \supset (T\alpha\gamma\equiv T\beta\gamma).$$
+%   $$(\alpha=\beta) \eif (T\alpha\gamma\eiff T\beta\gamma).$$
 % This says that if $\alpha=\beta$, then $\alpha$ is taller than $\gamma$ just in case $\beta$ is taller than $\gamma$. 
 % Certainly this seems true, and yet it is unclear how we would state such a principle for our theory of the taller-than relation without recourse to the identity predicate.
 % This gives us reason to think that the theory of the taller-than relation should be presented in $\FI$ instead of $\FOL$. 
@@ -216,34 +208,28 @@ In doing so, we are making our intuitive grasp on the logical terms in English e
 
 Before pressing on, it is worth considering three more cases involving identity.
 To begin with, consider the following example originally presented by Gottlob Frege:
-
 \begin{multicols}{2}
+  \begin{ekey}
+      \item[Rx:] $x$ is rising.
+      \item[h:] Hesperus
+      \item[p:] Phosphorus
+  \end{ekey}
 
-\begin{ekey}
-  % \begin{multicols}{2}
-    \item[Rx:] $x$ is rising.
-    \item[h:] Hesperus
-    \item[p:] Phosphorus
-  % \end{multicols}
-\end{ekey}
+  \columnbreak
 
-\begin{earg}
-  \eitem{Hesperus is rising.}
-  \uitem{Hesperus is Phosphorus.\quad\quad}
-  \eitem{Phosphorus is rising.}
-\end{earg}
-
+  \begin{earg} \label{informHP}
+    \eitem{Hesperus is rising.}
+    \uitem{Hesperus is Phosphorus.\quad\quad}
+    \eitem{Phosphorus is rising.}
+  \end{earg}
 \end{multicols}
-
 As specified below, identity is a primitive symbol of $\FI$.
 Accordingly, we do not need to include identity in the symbolization key given above to provide the following regimentation.
-
-\begin{earg}
+\begin{earg} \label{formHP}
   \eitem{$Rh$}
   \uitem{$h=p$\quad\quad}
   \eitem{$Rp$}
 \end{earg}
-
 As we will soon see, this is a perfectly valid argument.
 Instead of restricting consideration to an intended interpretation, or else adding some further assumptions, the conclusion is entailed by the premises given the semantics that we will provide for $\FI$.
 
@@ -254,7 +240,6 @@ Instead of restricting consideration to an intended interpretation, or else addi
 Next consider the regimentation of the following arguments:
 
 \begin{multicols}{2}
-
   \begin{ekey}
     \item[Lxy:] $x$ loves $y$
     \item[c:] Cara
@@ -266,18 +251,17 @@ Next consider the regimentation of the following arguments:
   \strut
   \columnbreak
 
-  \begin{earg}
+  \begin{earg} \label{cara}
     \eitem{Only Cara loves Pedro.}
     \uitem{DJ Faro loves Pedro.\quad\quad}
     \eitem{Cara is DJ Faro.}
   \end{earg}
 
-  \begin{earg}
+  \begin{earg} \label{caraF}
     \eitem{$\forall x(Lxp \eiff x=c)$}
     \uitem{$Ldp$\quad\quad}
     \eitem{$c=d$}
   \end{earg}
-
 \end{multicols}
 
 This is a valid argument.
@@ -297,7 +281,6 @@ For instance, consider the following sentence and its various competing regiment
 \end{earg}
 
 \begin{multicols}{2}
-
   \begin{ekey}
     \item[Cxy:] $x$ composed $y$
     % \item[Sx:] $x$ is a thing. 
@@ -310,7 +293,6 @@ For instance, consider the following sentence and its various competing regiment
     \eitem{$(\qt{\exists}{x} Cmx \eand \qt{\exists}{y} Cmy) \eand x\neq y$.}
     \eitem{$\qt{\exists}{x}\qt{\exists}{y}((Cmx \eand Cmy) \eand x\neq y)$.}
   \end{earg}
-
 \end{multicols}
 
 Although \eref{mozart}{1} regiments the sentence \eref{mo}{1} in $\FOL$, this regimentation does not require that there are at least two things that Mozart composed.
@@ -571,7 +553,6 @@ In order to establish this equivalence, we may now provide proofs of the followi
   We may then consider the following biconditionals:
 
   \begin{multicols}{2}
-  
     \begin{align*}
       \VV{\I}{\va{a}}(\metaA) = 1
         ~~\textit{iff}~~  & \VV{\I}{\va{a}}(\F\alpha_1,\ldots,\alpha_n) = 1\\
@@ -590,7 +571,6 @@ In order to establish this equivalence, we may now provide proofs of the followi
         ~~\textit{iff}~~  & \VV{\I}{\va{c}}(\alpha_1 = \alpha_n) = 1\\
         ~~\textit{iff}~~  & \VV{\I}{\va{c}}(\metaA) = 1.
     \end{align*}
-
   \end{multicols}
 
   Whereas the starred biconditionals follow by the identities above, the other biconditionals are immediate from case assumptions and semantics for $\FI$.
@@ -703,19 +683,19 @@ Nevertheless, it will help to streamline our semantic proofs to be able to appea
 Recall the following argument from before:
 
 \begin{multicols}{2}
+  \begin{oarg}[\ref{cara}]
+    \oeitem{Only Cara loves Pedro.}
+    \ouitem{DJ Faro loves Pedro.\quad\quad}
+    \oeitem{DJ Faro is Cara.}
+  \end{oarg}
 
-  \begin{earg}
-    \eitem{Only Cara loves Pedro.}
-    \uitem{DJ Faro loves Pedro.\quad\quad}
-    \eitem{DJ Faro is Cara.}
-  \end{earg}
+  \columnbreak
 
-  \begin{earg}
-    \eitem{$\qt{\forall}{x}(Lxp \eiff x=c)$}
-    \uitem{$Ldp$\quad\quad}
-    \eitem{$d=c$}
-  \end{earg}
-
+  \begin{oarg}[\ref{caraF}]
+    \oeitem{$\qt{\forall}{x}(Lxp \eiff x=c)$}
+    \ouitem{$Ldp$\quad\quad}
+    \oeitem{$d=c$}
+  \end{oarg}
 \end{multicols}
 
 We are now in a position to show that this argument is valid.
@@ -740,28 +720,31 @@ We are now in a position to show that this argument is valid.
   \qed
 \end{quote}
 
-% TODO: continue
+The proof begins by considering an arbitrary model in which the premises are true, showing that the conclusion must also be true in that model.
+The idea is to extend the general claim given in \eref{caraF}{1} to the particular claim given in \eref{caraF}{2} by considering an assignment of the variable $x$ to whatever the constant $d$ happens to refer to in the model at hand.
+Accordingly, it makes sense to begin by unpacking what we know about \eref{caraF}{2} before making use of \eref{caraF}{1}.
 
-The proof above only requires one critical choice.
-Given that $\VV{\I}{\va{a}}(\forall x(Lxp \eiff x=c))=1$, we know that $\VV{\I}{\va{b}}(Lxp \eiff x=c)=1$ for any $x$-variant $\va{b}$ of $\va{a}$ whatsoever.
-We were careful to choose the $x$-variant $\va{e}$ of $\va{a}$ where $\va{e}(x)=\I(d)$.
+Once we have worked out that $\tuple{\I(d),\I(p)}\in\I(L)$, we are now in a position to make a strategic choice.
+Although it follows that $\VV{\I}{\va{a}}(Lxp \eiff x=c)=1$ for any v.a. $\va{a}$ defined over the domain, we were careful to consider a v.a. $\va{e}$ where $\va{e}(x)=\I(d)$.
 This is akin to instantiating $x$ by $d$, resulting in the sentence $Ldp \eiff d=c$ which, together with $Ldp$ entails $d=c$.
-Instead of replacing `$x$' with `$d$' as we did just now to illustrate, we chose the $x$-variant $\va{e}$ where $\va{e}(x)=\I(d)$.
+Instead of replacing `$x$' with `$d$', we chose the $x$-variant $\va{e}$ where $\va{e}(x)=\I(d)$.
+This sort of reasoning will reappear once we introduce a proof system for $\FI$.
 
 Given that only Cara loves Pedro, we may think of her as the unique-Pedro-lover.
 That is, not only is there something out there that loves Pedro, Cara is \textit{the} Pedro-lover.
 Suppose we forget Cara's name, but remember this prominent fact about her.
 We might then ask: is the Pedro-lover the same as DJ Faro?
 Instead of using her name, we are using this distinguishing feature to refer to her.
-This is a common practice since we don't have names for everything in English, and even when we do, we don't always know the name of the relevant individual in question.
-Nevertheless, if we know that there is some particular way that only one thing happens to be, then we may use that way of being to pick out that thing.
+This is a common practice since we don't have names for everything in English, and even when we do, we don't always know everything name.
 
-Whereas Cara's distinguishing feature was loving Pedro, in general we may appeal to any condition however complex.
+Whereas Cara's distinguishing feature was loving Pedro, in general we may appeal to any condition however complex so long as it succeeds in picking out exactly one individual.
+That is, if we know that there is some particular way that one thing happens to be where only that thing is that way, then we may use that way of being to pick out that particular thing.
 For instance, perhaps many people love Pedro, but Cara is the only DJ to love Pedro.
 We may express this with $\forall x((Dx \eand Lxp) \eiff x=c)$.
-By replacing the constant `$c$' with a variable as in $\forall x((Dx \eand Lxp) \eiff x=y)$, we may consider the condition of being the only DJ to love Pedro.
-This open sentence is akin to the complex property of \textit{being the only DJ to love Pedro} where we may appeal to this distinguishing feature to refer to an individual, in this case Cara.
+Replacing the constant `$c$' with a variable as in $\forall x((Dx \eand Lxp) \eiff x=y)$ returns an open sentence which corresponds to the condition of \textit{being the only DJ to love Pedro}.
+% Or to speak of properties, we might  complex property of \textit{being the only DJ to love Pedro} where we may appeal to this distinguishing feature to refer to an individual, in this case Cara.
 This brings us to the topic of definite descriptions.
+
 
 
 
@@ -770,97 +753,96 @@ This brings us to the topic of definite descriptions.
 \section{Definite Descriptions}
   \label{sec.DefiniteDescription}
 
+
 In 1905, Bertrand Russell famously characterized \emph{definite descriptions} in terms of identity.
 % A definite description is a description that implies that only one object satisfies it.
 In the paradigm cases, definite descriptions use the definite article `the'.
-Suppose one were to hear a crying in the next room, saying `the baby is hungry'.
+Suppose one were to hear crying in the next room, saying `The baby is hungry'.
 This is to claim that the \emph{one and only baby} (in the vicinity) is hungry.
-Russell was motivated in part by the apparent fact that one can use this sort of language in a meaningful way even if one is wrong about whether there's any baby around.
+Russell was motivated in part by the apparent fact that one can use this sort of language in a meaningful way even if one is wrong about whether there is anything fitting the description.
 If there is no baby--- the crying is a recording --- the statement is false, but it's still meaningful.
 For this reason, Russell was reluctant to suppose that we should understand `the baby' as a name.
-Remember, in $\FOL$, all names have to refer to objects in the domain.
-Instead, the sentence can be understood to be an existentially quantified claim about a unique baby.
-Saying `the baby is hungry', according to Russell, is to say three things: there is a baby, there's no other baby than that one, and that baby is hungry.
-That second element, the uniqueness claim, can be expressed in $\FOL$ with identity. 
+% Recall that all constants in $\FI$ are required to refer to objects in the domain.
+Instead, the sentence can be understood to be an existentially quantified claim about a unique baby in the vicinity though there may not be a baby in the vicinity.
+According to Russell, saying `The baby is hungry' is to say three things: there is a baby, there's no other baby than that one, and that baby is hungry.
+As brought out above, uniqueness can be expressed in $\FI$ with the help of identity. 
 
-In order to bring out the contrast, consider the following symbolization key:
-
-\begin{ekey}
-  \item[Bx:] $x$ is a baby
-  \item[Hx:] $x$ is hungry
-  \item[j:] Jonathan
-\end{ekey}
-
-A sentence like `Jonathan is hungry' is straightforwardly translated as $Hj$.
-According to Russell's theory of definite descriptions, `the baby is hungry' has a much more complex logical form which we may regiment in either of the follows ways:
-
-\begin{earg}
-  \item[\ex{Def1}] $\qt{\exists}{x} ((Bx \eand \qt{\forall}{y} (By \eif y = x)) \eand Hx)$.
-  \item[\ex{Def2}] $\qt{\exists}{x} (\qt{\forall}{y} (By \eiff y = x) \eand Hx)$.
-\end{earg}
-
-Whereas the first regimentation says that there is some baby which is the only baby and is hungry, the second regimentation collapses the first two parts of the first regimentation, claiming that the unique baby is hungry.
-In order to express the uniqueness of being a baby, we have used the biconditional as in the previous section.
-That is, $x$ is the unique baby insofar as for any $y$ whatsoever, $y$ is a baby if and only if $y$ is identical to $x$.
-
-As brought out in the previous section, the distinguishing feature need not be expressed by a single predicate.
-For instance, suppose there is a baby who is sleeping right in front of us, but we hear crying from the other room.
-One may then be a little more specific by saying `the crying baby is hungry'.
-We may expand our symbolization key to regiment this claim.
+In order to contrast names with definite descriptions, consider the symbolization key and regimentations for `Jonathan is hungry' and `The baby is hungry':
 
 \begin{multicols}{2}
+  \begin{ekey}
+    \item[Bx:] $x$ is a baby
+    \item[Hx:] $x$ is hungry
+    \item[j:] Jonathan
+  \end{ekey}
+  
+  \columnbreak
 
-\begin{ekey}
-  \item[Cx:] $x$ is crying
-\end{ekey}
-
-\begin{earg}
-  \item[\ex{Def3}] $\qt{\exists}{x} (\qt{\forall}{y} ((Cy \eand By) \eiff y = x) \eand Hx)$.
-\end{earg}
-
+  \begin{earg} \label{baby}
+    \eitem{$Hj$}
+    \eitem{$\qt{\exists}{x} ((Bx \eand \qt{\forall}{y} (By \eif y = x)) \eand Hx)$.}
+    \eitem{$\qt{\exists}{x} (\qt{\forall}{y} (By \eiff y = x) \eand Hx)$.}
+  \end{earg}
 \end{multicols}
+Whereas `Jonathan is hungry' is easilyt regimented by \eref{baby}{1}, according to Russell's theory of definite descriptions, `The baby is hungry' has a much more complex logical form.
+Whereas the regimentation given in \eref{baby}{2} says that there is some baby which is the only baby and is hungry, \eref{baby}{3} collapses the first two parts of \eref{baby}{2}, claiming that the unique baby is hungry.
+% In order to express the uniqueness, we used the biconditional as in the previous section.
+% With respect to the example above, $x$ is the unique baby insofar as for any $y$ whatsoever, $y$ is a baby if and only if $y$ is identical to $x$.
 
-Instead of the single predicate `$B$', we have used `$C$' together with `$B$' in order to form the open sentence `$Cy \eand By$' which describes the individual to which we intend to refer.
+As mentioned in the previous section, the distinguishing feature by which an individual is uniquely identified need not be expressed by a single predicate.
+For instance, suppose there is a baby who is sleeping right in front of us, but we hear crying from the other room.
+One may then be a little more specific by saying `The crying baby is hungry'.
+Accordingly, we may expand our symbolization key to regiment this more specific claim.
+\begin{multicols}{2}
+  \begin{ekey}
+    \item[Cx:] $x$ is crying
+  \end{ekey}
+
+  \columnbreak
+
+  \begin{earg} \label{compbaby}
+    \eitem{$\qt{\exists}{x} (\qt{\forall}{y} ((Cy \eand By) \eiff y = x) \eand Hx)$.}
+  \end{earg}
+\end{multicols}
+Instead of the single predicate `$B$', we have used `$C$' together with `$B$' in order to form the open sentence `$Cy \eand By$' which describes the unique individual to which we intend to refer.
 
 In order to speak generally about the means by which we may refer to some unique individual satisfying a certain condition, let $\metaA(\alpha)$ be any wff of $\FI$ in which the variable $\alpha$ is free. 
 If $\alpha$ is the only free variable in $\metaA(\alpha)$, we may take $\metaA(\alpha)$ to be a \define{description}.
-Moreover, $\metaA(\alpha)$ provides a \define{definite description} just in case $\metaA(\alpha)$ is a description which just one thing satisfies, i.e., $\qt{\exists}{\beta}\qt{\forall}{\alpha}(\metaA(\alpha)\eiff \alpha = \beta)$ where $\alpha$ and $\beta$ are distinct variables.
+Moreover, $\metaA(\alpha)$ provides a \define{definite description} in a model $\M$ just in case $\metaA(\alpha)$ is a description which just one thing satisfies, i.e., $\qt{\exists}{\beta}\qt{\forall}{\alpha}(\metaA(\alpha)\eiff \alpha = \beta)$ where $\alpha \neq \beta$ are distinct variables.
 Given a definite description $\metaA(\alpha)$, we may make claims about the object satisfying that description by conjoining another description $\metaB(\beta)$ within the scope of the existential quantifier as follows: 
   $$\qt{\exists}{\beta}(\qt{\forall}{\alpha}(\metaA(\alpha)\eiff \alpha = \beta) \eand \metaB(\beta)).$$
-This reads: the unique thing for which $\metaA$ is such that $\metaB$.
-Sentence $\ref{Def3}$ is an instance of this general recipe, and reads: the unique thing for which it is a crying baby, is hungry. 
+This reads, the unique thing for which $\metaA$ is such that $\metaB$.
+The sentence \eref{compbaby}{1} is an instance of this general recipe, and reads: the unique thing for which it is a crying baby, is hungry. 
 Russell's idea is that this is what is going on when we use the definite article `the' since we may say the same thing much more naturally with: \textit{the} crying baby is hungry.
 
-One of the interesting features of Russell's theory is that `the baby is not hungry' is not the negation of `the baby is hungry'.
+One of the interesting features of Russell's theory is that `The baby is not hungry' is not the negation of `The baby is hungry'.
 Instead, the negation applies only to the last conjunct:
 
 \begin{earg}
-  \item[\ex{Def4}] $\qt{\exists}{x} (\qt{\forall}{y} ((Cy \eand By) \eiff y = x) \eand \enot Hx)$.
+  \eitem{$\qt{\exists}{x} (\qt{\forall}{y} ((Cy \eand By) \eiff y = x) \eand \enot Hx)$.}
 \end{earg}
 
 The reason Russell designed his theory this way was that he thought that both of these sentences equally implied that there is a baby.
-If there is no baby, then you'd be mistaken in saying either `the baby is hungry' or `the baby is not hungry'.
+If there is no baby, then you'd be mistaken in asserting either `The baby is hungry' or `The baby is not hungry'.
 Consequently, one can't be the negation of the other, but rather requires the analysis given above.
 
 As a treatment of the truth conditions of English sentences, Russell's theory is controversial.
 For instance, consider the following case:
-
 \begin{multicols}{2}
+  \begin{ekey}
+    \item[Kxy:] $x$ is king of $y$
+    \item[Bx:] $x$ is Bald
+    \item[f:] France
+  \end{ekey}
 
-\begin{ekey}
-  \item[Kxy:] $x$ is king of $y$
-  \item[Bx:] $x$ is Bald
-  \item[f:] France
-\end{ekey}
+  \columnbreak
 
-\begin{earg}
-  \item[\ex{Def4}] The king of France is bald.
-  \item[\ex{Def5}] $\qt{\exists}{x} (\qt{\forall}{y} (Kyf \eiff y = x) \eand Bx)$.
-  \item[] ~
-\end{earg}
-
+  \begin{earg}
+    \item[\ex{Def4}] The king of France is bald.
+    \item[\ex{Def5}] $\qt{\exists}{x} (\qt{\forall}{y} (Kyf \eiff y = x) \eand Bx)$.
+    \item[] ~
+  \end{earg}
 \end{multicols}
-
 Some philosophers of language think that sentences that seem to presuppose the existence of something that isn't there aren't straightforwardly false, but are rather defective in some other way--- perhaps they fail to be meaningful, or perhaps they take on some truth value other than true or false.
 These matters are beyond the scope of this book, and so we will remain neutral on whether Russell's theory is an accurate treatment of English.
 Nevertheless, without including identity in the language, this question would not even arise.
@@ -878,163 +860,143 @@ This helps to bring out what is distinctive about the expressive power of $\FI$ 
 Including identity in $\FI$ permits us to express claims about quantities that we couldn't in $\FOL$.
 In \S\ref{sec:IdentityLogic} we considered the sentence `Mozart composed at least two things' where identity was found to play a critical role.
 In particular, we provided the following regimentation:
-
-\begin{earg}
-  \item[\ref{M4}.] $\qt{\exists}{x}\qt{\exists}{y}((Cmx \eand Cmy) \eand x\neq y)$.
-\end{earg}
-
+\begin{oarg}[\ref{mozart}]
+  \setcounter{eargnum}{2}
+  \oeitem{$\qt{\exists}{x}\qt{\exists}{y}((Cmx \eand Cmy) \eand x\neq y)$.}
+\end{oarg}
 Given that we were able to regiment `at least two', you might suspect that we can also regiment `at least three', and so on for the other natural numbers.
 Consider the following:
-
-\begin{earg}
-  \item[\ex{Q1}] $\qt{\exists}{x}\qt{\exists}{y}\qt{\exists}{z}(((((Cmx \eand Cmy) \eand Cmz) \eand x\neq y) \eand x\neq z) \eand y\neq z)$.
+\begin{earg} \label{mozart3long}
+  \eitem{$\qt{\exists}{x}\qt{\exists}{y}\qt{\exists}{z}(((((Cmx \eand Cmy) \eand Cmz) \eand x\neq y) \eand x\neq z) \eand y\neq z)$.}
 \end{earg}
-
-Though it is a lot longer than sentence $\ref{M4}$, the sentence above says that there are at least three things that Mozart composed.
+Though it is a lot longer than sentence \eref{mozart}{3}, the sentence above says that there are at least three things that Mozart composed.
 Given that conjunction is associative and commutative, all but the outermost parentheses are more trouble than they are worth.
 In general, we will indulge in the convention of dropping the parentheses that occur in long conjunctions and long disjunctions.
-Thus we may rewrite sentence $\ref{Q1}$ as follows:
-
-\begin{earg}
-  \item[\ex{Q2}] $\qt{\exists}{x}\qt{\exists}{y}\qt{\exists}{z}(Cmx \eand Cmy \eand Cmz \eand x\neq y \eand x\neq z \eand y\neq z)$.
+Thus we may rewrite sentence \eref{mozart3long}{1}, as follows:
+\begin{earg} \label{mozart3}
+  \eitem{$\qt{\exists}{x}\qt{\exists}{y}\qt{\exists}{z}(Cmx \eand Cmy \eand Cmz \eand x\neq y \eand x\neq z \eand y\neq z)$.}
 \end{earg}
-
 This is a lot easier to read and nothing significant is lost.
 It is important to stress that we can only drop parentheses in sentences which \textit{only} include conjunction, or \textit{only} include disjunction.
 Even so, these sentences are bound to get very long for large values of $n$.
 
-In order to characterize quantities in a more general way, it can be useful to introduce some abbreviations for what we will refer to as the \define{inequality quantifiers}.
+In order to characterize quantities in a more general way, it can be useful to introduce some abbreviations for what we will refer to as the \textit{inequality quantifiers}.
 Instead of adding new primitive symbols to $\FI$, we are only providing conventions for abbreviating long expression with much shorter expressions for the sake of readability.
 
 In order to state these abbreviations in a general way, we will take $\beta$ to be \define{free for} $\alpha$ in $\metaA$ just in case there is no free occurrence of $\alpha$ in $\metaA$ in the scope of a quantifier that binds $\beta$. 
 For instance, $y$ is not free for $x$ in `$\forall y Fxy$' since replacing `$x$' with `$y$' would yield `$\forall yFyy$' where the quantifier `$\forall y$' would end up binding an extra variable.
 Roughly speaking, you can take `$\beta$ is free for $\alpha$' to mean `$\beta$ can replace $\alpha$ without leading to extra binding'.
 
-We may then take $\metaA\unisub{\beta}{\alpha}$ to be the result of replacing all free occurrences of $\alpha$ in $\metaA$ with $\beta$ where $\beta$ is required to be free for $\alpha$ in $\metaA$. 
+We may then define $\metaA\unisub{\beta}{\alpha}$ to be the \define{substitution} that results from replacing all free occurrences of $\alpha$ in $\metaA$ with $\beta$ where $\beta$ is required to be free for $\alpha$ in $\metaA$. 
 For instance, $\forall yFxy\unisub{z}{x}$ is the wff $\forall yFzy$, and $\forall yFxy\unisub{y}{x}$ is undefined since $y$ is not free for $x$.
 Given this notation, we may define the following abbreviations for quantifiers of the form `at least $n$ things are such that $\metaA$':
-
-\vspace{-.2in}
 \begin{align*}
-  \qt{\exists_{\geq 1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}\metaA\\ 
-  \qt{\exists_{\geq n+1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists_{\geq n}}{\beta}(\alpha \neq \beta \eand \metaA\unisub{\beta}{\alpha})) \text{ where } \beta \text{ is free for } \alpha \text{ in } \metaA.
+  \qt{\exists_{\geq 1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}\metaA(\alpha)\\ 
+  \qt{\exists_{\geq n+1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA(\alpha) \eand \qt{\exists_{\geq n}}{\beta}(\alpha \neq \beta \eand \metaA\unisub{\beta}{\alpha})) \text{ where } \beta \text{ is not free in } \metaA.
 \end{align*}
-\vspace{-.2in}
-
-Here `$\colonequals$' represents that the left side is merely an abbreviation for the right side. 
+As above `$\colonequals$' represents that the left side is merely an abbreviation for the right side. 
 These abbreviations have a recursive structure which defines $\qt{\exists_{\geq n}}{\alpha}$ for all $n$.
-We can put these quantifiers to work to consider sets of sentences like:
-
-\vspace{-.2in}
+Even in the base clause, it is important to require $\alpha$ to be free in $\metaA$ where we have achieved this by writing $\metaA(\alpha)$.
+Otherwise, claims like $\exists_{\geq n} x Hj$ would be read as `at least $n$ things are such that Jonathan is hungry' despite the fact that $Hj$ does not include any free variables for the quantifiers to bind. 
+We can put these quantifiers to work in order to construct sets of sentences like:
 \begin{align*}
   \MetaG_{\infty} &\colonequals \set{\qt{\exists_{\geq n}}{x}(x=x): n\in\mathbb{N}}.
 \end{align*}
-\vspace{-.2in}
-
-For any natural number $n$, the set $\MetaG_\infty$ includes a sentence that says at least $n$ things that are self-identical.
+For any natural number $n$, the set $\MetaG_\infty$ includes a sentence that says at least $n$ things are self-identical.
 Not only may we show that there are models which satisfy $\MetaG$, these models must have infinite domains.
 That we can begin to express claims about the infinite further demonstrates just how much more expressive power $\FI$ has than $\FOL$. 
 
 In addition to being able to say that there are at least $n$ things that satisfy a certain condition, $\FI$ permits us to say that that there are at most $n$ things that satisfy a certain condition. 
 Consider the following sentence and its regimentation:
-
-\begin{earg}
-  \item[\ex{Q3}] Mozart composed at most two things.
-  \item[\ex{Q4}] $\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z}((Cmx \eand Cmy \eand Cmz) \supset (x = y \eor x = z \eor y = z))$.
+\begin{earg} \label{mozart2most}
+  \eitem{Mozart composed at most two things.}
+  \eitem{$\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z}((Cmx \eand Cmy \eand Cmz) \eif (x = y \eor x = z \eor y = z))$.}
   % \item[\ex{Q4}] $\qt{\exists}{x}\qt{\exists}{y}\qt{\forall}{z}(Cmz \eif (z= x \eor z= y))$.
 \end{earg}
-
 This says that for any $x$, $y$, and $z$ which Mozart composed, at least two of them are identical. 
 So far, nothing prevents all of them from being identical or requires there to be something which Mozart composed. 
 % We may also that there at most three things that Mozart composed.
 %
 % \begin{earg}
 %   \item[\ex{Q5}] Mozart composed at most three things.
-%   \item[\ex{Q6}] $\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z}\qt{\forall}{w}((Cmx \eand Cmy \eand Cmz \eand Cmw) \supset (x = y \eor x = z \eor y = z \eor y = z))$.
+%   \item[\ex{Q6}] $\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z}\qt{\forall}{w}((Cmx \eand Cmy \eand Cmz \eand Cmw) \eif (x = y \eor x = z \eor y = z \eor y = z))$.
 %   % \item[\ex{Q6}] $\qt{\exists}{x}\qt{\exists}{y}\qt{\exists}{z}\qt{\forall}{w}(Cmw \eif (w = x \eor w = y \eor w = z))$.
 % \end{earg}
 %
 % Both sentences $\ref{Q4}$ and $\ref{Q6}$ are true if there are less than three things that Mozart composed, including the case where Mozart didn't compose anything.
 More generally, we may say that there are at most $n$ things which satisfy a given condition $\metaA$.
 Although we could define this recursively in a similar fashion to what was given above, we may avoid doing so by adopting the following convention for all $n$.
-
-\vspace{-.2in}
 \begin{align*}
-  \qt{\exists_{\leq n}}{\alpha}\metaA &\colonequals \neg\qt{\exists_{\geq n+1}}{\alpha}\metaA.
+  \qt{\exists_{\leq n}}{\alpha}\metaA &\colonequals \enot\qt{\exists_{\geq n+1}}{\alpha}\metaA.
 \end{align*}
-\vspace{-.2in}
-
-This says that there are not at least $n+1$ things that are $\metaA$, and so no more than $n$ things that are $\metaA$. 
+This says that it is not the case that there are at least $n+1$ things that are $\metaA$, and so no more than $n$ things that are $\metaA$. 
 We may combine these two types of quantifiers to say that there are between $n$ and $m$ things that are $\metaA$ as given by the following abbreviation: 
-
-\vspace{-.2in}
 \begin{align*}
-  \qt{\exists_{(n,m)}}{\alpha}\metaA &\colonequals \qt{\exists_{\geq n}}{\alpha}\metaA \eand \qt{\exists_{\leq m}}{\alpha}\metaA \text{ where } n\leq m.
+  \qt{\exists_{[n,m]}}{\alpha}\metaA &\colonequals \qt{\exists_{\geq n}}{\alpha}\metaA \eand \qt{\exists_{\leq m}}{\alpha}\metaA.
+  % \qt{\exists_n}{\alpha}\metaA &\colonequals \qt{\exists_{[n,n]}}{\alpha}\metaA.
 \end{align*}
-\vspace{-.2in}
-
-In the special case where $n=m$, the statement $\qt{\exists_{(n,n)}}{\alpha}\metaA$ says that exactly $n$ things are $\metaA$. 
+Whereas $\qt{\exists_{[n,m]}}{\alpha}\metaA$ says that between $n$ and $m$ things are $\metaA$, in the special case where $n=m$, the statement $\qt{\exists_{[n,n]}}{\alpha}\metaA$ says that exactly $n$ things are $\metaA$. 
 We have already seen instances of this above with uniqueness.
 After all, saying that \textit{only} Cara loves Pedro is like saying there is \textit{exactly one} thing that loves Pedro where this entails both that there is \textit{at least} one thing that loves Pedro and that there is \textit{at most} one thing that loves Pedro, namely Cara.
-We may refer to such quantifiers as \define{cardinality quantifiers}.
+
 % Although this is one way to define cardinality quantifiers, there is another method.
+Suppose that we want to say that there are exactly two things that Mozart composed.
+One way to do this is to conjoin sentences \eref{mozart}{3} and \eref{mozart2most}{2} since this amounts to saying that there is at least two things that Mozart composed and at most two things that Mozart composed. 
+However, the result is long and difficult to parse.
+Alternatively, we could use the notation $\qt{\exists_{[2,2]}}{\alpha}$ introduced above, though this notation abbreviates something just as complicated.
+% Is there a simpler way to define a quantifier for `exactly $n$ things are $\metaA$'?
 
-Suppose we want to say that there are exactly two things that Mozart composed.
-As above, one way to do this is to conjoin sentences $\ref{M4}$ and $\ref{Q4}$ since this amounts to saying that there is at least two things that Mozart composed and at most two things that Mozart composed. 
-However, we can simplify the regimentation by means of the following:
-
+Instead of employing the quantifier $\qt{\exists_{[2,2]}}{\alpha}$, we can simplify the regimentation as follows:
 \begin{earg}
-  \item[\ex{Q7}] Mozart composed exactly two things.
-  \item[\ex{Q8}] $\qt{\exists}{x}\qt{\exists}{y}(x \neq y \eand \qt{\forall}{z}(Cmz \eiff (z = x \eor z = y)))$.
+  \eitem{Mozart composed exactly two things.}
+  \eitem{$\qt{\exists}{x}\qt{\exists}{y}(x \neq y \eand \qt{\forall}{z}(Cmz \eiff (z = x \eor z = y)))$.}
   % \item[\ex{Q8}] $\qt{\exists}{x}\qt{\exists}{y}(Cmx \eand Cmy \eand x \neq y \eand \qt{\forall}{z}(Cmz \eif (z = x \eor z = y)))$.
 \end{earg}
-
-More generally, we may define the cardinality quantifiers as follows:
-
-\vspace{-.2in}
+More generally, consider the following definitions:
 \begin{align*}
-  % \qt{\exists_{1}}{\alpha}\metaA(\alpha) &\colonequals \qt{\exists}{\alpha}(\metaA(\alpha) \eand \qt{\exists_0}{\beta}(\alpha \neq \beta \eand \metaA(\beta/\alpha))) \text{ for } \beta \text{ not free in } \metaA(\alpha)\\
-  %   &\colonequals \qt{\exists}{\alpha}(\metaA(\alpha) \eand \qt{\forall}{\beta}\enot(\alpha \neq \beta \eand \metaA(\beta/\alpha))) \text{ for } \beta \text{ not free in } \metaA(\alpha)\\
+  % \qt{\exists_{1}}{\alpha}\metaA(\alpha) &\colonequals \qt{\exists}{\alpha}(\metaA(\alpha) \eand \qt{\exists_0}{\beta}(\alpha \neq \beta \eand \metaA[\beta/\alpha])) \text{ for } \beta \text{ not free in } \metaA(\alpha)\\
+  %   &\colonequals \qt{\exists}{\alpha}(\metaA(\alpha) \eand \qt{\forall}{\beta}\enot(\alpha \neq \beta \eand \metaA[\beta/\alpha])) \text{ for } \beta \text{ not free in } \metaA(\alpha)\\
   %   &\colonequals \qt{\exists}{\alpha}(
   %     \metaA(\alpha) \eand 
   %       \qt{\forall}{\beta}(
-  %         \metaA(\beta/\alpha) \eif \alpha = \beta
+  %         \metaA[\beta/\alpha] \eif \alpha = \beta
   %       )
   %     ) \text{ for } \beta \text{ not free in } \metaA(\alpha)\\
   % \qt{\exists_{2}}{\alpha}\metaA(\alpha) &\colonequals \qt{\exists}{\alpha}(
   %   \metaA(\alpha) \eand 
   %     \qt{\exists_1}{\beta}(
-  %       \alpha \neq \beta \eand \metaA(\beta/\alpha) 
+  %       \alpha \neq \beta \eand \metaA[\beta/\alpha] 
   %     )
   %   ) \text{ for } \beta \text{ not free in } \metaA(\alpha)\\
   % &\colonequals \qt{\exists}{\alpha}(
   %   \metaA(\alpha) \eand \qt{\exists}{\beta}(
-  %     \alpha \neq \beta \eand \metaA(\beta/\alpha) \eand 
+  %     \alpha \neq \beta \eand \metaA[\beta/\alpha] \eand 
   %       \qt{\forall}{\gamma}(
   %         (\alpha \neq \gamma \eand \metaA(\gamma/\alpha)) \eif \beta = \gamma
   %       )
   %     ) 
   %   ) \text{ for } \gamma \text{ not free in } \metaA(\beta)\\ 
-  \qt{\exists_0}{\alpha}\metaA &\colonequals \qt{\forall}{\alpha}\enot\metaA\\
-  \qt{\exists_{n+1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists_n}{\beta}(\alpha \neq \beta \eand \metaA(\beta/\alpha))) \text{ for } \beta \text{ not free in } \metaA
-  % \qt{\exists_1}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists_0}{\beta}(\alpha\neq\beta \eand \metaA(\beta/\alpha))) \text{ for } \beta \text{ not free in } \metaA\\
+  \qt{\exists_0}{\alpha}\metaA &\colonequals \qt{\forall}{\alpha}\enot\metaA(\alpha)\\
+  \qt{\exists_{n+1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA(\alpha) \eand \qt{\exists_n}{\beta}(\alpha \neq \beta \eand \metaA[\beta/\alpha])) \text{ where } \beta \text{ is not free in } \metaA
+  % \qt{\exists_1}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists_0}{\beta}(\alpha\neq\beta \eand \metaA[\beta/\alpha])) \text{ for } \beta \text{ not free in } \metaA\\
   % \qt{\exists_1}{\beta}\metaA &\colonequals \qt{\exists}{\beta}(\metaA \eand \qt{\exists_0}{\gamma}(\beta\neq\gamma \eand \metaA(\gamma/\beta))) \text{ for } \gamma \text{ not free in } \metaA\\
-  % \qt{\exists_2}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists_1}{\beta}(\alpha\neq\beta \eand \metaA(\beta/\alpha))) \text{ for } \beta \text{ not free in } \metaA\\
-  % \qt{\exists_{n+1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists_n}{\beta}(\beta\neq\alpha \eand \metaA(\beta/\alpha)) \text{ for } \beta \text{ not free in } \metaA\\
+  % \qt{\exists_2}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists_1}{\beta}(\alpha\neq\beta \eand \metaA[\beta/\alpha])) \text{ for } \beta \text{ not free in } \metaA\\
+  % \qt{\exists_{n+1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA \eand \qt{\exists_n}{\beta}(\beta\neq\alpha \eand \metaA[\beta/\alpha]) \text{ for } \beta \text{ not free in } \metaA\\
 \end{align*}
-
-We know what it is for no $\alpha$ to be $\metaA$--- that much is easy.
-What it is for $n+1$ things to be such that $\metaA$ is for something to be $\metaA$ and $n$ other things to be such that $\metaA$. 
-Given these recursive definitions, we may work out the following quantifiers:
-
-\vspace{-.2in}
+What it is for no $\alpha$ to be $\metaA$ is for everything to not be $\metaA$. 
+What it is for exactly $n+1$ things to be $\metaA$ is for something to be $\metaA$ and exactly $n$ other things to be $\metaA$.
+Given these recursive definitions, we may work out the following logical equivalences:
 \begin{align*}
-  \qt{\exists_0}{\alpha}\metaA &\colonequals \qt{\forall}{\alpha}\enot\metaA\\
-  \qt{\exists_1}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}\qt{\forall}{\beta}(\metaA(\beta/\alpha) \eiff \beta = \alpha)\\ 
+  \qt{\exists_0}{\alpha}\metaA &\Dashv\vDash \qt{\forall}{\alpha}\enot\metaA(\alpha)\\
+  \qt{\exists_1}{\alpha}\metaA
+    % &\Dashv\vDash \qt{\exists}{\alpha}(\metaA(\alpha) \eand \qt{\exists_0}{\beta}(\alpha \neq \beta \eand \metaA[\beta/\alpha])\\
+    % &\Dashv\vDash \qt{\exists}{\alpha}(\metaA(\alpha) \eand \qt{\forall}{\beta}\enot(\alpha \neq \beta \eand \metaA[\beta/\alpha])\\
+    % &\Dashv\vDash \qt{\exists}{\alpha}(\metaA(\alpha) \eand \qt{\forall}{\beta}(\metaA[\beta/\alpha] \eif \alpha = \beta)\\
+    &\Dashv\vDash \qt{\exists}{\alpha}\qt{\forall}{\beta}(\metaA[\beta/\alpha] \eiff \beta = \alpha)\\ 
   % \text{ for distinct } \alpha \text{ and } \beta\\
-  \qt{\exists_2}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}\qt{\exists}{\beta}(\alpha\neq\beta \eand \qt{\forall}{\gamma}(\metaA(\gamma/\alpha) \eiff (\gamma = \alpha \eor \gamma = \beta)))\\
+  \qt{\exists_2}{\alpha}\metaA &\Dashv\vDash \qt{\exists}{\alpha}\qt{\exists}{\beta}(\alpha\neq\beta \eand \qt{\forall}{\gamma}(\metaA(\gamma/\alpha) \eiff (\gamma = \alpha \eor \gamma = \beta)))\\
   % \text{ for distinct } \alpha, \beta, \text{ and } \gamma\\ 
-  \qt{\exists_3}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}
+  \qt{\exists_3}{\alpha}\metaA &\Dashv\vDash \qt{\exists}{\alpha}
       \qt{\exists}{\beta}
         \qt{\exists}{\gamma}(
           \alpha\neq\beta \eand \alpha\neq\gamma \eand \beta\neq\gamma \eand \qt{\forall}{\delta}(
@@ -1046,12 +1008,13 @@ Given these recursive definitions, we may work out the following quantifiers:
   % \text{ for distinct } \alpha, \beta, \text{ and } \gamma\\ 
   & ~\vdots
 \end{align*}
-
-Although the results differ in logical form from those that we may derive from $\qt{\exists_{(n,n)}}$ for different values of $n$, they are logically equivalent.
+% Establishing the claims above would be quite challenging.
+Although the results differ in logical form from those that we may derive from $\qt{\exists_{[n,n]}}{\alpha}$ for different values of $n$, they are logically equivalent insofar as $\qt{\exists_n}{\alpha}\metaA \Dashv\vDash \qt{\exists_{[n,n]}}{\alpha}\metaA$.
 % The fact that these cardinality quantifiers are definable in $\FI$ demonstrates the expressive power of this language in contrast to $\FOL$. 
-Whereas the inequality operators are interesting in their own right, the cardinality operators express something very specific, further demonstrating the expressive power of $\FI$.
-% For instance, we may consider a set of sentence $\MetaG=\set{}$
-% Given these definitions, we may consider the following set of sentences.
+
+Whereas $\qt{\exists_{\geq n}}{\alpha}$ and $\qt{\exists_{\leq n}}{\alpha}$ are referred to as \define{inequality quantifiers}, we will refer to $\qt{\exists_{[n,m]}}{\alpha}$ and $\qt{\exists_n}{\alpha}$ as \define{cardinality quantifiers}.
+Although the inequality operators are often useful, the cardinality operators express something very specific, further demonstrating the expressive power of $\FI$.
+After all, how would one attempt any of the definitions given above in $\FOL$?
 
 
 
@@ -1059,56 +1022,50 @@ Whereas the inequality operators are interesting in their own right, the cardina
 \section{Leibniz's Law}
 
 In $\S\ref{sec:IdentityLogic}$, we saw that treating identity as any other predicate invalidated the argument:
-
 \begin{multicols}{2}
-  
-\begin{earg}
-  \item[] Hesperus is rising.
-  \item[] Hesperus is Phosphorus.
-  \item[\therefore] Phosphorus is rising.
-\end{earg}
+  \begin{oarg}[\ref{informHP}] 
+    \oeitem{Hesperus is rising.}
+    \ouitem{Hesperus is Phosphorus.\quad\quad}
+    \oeitem{Phosphorus is rising.}
+  \end{oarg}
 
-\begin{earg}
-  \item[] $Rh$
-  \item[] $Ihp$
-  \item[\therefore] $Rp$
-\end{earg}
+  \columnbreak
 
+  \begin{oarg}[\ref{formHP}] 
+    \oeitem{$Rh$}
+    \ouitem{$Ihp$\quad\quad}
+    \oeitem{$Rp$}
+  \end{oarg}
 \end{multicols}
-
 The problem was that if the extension of the identity predicate can be assigned to any subset of $\D^2$, there was no guarantee that $h$ and $p$ refer to the same object.
 The problem was avoided by including identity among the primitive symbols of the language and providing its semantics as above.
 We may replace `$I$' with `$=$' in the argument above where the result is valid.
 This is because if `$h=p$' is true in a model, then `$h$' and `$p$' refer to the very same object in the domain, and so `$Rh$' and `$Rp$' will have the same truth-value.
-% Consequently, given any sentence $\metaA(\alpha)$ in which the constant $\alpha$ occurs, the sentence $\metaA(\beta/\alpha)$  that results from replacing each occurrence of $\alpha$ in $\metaA(\alpha)$ with $\beta$ will have the same truth value as $\metaA(\alpha)$ if $\alpha=\beta$.
+% Consequently, given any sentence $\metaA(\alpha)$ in which the constant $\alpha$ occurs, the sentence $\metaA[\beta/\alpha]$  that results from replacing each occurrence of $\alpha$ in $\metaA(\alpha)$ with $\beta$ will have the same truth value as $\metaA(\alpha)$ if $\alpha=\beta$.
 % This is because identity is transitive and identical objects have the same properties.
 More generally, we may show that all instances of the following schema are valid where $\alpha$ and $\beta$ are constants and $\metaA$ is a sentence, referring to this as a version of \textit{Leibniz's Law}:
-  $$\alpha=\beta \vDash \metaA \equiv \metaA(\beta/\alpha).$$
-The idea behind this schema is that if we are given two names for the same object, then whatever we can say about that object with one name will equally apply if we use the other name.
+  $$\alpha=\beta \vDash \metaA \eiff \metaA[\beta/\alpha].$$
+The idea behind this schema is that if we are given two names $\alpha$ and $\beta$ for the same object, then whatever we can say about that object with one name will have the same truth-value if we use the other name.
 This might seem natural in the case above.
 After all, if Hesperus is Phosphorus, how could it be that Hesperus is rising without Phosphorus rising?
 
 However compelling this particular instance may be, Leibniz's Law admits of a wide range of exceptions.
 For instance, consider the following argument:
-
 \begin{multicols}{2}
-  
-\begin{ekey}
-    \item[Bxy:] $x$ believes that $y$ is rising.
-    \item[t:] Thales
-    \item[h:] Hesperus
-    \item[p:] Phosphorus
-\end{ekey}
+  \begin{ekey}
+      \item[Bxy:] $x$ believes that $y$ is rising.
+      \item[t:] Thales
+      \item[h:] Hesperus
+      \item[p:] Phosphorus
+  \end{ekey}
 
-\begin{earg}
-  \item[] $Bth$
-  \item[] $h=p$
-  \item[\therefore] $Btp$
-  \item[] ~
-\end{earg}
-
+  \begin{earg}
+    \eitem{$Bth$}
+    \uitem{$h=p$\quad\quad}
+    \eitem{$Btp$}
+    \item[] ~
+  \end{earg}
 \end{multicols}
-
 Since the identity of Hesperus and Phosphorus was not always known, we might imagine a time when Thales believed that Hesperus is rising without also believing that Phosphorus is rising.
 As a result, the argument above may have true premises and a false conclusion.
 To take another case, we may imagine that Lois loves Clark Kent and Lois does not love Superman despite the fact that Clark Kent is Superman.
@@ -1116,23 +1073,24 @@ Nevertheless, both of these arguments are valid given the semantics for $\FI$.
 Has something gone wrong?
 % Do we need to somehow modify the semantics we provided for identity?
 
-The constants $\alpha$ and $\beta$ may be said to \textit{co-refer} just in case they name the same thing, i.e., $\alpha=\beta$.
-One common response holds that some claims are \textit{opaque} insofar as we cannot freely substitute co-referring constants.\footnote{Alternatively, one may attribute the opacity of `Thales believes that Hesperus is rising' to the opacity of the `Thales believes that' operator. Such suggestions are developed in epistemic logics.}
-Belief claims are paradigmatic of opacity: just because one believes that $\metaA$ doesn't mean that one must believe that $\metaA(\beta/\alpha)$ whenever $\alpha=\beta$.
-For instance, suppose that Kaya is learning arithmetic and has come to believe that $2$ is even.
+The constants $\alpha$ and $\beta$ may be said to \textit{co-refer} just in case they name the same thing, i.e., $\corner{\alpha=\beta}$ is true.
+One common response holds that some claims are \textit{opaque} insofar as we cannot freely substitute co-referring constants. %\footnote{Alternatively, one may attribute the opacity of `Thales believes that Hesperus is rising' to the opacity of the `Thales believes that' operator. Such suggestions are developed in epistemic logics.}
+Belief claims are paradigmatic of opacity: just because one believes that $\metaA$ doesn't mean that one must believe that $\metaA[\beta/\alpha]$ whenever $\corner{\alpha=\beta}$ is true.
+For instance, suppose that Kaya is learning arithmetic and believes that $2$ is even.
 Nevertheless, she hasn't learned anything about prime numbers and so does not believe that the first prime number is even despite the fact that $2$ is the first prime number. 
 
 % In $\FI$, we will take co-referring terms to always be substitutable for each other as claimed by the schema above.
-Given that Leibniz's Law is valid over the semantics for $\FI$, restricting Leibniz's Law requires significant revisions to the present semantics.
-For our purposes here, we will assume that co-referring terms can always be substituted for each other as asserted by the schema above.
+Given that Leibniz's Law is valid given the semantics for $\FI$, restricting Leibniz's Law requires significant revisions to the present semantic theory.
+For our purposes here, we will assume that co-referring terms can always be substituted for each other as asserted by \textit{Leibniz's Law}.
 This amounts to the assumption that none of the sentences with which we will be concerned are opaque.
-This is a significant limitation since it is easy to introduce predicates like $B$ given above. 
+This is a significant limitation since it is easy to introduce predicates like $B$ given above for belief ascriptions. 
 % One way to remedy the situation is to introduce a set of \textit{opaque predicates} $O^n_1,O^n_2,\ldots$ for each $n\geq 0$ which do not admit of free substitution. 
 % Whereas the arguments above are valid when regimented with predicates that are not opaque, they are invalid when regimented with opaque predicates.
 Nevertheless, overcoming this limitation is far from straightforward and lies outside the scope of our present concern.
+
 Although $\FI$ is a flexible and expressive powerful language, every language has its limits.
 Nevertheless, $\FI$ is perfectly adequate for a wide range of applications. 
-In particular, it is natural to assume that mathematics is \textit{transparent} insofar as it does not include any opaque claims.
+In particular, it is natural to assume that mathematics is \textit{transparent} insofar as it excludes consideration of opaque claims in which \textit{Leibniz's Law} fails to hold.
 % Although $\FI$ will remain useful for taking about the way things are, $\FI$ will not permit us to speak  
 
 

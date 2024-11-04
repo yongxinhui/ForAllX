@@ -19,9 +19,9 @@
     - [x] repost with final sections
   - [x] chapter 5
   - [x] chapter 6
-  - [ ] chapter 7
-  - [ ] chapter 8
-  - [ ] chapter 9
+  - [x] chapter 7
+  - [x] chapter 8
+  - [x] chapter 9
   - [ ] chapter 10
   - [ ] chapter 11
   - [ ] chapter 12
