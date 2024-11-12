@@ -460,12 +460,12 @@ This produces another contradiction, and so we may conclude in line $9$ with neg
 
 Although we could go on to prove $(\enot\forall)$ and $(\exists\enot)$ in a similar fashion, there is another approach which turns on the following \define{metarule} which takes one derivation to follow from another instead of taking one sentence to follow from some others.
 \begin{enumerate}[leftmargin=.75in]
-  \item[(MCP)] If $\metaA \proves \metaB$, then $\enot\metaB \proves \enot\metaA$.
+  \item[(MCP)] If $\metaA \vdash \metaB$, then $\enot\metaB \vdash \enot\metaA$.
 \end{enumerate}
 Given any $\metaA$ and $\metaB$, this rule says that if we can derive $\metaB$ from $\metaA$, then we may also derive $\enot\metaA$ from $\enot\metaB$, referring to this rule as \textit{meta-contraposition}.
-It is worth comparing our standard contraposition rule CP which we derived before: $\metaA \eif \metaB \proves \enot\metaB \eif \enot\metaA$.
-Whereas CP concerns the material conditional $\eif$, MCP concerns $\proves$.
-Nevertheless, the proof is similar where we begin by assuming $\metaA \proves \metaB$ for some otherwise arbitrary wfss $\metaA$ and $\metaB$ of $\FI$, calling this assumption $(\star)$.
+It is worth comparing our standard contraposition rule CP which we derived before: $\metaA \eif \metaB \vdash \enot\metaB \eif \enot\metaA$.
+Whereas CP concerns the material conditional $\eif$, MCP concerns $\vdash$.
+Nevertheless, the proof is similar where we begin by assuming $\metaA \vdash \metaB$ for some otherwise arbitrary wfss $\metaA$ and $\metaB$ of $\FI$, calling this assumption $(\star)$.
 We may then write the following proof:
 
 \begin{proof}
@@ -478,11 +478,11 @@ We may then write the following proof:
   \have{e}{\enot\metaA}     \ni{b-d}
 \end{proof}
 
-Since we know that $\metaA \proves \metaB$ by assumption, there is some proof of $\metaB$ from $\metaA$.
+Since we know that $\metaA \vdash \metaB$ by assumption, there is some proof of $\metaB$ from $\metaA$.
 Accordingly, we may think of the proof given above as abbreviating a longer proof in which $(\star)$ is replaced with the proof of $\metaB$ from $\metaA$.
 The result is a complete proof of $\enot\metaA$ from $\enot\metaB$. 
 
-There are two more derived rules ($\forall$DN) and ($\exists$DN) which will come in handy:
+There are two more derived rules ($\forall$DN) and (DN$\forall$) which will come in handy:
 
 \begin{multicols}{2}
   
@@ -506,6 +506,7 @@ There are two more derived rules ($\forall$DN) and ($\exists$DN) which will come
 \end{multicols}
 % \vspace{-.1in}
 
+Without too much trouble, we may reverse the direction of the proofs above to derive: $\qt{\forall}{\alpha}\metaA \vdash \qt{\forall}{\alpha} \enot\enot \metaA$ and $\qt{\exists}{\alpha} \metaA \vdash \qt{\exists}{\alpha} \enot\enot \metaA$. 
 We now have all the ingredients that we need to provide proofs which correspond to $(\enot\forall)$ and $(\exists\enot)$ from before.
 Since these proofs will make essential use of MCP, these proofs will take place in the metalanguage and be presented informally.
 
@@ -515,9 +516,9 @@ Since these proofs will make essential use of MCP, these proofs will take place 
 
 \begin{quote}
   \textit{Proof:}
-  Consider the result of replacing $\metaA$ with $\enot\metaA$ in the derivation of $(\enot\exists)$ given above, where this constitutes a proof of $\enot\qt{\exists}{\alpha}\enot\metaA \proves \qt{\forall}{\alpha}\enot\enot\metaA$.
-  Since $\qt{\forall}{\alpha}\enot\enot\metaA \proves \qt{\forall}{\alpha}\metaA$ by $\forall$DN, we may chain these proofs together to derive $\enot\qt{\exists}{\alpha}\enot\metaA \proves \qt{\forall}{\alpha}\metaA$.
-  If follows by MCP that $\enot\qt{\forall}{\alpha}\metaA \proves \enot\enot\qt{\exists}{\alpha}\enot\metaA$, and so $\enot\qt{\forall}{\alpha}\metaA \proves \qt{\exists}{\alpha}\enot\metaA$ by DN. 
+  Consider the result of replacing $\metaA$ with $\enot\metaA$ in the derivation of $(\enot\exists)$ given above, where this constitutes a proof of $\enot\qt{\exists}{\alpha}\enot\metaA \vdash \qt{\forall}{\alpha}\enot\enot\metaA$.
+  Since $\qt{\forall}{\alpha}\enot\enot\metaA \vdash \qt{\forall}{\alpha}\metaA$ by $\forall$DN, we may chain these proofs together to derive $\enot\qt{\exists}{\alpha}\enot\metaA \vdash \qt{\forall}{\alpha}\metaA$.
+  If follows by MCP that $\enot\qt{\forall}{\alpha}\metaA \vdash \enot\enot\qt{\exists}{\alpha}\enot\metaA$, and so $\enot\qt{\forall}{\alpha}\metaA \vdash \qt{\exists}{\alpha}\enot\metaA$ by DN. 
   \qed
 \end{quote}
   
@@ -527,9 +528,10 @@ Since these proofs will make essential use of MCP, these proofs will take place 
 
 \begin{quote}
   \textit{Proof:}
-  Consider the result of replacing $\metaA$ with $\enot\metaA$ in the derivation of $(\enot\forall)$ given above, where this constitutes a proof of $\enot\qt{\forall}{\alpha}\enot\metaA \proves \qt{\exists}{\alpha}\enot\enot\metaA$.
-  Since $\qt{\exists}{\alpha}\enot\enot\metaA \proves \qt{\exists}{\alpha}\metaA$ by $\exists$DN, we may chain these proofs together to derive $\enot\qt{\forall}{\alpha}\enot\metaA \proves \qt{\exists}{\alpha}\metaA$.
-  If follows by MCP that $\enot\qt{\exists}{\alpha}\metaA \proves \enot\enot\qt{\forall}{\alpha}\enot\metaA$, and so $\enot\qt{\exists}{\alpha}\metaA \proves \qt{\forall}{\alpha}\enot\metaA$ by DN. 
+  (Exercise for the reader.)
+  % Consider the result of replacing $\metaA$ with $\enot\metaA$ in the derivation of $(\forall\enot)$ given above, where this constitutes a proof of $\qt{\forall}{\alpha}\enot\enot\metaA \vdash \enot\qt{\exists}{\alpha}\enot\metaA$.
+  % Since $\qt{\forall}{\alpha}\metaA \vdash \qt{\forall}{\alpha}\enot\enot\metaA$ by $\exists$DN, we may chain these proofs together to derive $\enot\qt{\forall}{\alpha}\enot\metaA \vdash \qt{\exists}{\alpha}\metaA$.
+  % If follows by MCP that $\enot\qt{\exists}{\alpha}\metaA \vdash \enot\enot\qt{\forall}{\alpha}\enot\metaA$, and so $\enot\qt{\exists}{\alpha}\metaA \vdash \qt{\forall}{\alpha}\enot\metaA$ by DN. 
   \qed
 \end{quote}
 
@@ -537,7 +539,7 @@ You can think of these proofs as instruction manuals for constructing the approp
 In this case, it might have been easier to provide derivations for $(\enot\forall)$ and $(\exists\enot)$ in the same manner that we did for $(\enot\exists)$ and $(\forall\enot)$.
 Even so, the metarule MCP and derived rules ($\forall$DN) and ($\exists$DN) are important in their own right.
 It is important to note, however, that whereas ($\forall$DN) and ($\exists$DN) may be applied in the course of a derivation, MCP cannot.
-This is because MCP draws the conclusion $\enot\metaB \proves \enot\metaA$ from $\metaA \proves \metaB$, where the instances of these claims are not sentences in $\FI$ since they include `$\proves$'.
+This is because MCP draws the conclusion $\enot\metaB \vdash \enot\metaA$ from $\metaA \vdash \metaB$, where the instances of these claims are not sentences in $\FI$ since they include `$\vdash$'.
 It was for this reason that we provided informal proofs of $(\enot\forall)$ and $(\exists\enot)$ in the metalanguage. 
 
 % \begin{proof}
@@ -685,54 +687,55 @@ Since the constant $a$ does not occur in any premises or undischarged assumption
 \section{Proofs and Provability in $\FI$}
 
 We will refer to the natural deduction rules specified above together with the natural deduction rules provided in Chapter \ref{ch.PL-deduction} as the natural deduction rules for FOL$^=$.
-We may then adapt the definition of a proof from before as follows:
+We may then adapt the definition of a proof from before by replacing PL with FOL$^=$ as follows:
 
 \factoidbox{
-  A natural deduction \define{proof} (or \define{derivation}) of a conclusion $\metaA$ from a set of premises $\MetaG$ in FOL$^=$ is any sequence of lines ending with $\metaA$ on a live line where every line in the sequence is either: (1) a premise in $\MetaG$; (2) a discharged assumption; or (3) follows from previous lines by one of the natural deduction rules for FOL$^=$. 
+  A \define{derivation} (or \define{proof}) of $\metaA$ from $\MetaG$ in FOL$^=$ is any finite sequence of wfs of $\FI$ ending in $\metaA$ where every wfs in the sequence is either: (1) a premise in $\MetaG$; (2) an assumption which is eventually discharged; or (3) follows from previous lines by a natural deduction rule for FOL$^=$ besides AS. 
 }
 
-A $\FI$ sentence $\metaA$ is \define{provable} (or \define{derivable}) from $\MetaG$ in FOL$^=$ just in case there is a natural deduction proof (derivation) of $\metaA$ from $\MetaG$ in FOL$^=$, where we may write this $\MetaG \proves_{\textsc{qd}} \metaA$, or just $\MetaG \proves \metaA$ when it is clear from context which proof system we intend. 
+A wfs $\metaA$ of $\FI$ is \define{derivable} (or \define{provable}) from $\MetaG$ in FOL$^=$ just in case there is a natural deduction derivation (proof) of $\metaA$ from $\MetaG$ in FOL$^=$, where we may write this $\MetaG \vdash_{\textsc{fol}^=} \metaA$, or just $\MetaG \vdash \metaA$ when it is clear from context which proof system we intend.  
 
-In keeping with the definitions given before, we will refer to a $\FI$ sentence $\metaA$ as a \define{theorem} of FOL$^=$ just in case $\proves\metaA$, i.e., $\varnothing\proves\metaA$.
+In keeping with the definitions given before, a wfs $\metaA$ of $\FI$ is a \define{theorem} of FOL$^=$ just in case $\vdash\metaA$ which abbreviates $\varnothing\vdash\metaA$, indicating that $\metaA$ is derivable in FOL$^=$ from no premises.
 Since FOL$^=$ includes all the same rules and expressive resources of PL, all of the theorems of PL are also theorems of FOL$^=$.
+More generally, $\MetaG \vdash_{\textsc{fol}^=} \metaA$ whenever $\MetaG \vdash_{\textsc{pl}} \metaA$. 
 Put otherwise, FOL$^=$ is an \define{extension} of PL.
-Two sentences $\metaA$ and $\metaB$ are \define{provably equivalent} (or \define{interderivable}) in FOL$^=$ if and only if both $\metaA\proves\metaB$ and $\metaB\proves\metaA$.
-A set of sentences $\MetaG$ is \define{provably inconsistent} if and only if $\MetaG\proves\bot$ where $\bot$ is our arbitrarily chosen contradiction, e.g., $A\eand\enot A$.
+As brought out in Chapters \ref{ch.FOL-soundness} - \ref{ch.FOL-completeness}, we will similarly extend the soundness and completeness results for PL to cover FOL$^=$.
+
+Two sentences $\metaA$ and $\metaB$ are \define{interderivable} (or \define{provably equivalent}) in FOL$^=$ if and only if both $\metaA\vdash\metaB$ and $\metaB\vdash\metaA$.
+A set of sentences $\MetaG$ is \define{inconsistent} if and only if $\MetaG\vdash\bot$ where $\bot$ is our arbitrarily chosen contradiction, e.g., $A\eand\enot A$ from before.
 
 
 
 
-\section{Soundness and Completeness of FOL$^=$}
+\section{Soundness of FOL$^=$}
+
+% TODO: recall how important soundness is to avoid leading us astray
+% soundness also allows us to avoid writing semantic proofs
+% add
 
 % In order to show that something is a theorem we have to derive it from no premises.
-Recall from before the challenge of showing that a sentence is not a theorem.
-Whereas providing a derivation of the sentence from no premises is all that is required to show that the sentence is a theorem, it is not possible to survey the space of all possible proofs to show that a sentence is not a theorem.
-Instead, we may appeal to the following metalogical properties:
+Recall the challenge of showing that a wfs $\metaA$ of $\PL$ is not derivable in PL from a set of wfss $\MetaG$ of $\PL$.
+Whereas providing a derivation of $\metaA$ from $\MetaG$ in PL is all that is required to show that $\metaA$ is derivable from $\MetaG$, it is not possible to survey the space of all PL derivations to show that there is no derivation when none exists.
+The same predicament arises in attempting to show that $\metaA$ cannot be derived from $\MetaG$ in FOL$^=$.
+As before, we will overcome this difficulty by appealing to the following metalogical property:
 
 \factoidbox{
-  \textsc{soundness:} $\MetaG \proves_{\textsc{qd}} \metaA$ only if $\MetaG \models \metaA$.
-}\vspace{-.4in}
-\factoidbox{
-  \textsc{completeness:} $\MetaG \proves_{\textsc{qd}} \metaA$ if $\MetaG \models \metaA$.
-}
+  \textsc{FOL$^=$ Soundness:} $\MetaG \vdash_{\textsc{fol}^=} \metaA$ only if $\MetaG \models \metaA$.
+} %\vspace{-.4in}
 
-In order to show that $\MetaG \nproves \metaA$, we may show that $\MetaG \nmodels \metaA$ by providing a model which satisfies $\MetaG$ but does not satisfy $\metaA$.
-It then follows by soundness that $\MetaG \nproves \metaA$, and so there is no proof in FOL$^=$ of $\metaA$ from $\MetaG$.
-This is a lot easier that attempting survey the entire space of possible proofs in FOL$^=$.
-In the case where $\MetaG=\varnothing$, we need only provide a countermodel to $\metaA$ in order to show that $\metaA$ is not a theorem, i.e., $\nproves \metaA$.
+In order to show that $\MetaG \nvdash_{\textsc{fol}^=} \metaA$, we may show that $\MetaG \nmodels \metaA$ by providing a model in which $\VV{\I}{}(\metaG) = 1$ for all $\metaG \in \MetaG$ but $\VV{\I}{}(\metaA) = 0$.
+Given \textsc{FOL$^=$ Soundness}, it follows that $\MetaG \nvdash_{\textsc{fol}^=} \metaA$, and so there is no derivation of $\metaA$ from $\MetaG$ in FOL$^=$.
+% This is a lot easier that attempting survey the entire space of possible proofs in FOL$^=$.
+In the case where $\MetaG=\varnothing$, we need only provide a countermodel to $\metaA$ in order to show that $\metaA$ is not a theorem, i.e., $\nvdash_{\textsc{fol}^=} \metaA$.
 
-In the opposite direction, showing that $\MetaG \models \metaA$ is enough to conclude that $\MetaG \proves \metaA$ by appealing to completeness.
-This tells us that there is a proof of $\metaA$ from the premises $\MetaG$, but it does not identify that proof for us.
-Nevertheless, we know that there is good reason to look for one.
+In addition to these advantages, \textsc{FOL$^=$ Soundness} shows that FOL$^=$ can be relied on to only derive logical consequences from a set of premises.
+% Since we may appeal to \textsc{FOL$^=$ Soundness} in order to establish that $\MetaG \vDash \metaA$ by deriving $\metaA$ from $\metaG$ in FOL$^=$, thereby avoiding the need to write a semantic proof.
+Since writing semantic proofs is difficult and prone to error, establishing that $\MetaG \vDash \metaA$ by deriving $\metaA$ from $\metaG$ in FOL$^=$ is often much easier and more reliable.
+Moreover, given that there is at least one model $\M$ of $\FI$, it follows that $\metaA$ is true in $\M$ for any theorem $\vdash_{\textsc{fol}^=} \metaA$. 
+As a result, the set of all theorems of FOL$^=$ are satisfiable and so consistent since if $\bot$ was derivable from the set of theorems in FOL$^=$, then $\bot$ would be true in $\M$, but this leads to a contradiction.
+For these reasons, the following chapter will extend the proof of \textsc{PL Soundness} to establish \textsc{FOL$^=$ Soundness}.
 
-Recall the contrast between our two proof systems for PL.
-Whereas attempting to prove that $\MetaG \proves_{\textsc{sd}} \metaA$ was not guaranteed to lead to a proof or to the conclusion that no proof exists, the tree method for PL always returned an answer. 
-Given the soundness and completeness of the tree method for PL, we had an effective procedure for determining whether $\MetaG\models\metaA$ or not. 
-Put otherwise, logical entailment is \define{decidable} in PL insofar as there is an effective procedure for determining in a finite number of steps whether $\MetaG \models \metaA$ or not given soundness and completeness.
-By contrast, logical entailment in $\FI$ is \define{undecidable} insofar as there is no such method for determining whether or not $\MetaG \models \metaA$.
-Even though we may construct a tree method for $\FI$, this method is not guaranteed to lead to either a positive or negative determination in the way that it did for PL.
-This makes the tree method a lot less interesting for $\FI$.
-As a result, the following chapters will establish soundness and completeness for FOL$^=$ rather than for an extension of the tree method for $\FI$.
+
 
 
 

@@ -892,7 +892,7 @@ For instance, $\forall yFxy\unisub{z}{x}$ is the wff $\forall yFzy$, and $\foral
 Given this notation, we may define the following abbreviations for quantifiers of the form `at least $n$ things are such that $\metaA$':
 \begin{align*}
   \qt{\exists_{\geq 1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}\metaA(\alpha)\\ 
-  \qt{\exists_{\geq n+1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA(\alpha) \eand \qt{\exists_{\geq n}}{\beta}(\alpha \neq \beta \eand \metaA\unisub{\beta}{\alpha})) \text{ where } \beta \text{ is not free in } \metaA.
+  \qt{\exists_{\geq n+1}}{\alpha}\metaA &\colonequals \qt{\exists}{\alpha}(\metaA(\alpha) \eand \qt{\exists_{\geq n}}{\beta}(\alpha \neq \beta \eand \metaA\unisub{\beta}{\alpha})) \text{ where } \beta \text{ is free for } \alpha \text{ in } \metaA.
 \end{align*}
 As above `$\colonequals$' represents that the left side is merely an abbreviation for the right side. 
 These abbreviations have a recursive structure which defines $\qt{\exists_{\geq n}}{\alpha}$ for all $n$.

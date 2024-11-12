@@ -1,0 +1,306 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs, mathabx} %%Math packages
+\usepackage{../lecture} %calls local modified style file
+% \usepackage{../forallx-mit} %calls local modified style file
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{multicol} 
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage{prooftrees} 
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep=}
+% \usepackage{fitchproof} 
+
+\makeatletter
+\renewcommand{\maketitle}{
+\begin{flushright}
+{\LARGE\@title}
+
+\vspace{10pt}
+
+{\@author}
+\\ \@date
+\end{flushright}
+
+\vspace{-20pt}
+
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Natural Deduction in $\FI$}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+\section*{From Last Time\ldots}
+
+\begin{enumerate}
+  \item[\it Free For:] $\beta$ is \textsc{free for} $\alpha$ in $\metaA$ just in case there is no free occurrence of $\alpha$ in $\metaA$ in the scope of a quantifier that binds $\beta$. 
+  % \item[\it Constants:] If $\beta$ is a constant, then $\beta$ is free for any $\alpha$ and $\metaA$. 
+  \item[\it Substitution:] If $\beta$ is free for $\alpha$ in $\metaA$, then the \textsc{substitution} $\metaA\unisub{\beta}{\alpha}$ is the result of replacing all free occurrences of $\alpha$ in $\metaA$ with $\beta$. 
+  \item[\it Instance:] $\metaA\unisub{\beta}{\alpha}$ is a \textsc{substitution instance} of $\qt{\forall}{\alpha}\metaA$ and $\qt{\exists}{\alpha}\metaA$ if $\beta$ is a constant. 
+  % \item[\it Pattern:] $\qt{\forall}{x}\metaA \vdash \metaA\unisub{s}{x} \vdash \qt{\exists}{x}\metaA$.
+\end{enumerate}
+   
+
+  
+\section*{Examples}%
+  \label{sec:Examples}
+
+\begin{enumerate}
+  \begin{multicols}{2}
+    \item All humans are mortal.
+    % \item Socrates is mortal if human.
+    \item \underline{Socrates is human.\quad\quad}
+    % \item Socrates is mortal.
+    \item Someone is mortal.
+
+    \setcounter{enumi}{0}
+    \item $\forall x(Hx \eif Mx)$
+    % \item $Hs \eif Ms$ \quad (by $\forall$E) 
+    \item \underline{$Hs$\quad\quad} 
+    % \item $Ms$
+    \item $\exists xMx$ 
+  \end{multicols}
+\end{enumerate}
+
+
+
+\section*{Motivation}
+
+\begin{itemize}
+  \item[\it Logical Consequence:] We have defined logical consequence for $\FI$.
+    \item We captured logical form by quantifying over all interpretations.
+    \item But semantic proofs are cumbersome to write.
+  \item[\it Naturalness:] Want a finite and natural description of logical consequence.
+  \item[\it Soundness:] Our description should be accurate.
+  \item[\it Completeness:] We also want our description to be complete.
+  \item[\bf Question:] What rules do we need to derive the following?
+    \item Kin loves everything.
+    \item Kin loves Cassandra.
+    \item Kin loves something.
+\end{itemize}
+
+
+
+
+
+
+\section*{Universal Elimination and Existential Introduction}
+
+\begin{enumerate}
+  \item[($\forall$E)] $\forall\alpha\metaA \vdash \metaA\unisub{\beta}{\alpha}$ where $\beta$ is a constant and $\alpha$ is a variable. 
+  \item[($\exists$I)] $\metaA\unisub{\beta}{\alpha} \vdash \exists\alpha\metaA$ where $\beta$ is a constant and $\alpha$ is a variable. 
+  % \item[-] $\forall x(Hx \eif Mx)$
+  % \item[-] $Hs$
+  % \item[-] $Hs \eif Ms$ \quad (by $\forall$E) 
+  % \item[-] $Ms$ \quad (by $\eif$E) 
+  % \item[-] $\exists xMx$ \quad (by $\exists$I) 
+  \item[\bf Task:] Derive the Socrates argument above.
+  \item[\it Universal:] Everyone is rested or beleaguered $\forall x(Rx \eor Bx)$.
+  \item[\it Instantial:] Therefore Tom is rested or beleaguered $Rt \eor Bt$.
+  \item[\it Existential:] So something is rested or beleaguered $\exists x(Rx \eor Bx)$, $\exists x(Rt \eor Bx)$, \ldots.
+    % \begin{itemize}
+    %   \begin{multicols}{2}
+    %   \item $\exists x(Rx \eor Bx)$.
+    %   \item $\exists x(Rx \eor Bt)$.
+    %   \item $\exists x(Rt \eor Bt)$.
+    %   \item $\exists y\exists x(Ry \eor By)$.
+    %   \item $\exists y\exists x(Rx \eor By)$.
+    %   \item $\exists x\exists x(Rx \eor Bx)$.
+    %   \end{multicols}
+    % \end{itemize}
+  % \item[\bf Question:] What about universal introduction and existential elimination?
+\end{enumerate}
+
+
+
+
+
+
+\section*{Universal Introduction}
+
+\begin{enumerate}
+  % \item[\it Generalising:] It would seem that we cannot universally generalise from instances.
+  \item[\it Invalid:] The following argument is invalid and should not be derivable. 
+    \item \underline{Socrates is mortal. \quad ($Ms$)\quad\quad}
+    \item Everything is mortal. \quad ($\forall xMx$)
+  \item[\it Valid:] Compare the following valid argument which should be derivable:
+    \setcounter{enumi}{0}
+    \item $\forall x\forall y\forall z((Rxy \eand Ryz) \eif Rxz)$.
+    % \item \underline{$\forall x\forall y(Rxy \eif Ryx)$.\quad\quad}
+    % \item $\forall x\forall y\forall z((Rxy \eand Rxz) \eif Ryz)$.
+    \item \underline{$\forall x\enot Rxx$.\quad\quad}
+    \item $\forall x\forall y(Rxy \eif \enot Ryx)$.
+  \item[\bf Task:] Use the rules we have to derive as much as we can.  
+    \begin{proof}
+      \hypo{a}{\qt{\forall}{x}\qt{\forall}{y}\qt{\forall}{z} ((Rxy \eand Ryz) \eif Rxz)}      \pr{}
+      \hypo{b}{\qt{\forall}{x} \enot Rxx}      \pr{}
+      \have{c}{\qt{\forall}{y}\qt{\forall}{z} ((Ray \eand Ryz) \eif Raz)}      \Ae{a}
+      \have{d}{\qt{\forall}{z} ((Rab \eand Rbz) \eif Raz)}      \Ae{c}
+      \have{e}{(Rab \eand Rba) \eif Raa}      \Ae{d}
+      \have{f}{\enot Raa}      \Ae{b}
+        \open
+          \hypo{g}{Rab}        \as{for $\eif$I}
+            \open
+              \hypo{h}{Rba}  \as{for $\enot$I}
+              \have{i}{Rab \eand Rba}  \ai{g,h}
+              \have{j}{Raa}  \ce{e,i}
+              \have{k}{\enot Raa}  \r{f}
+            \close
+          \have{l}{\enot Rba}  \ni{h-k}
+        \close
+      \have{m}{Rab \eif Rba}       \ci{g-l}
+      \have{n}{\qt{\forall}{y}(Ray \eif Rya)}       \Ai{m}
+      \have{o}{\qt{\forall}{x}\qt{\forall}{y}(Rxy \eif Ryx)}       \Ai{n}
+    \end{proof}
+    \item[\bf Question:] How are we going to introduce universal quantifiers without making the invalid argument above derivable?
+  \item[($\forall$I)] $\metaA\unisub{\beta}{\alpha} \vdash \forall\alpha\metaA$ where $\beta$ is a constant, $\alpha$ is a variable, and $\beta$ does not occur in $\forall\alpha\metaA$ or in a premise or any undischarged assumption. 
+  % \item[\it Bad Response:] We cannot introduce universal quantifiers under any condition.
+  \item[\it Arbitrary:] The constraints on ($\forall$I) require $\beta$ to be arbitrary. 
+  \item[\it Review:] Bad inference above is blocked.
+  \item[\it In Premise:] Anu loves every dog.\\
+    $\forall x(Dx \eif Lax)\ \vdash\ Da \eif Laa\ \nvdash\ \forall x(Dx \eif Lxx)$.
+  \item[\it In Conclusion:] All dogs love themselves.\\
+    $\forall x(Dx \eif Lxx)\ \vdash\ Da \eif Laa\ \nvdash\ \forall x(Dx \eif Lax)$.
+\end{enumerate}
+
+
+
+
+
+
+\section*{Existential Elimination}
+
+\begin{enumerate}
+  \item[\bf Task:] Compare the following invalid inference.
+    \item \underline{Someone is mortal.\quad\quad}
+    \item Zeus is mortal.
+  \item[\bf Question:] How are we going to eliminate existential quantifiers without making the argument above derivable?
+  \item[\it Example:] Consider the following argument:
+    \setcounter{enumi}{0}
+    \item Everyone who applied found a position $\forall x(Ax \eif \exists y Fxy)$.
+    \item \underline{Someone applied $\exists xAx$.\quad\quad}
+    \item Someone found a position $\exists x\exists y Fxy$.
+  \item[($\exists$E)] If $\exists\alpha\metaA,\metaA\unisub{\beta}{\alpha} \vdash \metaB$ where $\beta$ is a constant that does not occur in $\exists\alpha\metaA$, $\metaB$, or in a premise or undischarged assumption, then $\exists\alpha\metaA\vdash \metaB$.
+  \item[\it Derivation:] We can derive the example without deriving the invalid inference.
+\end{enumerate}
+
+
+
+
+\section*{Relations}
+
+\begin{enumerate}
+  \item[\bf Question:] Is the following argument valid? 
+    \item $\forall x\forall y\forall z((Rxy \eand Ryz) \eif Rxz)$.
+    \item \underline{$\forall x\forall y(Rxy \eif Ryx)$.\quad\quad}
+    \item $\forall xRxx$.
+  \item[\bf Question:] Is the following argument valid?
+    \setcounter{enumi}{0}
+    \item $\forall x\forall y\forall z((Rxy \eand Ryz) \eif Rxz)$.
+    \item \underline{$\forall x\enot Rxx$.\quad\quad}
+    \item $\forall x\forall y(Rxy \eif \enot Ryx)$.
+  % \item[\it Domain:] Let the \textit{domain} $D$ be any set.
+  % \item[\it Relation:] A \textit{relation} $R$ on $D$ is any subset of $D^2$.
+  % \item[\it Reflexive:] A relation $R$ is \textit{reflexive} on $D$ \textit{iff} $\tuple{x,x}\in R$ for all $x\in D$.
+  % \item[\it Non-Reflexive:] A relation $R$ is \textit{non-reflexive} on $D$ \textit{iff} $R$ is not reflexive on $D$.
+  % \item[\bf Question 1:] What is it to be \textit{irreflexive}?
+  % \item[\it Irreflexive:] A relation $R$ is \textit{irreflexive} on $D$ \textit{iff} $\tuple{x,x}\notin R$ for all $x\in D$.
+  % \item[\it Symmetric:] A relation $R$ is \textit{symmetric iff} $\tuple{y,x}\in R$ whenever ${x,y}\in R$.
+  % \item[\bf Question 2:] Why don't we need to specify a domain?
+  % \item[\bf Question 3:] Why is a relation reflexive or irreflexive with respect to a domain?
+  % \item[\it Asymmetric:] A relation $R$ is \textit{asymmetric iff} $\tuple{y,x}\notin R$ whenever $\tuple{x,y}\in R$.
+  % \item[\bf Question 4:] What is it to be non-symmetric? How about non-asymmetric?
+  % \item[\bf Task 1:] Show that every asymmetric relation is irreflexive.
+  % \item[\it Transitive:] A relation $R$ is \textit{transitive iff} $\tuple{x,z}\in R$ whenever $\tuple{x,y},\tuple{y,z}\in R$.
+  % \item[\it Intransitive:] A relation $R$ is \textit{intransitive iff} $\tuple{x,z}\notin R$ whenever $\tuple{x,y},\tuple{y,z}\in R$.
+  % \item[\bf Question 5:] Is every symmetric transitive relation reflexive? (No: $R=\varnothing$)
+  % \item[\bf Task 2:] Show that every transitive irreflexive relation asymmetric?
+  % \item[\it Euclidean:] A relation $R$ is \textit{euclidean iff} $\tuple{y,z}\in R$ whenever $\tuple{x,y},\tuple{x,z}\in R$.
+  % \item[\bf Task 3:] Show that every transitive symmetric relation is euclidean.
+\end{enumerate}
+
+\section*{Quantifier Exchange Rules}
+
+\begin{enumerate}
+  \begin{multicols}{2}
+    \item[$(\enot\exists)$] $\enot\qt{\exists}{\alpha}\metaA \vdash \qt{\forall}{\alpha}\enot\metaA$.
+    \item[$(\enot\forall)$] $\enot\qt{\forall}{\alpha}\metaA \vdash \qt{\exists}{\alpha}\enot\metaA$.
+    \item[$(\forall\enot)$] $\qt{\forall}{\alpha}\enot\metaA \vdash \enot\qt{\exists}{\alpha}\metaA$.
+    \item[$(\exists\enot)$] $\qt{\exists}{\alpha}\enot\metaA \vdash \enot\qt{\forall}{\alpha}\metaA$.
+  \end{multicols}
+\end{enumerate}
+
+
+
+\begin{enumerate}
+  % \begin{multicols}{2}
+  \item[\bf Task:] $\qt{\forall}{\alpha}\enot\metaA \vdash \enot\qt{\exists}{\alpha}\metaA$.
+    \begin{proof}
+      \hypo{a}{\qt{\forall}{\alpha} \enot\metaA}      \pr{}
+        \open
+          \hypo{b}{\qt{\exists}{\alpha}\metaA}        \as{for $\enot$I}
+            \open
+              \hypo{c}{\metaA\unisub{\beta}{\alpha}}  \as{for $\exists$E where $\beta$ is a new constant}
+                \open
+                  \hypo{d}{\qt{\exists}{\alpha}\metaA}  \as{for $\enot$I}
+                  \have{e}{\metaA\unisub{\beta}{\alpha}}  \r{c}
+                  \have{f}{\enot\metaA\unisub{\beta}{\alpha}}  \Ae{a}
+                \close
+              \have{g}{\enot\qt{\exists}{\alpha}\metaA}  \ni{d-f}
+            \close
+          \have{h}{\enot\qt{\exists}{\alpha}\metaA}  \Ee{b,c-g}
+        \close
+      \have{i}{\enot\qt{\exists}{\alpha}\metaA}       \ni{b-h}
+    \end{proof}
+  \item[\bf Task:] $\enot\qt{\exists}{\alpha}\metaA \vdash \qt{\forall}{\alpha}\enot\metaA$.
+    \begin{proof}
+      \hypo{a}{\enot\qt{\exists}{\alpha} \metaA}      \pr{}
+        \open
+          \hypo{b}{\metaA\unisub{\beta}{\alpha}}      \as{for $\enot$I where $\beta$ is a new constant}
+          \have{c}{\qt{\exists}{\alpha} \metaA}       \Ei{b}
+          \have{d}{\enot\qt{\exists}{\alpha} \metaA}  \r{a}
+        \close
+      \have{e}{\enot\metaA\unisub{\beta}{\alpha}}     \ni{b-d}
+      \have{f}{\qt{\forall}{\alpha}\enot\metaA}       \Ai{e}
+    \end{proof}
+  \item[\bf Task:] Prove the rules below: 
+  \item[(MCP)] If $\metaA\vdash\metaB$, then $\enot\metaB\vdash\enot\metaA$.
+  \item[($\forall$DN)] $\forall\alpha\enot\enot\metaA\vdash\forall\alpha\metaA$.
+  \item[($\exists$DN)] $\exists\alpha\enot\enot\metaA\vdash\exists\alpha\metaA$.
+  \item[\bf Task:] Use the rules above to derive $(\enot\forall)$ and $(\exists\enot)$.
+    \item Replace $\metaA$ with $\enot \metaA$ in the derivations above: $\enot \qt{\exists}{\alpha} \enot \metaA \vdash \qt{\forall}{\alpha}\enot \enot \metaA$. 
+    \item So $\enot \qt{\exists}{\alpha} \enot \metaA \vdash \qt{\forall}{\alpha}\metaA$ by $\forall$DN, and so $\enot \qt{\forall}{\alpha}\metaA \vdash \enot \enot \qt{\exists}{\alpha} \enot \metaA \vdash \qt{\exists}{\alpha} \enot \metaA$. 
+\end{enumerate}
+
+
+%%% from before 
+
+
+
+\end{document}
+

@@ -1151,6 +1151,25 @@ Put otherwise, \textbf{\ref{lemma:sub}} is what explains why the identity elimin
 \section{Conclusion}%
   \label{sec:Conclusion}
 
+% Chapter \ref{ch.FOL-completeness} will prove the converse:
+% \factoidbox{
+%   \textsc{completeness:} $\MetaG \vdash_{\textsc{fol}^=} \metaA$ if $\MetaG \models \metaA$.
+% }
+% In the opposite direction, we show that $\MetaG \models \metaA$ is enough to conclude that $\MetaG \vdash \metaA$ by appealing to completeness.
+% This tells us that there is a proof of $\metaA$ from the premises $\MetaG$, but it does not identify that proof for us.
+% Nevertheless, we know that there is good reason to look for one.
+
+% Recall from before the contrast between our two proof systems for PL.
+Whereas attempting to prove that $\MetaG \vdash_{\textsc{sd}} \metaA$ was not guaranteed to lead to a proof or to the conclusion that no proof exists, the tree method for PL always returned an answer. 
+Given the soundness and completeness of the tree method for PL, we had an effective procedure for determining whether $\MetaG\models\metaA$ or not. 
+Put otherwise, logical entailment is \define{decidable} in PL insofar as there is an effective procedure for determining in a finite number of steps whether $\MetaG \models \metaA$ or not given soundness and completeness.
+By contrast, logical entailment in $\FI$ is \define{undecidable} insofar as there is no such method for determining whether or not $\MetaG \models \metaA$.
+Even though we may construct a tree method for $\FI$, this method is not guaranteed to lead to either a positive or negative determination in the way that it did for PL.
+This makes the tree method a lot less interesting for $\FI$.
+As a result, the following chapters will establish soundness and completeness for FOL$^=$ rather than for an extension of the tree method for $\FI$.
+
+%%% ABOVE IS FROM BEFORE
+
 Having provided proofs for every rule included in QD, we may draw on \textbf{\ref{rule:AS}} -- \textbf{\ref{rule:IdE}} given above in order to assert the following conclusion:
   
 \begin{enumerate}[leftmargin=1.5in]
