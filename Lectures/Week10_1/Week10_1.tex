@@ -99,9 +99,9 @@
   \item[\it Soundness:] Our description should be accurate.
   \item[\it Completeness:] We also want our description to be complete.
   \item[\bf Question:] What rules do we need to derive the following?
-    \item Kin loves everything.
-    \item Kin loves Cassandra.
-    \item Kin loves something.
+    \item Sid loves everything.
+    \item Sid loves Bina.
+    \item Sid loves something.
 \end{itemize}
 
 
@@ -244,61 +244,6 @@
   % \item[\bf Task 3:] Show that every transitive symmetric relation is euclidean.
 \end{enumerate}
 
-\section*{Quantifier Exchange Rules}
-
-\begin{enumerate}
-  \begin{multicols}{2}
-    \item[$(\enot\exists)$] $\enot\qt{\exists}{\alpha}\metaA \vdash \qt{\forall}{\alpha}\enot\metaA$.
-    \item[$(\enot\forall)$] $\enot\qt{\forall}{\alpha}\metaA \vdash \qt{\exists}{\alpha}\enot\metaA$.
-    \item[$(\forall\enot)$] $\qt{\forall}{\alpha}\enot\metaA \vdash \enot\qt{\exists}{\alpha}\metaA$.
-    \item[$(\exists\enot)$] $\qt{\exists}{\alpha}\enot\metaA \vdash \enot\qt{\forall}{\alpha}\metaA$.
-  \end{multicols}
-\end{enumerate}
-
-
-
-\begin{enumerate}
-  % \begin{multicols}{2}
-  \item[\bf Task:] $\qt{\forall}{\alpha}\enot\metaA \vdash \enot\qt{\exists}{\alpha}\metaA$.
-    \begin{proof}
-      \hypo{a}{\qt{\forall}{\alpha} \enot\metaA}      \pr{}
-        \open
-          \hypo{b}{\qt{\exists}{\alpha}\metaA}        \as{for $\enot$I}
-            \open
-              \hypo{c}{\metaA\unisub{\beta}{\alpha}}  \as{for $\exists$E where $\beta$ is a new constant}
-                \open
-                  \hypo{d}{\qt{\exists}{\alpha}\metaA}  \as{for $\enot$I}
-                  \have{e}{\metaA\unisub{\beta}{\alpha}}  \r{c}
-                  \have{f}{\enot\metaA\unisub{\beta}{\alpha}}  \Ae{a}
-                \close
-              \have{g}{\enot\qt{\exists}{\alpha}\metaA}  \ni{d-f}
-            \close
-          \have{h}{\enot\qt{\exists}{\alpha}\metaA}  \Ee{b,c-g}
-        \close
-      \have{i}{\enot\qt{\exists}{\alpha}\metaA}       \ni{b-h}
-    \end{proof}
-  \item[\bf Task:] $\enot\qt{\exists}{\alpha}\metaA \vdash \qt{\forall}{\alpha}\enot\metaA$.
-    \begin{proof}
-      \hypo{a}{\enot\qt{\exists}{\alpha} \metaA}      \pr{}
-        \open
-          \hypo{b}{\metaA\unisub{\beta}{\alpha}}      \as{for $\enot$I where $\beta$ is a new constant}
-          \have{c}{\qt{\exists}{\alpha} \metaA}       \Ei{b}
-          \have{d}{\enot\qt{\exists}{\alpha} \metaA}  \r{a}
-        \close
-      \have{e}{\enot\metaA\unisub{\beta}{\alpha}}     \ni{b-d}
-      \have{f}{\qt{\forall}{\alpha}\enot\metaA}       \Ai{e}
-    \end{proof}
-  \item[\bf Task:] Prove the rules below: 
-  \item[(MCP)] If $\metaA\vdash\metaB$, then $\enot\metaB\vdash\enot\metaA$.
-  \item[($\forall$DN)] $\forall\alpha\enot\enot\metaA\vdash\forall\alpha\metaA$.
-  \item[($\exists$DN)] $\exists\alpha\enot\enot\metaA\vdash\exists\alpha\metaA$.
-  \item[\bf Task:] Use the rules above to derive $(\enot\forall)$ and $(\exists\enot)$.
-    \item Replace $\metaA$ with $\enot \metaA$ in the derivations above: $\enot \qt{\exists}{\alpha} \enot \metaA \vdash \qt{\forall}{\alpha}\enot \enot \metaA$. 
-    \item So $\enot \qt{\exists}{\alpha} \enot \metaA \vdash \qt{\forall}{\alpha}\metaA$ by $\forall$DN, and so $\enot \qt{\forall}{\alpha}\metaA \vdash \enot \enot \qt{\exists}{\alpha} \enot \metaA \vdash \qt{\exists}{\alpha} \enot \metaA$. 
-\end{enumerate}
-
-
-%%% from before 
 
 
 

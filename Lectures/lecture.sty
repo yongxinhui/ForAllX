@@ -52,6 +52,15 @@
 \def\MetaS{\ensuremath{\Sigma}}
 \def\MetaP{\ensuremath{\varPhi}}
 
+\newcommand{\factoidbox}[1]{%
+  \setlength{\fboxsep}{10pt}% Adjust the padding inside the frame
+  \begin{quote}
+    \framebox{%
+      \parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}%
+    }%
+  \end{quote}%
+}
+
 \newcounter{eargletter} % Counter for the environment (resets per section)
 \renewcommand{\theeargletter}{\Alph{eargletter}} % Use capital letters for the counter
 

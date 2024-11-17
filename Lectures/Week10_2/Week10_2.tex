@@ -1,0 +1,247 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs, mathabx} %%Math packages
+\usepackage{../lecture} %calls local modified style file
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{multicol} 
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage{prooftrees} 
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep=}
+% \usepackage{fitchproof} 
+
+
+\makeatletter
+\renewcommand{\maketitle}{
+\begin{flushright}
+{\LARGE\@title}
+
+\vspace{10pt}
+
+{\@author}
+\\ \@date
+\end{flushright}
+
+\vspace{-10pt}
+
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Natural Deduction in FOL$^=$}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+
+\section*{Substitution}
+
+\begin{enumerate}
+  \item[\it Free For:] $\beta$ is \textsc{free for} $\alpha$ in $\metaA$ just in case there is no free occurrence of $\alpha$ in $\metaA$ in the scope of a quantifier that binds $\beta$. 
+  \item[\it Substitution:] If $\beta$ is free for $\alpha$ in $\metaA$, then the \textsc{substitution} $\metaA\unisub{\beta}{\alpha}$ is the result of replacing all free occurrences of $\alpha$ in $\metaA$ with $\beta$.
+\end{enumerate}
+   
+
+
+\section*{Quantifier Rules}
+
+\begin{enumerate}
+  \item[($\forall$E)] $\forall\alpha\metaA \vdash \metaA\unisub{\beta}{\alpha}$ where $\beta$ is a constant and $\alpha$ is a variable. 
+  \item[($\exists$I)] $\metaA\unisub{\beta}{\alpha} \vdash \exists\alpha\metaA$ where $\beta$ is a constant and $\alpha$ is a variable.
+  \item[($\forall$I)] $\metaA\unisub{\beta}{\alpha} \vdash \forall\alpha\metaA$ where $\beta$ is a constant, $\alpha$ is a variable, and $\beta$ does not occur in $\forall\alpha\metaA$ or in any undischarged assumption.
+  \item[($\exists$E)] If $\exists\alpha\metaA,\metaA\unisub{\beta}{\alpha} \vdash \metaB$ where $\beta$ is a constant that does not occur in $\exists\alpha\metaA$, $\metaB$, or in any undischarged assumption, then $\exists\alpha\metaA\vdash \metaB$.
+\end{enumerate}
+
+
+
+
+\section*{Unregulated Existential Elimination}%
+  \label{sec:Unregulated}
+  
+\begin{itemize}
+  \item[\bf Task:] $\qt{\exists}{x} Lbx,\ \qt{\exists}{x} Lsx \nvdash \qt{\exists}{x}\qt{\exists}{y}(Lxy \eand Lyx)$.
+    \begin{proof}
+      \hypo{a}{\qt{\exists}{x} Lbx}      \pr{}
+      \hypo{b}{\qt{\exists}{x} Lsx}      \pr{}
+        \open
+          \hypo{c}{Lbs}      \as{for $\exists$E}
+            \open
+              \hypo{d}{Lsb}      \as{for $\exists$E}
+              \have{e}{Lbs \eand Lsb}       \ai{c,d}
+              \have{f}{\qt{\exists}{y}(Lby \eand Lyb)}  \Ei{e}
+              \have{g}{\qt{\exists}{x}\qt{\exists}{y}(Lxy \eand Lyx)}  \Ei{f}
+            \close
+          \have{h}{\qt{\exists}{x}\qt{\exists}{y}(Lxy \eand Lyx)}  \by{$\exists$E (INCORRECT)}{b,d-g}
+        \close
+      \have{i}{\qt{\exists}{x}\qt{\exists}{y}(Lxy \eand Lyx)}  \by{$\exists$E (INCORRECT)}{a,c-h}
+    \end{proof}
+  \item Can't instantiate with constants that occur in the premises
+\end{itemize}
+
+
+
+
+\section*{Identity Rules}
+
+\begin{enumerate}
+  \item[($=$I)] $\vdash \alpha = \alpha$ for any constant $\alpha$. 
+    \begin{itemize}
+      \item[\it Axiom:] This rule is better referred to as an axiom schema.
+      \item[\it Note:] Easy to use, but not always obvious when to use.
+    \end{itemize}
+  \item[\bf Task:] Derive the following in FOL$^=$:
+    \begin{itemize}
+      \item $\forall x(x=x \eif \exists yFyx) \nvdash \exists y(Fyy)$.
+      \item $\forall x(x=x \eif \exists yFyx) \vdash \exists x \exists y(Fyx)$.
+      \item Everything is something.
+      \item Something exists.
+    \end{itemize}
+  \item[($=$E)] $\metaA\unisub{\alpha}{\gamma},\alpha=\beta\vdash\metaA\unisub{\beta}{\gamma}$.
+    \begin{itemize}
+      \item[\it Note:] Also easy to use, but not always obvious how to use.
+      % \item[\it Compare:] $Fab \eor \exists yFby,\ b = d\ \vdash Fad \eor \exists yFby/ Fab \eor \exists yFdy/ Fad \eor \exists yFdy$.
+    \end{itemize}
+  \item[\bf Task:] Derive the following in FOL$^=$:
+    \begin{itemize}
+      \item $m = n \eor n = o,\ An\ \vdash Am \eor Ao$
+      \item[\it Lonely:] $\qt{\forall}{x}\qt{\forall}{y}(Rxy \eif x = y)$. 
+      \item Every symmetric antisymmetric relation is lonely.
+      \item Every irreflexive antisymmetric relation is asymmetric.
+    \end{itemize}
+\end{enumerate}
+
+
+
+
+\section*{Identity Examples}
+
+\begin{enumerate}
+  \item[\bf Task:] Regiment and derive the following in FOL$^=$.
+  \item $\qt{\forall}{x}(x = m), Rma\vdash \qt{\exists}{x} Rxx$
+  \item $\qt{\forall}{x}(x{=}n \eiff Mx), \qt{\forall}{x}(Ox \eor \enot Mx)\vdash On$
+  \item $\qt{\exists}{x}(Kx \eand \qt{\forall}{y}(Ky \eif x{=}y) \eand Bx), Kd\vdash Bd$
+  \item $\vdash Pa \eif \qt{\forall}{x}(Px \eor x {\neq} a)$
+\end{enumerate}
+
+
+\section*{Derivability}%
+  \label{Sec:Derivability}
+  
+\begin{enumerate}
+  \item[\it Derivation:] A \textsc{derivation} (or \textsc{proof}) of $\metaA$ from $\MetaG$ in FOL$^=$ is any finite sequence of wfs of $\FI$ ending in $\metaA$ where every wfs in the sequence is either:
+    \item A premise in $\MetaG$;
+    \item An assumption which is eventually discharged; or
+    \item Follows from previous lines by a natural deduction rule for FOL$^=$ besides AS. 
+  \item[\bf Note:] This is exactly the same as before.
+\end{enumerate}
+
+
+
+
+\section*{Quantifier Exchange Rules}
+
+% \begin{itemize}
+%   \item[\bf Task:] It will be convenient to derive the following:
+%   \begin{multicols}{2}
+%     \item[$(\forall\enot)$] $\qt{\forall}{\alpha}\enot\metaA \vdash \enot\qt{\exists}{\alpha}\metaA$.
+%     \item[$(\enot\exists)$] $\enot\qt{\exists}{\alpha}\metaA \vdash \qt{\forall}{\alpha}\enot\metaA$.
+%     \item[$(\exists\enot)$] $\qt{\exists}{\alpha}\enot\metaA \vdash \enot\qt{\forall}{\alpha}\metaA$.
+%     \item[$(\enot\forall)$] $\enot\qt{\forall}{\alpha}\metaA \vdash \qt{\exists}{\alpha}\enot\metaA$.
+%   \end{multicols}
+% \end{itemize}
+
+\begin{enumerate}
+  % \begin{multicols}{2}
+  \item[$(\forall\enot)$] $\qt{\forall}{\alpha}\enot\metaA \vdash \enot\qt{\exists}{\alpha}\metaA$.
+    \begin{proof}
+      \hypo{a}{\qt{\forall}{\alpha} \enot\metaA}      \pr{}
+        \open
+          \hypo{b}{\qt{\exists}{\alpha}\metaA}        \as{for $\enot$I}
+            \open
+              \hypo{c}{\metaA\unisub{\beta}{\alpha}}  \as{for $\exists$E where $\beta$ is a new constant}
+                \open
+                  \hypo{d}{\qt{\exists}{\alpha}\metaA}  \as{for $\enot$I}
+                  \have{e}{\metaA\unisub{\beta}{\alpha}}  \r{c}
+                  \have{f}{\enot\metaA\unisub{\beta}{\alpha}}  \Ae{a}
+                \close
+              \have{g}{\enot\qt{\exists}{\alpha}\metaA}  \ni{d-f}
+            \close
+          \have{h}{\enot\qt{\exists}{\alpha}\metaA}  \Ee{b,c-g}
+        \close
+      \have{i}{\enot\qt{\exists}{\alpha}\metaA}       \ni{b-h}
+    \end{proof}
+  \item[$(\enot\exists)$] $\enot\qt{\exists}{\alpha}\metaA \vdash \qt{\forall}{\alpha}\enot\metaA$.
+    \begin{proof}
+      \hypo{a}{\enot\qt{\exists}{\alpha} \metaA}      \pr{}
+        \open
+          \hypo{b}{\metaA\unisub{\beta}{\alpha}}      \as{for $\enot$I where $\beta$ is a new constant}
+          \have{c}{\qt{\exists}{\alpha} \metaA}       \Ei{b}
+          \have{d}{\enot\qt{\exists}{\alpha} \metaA}  \r{a}
+        \close
+      \have{e}{\enot\metaA\unisub{\beta}{\alpha}}     \ni{b-d}
+      \have{f}{\qt{\forall}{\alpha}\enot\metaA}       \Ai{e}
+    \end{proof}
+  \item[\bf Task:] Prove the rules below: 
+  \item[(MCP)] If $\metaA\vdash\metaB$, then $\enot\metaB\vdash\enot\metaA$.
+  \item[($\forall$DN)] $\forall\alpha\enot\enot\metaA\dashv\vdash\forall\alpha\metaA$.
+  \item[($\exists$DN)] $\exists\alpha\enot\enot\metaA\dashv\vdash\exists\alpha\metaA$.
+  \item[$(\exists\enot)$] $\qt{\exists}{\alpha}\enot\metaA \vdash \enot\qt{\forall}{\alpha}\metaA$.
+    \item Replace $\metaA$ with $\enot \metaA$ in $(\forall\enot)$ above: $\qt{\forall}{\alpha} \enot\enot \metaA \vdash \enot \qt{\exists}{\alpha}\enot \metaA$. 
+    \item So $\qt{\forall}{\alpha}\metaA \vdash \enot \qt{\exists}{\alpha} \enot \metaA$ by $\forall$DN, and so $\enot \enot \qt{\exists}{\alpha} \enot \metaA \vdash \enot \qt{\forall}{\alpha}\metaA$ by MCP. 
+    % \item QED by DN.
+  \item[$(\enot\forall)$] $\enot\qt{\forall}{\alpha}\metaA \vdash \qt{\exists}{\alpha}\enot\metaA$.
+    \setcounter{enumi}{0}
+    \item Replace $\metaA$ with $\enot \metaA$ in $(\enot\exists)$ above: $\enot \qt{\exists}{\alpha} \enot \metaA \vdash \qt{\forall}{\alpha}\enot \enot \metaA$. 
+    \item So $\enot \qt{\exists}{\alpha} \enot \metaA \vdash \qt{\forall}{\alpha}\metaA$ by $\forall$DN, and so $\enot \qt{\forall}{\alpha}\metaA \vdash \enot \enot \qt{\exists}{\alpha} \enot \metaA$ by MCP. 
+    % \item QED by DN.
+\end{enumerate}
+
+
+
+% \section*{Relations}
+%
+% \begin{enumerate}
+%   \item[\bf Task:] Regiment and derive the following in FOL$^=$.
+%   \item Every transitive symmetric relation is left and right euclidean.
+%   \item Every nonempty transitive and symmetric relation is reflexive.
+%   \item Only the empty relation is symmetric and asymmetric.
+%   \item Every intransitive relation is irreflexive.
+%   \item Every intransitive relation is asymmetric.
+% \end{enumerate}
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
+

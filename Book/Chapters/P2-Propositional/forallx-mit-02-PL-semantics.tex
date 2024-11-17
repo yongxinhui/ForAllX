@@ -445,16 +445,16 @@ On the third row, each premise has a $1$ under its main operator but the conclus
   
 Evaluating wfss in $\PL$ by constructing complete truth tables provides a simple mechanical procedure that is straightforward to systematically employ.
 Moreover, since every wfs of $\PL$ is of finite length and contains a finite number of sentence letters, constructing a complete truth table for a wfs of $\PL$ provides a finite procedure which determines whether that sentence is a tautology, contradiction, or logical contingent.
-Put otherwise, constructing a complete truth table for a wfs of $\PL$ provides an \define{effective method} for determining whether that wfs is a tautology or not, and similarly for the other logical properties that sentence may or may not have.
-Since there is an effective method for determining whether a wfs of $\PL$ is a tautology, we may say that it is \define{decidable} whether a wfs of $\PL$ is a tautology.
+Put otherwise, constructing a complete truth table for a wfs of $\PL$ provides an \define{effective procedure} for determining whether that wfs is a tautology or not, and similarly for the other logical properties that sentence may or may not have.
+Since there is an effective procedure for determining whether a wfs of $\PL$ is a tautology, we may say that it is \define{decidable} whether a wfs of $\PL$ is a tautology.
 It is similarly decidable whether a wfs of $\PL$ is a contradiction or logically contingent.
 
-Given a finite set $\Gamma$ of wfss of $\PL$, constructing a complete truth table for those wfss provides an effective method for determining whether $\Gamma$ is satisfiable or not, and so the question of whether $\Gamma$ is satisfiable is decidable. 
+Given a finite set $\Gamma$ of wfss of $\PL$, constructing a complete truth table for those wfss provides an effective procedure for determining whether $\Gamma$ is satisfiable or not, and so the question of whether $\Gamma$ is satisfiable is decidable. 
 However, the same cannot be said for infinite sets of wfss of $\PL$.
 Even though each wfs of $\PL$ is of finite length with finitely many sentence letters, an infinite set of wfss of $\PL$ may contain infinitely many sentence letters, requiring an infinitely large truth table.
 Although there is nothing to prevent us from \textit{defining} infinitely large truth tables mathematically, there is of course little hope of \textit{using} such an infinite truth table to determine whether an infinite set of sentences is satisfiable.
 It is for this reason that the truth table method does not provide an effective procedure for deciding whether a set of wfs of $\PL$ is satisfiable. 
-Of course, there could be another effective method for determining whether a set of $\PL$ sentences is satisfiable, and so we cannot claim that it is \define{undecidable} whether a set of sentences is satisfiable just because one method cannot be used.
+Of course, there could be another effective procedure for determining whether a set of $\PL$ sentences is satisfiable, and so we cannot claim that it is \define{undecidable} whether a set of sentences is satisfiable just because one method cannot be used.
 
 Although it is beyond the scope of this course, it is in fact undecidable whether an infinite set of wfs of $\PL$ is satisfiable or not.
 That is, there is no effective procedure that we could hope to use to determine whether any infinite set of wfs of $\PL$ is satisfiable. %, though there may be particular infinite sets that we may are or are not satisfiable.
@@ -765,7 +765,7 @@ For the time being, we only pause to indicate the central role that logical cons
   \label{sec:SemanticProofs}
 
 The formal definitions given above are certainly much more elegant than the truth table definitions for the corresponding terms, avoiding all the ambiguities that we mentioned but did not take the time to fully resolve above.
-Although these new definitions do not provide effective methods for deciding logical questions in the same way as the truth table definitions, they will nevertheless allow us to prove things about the wfss of $\PL$ and their various logical properties and relationships.
+Although these new definitions do not provide effective procedures for deciding logical questions in the same way as the truth table definitions, they will nevertheless allow us to prove things about the wfss of $\PL$ and their various logical properties and relationships.
 For instance, consider the following set of wfss:
 $$ \MetaG = \set{A \eand  C,\ B \eiff \enot A,\ C \eif (B \eand D),\ E} $$
 It turns out that this set is unsatisfiable.
