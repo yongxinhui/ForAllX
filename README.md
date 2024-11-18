@@ -22,3 +22,6 @@ Feel free to contact me if you would like access to the exams, written problem s
 
 Although you are welcome to fork this repository adapting these resources as you please, I would also be happy to accept pull requests or to be notified of any errors.
 If you have any suggestion or questions, I would encourage you to open an issue above.
+At some point I hope to include documentation describing how to adapt these resources for those new to LaTeX and GitHub.
+
+If you are interested in using the text editor that I used to streamline work on this project, you can check out the [NeoVim config](https://github.com/benbrastmckie/.config) that I maintain, as well as the [VSCodium config](https://github.com/benbrastmckie/VSCodium) that I started for those who are looking for something a little more user friendly.
