@@ -11,6 +11,7 @@ Additionally, I have taken pains to discuss the philosophical foundations of log
 
 The terms at MIT span fifteen weeks, two of which are devoted to soundness and completeness for propositional logic (PL) and another two weeks to extend these results to first-order logic with identity (FOL).
 In order to introduce the material at a slower rate or over the course of a shorter term, the metalogical portions of the text can easily be omitted without compromising the integrity of the text.
+I hope to someday expand the text to include practice problems, a glossary of terms and notation, and a bibliography for further study.
 
 I have included the [LaTeX files](https://github.com/benbrastmckie/ForAllX/tree/master/Lectures) for the [lecture notes](https://github.com/benbrastmckie/ForAllX/blob/master/Handouts/All_Handouts.pdf) as well as the [syllabus](https://github.com/benbrastmckie/ForAllX/blob/master/Syllabus/Syllabus.pdf) for the MIT course.
 Feel free to contact me if you would like access to the exams, written problem sets, and assignments on [Carnap](https://carnap.io/).
