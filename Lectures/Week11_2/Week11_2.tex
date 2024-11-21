@@ -1,0 +1,284 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs, mathabx} %%Math packages
+\usepackage{../lecture} %calls local modified style file
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{multicol} 
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage{prooftrees} 
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep=}
+% \usepackage{fitchproof} 
+
+
+\makeatletter
+\renewcommand{\maketitle}{
+\begin{flushright}
+{\LARGE\@title}
+
+\vspace{10pt}
+
+{\@author}
+\\ \@date
+\end{flushright}
+
+\vspace{-20pt}
+
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Soundness: Part II}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+
+% \section*{Substitution}
+%
+% \begin{enumerate}
+%   \item[\it Free For:] $\beta$ is \textsc{free for} $\alpha$ in $\varphi$ just in case there is no free occurrence of $\alpha$ in $\varphi$ in the scope of a quantifier that binds $\beta$. 
+%   \item[\it Substitution:] If $\beta$ is free for $\alpha$ in $\varphi$, then the \textsc{substitution} $\varphi\unisub{\beta}{\alpha}$ is the result of replacing all free occurrences of $\alpha$ in $\varphi$ with $\beta$.
+% \end{enumerate}
+   
+
+
+
+
+
+
+\section*{FOL$^=$ Rules}
+
+\begin{enumerate}
+  \item[($\forall$E)] $\forall\alpha\varphi \vdash \varphi\unisub{\beta}{\alpha}$ where $\beta$ is a constant and $\alpha$ is a variable. 
+  \item[($\exists$I)] $\varphi\unisub{\beta}{\alpha} \vdash \exists\alpha\varphi$ where $\beta$ is a constant and $\alpha$ is a variable.
+  \item[($\forall$I)] $\varphi\unisub{\beta}{\alpha} \vdash \forall\alpha\varphi$ where $\beta$ is a constant, $\alpha$ is a variable, and $\beta$ does not occur in $\forall\alpha\varphi$ or in any undischarged assumption.
+  \item[($\exists$E)] If $\exists\alpha\varphi,\varphi\unisub{\beta}{\alpha} \vdash \psi$ where $\beta$ is a constant that does not occur in $\exists\alpha\varphi$, $\psi$, or in any undischarged assumption, then $\exists\alpha\varphi\vdash \psi$.
+  \item[($=$I)] $\vdash \alpha = \alpha$ for any constant $\alpha$. 
+  \item[($=$E)] $\varphi\unisub{\alpha}{\gamma},\alpha=\beta\vdash\varphi\unisub{\beta}{\gamma}$.
+\end{enumerate}
+
+
+
+
+
+
+
+
+\section*{Lemmas From Last Time\ldots}%
+  \label{sec:Lemmas}
+  
+\begin{itemize}
+  \item[\bf L2.1] If $\MetaG \vDash \metaA$, then $\MetaG \cup \MetaS \vDash \metaA$.
+  \item[\bf L4.3] For any FOL$^=$ proof $X$, if $\metaA_k$ is live at line $n$ where $k\leq n$, then $\MetaG_k\subseteq \MetaG_{n}$.
+  \item[\bf L9.1] $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$ if $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\metaA$.
+  \item[\bf L9.2] $\VV{\I}{}(\metaA)= 1$ just in case $\VV{\I}{\va{a}}(\metaA)= 1$ for some v.a. $\va{a}$ over $\D$.
+  \item[\bf L11.2] If $\MetaG \vDash \metaA$ and $\MetaG \vDash \enot\metaA$, then $\MetaG$ is unsatisfiable.
+  \item[\bf L11.3] $\MetaG \cup \set{\metaA}$ is unsatisfiable just in case $\MetaG \vDash \enot\metaA$.
+  % \item[\bf L11.4] If $\MetaG \cup \set{\metaA} \vDash \metaB$, then $\MetaG \vDash \metaA \eif \metaB$.
+  \item[\bf L11.5] $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ if $\val{\I}{\va{a}}(\alpha)=\val{\I}{\va{a}}(\beta)$ and $\beta$ is free for $\alpha$ in $\metaA$.
+  \item[\bf L11.6] If $\M=\tuple{\D,\I}$ and $\M'=\tuple{\D,\I'}$ where $\I$ and $\I'$ agree about every constant $\alpha$ and $n$-place predicate $\F^n$ that occurs in $\metaA$, it follows that $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any variable assignment $\va{a}$ over $\D$.
+\end{itemize}
+
+
+
+
+\section*{Soundness of FOL$^=$}
+
+\begin{enumerate}
+  \item[\it Assume:] $\Gamma \vdash \varphi$, so there is a FOL$^=$ proof $X$ of $\varphi$ from $\Gamma$. 
+  \item[\it Lines:] Let $\metaA_i$ be the wfs on line $i$ of $X$ and $\Gamma_i$ be the premises and undischarged assumptions at line $i$. 
+  \item[\it Proof:] The proof goes by induction on length of $X$:
+    \begin{itemize}
+      \item[\bf L11.1:] (Base Step)~~ $\Gamma_1 \vDash \varphi_i$. 
+      \item[\bf L11.13:] (Induction Step)~~ If $\Gamma_k \vDash \varphi_k$ for all $k\leq n$, then $\Gamma_{n+1} \vDash \varphi_{n+1}$. 
+    \end{itemize}
+  \item[\it Finite:] Since $X$ is finite, there is some $m$ where $\varphi_m=\varphi$ and $\Gamma_m=\Gamma$, so $\Gamma \vDash \varphi$.
+\end{enumerate}
+
+
+
+
+\section*{Induction Step}
+
+\begin{itemize}
+  \item[\it Assume:] $\Gamma_k \vDash \varphi_k$ for all $k\leq n$ where $\metaA_{n+1}$ follows an FOL$^=$ rule. 
+  \item Want to show $\Gamma_{n+1}\vDash\varphi_{n+1}$.
+\end{itemize}
+
+
+
+
+
+\section*{Universal Rules}
+
+\begin{itemize}
+  \item[\bf L11.7] For a constant $\beta$ not in $\qt{\forall}{\alpha}\metaA$ or $\metaB\in\MetaG$, if $\MetaG \vDash \metaA\unisub{\beta}{\alpha}$, then $\MetaG \vDash \qt{\forall}{\alpha}\metaA$.
+      \item Assume $\MetaG \vDash \metaA\unisub{\beta}{\alpha}$ for constant $\beta$ not in $\qt{\forall}{\alpha}\metaA$ or $\MetaG$.
+      \item Let $\M = \tuple{\D, \I}$ where $\VV{\I}{}(\metaC) = 1$ for all $\metaC\in\MetaG$, and let $\va{c}$ be arbitrary.
+      \item So $\VV{\I}{\va{a}}(\metaC) = 1$ for all $\metaC\in\MetaG$ for all v.a. $\va{a}$, and so for $\va{c}$ in particular.
+      \item Let $\M'$ be like $\M$ but for $\I'(\beta)=\va{c}(\alpha)$, and so $\val{\I'}{\va{c}}(\alpha)=\val{\I'}{\va{c}}(\beta)$.
+      \item Since $\beta$ does not occur in $\MetaG$, we know $\VV{\I'}{\va{c}}(\metaC) = 1$ for all $\metaC \in \MetaG$ by \textbf{L11.6}.
+      \item So $\VV{\I'}{}(\metaC) = 1$ for all $\metaC\in\MetaG$ by \textbf{L9.2}, so $\VV{\I'}{}(\metaA\unisub{\beta}{\alpha}) = 1$ by assumption.
+      \item So $\VV{\I'}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for all $\va{a}$, and so $\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$ for $\va{c}$ in particular.
+      \item So $\VV{\I'}{\va{c}}(\metaA) = 1$ by \textbf{L11.5} given $\val{\I'}{\va{c}}(\alpha) = \val{\I'}{\va{c}}(\beta)$ above. 
+      \item Since $\beta$ is not in $\qt{\forall}{\alpha}\metaA$, we know $\beta$ is not in $\metaA$, so $\VV{\I}{\va{c}}(\metaA)=1$ by \textbf{L11.6}.
+      \item Since $\va{c}$ was arbitrary, $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ for any $\va{a}$, so $\VV{\I}{}(\qt{\forall}{\alpha}\metaA)=1$.
+      % \item By generalizing on $\M$, we may conclude that $\MetaG \vDash \qt{\forall}{\alpha}\metaA$.
+  \item[\bf L11.8] $\forall\alpha\metaA \vDash \metaA\unisub{\beta}{\alpha}$ where $\alpha$ is a variable and $\metaA\unisub{\beta}{\alpha}$ is a wfs of $\FI$.
+    \item Let $\M = \tuple{\D, \I}$ where $\VV{\I}{}(\qt{\forall}{\alpha}\metaA) = 1$, so $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ for arbitrary $\va{a}$. 
+    \item So $\VV{\I}{\va{c}}(\metaA)=1$ for an $\alpha$-variant $\va{c}$ of $\va{a}$ where $\va{c}(\alpha)=\I(\beta)$.
+    \item Since $\val{\I}{\va{c}}(\alpha)=\val{\I}{\va{c}}(\beta)$, we know $\VV{\I}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$ by \textbf{L11.5}.
+    \item Thus $\VV{\I}{}(\metaA\unisub{\beta}{\alpha})=1$ by \textbf{L9.2}, so $\forall\alpha\metaA \vDash \metaA\unisub{\beta}{\alpha}$ generalizing on $\M$.
+  \item[\bf L11.9] If $\MetaG \vDash \metaA$ and $\Sigma \cup \set{\metaA} \vDash \metaB$, then $\MetaG\cup\Sigma \vDash \metaB$.
+  \item[($\forall$I)] $\metaA_i=\metaA\unisub{\beta}{\alpha}$ for $i\leq n$ live at $n+1$ where $\beta$ is not in $\metaA_{n+1}$ or $\MetaG_{n+1}$.
+    \item So $\MetaG_i\vDash\metaA_i$ by hypothesis, and $\MetaG_i\subseteq\MetaG_{n+1}$ by \textbf{L4.3}.
+    \item Thus $\MetaG_{n+1}\vDash\metaA_i$ by \textbf{L2.1}, so $\MetaG_{n+1}\vDash\metaA\unisub{\beta}{\alpha}$.
+    \item So $\MetaG_{n+1}\vDash \qt{\forall}{\alpha}\metaA$ by \textbf{L11.7} since $\beta$ not in $\qt{\forall}{\alpha}\metaA$ or $\MetaG_{n+1}$.
+    \item Equivalently, $\MetaG_{n+1}\vDash \metaA_{n+1}$.
+  \item[($\forall$E)] $\metaA_i=\qt{\forall}{\alpha}\metaA$ for $i\leq n$ live at $n+1$ where $\metaA_{n+1}=\metaA\unisub{\beta}{\alpha}$.
+    \item So $\MetaG_i\vDash\metaA_i$ by hypothesis, and $\MetaG_i\subseteq\MetaG_{n+1}$ by \textbf{L4.3}.
+    \item Thus $\MetaG_{n+1}\vDash\metaA_i$ by \textbf{L2.1}, so $\MetaG_{n+1}\vDash \qt{\forall}{\alpha}\metaA$.
+    \item By \textbf{L11.8} $\qt{\forall}{\alpha}\metaA\vDash\metaA\unisub{\beta}{\alpha}$, and so $\MetaG_{n+1}\vDash\metaA\unisub{\beta}{\alpha}$ by \textbf{L11.9}.
+    \item Equivalently, $\MetaG_{n+1}\vDash \metaA_{n+1}$.
+\end{itemize}
+
+
+
+
+\section*{Existential Rules}
+
+\begin{itemize}
+  \item[\bf L11.10] $\metaA\unisub{\beta}{\alpha} \vDash \exists\alpha\metaA$ where $\alpha$ is a variable and $\metaA\unisub{\beta}{\alpha}$ is a wfs of $\FI$.
+    \item Let $\M=\tuple{\D,\I}$ where $\VV{\I}{}(\metaA\unisub{\beta}{\alpha})=1$, so $\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for all $\va{a}$.
+    \item Let $\va{c}$ be s.t. $\va{c}(\alpha)=\I(\beta)$, so $\val{\I}{\va{c}}(\alpha)=\val{\I}{\va{c}}(\beta)$ where $\beta$ is free for $\alpha$ in $\metaA$.
+    \item So $\VV{\I}{\va{c}}(\metaA\unisub{\beta}{\alpha})=\VV{\I}{\va{c}}(\metaA)$ by \textbf{L11.5}.
+    \item Since $\va{c}$ is an $\alpha$-variant of itself, $\VV{\I}{\va{c}}(\qt{\exists}{\alpha}\metaA)=1$ by semantics.
+    \item Since $\metaA\unisub{\beta}{\alpha}$ is a wfs $\FI$, at most $\alpha$ is free in $\metaA$, and so $\qt{\exists}{\alpha}\metaA$ is a wfs. 
+    \item Hence $\VV{\I}{}(\qt{\exists}{\alpha}\metaA)=1$ by \textbf{L9.2}, and so $\metaA\unisub{\beta}{\alpha} \vDash \exists\alpha\metaA$.
+  \item[\bf L11.11] For any constant $\beta$ that does not occur in $\exists\alpha\metaA$, $\metaB$, or in any sentence $\metaC\in\Gamma$, if $\Gamma \vDash \exists\alpha\metaA$ and $\Gamma \cup \set{\metaA\unisub{\beta}{\alpha}} \vDash \metaB$, then $\Gamma \vDash \metaB$.
+    \item Let $\Gamma \vDash \exists\alpha\metaA$ and $\Gamma \cup \set{\metaA\unisub{\beta}{\alpha}} \vDash \metaB$ for a constant $\beta$ not in $\exists\alpha\metaA$, $\metaB$, or $\Gamma$. 
+    \item Let $\M=\tuple{\D,\I}$ be a model where $\VV{\I}{}(\metaC) = 1$ for all $\metaC \in \Gamma$.
+    \item So $\VV{\I}{}(\qt{\exists}{\alpha}\metaA) = 1$, and so $\VV{\I}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$ for some v.a. $\va{a}$ by \textbf{L9.2}.
+    \item So $\VV{\I}{\va{c}}(\metaA)=1$ for a $\alpha$-variant $\va{c}$ of $\va{a}$ by the semantics.
+    \item Let $\M'$ be like $\M$ but for $\I'(\beta)=\va{c}(\alpha)$, and so $\val{\I'}{\va{c}}(\beta)=\val{\I'}{\va{c}}(\alpha)$.
+    \item Given any $\va{e}$, we know $\VV{\I}{}(\metaC) = 1$ and so $\VV{\I}{\va{e}}(\metaC) = 1$ for any $\metaC \in \MetaG$.
+    \item Given the assumptions about $\beta$, by \textbf{L11.6} $\VV{\I'}{\va{e}}(\metaC) = 1$, so $\VV{\I'}{}(\metaC) = 1$.
+    \item Generalizing on $\metaC$, it follows that $\VV{\I'}{}(\metaC) = 1$ for all $\metaC \in \Gamma$.
+    \item Since $\beta$ is not in $\qt{\exists}{\alpha}\metaA$, it's not in $\metaA$, and so $\VV{\I}{\va{c}}(\metaA)=\VV{\I'}{\va{c}}(\metaA)$ by \textbf{L11.6}.
+    \item Since $\val{\I'}{\va{c}}(\beta)=\val{\I'}{\va{c}}(\alpha)$, we know $\VV{\I'}{\va{c}}(\metaA)=\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{L11.5}. 
+    \item Thus $\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$, and so $\VV{\I'}{}(\metaA\unisub{\beta}{\alpha})=1$ by \textbf{L9.2}.
+    \item Hence $\VV{\I'}{}(\metaC) = 1$ for all $\metaC \in \Gamma \cup \set{\metaA\unisub{\beta}{\alpha}}$.
+    \item So $\VV{\I'}{}(\metaB) = 1$ by assumption, so $\VV{\I'}{\va{g}}(\metaB)=1$ for some $\va{g}$ by \textbf{L9.2}.
+    \item Since $\beta$ does not occur in $\metaB$, $\VV{\I}{\va{g}}(\metaB)=1$ for all $\va{g}$ by \textbf{L11.6}.
+    \item Thus $\VV{\I}{}(\metaB)=1$ by \textbf{L9.2}, so $\Gamma \vDash \metaB$ by generalizing on $\M$.
+    
+  \item[\bf L11.12] If $\alpha$ and $\beta$ are constants, then $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \vDash \metaA\unisub{\beta}{\gamma}$.
+\end{itemize}
+
+
+  
+
+
+
+  \qed
+
+\factoidbox{
+\begin{Rthm} \label{rule:ExistI}
+  \textbf{($\boldsymbol\exists$I)}~~ $\Gamma_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\exists$I. 
+\end{Rthm}
+}
+
+\begin{quote} 
+  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential introduction $\exists$I.
+  Thus there is some $i\leq n$ where $\metaA_i=\metaA\unisub{\beta}{\alpha}$ is live at $n+1$ and $\metaA_{n+1}=\qt{\exists}{\alpha}\metaA$ for some variable $\alpha$ and constant $\beta$.
+  By \textbf{\ref{lemma:PL-live}}, $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\vDash\metaA_i$ by hypotheses, and so $\Gamma_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:PL-weakening}}.
+  Equivalently, $\Gamma_{n+1} \vDash \metaA\unisub{\beta}{\alpha}$.
+  Since $\metaA\unisub{\beta}{\alpha} \vDash \qt{\exists}{\alpha}\metaA$ by \textbf{\ref{lemma:exigen}}, $\Gamma_{n+1}\vDash\metaA_{n+1}$ by \textbf{\ref{lemma:cut}}.
+  \qed
+\end{quote}
+
+
+\section*{PL Rules}
+
+\begin{itemize}
+  \item[($\enot$E)] There is a proof of $\metaB$ at line $h$ and $\enot\metaB$ at line $j$ from $\enot \metaA$ on line $i$.
+    %$\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\MetaG_{n+1}$ by the rule $\enot$I.
+    \item By hypothesis $\MetaG_h\vDash \metaB$ and $\MetaG_j\vDash\enot\metaB$, where $\MetaG_h,\MetaG_j\subseteq\MetaG_{n+1}\cup\set{\enot \metaA_i}$.
+    \item By \textbf{L2.1}, $\MetaG_{n+1}\cup\set{\enot \metaA_i}\vDash\metaB$ and $\MetaG_{n+1}\cup\set{\enot \metaA_i}\vDash\enot\metaB$.
+    \item So $\MetaG_{n+1}\cup\set{\enot \metaA_i}$ is unsatisfiable by \textbf{L11.2}
+    \item So $\MetaG_{n+1}\vDash \enot\enot\metaA_{n+1}$ follows by \textbf{L11.3}, and then appeal to the semantics.
+\end{itemize}
+
+
+
+
+
+\section*{Existential Elimination}
+
+\begin{enumerate}
+  \item[\bf Task 1:] Regiment and derive the following in FOL$^=$.
+  % \item $\qt{\forall}{x}, Rma\vdash \qt{\exists}{x} Rxx$
+  % \item $\qt{\forall}{x}(x{=}n \equiv Mx), \qt{\forall}{x}(Ox \vee \neg Mx)\vdash On$
+  \item The elephant would not obey.\\
+    \underline{Patrick is an elephant.}\\ 
+    Patrick would not obey.
+  \item $\qt{\forall}{x}(Jx \supset Kx)$\\
+    $\qt{\exists}{x}\qt{\forall}{y} Lxy$\\
+    \underline{$\qt{\forall}{x} Jx$}\\
+    $\qt{\exists}{x}(Kx \wedge Lxx)$.
+  \item \underline{$\qt{\exists}{x}(Px \supset \qt{\forall}{x}Qx)$}\\
+    $\qt{\forall}{x}Px \supset \qt{\forall}{x}Qx$.
+  \item \underline{$\qt{\exists}{x}Px \vee \qt{\exists}{x}Qx$}\\
+    $\qt{\exists}{x}(Px \vee Qx)$.
+  % \item $\qt{\exists}{x}(Kx \wedge \qt{\forall}{y}(Ky \supset x{=}y) \wedge Bx), Kd\vdash Bd$
+  % \item $\vdash Pa \supset \qt{\forall}{x}(Px \vee x {\neq} a)$
+  \item Every nonempty asymmetric relation is non-symmetric.
+\end{enumerate}
+
+
+
+
+
+
+\section*{Further Problems: Relations}
+
+\begin{enumerate}
+  \item[\bf Task 1:] Regiment and derive the following in FOL$^=$.
+  \item Every transitive and symmetric relation is quasi-reflexive.
+  \item Only the empty relation is symmetric and asymmetric.
+  \item Every intransitive relation is irreflexive.
+  \item Every intransitive relation is asymmetric.
+\end{enumerate}
+
+
+
+
+
+
+
+
+\end{document}
+

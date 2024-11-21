@@ -1,0 +1,261 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs, mathabx} %%Math packages
+\usepackage{../lecture} %calls local modified style file
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{multicol} 
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage{prooftrees} 
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep=}
+% \usepackage{fitchproof} 
+
+
+\makeatletter
+\renewcommand{\maketitle}{
+\begin{flushright}
+{\LARGE\@title}
+
+\vspace{10pt}
+
+{\@author}
+\\ \@date
+\end{flushright}
+
+\vspace{30pt}
+
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{FOL$^=$ Soundness}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+
+\section*{Substitution}
+
+\begin{enumerate}
+  \item[\it Free For:] $\beta$ is \textsc{free for} $\alpha$ in $\varphi$ just in case there is no free occurrence of $\alpha$ in $\varphi$ in the scope of a quantifier that binds $\beta$. 
+  \item[\it Substitution:] If $\beta$ is free for $\alpha$ in $\varphi$, then the \textsc{substitution} $\varphi\unisub{\beta}{\alpha}$ is the result of replacing all free occurrences of $\alpha$ in $\varphi$ with $\beta$.
+\end{enumerate}
+   
+
+
+
+
+
+
+\section*{FOL$^=$ Rules}
+
+\begin{enumerate}
+  \item[($\forall$E)] $\forall\alpha\varphi \vdash \varphi\unisub{\beta}{\alpha}$ where $\beta$ is a constant and $\alpha$ is a variable. 
+  \item[($\exists$I)] $\varphi\unisub{\beta}{\alpha} \vdash \exists\alpha\varphi$ where $\beta$ is a constant and $\alpha$ is a variable.
+  \item[($\forall$I)] $\varphi\unisub{\beta}{\alpha} \vdash \forall\alpha\varphi$ where $\beta$ is a constant, $\alpha$ is a variable, and $\beta$ does not occur in $\forall\alpha\varphi$ or in any undischarged assumption.
+  \item[($\exists$E)] If $\exists\alpha\varphi,\varphi\unisub{\beta}{\alpha} \vdash \psi$ where $\beta$ is a constant that does not occur in $\exists\alpha\varphi$, $\psi$, or in any undischarged assumption, then $\exists\alpha\varphi\vdash \psi$.
+  \item[($=$I)] $\vdash \alpha = \alpha$ for any constant $\alpha$. 
+  \item[($=$E)] $\varphi\unisub{\alpha}{\gamma},\alpha=\beta\vdash\varphi\unisub{\beta}{\gamma}$.
+\end{enumerate}
+
+
+
+
+
+
+\section*{From Natural to Normative}
+
+\begin{itemize}
+  \item[\it Soundness:] If $\Gamma \vdash \varphi$, then $\Gamma \vDash \varphi$.
+  \item Soundness shows that we can trust FOL$^=$ to establish validity.
+  \item Easier to derive a conclusion that to provide a semantic argument.
+  \item Same story as before\ldots
+  \item[\it Natural:] FOL$^=$ describes (approximately) how we in fact reason.
+  \item The quantifier rules are somewhat natural...
+  \item Can we understand the quantifiers only by their rules?
+  \item Semantics for the quantifiers is more natural.
+  \item Soundness explains why we ought to use FOL$^=$ to reason.
+\end{itemize}
+
+
+
+
+\section*{Soundness of FOL$^=$}
+
+\begin{enumerate}
+  \item[\it Assume:] $\Gamma \vdash \varphi$, so there is a FOL$^=$ proof $X$ of $\varphi$ from $\Gamma$. 
+  \item[\it Lines:] Let $\metaA_i$ be the wfs on line $i$ of $X$.
+  \item[\it Dependencies:] Let $\Gamma_i$ be the premises and undischarged assumptions at line $i$. 
+  \item[\it Proof:] The proof goes by induction on length of $X$:
+    \begin{itemize}
+      \item[\bf L11.1:] (Base Step)~~ $\Gamma_1 \vDash \varphi_i$. 
+      \item[\bf L11.13:] (Induction Step)~~ If $\Gamma_k \vDash \varphi_k$ for all $k\leq n$, then $\Gamma_{n+1} \vDash \varphi_{n+1}$. 
+    \end{itemize}
+  \item[\it Finite:] Since $X$ is finite, there is some $m$ where $\varphi_m=\varphi$ and $\Gamma_m=\Gamma$, so $\Gamma \vDash \varphi$.
+\end{enumerate}
+
+
+
+
+\section*{Base Step}
+
+\begin{itemize}
+  \item[\it Proof:] Every line in a FOL$^=$ proof is either a premise or follows by the rules.
+  \item $\varphi_1$ is either a premise or follows by AS or $=$I. 
+  \item If $\varphi_1$ is a premise or assumption, then $\Gamma_1=\set{\varphi_1}$, and so $\Gamma_1\vDash\varphi_1$.
+  \item If $\varphi_1$ follows by $=$I, then $\varphi_1$ is $\alpha=\alpha$ for some constant $\alpha$. 
+  \item Letting $\M=\tuple{\D,\I}$ be any model, $\I(\alpha) \in \D$.
+  \item Letting $\va{a}$ be a variable assignment, $\val{\I}{\va{a}}(\alpha)=\val{\I}{\va{a}}(\alpha)$.
+  \item So $\VV{\I}{\va{a}}(\alpha=\alpha)=1$, and so $\vDash \alpha=\alpha$, thus $\Gamma_1\vDash \varphi_1$ since $\Gamma_1=\varnothing$.
+\end{itemize}
+
+
+
+\section*{Induction Step}
+
+\begin{itemize}
+  \item[\it Assume:] $\Gamma_k \vDash \varphi_k$ for all $k\leq n$.
+  \item If $\varphi_{n+1}$ is a premise, assumption, or $=$I, then the same as above. 
+  \item Assume $\varphi_{n+1}$ follows by the FOL$^=$ rules, to show $\Gamma_{n+1}\vDash\varphi_{n+1}$.
+  \item There are 11 more rules in PL and an additional 5 from FOL$^=$.
+  \item[\bf Question:] Can't we just appeal to the proofs from before for the PL rules?
+    \item Models and variable assignments instead of interpretations.
+    \item Differences are superficial and provided in the book.
+  \item[\it Updated:] Consider how the proofs of the following lemmas must change: 
+    \item[\bf L2.1] If $\MetaG \vDash \metaA$, then $\MetaG \cup \MetaS \vDash \metaA$.
+    \item[\bf L4.3] For any FOL$^=$ proof $X$, if $\metaA_k$ is live at line $n$ where $k\leq n$, then $\MetaG_k\subseteq \MetaG_{n}$.
+    \item[\bf L11.2] If $\MetaG \vDash \metaA$ and $\MetaG \vDash \enot\metaA$, then $\MetaG$ is unsatisfiable.
+    \item[\bf L11.3] $\MetaG \cup \set{\metaA}$ is unsatisfiable just in case $\MetaG \vDash \enot\metaA$.
+    \item[\bf L11.4] If $\MetaG \cup \set{\metaA} \vDash \metaB$, then $\MetaG \vDash \metaA \eif \metaB$.
+  \item[\it Unchanged:] The following lemmas do not need to change:
+  \item[\bf L9.1] $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$ if $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\metaA$.
+  \item[\bf L9.2] $\VV{\I}{}(\metaA)= 1$ just in case $\VV{\I}{\va{a}}(\metaA)= 1$ for some v.a. $\va{a}$ over $\D$.
+\end{itemize}
+\vspace{-.25in}
+
+
+
+
+
+\section*{PL Rules}
+
+\begin{itemize}
+  % \item[\checkmark (AS)] Proof is the same as in the base case considered last week.
+  % \item[(R)] $\metaA_k=\metaA_{n+1}$ for live $k\leq n$.
+  %   \item Thus $\MetaG_k\vDash\metaA_k$ by hypothesis and $\MetaG_k\subseteq\MetaG_{n+1}$ by \textbf{L12.2}.
+  %   \item Thus $\MetaG_{n+1}\vDash\metaA_k$ by \textbf{L12.1}, and so $\MetaG_{n+1}\vDash\metaA_{n+1}$.
+  % \item[($\enot$I)] There is a proof of $\metaB$ at line $h$ and $\enot\metaB$ at line $j$ from $\metaA$ on line $i$.
+  %   %$\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\MetaG_{n+1}$ by the rule $\enot$I.
+  %   \item By hypothesis $\MetaG_h\vDash \metaB$ and $\MetaG_j\vDash\enot\metaB$, where $\MetaG_h,\MetaG_j\subseteq\MetaG_{n+1}\cup\set{\metaA_i}$.
+  %   \item By \textbf{L12.1}, $\MetaG_{n+1}\cup\set{\metaA_i}\vDash\metaB$ and $\MetaG_{n+1}\cup\set{\metaA_i}\vDash\enot\metaB$.
+  %   \item So $\MetaG_{n+1}\cup\set{\metaA_i}$ is unsatisfiable by \textbf{L12.3}, so $\MetaG_{n+1}\vDash\metaA_{n+1}$ by \textbf{L12.4}.
+  \item[($\enot$E)] There is a proof of $\metaB$ at line $h$ and $\enot\metaB$ at line $j$ from $\enot \metaA$ on line $i$.
+    %$\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\MetaG_{n+1}$ by the rule $\enot$I.
+    \item By hypothesis $\MetaG_h\vDash \metaB$ and $\MetaG_j\vDash\enot\metaB$, where $\MetaG_h,\MetaG_j\subseteq\MetaG_{n+1}\cup\set{\enot \metaA_i}$.
+    \item By \textbf{L2.1}, $\MetaG_{n+1}\cup\set{\enot \metaA_i}\vDash\metaB$ and $\MetaG_{n+1}\cup\set{\enot \metaA_i}\vDash\enot\metaB$.
+    \item So $\MetaG_{n+1}\cup\set{\enot \metaA_i}$ is unsatisfiable by \textbf{L11.2}
+    \item So $\MetaG_{n+1}\vDash \enot\enot\metaA_{n+1}$ follows by \textbf{L11.3}, and then appeal to the semantics.
+    % \item The final step that $\MetaG_{n+1}\vDash \metaA_{n+1}$ must appeal to the semantics for $\FI$. 
+  % \item[\checkmark ($\enot$E)] Similar to ($\enot$I).
+  % \item[\checkmark ($\eand$I)] Skip.
+  % \item[($\eand$E)] $\metaA_{n+1}\eand\metaB$ is live on line $i\leq n$.
+  %   \item By hypothesis, $\MetaG_i\vDash\metaA_{n+1}\eand\metaB$ where $\MetaG_i\subseteq\MetaG_{n+1}$ by \textbf{L12.2}
+  %   \item Thus $\MetaG_{n+1}\vDash\metaA_{n+1}\eand\metaB$ by \textbf{L12.1}, and so $\MetaG_{n+1}\vDash\metaA_{n+1}$ by semantics.
+  % \item[($\eor$I)] 
+  % \item[($\eor$E)] 
+  % \item[($\eif$I)] There is a proof of $\metaB$ at line $j$ from $\metaA$ on line $i$. 
+  %   \item By hypothesis $\MetaG_j\vDash \metaB$, where $\MetaG_j\subseteq\MetaG_{n+1}\cup\set{\metaA}$.
+  %   \item So $\MetaG_{n+1}\cup\set{\metaA}\vDash\metaB$, and so $\MetaG_{n+1}\vDash\metaA\eif\metaB$ by \textbf{L12.7}.
+  % \item[($\eif$E)] 
+  % \item[($\equiv$I)] 
+  % \item[($\equiv$E)] 
+\end{itemize}
+\vspace{-.25in}
+
+
+
+\section*{FOL$^=$ Lemmas}
+
+\begin{itemize}
+  \item[\bf L11.5] $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ if $\val{\I}{\va{a}}(\alpha)=\val{\I}{\va{a}}(\beta)$ and $\beta$ is free for $\alpha$ in $\metaA$.
+    \item[\it Base:] Assume $\metaA$ is $\F^n\alpha_1,\ldots,\alpha_n$ or $\alpha_1=\alpha_2$ where $\val{\I}{\va{a}}(\alpha)=\val{\I}{\va{a}}(\beta)$. 
+    \item Let $\gamma_i=
+      \begin{cases}
+        \beta     & \text{ if } \alpha_i=\alpha\\
+        \alpha_i  & \text{ otherwise.}
+      \end{cases}$
+    \item $\tuple{\val{\I}{\va{a}}(\alpha_1),\ldots,\val{\I}{\va{a}}(\alpha_n)}\in\I(\F^n) \textit{ ~iff~ } \tuple{\val{\I}{\va{a}}(\gamma_1),\ldots,\val{\I}{\va{a}}(\gamma_n)}\in\I(\F^n)$.
+    \item $\val{\I}{\va{a}}(\alpha_1)=\val{\I}{\va{a}}(\alpha_n) \textit{ ~iff~ } \val{\I}{\va{a}}(\gamma_1)=\val{\I}{\va{a}}(\gamma_n)$.
+    \item[\it Induction:] If $\comp{\metaA}\leq n$, $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ whenever $\val{\I}{\va{a}}(\alpha)=\val{\I}{\va{a}}(\beta)$.
+    \item[\it Case 2:] Assume $\metaA=\metaB\eand\metaC$ where $\val{\I}{\va{a}}(\alpha)=\val{\I}{\va{a}}(\beta)$.
+    \item So $\VV{\I}{\va{a}}(\metaA)=1$ \textit{iff} $\VV{\I}{\va{a}}(\metaB\eand\metaC)=1$ \textit{iff} $\VV{\I}{\va{a}}(\metaB)=\VV{\I}{\va{a}}(\metaC)=1$ \textit{iff} \ldots
+    \item[\it Case 6:] Assume $\metaA=\qt{\forall}{\gamma}\metaB$ where $\val{\I}{\va{a}}(\alpha)=\val{\I}{\va{a}}(\beta)$.
+    \item If $\gamma=\alpha$, then $\metaA=\metaA\unisub{\beta}{\alpha}$.
+    \item If $\gamma\neq\alpha$, $\VV{\I}{\va{a}}(\qt{\forall}{\gamma}\metaB)=1$ \textit{iff} $\VV{\I}{\va{e}}(\metaB)=1$ for all $\gamma$-variants $\va{e}$ of $\va{a}$ \textit{iff}\ldots
+    \item Let $\va{e}$ be an arbitrary $\gamma$-variant of $\va{a}$.
+    \item Since $\gamma\neq\alpha$, $\va{e}(\alpha)=\va{a}(\alpha)$ if $\alpha$ is a variable, so $\val{\I}{\va{e}}(\alpha)=\val{\I}{\va{a}}(\alpha)$. 
+    \item Thus $\val{\I}{\va{e}}(\alpha)=\val{\I}{\va{a}}(\beta)$ follows from the assumption. 
+    \item Since $\beta$ is free for $\alpha$ in $\qt{\forall}{\gamma}\metaB$, we know that $\gamma\neq\beta$.
+    \item If $\beta$ is a variable, then $\va{e}(\beta)=\va{a}(\beta)$ since $\va{e}$ is a $\gamma$-variant of $\va{a}$.
+    \item Thus $\val{\I}{\va{e}}(\beta)=\val{\I}{\va{a}}(\beta)$, and so $\val{\I}{\va{e}}(\alpha)=\val{\I}{\va{e}}(\beta)$.
+    \item By hypothesis, $\VV{\I}{\va{e}}(\metaB)=\VV{\I}{\va{e}}(\metaB\unisub{\beta}{\alpha})$, where $\va{e}$ was arbitrary.
+    \item \ldots\textit{iff} $\VV{\I}{\va{e}}(\metaB\unisub{\beta}{\alpha})=1$ for all $\gamma$-variants $\va{e}$ of $\va{a}$ \textit{iff} $\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$.
+  \item[\bf L11.6] If $\M=\tuple{\D,\I}$ and $\M'=\tuple{\D,\I'}$ where $\I$ and $\I'$ agree about every constant $\alpha$ and $n$-place predicate $\F^n$ that occurs in $\metaA$, it follows that $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any variable assignment $\va{a}$ over $\D$.
+    \item[\it Base:] $\tuple{\val{\I}{\va{a}}(\alpha_1),\ldots,\val{\I}{\va{a}}(\alpha_n)}\in\I(\F^n) \textit{ ~iff~ } \tuple{\val{\I'}{\va{a}}(\alpha_1),\ldots,\val{\I'}{\va{a}}(\alpha_n)}\in\I'(\F^n)$.
+    \item $\I(\F^n)=\I'(\F^n)$ is immediate from the assumption.
+    \item $\val{\I}{\va{a}}(\alpha_i)=\I(\alpha_i)=\I'(\alpha_i)=\val{\I'}{\va{a}}(\alpha_i)$ if $\alpha_i$ is a constant.
+    \item $\val{\I}{\va{a}}(\alpha_i)=\va{a}(\alpha_i)=\val{\I'}{\va{a}}(\alpha_i)$ if $\alpha_i$ is a variable.
+  \item[\bf L11.7] For a constant $\beta$ not in $\qt{\forall}{\alpha}\metaA$ or $\metaB\in\MetaG$, if $\MetaG \vDash \metaA\unisub{\beta}{\alpha}$, then $\MetaG \vDash \qt{\forall}{\alpha}\metaA$.
+      \item Assume $\MetaG \vDash \metaA\unisub{\beta}{\alpha}$ for constant $\beta$ not in $\qt{\forall}{\alpha}\metaA$ or $\MetaG$.
+      \item Let $\M = \tuple{\D, \I}$ where $\VV{\I}{}(\metaC) = 1$ for all $\metaC\in\MetaG$, and let $\va{c}$ be arbitrary.
+      \item So $\VV{\I}{\va{a}}(\metaC) = 1$ for all $\metaC\in\MetaG$ for all v.a. $\va{a}$, and so for $\va{c}$ in particular.
+      \item Let $\M'$ be like $\M$ but for $\I'(\beta)=\va{c}(\alpha)$, and so $\val{\I'}{\va{c}}(\alpha)=\val{\I'}{\va{c}}(\beta)$.
+      \item Since $\beta$ does not occur in $\MetaG$, we know $\VV{\I'}{\va{c}}(\metaC) = 1$ for all $\metaC \in \MetaG$ by \textbf{L11.6}.
+      \item So $\VV{\I'}{}(\metaC) = 1$ for all $\metaC\in\MetaG$ by \textbf{L9.2}, so $\VV{\I'}{}(\metaA\unisub{\beta}{\alpha}) = 1$ by assumption.
+      \item So $\VV{\I'}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for all $\va{a}$, and so $\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$ for $\va{c}$ in particular.
+      \item So $\VV{\I'}{\va{c}}(\metaA) = 1$ by \textbf{L11.5} given $\val{\I'}{\va{c}}(\alpha) = \val{\I'}{\va{c}}(\beta)$ above. 
+      \item Since $\beta$ is not in $\qt{\forall}{\alpha}\metaA$, we know $\beta$ is not in $\metaA$, so $\VV{\I}{\va{c}}(\metaA)=1$ by \textbf{L11.6}.
+      \item Since $\va{c}$ was arbitrary, $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ for any $\va{a}$, so $\VV{\I}{}(\qt{\forall}{\alpha}\metaA)=1$.
+      \item By generalizing on $\M$, we may conclude that $\MetaG \vDash \qt{\forall}{\alpha}\metaA$.
+  % \item[\bf L11.8] $\forall\alpha\metaA \vDash \metaA\unisub{\beta}{\alpha}$ where $\alpha$ is a variable and $\metaA\unisub{\beta}{\alpha}$ is a wfs of $\FI$.
+  %   \item Let $\M = \tuple{\D, \I}$ where $\VV{\I}{}(\qt{\forall}{\alpha}\metaA) = 1$, so $\VV{\I}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ for arbitrary $\va{a}$. 
+  %   \item So $\VV{\I}{\va{c}}(\metaA)=1$ for an $\alpha$-variant $\va{c}$ of $\va{a}$ where $\va{c}(\alpha)=\I(\beta)$.
+  %   \item Since $\val{\I}{\va{c}}(\alpha)=\val{\I}{\va{c}}(\beta)$, we know $\VV{\I}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$ by \textbf{L11.5}.
+  %   \item Thus $\VV{\I}{}(\metaA\unisub{\beta}{\alpha})=1$ by \textbf{L9.2}, so $\forall\alpha\metaA \vDash \metaA\unisub{\beta}{\alpha}$ generalizing on $\M$.
+  % \item[\bf L11.9] If $\MetaG \vDash \metaA$ and $\Sigma \cup \set{\metaA} \vDash \metaB$, then $\MetaG\cup\Sigma \vDash \metaB$.
+  % \item[($\forall$I)] $\metaA_i=\metaA\unisub{\beta}{\alpha}$ for $i\leq n$ live at $n+1$ where $\beta$ is not in $\metaA_{n+1}$ or $\MetaG_{n+1}$.
+  %   \item So $\MetaG_i\vDash\metaA_i$ by hypothesis, and $\MetaG_i\subseteq\MetaG_{n+1}$ by \textbf{L4.3}.
+  %   \item Thus $\MetaG_{n+1}\vDash\metaA_i$ by \textbf{L2.1}, so $\MetaG_{n+1}\vDash\metaA\unisub{\beta}{\alpha}$.
+  %   \item So $\MetaG_{n+1}\vDash \qt{\forall}{\alpha}\metaA$ by \textbf{L11.7} since $\beta$ not in $\qt{\forall}{\alpha}\metaA$ or $\MetaG_{n+1}$.
+  %   \item Equivalently, $\MetaG_{n+1}\vDash \metaA_{n+1}$.
+  % \item[($\forall$E)] $\metaA_i=\qt{\forall}{\alpha}\metaA$ for $i\leq n$ live at $n+1$ where $\metaA_{n+1}=\metaA\unisub{\beta}{\alpha}$.
+  %   \item So $\MetaG_i\vDash\metaA_i$ by hypothesis, and $\MetaG_i\subseteq\MetaG_{n+1}$ by \textbf{L4.3}.
+  %   \item Thus $\MetaG_{n+1}\vDash\metaA_i$ by \textbf{L2.1}, so $\MetaG_{n+1}\vDash \qt{\forall}{\alpha}\metaA$.
+  %   \item By \textbf{L11.8} $\qt{\forall}{\alpha}\metaA\vDash\metaA\unisub{\beta}{\alpha}$, and so $\MetaG_{n+1}\vDash\metaA\unisub{\beta}{\alpha}$ by \textbf{L11.9}.
+  %   \item Equivalently, $\MetaG_{n+1}\vDash \metaA_{n+1}$.
+\end{itemize}
+
+\end{document}
+
