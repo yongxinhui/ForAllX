@@ -10,6 +10,10 @@
 *.xmpi
 *.synctex(busy)
 Handouts/Week00_1.pdf
+Handouts/Week01_1.pdf
+Handouts/Week01_2.pdf
+Handouts/Week02_1.pdf
+Handouts/Week02_2.pdf
 Handouts/Week03_1.pdf
 Handouts/Week03_2.pdf
 Handouts/Week04_1.pdf
@@ -23,6 +27,7 @@ Handouts/Week09_2.pdf
 Handouts/Week10_1.pdf
 Handouts/Week10_2.pdf
 Handouts/Week11_1.pdf
+Handouts/Week11_2.pdf
 Handouts/Week12_1.pdf
 Handouts/Week12_2.pdf
 Handouts/Week13_1.pdf
@@ -53,3 +58,5 @@ Lectures/Week10_2/Week10_2.pdf
 Lectures/Week11_1/Week11_1.pdf
 Lectures/Week11_2/Week11_2.pdf
 Lectures/midterm_review/Week07_1.pdf
+Handouts/Week07_2.pdf
+Handouts/Week08_1.pdf
