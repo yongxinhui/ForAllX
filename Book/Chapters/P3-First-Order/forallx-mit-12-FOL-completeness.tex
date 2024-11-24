@@ -11,9 +11,9 @@ Although it may often given the right results, there would be no way to know if 
 Put otherwise, the calculator is not \textit{sound} with respect to the truths of arithmetic since some of its answers are false.
 For an analogous reason, it was important to show that FOL$^=$ was sound over the semantics for $\FI$ so that we could rely on FOL$^=$ to conduct valid reasoning.
 If $\metaA$ is derivable from $\MetaG$, we know by soundness that $\metaA$ is also a logical consequence of $\MetaG$.
-Put formally: if $\MetaG\proves\metaA$, then $\MetaG\models\metaA$.
+Put formally: if $\MetaG\vdash\metaA$, then $\MetaG\vDash\metaA$.
 
-Completeness asserts the converse so that we may conclude that $\metaA$ is derivable from $\MetaG$ whenever $\metaA$ is a logical consequence of $\MetaG$, or more compactly: if $\MetaG\models\metaA$, then $\MetaG\proves\metaA$.
+Completeness asserts the converse so that we may conclude that $\metaA$ is derivable from $\MetaG$ whenever $\metaA$ is a logical consequence of $\MetaG$, or more compactly: if $\MetaG\vDash\metaA$, then $\MetaG\vdash\metaA$.
 You might recall that our calculator from before is not complete.
 In fact, no calculator is complete for purely material reasons: no matter how much memory a calculator may have, there are numbers big enough that will exhaust its memory.
 For instance, raising one large number to another large number will quickly use up the memory.
@@ -28,7 +28,7 @@ FOL$^=$ does not share this same fate.
 Rather, we will show in the following section that whenever a conclusion is a logical consequence of some premises, that conclusion is derivable from those premises in FOL$^=$.
 % This is an impressive result.
 
-Much will be as before where instead of beginning with $\MetaG\models\metaA$ as an assumption and arguing to the conclusion $\MetaG\proves\metaA$, we will focus on establishing a closely related result: 
+Much will be as before where instead of beginning with $\MetaG\vDash\metaA$ as an assumption and arguing to the conclusion $\MetaG\vdash\metaA$, we will focus on establishing a closely related result: 
 \begin{enumerate}[leftmargin=1.5in]
   \item[\textbf{\ref{thm:comp}}] Every consistent set of $\FI$ sentences $\MetaG$ is satisfiable. 
 \end{enumerate}
@@ -60,9 +60,10 @@ The next stage will be familiar from before where we will extend $\MetaS_\MetaG$
 We will show in $\S\ref{sub:Maximization}$ that $\MetaD$ is consistent, where it follows that $\MetaD$ is \textit{deductively closed} insofar as it contains every sentence that is derivable from $\MetaD$.
 Deductive closure is a very important and convenient property which will play a critical role in the later stages of the proof.
 
-Having extended $\MetaG$ to a much bigger set of sentences $\MetaD$ that is saturated, maximal, consistent, and deductively closed, we will proceed to use this set to construct a model that satisfies $\MetaD$, and so satisfies $\MetaG$ as a result. 
-As in the proof of \textsc{PL Completeness}, we are using a set of wfss to build a model that we will use to interpret that set of sentences.
+Having extended $\MetaG$ to a much bigger set of sentences $\MetaD$ that is saturated, maximal, consistent, and deductively closed, we will proceed to use this set to construct a model that shows $\MetaD$ is satisfiable, and so $\MetaG$ is satisfiable as a result. 
+Accordingly, it will be convenient to say that a model $\M$ \textsc{satisfies} a set $\Lambda$ of wfss just in case $\VV{\I}{}(\metaC) = 1$ for all $\metaC \in \Lambda$. 
 
+As in the proof of \textsc{PL Completeness}, we will use the set of wfss $\MetaG$ to build a model that satisfies $\MetaG$.
 However strange it may be to use the symbols that make up the syntax of a language to provide a model of that language, there is no circularity.
 Rather, to interpret a first-order language like $\FI$ and $\FIN$, all we need is a domain where any nonempty set will suffice.
 In what follows, we will interpret $\FIN$ over the domain $\D_\MetaD$ whose members are sets of constants in our extended language $\FIN$ which we will define below.
@@ -74,9 +75,9 @@ As a result, $\M_\MetaD$ satisfies $\MetaD$, and since $\MetaG\subseteq\MetaD$, 
 As before, we will refer to this cleverly constructed model $\M_\MetaD$ as a Henkin model after Leon Henkin who developed this proof strategy in 1949.
 
 This provides a rough overview of the proof strategy that will be deployed below.
-If you find that you get lost along the way, it can help to return to this overview to regain your bearings.
+If you find that you get lost along the way, it can help to return to this overview to regain your bearings and keep track of what is happening and why.
 Slogging on in the dark is rarely advisable.
-Rather, it is better to keep zooming out so that you can keep track of where you are and where you are headed to next.
+% Rather, it is better to keep zooming out so that you can keep track of where you are and where you are headed to next.
 
 % TODO: introduction
   % state standard form of completeness
@@ -101,7 +102,7 @@ Rather, it is better to keep zooming out so that you can keep track of where you
 Assume $\MetaG$ is a consistent set of $\FI$ sentences.
 We will maintain this assumption throughout the following sections in order to show that $\MetaG$ is satisfiable. 
 The following section begins by constructing an extension of $\MetaG$ called $\MetaD$--- i.e., where $\MetaG \subseteq \MetaD$---  which we will show is saturated, maximal, and consistent.
-These properties will enable us to show that $\MetaD$ is \define{deductively closed} insofar as $\metaA\in\MetaD$ whenever $\MetaD\proves\metaA$. 
+These properties will enable us to show that $\MetaD$ is \define{deductively closed} insofar as $\metaA\in\MetaD$ whenever $\MetaD\vdash\metaA$. 
 Deductive closure will play a critical role in constructing a Henkin model $\M_\MetaD$ which satisfies $\MetaD$, and so satisfies $\MetaG$ as a consequence. 
 % The following section will begin by defining $\FIN$.
 
@@ -120,11 +121,11 @@ In order to rule out this possibility out, we will prove the following lemma.
 Assuming that $\beta$ is free for $\alpha$ in every line of a proof $X$, it will be convenient to take $X\unisub{\beta}{\alpha}$ to be the result of replacing $\beta$ with $\alpha$ in every line of $X$.
 
 % \begin{Lthm} \label{lemma:gencon}
-%   If $\MetaG\proves\metaA$ and $\beta$ is a constant that does not occur in any $\metaB\in\MetaG$, then there is a variable $\alpha$ which does not occur in $\metaA$ such that $\MetaG\proves \qt{\forall}{\alpha}\metaC$ where $\metaC=\metaA\unisub{\alpha}{\beta}$ and the derivation of $\qt{\forall}{\alpha}\metaC$ from $\MetaG$ does not include $\beta$.
+%   If $\MetaG\vdash\metaA$ and $\beta$ is a constant that does not occur in any $\metaB\in\MetaG$, then there is a variable $\alpha$ which does not occur in $\metaA$ such that $\MetaG\vdash \qt{\forall}{\alpha}\metaC$ where $\metaC=\metaA\unisub{\alpha}{\beta}$ and the derivation of $\qt{\forall}{\alpha}\metaC$ from $\MetaG$ does not include $\beta$.
 % \end{Lthm}
 %
 % \begin{quote} 
-%   \textit{Proof:} Assume $\MetaG\proves\metaA$ where $\beta$ is a constant that does not occur in any $\metaB\in\MetaG$.
+%   \textit{Proof:} Assume $\MetaG\vdash\metaA$ where $\beta$ is a constant that does not occur in any $\metaB\in\MetaG$.
 %   Thus there is some FOL$^=$ proof $X$ of $\metaA$ from $\MetaG$ where $\beta$ does not occur in any line of $X$. 
 %   Let $\alpha$ be the first variable that does not occur in any line of $X$, and let $X\unisub{\alpha}{\beta}$ be the result of substituting $\alpha$ for $\beta$ in ever line of $X$.
 %   Since $\beta$ does not occur in any $\metaB\in\MetaG$, it follows that $X\unisub{\alpha}{\beta}$ is a proof $\metaA\unisub{\alpha}$ from $\MetaG$ 
@@ -141,10 +142,10 @@ Assuming that $\beta$ is free for $\alpha$ in every line of a proof $X$, it will
   % The proof goes by a routine induction on the length of $X$, and so the details will be omitted.
   \qed
   %   For easy of exposition, we will take $\metaA_i$ to be the $i$\textsuperscript{th} line of $X$ and $\MetaG_i$ to be the undischarged assumptions at line $i$.
-  %   We then aim to show that $\MetaG_i\models\metaA_i$ for ever line $i$ in $X$. 
+  %   We then aim to show that $\MetaG_i\vDash\metaA_i$ for ever line $i$ in $X$. 
   %
   %   \textit{Base:} We know that $\metaA_1$ is either a premise, assumption, or instance of identity introduction $\alpha=\alpha$ for a constant $\alpha$. 
-  %   In each case, $\MetaG_1\proves$
+  %   In each case, $\MetaG_1\vdash$
 \end{quote}
 
 
@@ -165,7 +166,7 @@ We may then prove the following.
 
 \begin{quote} 
   \textit{Proof:} Assume that $\MetaG$ is a consistent in FOL$^=$.
-  Assume for contradiction that $\MetaG$ is inconsistent in FOL$^=_\N$, and so $\MetaG\proves A\eand\enot A$ in FOL$^=_\N$.
+  Assume for contradiction that $\MetaG$ is inconsistent in FOL$^=_\N$, and so $\MetaG\vdash A\eand\enot A$ in FOL$^=_\N$.
   Thus there is a derivation $X$ of $A\eand\enot A$ from $\MetaG$ where every line of $X$ is a wfs of $\FIN$.
   Since every proof is finite, there are at most finitely many constants that occur in $X$, and so at most finitely many constants in $X$ that belong to $\N$.
 
@@ -228,28 +229,28 @@ Before showing that $\MetaS_\MetaG$ is consistent, we will begin by proving the 
 
 
 % \begin{Lthm} \label{lemma:prunigen}
-%   $\MetaG\proves \qt{\forall}{\alpha}\metaA$ if $\MetaG\proves\metaA\unisub{\beta}{\alpha}$ where $\beta$ is a constant not occurring in $\MetaG$ or $\metaA$.
+%   $\MetaG\vdash \qt{\forall}{\alpha}\metaA$ if $\MetaG\vdash\metaA\unisub{\beta}{\alpha}$ where $\beta$ is a constant not occurring in $\MetaG$ or $\metaA$.
 % \end{Lthm}
 %
 % \begin{quote} 
-%   \textit{Proof:} Assume $\MetaG\proves\metaA\unisub{\beta}{\alpha}$ where $\beta$ is a constant not occurring in $\MetaG$ or $\metaA$. 
+%   \textit{Proof:} Assume $\MetaG\vdash\metaA\unisub{\beta}{\alpha}$ where $\beta$ is a constant not occurring in $\MetaG$ or $\metaA$. 
 % \end{quote}
 %
 %
 %
 
 \begin{Lthm} \label{lemma:incon}
-  If $\Lambda\cup\set{\metaA}$ is inconsistent, then $\Lambda\proves\enot\metaA$. 
+  If $\Lambda\cup\set{\metaA}$ is inconsistent, then $\Lambda\vdash\enot\metaA$. 
 \end{Lthm}
 
 \begin{quote} 
   \textit{Proof:}
   Identical to \textbf{\ref{lemma:PL-incon}}.
   % Assume $\Lambda\cup\set{\metaA}$ is inconsistent.
-  % Thus $\Lambda\cup\set{\metaA}\proves A\eand\enot A$, and so there is some proof $X$ of $A\eand\enot A$ from $\Lambda\cup\set{\metaA}$. 
+  % Thus $\Lambda\cup\set{\metaA}\vdash A\eand\enot A$, and so there is some proof $X$ of $A\eand\enot A$ from $\Lambda\cup\set{\metaA}$. 
   % Let $X'$ be the result of replacing the premise $\metaA$ with the assumption of $\metaA$, appending lines for $A$ and $\enot A$ by conjunction elimination $\eand$E. 
   % We may then apply negation introduction $\enot$I in order to discharge the assumption of $\metaA$.
-  % The result is a proof of $\enot\metaA$ from $\Lambda$, and so $\Lambda\proves\enot\metaA$. 
+  % The result is a proof of $\enot\metaA$ from $\Lambda$, and so $\Lambda\vdash\enot\metaA$. 
   \qed
 \end{quote}
 
@@ -262,14 +263,14 @@ As with so many proofs, a small technique can make the difference between being 
 
 % TODO: move up CH3 and then repeat above
 \begin{Lthm} \label{lemma:prcut}
-  If $\Lambda \proves \metaA$ and $\Pi\cup\set{\metaA} \proves \metaB$, then $\Lambda\cup\Pi \proves \metaB$. 
+  If $\Lambda \vdash \metaA$ and $\Pi\cup\set{\metaA} \vdash \metaB$, then $\Lambda\cup\Pi \vdash \metaB$. 
 \end{Lthm}
 
 \begin{quote} 
-  \textit{Proof:} Assume that $\Lambda \proves \metaA$ and $\Pi\cup{\metaA} \proves \metaB$.
+  \textit{Proof:} Assume that $\Lambda \vdash \metaA$ and $\Pi\cup{\metaA} \vdash \metaB$.
   It follows that there is a proof of $\metaA$ from $\Lambda$ as well as a proof $Y$ of $\metaB$ from $\Pi$. 
   Let $Z$ be the result of replacing the line in which $\metaA$ occurs as a premise with $X$.
-  Since $Z$ proves $\metaB$ from the premises $\Lambda$ in $X$ together with the premises $\Pi\cup\set{\metaA}$ in $Y$ with the exception of $\metaA$, we may conclude that $Z$ proves $\metaA$ from $\Lambda\cup\Pi$, and so $\Lambda\cup\Pi\proves\metaB$.
+  Since $Z$ proves $\metaB$ from the premises $\Lambda$ in $X$ together with the premises $\Pi\cup\set{\metaA}$ in $Y$ with the exception of $\metaA$, we may conclude that $Z$ proves $\metaA$ from $\Lambda\cup\Pi$, and so $\Lambda\cup\Pi\vdash\metaB$.
   \qed
 \end{quote}
 
@@ -291,23 +292,23 @@ As with so many proofs, a small technique can make the difference between being 
   The proof that $\MetaS_\MetaG$ is consistent goes by induction on its construction where the consistency of $\MetaS_0$ follows from its definition given the starting assumption.
   Assume $\MetaS_m$ is consistent.
   To show that $\MetaS_{m+1}$ is consistent, assume for contradiction that $\MetaS_{m+1}$ is not consistent.
-  Since $\MetaS_{m+1}=\MetaS_m\cup\set{\theta_{m+1}}$, we know that $\MetaS_m\proves \enot\theta_{m+1}$ by \textbf{\ref{lemma:incon}}, and so $\MetaS_m\proves\enot(\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}\eif \metaA_{m+1}\unisub{n_{m+1}}{\alpha_{m+1}})$.
+  Since $\MetaS_{m+1}=\MetaS_m\cup\set{\theta_{m+1}}$, we know that $\MetaS_m\vdash \enot\theta_{m+1}$ by \textbf{\ref{lemma:incon}}, and so $\MetaS_m\vdash\enot(\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}\eif \metaA_{m+1}\unisub{n_{m+1}}{\alpha_{m+1}})$.
 
   % TODO: would be good to discuss the cut rule above which gets used here; ditto other structural rules
-  Given that the derived rules for PL are also derived rules in FOL$^=$, it follows by \textbf{\ref{lemma:prcut}} that $\MetaS_m\proves \qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ and $\MetaS_m\proves\enot\metaA_{m+1}\unisub{n_{m+1}}{\alpha_{m+1}}$.
+  Given that the derived rules for PL are also derived rules in FOL$^=$, it follows by \textbf{\ref{lemma:prcut}} that $\MetaS_m\vdash \qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ and $\MetaS_m\vdash\enot\metaA_{m+1}\unisub{n_{m+1}}{\alpha_{m+1}}$.
   In particular, we may derive the rules $\enot(\metaA \eif \metaB) \vdash \metaA$ and $\enot(\metaA \eif \metaB) \vdash \enot\metaB$, where applications of these rules together with \textbf{\ref{lemma:prcut}} justifies the claims indicated in the previous sentence.
 
     % TODO: cite derived rule; add this rule to chapter 6
-  Since $n_{m+1}$ does not occur in $\metaA_{m+1}$ or in $\MetaS_m$, it follows by universal introduction $\forall$I that $\MetaS_m\proves \qt{\forall}{\alpha_{m+1}}\enot\metaA_{m+1}$, and so $\MetaS_m\proves \enot\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ by the quantifier exchange rule $(\forall\enot)$ derived in $\S\ref{QER}$.
-  By EFQ in $\S\ref{EFQ}$, we may conclude that $\MetaS_m\proves A\wedge\neg A$, and so $\MetaS_m$ is inconsistent, contradicting our assumption. 
+  Since $n_{m+1}$ does not occur in $\metaA_{m+1}$ or in $\MetaS_m$, it follows by universal introduction $\forall$I that $\MetaS_m\vdash \qt{\forall}{\alpha_{m+1}}\enot\metaA_{m+1}$, and so $\MetaS_m\vdash \enot\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ by the quantifier exchange rule $(\forall\enot)$ derived in $\S\ref{QER}$.
+  By EFQ in $\S\ref{EFQ}$, we may conclude that $\MetaS_m\vdash A\wedge\neg A$, and so $\MetaS_m$ is inconsistent, contradicting our assumption. 
     % TODO: replace EFQ with better reference
     % TODO: avoid reference to specific contradiction
   Thus we may conclude that $\MetaS_{m+1}$ is consistent, and so $\MetaS_k$ is consistent for all $k\in\N$ as desired.
 
   Assume for contradiction that $\MetaS_\MetaG$ is inconsistent. 
-  By definition $\MetaS_\MetaG\proves A\wedge\neg A$, and so there is a proof $X$ of $A\wedge\neg A$ from the premises $\MetaS_\MetaG$.
+  By definition $\MetaS_\MetaG\vdash A\wedge\neg A$, and so there is a proof $X$ of $A\wedge\neg A$ from the premises $\MetaS_\MetaG$.
   Since every proof is finite, at most finitely many premises in $\MetaS_\MetaG$ are cited in $X$, and so there is some $m\in\N$ where every premise cited in $X$ occurs in $\MetaS_m$.
-  As a result, $\MetaS_m\proves A\wedge\neg A$, and so $\MetaS_m$ is inconsistent, contradicting the above. 
+  As a result, $\MetaS_m\vdash A\wedge\neg A$, and so $\MetaS_m$ is inconsistent, contradicting the above. 
   Thus $\MetaS_\MetaG$ is consistent. 
   \qed
 \end{quote}
@@ -352,9 +353,9 @@ In order to establish these results, we will begin by relabeling the following s
   \textit{Proof:}
   Identical to \textbf{\ref{lemma:PL-prweak}}.
   % Assume that $\Lambda \cup \set{\metaA}$ and $\Lambda\cup \set{\enot\metaA}$ are both inconsistent.
-  % It follows that $\Lambda\proves \enot\metaA$ and $\Lambda\proves\enot\enot\metaA$ by \textbf{\ref{lemma:incon}}, and so there is some proof $X$ of $\enot\metaA$ from $\Lambda$, and some proof $Y$ of $\enot\enot\metaA$ from $\Lambda$. 
+  % It follows that $\Lambda\vdash \enot\metaA$ and $\Lambda\vdash\enot\enot\metaA$ by \textbf{\ref{lemma:incon}}, and so there is some proof $X$ of $\enot\metaA$ from $\Lambda$, and some proof $Y$ of $\enot\enot\metaA$ from $\Lambda$. 
   % Let $Z$ be the result of concatenating $X$ and $Y$ and using EFQ from $\S\ref{EFQ}$ on the last lines of $X$ and $Y$ to derive $A\eand\enot A$. 
-  % Since the only premises in $Z$ are the premises in $X$ and $Y$, we may conclude that $\Lambda\proves A\eand\enot A$, and so $\Lambda$ is inconsistent. 
+  % Since the only premises in $Z$ are the premises in $X$ and $Y$, we may conclude that $\Lambda\vdash A\eand\enot A$, and so $\Lambda$ is inconsistent. 
 \end{quote}
 
 
@@ -380,14 +381,14 @@ In order to establish these results, we will begin by relabeling the following s
   \textit{Case 2:} $\MetaD_n\cup\set{\metaB_n}$ is not consistent, and so $\MetaD_{n+1}=\MetaD_n\cup\set{\enot\metaB_n}$. 
   Assume for contradiction that $\MetaD_n\cup\set{\enot\metaB_n}$ is not consistent. 
   By \textbf{\ref{lemma:conin}}, $\MetaD_n$ is inconsistent, contradicting the hypothesis. 
-  % It follows that $\MetaD_n\proves\enot\enot\metaB_n$ by \textbf{\ref{lemma:incon}}, and so $\MetaD_n\proves\metaB_n$ by DN.
-  % Since $\MetaD_n\cup\set{\metaB_n}$ is also not consistent, $\MetaD_n\cup\set{\metaB_n} \proves A\eand\enot A$.
-  % By \textbf{\ref{lemma:prcut}}, $\MetaD_n \proves A\eand\enot A$, and so $\MetaD_n$ is not consistent, contradicting the hypothesis. 
+  % It follows that $\MetaD_n\vdash\enot\enot\metaB_n$ by \textbf{\ref{lemma:incon}}, and so $\MetaD_n\vdash\metaB_n$ by DN.
+  % Since $\MetaD_n\cup\set{\metaB_n}$ is also not consistent, $\MetaD_n\cup\set{\metaB_n} \vdash A\eand\enot A$.
+  % By \textbf{\ref{lemma:prcut}}, $\MetaD_n \vdash A\eand\enot A$, and so $\MetaD_n$ is not consistent, contradicting the hypothesis. 
   Thus $\MetaG_{n+1}$ is consistent. 
 
   Since $\MetaG_{n+1}$ is consistent, it follows by induction that $\MetaG_n$ is consistent for all $n\in\N$.
   Assume for contradiction that $\MetaD_{\MetaS_\MetaG}$ is inconsistent.
-  Thus $\MetaD_{\MetaS_\MetaG}\proves A\eand\enot A$, and so there is a proof $Y$ of $A\eand\enot A$ from $\MetaD_{\MetaS_\MetaG}$. 
+  Thus $\MetaD_{\MetaS_\MetaG}\vdash A\eand\enot A$, and so there is a proof $Y$ of $A\eand\enot A$ from $\MetaD_{\MetaS_\MetaG}$. 
     % TODO: remove particular contradiction
   Since $Y$ is finite, there is a finite number of premises cited in $Y$, and so there is some $k\in\N$ where every premise cited in $Y$ belongs to $\MetaD_k$.
   As a result, $Y$ is also a proof of $A\eand\enot A$ from $\MetaD_k$, and so $\MetaD_k$ is inconsistent, contradicting the above. 
@@ -420,19 +421,19 @@ As brought out in the proof of \textsc{PL Completeness} before, maximal consiste
   \label{sub:DeductiveClosure}
 
 Maximal consistent sets of wfss are deductively closed insofar as they contain every wfs derivable from that set as a member.
-Put formally, $\MetaD$ is \define{deductively closed} just in case $\metaA\in\MetaD$ whenever $\MetaD\proves\metaA$.
-Since $\MetaD\proves\metaA$ whenever $\metaA\in\MetaD$, deductively closed sets of wfss are identical to the set of wfss which they derive.
+Put formally, $\MetaD$ is \define{deductively closed} just in case $\metaA\in\MetaD$ whenever $\MetaD\vdash\metaA$.
+Since $\MetaD\vdash\metaA$ whenever $\metaA\in\MetaD$, deductively closed sets of wfss are identical to the set of wfss which they derive.
 In order to show that $\MetaD_{\MetaS_\MetaG}$ is deductively closed, we will begin by relabeling the following general purpose lemma from before. 
 
 \begin{Lthm} \label{lemma:cont}
-  If $\Lambda\proves\metaA$ and $\Lambda\proves\enot\metaA$, then $\Lambda$ is inconsistent. 
+  If $\Lambda\vdash\metaA$ and $\Lambda\vdash\enot\metaA$, then $\Lambda$ is inconsistent. 
 \end{Lthm}
 
 \begin{quote} 
   \textit{Proof:} 
   Identical to \textbf{\ref{lemma:PL-cont}}.
   \qed
-  % Assume $\Lambda\proves\metaA$ and $\Lambda\proves\enot\metaA$.
+  % Assume $\Lambda\vdash\metaA$ and $\Lambda\vdash\enot\metaA$.
   % Thus there is a FOL$^=$ proof $X$ of $\metaA$ from $\Lambda$ as well as a FOL$^=$ proof $Y$ of $\enot\metaA$ from $\Lambda$. 
   % Letting $Z$ be the result of concatenating $X$ and $Y$ and using EFQ from $\S\ref{EFQ}$ to derive $A\eand\enot A$, we may observe that $Z$ is a proof of $A\eand\enot A$ from $\Lambda$, and so $\Lambda$ is inconsistent.
 \end{quote}
@@ -442,13 +443,13 @@ In order to show that $\MetaD_{\MetaS_\MetaG}$ is deductively closed, we will be
 
 
 \begin{Lthm} \label{lemma:deductive}
-  If $\MetaD$ is maximal in $\FIN$ and consistent, then $\metaA\in\MetaD$ whenever $\MetaD\proves\metaA$.
+  If $\MetaD$ is maximal in $\FIN$ and consistent, then $\metaA\in\MetaD$ whenever $\MetaD\vdash\metaA$.
 \end{Lthm}
 
 \begin{quote} 
-  \textit{Proof:} Assume $\MetaD$ is maximal in $\FIN$ and consistent where $\MetaD\proves\metaA$.
-  If $\MetaD\proves\enot\metaA$, then $\MetaD$ is inconsistent by \textbf{\ref{lemma:cont}}, contradicting the assumption.
-  Thus $\MetaD\nproves\enot\metaA$, and so $\enot\metaA\notin\MetaD$ since otherwise $\MetaD\proves\enot\metaA$. 
+  \textit{Proof:} Assume $\MetaD$ is maximal in $\FIN$ and consistent where $\MetaD\vdash\metaA$.
+  If $\MetaD\vdash\enot\metaA$, then $\MetaD$ is inconsistent by \textbf{\ref{lemma:cont}}, contradicting the assumption.
+  Thus $\MetaD\nproves\enot\metaA$, and so $\enot\metaA\notin\MetaD$ since otherwise $\MetaD\vdash\enot\metaA$. 
   Since $\MetaD$ is maximal, $\metaA\in\MetaD$. 
   \qed
 \end{quote}
@@ -485,15 +486,15 @@ In order to show that $[\alpha]_\MetaD\neq\varnothing$ for any constant $\alpha\
 
 
 \begin{Lthm} \label{lemma:prweak}
-  If $\Lambda\proves\metaA$, then $\Lambda\cup\Pi\proves\metaA$.
+  If $\Lambda\vdash\metaA$, then $\Lambda\cup\Pi\vdash\metaA$.
 \end{Lthm}
   % TODO: move weakening to FOL$^=$ chapter?
 
 \begin{quote} 
   \textit{Proof:} 
   Identical to \textbf{\ref{lemma:PL-prweak}}.
-  % Assuming that $\Lambda\proves\metaA$, there is a proof $X$ of $\metaA$ from $\Lambda$ in FOL$^=$.
-  % Since $\Lambda\subseteq\Lambda\cup\Pi$, it follows that $X$ is a proof of $\metaA$ from $\Lambda\cup\Pi$ in FOL$^=$, and so $\Lambda\cup\Pi\proves\metaA$. 
+  % Assuming that $\Lambda\vdash\metaA$, there is a proof $X$ of $\metaA$ from $\Lambda$ in FOL$^=$.
+  % Since $\Lambda\subseteq\Lambda\cup\Pi$, it follows that $X$ is a proof of $\metaA$ from $\Lambda\cup\Pi$ in FOL$^=$, and so $\Lambda\cup\Pi\vdash\metaA$. 
   \qed
 \end{quote}
 
@@ -511,7 +512,7 @@ Every constant $\alpha\in\C$ generates an element $[\alpha]_\MetaD\in\D_\MetaD$ 
 \begin{quote} 
   \textit{Proof:} 
   Let $\alpha\in\C$ be an arbitrary constant. 
-  Since $\proves \alpha=\alpha$ by identity introduction $=$I, it follows that $\MetaD\proves\alpha=\alpha$ by \textbf{\ref{lemma:prweak}}, and so $\alpha=\alpha\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
+  Since $\vdash \alpha=\alpha$ by identity introduction $=$I, it follows that $\MetaD\vdash\alpha=\alpha$ by \textbf{\ref{lemma:prweak}}, and so $\alpha=\alpha\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
   Thus $\alpha\in[\alpha]_\MetaD$ for any constant $\alpha\in\C$.
   \qed
 \end{quote}
@@ -526,7 +527,7 @@ Next we may show that the elements of $\D_\MetaD$ are well defined with the foll
   \textit{Proof:}
   Assume $\alpha=\beta\in\MetaD$.
   Letting $\gamma\in[\alpha]_\MetaD$, it follows that $\alpha=\gamma\in\MetaD$.
-  Since $\alpha=\beta,\alpha=\gamma\proves\beta=\gamma$ by identity elimination $=$E, we know that $\MetaD\proves\beta=\gamma$ by \textbf{\ref{lemma:prweak}}, and so $\beta=\gamma\in\MetaD$ by \textbf{\ref{lemma:deductive}}. 
+  Since $\alpha=\beta,\alpha=\gamma\vdash\beta=\gamma$ by identity elimination $=$E, we know that $\MetaD\vdash\beta=\gamma$ by \textbf{\ref{lemma:prweak}}, and so $\beta=\gamma\in\MetaD$ by \textbf{\ref{lemma:deductive}}. 
   Thus $\gamma\in[\beta]_\MetaD$, and so generalising on $\gamma$, it follows that $[\alpha]_\MetaD\subseteq[\beta]_\MetaD$.
   By parity of reasoning, we may conclude that $[\beta]_\MetaD\subseteq[\alpha]_\MetaD$, and so $[\alpha]_\MetaD=[\beta]_\MetaD$ as desired.
   \qed
@@ -559,7 +560,7 @@ Put otherwise, we must show that the extensions of predicates are well-defined a
 \begin{quote} 
   \textit{Proof:} 
   Assume that $\alpha_i=\beta_i\in\MetaD$ for some $\alpha_i,\beta_i\in\C$ where $\F^n\alpha_1,\ldots,\alpha_n\in\MetaD$.
-  It follows that $\MetaD\proves\F^n\alpha_1,\ldots,\alpha_n\unisub{\beta_i}{\alpha_i}$ by identity elimination $=$E, and so $\F^n\alpha_1,\ldots,\alpha_n\unisub{\beta_i}{\alpha_i}\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
+  It follows that $\MetaD\vdash\F^n\alpha_1,\ldots,\alpha_n\unisub{\beta_i}{\alpha_i}$ by identity elimination $=$E, and so $\F^n\alpha_1,\ldots,\alpha_n\unisub{\beta_i}{\alpha_i}\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
   By parity of reasoning, we may conclude that $\F^n\alpha_1,\ldots,\alpha_n\in\MetaD$ just in case $\F^n\alpha_1,\ldots,\alpha_n\unisub{\beta_i}{\alpha_i}\in\MetaD$.
   \qed
 \end{quote}
@@ -719,8 +720,9 @@ Given the importance of this lemma, all but one case has been included in full.
       &\textit{ ~iff~ } \metaA\in\MetaD.
   \end{align*}
 
-  Whereas $(\hspace{1pt}\star\hspace{1pt})$ holds by hypothesis, $(\neg)$ follows from the maximal consistency of $\MetaD$ established in \textbf{\ref{lemma:max}}.
-  The other biconditionals follow from the semantics for negation together and the case assumption.
+  Assuming $\metaB \notin \MetaD$, it follows by the maximality assumed of $\MetaD$ that $\enot\metaB \in \MetaD$. 
+  Conversely, if $\enot\metaB \in \MetaD$, then $\metaB \notin \MetaD$ since otherwise $\MetaD \vdash \bot$ by EFQ in $\S\ref{EFQ}$, making $\MetaD$ inconsistent contrary to assumption.
+  This establishes $(\neg)$ where $(\hspace{1pt}\star\hspace{1pt})$ holds by hypothesis and the other biconditionals follow from the semantics for negation together and the case assumption.
 
   \textit{Case 2:}
   Assume $\metaA=\metaB\eand\metaC$.
@@ -736,8 +738,8 @@ Given the importance of this lemma, all but one case has been included in full.
       &\textit{ ~iff~ } \metaA\in\MetaD.
   \end{align*}
 
-  Assuming that $\metaB,\metaC\in\MetaD$, we know that $\MetaD\proves\metaB\eand\metaC$ by conjunction introduction $\eand$I, and so $\metaB\eand\metaC\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
-  Assuming instead that $\metaB\eand\metaC\in\MetaD$, it follows that $\MetaD\proves\metaB$ and $\MetaD\proves\metaC$ by conjunction elimination $\eand$E, and so $\metaB,\metaC\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
+  Assuming that $\metaB,\metaC\in\MetaD$, we know that $\MetaD\vdash\metaB\eand\metaC$ by conjunction introduction $\eand$I, and so $\metaB\eand\metaC\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
+  Assuming instead that $\metaB\eand\metaC\in\MetaD$, it follows that $\MetaD\vdash\metaB$ and $\MetaD\vdash\metaC$ by conjunction elimination $\eand$E, and so $\metaB,\metaC\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
   This establishes $(\eand)$.
 
   Additionally, $(\hspace{1.6pt}\star\hspace{1.6pt})$ holds by hypothesis, and the other biconditionals follow from the semantics for conjunction along with the case assumption.
@@ -757,12 +759,12 @@ Given the importance of this lemma, all but one case has been included in full.
       &\textit{ ~iff~ } \metaA\in\MetaD.
   \end{align*}
 
-  Assuming that $\metaB\in\MetaD$, we know that $\MetaD\proves\metaB\eor\metaC$ by disjunction introduction $\eor$I, and so $\metaB\eor\metaC\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
+  Assuming that $\metaB\in\MetaD$, we know that $\MetaD\vdash\metaB\eor\metaC$ by disjunction introduction $\eor$I, and so $\metaB\eor\metaC\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
   Analogous reasoning shows that $\metaB\eor\metaC\in\MetaD$ if $\metaC\in\MetaD$, and so $\metaB\eor\metaC\in\MetaD$ if either $\metaB\in\MetaD$ or $\metaC\in\MetaD$. 
 
   Assume instead that $\metaB\eor\metaC\in\MetaD$.
   If $\metaB\in\MetaD$, then either $\metaB\in\MetaD$ or $\metaC\in\MetaD$.
-  If $\metaB\notin\MetaD$, then $\enot\metaB\in\MetaD$ by \textbf{\ref{lemma:max}}, and so $\MetaD\proves\metaC$ by DS from $\S\ref{DS}$.
+  If $\metaB\notin\MetaD$, then $\enot\metaB\in\MetaD$ by the maximality assumed of $\MetaD$, and so $\MetaD\vdash\metaC$ by DS from $\S\ref{DS}$.
   Thus $\metaC\in\MetaD$ by \textbf{\ref{lemma:deductive}}, and so either $\metaB\in\MetaD$ or $\metaC\in\MetaD$. 
   It follows that $\metaB\in\MetaD$ or $\metaC\in\MetaD$ if $\metaB\eor\metaC\in\MetaD$ which together with the above establishes $(\eor)$.  
 
@@ -777,25 +779,25 @@ Given the importance of this lemma, all but one case has been included in full.
   \begin{align*}
     \VV{\I_\MetaD}{\va{a}}(\metaA)=1 &\textit{ ~iff~ } \VV{\I_\MetaD}{\va{a}}(\metaB\eif\metaC)=1\\
       &\textit{ ~iff~ } \VV{\I_\MetaD}{\va{a}}(\metaB)\neq 1 \text{ or } \VV{\I_\MetaD}{\va{a}}(\metaC)=1 \\
-      (\hspace{1.6pt}\star\hspace{1.6pt}) &\textit{ ~iff~ } \metaB\notin\MetaD \text{ or } \metaC\in\MetaD \\
+      (\hspace{2.9pt}\star\hspace{2.9pt}) &\textit{ ~iff~ } \metaB\notin\MetaD \text{ or } \metaC\in\MetaD \\
       (\eif) &\textit{ ~iff~ } \metaB\eif\metaC\in\MetaD \\
       &\textit{ ~iff~ } \metaA\in\MetaD.
   \end{align*}
 
-  Assuming that $\metaB\notin\MetaD$, we know that $\enot\metaB\in\MetaD$ by \textbf{\ref{lemma:max}}.
-  Moreover, it is easy to derive $\enot\metaB\proves\metaB\eif\metaC$ since given $\enot\metaB$ as a premise, we may use the assumption rule AS to write $\metaB$ on a second line, deriving $\metaC$ by EFQ from $\S\ref{EFQ}$ and using conditional introduction $\eif$I to discharge the assumption.
+  Assuming that $\metaB\notin\MetaD$, we know that $\enot\metaB\in\MetaD$ by the maximality of $\MetaD$.
+  Moreover, it is easy to derive $\enot\metaB\vdash\metaB\eif\metaC$ since given $\enot\metaB$ as a premise, we may use the assumption rule AS to write $\metaB$ on a second line, deriving $\metaC$ by EFQ from $\S\ref{EFQ}$ and using conditional introduction $\eif$I to discharge the assumption.
   % TODO: derive this in an earlier chapter
-  It follows that $\MetaD\proves\metaB\eif\metaC$ by \textbf{\ref{lemma:prweak}}, and so $\metaB\eif\metaC\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
+  It follows that $\MetaD\vdash\metaB\eif\metaC$ by \textbf{\ref{lemma:prweak}}, and so $\metaB\eif\metaC\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
 
-  Assuming instead that $\metaC\in\MetaD$, we may derive $\metaC\proves\metaB\eif\metaC$ since given $\metaC$ as a premise, we may use the assumption rule AS to write $\metaB$ on a second line.
+  Assuming instead that $\metaC\in\MetaD$, we may derive $\metaC\vdash\metaB\eif\metaC$ since given $\metaC$ as a premise, we may use the assumption rule AS to write $\metaB$ on a second line.
   % TODO: derive this in an earlier chapter
   By then using the reiteration rule R, we may rewrite the premise $\metaC$, discharging our assumption with conditional introduction $\eif$I in order to derive $\metaB\eif\metaC$ from $\metaC$. 
-  Thus $\MetaD\proves\metaB\eif\metaC$ by \textbf{\ref{lemma:prweak}}, and so $\metaB\eif\metaC\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
+  Thus $\MetaD\vdash\metaB\eif\metaC$ by \textbf{\ref{lemma:prweak}}, and so $\metaB\eif\metaC\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
   We may then conclude that $\metaB\eif\metaC\in\MetaD$ if either $\metaB\notin\MetaD$ or $\metaC\in\MetaD$.
 
   Assume instead that $\metaB\eif\metaC\in\MetaD$.
   If $\metaB\notin\MetaD$, then $\metaB\notin\MetaD$ or $\metaC\in\MetaD$.
-  If $\metaB\in\MetaD$, then $\MetaD\proves\metaC$ by conditional elimination $\eif$E, and so $\metaC\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
+  If $\metaB\in\MetaD$, then $\MetaD\vdash\metaC$ by conditional elimination $\eif$E, and so $\metaC\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
   Thus $\metaB\notin\MetaD$ or $\metaC\in\MetaD$ if $\metaB\eif\metaC\in\MetaD$ which, given the above, establishes $(\eif)$.  
 
   Additionally, $(\hspace{1.6pt}\star\hspace{1.6pt})$ holds by hypothesis, and the other biconditionals follow from the semantics for the conditional along with the case assumption.
@@ -812,18 +814,19 @@ Given the importance of this lemma, all but one case has been included in full.
   \begin{align*}
     \VV{\I_\MetaD}{\va{a}}(\metaA)=1 &\textit{ ~iff~ } \VV{\I_\MetaD}{\va{a}}(\qt{\exists}{\alpha}\metaB)=1\\
       % &\textit{ ~iff~ } \VV{\I_\MetaD}{\va{c}}(\metaB)=1 \text{ for some } \alpha\text{-variant } \va{c} \text{ of } \va{a}\\
-      (\hspace{.7pt}\ast\hspace{.7pt}) &\textit{ ~iff~ } \VV{\I_\MetaD}{\va{a}}(\metaB\unisub{\beta}{\alpha})=1 \text{ for some constant } \beta\in\C\\
+      (\hspace{1pt}\ast\hspace{1pt}) &\textit{ ~iff~ } \VV{\I_\MetaD}{\va{a}}(\metaB\unisub{\beta}{\alpha})=1 \text{ for some constant } \beta\in\C\\
       (\hspace{.7pt}\star\hspace{.7pt}) &\textit{ ~iff~ } \metaB\unisub{\beta}{\alpha}\in\MetaD \text{ for some constant } \beta\in\C\\ 
-      (\exists) &\textit{ ~iff~ } \qt{\exists}{\alpha}\metaB\in\MetaD \\
+      (\hspace{.7pt}\exists\hspace{.7pt}) &\textit{ ~iff~ } \qt{\exists}{\alpha}\metaB\in\MetaD \\
       &\textit{ ~iff~ } \metaA\in\MetaD.
   \end{align*}
 
   Assume $\metaB\unisub{\beta}{\alpha}\in\MetaD$ for some constant $\beta\in\C$.
-  Thus $\MetaD\proves \qt{\exists}{\alpha}\metaB$ by existential introduction $\exists$I, and so $\qt{\exists}{\alpha}\metaB\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
+  Thus $\MetaD\vdash \qt{\exists}{\alpha}\metaB$ by existential introduction $\exists$I, and so $\qt{\exists}{\alpha}\metaB\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
+  % TODO: consider case with no free variables
   Assuming $\qt{\exists}{\alpha}\metaB\in\MetaD$ instead, we know that $\metaB$ has at most one free variable $\alpha$, and so $\metaB=\metaA_i(\alpha_i)$ for some $i\in\N$ where $\alpha_i=\alpha$ by the enumeration given in $\S\ref{sub:Saturation}$.
-  Thus $\qt{\exists}{\alpha_i}\metaA_i\eif \metaA_i\unisub{n_i}{\alpha_i}\in\MetaD$ by \textbf{\ref{lemma:include}}.
-  Since $n_i\in\C$, it follows that $\qt{\exists}{\alpha}\metaB\eif\metaB\unisub{\beta}{\alpha}\in\MetaD$ for some $\beta\in\C$, and so $\MetaD\proves\metaB\unisub{\beta}{\alpha}$ by conditional elimination $\eif$E. 
-  We may then conclude by \textbf{\ref{lemma:deductive}} that $\metaB\unisub{\beta}{\alpha}\in\MetaD$, thereby establishing $(\exists)$.
+  Thus $\qt{\exists}{\alpha_i}\metaA_i\eif \metaA_i\unisub{n_i}{\alpha_i}\in\MetaD$ by the saturation assumed of $\MetaD$.
+  Since $n_i\in\C$, it follows that $\qt{\exists}{\alpha}\metaB\eif\metaB\unisub{\beta}{\alpha}\in\MetaD$ for some $\beta\in\C$, and so $\MetaD\vdash\metaB\unisub{\beta}{\alpha}$ by conditional elimination $\eif$E. 
+  We may then conclude by \textbf{\ref{lemma:deductive}} that $\metaB\unisub{\beta}{\alpha}\in\MetaD$, thereby establishing $(\hspace{.7pt}\exists\hspace{.7pt})$.
 
   Additionally, $(\hspace{.7pt}\star\hspace{.7pt})$ holds by hypothesis, $(\hspace{.7pt}\ast\hspace{.7pt})$ is given by \textbf{\ref{lemma:quantE}}, and the other biconditionals follow from the case assumption.
 
@@ -836,36 +839,38 @@ Given the importance of this lemma, all but one case has been included in full.
   \begin{align*}
     \VV{\I_\MetaD}{\va{a}}(\metaA)=1 &\textit{ ~iff~ } \VV{\I_\MetaD}{\va{a}}(\qt{\forall}{\alpha}\metaB)=1\\
       % &\textit{ ~iff~ } \VV{\I_\MetaD}{\va{c}}(\metaB)=1 \text{ for some } \alpha\text{-variant } \va{c} \text{ of } \va{a}\\
-      (\hspace{.7pt}\ast\hspace{.7pt}) &\textit{ ~iff~ } \VV{\I_\MetaD}{\va{a}}(\metaB\unisub{\beta}{\alpha})=1 \text{ for every constant } \beta\in\C\\
+      (\hspace{1pt}\ast\hspace{1pt}) &\textit{ ~iff~ } \VV{\I_\MetaD}{\va{a}}(\metaB\unisub{\beta}{\alpha})=1 \text{ for every constant } \beta\in\C\\
       (\hspace{.7pt}\star\hspace{.7pt}) &\textit{ ~iff~ } \metaB\unisub{\beta}{\alpha}\in\MetaD \text{ for every constant } \beta\in\C\\ 
-      (\forall) &\textit{ ~iff~ } \qt{\forall}{\alpha}\metaB\in\MetaD \\
+      (\hspace{.3pt}\forall\hspace{.3pt}) &\textit{ ~iff~ } \qt{\forall}{\alpha}\metaB\in\MetaD \\
       &\textit{ ~iff~ } \metaA\in\MetaD.
   \end{align*}
 
-  Assume for contraposition that $\metaB\unisub{\beta}{\alpha}\notin\MetaD$ for some constant $\beta\in\C$.
-  Thus $\enot\metaB\unisub{\beta}{\alpha}\in\MetaD$ by \textbf{\ref{lemma:max}}.
-  Since $\enot\metaB$ has at most one free variable $\alpha$, we know that $\enot\metaB=\metaA_i(\alpha_i)$ for some $i\in\N$ where $\alpha_i=\alpha$ by the enumeration given in $\S\ref{sub:Saturation}$.
-  Thus $\qt{\exists}{\alpha_i}\metaA_i\eif\metaA_i\unisub{n_i}{\alpha_i}\in\MetaD$ by \textbf{\ref{lemma:include}}.
-  Since $n_i\in\C$, it follows that $\qt{\exists}{\alpha}\enot\metaB\eif\enot\metaB\unisub{\beta}{\alpha}\in\MetaD$ for some $\beta\in\C$, and so $\MetaD\proves\enot\metaB\unisub{\beta}{\alpha}$ by conditional elimination $\eif$E. 
-  It follows by \textbf{\ref{lemma:deductive}} that $\enot\metaB\unisub{\beta}{\alpha}\in\MetaD$, and so $\MetaD\proves \qt{\exists}{\alpha}\enot\metaB$ by existential introduction $\exists$I. 
-  Since $\qt{\exists}{\alpha}\enot\metaB\proves\enot\qt{\forall}{\alpha}\metaB$ by $(\exists\enot)$ from \textbf{\ref{QER}}, it follows that $\MetaD\proves\enot \qt{\forall}{\alpha}\metaB$ by \textbf{\ref{lemma:prweak}}. 
-  Thus $\enot\qt{\forall}{\alpha}\metaB\in\MetaD$, and so $\qt{\forall}{\alpha}\metaB\notin\MetaD$ by \textbf{\ref{lemma:max}}.
-  We may then conclude by contraposition that $\qt{\forall}{\alpha}\metaB\in\MetaD$ if $\metaB\unisub{\beta}{\alpha}\in\MetaD$ for every constant $\beta\in\C$.
+  Assuming $\qt{\forall}{\alpha}\metaB \in \MetaD$ and letting $\beta \in \C$ be arbitrary, it follows that $\MetaD \vdash \metaB\unisub{\beta}{\alpha}$ by universal elimination $\forall$E, and so $\metaB\unisub{\beta}{\alpha} \in \MetaD$ by \textbf{\ref{lemma:deductive}}. 
 
-  Assume instead that $\qt{\forall}{\alpha}\metaB\in\MetaD$ and let $\beta\in\C$ be arbitrary.
-  Thus $\MetaD\proves\metaB\unisub{\beta}{\alpha}$ by universal elimination $\forall$E, and so $\metaB\unisub{\beta}{\alpha}\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
-  Generalizing on $\beta$, it follows that $\metaB\unisub{\beta}{\alpha}\in\MetaD$ for all $\beta\in\C$, thereby establishing $(\forall)$.
+  Assume instead that $\qt{\forall}{\alpha}\metaB \notin \MetaD$.
+  Since $\MetaD$ is maximal, $\enot\qt{\forall}{\alpha}\metaB \in \MetaD$.
+  By ($\enot\forall$) from $\S\ref{QER}$, we know that $\enot\qt{\forall}{\alpha}\metaB \vdash \qt{\exists}{\alpha}\enot\metaB$, and so $\MetaD \vdash \qt{\exists}{\alpha}\enot\metaB$ by \textbf{\ref{lemma:prweak}}.
+  Thus $\qt{\exists}{\alpha}\enot\metaB \in \MetaD$ by \textbf{\ref{lemma:deductive}}.
+
+  Given that $\enot\metaB$ has at most one free variable $\alpha$, it follows that $\metaB=\metaA_i(\alpha_i)$ for some $i\in\N$ where $\alpha_i=\alpha$ by the enumeration given in $\S\ref{sub:Saturation}$.
+  Since $\MetaD$ is saturated, it follows that $\qt{\exists}{\alpha_i} \metaA_i \eif \metaA_i\unisub{n_i}{\alpha_i} \in \MetaD$ where $n_i\in\C$, and so $\qt{\exists}{\alpha}\enot\metaB \eif \enot\metaB\unisub{\beta}{\alpha} \in  \MetaD$ for some $\beta \in \C$.
+  By conditional elimination $\eif$E, we know $\MetaD \vdash \enot\metaB\unisub{\beta}{\alpha}$.
+
+  If $\metaB\unisub{\beta}{\alpha} \in \MetaD$, then $\MetaD \vdash \metaB\unisub{\beta}{\alpha}$, and so it would follow by \textbf{\ref{lemma:cont}} that $\MetaD$ is inconsistent contrary to assumption. 
+  Thus $\metaB\unisub{\beta}{\alpha} \notin \MetaD$ for some $\beta \in \C$.
+  By contraposition, we may conclude that if $\metaB\unisub{\beta}{\alpha} \in \MetaD$ for all $\beta \in \C$, then $\qt{\forall}{\alpha}\metaB \in \MetaD$.
+  Together with the above, this establishes $(\forall)$. 
 
   Additionally, $(\hspace{.7pt}\star\hspace{.7pt})$ holds by hypothesis, $(\hspace{.7pt}\ast\hspace{.7pt})$ is given by \textbf{\ref{lemma:quantA}}, and the other biconditionals follow from the case assumption.
 
   \textit{Conclusion:}
-  It follows by induction that $\VV{\I_\MetaD}{\va{a}}(\metaA)=1$ just in case $\metaA\in\MetaD$ for any variable assignment $\va{a}$ and sentence $\metaA$ in $\FIN$. 
-  Thus we have the following:
+  It follows by induction that $\VV{\I_\MetaD}{\va{a}}(\metaA)=1$ just in case $\metaA\in\MetaD$ where the variable assignment $\va{a}$ and sentence $\metaA$ in $\FIN$ where both arbitrary. 
+  Thus we have:
 
   \vspace{-.2in}
   \begin{align*}
     \M_\MetaD \text{ satisfies } \metaA &\textit{ ~iff~ } \VV{\I_\MetaD}{}(\metaA)=1\\
-    &\textit{ ~iff~ } \VV{\I_\MetaD}{\va{a}}(\metaA)=1 \text{ for some v.a. } \va{a}\\
+    &\textit{ ~iff~ } \VV{\I_\MetaD}{\va{a}}(\metaA)=1 \text{ for all v.a. } \va{a}\\
       &\textit{ ~iff~ } \metaA\in\MetaD.
   \end{align*}
 
@@ -873,6 +878,8 @@ Given the importance of this lemma, all but one case has been included in full.
   \qed
 \end{quote}
 
+Most of the work is done.
+Now all that remains is to connect the dots, establishing \textsc{FOL$^=$ Completeness} over our original language $\FI$.
 
 
 
@@ -881,34 +888,37 @@ Given the importance of this lemma, all but one case has been included in full.
   \label{sub:Restriction}
  
 It follows immediately from \textbf{\ref{lemma:truth}} that $\M_\MetaD$ satisfies $\MetaD$ and so $\M_\MetaD$ satisfies $\MetaG$ since $\MetaG\subseteq\MetaD$ by \textbf{\ref{lemma:include}}. 
-Since $\M_\MetaD$ is a model of $\FIN$ and not $\FI$, and so it remains to show that $\MetaG$ is satisfied by a model of $\FI$.
+Since $\M_\MetaD$ is a model of $\FIN$ and not $\FI$, it remains to show that $\MetaG$ is satisfied by a model of $\FI$.
 Thus we will restrict $\M_\MetaD$ to $\FI$ as follows: 
   \begin{enumerate}[leftmargin=1.5in]
     \item[\it Restriction:] $\I'_\MetaD(\alpha)=[\alpha]_\MetaD$ for every constant $\alpha$ in $\FI$.
     \item[~] $\I'_\MetaD(\F^n)=\I_\MetaD(\F^n)$ for all $n$-place predicates $\F^n$ and $n\in\N$. 
   \end{enumerate}
-Since the predicates in $\FIN$ are the same as those in $\FI$, no change to the extensions of the $n$-place predicates is required.
-Given that our aim is to restrict consideration to the expressions in $\FI$, it doesn't matter that the elements in $\D_\MetaD$ may contain constants that do not belong to $\FI$.
-In interpreting constants and predicates that belong to $\FI$ the domain may contain anything whatsoever.
-There simply is no requirement that the domain only include constants that belong to $\FI$.
+Since the predicates in $\FIN$ are the same as those in $\FI$, no change to the predicate extensions is required.
+By contrast, the set of constants in $\FI$ is a proper subset of the set of constants in $\FIN$. 
+Given that our aim is to restrict consideration to the expressions in $\FI$, it doesn't matter that the elements in $\D_\MetaD$ over which we are interpreting $\FI$ may contain constants that do not belong to $\FI$.
+Rather, we simply need some nonempty set of elements over which to interpret $\FI$ and $\D_\MetaD$ will suffice. 
+% In interpreting constants and predicates that belong to $\FI$ the domain may contain anything whatsoever.
+% There simply is no requirement that the domain only include constants that belong to $\FI$.
 Thus we may take $\D'_\MetaD=\D_\MetaD$ as before, letting $\M'_\MetaD=\tuple{\D'_\MetaD,\I'_\MetaD}$ be the restriction of $\M$ to $\FI$. 
-It is easy to show that $\M'_\MetaD$ and $\M_\MetaD$ satisfy the same $\FI$ sentences, and so $\M'_\MetaD$ satisfies $\MetaG$ where $\M'_\MetaD$ is a model of $\FI$. 
-Thus we may conclude that $\MetaG$ is satisfiable in the desired sense. 
+Since every wfs of $\FIN$ is also a wfs of $\FI$, it is easy to show that $\M'_\MetaD$ and $\M_\MetaD$ satisfy the same $\FI$ sentences, and so $\M'_\MetaD$ satisfies $\MetaG$ where $\M'_\MetaD$ is a model of $\FI$. 
+Thus we may conclude that $\MetaG$ is satisfiable as desired. 
 
 \begin{Lthm} \label{lemma:satrest}
   For all $\FI$ sentences $\metaA$, $\M'_\MetaD$ satisfies $\metaA$ just in case $\M_\MetaD$ satisfies $\metaA$.
 \end{Lthm}
 
 \begin{quote} 
-  \textit{Proof:} The proof goes by induction where the base cases are immediate from the restriction to the sentences of $\FI$ together with the definition of $\M'_\MetaD$.
-  The induction case is just as trivial, and so details will be omitted.
+  \textit{Proof:} The proof goes by induction on complexity where the base cases are immediate from the restriction to the sentences of $\FI$ together with the definition of $\M'_\MetaD$.
+  The induction cases are just as trivial, and so details will be omitted.
+  \qed
   %
   % % TODO Use the \bref{lemma:model}
   %
   % If $\M=\tuple{\D,\I}$ and $\M'=\tuple{\D,\I'}$ share the domain $\D$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and constant $\alpha$ that occurs in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any variable assignment $\va{a}$ over $\D$.
 \end{quote}
 
-Given that $\M_\MetaD$ satisfies $\MetaG$ where every $\metaA\in\MetaG$ is a sentence of $\FI$, it follows from \textbf{\ref{lemma:satrest}} that $\M'_\MetaD$ satisfies $\MetaG$ where $\M'_\MetaD$ is a $\FI$ model. 
+Since $\M_\MetaD$ satisfies $\MetaG$ where every $\metaA\in\MetaG$ is a sentence of $\FI$, it follows from \textbf{\ref{lemma:satrest}} that $\M'_\MetaD$ satisfies $\MetaG$ where $\M'_\MetaD$ is a $\FI$ model. 
 Thus $\MetaG$ is satisfiable with respect to the models of $\FI$.
 Since $\MetaG$ was any consistent set, we may draw the following conclusion:
 
@@ -920,36 +930,46 @@ Since $\MetaG$ was any consistent set, we may draw the following conclusion:
 
 \begin{quote} 
   \textit{Proof:} 
-  Assume $\MetaG$ is a consistent set of $\FI$ sentences.
-  By \textbf{\ref{lemma:const}}, $\MetaG$ is a consistent set of $\FIN$ sentences, and so $\MetaS_\MetaG$ is a consistent and saturated set of $\FIN$ sentences by \textbf{\ref{lemma:sat}}. 
+  Let $\MetaG$ be a consistent set of $\FI$ sentences in FOL$^=$.
+  By \textbf{\ref{lemma:const}}, $\MetaG$ is a set of $\FIN$ sentences that is consistent in FOL$^=_\N$, and so $\MetaS_\MetaG$ is consistent and saturated in $\FIN$ by \textbf{\ref{lemma:sat}}. 
   Given \textbf{\ref{lemma:max}} and \textbf{\ref{lemma:include}}, $\MetaD_{\MetaS_\MetaG}$ is a saturated maximal consistent set of sentences in $\FIN$ where $\MetaG\subseteq\MetaD_{\MetaS_\MetaG}$.
-  Letting $\MetaD=\MetaD_{\MetaS_\MetaG}$, it follows that there is a Henkin model $\M_\MetaD$ which satisfies $\metaA$ just in case $\metaA\in\MetaD$.
-  As a result, $\M_\MetaD$ satisfies $\MetaD$, and since $\MetaG\subseteq\MetaD$, we know that $\M_\MetaD$ satisfies $\MetaG$.
-  Since $\MetaG$ is a set of $\FI$ sentences, it follows by \textbf{\ref{lemma:satrest}} that there is a model $\FI$ model $\M'_\MetaD$ that satisfies $\MetaG$.
+  Letting $\MetaD=\MetaD_{\MetaS_\MetaG}$, \textbf{\ref{lemma:truth}} shows that the Henkin model $\M_\MetaD$ satisfies $\metaA$ just in case $\metaA\in\MetaD$, and so $\M_\MetaD$ satisfies $\MetaD$.
+  Having shown that $\MetaG\subseteq\MetaD$, we know that $\M_\MetaD$ satisfies $\MetaG$.
+  Since $\MetaG$ is a set of $\FI$ sentences, it follows by \textbf{\ref{lemma:satrest}} that there is a model $\M'_\MetaD$ of $\FI$ that satisfies $\MetaG$.
   Thus $\MetaG$ is satisfiable.
-
+  \qed
 \end{quote}
 
-Given this result, the completeness of FOL$^=$ over the semantics for $\FI$ follows as a corollary. 
+Whereas we began with the assumption that $\MetaG$ is consistent in FOL$^=$ which is made up of rules defined for the language $\FI$, \textbf{\ref{lemma:const}} established the consistency of $\MetaG$ in FOL$^=_\N$ since $\MetaG$ is also a set of wfss of $\FIN$.
+Throughout the remainder of the lemma, consistency is defined with respect to FOL$^=_\N$ rather than FOL$^=$ in order to show that $\MetaG$ is satisfied by a model of $\FIN$. 
+It is not until \textbf{\ref{lemma:satrest}} that consideration is returned to $\FI$, showing that $\MetaG$ is also satisfied by a model of $\FI$, and so is satisfiable in the desired sense.
 
-\begin{Cthm}[Completeness] \label{cor:Completeness}
-  If $\MetaG\models\metaA$, then $\MetaG\proves\metaA$.
+Given the previous result, the completeness of FOL$^=$ over the semantics for $\FI$ follows as a corollary. 
+The proof below formalizes the reasoning that we provided early on in order to motivate our approach to ultimately establishing the following result.
+
+
+
+\begin{Cthm}[\sc FOL$^=$ Completeness] \label{cor:Completeness}
+  If $\MetaG\vDash\metaA$, then $\MetaG\vdash\metaA$.
 \end{Cthm}
 
 \begin{quote} 
-  \textit{Proof:} Assume $\MetaG\models\metaA$ and let $\M=\tuple{\D,\I}$ be a model that satisfies $\MetaG$.
-  It follows that $\M$ satisfies $\metaA$, and so by \textbf{\ref{lemma:allvar}}, $\VV{\I}{\va{a}}(\metaA)=1$ for every variable assignment $\va{a}$.
+  \textit{Proof:} Assume $\MetaG\vDash\metaA$ and let $\M=\tuple{\D,\I}$ be a model that satisfies $\MetaG$.
+  It follows that $\M$ satisfies $\metaA$, and so $\VV{\I}{\va{a}}(\metaA)=1$ for every variable assignment $\va{a}$.
   Given the semantics for negation, $\VV{\I}{\va{a}}(\enot\metaA)\neq 1$ for every variable assignment $\va{a}$, and so $\VV{\I}{}(\enot\metaA)\neq 1$.
   Thus $\M$ does not satisfy $\enot\metaA$.
   By generalising on $\M$, no model that satisfies $\MetaG$ also satisfies $\enot\metaA$, and so $\MetaG\cup\set{\metaA}$ is unsatisfiable. 
-  By \textbf{\ref{thm:comp}}, $\MetaG\cup\set{\enot\metaA}$ is inconsistent, and so $\MetaG\proves\enot\enot\metaA$ by \textbf{\ref{lemma:incon}}.
-  Since $\enot\enot\metaA\proves\metaA$ by DN, we may conclude that $\MetaG\proves\metaA$ by \textbf{\ref{lemma:cut}}.
+  By \textbf{\ref{thm:comp}}, $\MetaG\cup\set{\enot\metaA}$ is inconsistent, and so $\MetaG\vdash\enot\enot\metaA$ by \textbf{\ref{lemma:incon}}.
+  Since $\enot\enot\metaA\vdash\metaA$ by DN from $\S\ref{EFQ}$, we may conclude that $\MetaG\vdash\metaA$ by \textbf{\ref{lemma:prcut}}.
+  \qed
 \end{quote}
 
 Completeness may seems like a good property for any proof system to have.
-In particular, the completeness of FOL$^=$ shows that there is no (extensionally) better proof system which allows us to derive a valid inference that FOL$^=$ leaves out.
-However, there is another perspective which takes completeness to describe a certain limitation on what sorts of logical consequences hold between the sentences in $\FI$, calling the notion of logical consequence in $\FI$ into question.
-% We will close by briefly considering this 
+In analogy, if we could build a complete calculator that could compute any arithmetical operation, that would seem like a good thing.
+With respect to the semantics we provided for $\FI$, the completeness of FOL$^=$ shows that there is no (extensionally) better proof system which allows us to derive a valid inference that FOL$^=$ leaves out.
+However, there is another perspective which takes completeness to describe a certain limitation on what sorts of logical consequences hold between the sentences in $\FI$, calling the notion of logical consequence that we provided for $\FI$ into question.
+We will close by briefly reflecting on the status of FOL$^=$. % and its corresponding theory of logical consequence, discouraging any temptation to consider FOL$^=$.
+% Rather than calling for any specific revision to the semantics that we provided, the
 
 
 
@@ -958,20 +978,20 @@ However, there is another perspective which takes completeness to describe a cer
 
 \section{Compactness}%
   \label{sec:Compactness}
-  
 
-We will close with an important consequence of completeness.
+In order to discipline the following reflections we may begin with an important consequence of the completeness of FOL$^=$, mirroring a related result that we established for PL.
 
 \begin{Cthm} \label{cor:compact}
-  If $\MetaG\models\metaA$, then there is a finite subset $\Lambda\subseteq\MetaG$ where $\Lambda\models\metaA$.
+  If $\MetaG\vDash\metaA$, then there is a finite subset $\Lambda\subseteq\MetaG$ where $\Lambda\vDash\metaA$.
 \end{Cthm}
 
 \begin{quote} 
   \textit{Proof:} 
-Assume $\MetaG\models\metaA$.  
-It follows by completeness that $\MetaG\proves\metaA$, and so there is a finite proof $X$ of $\metaA$ from $\MetaG$.
-Letting $\MetaG_X$ be the set of premises which appear in $X$, it follows that $\MetaG_X\proves\metaA$, and so $\MetaG_X\models\metaA$.
-Since $X$ is finite, $\MetaG_X$ is also finite, and so we may conclude that whenever $\MetaG\models\metaA$ there is a finite subset $\Lambda\subseteq\MetaG$ where $\Lambda\models\metaA$.
+  Assume $\MetaG\vDash\metaA$.  
+  Thus $\MetaG\vdash\metaA$ by \textsc{FOL$^=$ Completeness}, and so there is a derivation $X$ of $\metaA$ from $\MetaG$.
+  Letting $\MetaG_X$ be the set of premises which appear in $X$, it follows that $\MetaG_X\vdash\metaA$, and so $\MetaG_X\vDash\metaA$ by \textsc{FOL$^=$ Soundness}.
+  Since $X$ is finite, $\MetaG_X$ is also finite, and so there is a finite subset $\Lambda\subseteq\MetaG$ where $\Lambda\vDash\metaA$.
+  \qed
 \end{quote}
 
 
@@ -983,23 +1003,25 @@ Since $X$ is finite, $\MetaG_X$ is also finite, and so we may conclude that when
 \begin{quote} 
   \textit{Proof:} 
   Assume for contraposition that $\MetaG$ is unsatisfiable. 
-  It follows vacuously that $\MetaG\models\bot$, and so $\Lambda\models\bot$ by \textbf{\ref{cor:compact}} for some finite subset $\Lambda\subseteq\MetaG$.
+  It follows vacuously that $\MetaG\vDash\bot$, and so $\Lambda\vDash\bot$ by \textbf{\ref{cor:compact}} for some finite subset $\Lambda\subseteq\MetaG$.
   Thus there is some finite subset $\Lambda\subseteq\MetaG$ that is unsatisfiable. 
   By contraposition, if every finite subset $\Lambda\subseteq\MetaG$ is satisfiable, then $\MetaG$ is satisfiable. 
+  \qed
 \end{quote}
 
 
 This property is referred to as \define{compactness}.
-Although compactness may seems like a nice property to have, it demonstrates that there cannot be sentences which are only logical consequences of infinitely many sentences.
+Although compactness may seems like a nice property, it demonstrates that there cannot be wfs in $\FI$ which are only logical consequences of infinite sets of wfss of $\FI$.
 However, there would seems to be some natural examples.
-For instance, let $\MetaG_\infty=\set{\exists_{\geq n}xFx:n\in\N}$ be the set of sentences which says that at least $n$ things are $F$ for all natural numbers $n$. 
+For instance, let $\MetaG_\infty=\set{\exists_{\geq n}xFx:n\in\N}$ be the set of wfs which say that at least $n$ things are $F$ for every natural number $n$. 
 Although it would seem that it is a logical consequence of $\MetaG_\infty$ that infinitely many things are $F$, this logical consequence cannot hold by compactness.
-Suppose for instance that $A_\infty$ is a sentence which is only satisfied by models with infinite domains where everything is $F$.
-If $\MetaG_\infty\models A_\infty$, then $\Lambda\models A_\infty$ for some finite subset $\Lambda\subseteq\MetaG_\infty$ by compactness.
-However, every nonempty finite subset $\Lambda\subseteq\MetaG_\infty$ will have a finite model, and so $A_\infty$ must have a finite model given $\Lambda\models A_\infty$. 
-But this contradicts the assumption that $A_\infty$ is a sentence which is only satisfied by models with infinite domains.
-As a result, there are no sentences such as $A_\infty$ that only have infinite models. %, and so there is much that we cannot say in our present language.
-Put otherwise, talk of infinity is simply out of reach.
+More precisely, there is no wfs of $\FI$ which asserts that infinitely many things are $F$.
+
+In order to see this, suppose that there were a wfs $A_\infty$ of $\FI$ that is satisfied by all and only the models in which infinitely many things are $F$.
+It follows that $\MetaG_\infty\vDash A_\infty$, and so $\Lambda\vDash A_\infty$ for some finite subset $\Lambda\subseteq\MetaG_\infty$ by compactness.
+However, since every finite subset $\Lambda\subseteq\MetaG_\infty$ will have a finite model, $A_\infty$ must have a finite model given that $\Lambda\vDash A_\infty$. 
+But this contradicts the assumption that $A_\infty$ is only satisfied by models in which infinitely many things are $F$.
+As a result, there are no wfs of $\FI$ such as $A_\infty$ that only have infinite models. %, and so there is much that we cannot say in our present language.
 % Although this does not mean that $\FI$ along with its semantics and the definition of logical consequence is of no use, it does means that we should not take 
 
 These conclusions do not tell against infinity, but rather expose a limitation of our present semantics.
@@ -1010,16 +1032,16 @@ Even though $\FI$ along with its semantics and proof system FOL$^=$ is extremely
 Rather, the systems that we have covered are just the beginning.
 
 
-%%% BREAK 
+%%% TODO: add final section on decidability
 
-Although attempting to show that $\MetaG \plvdash \metaA$ was not guaranteed to lead to a proof or to the conclusion that no proof exists, truth-tables provided an effective procedure for determining whether $\MetaG\vDash\metaA$ or not. 
-Put otherwise, logical consequence is \define{decidable} in PL insofar as there is an effective procedure for determining in a finite number of steps whether $\MetaG \vDash \metaA$.
-By soundness and completeness... % TODO continue
-
-By contrast, logical consequence in $\FI$ is \define{undecidable} insofar as there is no such method for determining whether or not $\MetaG \vDash \metaA$.
-Even though we may construct a tree method for $\FI$, this method is not guaranteed to lead to either a positive or negative determination in the way that it did for PL.
-This makes the tree method a lot less interesting for $\FI$.
-As a result, the following chapters will establish soundness and completeness for FOL$^=$ rather than for an extension of the tree method for $\FI$.
+% Although attempting to show that $\MetaG \plvdash \metaA$ was not guaranteed to lead to a proof or to the conclusion that no proof exists, truth-tables provided an effective procedure for determining whether $\MetaG\vDash\metaA$ or not. 
+% Put otherwise, logical consequence is \define{decidable} in PL insofar as there is an effective procedure for determining in a finite number of steps whether $\MetaG \vDash \metaA$.
+% By soundness and completeness... % TODO continue
+%
+% By contrast, logical consequence in $\FI$ is \define{undecidable} insofar as there is no such method for determining whether or not $\MetaG \vDash \metaA$.
+% Even though we may construct a tree method for $\FI$, this method is not guaranteed to lead to either a positive or negative determination in the way that it did for PL.
+% This makes the tree method a lot less interesting for $\FI$.
+% As a result, the following chapters will establish soundness and completeness for FOL$^=$ rather than for an extension of the tree method for $\FI$.
 
 
 \iffalse
