@@ -124,8 +124,8 @@
 \section*{Induction Step}
 
 \begin{itemize}
-  \item[\it Assume:] $\Gamma_k \vDash \varphi_k$ for all $k\leq n$ where $\metaA_{n+1}$ follows an FOL$^=$ rule. 
-  \item Want to show $\Gamma_{n+1}\vDash\varphi_{n+1}$.
+  \item[\it Assume:] $\Gamma_k \vDash \varphi_k$ for all $k\leq n$ where $\metaA_{n+1}$ follows by a FOL$^=$ rule. 
+  \item Want to show $\Gamma_{n+1}\vDash\varphi_{n+1}$ by each rule.
 \end{itemize}
 
 
@@ -168,7 +168,7 @@
 
 
 
-\section*{Existential Rules}
+\section*{Existential and Identity Lemmas}
 
 \begin{itemize}
   \item[\bf L11.10] $\metaA\unisub{\beta}{\alpha} \vDash \exists\alpha\metaA$ where $\alpha$ is a variable and $\metaA\unisub{\beta}{\alpha}$ is a wfs of $\FI$.
@@ -184,95 +184,123 @@
     \item So $\VV{\I}{}(\qt{\exists}{\alpha}\metaA) = 1$, and so $\VV{\I}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$ for some v.a. $\va{a}$ by \textbf{L9.2}.
     \item So $\VV{\I}{\va{c}}(\metaA)=1$ for a $\alpha$-variant $\va{c}$ of $\va{a}$ by the semantics.
     \item Let $\M'$ be like $\M$ but for $\I'(\beta)=\va{c}(\alpha)$, and so $\val{\I'}{\va{c}}(\beta)=\val{\I'}{\va{c}}(\alpha)$.
-    \item Given any $\va{e}$, we know $\VV{\I}{}(\metaC) = 1$ and so $\VV{\I}{\va{e}}(\metaC) = 1$ for any $\metaC \in \MetaG$.
-    \item Given the assumptions about $\beta$, by \textbf{L11.6} $\VV{\I'}{\va{e}}(\metaC) = 1$, so $\VV{\I'}{}(\metaC) = 1$.
-    \item Generalizing on $\metaC$, it follows that $\VV{\I'}{}(\metaC) = 1$ for all $\metaC \in \Gamma$.
     \item Since $\beta$ is not in $\qt{\exists}{\alpha}\metaA$, it's not in $\metaA$, and so $\VV{\I}{\va{c}}(\metaA)=\VV{\I'}{\va{c}}(\metaA)$ by \textbf{L11.6}.
     \item Since $\val{\I'}{\va{c}}(\beta)=\val{\I'}{\va{c}}(\alpha)$, we know $\VV{\I'}{\va{c}}(\metaA)=\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{L11.5}. 
     \item Thus $\VV{\I'}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$, and so $\VV{\I'}{}(\metaA\unisub{\beta}{\alpha})=1$ by \textbf{L9.2}.
+    \item Given any $\va{e}$, we know $\VV{\I}{}(\metaC) = 1$ and so $\VV{\I}{\va{e}}(\metaC) = 1$ for any $\metaC \in \MetaG$.
+    \item Given the assumptions about $\beta$, by \textbf{L11.6} $\VV{\I'}{\va{e}}(\metaC) = 1$, so $\VV{\I'}{}(\metaC) = 1$.
+    \item Generalizing on $\metaC$, it follows that $\VV{\I'}{}(\metaC) = 1$ for all $\metaC \in \Gamma$.
     \item Hence $\VV{\I'}{}(\metaC) = 1$ for all $\metaC \in \Gamma \cup \set{\metaA\unisub{\beta}{\alpha}}$.
     \item So $\VV{\I'}{}(\metaB) = 1$ by assumption, so $\VV{\I'}{\va{g}}(\metaB)=1$ for some $\va{g}$ by \textbf{L9.2}.
     \item Since $\beta$ does not occur in $\metaB$, $\VV{\I}{\va{g}}(\metaB)=1$ for all $\va{g}$ by \textbf{L11.6}.
     \item Thus $\VV{\I}{}(\metaB)=1$ by \textbf{L9.2}, so $\Gamma \vDash \metaB$ by generalizing on $\M$.
-    
   \item[\bf L11.12] If $\alpha$ and $\beta$ are constants, then $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \vDash \metaA\unisub{\beta}{\gamma}$.
+    \item Let $\M=\tuple{\D,\I}$ where $\VV{\I}{}(\metaA\unisub{\alpha}{\gamma}) = \VV{\I}{}(\alpha = \beta) = 1$. 
+    \item By \textbf{L9.2}, $\VV{\I}{\va{a}}(\metaA\unisub{\alpha}{\gamma})=1$ for some $\va{a}$, where $\VV{\I}{\va{c}}(\alpha=\beta)=1$ for all $\va{c}$.
+    \item So $\VV{\I}{\va{a}}(\alpha=\beta)=1$ in particular, and so $\val{\I}{\va{a}}(\alpha)=\val{\I}{\va{a}}(\beta)$ by semantics.
+    \item Since $\beta$ is a constant, $\VV{\I}{\va{a}}(\metaA\unisub{\alpha}{\gamma}) = \VV{\I}{\va{a}}((\metaA\unisub{\alpha}{\gamma})\unisub{\beta}{\alpha})$ by \textbf{L11.5}.
+    \item However, $(\metaA\unisub{\alpha}{\gamma})\unisub{\beta}{\alpha}=\metaA\unisub{\beta}{\gamma}$, and so $\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\gamma})=1$.
+    \item Since $\metaA\unisub{\beta}{\gamma}$ is a wfs of $\FI$, we know $\VV{\I}{}(\metaA\unisub{\beta}{\gamma})=1$. 
+    \item By generalizing on $\M$ we may conclude that $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \vDash \metaA\unisub{\beta}{\gamma}$. 
 \end{itemize}
 
 
+
+
+\section*{Existential and Identity Rules}%
+  \label{sec:ExistentialRules}
   
-
-
-
-  \qed
-
-\factoidbox{
-\begin{Rthm} \label{rule:ExistI}
-  \textbf{($\boldsymbol\exists$I)}~~ $\Gamma_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\exists$I. 
-\end{Rthm}
-}
-
-\begin{quote} 
-  \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential introduction $\exists$I.
-  Thus there is some $i\leq n$ where $\metaA_i=\metaA\unisub{\beta}{\alpha}$ is live at $n+1$ and $\metaA_{n+1}=\qt{\exists}{\alpha}\metaA$ for some variable $\alpha$ and constant $\beta$.
-  By \textbf{\ref{lemma:PL-live}}, $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\vDash\metaA_i$ by hypotheses, and so $\Gamma_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:PL-weakening}}.
-  Equivalently, $\Gamma_{n+1} \vDash \metaA\unisub{\beta}{\alpha}$.
-  Since $\metaA\unisub{\beta}{\alpha} \vDash \qt{\exists}{\alpha}\metaA$ by \textbf{\ref{lemma:exigen}}, $\Gamma_{n+1}\vDash\metaA_{n+1}$ by \textbf{\ref{lemma:cut}}.
-  \qed
-\end{quote}
-
-
-\section*{PL Rules}
-
 \begin{itemize}
-  \item[($\enot$E)] There is a proof of $\metaB$ at line $h$ and $\enot\metaB$ at line $j$ from $\enot \metaA$ on line $i$.
-    %$\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\MetaG_{n+1}$ by the rule $\enot$I.
-    \item By hypothesis $\MetaG_h\vDash \metaB$ and $\MetaG_j\vDash\enot\metaB$, where $\MetaG_h,\MetaG_j\subseteq\MetaG_{n+1}\cup\set{\enot \metaA_i}$.
-    \item By \textbf{L2.1}, $\MetaG_{n+1}\cup\set{\enot \metaA_i}\vDash\metaB$ and $\MetaG_{n+1}\cup\set{\enot \metaA_i}\vDash\enot\metaB$.
-    \item So $\MetaG_{n+1}\cup\set{\enot \metaA_i}$ is unsatisfiable by \textbf{L11.2}
-    \item So $\MetaG_{n+1}\vDash \enot\enot\metaA_{n+1}$ follows by \textbf{L11.3}, and then appeal to the semantics.
+  \item[($\exists$I)] $\Gamma_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\exists$I. 
+    \item Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential introduction $\exists$I.
+    \item Thus $\metaA_i=\metaA\unisub{\beta}{\alpha}$ is live at $n+1$ for some $i\leq n$ where $\metaA_{n+1}=\qt{\exists}{\alpha}\metaA$.
+    \item By \textbf{L4.3}, we know $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\vDash\metaA_i$ by hypotheses.
+    \item So $\Gamma_{n+1} \vDash \metaA_i$ by \textbf{L2.1}, and so equivalently, $\Gamma_{n+1} \vDash \metaA\unisub{\beta}{\alpha}$.
+    \item Since $\metaA\unisub{\beta}{\alpha} \vDash \qt{\exists}{\alpha}\metaA$ by \textbf{L11.10}, we know $\Gamma_{n+1}\vDash\metaA_{n+1}$ by \textbf{L11.9}.
+  \item[($\exists$E)] $\Gamma_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $\exists$E.
+    \item Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential elimination $\exists$E.
+    \item For some $i<j<k\leq n$ where $\metaA_i=\qt{\exists}{\alpha}\metaA$ is live at $n+1$, $\metaA_j=\metaA\unisub{\beta}{\alpha}$ for some constant $\beta$ that does not occur in $\metaA_i$, $\metaA_k$, or any $\metaB\in\Gamma_i$.
+      \begin{proof}
+        \have[i]{i}{\qt{\exists}{\alpha}\metaA}
+        \open	
+          \hypo[j]{j}{\metaA\unisub{\beta}{\alpha}} \as{for $\exists$E}
+          \have[ ]{x}{\vdots} 
+          \have[k]{k}{\metaB}
+        \close
+        \have[n+1]{n}{\metaB{}} \Ee{i,j-k}
+      \end{proof}
+    \item By hypothesis, $\Gamma_i\vDash\metaA_i$ and $\Gamma_k\vDash\metaA_k$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{L4.3}.
+    \item With the exception of $\metaA_j$, every assumption that is undischarged at line $k$ is also undischarged at line $n+1$, and so $\Gamma_k\subseteq\Gamma_{n+1}\cup\set{\metaA_j}$.
+    \item By \textbf{L2.1} we know $\Gamma_{n+1} \vDash \metaA_i$ and $\Gamma_{n+1}\cup\set{\metaA_j} \vDash \metaA_k$.
+    \item Equivalently, $\Gamma_{n+1} \vDash \qt{\exists}{\alpha}\metaA$ and $\Gamma_{n+1}\cup\set{\metaA\unisub{\beta}{\alpha}} \vDash \metaB$.
+    \item Thus $\Gamma_{n+1}\vDash\metaB$ by \textbf{L11.11}, and so $\Gamma_{n+1}\vDash\metaA_{n+1}$.
+  \item[($=$E)] $\Gamma_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by the rule $=$E. 
+    \item Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential elimination $=$E.
+    \item By parity, $\metaA_i$ is $\alpha=\beta$, $\metaA_j=\metaA\unisub{\alpha}{\gamma}$, and $\metaA_{n+1}=\metaA\unisub{\beta}{\gamma}$.
+    \item By \textbf{L4.3}, $\Gamma_i,\Gamma_j\subseteq \Gamma_{n+1}$ where $\Gamma_i\vDash\metaA_i$ and $\Gamma_j\vDash\metaA_j$ by hypotheses.
+    \item So $\Gamma_{n+1} \vDash \metaA_i$ and $\Gamma_{n+1} \vDash \metaA_j$ by \textbf{L2.1}.
+    \item Equivalently, $\Gamma_{n+1} \vDash \alpha = \beta$ and $\Gamma_{n+1} \vDash \metaA\unisub{\alpha}{\gamma}$.
+    \item So $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \vDash \metaA\unisub{\beta}{\gamma}$ by \textbf{L11.12} since $\alpha$ and $\beta$ are constants.
+    \item By two applications of \textbf{L11.9}, $\Gamma_{n+1}\vDash\metaA\unisub{\beta}{\gamma}$, so $\Gamma_{n+1}\vDash\metaA_{n+1}$.
 \end{itemize}
 
 
 
 
 
-\section*{Existential Elimination}
 
-\begin{enumerate}
-  \item[\bf Task 1:] Regiment and derive the following in FOL$^=$.
-  % \item $\qt{\forall}{x}, Rma\vdash \qt{\exists}{x} Rxx$
-  % \item $\qt{\forall}{x}(x{=}n \equiv Mx), \qt{\forall}{x}(Ox \vee \neg Mx)\vdash On$
-  \item The elephant would not obey.\\
-    \underline{Patrick is an elephant.}\\ 
-    Patrick would not obey.
-  \item $\qt{\forall}{x}(Jx \supset Kx)$\\
-    $\qt{\exists}{x}\qt{\forall}{y} Lxy$\\
-    \underline{$\qt{\forall}{x} Jx$}\\
-    $\qt{\exists}{x}(Kx \wedge Lxx)$.
-  \item \underline{$\qt{\exists}{x}(Px \supset \qt{\forall}{x}Qx)$}\\
-    $\qt{\forall}{x}Px \supset \qt{\forall}{x}Qx$.
-  \item \underline{$\qt{\exists}{x}Px \vee \qt{\exists}{x}Qx$}\\
-    $\qt{\exists}{x}(Px \vee Qx)$.
-  % \item $\qt{\exists}{x}(Kx \wedge \qt{\forall}{y}(Ky \supset x{=}y) \wedge Bx), Kd\vdash Bd$
-  % \item $\vdash Pa \supset \qt{\forall}{x}(Px \vee x {\neq} a)$
-  \item Every nonempty asymmetric relation is non-symmetric.
-\end{enumerate}
-
-
-
-
-
-
-\section*{Further Problems: Relations}
-
-\begin{enumerate}
-  \item[\bf Task 1:] Regiment and derive the following in FOL$^=$.
-  \item Every transitive and symmetric relation is quasi-reflexive.
-  \item Only the empty relation is symmetric and asymmetric.
-  \item Every intransitive relation is irreflexive.
-  \item Every intransitive relation is asymmetric.
-\end{enumerate}
-
+% \section*{PL Rules}
+%
+% \begin{itemize}
+%   \item[($\enot$E)] There is a proof of $\metaB$ at line $h$ and $\enot\metaB$ at line $j$ from $\enot \metaA$ on line $i$.
+%     %$\MetaG_{n+1} \vDash \metaA_{n+1}$ if $\metaA_{n+1}$ follows from $\MetaG_{n+1}$ by the rule $\enot$I.
+%     \item By hypothesis $\MetaG_h\vDash \metaB$ and $\MetaG_j\vDash\enot\metaB$, where $\MetaG_h,\MetaG_j\subseteq\MetaG_{n+1}\cup\set{\enot \metaA_i}$.
+%     \item By \textbf{L2.1}, $\MetaG_{n+1}\cup\set{\enot \metaA_i}\vDash\metaB$ and $\MetaG_{n+1}\cup\set{\enot \metaA_i}\vDash\enot\metaB$.
+%     \item So $\MetaG_{n+1}\cup\set{\enot \metaA_i}$ is unsatisfiable by \textbf{L11.2}
+%     \item So $\MetaG_{n+1}\vDash \enot\enot\metaA_{n+1}$ follows by \textbf{L11.3}, and then appeal to the semantics.
+% \end{itemize}
+%
+%
+%
+%
+%
+% \section*{Existential Elimination}
+%
+% \begin{enumerate}
+%   \item[\bf Task 1:] Regiment and derive the following in FOL$^=$.
+%   % \item $\qt{\forall}{x}, Rma\vdash \qt{\exists}{x} Rxx$
+%   % \item $\qt{\forall}{x}(x{=}n \equiv Mx), \qt{\forall}{x}(Ox \vee \neg Mx)\vdash On$
+%   \item The elephant would not obey.\\
+%     \underline{Patrick is an elephant.}\\ 
+%     Patrick would not obey.
+%   \item $\qt{\forall}{x}(Jx \supset Kx)$\\
+%     $\qt{\exists}{x}\qt{\forall}{y} Lxy$\\
+%     \underline{$\qt{\forall}{x} Jx$}\\
+%     $\qt{\exists}{x}(Kx \wedge Lxx)$.
+%   \item \underline{$\qt{\exists}{x}(Px \supset \qt{\forall}{x}Qx)$}\\
+%     $\qt{\forall}{x}Px \supset \qt{\forall}{x}Qx$.
+%   \item \underline{$\qt{\exists}{x}Px \vee \qt{\exists}{x}Qx$}\\
+%     $\qt{\exists}{x}(Px \vee Qx)$.
+%   % \item $\qt{\exists}{x}(Kx \wedge \qt{\forall}{y}(Ky \supset x{=}y) \wedge Bx), Kd\vdash Bd$
+%   % \item $\vdash Pa \supset \qt{\forall}{x}(Px \vee x {\neq} a)$
+%   \item Every nonempty asymmetric relation is non-symmetric.
+% \end{enumerate}
+%
+%
+%
+%
+%
+%
+% \section*{Further Problems: Relations}
+%
+% \begin{enumerate}
+%   \item[\bf Task 1:] Regiment and derive the following in FOL$^=$.
+%   \item Every transitive and symmetric relation is quasi-reflexive.
+%   \item Only the empty relation is symmetric and asymmetric.
+%   \item Every intransitive relation is irreflexive.
+%   \item Every intransitive relation is asymmetric.
+% \end{enumerate}
+%
 
 
 

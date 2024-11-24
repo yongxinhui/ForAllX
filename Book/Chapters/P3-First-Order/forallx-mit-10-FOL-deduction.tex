@@ -2,6 +2,7 @@
 \chapter{Natural Deduction in $\FI$}
 \label{ch.FOL-deduction}
 
+% TODO: lemma showing that we may import all derived rules and theorems
 
 % Trees employ a kind of `brute force' strategy for proving entailment claims.
 % When the logical structure of the relevant sentences is rather simple, as it is in PL and in some FOL$^=$ cases, it can be an effective strategy.
@@ -690,7 +691,7 @@ We will refer to the natural deduction rules specified above together with the n
 We may then adapt the definition of a proof from before by replacing PL with FOL$^=$ as follows:
 
 \factoidbox{
-  A \define{derivation} (or \define{proof}) of $\metaA$ from $\MetaG$ in FOL$^=$ is any finite sequence of wfs of $\FI$ ending in $\metaA$ where every wfs in the sequence is either: (1) a premise in $\MetaG$; (2) an assumption which is eventually discharged; or (3) follows from previous lines by a natural deduction rule for FOL$^=$ besides AS. 
+  A \define{derivation} (or \define{proof}) of $\metaA$ from $\MetaG$ in FOL$^=$ is any finite sequence of wfss of $\FI$ ending in $\metaA$ where every wfs in the sequence is either: (1) a premise in $\MetaG$; (2) an assumption which is eventually discharged; or (3) follows from previous lines by a natural deduction rule for FOL$^=$ besides AS. 
 }
 
 A wfs $\metaA$ of $\FI$ is \define{derivable} (or \define{provable}) from $\MetaG$ in FOL$^=$ just in case there is a natural deduction derivation (proof) of $\metaA$ from $\MetaG$ in FOL$^=$, where we may write this $\MetaG \vdash_{\textsc{fol}^=} \metaA$, or just $\MetaG \vdash \metaA$ when it is clear from context which proof system we intend.  

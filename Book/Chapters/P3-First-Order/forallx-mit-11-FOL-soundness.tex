@@ -4,7 +4,7 @@
 
   % TODO: make existential case come before universal case throughout
 
-In Chapter \ref{ch.PL-Soundness}, we showed that PL was sound over its semantics.
+In Chapter \ref{ch.PL-soundness}, we showed that PL was sound over its semantics.
 In particular, soundness showed that whenever a wfs $\metaA$ of $\PL$ is derivable in PL from some set of wfss $\MetaG$, we may conclude that $\metaA$ is a logical consequence of $\MetaG$ which we expressed as $\Gamma \vDash \metaA$.
 As a result, we could rely on derivations in PL in order to evaluate whether a conclusion of an argument was a logical consequence of its premises, making the argument valid.
 % The completeness result concerned the converse, showing that whenever some premises entail a conclusion, there is a closed tree that results from taking those premises together with the negation as the root.
@@ -163,8 +163,8 @@ It is this latter result which will play a critical role in the proof of \bref{l
 \section{PL Rules}%
   \label{sec:PL-Rules}
 
-You might recognize \textsc{PL Rules} from Chapter \ref{ch.PL-Soundness}, wondering why we can't simply cite this previous result.
-Despite the superficial similarities, \textsc{PL Rules} stated above says something about the wfss of $\FI$, a language we had not introduced in Chapter \ref{ch.PL-Soundness}.
+You might recognize \textsc{PL Rules} from Chapter \ref{ch.PL-soundness}, wondering why we can't simply cite this previous result.
+Despite the superficial similarities, \textsc{PL Rules} stated above says something about the wfss of $\FI$, a language we had not introduced in Chapter \ref{ch.PL-soundness}.
 Even though \textsc{PL Rules} only concerns proofs rules that occur in PL, the semantic turnstile $\vDash$ used above quantifies over the models of $\FI$, not the interpretations of $\PL$. 
 Were we to disambiguate, we may replace the turnstiles above with $\fivDash$ and not $\plvDash$, however tempting. 
 
@@ -176,7 +176,7 @@ The answer is that there are proof strategies that go this way, though they typi
 Either they merely wave their hands, suppressing the details that make the proof worth reading, or they define an injection from $\FI$ into $\PL$ in order to make use of \textsc{PL Soundness}. % , showing that if $\metaA_{n+1}$ follows by a proof rule for PL, then mapping the wfss involved into $\PL$ also  
 Since this latter strategy is abstract and cumbersome, and the former is pointless, we will follow the much more concrete approach of simply revising our former proofs.
 In addition to providing the opportunity to review how the proof of \textsc{PL Soundness} worked before, we will also be in a position to omit certain elements when the details are very similar to the proofs that we already provided above.
-Nevertheless, by referring to the proofs in Chapter \ref{ch.PL-Soundness}, it should be possible to reconstruct every element of the proof in rigorous detail.
+Nevertheless, by referring to the proofs in Chapter \ref{ch.PL-soundness}, it should be possible to reconstruct every element of the proof in rigorous detail.
 
 
 
@@ -240,7 +240,7 @@ Given these two lemmas, we may now proceed to establish the reiteration rule R i
   \qed
 \end{quote}
 
-% Whereas no amendment is needed to adapt the proof of \bref{rule:R} from Chapter \ref{ch.PL-Soundness}, other PL proof rules will require some minor changes.
+% Whereas no amendment is needed to adapt the proof of \bref{rule:R} from Chapter \ref{ch.PL-soundness}, other PL proof rules will require some minor changes.
 % By contrast with the assumption rule, the reiteration makes an essential appeal to the induction hypothesis.
 % We will see something similar in all of the rule proofs given below with the only other exception being identity introduction.
 
@@ -253,7 +253,7 @@ This is true in some cases and not in others where the same may be said for some
 \subsection{Negation Rules}%
   \label{sub:NegationRules}
 
-In order to show that the negation rules preserve logical consequence, Chapter \ref{ch.PL-Soundness} appealed to two supporting lemmas.
+In order to show that the negation rules preserve logical consequence, Chapter \ref{ch.PL-soundness} appealed to two supporting lemmas.
 Since these lemmas will continue to be important for what follows, we prove that they continue to hold given the semantics for $\FI$ which, unlike before, includes variable assignments.
 In particular, consider the following proof:
   
@@ -294,7 +294,7 @@ Something similar may be said for the following lemma which has been left as an 
 \end{quote}
 
 Given the updated lemmas above, the proof of $\enot$I is exactly the same as it was before.
-Omitting the details of the proof here, it worth reviewing the proof given in Chapter \ref{ch.PL-Soundness}.
+Omitting the details of the proof here, it worth reviewing the proof given in Chapter \ref{ch.PL-soundness}.
 
 
 \factoidbox{
@@ -618,7 +618,7 @@ As with the previous two proof rules for conjunction and disjunction, the proof 
   \label{sub:ConditionalRules}
   
 The elimination rules for the conditional and the biconditional are also straightforward applications of the semantics.
-By contrast, the introduction rules for the conditional and biconditional benefit from the following analogue of \textbf{\ref{lemma:PL-conditional}} from Chapter \ref{ch.PL-Soundness}. %which produces a logical consequence including a conditional from a logical consequence that does not.
+By contrast, the introduction rules for the conditional and biconditional benefit from the following analogue of \textbf{\ref{lemma:PL-conditional}} from Chapter \ref{ch.PL-soundness}. %which produces a logical consequence including a conditional from a logical consequence that does not.
 Since the proofs are very similar, the details have been left as an exercise for the reader.
 % Despite minor differences, the following lemma turns on nothing more than the semantics for the conditional, and so has been proved separately only to avoid redundancy.
 
@@ -779,7 +779,7 @@ Given \textbf{\ref{rule:AS}} -- \textbf{\ref{rule:Bicon}}, we may report the fol
 
 It remains to extend this result to include the remaining proof rules in FOL$^=$.
 In order to do so, the following section will prove two important supporting lemmas.
-Whereas the lemmas above merely adapted the lemmas already given in Chapter \ref{ch.PL-Soundness}, the lemmas proven in the following section are entirely novel to $\FI$.
+Whereas the lemmas above merely adapted the lemmas already given in Chapter \ref{ch.PL-soundness}, the lemmas proven in the following section are entirely novel to $\FI$.
 We will then put these lemmas to work in order to establish \textsc{FOL$^=$ Rules} in the following section.
 
 
