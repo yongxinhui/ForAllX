@@ -79,17 +79,6 @@ If you find that you get lost along the way, it can help to return to this overv
 Slogging on in the dark is rarely advisable.
 % Rather, it is better to keep zooming out so that you can keep track of where you are and where you are headed to next.
 
-% TODO: introduction
-  % state standard form of completeness
-  % we will establish this as a corollary of the consistency version
-  % basic outline of the proof
-    % expand language to include infinitely more constants
-    % saturate \MetaG by adding witness wffs 
-    % expand \MetaS to the maximal \MetaD
-    % show that \MetaD is consistent and deductively closed
-    % build Henkin model out of \MetaD
-    % restrict to original language
-    % show that the Henkin model satisfies \MetaD
 
 
 
@@ -196,7 +185,6 @@ Nevertheless, this is one of the more opaque portions of the proof where it will
   \label{sub:Saturation}
 
 We will now move to extend $\MetaG$ to a saturated set of wfss.
-% TODO: is \metaA(\alpha) in the extension or not?
 Letting $\metaA(\alpha)$ be a wff of $\FIN$ with at most one free variable $\alpha$, we may take a set of wfss $\MetaS$ to be \define{saturated} in $\FIN$ just in case for each wff $\metaA(\alpha)$ of $\FIN$, there is a constant $\beta$ in $\FIN$ where $(\qt{\exists}{\alpha}\metaA \eif \metaA\unisub{\beta}{\alpha})\in\MetaS$.
 In order to extend $\MetaG$ to a saturated set $\MetaS$, fix an enumeration $\metaA_1(\alpha_1),\metaA_2(\alpha_2),\metaA_3(\alpha_3),\ldots$ of all wffs of $\FIN$ with one free variable. %, and let $n_0$ be the first natural number that does not occur in $\metaA_0(\alpha_0)$.
 We may then provide the following recursive definition:
@@ -205,6 +193,7 @@ We may then provide the following recursive definition:
   \item[\it $\theta$-Recursion:] $\theta_{k+1}=(\qt{\exists}{\alpha_{k+1}}\metaA_{k+1}\eif \metaA_{k+1}\unisub{n_{k+1}}{\alpha_{k+1}})$  where $n_{k+1}\in\N$ is the first constant not in $\theta_j$ for any $j\leq k$.
 \end{enumerate}
 % TODO: show that there is a denumerable number of wffs of $\FI$
+% tODO: recall previous result here
 Given the infinite supply of new constants $\N$, we may always find an unused constant at each stage $k$ in the process of constructing $\theta_{k+1}$.
 We may then extend $\MetaG$ to the saturated set $\MetaS_\MetaG$:
   % $$ \MetaS_\MetaG=\MetaG\cup\set{\theta_i:i\in\N}. $$
@@ -294,7 +283,6 @@ As with so many proofs, a small technique can make the difference between being 
   To show that $\MetaS_{m+1}$ is consistent, assume for contradiction that $\MetaS_{m+1}$ is not consistent.
   Since $\MetaS_{m+1}=\MetaS_m\cup\set{\theta_{m+1}}$, we know that $\MetaS_m\vdash \enot\theta_{m+1}$ by \textbf{\ref{lemma:incon}}, and so $\MetaS_m\vdash\enot(\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}\eif \metaA_{m+1}\unisub{n_{m+1}}{\alpha_{m+1}})$.
 
-  % TODO: would be good to discuss the cut rule above which gets used here; ditto other structural rules
   Given that the derived rules for PL are also derived rules in FOL$^=$, it follows by \textbf{\ref{lemma:prcut}} that $\MetaS_m\vdash \qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ and $\MetaS_m\vdash\enot\metaA_{m+1}\unisub{n_{m+1}}{\alpha_{m+1}}$.
   In particular, we may derive the rules $\enot(\metaA \eif \metaB) \vdash \metaA$ and $\enot(\metaA \eif \metaB) \vdash \enot\metaB$, where applications of these rules together with \textbf{\ref{lemma:prcut}} justifies the claims indicated in the previous sentence.
 
@@ -302,7 +290,6 @@ As with so many proofs, a small technique can make the difference between being 
   Since $n_{m+1}$ does not occur in $\metaA_{m+1}$ or in $\MetaS_m$, it follows by universal introduction $\forall$I that $\MetaS_m\vdash \qt{\forall}{\alpha_{m+1}}\enot\metaA_{m+1}$, and so $\MetaS_m\vdash \enot\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ by the quantifier exchange rule $(\forall\enot)$ derived in $\S\ref{QER}$.
   By EFQ in $\S\ref{EFQ}$, we may conclude that $\MetaS_m\vdash A\wedge\neg A$, and so $\MetaS_m$ is inconsistent, contradicting our assumption. 
     % TODO: replace EFQ with better reference
-    % TODO: avoid reference to specific contradiction
   Thus we may conclude that $\MetaS_{m+1}$ is consistent, and so $\MetaS_k$ is consistent for all $k\in\N$ as desired.
 
   Assume for contradiction that $\MetaS_\MetaG$ is inconsistent. 
@@ -389,7 +376,6 @@ In order to establish these results, we will begin by relabeling the following s
   Since $\MetaG_{n+1}$ is consistent, it follows by induction that $\MetaG_n$ is consistent for all $n\in\N$.
   Assume for contradiction that $\MetaD_{\MetaS_\MetaG}$ is inconsistent.
   Thus $\MetaD_{\MetaS_\MetaG}\vdash A\eand\enot A$, and so there is a proof $Y$ of $A\eand\enot A$ from $\MetaD_{\MetaS_\MetaG}$. 
-    % TODO: remove particular contradiction
   Since $Y$ is finite, there is a finite number of premises cited in $Y$, and so there is some $k\in\N$ where every premise cited in $Y$ belongs to $\MetaD_k$.
   As a result, $Y$ is also a proof of $A\eand\enot A$ from $\MetaD_k$, and so $\MetaD_k$ is inconsistent, contradicting the above. 
   Thus $\MetaD_{\MetaS_\MetaG}$ is consistent. 
@@ -485,10 +471,10 @@ In order to show that $[\alpha]_\MetaD\neq\varnothing$ for any constant $\alpha\
 
 
 
+% TODO: move weakening to FOL$^=$ chapter?
 \begin{Lthm} \label{lemma:prweak}
   If $\Lambda\vdash\metaA$, then $\Lambda\cup\Pi\vdash\metaA$.
 \end{Lthm}
-  % TODO: move weakening to FOL$^=$ chapter?
 
 \begin{quote} 
   \textit{Proof:} 
@@ -786,11 +772,9 @@ Given the importance of this lemma, all but one case has been included in full.
 
   Assuming that $\metaB\notin\MetaD$, we know that $\enot\metaB\in\MetaD$ by the maximality of $\MetaD$.
   Moreover, it is easy to derive $\enot\metaB\vdash\metaB\eif\metaC$ since given $\enot\metaB$ as a premise, we may use the assumption rule AS to write $\metaB$ on a second line, deriving $\metaC$ by EFQ from $\S\ref{EFQ}$ and using conditional introduction $\eif$I to discharge the assumption.
-  % TODO: derive this in an earlier chapter
   It follows that $\MetaD\vdash\metaB\eif\metaC$ by \textbf{\ref{lemma:prweak}}, and so $\metaB\eif\metaC\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
 
   Assuming instead that $\metaC\in\MetaD$, we may derive $\metaC\vdash\metaB\eif\metaC$ since given $\metaC$ as a premise, we may use the assumption rule AS to write $\metaB$ on a second line.
-  % TODO: derive this in an earlier chapter
   By then using the reiteration rule R, we may rewrite the premise $\metaC$, discharging our assumption with conditional introduction $\eif$I in order to derive $\metaB\eif\metaC$ from $\metaC$. 
   Thus $\MetaD\vdash\metaB\eif\metaC$ by \textbf{\ref{lemma:prweak}}, and so $\metaB\eif\metaC\in\MetaD$ by \textbf{\ref{lemma:deductive}}.
   We may then conclude that $\metaB\eif\metaC\in\MetaD$ if either $\metaB\notin\MetaD$ or $\metaC\in\MetaD$.
@@ -866,20 +850,20 @@ Given the importance of this lemma, all but one case has been included in full.
   \textit{Conclusion:}
   It follows by induction that $\VV{\I_\MetaD}{\va{a}}(\metaA)=1$ just in case $\metaA\in\MetaD$ where the variable assignment $\va{a}$ and sentence $\metaA$ in $\FIN$ where both arbitrary. 
   Thus we have:
-
-  \vspace{-.2in}
   \begin{align*}
     \M_\MetaD \text{ satisfies } \metaA &\textit{ ~iff~ } \VV{\I_\MetaD}{}(\metaA)=1\\
-    &\textit{ ~iff~ } \VV{\I_\MetaD}{\va{a}}(\metaA)=1 \text{ for all v.a. } \va{a}\\
-      &\textit{ ~iff~ } \metaA\in\MetaD.
+      &\textit{ ~iff~ } \VV{\I_\MetaD}{\va{a}}(\metaA)=1 \text{ for all v.a. } \va{a}\\
+      (\star) &\textit{ ~iff~ } \metaA\in\MetaD.
   \end{align*}
-
+  Whereas the induction argument presented above was required to establish $(\star)$, the other biconditionals follow from the definitions.
   This completes the proof.
   \qed
 \end{quote}
 
 Most of the work is done.
-Now all that remains is to connect the dots, establishing \textsc{FOL$^=$ Completeness} over our original language $\FI$.
+All that remains is to connect the dots in order to establish \textsc{FOL$^=$ Completeness}.
+In particular, the following section extend the results that we have established for $\FIN$ to apply to our original language $\FI$.
+Since the details of the lemmas given above are independent of the global structure of the proof, it is worth reviewing the way that the proof was set up in order to regain perspective of the whole before continuing.
 
 
 
@@ -897,25 +881,33 @@ Thus we will restrict $\M_\MetaD$ to $\FI$ as follows:
 Since the predicates in $\FIN$ are the same as those in $\FI$, no change to the predicate extensions is required.
 By contrast, the set of constants in $\FI$ is a proper subset of the set of constants in $\FIN$. 
 Given that our aim is to restrict consideration to the expressions in $\FI$, it doesn't matter that the elements in $\D_\MetaD$ over which we are interpreting $\FI$ may contain constants that do not belong to $\FI$.
-Rather, we simply need some nonempty set of elements over which to interpret $\FI$ and $\D_\MetaD$ will suffice. 
-% In interpreting constants and predicates that belong to $\FI$ the domain may contain anything whatsoever.
-% There simply is no requirement that the domain only include constants that belong to $\FI$.
-Thus we may take $\D'_\MetaD=\D_\MetaD$ as before, letting $\M'_\MetaD=\tuple{\D'_\MetaD,\I'_\MetaD}$ be the restriction of $\M$ to $\FI$. 
+Rather, we simply need some nonempty set of elements over which to interpret $\FI$.
+Since nothing requires the domain by which we interpret $\FI$ to only include constants that belong to $\FI$, interpreting $\FI$ over the domain $\D_\MetaD$ will suffice.
+
+Given these considerations, we may take $\D'_\MetaD=\D_\MetaD$ as before, letting $\M'_\MetaD=\tuple{\D'_\MetaD,\I'_\MetaD}$ be the restriction of $\M$ to $\FI$ as defined above. 
 Since every wfs of $\FIN$ is also a wfs of $\FI$, it is easy to show that $\M'_\MetaD$ and $\M_\MetaD$ satisfy the same $\FI$ sentences, and so $\M'_\MetaD$ satisfies $\MetaG$ where $\M'_\MetaD$ is a model of $\FI$. 
 Thus we may conclude that $\MetaG$ is satisfiable as desired. 
+
+In support of this conclusion, we begin by drawing on \textbf{\ref{lemma:model}} in order to establish the following result without having to indulge in another induction proof on the complexity.
 
 \begin{Lthm} \label{lemma:satrest}
   For all $\FI$ sentences $\metaA$, $\M'_\MetaD$ satisfies $\metaA$ just in case $\M_\MetaD$ satisfies $\metaA$.
 \end{Lthm}
 
 \begin{quote} 
-  \textit{Proof:} The proof goes by induction on complexity where the base cases are immediate from the restriction to the sentences of $\FI$ together with the definition of $\M'_\MetaD$.
-  The induction cases are just as trivial, and so details will be omitted.
+  \textit{Proof:}
+  Since $\M'=\tuple{\D_\MetaD,\I_\MetaD'}$ and $\M=\tuple{\D_\MetaD,\I_\MetaD}$ share the same domain $\D_\MetaD$ where $\I_\MetaD$ and $\I'_\MetaD$ agree about every $n$-place predicate $\F^n$ and constant $\alpha$ that occurs in any wfs $\metaA$ of $\FI$, we know that $\VV{\I'_\MetaD}{\va{a}}(\metaA) = \VV{\I_\MetaD}{\va{a}}(\metaA)$ for any variable assignment $\va{a}$ defined over $\D_\MetaD$ by \textbf{\ref{lemma:model}}.
+  We may then reason as follows:
+  \begin{align*}
+    \M'_\MetaD \text{ satisfies } \metaA &\textit{ ~iff~ } \VV{\I'_\MetaD}{}(\metaA)=1\\
+    &\textit{ ~iff~ } \VV{\I'_\MetaD}{\va{a}}(\metaA)=1 \text{ for all v.a. } \va{a}\\
+    (\star) &\textit{ ~iff~ } \VV{\I_\MetaD}{\va{a}}(\metaA)=1 \text{ for all v.a. } \va{a}\\
+    &\textit{ ~iff~ } \VV{\I_\MetaD}{}(\metaA)=1\\
+    &\textit{ ~iff~ } \M_\MetaD \text{ satisfies } \metaA.
+  \end{align*}
+  Whereas $(\star)$ follows from \textbf{\ref{lemma:model}}, the other biconditionals follow from the definitions.
+  This completes the proof.
   \qed
-  %
-  % % TODO Use the \bref{lemma:model}
-  %
-  % If $\M=\tuple{\D,\I}$ and $\M'=\tuple{\D,\I'}$ share the domain $\D$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and constant $\alpha$ that occurs in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any variable assignment $\va{a}$ over $\D$.
 \end{quote}
 
 Since $\M_\MetaD$ satisfies $\MetaG$ where every $\metaA\in\MetaG$ is a sentence of $\FI$, it follows from \textbf{\ref{lemma:satrest}} that $\M'_\MetaD$ satisfies $\MetaG$ where $\M'_\MetaD$ is a $\FI$ model. 
