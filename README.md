@@ -26,3 +26,13 @@ If you have any suggestion or questions, I would encourage you to open an issue 
 At some point I hope to include documentation describing how to adapt these resources for those new to LaTeX and GitHub.
 
 If you are interested in using the text editor that I used to streamline work on this project, you can check out the [NeoVim config](https://github.com/benbrastmckie/.config) that I maintain, as well as the [VSCodium config](https://github.com/benbrastmckie/VSCodium) that I started for those who are looking for something a little more user friendly.
+
+## Pending
+
+Rather than attempting to record all of the changes that I have made, I will state the main changes that I still hope to make:
+
+-  Include a primer on set theory, relations, and functions in an _Appendix_.
+-  Include a glossary of terms and symbols.
+-  Include cheatsheets for the proof rules for PL and FOL$^=$ in an _Appendix_.
+-  Include an index of lemmas, theorems, and corollaries.
+-  Include practice problems for each week along with solutions.
