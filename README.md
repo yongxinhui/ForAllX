@@ -33,6 +33,6 @@ Rather than attempting to record all of the changes that I have made, I will sta
 
 -  Include a primer on set theory, relations, and functions in an _Appendix_.
 -  Include a glossary of terms and symbols.
--  Include cheatsheets for the proof rules for PL and FOL$^=$ in an _Appendix_.
+-  Include cheatsheets for the proof rules for PL and FOL in an _Appendix_.
 -  Include an index of lemmas, theorems, and corollaries.
 -  Include practice problems for each week along with solutions.
