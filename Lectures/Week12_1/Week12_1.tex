@@ -1,0 +1,165 @@
+\documentclass[a4paper, 11pt]{article} % Font size (can be 10pt, 11pt or 12pt) and paper size (remove a4paper for US letter paper)
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{graphicx} % Required for including pictures
+\usepackage{wrapfig} % Allows in-line images
+\usepackage{enumitem} %%Enables control over enumerate and itemize environments
+\usepackage{setspace}
+\usepackage{amssymb, amsmath, mathrsfs, mathabx} %%Math packages
+\usepackage{../lecture} %calls local modified style file
+\usepackage{stmaryrd}
+\usepackage{mathtools}
+\usepackage{multicol} 
+\usepackage{mathpazo} % Use the Palatino font
+\usepackage[T1]{fontenc} % Required for accented characters
+\usepackage{array}
+\usepackage{bibentry}
+\usepackage{prooftrees} 
+\usepackage[round]{natbib} %%Or change 'round' to 'square' for square backers
+\setcitestyle{aysep=}
+% \usepackage{fitchproof} 
+
+
+\makeatletter
+\renewcommand{\maketitle}{
+\begin{flushright}
+{\LARGE\@title}
+
+\vspace{10pt}
+
+{\@author}
+\\ \@date
+\end{flushright}
+
+\vspace{60pt}
+
+}
+\makeatother
+
+%----------------------------------------------------------------------------------------
+%	TITLE
+%----------------------------------------------------------------------------------------
+
+\title{\textbf{Completeness of FOL$^=$}} % Subtitle
+
+\author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
+
+\date{\today} % Date
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Print the title section
+
+\thispagestyle{empty}
+
+%----------------------------------------------------------------------------------------
+
+
+\section*{Basic Lemmas}
+
+\begin{itemize}
+  \item[\bf L9.1] If $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$.
+  \item[\bf L11.5] $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ if $\val{\I}{\va{a}}(\alpha)=\val{\I}{\va{a}}(\beta)$ and $\beta$ is free for $\alpha$ in $\metaA$.
+  \item[\bf L11.6] If $\M$ and $\M'$ have the same domain $\D$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and constant $\alpha$ that occurs in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any v.a. $\va{a}$ defined over $\D$.
+  \item[\bf L12.1] If $\alpha$ is a constant and $X$ is an FOL$^=$ derivation in which the constant $\beta$ does not occur, then $X\unisub{\beta}{\alpha}$ is also an FOL$^=$ derivation.
+  \item[\bf L12.3] If $\MetaL\cup\set{\metaA}$ is inconsistent, then $\MetaL\vdash\neg\metaA$.
+  \item[\bf L12.4] If $\MetaL \vdash \metaA$ and $\Pi\cup\set{\metaA} \vdash \metaB$, then $\MetaL\cup\Pi \vdash \metaB$.
+  \item[\bf L12.6] If $\MetaL \cup \set{\metaA}$ and $\MetaL\cup \set{\neg\metaA}$ are both inconsistent, then $\MetaL$ is inconsistent.
+  \item[\bf L12.9] If $\MetaL\vdash\metaA$ and $\MetaL\vdash\neg\metaA$, then $\MetaL$ is inconsistent.
+  \item[\bf L12.11] If $\MetaL\vdash\metaA$, then $\MetaL\cup\Pi\vdash\metaA$.
+\end{itemize}
+
+
+\section*{Completeness}
+
+\begin{itemize}
+  \item[\bf T12.1] Every consistent set of $\FI$ wfss $\MetaG$ is satisfiable.
+  \item[\it Completeness:] If $\MetaG\vDash\metaA$, then $\MetaG\vdash\metaA$.
+  \item Assuming $\MetaG\vDash\metaA$, we know $\MetaG\cup\set{\neg\metaA}$ is unsatisfiable (check).
+  \item So $\MetaG\cup\set{\neg\metaA}$ is inconsistent by \textbf{T12.1}.
+  \item So $\MetaG\vdash\neg\neg\metaA$ by \textbf{L12.3}, and so $\MetaG\vdash\metaA$ by DN and \textbf{L12.4}.
+  \item[\it Assume:] Let $\MetaG$ be a set of $\FI$ wfss that is consistent in FOL$^=$.
+\end{itemize}
+
+
+
+
+\section*{Saturation}
+
+\begin{itemize}
+  \item[\it Extension:] Let $\FIN$ include the extra constants $\N$.
+    \item Let $\C$ be the set of all constants in $\FIN$.
+  \item[\it Free:] Let $\metaA(\alpha)$ be a wff of $\FIN$ with at most one free variable $\alpha$.
+  \item[\it Saturated:] A set of wfss $\MetaS$ is \textsc{saturated} in $\FIN$ just in case for each wff $\metaA(\alpha)$ of $\FIN$, there is a constant $\beta$ where $(\qt{\exists}{\alpha}\metaA \eif \metaA\unisub{\beta}{\alpha})\in\MetaS$.
+  \item[\bf L12.2] $\MetaG$ is consistent in FOL$^=_{\N}$.
+    \item We will hence forth take `consistent' to mean `consistent in FOL$^=_\N$'.
+  \item[\it Free Enumeration:] \mbox{Let $\metaA_1(\alpha_1),\metaA_2(\alpha_2),\metaA_3(\alpha_3),\ldots$ enumerate all wffs of $\FIN$ with at most one free variable.}
+  \item[\it Witnesses:] \mbox{$\theta_1=(\qt{\exists}{\alpha_1}\metaA_1\eif \metaA_1\unisub{n_1}{\alpha_1})$ where $n_1\in\N$ is the first constant not in $\metaA_1$.}\vspace{.05in}\\
+    $\theta_{k+1}=(\qt{\exists}{\alpha_{k+1}}\metaA_{k+1}\eif \metaA_{k+1}\unisub{n_{k+1}}{\alpha_{k+1}})$  where $n_{k+1}\in\N$ is the first constant not in $\metaA_{k+1}$ or $\theta_j$ for any $j\leq k$.
+  \item[\it Saturation:]
+    $\MetaS_0 = \MetaG$,\\
+    $\MetaS_{n+1} = \MetaS_n\cup\set{\theta_{n+1}}$, and\\
+    $\MetaS_\MetaG = \bigcup\limits_{i\in\N}\MetaS_n$.
+  \item[\bf L12.5] $\MetaS_\MetaG$ is consistent and saturated in $\FIN$.
+    \item[\it Base:] $\MetaS_0 = \MetaG$ is consistent. 
+      \item Immediate from \textbf{L12.2}.
+    \item[\it Induction:] Assume $\MetaS_m$ is consistent. 
+    \item Assume $\MetaS_{m+1} = \MetaS_m \cup \set{\theta_{m+1}}$ is inconsistent for contradiction.
+    \item So $\MetaS_m \vdash \enot\theta_{m+1}$ by \textbf{L12.3}, and so $\MetaS_m \vdash \enot (\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}\eif \metaA_{m+1}\unisub{n_{m+1}}{\alpha_{m+1}})$.
+    \item \mbox{So $\MetaS_m\vdash \qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ and $\MetaS_m\vdash\neg\metaA_{m+1}\unisub{n_{m+1}}{\alpha_{m+1}}$ by derived PL rules.}
+    \item So $\MetaS_m\vdash \qt{\forall}{\alpha_{m+1}}\neg\metaA_{m+1}$ by $\forall$I since $n_{m+1}$ is not in $\qt{\forall}{\alpha_{m+1}}\neg\metaA_{m+1}$ or $\MetaS_m$.
+    \item So $\MetaS_m\vdash \neg\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ by $\forall\neg$, and so $\MetaS_m$ is inconstant by \textbf{L12.9}.
+    \item It follows by \textit{reductio} that $\MetaS_{m+1}$ is consistent.
+    \item By weak induction, we know that $\MetaS_k$ is consistent for all $k \in \N$.
+    \item[\it Limit:] If $\MetaS_\MetaG$ is inconsistent, then $X$ derives $\bot$ from $\MetaS_\MetaG$ in FOL$^=_\N$. 
+    \item Since $X$ is finite, $\MetaS_m\vdash\bot$ for some $m\in\N$ including all premises in $X$.
+    \item So $\MetaS_m$ is inconsistent, contradicting the above. 
+    \item By \textit{reductio}, $\MetaS_\MetaG$ is consistent. 
+\end{itemize}
+
+
+
+
+
+
+\section*{Maximization}
+
+\begin{itemize}
+  \item[\it Maximal:] A set of wfss $\MetaD$ is \textsc{maximal} in $\FIN$ just in case either $\metaB\in\MetaD$ or $\neg\metaB\in\MetaD$ for every wfs $\metaB$ in $\FIN$.
+  \item[\it Full Enumeration:] Let $\metaB_0,\metaB_1,\metaB_2,\ldots$ enumerate all wfss in $\FIN$.
+  \item[\it Maximization:]
+    $\MetaD_0 = \MetaS_\MetaG$,\\ 
+    $\MetaD_{n+1} =
+      \begin{cases}
+        \MetaD_n\cup\set{\metaB_n} ~~\text{ if } \MetaD_n\cup\set{\metaB_n} \text{ is consistent}\\
+        \MetaD_n\cup\set{\neg\metaB_n} ~~\text{ otherwise}.
+      \end{cases}$,\\
+    $\MetaD_\MetaS = \bigcup_{i\in\N}\MetaD_n$. 
+  \item[\bf L12.7] $\MetaD=\MetaD_{\MetaS_\MetaG}$ is maximal in $\FIN$ and consistent. 
+  \item[\it Base:] $\MetaD_0 = \MetaS_\MetaG$ is consistent by \textbf{L12.5}. 
+  \item[\it Induction:] Assume $\MetaD_n$ is consistent.
+    \item Want to show that $\MetaD_{n+1}$ is consistent. 
+  \item[\it Case 1:] If $\MetaD_n\cup\set{\metaB_n}$ is consistent, then $\MetaD_{n+1}=\MetaD_n\cup\set{\metaB_n}$ is consistent. 
+  \item[\it Case 2:] If $\MetaD_n\cup\set{\metaB_n}$ is inconsistent, then $\MetaD_{n+1}=\MetaD_n\cup\set{\neg\metaB_n}$.
+    \item Assume $\MetaD_n\cup\set{\neg\metaB_n}$ is inconsistent for contradiction.
+    \item So $\MetaD_n$ is inconsistent by \textbf{L12.6}. 
+    \item So $\MetaD_{n+1}$ is consistent in both cases. 
+  \item[\it Limit] If $\MetaD$ is inconsistent, then $Y$ derives $\bot$ from $\MetaD$ in FOL$^=_\N$. 
+    \item Since $Y$ is finite, $\MetaD_m\vdash\bot$ for some $m\in\N$ including all premises in $Y$.
+    \item This contradicts the above, and so $\MetaD$ is consistent by \textit{reductio}. 
+  \item[\it Maximal:] Let $\metaB$ be any wfs of $\FIN$, and so $\metaB=\metaB_k$ for some $k \in \N$. 
+    \item By construction, $\metaB_k \in \MetaD_{k+1}$ or $\enot\metaB_k \in \MetaD_{k+1}$.
+    \item Generalizing on $\metaB$ shows that $\MetaD$ is maximal.
+  \item[\bf L12.8] $\MetaG\subseteq\MetaS_\MetaG\subseteq\MetaD$ where $\MetaD$ is saturated.
+    \item Immediate from the definitions.
+  \item[\bf L12.10] $\metaA\in\MetaD$ whenever $\MetaD\vdash\metaA$.
+    \item Assuming $\MetaD\vdash\metaA$, we know $\MetaD\nvdash\neg\metaA$ by \textbf{L12.9}.
+    \item So $\neg\metaA\notin\MetaD$ since otherwise $\MetaD\vdash\neg\metaA$.
+    \item Thus $\metaA\in\MetaD$ by maximality. 
+\end{itemize}
+
+
+
+\end{document}
+

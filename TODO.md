@@ -11,6 +11,7 @@
   - [ ] discuss logical constants into Ch00
   - [ ] show that the number the sentences of PL and FOL are countable
   - [ ] expand discussions of decidability throughout
+  - [ ] clean up style files
 - [ ] glossary
 - [ ] appendix
   - [ ] set theory, functions, orders

@@ -121,7 +121,7 @@ Assuming that $\beta$ is free for $\alpha$ in every line of a proof $X$, it will
 % \end{quote}
 
 \begin{Lthm} \label{lemma:FOL-prsub}
-  If $\alpha$ is a constant and $X$ is an FOL$^=$ derivation in which the constant $\beta$ does not occur, then $X\unisub{\beta}{\alpha}$ is also an FOL$^=$ derivation 
+  If $\alpha$ is a constant and $X$ is an FOL$^=$ derivation in which the constant $\beta$ does not occur, then $X\unisub{\beta}{\alpha}$ is also an FOL$^=$ derivation.
 \end{Lthm}
 
 \begin{quote} 
@@ -186,11 +186,11 @@ Nevertheless, this is one of the more opaque portions of the proof where it will
 
 We will now move to extend $\MetaG$ to a saturated set of wfss.
 Letting $\metaA(\alpha)$ be a wff of $\FIN$ with at most one free variable $\alpha$, we may take a set of wfss $\MetaS$ to be \define{saturated} in $\FIN$ just in case for each wff $\metaA(\alpha)$ of $\FIN$, there is a constant $\beta$ in $\FIN$ where $(\qt{\exists}{\alpha}\metaA \eif \metaA\unisub{\beta}{\alpha})\in\MetaS$.
-In order to extend $\MetaG$ to a saturated set $\MetaS$, fix an enumeration $\metaA_1(\alpha_1),\metaA_2(\alpha_2),\metaA_3(\alpha_3),\ldots$ of all wffs of $\FIN$ with one free variable. %, and let $n_0$ be the first natural number that does not occur in $\metaA_0(\alpha_0)$.
+In order to extend $\MetaG$ to a saturated set $\MetaS$, fix an enumeration $\metaA_1(\alpha_1),\metaA_2(\alpha_2),\metaA_3(\alpha_3),\ldots$ of all wffs of $\FIN$ with at most one free variable. %, and let $n_0$ be the first natural number that does not occur in $\metaA_0(\alpha_0)$.
 We may then provide the following recursive definition:
 \begin{enumerate}[leftmargin=1in]
   \item[\it $\theta$-Base:] $\theta_1=(\qt{\exists}{\alpha_1}\metaA_1\eif \metaA_1\unisub{n_1}{\alpha_1})$ where $n_1\in\N$ is the first constant not in $\metaA_1$.
-  \item[\it $\theta$-Recursion:] $\theta_{k+1}=(\qt{\exists}{\alpha_{k+1}}\metaA_{k+1}\eif \metaA_{k+1}\unisub{n_{k+1}}{\alpha_{k+1}})$  where $n_{k+1}\in\N$ is the first constant not in $\theta_j$ for any $j\leq k$.
+  \item[\it $\theta$-Recursion:] $\theta_{k+1}=(\qt{\exists}{\alpha_{k+1}}\metaA_{k+1}\eif \metaA_{k+1}\unisub{n_{k+1}}{\alpha_{k+1}})$  where $n_{k+1}\in\N$ is the first constant not in $\metaA_{k+1}$ or $\theta_j$ for any $j\leq k$.
 \end{enumerate}
 % TODO: show that there is a denumerable number of wffs of $\FI$
 % tODO: recall previous result here
@@ -265,6 +265,34 @@ As with so many proofs, a small technique can make the difference between being 
 
 
 
+% % TODO: SAVE
+% In the proof given above we made explicit appeal to \textbf{\ref{lemma:FOL-prcut}}.
+% This rule is referred to as a \define{structural metarules} given the fundamental role that it plays in manipulating and multiplying derivations.
+% We will see one more structural rule in due course.
+% Since such metarules are both intuitive and commonplace, it is typical to suppress explicit reference to structural rules like \textbf{\ref{lemma:FOL-prcut}}.
+% We will attempt to make all applications of the metarules explicit here, but this is something to look out for in logic more generally.
+
+
+
+
+
+
+\begin{Lthm} \label{lemma:FOL-cont}
+  If $\Lambda\vdash\metaA$ and $\Lambda\vdash\enot\metaA$, then $\Lambda$ is inconsistent. 
+\end{Lthm}
+
+\begin{quote} 
+  \textit{Proof:} 
+  Identical to \textbf{\ref{lemma:PL-cont}}.
+  \qed
+  % Assume $\Lambda\vdash\metaA$ and $\Lambda\vdash\enot\metaA$.
+  % Thus there is a FOL$^=$ proof $X$ of $\metaA$ from $\Lambda$ as well as a FOL$^=$ proof $Y$ of $\enot\metaA$ from $\Lambda$. 
+  % Letting $Z$ be the result of concatenating $X$ and $Y$ and using EFQ from $\S\ref{EFQ}$ to derive $A\eand\enot A$, we may observe that $Z$ is a proof of $A\eand\enot A$ from $\Lambda$, and so $\Lambda$ is inconsistent.
+\end{quote}
+  
+
+
+
 
 
 \begin{Lthm} \label{lemma:FOL-sat}
@@ -287,10 +315,9 @@ As with so many proofs, a small technique can make the difference between being 
   In particular, we may derive the rules $\enot(\metaA \eif \metaB) \vdash \metaA$ and $\enot(\metaA \eif \metaB) \vdash \enot\metaB$, where applications of these rules together with \textbf{\ref{lemma:FOL-prcut}} justifies the claims indicated in the previous sentence.
 
     % TODO: cite derived rule; add this rule to chapter 6
-  Since $n_{m+1}$ does not occur in $\metaA_{m+1}$ or in $\MetaS_m$, it follows by universal introduction $\forall$I that $\MetaS_m\vdash \qt{\forall}{\alpha_{m+1}}\enot\metaA_{m+1}$, and so $\MetaS_m\vdash \enot\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ by the quantifier exchange rule $(\forall\enot)$ derived in $\S\ref{QER}$.
-  By EFQ in $\S\ref{EFQ}$, we may conclude that $\MetaS_m\vdash A\wedge\neg A$, and so $\MetaS_m$ is inconsistent, contradicting our assumption. 
-    % TODO: replace EFQ with better reference
-  Thus we may conclude that $\MetaS_{m+1}$ is consistent, and so $\MetaS_k$ is consistent for all $k\in\N$ as desired.
+  Since $n_{m+1}$ does not occur in $\metaA_{m+1}$ or in $\MetaS_m$, it follows by universal introduction $\forall$I that $\MetaS_m\vdash \qt{\forall}{\alpha_{m+1}}\enot\metaA_{m+1}$.
+  Given that $\qt{\forall}{\alpha_{m+1}}\enot\metaA_{m+1} \vdash \enot\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ by the quantifier exchange rule $(\forall\enot)$ derived in $\S\ref{QER}$, we know that $\MetaS_m \vdash \enot\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ by \textbf{\ref{lemma:FOL-prcut}}, and so $\MetaS_m$ is inconsistent by \textbf{\ref{lemma:FOL-cont}}, contradicting our assumption. 
+  Thus we may conclude that $\MetaS_{m+1}$ is consistent, and so it follows by induction that $\MetaS_k$ is consistent for all $k\in\N$ as desired.
 
   Assume for contradiction that $\MetaS_\MetaG$ is inconsistent. 
   By definition $\MetaS_\MetaG\vdash A\wedge\neg A$, and so there is a proof $X$ of $A\wedge\neg A$ from the premises $\MetaS_\MetaG$.
@@ -300,11 +327,7 @@ As with so many proofs, a small technique can make the difference between being 
   \qed
 \end{quote}
 
-In the proof given above we made explicit appeal to \textbf{\ref{lemma:FOL-prcut}}.
-This rule is referred to as a \define{structural metarules} given the fundamental role that it plays in manipulating and multiplying derivations.
-We will see one more structural rule in due course.
-Since such metarules are both intuitive and commonplace, it is typical to suppress explicit reference to structural rules like \textbf{\ref{lemma:FOL-prcut}}.
-We will attempt to make all applications of the metarules explicit here, but this is something to look out for in logic more generally.
+
 
 
 
@@ -375,9 +398,9 @@ In order to establish these results, we will begin by relabeling the following s
 
   Since $\MetaG_{n+1}$ is consistent, it follows by induction that $\MetaG_n$ is consistent for all $n\in\N$.
   Assume for contradiction that $\MetaD_{\MetaS_\MetaG}$ is inconsistent.
-  Thus $\MetaD_{\MetaS_\MetaG}\vdash A\eand\enot A$, and so there is a proof $Y$ of $A\eand\enot A$ from $\MetaD_{\MetaS_\MetaG}$. 
+  Thus $\MetaD_{\MetaS_\MetaG}\vdash \bot$, and so there is a derivation $Y$ of $\bot$ from $\MetaD_{\MetaS_\MetaG}$ in FOL$^=_\N$. 
   Since $Y$ is finite, there is a finite number of premises cited in $Y$, and so there is some $k\in\N$ where every premise cited in $Y$ belongs to $\MetaD_k$.
-  As a result, $Y$ is also a proof of $A\eand\enot A$ from $\MetaD_k$, and so $\MetaD_k$ is inconsistent, contradicting the above. 
+  As a result, $Y$ is also a proof of $\bot$ from $\MetaD_k$, and so $\MetaD_k$ is inconsistent, contradicting the above. 
   Thus $\MetaD_{\MetaS_\MetaG}$ is consistent. 
   \qed
 \end{quote}
@@ -411,22 +434,6 @@ Put formally, $\MetaD$ is \define{deductively closed} just in case $\metaA\in\Me
 Since $\MetaD\vdash\metaA$ whenever $\metaA\in\MetaD$, deductively closed sets of wfss are identical to the set of wfss which they derive.
 In order to show that $\MetaD_{\MetaS_\MetaG}$ is deductively closed, we will begin by relabeling the following general purpose lemma from before. 
 
-\begin{Lthm} \label{lemma:FOL-cont}
-  If $\Lambda\vdash\metaA$ and $\Lambda\vdash\enot\metaA$, then $\Lambda$ is inconsistent. 
-\end{Lthm}
-
-\begin{quote} 
-  \textit{Proof:} 
-  Identical to \textbf{\ref{lemma:PL-cont}}.
-  \qed
-  % Assume $\Lambda\vdash\metaA$ and $\Lambda\vdash\enot\metaA$.
-  % Thus there is a FOL$^=$ proof $X$ of $\metaA$ from $\Lambda$ as well as a FOL$^=$ proof $Y$ of $\enot\metaA$ from $\Lambda$. 
-  % Letting $Z$ be the result of concatenating $X$ and $Y$ and using EFQ from $\S\ref{EFQ}$ to derive $A\eand\enot A$, we may observe that $Z$ is a proof of $A\eand\enot A$ from $\Lambda$, and so $\Lambda$ is inconsistent.
-\end{quote}
-  
-
-
-
 
 \begin{Lthm} \label{lemma:FOL-deductive}
   If $\MetaD$ is maximal in $\FIN$ and consistent, then $\metaA\in\MetaD$ whenever $\MetaD\vdash\metaA$.
@@ -440,9 +447,12 @@ In order to show that $\MetaD_{\MetaS_\MetaG}$ is deductively closed, we will be
   \qed
 \end{quote}
 
+
+
 This completes the setup for the construction of the Henkin Model presented in the following section.
-With the exception of saturation, most of what we have done so far was already provided in Chapter \ref{ch.PL-completeness}.
-Although similarities will persist, the Henkin model that we will define over $\MetaD_{\MetaS_\MetaG}$ will differ considerably from the Henkin interpretation that we introduced before. 
+Whereas saturation was required to make sure every existential claim has a witness, maximal consistency is familiar from Chapter \ref{ch.PL-completeness}.
+
+Although certain similarities will persist, the Henkin model that we will define over $\MetaD_{\MetaS_\MetaG}$ will differ considerably from the Henkin interpretation that we introduced before. 
 In particular, constructing the domain will require some care so as to ensure that any two constants that name the same individual are assigned to the same element of the domain of our Henkin model.
 None of these considerations occurred before, and indeed would be considerably simpler in a language without identity.
 These are the costs incurred by expanding the expressive power of our language to include not just predicates and the quantifiers but also a designated identity predicate for which we provided a semantics.
