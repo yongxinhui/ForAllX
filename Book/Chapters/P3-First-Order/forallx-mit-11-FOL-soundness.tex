@@ -201,29 +201,39 @@ Whereas the proofs for most of the rules will appeal to the induction hypothesis
 \end{quote}
 
 The proof above does not require the induction hypothesis or any additional results.
-By contrast, it will help to establish the reiteration rule by first recalling the following lemmas.
+By contrast, proof for the reiteration rule will appeal to analogs of the following lemmas.
 
-% \begin{Lthm} \label{lemma:PL-weakening}
-%   If $\Gamma \vDash \metaA$ and $\Gamma \subseteq \Gamma'$, then $\Gamma' \vDash \metaA$.
-% \end{Lthm}
-% % \vspace{-.3in}
-%
-% \begin{quote} 
-%   \textit{Proof:} Assume $\Gamma \vDash \metaA$ and $\Gamma \eifeq \Gamma'$.
-%   Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma'$, it follows that $\VV{\I}{}(\metaB)=1$ for all $\metaB \in \Gamma'$.
-%   Since $\Gamma\subseteq \Gamma'$, it follows that $\VV{\I}{}(\metaB)=1$ for all $\metaB \in \Gamma$, and so $\M$ satisfies $\Gamma$. 
-%   By assumption, $\M$ satisfies $\metaA$, and so $\Gamma \vDash \metaA$.
-% \end{quote}
+\begin{Lthm} \label{lemma:FOL-smweak}
+  If $\Gamma \vDash \metaA$ and $\Gamma \subseteq \Gamma'$, then $\Gamma' \vDash \metaA$.
+\end{Lthm}
+% \vspace{-.3in}
 
-\begin{itemize}[leftmargin=1.25in]
-  \item[\bf \ref{lemma:PL-weakening}:] If $\MetaG \vDash \metaA$, then $\MetaG \cup \MetaS \vDash \metaA$.
-  \item[\bf \ref{lemma:PL-live}:] If $\metaA_k$ is live at line $n$ of an FOL$^=$ derivation where $k\leq n$, then $\Gamma_k\subseteq \Gamma_{n}$.
-\end{itemize}
+\begin{quote} 
+  \textit{Proof:}
+  Similar to \textbf{\ref{lemma:PL-weakening}}.
+  % Assume $\Gamma \vDash \metaA$ and $\Gamma \eifeq \Gamma'$.
+  % Letting $\M=\tuple{\D,\I}$ be any model that satisfies $\Gamma'$, it follows that $\VV{\I}{}(\metaB)=1$ for all $\metaB \in \Gamma'$.
+  % Since $\Gamma\subseteq \Gamma'$, it follows that $\VV{\I}{}(\metaB)=1$ for all $\metaB \in \Gamma$, and so $\M$ satisfies $\Gamma$. 
+  % By assumption, $\M$ satisfies $\metaA$, and so $\Gamma \vDash \metaA$.
+  \qed
+\end{quote}
+
+
+\begin{Lthm} \label{lemma:FOL-live}
+  If $\Gamma \vDash \metaA$ and $\Gamma \subseteq \Gamma'$, then $\Gamma' \vDash \metaA$.
+\end{Lthm}
+% \vspace{-.3in}
+
+\begin{quote} 
+  \textit{Proof:}
+  Identical to \textbf{\ref{lemma:PL-live}}.
+  \qed
+\end{quote}
 
 
 The proofs for these lemmas is very similar to what it was before though $\MetaG$ is now permitted to be any set of wfss of $\FI$, where similarly, $\metaA$ is any wfs of $\FI$. 
 It is nevertheless worth looking back to confirm that the old proofs continue to apply.
-% Whereas \textbf{\ref{lemma:PL-weakening}} says that logical consequence is preserved upon adding premises, \textbf{\ref{lemma:PL-live}} makes an important observation about how undischarged assumptions are inherited by live lines.
+% Whereas \textbf{\ref{lemma:FOL-smweak}} says that logical consequence is preserved upon adding premises, \textbf{\ref{lemma:FOL-live}} makes an important observation about how undischarged assumptions are inherited by live lines.
 Given these two lemmas, we may now proceed to establish the reiteration rule R in the same manner as before.
 
 \factoidbox{
@@ -235,7 +245,7 @@ Given these two lemmas, we may now proceed to establish the reiteration rule R i
 \begin{quote} 
   \textit{Proof:} Assume that $\metaA_{n+1}$ follows by the reiteration rule R from the sentences in $\Gamma_{n+1}$.
   It follows that $\metaA_{n+1}=\metaA_{k}$ for some $k\leq n$, and so $\Gamma_k \vDash \metaA_k$ by hypothesis.
-  Since $\metaA_k$ is live at line $n+1$, we know by \textbf{\ref{lemma:PL-live}} that $\Gamma_k\subseteq \Gamma_{n+1}$, and so $\Gamma_{n+1} \vDash \metaA_{k}$ by \bref{lemma:PL-weakening}.
+  Since $\metaA_k$ is live at line $n+1$, we know by \textbf{\ref{lemma:FOL-live}} that $\Gamma_k\subseteq \Gamma_{n+1}$, and so $\Gamma_{n+1} \vDash \metaA_{k}$ by \bref{lemma:FOL-smweak}.
   Thus $\Gamma_{n+1} \vDash \metaA_{n+1}$ given the identity above.
   \qed
 \end{quote}
@@ -320,7 +330,7 @@ Omitting the details of the proof here, it worth reviewing the proof given in Ch
 %
 %   By hypothesis, $\Gamma_h \vDash \metaB$ and $\Gamma_j \vDash \enot\metaB$.
 %   With the exception of $\metaA_i=\metaA$, every assumption that is undischarged at lines $h$ and $j$ are also undischarged at line $n+1$.
-%   It follows that $\Gamma_h,\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \vDash \metaB$ and $\Gamma_{n+1}\cup\set{\metaA_i} \vDash \enot\metaB$ by \textbf{\ref{lemma:PL-weakening}}.
+%   It follows that $\Gamma_h,\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \vDash \metaB$ and $\Gamma_{n+1}\cup\set{\metaA_i} \vDash \enot\metaB$ by \textbf{\ref{lemma:FOL-smweak}}.
 %   Thus $\Gamma_{n+1}\cup\set{\metaA_i}$ is unsatisfiable by \textbf{\ref{lemma:unsat}}, and so $\Gamma_{n+1} \vDash \enot\metaA_i$ by \textbf{\ref{lemma:unsatent}}.
 %   Equivalently, $\Gamma_{n+1} \vDash \metaA_{n+1}$.
 % \end{quote}
@@ -351,7 +361,7 @@ Despite how similar the introduction and elimination rules are for negation, a f
 
   By hypothesis, $\Gamma_h \vDash \metaB$ and $\Gamma_j \vDash \enot\metaB$.
   With the exception of $\metaA_i=\enot\metaA$, the undischarged assumptions at lines $h$ and $j$ are also undischarged at line $n+1$.
-  It follows that $\Gamma_h,\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \vDash \metaB$ and $\Gamma_{n+1}\cup\set{\metaA_i} \vDash \enot\metaB$ by \textbf{\ref{lemma:PL-weakening}}.
+  It follows that $\Gamma_h,\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \vDash \metaB$ and $\Gamma_{n+1}\cup\set{\metaA_i} \vDash \enot\metaB$ by \textbf{\ref{lemma:FOL-smweak}}.
   Thus $\Gamma_{n+1}\cup\set{\metaA_i}$ is unsatisfiable by \textbf{\ref{lemma:unsat}}, and so $\Gamma_{n+1} \vDash \enot\metaA_i$ by \textbf{\ref{lemma:unsatent}}.
   Equivalently, $\Gamma_{n+1} \vDash \enot\enot\metaA_{n+1}$.
   Given any model $\M=\tuple{\D,\I}$ where $\VV{\I}{}(\metaC) = 1$ for all $\metaC \in \Gamma_{n+1}$, it follows that $\VV{\I}{}(\enot\enot\metaA_{n+1}) = 1$, and so $\VV{\I}{\va{a}}(\enot\enot\metaA_{n+1})=1$ for all $\va{a}$. 
@@ -498,8 +508,8 @@ The following rule is established in much the same way as before save for minor 
   This proof is left as an exercise for the reader.
   % Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conjunction introduction $\eand$I.
   % Thus $\metaA_{n+1}=\metaA_i\eand\metaA_j$ for some lines $i,j\leq n$ that are live at line $n+1$.
-  % By hypothesis, $\Gamma_i\vDash \metaA_i$ and $\Gamma_j\vDash \metaA_j$ where $\Gamma_i,\Gamma_j\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:PL-live}}.
-  % Thus $\Gamma_{n+1} \vDash \metaA_i$ and $\Gamma_{n+1} \vDash \metaA_j$ by \textbf{\ref{lemma:PL-weakening}}.
+  % By hypothesis, $\Gamma_i\vDash \metaA_i$ and $\Gamma_j\vDash \metaA_j$ where $\Gamma_i,\Gamma_j\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:FOL-live}}.
+  % Thus $\Gamma_{n+1} \vDash \metaA_i$ and $\Gamma_{n+1} \vDash \metaA_j$ by \textbf{\ref{lemma:FOL-smweak}}.
   % Letting $\M=\tuple{\D,\I}$ be a model which satisfies $\Gamma_{n+1}$, it follows that $\M$ also satisfies $\metaA_i$ and $\metaA_j$.
   % By \textbf{\ref{lemma:VarAssign}}, $\VV{\I}{\va{a}}(\metaA_i)=\VV{\I}{\va{a}}(\metaA_j)=1$ for every variable assignment $\va{a}$ over $\D$, and so for some $\va{a}$ in particular.
   % Thus $\VV{\I}{\va{a}}(\metaA_i\eand\metaA_j)=\VV{\I}{\va{a}}(\metaA_{n+1})=1$, and so $\M$ satisfies $\metaA_{n+1}$.
@@ -531,7 +541,7 @@ Nevertheless, few changes are required for the proof to go through.
 \begin{quote} 
   \textit{Proof:} Assuming $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conjunction elimination $\eand$E, there is some $i\leq n$ where either $\metaA_i=\metaA_{n+1}\eand\metaB$ or $\metaA_i=\metaB\eand\metaA_{n+1}$ is live at line $n+1$.
   % By parity of reasoning we may assume that $\metaA_i=\metaA_{n+1}\eand\metaB$.
-  By hypothesis, $\Gamma_i\vDash \metaA_i$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:PL-live}}, and so $\Gamma_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:PL-weakening}}.
+  By hypothesis, $\Gamma_i\vDash \metaA_i$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:FOL-live}}, and so $\Gamma_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:FOL-smweak}}.
   Letting $\M=\tuple{\D,\I}$ be a model of $\FI$ where $\VV{\I}{}(\metaC) = 1$ for all $\metaC \in \Gamma_{n+1}$, it follows that $\VV{\I}{}(\metaA_i) = 1$, and so either $\VV{\I}{}(\metaA_{n+1}\eand\metaB) = 1$ or $\VV{\I}{}(\metaB\eand\metaA_{n+1}) = 1$.
   By \bref{lemma:VarAssign}, either $\VV{\I}{\va{a}}(\metaA_{n+1}\eand\metaB)=1$ or $\VV{\I}{\va{a}}(\metaB\eand\metaA_{n+1})=1$ for some v.a. $\va{a}$, and so either way $\VV{\I}{\va{a}}(\metaA_{n+1})=1$ by the semantics for conjunction.
   Thus $\VV{\I}{}(\metaA_{n+1}) = 1$ again by \bref{lemma:VarAssign}, and so $\Gamma_{n+1} \vDash \metaA_{n+1}$.
@@ -551,7 +561,7 @@ Nevertheless, few changes are required for the proof to go through.
 \begin{quote} 
   \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by disjunction introduction $\eor$I.
   Thus $\metaA_{n+1}=\metaA_i\eor\metaB$ or $\metaA_{n+1}=\metaB\eor\metaA_i$ for some line $i\leq n$ that is live at line $n+1$.
-  By hypothesis, $\Gamma_i\vDash \metaA_i$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:PL-live}}, and so $\Gamma_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:PL-weakening}}.
+  By hypothesis, $\Gamma_i\vDash \metaA_i$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:FOL-live}}, and so $\Gamma_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:FOL-smweak}}.
   Letting $\M=\tuple{\D,\I}$ be a model where $\VV{\I}{}(\metaC) = 1$ for all $\metaC \in \Gamma_{n+1}$, it follows that $\VV{\I}{}(\metaA_i) = 1$, and so $\VV{\I}{\va{a}}(\metaA_i)=1$ for some variable assignment $\va{a}$ by \bref{lemma:VarAssign}.
   By the semantics for disjunction, both $\VV{\I}{\va{a}}(\metaA_{i}\eor\metaB)=1$ and $\VV{\I}{\va{a}}(\metaB\eor\metaA_{i})=1$, and so $\VV{\I}{\va{a}}(\metaA_{n+1})=1$.
   Thus $\VV{\I}{}(\metaA_{n+1})=1$ again by \bref{lemma:VarAssign}, and so $\Gamma_{n+1} \vDash \metaA_{n+1}$ follows from generalizing on $\M$.
@@ -594,9 +604,9 @@ Something similar may be said for the following proof though a little more care 
   \have[n+1]{a}[\ ]{\metaC}\oe{i,j-h,k-l} 
   \end{proof}
 
-  By hypothesis, $\Gamma_i\vDash \metaA_i$, $\Gamma_h\vDash \metaA_h$, and $\Gamma_l\vDash \metaA_l$ where $\Gamma_i\subseteq \Gamma_{n+1}$ all follow by \textbf{\ref{lemma:PL-live}}, and so $\Gamma_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:PL-weakening}}.
+  By hypothesis, $\Gamma_i\vDash \metaA_i$, $\Gamma_h\vDash \metaA_h$, and $\Gamma_l\vDash \metaA_l$ where $\Gamma_i\subseteq \Gamma_{n+1}$ all follow by \textbf{\ref{lemma:FOL-live}}, and so $\Gamma_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:FOL-smweak}}.
   With the exception of $\metaA_j=\metaA$, every assumption that is undischarged at line $h$ is also undischarged at line $n+1$, and so $\Gamma_h\subseteq\Gamma_{n+1}\cup\set{\metaA_j}$.
-  Similarly, we may conclude that $\Gamma_l\subseteq\Gamma_{n+1}\cup\set{\metaA_k}$, and so $\Gamma_{n+1}\cup\set{\metaA_j} \vDash \metaA_h$ and $\Gamma_{n+1}\cup\set{\metaA_k} \vDash \metaA_l$ by \textbf{\ref{lemma:PL-weakening}}.
+  Similarly, we may conclude that $\Gamma_l\subseteq\Gamma_{n+1}\cup\set{\metaA_k}$, and so $\Gamma_{n+1}\cup\set{\metaA_j} \vDash \metaA_h$ and $\Gamma_{n+1}\cup\set{\metaA_k} \vDash \metaA_l$ by \textbf{\ref{lemma:FOL-smweak}}.
 
   % TODO: continue
 
@@ -671,7 +681,7 @@ The application of the previous lemma in the proof of the following rule is unch
 %
 %   By hypothesis, $\Gamma_j \vDash \metaA_j$.
 %   With the exception of $\metaA_i$, every assumption that is undischarged at line $j$ is also undischarged at line $n+1$.
-%   It follows that $\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \vDash \metaA_j$ by \textbf{\ref{lemma:PL-weakening}}.
+%   It follows that $\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \vDash \metaA_j$ by \textbf{\ref{lemma:FOL-smweak}}.
 %   Thus $\Gamma_{n+1} \vDash \metaA_i \eif \metaA_j$ by \textbf{\ref{lemma:cond}}.
 %   Equivalently, $\Gamma_{n+1} \vDash \metaA_{n+1}$.
 %   \qed
@@ -689,8 +699,8 @@ Having previously left the proof for the following proof rule as an exercise for
 
 \begin{quote} 
   \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by conditional introduction $\eif$E.
-  Thus there are some lines $\metaA_i=\metaA_j\eif\metaA_{n+1}$ and $\metaA_j$ for $i,j\leq n$ which are live at $n+1$, and so $\Gamma_i,\Gamma_j\subseteq\Gamma_{n+1}$ by \textbf{\ref{lemma:PL-live}}.
-  By hypothesis, $\Gamma_i\vDash \metaA_i$ and $\Gamma_j\vDash \metaA_j$, and so both $\Gamma_{n+1} \vDash \metaA_i$ and $\Gamma_{n+1} \vDash \metaA_j$ by \textbf{\ref{lemma:PL-weakening}}.
+  Thus there are some lines $\metaA_i=\metaA_j\eif\metaA_{n+1}$ and $\metaA_j$ for $i,j\leq n$ which are live at $n+1$, and so $\Gamma_i,\Gamma_j\subseteq\Gamma_{n+1}$ by \textbf{\ref{lemma:FOL-live}}.
+  By hypothesis, $\Gamma_i\vDash \metaA_i$ and $\Gamma_j\vDash \metaA_j$, and so both $\Gamma_{n+1} \vDash \metaA_i$ and $\Gamma_{n+1} \vDash \metaA_j$ by \textbf{\ref{lemma:FOL-smweak}}.
 
   Letting $\M=\tuple{\D,\I}$ be any model where $\VV{\I}{}(\metaC) = 1$ for all $\metaC \in \Gamma_{n+1}$, it follows that $\VV{\I}{}(\metaA_i) = \VV{\I}{}(\metaA_j) = 1$.
   It follows that $\VV{\I}{\va{a}}(\metaA_i)=\VV{\I}{\va{a}}(\metaA_j\eif\metaA_{n+1})=\VV{\I}{\va{a}}(\metaA_j)=1$ for all variable assignment $\va{a}$ over $\D$, and so for some $\va{a}$ in particular.
@@ -733,7 +743,7 @@ Having previously left the proof for the following proof rule as an exercise for
 
   By hypothesis, $\Gamma_j\vDash \metaA_j$, $\Gamma_k\vDash \metaA_k$, and $\Gamma_{n+1}\vDash \metaA_{n+1}$.
   With the exception of $\metaA_i$, every assumption that is undischarged at line $j$ is also undischarged at line $n+1$, and so $\Gamma_j\subseteq\Gamma_{n+1}\cup\set{\metaA_i}$.
-  Similarly, we may conclude that $\Gamma_k\subseteq\Gamma_{n+1}\cup\set{\metaA_h}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \vDash \metaA_j$ and $\Gamma_{n+1}\cup\set{\metaA_h} \vDash \metaA_k$ by \textbf{\ref{lemma:PL-weakening}}.
+  Similarly, we may conclude that $\Gamma_k\subseteq\Gamma_{n+1}\cup\set{\metaA_h}$, and so $\Gamma_{n+1}\cup\set{\metaA_i} \vDash \metaA_j$ and $\Gamma_{n+1}\cup\set{\metaA_h} \vDash \metaA_k$ by \textbf{\ref{lemma:FOL-smweak}}.
 
   By \textbf{\ref{lemma:cond}}, both $\Gamma_{n+1} \vDash \metaA_i \eif \metaA_j$ and $\Gamma_{n+1} \vDash \metaA_h \eif \metaA_k$.
   Equivalently, $\Gamma_{n+1} \vDash \metaA \eif \metaB$ and $\Gamma_{n+1} \vDash \metaB \eif \metaA$.
@@ -760,8 +770,8 @@ Having previously left the proof for the following proof rule as an exercise for
 \begin{quote} 
   \textit{Proof:} Assume $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by biconditional introduction $\eif$E.
 Thus there are some lines $i,j\leq n$ that are live at $n+1$ where either $\metaA_i=\metaA_j\eiff\metaA_{n+1}$ or $\metaA_i=\metaA_{n+1}\eiff\metaA_j$.
-  By parity of reasoning, we may assume that $\metaA_i=\metaA_j\eiff\metaA_{n+1}$ where $\Gamma_i,\Gamma_j\subseteq\Gamma_{n+1}$ follows by \textbf{\ref{lemma:PL-live}}.
-  By hypothesis, $\Gamma_i\vDash \metaA_i$ and $\Gamma_j\vDash \metaA_j$, and so $\Gamma_{n+1} \vDash \metaA_i$ and $\Gamma_{n+1} \vDash \metaA_j$ by \textbf{\ref{lemma:PL-weakening}}.
+  By parity of reasoning, we may assume that $\metaA_i=\metaA_j\eiff\metaA_{n+1}$ where $\Gamma_i,\Gamma_j\subseteq\Gamma_{n+1}$ follows by \textbf{\ref{lemma:FOL-live}}.
+  By hypothesis, $\Gamma_i\vDash \metaA_i$ and $\Gamma_j\vDash \metaA_j$, and so $\Gamma_{n+1} \vDash \metaA_i$ and $\Gamma_{n+1} \vDash \metaA_j$ by \textbf{\ref{lemma:FOL-smweak}}.
 
   Letting $\M=\tuple{\D,\I}$ be any model where $\VV{\I}{}(\metaC) = 1$ for all $\metaC \in \Gamma_{n+1}$, it follows that $\VV{\I}{}(\metaA_i) = \VV{\I}{}(\metaA_j) = 1$.
   Thus $\VV{\I}{\va{a}}(\metaA_i)=\VV{\I}{\va{a}}(\metaA_j\eiff\metaA_{n+1})=\VV{\I}{\va{a}}(\metaA_j)=1$ for every v.a. $\va{a}$ defined over $\D$, and so for some $\va{a}$ in particular. 
@@ -1019,7 +1029,7 @@ Consider the following proof.
 \begin{quote} 
   \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by universal introduction $\forall$I.
   Thus there is some $i\leq n$ where $\metaA_i=\metaA\unisub{\beta}{\alpha}$ is live at $n+1$ and $\beta$ does not occur in $\metaA_{n+1}=\qt{\forall}{\alpha}\metaA$ or in undischarged assumptions in $\Gamma_{n+1}$.
-  By \textbf{\ref{lemma:PL-live}}, $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\vDash\metaA_i$ by hypotheses, and so $\Gamma_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:PL-weakening}}.
+  By \textbf{\ref{lemma:FOL-live}}, $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\vDash\metaA_i$ by hypotheses, and so $\Gamma_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:FOL-smweak}}.
   Equivalently, $\Gamma_{n+1} \vDash \metaA\unisub{\beta}{\alpha}$.
   Since $\beta$ does not occur in $\qt{\forall}{\alpha}\metaA$ or any undischarged assumptions in $\Gamma_{n+1}$, it follows by \textbf{\ref{lemma:unigen}} that $\Gamma_{n+1}\vDash \qt{\forall}{\alpha}\metaA$, and so $\Gamma_{n+1}\vDash\metaA_{n+1}$.
   \qed
@@ -1083,7 +1093,7 @@ This will play a helpful role in the following proof.
 \begin{quote} 
   \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by universal elimination $\forall$E.
   Thus there is some $i\leq n$ where $\metaA_i=\qt{\forall}{\alpha}\metaA$ is live at $n+1$ and $\metaA_{n+1}=\metaA\unisub{\beta}{\alpha}$ for some variable $\alpha$ and constant $\beta$.
-  By \textbf{\ref{lemma:PL-live}}, $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\vDash\metaA_i$ by hypotheses, and so $\Gamma_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:PL-weakening}}.
+  By \textbf{\ref{lemma:FOL-live}}, $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\vDash\metaA_i$ by hypotheses, and so $\Gamma_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:FOL-smweak}}.
   Equivalently, $\Gamma_{n+1} \vDash \qt{\forall}{\alpha}\metaA$.
   By \textbf{\ref{lemma:uniinst}} that $\qt{\forall}{\alpha}\metaA\vDash \metaA\unisub{\beta}{\alpha}$, and so $\Gamma_{n+1}\vDash\metaA_{n+1}$ by \textbf{\ref{lemma:cut}}.
   \qed
@@ -1129,7 +1139,7 @@ We may now turn to provide a proof for the existential introduction rule given b
 \begin{quote} 
   \textit{Proof:} Assume that $\metaA_{n+1}$ follows from $\Gamma_{n+1}$ by existential introduction $\exists$I.
   Thus there is some $i\leq n$ where $\metaA_i=\metaA\unisub{\beta}{\alpha}$ is live at $n+1$ and $\metaA_{n+1}=\qt{\exists}{\alpha}\metaA$ for some variable $\alpha$ and constant $\beta$.
-  By \textbf{\ref{lemma:PL-live}}, $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\vDash\metaA_i$ by hypotheses, and so $\Gamma_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:PL-weakening}}.
+  By \textbf{\ref{lemma:FOL-live}}, $\Gamma_i\subseteq \Gamma_{n+1}$ where $\Gamma_i\vDash\metaA_i$ by hypotheses, and so $\Gamma_{n+1} \vDash \metaA_i$ by \textbf{\ref{lemma:FOL-smweak}}.
   Equivalently, $\Gamma_{n+1} \vDash \metaA\unisub{\beta}{\alpha}$.
   Since $\metaA\unisub{\beta}{\alpha} \vDash \qt{\exists}{\alpha}\metaA$ by \textbf{\ref{lemma:exigen}}, $\Gamma_{n+1}\vDash\metaA_{n+1}$ by \textbf{\ref{lemma:cut}}.
   \qed
@@ -1202,9 +1212,9 @@ Given the previous lemma, we may proceed to show that the proof rule for existen
     \have[n+1]{n}{\metaB{}} \Ee{i,j-k}
   \end{proof}
 
-  By hypothesis, $\Gamma_i\vDash\metaA_i$ and $\Gamma_k\vDash\metaA_k$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:PL-live}}.
+  By hypothesis, $\Gamma_i\vDash\metaA_i$ and $\Gamma_k\vDash\metaA_k$ where $\Gamma_i\subseteq \Gamma_{n+1}$ by \textbf{\ref{lemma:FOL-live}}.
   With the exception of $\metaA_j$, every assumption that is undischarged at line $k$ is also undischarged at line $n+1$, and so $\Gamma_k\subseteq\Gamma_{n+1}\cup\set{\metaA_j}$.
-  It follows by \textbf{\ref{lemma:PL-weakening}} that $\Gamma_{n+1} \vDash \metaA_i$ and $\Gamma_{n+1}\cup\set{\metaA_j} \vDash \metaA_k$, and so $\Gamma_{n+1} \vDash \qt{\exists}{\alpha}\metaA$ and $\Gamma_{n+1}\cup\set{\metaA\unisub{\beta}{\alpha}} \vDash \metaB$.
+  It follows by \textbf{\ref{lemma:FOL-smweak}} that $\Gamma_{n+1} \vDash \metaA_i$ and $\Gamma_{n+1}\cup\set{\metaA_j} \vDash \metaA_k$, and so $\Gamma_{n+1} \vDash \qt{\exists}{\alpha}\metaA$ and $\Gamma_{n+1}\cup\set{\metaA\unisub{\beta}{\alpha}} \vDash \metaB$.
   Thus $\Gamma_{n+1}\vDash\metaB$ by \textbf{\ref{lemma:exiinst}}, and so $\Gamma_{n+1}\vDash\metaA_{n+1}$.
   \qed
 \end{quote}
@@ -1232,7 +1242,7 @@ All that remains is to generalize this proof to the present setting where the $n
   Thus $\metaA_{n+1}$ is $\alpha=\alpha$ for some constant $\alpha$. 
   Letting $\M=\tuple{\D,\I}$ be any model, it follows that $\I(\alpha)=\I(\alpha)$, and so $\val{\I}{\va{a}}(\alpha)=\val{\I}{\va{a}}(\alpha)$ for any variable assignment $\va{a}$.
   By the semantics for identity, $\VV{\I}{\va{a}}(\alpha=\alpha)=1$, and so $\vDash \alpha=\alpha$ by generalizing on $\M$.
-  Equivalently $\vDash \metaA_{n+1}$, and so $\Gamma_{n+1}\vDash\metaA_{n+1}$ follows by \textbf{\ref{lemma:PL-weakening}}.
+  Equivalently $\vDash \metaA_{n+1}$, and so $\Gamma_{n+1}\vDash\metaA_{n+1}$ follows by \textbf{\ref{lemma:FOL-smweak}}.
   \qed
 \end{quote}
 
@@ -1282,7 +1292,7 @@ We may then provide the following proof:
     \have[n+1]{n}{\metaA\unisub{\beta}{\gamma}} \by{=E}{i,j}
   \end{proof}
 
-  By \textbf{\ref{lemma:PL-live}}, $\Gamma_i,\Gamma_j\subseteq \Gamma_{n+1}$ where $\Gamma_i\vDash\metaA_i$ and $\Gamma_j\vDash\metaA_j$ by hypotheses, and so $\Gamma_{n+1} \vDash \metaA_i$ and $\Gamma_{n+1} \vDash \metaA_j$ by \textbf{\ref{lemma:PL-weakening}}.
+  By \textbf{\ref{lemma:FOL-live}}, $\Gamma_i,\Gamma_j\subseteq \Gamma_{n+1}$ where $\Gamma_i\vDash\metaA_i$ and $\Gamma_j\vDash\metaA_j$ by hypotheses, and so $\Gamma_{n+1} \vDash \metaA_i$ and $\Gamma_{n+1} \vDash \metaA_j$ by \textbf{\ref{lemma:FOL-smweak}}.
   Equivalently, $\Gamma_{n+1} \vDash \alpha = \beta$ and $\Gamma_{n+1} \vDash \metaA\unisub{\alpha}{\gamma}$.
   Since $\alpha$ and $\beta$ are constants, we know by \textbf{\ref{lemma:id}} that $\metaA\unisub{\alpha}{\gamma}, \alpha = \beta \vDash \metaA\unisub{\beta}{\gamma}$.
   By two applications of \textbf{\ref{lemma:cut}}, we may conclude that $\Gamma_{n+1}\vDash\metaA\unisub{\beta}{\gamma}$, or equivalently, $\Gamma_{n+1}\vDash\metaA_{n+1}$.
