@@ -3,7 +3,15 @@
 # Define the base directory and the target directory
 base_directory="Lectures"
 target_directory="Handouts"
+#
+# Delete the target directory if it exists
+if [ -d "$target_directory" ]; then
+    rm -rf "$target_directory"
+    echo "Existing directory '$target_directory' has been deleted."
+fi
 
+# Create the target directory
+mkdir -p "$target_directory"
 # Create the target directory if it doesn't exist
 mkdir -p "$target_directory"
 

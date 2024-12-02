@@ -39,7 +39,7 @@
 %	TITLE
 %----------------------------------------------------------------------------------------
 
-\title{\textbf{Completeness of FOL$^=$}} % Subtitle
+\title{\textbf{Completeness of FOL$^=$: Part II}} % Subtitle
 
 \author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
 
@@ -55,18 +55,54 @@
 
 %----------------------------------------------------------------------------------------
 
+\section*{Definitions}
 
-\section*{Basic Lemmas}
+\begin{itemize}
+  \item[\it Extension:] Let $\FIN$ include the extra constants $\N$.
+  \item[\it Constants:] Let $\C$ be the set of all constants in $\FIN$.
+  \item[\it Free:] Let $\metaA(\alpha)$ be a wff of $\FIN$ with at most one free variable $\alpha$.
+  \item[\it Saturated:] A set of wfss $\MetaS$ is \textsc{saturated} in $\FIN$ just in case for each wff $\metaA(\alpha)$ of $\FIN$, there is a constant $\beta$ where $(\qt{\exists}{\alpha}\metaA \eif \metaA\unisub{\beta}{\alpha})\in\MetaS$.
+  \item[\it Free Enumeration:] \mbox{Let $\metaA_1(\alpha_1),\metaA_2(\alpha_2),\metaA_3(\alpha_3),\ldots$ enumerate all wffs of $\FIN$ with at most one free variable.}
+  \item[\it Witnesses:] \mbox{$\theta_1=(\qt{\exists}{\alpha_1}\metaA_1\eif \metaA_1\unisub{n_1}{\alpha_1})$ where $n_1\in\N$ is the first constant not in $\metaA_1$.}\vspace{.05in}\\
+    $\theta_{k+1}=(\qt{\exists}{\alpha_{k+1}}\metaA_{k+1}\eif \metaA_{k+1}\unisub{n_{k+1}}{\alpha_{k+1}})$  where $n_{k+1}\in\N$ is the first constant not in $\metaA_{k+1}$ or $\theta_j$ for any $j\leq k$.
+  \item[\it Saturation:]
+    $\MetaS_0 = \MetaG$,\\
+    $\MetaS_{n+1} = \MetaS_n\cup\set{\theta_{n+1}}$, and\\
+    $\MetaS_\MetaG = \bigcup\limits_{i\in\N}\MetaS_n$.
+  \item[\it Maximal:] A set of wfss $\MetaD$ is \textsc{maximal} in $\FIN$ just in case either $\metaB\in\MetaD$ or $\neg\metaB\in\MetaD$ for every wfs $\metaB$ in $\FIN$.
+  \item[\it Full Enumeration:] Let $\metaB_0,\metaB_1,\metaB_2,\ldots$ enumerate all wfss in $\FIN$.
+  \item[\it Maximization:]
+    $\MetaD_0 = \MetaS_\MetaG$,\\ 
+    $\MetaD_{n+1} =
+      \begin{cases}
+        \MetaD_n\cup\set{\metaB_n} ~~\text{ if } \MetaD_n\cup\set{\metaB_n} \text{ is consistent}\\
+        \MetaD_n\cup\set{\neg\metaB_n} ~~\text{ otherwise}.
+      \end{cases}$,\\
+    $\MetaD_\MetaS = \bigcup_{i\in\N}\MetaD_n$. 
+\end{itemize}
+
+
+
+
+
+
+
+\section*{Lemmas}
 
 \begin{itemize}
   \item[\bf L9.1] If $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$.
   \item[\bf L11.5] $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ if $\val{\I}{\va{a}}(\alpha)=\val{\I}{\va{a}}(\beta)$ and $\beta$ is free for $\alpha$ in $\metaA$.
   \item[\bf L11.6] If $\M$ and $\M'$ have the same domain $\D$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and constant $\alpha$ that occurs in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any v.a. $\va{a}$ defined over $\D$.
   \item[\bf L12.1] If $\alpha$ is a constant and $X$ is an FOL$^=$ derivation in which the constant $\beta$ does not occur, then $X\unisub{\beta}{\alpha}$ is also an FOL$^=$ derivation.
+  \item[\bf L12.2] $\MetaG$ is consistent in FOL$^=_{\N}$.
   \item[\bf L12.3] If $\MetaL\cup\set{\metaA}$ is inconsistent, then $\MetaL\vdash\neg\metaA$.
   \item[\bf L12.4] If $\MetaL \vdash \metaA$ and $\Pi\cup\set{\metaA} \vdash \metaB$, then $\MetaL\cup\Pi \vdash \metaB$.
+  \item[\bf L12.5] $\MetaS_\MetaG$ is consistent and saturated in $\FIN$.
   \item[\bf L12.6] If $\MetaL \cup \set{\metaA}$ and $\MetaL\cup \set{\neg\metaA}$ are both inconsistent, then $\MetaL$ is inconsistent.
+  \item[\bf L12.7] $\MetaD=\MetaD_{\MetaS_\MetaG}$ is maximal in $\FIN$ and consistent. 
+  \item[\bf L12.8] $\MetaG\subseteq\MetaS_\MetaG\subseteq\MetaD$ where $\MetaD$ is saturated.
   \item[\bf L12.9] If $\MetaL\vdash\metaA$ and $\MetaL\vdash\neg\metaA$, then $\MetaL$ is inconsistent.
+  \item[\bf L12.10] $\metaA\in\MetaD$ whenever $\MetaD\vdash\metaA$.
   \item[\bf L12.11] If $\MetaL\vdash\metaA$, then $\MetaL\cup\Pi\vdash\metaA$.
 \end{itemize}
 
@@ -84,73 +120,6 @@
 
 
 
-
-\section*{Saturation}
-
-\begin{itemize}
-  % \item[\it Extension:] We begin by taking $\FIN$ to include $\N$ as new constants.
-  \item[\it Extension:] Let $\FIN$ include the extra constants $\N$ where $\C$ is the set of all constants.
-  \item[\it Free:] Let $\metaA(\alpha)$ be a wff of $\FIN$ with at most one free variable $\alpha$.
-  \item[\it Saturated:] A set of wfss $\MetaS$ is \textsc{saturated} in $\FIN$ just in case for each wff $\metaA(\alpha)$ of $\FIN$, there is a constant $\beta$ where $(\qt{\exists}{\alpha}\metaA \eif \metaA\unisub{\beta}{\alpha})\in\MetaS$.
-  \item[\bf L12.2] $\MetaG$ is consistent in FOL$^=_{\N}$. \quad(We will drop `in FOL$^=_\N$')
-    % \item We will hence forth take `consistent' to mean `consistent in FOL$^=_\N$'.
-  \item[\it Free Enumeration:] \mbox{Let $\metaA_1(\alpha_1),\metaA_2(\alpha_2),\metaA_3(\alpha_3),\ldots$ enumerate all wffs of $\FIN$ with at most one free variable.}
-  \item[\it Witnesses:] \mbox{$\theta_1=(\qt{\exists}{\alpha_1}\metaA_1\eif \metaA_1\unisub{n_1}{\alpha_1})$ where $n_1\in\N$ is the first constant not in $\metaA_1$.}\vspace{.05in}\\
-    $\theta_{k+1}=(\qt{\exists}{\alpha_{k+1}}\metaA_{k+1}\eif \metaA_{k+1}\unisub{n_{k+1}}{\alpha_{k+1}})$  where $n_{k+1}\in\N$ is the first constant not in $\metaA_{k+1}$ or $\theta_j$ for any $j\leq k$.
-  \item[\it Saturation:]
-    $\MetaS_0 = \MetaG$,\\
-    $\MetaS_{n+1} = \MetaS_n\cup\set{\theta_{n+1}}$, and\\
-    $\MetaS_\MetaG = \bigcup\limits_{i\in\N}\MetaS_n$.
-  \item[\bf L12.5] $\MetaS_\MetaG$ is consistent and saturated in $\FIN$.
-    \item[\it Base:] $\MetaS_0 = \MetaG$ is consistent. 
-    \item[\it Induction:] Assume $\MetaS_m$ is consistent. 
-    \item Assume $\MetaS_{m+1} = \MetaS_m \cup \set{\theta_{m+1}}$ is inconsistent for contradiction.
-    \item So $\MetaS_m \vdash \enot\theta_{m+1}$ by \textbf{L12.3}, and so $\MetaS_m \vdash \enot (\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}\eif \metaA_{m+1}\unisub{n_{m+1}}{\alpha_{m+1}})$.
-    \item \mbox{So $\MetaS_m\vdash \qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ and $\MetaS_m\vdash\neg\metaA_{m+1}\unisub{n_{m+1}}{\alpha_{m+1}}$ by derived PL rules.}
-    \item So $\MetaS_m\vdash \qt{\forall}{\alpha_{m+1}}\neg\metaA_{m+1}$ by $\forall$I since $n_{m+1}$ is not in $\qt{\forall}{\alpha_{m+1}}\neg\metaA_{m+1}$ or $\MetaS_m$.
-    \item So $\MetaS_m\vdash \neg\qt{\exists}{\alpha_{m+1}}\metaA_{m+1}$ by $\forall\neg$, and so $\MetaS_m$ is inconstant by \textbf{L12.9}.
-    \item It follows by \textit{reductio} that $\MetaS_{m+1}$ is consistent.
-    \item By weak induction, we know that $\MetaS_k$ is consistent for all $k \in \N$.
-    \item[\it Limit:] If $\MetaS_\MetaG$ is inconsistent, then $X$ derives $\bot$ from $\MetaS_\MetaG$ in FOL$^=_\N$. 
-    \item Since $X$ is finite, $\MetaS_m\vdash\bot$ for some $m\in\N$ including all premises in $X$.
-    \item So $\MetaS_m$ is inconsistent, contradicting the above. 
-    \item By \textit{reductio}, $\MetaS_\MetaG$ is consistent. 
-\end{itemize}
-
-
-
-
-
-
-\section*{Maximization}
-
-\begin{itemize}
-  \item[\it Maximal:] A set of wfss $\MetaD$ is \textsc{maximal} in $\FIN$ just in case either $\metaB\in\MetaD$ or $\neg\metaB\in\MetaD$ for every wfs $\metaB$ in $\FIN$.
-  \item[\it Full Enumeration:] Let $\metaB_0,\metaB_1,\metaB_2,\ldots$ enumerate all wfss in $\FIN$.
-  \item[\it Maximization:]
-    $\MetaD_0 = \MetaS$,\\ 
-    $\MetaD_{n+1} =
-      \begin{cases}
-        \MetaD_n\cup\set{\metaB_n} ~~\text{ if } \MetaG_n\cup\set{\metaB_n} \text{ is consistent}\\
-        \MetaD_n\cup\set{\neg\metaB_n} ~~\text{ otherwise}.
-      \end{cases}$,\\
-    $\MetaD_\MetaS = \bigcup_{i\in\N}\MetaD_n$. 
-  \item[\bf L12.7] $\MetaD=\MetaD_{\MetaS_\MetaG}$ is maximal in $\FIN$ and consistent. 
-  \item[\it Case 1:] $\MetaD_n\cup\set{\metaB_n}$ is consistent, and so $\MetaD_{n+1}=\MetaD_n\cup\set{\metaB_n}$ is consistent. 
-  \item[\it Case 2:] $\MetaD_n\cup\set{\metaB_n}$ is not consistent, and so $\MetaD_{n+1}=\MetaD_n\cup\set{\neg\metaB_n}$.
-  \item If $\MetaD_n\cup\set{\neg\metaB_n}$ is inconsistent, then $\MetaD_n$ is inconsistent by \textbf{L12.6}. 
-  \item So $\MetaD_{n+1}$ is consistent in both cases. 
-  \item If $\MetaD_\MetaS$ is inconsistent, then $\MetaD_m\vdash\bot$ for some $m\in\N$.
-  \item Maximality is immediate.
-  \item[\bf L12.8] $\MetaG\subseteq\MetaS_\MetaG\subseteq\MetaD$ where $\MetaD$ is saturated.
-    \setcounter{enumi}{0}
-  % \item Immediate from the definitions.
-  \item[\bf L12.10] $\metaA\in\MetaD$ whenever $\MetaD\vdash\metaA$.
-    \setcounter{enumi}{0}
-  \item Assuming $\MetaD\vdash\metaA$, we know $\MetaD\nvdash\neg\metaA$ by \textbf{L12.9}.
-  \item So $\neg\metaA\notin\MetaD$ since otherwise $\MetaD\vdash\neg\metaA$.
-  \item Thus $\metaA\in\MetaD$ by maximality. 
-\end{itemize}
 
 
 \section*{Henkin Model}
@@ -180,26 +149,27 @@
 
 \begin{itemize}
   \item[\bf L12.15] $\VV{\I_\MetaD}{\va{a}}(\qt{\exists}{\alpha}\metaB)=1$ just in case $\VV{\I_\MetaD}{\va{a}}(\metaB\unisub{\beta}{\alpha})=1$ for some constant $\beta\in\C$.
-  \item Letting $\VV{\I_\MetaD}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$, we know $\VV{\I_\MetaD}{\va{c}}(\metaA)=1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$.
+  \item[\sc ltr:] Letting $\VV{\I_\MetaD}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$, we know $\VV{\I_\MetaD}{\va{c}}(\metaA)=1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$.
   \item So $\va{c}(\alpha)=[\beta]_\MetaD$ for some $\beta\in\C$, so $\va{c}(\alpha)=\I_\MetaD(\beta)$ since $\I_\MetaD(\beta)=[\beta]_\MetaD$.
   \item Thus $\val{\I}{\va{c}}(\alpha)=\val{\I}{\va{c}}(\beta)$, and so $\VV{\I_\MetaD}{\va{c}}(\metaA)=\VV{\I_\MetaD}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{L11.5}.
   \item So $\VV{\I_\MetaD}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$, and so $\VV{\I_\MetaD}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ by \textbf{L9.1}.
-  \item Assume instead that $\VV{\I_\MetaD}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for some $\beta\in\C$.
+  \item[\sc rtl:] Assume instead that $\VV{\I_\MetaD}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for some $\beta\in\C$.
   \item Let $\va{c}$ be the $\alpha$-variant of $\va{a}$ where $\va{c}(\alpha)=\I_\MetaD(\beta)$, so $\val{\I}{\va{c}}(\alpha)=\val{\I}{\va{c}}(\beta)$.
   \item Thus $\VV{\I_\MetaD}{\va{c}}(\metaA)=\VV{\I_\MetaD}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{L11.5}, and so $\VV{\I_\MetaD}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$.
   \item[\bf L12.16] $\VV{\I_\MetaD}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ just in case $\VV{\I_\MetaD}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for all constants $\beta\in\C$.
     \setcounter{enumi}{0}
   \item Similar to \textbf{L12.15}.
-  \item[\bf L12.17] $\VV{\I_\MetaD}{}(\metaA)=1$ just in case $\metaA\in\MetaD$. \quad(Let $\va{a}$ be arbitrary.)
-    \setcounter{enumi}{0}
+  \item[\bf L12.17] $\VV{\I_\MetaD}{}(\metaA)=1$ just in case $\metaA\in\MetaD$.
+    \item Let $\va{a}$ be arbitrary.
   \item[\it Base:] 
     $\VV{\I_\MetaD}{\va{a}}(\alpha_1=\alpha_2)=1
       % \textit{ ~iff~ } \VV{\I_\MetaD}{\va{a}}(\alpha_1)=\VV{\I_\MetaD}{\va{a}}(\alpha_2)
       \textit{ iff } \I_\MetaD(\alpha_1)=\I_\MetaD(\alpha_2)
       \textit{ iff } [\alpha_1]_\MetaD=[\alpha_2]_\MetaD
       \textit{ iff } \alpha_1=\alpha_2\in\MetaD.$
-  \item If $[\alpha_1]_\MetaD=[\alpha_2]_\MetaD$, then $\alpha_2\in[\alpha_2]_\MetaD$ by \textbf{L12.12}, and so $\alpha_2\in[\alpha_1]_\MetaD$.
-  \item Thus $\alpha_1=\alpha_2\in\MetaD$ by definition, and the converse holds by \textbf{L12.13}.
+    \item If $[\alpha_1]_\MetaD=[\alpha_2]_\MetaD$, then $\alpha_2\in[\alpha_2]_\MetaD$ by \textbf{L12.12}, and so $\alpha_2\in[\alpha_1]_\MetaD$.
+    \item Thus $\alpha_1=\alpha_2\in\MetaD$ by definition, and the converse holds by \textbf{L12.13}.
+    \item The predicate case is immediate from \textit{Predicates} definition.
   \item[\it Induction:] Assume $\VV{\I_\MetaD}{\va{a}}(\metaA)=1$ just in case $\metaA\in\MetaD$ whenever $\comp{\metaA}\leq n$.
     \setcounter{enumi}{0}
   \item Let $\metaA$ be a wfs of $\FIN$ where $\comp{\metaA}=n+1$.
@@ -220,8 +190,9 @@
     \item \mbox{If $\metaB\unisub{\beta}{\alpha}\in\MetaD$ for some $\beta\in\C$, then $\MetaD\vdash \qt{\exists}{\alpha}\metaB$ by $\exists$I, so $\qt{\exists}{\alpha}\metaB\in\MetaD$ by \textbf{L12.10}.}
     \item If $\qt{\exists}{\alpha}\metaB\in\MetaD$ instead, then $\metaB=\metaA_i(\alpha_i)$ for some $i\in\N$ where $\alpha_i=\alpha$.
     \item Thus $\qt{\exists}{\alpha_i}\metaA_i\eif \metaA_i\unisub{n_i}{\alpha_i}\in\MetaD$ by the saturation assumed of $\MetaD$.
-    \item Since $n_i\in\C$, it follows that $\qt{\exists}{\alpha}\metaB\eif\metaB\unisub{\beta}{\alpha}\in\MetaD$ for some $\beta\in\C$, and so $\MetaD\vdash\metaB\unisub{\beta}{\alpha}$ by conditional elimination $\eif$E. 
-    \item Thus \textbf{L12.10} that $\metaB\unisub{\beta}{\alpha}\in\MetaD$, thereby establishing $(\hspace{.7pt}\exists\hspace{.7pt})$.
+    \item Since $n_i\in\C$, it follows that $\qt{\exists}{\alpha}\metaB\eif\metaB\unisub{\beta}{\alpha}\in\MetaD$ for some $\beta\in\C$.
+    \item So $\MetaD\vdash\metaB\unisub{\beta}{\alpha}$ by conditional elimination $\eif$E. 
+    \item Thus $\metaB\unisub{\beta}{\alpha}\in\MetaD$ by \textbf{L12.10}, thereby establishing $(\hspace{.7pt}\exists\hspace{.7pt})$.
   \item[\it Conclusion:] So $\VV{\I_\MetaD}{\va{a}}(\metaA)=1$ just in case $\metaA\in\MetaD$, from which the lemma follows.
 \end{itemize}
 
@@ -230,17 +201,17 @@
 \begin{itemize}
   \item[\it Restriction:] $\I'_\MetaD(\alpha)=[\alpha]_\MetaD$ for every constant $\alpha$ in $\FIN$.
     \item[] $\I'_\MetaD(\F^n)=\I_\MetaD(\F^n)$ for all $n$-place predicates $\F^n$. 
-  \item[\bf L12.18] For any wfs $\metaA$ of $\FIN$, $\M'_\MetaD$ satisfies $\metaA$ just in case $\M_\MetaD$ satisfies $\metaA$.
+  \item[\bf L12.18] $\VV{\I'_\MetaD}{}(\metaA) = \VV{\I'_\MetaD}{}(\metaA)$ for any wfs $\metaA$ of $\FI$.
+    \item Let $\va{a}$ be an arbitrary v.a. defined over $\D_\MetaD$. 
     \item $\VV{\I'_\MetaD}{\va{a}}(\metaA) = \VV{\I_\MetaD}{\va{a}}(\metaA)$ for any variable assignment $\va{a}$ by \textbf{L11.6}.
-  \item[\bf T12.1] Every consistent set $\MetaG$ of wfss in $\FIN$ is satisfiable.
+  \item[\bf T12.1] Every consistent set $\MetaG$ of wfss in $\FI$ is satisfiable.
     \item Let $\MetaG$ be a consistent set of $\FI$ sentences in FOL$^=$.
     \item By \textbf{L12.2}, $\MetaG$ is a set of $\FIN$ sentences that is consistent in FOL$^=_\N$.
     \item So $\MetaS_\MetaG$ is consistent and saturated in $\FIN$ by \textbf{L12.5}. 
     \item Given \textbf{L12.7} and \textbf{L12.8}, $\MetaD_{\MetaS_\MetaG}$ is a saturated maximal consistent set of sentences in $\FIN$ where $\MetaG\subseteq\MetaD_{\MetaS_\MetaG}$.
-    \item Letting $\MetaD=\MetaD_{\MetaS_\MetaG}$, \textbf{L12.7} shows that the Henkin model $\M_\MetaD$ satisfies $\metaA$ just in case $\metaA\in\MetaD$, and so $\M_\MetaD$ satisfies $\MetaD$.
+    \item Letting $\MetaD=\MetaD_{\MetaS_\MetaG}$, \textbf{L12.7} shows that the Henkin model $\M_\MetaD$ is such that $\VV{\I_\MetaD}{}{}(\metaA) = 1$ just in case $\metaA\in\MetaD$, and so $\M_\MetaD$ satisfies $\MetaD$.
     \item Having shown that $\MetaG\subseteq\MetaD$, we know that $\M_\MetaD$ satisfies $\MetaG$.
-    \item Since $\MetaG$ is a set of $\FI$ sentences, it follows by \textbf{L12.18} that there is a model $\M'_\MetaD$ of $\FI$ that satisfies $\MetaG$.
-    \item Thus $\MetaG$ is satisfiable.
+    \item Since $\MetaG$ is a set of $\FI$ sentences, it follows by \textbf{L12.18} that there is a model $\M'_\MetaD$ of $\FI$ that satisfies $\MetaG$, so $\MetaG$ is satisfiable.
 \end{itemize}
 
 
@@ -248,32 +219,45 @@
 
 \begin{itemize}
   \item[\bf C12.2] If $\MetaG\vDash\metaA$, then there is a finite subset $\MetaL\subseteq\MetaG$ where $\MetaL\vDash\metaA$.
+    \item Assuming $\MetaG\vDash\metaA$, we know $\MetaG\vdash\metaA$ by \textsc{FOL$^=$ Completeness}.
+    \item So there is a derivation $X$ of $\metaA$ from $\MetaG$.
+    \item Let $\MetaG_X$ be the set of premises which appear in $X$.
+    \item It follows that $\MetaG_X\vdash\metaA$, and so $\MetaG_X\vDash\metaA$ by \textsc{FOL$^=$ Soundness}.
+    \item Since $X$ is finite, $\MetaG_X$ is finite, and so $\Lambda\vDash\metaA$ for a finite subset $\Lambda\subseteq\MetaG$.
   \item[\bf C12.3] $\MetaG$ is satisfiable if every finite subset $\MetaL\subseteq\MetaG$ is satisfiable.
+    \item Assume for contraposition that $\MetaG$ is unsatisfiable. 
+    \item Vacuously, $\MetaG\vDash\bot$, and so $\Lambda\vDash\bot$ by \textbf{C12.2} for a finite subset $\Lambda\subseteq\MetaG$.
+    \item Hence $\Lambda$ must also be unsatisfiable.
+    \item Thus there is some finite subset $\Lambda\subseteq\MetaG$ that is unsatisfiable. 
+    \item By contraposition, QED.
+  \item[\bf Question:] Is it possible to express `At most finitely many $x$s are $F$' in $\FI$? 
+    \item But $\MetaG_\infty=\set{\exists_{\geq n}xFx:n\in\N} \vDash \enot \qt{\exists^\star}{\alpha}Fx$.
+    \item So $\Lambda_\infty \vDash \enot \qt{\exists^\star}{\alpha}Fx$ for finite $\Lambda_\infty \subseteq \set{\exists_{\geq n}xFx:n\in\N}$.
 \end{itemize}
 
 
 
 
-\section*{Final Exam Review}
-
-\begin{enumerate}
-  \item[\it Regimentation:]
-    \begin{enumerate}
-      \item No two individuals are at least as tall as each other. Sanna is at least as tall as the finalist, and the finalist is at least as tall as Sanna. Thus, Sanna is the finalist.
-      % \item Everyone who loves Meera is brave. Someone loves Meera but not everyone is brave. Thus there are at least two people.
-    \end{enumerate}
-  \item[\it Models:]
-    \begin{enumerate}
-      \item $Qab, Qba \nvDash a=b$.
-      \item $\qt{\forall}{x}\qt{\forall}{y}(Px \supset (Py \supset x \neq y)) \nvDash \qt{\exists}{x}\qt{\exists}{y}\ x \neq y$.
-    \end{enumerate}
-  \item[\it Equivalence:] $\qt{\exists}{x}(\qt{\forall}{y}(Py \supset x = y) \wedge Px) \Dashv\vDash \qt{\exists}{x}\qt{\forall}{y}(Py \equiv x = y)$.
-  \item[\it Relations:]
-    \begin{enumerate}
-      \item $R$ is symmetric and antisymmetric. Therefore $R$ is reflexive.
-      \item $R$ is asymmetric. Therefore $R$ is antisymmetric.
-    \end{enumerate}
-\end{enumerate}
+% \section*{Final Exam Review}
+%
+% \begin{enumerate}
+%   \item[\it Regimentation:]
+%     \begin{enumerate}
+%       \item No two individuals are at least as tall as each other. Sanna is at least as tall as the finalist, and the finalist is at least as tall as Sanna. Thus, Sanna is the finalist.
+%       % \item Everyone who loves Meera is brave. Someone loves Meera but not everyone is brave. Thus there are at least two people.
+%     \end{enumerate}
+%   \item[\it Models:]
+%     \begin{enumerate}
+%       \item $Qab, Qba \nvDash a=b$.
+%       \item $\qt{\forall}{x}\qt{\forall}{y}(Px \supset (Py \supset x \neq y)) \nvDash \qt{\exists}{x}\qt{\exists}{y}\ x \neq y$.
+%     \end{enumerate}
+%   \item[\it Equivalence:] $\qt{\exists}{x}(\qt{\forall}{y}(Py \supset x = y) \wedge Px) \Dashv\vDash \qt{\exists}{x}\qt{\forall}{y}(Py \equiv x = y)$.
+%   \item[\it Relations:]
+%     \begin{enumerate}
+%       \item $R$ is symmetric and antisymmetric. Therefore $R$ is reflexive.
+%       \item $R$ is asymmetric. Therefore $R$ is antisymmetric.
+%     \end{enumerate}
+% \end{enumerate}
 
 
 \end{document}
