@@ -39,7 +39,7 @@
 %	TITLE
 %----------------------------------------------------------------------------------------
 
-\title{\textbf{Completeness of FOL$^=$: Part II}} % Subtitle
+\title{\textbf{Completeness of FOL$^=$: Part III}} % Subtitle
 
 \author{\textsc{Logic I}\\ \em Benjamin Brast-McKie} % Institution
 
@@ -208,6 +208,70 @@
 
 
 
+
+
+\section*{Restriction}
+
+\begin{itemize}
+  \item[\it Restriction:] $\I'_\MetaD(\alpha)=[\alpha]_\MetaD$ for every constant $\alpha$ in $\FIN$.
+    \item[] $\I'_\MetaD(\F^n)=\I_\MetaD(\F^n)$ for all $n$-place predicates $\F^n$. 
+  \item[\bf L12.18] $\VV{\I'_\MetaD}{}(\metaA) = \VV{\I'_\MetaD}{}(\metaA)$ for any wfs $\metaA$ of $\FI$.
+    \item Let $\va{a}$ be an arbitrary v.a. defined over $\D_\MetaD$. 
+    \item $\VV{\I'_\MetaD}{\va{a}}(\metaA) = \VV{\I_\MetaD}{\va{a}}(\metaA)$ for any variable assignment $\va{a}$ by \textbf{L11.6}.
+  \item[\bf T12.1] Every consistent set $\MetaG$ of wfss in $\FI$ is satisfiable.
+    \item Let $\MetaG$ be a consistent set of $\FI$ sentences in FOL$^=$.
+    \item By \textbf{L12.2}, $\MetaG$ is a set of $\FIN$ sentences that is consistent in FOL$^=_\N$.
+    \item So $\MetaS_\MetaG$ is consistent and saturated in $\FIN$ by \textbf{L12.5}. 
+    \item Given \textbf{L12.7} and \textbf{L12.8}, $\MetaD_{\MetaS_\MetaG}$ is a saturated maximal consistent set of sentences in $\FIN$ where $\MetaG\subseteq\MetaD_{\MetaS_\MetaG}$.
+    \item Letting $\MetaD=\MetaD_{\MetaS_\MetaG}$, \textbf{L12.17} shows that the Henkin model $\M_\MetaD$ of $\FIN$ is such that $\VV{\I_\MetaD}{}{}(\metaA) = 1$ just in case $\metaA\in\MetaD$, and so $\M_\MetaD$ satisfies $\MetaD$.
+    \item Having shown that $\MetaG\subseteq\MetaD$, we know that $\M_\MetaD$ satisfies $\MetaG$.
+    \item Since $\MetaG$ is a set of $\FI$ sentences, it follows by \textbf{L12.18} that there is a model $\M'_\MetaD$ of $\FI$ that satisfies $\MetaG$, so $\MetaG$ is satisfiable.
+\end{itemize}
+
+
+\section*{Compactness}
+
+\begin{itemize}
+  \item[\bf C12.2] If $\MetaG\vDash\metaA$, then there is a finite subset $\MetaL\subseteq\MetaG$ where $\MetaL\vDash\metaA$.
+    \item Assuming $\MetaG\vDash\metaA$, we know $\MetaG\vdash\metaA$ by \textsc{FOL$^=$ Completeness}.
+    \item So there is a derivation $X$ of $\metaA$ from $\MetaG$.
+    \item Let $\MetaG_X$ be the set of premises which appear in $X$.
+    \item It follows that $\MetaG_X\vdash\metaA$, and so $\MetaG_X\vDash\metaA$ by \textsc{FOL$^=$ Soundness}.
+    \item Since $X$ is finite, $\MetaG_X$ is finite, and so $\Lambda\vDash\metaA$ for a finite subset $\Lambda\subseteq\MetaG$.
+  \item[\bf C12.3] $\MetaG$ is satisfiable if every finite subset $\MetaL\subseteq\MetaG$ is satisfiable.
+    \item Assume for contraposition that $\MetaG$ is unsatisfiable. 
+    \item Vacuously, $\MetaG\vDash\bot$, and so $\Lambda\vDash\bot$ by \textbf{C12.2} for a finite subset $\Lambda\subseteq\MetaG$.
+    \item Hence $\Lambda$ must also be unsatisfiable.
+    \item Thus there is some finite subset $\Lambda\subseteq\MetaG$ that is unsatisfiable. 
+    \item By contraposition, QED.
+  \item[\bf Question:] Is it possible to express `At most finitely many $x$s are $F$' in $\FI$? 
+    \item But $\MetaG_\infty=\set{\exists_{\geq n}xFx:n\in\N} \vDash \enot \qt{\exists^\#}{\alpha}Fx$.
+    \item So $\Lambda_\infty \vDash \enot \qt{\exists^\#}{\alpha}Fx$ for finite $\Lambda_\infty \subseteq \set{\exists_{\geq n}xFx:n\in\N}$.
+\end{itemize}
+
+
+
+
+\section*{Final Exam Review}
+
+\begin{enumerate}
+  \item[\it Regimentation:]
+    \begin{enumerate}
+      \item No two individuals are at least as tall as each other. Sanna is at least as tall as the finalist, and the finalist is at least as tall as Sanna. Thus, Sanna is the finalist.
+      % \item Everyone who loves Meera is brave. Someone loves Meera but not everyone is brave. Thus there are at least two people.
+    \end{enumerate}
+  \item[\it Models:]
+    \begin{enumerate}
+      \item $Qab, Qba \nvDash a=b$.
+      \item $\qt{\forall}{x}\qt{\forall}{y}(Px \supset (Py \supset x \neq y)) \nvDash \qt{\exists}{x}\qt{\exists}{y}\ x \neq y$.
+    \end{enumerate}
+  \item[\it Equivalence:] $\qt{\exists}{x}(\qt{\forall}{y}(Py \supset x = y) \wedge Px) \Dashv\vDash \qt{\exists}{x}\qt{\forall}{y}(Py \equiv x = y)$.
+  \item[\it Relations:]
+    \begin{enumerate}
+      \item $R$ is symmetric and antisymmetric. Therefore $R$ is reflexive.
+      \item $R$ is asymmetric. Therefore $R$ is antisymmetric.
+    \end{enumerate}
+\end{enumerate}
 
 
 \end{document}
