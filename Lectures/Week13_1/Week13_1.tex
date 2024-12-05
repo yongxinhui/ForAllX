@@ -30,7 +30,7 @@
 \\ \@date
 \end{flushright}
 
-\vspace{-20pt}
+\vspace{-50pt}
 
 }
 \makeatother
@@ -79,37 +79,10 @@
         \MetaD_n\cup\set{\neg\metaB_n} ~~\text{ otherwise}.
       \end{cases}$,\\
     $\MetaD_\MetaS = \bigcup_{i\in\N}\MetaD_n$. 
-\end{itemize}
-
-
-
-
-
-
-
-\section*{Basic Lemmas}
-
-\begin{itemize}
-  \item[\bf L9.1] If $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$.
-  \item[\bf L11.5] $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ if $\val{\I}{\va{a}}(\alpha)=\val{\I}{\va{a}}(\beta)$ and $\beta$ is free for $\alpha$ in $\metaA$.
-  \item[\bf L11.6] If $\M$ and $\M'$ have the same domain $\D$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and constant $\alpha$ that occurs in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any v.a. $\va{a}$ defined over $\D$.
-  \item[\bf L12.1] If $\alpha$ is a constant and $X$ is an FOL$^=$ derivation in which the constant $\beta$ does not occur, then $X\unisub{\beta}{\alpha}$ is also an FOL$^=$ derivation.
-  \item[\bf L12.3] If $\MetaL\cup\set{\metaA}$ is inconsistent, then $\MetaL\vdash\neg\metaA$.
-  \item[\bf L12.4] If $\MetaL \vdash \metaA$ and $\Pi\cup\set{\metaA} \vdash \metaB$, then $\MetaL\cup\Pi \vdash \metaB$.
-\end{itemize}
-
-
-\section*{Consistence Lemmas}%
-  
-\begin{itemize}
-  \item[\bf L12.2] $\MetaG$ is consistent in FOL$^=_{\N}$.
-  \item[\bf L12.5] $\MetaS_\MetaG$ is consistent and saturated in $\FIN$.
-  % \item[\bf L12.6] If $\MetaL \cup \set{\metaA}$ and $\MetaL\cup \set{\neg\metaA}$ are both inconsistent, then $\MetaL$ is inconsistent.
-  \item[\bf L12.7] $\MetaD=\MetaD_{\MetaS_\MetaG}$ is maximal in $\FIN$ and consistent. 
-  \item[\bf L12.8] $\MetaG\subseteq\MetaS_\MetaG\subseteq\MetaD$ where $\MetaD$ is saturated.
-  % \item[\bf L12.9] If $\MetaL\vdash\metaA$ and $\MetaL\vdash\neg\metaA$, then $\MetaL$ is inconsistent.
-  \item[\bf L12.10] $\metaA\in\MetaD$ whenever $\MetaD\vdash\metaA$.
-  \item[\bf L12.11] If $\MetaL\vdash\metaA$, then $\MetaL\cup\Pi\vdash\metaA$.
+  \item[\it Element:] $[\alpha]_\MetaD=\set{\beta\in\C : \alpha=\beta\in\MetaD}$.
+  \item[\it Domain:] $\D_\MetaD=\set{[\alpha]_\MetaD \subseteq \C : \alpha\in\C}$.
+  \item[\it Constants:] $\I_\MetaD(\alpha)=[\alpha]_\MetaD$ for all constants $\alpha\in\C$.
+  \item[\it Predicates:] $\I_\MetaD(\F^n)=\set{\tuple{[\alpha_1]_\MetaD,\ldots,[\alpha_n]_\MetaD}\in\D_\MetaD^n:\F^n\alpha_1,\ldots,\alpha_n\in\MetaD}$.
 \end{itemize}
 
 
@@ -130,25 +103,27 @@
 
 
 
-\section*{Henkin Model}
+
+
+\section*{Lemmas}
 
 \begin{itemize}
-  \item[\it Element:] $[\alpha]_\MetaD=\set{\beta\in\C : \alpha=\beta\in\MetaD}$.
-  \item[\it Domain:] $\D_\MetaD=\set{[\alpha]_\MetaD \subseteq \C : \alpha\in\C}$.
-  \item[\bf L12.12] $\alpha\in[\alpha]_\MetaD$ for any constant $\alpha\in\C$.
-    \item Need to check that elements in $\D_\MetaD$ are well defined for our purposes. 
-  \item[\bf L12.13] If $\alpha=\beta\in\MetaD$, then $[\alpha]_\MetaD=[\beta]_\MetaD$.
-  \item Assuming $\alpha=\beta\in\MetaD$ where $\metaG\in[\alpha]_\MetaD$, we know $\alpha=\gamma\in\MetaD$.
-  \item So $\alpha=\beta,\alpha=\gamma\vdash\beta=\gamma$ by $=$E, and so $\MetaD\vdash\beta=\gamma$ by \textbf{L12.11}.
-  \item Thus $\beta=\gamma\in\MetaD$ by \textbf{L12.10}, and so $\gamma\in[\beta]_\MetaD$, hence $[\alpha]_\MetaD\subseteq[\beta]_\MetaD$.
-  \item[\it Constants:] $\I_\MetaD(\alpha)=[\alpha]_\MetaD$ for all constants $\alpha\in\C$.
-  \item[\it Predicates:] $\I_\MetaD(\F^n)=\set{\tuple{[\alpha_1]_\MetaD,\ldots,[\alpha_n]_\MetaD}\in\D_\MetaD^n:\F^n\alpha_1,\ldots,\alpha_n\in\MetaD}$.
-  \item[\bf L12.14] If $\alpha_i=\beta_i\in\MetaD$, then $\F^n\alpha_1,\ldots,\alpha_n\in\MetaD$ \textit{iff} $\F^n\alpha_1,\ldots,\alpha_n\unisub{\beta_i}{\alpha_i}\in\MetaD$.
-    \setcounter{enumi}{0}
-  \item Assume $\alpha_i=\beta_i\in\MetaD$ where $\F^n\alpha_1,\ldots,\alpha_n\in\MetaD$.
-  \item $\MetaD\vdash\F^n\alpha_1,\ldots,\alpha_n\unisub{\beta_i}{\alpha_i}$ by $=$E, so $\F^n\alpha_1,\ldots,\alpha_n\unisub{\beta_i}{\alpha_i}\in\MetaD$ by \textbf{L12.10}.
-  \item Parity of reasoning completes the proof.
+  \item[\bf L9.1] If $\va{a}(\alpha)=\va{c}(\alpha)$ for all free variables $\alpha$ in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{c}}(\metaA)$.
+  \item[\bf L11.5] $\VV{\I}{\va{a}}(\metaA)=\VV{\I}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ if $\val{\I}{\va{a}}(\alpha)=\val{\I}{\va{a}}(\beta)$ and $\beta$ is free for $\alpha$ in $\metaA$.
+  \item[\bf L11.6] If $\M$ and $\M'$ have the same domain $\D$ where $\I(\F^n)=\I'(\F^n)$ and $\I(\alpha)=\I'(\alpha)$ for every $n$-place predicate $\F^n$ and constant $\alpha$ that occurs in a wff $\metaA$, then $\VV{\I}{\va{a}}(\metaA)=\VV{\I'}{\va{a}}(\metaA)$ for any v.a. $\va{a}$ defined over $\D$.
+  \item[\bf L12.1] If $\alpha$ is a constant and $X$ is an FOL$^=$ derivation in which the constant $\beta$ does not occur, then $X\unisub{\beta}{\alpha}$ is also an FOL$^=$ derivation.
+  \item[\bf L12.2] $\MetaG$ is consistent in FOL$^=_{\N}$.
+  \item[\bf L12.3] If $\MetaL\cup\set{\metaA}$ is inconsistent, then $\MetaL\vdash\neg\metaA$.
+  \item[\bf L12.4] If $\MetaL \vdash \metaA$ and $\Pi\cup\set{\metaA} \vdash \metaB$, then $\MetaL\cup\Pi \vdash \metaB$.
+  \item[\bf L12.6] $\MetaS_\MetaG$ is consistent and saturated in $\FIN$.
+  % \item[\bf L12.6] If $\MetaL \cup \set{\metaA}$ and $\MetaL\cup \set{\neg\metaA}$ are both inconsistent, then $\MetaL$ is inconsistent.
+  \item[\bf L12.8] $\MetaD=\MetaD_{\MetaS_\MetaG}$ is maximal in $\FIN$ and consistent. 
+  \item[\bf L12.9] $\MetaG\subseteq\MetaS_\MetaG\subseteq\MetaD$ where $\MetaD$ is saturated.
+  % \item[\bf L12.9] If $\MetaL\vdash\metaA$ and $\MetaL\vdash\neg\metaA$, then $\MetaL$ is inconsistent.
+  \item[\bf L12.10] $\metaA\in\MetaD$ whenever $\MetaD\vdash\metaA$.
+  \item[\bf L12.11] If $\MetaL\vdash\metaA$, then $\MetaL\cup\Pi\vdash\metaA$.
 \end{itemize}
+
 
 
 
@@ -156,53 +131,62 @@
 \section*{Henkin Lemmas}
 
 \begin{itemize}
+  \item[\bf L12.12] $\alpha\in[\alpha]_\MetaD$ for any constant $\alpha\in\C$.
+  \item[\bf L12.13] If $\alpha=\beta\in\MetaD$, then $[\alpha]_\MetaD=[\beta]_\MetaD$.
+  \item[\bf L12.14] If $\alpha_i=\beta_i\in\MetaD$, then $\F^n\alpha_1,\ldots,\alpha_n\in\MetaD$ \textit{iff} $\F^n\alpha_1,\ldots,\alpha_n\unisub{\beta_i}{\alpha_i}\in\MetaD$.
   \item[\bf L12.15] $\VV{\I_\MetaD}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$ just in case $\VV{\I_\MetaD}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for some constant $\beta\in\C$.
-  \item[\sc ltr:] Letting $\VV{\I_\MetaD}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$, we know $\VV{\I_\MetaD}{\va{c}}(\metaA)=1$ for some $\alpha$-variant $\va{c}$ of $\va{a}$.
-  \item So $\va{c}(\alpha)=[\beta]_\MetaD$ for some $\beta\in\C$, so $\va{c}(\alpha)=\I_\MetaD(\beta)$ since $\I_\MetaD(\beta)=[\beta]_\MetaD$.
-  \item Thus $\val{\I}{\va{c}}(\alpha)=\val{\I}{\va{c}}(\beta)$, and so $\VV{\I_\MetaD}{\va{c}}(\metaA)=\VV{\I_\MetaD}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{L11.5}.
-  \item So $\VV{\I_\MetaD}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$, and so $\VV{\I_\MetaD}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ by \textbf{L9.1}.
-  \item[\sc rtl:] Assume instead that $\VV{\I_\MetaD}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for some $\beta\in\C$.
-  \item Let $\va{c}$ be the $\alpha$-variant of $\va{a}$ where $\va{c}(\alpha)=\I_\MetaD(\beta)$, so $\val{\I}{\va{c}}(\alpha)=\val{\I}{\va{c}}(\beta)$.
-  \item Thus $\VV{\I_\MetaD}{\va{c}}(\metaA)=\VV{\I_\MetaD}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{L11.5}.
-  \item But $\VV{\I_\MetaD}{\va{c}}(\metaA\unisub{\beta}{\alpha})=\VV{\I_\MetaD}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{L9.1}.
-  \item Hence $\VV{\I_\MetaD}{\va{c}}(\metaA)=1$, and so $\VV{\I_\MetaD}{\va{a}}(\qt{\exists}{\alpha}\metaA)=1$.
   \item[\bf L12.16] $\VV{\I_\MetaD}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ just in case $\VV{\I_\MetaD}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for all constants $\beta\in\C$.
-    \setcounter{enumi}{0}
-  \item Similar to \textbf{L12.15}.
-  \item[\bf L12.17] $\VV{\I_\MetaD}{}(\metaA)=1$ just in case $\metaA\in\MetaD$.
-    \item Let $\va{a}$ be arbitrary.
-  \item[\it Base:] 
-    $\VV{\I_\MetaD}{\va{a}}(\alpha_1=\alpha_2)=1
-      % \textit{ ~iff~ } \VV{\I_\MetaD}{\va{a}}(\alpha_1)=\VV{\I_\MetaD}{\va{a}}(\alpha_2)
-      \textit{ iff } \I_\MetaD(\alpha_1)=\I_\MetaD(\alpha_2)
-      \textit{ iff } [\alpha_1]_\MetaD=[\alpha_2]_\MetaD
-      \textit{ iff } \alpha_1=\alpha_2\in\MetaD.$
-    \item If $[\alpha_1]_\MetaD=[\alpha_2]_\MetaD$, then $\alpha_2\in[\alpha_2]_\MetaD$ by \textbf{L12.12}, and so $\alpha_2\in[\alpha_1]_\MetaD$.
-    \item Thus $\alpha_1=\alpha_2\in\MetaD$ by definition, and the converse holds by \textbf{L12.13}.
-    \item The predicate case is immediate from \textit{Predicates} definition.
+  \item[\sc ltr:] Let $\VV{\I_\MetaD}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ where $\va{a}$ is a v.a. defined over $\D_\MetaD$.
+    \item So $\VV{\I_\MetaD}{\va{c}}(\metaA)=1$ for every $\alpha$-variant $\va{c}$ of $\va{a}$ by the semantics.
+    \item Letting $\beta\in\C$ be arbitrary, we know $[\beta]_\MetaD\in\D_\MetaD$.
+    \item Let $\va{c}$ be the $\alpha$-variant of $\va{a}$ where $\va{c}(\alpha)=[\beta]_\MetaD$.
+    \item Since $\I_\MetaD(\beta)=[\beta]_\MetaD$, we know $\va{c}(\alpha)=\I_\MetaD(\beta)$, and so $\val{\I}{\va{c}}(\alpha)=\val{\I}{\va{c}}(\beta)$.
+    \item So $\VV{\I_\MetaD}{\va{c}}(\metaA)=\VV{\I_\MetaD}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{L11.5}, so $\VV{\I_\MetaD}{\va{c}}(\metaA\unisub{\beta}{\alpha})=1$.
+    \item Since $\alpha$ does not occur in $\metaA\unisub{\beta}{\alpha}$ and $\va{c}$ is a $\alpha$-variant of $\va{a}$, we know $\va{c}(\gamma) = \va{a}(\gamma)$ for all variables $\gamma$ that occur in $\metaA\unisub{\beta}{\alpha}$.
+    \item Thus $\VV{\I_\MetaD}{\va{c}}(\metaA\unisub{\beta}{\alpha}) = \VV{\I_\MetaD}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{L9.1}, and so $\VV{\I_\MetaD}{\va{a}}(\metaA\unisub{\beta}{\alpha}) = 1$.
+    \item Generalizing on $\beta$ concludes the case. 
+  \item[\sc rtl:] Assume $\VV{\I_\MetaD}{\va{a}}(\metaA\unisub{\beta}{\alpha})=1$ for every constant $\beta\in\C$.
+    \item Letting $\va{c}$ be any $\alpha$-variant of $\va{a}$, we know $\va{c}(\alpha)\in\D_\MetaD$.
+    \item So $\va{c}(\alpha)=[\beta]_\MetaD$ for some constant $\beta\in\C$, and so $\val{\I}{\va{c}}(\alpha)=\val{\I}{\va{c}}(\beta)$.
+    \item So $\VV{\I_\MetaD}{\va{c}}(\metaA)=\VV{\I_\MetaD}{\va{c}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{L11.5}.
+    \item Since $\alpha$ does not occur in $\metaA\unisub{\beta}{\alpha}$ and $\va{c}$ is a $\alpha$-variant of $\va{a}$, we know $\va{c}(\gamma) = \va{a}(\gamma)$ for all variables $\gamma$ that occur in $\metaA\unisub{\beta}{\alpha}$.
+    \item Thus $\VV{\I_\MetaD}{\va{c}}(\metaA\unisub{\beta}{\alpha}) = \VV{\I_\MetaD}{\va{a}}(\metaA\unisub{\beta}{\alpha})$ by \textbf{L9.1}.
+    \item By assumption, $\VV{\I_\MetaD}{\va{a}}(\metaA\unisub{\beta}{\alpha}) = 1$, and so $\VV{\I_\MetaD}{\va{c}}(\metaA) = 1$.
+    \item Generalizing on $\va{c}$, we know $\VV{\I_\MetaD}{\va{a}}(\qt{\forall}{\alpha}\metaA)=1$ by the semantics. 
+
+  \item[\bf L12.17] $\VV{\I_\MetaD}{}(\metaA)=1$ just in case $\metaA\in\MetaD$. (Let $\va{a}$ be arbitrary.)
+    % \item Let $\va{a}$ be arbitrary to show: $\VV{\I_\MetaD}{\va{a}}(\metaA)=1$ just in case $\metaA\in\MetaD$.
+  \item[\it Base:] Immediate from \textit{Constants} and \textit{Predicates} since $\alpha_1,\ldots,\alpha_n \in \D_\MetaD$.
+    % $\VV{\I_\MetaD}{\va{a}}(\F^n\alpha_1,\ldots,\alpha_n)=1
+    %   ~\textit{iff}~~~ \tuple{\I_\MetaD(\alpha_1),\ldots,\I_\MetaD(\alpha_n)} \in \I_\MetaD(\F^n)$
+    %   \item[] \strut\hspace{1.48in} \textit{iff}~~ $\tuple{[\alpha_1]_\MetaD,\ldots,[\alpha_2]_\MetaD}\in \I_\MetaD(\F^n)$
+    %   \item[] \strut\hspace{1.48in} \textit{iff}~~ $\F^n\alpha_1,\ldots,\alpha_n\in\MetaD$.
+    % \item Immediate from \textit{Constants} and \textit{Predicates} since $\alpha_1,\ldots,\alpha_n \in \D_\MetaD$.
   \item[\it Induction:] Assume $\VV{\I_\MetaD}{\va{a}}(\metaA)=1$ just in case $\metaA\in\MetaD$ whenever $\comp{\metaA}\leq n$.
-    \setcounter{enumi}{0}
   \item Let $\metaA$ be a wfs of $\FIN$ where $\comp{\metaA}=n+1$.
-  \item[\it Case 1:]     
-    $ \VV{\I_\MetaD}{\va{a}}(\neg\metaB)=1
-      \textit{ iff } \VV{\I_\MetaD}{\va{a}}(\metaB)\neq 1
-      \textit{ iff } \metaB\notin\MetaD
-      \textit{ iff } \neg\metaB\in\MetaD.$
-  \item[\it Case 2:]     
-    $ \VV{\I_\MetaD}{\va{a}}(\metaB\eand\metaC)=1
-      \textit{ iff } \VV{\I_\MetaD}{\va{a}}(\metaB)=\VV{\I_\MetaD}{\va{a}}(\metaC)=1 
-      \textit{ iff } \metaB,\metaC\in\MetaD 
-      \textit{ iff } \metaB\eand\metaC\in\MetaD.$
+  % \item[\it Case 3:] $\VV{\I_\MetaD}{\va{a}}(\metaB \eor \metaC)=1$ \textit{iff} \ldots
+  % \item[\it Case 4:] $\VV{\I_\MetaD}{\va{a}}(\metaB \eif \metaC)=1$ \textit{iff} \ldots
   \item[\it Case 6:] $\VV{\I_\MetaD}{\va{a}}(\qt{\exists}{\alpha}\metaB)=1$  \textit{iff} $\VV{\I_\MetaD}{\va{a}}(\metaB\unisub{\beta}{\alpha})=1$ for some $\beta\in\C$ by \textbf{L12.15}.
-    \setcounter{enumi}{0}
-  \item[] \strut\quad\quad~~\ldots\ \textit{iff} $\metaB\unisub{\beta}{\alpha}\in\MetaD$ for some $\beta\in\C$ by hypothesis.
-  \item[] $(\exists)$ \strut\quad\ldots\ \textit{iff} $\qt{\exists}{\alpha}\metaB\in\MetaD$ by $\exists$I and \textbf{L12.10} given saturation.  
+    \item[] \strut\hspace{.91in}  \textit{iff} $\metaB\unisub{\beta}{\alpha}\in\MetaD$ for some $\beta\in\C$ by hypothesis.
+    \item[] $(\exists)$ \hspace{.66in} \textit{iff} $\qt{\exists}{\alpha}\metaB\in\MetaD$ by $\exists$I and \textbf{L12.10} given saturation.  
     \item \mbox{If $\metaB\unisub{\beta}{\alpha}\in\MetaD$ for some $\beta\in\C$, then $\MetaD\vdash \qt{\exists}{\alpha}\metaB$ by $\exists$I, so $\qt{\exists}{\alpha}\metaB\in\MetaD$ by \textbf{L12.10}.}
     \item If $\qt{\exists}{\alpha}\metaB\in\MetaD$ instead, then $\metaB=\metaA_i(\alpha_i)$ for some $i\in\N$ where $\alpha_i=\alpha$.
     \item Thus $\qt{\exists}{\alpha_i}\metaA_i\eif \metaA_i\unisub{n_i}{\alpha_i}\in\MetaD$ by the saturation assumed of $\MetaD$.
     \item Since $n_i\in\C$, it follows that $\qt{\exists}{\alpha}\metaB\eif\metaB\unisub{\beta}{\alpha}\in\MetaD$ for some $\beta\in\C$.
     \item So $\MetaD\vdash\metaB\unisub{\beta}{\alpha}$ by conditional elimination $\eif$E. 
     \item Thus $\metaB\unisub{\beta}{\alpha}\in\MetaD$ by \textbf{L12.10}, thereby establishing $(\hspace{.7pt}\exists\hspace{.7pt})$.
+  \item[\it Case 7:] $\VV{\I_\MetaD}{\va{a}}(\qt{\forall}{\alpha}\metaB)=1$  \textit{iff} $\VV{\I_\MetaD}{\va{a}}(\metaB\unisub{\beta}{\alpha})=1$ for all $\beta\in\C$ by \textbf{L12.16}.
+    \item[] \strut\hspace{.93in} \textit{iff} $\metaB\unisub{\beta}{\alpha}\in\MetaD$ for all $\beta\in\C$ by hypothesis.
+    \item[] $(\forall)$ \hspace{.68in} \textit{iff} $\qt{\forall}{\alpha}\metaB\in\MetaD$ by $\exists$I and \textbf{L12.10} given saturation.  
+
+    \item[\sc rtl:] Assume $\qt{\forall}{\alpha}\metaB \in \MetaD$ and let $\beta \in \C$ be arbitrary.
+    \item So $\MetaD \vdash \metaB\unisub{\beta}{\alpha}$ by $\forall$E, and so $\metaB\unisub{\beta}{\alpha} \in \MetaD$ by \textbf{L12.10}. 
+    \item[\sc ltr:] Assuming $\qt{\forall}{\alpha}\metaB \notin \MetaD$, we know $\enot\qt{\forall}{\alpha}\metaB \in \MetaD$ since $\MetaD$ is maximal.
+    \item By ($\enot\forall$), we know $\enot\qt{\forall}{\alpha}\metaB \vdash \qt{\exists}{\alpha}\enot\metaB$, and so $\MetaD \vdash \qt{\exists}{\alpha}\enot\metaB$ by \textbf{L12.11}.
+    \item Thus $\qt{\exists}{\alpha}\enot\metaB \in \MetaD$ by \textbf{L12.10}, and so $\enot\metaB=\metaA_i(\alpha_i)$.
+    \item Since $\MetaD$ is saturated, $\qt{\exists}{\alpha_i} \metaA_i \eif \metaA_i\unisub{n_i}{\alpha_i} \in \MetaD$, i.e., $\qt{\exists}{\alpha}\enot\metaB \eif \enot\metaB\unisub{\beta}{\alpha} \in  \MetaD$.
+    \item So $\MetaD \vdash \enot\metaB\unisub{\beta}{\alpha}$ by $\eif$E, and so $\metaB\unisub{\beta}{\alpha} \notin \MetaD$ for some $\beta \in \C$.
+    \item By contraposition, if $\metaB\unisub{\beta}{\alpha} \in \MetaD$ for all $\beta \in \C$, then $\qt{\forall}{\alpha}\metaB \in \MetaD$.
   \item[\it Conclusion:] So $\VV{\I_\MetaD}{\va{a}}(\metaA)=1$ just in case $\metaA\in\MetaD$, from which the lemma follows.
 \end{itemize}
 
@@ -252,26 +236,26 @@
 
 
 
-\section*{Final Exam Review}
-
-\begin{enumerate}
-  \item[\it Regimentation:]
-    \begin{enumerate}
-      \item No two individuals are at least as tall as each other. Sanna is at least as tall as the finalist, and the finalist is at least as tall as Sanna. Thus, Sanna is the finalist.
-      % \item Everyone who loves Meera is brave. Someone loves Meera but not everyone is brave. Thus there are at least two people.
-    \end{enumerate}
-  \item[\it Models:]
-    \begin{enumerate}
-      \item $Qab, Qba \nvDash a=b$.
-      \item $\qt{\forall}{x}\qt{\forall}{y}(Px \supset (Py \supset x \neq y)) \nvDash \qt{\exists}{x}\qt{\exists}{y}\ x \neq y$.
-    \end{enumerate}
-  \item[\it Equivalence:] $\qt{\exists}{x}(\qt{\forall}{y}(Py \supset x = y) \wedge Px) \Dashv\vDash \qt{\exists}{x}\qt{\forall}{y}(Py \equiv x = y)$.
-  \item[\it Relations:]
-    \begin{enumerate}
-      \item $R$ is symmetric and antisymmetric. Therefore $R$ is reflexive.
-      \item $R$ is asymmetric. Therefore $R$ is antisymmetric.
-    \end{enumerate}
-\end{enumerate}
+% \section*{Final Exam Review}
+%
+% \begin{enumerate}
+%   \item[\it Regimentation:]
+%     \begin{enumerate}
+%       \item No two individuals are at least as tall as each other. Sanna is at least as tall as the finalist, and the finalist is at least as tall as Sanna. Thus, Sanna is the finalist.
+%       % \item Everyone who loves Meera is brave. Someone loves Meera but not everyone is brave. Thus there are at least two people.
+%     \end{enumerate}
+%   \item[\it Models:]
+%     \begin{enumerate}
+%       \item $Qab, Qba \nvDash a=b$.
+%       \item $\qt{\forall}{x}\qt{\forall}{y}(Px \supset (Py \supset x \neq y)) \nvDash \qt{\exists}{x}\qt{\exists}{y}\ x \neq y$.
+%     \end{enumerate}
+%   \item[\it Equivalence:] $\qt{\exists}{x}(\qt{\forall}{y}(Py \supset x = y) \wedge Px) \Dashv\vDash \qt{\exists}{x}\qt{\forall}{y}(Py \equiv x = y)$.
+%   \item[\it Relations:]
+%     \begin{enumerate}
+%       \item $R$ is symmetric and antisymmetric. Therefore $R$ is reflexive.
+%       \item $R$ is asymmetric. Therefore $R$ is antisymmetric.
+%     \end{enumerate}
+% \end{enumerate}
 
 
 \end{document}
