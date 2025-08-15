@@ -1,0 +1,23 @@
+#!/bin/bash
+# Git pre-commit hook to prevent auxiliary files from being committed
+# Install by copying to .git/hooks/pre-commit and making executable
+
+# Define patterns for files that should not be committed
+AUX_PATTERNS="*.aux *.fdb_latexmk *.fls *.log *.out *.synctex.gz *.toc *.nav *.snm *.bbl *.blg *.xmpi"
+
+# Check if any auxiliary files are staged
+for pattern in $AUX_PATTERNS; do
+    if git diff --cached --name-only | grep -q "$pattern"; then
+        echo "Error: Attempting to commit auxiliary LaTeX files."
+        echo "Please unstage these files before committing:"
+        git diff --cached --name-only | grep -E '\.(aux|fdb_latexmk|fls|log|out|synctex\.gz|toc|nav|snm|bbl|blg|xmpi)$'
+        echo ""
+        echo "You can unstage them with:"
+        echo "  git reset HEAD <file>"
+        echo "Or clean all auxiliary files with:"
+        echo "  bash scripts/clean-all.sh"
+        exit 1
+    fi
+done
+
+exit 0

@@ -10,6 +10,71 @@ I have taken pains to provide rigorous proofs throughout, including commentary a
 Although this text is written with greater formal rigor than is common in most introductory textbooks in logic, I have aimed to preserve the friendly and accessible character of ForAllX in addition to preserving its title.
 Additionally, I have included discussions of the philosophical foundations of logic which are often omitted in introductory books and simply alluded to in more advanced treatments.
 
+## Building the Project
+
+### Prerequisites
+
+- A complete LaTeX distribution (e.g., TeX Live, MacTeX, or MiKTeX)
+- `latexmk` (usually included with LaTeX distributions)
+- Python 3 (for the pdflatex.py script)
+- `pdftk` (for combining handouts)
+
+### Building with latexmk
+
+The recommended way to build the project is using `latexmk`:
+
+```bash
+# Build the main textbook
+cd Book
+latexmk -pdf forallx-mit.tex
+
+# Build individual lectures
+cd Lectures/Week01_1
+latexmk -pdf Week01_1.tex
+
+# Clean auxiliary files
+latexmk -C
+```
+
+### Using with Vim/Neovim
+
+If you use Vim with the vimtex plugin, compilation happens automatically. The project includes a `.latexmkrc` file with sensible defaults for the entire project.
+
+### Building Everything
+
+For convenience, you can build all course materials at once:
+
+```bash
+bash scripts/build-all.sh
+```
+
+This will:
+1. Build the main textbook
+2. Build all lecture notes
+3. Generate the combined handouts PDF
+
+To clean all auxiliary files:
+
+```bash
+bash scripts/clean-all.sh
+```
+
+## Project Structure
+
+```
+ForAllX/
+├── Book/               # Main textbook source
+│   ├── Chapters/       # Book chapters organized by topic
+│   ├── Assets/         # Images and figures
+│   └── sty/            # LaTeX style files
+├── Lectures/           # Weekly lecture notes
+├── Bibliography/       # Bibliography files
+├── Syllabus/          # Course syllabus
+├── Handouts/          # Generated lecture handouts
+├── scripts/           # Build and utility scripts
+└── forallx-mit.pdf    # Main textbook PDF
+```
+
 ## Using this Textbook
 
 The terms at MIT span fifteen weeks, two of which are devoted to soundness and completeness for propositional logic (PL) and another two weeks to extend these results to first-order logic with identity (FOL).

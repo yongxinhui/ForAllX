@@ -1,10 +1,15 @@
-%!TEX root = forallx-ubc.tex
+%!TEX root = ../forallx-mit.tex
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{forallx-ubc}[2011/10/29 support for a logic textbook]
+\ProvidesPackage{forallx-mit}[2024/01/01 Support for ForAllX MIT logic textbook]
+
+% Load common macros first
+\RequirePackage{common-macros}
+
+% Required packages
 \usepackage[dvipsnames]{xcolor}
 \usepackage{enumitem} %%Enables control over enumerate and itemize environments
-\RequirePackage{graphicx,adjustbox,amssymb,colonequals,amsmath,mathabx,lmodern,microtype,multicol,ifthen,prooftrees,titlesec, apptools,mathtools}
+\RequirePackage{graphicx,adjustbox,amssymb,colonequals,amsmath,mathabx,lmodern,microtype,multicol,ifthen,prooftrees,titlesec,apptools,mathtools}
 
 \usepackage[linktocpage=true]{hyperref}
 \definecolor{URLblue}{RGB}{0,0,150}
@@ -20,71 +25,8 @@
 \raggedbottom
 
 
-% The original forallx.sty was written in 2005
-%    ****************************************
-%    *            LOGICAL SYMBOLS           *
-%    ****************************************
-%
-% There are, of course, many different symbols used for the truth-functional
-% connectives. In order to make the book adaptable, the symbols are defined
-% here in the style sheet and these commands are used throughout the book.
-% To change conjunction from the ampersand to the carat, for instance,
-% change the definition of \eand from ~\&~ to \wedge. To change negation from
-% the hoe to the swung dash, change \enot from \neg to {\sim}. Other examples
-% are given below.
-%
-\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}
-% disjunction
-\def\eor{\ensuremath{\vee}}
-% \def\eor{\ensuremath{\mkern1mu\vee\mkern1mu}}
-% conjunction: 
-% {\,^{_{_{_{_{\mbox{\footnotesize\textbullet}}}}}}} gives the dot
-\def\eand{\ensuremath{\wedge}}
-% \def\eand{\ensuremath{\mathrel\&}}
-% conditional: \rightarrow gives the right arrow
-\def\eif{\ensuremath{\rightarrow}}
-% \def\eif{\ensuremath{\supset}}
-% biconditional: \leftrightarrow gives the left and right arrow
-\def\eiff{\ensuremath{\leftrightarrow}}
-% negation: {\sim} gives the swung dash 
-\def\enot{\ensuremath{\neg}}
-%\def\enot{\ensuremath{\sim}} %note that \sim is defined as a relation, which leads to spacing issues. adding a \! leads to more spacing issues (piled up double negations).  
-% \def\enot{\ensuremath{{\sim}}} %redefining as {\sim} treats the tilde as a unary operator, rather than a relation, solving a lot of the spacing issues. 
-
-
-% \def\corner[1]{\ensuremath\ulcorner#1\urcorner}
-
-\renewcommand{\vert}[1]{\lvert#1\rvert}
-\newcommand{\corner}[1]{\ulcorner#1\urcorner} %%Corner quotes
-\newcommand{\concat}[2]{{#1}{\raisebox{4pt}{\smallfrown}}{#2}} %%Corner quotes
-\newcommand{\tuple}[1]{\langle#1\rangle} %%Corner quotes
-\newcommand{\set}[1]{\lbrace#1\rbrace} %%Corner quotes
-\newcommand{\I}{\mathcal{I}} %%
-\newcommand{\J}{\mathcal{J}} %%
-\newcommand{\B}{\mathcal{B}} %%
-\newcommand{\M}{\mathcal{M}} %%
-\newcommand{\N}{\mathbb{N}} %%
-\newcommand{\PL}{\mathcal{L}^{\textsc{pl}}} %%
-\newcommand{\FOL}{\mathcal{L}^{\textsc{fol}}} %%
-\newcommand{\FI}{\mathcal{L}^{=}} %%
-\newcommand{\FIN}{\mathcal{L}^{=}_{\mathbb{N}}} %%
-\newcommand{\C}{\mathbb{C}} %%
-\newcommand{\F}{\mathcal{F}} %%
-\newcommand{\D}{\mathbb{D}} %%
-\newcommand{\length}{\texttt{Length}} %%
-\newcommand{\comp}{\texttt{Comp}} %%
-\newcommand{\T}{\mathcal{T}} %%
-\newcommand{\V}[1]{\mathcal{V}_{#1}} %%
-\newcommand{\VV}[2]{\mathcal{V}_{#1}^{#2}} %%
-\newcommand{\val}[2]{\mathscr{v}_{#1}^{#2}} %%
-\newcommand{\ext}[3]{|#1|_{#2}^{#3}} %%
-\newcommand{\va}[1]{\hat{#1}} %%
-\renewcommand{\v}[1]{\mathbf{#1}} %%
-\newcommand{\res}{\texttt{Res}}
-\newcommand{\plvdash}{\vdash_{\textsc{pl}}}
-\newcommand{\plvDash}{\vDash_{\PL}}
-\newcommand{\fivdash}{\vdash_{\textsc{fol}^=}}
-\newcommand{\fivDash}{\vDash_{\FI}}
+% Additional symbols and commands specific to the book
+% (Common macros are loaded from common-macros.sty)
 
 % \makeatletter
 % \DeclareRobustCommand{\eif}{%

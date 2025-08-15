@@ -1,3 +1,4 @@
+# LaTeX auxiliary files
 *.aux
 *.fdb_latexmk
 *.fls
@@ -9,57 +10,32 @@
 *.toc
 *.xmpi
 *.synctex(busy)
-Handouts/Week00_1.pdf
-Handouts/Week01_1.pdf
-Handouts/Week01_2.pdf
-Handouts/Week02_1.pdf
-Handouts/Week02_2.pdf
-Handouts/Week03_1.pdf
-Handouts/Week03_2.pdf
-Handouts/Week04_1.pdf
-Handouts/Week04_2.pdf
-Handouts/Week05_1.pdf
-Handouts/Week05_2.pdf
-Handouts/Week07_1.pdf
-Handouts/Week08_2.pdf
-Handouts/Week09_1.pdf
-Handouts/Week09_2.pdf
-Handouts/Week10_1.pdf
-Handouts/Week10_2.pdf
-Handouts/Week11_1.pdf
-Handouts/Week11_2.pdf
-Handouts/Week12_1.pdf
-Handouts/Week12_2.pdf
-Handouts/Week13_1.pdf
-Handouts/Week13_2.pdf
-Handouts/Week14_1.pdf
-OLD
-Book/forallx-mit.pdf
-bibliography/bibliography.pdf
-Lectures/Week00_1/Week00_1.pdf
-Lectures/Week01_1/Week01_1.pdf
-Lectures/Week01_2/Week01_2.pdf
-Lectures/Week02_1/Week02_1.pdf
-Lectures/Week02_2/Week02_2.pdf
-Lectures/Week03_1/Week03_1.pdf
-Lectures/Week03_2/Week03_2.pdf
-Lectures/Week04_1/Week04_1.pdf
-Lectures/Week04_2/Week04_2.pdf
-Lectures/Week05_1/Week05_1.pdf
-Lectures/Week05_2/Week05_2.pdf
-Lectures/Week07_1/Week07_1.pdf
-Lectures/Week07_2/Week07_2.pdf
-Lectures/Week08_1/Week08_1.pdf
-Lectures/Week08_2/Week08_2.pdf
-Lectures/Week09_1/Week09_1.pdf
-Lectures/Week09_2/Week09_2.pdf
-Lectures/Week10_1/Week10_1.pdf
-Lectures/Week10_2/Week10_2.pdf
-Lectures/Week11_1/Week11_1.pdf
-Lectures/Week11_2/Week11_2.pdf
-Lectures/midterm_review/Week07_1.pdf
-Handouts/Week07_2.pdf
-Handouts/Week08_1.pdf
-Lectures/Week12_1/Week12_1.pdf
-Lectures/Week12_2/Week12_2.pdf
-Lectures/Week13_1/Week13_1.pdf
+*.bbl
+*.blg
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Temporary files
+pdflatex*.fls
+
+# Generated handouts (except All_Handouts.pdf if you want to keep it)
+Handouts/*.pdf
+!Handouts/All_Handouts.pdf
+
+# Generated lecture PDFs
+Lectures/**/*.pdf
+
+# Generated bibliography PDF
+Bibliography/*.pdf
+
+# Keep the main book PDF in root
+!forallx-mit.pdf
+
+# OLD directory is an archive
+OLD/
+
+# OS files
+.DS_Store
+Thumbs.db
