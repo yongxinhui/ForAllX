@@ -71,9 +71,13 @@ ForAllX/
 ├── Bibliography/       # Bibliography files
 ├── Syllabus/          # Course syllabus
 ├── Handouts/          # Generated lecture handouts
-├── scripts/           # Build and utility scripts
+├── Scripts/           # Build and utility scripts
 └── forallx-mit.pdf    # Main textbook PDF
 ```
+
+### LaTeX Style Files
+
+The specialized LaTeX formatting and typesetting for this textbook is handled by custom style files in the `Book/sty/` directory. For detailed documentation on the logical notation, proof systems, and formatting commands available, see the [Style Files Documentation](Book/sty/README.md).
 
 ## Using this Textbook
 

@@ -1,634 +1,456 @@
 %!TEX root = ../forallx-mit.tex
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{forallx-mit}[2024/01/01 Support for ForAllX MIT logic textbook]
+\ProvidesPackage{forallx-mit}[2024/01/01 ForAllX MIT logic textbook style]
 
-% Load common macros first
-\RequirePackage{common-macros}
+% ========================================
+% REQUIRED PACKAGES
+% ========================================
+% This section loads all the LaTeX packages required by the style file.
+% Each package serves a specific purpose in formatting the logic textbook.
 
-% Required packages
-\usepackage[dvipsnames]{xcolor}
-\usepackage{enumitem} %%Enables control over enumerate and itemize environments
-\RequirePackage{graphicx,adjustbox,amssymb,colonequals,amsmath,mathabx,lmodern,microtype,multicol,ifthen,prooftrees,titlesec,apptools,mathtools}
+\RequirePackage[dvipsnames]{xcolor}        % Extended color support with named colors
+\RequirePackage{enumitem}                  % Enhanced control over lists (enumerate, itemize)
+\RequirePackage{graphicx}                  % Include graphics and images
+\RequirePackage{adjustbox}                 % Adjust size and position of boxes
+\RequirePackage{amssymb}                   % AMS mathematical symbols
+\RequirePackage{colonequals}               % Colon-equals symbols (e.g., :=)
+\RequirePackage{amsmath}                   % AMS mathematical environments
+\RequirePackage{mathabx}                   % Additional mathematical symbols
+\RequirePackage{lmodern}                   % Latin Modern fonts (better than default)
+\RequirePackage{microtype}                 % Improved typography (character protrusion, font expansion)
+\RequirePackage{multicol}                  % Multiple column layouts
+\RequirePackage{ifthen}                    % Conditional statements in LaTeX
+\RequirePackage{prooftrees}                % Package for typesetting proof trees
+\RequirePackage{titlesec}                  % Customize section titles
+\RequirePackage{apptools}                  % Tools for appendices
+\RequirePackage{mathtools}                 % Extension of amsmath
+\RequirePackage{amsthm}                    % Theorem environments
+\RequirePackage{lipsum}                    % Lorem ipsum text (for testing)
+\RequirePackage{fancyhdr}                  % Fancy headers and footers
+\RequirePackage{mdwtab}                    % Enhanced tabular environments
+\RequirePackage{latexsym}                  % LaTeX symbols
 
-\usepackage[linktocpage=true]{hyperref}
-\definecolor{URLblue}{RGB}{0,0,150}
+% ========================================
+% HYPERREF SETUP
+% ========================================
+% Configure hyperlinks in the PDF output. This makes the document interactive
+% with clickable links for references, citations, and URLs.
+
+\RequirePackage[linktocpage=true]{hyperref}  % Make page numbers (not titles) clickable in TOC
+\definecolor{URLblue}{RGB}{0,0,150}          % Define a custom blue color for links
 \hypersetup{
-	colorlinks   = true, 	% Use colored links instead of boxes
-  	urlcolor      =  URLblue, 	% Color for external hyperlinks
-  	linkcolor    = URLblue, 	% Color of internal links
-  	citecolor   = red 	% Color of citations
-	}
-	
-% Put gaps at the bottom of pages without enough vertical content instead of trying to space elements 
-% over the page. Mostly effects the answer key where large proof trees can cause awkward page breaks.
-\raggedbottom
+    colorlinks   = true,                      % Use colored text for links (not boxes)
+    urlcolor     = URLblue,                   % Color for external URLs
+    linkcolor    = URLblue,                   % Color for internal links (sections, pages)
+    citecolor    = red                        % Color for citation links
+}
 
+% ========================================
+% PAGE LAYOUT
+% ========================================
+% Basic page layout settings
 
-% Additional symbols and commands specific to the book
-% (Common macros are loaded from common-macros.sty)
+\raggedbottom  % Don't stretch vertical space to fill pages
+               % This prevents awkward spacing, especially with large proof trees
 
-% \makeatletter
-% \DeclareRobustCommand{\eif}{%
-%   \mathbin{\mathpalette\scaletoplus@{\mkern1mu\supset\mkern1mu}}%
-% }
-% \newcommand{\scaletoplus@}[2]{%
-%   \vcenter{%
-%     \hbox{\sbox\z@{$\m@th#1+$}\resizebox{\wd\z@}{!}{$\m@th#1#2$}}%
-%   }%
-% }
-% \makeatother
+% ========================================
+% LOGICAL SYMBOLS
+% ========================================
+% Define commands for logical connectives. This allows easy customization
+% of logical notation throughout the book. To change notation, simply
+% modify these definitions.
 
-% \let\oldsim\sim %renames any \sim commands as \oldsim. 
-% \renewcommand{\sim}{{\oldsim}} %redefines \sim as unary operator version of \sim, in case there are any straggling \sim commands in the wild
+\def\therefore{\ensuremath{\ldotp\dot{}\,\ldotp}}  % Therefore symbol (three dots)
+\def\eor{\ensuremath{\vee}}                         % Disjunction (logical OR)
+\def\eand{\ensuremath{\wedge}}                      % Conjunction (logical AND)
+\def\eif{\ensuremath{\rightarrow}}                  % Conditional (if...then)
+\def\eiff{\ensuremath{\leftrightarrow}}             % Biconditional (if and only if)
+\def\enot{\ensuremath{\neg}}                        % Negation (logical NOT)
 
-%for explanations of these spacing issues, see here:
-%https://tex.stackexchange.com/questions/55701/how-do-i-write-sim-approximately-with-the-correct-spacing
+% ========================================
+% MATHEMATICAL NOTATION
+% ========================================
+% Commands for common mathematical constructs used in logic
 
+% Common commands
+\renewcommand{\vert}[1]{\lvert#1\rvert}             % Vertical bars for absolute value
+\newcommand{\corner}[1]{\ulcorner#1\urcorner}      % Corner quotes (Quine quotes)
+\newcommand{\concat}[2]{{#1}{\raisebox{4pt}{\smallfrown}}{#2}}  % String concatenation
+\newcommand{\tuple}[1]{\langle#1\rangle}            % Angle brackets for tuples
+\newcommand{\set}[1]{\lbrace#1\rbrace}              % Curly braces for sets
 
-%***********Josh Hunt addition to boost flexibility with Carnap system syntax******%
-\newcommand{\qt}[2]{#1 #2} % for modifying style of quantifer and bound variable pairs
+% Mathematical symbols - Calligraphic and blackboard bold letters
+\newcommand{\I}{\mathcal{I}}        % Interpretation function
+\newcommand{\J}{\mathcal{J}}        % Alternative interpretation
+\newcommand{\B}{\mathcal{B}}        % Base/Boolean domain
+\newcommand{\M}{\mathcal{M}}        % Model
+\newcommand{\N}{\mathbb{N}}         % Natural numbers
+\newcommand{\PL}{\mathcal{L}^{\textsc{pl}}}        % Propositional logic language
+\newcommand{\FOL}{\mathcal{L}^{\textsc{fol}}}      % First-order logic language
+\newcommand{\FI}{\mathcal{L}^{=}}                   % First-order logic with identity
+\newcommand{\FIN}{\mathcal{L}^{=}_{\mathbb{N}}}    % FOL with identity over naturals
+\newcommand{\C}{\mathbb{C}}         % Complex numbers (or arbitrary constant)
+\newcommand{\F}{\mathcal{F}}        % Function symbols
+\newcommand{\D}{\mathbb{D}}         % Domain
 
-%\newcommand{\quant}[2]{(#1 #2)} % In case \qt ever gets taken for something else, here's a more clunky name for this command.  
+% Text commands for special functions
+\newcommand{\length}{\texttt{Length}}  % Length function
+\newcommand{\comp}{\texttt{Comp}}      % Complexity function
+\newcommand{\res}{\texttt{Res}}        % Resolution/restriction
 
+% Mathematical structures
+\newcommand{\T}{\mathcal{T}}           % Theory
+\newcommand{\V}[1]{\mathcal{V}_{#1}}   % Valuation function with subscript
+\newcommand{\VV}[2]{\mathcal{V}_{#1}^{#2}}  % Valuation with sub and superscript
+\newcommand{\val}[2]{\mathscr{v}_{#1}^{#2}}  % Alternative valuation notation
+\newcommand{\ext}[3]{|#1|_{#2}^{#3}}   % Extension in a model
+\newcommand{\va}[1]{\hat{#1}}          % Variable with hat
+\renewcommand{\v}[1]{\mathbf{#1}}      % Bold vector notation
 
-\let\oldemptyset\emptyset
-\let\emptyset\varnothing
+% Deduction symbols - turnstile variants
+\newcommand{\plvdash}{\vdash_{\textsc{pl}}}     % PL syntactic consequence
+\newcommand{\plvDash}{\vDash_{\PL}}              % PL semantic consequence
+\newcommand{\fivdash}{\vdash_{\textsc{fol}^=}}  % FOL with identity syntactic consequence
+\newcommand{\fivDash}{\vDash_{\FI}}              % FOL with identity semantic consequence
 
+% Additional logical symbols
+\def\ered{\ensuremath{\bot}}           % Bottom/falsum/absurdity
+\def\proves{\ensuremath{\vdash}}        % Proves (syntactic consequence)
+\def\entails{\ensuremath{\vDash}}       % Entails (semantic consequence)
+\def\nproves{\ensuremath{\nvdash}}      % Does not prove
+\def\nentails{\ensuremath{\nvDash}}     % Does not entail
 
-%From Calgary style file: 
-\def\ered{\ensuremath{\bot}}% TB: added to give an absurdity sign
-\def\proves{\ensuremath{\vdash}}
-\def\entails{\ensuremath{\vDash}}
-\def\nproves{\ensuremath{\nvdash}}
-\def\nentails{\ensuremath{\nvDash}}
+\let\oldemptyset\emptyset               % Save old empty set symbol
+\let\emptyset\varnothing                % Use the better-looking empty set symbol
 
+% Quantifier and substitution notation
+\newcommand{\qt}[2]{#1 #2}              % Quantifier-variable pairs
+\newcommand{\unisub}[2]{[#1/#2]}        % Uniform substitution notation
+\newcommand{\freesub}[2]{(#1/#2)}       % Free substitution notation
 
+% ========================================
+% META-LANGUAGE VARIABLES
+% ========================================
+% Greek letters used as metavariables for formulas and sets of formulas
 
+\def\metaA{\ensuremath{\varphi}}        % Formula metavariable (phi)
+\def\metaB{\ensuremath{\psi}}           % Formula metavariable (psi)
+\def\metaC{\ensuremath{\chi}}           % Formula metavariable (chi)
+\def\metaD{\ensuremath{\delta}}         % Formula metavariable (delta)
+\def\metaG{\ensuremath{\gamma}}         % Formula metavariable (gamma)
+\def\MetaG{\ensuremath{\Gamma}}         % Set of formulas (capital Gamma)
+\def\MetaS{\ensuremath{\Sigma}}         % Set of formulas (capital Sigma)
+\def\MetaD{\ensuremath{\Delta}}         % Set of formulas (capital Delta)
+\def\metaSetX{\ensuremath{\Gamma}}      % Generic formula set X
+\def\metaSetY{\ensuremath{\Sigma}}      % Generic formula set Y
+\def\metaSetZ{\ensuremath{\varPhi}}     % Generic formula set Z
 
-% metalanguage variables: change greek to A and B if you prefer
-\def\metaA{\ensuremath{\varphi}}
-\def\metaB{\ensuremath{\psi}}
-\def\metaC{\ensuremath{\chi}}
-\def\metaD{\ensuremath{\delta}}
-\def\metaG{\ensuremath{\gamma}}
-\def\MetaG{\ensuremath{\Gamma}}
-\def\MetaS{\ensuremath{\Sigma}}
-\def\MetaD{\ensuremath{\Delta}}
-\def\metaSetX{\ensuremath{\Gamma}}
-\def\metaSetY{\ensuremath{\Sigma}}
-\def\metaSetZ{\ensuremath{\varPhi}}
+% ========================================
+% THEOREM ENVIRONMENTS
+% ========================================
+% Define various theorem-like environments with custom styling and numbering
 
-% Latex's hyphenation algorithm cannot decide how to hyphenate
-% some common words in the book. The definitions below define 
-% acceptable hyphenations.
-
-
-\usepackage{amsthm}
-
-\usepackage{lipsum}
-% \newenvironment{Proof}[1][Proof]
-%   {\proof[#1]\leftskip=1cm\rightskip=1cm}
-%   {\endproof}
-
+% Theorem style and environment
 \newtheoremstyle{Tthm}
-{.3in}                % Space above
-{}                % Space below
-{\normalfont}        % Theorem body font % (default is "\upshape")
-{}                % Indent amount
-{\bfseries}       % Theorem head font % (default is \mdseries)
-{}               % Punctuation after theorem head % default: no punctuation
-{.18in}               % Space after theorem head
-{}                % Theorem head spec
+{.3in}{}{\normalfont}{}{\bfseries}{}{.18in}{}  % Space above, below, body font, indent, head font, punctuation, space after head, head spec
 \theoremstyle{Tthm}
-\newtheorem{Tthm}{}[chapter]% theorem counter resets every \subsection
-\renewcommand{\theTthm}{Theorem \arabic{chapter}.\arabic{Tthm}}% Remove subsection from theorem counter representation
+\newtheorem{Tthm}{}[chapter]                    % Reset theorem counter each chapter
+\renewcommand{\theTthm}{Theorem \arabic{chapter}.\arabic{Tthm}}  % Format: "Theorem 3.2"
 
-
+% Lemma style and environment
 \newtheoremstyle{Lthm}
-{.3in}                % Space above
-{}                % Space below
-{\normalfont}        % Theorem body font % (default is "\upshape")
-{}                % Indent amount
-{\bfseries}       % Theorem head font % (default is \mdseries)
-{}               % Punctuation after theorem head % default: no punctuation
-{.18in}               % Space after theorem head
-{}                % Theorem head spec
+{.3in}{}{\normalfont}{}{\bfseries}{}{.18in}{}
 \theoremstyle{Lthm}
-\newtheorem{Lthm}{}[chapter]% theorem counter resets every \subsection
-\renewcommand{\theLthm}{Lemma \arabic{chapter}.\arabic{Lthm}}% Remove subsection from theorem counter representation
+\newtheorem{Lthm}{}[chapter]
+\renewcommand{\theLthm}{Lemma \arabic{chapter}.\arabic{Lthm}}
 
+% Corollary style and environment
 \newtheoremstyle{Cthm}
-{.3in}                % Space above
-{}                % Space below
-{\normalfont}        % Theorem body font % (default is "\upshape")
-{}                % Indent amount
-{\bfseries}       % Theorem head font % (default is \mdseries)
-{}               % Punctuation after theorem head % default: no punctuation
-{.18in}               % Space after theorem head
-{}                % Theorem head spec
+{.3in}{}{\normalfont}{}{\bfseries}{}{.18in}{}
 \theoremstyle{Cthm}
-\newtheorem{Cthm}{}[chapter]% theorem counter resets every \subsection
-\renewcommand{\theCthm}{Corollary \arabic{chapter}.\arabic{Cthm}}% Remove subsection from theorem counter representation
+\newtheorem{Cthm}{}[chapter]
+\renewcommand{\theCthm}{Corollary \arabic{chapter}.\arabic{Cthm}}
 
+% Rule style and environment (for inference rules)
 \newtheoremstyle{Rthm}
-{}                % Space above
-{}                % Space below
-{\normalfont}        % Theorem body font % (default is "\upshape")
-{}                % Indent amount
-{\bfseries}       % Theorem head font % (default is \mdseries)
-{}               % Punctuation after theorem head % default: no punctuation
-{4pt}               % Space after theorem head
-{}                % Theorem head spec
+{}{}{\normalfont}{}{\bfseries}{}{4pt}{}
 \theoremstyle{Rthm}
-\newtheorem{Rthm}{}[chapter]% theorem counter resets every \subsection
-\renewcommand{\theRthm}{Rule \arabic{Rthm}}% Remove subsection from theorem counter representation
+\newtheorem{Rthm}{}[chapter]
+\renewcommand{\theRthm}{Rule \arabic{Rthm}}
 
-% \newtheorem{manualtheoreminner}{Theorem}
-% \newenvironment{Rthm}[1]{%
-%   \renewcommand\themanualtheoreminner{#1}%
-%   \manualtheoreminner
-% }{\endmanualtheoreminner}
-%
-% \begin{Rthm}{}[title]\label{foo}
-% This is a theorem.
-% \end{Rthm}
-
+% Problem style and environment
 \newtheoremstyle{Pthm}
-{}                % Space above
-{}                % Space below
-{\normalfont}        % Theorem body font % (default is "\upshape")
-{}                % Indent amount
-{\bfseries}       % Theorem head font % (default is \mdseries)
-{}               % Punctuation after theorem head % default: no punctuation
-{.18in}               % Space after theorem head
-{}                % Theorem head spec
+{}{}{\normalfont}{}{\bfseries}{}{.18in}{}
 \theoremstyle{Pthm}
-\newtheorem{Pthm}{}[subsection]% theorem counter resets every \subsection
-\renewcommand{\thePthm}{P\arabic{Pthm}}% Remove subsection from theorem counter representation
+\newtheorem{Pthm}{}[subsection]
+\renewcommand{\thePthm}{P\arabic{Pthm}}
 
-\newcommand{\bref}[1]{\textbf{\ref{#1}}}
+% Bold reference command
+\newcommand{\bref}[1]{\textbf{\ref{#1}}}  % Bold cross-references
 
+% ========================================
+% TITLE AND VERSION
+% ========================================
+% Book title and automatic version numbering based on compilation date
 
-
-%    ****************************************
-%    *        TITLE AND VERSION DATA        *
-%    ****************************************
-% the title of the book
-\newcommand*{\forallx}{{\tt forall\script{x}}}
-% The version number of the book is a 5 digit integer:
-% the last digit of the year, the month, the day of the month
+\newcommand*{\forallx}{{\tt forall\script{x}}}  % Stylized book title
 \newcounter{dummy}
 \setcounter{dummy}{\year}
 \addtocounter{dummy}{-2000}
+% Version number format: YYMMDD (e.g., 240115 for Jan 15, 2024)
 \newcommand*{\bookversion}{%
-	\ifthenelse{\arabic{dummy}<10}{0}{}%
-	\arabic{dummy}%
-	\ifthenelse{\month<10}{0}{}\number\month%
-	\ifthenelse{\day<10}{0}{}\number\day%
+    \ifthenelse{\arabic{dummy}<10}{0}{}%
+    \arabic{dummy}%
+    \ifthenelse{\month<10}{0}{}\number\month%
+    \ifthenelse{\day<10}{0}{}\number\day%
 }  
 
-%    ****************************************
-%    *       APPENDIX FORMATTING      *
-%    ****************************************
-%
-% Uses the apptools and titlesec packages to remove the additional
-% white space normally included at the start of an appendix. This
-% allows the quick reference appendix to be more printer friendly.
-% Also reduces the size of section titles to make the answer key more 
-% readable. 
-\AtAppendix{%
-	\titleformat{\chapter}[display]{\vspace*{-50pt}\bfseries\huge}{Appendix~\thechapter}{0.5em}{}
-	\titlespacing*{\chapter}{0pt}{0pt}{1em}
+% ========================================
+% FONTS AND TYPOGRAPHY
+% ========================================
+% Special fonts and typographical elements
 
-	\titleformat*{\section}{\large \bfseries}
-	\titleformat*{\subsection}{\bfseries}
-	}%
-
-
-%    ****************************************
-%    *       SYMBOLS AND SCRIPTY BITS       *
-%    ****************************************
-% equivalent to commenting something out, but usable on multiple lines
-\providecommand{\nix}[1]{}
-% script letters are rendered in Zapf Chancery,
-% which has both upper and lower case.
+% Zapf Chancery for script letters
 \DeclareFontFamily{OT1}{pzc}{}
 \DeclareFontShape{OT1}{pzc}{m}{it}{<-> s * [1.200] pzcmi7t}{}
 \DeclareMathAlphabet{\mathscr}{OT1}{pzc}{m}{it}
-\newcommand*{\script}[1]{\ensuremath{\mathscr{#1}}}
-% create a blank
-\newcommand*{\blank}{\underline{\hspace*{2.5em}}}
-\newcommand*{\gap}[1]{\blank$_{#1}$} % TB: used for keys, to avoid use/mention confusion
+\newcommand*{\script}[1]{\ensuremath{\mathscr{#1}}}  % Script letters
 
-% These are included for discussing formal semantics in predicate logic.
-\renewcommand{\models}{\vDash}
-\newcommand{\nmodels}{\nvDash}
-\newcommand*{\model}[1]{\ensuremath{\mathbb{#1}}}
-\newcommand*{\extension}[1]{\ensuremath{\mbox{extension}(#1)}}
-\newcommand*{\referent}[1]{\ensuremath{\mbox{referent}(#1)}}
-  % I personally dislike the default LaTeX angle brackets. I think that
-  % they are too narrow. If you want to use them, though, you can
-  % replace < and > in the commands below with \langle and \rangle
-\newcommand*{\openntuple}{\langle}
-\newcommand*{\closentuple}{\rangle}
-\newcommand*{\ntuple}[1]{\mbox{\ensuremath{\mathopen{\openntuple}}#1\ensuremath{\mathclose{\closentuple}}}} 
-% definitions
-\newcommand*{\define}[1]{\textsc{\lowercase{#1}}}
+% Typography commands
+\newcommand*{\blank}{\underline{\hspace*{2.5em}}}    % Blank line for fill-in
+\newcommand*{\gap}[1]{\blank$_{#1}$}                 % Numbered gap for exercises
+\newcommand*{\define}[1]{\textsc{\lowercase{#1}}}    % Small caps for defined terms
 
-%\newcommand*{\define}[1]{\textsc{\lowercase{\color{leadbeater}#1}}} %Calgary version 
+% ========================================
+% SEMANTIC NOTATION
+% ========================================
+% Commands for model theory and formal semantics
 
+\renewcommand{\models}{\vDash}          % Models relation
+\newcommand{\nmodels}{\nvDash}          % Does not model
+\newcommand*{\model}[1]{\ensuremath{\mathbb{#1}}}   % Blackboard bold for models
+\newcommand*{\extension}[1]{\ensuremath{\mbox{extension}(#1)}}  % Extension function
+\newcommand*{\referent}[1]{\ensuremath{\mbox{referent}(#1)}}    % Referent function
+\newcommand*{\openntuple}{\langle}      % Opening angle bracket
+\newcommand*{\closentuple}{\rangle}     % Closing angle bracket
+\newcommand*{\ntuple}[1]{\mbox{\ensuremath{\mathopen{\openntuple}}#1\ensuremath{\mathclose{\closentuple}}}}  % n-tuple notation
 
-%    ****************************************
-%    *          LIST  ENVIRONMENTS          *
-%    ****************************************
-% The {earg} environment is used for arguments and example sentences.
-% The {ekey} environment is used for symbolization keys.
+% ========================================
+% LIST ENVIRONMENTS
+% ========================================
+% Custom list environments for arguments, examples, and keys
 
-% \newcounter{eargnum}
-% \newcounter{earg}
-% \newenvironment{earg}%
-% {\begin{list}{\arabic{earg}\arabic{eargnum}.}{\usecounter{eargnum}\setlength{\itemsep}{-.4em}}}%
-% {\stepcounter{earg}\end{list}}
+% Counters for custom lists
+\newcounter{eargletter}[chapter]        % Letter counter for arguments (resets per chapter)
+\renewcommand{\theeargletter}{\Alph{eargletter}}
+\newcounter{eargnum}[eargletter]        % Number counter within each letter
 
-% Set labels in enumerate to use capital letters
-% \renewcommand{\labelenumi}{\Alph{enumi}.}
-% \renewcommand{\theenumi}{\Alph{enumi}}
-
-\newcounter{eargletter}[chapter] % Counter for the environment (resets per section)
-% \newcounter{oldletter}[chapter] % Counter for the custom letter prefix
-\renewcommand{\theeargletter}{\Alph{eargletter}} % Use capital letters for the counter
-
-\newcounter{eargnum}[eargletter]
-
-\newenvironment{earg}[1][] % Optional argument to customize numbering
+% earg environment: For listing arguments with labels like A1, A2, B1, B2
+\newenvironment{earg}[1][]
 {%
-  \refstepcounter{eargletter}% Step the environment counter
+  \refstepcounter{eargletter}%
   \begin{enumerate}[label=\Alph{eargletter}\arabic{eargnum}., #1]%
   \usecounter{eargnum}
-  \setlength{\itemsep}{-.4em}% Adjust item spacing
+  \setlength{\itemsep}{-.4em}%          % Reduce vertical space between items
 }
-{%
-  \end{enumerate}%
-}
+{\end{enumerate}}
 
-\newenvironment{oarg}[1][] % Optional argument for custom prefix
+% oarg environment: For custom prefix labels
+\newenvironment{oarg}[1][]
 {%
-  \def\customprefix{#1}% Define the prefix as the provided argument
+  \def\customprefix{#1}%
   \begin{enumerate}[label=\customprefix\arabic{eargnum}.]%
   \usecounter{eargnum}
-  \setlength{\itemsep}{-.4em}% Adjust item spacing
+  \setlength{\itemsep}{-.4em}%
 }
-{%
-  \end{enumerate}%
-}
+{\end{enumerate}}
 
-
-\newcommand{\oeitem}[1]{%
-  \refstepcounter{eargnum} % Step the item counter
-  \item[\customprefix\arabic{eargnum}.] {#1}
-  % \label{\customprefix\arabic{eargnum}} % Create a label for referencing
-}
-
-\newcommand{\ouitem}[1]{%
-  \refstepcounter{eargnum} % Step the item counter
-  \item[\customprefix\arabic{eargnum}.] \underline{#1}\vspace{2pt}
-  % \label{\customprefix\arabic{eargnum}} % Create a label for referencing
-}
-
-\newcommand{\eitem}[1]{%
-  \refstepcounter{eargnum}% Step the item counter
+% Custom item commands
+\newcommand{\eitem}[1]{%                % Regular item in earg
+  \refstepcounter{eargnum}%
   \item[\Alph{eargletter}\arabic{eargnum}.] {#1}
   \label{\theeargnum}
-  % \label{\Alph{eargletter}\arabic{eargnum}}
-  % \label{\theeargletter\theeargnum}}% Create a label for referencing
 }
 
-\newcommand{\uitem}[1]{% use to insert line before conclusion
-  \refstepcounter{eargnum}% Step the item counter
+\newcommand{\uitem}[1]{%                % Underlined item (for conclusions)
+  \refstepcounter{eargnum}%
   \item[\Alph{eargletter}\arabic{eargnum}.] \underline{#1}\vspace{2pt}
   \label{\theeargnum}
-  % \label{\Alph{eargletter}\arabic{eargnum}} % Label with underline format
-  % \label{\theeargletter\theeargnum}
 }
 
-\newcommand{\eref}[2]{\ref{#1}\ref{#2}}
+\newcommand{\oeitem}[1]{%               % Regular item in oarg
+  \refstepcounter{eargnum}%
+  \item[\customprefix\arabic{eargnum}.] {#1}
+}
 
-% % Define a counter for the letter and number
-% \newcounter{eargletter}
-% \newcounter{eargnum}[eargletter]
-%
-% % Define the custom environment
-% \newenvironment{earg}{
-%     \refstepcounter{eargletter} % Increment the letter counter
-%     \setcounter{eargnum}{0} % Reset the number counter
-%     \begin{enumerate}[label=\Alph{eargletter}\arabic{eargnum}., leftmargin=*]
-%     \stepcounter{eargnum} % Start numbering from 1
-% }{
-%     \end{enumerate}
-% }
+\newcommand{\ouitem}[1]{%               % Underlined item in oarg
+  \refstepcounter{eargnum}%
+  \item[\customprefix\arabic{eargnum}.] \underline{#1}\vspace{2pt}
+}
 
-% \newcommand{\uitem}[1]{% use to insert line before conclusion
-%   \item \underline{#1}\vspace{2pt}
-% }
+\newcommand{\eref}[2]{\ref{#1}\ref{#2}} % Reference two items at once
 
-\newenvironment{ebullet}% In calgary remix: TB: added to give a nice bulleted enivronment
-{\begin{list}{\textbullet}{\itemsep=0pt \parsep=0pt}}%
+% Other list environments
+\newenvironment{ebullet}                % Compact bullet list
+{\begin{list}{\textbullet}{\itemsep=0pt \parsep=0pt}}
 {\end{list}}
 
-\newcommand{\ekeylabel}[1]{{\makebox[8ex][r]{\textbf{ #1}}}}
-% \newenvironment{ekey}{\begin{list}{}{\renewcommand{\makelabel}{\ekeylabel}\setlength{\itemsep}{-.5em}}}{\end{list}}
+\newcommand{\ekeylabel}[1]{{\makebox[8ex][r]{\textbf{ #1}}}}  % Label for key items
 
-\newenvironment{ekey}[1][] % Optional argument to customize numbering
-{%
-  \begin{enumerate}[#1]%
-  \setlength{\itemsep}{-.4em}% Adjust item spacing
-}
-{%
-  \end{enumerate}%
-}
+\newenvironment{ekey}[1][]              % Environment for symbolization keys
+{\begin{enumerate}[#1]\setlength{\itemsep}{-.4em}}
+{\end{enumerate}}
 
-% Used in conjunction with {earg}, this handles the numbering and
-% references to example sentences:
+% Example counter and command
 \newcounter{Example}[chapter]
 \newcommand*{\ex}[1]{\refstepcounter{Example}\arabic{Example}.\label{#1}}
-% Used in specifying partial models, this keeps the lines justified so
-% so that the = signs all line up. For example:
-%	\begin{partialmodel}
-%		UD			& \{Duke, Miles\}\\
-%		\extension{B}	& \{Duke\}
-%	\end{partialmodel}
-\newenvironment{partialmodel}{\par\begin{tabular}{r@{~=~}l}}{\end{tabular}\par}
-% define the bullet for {itemize} lists
-% \renewcommand{\labelitemi}{$\triangleright$}
 
-% \factoidbox{...} produces an inset paragraph of text with a line around it
-% Neither for lists nor an environment, but it really didn't
-% belong anywhere else.
-% \newcommand{\factoidbox}[1]{\begin{quote}\framebox{\parbox{\dimexpr\linewidth-3\fboxsep\relax}{#1}}\end{quote}}
+% Partial model environment (for model theory)
+\newenvironment{partialmodel}{\par\begin{tabular}{r@{~=~}l}}{\end{tabular}\par}
+
+% Factoid box for important definitions or facts
 \newcommand{\factoidbox}[1]{%
-  \setlength{\fboxsep}{10pt}% Adjust the padding inside the frame
+  \setlength{\fboxsep}{10pt}%           % Padding inside the box
   \begin{quote}
-    \framebox{%
-      \parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}%
-    }%
+    \framebox{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}%
   \end{quote}%
 }
 
-% \tablefbox{...} is used in certain tables to put a box around the contents of specific table cells without having lines that run the whole length of the table
+% Table box for framed table cells
 \newcommand{\tablefbox}[1]{\multicolumn{1}{|p{10em}|}{#1}}
 
+% ========================================
+% PRACTICE PROBLEMS
+% ========================================
+% Commands for practice problems and solutions
 
-
-%    ****************************************
-%    *          PRACTICE PROBLEMS           *
-%    ****************************************
-\newcounter{ProbPart}[chapter]
+\newcounter{ProbPart}[chapter]          % Problem part counter
 \renewcommand{\theProbPart}{\Alph{ProbPart}}
 
-% This inserts a heading and resets the counter; labels with ch. number:
+% Practice problems for a specific chapter
 \newcommand*{\practiceproblemsA}[1]{
-	\phantomsection
-	\setcounter{ProbPart}{0}\section*{Practice Exercises for Chapter {\ref{#1}}}
-	\addcontentsline{toc}{section}{Exercises for Ch.~\ref{#1}}
-	\markright{Exercises for Ch.~\ref{#1}}%
+    \phantomsection                     % For hyperref
+    \setcounter{ProbPart}{0}\section*{Practice Exercises for Chapter {\ref{#1}}}
+    \addcontentsline{toc}{section}{Exercises for Ch.~\ref{#1}}
+    \markright{Exercises for Ch.~\ref{#1}}%
 }
 
-%Ichikawa OG command
+% Generic practice problems section
 \newcommand*{\practiceproblems}{
-	\phantomsection
-	\setcounter{ProbPart}{0}\section*{Practice Exercises}
-	\addcontentsline{toc}{section}{Practice Exercises}
+    \phantomsection
+    \setcounter{ProbPart}{0}\section*{Practice Exercises}
+    \addcontentsline{toc}{section}{Practice Exercises}
 }
-% This starts a new section which is automatically numbered:
+
+% Problem part command
 \newcommand*{\problempart}{
-	\refstepcounter{ProbPart}\textbf{Part \Alph{ProbPart}}\ 
+    \refstepcounter{ProbPart}\textbf{Part \Alph{ProbPart}}\ 
 }
-% This bullet is used to indicate that solutions appear at the end of
-% the book.
-\newcommand*{\solutions}{$\star$}
-% When solutions are only given for selected problems, the
-% star is placed left of the problem number.
+
+% Solutions marking
+\newcommand*{\solutions}{$\star$}       % Star indicates solution available
 \newcommand*{\leftsolutions}{\hspace{-2.2em}\makebox[2em][l]{\solutions}}
 
-% This is used at the beginning of a section in the solutions
+% Solution sections
 \newcommand*{\solutionsection}[1]{%
-	\section*{Chapter {\ref{#1}}}%
-	\addcontentsline{toc}{section}{Chapter {\ref{#1}}}%
-	\markright{solutions for ch.~\ref{#1}}%
-	\setcounter{countSeq}{0}
+    \section*{Chapter {\ref{#1}}}%
+    \addcontentsline{toc}{section}{Chapter {\ref{#1}}}%
+    \markright{solutions for ch.~\ref{#1}}%
+    \setcounter{countSeq}{0}
 }
 
-% This is used at the beginning of a subsection in the solutions
 \newcommand*{\solutionpart}[2]{%
-	% This is needed to prevent an error generated by an interaction
-	% between the hyperref and titlesec packages.
-	\phantomsection%
-	\subsection*{Chapter {\ref{#1}} Part {\ref{#2}}}%
-	% This adds a line to the table of contents for each solution part
-	% \addcontentsline{toc}{subsection}{Part {\ref{#2}}}%
+    \phantomsection%
+    \subsection*{Chapter {\ref{#1}} Part {\ref{#2}}}%
 }
 
-% This is used to enumerate things that have a given property.
-% For example: \nextSeq\nextSeq\noSeq\lastSeq are valid.
-% produces   : 1, 2, and 4 are valid.
+% Sequence counting for solutions
 \newcounter{countSeq}
 \newcommand*{\nextSeq}{\stepcounter{countSeq}\arabic{countSeq}, }
 \newcommand*{\noSeq}{\stepcounter{countSeq}}
 \newcommand*{\lastSeq}{and \stepcounter{countSeq}\arabic{countSeq}\setcounter{countSeq}{0} }
 
-% This is used to place (eg) a partial model or proof as an item
-% in a list. Without it, the item tag will be vertically centered next
-% to the model or proof. 
-\newenvironment{solutioninlist}{\begin{adjustbox}{valign=t}}{\end{adjustbox}\vspace{6pt}}%
-
-% This creates a minipage which keeps items in the environment grouped together.
-% Use this if an example should not be broken or if text should be grouped with an example.
+% Environments for solutions
+\newenvironment{solutioninlist}{\begin{adjustbox}{valign=t}}{\end{adjustbox}\vspace{6pt}}
 \newenvironment{groupitems}{\begin{minipage}[t]{\linewidth}}{\end{minipage}}
 
+% ========================================
+% TABLE OF CONTENTS AND HEADERS
+% ========================================
+% Configure table of contents depth and page headers
 
-
-%    ****************************************
-%    *   TABLE OF CONTENTS, Headers  *
-%    ****************************************
-\setcounter{tocdepth}{1}
-% \setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{1}                % Show chapters and sections in TOC
 \renewcommand{\thechapter}{\arabic{chapter}}
 \renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
-%\renewcommand{\thesubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}
 
-
-%**************************
-%Headers
-%*************************
-
-\usepackage{fancyhdr}
+% Page style configuration
 \pagestyle{fancy}
-%\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}} %defined below
-\headsep=12pt
-\headheight=15pt
+\headsep=12pt                           % Space between header and text
+\headheight=15pt                        % Height of header
 
-%Note that you can alter the running header by remaining in mainmatter style and just defining rightmark at start of a chapter: e.g. \markright{Appendix: Symbolic Notation}
-
+% Main matter page style
 \fancypagestyle{mainmatter}{
-\fancyhead{} %clears header
-%\fancyhead[LO]{\slshape }
-%\fancyhead[RO]{\slshape } % odd pages, if using twosided book 
-%\fancyhead[CO]{\textsc{ForAllX}}
-\fancyhead[C]{\scshape \rightmark}   % even pages: chapter title; calls leftmark from markboth command
-\renewcommand{\headrulewidth}{0pt}%gets rid of line
-%note: \rightmark would call 2nd argument of \markboth command, but easier to just write the title here. 
+\fancyhead{}                            % Clear all headers
+\fancyhead[C]{\scshape \rightmark}      % Chapter title in small caps, centered
+\renewcommand{\headrulewidth}{0pt}      % No line under header
 }
 
+% Front matter page style
 \fancypagestyle{frontmatter}{
-\fancyhead{} %clears header
+\fancyhead{}
 \fancyhead[C]{\scshape \leftmark}
-\renewcommand{\headrulewidth}{0pt}%gets rid of line
+\renewcommand{\headrulewidth}{0pt}
 }
 
+% Preface page style
 \fancypagestyle{prefacestyle}{
-\fancyhead{} %clears header
+\fancyhead{}
 \fancyhead[C]{\textsc{Preface}}
-\renewcommand{\headrulewidth}{0pt}%gets rid of line
+\renewcommand{\headrulewidth}{0pt}
 }
 
+% Appendix page style
 \fancypagestyle{appendixstyle}{
-\fancyhead{} %clears header
-%\fancyhead[C]{\textsc{Appendix}}
-\renewcommand{\headrulewidth}{0pt}%gets rid of line
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt}
 }
 
-%\iffalse
-\renewcommand{\chaptermark}[1]{\markboth%redefines chaptermark 
-{\forallx}% defines book title as the \leftmark
-{\scshape Ch.~\thechapter\ #1}% defines chapter title as the \rightmark, and formats it 
-}
+% Chapter and section marks for headers
+\renewcommand{\chaptermark}[1]{\markboth{\forallx}{\scshape Ch.~\thechapter\ #1}}
 \renewcommand{\sectionmark}[1]{}
-%\fi
-%\textrm{Ch.~\thechapter\ \MakeUppercase{#1}}  %alternate style for header 
 
-% Slightly decrease the spacing between the numbers of (sub)sections
-% and the name of the (sub)section to avoid overfull hboxes.
-% \titlespacing*{\section}{0ex}{*1}{*1}%
-% \titlespacing*{\subsection}{0ex}{*1}{*1}%
-\titleformat{\section}{\bfseries\Large}{~\thesection}{0.5em}{}%
-\titleformat{\subsection}{\bfseries\large}{~\thesubsection}{0.5em}{}%
+% Section title formatting
+\titleformat{\section}{\bfseries\Large}{~\thesection}{0.5em}{}
+\titleformat{\subsection}{\bfseries\large}{~\thesubsection}{0.5em}{}
 
+% ========================================
+% TRUTH TABLES
+% ========================================
+% Special spacing commands for typesetting truth tables
 
+\newcommand*{\TTon}{\hspace{1.5em}\extracolsep{-1em}}   % Turn on negative column spacing
+\newcommand*{\TToff}{\extracolsep{-1em}\hspace{.3em}}   % Turn off and add small space
+\newcommand*{\TTbf}[1]{\textbf{#1}}                     % Bold text in truth tables
 
-%    ****************************************
-%    *             TRUTH TABLES             * %but see calgary version for updates 
-%    ****************************************
+% ========================================
+% NATURAL DEDUCTION
+% ========================================
+% Complex macro system for typesetting natural deduction proofs
+% Based on fitch.sty by Peter Selinger, modified by P.D. Magnus
 
-% This facilitates the typesetting of truth tables by
-% effectively eliminating the intercolumn space.
-% This allows truth tables with the Ts and Fs immediately
-% below arbitrary connectives.
-% An example follows:
-%\begin{center}
-%\begin{tabular}{c|c|@{\TTon}*{5}{c}@{\TToff}}
-%$A$&$B$&$(A$&\eand&$B)$&\eif&A\\
-%\hline
-% T & T &    &  T  &    &  T & \\
-% T & F &    &  F  &    &  T & \\
-% F & T &    &  F  &    &  T & \\
-% F & F &    &  T  &    &  T &
-%\end{tabular}
-%\end{center}
-
-\newcommand*{\TTon}{\hspace{1.5em}\extracolsep{-1em}}
-\newcommand*{\TToff}{\extracolsep{-1em}\hspace{.3em}}
-\newcommand*{\TTbf}[1]{\textbf{#1}}
-
-
-
-%    ****************************************
-%    *                PROOFS                *
-%    ****************************************
-
-% notation to indicate substitution instances
-% \substitute{x}{c} is the wff obtained by replacing all instances of x in A with c
-% A\substitutesome{x}{c} is a wff obtained by replacing some or all instances of x in A with c
-
-%Ichikawa's preferred notation for substitution instances:
-%\newcommand{\substitute}[2]{\hspace{.15em}\raisebox{.3ex}{\fbox{$#1\Rightarrow#2$}}}
-
-%Ichikawa uses substitutesome to note special feature of existential introduction, namely that you don't have to replace every instance of previously bound variable with a constant: 
-%\newcommand{\substitutesome}[2]{\hspace{.15em}\raisebox{.4ex}{\fbox{\fbox{$#1\Rightarrow#2$}}}}
-
-%Logic book notation for substitution instance, note that constant is written second when calling the command, in order to flip Ichikawa commands:
-% \newcommand{\substitute}[2]{[#1/#2]}
-\newcommand{\unisub}[2]{[#1/#2]}
-
-%JH: idea to use ceiling notation since this looks like a partial bracket, mirroring a partial substitution instance
-\newcommand{\freesub}[2]{(#1/#2)}
-
-%\newcommand{\substitutesome}[2]{\mbox{$\lceil#2/#1\rfloor$}}
-
-
-
-% based on fitch.sty by Peter Selinger, University of Ottawa
-% v 0.4, (C) 2002 Peter Selinger
-% revised 2003--5 by P.D. Magnus
-
-% Selinger released this code under the GNU General Public License,
-% version 2 or later. So this bit of the style is free to you under
-% the GPL.
-
-% ----------------------------------------------------------------------
-% The comments in this file are intended for programmers who
-% might want to hack this package. For information on how to use the
-% package, the file fitchdoc.tex is a better place to look.
-% ----------------------------------------------------------------------
-
-% Global identifiers defined by this package start with '\nd*'. The
-% only exceptions are \ndref, \nddim, and the "nd" and "ndresume"
-% latex environments.
-
+% Enable use of * in control sequences
 {\chardef\x=\catcode`\*
 \catcode`\*=11
 \global\let\nd*astcode\x}
 \catcode`\*=11
 
-% The macros provided by this package mix TeX and LaTeX primitives.
-% LaTeX is used for \rule, \settowidth, \addtolength, \hspace...
-% All macros are assumed to be called in math mode.
-
-% Translation proceeds through several layers of macros. Each layer
-% consist of macros which expand into macros of the previous
-% layer. Each layer may have some global state and initialization
-% functions. Only the topmost layer (layer C) is directly
-% user-accessible. 
-
-
-% References
-
-% We start with some macros to facilitate automatic line numbering, and
-% for referencing of lines by labels. The macros defined here are:
-% \nd*reset to reset the line number count. \nd*num{x}, to generate the next
-% line number and store it in reference x; \nd*ref{x} to print the line
-% number referenced by x, \ndref{xxx} to parse a list of references,
-% separated by commas, periods, and hyphens, and translate all references to
-% line numbers. Note: \ndref ignores spaces in its argument, but puts
-% a space after each comma or period in the output. Also note: \nd*ref can be
-% useful outside a natded environment, and thus it has a user
-% accessible name. Most general ``line numbers'' actually consist of a
-% name (such as ``n'') and a number (such as ``2''), to produce output
-% such as $n+2$. \nd*set{n}{m} is called to set the letter to n and
-% the number to m. As special cases, if the second argument is empty,
-% it is not set, and if the first argument is \relax, it is not set.
-
-% Example for references:
-
-% \nd*reset \nd*num{x}; \nd*num{y}; \nd*numopt{n+1}{z}; \nd*num{zz}; 
-% \nd*ref{y}; \ndref{x, y-zz, z}
-% will produce: 1; 2; n+1; 3; 2; 1, 2-3, n+1
-
-\newcount\nd*ctr
+% Line numbering system
+\newcount\nd*ctr                        % Counter for line numbers
 \def\nd*render{\expandafter\ifx\expandafter\nd*x\nd*base\nd*x\the\nd*ctr\else\nd*base\ifnum\nd*ctr<0\the\nd*ctr\else\ifnum\nd*ctr>0+\the\nd*ctr\fi\fi\fi}
 \expandafter\def\csname nd*-\endcsname{}
 
-%\def\nd*num#1{\global\advance\nd*ctr1\nd*numo{\the\nd*ctr}{#1}}
+% Line number generation and referencing
 \def\nd*num#1{\nd*numo{\nd*render}{#1}\global\advance\nd*ctr1}
 \def\nd*numopt#1#2{\nd*numo{$#1$}{#2}}
 \def\nd*numo#1#2{\edef\x{#1}\mbox{$\x$}\expandafter\global\expandafter\let\csname nd*-#2\endcsname\x}
@@ -637,6 +459,8 @@
 \def\nd*noop{}
 \def\nd*set#1#2{\ifx\relax#1\nd*noop\else\global\def\nd*base{#1}\fi\ifx\relax#2\relax\else\global\nd*ctr=#2\fi}
 \def\nd*reset{\nd*set{}{1}}
+
+% Reference parsing system for comma/hyphen separated lists
 \def\nd*refa#1{\nd*ref{#1}}
 \def\nd*aux#1#2{\ifx#2-\nd*refa{#1}--\def\c{\nd*aux{}}%
   \else\ifx#2,\nd*refa{#1}, \def\c{\nd*aux{}}%
@@ -647,74 +471,30 @@
   \else\ifx#2\nd*end\nd*refa{#1}\def\c{}%
   \else\def\c{\nd*aux{#1#2}}%
   \fi\fi\fi\fi\fi\fi\fi\c}
-\def\ndref#1{\nd*aux{}#1\nd*end}
+\def\ndref#1{\nd*aux{}#1\nd*end}        % User command for references
 
-
-% Layer A
-
-% Layer A provides primitive picture elements which can be combined
-% into natural deduction derivations. These are: \nd*t to make a
-% topmost vertical line segment; \nd*v to make a continuation vertical
-% line segment, \nd*i to produce the indentation for a subproof,
-% \nd*s to produce the horizontal space between a vertical line and a
-% formula, \nd*u{x} to underline x with appropriate spacing for a
-% hypothesis. \nd*f{x} typesets the formula x with the appropriate vertical
-% spacing. \nd*g{x} is like \nd*i, except it puts a guard in the
-% space it creates. These elements are spaced so that they are appropriate
-% as left-aligned array entries. Line numberings and justifications
-% must be provided manually in this layer. All explicit spacing
-% information is contained in this layer; higher layers manipulate only
-% layer A primitives.
-
-% define various dimensions (explained in fitchdoc.tex):
+% Layer A: Primitive drawing elements
 \newlength{\nd*dim} 
 \newdimen\nd*depthdim
 \newdimen\nd*hsep
-% user command to redefine dimensions
+
+% Dimension configuration command
 \def\nddim#1#2#3#4#5#6#7#8{\nd*depthdim=#3\relax\nd*hsep=#6\relax%
 \def\nd*height{#1}\def\nd*thickness{#8}\def\nd*initheight{#2}%
 \def\nd*indent{#5}\def\nd*labelsep{#4}\def\nd*justsep{#7}}
-% set initial dimensions
 \nddim{4.5ex}{3.5ex}{1.5ex}{1em}{1.6em}{.5em}{2.5em}{.2mm}
 
-\def\nd*v{\rule[-\nd*depthdim]{\nd*thickness}{\nd*height}}
-\def\nd*t{\rule[-\nd*depthdim]{0mm}{\nd*height}\rule[-\nd*depthdim]{\nd*thickness}{\nd*initheight}}
-\def\nd*i{\hspace{\nd*indent}} 
-\def\nd*s{\hspace{\nd*hsep}}
-\def\nd*g#1{\nd*f{\makebox[\nd*indent][c]{$#1$}}}
-\def\nd*f#1{\raisebox{0pt}[0pt][0pt]{$#1$}}
-\def\nd*u#1{\makebox[0pt][l]{\settowidth{\nd*dim}{\nd*f{#1}}%
+% Primitive elements
+\def\nd*v{\rule[-\nd*depthdim]{\nd*thickness}{\nd*height}}              % Vertical line
+\def\nd*t{\rule[-\nd*depthdim]{0mm}{\nd*height}\rule[-\nd*depthdim]{\nd*thickness}{\nd*initheight}}  % Top vertical line
+\def\nd*i{\hspace{\nd*indent}}                                          % Indentation
+\def\nd*s{\hspace{\nd*hsep}}                                            % Horizontal space
+\def\nd*g#1{\nd*f{\makebox[\nd*indent][c]{$#1$}}}                      % Guard
+\def\nd*f#1{\raisebox{0pt}[0pt][0pt]{$#1$}}                            % Formula
+\def\nd*u#1{\makebox[0pt][l]{\settowidth{\nd*dim}{\nd*f{#1}}%          % Underlined (hypothesis)
     \addtolength{\nd*dim}{2\nd*hsep}\hspace{-\nd*hsep}\rule[-\nd*depthdim]{\nd*dim}{\nd*thickness}}\nd*f{#1}}
 
-% Example of a derivation using layer A syntax:
-
-%\begin{array}{lll}
-%  1  &  \nd*t\nd*s\nd*f            {P\vee Q}                           \\
-%  2  &  \nd*v\nd*s\nd*u            {\neg Q}                            \\
-%  3  &  \nd*v\nd*i\nd*t\nd*s\nd*u  {P}                                 \\
-%  4  &  \nd*v\nd*i\nd*v\nd*s\nd*f  {P}       &  \mbox{by 3}            \\
-%  5  &  \nd*v\nd*i\nd*t\nd*s\nd*u  {Q}                                 \\
-%  6  &  \nd*v\nd*i\nd*v\nd*s\nd*f  {\neg Q}  &  \mbox{by 2}            \\
-%  7  &  \nd*v\nd*i\nd*v\nd*s\nd*f  {\bot}    &  \mbox{by 5, 6}         \\
-%  8  &  \nd*v\nd*i\nd*v\nd*s\nd*f  {P}       &  \mbox{by 7}            \\
-%  9  &  \nd*v\nd*s\nd*f            {P}       &  \mbox{by 1, 3-4, 5-8}  \\
-%\end{array}
-
-
-% Lists
-
-% This is a bit of a hack. We implement linked lists as follows: a
-% list is either \nd*nil, or \nd*cons{T}{H}, where T is another list,
-% and H is some arbitrary code. Note that lists grow to the right. 
-% The following macros operate on a list that is stored in a macro
-% \list. 
-% \nd*push\list{item} pushes the item onto the list
-% \nd*pop\list{item} pops and discards the last item from the list
-% \nd*item\list{command} applies command to each element of the list
-% \nd*modify\list\n{elt} modifies the \n-th element of the
-% list, if there is such an element. Here \n is a counter. Elements
-% are counted from the right, starting from 1.
-
+% List implementation for tracking proof structure
 \def\nd*push#1#2{\expandafter\gdef\expandafter#1\expandafter%
   {\expandafter\nd*cons\expandafter{#1}{#2}}}
 \def\nd*pop#1{{\def\nd*nil{\gdef#1{\nd*nil}}\def\nd*cons##1##2%
@@ -723,70 +503,11 @@
 \def\nd*modify#1#2#3{{\def\nd*nil{\gdef#1{\nd*nil}}\def\nd*cons##1##2%
     {\advance#2-1 ##1\advance#2 1 \ifnum#2=1\nd*push#1{#3}\else%
       \nd*push#1{##2}\fi}#1}}
-
-% we use lists of items of the forms \nd*t, \nd*v, \nd*i, and
-% \nd*g{...} to represent the current indentation level and
-% format (see Layer A, above). The following function 
-% computes the indentation for the following line by replacing all
-% items of the form \nd*t by \nd*v and \nd*g{...} by \nd*i. 
-
 \def\nd*cont#1{{\def\nd*t{\nd*v}\def\nd*v{\nd*v}\def\nd*g##1{\nd*i}%
     \def\nd*i{\nd*i}\def\nd*nil{\gdef#1{\nd*nil}}\def\nd*cons##1##2%
     {##1\expandafter\nd*push\expandafter#1\expandafter{##2}}#1}}
 
-% With the list syntax, a derivation can be expressed like this:
-
-% \[\begin{array}{lll}
-%   \gdef\stack{\nd*nil}
-%   \newcount\n
-%   \nd*push\stack{\nd*t}
-%   1 & \nd*iter\stack\relax\nd*s\nd*u       {\neg\exists xP(x)} \\
-%   \nd*cont\stack
-%   \nd*push\stack{\nd*i}
-%   \nd*push\stack{\nd*t}
-%   \nd*n=2\nd*modify\stack\n{\nd*g{u}}
-%   \nd*push\stack{\nd*i}
-%   \nd*push\stack{\nd*t}
-%   2 & \nd*iter\stack\relax\nd*s\nd*u       {P(u)} \\
-%   \nd*cont\stack
-%   3 & \nd*iter\stack\relax\nd*s\nd*f       {\exists xP(x)} \\
-%   \nd*cont\stack
-%   4 & \nd*iter\stack\relax\nd*s\nd*f       {\neg\exists xP(x)} \\
-%   \nd*cont\stack
-%   5 & \nd*iter\stack\relax\nd*s\nd*f       {\bot} \\
-%   \nd*cont\stack
-%   \nd*pop\stack
-%   \nd*pop\stack
-%   6 & \nd*iter\stack\relax\nd*s\nd*f       {\neg P(u)} \\
-%   \nd*cont\stack
-%   \nd*pop\stack
-%   \nd*pop\stack
-%   7 & \nd*iter\stack\relax\nd*s\nd*f       {\forall y\neg P(y)} \\
-%   \nd*cont\stack
-%  \end{array}
-% \]
-
-
-% Layer B
-
-% Layer B is simply a wrapper around layer A. It provides commands
-% \nd*beginb, \nd*resumeb, \nd*endb, \nd*openb, \nd*closeb,
-% \nd*guardb, \nd*hypob, and \nd*haveb which abstract from the layer A 
-% primitives. This includes automatic line numbering, and automatic
-% indentation. \nd*beginb and \nd*endb enclose a natural deduction in
-% layer B syntax. \nd*resumeb is like \nd*beginb, except that it
-% resumes a deduction in progress (for instance, after a manual page
-% break). \nd*openb and \nd*closeb open, respectively close, a
-% subproof.  \nd*guardb{n}{g} adds the guard g to the nth enclosing
-% subderivation (counted from 1 from the inside). \nd*hypob 
-% introduces a hypothesis, and \nd*haveb introduces a non-hypothesis
-% line in a proof.  Line numbering is integrated, but justifications
-% must still be given manually. Also, proof lines must still be
-% terminated by '\\'. An idiosyncracy of this layer is that in a list
-% of several hypotheses, all but the last one must be called with
-% \nd*haveb, not \nd*hypob, to avoid drawing a horizontal line under
-% each of them.
-
+% Layer B: Mid-level proof construction
 \newcount\nd*n
 \def\nd*beginb{\begingroup\nd*reset\gdef\nd*stack{\nd*nil}\nd*push\nd*stack{\nd*t}%
   \begin{array}{l@{\hspace{\nd*labelsep}}l@{\hspace{\nd*justsep}}l}}
@@ -798,103 +519,27 @@
 \def\nd*closeb{\nd*pop\nd*stack\nd*pop\nd*stack}
 \def\nd*guardb#1#2{\nd*n=#1\multiply\nd*n by 2 \nd*modify\nd*stack\nd*n{\nd*g{#2}}}
 
-% Example of a derivation using layer B syntax. Note that the "line
-% numbers" are really labels, which will be replaced by consecutive
-% line numbers in the output.
-
-% \[
-%   \nd*beginb
-%   \nd*haveb  {1}{P\vee Q}                               \\
-%   \nd*hypob  {2}{\neg Q}                                \\
-%   \nd*openb
-%   \nd*hypob  {3}{P}                                     \\
-%   \nd*haveb  {4}{P}       \mbox{by \ndref{3}}           \\
-%   \nd*closeb
-%   \nd*openb
-%   \nd*hypob  {5}{Q}                                     \\
-%   \nd*haveb  {6}{\neg Q}  \mbox{by \ndref{2}}           \\
-%   \nd*haveb  {6a}{\bot}   \mbox{by \ndref{5,6}}         \\
-%   \nd*haveb  {6b}{P}      \mbox{by \ndref{6a}}          \\
-%   \nd*closeb
-%   \nd*haveb  {8}{P}       \mbox{by \ndref{1,3-4,5-6b}}  \\
-%   \nd*endb
-% \]
-
-% Here is another example, using a guard.
-
-% \[
-%   \nd*beginb
-%   \nd*hypob  {1}{\neg\exists xP(x)}   \\
-%   \nd*openb
-%   \nd*guardb {1}{u}
-%   \nd*openb
-%   \nd*hypob  {2}{P(u)}                \\
-%   \nd*haveb  {3}{\exists xP(x)}       \mbox{by \ndref{2}}  \\
-%   \nd*haveb  {4}{\neg\exists xP(x)}   \mbox{by \ndref{1}}  \\
-%   \nd*haveb  {5}{\bot}                \mbox{by \ndref{3,4}}\\
-%   \nd*closeb
-%   \nd*haveb  {6}{\neg P(u)}           \mbox{by \ndref{2-5}}\\
-%   \nd*closeb
-%   \nd*haveb  {7}{\forall y\neg P(y)}  \mbox{by \ndref{2-6}}\\
-%   \nd*endb
-% \]
-
-
-% Layer C
-
-% Layer C is the syntax used by the end user. It is implemented as a
-% wrapper around layer B, providing six additional conveniences: 
-% (1) no more need for explicit '\\', (2) all hypotheses 
-% are denoted \hypo, (3) a convenient syntax for writing justification
-% labels, (4) a latex environment, (5) guard as optional argument to
-% \have, \hypo, or \open, (6) optional relabeling arguments. The user
-% level commands are similar to those of layer B: they are called
-% \begin{nd}, \end{nd}, \open, \close, \hypo, \have. In addition there
-% is a \by command for writing justification labels, in the style of
-% \by{$\vee$E}{1,2-4,5-6}. For convenience, a number of abbreviations
-% is also provided, for instance \ie for \by{$\Rightarrow$E}
-% etc. These commands are only visible inside an nd-environment; thus
-% they do not interfere with the global name space. There is also an
-% environment ndresume which is like nd, except that it continues a
-% proof in progress (with continuous nesting and labeling).
-
-% The layer C macros work by storing each line in a data structure
-% \ppp,\nd*typ,\nd*byt. The line is ejected when the beginning of the next
-% line is read, and once at the very end. In this way, we can put in
-% the correct line breaks (whether or not the line carries a
-% justification), and a hypothesis does not get typeset until we know
-% whether it is followed by another hypothesis. \nd*sto stores a new
-% line, \nd*clr clears the current line, \nd*cmd outputs the current
-% line. Finally, \nd*init puts all the commands which are visible
-% inside an nd-environment in the current name space.
-
+% Layer C: User interface
 \def\nd*clr{\gdef\nd*cmd{}}
 \def\nd*sto#1#2#3{\gdef\nd*typ{#1}\gdef\nd*byt{}%
   \gdef\nd*cmd{\nd*typ{#2}{#3}\nd*byt\\}}
 \def\nd*hyc#1#2{\def\nd*typ{\nd*haveb}\nd*cmd\nd*sto{\nd*hypob}{#1}{#2}}
 \def\nd*hac#1#2{\nd*cmd\nd*sto{\nd*haveb}{#1}{#2}}
 
-% usage: \optarg{default}{continuation}xxx - reads an optional argument, 
-% supplies default if necessary, then continues with continuation. 
-% Continuation expects optional argument between [...]. I.e., 
-% \optarg{d}{c}[xxx] => c[xxx], and \optarg{d}{c}x => c[d]x if x != '['. 
-% Behavior is undefined if x is {[...}. \optargg is similar except it 
-% takes two continuations: first one for optional argument present, second 
-% for not present. It takes no default value.
-
+% Optional argument handling
 \def\optarg#1#2#3{\ifx[#3\def\c{#2#3}\else\def\c{#2[#1]{#3}}\fi\c}
 \def\optargg#1#2#3{\ifx[#3\def\c{#1#3}\else\def\c{#2{#3}}\fi\c}
 
+% Complex argument parsing
 \def\nd*hyx[#1][#2]#3[#4]#5{\ifx\relax#4\relax\else\nd*guardb{1}{#4}\fi\nd*hyc{#3}{#5}\nd*set{#1}{#2}}
 \def\nd*hax[#1][#2]#3[#4]#5{\ifx\relax#4\relax\else\nd*guardb{1}{#4}\fi\nd*hac{#3}{#5}\nd*set{#1}{#2}}
 
-% \nd*five{\a}: read five, partly optional arguments of the shape [][]{}[]{}, 
-% then call \a with these arguments.
 \def\nd*five#1{\optargg{\nd*four{#1}}{\nd*two{#1}}}
 \def\nd*four#1[#2]{\optarg{0}{\nd*three{#1}[#2]}}
 \def\nd*three#1[#2][#3]#4{\optarg{}{#1[#2][#3]{#4}}}
 \def\nd*two#1{\nd*three{#1}[\relax][]}
 
+% Main user commands
 \def\nd*have{\nd*five{\nd*hax}}
 \def\nd*hypo{\nd*five{\nd*hyx}}
 \def\nd*base{undefined}
@@ -906,150 +551,68 @@
 \def\nd*guard{\optarg{1}{\nd*guardc}}
 \def\nd*guardc[#1]#2{\nd*guardb{#1}{#2}}
 
-%%JRH: The following \by command follows Carnap justification convention for LogicBookSD system: colon, then line numbers, then rule. 
-
+% Justification commands
 \def\nd*by#1#2{\ifx\nd*x#2\nd*x\gdef\nd*byt{\mbox{#1}}\else\gdef\nd*byt{\mbox{:\ndref{#2} #1}}\fi}
-
-%%JRH: Following pr and as commands autoprint :PR and :AS respectively, allowing you to still type a note. So one can turn off the :PR and :AS just by deleting that text before #1 in the commands' first \mbox: 
-
 \def\nd*prs#1#2{\ifx\nd*x#2\nd*x\gdef\nd*byt{\mbox{:PR #1}}\else\gdef\nd*byt{\mbox{:\ndref{#2} #1}}\fi}
-
 \def\nd*ass#1#2{\ifx\nd*x#2\nd*x\gdef\nd*byt{\mbox{:AS #1}}\else\gdef\nd*byt{\mbox{:\ndref{#2} #1}}\fi}
+\def\nd*pr#1{\gdef\nd*byt{\mbox{:PR #1}}}  % Premise
+\def\nd*as#1{\gdef\nd*byt{\mbox{:AS #1}}}  % Assumption
 
-%eliminates the need for second brace for line numbers, since premises and assumptions never call line numbers:
-\def\nd*pr#1{\gdef\nd*byt{\mbox{:PR #1}}}
-
-\def\nd*as#1{\gdef\nd*byt{\mbox{:AS #1}}}
-
-%To make these :PR and :AS occurances go away, simply replace the above four commands with the following four:
-%\def\nd*pr#1{\gdef\nd*byt{\mbox{#1}}}
-%\def\nd*as#1{\gdef\nd*byt{\mbox{#1}}}
-%\def\nd*prs#1#2{\ifx\nd*x#2\nd*x\gdef\nd*byt{\mbox{#1}}\else\gdef\nd*byt{\mbox{:\ndref{#2} #1}}\fi}
-%\def\nd*ass#1#2{\ifx\nd*x#2\nd*x\gdef\nd*byt{\mbox{#1}}\else\gdef\nd*byt{\mbox{:\ndref{#2} #1}}\fi}
-
-
-
-%\def\nd*bys#1#2{\ifx\nd*x#2\nd*x\gdef\nd*byt{\mbox{#1}}\else\nd*byt{\mbox{:#2 #1}}\fi}
-
-
-%\newcommand{\bys}[2]{\mbox{:#2 #1}} % for premises and assumptions 
-
-%Ichikawa by command (prints rule then line numbers):
-%\def\nd*by#1#2{\ifx\nd*x#2\nd*x\gdef\nd*byt{\mbox{#1}}\else\gdef\nd*byt{\mbox{#1\ \ndref{#2}}}\fi}
-
-%Selinger's own by command, which inserts a comma between the rule and the justification:
-%\def\nd*by#1#2{\ifx\nd*x#2\nd*x\gdef\nd*byt{\mbox{#1}}\else\gdef\nd*byt{\mbox{#1, \ndref{#2}}}\fi}
-
-%following does rule in paren then the lines:
-%\def\nd*by#1#2{\ifx\nd*x#2\nd*x\gdef\nd*byt{\mbox{#1}}\else\gdef\nd*byt{\mbox{(#1) \ \ndref{#2}}}\fi}
-
-% * * *
-% This block defines the natural deduction rules.
-% Rules designated by ordinary letters may be specified with \by{RULE}
-% * * *
-
+% Rule abbreviations initialization
 \def\nd*init{%
-  \let\open\nd*open%
-  \let\close\nd*close%
-  \let\hypo\nd*hypo%
-  \let\have\nd*have%
-  \let\by\nd*by%
-    \let\pr\nd*pr% %JRH: command for premises at start of proof, to auto print :PR, \pr{}
-      \let\as\nd*as% \as{} (only one set of braces needed! 
-       \let\prs\nd*prs% Requires {}{} at end
-             \let\ass\nd*ass% %Requires {}{} at end
-  \let\guard\nd*guard%
-  \def\bi{\by{{\eiff}I}}%
-  \def\be{\by{{\eiff}E}}%
-  \def\ci{\by{{\eif}I}}%
-  \def\ce{\by{{\eif}E}}%
-  \def\Ai{\by{$\forall$I}}%
-  \def\Ae{\by{$\forall$E}}%
-  \def\Ei{\by{$\exists$I}}%
-  \def\Ee{\by{$\exists$E}}%
-  \def\ae{\by{{\eand}E}}%
-  \def\ai{\by{{\eand}I}}%
-  \def\oi{\by{{\eor}I}}%
-  \def\oe{\by{{\eor}E}}%
-  \def\ni{\by{{\enot}I}}%
-  \def\ne{\by{{\enot}E}}%
-  \def\ii{\by{$=$I}}%
-  \def\ie{\by{$=$E}}%
-    \def\r{\by{R}}% %Ichikawa left this one out for some reason...Calgary remix has it! 
-   %\def\pr{\by{:PR}}% %prints `:PR' which Carnap needs for starting premises 
-      \def\tnd{\by{LEM}}% RZ: Law of excluded middle
-  \def\ip{\by{IP}}% RZ: indirect proof
-  \def\dne{\by{DNE}}% TB: double negation elimination (derived rule)
-  \def\mt{\by{MT}}% TB: modus tollens (derived rule)
-  \def\ds{\by{DS}}% TB: disjunctive syllogism (a derived rule in Cambridge version)
-  \def\dem{\by{DeM}}% TB: De Morgan rule (derived rule)
-  \def\cq{\by{CQ}}% TB: conversion of quantifiers (derived rule)
-    \def\re{\by{X}}% RZ: this is now X (explosion)
-      \def\ellipsesline{\have[ ]{}{\vdots}}%Ellipses line from Zach slides 
-        \def\breakline{\have[ ]{}{\begin{tiny}-{}-\end{tiny}}}% For separating subproofs within disjunction Elim and bicond. elim in Carnap %note that font command doesn't seem to work...
+  \let\open\nd*open%                    % Open subproof
+  \let\close\nd*close%                  % Close subproof
+  \let\hypo\nd*hypo%                    % Hypothesis
+  \let\have\nd*have%                    % Derived line
+  \let\by\nd*by%                        % Justification
+  \let\pr\nd*pr%                        % Premise
+  \let\as\nd*as%                        % Assumption
+  \let\prs\nd*prs%                      % Premise with reference
+  \let\ass\nd*ass%                      % Assumption with reference
+  \let\guard\nd*guard%                  % Guard for quantifiers
+  % Logical rule abbreviations
+  \def\bi{\by{{\eiff}I}}%               % Biconditional introduction
+  \def\be{\by{{\eiff}E}}%               % Biconditional elimination
+  \def\ci{\by{{\eif}I}}%                % Conditional introduction
+  \def\ce{\by{{\eif}E}}%                % Conditional elimination (modus ponens)
+  \def\Ai{\by{$\forall$I}}%             % Universal introduction
+  \def\Ae{\by{$\forall$E}}%             % Universal elimination
+  \def\Ei{\by{$\exists$I}}%             % Existential introduction
+  \def\Ee{\by{$\exists$E}}%             % Existential elimination
+  \def\ae{\by{{\eand}E}}%               % Conjunction elimination
+  \def\ai{\by{{\eand}I}}%               % Conjunction introduction
+  \def\oi{\by{{\eor}I}}%                % Disjunction introduction
+  \def\oe{\by{{\eor}E}}%                % Disjunction elimination
+  \def\ni{\by{{\enot}I}}%               % Negation introduction
+  \def\ne{\by{{\enot}E}}%               % Negation elimination
+  \def\ii{\by{$=$I}}%                   % Identity introduction
+  \def\ie{\by{$=$E}}%                   % Identity elimination
+  \def\r{\by{R}}%                       % Reiteration
+  \def\tnd{\by{LEM}}%                   % Law of excluded middle
+  \def\ip{\by{IP}}%                     % Indirect proof
+  \def\dne{\by{DNE}}%                   % Double negation elimination
+  \def\mt{\by{MT}}%                     % Modus tollens
+  \def\ds{\by{DS}}%                     % Disjunctive syllogism
+  \def\dem{\by{DeM}}%                   % De Morgan's laws
+  \def\cq{\by{CQ}}%                     % Conversion of quantifiers
+  \def\re{\by{X}}%                      % Explosion (ex falso)
+  \def\ellipsesline{\have[ ]{}{\vdots}}%  % Vertical dots
+  \def\breakline{\have[ ]{}{\begin{tiny}-{}-\end{tiny}}}%  % Break line
 }
+
+% Natural deduction environments
 \newenvironment{nd}{\begingroup\nd*init\nd*beginb\nd*clr}{\nd*cmd\nd*endb\endgroup}
-\newenvironment{ndresume}{\begingroup\nd*init\nd*resumeb\nd*clr}%
-  {\nd*cmd\nd*endb\endgroup}
-  
- 
-  
+\newenvironment{ndresume}{\begingroup\nd*init\nd*resumeb\nd*clr}{\nd*cmd\nd*endb\endgroup}
 
-
-% Example of a derivation using layer C syntax. As before, the "line
-% numbers" are really labels, which will be replaced by consecutive
-% line numbers in the output.
-
-% \[
-% \begin{nd}
-%   \hypo{1}  {P\vee Q}   
-%   \hypo{2}  {\neg Q}                         
-%   \open                              
-%   \hypo{3a} {P}
-%   \have{3b} {P}        \r{3a}
-%   \close                   
-%   \open
-%   \hypo{4a} {Q}
-%   \have{4b} {\neg Q}   \r{2}
-%   \have{4c} {\bot}     \ne{4a,4b}
-%   \have{4d} {P}        \be{4c}
-%   \close                             
-%   \have{5}  {P}        \oe{1,3a-3b,4a-4d}                 
-% \end{nd}
-% \]
-
-% Another example of layer C syntax, using guards and relabelings:
-
-% \begin{nd}
-%   \hypo          {1} {P\vee Q}
-%   \open
-%   \hypo          {2}[u] {P}
-%   \have [\vdots] {3} {\vdots}
-%   \have [n][-1]  {4} {A\wedge B}
-%   \close
-%   \open
-%   \hypo          {5} {Q}
-%   \have [\vdots] {6} {\vdots}
-%   \have [m]      {7} {A\wedge B}
-%   \close
-%   \have          {8} {A\wedge B}  \oe{1,2-(4),5-7}
-%   \have [\vdots] {9} {\vdots}
-%   \have [][100] {10} {A}          \ae{8}
-% \end{nd}
-
+% Restore * catcode
 \catcode`\*=\nd*astcode
 
-% a command for indicating the goal in a proof or subproof
-\newcommand*{\want}[1]{\by{(Want: \ensuremath{#1})}{}}
-% an environment that separates the proof from surrounding paragraphs
-\newenvironment{iproof}{\par$\begin{nd}}{\end{nd}$\par} %Redefining as iproof, since `proof' is already defined in another package; not sure how Ichikawa got away with this...Calgary remix defines this environment as `fitchproof' 
-%MAYBE ichikawa avoids trouble b/c he doesn't call a separate fitch file that defines proof environment!
+% Additional proof commands
+\newcommand*{\want}[1]{\by{(Want: \ensuremath{#1})}{}}  % Goal indicator
+\newenvironment{iproof}{\par$\begin{nd}}{\end{nd}$\par}  % Inline proof
+\renewenvironment{proof}{\par$\begin{nd}}{\end{nd}$\par} % Standard proof
 
-\renewenvironment{proof}{\par$\begin{nd}}{\end{nd}$\par}
-
-% I keep mixing up the \ce and \ae commands, so I define a less ambiguous
-% alternate set of commands
-
+% Long-form rule names
 \newcommand*{\notI}{\ni}
 \newcommand*{\notE}{\ne}
 \newcommand*{\iffI}{\bi}
@@ -1065,22 +628,13 @@
 \newcommand*{\existsI}{\Ei}
 \newcommand*{\existsE}{\Ee}
 
-
-
-
-
-
-
-
-% Tree stuff
-%JRH: adding in definition of line no override, local option included in 2019 revision. since my prooftrees package is not up to date! 
-% see code here: https://tex.stackexchange.com/questions/415976/manually-set-line-numbers-if-prooftrees-sty
-% see p. 24 of prooftrees manual for directions on using this. works w/ {}, e.g. line no override={n+1}
-
-%the command `vdotsline' lets you put anything in number column, without a period appearing afterwards. so it's like `line no override' without \linenumberstyle
-%e.g. for vertical dots vertically aligned, use: vdotsline={\\[-0.55em] \vdots}
+% ========================================
+% PROOF TREES CONFIGURATION
+% ========================================
+% Configuration for the prooftrees package
 
 \forestset{
+  % Override line numbers in proof trees
   line no override/.style={
     before drawing tree={
       for name/.process={Ow}{proof tree proof line no}{line no ##1}{
@@ -1089,6 +643,7 @@
       },
     },
   },
+  % Suppress line numbers
   no line no/.style={
     before drawing tree={
       for name/.process={Ow}{proof tree proof line no}{line no ##1}{
@@ -1097,6 +652,7 @@
       },
     },
   },
+  % Vertical dots in line number position
   vdotsline/.style={
     before drawing tree={
       for name/.process={Ow}{proof tree proof line no}{line no ##1}{
@@ -1105,149 +661,89 @@
       },
     },
   },
+  % Default settings for all proof trees
   default preamble={
-	single branches,
-	close with=\ensuremath{\times},
-	just sep=1.75em,
-	line no sep=1.75em
-	}
+    single branches,                    % No branching by default
+    close with=\ensuremath{\times},     % Use × for closed branches
+    just sep=1.75em,                    % Space for justifications
+    line no sep=1.75em                  % Space for line numbers
+  }
 }
 
+% ========================================
+% FITCH-STYLE PROOFS
+% ========================================
+% Alternative proof system using Fitch-style notation
 
-\iffalse
-\forestset{
-	default preamble={
-	single branches,
-	close with=\ensuremath{\times},
-	just sep=1.75em,
-	line no sep=1.75em
-	}
-	 line no override/.style={
-    before drawing tree={
-      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
-        content=\linenumberstyle{#1},
-        typeset node,
-      },
-    },
-  },
-}
-
-%\iffalse
-
- line no override/.style={
-    before drawing tree={
-      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
-        content=\linenumberstyle{#1},
-        typeset node,
-      },
-    },
-  },
-  no line no/.style={
-    before drawing tree={
-      for name/.process={Ow}{proof tree proof line no}{line no ##1}{
-        content=,
-        typeset node,
-      },
-    },
-  },
-
-\fi
-
-
-%*********************FROM KLUWER's FITCH .sty file ****************************
-
-%%%Josh: pasted this from website on August 15 2022:
-%https://www.logicmatters.net/resources/fitch.sty
-
-
-% $Id: fitch.sty,v 1.6 2003/06/28 16:53:00 johanw Exp $
-
-% Macros for Fitch-style formal proofs
-% Johan W. KlÃ¼wer, June 10, 2001
-
-
-%\RequirePackage{mdwtab,latexsym,amsmath,amsfonts,ifthen}  
-
-\RequirePackage{mdwtab,latexsym} %other required packages are called above already 
-
-% Line height in proofs
+% Dimensions for Fitch proofs
 \newlength{\fitchlineht}
-\setlength{\fitchlineht}{1.5\baselineskip}
-% Horizontal indent between proof levels
+\setlength{\fitchlineht}{1.5\baselineskip}    % Line height
 \newlength{\fitchindent}
-\setlength{\fitchindent}{1em}
-% Indent to comment
+\setlength{\fitchindent}{1em}                 % Indentation
 \newlength{\fitchcomind}
-\setlength{\fitchcomind}{2em}
-% Line number width
+\setlength{\fitchcomind}{2em}                 % Comment indentation
 \newlength{\fitchnumwd}
-\setlength{\fitchnumwd}{1em}
+\setlength{\fitchnumwd}{1em}                  % Line number width
 
-% Altered from mdwtab.sty: shorter vline, for start of subproof
+% Fitch proof elements
 \makeatletter
 \newcommand\fvline[1][\arrayrulewidth]{\vrule\@height.5\fitchlineht\@width#1\relax}
 \makeatother
-% Ordinary vertical line
-\newcommand{\fa}{\vline\hspace*{\fitchindent}}
-% Vertical line, shorter: Use at start of (sub)proof
-\newcommand{\fb}{\fvline\hspace*{\fitchindent}}
-% Hypothesis
-\newcommand{\fh}{\fvline%
+
+\newcommand{\fa}{\vline\hspace*{\fitchindent}}       % Vertical line
+\newcommand{\fb}{\fvline\hspace*{\fitchindent}}      % Short vertical line
+\newcommand{\fh}{\fvline%                             % Hypothesis
   \makebox[0pt][l]{{%
       \raisebox{-1.4ex}[0pt][0pt]{\rule{1.5em}{\arrayrulewidth}}}}%
   \hspace*{\fitchindent}}
-% Hypothesis, with longer vert line: for >1 hypothesis
-\newcommand{\fj}{\vline%
+\newcommand{\fj}{\vline%                              % Multi-hypothesis
   \makebox[0pt][l]{{%
       \raisebox{-1.4ex}[0pt][0pt]{\rule{1.5em}{\arrayrulewidth}}}}%
   \hspace*{\fitchindent}}
-% Modal subproof: takes argument = operator
+
+% Modal subproofs
 \newcommand{\fitchmodal}[1]{% 
   \makebox[0pt][r]{${}^{#1}$\,}\fvline\hspace*{\fitchindent}}
-\newcommand{\fn}{\fitchmodal{\Box}}% Box subproof 
-\newcommand{\fp}{\fitchmodal{\Diamond}}% Diamond subproof
-% Modal subproof with hypothesis in first line (as in Fitch)
-\newcommand{\fitchmodalh}[1]{% 
+\newcommand{\fn}{\fitchmodal{\Box}}           % Necessary subproof
+\newcommand{\fp}{\fitchmodal{\Diamond}}       % Possible subproof
+\newcommand{\fitchmodalh}[1]{%                % Modal hypothesis
   \makebox[0pt][r]{${}^{#1}$\,}%
   \fvline%
   \makebox[0pt][l]{{%
       \raisebox{-1.4ex}[0pt][0pt]{\rule{1.5em}{\arrayrulewidth}}}}%
   \hspace*{\fitchindent}}
-% Rule: formula introduction marker. \fr with line, \fs without line
-\newcommand{\fr}{%
-  \makebox[0pt][r]{${\rhd}$\,\,}\vline\hspace*{\fitchindent}}
-\newcommand{\fs}{%
-  \makebox[0pt][r]{${\rhd}$\,\,}}
-% Box around argument, like new variable in ql
-\newcommand{\fw}[1]{\fbox{\footnotesize $#1$}}
 
-% 
+% Rule markers
+\newcommand{\fr}{%                            % Rule with line
+  \makebox[0pt][r]{${\rhd}$\,\,}\vline\hspace*{\fitchindent}}
+\newcommand{\fs}{%                            % Rule without line
+  \makebox[0pt][r]{${\rhd}$\,\,}}
+\newcommand{\fw}[1]{\fbox{\footnotesize $#1$}} % Boxed variable
+
+% Fitch counter system
 \newcounter{fitchcounter}
 \setcounter{fitchcounter}{0}
-%To avoid starting from 1, \setboolean{resetfitchcounter}{false}
 \newboolean{resetfitchcounter}
 \setboolean{resetfitchcounter}{true}
-%To avoid increasing numbers, \setboolean{increasefitchcounter}{false}
 \newboolean{increasefitchcounter}
 \setboolean{increasefitchcounter}{true}
-%\formatfitchcounter can be altered if need be, though only once per proof
 \newcommand{\formatfitchcounter}[1]{\arabic{#1}}
-%Typeset the counter
 \newcommand{\fitchcounter}{%
   \ifthenelse{\boolean{increasefitchcounter}}{\addtocounter{fitchcounter}{1}}{}
   \formatfitchcounter{fitchcounter}}
 
-%A line with a special number -- a tag, e.g. \ftag{\vdots}{}
+% Special line numbering
 \newcommand{\ftag}[2]{\multicolumn{1}%
   {!{\makebox[\fitchnumwd][r]{#1}\hspace{\fitchindent}}Ml@{\hspace{\fitchcomind}}}%
   {#2}}
 
-\newenvironment{fitchnum}%
+% Fitch environments
+\newenvironment{fitchnum}%                    % Numbered Fitch proof
 {\ifthenelse{\boolean{resetfitchcounter}}{\setcounter{fitchcounter}{0}}{}
   \begin{tabular}{!{\makebox[\fitchnumwd][r]{\fitchcounter }\hspace{\fitchindent}}Ml@{\hspace{\fitchcomind}}l}}%
 {\end{tabular}}
 
-\newenvironment{fitchunum}%
+\newenvironment{fitchunum}%                   % Unnumbered Fitch proof
 {\begin{tabular}{!{\makebox[\fitchnumwd][r]{}\hspace{\fitchindent}}Ml@{\hspace{\fitchcomind}}l}}%
 {\end{tabular}}
 
@@ -1255,17 +751,15 @@
   \begin{fitchnum}}{\end{fitchnum}}
 \newenvironment{fitch*}{\renewcommand{\arraystretch}{1.5}
   \begin{fitchunum}}{\end{fitchunum}}
-  
 
-
-% The following is useful for giving a numbered formula, then the proof.
+% Fitch lemma environment
 \newenvironment{flem}[2]%
 {\begin{eqnarray}
     &#1\label{#2}\\
     &\begin{fitch}}%
     {\end{fitch}\notag\end{eqnarray}}
 
-%To write comment field for two consecutive lines, with brace
+% Two-line comment with brace
 \newcommand{\ftwocom}[1]{%
   \parbox[t]{3cm}{
     \raisebox{-.6\baselineskip}[\baselineskip][0pt]{%
@@ -1275,66 +769,34 @@
         \end{aligned}
       \right\}$\quad #1}
   }}
-  
-  
-   %%%%%%%%%%%%%%%%%%%%%%%%%%
- %	TAPPENDEN STUFF, from KFITCH.sty 
- %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  
-  \newenvironment{kfitch}{\renewcommand{\arraystretch}{1.5}
+
+% Additional Fitch variants
+\newenvironment{kfitch}{\renewcommand{\arraystretch}{1.5}
   \begin{fitchnum}}{\end{fitchnum}}
 \newenvironment{kfitch*}{\renewcommand{\arraystretch}{1.5}
   \begin{fitchunum}}{\end{fitchunum}}
-  
-  
-  
-  
-  %%%%%%%%%%%%
-  % ************** GORDON Stuff from his Derivation Docs **************
-  
-  \newcommand{\e}{\emph}
-\newcommand{\n}{\sim}
-\newcommand{\an}{\hs \& \hs}
-\newcommand{\then}{\supset}
-\newcommand{\iif}{\equiv}
-\newcommand{\tb}{\textbf}
-\newcommand{\vs}{\vspace{15pt}}
-\newcommand{\hs}{\hspace{2pt}}
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
 
+% ========================================
+% MISCELLANEOUS
+% ========================================
+% Various utility commands
 
+\providecommand{\nix}[1]{}              % Ignore argument (like comment)
+\newcommand*{\metav}[1]{\ensuremath{\mathcal{#1}}}  % Calligraphic metavariable
+\newenvironment{fitchproof}              % Fitch proof with nd syntax
+    {\begin{list}{}{\setlength{\leftmargin}{0pt}}\item$\begin{nd}}
+    {\end{nd}$\end{list}}
 
+% ========================================
+% APPENDIX FORMATTING
+% ========================================
+% Special formatting for appendices
 
-% ******************** FROM CALGARY REMIX .sty file *****************************
+\AtAppendix{%                            % Execute at start of appendix
+    \titleformat{\chapter}[display]{\vspace*{-50pt}\bfseries\huge}{Appendix~\thechapter}{0.5em}{}
+    \titlespacing*{\chapter}{0pt}{0pt}{1em}
+    \titleformat*{\section}{\large \bfseries}
+    \titleformat*{\subsection}{\bfseries}
+}
 
-
-\newcommand*{\metav}[1]{\ensuremath{\mathcal{#1}}}
-
-% an environment that separates the proof from surrounding paragraphs
-\newenvironment{fitchproof}
-	{\begin{list}{}{\setlength{\leftmargin}{0pt}}\item$\begin{nd}}
-	{\end{nd}$\end{list}}
-	
-	
-%added the ebullet environment above, from Lists. 
-
-%cool call line one could add to call local style file:
-%\IfFileExists{forallxyyc-local.sty}{\usepackage{forallxyyc-local}}{}
+\endinput

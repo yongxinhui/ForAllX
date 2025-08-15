@@ -1,22 +1,57 @@
 \ProvidesPackage{lecture}[2024/01/01 Formatting support for logic handouts]
-
-% Load common macros first
-\RequirePackage{../Book/sty/common-macros}
-
-% Required packages
 \RequirePackage{ifthen}
+
+% Logical operators (same as in book)
+\def\eor{\ensuremath{\vee}}
+\def\eand{\ensuremath{\wedge}}
+\def\eif{\ensuremath{\rightarrow}}
+\def\eiff{\ensuremath{\leftrightarrow}}
+\def\enot{\ensuremath{\neg}}
+
+% Common commands (same as in book)
+\renewcommand{\vert}[1]{\lvert#1\rvert}
+\newcommand{\corner}[1]{\ulcorner#1\urcorner}
+\newcommand{\concat}[2]{{#1}{\raisebox{4pt}{\smallfrown}}{#2}}
+\newcommand{\tuple}[1]{\langle#1\rangle}
+\newcommand{\set}[1]{\lbrace#1\rbrace}
+
+% Mathematical symbols (same as in book)
+\newcommand{\I}{\mathcal{I}}
+\newcommand{\J}{\mathcal{J}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\M}{\mathcal{M}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\PL}{\mathcal{L}^{\textsc{pl}}}
+\newcommand{\FOL}{\mathcal{L}^{\textsc{fol}}}
+\newcommand{\FI}{\mathcal{L}^=}
+\newcommand{\FIN}{\mathcal{L}^{=}_{\mathbb{N}}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\D}{\mathbb{D}}
+
+% Text commands
+\newcommand{\length}{\texttt{Length}}
+\newcommand{\res}{\texttt{Res}}
+
+% Mathematical structures
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\V}[1]{\mathcal{V}_{#1}}
+\newcommand{\VV}[2]{\mathcal{V}_{#1}^{#2}}
+\newcommand{\ext}[3]{|#1|_{#2}^{#3}}
+\newcommand{\va}[1]{\hat{#1}}
+\renewcommand{\v}[1]{\mathbf{#1}}
 
 % Additional lecture-specific commands
 \newcommand{\interpret}[1]{\llbracket#1\rrbracket}
 \newcommand{\lit}{\mathbb{L}}
 
 % Lecture-specific variants (different from book)
-\renewcommand{\comp}[1]{\texttt{Comp}(#1)}
+\newcommand{\comp}[1]{\texttt{Comp}(#1)}
 \newcommand{\simp}[1]{\texttt{Simple}(#1)}
 \newcommand{\even}[1]{\texttt{Even}(#1)}
 
 % Alternative value notation for lectures
-\renewcommand{\val}[2]{\mathfrak{v}_{#1}^{#2}}
+\newcommand{\val}[2]{\mathfrak{v}_{#1}^{#2}}
 
 % Quantifier and substitution notation
 \newcommand{\qt}[2]{#1 #2}

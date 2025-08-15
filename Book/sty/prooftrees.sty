@@ -1,157 +1,355 @@
-%% Copyright 2017 Clea F. Rees
-% Modified by Jonathan Ichikawa who doesn't really understand LaTeX. I've introduced a separate 'open' marker, syntactically alike to 'close'
-% I did it by trial and error for myself. Use at your own risk.
-%
-% This work may be distributed and/or modified under the
-% conditions of the LaTeX Project Public License, either version 1.3
-% of this license or (at your option) any later version.
-% The latest version of this license is in
-%   http://www.latex-project.org/lppl.txt
-% and version 1.3 or later is part of all distributions of LaTeX
-% version 2005/12/01 or later.
-%
-% This work has the LPPL maintenance status `maintained'.
-%
-% The Current Maintainer of this work is Clea F. Rees.
-%
-% This work consists of all files listed in manifest.txt.
+%% prooftrees.sty - Package for typesetting natural deduction and semantic tableaux proofs
+%%
+%% Original Copyright 2017 Clea F. Rees
+%% Modified by Jonathan Ichikawa for MIT Logic course
+%% - Added 'open' marker functionality for semantic tableaux
+%% - Syntax follows the 'close' marker pattern
+%%
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%%
+%% DESCRIPTION:
+%% This package provides a forest-based environment for typesetting
+%% natural deduction proofs and semantic tableaux. It supports:
+%% - Automatic line numbering with customizable formatting
+%% - Justifications with cross-references to previous lines
+%% - Branch closure markers for tableaux
+%% - Branch opening markers for tableaux (MIT addition)
+%% - Automatic vertical alignment of proof lines
+%% - Highlighting of specific lines or components
+%% - Support for both single-branch and grouped layouts
+%%
+%% KEY USER COMMANDS:
+%% 
+%% Environment:
+%%   \begin{prooftree}[options] ... \end{prooftree}
+%%   \begin{tableau}[options] ... \end{tableau}    (if tableaux option used)
+%%
+%% Node styles:
+%%   just=text:refs          - Add justification with cross-references
+%%   close                   - Mark branch as closed  
+%%   close=annotation:refs   - Mark branch as closed with annotation
+%%   open                    - Mark branch as open (MIT addition)
+%%   open=annotation:refs    - Mark branch as open with annotation  
+%%   checked, checked=name   - Mark discharged assumption
+%%   subs, subs=name         - Mark universal instantiation
+%%   move by=n               - Move line n positions down
+%%
+%% Global options:
+%%   line numbering / not line numbering
+%%   justifications / not justifications  
+%%   single branches / not single branches
+%%   zero start                - Start numbering from 0
+%%   to prove=statement        - Set proof goal
 %%
 \NeedsTeXFormat{LaTeX2e}
 \RequirePackage{svn-prov}
 \ProvidesPackageSVN{$Id: prooftrees.sty 5848 2017-02-09 02:15:38Z cfrees $}[v0.6 \revinfo]
 \RequirePackage{etoolbox}
-% define \prooftrees@enw to hold the name of the environment
-% default is to name the environment prooftree, this ensures backwards compatibility
+
+%% ===========================================
+%% PACKAGE OPTIONS AND ENVIRONMENT NAMING
+%% ===========================================
+
+%% Environment name configuration
+%% Default: 'prooftree' environment
+%% Can be changed to 'tableau' to avoid conflicts with other packages
 \newcommand*\prooftrees@enw{prooftree}
-% allow users to change the name to tableau using tableaux
+
+%% Package options for environment naming
 \DeclareOption{tableaux}{\renewcommand*\prooftrees@enw{tableau}}
-% just in case
 \DeclareOption{tableau}{\renewcommand*\prooftrees@enw{tableau}}
 \DeclareOption*{\PassOptionsToPackage{\CurrentOption}{forest}}
-% if \prooftree is not yet defined, set the name to prooftree; otherwise, use tableau to avoid conflict with bussproofs (which uses 'prooftree' rather than 'bussproof' as one might expect)
+
+%% Automatic conflict detection with bussproofs package
+%% If \prooftree is already defined, use 'tableau' as environment name
 \ifundef\prooftree{\renewcommand*\prooftrees@enw{prooftree}}{\renewcommand*\prooftrees@enw{tableau}}
-% let users override the default prooftree in case they need to load bussproofs later
+
 \ProcessOptions
+
+%% ===========================================
+%% REQUIRED PACKAGES
+%% ===========================================
+
+%% forest: Main tree-drawing engine
 \RequirePackage{forest}[2016/12/04]
+
+%% amssymb: Mathematical symbols (used for default markers)
 \RequirePackage{amssymb}
+
+%% ===========================================
+%% USER-CUSTOMIZABLE COMMANDS
+%% ===========================================
+
+%% Line numbering style (default: "1.", "2.", etc.)
+%% Users can redefine this command to customize line number format
 \newcommand*\linenumberstyle[1]{#1.}
-% currently, keys starting 'proof tree' and macros starting 'prooftree' or 'prooftree@' are intended for internal use only
-% this does not apply to the environment prooftree
-% other keys and macros are intended for use in documents
-% in particular, the style 'proof tree' is **NOT** intended to be used directly by the user and its direct use is **ABSOLUTELY NOT SUPPORTED IN ANY WAY, SHAPE OR FORM**; it is intended only for implicit use when the prooftree environment calls it
-\forestset{% don't use @ in register/option names - the documentation is lying when it says non-alphanumerics will be converted to underscores when forming pgfmath functions ;)
-  declare boolean register={line numbering},% line numbers
-  line numbering,% default is for line numbers
-  declare boolean register={justifications},% line justifications
-  not justifications,% default is for no line justifications (b/c there's no point in enabling this if the user doesn't specify any content)
-  declare boolean register={single branches},% single branches: explicitly drawn branches and a normal level distance between lone children and their parents
-  not single branches,% default is for lone children to be grouped with their parents
-  declare dimen register={line no width},% default will be set to the width of 99 wrapped in the line numbering style
-  line no width'=0pt,% fallback default is 0pt
-  declare dimen register={just sep},% amount by which to shift justifications away from the main tree
-  just sep'=1.5em,% default is 1.5em
-  declare dimen register={line no sep},% amount by which to shift line numbers away from the main tree
+
+%% ===========================================
+%% INTERNAL ARCHITECTURE NOTES
+%% ===========================================
+%% Keys starting with 'proof tree' are for internal use only
+%% The 'proof tree' style should NOT be used directly by users
+%% It is applied automatically by the prooftree environment
+%% ===========================================
+%% FOREST CONFIGURATION AND REGISTERS
+%% ===========================================
+
+\forestset{
+  %% ===========================================
+  %% USER-CONFIGURABLE BOOLEAN OPTIONS
+  %% ===========================================
+  
+  %% Line numbering: Controls whether proof lines are numbered
+  declare boolean register={line numbering},
+  line numbering,  % Default: enabled
+  
+  %% Justifications: Controls whether justifications appear on the right
+  declare boolean register={justifications},
+  not justifications,  % Default: disabled (no point unless user provides content)
+  
+  %% Single branches: Controls branch drawing behavior
+  %% - true: explicit branches with normal spacing between single children and parents
+  %% - false: single children are grouped with their parents (more compact)
+  declare boolean register={single branches},
+  not single branches,  % Default: group single children with parents
+  
+  %% ===========================================
+  %% SPACING AND LAYOUT DIMENSIONS
+  %% ===========================================
+  
+  %% Width reserved for line numbers (auto-calculated from "99.")
+  declare dimen register={line no width},
+  line no width'=0pt,  % Fallback default
+  
+  %% Distance between main tree and justifications
+  declare dimen register={just sep},
+  just sep'=1.5em,
+  
+  %% Distance between main tree and line numbers
+  declare dimen register={line no sep},
   line no sep'=1.5em,
-  declare dimen register={close sep},% distance between closure symbols and any following annotation
+  
+  %% Distance between closure/opening symbols and following annotations
+  declare dimen register={close sep},
   close sep'=.75\baselineskip,
+  %% ===========================================
+  %% INTERNAL POSITIONING COORDINATES
+  %% ===========================================
+  
+  %% X-coordinates for line numbers and justifications (calculated internally)
   declare dimen register={proof tree line no x},
   proof tree line no x'=0pt,
   declare dimen register={proof tree justification x},
   proof tree justification x'=0pt,
-  declare count register={proof tree rhif lefelau},% count the levels in the proof tree
+  
+  %% ===========================================
+  %% INTERNAL COUNTERS
+  %% ===========================================
+  
+  %% Count proof tree levels
+  declare count register={proof tree rhif lefelau},
   proof tree rhif lefelau'=0,
-  declare count register={proof tree lcount},% count the line numbers (on the left)
+  
+  %% Count line numbers (left side)
+  declare count register={proof tree lcount},
   proof tree lcount'=0,
-  declare count register={proof tree jcount},% count the justifications (on the right)
+  
+  %% Count justifications (right side)
+  declare count register={proof tree jcount},
   proof tree jcount'=0,
-  declare count register={line no shift},% adjustment for line numbering
+  
+  %% Line numbering adjustment (for zero-start numbering, etc.)
+  declare count register={line no shift},
   line no shift'=0,
+  
+  %% Internal processing counter
   declare count register={proof tree aros},
   proof tree aros'=0,
+  
+  %% ===========================================
+  %% SYMBOL CONFIGURATION
+  %% ===========================================
+  
+  %% Checked/discharged formula marker (for existential instantiation)
   declare toks register={check with},
   check with={\ensuremath{\checkmark}},
   declare boolean register={check right},
-  check right,
+  check right,  % Default: marker appears on right side
   check left/.style={not check right},
+  
+  %% Substitution marker (for universal instantiation)
   declare toks register={subs with},
   subs with={\ensuremath{\backslash}},
   declare boolean register={subs right},
-  subs right,
+  subs right,  % Default: marker appears on right side
   subs left/.style={not subs right},
+  
+  %% Branch closure marker (semantic tableaux)
   declare toks register={close with},
   close with={\ensuremath{\otimes}},
+  
+  %% Branch opening marker (MIT addition for semantic tableaux)
   declare toks register={open with},
   open with={\ensuremath{\uparrow}},
+  
+  %% Delimiter for merging conflicting justifications
+  declare toks register={merge delimiter},
+  merge delimiter={\text{; }},
+  
+  %% ===========================================
+  %% FORMATTING OPTIONS
+  %% ===========================================
+  
+  %% Closure annotation formatting
   declare keylist register={close format},
   close format={font=\scriptsize},
   declare keylist register={close with format},
   close with format={},
-  declare toks register={merge delimiter},
-  merge delimiter={\text{; }},
+  
+  %% Justification placement and formatting
   declare boolean register={just refs left},
-  just refs left,
+  just refs left,  % Default: reference numbers appear on left side of justification
   just refs right/.style={not just refs left},
   declare keylist register={just format},
   just format={},
+  
+  %% Line number formatting
   declare keylist register={line no format},
   line no format={},
+  
+  %% Highlighting format (for emphasized lines/components)
   declare autowrapped toks register={highlight format},
   highlight format={draw=gray, rounded corners},
+  
+  %% Proof statement formatting (top of proof)
   declare keylist register={proof statement format},
   proof statement format={},
+  
+  %% Well-formed formula formatting
   declare keylist register={wff format},
   wff format={},
+  %% ===========================================
+  %% INTERNAL NODE TYPE FLAGS
+  %% ===========================================
+  
+  %% Marks nodes that contain justifications
   declare boolean={proof tree justification}{0},
+  
+  %% Marks nodes that contain line numbers
   declare boolean={proof tree line number}{0},
+  
+  %% Marks nodes that should be grouped with their parents (compact layout)
   declare boolean={grouped}{0},
+  
+  %% Marks phantom nodes (used for structural purposes, not displayed)
   declare boolean={proof tree phantom}{0},
-  declare boolean={highlight wff}{0},
-  declare boolean={highlight just}{0},
-  declare boolean={highlight line no}{0},
-  declare boolean={highlight line}{0},
+  
+  %% ===========================================
+  %% HIGHLIGHTING FLAGS
+  %% ===========================================
+  
+  %% Individual component highlighting
+  declare boolean={highlight wff}{0},        % Highlight well-formed formulas
+  declare boolean={highlight just}{0},       % Highlight justifications
+  declare boolean={highlight line no}{0},    % Highlight line numbers
+  declare boolean={highlight line}{0},       % Highlight entire proof lines
+  
+  %% Auto-forwarding: when "highlight line" is used, automatically enable all components
   Autoforward={highlight line}{highlight just, highlight wff, highlight line no},
-  declare boolean={proof tree toing}{0},
-  declare boolean={proof tree toing with}{0},
-  declare boolean={proof tree rhiant cymysg}{0},
-  declare boolean={proof tree rhifo}{1},
-  declare boolean={proof tree arweinydd}{0},
-  declare autowrapped toks={just}{},
-  declare toks={proof tree rhestr rhifau llinellau}{},
-  declare toks={proof tree close}{},
-  declare toks={proof tree open}{},
-  declare toks={proof tree rhestr rhifau llinellau cau}{},
-  declare autowrapped toks={just options}{},
-  declare autowrapped toks={line no options}{},
-  declare autowrapped toks={wff options}{},
-  declare autowrapped toks={line options}{},
+  %% ===========================================
+  %% INTERNAL STRUCTURAL FLAGS
+  %% ===========================================
+  
+  %% Movement and positioning flags (used for complex tree rearrangement)
+  declare boolean={proof tree toing}{0},           % Mark nodes to be moved
+  declare boolean={proof tree toing with}{0},      % Mark nodes moving with parents
+  declare boolean={proof tree rhiant cymysg}{0},   % Mark parents with mixed children
+  declare boolean={proof tree rhifo}{1},           % Include in proof line numbering
+  declare boolean={proof tree arweinydd}{0},       % Mark lead nodes for movements
+  
+  %% ===========================================
+  %% CONTENT STORAGE
+  %% ===========================================
+  
+  %% Justification content and cross-references
+  declare autowrapped toks={just}{},                              % Justification text
+  declare toks={proof tree rhestr rhifau llinellau}{},           % Line number list for justifications
+  declare toks={proof tree rhestr rhifau llinellau cau}{},       % Line number list for closures
+  
+  %% Closure and opening markers with annotations
+  declare toks={proof tree close}{},               % Closure annotation content
+  declare toks={proof tree open}{},                % Opening annotation content
+  
+  %% ===========================================
+  %% FORMATTING OPTIONS STORAGE
+  %% ===========================================
+  
+  %% TikZ options for different components
+  declare autowrapped toks={just options}{},       % TikZ options for justifications
+  declare autowrapped toks={line no options}{},    % TikZ options for line numbers
+  declare autowrapped toks={wff options}{},         % TikZ options for formulas
+  declare autowrapped toks={line options}{},        % TikZ options for entire lines
+  
+  %% Auto-forwarding: line options apply to all components
   Autoforward={line options}{just options={#1}, line no options={#1}, wff options={#1}},
-  declare count={proof tree toing by}{0},
-  declare count={proof tree cadw toing by}{0},
-  declare count={proof tree toooing}{0},
-  declare count={proof tree proof line no}{0},
-  % keylists for internal storage
-  declare keylist={proof tree jrefs}{},
-  declare keylist={proof tree crefs}{},
-  % keylists for use in stages
-  declare keylist={proof tree ffurf}{},
-  declare keylist={proof tree symud awto}{},
-  declare keylist={proof tree creu nodiadau}{},
-  declare keylist={proof tree nodiadau}{},
-  % > not documented yet, I think
-  % > now indicates use of process when it is the first token, preceding a list of instructions as opposed to pgfmath stuff
+  
+  %% ===========================================
+  %% MOVEMENT AND POSITIONING COUNTERS
+  %% ===========================================
+  
+  declare count={proof tree toing by}{0},          % How many lines to move by
+  declare count={proof tree cadw toing by}{0},     % Saved movement amount
+  declare count={proof tree toooing}{0},           % Movement processing counter
+  declare count={proof tree proof line no}{0},     % Current proof line number
+  
+  %% ===========================================
+  %% INTERNAL DATA STRUCTURES
+  %% ===========================================
+  
+  %% Cross-reference storage
+  declare keylist={proof tree jrefs}{},            % Justification cross-references
+  declare keylist={proof tree crefs}{},            % Closure cross-references
+  
+  %% Processing stage keylists (control the order of operations)
+  declare keylist={proof tree ffurf}{},            % Form/structure processing
+  declare keylist={proof tree symud awto}{},       % Automatic movement processing
+  declare keylist={proof tree creu nodiadau}{},    % Create annotations
+  declare keylist={proof tree nodiadau}{},         % Process annotations
+  %% ===========================================
+  %% INTERNAL PROCESSING STEPS
+  %% ===========================================
+  %% These define the order and method of tree processing
+  
+  %% Basic tree sorting by level and children count
   define long step={proof tree symud}{}{%
     root,sort by={>{O}{level},>{_O<}{1}{n children}},sort'=descendants
   },
+  
+  %% Corrected movement sorting (accounts for line numbering)
   define long step={proof tree cywiro symud}{}{%
     root,if line numbering={n=2}{n=1},sort by={>{O}{level},>{_O<}{1}{n children}},sort'=descendants
   },
-  define long step={proof tree camau}{}{% updated version of defn. from saso's code (forest2-saso-ptsz.tex) & http://chat.stackexchange.com/transcript/message/28321501#28321501
-    root,sort by={>{O}{y},>{Ow1+d}{x}{-##1}},sort'={filter={descendants}{>{OO!&}{proof tree rhifo}{proof tree phantom}}}% angen +d - gweler http://chat.stackexchange.com/transcript/message/28607212#28607212
+  
+  %% Y-coordinate based sorting for final positioning
+  %% Filters out phantom nodes that shouldn't be numbered
+  define long step={proof tree camau}{}{%
+    root,sort by={>{O}{y},>{Ow1+d}{x}{-##1}},sort'={filter={descendants}{>{OO!&}{proof tree rhifo}{proof tree phantom}}}
   },
-  define long step={proof tree wffs}{}{% coeden brif yn unig ar ôl i greu nodiadau
+  
+  %% Process only the main tree (after annotations are created)
+  define long step={proof tree wffs}{}{%
     fake=root,if line numbering={n=2}{n=1},tree
   },
-  checked/.style={% mark discharge with optional name substituted into existential
+  
+  %% ===========================================
+  %% USER-FACING STYLES AND COMMANDS
+  %% ===========================================
+  %% Mark formula as checked/discharged (existential instantiation)
+  %% Usage: checked, checked=name
+  %% Adds checkmark symbol with optional name substitution
+  checked/.style={%
     delay={%
       if check right={%
         content+'={\ \forestregister{check with}#1},
@@ -160,7 +358,11 @@
       },
     },
   },
-  subs/.style={% mark substitution of name into universal
+  
+  %% Mark formula with substitution (universal instantiation)
+  %% Usage: subs, subs=name  
+  %% Adds backslash symbol with optional name substitution
+  subs/.style={%
     delay={%
       if subs right={%
         content+'={\ \forestregister{subs with}#1},
@@ -169,7 +371,15 @@
       },
     },
   },
-  close/.style={% this now uses nodes rather than a label to accommodate annotations; closing must be done before packing the tree to ensure that sufficient space is allowed for the symbol and any following annotation; the annotations must be processed before anything is moved to ensure that the correct line numbers are used later, even if the references are given as relative node names
+  %% ===========================================
+  %% BRANCH CLOSURE AND OPENING MARKERS
+  %% ===========================================
+  
+  %% Mark a tableau branch as closed
+  %% Usage: close, close=annotation, close=annotation:ref1,ref2
+  %% Creates nodes for the closure symbol and optional annotation
+  %% Must be processed before tree packing for proper spacing
+  close/.style={%
     if={%
       >{__=}{#1}{}%
     }{}{%
@@ -231,7 +441,11 @@
       },
     },
   },
-    open/.style={% this now uses nodes rather than a label to accommodate annotations; closing must be done before packing the tree to ensure that sufficient space is allowed for the symbol and any following annotation; the annotations must be processed before anything is moved to ensure that the correct line numbers are used later, even if the references are given as relative node names
+  %% Mark a tableau branch as open (MIT addition)
+  %% Usage: open, open=annotation, open=annotation:ref1,ref2  
+  %% Syntax mirrors the 'close' command but uses different symbol
+  %% Creates nodes for the opening symbol and optional annotation
+  open/.style={%
     if={%
       >{__=}{#1}{}%
     }{}{%
@@ -293,7 +507,14 @@
       },
     },
   },
-  proof tree line no/.style={% creates the line numbers on the left; note that it *does* matter that these are part of the tree, even though they do not need to be packed or to have xy computed; moreover, it matters that each is the child of the previous line number... so it won't do for them to *remain* siblings, even though that's fine when they are created.
+  %% ===========================================
+  %% LINE NUMBER CREATION AND MANAGEMENT
+  %% ===========================================
+  
+  %% Create line numbers on the left side of proofs
+  %% Line numbers must be part of the tree structure for proper positioning
+  %% Each line number becomes child of the previous one during processing
+  proof tree line no/.style={%
     anchor=base west,
     no edge,
     proof tree line number,
@@ -313,7 +534,13 @@
       }{},
     },
   },
-  proof tree line justification/.style={% creates the justifications on the right but does not yet specify any content
+  %% ===========================================
+  %% JUSTIFICATION CREATION AND MANAGEMENT  
+  %% ===========================================
+  
+  %% Create justification nodes on the right side of proofs
+  %% Content is added later during annotation processing
+  proof tree line justification/.style={%
     anchor=base west,
     no edge,
     proof tree justification,
@@ -331,10 +558,18 @@
       }{},
     },
   },
+  %% ===========================================
+  %% PROOF CONFIGURATION OPTIONS
+  %% ===========================================
+  
+  %% Start line numbering from 0 instead of 1
   zero start/.style={%
     line no shift'+=-1,
   },
-  to prove/.style={% sets a proof statement
+  
+  %% Set the statement to be proved (appears at top)
+  %% Usage: to prove=statement
+  to prove/.style={%
     for root={%
       before typesetting nodes={%
         content={#1},
@@ -352,7 +587,12 @@
       },
     },
   },
-  proof tree/.style={% this style should **NOT** be used directly in a forest environment - see notes at top of this file
+  %% ===========================================
+  %% MAIN PROOF TREE STYLE (INTERNAL USE ONLY)
+  %% ===========================================
+  %% This style configures the entire proof tree structure
+  %% **DO NOT USE DIRECTLY** - Applied automatically by prooftree environment
+  proof tree/.style={%
     for tree={%
       parent anchor=children,% manual 64
       child anchor=parent,% manual 64
@@ -723,7 +963,15 @@
       }{},
     },
   },
-  move by/.style={% this implements both the automated moves prooftrees finds necessary and any additional moves requested by the user - more accurately, it implements initial moves, which may get corrected later (e.g. to avoid skipping numbers or creating empty proof lines, which we assume aren't wanted)
+  %% ===========================================
+  %% LINE MOVEMENT SYSTEM
+  %% ===========================================
+  
+  %% Move a proof line down by a specified number of positions
+  %% Usage: move by=n
+  %% Implements both automatic and user-requested movements
+  %% May be adjusted later to avoid gaps in numbering
+  move by/.style={%
     if={
      >{_n<}{0}{#1}%
     }{% only try to move the node if the target line number exceeds the one i.e. the line number is to be positively incremented
@@ -828,36 +1076,50 @@
     },
   },
 }
+
+%% ===========================================
+%% ENVIRONMENT DEFINITION
+%% ===========================================
+
+%% Set up environment body capture
 \environbodyname\prooftreebody
 \bracketset{action character=@}
-\NewEnviron{\prooftrees@enw}[1]{% \forest/\endforest from egreg's answer at http://tex.stackexchange.com/a/229608/
+
+%% Define the main prooftree environment
+%% Takes optional arguments for forest configuration
+\NewEnviron{\prooftrees@enw}[1]{%
   \forest
     (%
-      stages={% customised definition of stages - we don't use any custom stages, but we do use several custom keylists, where the processing order of these is critical
-        for root'={% nothing is removed from the standard forest definition - we only change it by adding to it
+      stages={%
+        %% Standard forest processing stages with custom additions
+        for root'={%
           process keylist register=default preamble,
           process keylist register=preamble,
         },
         process keylist=given options,
         process keylist=before typesetting nodes,
-        % first two additions: process two custom keylists after before typesetting nodes and before typesetting nodes
-        process keylist=proof tree ffurf,
-        process keylist=proof tree symud awto,
+        
+        %% CUSTOM STAGES: Structure and movement processing
+        process keylist=proof tree ffurf,        % Form/structure processing
+        process keylist=proof tree symud awto,   % Automatic movement processing
+        
         typeset nodes stage,
         process keylist=before packing,
         pack stage,
         process keylist=before computing xy,
         compute xy stage,
-        % second two additions: process two custom keylists after computing xy and before before drawing tree
-        process keylist=proof tree creu nodiadau,
-        process keylist=proof tree nodiadau,
+        
+        %% CUSTOM STAGES: Annotation processing  
+        process keylist=proof tree creu nodiadau, % Create annotations
+        process keylist=proof tree nodiadau,       % Process annotations
+        
         process keylist=before drawing tree,
         draw tree stage,
       },
     )%
-    proof tree,% apply the proof tree style, which sets keylists from both forest's defaults and our custom additions
-    #1,% insert user's preamble, empty or otherwise - this allows the user both to override our defaults (e.g. by setting a non-empty proof statement or a custom format for line numbers) and to customise the tree using forest's facilities in the usual way - BUT customisations of the latter kind may or may not be effective, may or may not have undesirable - not to say chaotic - consequences, and may or may not cause compilation failures (structural changes, in particular, should be avoided completely)
-    [, name=proof statement @\prooftreebody]%
+    proof tree,  %% Apply main proof tree configuration
+    #1,          %% User's optional configuration
+    [, name=proof statement @\prooftreebody]%  %% Insert proof content
   \endforest}
 \endinput
 %% end prooftrees.sty
